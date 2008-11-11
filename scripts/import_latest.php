@@ -1,7 +1,7 @@
 <?php
 
 require_once 'UNL/Autoload.php';
-require_once 'config.inc.php';
+require_once dirname(__FILE__).'/../config.inc.php';
 
 $controller = new UNL_MediaYak_Controller($dsn);
 
