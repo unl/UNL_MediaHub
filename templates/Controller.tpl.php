@@ -1,6 +1,10 @@
 <?php
 require_once 'UNL/Templates.php';
+
 $page = UNL_Templates::factory('Fixed');
+if (isset($GLOBALS['UNLTEMPLATEDEPENDENTSPATH'])) {
+    UNL_Templates::$options['templatedependentspath'] = $GLOBALS['UNLTEMPLATEDEPENDENTSPATH'];
+}
 $page->doctitle     = '<title>UNL | Online Media</title>';
 $page->titlegraphic = '<h1>UNL\'s Online Media</h1><h2></h2>';
 $page->addStylesheet('/ucomm/templatedependents/templatecss/components/forms.css');
