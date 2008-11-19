@@ -42,9 +42,18 @@ UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '<ul> <li><a href="ht
 </div>
 <div class="col right">
   <h2><?php echo $this->title; ?></h2>
-  <p><?php echo htmlspecialchars(strip_tags($this->description)); ?><br />
+  <p><?php echo $this->description; ?><br />
   <?php if (!empty($this->author)) { ?><span class="author">From:</span> <?php echo $this->author; ?><br />
   <?php } ?>
   <span class="addedDate">Added:</span> <?php echo date('m/d/Y', strtotime($this->datecreated)); ?>
   </p>
+    <!-- ADDTHIS BUTTON BEGIN -->
+    <script type="text/javascript">
+    addthis_pub             = 'unlwdn';
+    addthis_brand           = 'UNL';
+    addthis_options         = 'favorites, email, digg, delicious, myspace, facebook, google, live, more';
+    </script>
+    <a class="imagelink" href="http://www.addthis.com/bookmark.php" onmouseover="return addthis_open(this, '', '[URL]', '[TITLE]')" onmouseout="addthis_close()" onclick="return addthis_sendto()"><img src="http://s9.addthis.com/button1-share.gif" width="125" height="16" border="0" alt="" /></a>
+    <script type="text/javascript" src="http://s7.addthis.com/js/152/addthis_widget.js"></script>
+    <!-- ADDTHIS BUTTON END -->
 </div>
