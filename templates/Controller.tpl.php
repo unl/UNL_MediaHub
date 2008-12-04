@@ -99,11 +99,10 @@ $page->addScript(UNL_MediaYak_Controller::getURL().'templates/mediatools.js');
 $page->maincontentarea = UNL_MediaYak_OutputController::display($this->output, true);
 $page->navlinks        = '
 <div id="local_search">
- <form action="'.UNL_MediaYak_Controller::getURL().'" id="localSearchForm" method="get"> 
+ <form action="'.UNL_MediaYak_Controller::getURL().'search/" id="localSearchForm" method="get"> 
   <div id="localSearchQuery">
    <label for="localSearchQuery-field" class="overlabel">Search UNL Media</label>
    <input id="localSearchQuery-field" type="text" name="q"  value="" />
-   <input type="hidden" name="view" value="search" />
   </div>
   <div id="localSearch">
     <input type="image" alt="Search" src="/ucomm/templatedependents/templatecss/images/transpixel.gif" id="localSearch-Button" name="localSearch-Button"/>
