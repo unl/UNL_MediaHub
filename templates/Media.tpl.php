@@ -1,5 +1,5 @@
 <?php
-UNL_MediaYak_Controller::setReplacementData('title', 'UNL | Media | '.htmlentities($this->title));
+UNL_MediaYak_Controller::setReplacementData('title', 'UNL | Media | '.htmlspecialchars($this->title));
 UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaYak_Controller::getURL().'">Media</a></li> <li>'.htmlentities($this->title).'</li></ul>');
 
 ?>

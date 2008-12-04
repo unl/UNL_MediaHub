@@ -21,8 +21,15 @@ if (count($this->media)) {
             <li>
             <div class="clr">
                 <div><a href="<?php echo UNL_MediaYak_Controller::getURL($media); ?>"><img src="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.$media->url; ?>" alt="Thumbnail preview for <?php echo $media->title; ?>" width="50" height="38" /></a></div>
-                <h4><a href="<?php echo UNL_MediaYak_Controller::getURL($media); ?>"><?php echo htmlentities($media->title); ?></a></h4>
-                <p><?php echo htmlentities(substr(strip_tags($media->description), 0, 250)); ?></p>
+                <h4><a href="<?php echo UNL_MediaYak_Controller::getURL($media); ?>"><?php echo htmlspecialchars($media->title); ?></a></h4>
+                <?php
+                $summary = $media->description;
+                if (strlen($summary) >= 250) {
+                    $summary = substr($summary, 0, 250).'&hellip;';
+                }
+                $summary = strip_tags($summary, '<a><img>');
+                ?>
+                <p><?php echo $summary; ?></p>
             </div>
             </li>
         <?php  
