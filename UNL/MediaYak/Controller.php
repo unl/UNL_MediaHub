@@ -29,11 +29,6 @@ class UNL_MediaYak_Controller implements UNL_MediaYak_CacheableInterface, UNL_Me
         $this->options = $_GET + array('view'   => null,
                                        'format' => null,
                                        );
-        
-        if (self::isLoggedIn()) {
-            // We're golden.
-        }
-                                       
     }
     
     static function isLoggedIn()
@@ -66,6 +61,10 @@ class UNL_MediaYak_Controller implements UNL_MediaYak_CacheableInterface, UNL_Me
     
     function run()
     {
+        if (self::isLoggedIn()) {
+            // We're golden.
+        }
+        
         switch ($this->options['view'])
         {
             case 'media':
