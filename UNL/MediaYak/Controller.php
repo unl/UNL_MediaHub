@@ -163,17 +163,19 @@ class UNL_MediaYak_Controller implements UNL_MediaYak_CacheableInterface, UNL_Me
         $params = array();
         $url = UNL_MediaYak_Controller::$url;
         
-        switch (get_class($mixed)) {
-            case 'UNL_MediaYak_Media':
-                //$params['view'] = 'release';
-                //$params['id']   = $mixed->id;
-                //$url .= date('Y/m/d/', strtotime($mixed->datecreated));
-                $url .= 'media/'.$mixed->id;
-                break;
-            case 'UNL_MediaYak_MediaList':
-                $url = $mixed->getURL();
-            default:
-                
+        if (is_object($mixed)) {
+            switch (get_class($mixed)) {
+                case 'UNL_MediaYak_Media':
+                    //$params['view'] = 'release';
+                    //$params['id']   = $mixed->id;
+                    //$url .= date('Y/m/d/', strtotime($mixed->datecreated));
+                    $url .= 'media/'.$mixed->id;
+                    break;
+                case 'UNL_MediaYak_MediaList':
+                    $url = $mixed->getURL();
+                default:
+                    
+            }
         }
         
         $params = array_merge($params, $additional_params);

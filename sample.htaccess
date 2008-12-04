@@ -5,4 +5,4 @@ RewriteBase /workspace/UNL_MediaYak/
 # media rewrite
 RewriteRule ^media/([0-9]+)$ ?view=media&id=$1&%{QUERY_STRING} [L]
 
-#RewriteRule . index.php
+RewriteRule ^search/(.*) ?view=search&q=$1&%{QUERY_STRING} [L]
