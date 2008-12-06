@@ -1,8 +1,22 @@
 <?php
 class UNL_MediaYak_Manager
 {
+    protected $auth;
+    
+    public $user;
+    
+    public $output;
+    
+    function __construct($dsn)
+    {
+        $this->auth = UNL_Auth::factory('CAS');
+        $this->auth->login();
+        $this->user = new UNL_MediaYak_User($this->auth->getUser());
+    }
+    
     function isLoggedIn()
     {
+        return $this->auth->isLoggedIn();
     }
     
     /**
@@ -11,6 +25,7 @@ class UNL_MediaYak_Manager
      */
     function getUser()
     {
+        return $this->user;
     }
     
     function showMedia()
