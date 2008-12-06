@@ -14,9 +14,12 @@ var UNL_MediaYak = function()
 {
     return {
         url : "'.UNL_MediaYak_Controller::getURL().'",
-        thumbnail_generator : "'.UNL_MediaYak_Controller::$thumbnail_generator.'"
-    }
-}
+        thumbnail_generator : "'.UNL_MediaYak_Controller::$thumbnail_generator.'",
+        getURL : function() {
+            return UNL_MediaYak.url;
+        }
+    };
+}();
 var UNL_MediaYak_thumbnail_generator = "'.UNL_MediaYak_Controller::$thumbnail_generator.'";
 </script>';
 $page->addStyleDeclaration('blockquote {
@@ -96,10 +99,11 @@ blockquote {
 $page->addScript('/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/swfobject.js');
 $page->addScript(UNL_MediaYak_Controller::getURL().'templates/jquery-1.2.6.min.js');
 $page->addScript(UNL_MediaYak_Controller::getURL().'templates/mediatools.js');
+$page->addScript(UNL_MediaYak_Controller::getURL().'templates/audio-player/audio-player-noswfobject.js');
 $page->maincontentarea = UNL_MediaYak_OutputController::display($this->output, true);
 $page->navlinks        = '
 <div id="local_search">
- <form action="'.UNL_MediaYak_Controller::getURL().'search/" id="localSearchForm" method="get"> 
+ <form action="'.UNL_MediaYak_Controller::getURL().'search/" id="localSearchForm" method="get">
   <div id="localSearchQuery">
    <label for="localSearchQuery-field" class="overlabel">Search UNL Media</label>
    <input id="localSearchQuery-field" type="text" name="q"  value="" />
@@ -117,7 +121,7 @@ $page->navlinks        = '
 $page->optionalfooter = '
 <p>
     The UNL Office of University Communications maintains this database of online media.
-    If there are additional functions that would be of interest to you, please 
+    If there are additional functions that would be of interest to you, please
     <a href="http://www1.unl.edu/comments/">send us a comment</a>.
 </p>';
 
