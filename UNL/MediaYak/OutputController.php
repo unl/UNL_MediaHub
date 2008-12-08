@@ -65,16 +65,27 @@ class UNL_MediaYak_OutputController
                 $object->preRun(true);
             } else {
                 // Content should be cached, but none could be found.
+                flush();
                 ob_start();
                 $object->preRun(false);
                 $object->run();
-                self::sendObjectOutput($object, $return);
-                $data = ob_get_contents();
-                self::$cache->save($data);
+                
+                if ($return) {
+                    $data = self::sendObjectOutput($object, $return);
+                } else {
+                    self::sendObjectOutput($object, $return);
+                    $data = ob_get_contents();
+                }
+                
+                if ($key !== false) {
+                    self::$cache->save($data);
+                }
                 ob_end_clean();
             }
             
-            $data = $object->postRun($data);
+            if ($object instanceof UNL_News_PostRunReplacements) {
+                $data = $object->postRun($data);
+            }
             
             if ($return) {
                 return $data;
@@ -83,11 +94,12 @@ class UNL_MediaYak_OutputController
             echo $data;
             return true;
         }
+        
         return self::sendObjectOutput($object, $return);
 
     }
     
-    static protected function sendObjectOutput($object, $return = false)
+    static protected function sendObjectOutput(&$object, $return = false)
     {
         include_once 'Savant3.php';
         $savant = new Savant3();
@@ -102,10 +114,10 @@ class UNL_MediaYak_OutputController
         $templatefile = self::getTemplateFilename(get_class($object));
         if (file_exists($templatefile)) {
             if ($return) {
-                flush();
                 ob_start();
                 $savant->display($templatefile);
-                return ob_get_clean();
+                $output = ob_get_clean();
+                return $output;
             }
             $savant->display($templatefile);
             return true;
