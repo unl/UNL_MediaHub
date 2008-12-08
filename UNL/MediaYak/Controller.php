@@ -29,12 +29,14 @@ class UNL_MediaYak_Controller implements UNL_MediaYak_CacheableInterface, UNL_Me
         $this->options = $_GET + array('view'   => null,
                                        'format' => null,
                                        );
+                                       
+        include_once 'UNL/Auth.php';
+        self::$auth = UNL_Auth::factory('CAS');
     }
     
     static function isLoggedIn()
     {
-        include_once 'UNL/Auth.php';
-        self::$auth = UNL_Auth::factory('CAS');
+        
         if (self::$auth->isLoggedIn()) {
             return true;
         }
@@ -212,4 +214,3 @@ class UNL_MediaYak_Controller implements UNL_MediaYak_CacheableInterface, UNL_Me
     }
 }
 
-?>
