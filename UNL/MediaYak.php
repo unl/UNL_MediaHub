@@ -37,9 +37,11 @@ class UNL_MediaYak
             $results = $query->execute();
             if (count($results) == 1) {
                 // Already exists do update
-                if ($results[0]->title.$results[0]->description != $media->getTitle().$media->getDescription()) {
-                    $results[0]->title = $media->getTitle();
+                if ($results[0]->title.$results[0]->description != $media->getTitle().$media->getDescription()
+                    || strtotime($results[0]->datecreated) != strtotime($media->getDatePublished())) {
+                    $results[0]->title       = $media->getTitle();
                     $results[0]->description = $media->getDescription();
+                    $results[0]->datecreated = $media->getDatePublished();
                     $results[0]->save();
                     echo $results[0]->title.' has bee updated!'.PHP_EOL;
                 }
@@ -47,7 +49,7 @@ class UNL_MediaYak
                 $data = array('url'         => $media->getURL(),
                               'title'       => $media->getTitle(),
                               'description' => $media->getDescription(),
-                              'datecreated' => date('Y-m-d H:i', $media->getDatePublished()));
+                              'datecreated' => $media->getDatePublished());
                 $this->addMedia($data);
                 echo 'Added '.$entry['title'].PHP_EOL;
             }

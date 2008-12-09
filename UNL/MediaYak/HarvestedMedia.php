@@ -32,7 +32,7 @@ class UNL_MediaYak_HarvestedMedia
     
     function getDatePublished()
     {
-        return $this->datePublished;
+        return date('Y-m-d H:i', strtotime($this->datePublished));
     }
 }
 
