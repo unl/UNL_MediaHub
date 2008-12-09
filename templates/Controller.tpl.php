@@ -125,6 +125,19 @@ $page->optionalfooter = '
     <a href="http://www1.unl.edu/comments/">send us a comment</a>.
 </p>';
 
-$page->footercontent = '&copy; 2008 University of Nebraska&mdash;Lincoln | Lincoln, NE 68588 | 402-472-7211 | <a href="http://www1.unl.edu/comments/" title="Click here to direct your comments and questions">comments?</a>';
+$page->footercontent = '&copy; 2008 University of Nebraska&mdash;Lincoln | Lincoln, NE 68588 | 402-472-7211 | <a href="http://www1.unl.edu/comments/" title="Click here to direct your comments and questions">comments?</a>
+<script type="text/javascript">
+//<![CDATA[
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write("\<script src=\'" + gaJsHost + "google-analytics.com/ga.js\' type=\'text/javascript\'>\<\/script>" );
+//]]>
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-3203435-1");
+pageTracker._initData();
+pageTracker._setDomainName(".unl.edu");
+pageTracker._trackPageview();
+</script>
+';
 $page->leftRandomPromo = '';
 echo $page;
