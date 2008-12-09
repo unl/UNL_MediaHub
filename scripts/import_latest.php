@@ -10,7 +10,7 @@ $feed_url = $recent_items_feed = 'http://pipes.yahoo.com/pipes/pipe.run?_id=fc9a
 
 $mediayak = new UNL_MediaYak($dsn);
 
-$mediayak->addFromYahooPipe($feed_url);
+$mediayak->harvest(new UNL_MediaYak_Harvester_YahooPipe($feed_url));
 
 
 ?>

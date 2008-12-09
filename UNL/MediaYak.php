@@ -16,41 +16,41 @@ class UNL_MediaYak
     }
     
     /**
-     * Add media from a Yahoo Pipe containing the serialized feed.
+     * Add media from a Harvester.
      *
-     * @param string $serialized_pipe_url URL with the serialized feed.
+     * @param UNL_MediaYak_Harvester $harvester A harvester that can returned harvested media.
      * 
      * @return bool
      */
-    function addFromYahooPipe($serialized_pipe_url)
+    function harvest(UNL_MediaYak_Harvester $harvester)
     {
-        if ($feed = @file_get_contents($serialized_pipe_url)) {
-            $feed = unserialize($feed);
-            if ($feed) {
-                foreach ($feed['value']['items'] as $entry) {
-                    // Try and find an existing one with this URL.
-                    $query    = new Doctrine_Query();
-                    $query->from('UNL_MediaYak_Media m');
-                    $query->where('m.url LIKE ?', array($entry['link']));
-                    $results = $query->execute();
-                    if (count($results)) {
-                        // Already exists
-                    } else {
-                        $media = array('url'         => $entry['link'],
-                                       'title'       => $entry['title'],
-                                       'description' => $entry['description'],
-                                       'datecreated' => date('Y-m-d H:i', $entry['y:published']['utime']));
-                        if (isset($entry['itunes:author'])) {
-                            $media['author'] = $entry['itunes:author']; 
-                        }
-                        $this->addMedia($media);
-                        echo 'Added '.$entry['title'].'<br />';
-                    }
+        foreach ($harvester as $url=>$media) {
+            
+            if (!($media instanceof UNL_MediaYak_HarvestedMedia)) {
+                throw new Exception('Harvesters must return a UNL_MediaYak_HarvestedMedia class!');
+            }
+            
+            // Try and find an existing one with this URL.
+            $query    = new Doctrine_Query();
+            $query->from('UNL_MediaYak_Media m');
+            $query->where('m.url LIKE ?', array($media->getURL()));
+            $results = $query->execute();
+            if (count($results) == 1) {
+                // Already exists do update
+                if ($results[0]->title.$results[0]->description != $media->getTitle().$media->getDescription()) {
+                    $results[0]->title = $media->getTitle();
+                    $results[0]->description = $media->getDescription();
+                    $results[0]->save();
+                    echo $results[0]->title.' has bee updated!'.PHP_EOL;
                 }
-                return true;
+            } else {
+                $data = array('url'         => $media->getURL(),
+                              'title'       => $media->getTitle(),
+                              'description' => $media->getDescription(),
+                              'datecreated' => date('Y-m-d H:i', $media->getDatePublished()));
+                $this->addMedia($data);
+                echo 'Added '.$entry['title'].PHP_EOL;
             }
         }
-        
-        return false;
     }
 }
