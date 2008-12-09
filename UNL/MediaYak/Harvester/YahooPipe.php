@@ -45,10 +45,16 @@ class UNL_MediaYak_Harvester_YahooPipe extends UNL_MediaYak_Harvester
     
     function current()
     {
+        if (isset($this->feed['value']['items'][$this->current]['y:published']['utime'])) {
+            $pubDate = $this->feed['value']['items'][$this->current]['y:published']['utime'];
+        } else {
+            $pubDate = strtotime($this->feed['value']['items'][$this->current]['pubDate']);
+        }
+        
         return new UNL_MediaYak_HarvestedMedia($this->feed['value']['items'][$this->current]['link'],
                                                $this->feed['value']['items'][$this->current]['title'],
                                                $this->feed['value']['items'][$this->current]['description'],
-                                               (int) $this->feed['value']['items'][$this->current]['y:published']['utime']);
+                                               $pubDate);
     }
     
     
