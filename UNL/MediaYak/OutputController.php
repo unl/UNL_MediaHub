@@ -83,7 +83,7 @@ class UNL_MediaYak_OutputController
                 ob_end_clean();
             }
             
-            if ($object instanceof UNL_News_PostRunReplacements) {
+            if ($object instanceof UNL_MediaYak_PostRunReplacements) {
                 $data = $object->postRun($data);
             }
             
