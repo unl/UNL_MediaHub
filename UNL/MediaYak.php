@@ -49,7 +49,7 @@ class UNL_MediaYak
                     $results[0]->description = $media->getDescription();
                     $results[0]->datecreated = $media->getDatePublished();
                     $results[0]->save();
-                    echo $results[0]->title.' has bee updated!'.PHP_EOL;
+                    echo $results[0]->title.' has been updated!'.PHP_EOL;
                 }
             } else {
                 $data = array('url'         => $media->getURL(),
@@ -57,7 +57,7 @@ class UNL_MediaYak
                               'description' => $media->getDescription(),
                               'datecreated' => $media->getDatePublished());
                 $this->addMedia($data);
-                echo 'Added '.$entry['title'].PHP_EOL;
+                echo 'Added '.$media->getTitle().PHP_EOL;
             }
         }
     }

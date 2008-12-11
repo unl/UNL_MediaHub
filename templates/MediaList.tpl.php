@@ -6,8 +6,8 @@ if (isset($this->label) && !empty($this->label)) {
 }
 ?></h3>
 <?php
-if (count($this->media)) {
-    $pager_layout   = new Doctrine_Pager_Layout($this->pager,
+if (count($this->items)) {
+    $pager_layout = new Doctrine_Pager_Layout($this->pager,
         new Doctrine_Pager_Range_Sliding(array('chunk'=>5)),
         UNL_MediaYak_Controller::getURL(null, array_merge($this->options, array('page'=>'{%page_number}'))));
     $pager_layout->setTemplate(' <a href="{%url}">{%page}</a> ');
@@ -17,7 +17,7 @@ if (count($this->media)) {
         <ul>
     
         <?php
-        foreach ($this->media as $media) { ?>
+        foreach ($this->items as $media) { ?>
             <li>
             <div class="clr">
                 <div><a href="<?php echo UNL_MediaYak_Controller::getURL($media); ?>"><img src="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.$media->url; ?>" alt="Thumbnail preview for <?php echo $media->title; ?>" width="50" height="38" /></a></div>

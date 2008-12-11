@@ -1,6 +1,6 @@
 <?php
 
-interface UNL_MediaYak_MediaList_Filter
+interface UNL_MediaYak_Filter
 {
     function apply(Doctrine_Query &$query);
     function getLabel();

@@ -1,5 +1,5 @@
 <?php
-class UNL_MediaYak_Manager
+class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
 {
     protected $auth;
     
@@ -7,11 +7,37 @@ class UNL_MediaYak_Manager
     
     public $output;
     
+    public static $url;
+    
+    protected $mediayak;
+    
     function __construct($dsn)
     {
+        $this->mediayak = new UNL_MediaYak($dsn);
+        
         $this->auth = UNL_Auth::factory('CAS');
         $this->auth->login();
+        
         $this->user = new UNL_MediaYak_User($this->auth->getUser());
+    }
+    
+    function getCacheKey()
+    {
+        return false;
+    }
+    
+    function preRun()
+    {
+        return void;
+    }
+    
+    function run()
+    {
+        switch($this->options['view']) {
+        default:
+            $this->showFeeds($this->user);
+            break;
+        }
     }
     
     function isLoggedIn()
@@ -35,8 +61,14 @@ class UNL_MediaYak_Manager
     
     function showFeeds(UNL_MediaYak_User $user)
     {
+        $this->output = $user->getFeeds();
     }
     
+    
+    public static function getURL()
+    {
+        return self::$url;
+    }
     
     function showFeed()
     {
