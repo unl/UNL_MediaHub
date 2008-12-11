@@ -5,7 +5,13 @@ class UNL_MediaYak
     
     function __construct($dsn)
     {
+        include_once 'Doctrine/lib/Doctrine.php';
+
+        spl_autoload_register(array('Doctrine', 'autoload'));
         
+        Doctrine_Manager::getInstance()->setAttribute('model_loading', 'conservative');
+        Doctrine::loadModels(dirname(dirname(__FILE__)).'/UNL/MediaYak/Media');
+        Doctrine_Manager::connection($dsn);
     }
     
     function addMedia(array $details)

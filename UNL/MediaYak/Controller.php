@@ -1,38 +1,96 @@
 <?php
-
-class UNL_MediaYak_Controller implements UNL_MediaYak_CacheableInterface, UNL_MediaYak_PostRunReplacements
+/**
+ * Controller for the public frontend to the MediaYak system.
+ * 
+ * PHP version 5
+ * 
+ * @category  Events 
+ * @package   UNL_UCBCN
+ * @author    Brett Bieber <brett.bieber@gmail.com>
+ * @copyright 2008 Regents of the University of Nebraska
+ * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
+ * @link      http://code.google.com/p/unl-event-publisher/
+ */
+class UNL_MediaYak_Controller
+    implements UNL_MediaYak_CacheableInterface, UNL_MediaYak_PostRunReplacements
 {
+    /**
+     * Auth object for the client.
+     *
+     * @var UNL_Auth
+     */
     protected static $auth;
 
+    /**
+     * Array of options
+     *
+     * @var array
+     */
     public $options;
     
+    /**
+     * UNL template style to use.
+     *
+     * @var string
+     */
     public $template = 'Fixed';
     
+    /**
+     * Any output prepared by this controller will go here. This could be 
+     * any type of data, string, array or object.
+     *
+     * @var mixed
+     */
     public $output;
     
+    /**
+     * URL to this controller.
+     *
+     * @var string
+     */
     public static $url;
     
+    /**
+     * URL to a thumbnail generator for media files.
+     *
+     * @var string
+     */
     public static $thumbnail_generator;
     
     static protected $replacements;
     
+    /**
+     * Backend media system.
+     *
+     * @var UNL_MediaYak
+     */
+    protected $mediayak;
+    
+    /**
+     * Construct a new controller.
+     *
+     * @param string $dsn Database connection string
+     */
     function __construct($dsn)
     {
-        include_once 'Doctrine/lib/Doctrine.php';
-
-        spl_autoload_register(array('Doctrine', 'autoload'));
+        // Set up database
+        $this->mediayak = new UNL_MediaYak($dsn);
         
-        Doctrine_Manager::getInstance()->setAttribute('model_loading', 'conservative');
-        Doctrine::loadModels(dirname(dirname(dirname(__FILE__))).'/UNL/MediaYak/Media');
-        Doctrine_Manager::connection($dsn);
-        
+        // Initialize default options
         $this->options = $_GET + array('view'   => null,
                                        'format' => null,
                                        );
+                                       
+        // Start authentication for comment system.
         include_once 'UNL/Auth.php';
         self::$auth = UNL_Auth::factory('SimpleCAS');
     }
     
+    /**
+     * Check if the user is logged in or not.
+     *
+     * @return bool
+     */
     static function isLoggedIn()
     {
         if (self::$auth->isLoggedIn()) {
@@ -42,23 +100,41 @@ class UNL_MediaYak_Controller implements UNL_MediaYak_CacheableInterface, UNL_Me
         return false;
     }
     
+    /**
+     * Get the cache key for the data prepared by the controller
+     *
+     * @return string|false
+     */
     function getCacheKey()
     {
         return false;
     }
     
+    /**
+     * function called before output, cached or otherwise is sent.
+     *
+     * @return bool
+     */
     function preRun()
     {
         switch ($this->options['format']) {
-            case 'xml':
-                header('Content-type: text/xml');
-                UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_Controller','ControllerXML');    
-            default:
-                break;
+        case 'xml':
+            // Send XML content-type headers, and assign XML output template.
+            header('Content-type: text/xml');
+            UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_Controller', 'ControllerXML');    
+        default:
+            break;
         }
         return true;
     }
     
+    /**
+     * Main hub for the controller.
+     * 
+     * This will be called when cached output cannot be found.
+     * 
+     * @return void
+     */
     function run()
     {
         if (self::isLoggedIn()) {
@@ -67,16 +143,23 @@ class UNL_MediaYak_Controller implements UNL_MediaYak_CacheableInterface, UNL_Me
         
         switch ($this->options['view'])
         {
-            case 'media':
-                $media = $this->findRequestedMedia($this->options);
-                $this->showMedia($media);
-                break;
-            case 'search':
-            default:
-                $this->showLatestMedia();
+        case 'media':
+            $media = $this->findRequestedMedia($this->options);
+            $this->showMedia($media);
+            break;
+        case 'search':
+        default:
+            $this->showLatestMedia();
         }
     }
     
+    /**
+     * Find a specific piece of media.
+     *
+     * @param array $options Associative array of options $options['id']
+     * 
+     * @return UNL_MediaYak_Media
+     */
     function findRequestedMedia($options)
     {
         $media = false;
@@ -86,10 +169,12 @@ class UNL_MediaYak_Controller implements UNL_MediaYak_CacheableInterface, UNL_Me
         
         if (isset($_POST, $_POST['comment'])
             && self::isLoggedIn()) {
-            $comment = new UNL_MediaYak_Media_Comment();
+            
             $data = array('uid'      => self::$auth->getUID(),
                           'media_id' => $media->id,
                           'comment'  => $_POST['comment']);
+            
+            $comment = new UNL_MediaYak_Media_Comment();
             $comment->fromArray($data);
             $comment->save();
         }
@@ -98,23 +183,6 @@ class UNL_MediaYak_Controller implements UNL_MediaYak_CacheableInterface, UNL_Me
         if ($media) {
             return $media;
         }
-        /*
-        if (isset($options['y'],
-                  $options['m'],
-                  $options['d'],
-                  $options['headline'])) {
-            $date     = $options['y'].'-'.$options['m'].'-'.$options['d'];
-            $headline = urldecode($options['headline']);
-            $filter   = new UNL_MediaYak_MediaList_Filter_ByDateAndHeadline($date, $headline);
-            $query    = new Doctrine_Query();
-            $query->from('UNL_MediaYak_Media m');
-            $filter->apply($query);
-            $results = $query->execute();
-            if (count($results)) {
-                return $results[0];
-            }
-        }
-        */
         
         throw new Exception('Cannot determine the media to display.');
     }
@@ -122,7 +190,7 @@ class UNL_MediaYak_Controller implements UNL_MediaYak_CacheableInterface, UNL_Me
     /**
      * Called after run - with all output contents.
      *
-     * @param string $me
+     * @param string $me The content from the outputcontroller
      * 
      * @return string
      */
@@ -141,39 +209,55 @@ class UNL_MediaYak_Controller implements UNL_MediaYak_CacheableInterface, UNL_Me
         }
 
         if (isset(self::$replacements['breadcrumbs'])) {
-            $me = str_replace($scanned->breadcrumbs, self::$replacements['breadcrumbs'], $me);
+            $me = str_replace($scanned->breadcrumbs,
+                              self::$replacements['breadcrumbs'],
+                              $me);
         }
         
         return $me;
     }
     
+    /**
+     * Allows you to set dynamic data when cached output is sent.
+     *
+     * @param string $field Area to be replaced
+     * @param string $data  Data to replace the field with.
+     * 
+     * @return void
+     */
     static function setReplacementData($field, $data)
     {
         switch ($field) {
-            case 'title':
-            case 'head':
-            case 'breadcrumbs':
-                self::$replacements[$field] = $data;
-                break;
+        case 'title':
+        case 'head':
+        case 'breadcrumbs':
+            self::$replacements[$field] = $data;
+            break;
         }
     }
     
+    /**
+     * Get the URL for the system or a specific object this controller can display.
+     *
+     * @param mixed $mixed             Optional object to get a URL for.
+     * @param array $additional_params Extra parameters to adjust the URL.
+     * 
+     * @return string
+     */
     function getURL($mixed = null, $additional_params = array())
     {
         $params = array();
+         
         $url = UNL_MediaYak_Controller::$url;
         
         if (is_object($mixed)) {
             switch (get_class($mixed)) {
-                case 'UNL_MediaYak_Media':
-                    //$params['view'] = 'release';
-                    //$params['id']   = $mixed->id;
-                    //$url .= date('Y/m/d/', strtotime($mixed->datecreated));
-                    $url .= 'media/'.$mixed->id;
-                    break;
-                case 'UNL_MediaYak_MediaList':
-                    $url = $mixed->getURL();
-                default:
+            case 'UNL_MediaYak_Media':
+                $url .= 'media/'.$mixed->id;
+                break;
+            case 'UNL_MediaYak_MediaList':
+                $url = $mixed->getURL();
+            default:
                     
             }
         }
@@ -191,6 +275,11 @@ class UNL_MediaYak_Controller implements UNL_MediaYak_CacheableInterface, UNL_Me
         return trim($url, '?;&amp=');
     }
     
+    /**
+     * Prepare output for a list of media.
+     *
+     * @return void
+     */
     function showLatestMedia()
     {
         $filter = null;
@@ -201,9 +290,16 @@ class UNL_MediaYak_Controller implements UNL_MediaYak_CacheableInterface, UNL_Me
         $this->output = new UNL_MediaYak_MediaList($filter);
     }
     
+    /**
+     * Prepare output for a piece of media.
+     *
+     * @param UNL_MediaYak_Media $media The media to display.
+     * 
+     * @return void
+     */
     function showMedia(UNL_MediaYak_Media $media)
     {
-        $this->output   = $media;
+        $this->output = $media;
         if (!$this->output) {
             header('HTTP/1.0 404 Not Found');
             throw new Exception('Could not find that news release.');
