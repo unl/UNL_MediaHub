@@ -1,10 +1,16 @@
 <?php
-
-class UNL_MediaYak_MediaList_Filter_ShowRecent implements UNL_MediaYak_Filter
+class UNL_MediaYak_FeedList_Filter_ByUser implements UNL_MediaYak_Filter
 {
+    protected $user;
+    
+    function __construct(UNL_MediaYak_User $user)
+    {
+        $this->user = $user;
+    }
+    
     function apply(Doctrine_Query &$query)
     {
-        $query->where('m.datecreated > ?', date('Y-m-d H:i:s'));
+        $query->where('u.uid > ?', $user->uid);
     }
     
     function getLabel()

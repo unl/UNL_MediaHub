@@ -1,5 +1,5 @@
 <?php
-class UNL_MediaYak_MediaList_Filter_TextSearch implements UNL_MediaYak_MediaList_Filter
+class UNL_MediaYak_MediaList_Filter_TextSearch implements UNL_MediaYak_Filter
 {
     protected $query;
     
