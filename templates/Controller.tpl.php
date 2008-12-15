@@ -133,11 +133,17 @@ document.write("\<script src=\'" + gaJsHost + "google-analytics.com/ga.js\' type
 //]]>
 </script>
 <script type="text/javascript">
-var pageTracker = _gat._getTracker("UA-3203435-1");
-pageTracker._initData();
-pageTracker._setDomainName(".unl.edu");
-pageTracker._trackPageview();
-</script>
+var firstTracker = _gat._getTracker("UA-3203435-1"); //For the UNL WDN account
+firstTracker._setDomainName(".unl.edu"); //Required to gather all subdomain traffic into one profile w/o duplicating data
+firstTracker._setAllowLinker(true); // allow links to external resources to be tracked
+firstTracker._setAllowHash(false); // turn off domain hashing so that the cookie integrity check will not reject a user cookie coming from one domain to another
+firstTracker._initData();
+firstTracker._trackPageview(); 
+
+var secondTracker = _gat._getTracker("UA-1982199-1");  //For department specific accounts (in this case, an Admissions test)
+secondTracker._initData();
+secondTracker._trackPageview();
+</script> 
 ';
 $page->leftRandomPromo = '';
 echo $page;
