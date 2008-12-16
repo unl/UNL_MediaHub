@@ -9,9 +9,10 @@ $meta = '
 <meta name="title" content="'.htmlentities($this->title, ENT_QUOTES).'" />
 <meta name="description" content="'.htmlentities($this->description, ENT_QUOTES).'" />
 <link rel="image_src" href="'.UNL_MediaYak_Controller::$thumbnail_generator.$this->url.'" />
-<meta name="medium" content="'.$type.'" />
-<link rel="video_src" href="'.$this->url.'"/>
-';
+<meta name="medium" content="'.$type.'" />';
+if ($type == 'video') {
+    $meta .= '<link rel="video_src" href="'.$this->url.'" />';
+}
 UNL_MediaYak_Controller::setReplacementData('head', $meta);
 ?>
 <div class="two_col left">
