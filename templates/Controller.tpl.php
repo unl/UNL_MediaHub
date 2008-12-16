@@ -125,25 +125,6 @@ $page->optionalfooter = '
     <a href="http://www1.unl.edu/comments/">send us a comment</a>.
 </p>';
 
-$page->footercontent = '&copy; 2008 University of Nebraska&mdash;Lincoln | Lincoln, NE 68588 | 402-472-7211 | <a href="http://www1.unl.edu/comments/" title="Click here to direct your comments and questions">comments?</a>
-<script type="text/javascript">
-//<![CDATA[
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write("\<script src=\'" + gaJsHost + "google-analytics.com/ga.js\' type=\'text/javascript\'>\<\/script>" );
-//]]>
-</script>
-<script type="text/javascript">
-var wdnTracker = _gat._getTracker("UA-3203435-1"); //For the UNL WDN account
-wdnTracker._setDomainName(".unl.edu"); //Required to gather all subdomain traffic into one profile w/o duplicating data
-wdnTracker._setAllowLinker(true); // allow links to external resources to be tracked
-wdnTracker._setAllowHash(false); // turn off domain hashing so that the cookie integrity check will not reject a user cookie coming from one domain to another
-wdnTracker._initData();
-wdnTracker._trackPageview(); 
-
-var departmentTracker = _gat._getTracker("UA-1982199-1");  //For department specific accounts (in this case, an Admissions test)
-departmentTracker._initData();
-departmentTracker._trackPageview();
-</script>
-';
+$page->footercontent = '&copy; 2008 University of Nebraska&mdash;Lincoln | Lincoln, NE 68588 | 402-472-7211 | <a href="http://www1.unl.edu/comments/" title="Click here to direct your comments and questions">comments?</a>';
 $page->leftRandomPromo = '';
 echo $page;
