@@ -1,7 +1,18 @@
 <?php
+$type = 'video';
+if (substr($this->url, -4) == '.mp3') {
+    $type = 'audio';
+}
 UNL_MediaYak_Controller::setReplacementData('title', 'UNL | Media | '.htmlspecialchars($this->title));
 UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaYak_Controller::getURL().'">Media</a></li> <li>'.htmlspecialchars($this->title).'</li></ul>');
-
+$meta = '
+<meta name="title" content="'.htmlentities($this->title, ENT_QUOTES).'" />
+<meta name="description" content="'.htmlentities($this->description, ENT_QUOTES).'" />
+<link rel="image_src" href="'.UNL_MediaYak_Controller::$thumbnail_generator.$this->url.'" />
+<meta name="medium" content="'.$type.'" />
+<link rel="video_src" href="'.$this->url.'"/>
+';
+UNL_MediaYak_Controller::setReplacementData('head', $meta);
 ?>
 <div class="two_col left">
     <div class="content_holder" id="preview_holder">
