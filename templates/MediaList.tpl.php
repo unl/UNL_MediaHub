@@ -28,6 +28,7 @@ if (count($this->items)) {
                     $summary = substr($summary, 0, 250).'&hellip;';
                 }
                 $summary = strip_tags($summary, '<a><img>');
+                $summary = str_replace('Related Links', '', $summary);
                 ?>
                 <p><?php echo $summary; ?></p>
             </div>
