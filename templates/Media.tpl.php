@@ -3,7 +3,7 @@ $type = 'video';
 if (substr($this->url, -4) == '.mp3') {
     $type = 'audio';
 }
-UNL_MediaYak_Controller::setReplacementData('title', 'UNL | Media | '.htmlspecialchars($this->title));
+UNL_MediaYak_Controller::setReplacementData('title', 'UNL | Media Hub | '.htmlspecialchars($this->title));
 UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaYak_Controller::getURL().'">Media</a></li> <li>'.htmlspecialchars($this->title).'</li></ul>');
 $meta = '
 <meta name="title" content="'.htmlentities($this->title, ENT_QUOTES).'" />

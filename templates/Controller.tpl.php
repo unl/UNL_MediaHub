@@ -5,8 +5,8 @@ $page = UNL_Templates::factory('Fixed');
 if (isset($GLOBALS['UNLTEMPLATEDEPENDENTSPATH'])) {
     UNL_Templates::$options['templatedependentspath'] = $GLOBALS['UNLTEMPLATEDEPENDENTSPATH'];
 }
-$page->doctitle     = '<title>UNL | Online Media</title>';
-$page->titlegraphic = '<h1>UNL\'s Online Media</h1><h2></h2>';
+$page->doctitle     = '<title>UNL | Media Hub</title>';
+$page->titlegraphic = '<h1>UNL Media Hub</h1><h2>Lights, Camera, Action</h2>';
 $page->addStylesheet('/ucomm/templatedependents/templatecss/components/forms.css');
 $page->breadcrumbs = '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li>Media</li></ul>';
 $page->head .= '<script type="text/javascript">
@@ -115,9 +115,15 @@ $page->navlinks        = '
 </div>
 
 <ul>
-    <li><a href="'.UNL_MediaYak_Controller::getURL().'">UNL Media</a></li>
-    <li><a href="http://itunes.unl.edu/">UNL iTunes U</a></li>
+    <li><a href="'.UNL_MediaYak_Controller::getURL().'">Media Hub</a></li>
 </ul>';
+
+$page->leftcollinks('
+<h3>Related Links</h3>
+<ul>
+    <li><a href="http://itunes.unl.edu/">UNL On iTunes U</a></li>
+</ul>
+');
 $page->optionalfooter = '
 <p>
     The UNL Office of University Communications maintains this database of online media.
