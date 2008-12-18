@@ -118,12 +118,12 @@ $page->navlinks        = '
     <li><a href="'.UNL_MediaYak_Controller::getURL().'">Media Hub</a></li>
 </ul>';
 
-$page->leftcollinks('
+$page->leftcollinks = '
 <h3>Related Links</h3>
 <ul>
     <li><a href="http://itunes.unl.edu/">UNL On iTunes U</a></li>
 </ul>
-');
+';
 $page->optionalfooter = '
 <p>
     The UNL Office of University Communications maintains this database of online media.
