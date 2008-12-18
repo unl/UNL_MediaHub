@@ -20,7 +20,7 @@ abstract class UNL_MediaYak_List implements Countable
     
     static public $url;
     
-    public $table = 'null';
+    public $tables = 'null';
     
     function __construct(UNL_MediaYak_Filter $filter = null)
     {

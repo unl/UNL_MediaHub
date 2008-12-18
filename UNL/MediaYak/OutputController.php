@@ -65,7 +65,7 @@ class UNL_MediaYak_OutputController
                 $object->preRun(true);
             } else {
                 // Content should be cached, but none could be found.
-                flush();
+                //flush();
                 ob_start();
                 $object->preRun(false);
                 $object->run();

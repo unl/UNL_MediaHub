@@ -7,6 +7,8 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
     
     public $output;
     
+    public $options = array('view'=>'feeds');
+    
     public static $url;
     
     protected $mediayak;
@@ -18,7 +20,9 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
         $this->auth = UNL_Auth::factory('CAS');
         $this->auth->login();
         
-        $this->user = new UNL_MediaYak_User($this->auth->getUser());
+        $this->options = array_merge($this->options, $_GET);
+        
+        $this->user = UNL_MediaYak_User::getByUid($this->auth->getUser());
     }
     
     function getCacheKey()
@@ -33,10 +37,24 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
     
     function run()
     {
-        switch($this->options['view']) {
-        default:
-            $this->showFeeds($this->user);
-            break;
+        if (count($_POST)) {
+            $this->handlePost();
+        } else {
+            switch($this->options['view']) {
+            case 'feed':
+                $this->showFeed();
+                break;
+            case 'feedmetadata':
+                $this->editFeedMetaData();
+                break;
+            case 'addmedia':
+                $this->addMedia();
+                break;
+            case 'feeds':
+            default:
+                $this->showFeeds($this->user);
+                break;
+            }
         }
     }
     
@@ -54,8 +72,9 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
         return $this->user;
     }
     
-    function showMedia()
+    function showMedia(UNL_MediaYak_Filter $filter = null)
     {
+        $this->output[] = new UNL_MediaYak_MediaList($filter);
     }
     
     
@@ -65,13 +84,39 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
     }
     
     
-    public static function getURL()
+    public static function getURL($mixed = null)
     {
-        return self::$url;
+        if (is_object($mixed)) {
+            switch(get_class($mixed)) {
+                case 'UNL_MediaYak_Feed':
+                    return UNL_MediaYak_Controller::$url.'manager/?view=feed&id='.$mixed->id;
+            }
+        }
+        return UNL_MediaYak_Controller::$url.'manager/';
     }
     
     function showFeed()
     {
+        $feed = UNL_MediaYak_Feed::getById($_GET['id']);
+        $this->output[] = $feed;
+        $filter = new UNL_MediaYak_MediaList_Filter_ByFeed($feed);
+        $this->showMedia($filter);
+    }
+    
+    function handlePost()
+    {
+        if (isset($_POST['id'])) {
+            $feed = UNL_MediaYak_Feed::getById($_POST['id']);
+            $feed->synchronizeWithArray($_POST);
+            $feed->save();
+        } else {
+            $feed = new UNL_MediaYak_Feed();
+            $data = array_merge($_POST, array('datecreated'=>date('Y-m-d H:i:s'),
+                                              'uidcreated'=>$this->getUser()->uid));
+            $feed->fromArray($data);
+            $feed->save();
+        }
+        $this->redirect('?view=feed&id='.$feed->id);
     }
     
     function userCanEditFeed($user, $feed)
@@ -79,7 +124,13 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
     }
     
     function editFeedMetaData()
-    {
+    {        
+        if (isset($_GET['id'])) {
+            $this->output = new UNL_MediaYak_Feed_Form(UNL_MediaYak_Feed::getById($_GET['id']));
+            return;
+        }
+        
+        $this->output[] = new UNL_MediaYak_Feed_Form($feed);
     }
     
     function editFeedPublishers($feed)
@@ -88,7 +139,12 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
     
     function addMedia()
     {
+        $this->output = new UNL_MediaYak_Feed_MediaForm();
+    }
+    
+    function redirect($location)
+    {
+        header('Location: '.$location);
+        exit();
     }
 }
-
-?>
