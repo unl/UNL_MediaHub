@@ -1,16 +1,17 @@
 <?php
-class UNL_MediaYak_FeedList_Filter_ByUser implements UNL_MediaYak_Filter
+
+class UNL_MediaYak_MediaList_Filter_ByFeed implements UNL_MediaYak_Filter
 {
-    protected $user;
+    protected $feed;
     
-    function __construct(UNL_MediaYak_User $user)
+    function __construct(UNL_MediaYak_Feed $feed)
     {
-        $this->user = $user;
+        $this->feed = $feed;
     }
     
     function apply(Doctrine_Query &$query)
     {
-        $query->where('f.uidcreated = ?', $this->user->uid);
+        $query->where('UNL_MediaYak_Feed_Media.feed_id = ?', $this->feed->id);
     }
     
     function getLabel()
