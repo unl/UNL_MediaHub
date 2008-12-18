@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 11, 2008 at 08:44 PM
+-- Generation Time: Dec 18, 2008 at 05:03 PM
 -- Server version: 5.0.67
 -- PHP Version: 5.2.6
 
@@ -47,7 +47,20 @@ CREATE TABLE IF NOT EXISTS `feeds` (
   `uidcreated` varchar(50) NOT NULL,
   `datecreated` datetime NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `feed_has_media`
+--
+
+CREATE TABLE IF NOT EXISTS `feed_has_media` (
+  `id` int(10) unsigned NOT NULL,
+  `feed_id` int(10) unsigned NOT NULL,
+  `media_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
