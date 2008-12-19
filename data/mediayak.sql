@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 18, 2008 at 05:03 PM
+-- Generation Time: Dec 19, 2008 at 11:44 AM
 -- Server version: 5.0.67
 -- PHP Version: 5.2.6
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `comment` mediumtext NOT NULL,
   `datecreated` timestamp NOT NULL default CURRENT_TIMESTAMP,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `feeds` (
   `uidcreated` varchar(50) NOT NULL,
   `datecreated` datetime NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `media` (
   `author` varchar(255) default NULL,
   `datecreated` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=287 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -88,4 +88,17 @@ CREATE TABLE IF NOT EXISTS `users` (
   `uid` varchar(50) NOT NULL,
   `datecreated` datetime NOT NULL,
   PRIMARY KEY  (`uid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_has_permission`
+--
+
+CREATE TABLE IF NOT EXISTS `user_has_permission` (
+  `user_uid` varchar(50) NOT NULL,
+  `permission_id` int(10) unsigned NOT NULL,
+  `feed_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY  (`user_uid`,`permission_id`,`feed_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
