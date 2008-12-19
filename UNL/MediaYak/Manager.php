@@ -106,15 +106,18 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
     function handlePost()
     {
         if (isset($_POST['id'])) {
+            // Update an existing feed.
             $feed = UNL_MediaYak_Feed::getById($_POST['id']);
             $feed->synchronizeWithArray($_POST);
             $feed->save();
         } else {
-            $feed = new UNL_MediaYak_Feed();
+            // Add a new feed for this user.
             $data = array_merge($_POST, array('datecreated'=>date('Y-m-d H:i:s'),
                                               'uidcreated'=>$this->getUser()->uid));
+            $feed = new UNL_MediaYak_Feed();
             $feed->fromArray($data);
             $feed->save();
+            $feed->addUser($this->user);
         }
         $this->redirect('?view=feed&id='.$feed->id);
     }
