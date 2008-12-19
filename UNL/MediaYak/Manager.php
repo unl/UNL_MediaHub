@@ -139,7 +139,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
     
     function addMedia()
     {
-        $this->output = new UNL_MediaYak_Feed_MediaForm();
+        $this->output = new UNL_MediaYak_Feed_Media_Form();
     }
     
     function redirect($location)
