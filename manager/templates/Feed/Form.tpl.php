@@ -1,6 +1,10 @@
 <form action="<?php echo $this->action; ?>" method="post" name="feed" id="feed">
     <div style="display: none;">
-    
+    <?php
+        if (isset($this->feed->id)) {
+            echo '<input type="hidden" id="id" name="id" value="'.$this->feed->id.'" />';
+        }
+    ?>
     </div>
 
     <fieldset id="feed_header">

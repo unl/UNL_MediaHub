@@ -9,7 +9,7 @@ if (count($this->items)) {
 }
 $addMediaURL = UNL_MediaYak_Manager::getURL().'?view=addmedia';
 if (isset($_GET['id'])) {
-    $addMediaURL .= '&feed_id='.$_GET['id'];
+    $addMediaURL .= '&amp;feed_id='.$_GET['id'];
 }
 ?>
 <p><a href="<?php echo $addMediaURL; ?>">Add media -</a></p> 
