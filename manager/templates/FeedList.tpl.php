@@ -2,7 +2,7 @@
 if (count($this->items)) {
     echo '<h1>My Channels</h1><ul>';
     foreach ($this->items as $feed) {
-        echo '<li><a href="'.UNL_MediaYak_Manager::getURL($feed).'">'.$feed->title.'</a></li>';
+        echo '<li><a href="'.htmlentities(UNL_MediaYak_Manager::getURL($feed)).'">'.$feed->title.'</a></li>';
     }
     echo '</ul>';
 } else {
