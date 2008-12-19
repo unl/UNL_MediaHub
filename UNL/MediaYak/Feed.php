@@ -16,22 +16,32 @@ class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
     {
     }
     
+    /**
+     * Add all permissions for a user to this feed.
+     *
+     * @param UNL_MediaYak_User $user
+     */
     function addUser(UNL_MediaYak_User $user)
     {
         $permissions = new ReflectionClass('UNL_MediaYak_Permission');
-        foreach($permissions->getConstants() as $permission) {
-            $this->grantUserPermission($user, UNL_MediaYak_Permission::getByID($permission));
+        foreach($permissions->getConstants() as $key=>$permission) {
+            if (substr($key, 0, 9) == 'USER_CAN_') {
+                $this->grantUserPermission($user, UNL_MediaYak_Permission::getByID($permission));
+            }
         }
     }
     
+    /**
+     * Grant permission for a user.
+     *
+     * @param UNL_MediaYak_User $user
+     * @param UNL_MediaYak_Permission $permission
+     * 
+     * @return bool
+     */
     function grantUserPermission(UNL_MediaYak_User $user, UNL_MediaYak_Permission $permission)
     {
-        $data = array('user_uid'      => $user->uid,
-                      'permission_id' => $permission->id,
-                      'feed_id'       => $this->id);
-        $user_permission = new UNL_MediaYak_User_Permission();
-        $user_permission->fromArray($data);
-        return $user_permission->save();
+        return UNL_MediaYak_Permission::grantUserPermission($user, $permission, $this);
     }
 }
 ?>
