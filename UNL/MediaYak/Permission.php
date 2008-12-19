@@ -31,8 +31,13 @@ class UNL_MediaYak_Permission extends UNL_MediaYak_Models_BasePermission
         return Doctrine::getTable('UNL_MediaYak_Permission')->findByTitle($title);
     }
     
-    public static function grantUserPermission(UNL_MediaYak_User $user, UNL_MediaYak_Permission $permission)
+    public static function grantUserPermission(UNL_MediaYak_User $user, UNL_MediaYak_Permission $permission, UNL_MediaYak_Feed $feed)
     {
-        throw new Exception('todo');
+        $data = array('user_uid'      => $user->uid,
+                      'permission_id' => $permission->id,
+                      'feed_id'       => $feed->id);
+        $user_permission = new UNL_MediaYak_User_Permission();
+        $user_permission->fromArray($data);
+        return $user_permission->save();
     }
 }
