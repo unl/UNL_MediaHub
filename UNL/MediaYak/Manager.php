@@ -99,6 +99,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
     {
         $feed = UNL_MediaYak_Feed::getById($_GET['id']);
         $this->output[] = $feed;
+        
         $filter = new UNL_MediaYak_MediaList_Filter_ByFeed($feed);
         $this->showMedia($filter);
     }
