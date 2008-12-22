@@ -10,7 +10,7 @@ class UNL_MediaYak_FeedList_Filter_ByUser implements UNL_MediaYak_Filter
     
     function apply(Doctrine_Query &$query)
     {
-        $query->where('f.uidcreated = ?', $this->user->uid);
+        $query->where('UNL_MediaYak_User_Permission.user_uid = ? AND UNL_MediaYak_User_Permission.feed_id = f.id', $this->user->uid);
     }
     
     function getLabel()
