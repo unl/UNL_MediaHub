@@ -14,18 +14,29 @@ class UNL_MediaYak
         Doctrine_Manager::connection($dsn);
     }
     
+    /**
+     * Add media to the mediahub
+     *
+     * @param array $details
+     *
+     * @return UNL_MediaYak_Media
+     */
     function addMedia(array $details)
     {
         $media = new UNL_MediaYak_Media();
         $media->fromArray($details);
-        return $media->save();
+        $return = $media->save();
+        if ($return) {
+            return $media;
+        }
+        return $return;
     }
     
     /**
      * Add media from a Harvester.
      *
      * @param UNL_MediaYak_Harvester $harvester A harvester that can returned harvested media.
-     * 
+     *
      * @return bool
      */
     function harvest(UNL_MediaYak_Harvester $harvester)

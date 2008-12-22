@@ -1,6 +1,8 @@
 <h1>Add media</h1>
 <form action="?view=feed" method="post" name="media" id="media" enctype="multipart/form-data">
     <div style="display: none;">
+        <input type="hidden" id="feed_id" name="feed_id" value="<?php echo (int)$_GET['feed_id']; ?>" />
+        <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
         <input id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" type="hidden" value="67108864" />
     </div>
 

@@ -1,6 +1,6 @@
 <?php
 class UNL_MediaYak_User extends UNL_MediaYak_Models_BaseUser
-{   
+{
     /**
      * Get a user by uid/username
      *

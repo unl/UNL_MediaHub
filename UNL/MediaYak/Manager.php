@@ -11,6 +11,11 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
     
     public static $url;
     
+    /**
+     * MediaYak
+     *
+     * @var UNL_MediaYak
+     */
     protected $mediayak;
     
     function __construct($dsn)
@@ -106,21 +111,47 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
     
     function handlePost()
     {
-        if (isset($_POST['id'])) {
-            // Update an existing feed.
-            $feed = UNL_MediaYak_Feed::getById($_POST['id']);
-            $feed->synchronizeWithArray($_POST);
-            $feed->save();
-        } else {
-            // Add a new feed for this user.
-            $data = array_merge($_POST, array('datecreated'=>date('Y-m-d H:i:s'),
-                                              'uidcreated'=>$this->getUser()->uid));
-            $feed = new UNL_MediaYak_Feed();
-            $feed->fromArray($data);
-            $feed->save();
-            $feed->addUser($this->user);
+        switch($this->determinePostTarget()) {
+        case 'feed':
+            if (isset($_POST['id'])) {
+                // Update an existing feed.
+                $feed = UNL_MediaYak_Feed::getById($_POST['id']);
+                $feed->synchronizeWithArray($_POST);
+                $feed->save();
+            } else {
+                // Add a new feed for this user.
+                $data = array_merge($_POST, array('datecreated'=>date('Y-m-d H:i:s'),
+                                                  'uidcreated'=>$this->getUser()->uid));
+                $feed = new UNL_MediaYak_Feed();
+                $feed->fromArray($data);
+                $feed->save();
+                $feed->addUser($this->user);
+            }
+            $this->redirect('?view=feed&id='.$feed->id);
+            break;
+        case 'feed_media':
+            $feed = UNL_MediaYak_Feed::getById($_POST['feed_id']);
+            if ($media = UNL_MediaYak_Media::getByURL($_POST['url'])) {
+                // all ok
+            } else {
+                // Insert a new piece of media
+                $details = array('url'=>$_POST['url'],
+                                 'title'=>$_POST['title'],
+                                 'description'=>$_POST['description']);
+                $media = $this->mediayak->addMedia($details);
+            }
+            $feed->addMedia($media);
+            $this->redirect('?view=feed&id='.$feed->id);
+            break;
         }
-        $this->redirect('?view=feed&id='.$feed->id);
+    }
+    
+    function determinePostTarget()
+    {
+        if (isset($_POST['__unlmy_posttarget'])) {
+            return $_POST['__unlmy_posttarget'];
+        }
+        return false;
     }
     
     function userCanEditFeed($user, $feed)
@@ -128,7 +159,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
     }
     
     function editFeedMetaData()
-    {        
+    {
         if (isset($_GET['id'])) {
             $this->output = new UNL_MediaYak_Feed_Form(UNL_MediaYak_Feed::getById($_GET['id']));
             return;
