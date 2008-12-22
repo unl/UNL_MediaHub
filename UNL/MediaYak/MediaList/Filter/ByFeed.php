@@ -11,7 +11,7 @@ class UNL_MediaYak_MediaList_Filter_ByFeed implements UNL_MediaYak_Filter
     
     function apply(Doctrine_Query &$query)
     {
-        $query->where('UNL_MediaYak_Feed_Media.feed_id = ?', $this->feed->id);
+        $query->where('UNL_MediaYak_Feed_Media.feed_id = ? AND UNL_MediaYak_Feed_Media.media_id = m.id', $this->feed->id);
     }
     
     function getLabel()
