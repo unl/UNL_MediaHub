@@ -12,4 +12,12 @@ abstract class UNL_MediaYak_Models_BaseFeed extends Doctrine_Record
     $this->hasColumn('datecreated',   'timestamp', null, array('primary' => false, 'notnull' => true, 'autoincrement' => false));
   }
   
+  public function setUp()
+  {
+      $this->hasMany('UNL_MediaYak_Media',    array('local'    => 'feed_id',
+                                                    'foreign'  => 'media_id',
+                                                    'refClass' => 'UNL_MediaYak_Feed_Media'));
+      parent::setUp();
+  }
+  
 }
