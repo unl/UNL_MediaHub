@@ -5,6 +5,7 @@ class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
      * Get a feed by PK.
      *
      * @param int $id ID of the feed.
+     *
      * @return UNL_MediaYak_Feed
      */
     static function getById($id)
@@ -12,9 +13,10 @@ class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
         return Doctrine::getTable('UNL_MediaYak_Feed')->find($id);
     }
     
-    function addMedia(UNL_MediaYak_Media $media, UNL_MediaYak_Media_MetaData $metadata)
+    function addMedia(UNL_MediaYak_Media $media, UNL_MediaYak_Media_MetaData $metadata = null)
     {
-        throw new Exception('@todo');
+        $this->feed->UNL_MediaYak_Media[] = $media;
+        return $this->feed->save();
     }
     
     /**
@@ -37,7 +39,7 @@ class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
      *
      * @param UNL_MediaYak_User $user
      * @param UNL_MediaYak_Permission $permission
-     * 
+     *
      * @return bool
      */
     function grantUserPermission(UNL_MediaYak_User $user, UNL_MediaYak_Permission $permission)

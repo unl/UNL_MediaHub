@@ -1,5 +1,6 @@
 <form action="<?php echo $this->action; ?>" method="post" name="feed" id="feed">
     <div style="display: none;">
+    <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed" />
     <?php
         if (isset($this->feed->id)) {
             echo '<input type="hidden" id="id" name="id" value="'.$this->feed->id.'" />';

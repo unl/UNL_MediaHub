@@ -11,6 +11,7 @@ $page->navlinks = '
     <li><a href="'.UNL_MediaYak_Manager::getURL().'">My Channels</a></li>
 </ul>';
 
-$page->maincontentarea = UNL_MediaYak_OutputController::display($this->output, true);
+$page->maincontentarea = 'Welcome '.$this->user->uid;
+$page->maincontentarea .= UNL_MediaYak_OutputController::display($this->output, true);
 
 echo $page;
