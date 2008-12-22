@@ -12,6 +12,7 @@ if (count($this->items)) {
         <a href="'.UNL_MediaYak_Manager::getURL().'?view=feedmetadata">Would you like to create one?</a>
     </p>';
 }
-echo '<p>
-        <a href="'.UNL_MediaYak_Manager::getURL().'?view=feedmetadata">Create a new channel</a>
+echo '
+    <p>
+        <a class="add_feed" href="'.UNL_MediaYak_Manager::getURL().'?view=feedmetadata">Add channel</a>
     </p>';

@@ -25,11 +25,8 @@ class UNL_MediaYak
     {
         $media = new UNL_MediaYak_Media();
         $media->fromArray($details);
-        $return = $media->save();
-        if ($return) {
-            return $media;
-        }
-        return $return;
+        $media->save();
+        return $media;
     }
     
     /**
