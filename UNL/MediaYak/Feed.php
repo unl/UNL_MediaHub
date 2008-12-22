@@ -13,6 +13,11 @@ class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
         return Doctrine::getTable('UNL_MediaYak_Feed')->find($id);
     }
     
+    static function getByTitle($title)
+    {
+        return Doctrine::getTable('UNL_MediaYak_Feed')->findOneByTitle($title);
+    }
+    
     function addMedia(UNL_MediaYak_Media $media, UNL_MediaYak_Media_MetaData $metadata = null)
     {
         $this->UNL_MediaYak_Media[] = $media;

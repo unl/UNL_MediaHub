@@ -141,11 +141,13 @@ class UNL_MediaYak_Controller
             // We're golden.
         }
         
-        switch ($this->options['view'])
-        {
+        switch ($this->options['view']) {
         case 'media':
             $media = $this->findRequestedMedia($this->options);
             $this->showMedia($media);
+            break;
+        case 'feed':
+            $this->showFeed();
             break;
         case 'search':
         default:
@@ -257,6 +259,10 @@ class UNL_MediaYak_Controller
                 break;
             case 'UNL_MediaYak_MediaList':
                 $url = $mixed->getURL();
+                break;
+            case 'UNL_MediaYak_Feed':
+                $url .= 'channels/'.url_encode($mixed->title);
+                break;
             default:
                     
             }
@@ -305,6 +311,18 @@ class UNL_MediaYak_Controller
             throw new Exception('Could not find that news release.');
         }
         $this->output->loadReference('UNL_MediaYak_Media_Comment');
+    }
+    
+    function showFeed()
+    {
+        if (isset($this->options['feed_id'])) {
+            $feed = UNL_MediaYak_Feed::getById($this->options['feed_id']);
+        } elseif (isset($this->options['title'])) {
+            $feed = UNL_MediaYak_Feed::getByTitle($this->options['title']);
+        }
+        $feed->loadReference('UNL_MediaYak_Media');
+        $this->output[] = $feed;
+        
     }
 }
 
