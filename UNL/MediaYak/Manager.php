@@ -113,6 +113,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
     {
         switch($this->determinePostTarget()) {
         case 'feed':
+            // Insert or update a Feed/Channel
             if (isset($_POST['id'])) {
                 // Update an existing feed.
                 $feed = UNL_MediaYak_Feed::getById($_POST['id']);
@@ -130,14 +131,15 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
             $this->redirect('?view=feed&id='.$feed->id);
             break;
         case 'feed_media':
+            // Add media to a feed/channel
             $feed = UNL_MediaYak_Feed::getById($_POST['feed_id']);
             if ($media = UNL_MediaYak_Media::getByURL($_POST['url'])) {
                 // all ok
             } else {
                 // Insert a new piece of media
-                $details = array('url'=>$_POST['url'],
-                                 'title'=>$_POST['title'],
-                                 'description'=>$_POST['description']);
+                $details = array('url'        => $_POST['url'],
+                                 'title'      => $_POST['title'],
+                                 'description'=> $_POST['description']);
                 $media = $this->mediayak->addMedia($details);
             }
             $feed->addMedia($media);
