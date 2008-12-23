@@ -1,6 +1,6 @@
 <?php
-        if (count($this->items)) {
-            foreach ($this->items as $media) { ?>
+if (count($this->items)) {
+    foreach ($this->items as $media) { ?>
     <item>
       <title><?php echo $media->title; ?></title>
       <link><?php echo $media->url; ?></link>
@@ -9,6 +9,6 @@
       <guid><?php echo $media->url; ?></guid>
     </item>
 <?php
-            }
-        }
-    ?>
+    }
+}
+?>
