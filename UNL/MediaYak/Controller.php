@@ -320,8 +320,7 @@ class UNL_MediaYak_Controller
         } elseif (isset($this->options['title'])) {
             $feed = UNL_MediaYak_Feed::getByTitle($this->options['title']);
         }
-        $feed->loadReference('UNL_MediaYak_Media');
-        $this->output[] = $feed;
+        $this->output[] = new UNL_MediaYak_FeedAndMedia($feed);
         
     }
 }
