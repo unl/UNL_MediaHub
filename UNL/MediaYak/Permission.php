@@ -8,9 +8,17 @@ class UNL_MediaYak_Permission extends UNL_MediaYak_Models_BasePermission
     
     const USER_CAN_UPLOAD = 10;
     
-    public static function userHasPermission(UNL_MediaYak_User $user, UNL_MediaYak_Permission $permission)
+    const USER_CAN_ADD_USER = 20;
+    
+    public static function userHasPermission(UNL_MediaYak_User $user, UNL_MediaYak_Permission $permission, UNL_MediaYak_Feed $feed)
     {
-        throw new Exception('todo');
+        $query = new Doctrine_Query();
+        $query->from('UNL_MediaYak_User_Permission u')
+              ->where('u.user_uid = ? AND u.permission_id = ? AND u.feed_id = ?',
+                      array($user->uid, $permission->id, $feed->id));
+        $results = $query->execute();
+        
+        return count($results);
     }
     
     public static function getByID($id)

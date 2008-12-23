@@ -55,6 +55,9 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
             case 'addmedia':
                 $this->addMedia();
                 break;
+            case 'permissions':
+                $this->editPermissions();
+                break;
             case 'feeds':
             default:
                 $this->showFeeds($this->user);
@@ -63,6 +66,11 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
         }
     }
     
+    /**
+     * Determines if the user is logged in.
+     *
+     * @return bool
+     */
     function isLoggedIn()
     {
         return $this->auth->isLoggedIn();
@@ -82,10 +90,15 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
         $this->output[] = new UNL_MediaYak_MediaList($filter);
     }
     
+    function editPermissions()
+    {
+        $feed = UNL_MediaYak_Feed::getById($_GET['feed_id']);
+        $this->output[] = new UNL_MediaYak_UserList(new UNL_MediaYak_UserList_Filter_ByFeed($feed));
+    }
     
     function showFeeds(UNL_MediaYak_User $user)
     {
-        $this->output = $user->getFeeds();
+        $this->output[] = $user->getFeeds();
     }
     
     
@@ -133,6 +146,11 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
         case 'feed_media':
             // Add media to a feed/channel
             $feed = UNL_MediaYak_Feed::getById($_POST['feed_id']);
+            if (!$feed->userHasPermission($this->user,
+                                          UNL_MediaYak_Permission::getByID(
+                                            UNL_MediaYak_Permission::USER_CAN_INSERT))) {
+                throw new Exception('You do not have permission to do this.');
+            }
             if ($media = UNL_MediaYak_Media::getByURL($_POST['url'])) {
                 // all ok
             } else {
@@ -145,6 +163,18 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
             $feed->addMedia($media);
             $this->redirect('?view=feed&id='.$feed->id);
             break;
+        case 'feed_users':
+            $feed = UNL_MediaYak_Feed::getById($_POST['feed_id']);
+            if (!$feed->userHasPermission($this->user,
+                                          UNL_MediaYak_Permission::getByID(
+                                            UNL_MediaYak_Permission::USER_CAN_ADD_USER))) {
+                throw new Exception('You do not have permission to add a user.');
+            }
+            if (!empty($_POST['uid'])) {
+                $feed->addUser(UNL_MediaYak_User::getByUid($_POST['uid']));
+            }
+            $this->redirect('?view=feed&id='.$feed->id);
+            break;
         }
     }
     
@@ -154,10 +184,6 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
             return $_POST['__unlmy_posttarget'];
         }
         return false;
-    }
-    
-    function userCanEditFeed($user, $feed)
-    {
     }
     
     function editFeedMetaData()
