@@ -10,6 +10,11 @@ class UNL_MediaYak_FeedAndMedia
         $this->feed = $feed;
         $this->media_list = new UNL_MediaYak_MediaList(new UNL_MediaYak_MediaList_Filter_ByFeed($feed));
     }
+    
+    public function setMediaList(UNL_MediaYak_MediaList $media_list)
+    {
+        $this->media_list = $list;
+    }
 }
 
 ?>
