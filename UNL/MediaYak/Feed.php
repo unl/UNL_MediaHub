@@ -40,6 +40,19 @@ class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
     }
     
     /**
+     * check if user has a given permission for this feed
+     *
+     * @param UNL_MediaYak_User $user
+     * @param UNL_MediaYak_Permission $permission
+     * 
+     * @return bool
+     */
+    function userHasPermission(UNL_MediaYak_User $user, UNL_MediaYak_Permission $permission)
+    {
+        return UNL_MediaYak_Permission::userHasPermission($user, $permission, $this);
+    }
+    
+    /**
      * Grant permission for a user.
      *
      * @param UNL_MediaYak_User $user
