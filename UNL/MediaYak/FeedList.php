@@ -4,7 +4,8 @@ class UNL_MediaYak_FeedList extends UNL_MediaYak_List
     public $tables = 'UNL_MediaYak_Feed f';
     
     public $options = array('orderby' => 'title',
-                            'order'   => 'ASC');
+                            'order'   => 'ASC',
+                            'page'    => 0);
     
     function setOrderBy(Doctrine_Query &$query)
     {
