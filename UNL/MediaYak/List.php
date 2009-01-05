@@ -39,7 +39,7 @@ abstract class UNL_MediaYak_List implements Countable
             $this->label = $filter->getLabel();
         }
 
-        $pager = new Doctrine_Pager($query, $this->options['page'], self::$results_per_page);
+        $pager = new Doctrine_Pager($query, (int)$this->options['page'], self::$results_per_page);
         $pager->setCountQuery($query);
         
         $this->items = $pager->execute();
