@@ -37,7 +37,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
     
     function preRun()
     {
-        return void;
+        return null;
     }
     
     function run()
