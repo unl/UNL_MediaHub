@@ -5,7 +5,7 @@ abstract class UNL_MediaYak_Models_BaseUserHasPermission extends Doctrine_Record
   public function setTableDefinition()
   {
     $this->setTableName('user_has_permission');
-    $this->hasColumn('user_uid',      'string', null,    array('primary' => trie, 'notnull' => true, 'autoincrement' => true));
+    $this->hasColumn('user_uid',      'string', null,    array('primary' => true, 'notnull' => true, 'autoincrement' => true));
     $this->hasColumn('permission_id', 'integer',   4,    array('unsigned' => 0, 'primary' => true, 'notnull' => true, 'autoincrement' => true));
     $this->hasColumn('feed_id',       'integer',   4,    array('unsigned' => 0, 'primary' => true, 'notnull' => true, 'autoincrement' => true));
     $this->hasColumn('user_uid as uid', 'string');
