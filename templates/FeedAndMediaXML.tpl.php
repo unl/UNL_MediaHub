@@ -1,7 +1,7 @@
 <?php
 UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_MediaList', 'MediaListXML');
+echo '<?xml version="1.0"?>'.PHP_EOL;
 ?>
-<?xml version="1.0"?>
 <rss version="2.0">
   <channel>
     <title><?php echo $this->feed->title; ?></title>
