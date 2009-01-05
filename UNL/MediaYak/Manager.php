@@ -193,7 +193,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
             return;
         }
         
-        $this->output[] = new UNL_MediaYak_Feed_Form($feed);
+        $this->output[] = new UNL_MediaYak_Feed_Form();
     }
     
     function editFeedPublishers($feed)
