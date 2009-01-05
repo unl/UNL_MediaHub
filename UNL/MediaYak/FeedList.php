@@ -1,5 +1,5 @@
 <?php
-class UNL_MediaYak_FeedList extends UNL_Mediayak_List
+class UNL_MediaYak_FeedList extends UNL_MediaYak_List
 {
     public $tables = 'UNL_MediaYak_Feed f';
     
