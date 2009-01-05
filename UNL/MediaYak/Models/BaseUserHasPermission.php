@@ -8,7 +8,6 @@ abstract class UNL_MediaYak_Models_BaseUserHasPermission extends Doctrine_Record
     $this->hasColumn('user_uid',      'string', null,    array('primary' => true, 'notnull' => true, 'autoincrement' => true));
     $this->hasColumn('permission_id', 'integer',   4,    array('unsigned' => 0, 'primary' => true, 'notnull' => true, 'autoincrement' => true));
     $this->hasColumn('feed_id',       'integer',   4,    array('unsigned' => 0, 'primary' => true, 'notnull' => true, 'autoincrement' => true));
-    $this->hasColumn('user_uid as uid', 'string');
   }
 
   public function setUp()
