@@ -1,6 +1,8 @@
 <?php
 class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
 {
+    protected $namespaces = array();
+    
     /**
      * Get a feed by PK.
      *
@@ -63,6 +65,11 @@ class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
     function grantUserPermission(UNL_MediaYak_User $user, UNL_MediaYak_Permission $permission)
     {
         return UNL_MediaYak_Permission::grantUserPermission($user, $permission, $this);
+    }
+    
+    function addNamespace(UNL_MediaYak_Feed_NamespacedAttributes $namespace)
+    {
+        
     }
 }
 ?>
