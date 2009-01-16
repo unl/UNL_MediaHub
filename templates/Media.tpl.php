@@ -68,4 +68,8 @@ UNL_MediaYak_Controller::setReplacementData('head', $meta);
     <a class="imagelink" href="http://www.addthis.com/bookmark.php" onmouseover="return addthis_open(this, '', '[URL]', '[TITLE]')" onmouseout="addthis_close()" onclick="return addthis_sendto()"><img src="http://s9.addthis.com/button1-share.gif" width="125" height="16" border="0" alt="" /></a>
     <script type="text/javascript" src="http://s7.addthis.com/js/152/addthis_widget.js"></script>
     <!-- ADDTHIS BUTTON END -->
+    <h6>Embed</h6>
+    <textarea cols="25" rows="3" onclick="this.select(); return false;"><?php
+        echo htmlentities('<div class="content_holder" id="preview_holder"><div class="unl_liquid_pictureframe"><div class="unl_liquid_pictureframe_inset"><object style="visibility: visible;" id="preview" data="/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/player.swf" type="application/x-shockwave-flash" height="358" width="450"><param value="true" name="allowfullscreen"><param value="always" name="allowscriptaccess"><param value="file='.$this->url.'&amp;image='.UNL_MediaYak_Controller::$thumbnail_generator.$this->url.'&amp;volume=100&amp;autostart=true" name="flashvars"></object><span class="unl_liquid_pictureframe_footer"></span></div></div></div>');
+    ?></textarea>
 </div>
