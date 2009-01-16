@@ -21,7 +21,8 @@ function writeUNLVideoPlayer(mediaurl, id)
       file: mediaurl,
       image: image,
       volume: "100",
-      autostart: "true"
+      autostart: "true",
+      plugins: "googlytics-1"
     };
     var params = {
       allowfullscreen: "true",
