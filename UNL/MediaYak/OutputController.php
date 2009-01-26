@@ -149,12 +149,12 @@ class UNL_MediaYak_OutputController
         return $templatefile;
     }
     
-    static public function setOutputTemplate($cname, $templatename)
+    static public function setOutputTemplate($class_name, $template_name)
     {
-        if (isset($templatename)) {
-            self::$output_template[$cname] = $templatename;
+        if (isset($template_name)) {
+            self::$output_template[$class_name] = $template_name;
         }
-        return self::getTemplateFilename($cname);
+        return self::getTemplateFilename($class_name);
     }
     
     static public function setDirectorySeparator($separator)
@@ -168,4 +168,3 @@ class UNL_MediaYak_OutputController
     }
 }
 
-?>
