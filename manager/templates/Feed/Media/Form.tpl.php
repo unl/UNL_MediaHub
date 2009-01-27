@@ -24,7 +24,7 @@
         <legend>iTunes Options <a href="#" onclick="document.getElementById('itunes_elements').style.display='block'; return false;">Show</a></legend>
         <ol style="display:none;" id="itunes_elements">
             <?php
-            $itunes = new UNL_MediaYak_Feed_NamespacedElements_itunes();
+            $itunes = new UNL_MediaYak_Feed_Media_NamespacedElements_itunes();
             foreach ($itunes->getItemElements() as $element) {
                 $value = '';
                 $label = ucwords($element);
