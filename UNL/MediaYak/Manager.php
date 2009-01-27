@@ -222,7 +222,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
     
     /**
      * Show the form to add media to a feed.
-     * 
+     *
      * @return void
      */
     function addMedia()
