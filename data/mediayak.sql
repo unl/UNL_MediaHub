@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 05, 2009 at 04:19 PM
+-- Generation Time: Jan 27, 2009 at 03:43 PM
 -- Server version: 5.0.67
 -- PHP Version: 5.2.6
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `comment` mediumtext NOT NULL,
   `datecreated` timestamp NOT NULL default CURRENT_TIMESTAMP,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `feeds` (
   `uidcreated` varchar(50) NOT NULL,
   `datecreated` datetime NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
 
 -- --------------------------------------------------------
 
@@ -64,6 +64,19 @@ CREATE TABLE IF NOT EXISTS `feed_has_media` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `feed_has_nselement`
+--
+
+CREATE TABLE IF NOT EXISTS `feed_has_nselement` (
+  `feed_id` int(10) unsigned NOT NULL,
+  `nselement` varchar(100) NOT NULL,
+  `value` mediumtext NOT NULL,
+  PRIMARY KEY  (`feed_id`,`nselement`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `media`
 --
 
@@ -75,7 +88,20 @@ CREATE TABLE IF NOT EXISTS `media` (
   `author` varchar(255) default NULL,
   `datecreated` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=292 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `media_has_nselement`
+--
+
+CREATE TABLE IF NOT EXISTS `media_has_nselement` (
+  `media_id` int(10) unsigned NOT NULL,
+  `nselement` varchar(100) NOT NULL,
+  `value` mediumtext NOT NULL,
+  PRIMARY KEY  (`media_id`,`nselement`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
