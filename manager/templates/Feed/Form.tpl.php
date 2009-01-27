@@ -17,5 +17,21 @@
             <li><label for="submit" class="element">&nbsp;</label><div class="element"><input id="submit" name="submit" value="Save" type="submit" /></div></li>
         </ol>
     </fieldset>
+    
+    <fieldset id="itunes_header">
+
+        <legend>iTunes Options</legend>
+        <ol>
+            <?php
+            $itunes = new UNL_MediaYak_Feed_NamespacedElements_itunes();
+            foreach ($itunes->getChannelElements() as $element) {
+                $value = '';
+                $label = ucwords($element);
+                echo "<li><label for='itunes_$element' class='element'>$label</label><div class='element'><input id='itunes_$element' name='itunes_$element' type='text' value='$value' size='55' /></div></li>"; 
+            }
+            ?>
+            <li><label for="itunes_submit" class="element">&nbsp;</label><div class="element"><input id="itunes_submit" name="submit" value="Save" type="submit" /></div></li>
+        </ol>
+    </fieldset>
 
 </form>
