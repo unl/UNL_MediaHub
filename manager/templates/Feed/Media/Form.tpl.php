@@ -19,6 +19,21 @@
             <li><label for="submit_existing" class="element">&nbsp;</label><div class="element"><input id="submit_existing" name="submit_existing" value="Save" type="submit" /></div></li>
         </ol>
     </fieldset>
+    <fieldset id="itunes_header">
+
+        <legend>iTunes Options <a href="#" onclick="document.getElementById('itunes_elements').style.display='block'; return false;">Show</a></legend>
+        <ol style="display:none;" id="itunes_elements">
+            <?php
+            $itunes = new UNL_MediaYak_Feed_NamespacedElements_itunes();
+            foreach ($itunes->getItemElements() as $element) {
+                $value = '';
+                $label = ucwords($element);
+                echo "<li><label for='itunes_$element' class='element'>$label</label><div class='element'><input id='itunes_$element' name='itunes_$element' type='text' value='$value' size='55' /></div></li>"; 
+            }
+            ?>
+            <li><label for="itunes_submit" class="element">&nbsp;</label><div class="element"><input id="itunes_submit" name="submit" value="Save" type="submit" /></div></li>
+        </ol>
+    </fieldset>
     <fieldset id="new_media">
         <legend>Upload new media</legend>
         <ol>
