@@ -1,5 +1,6 @@
 <?php
-abstract class UNL_MediaYak_Feed_NamespacedElements extends UNL_MediaYak_Models_BaseFeedHasNSElement
+
+abstract class UNL_MediaYak_Feed_Media_NamespacedElements extends UNL_MediaYak_Models_BaseMediaHasNSElement
 {
     public function getXMLNS()
     {
@@ -11,5 +12,5 @@ abstract class UNL_MediaYak_Feed_NamespacedElements extends UNL_MediaYak_Models_
         return $this->uri;
     }
     
-    abstract function getChannelElements();
+    abstract function getItemElements();
 }

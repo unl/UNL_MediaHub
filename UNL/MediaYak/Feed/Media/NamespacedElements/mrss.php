@@ -4,15 +4,17 @@
  * http://search.yahoo.com/mrss/
  *
  */
-class UNL_MediaYak_Feed_NamespacedElements_mrss extends UNL_MediaYak_Feed_NamespacedElements
+class UNL_MediaYak_Feed_Media_NamespacedElements_mrss extends UNL_MediaYak_Feed_Media_NamespacedElements
 {
     protected $xmlns = 'mrss';
     
     protected $uri = 'http://search.yahoo.com/mrss/';
     
-    function getChannelElements()
+    function getItemElements()
     {
         return array(
+            'group',
+            'content',
             'rating',
             'title',
             'description',

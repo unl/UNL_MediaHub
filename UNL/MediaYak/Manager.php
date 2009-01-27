@@ -1,8 +1,18 @@
 <?php
 class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
 {
+    /**
+     * The auth object.
+     *
+     * @var UNL_Auth
+     */
     protected $auth;
     
+    /**
+     * The user that's logged in.
+     *
+     * @var UNL_mediaYak_User
+     */
     public $user;
     
     public $output;
@@ -37,7 +47,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
     
     function preRun()
     {
-        return null;
+        return true;
     }
     
     function run()
@@ -178,6 +188,11 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
         }
     }
     
+    /**
+     * Determine what type of data is being saved.
+     *
+     * @return string
+     */
     function determinePostTarget()
     {
         if (isset($_POST['__unlmy_posttarget'])) {
@@ -186,6 +201,11 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
         return false;
     }
     
+    /**
+     * Display a form for editing a feed's details
+     *
+     * @return void
+     */
     function editFeedMetaData()
     {
         if (isset($_GET['id'])) {
@@ -200,6 +220,11 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
     {
     }
     
+    /**
+     * Show the form to add media to a feed.
+     * 
+     * @return void
+     */
     function addMedia()
     {
         $this->output = new UNL_MediaYak_Feed_Media_Form();
