@@ -18,5 +18,21 @@ abstract class UNL_MediaYak_Models_BaseMediaHasNSElement extends Doctrine_Record
                                                  'foreign' => 'id'));
       parent::setUp();
   }
+  
+    function preInsert($event)
+    {
+        if (empty($this->value)) {
+            $event->skipOperation();
+        }
+    }
+    
+    function preUpdate($event)
+    {
+        if (empty($this->value)) {
+            $this->delete();
+            $event->skipOperation();
+            return;
+        }
+    }
 
 }

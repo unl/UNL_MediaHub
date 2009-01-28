@@ -18,22 +18,25 @@
         </ol>
     </fieldset>
     
-    <fieldset id="itunes_header">
+    <?php foreach(array('iTunes'=>'itunes', 'Media RSS'=>'mrss') as $label=>$class) { ?>
+    <fieldset id="<?php echo $class; ?>_header">
 
-        <legend>iTunes Options</legend>
+        <legend><?php echo $label; ?> Options</legend>
         <ol>
             <?php
-            $itunes = new UNL_MediaYak_Feed_NamespacedElements_itunes();
-            foreach ($itunes->getChannelElements() as $count=>$element) {
+            $ns_class = 'UNL_MediaYak_Feed_NamespacedElements_'.$class;
+            $ns_object = new $ns_class();
+            foreach ($ns_object->getChannelElements() as $count=>$element) {
+                $nselement = $ns_object->getXMLNS().$element;
                 $value = '';
                 $label = ucwords($element);
-                echo "<li><label for='itunes_$element' class='element'>$label</label><div class='element'>
-                <input id='itunes_$element' name='UNL_MediaYak_Feed_NamespacedElements_itunes[$count][nselement]' type='hidden' value='$element' />
-                <input id='itunes_$element' name='UNL_MediaYak_Feed_NamespacedElements_itunes[$count][value]' type='text' value='$value' size='55' /></div></li>";
+                echo "<li><label for='$class_$element' class='element'>$label</label><div class='element'>
+                <input name='$ns_class[$count][nselement]' type='hidden' value='$nselement' />
+                <input id='$class_$element' name='$ns_class[$count][value]' type='text' value='$value' size='55' /></div></li>";
             }
             ?>
-            <li><label for="itunes_submit" class="element">&nbsp;</label><div class="element"><input id="itunes_submit" name="submit" value="Save" type="submit" /></div></li>
+            <li><label for="<?php echo $class; ?>_submit" class="element">&nbsp;</label><div class="element"><input id="<?php echo $class; ?>_submit" name="submit" value="Save" type="submit" /></div></li>
         </ol>
     </fieldset>
-
+    <?php } ?>
 </form>
