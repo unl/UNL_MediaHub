@@ -131,6 +131,6 @@ $page->optionalfooter = '
     <a href="http://www1.unl.edu/comments/">send us a comment</a>.
 </p>';
 
-$page->footercontent = '&copy; 2008 University of Nebraska&mdash;Lincoln | Lincoln, NE 68588 | 402-472-7211 | <a href="http://www1.unl.edu/comments/" title="Click here to direct your comments and questions">comments?</a>';
+$page->footercontent = '&copy; '.date('Y').' University of Nebraska&mdash;Lincoln | Lincoln, NE 68588 | 402-472-7211 | <a href="http://www1.unl.edu/comments/" title="Click here to direct your comments and questions">comments?</a>';
 $page->leftRandomPromo = '';
 echo $page;
