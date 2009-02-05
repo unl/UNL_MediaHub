@@ -19,6 +19,8 @@ abstract class UNL_MediaYak_Models_BaseFeed extends Doctrine_Record
                                                     'refClass' => 'UNL_MediaYak_Feed_Media'));
       $this->hasMany('UNL_MediaYak_Feed_NamespacedElements_itunes',    array('local'    => 'id',
                                                                              'foreign'  => 'feed_id'));
+      $this->hasMany('UNL_MediaYak_Feed_NamespacedElements_mrss',      array('local'    => 'id',
+                                                                             'foreign'  => 'feed_id'));
       parent::setUp();
   }
   
