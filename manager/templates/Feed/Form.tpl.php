@@ -12,8 +12,8 @@
 
         <legend><?php echo (isset($this->feed))?'Edit':'Create'; ?> Feed</legend>
         <ol>
-            <li><label for="title" class="element">Title</label><div class="element"><input id="title" name="title" type="text" value="<?php echo $this->feed->title; ?>" size="55" /></div></li>
-            <li><label for="description" class="element">Description</label><div class="element"><textarea id="description" name="description" rows="5" cols="50"><?php echo $this->feed->title; ?></textarea></div></li>
+            <li><label for="title" class="element">Title</label><div class="element"><input id="title" name="title" type="text" value="<?php echo htmlentities($this->feed->title, ENT_QUOTES); ?>" size="55" /></div></li>
+            <li><label for="description" class="element">Description</label><div class="element"><textarea id="description" name="description" rows="5" cols="50"><?php echo htmlentities($this->feed->title); ?></textarea></div></li>
             <li><label for="submit" class="element">&nbsp;</label><div class="element"><input id="submit" name="submit" value="Save" type="submit" /></div></li>
         </ol>
     </fieldset>
@@ -26,13 +26,23 @@
             <?php
             $ns_class = 'UNL_MediaYak_Feed_NamespacedElements_'.$class;
             $ns_object = new $ns_class();
+            $count = 0;
             foreach ($ns_object->getChannelElements() as $count=>$element) {
-                $nselement = $ns_object->getXMLNS().$element;
+                $nselement = $ns_object->getXMLNS().':'.$element;
                 $value = '';
+                if (count($this->feed->$ns_class)) {
+                    foreach ($this->feed->$ns_class as $ns_record) {
+                        if ($ns_record['nselement'] == $nselement) {
+                            $value = htmlentities($ns_record['value'], ENT_QUOTES);
+                            break;
+                        }
+                    }
+                }
                 $label = ucwords($element);
-                echo "<li><label for='$class_$element' class='element'>$label</label><div class='element'>
-                <input name='$ns_class[$count][nselement]' type='hidden' value='$nselement' />
-                <input id='$class_$element' name='$ns_class[$count][value]' type='text' value='$value' size='55' /></div></li>";
+                echo "<li><label for='{$class}_{$element}' class='element'>$label</label><div class='element'>
+                <input name='{$ns_class}[{$count}][nselement]' type='hidden' value='$nselement' />
+                <input id='{$class}_{$element}' name='{$ns_class}[{$count}][value]' type='text' value='$value' size='55' /></div></li>";
+                $count++;
             }
             ?>
             <li><label for="<?php echo $class; ?>_submit" class="element">&nbsp;</label><div class="element"><input id="<?php echo $class; ?>_submit" name="submit" value="Save" type="submit" /></div></li>
