@@ -10,8 +10,8 @@ if (count($this->items)) {
     foreach ($this->items as $media) {
         echo '
         <li>
-            <a href="">'.$media->title.'</a>
-            <p>'.$media->description.'</p>
+            '.$media->title.'
+            <a class="edit" href="'.$addMediaURL.'&amp;id='.$media->id.'">Edit Details</a>
         </li>';
     }
     echo '</ul>';
