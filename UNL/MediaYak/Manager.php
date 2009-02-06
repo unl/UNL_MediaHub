@@ -241,7 +241,12 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
      */
     function addMedia()
     {
-        $this->output = new UNL_MediaYak_Feed_Media_Form();
+        if (isset($_GET['id'])) {
+            $this->output[] = new UNL_MediaYak_Feed_Media_Form(UNL_MediaYak_Media::getById($_GET['id']));
+            return;
+        }
+        
+        $this->output[] = new UNL_MediaYak_Feed_Media_Form();
     }
     
     function redirect($location)
