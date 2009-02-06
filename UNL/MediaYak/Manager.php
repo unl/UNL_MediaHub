@@ -134,6 +134,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
     
     function handlePost()
     {
+        $this->filterPostData();
         switch($this->determinePostTarget()) {
         case 'feed':
             // Insert or update a Feed/Channel
@@ -199,6 +200,19 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
             return $_POST['__unlmy_posttarget'];
         }
         return false;
+    }
+    
+    function filterPostData()
+    {
+        /** Remove linked records if they are not set anymore **/
+        foreach (array('UNL_MediaYak_Feed_NamespacedElements_itunes' => 'value',
+                       'UNL_MediaYak_Feed_NamespacedElements_mrss'   => 'value') as $relation=>$field) {
+            foreach ($_POST[$relation] as $key=>$values) {
+                if (empty($values[$field])) {
+                    unset($_POST[$relation][$key]);
+                }
+            }
+        }
     }
     
     /**
