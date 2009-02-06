@@ -21,18 +21,40 @@ abstract class UNL_MediaYak_Models_BaseFeedHasNSElement extends Doctrine_Record
   
     function preInsert($event)
     {
+        if (!preg_match('/^'.$this->getXMLNS().':(.*)/', $this->nselement)) {
+            $event->skipOperation();
+            return;
+        }
         if (empty($this->value)) {
             $event->skipOperation();
+            return;
         }
     }
     
     function preUpdate($event)
     {
+        if (!preg_match('/^'.$this->getXMLNS().':(.*)/', $this->nselement)) {
+            $event->skipOperation();
+            return;
+        }
         if (empty($this->value)) {
             $this->delete();
             $event->skipOperation();
             return;
         }
+    }
+    
+    function preDelete($event)
+    {
+        if (!preg_match('/^'.$this->getXMLNS().':(.*)/', $this->nselement)) {
+            $event->skipOperation();
+            return;
+        }
+    }
+    
+    function getXMLNS()
+    {
+        return $this->xmlns;
     }
 
 }
