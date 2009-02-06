@@ -19,21 +19,37 @@
             <li><label for="submit_existing" class="element">&nbsp;</label><div class="element"><input id="submit_existing" name="submit_existing" value="Save" type="submit" /></div></li>
         </ol>
     </fieldset>
-    <fieldset id="itunes_header">
+    <?php foreach(array('iTunes'=>'itunes', 'Media RSS'=>'mrss') as $label=>$class) { ?>
+    <fieldset id="<?php echo $class; ?>_header">
 
-        <legend>iTunes Options <a href="#" onclick="document.getElementById('itunes_elements').style.display='block'; return false;">Show</a></legend>
-        <ol style="display:none;" id="itunes_elements">
+        <legend><?php echo $label; ?> Options</legend>
+        <ol>
             <?php
-            $itunes = new UNL_MediaYak_Feed_Media_NamespacedElements_itunes();
-            foreach ($itunes->getItemElements() as $element) {
+            $ns_class = 'UNL_MediaYak_Feed_Media_NamespacedElements_'.$class;
+            $ns_object = new $ns_class();
+            $count = 0;
+            foreach ($ns_object->getItemElements() as $count=>$element) {
+                $nselement = $ns_object->getXMLNS().':'.$element;
                 $value = '';
+                if (count($this->feed->$ns_class)) {
+                    foreach ($this->feed->$ns_class as $ns_record) {
+                        if ($ns_record['nselement'] == $nselement) {
+                            $value = htmlentities($ns_record['value'], ENT_QUOTES);
+                            break;
+                        }
+                    }
+                }
                 $label = ucwords($element);
-                echo "<li><label for='itunes_$element' class='element'>$label</label><div class='element'><input id='itunes_$element' name='itunes_$element' type='text' value='$value' size='55' /></div></li>"; 
+                echo "<li><label for='{$class}_{$element}' class='element'>$label</label><div class='element'>
+                <input name='{$ns_class}[{$count}][nselement]' type='hidden' value='$nselement' />
+                <input id='{$class}_{$element}' name='{$ns_class}[{$count}][value]' type='text' value='$value' size='55' /></div></li>";
+                $count++;
             }
             ?>
-            <li><label for="itunes_submit" class="element">&nbsp;</label><div class="element"><input id="itunes_submit" name="submit" value="Save" type="submit" /></div></li>
+            <li><label for="<?php echo $class; ?>_submit" class="element">&nbsp;</label><div class="element"><input id="<?php echo $class; ?>_submit" name="submit" value="Save" type="submit" /></div></li>
         </ol>
     </fieldset>
+    <?php } ?>
     <fieldset id="new_media">
         <legend>Upload new media</legend>
         <ol>
