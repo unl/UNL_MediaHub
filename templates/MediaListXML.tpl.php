@@ -4,7 +4,10 @@ if (count($this->items)) {
     <item>
       <title><?php echo $media->title; ?></title>
       <link><?php echo $media->url; ?></link>
-      <description><?php echo $media->description; ?></description>
+      <description><![CDATA[
+      <?php echo $media->description; ?>
+      ]]>
+      </description>
       <pubDate><?php echo date('r', strtotime($media->datecreated)); ?></pubDate>
       <guid><?php echo $media->url; ?></guid>
     </item>
