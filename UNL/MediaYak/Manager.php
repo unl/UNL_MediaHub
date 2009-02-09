@@ -162,8 +162,11 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
                                             UNL_MediaYak_Permission::USER_CAN_INSERT))) {
                 throw new Exception('You do not have permission to do this.');
             }
-            if ($media = UNL_MediaYak_Media::getByURL($_POST['url'])) {
+            if (isset($_POST['id'])) {
                 // all ok
+                $media = UNL_MediaYak_Media::getById($_POST['id']);
+                $media->synchronizeWithArray($_POST);
+                $media->save();
             } else {
                 // Insert a new piece of media
                 $details = array('url'        => $_POST['url'],
@@ -205,11 +208,15 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
     function filterPostData()
     {
         /** Remove linked records if they are not set anymore **/
-        foreach (array('UNL_MediaYak_Feed_NamespacedElements_itunes' => 'value',
-                       'UNL_MediaYak_Feed_NamespacedElements_mrss'   => 'value') as $relation=>$field) {
-            foreach ($_POST[$relation] as $key=>$values) {
-                if (empty($values[$field])) {
-                    unset($_POST[$relation][$key]);
+        foreach (array('UNL_MediaYak_Feed_NamespacedElements_itunes'       => 'value',
+                       'UNL_MediaYak_Feed_NamespacedElements_mrss'         => 'value',
+                       'UNL_MediaYak_Feed_Media_NamespacedElements_itunes' => 'value',
+                       'UNL_MediaYak_Feed_Media_NamespacedElements_mrss'   => 'value') as $relation=>$field) {
+            if (isset($_POST[$relation])) {
+                foreach ($_POST[$relation] as $key=>$values) {
+                    if (empty($values[$field])) {
+                        unset($_POST[$relation][$key]);
+                    }
                 }
             }
         }
