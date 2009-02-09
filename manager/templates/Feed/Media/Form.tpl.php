@@ -1,19 +1,23 @@
-<h1>Add media</h1>
+<h1><?php echo (isset($this->media))?'Edit':'Add'; ?> Media</h1>
 <form action="?view=feed" method="post" name="media" id="media" enctype="multipart/form-data">
     <div style="display: none;">
         <input type="hidden" id="feed_id" name="feed_id" value="<?php echo (int)$_GET['feed_id']; ?>" />
         <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
         <input id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" type="hidden" value="67108864" />
+        <?php
+        if (isset($this->media->id)) {
+            echo '<input type="hidden" id="id" name="id" value="'.$this->media->id.'" />';
+        }
+        ?>
     </div>
-
     <fieldset id="existing_media">
         <legend>Existing Media</legend>
         <ol>
-            <li><label for="url" class="element">URL</label><div class="element"><input id="url" name="url" type="text" size="60" /></div></li>
-            <li><label for="title" class="element">Title</label><div class="element"><input id="title" name="title" type="text" size="60" /></div></li>
+            <li><label for="url" class="element">URL</label><div class="element"><input id="url" name="url" type="text" size="60" value="<?php echo htmlentities($this->media->url, ENT_QUOTES); ?>" /></div></li>
+            <li><label for="title" class="element">Title</label><div class="element"><input id="title" name="title" type="text" size="60" value="<?php echo htmlentities($this->media->title, ENT_QUOTES); ?>" /></div></li>
             <li>
                 <label for="description" class="element">Description</label>
-                <div class="element"><textarea id="description" name="description" rows="5" cols="60"></textarea></div>
+                <div class="element"><textarea id="description" name="description" rows="5" cols="60"><?php echo htmlentities($this->media->description); ?></textarea></div>
             </li>
 
             <li><label for="submit_existing" class="element">&nbsp;</label><div class="element"><input id="submit_existing" name="submit_existing" value="Save" type="submit" /></div></li>
@@ -31,8 +35,8 @@
             foreach ($ns_object->getItemElements() as $count=>$element) {
                 $nselement = $ns_object->getXMLNS().':'.$element;
                 $value = '';
-                if (count($this->feed->$ns_class)) {
-                    foreach ($this->feed->$ns_class as $ns_record) {
+                if (count($this->media->$ns_class)) {
+                    foreach ($this->media->$ns_class as $ns_record) {
                         if ($ns_record['nselement'] == $nselement) {
                             $value = htmlentities($ns_record['value'], ENT_QUOTES);
                             break;
@@ -49,7 +53,9 @@
             <li><label for="<?php echo $class; ?>_submit" class="element">&nbsp;</label><div class="element"><input id="<?php echo $class; ?>_submit" name="submit" value="Save" type="submit" /></div></li>
         </ol>
     </fieldset>
-    <?php } ?>
+    <?php }
+    if (!isset($this->media)) {
+    ?>
     <fieldset id="new_media">
         <legend>Upload new media</legend>
         <ol>
@@ -60,4 +66,7 @@
             <li><label for="submit_new" class="element">&nbsp;</label><div class="element"><input id="submit_new" name="submit_new" value="Save" type="submit" /></div></li>
         </ol>
     </fieldset>
+    <?php
+    }
+    ?>
 </form>
