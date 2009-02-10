@@ -27,5 +27,5 @@ $page->collegenavigationlist = '
     <li>Logout</li>
 </ul>';
 $page->maincontentarea = UNL_MediaYak_OutputController::display($this->output, true);
-
+$page->footercontent = '&copy; '.date('Y').' University of Nebraska&ndash;Lincoln | Lincoln, NE 68588 | 402-472-7211 | <a href="http://www1.unl.edu/comments/" title="Click here to direct your comments and questions">comments?</a>';
 echo $page;
