@@ -103,9 +103,18 @@ $(document).ready(function() {
             <li><label for="<?php echo $class; ?>_submit" class="element">&nbsp;</label><div class="element"><input id="<?php echo $class; ?>_submit" name="submit" value="Save" type="submit" /></div></li>
         </ol>
     </fieldset>
-    <?php }
-    
-    ?>
+    <?php } ?>
+    <fieldset>
+        <legend>Add to feeds</legend>
+        <ol>
+            <?php
+            foreach (UNL_MediaYak_Manager::getUser()->getFeeds() as $feed) {
+                
+            }
+            ?>
+            <li><label for="file_upload" class="element">Upload a file</label><div class="element"><input id="file_upload" name="file_upload" type="file" /></div></li>
+        </ol>
+    </fieldset>
     <a class="continue" id="continue3" href="#" onclick="document.getElementById('submit_existing').click();">Publish</a>
 </div>
 </form>

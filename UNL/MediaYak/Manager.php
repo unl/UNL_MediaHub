@@ -11,9 +11,9 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
     /**
      * The user that's logged in.
      *
-     * @var UNL_mediaYak_User
+     * @var UNL_MediaYak_User
      */
-    public $user;
+    protected static $user;
     
     public $output;
     
@@ -39,7 +39,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
         
         $this->options = array_merge($this->options, $_GET);
         
-        $this->user = UNL_MediaYak_User::getByUid($this->auth->getUser());
+        self::$user = UNL_MediaYak_User::getByUid($this->auth->getUser());
     }
     
     function getCacheKey()
@@ -57,7 +57,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
      *
      * @param string $field Area to be replaced
      * @param string $data  Data to replace the field with.
-     * 
+     *
      * @return void
      */
     static function setReplacementData($field, $data)
@@ -75,7 +75,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
      * Called after run - with all output contents.
      *
      * @param string $me The content from the outputcontroller
-     * 
+     *
      * @return string
      */
     function postRun($me)
@@ -117,12 +117,12 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
                 $this->editPermissions();
                 break;
             case 'feeds':
-                $this->showFeeds($this->user);
+                $this->showFeeds(self::getUser());
                 break;
             case 'addmedia':
                 $this->addMedia();
             default:
-                $this->showFeeds($this->user);
+                $this->showFeeds(self::getUser());
                 break;
             }
         }
@@ -140,11 +140,12 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
     
     /**
      * Get the user
+     *
      * @return UNL_MediaYak_User
      */
-    function getUser()
+    public static function getUser()
     {
-        return $this->user;
+        return self::$user;
     }
     
     function showMedia(UNL_MediaYak_Filter $filter = null)
@@ -204,7 +205,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
                 $feed = new UNL_MediaYak_Feed();
                 $feed->fromArray($data);
                 $feed->save();
-                $feed->addUser($this->user);
+                $feed->addUser(self::getUser());
             }
             $this->redirect('?view=feed&id='.$feed->id);
             break;
@@ -224,7 +225,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
             }
             if (!empty($_POST['feed_id'])) {
                 $feed = UNL_MediaYak_Feed::getById($_POST['feed_id']);
-                if (!$feed->userHasPermission($this->user,
+                if (!$feed->userHasPermission(self::getUser(),
                                               UNL_MediaYak_Permission::getByID(
                                                 UNL_MediaYak_Permission::USER_CAN_INSERT))) {
                     throw new Exception('You do not have permission to do this.');
@@ -235,7 +236,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
             break;
         case 'feed_users':
             $feed = UNL_MediaYak_Feed::getById($_POST['feed_id']);
-            if (!$feed->userHasPermission($this->user,
+            if (!$feed->userHasPermission(self::getUser(),
                                           UNL_MediaYak_Permission::getByID(
                                             UNL_MediaYak_Permission::USER_CAN_ADD_USER))) {
                 throw new Exception('You do not have permission to add a user.');

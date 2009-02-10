@@ -23,7 +23,7 @@ $page->breadcrumbs = '
 
 $page->collegenavigationlist = '
 <ul>
-    <li>'.$this->user->uid.'</li>
+    <li>'.UNL_MediaYak_Manager::getUser()->uid.'</li>
     <li>Logout</li>
 </ul>';
 $page->maincontentarea = UNL_MediaYak_OutputController::display($this->output, true);
