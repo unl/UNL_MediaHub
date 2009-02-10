@@ -105,14 +105,14 @@ $(document).ready(function() {
     </fieldset>
     <?php } ?>
     <fieldset>
-        <legend>Add to feeds</legend>
+        <legend>Add to my feeds</legend>
         <ol>
             <?php
-            foreach (UNL_MediaYak_Manager::getUser()->getFeeds() as $feed) {
-                
+            foreach (UNL_MediaYak_Manager::getUser()->getFeeds()->items as $feed) {
+                echo '<li><label for="feed_id['.$feed->id.']" class="element">'.$feed->title.'</label><div class="element"><input id="feed_id['.$feed->id.']" id="feed_id['.$feed->id.']" type="checkbox" /></div></li>';
             }
             ?>
-            <li><label for="file_upload" class="element">Upload a file</label><div class="element"><input id="file_upload" name="file_upload" type="file" /></div></li>
+            <li><label for="new_feed" class="element">New Feed</label><div class="element"><input id="new_feed" id="new_feed" type="text" /></div></li>
         </ol>
     </fieldset>
     <a class="continue" id="continue3" href="#" onclick="document.getElementById('submit_existing').click();">Publish</a>
