@@ -14,7 +14,8 @@ if (count($this->items)) {
         foreach (array('UNL_MediaYak_Feed_Media_NamespacedElements_itunes',
                        'UNL_MediaYak_Feed_Media_NamespacedElements_mrss') as $ns_class) {
             foreach ($media->$ns_class as $namespaced_element) {
-                echo "<{$namespaced_element['nselement']}>{$namespaced_element['value']}</{$namespaced_element['nselement']}>\n";
+                $element = "{$namespaced_element['xmlns']}:{$namespaced_element['element']}";
+                echo "<$element>{$namespaced_element['value']}</$element>\n";
             }
         }
       ?>

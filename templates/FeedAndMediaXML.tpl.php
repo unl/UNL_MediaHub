@@ -21,7 +21,8 @@ echo '<?xml version="1.0"?>'.PHP_EOL;
     foreach (array('UNL_MediaYak_Feed_NamespacedElements_itunes',
                    'UNL_MediaYak_Feed_NamespacedElements_mrss') as $ns_class) {
         foreach ($this->feed->$ns_class as $namespaced_element) {
-            echo "<{$namespaced_element['nselement']}>{$namespaced_element['value']}</{$namespaced_element['nselement']}>\n";
+            $element = "{$namespaced_element['xmlns']}:{$namespaced_element['element']}";
+            echo "<$element>{$namespaced_element['value']}</$element>\n";
         }
     }
     UNL_MediaYak_OutputController::display($this->media_list);

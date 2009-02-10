@@ -28,11 +28,10 @@
             $ns_object = new $ns_class();
             $count = 0;
             foreach ($ns_object->getChannelElements() as $count=>$element) {
-                $nselement = $ns_object->getXMLNS().':'.$element;
                 $value = '';
                 if (count($this->feed->$ns_class)) {
                     foreach ($this->feed->$ns_class as $ns_record) {
-                        if ($ns_record['nselement'] == $nselement) {
+                        if ($ns_record['element'] == $element) {
                             $value = htmlentities($ns_record['value'], ENT_QUOTES);
                             break;
                         }
@@ -40,7 +39,7 @@
                 }
                 $label = ucwords($element);
                 echo "<li><label for='{$class}_{$element}' class='element'>$label</label><div class='element'>
-                <input name='{$ns_class}[{$count}][nselement]' type='hidden' value='$nselement' />
+                <input name='{$ns_class}[{$count}][element]' type='hidden' value='$element' />
                 <input id='{$class}_{$element}' name='{$ns_class}[{$count}][value]' type='text' value='$value' size='55' /></div></li>";
                 $count++;
             }

@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 27, 2009 at 03:43 PM
--- Server version: 5.0.67
+-- Generation Time: Feb 10, 2009 at 07:07 AM
+-- Server version: 5.0.51
 -- PHP Version: 5.2.6
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `comment` mediumtext NOT NULL,
   `datecreated` timestamp NOT NULL default CURRENT_TIMESTAMP,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `feeds` (
   `uidcreated` varchar(50) NOT NULL,
   `datecreated` datetime NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 -- --------------------------------------------------------
 
@@ -56,10 +56,11 @@ CREATE TABLE IF NOT EXISTS `feeds` (
 --
 
 CREATE TABLE IF NOT EXISTS `feed_has_media` (
+  `id` int(10) unsigned NOT NULL auto_increment,
   `feed_id` int(10) unsigned NOT NULL,
   `media_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY  (`feed_id`,`media_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -69,9 +70,11 @@ CREATE TABLE IF NOT EXISTS `feed_has_media` (
 
 CREATE TABLE IF NOT EXISTS `feed_has_nselement` (
   `feed_id` int(10) unsigned NOT NULL,
-  `nselement` varchar(100) NOT NULL,
+  `xmlns` varchar(10) NOT NULL,
+  `element` varchar(100) NOT NULL,
+  `attributes` varchar(255) default NULL,
   `value` mediumtext NOT NULL,
-  PRIMARY KEY  (`feed_id`,`nselement`)
+  PRIMARY KEY  (`feed_id`,`xmlns`,`element`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -88,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `media` (
   `author` varchar(255) default NULL,
   `datecreated` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=292 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=285 ;
 
 -- --------------------------------------------------------
 
@@ -98,9 +101,11 @@ CREATE TABLE IF NOT EXISTS `media` (
 
 CREATE TABLE IF NOT EXISTS `media_has_nselement` (
   `media_id` int(10) unsigned NOT NULL,
-  `nselement` varchar(100) NOT NULL,
+  `xmlns` varchar(10) NOT NULL,
+  `element` varchar(100) NOT NULL,
+  `attributes` varchar(255) NOT NULL,
   `value` mediumtext NOT NULL,
-  PRIMARY KEY  (`media_id`,`nselement`)
+  PRIMARY KEY  (`media_id`,`xmlns`,`element`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
