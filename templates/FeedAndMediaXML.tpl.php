@@ -1,4 +1,6 @@
 <?php
+$this->feed->loadReference('UNL_MediaYak_Feed_NamespacedElements_itunes');
+$this->feed->loadReference('UNL_MediaYak_Feed_NamespacedElements_mrss');
 UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_MediaList', 'MediaListXML');
 echo '<?xml version="1.0"?>'.PHP_EOL;
 ?>
@@ -16,6 +18,12 @@ echo '<?xml version="1.0"?>'.PHP_EOL;
     <webMaster>brett.bieber@gmail.com</webMaster>
     <ttl>5</ttl>
     <?php
+    foreach (array('UNL_MediaYak_Feed_NamespacedElements_itunes',
+                   'UNL_MediaYak_Feed_NamespacedElements_mrss') as $ns_class) {
+        foreach ($this->feed->$ns_class as $namespaced_element) {
+            echo "<{$namespaced_element['nselement']}>{$namespaced_element['value']}</{$namespaced_element['nselement']}>\n";
+        }
+    }
     UNL_MediaYak_OutputController::display($this->media_list);
     ?>
     </channel>
