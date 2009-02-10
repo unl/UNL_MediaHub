@@ -9,6 +9,7 @@ if (!isset($this->media)) {
 
 $jquery .= '
     $("#continue2").click(function() {
+            $("#feedlist").hide(400);
             $("#part1").hide(400);
             $("#part2").show(400);
             return false;
