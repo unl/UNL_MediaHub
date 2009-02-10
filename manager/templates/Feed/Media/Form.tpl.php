@@ -37,7 +37,7 @@ $(document).ready(function() {
 ');
 
 ?>
-<form action="?view=feed" method="post" name="media" id="media" enctype="multipart/form-data">
+<form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data">
 <div id="part1">
     <h1>Add new media:</h1>
     <fieldset id="add_media">
@@ -47,7 +47,7 @@ $(document).ready(function() {
             <li><label for="file_upload" class="element">File</label><div class="element"><input id="file_upload" name="file_upload" type="file" /></div></li>
         </ol>
     </fieldset>
-    <a id="continue2" href="#">Continue</a>
+    <a class="continue" id="continue2" href="#">Continue</a>
 </div>
 <div id="part2">
 <h1><?php echo (isset($this->media))?'Edit the details of your':'Tell us about your'; ?> media.</h1>
@@ -105,4 +105,6 @@ $(document).ready(function() {
     <?php }
     
     ?>
+    <a id="continue3" href="#" onclick="document.getElementById('submit_existing').click();">Publish</a>
+</div>
 </form>
