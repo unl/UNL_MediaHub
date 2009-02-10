@@ -4,7 +4,7 @@ $this->feed->loadReference('UNL_MediaYak_Feed_NamespacedElements_mrss');
 UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_MediaList', 'MediaListXML');
 echo '<?xml version="1.0"?>'.PHP_EOL;
 ?>
-<rss version="2.0">
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:mrss="http://search.yahoo.com/mrss/">
   <channel>
     <title><?php echo $this->feed->title; ?></title>
     <link><?php echo UNL_MediaYak_Controller::getURL(); ?></link>
