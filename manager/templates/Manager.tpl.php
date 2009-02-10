@@ -32,6 +32,12 @@ $page->navlinks = '
     <li><a href="'.UNL_MediaYak_Manager::getURL().'">My Channels</a></li>
 </ul>';
 
+$page->breadcrumbs = '
+<ul>
+    <li><a href="http://www.unl.edu/">UNL</a></li>
+    <li>MediaHub</li>
+</ul>';
+
 $page->collegenavigationlist = '
 <ul>
     <li>'.$this->user->uid.'</li>
