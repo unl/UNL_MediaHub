@@ -13,11 +13,11 @@
     <fieldset id="existing_media">
         <legend>Existing Media</legend>
         <ol>
-            <li><label for="url" class="element">URL</label><div class="element"><input id="url" name="url" type="text" size="60" value="<?php echo htmlentities($this->media->url, ENT_QUOTES); ?>" /></div></li>
-            <li><label for="title" class="element">Title</label><div class="element"><input id="title" name="title" type="text" size="60" value="<?php echo htmlentities($this->media->title, ENT_QUOTES); ?>" /></div></li>
+            <li><label for="url" class="element">URL</label><div class="element"><input id="url" name="url" type="text" size="60" value="<?php echo htmlentities(@$this->media->url, ENT_QUOTES); ?>" /></div></li>
+            <li><label for="title" class="element">Title</label><div class="element"><input id="title" name="title" type="text" size="60" value="<?php echo htmlentities(@$this->media->title, ENT_QUOTES); ?>" /></div></li>
             <li>
                 <label for="description" class="element">Description</label>
-                <div class="element"><textarea id="description" name="description" rows="5" cols="60"><?php echo htmlentities($this->media->description); ?></textarea></div>
+                <div class="element"><textarea id="description" name="description" rows="5" cols="60"><?php echo htmlentities(@$this->media->description); ?></textarea></div>
             </li>
 
             <li><label for="submit_existing" class="element">&nbsp;</label><div class="element"><input id="submit_existing" name="submit_existing" value="Save" type="submit" /></div></li>
@@ -35,7 +35,7 @@
             foreach ($ns_object->getItemElements() as $count=>$element) {
                 $nselement = $ns_object->getXMLNS().':'.$element;
                 $value = '';
-                if (count($this->media->$ns_class)) {
+                if (isset($this->media) && count($this->media->$ns_class)) {
                     foreach ($this->media->$ns_class as $ns_record) {
                         if ($ns_record['nselement'] == $nselement) {
                             $value = htmlentities($ns_record['value'], ENT_QUOTES);
