@@ -1,5 +1,5 @@
 <?php
-class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
+class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_MediaYak_PostRunReplacements
 {
     /**
      * The auth object.
@@ -17,7 +17,9 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
     
     public $output;
     
-    public $options = array('view'=>'feeds');
+    public $options = array('view'=>'addmedia');
+    
+    protected static $replacements = array();
     
     public static $url;
     
@@ -50,6 +52,55 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
         return true;
     }
     
+    /**
+     * Allows you to set dynamic data when cached output is sent.
+     *
+     * @param string $field Area to be replaced
+     * @param string $data  Data to replace the field with.
+     * 
+     * @return void
+     */
+    static function setReplacementData($field, $data)
+    {
+        switch ($field) {
+        case 'title':
+        case 'head':
+        case 'breadcrumbs':
+            self::$replacements[$field] = $data;
+            break;
+        }
+    }
+    
+    /**
+     * Called after run - with all output contents.
+     *
+     * @param string $me The content from the outputcontroller
+     * 
+     * @return string
+     */
+    function postRun($me)
+    {
+        $scanned = new UNL_Templates_Scanner($me);
+        
+        if (isset(self::$replacements['title'])) {
+            $me = str_replace($scanned->doctitle,
+                              '<title>'.self::$replacements['title'].'</title>',
+                              $me);
+        }
+        
+        if (isset(self::$replacements['head'])) {
+            $me = str_replace('</head>', self::$replacements['head'].'</head>', $me);
+        }
+
+        if (isset(self::$replacements['breadcrumbs'])) {
+            $me = str_replace($scanned->breadcrumbs,
+                              self::$replacements['breadcrumbs'],
+                              $me);
+        }
+        
+        return $me;
+    }
+    
     function run()
     {
         if (count($_POST)) {
@@ -62,15 +113,15 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
             case 'feedmetadata':
                 $this->editFeedMetaData();
                 break;
-            case 'addmedia':
-                $this->addMedia();
-                break;
             case 'permissions':
                 $this->editPermissions();
                 break;
             case 'feeds':
-            default:
                 $this->showFeeds($this->user);
+                break;
+            default:
+            case 'addmedia':
+                $this->addMedia();
                 break;
             }
         }

@@ -1,5 +1,56 @@
-<h1><?php echo (isset($this->media))?'Edit':'Add'; ?> Media</h1>
+<?php
+
+$jquery = '';
+if (!isset($this->media)) {
+    $jquery .= '$("#part2").hide();';
+} else {
+    $jquery .= '$("#part1").hide();';
+}
+
+$jquery .= '
+    $("#continue2").click(function() {
+            $("#part1").hide(400);
+            $("#part2").show(400);
+            return false;
+        }
+    );';
+$jquery .= '
+    $("#itunes_header ol").hide();
+    $("#mrss_header ol").hide();
+    
+    $("#itunes_header legend").click(function() {
+      $("#itunes_header ol").toggle(400);
+      return false;
+    });
+    $("#mrss_header legend").click(function() {
+      $("#mrss_header ol").toggle(400);
+      return false;
+    });';
+
+UNL_MediaYak_Manager::setReplacementData('head','
+<script type="text/javascript">
+$(document).ready(function() {
+    '.$jquery.'
+});
+
+</script>
+');
+
+?>
 <form action="?view=feed" method="post" name="media" id="media" enctype="multipart/form-data">
+<div id="part1">
+    <h1>Add new media:</h1>
+    <fieldset id="add_media">
+        <legend>Add new media:</legend>
+        <ol>
+            <li><label for="url" class="element">Upload a file</label><div class="element"><input id="url" name="url" type="text" size="60" value="<?php echo htmlentities(@$this->media->url, ENT_QUOTES); ?>" /></div></li>
+            <li><label for="file_upload" class="element">File</label><div class="element"><input id="file_upload" name="file_upload" type="file" /></div></li>
+        </ol>
+    </fieldset>
+    <a id="continue2" href="#">Continue</a>
+</div>
+<div id="part2">
+<h1><?php echo (isset($this->media))?'Edit the details of your':'Tell us about your'; ?> media.</h1>
     <div style="display: none;">
         <input type="hidden" id="feed_id" name="feed_id" value="<?php echo (int)$_GET['feed_id']; ?>" />
         <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
@@ -13,7 +64,6 @@
     <fieldset id="existing_media">
         <legend>Existing Media</legend>
         <ol>
-            <li><label for="url" class="element">URL</label><div class="element"><input id="url" name="url" type="text" size="60" value="<?php echo htmlentities(@$this->media->url, ENT_QUOTES); ?>" /></div></li>
             <li><label for="title" class="element">Title</label><div class="element"><input id="title" name="title" type="text" size="60" value="<?php echo htmlentities(@$this->media->title, ENT_QUOTES); ?>" /></div></li>
             <li>
                 <label for="description" class="element">Description</label>
@@ -53,19 +103,6 @@
         </ol>
     </fieldset>
     <?php }
-    if (!isset($this->media)) {
-    ?>
-    <fieldset id="new_media">
-        <legend>Upload new media</legend>
-        <ol>
-            <li><label for="file_upload" class="element">File</label><div class="element"><input id="file_upload" name="file_upload" type="file" /></div></li>
-            <li><label for="qf_4f7d51" class="element">What would you like to do with this file?</label><div class="element"><input name="upload_target" type="radio" id="qf_4f7d51" /><label for="qf_4f7d51">Encode it</label></div></li>
-
-            <li><label for="qf_a38a81" class="element">&nbsp;</label><div class="element"><input name="upload_target" type="radio" id="qf_a38a81" /><label for="qf_a38a81">Go Live</label></div></li>
-            <li><label for="submit_new" class="element">&nbsp;</label><div class="element"><input id="submit_new" name="submit_new" value="Save" type="submit" /></div></li>
-        </ol>
-    </fieldset>
-    <?php
-    }
+    
     ?>
 </form>
