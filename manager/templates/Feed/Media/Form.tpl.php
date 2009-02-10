@@ -43,8 +43,8 @@ $(document).ready(function() {
     <fieldset id="add_media">
         <legend>Add new media:</legend>
         <ol>
-            <li><label for="url" class="element">Upload a file</label><div class="element"><input id="url" name="url" type="text" size="60" value="<?php echo htmlentities(@$this->media->url, ENT_QUOTES); ?>" /></div></li>
-            <li><label for="file_upload" class="element">File</label><div class="element"><input id="file_upload" name="file_upload" type="file" /></div></li>
+            <li><label for="url" class="element">Add by URL</label><div class="element"><input id="url" name="url" type="text" size="60" value="<?php echo htmlentities(@$this->media->url, ENT_QUOTES); ?>" /></div></li>
+            <li><label for="file_upload" class="element">Upload a file</label><div class="element"><input id="file_upload" name="file_upload" type="file" /></div></li>
         </ol>
     </fieldset>
     <a class="continue" id="continue2" href="#">Continue</a>
@@ -105,6 +105,6 @@ $(document).ready(function() {
     <?php }
     
     ?>
-    <a id="continue3" href="#" onclick="document.getElementById('submit_existing').click();">Publish</a>
+    <a class="continue" id="continue3" href="#" onclick="document.getElementById('submit_existing').click();">Publish</a>
 </div>
 </form>

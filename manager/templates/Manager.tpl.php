@@ -7,6 +7,7 @@ if (isset($GLOBALS['UNLTEMPLATEDEPENDENTSPATH'])) {
 $page->doctitle = '<title>UNL | Media Hub | Manager</title>';
 $page->titlegraphic = '<h1>UNL MediaHub Manager</h1>';
 $page->addStyleSheet('/ucomm/templatedependents/templatecss/components/forms.css');
+$page->addStyleSheet(UNL_MediaYak_Manager::getURL().'templates/css/forms.css');
 $page->addStyleDeclaration('#navigation {display:none;}');
 $page->addScript(UNL_MediaYak_Manager::getURL().'templates/scripts/jquery-1.3.1.min.js');
 $page->leftRandomPromo = '';
