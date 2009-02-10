@@ -209,12 +209,6 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
             break;
         case 'feed_media':
             // Add media to a feed/channel
-            $feed = UNL_MediaYak_Feed::getById($_POST['feed_id']);
-            if (!$feed->userHasPermission($this->user,
-                                          UNL_MediaYak_Permission::getByID(
-                                            UNL_MediaYak_Permission::USER_CAN_INSERT))) {
-                throw new Exception('You do not have permission to do this.');
-            }
             if (isset($_POST['id'])) {
                 // all ok
                 $media = UNL_MediaYak_Media::getById($_POST['id']);
@@ -227,7 +221,15 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
                                  'description'=> $_POST['description']);
                 $media = $this->mediayak->addMedia($details);
             }
-            $feed->addMedia($media);
+            if (!empty($_POST['feed_id'])) {
+                $feed = UNL_MediaYak_Feed::getById($_POST['feed_id']);
+                if (!$feed->userHasPermission($this->user,
+                                              UNL_MediaYak_Permission::getByID(
+                                                UNL_MediaYak_Permission::USER_CAN_INSERT))) {
+                    throw new Exception('You do not have permission to do this.');
+                }
+                $feed->addMedia($media);
+            }
             $this->redirect('?view=feed&id='.$feed->id);
             break;
         case 'feed_users':
