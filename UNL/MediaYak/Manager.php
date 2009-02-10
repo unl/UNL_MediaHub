@@ -134,13 +134,15 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
     
     function handlePost()
     {
+        $post_target = $this->determinePostTarget();
         $this->filterPostData();
-        switch($this->determinePostTarget()) {
+        switch($post_target) {
         case 'feed':
             // Insert or update a Feed/Channel
             if (isset($_POST['id'])) {
                 // Update an existing feed.
                 $feed = UNL_MediaYak_Feed::getById($_POST['id']);
+                $feed->loadReference('UNL_MediaYak_Feed_NamespacedElements_itunes');
                 $feed->synchronizeWithArray($_POST);
                 $feed->save();
             } else {
@@ -220,6 +222,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface
                 }
             }
         }
+        unset($_POST['__unlmy_posttarget']);
     }
     
     /**

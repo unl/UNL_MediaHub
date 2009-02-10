@@ -6,9 +6,17 @@ abstract class UNL_MediaYak_Models_BaseFeedHasNSElement extends Doctrine_Record
     public function setTableDefinition()
     {
         $this->setTableName('feed_has_nselement');
-        $this->hasColumn('feed_id',   'integer',    4, array('unsigned' => 0, 'primary' => true, 'notnull' => true, 'autoincrement' => true));
-        $this->hasColumn('nselement', 'string',  null, array('primary' => true, 'notnull' => true, 'autoincrement' => false));
-        $this->hasColumn('value',     'string',  null, array('primary' => false, 'notnull' => true, 'autoincrement' => false, 'minlength'=>1));
+        $this->hasColumn('feed_id',    'integer',    4, array('unsigned' => 0, 'primary' => true, 'notnull' => true, 'autoincrement' => true));
+        $this->hasColumn('xmlns',      'string',  null, array('primary' => true, 'notnull' => true, 'autoincrement' => false));
+        $this->hasColumn('element',    'string',  null, array('primary' => true, 'notnull' => true, 'autoincrement' => false));
+        $this->hasColumn('attributes', 'string',  null, array('primary' => false, 'notnull' => false, 'autoincrement' => false));
+        $this->hasColumn('value',      'string',  null, array('primary' => false, 'notnull' => false, 'autoincrement' => false));
+        
+        $this->setSubclasses(array(
+                'UNL_MediaYak_Feed_NamespacedElements_itunes' => array('xmlns' => 'itunes'),
+                'UNL_MediaYak_Feed_NamespacedElements_mrss'   => array('xmlns' => 'mrss')
+            )
+        );
     
     }
     
@@ -21,11 +29,7 @@ abstract class UNL_MediaYak_Models_BaseFeedHasNSElement extends Doctrine_Record
   
     function preInsert($event)
     {
-        if (!preg_match('/^'.$this->getXMLNS().':(.*)/', $this->nselement)) {
-            $event->skipOperation();
-            return;
-        }
-        if (empty($this->value)) {
+        if (empty($this->value) && empty($this->attributes)) {
             $event->skipOperation();
             return;
         }
@@ -33,24 +37,13 @@ abstract class UNL_MediaYak_Models_BaseFeedHasNSElement extends Doctrine_Record
     
     function preUpdate($event)
     {
-        if (!preg_match('/^'.$this->getXMLNS().':(.*)/', $this->nselement)) {
-            $event->skipOperation();
-            return;
-        }
-        if (empty($this->value)) {
+        if (empty($this->value) && $this->attributes) {
             $this->delete();
             $event->skipOperation();
             return;
         }
     }
     
-    function preDelete($event)
-    {
-        if (!preg_match('/^'.$this->getXMLNS().':(.*)/', $this->nselement)) {
-            $event->skipOperation();
-            return;
-        }
-    }
     
     /**
      * return the xmlnamespace shortname
