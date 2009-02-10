@@ -10,6 +10,14 @@ if (count($this->items)) {
       </description>
       <pubDate><?php echo date('r', strtotime($media->datecreated)); ?></pubDate>
       <guid><?php echo $media->url; ?></guid>
+      <?php
+        foreach (array('UNL_MediaYak_Feed_Media_NamespacedElements_itunes',
+                       'UNL_MediaYak_Feed_Media_NamespacedElements_mrss') as $ns_class) {
+            foreach ($media->$ns_class as $namespaced_element) {
+                echo "<{$namespaced_element['nselement']}>{$namespaced_element['value']}</{$namespaced_element['nselement']}>\n";
+            }
+        }
+      ?>
     </item>
 <?php
     }
