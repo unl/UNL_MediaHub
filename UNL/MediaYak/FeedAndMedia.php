@@ -13,7 +13,7 @@ class UNL_MediaYak_FeedAndMedia
     
     public function setMediaList(UNL_MediaYak_MediaList $media_list)
     {
-        $this->media_list = $list;
+        $this->media_list = $media_list;
     }
 }
 
