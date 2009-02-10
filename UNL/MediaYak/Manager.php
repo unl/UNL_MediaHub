@@ -119,9 +119,10 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
             case 'feeds':
                 $this->showFeeds($this->user);
                 break;
-            default:
             case 'addmedia':
                 $this->addMedia();
+            default:
+                $this->showFeeds($this->user);
                 break;
             }
         }
