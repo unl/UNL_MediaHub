@@ -12,6 +12,7 @@ $jquery .= '
             $("#feedlist").hide(400);
             $("#part1").hide(400);
             $("#part2").show(400);
+            document.getElementById("thumbnail").src = "'.UNL_MediaYak_Controller::$thumbnail_generator.'"+document.getElementById("url").value;
             return false;
         }
     );';
@@ -52,6 +53,7 @@ $(document).ready(function() {
 </div>
 <div id="part2">
 <h1><?php echo (isset($this->media))?'Edit the details of your':'Tell us about your'; ?> media.</h1>
+<div><img src="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.$this->media->url; ?>" id="thumbnail" alt="Thumbnail preview" /></div>
     <div style="display: none;">
         <input type="hidden" id="feed_id" name="feed_id" value="<?php echo (int)$_GET['feed_id']; ?>" />
         <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />

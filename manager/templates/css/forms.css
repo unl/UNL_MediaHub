@@ -4,3 +4,6 @@
     display:inline-block;
     padding:10px;
 }
+form #thumbnail {
+    width:120px;
+}
