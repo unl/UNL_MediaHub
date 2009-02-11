@@ -1,14 +1,22 @@
 UNL MediaYak system running at http://www1.unl.edu/mediahub/
 
-
 Installation instructions:
 pear channel-discover pear.unl.edu
-pear install unl/UNL_Autoload
+pear channel-discover pear.phpdoctrine.org
+pear install unl/UNL_Autoload-alpha unl/UNL_Templates-alpha pear.phpdoctrine.org/Doctrine
 cp config.sample.php config.inc.php
 cp sample.htaccess .htaccess
 
 Database:
 Create a database for mediayak
+mysql -u root
+
+CREATE DATABASE mediayak;
+GRANT ALL ON mediayak.* TO mediayak@localhost IDENTIFIED BY 'mediayak';
+
+mysql -u mediayak -p mediayak < UNL_MediaYak/data/mediayak.sql
+
+
 username: mediayak
 password: mediayak
 Create the database using the data/mediayak.sql
@@ -17,7 +25,9 @@ Requirements:
 PHP 5
 PDO Mysql
 Doctrine
-UNL_Autoload http://pear.unl.edu/index.php?package=UNL_Autoload
+UNL_Autoload  http://pear.unl.edu/index.php?package=UNL_Autoload
+UNL_Templates http://pear.unl.edu/index.php?package=UNL_Templates
+
 
 Sources:
 Audio player from http://wpaudioplayer.com/
