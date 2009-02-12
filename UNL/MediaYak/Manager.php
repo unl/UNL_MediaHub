@@ -199,17 +199,11 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
             if (isset($_POST['id'])) {
                 // Update an existing feed.
                 $feed = UNL_MediaYak_Feed::getById($_POST['id']);
-                $feed->loadReference('UNL_MediaYak_Feed_NamespacedElements_itunes');
                 $feed->synchronizeWithArray($_POST);
                 $feed->save();
             } else {
                 // Add a new feed for this user.
-                $data = array_merge($_POST, array('datecreated'=>date('Y-m-d H:i:s'),
-                                                  'uidcreated'=>$this->getUser()->uid));
-                $feed = new UNL_MediaYak_Feed();
-                $feed->fromArray($data);
-                $feed->save();
-                $feed->addUser(self::getUser());
+                $feed = UNL_MediaYak_Feed::addFeed($_POST, self::getUser());
             }
             $this->redirect('?view=feed&id='.$feed->id);
             break;
@@ -228,15 +222,23 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
                 $media = $this->mediayak->addMedia($details);
             }
             if (!empty($_POST['feed_id'])) {
-                $feed = UNL_MediaYak_Feed::getById($_POST['feed_id']);
-                if (!$feed->userHasPermission(self::getUser(),
-                                              UNL_MediaYak_Permission::getByID(
-                                                UNL_MediaYak_Permission::USER_CAN_INSERT))) {
-                    throw new Exception('You do not have permission to do this.');
+                if (is_array($_POST['feed_id'])) {
+                    $feed_ids = array_keys($_POST['feed_id']);
+                } else {
+                    $feed_ids = array($_POST['feed_id']);
                 }
-                $feed->addMedia($media);
+                foreach ($feed_ids as $feed_id) {
+                    $feed = UNL_MediaYak_Feed::getById($feed_id);
+                    if (!$feed->userHasPermission(self::getUser(),
+                                                  UNL_MediaYak_Permission::getByID(
+                                                    UNL_MediaYak_Permission::USER_CAN_INSERT))) {
+                        throw new Exception('You do not have permission to do this.');
+                    }
+                    $feed->addMedia($media);
+                }
+                $this->redirect('?view=feed&id='.$feed->id);
             }
-            $this->redirect('?view=feed&id='.$feed->id);
+            $this->redirect(UNL_MediaYak_Manager::getURL());
             break;
         case 'feed_users':
             $feed = UNL_MediaYak_Feed::getById($_POST['feed_id']);

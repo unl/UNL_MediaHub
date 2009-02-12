@@ -50,6 +50,25 @@ class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
     }
     
     /**
+     * Add a feed to the system
+     *
+     * @param array             $data Associative array of details.
+     * @param UNL_MediaYak_User $user User creating this feed
+     *
+     * @return UNL_MediaYak_Feed
+     */
+    public static function addFeed($data, UNL_MediaYak_User $user)
+    {
+        $data = array_merge($data, array('datecreated' => date('Y-m-d H:i:s'),
+                                         'uidcreated'  => $user->uid));
+        $feed = new self();
+        $feed->fromArray($data);
+        $feed->save();
+        $feed->addUser($user);
+        return $feed;
+    }
+    
+    /**
      * Add a user with all permissions to this feed.
      *
      * @param UNL_MedaiYak_User $user The user to grant permission to
@@ -117,6 +136,21 @@ class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
     function addNamespace(UNL_MediaYak_Feed_NamespacedAttributes $namespace)
     {
         
+    }
+    
+    /**
+     * Check if this feed is linked to the related media.
+     *
+     * @param UNL_MediaYak_Media $media The media file we're checking
+     *
+     * @return bool
+     */
+    public function hasMedia(UNL_MediaYak_Media $media)
+    {
+        $query = new Doctrine_Query();
+        $query->from('UNL_MediaYak_Feed_Media')
+              ->where('feed_id = ? AND media_id = ?', array($this->id, $media->id));
+        return $query->count();
     }
 }
 ?>
