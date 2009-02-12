@@ -4,7 +4,7 @@ $jquery = '';
 if (!isset($this->media)) {
     $jquery .= '$("#part2").hide();';
 } else {
-    $jquery .= '$("#part1").hide();';
+    $jquery .= '$("#part1").hide();$("#feedlist").hide();';
 }
 
 $jquery .= '
@@ -42,6 +42,15 @@ $(document).ready(function() {
 <form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data">
 <div id="part1">
     <h1>Add new media:</h1>
+    <div style="display: none;">
+        <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
+        <input id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" type="hidden" value="67108864" />
+        <?php
+        if (isset($this->media->id)) {
+            echo '<input type="hidden" id="id" name="id" value="'.$this->media->id.'" />';
+        }
+        ?>
+    </div>
     <fieldset id="add_media">
         <legend>Add new media:</legend>
         <ol>
@@ -54,16 +63,6 @@ $(document).ready(function() {
 <div id="part2">
 <h1><?php echo (isset($this->media))?'Edit the details of your':'Tell us about your'; ?> media.</h1>
 <div><img src="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.$this->media->url; ?>" id="thumbnail" alt="Thumbnail preview" /></div>
-    <div style="display: none;">
-        <input type="hidden" id="feed_id" name="feed_id" value="<?php echo (int)$_GET['feed_id']; ?>" />
-        <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
-        <input id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" type="hidden" value="67108864" />
-        <?php
-        if (isset($this->media->id)) {
-            echo '<input type="hidden" id="id" name="id" value="'.$this->media->id.'" />';
-        }
-        ?>
-    </div>
     <fieldset id="existing_media">
         <legend>Existing Media</legend>
         <ol>
@@ -111,7 +110,12 @@ $(document).ready(function() {
         <ol>
             <?php
             foreach (UNL_MediaYak_Manager::getUser()->getFeeds()->items as $feed) {
-                echo '<li><label for="feed_id['.$feed->id.']" class="element">'.$feed->title.'</label><div class="element"><input id="feed_id['.$feed->id.']" id="feed_id['.$feed->id.']" type="checkbox" /></div></li>';
+                $checked = '';
+                if (isset($this->media)
+                    && $feed->hasMedia($this->media)) {
+                    $checked = 'checked="checked"';
+                }
+                echo '<li><label for="feed_id['.$feed->id.']" class="element">'.$feed->title.'</label><div class="element"><input id="feed_id['.$feed->id.']" name="feed_id['.$feed->id.']" type="checkbox" '.$checked.' /></div></li>';
             }
             ?>
             <li><label for="new_feed" class="element">New Feed</label><div class="element"><input id="new_feed" id="new_feed" type="text" /></div></li>
