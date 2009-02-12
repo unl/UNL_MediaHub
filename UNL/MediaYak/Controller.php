@@ -172,7 +172,7 @@ class UNL_MediaYak_Controller
         if (isset($_POST, $_POST['comment'])
             && self::isLoggedIn()) {
             
-            $data = array('uid'      => self::$auth->getUID(),
+            $data = array('uid'      => self::$auth->getUser(),
                           'media_id' => $media->id,
                           'comment'  => $_POST['comment']);
             
