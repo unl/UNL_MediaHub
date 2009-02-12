@@ -34,7 +34,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
     {
         $this->mediayak = new UNL_MediaYak($dsn);
         
-        $this->auth = UNL_Auth::factory('CAS');
+        $this->auth = UNL_Auth::factory('SimpleCAS');
         $this->auth->login();
         if (isset($_GET['logout'])) {
             $this->auth->logout();
