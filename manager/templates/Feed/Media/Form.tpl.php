@@ -30,16 +30,40 @@ $jquery .= '
     });';
 
 UNL_MediaYak_Manager::setReplacementData('head','
+<style type="text/css">
+
+</style>
+<!-- Skin CSS file -->
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/assets/skins/sam/skin.css">
+<!-- Utility Dependencies -->
+<script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/yahoo-dom-event/yahoo-dom-event.js"></script> 
+<script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/element/element-beta-min.js"></script> 
+<!-- Needed for Menus, Buttons and Overlays used in the Toolbar -->
+<script src="http://yui.yahooapis.com/2.6.0/build/container/container_core-min.js"></script>
+<script src="http://yui.yahooapis.com/2.6.0/build/menu/menu-min.js"></script>
+<script src="http://yui.yahooapis.com/2.6.0/build/button/button-min.js"></script>
+<!-- Source file for Rich Text Editor-->
+<script src="http://yui.yahooapis.com/2.6.0/build/editor/editor-min.js"></script>
+
 <script type="text/javascript">
 $(document).ready(function() {
     '.$jquery.'
 });
+var myEditor = new YAHOO.widget.Editor("description", { 
+    height: "300px", 
+    width: "522px", 
+    dompath: true, //Turns on the bar at the bottom 
+    animate: true, //Animates the opening, closing and moving of Editor windows
+    handleSubmit: true 
+    }); 
+    myEditor.render();
 
 </script>
+
 ');
 
 ?>
-<form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data">
+<form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data"  class="yui-skin-sam">
 <div id="part1">
     <h1>Add new media:</h1>
     <div style="display: none;">
@@ -54,8 +78,8 @@ $(document).ready(function() {
     <fieldset id="add_media">
         <legend>Add new media:</legend>
         <ol>
-            <li><label for="url" class="element">Add by URL</label><div class="element"><input id="url" name="url" type="text" size="60" value="<?php echo htmlentities(@$this->media->url, ENT_QUOTES); ?>" /></div></li>
-            <li><label for="file_upload" class="element">Upload a file</label><div class="element"><input id="file_upload" name="file_upload" type="file" /></div></li>
+            <li><label for="url" class="element">Add by URL (http://)</label><div class="element"><input id="url" name="url" type="text" size="60" value="<?php echo htmlentities(@$this->media->url, ENT_QUOTES); ?>" /><br /><span class="caption">media types supported: .m4v, .mp4, .mp3</span></div></li>
+            <!-- <li><label for="file_upload" class="element">Upload a file</label><div class="element"><input id="file_upload" name="file_upload" type="file" /></div></li>  -->
         </ol>
     </fieldset>
     <a class="continue" id="continue2" href="#">Continue</a>
@@ -69,7 +93,7 @@ $(document).ready(function() {
             <li><label for="title" class="element">Title</label><div class="element"><input id="title" name="title" type="text" size="60" value="<?php echo htmlentities(@$this->media->title, ENT_QUOTES); ?>" /></div></li>
             <li>
                 <label for="description" class="element">Description</label>
-                <div class="element"><textarea id="description" name="description" rows="5" cols="60"><?php echo htmlentities(@$this->media->description); ?></textarea></div>
+                <div class="element" id="description_wrapper"><textarea id="description" name="description" rows="5" cols="60"><?php echo htmlentities(@$this->media->description); ?></textarea></div>
             </li>
 
             <li><label for="submit_existing" class="element">&nbsp;</label><div class="element"><input id="submit_existing" name="submit_existing" value="Save" type="submit" /></div></li>
