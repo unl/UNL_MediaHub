@@ -7,3 +7,46 @@
 form #thumbnail {
     width:120px;
 }
+#maincontent form fieldset li #description_wrapper li {
+    list-style: inline;
+    margin: 0;
+    clear: none;
+    display: normal;
+    float: left;
+    width: auto;
+}
+#maincontent form fieldset li #description_wrapper {
+	background-color:#FFF;
+}
+#maincontent form fieldset li #description_wrapper * {
+	margin:0;
+	font-size:85%;
+	max-width:520px;
+}
+#maincontent form fieldset li #description_wrapper iframe {
+	clear:both;
+}
+
+#maincontent #description_wrapper fieldset {
+	margin:0px !important;
+	padding:0px;
+	border:none;
+	background-color:#EEE;
+	float:none;
+}
+
+#maincontent #description_wrapper .yui-toolbar-titlebar {
+	padding:2px;
+}
+
+#description-panel {
+	background-color:#FAFAFA;
+	border:1px solid #DDD;
+}
+
+#description-panel .close {
+	background-color:#CCC;
+	border:1px solid;
+}
+
+iframe * {margin:0px}
