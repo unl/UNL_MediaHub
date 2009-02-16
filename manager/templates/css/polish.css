@@ -2,6 +2,7 @@
 #part1 {
 	background:#ecf4f8 url(images/focusBG.png) no-repeat top left;
 	padding:22px;
+	width:896px;
 }
 #part1_close {
 	background:url(images/focusBGBottom.png) no-repeat bottom left;
