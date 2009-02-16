@@ -65,7 +65,7 @@ var myEditor = new YAHOO.widget.Editor("description", {
 ?>
 <form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data"  class="yui-skin-sam">
 <div id="part1">
-    <h1>Add new media:</h1>
+    <h1>Please add new media:</h1>
     <div style="display: none;">
         <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
         <input id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" type="hidden" value="67108864" />
