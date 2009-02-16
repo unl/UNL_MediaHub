@@ -34,16 +34,16 @@ UNL_MediaYak_Manager::setReplacementData('head','
 
 </style>
 <!-- Skin CSS file -->
-<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/assets/skins/sam/skin.css">
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/assets/skins/sam/skin.css" />
 <!-- Utility Dependencies -->
 <script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/yahoo-dom-event/yahoo-dom-event.js"></script> 
 <script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/element/element-beta-min.js"></script> 
 <!-- Needed for Menus, Buttons and Overlays used in the Toolbar -->
-<script src="http://yui.yahooapis.com/2.6.0/build/container/container_core-min.js"></script>
-<script src="http://yui.yahooapis.com/2.6.0/build/menu/menu-min.js"></script>
-<script src="http://yui.yahooapis.com/2.6.0/build/button/button-min.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/container/container_core-min.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/menu/menu-min.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/button/button-min.js"></script>
 <!-- Source file for Rich Text Editor-->
-<script src="http://yui.yahooapis.com/2.6.0/build/editor/editor-min.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/editor/editor-min.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -65,7 +65,7 @@ var myEditor = new YAHOO.widget.Editor("description", {
 ?>
 <form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data"  class="yui-skin-sam">
 <div id="part1">
-    <h1>Please add new media:</h1>
+    <h1>Add new media:</h1>
     <div style="display: none;">
         <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
         <input id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" type="hidden" value="67108864" />
@@ -75,15 +75,19 @@ var myEditor = new YAHOO.widget.Editor("description", {
         }
         ?>
     </div>
-    <fieldset id="add_media">
-        <legend>Add new media:</legend>
-        <ol>
-            <li><label for="url" class="element">Add by URL (http://)</label><div class="element"><input id="url" name="url" type="text" size="60" value="<?php echo htmlentities(@$this->media->url, ENT_QUOTES); ?>" /><br /><span class="caption">media types supported: .m4v, .mp4, .mp3</span></div></li>
-            <!-- <li><label for="file_upload" class="element">Upload a file</label><div class="element"><input id="file_upload" name="file_upload" type="file" /></div></li>  -->
-        </ol>
-    </fieldset>
-    <a class="continue" id="continue2" href="#">Continue</a>
+    
+    <ul id="tabnav">
+    	<li class="selected"><a href="#">Add by URL</a></li>
+    	<li><a href="#">Upload a file</a></li>
+    </ul>
+    <div id="formContent">
+	    <input id="url" name="url" type="text" value="<?php echo htmlentities(@$this->media->url, ENT_QUOTES); ?>" />
+    	<input id="file_upload" name="file_upload" type="file" />
+    </div>
+    <span class="caption">media types supported: .m4v, .mp4, .mp3</span>
+    <div id="part1_close"></div>
 </div>
+<a class="continue" id="continue2" href="#">Continue</a>
 <div id="part2">
 <h1><?php echo (isset($this->media))?'Edit the details of your':'Tell us about your'; ?> media.</h1>
 <div><img src="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.$this->media->url; ?>" id="thumbnail" alt="Thumbnail preview" /></div>
