@@ -51,6 +51,7 @@
 #formContent input#url, #formContent input#file_upload {
 	width: 868px;
 	font-size:2em;
+	color:#878c8e;
 	}
 #part1 .caption {
 	text-align: right;
