@@ -5,6 +5,6 @@ $dsn = 'mysql://mediayak:mediayak@localhost/mediayak;unix_socket=/var/mysql/mysq
 
 set_include_path(dirname(__FILE__).PATH_SEPARATOR.get_include_path());
 
-UNL_MediaYak_Controller::$url = 'http://ucommbieber.unl.edu/workspace/UNL_MediaYak/';
-UNL_MediaYak_Controller::$thumbnail_generator = 'http://ucommbieber.unl.edu/workspace/UNL_iTunesU/thumbnails.php?url=';
+UNL_MediaYak_Controller::$url = 'http://localhost/workspace/UNL_MediaYak/';
+UNL_MediaYak_Controller::$thumbnail_generator = 'http://itunes.unl.edu/thumbnails.php?url=';
 

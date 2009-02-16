@@ -3,7 +3,8 @@ UNL MediaYak system running at http://www1.unl.edu/mediahub/
 Installation instructions:
 pear channel-discover pear.unl.edu
 pear channel-discover pear.phpdoctrine.org
-pear install unl/UNL_Autoload-alpha unl/UNL_Auth-alpha unl/UNL_Templates-alpha pear.phpdoctrine.org/Doctrine
+pear channel-discover simplecas.googlecode.com/svn
+pear install unl/UNL_Autoload-alpha unl/UNL_Auth-alpha unl/UNL_Templates-alpha pear.phpdoctrine.org/Doctrine simplecas/SimpleCAS-alpha
 pear install http://phpsavant.com/Savant3-3.0.0.tgz
 cp config.sample.php config.inc.php
 cp sample.htaccess .htaccess
@@ -32,3 +33,5 @@ UNL_Templates http://pear.unl.edu/index.php?package=UNL_Templates
 
 Sources:
 Audio player from http://wpaudioplayer.com/
+JQuery
+YUI Editor
