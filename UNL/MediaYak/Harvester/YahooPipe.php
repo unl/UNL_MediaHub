@@ -51,9 +51,23 @@ class UNL_MediaYak_Harvester_YahooPipe extends UNL_MediaYak_Harvester
             $pubDate = strtotime($this->feed['value']['items'][$this->current]['pubDate']);
         }
         
+        $title = $this->feed['value']['items'][$this->current]['title'];
+        
+        if (isset($this->feed['value']['items'][$this->current]['itunes:subtitle'])
+            && !empty($this->feed['value']['items'][$this->current]['itunes:subtitle'])) {
+            $title = $this->feed['value']['items'][$this->current]['itunes:subtitle'];
+        }
+        
+        $description = $this->feed['value']['items'][$this->current]['description'];
+        
+        if (isset($this->feed['value']['items'][$this->current]['itunes:summary'])
+            && !empty($this->feed['value']['items'][$this->current]['itunes:summary'])) {
+            $description = $this->feed['value']['items'][$this->current]['itunes:summary'];
+        }
+        
         return new UNL_MediaYak_HarvestedMedia($this->feed['value']['items'][$this->current]['link'],
-                                               $this->feed['value']['items'][$this->current]['title'],
-                                               $this->feed['value']['items'][$this->current]['description'],
+                                               $title,
+                                               $description,
                                                $pubDate);
     }
     
