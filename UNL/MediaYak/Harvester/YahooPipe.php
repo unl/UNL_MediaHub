@@ -64,7 +64,7 @@ class UNL_MediaYak_Harvester_YahooPipe extends UNL_MediaYak_Harvester
             && !empty($this->feed['value']['items'][$this->current]['itunes:summary'])) {
             $description = $this->feed['value']['items'][$this->current]['itunes:summary'];
         }
-        
+        // @TODO Namespaced attributes need to be supported!
         return new UNL_MediaYak_HarvestedMedia($this->feed['value']['items'][$this->current]['link'],
                                                $title,
                                                $description,
