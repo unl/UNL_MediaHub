@@ -1,19 +1,26 @@
 #main_right {overflow:visible;}
 #part1 {
 	background:#ecf4f8 url(images/focusBG.png) no-repeat top left;
-	padding:22px;
-	width:896px;
+	padding:20px;
+	width:899px;
 }
 #part1_close {
 	background:url(images/focusBGBottom.png) no-repeat bottom left;
 	height:24px;
-	margin-bottom:-22px;
-	margin-left:-22px;
+	margin-bottom:-20px;
+	margin-left:-20px;
 }
 #part1 h1 {
 	background: url(images/h1Film.png) no-repeat top left;
 	padding-left: 60px;
 	font-size: 2em;
+	}
+#feedlist h1 {
+	background: url(images/h1Feeds.png) no-repeat top left;
+	padding-left: 60px;
+	font-size: 2em;
+	border-bottom: 2px solid #e8e9ea;
+	margin:2em 0 1em 0;
 	}
 #tabnav {
 	list-style-type: none;
@@ -44,16 +51,31 @@
 	color:white;
 	}
 #formContent {
-	margin-top:-4px;
+	margin-top:-5px;
 	background: #1091d1 url(images/formContentBG.png) bottom left no-repeat;
 	padding:15px;
 	}
 #formContent input#url, #formContent input#file_upload {
-	width: 868px;
+	width: 860px;
 	font-size:2em;
 	color:#878c8e;
 	}
-#part1 .caption {
+#part1 p.submit {
+	margin-top: 0px;
+	background:url(images/submitL.png) top left no-repeat;
+	display:inline-block;
+	height:45px;
+	padding-left:5px;
+}
+p.submit a {
+    background:url(images/submitR.png) no-repeat top right;
+    font-size:1.5em;
+    color:#FFF;
+    display:inline-block;
+    padding:15px 45px 15px 10px;
+}
+#part1 p.caption {
+	margin-top: 5px;
 	text-align: right;
 	color:#1091d1;
 }

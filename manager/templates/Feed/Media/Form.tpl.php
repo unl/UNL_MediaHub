@@ -2,7 +2,25 @@
 
 $jquery = '';
 if (!isset($this->media)) {
-    $jquery .= '$("#part2").hide();';
+    $jquery .= '
+    $("#part2").hide();
+    $("#file_upload").hide();
+    $("#a_url").click(function(){
+    	$(this).parent("li").addClass("selected");
+    	$(this).parent("li").siblings("li").removeClass("selected");
+    	$("#file_upload").hide(400);
+    	$("#url").show(400);
+    	
+    	return false;
+    });
+    $("#a_file").click(function(){
+    	$(this).parent("li").addClass("selected");
+    	$(this).parent("li").siblings("li").removeClass("selected");
+    	$("#url").hide(400);
+    	$("#file_upload").show(400);
+    	return false;
+    });
+    ';
 } else {
     $jquery .= '$("#part1").hide();$("#feedlist").hide();';
 }
@@ -77,17 +95,17 @@ var myEditor = new YAHOO.widget.Editor("description", {
     </div>
     
     <ul id="tabnav">
-    	<li class="selected"><a href="#">Add by URL</a></li>
-    	<li><a href="#">Upload a file</a></li>
+    	<li class="selected"><a href="#" id="a_url">Add by URL</a></li>
+    	<li><a href="#" id="a_file">Upload a file</a></li>
     </ul>
     <div id="formContent">
 	    <input id="url" name="url" type="text" value="<?php echo htmlentities(@$this->media->url, ENT_QUOTES); ?>" />
     	<input id="file_upload" name="file_upload" type="file" />
     </div>
-    <span class="caption">media types supported: .m4v, .mp4, .mp3</span>
+    <p class="caption">media types supported: .m4v, .mp4, .mp3</p>
+    <p class="submit"><a id="continue2" href="#">Continue</a></p>
     <div id="part1_close"></div>
 </div>
-<a class="continue" id="continue2" href="#">Continue</a>
 <div id="part2">
 <h1><?php echo (isset($this->media))?'Edit the details of your':'Tell us about your'; ?> media.</h1>
 <div><img src="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.$this->media->url; ?>" id="thumbnail" alt="Thumbnail preview" /></div>
