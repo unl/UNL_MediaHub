@@ -1,5 +1,5 @@
 <div id="feedlist">
-    <h1>My Channels</h1>
+    <h1>My Feeds</h1>
     <p>Select a channel to add your media to, or create a new channel.</p>
     <?php
     if (count($this->items)) {
