@@ -38,34 +38,59 @@ class UNL_MediaYak
      */
     function harvest(UNL_MediaYak_Harvester $harvester)
     {
-        foreach ($harvester as $url=>$media) {
+        foreach ($harvester as $url=>$harvested_media) {
             
-            if (!($media instanceof UNL_MediaYak_HarvestedMedia)) {
+            if (!($harvested_media instanceof UNL_MediaYak_HarvestedMedia)) {
                 throw new Exception('Harvesters must return a UNL_MediaYak_HarvestedMedia class!');
             }
             
-            // Try and find an existing one with this URL.
-            $query    = new Doctrine_Query();
-            $query->from('UNL_MediaYak_Media m');
-            $query->where('m.url LIKE ?', array($media->getURL()));
-            $results = $query->execute();
-            if (count($results) == 1) {
-                // Already exists do update
-                if ($results[0]->title.$results[0]->description != $media->getTitle().$media->getDescription()
-                    || strtotime($results[0]->datecreated) != strtotime($media->getDatePublished())) {
-                    $results[0]->title       = $media->getTitle();
-                    $results[0]->description = $media->getDescription();
-                    $results[0]->datecreated = $media->getDatePublished();
-                    $results[0]->save();
-                    echo $results[0]->title.' has been updated!'.PHP_EOL;
+            // Collect the namespaced elements first
+            $namespacedElements = $harvested_media->getNamespacedElements();
+            $add_ns_elements = array(); 
+            if (count($namespacedElements)) {
+                foreach ($namespacedElements as $xmlns=>$elements) {
+                    switch($xmlns) {
+                        case 'media':
+                            $xmlns = 'mrss';
+                        case 'unl':
+                        case 'itunes':
+                            $ns_class = 'UNL_MediaYak_Feed_Media_NamespacedElements_'.$xmlns;
+                            foreach ($elements as $element=>$value) {
+                                $add_ns_elements[$ns_class][] = array('element'=>$element, 'value'=>$value);
+                            }
+                            break;
+                        default:
+                            //echo 'Unknown namespaced attribute '.$xmlns.':'.$element.PHP_EOL;
+                            break;
+                    }
                 }
+            }
+            
+            // Try and find an existing one with this URL.
+            if ($media = UNL_MediaYak_Media::getByURL($harvested_media->getURL())) {
+                // Already exists do update
+                $media->loadReference('UNL_MediaYak_Feed_Media_NamespacedElements_itunes');
+                $media->loadReference('UNL_MediaYak_Feed_Media_NamespacedElements_mrss');
+                $media->title       = $harvested_media->getTitle();
+                $media->description = $harvested_media->getDescription();
+                $media->datecreated = $harvested_media->getDatePublished();
+                
+                
+                $media->UNL_MediaYak_Feed_Media_NamespacedElements_itunes->delete();
+                $media->UNL_MediaYak_Feed_Media_NamespacedElements_mrss->delete();
+                $media->save();
+                $media->synchronizeWithArray(array_merge($media->toArray(), $add_ns_elements));
+                $media->save();
+                //echo $media->title.' has been updated!'.PHP_EOL;
             } else {
-                $data = array('url'         => $media->getURL(),
-                              'title'       => $media->getTitle(),
-                              'description' => $media->getDescription(),
-                              'datecreated' => $media->getDatePublished());
-                $this->addMedia($data);
-                echo 'Added '.$media->getTitle().PHP_EOL;
+                $data = array('url'         => $harvested_media->getURL(),
+                              'title'       => $harvested_media->getTitle(),
+                              'description' => $harvested_media->getDescription(),
+                              'datecreated' => $harvested_media->getDatePublished());
+                $media = $this->addMedia($data);
+                $media->synchronizeWithArray(array_merge($media->toArray(), $add_ns_elements));
+                $media->save();
+                echo 'Added '.$media->title.PHP_EOL;
             }
         }
     }

@@ -52,23 +52,26 @@ class UNL_MediaYak_Harvester_YahooPipe extends UNL_MediaYak_Harvester
         }
         
         $title = $this->feed['value']['items'][$this->current]['title'];
-        
-        if (isset($this->feed['value']['items'][$this->current]['itunes:subtitle'])
-            && !empty($this->feed['value']['items'][$this->current]['itunes:subtitle'])) {
-            $title = $this->feed['value']['items'][$this->current]['itunes:subtitle'];
-        }
-        
         $description = $this->feed['value']['items'][$this->current]['description'];
         
-        if (isset($this->feed['value']['items'][$this->current]['itunes:summary'])
-            && !empty($this->feed['value']['items'][$this->current]['itunes:summary'])) {
-            $description = $this->feed['value']['items'][$this->current]['itunes:summary'];
+        $namespacedElements = array();
+        
+        foreach ($this->feed['value']['items'][$this->current] as $ns_element=>$value) {
+            if (strpos($ns_element, ':') > 0) {
+                list($xmlns, $element) = explode(':', $ns_element);
+                if (!isset($namespacedElements[$xmlns])) {
+                    $namespacedElements[$xmlns] = array();
+                }
+                $namespacedElements[$xmlns][$element] = $value;
+            }
         }
+        
         // @TODO Namespaced attributes need to be supported!
         return new UNL_MediaYak_HarvestedMedia($this->feed['value']['items'][$this->current]['link'],
                                                $title,
                                                $description,
-                                               $pubDate);
+                                               $pubDate,
+                                               $namespacedElements);
     }
     
     
