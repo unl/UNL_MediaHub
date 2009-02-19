@@ -189,6 +189,10 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
         $this->showMedia($filter);
     }
     
+    /**
+     * This function accepts info posted to the system.
+     * 
+     */
     function handlePost()
     {
         $post_target = $this->determinePostTarget();
@@ -268,6 +272,11 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
         return false;
     }
     
+    /**
+     * Remove POST data that should not be handled.
+     *
+     * @return void
+     */
     function filterPostData()
     {
         /** Remove linked records if they are not set anymore **/
@@ -320,6 +329,11 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
         $this->output[] = new UNL_MediaYak_Feed_Media_Form();
     }
     
+    /**
+     * Redirect to the location given.
+     *
+     * @param string $location URL to redirect to.
+     */
     function redirect($location)
     {
         header('Location: '.$location);
