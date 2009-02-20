@@ -20,7 +20,7 @@ if (count($this->items)) {
         foreach ($this->items as $media) { ?>
             <li>
             <div class="clr">
-                <div><a href="<?php echo UNL_MediaYak_Controller::getURL($media); ?>"><img src="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.$media->url; ?>" alt="Thumbnail preview for <?php echo $media->title; ?>" width="50" height="38" /></a></div>
+                <div><a href="<?php echo UNL_MediaYak_Controller::getURL($media); ?>"><img src="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.urlencode($media->url); ?>" alt="Thumbnail preview for <?php echo $media->title; ?>" width="50" height="38" /></a></div>
                 <h4><a href="<?php echo UNL_MediaYak_Controller::getURL($media); ?>"><?php echo htmlspecialchars($media->title); ?></a></h4>
                 <?php
                 if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_itunes::mediaHasElement($media->id, 'subtitle')) {

@@ -108,7 +108,7 @@ var myEditor = new YAHOO.widget.Editor("description", {
 </div>
 <div id="part2">
 <h1><?php echo (isset($this->media))?'Edit the details of your':'Tell us about your'; ?> media.</h1>
-<div><img src="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.$this->media->url; ?>" id="thumbnail" alt="Thumbnail preview" /></div>
+<div><img src="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.urlencode($this->media->url); ?>" id="thumbnail" alt="Thumbnail preview" /></div>
     <fieldset id="existing_media">
         <legend>Existing Media</legend>
         <ol>

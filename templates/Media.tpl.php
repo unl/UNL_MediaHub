@@ -8,7 +8,7 @@ UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '<ul> <li><a href="ht
 $meta = '
 <meta name="title" content="'.htmlentities($this->title, ENT_QUOTES).'" />
 <meta name="description" content="'.htmlentities($this->description, ENT_QUOTES).'" />
-<link rel="image_src" href="'.UNL_MediaYak_Controller::$thumbnail_generator.$this->url.'" />
+<link rel="image_src" href="'.UNL_MediaYak_Controller::$thumbnail_generator.urlencode($this->url).'" />
 <meta name="medium" content="'.$type.'" />';
 if ($type == 'video') {
     $meta .= '<link rel="video_src" href="'.$this->url.'" />';
@@ -79,7 +79,7 @@ UNL_MediaYak_Controller::setReplacementData('head', $meta);
     <!-- ADDTHIS BUTTON END -->
     <h6>Embed</h6>
     <textarea cols="25" rows="3" onclick="this.select(); return false;"><?php
-        echo htmlentities('<div class="content_holder" id="preview_holder"><div class="unl_liquid_pictureframe"><div class="unl_liquid_pictureframe_inset"><object style="visibility: visible;" id="preview" data="/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/player.swf" type="application/x-shockwave-flash" height="358" width="450"><param value="true" name="allowfullscreen" /><param value="always" name="allowscriptaccess" /><param value="file='.$this->url.'&amp;image='.UNL_MediaYak_Controller::$thumbnail_generator.$this->url.'&amp;volume=100&amp;autostart=false" name="flashvars" /></object><span class="unl_liquid_pictureframe_footer"></span></div></div></div>');
+        echo htmlentities('<div class="content_holder" id="preview_holder"><div class="unl_liquid_pictureframe"><div class="unl_liquid_pictureframe_inset"><object style="visibility: visible;" id="preview" data="/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/player.swf" type="application/x-shockwave-flash" height="358" width="450"><param value="true" name="allowfullscreen" /><param value="always" name="allowscriptaccess" /><param value="file='.$this->url.'&amp;image='.UNL_MediaYak_Controller::$thumbnail_generator.urlencode($this->url).'&amp;volume=100&amp;autostart=false" name="flashvars" /></object><span class="unl_liquid_pictureframe_footer"></span></div></div></div>');
     ?></textarea>
     
     <h6 style="margin-top:1em;"><a href="<?php echo $this->url; ?>" class="video-x-generic">Download this media file</a></h6>
