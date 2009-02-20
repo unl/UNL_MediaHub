@@ -18,4 +18,10 @@ class UNL_MediaYak_Feed_Media_NamespacedElements_itunes extends UNL_MediaYak_Fee
             'summary',
             );
     }
+    
+    public static function mediaHasElement($media_id, $element)
+    {
+        return UNL_MediaYak_Feed_Media_NamespacedElements::mediaHasElement($media_id, $element, 'itunes');
+    }
+    
 }
