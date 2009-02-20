@@ -54,7 +54,16 @@ UNL_MediaYak_Controller::setReplacementData('head', $meta);
 </div>
 <div class="col right">
   <h2><?php echo $this->title; ?></h2>
-  <p><?php echo $this->description; ?><br />
+  <?php
+    if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_itunes::mediaHasElement($this->id, 'subtitle')) {
+        echo '<h3 class="itunes_subtitle">'.$element->value.'</h3>';
+    }
+    $summary = $this->description;
+    if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_itunes::mediaHasElement($this->id, 'summary')) {
+        $summary .= '<span class="itunes_summary">'.$element->value.'</span>';
+    }
+    ?>
+  <p><?php echo $summary; ?><br />
   <?php if (!empty($this->author)) { ?><span class="author">From:</span> <?php echo $this->author; ?><br />
   <?php } ?>
   <span class="addedDate">Added:</span> <?php echo date('m/d/Y', strtotime($this->datecreated)); ?>
