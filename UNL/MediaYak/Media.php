@@ -30,5 +30,37 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
         }
         return false;
     }
+    
+    public function preInsert($event)
+    {
+        $this->setContentType();
+    }
+    
+    public function preUpdate($event)
+    {
+        $this->setContentType();
+    }
+    
+    function setContentType()
+    {
+        include_once 'Validate.php';
+        $validate = new Validate();
+        if (!$validate->uri($this->url)) {
+            return false;
+        }
+        
+        $headers = get_headers($this->url);
+        if (count($headers)) {
+            foreach($headers as $header) {
+                if (strpos($header, 'Content-Type: ') !== false) {
+                    $this->type = substr($header, 14);
+                }
+                if (strpos($header, 'Content-Length: ') !== false) {
+                    $this->length = substr($header, 16);
+                }
+            }
+        }
+        return true;
+    }
 }
 
