@@ -3,7 +3,7 @@
 $jquery = '';
 if (!isset($this->media)) {
     $jquery .= '
-    $("#part1").hide();
+    //$("#part2").hide();
     $("#file_upload").hide();
     $("#a_url").click(function(){
     	$(this).parent("li").addClass("selected");
@@ -22,7 +22,7 @@ if (!isset($this->media)) {
     });
     ';
 } else {
-    $jquery .= '$("#part2").hide();$("#feedlist").hide();';
+    $jquery .= '//$("#part1").hide();$("#feedlist").hide();';
 }
 
 $jquery .= '
@@ -110,7 +110,7 @@ var myEditor = new YAHOO.widget.Editor("description", {
 	<img src="templates/images/thumbs/placeholder.jpg" id="thumbnail" alt="Thumbnail preview2" />
 </div>
     <fieldset id="existing_media">
-        <legend>Existing Media</legend>
+        <legend>Required Information</legend>
         <ol>
             <li><label for="title" class="element">Title</label><div class="element"><input id="title" name="title" type="text" size="60" value="<?php echo htmlentities(@$this->media->title, ENT_QUOTES); ?>" /></div></li>
             <li>
@@ -167,6 +167,6 @@ var myEditor = new YAHOO.widget.Editor("description", {
             <li><label for="new_feed" class="element">New Feed</label><div class="element"><input id="new_feed" id="new_feed" type="text" /></div></li>
         </ol>
     </fieldset>
-    <a class="continue" id="continue3" href="#" onclick="document.getElementById('submit_existing').click();">Publish</a>
+    <p class="submit"><a class="continue"  id="continue3" href="#" onclick="document.getElementById('submit_existing').click();">Publish</a></p>
 </div>
 </form>
