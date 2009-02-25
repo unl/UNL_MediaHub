@@ -19,6 +19,7 @@ if (count($this->items)) {
             }
         }
       ?>
+      <enclosure url="<?php echo $media->url; ?>" length="92366556" type="video/mp4" />
     </item>
 <?php
     }
