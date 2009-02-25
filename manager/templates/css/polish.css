@@ -60,7 +60,7 @@
 	font-size:2em;
 	color:#878c8e;
 	}
-#part1 p.submit {
+p.submit {
 	margin-top: 0px;
 	background:url(images/submitL.png) top left no-repeat;
 	display:inline-block;

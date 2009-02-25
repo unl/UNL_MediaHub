@@ -1,6 +1,20 @@
 form #thumbnail {
     width:120px;
 }
+#maincontent form fieldset {
+	width:940px;
+	background:#f4f4f4;
+	}
+#maincontent form fieldset legend {
+	border:none;
+	font-size:2em;
+	color:#585d5f;
+	margin:0 0 70px -5px;;
+	}
+#maincontent form fieldset ol {
+	margin-top:-25px;
+	}
+
 #maincontent form fieldset li #description_wrapper li {
     list-style: inline;
     margin: 0;
