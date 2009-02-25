@@ -11,9 +11,7 @@ $list = new UNL_MediaYak_MediaList(new UNL_MediaYak_MediaList_Filter_NoContentTy
 if (count($list->items)) {
     foreach ($list->items as $media) {
         $media->setContentType();
-        if ($media->save()) {
-            echo 'Saved file '.$media->url.PHP_EOL;
-        }
+        $media->save();
     }
 }
 ?>
