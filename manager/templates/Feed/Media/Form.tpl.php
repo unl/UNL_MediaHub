@@ -3,7 +3,7 @@
 $jquery = '';
 if (!isset($this->media)) {
     $jquery .= '
-    $("#part2").hide();
+    $("#part1").hide();
     $("#file_upload").hide();
     $("#a_url").click(function(){
     	$(this).parent("li").addClass("selected");
@@ -22,7 +22,7 @@ if (!isset($this->media)) {
     });
     ';
 } else {
-    $jquery .= '$("#part1").hide();$("#feedlist").hide();';
+    $jquery .= '$("#part2").hide();$("#feedlist").hide();';
 }
 
 $jquery .= '
@@ -83,17 +83,7 @@ var myEditor = new YAHOO.widget.Editor("description", {
 ?>
 <form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data"  class="yui-skin-sam">
 <div id="part1">
-    <h1>Add new media:</h1>
-    <div style="display: none;">
-        <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
-        <input id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" type="hidden" value="67108864" />
-        <?php
-        if (isset($this->media->id)) {
-            echo '<input type="hidden" id="id" name="id" value="'.$this->media->id.'" />';
-        }
-        ?>
-    </div>
-    
+    <h1>Add new media:</h1>    
     <ul id="tabnav">
     	<li class="selected"><a href="#" id="a_url">Add by URL</a></li>
     	<li><a href="#" id="a_file">Upload a file</a></li>
@@ -101,14 +91,24 @@ var myEditor = new YAHOO.widget.Editor("description", {
     <div id="formContent">
 	    <input id="url" name="url" type="text" value="<?php echo htmlentities(@$this->media->url, ENT_QUOTES); ?>" />
     	<input id="file_upload" name="file_upload" type="file" />
+    	<input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
+        <input id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" type="hidden" value="67108864" />
+        <?php
+        if (isset($this->media->id)) {
+            echo '<input type="hidden" id="id" name="id" value="'.$this->media->id.'" />';
+        }
+        ?>
     </div>
     <p class="caption">media types supported: .m4v, .mp4, .mp3</p>
     <p class="submit"><a id="continue2" href="#">Continue</a></p>
     <div id="part1_close"></div>
 </div>
 <div id="part2">
-<h1><?php echo (isset($this->media))?'Edit the details of your':'Tell us about your'; ?> media.</h1>
-<div><img src="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.urlencode($this->media->url); ?>" id="thumbnail" alt="Thumbnail preview" /></div>
+<div class="headline_main">
+	<h1><?php echo (isset($this->media))?'Edit the details of your':'Tell us about your'; ?> media.</h1>
+	<!--  <img src="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.urlencode($this->media->url); ?>" id="thumbnail" alt="Thumbnail preview" />-->
+	<img src="templates/images/thumbs/placeholder.jpg" id="thumbnail" alt="Thumbnail preview2" />
+</div>
     <fieldset id="existing_media">
         <legend>Existing Media</legend>
         <ol>
