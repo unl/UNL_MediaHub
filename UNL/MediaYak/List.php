@@ -22,6 +22,13 @@ abstract class UNL_MediaYak_List implements Countable
     
     public $tables = 'null';
     
+    /**
+     * Construct a list of items.
+     * 
+     * @param $filter Filter to use when filtering.
+     * 
+     * @return UNL_MediaYak_List
+     */
     function __construct(UNL_MediaYak_Filter $filter = null)
     {
     

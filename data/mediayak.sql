@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 10, 2009 at 07:07 AM
--- Server version: 5.0.51
+-- Generation Time: Feb 25, 2009 at 08:46 AM
+-- Server version: 5.0.67
 -- PHP Version: 5.2.6
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `comment` mediumtext NOT NULL,
   `datecreated` timestamp NOT NULL default CURRENT_TIMESTAMP,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `feeds` (
   `uidcreated` varchar(50) NOT NULL,
   `datecreated` datetime NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -56,11 +56,10 @@ CREATE TABLE IF NOT EXISTS `feeds` (
 --
 
 CREATE TABLE IF NOT EXISTS `feed_has_media` (
-  `id` int(10) unsigned NOT NULL auto_increment,
   `feed_id` int(10) unsigned NOT NULL,
   `media_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  PRIMARY KEY  (`feed_id`,`media_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -86,12 +85,14 @@ CREATE TABLE IF NOT EXISTS `feed_has_nselement` (
 CREATE TABLE IF NOT EXISTS `media` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `url` varchar(255) NOT NULL,
+  `length` bigint(20) unsigned default '0',
+  `type` varchar(50) NOT NULL,
   `title` varchar(255) NOT NULL,
   `description` mediumtext NOT NULL,
   `author` varchar(255) default NULL,
   `datecreated` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=285 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
