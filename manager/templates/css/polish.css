@@ -79,3 +79,18 @@ p.submit a {
 	text-align: right;
 	color:#1091d1;
 }
+div.headline_main {
+	background:url(images/headline_mainBG.png) no-repeat top left;
+	/*display:block;*/
+	width:940px;
+	height:121px;
+	padding:25px 20px 20px 20px;
+}
+#part2 div.headline_main h1 {
+	font-size:3em;
+	float:left;
+}
+div.headline_main img {
+	float:right;
+	margin-right:40px;
+}
