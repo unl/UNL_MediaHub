@@ -121,12 +121,11 @@ var myEditor = new YAHOO.widget.Editor("description", {
             <li><label for="submit_existing" class="element">&nbsp;</label><div class="element"><input id="submit_existing" name="submit_existing" value="Save" type="submit" /></div></li>
         </ol>
     </fieldset>
-    <?php foreach(array('iTunes'=>'itunes', 'Media RSS'=>'mrss') as $label=>$class) { ?>
-    <fieldset id="<?php echo $class; ?>_header">
-
-        <legend><?php echo $label; ?> Options</legend>
+    
+    <fieldset id="enhanced_header">
+        <legend>Enhanced Information</legend>
         <ol>
-            <?php
+        <?php foreach(array('iTunes'=>'itunes', 'Media RSS'=>'mrss') as $label=>$class) { 
             $ns_class = 'UNL_MediaYak_Feed_Media_NamespacedElements_'.$class;
             $ns_object = new $ns_class();
             $count = 0;
@@ -146,13 +145,12 @@ var myEditor = new YAHOO.widget.Editor("description", {
                 <input id='{$class}_{$element}' name='{$ns_class}[{$count}][value]' type='text' value='$value' size='55' /></div></li>";
                 $count++;
             }
-            ?>
+         } ?>
             <li><label for="<?php echo $class; ?>_submit" class="element">&nbsp;</label><div class="element"><input id="<?php echo $class; ?>_submit" name="submit" value="Save" type="submit" /></div></li>
         </ol>
     </fieldset>
-    <?php } ?>
     <fieldset>
-        <legend>Add to my feeds</legend>
+        <legend>Select Your Feeds</legend>
         <ol>
             <?php
             foreach (UNL_MediaYak_Manager::getUser()->getFeeds()->items as $feed) {
