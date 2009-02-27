@@ -121,32 +121,165 @@ var myEditor = new YAHOO.widget.Editor("description", {
             <li><label for="submit_existing" class="element">&nbsp;</label><div class="element"><input id="submit_existing" name="submit_existing" value="Save" type="submit" /></div></li>
         </ol>
     </fieldset>
-    
+    <?php 
+    function getFieldValue($media, $xmlns, $element)
+    {
+        $class = 'UNL_MediaYak_Feed_Media_NamespacedElements_'.$xmlns;
+        if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_itunes::mediaHasElement($media->id, $element)) {
+            return $element->value;
+        }
+        return '';
+    }
+    ?>
     <fieldset id="enhanced_header">
         <legend>Enhanced Information</legend>
         <ol>
-        <?php foreach(array('iTunes'=>'itunes', 'Media RSS'=>'mrss') as $label=>$class) { 
-            $ns_class = 'UNL_MediaYak_Feed_Media_NamespacedElements_'.$class;
-            $ns_object = new $ns_class();
-            $count = 0;
-            foreach ($ns_object->getItemElements() as $count=>$element) {
-                $value = '';
-                if (isset($this->media) && count($this->media->$ns_class)) {
-                    foreach ($this->media->$ns_class as $ns_record) {
-                        if ($ns_record['element'] == $element) {
-                            $value = htmlentities($ns_record['value'], ENT_QUOTES);
-                            break;
-                        }
-                    }
-                }
-                $label = ucwords($element);
-                echo "<li><label for='{$class}_{$element}' class='element'>$label</label><div class='element'>
-                <input name='{$ns_class}[{$count}][element]' type='hidden' value='$element' />
-                <input id='{$class}_{$element}' name='{$ns_class}[{$count}][value]' type='text' value='$value' size='55' /></div></li>";
-                $count++;
-            }
-         } ?>
-            <li><label for="<?php echo $class; ?>_submit" class="element">&nbsp;</label><div class="element"><input id="<?php echo $class; ?>_submit" name="submit" value="Save" type="submit" /></div></li>
+            <li>
+                <label for="itunes_author" class="element">Author</label>
+                <div class="element">
+                    <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[0][element]" type="hidden" value="author"/>
+                    <input id="itunes_author" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[0][value]" type="text" value="<?php echo getFieldValue($this->media, 'itunes', 'author'); ?>" size="55"/>
+                </div>
+            </li>
+            <li>
+                <label for="itunes_block" class="element">Block</label>
+                <div class="element">
+                    <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[1][element]" type="hidden" value="block"/>
+                    <input id="itunes_block" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[1][value]" type="text" value="<?php echo getFieldValue($this->media, 'itunes', 'block'); ?>" size="55"/>
+                </div>
+            </li>
+            <li>
+                <label for="itunes_duration" class="element">Duration</label>
+                <div class="element">
+                    <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[2][element]" type="hidden" value="duration"/>
+                    <input id="itunes_duration" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[2][value]" type="text" value="<?php echo getFieldValue($this->media, 'itunes', 'duration'); ?>" size="55"/>
+                </div>
+            </li>
+            <li>
+                <label for="itunes_explicit" class="element">Explicit</label>
+                <div class="element">
+                    <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[3][element]" type="hidden" value="explicit"/>
+                    <input id="itunes_explicit" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[3][value]" type="text" value="<?php echo getFieldValue($this->media, 'itunes', 'explicit'); ?>" size="55"/>
+                </div>
+            </li>
+            <li>
+                <label for="itunes_keywords" class="element">Keywords</label>
+                <div class="element">
+                    <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[4][element]" type="hidden" value="keywords"/>
+                    <input id="itunes_keywords" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[4][value]" type="text" value="<?php echo getFieldValue($this->media, 'itunes', 'keywords'); ?>" size="55"/>
+                </div>
+            </li>
+            <li>
+                <label for="itunes_subtitle" class="element">Subtitle</label>
+                <div class="element">
+                    <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[5][element]" type="hidden" value="subtitle"/>
+                    <input id="itunes_subtitle" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[5][value]" type="text" value="<?php echo getFieldValue($this->media, 'itunes', 'subtitle'); ?>" size="55"/>
+                </div>
+            </li>
+            <li>
+                <label for="itunes_summary" class="element">Summary</label>
+                <div class="element">
+                    <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[6][element]" type="hidden" value="summary"/>
+                    <input id="itunes_summary" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[6][value]" type="text" value="<?php echo getFieldValue($this->media, 'itunes', 'summary'); ?>" size="55"/>
+                </div>
+            </li>
+            <li>
+                <label for="mrss_group" class="element">Group</label>
+                <div class="element">
+                    <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[0][element]" type="hidden" value="group"/>
+                    <input id="mrss_group" name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[0][value]" type="text" value="<?php echo getFieldValue($this->media, 'mrss', 'group'); ?>" size="55"/>
+                </div>
+            </li>
+            <li>
+                <label for="mrss_content" class="element">Content</label>
+                <div class="element">
+                    <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[1][element]" type="hidden" value="content"/>
+                    <input id="mrss_content" name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[1][value]" type="text" value="<?php echo getFieldValue($this->media, 'mrss', 'content'); ?>" size="55"/>
+                </div>
+            </li>
+            <li>
+                <label for="mrss_rating" class="element">Rating</label>
+                <div class="element">
+                    <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[2][element]" type="hidden" value="rating"/>
+                    <input id="mrss_rating" name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[2][value]" type="text" value="<?php echo getFieldValue($this->media, 'mrss', 'rating'); ?>" size="55"/>
+                </div>
+            </li>
+            <li>
+                <label for="mrss_title" class="element">Title</label>
+                <div class="element">
+                    <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[3][element]" type="hidden" value="title"/>
+                    <input id="mrss_title" name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[3][value]" type="text" value="<?php echo getFieldValue($this->media, 'mrss', 'title'); ?>" size="55"/>
+                </div>
+            </li>
+            <li>
+                <label for="mrss_description" class="element">Description</label>
+                <div class="element">
+                    <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[4][element]" type="hidden" value="description"/>
+                    <input id="mrss_description" name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[4][value]" type="text" value="<?php echo getFieldValue($this->media, 'mrss', 'description'); ?>" size="55"/>
+                </div>
+            </li>
+            <li>
+                <label for="mrss_keywords" class="element">Keywords</label>
+                <div class="element">
+                    <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[5][element]" type="hidden" value="keywords"/>
+                    <input id="mrss_keywords" name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[5][value]" type="text" value="<?php echo getFieldValue($this->media, 'mrss', 'keywords'); ?>" size="55"/>
+                </div>
+            </li>
+            <li>
+                <label for="mrss_thumbnail" class="element">Thumbnail</label>
+                <div class="element">
+                    <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[6][element]" type="hidden" value="thumbnail"/>
+                    <input id="mrss_thumbnail" name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[6][value]" type="text" value="<?php echo getFieldValue($this->media, 'mrss', 'thumbnail'); ?>" size="55"/>
+                </div>
+            </li>
+            <li>
+                <label for="mrss_category" class="element">Category</label>
+                <div class="element">
+                    <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[7][element]" type="hidden" value="category"/>
+                    <input id="mrss_category" name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[7][value]" type="text" value="<?php echo getFieldValue($this->media, 'mrss', 'category'); ?>" size="55"/>
+                </div>
+            </li>
+            <li>
+                <label for="mrss_player" class="element">Player</label>
+                <div class="element">
+                    <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[8][element]" type="hidden" value="player"/>
+                    <input id="mrss_player" name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[8][value]" type="text" value="<?php echo getFieldValue($this->media, 'mrss', 'player'); ?>" size="55"/>
+                </div>
+            </li>
+            <li>
+                <label for="mrss_credit" class="element">Credit</label>
+                <div class="element">
+                    <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[9][element]" type="hidden" value="credit"/>
+                    <input id="mrss_credit" name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[9][value]" type="text" value="<?php echo getFieldValue($this->media, 'mrss', 'credit'); ?>" size="55"/>
+                </div>
+            </li>
+            <li>
+                <label for="mrss_copyright" class="element">Copyright</label>
+                <div class="element">
+                    <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[10][element]" type="hidden" value="copyright"/>
+                    <input id="mrss_copyright" name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[10][value]" type="text" value="<?php echo getFieldValue($this->media, 'mrss', 'copyright'); ?>" size="55"/>
+                </div>
+            </li>
+            <li>
+                <label for="mrss_text" class="element">Text</label>
+                <div class="element">
+                    <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[11][element]" type="hidden" value="text"/>
+                    <input id="mrss_text" name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[11][value]" type="text" value="<?php echo getFieldValue($this->media, 'mrss', 'text'); ?>" size="55"/>
+                </div>
+            </li>
+            <li>
+                <label for="mrss_restriction" class="element">Restriction</label>
+                <div class="element">
+                    <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[12][element]" type="hidden" value="restriction"/>
+                    <input id="mrss_restriction" name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[12][value]" type="text" value="<?php echo getFieldValue($this->media, 'mrss', 'restriction'); ?>" size="55"/>
+                </div>
+            </li>
+            <li>
+                <label for="enhanced_submit" class="element"/>
+                <div class="element">
+                    <input id="enhanced_submit" name="submit" value="Save" type="submit"/>
+                </div>
+            </li>
         </ol>
     </fieldset>
     <fieldset>
