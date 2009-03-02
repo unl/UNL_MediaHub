@@ -9,7 +9,7 @@ abstract class UNL_MediaYak_Models_BaseFeedHasNSElement extends Doctrine_Record
         $this->hasColumn('feed_id',    'integer',    4, array('unsigned' => 0, 'primary' => true, 'notnull' => true, 'autoincrement' => true));
         $this->hasColumn('xmlns',      'string',  null, array('primary' => true, 'notnull' => true, 'autoincrement' => false));
         $this->hasColumn('element',    'string',  null, array('primary' => true, 'notnull' => true, 'autoincrement' => false));
-        $this->hasColumn('attributes', 'string',  null, array('primary' => false, 'notnull' => false, 'autoincrement' => false));
+        $this->hasColumn('attributes', 'array',   null, array('primary' => false, 'notnull' => false, 'autoincrement' => false));
         $this->hasColumn('value',      'string',  null, array('primary' => false, 'notnull' => false, 'autoincrement' => false));
         
         $this->setSubclasses(array(
