@@ -103,11 +103,16 @@ var myEditor = new YAHOO.widget.Editor("description", {
     <p class="submit"><a id="continue2" href="#">Continue</a></p>
     <div id="part1_close"></div>
 </div>
-<div id="part2">
+<div id="part2" style="display:none;">
 <div class="headline_main">
 	<h1><?php echo (isset($this->media))?'Edit the details of your':'Tell us about your'; ?> media.</h1>
-	<!--  <img src="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.urlencode($this->media->url); ?>" id="thumbnail" alt="Thumbnail preview" />-->
-	<img src="templates/images/thumbs/placeholder.jpg" id="thumbnail" alt="Thumbnail preview2" />
+	<?php
+	$thumbnail = 'templates/images/thumbs/placeholder.jpg';
+	if (isset($this->media)) {
+	    $thumbnail = UNL_MediaYak_Controller::$thumbnail_generator.urlencode($this->media->url); 
+	}
+	?>
+	<img src="<?php echo $thumbnail; ?>" id="thumbnail" alt="Thumbnail preview2" />
 </div>
     <fieldset id="existing_media">
         <legend>Required Information</legend>
