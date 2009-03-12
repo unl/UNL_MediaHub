@@ -86,7 +86,7 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
                             'type'     => $this->type,
                             'width'    => $width,
                             'height'   => $height,
-                            'lang'     => $en);
+                            'lang'     => 'en');
         if (isset($element->attributes) && is_array($element->attributes)) {
             $attributes = array_merge($element->attributes, $attributes);
         }
