@@ -36,11 +36,44 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
         $this->setContentType();
     }
     
+    public function postInsert($event)
+    {
+        $this->setThumbnail();
+    }
+    
     public function preUpdate($event)
     {
         $this->setContentType();
+        $this->setThumbnail();
     }
     
+    /**
+     * Sets the thumbnail media rss element.
+     * 
+     * @return true
+     */
+    function setThumbnail()
+    {
+        if ($element = UNL_MediaYak_Feed_Media_NamespacedElements::mediaHasElement($media->id, 'thumbnail', 'mrss')) {
+            // all ok
+        } else {
+            $element = new UNL_MediaYak_Feed_Media_NamespacedElements_mrss();
+            $element->media_id = $this->id;
+            $element->element = 'thumbnail';
+        }
+        $attributes = array('url' => UNL_MediaYak_Controller::$thumbnail_generator.urlencode($this->url),
+                            //width="75" height="50" time="12:05:01.123"
+                            );
+        $element->attributes = $attributes;
+        $element->save();
+        return true;
+    }
+    
+    /**
+     * Sets the content type for the media being added.
+     * 
+     * @return bool
+     */
     function setContentType()
     {
         include_once 'Validate.php';
