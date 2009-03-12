@@ -73,7 +73,6 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
     
     function setMRSSContent()
     {
-        list($width, $height) = getimagesize(UNL_MediaYak_Controller::$thumbnail_generator.urlencode($this->url));
         if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_mrss::mediaHasElement($this->id, 'content')) {
             // all good
         } else {
@@ -84,15 +83,32 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
         $attributes = array('url'      => $this->url,
                             'fileSize' => $this->length,
                             'type'     => $this->type,
-                            'width'    => $width,
-                            'height'   => $height,
                             'lang'     => 'en');
+        if (UNL_MediaYak_Media::isVideo($this->type)) {
+            list($width, $height) = getimagesize(UNL_MediaYak_Controller::$thumbnail_generator.urlencode($this->url));
+            $attributes['width']  = $width;
+            $attributes['height'] = $height;
+        }
+        
         if (isset($element->attributes) && is_array($element->attributes)) {
             $attributes = array_merge($element->attributes, $attributes);
         }
         $element->attributes = $attributes;
         $element->save();
         return true;
+    }
+    
+    /**
+     * Check if this media is a video file.
+     * 
+     * @return bool
+     */
+    public static function isVideo($content_type)
+    {
+        if (strpos($content_type, 'video') == 0) {
+            return true;
+        }
+        return false;
     }
     
     /**
