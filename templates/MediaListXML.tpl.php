@@ -6,8 +6,7 @@ if (count($this->items)) {
       <link><?php echo $media->url; ?></link>
       <description><![CDATA[
       <?php echo $media->description; ?>
-      ]]>
-      </description>
+      ]]></description>
       <pubDate><?php echo date('r', strtotime($media->datecreated)); ?></pubDate>
       <guid><?php echo $media->url; ?></guid>
       <?php
@@ -15,7 +14,11 @@ if (count($this->items)) {
                        'UNL_MediaYak_Feed_Media_NamespacedElements_mrss') as $ns_class) {
             foreach ($media->$ns_class as $namespaced_element) {
                 $element = "{$namespaced_element['xmlns']}:{$namespaced_element['element']}";
-                echo "<$element>{$namespaced_element['value']}</$element>\n";
+                $attribute_string = '';
+                foreach ($namespaced_element['attributes'] as $attribute=>$value) {
+                    $attribute_string .= " $attribute=\"$value\"";
+                }
+                echo "<{$element}{$attribute_string}>{$namespaced_element['value']}</$element>\n";
             }
         }
       ?>
