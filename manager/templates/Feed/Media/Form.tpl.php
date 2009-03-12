@@ -125,8 +125,16 @@ var myEditor = new YAHOO.widget.Editor("description", {
     function getFieldValue($media, $xmlns, $element)
     {
         $class = 'UNL_MediaYak_Feed_Media_NamespacedElements_'.$xmlns;
-        if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_itunes::mediaHasElement($media->id, $element)) {
-            return $element->value;
+        if ($element = call_user_func($class .'::mediaHasElement', $media->id, $element, $xmlns)) {
+            return htmlentities($element->value, ENT_QUOTES);
+        }
+        return '';
+    }
+    function getFieldAttributes($media, $xmlns, $element)
+    {
+        $class = 'UNL_MediaYak_Feed_Media_NamespacedElements_'.$xmlns;
+        if ($element = call_user_func($class .'::mediaHasElement', $media->id, $element, $xmlns)) {
+            return htmlentities(serialize($element->attributes), ENT_QUOTES);
         }
         return '';
     }
@@ -190,12 +198,12 @@ var myEditor = new YAHOO.widget.Editor("description", {
                     <input id="mrss_group" name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[0][value]" type="text" value="<?php echo getFieldValue($this->media, 'mrss', 'group'); ?>" size="55"/>
                 </div>
             </li>
-            <li>
-                <label for="mrss_content" class="element">Content</label>
-                <div class="element">
-                    <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[1][element]" type="hidden" value="content"/>
-                    <input id="mrss_content" name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[1][value]" type="text" value="<?php echo getFieldValue($this->media, 'mrss', 'content'); ?>" size="55"/>
-                </div>
+            <li style="display:none">
+                <!-- mrss hidden elements that are handled automatically -->
+                <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[1][media_id]" type="hidden" value="<?php echo $this->media->id; ?>"/>
+                <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[1][element]" type="hidden" value="content" />
+                <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[1][value]" type="hidden" value="<?php echo getFieldValue($this->media, 'mrss', 'content'); ?>" />
+                <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[1][attributes]" type="hidden" value="<?php echo getFieldAttributes($this->media, 'mrss', 'content'); ?>" />
             </li>
             <li>
                 <label for="mrss_rating" class="element">Rating</label>
@@ -225,12 +233,12 @@ var myEditor = new YAHOO.widget.Editor("description", {
                     <input id="mrss_keywords" name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[5][value]" type="text" value="<?php echo getFieldValue($this->media, 'mrss', 'keywords'); ?>" size="55"/>
                 </div>
             </li>
-            <li>
-                <label for="mrss_thumbnail" class="element">Thumbnail</label>
-                <div class="element">
-                    <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[6][element]" type="hidden" value="thumbnail"/>
-                    <input id="mrss_thumbnail" name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[6][value]" type="text" value="<?php echo getFieldValue($this->media, 'mrss', 'thumbnail'); ?>" size="55"/>
-                </div>
+            <li style="display:none;">
+                <!-- mrss hidden elements that are handled automatically -->
+                <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[6][media_id]" type="hidden" value="<?php echo $this->media->id; ?>"/>
+                <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[6][element]" type="hidden" value="thumbnail"/>
+                <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[6][value]" type="hidden" value="<?php echo getFieldValue($this->media, 'mrss', 'thumbnail'); ?>" />
+                <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[6][attributes]" type="hidden" value="<?php echo getFieldAttributes($this->media, 'mrss', 'thumbnail'); ?>" />
             </li>
             <li>
                 <label for="mrss_category" class="element">Category</label>

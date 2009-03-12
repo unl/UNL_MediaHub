@@ -31,6 +31,11 @@ abstract class UNL_MediaYak_Models_BaseMediaHasNSElement extends Doctrine_Record
             $event->skipOperation();
             return;
         }
+        if (!empty($this->attributes) && !is_array($this->attributes)) {
+            if ($test = unserialize($this->attributes)) {
+                $this->attributes = $test;
+            }
+        }
     }
     
     function preUpdate($event)
@@ -40,11 +45,11 @@ abstract class UNL_MediaYak_Models_BaseMediaHasNSElement extends Doctrine_Record
             $event->skipOperation();
             return;
         }
-    }
-    
-    function preDelete($event)
-    {
-
+        if (!empty($this->attributes) && !is_array($this->attributes)) {
+            if ($test = unserialize($this->attributes)) {
+                $this->attributes = $test;
+            }
+        }
     }
     
     /**

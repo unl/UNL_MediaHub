@@ -28,4 +28,9 @@ class UNL_MediaYak_Feed_Media_NamespacedElements_mrss extends UNL_MediaYak_Feed_
             'restriction',
             );
     }
+    
+    public static function mediaHasElement($media_id, $element)
+    {
+        return UNL_MediaYak_Feed_Media_NamespacedElements::mediaHasElement($media_id, $element, 'mrss');
+    }
 }

@@ -225,6 +225,9 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
                                  'description'=> $_POST['description']);
                 $media = $this->mediayak->addMedia($details);
             }
+            
+            // @TODO ADD NEW FEED HERE IF NECESSARY!
+            
             if (!empty($_POST['feed_id'])) {
                 if (is_array($_POST['feed_id'])) {
                     $feed_ids = array_keys($_POST['feed_id']);
@@ -286,13 +289,16 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
                        'UNL_MediaYak_Feed_Media_NamespacedElements_mrss'   => 'value') as $relation=>$field) {
             if (isset($_POST[$relation])) {
                 foreach ($_POST[$relation] as $key=>$values) {
-                    if (empty($values[$field])) {
+                    if (empty($values[$field])
+                        && empty($values['attributes'])) {
                         unset($_POST[$relation][$key]);
                     }
                 }
             }
         }
         unset($_POST['__unlmy_posttarget']);
+        unset($_POST['MAX_FILE_SIZE']);
+        unset($_POST['submit_existing']);
     }
     
     /**

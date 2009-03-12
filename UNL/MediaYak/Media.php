@@ -38,13 +38,15 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
     
     public function postInsert($event)
     {
-        $this->setThumbnail();
+        $this->setMRSSThumbnail();
+        $this->setMRSSContent();
     }
     
-    public function preUpdate($event)
+    public function postSave()
     {
-        $this->setContentType();
-        $this->setThumbnail();
+//        var_dump('postsave');
+//        $this->setMRSSThumbnail();
+//        $this->setMRSSContent();
     }
     
     /**
@@ -52,9 +54,9 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
      * 
      * @return true
      */
-    function setThumbnail()
+    function setMRSSThumbnail()
     {
-        if ($element = UNL_MediaYak_Feed_Media_NamespacedElements::mediaHasElement($media->id, 'thumbnail', 'mrss')) {
+        if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_mrss::mediaHasElement($this->id, 'thumbnail')) {
             // all ok
         } else {
             $element = new UNL_MediaYak_Feed_Media_NamespacedElements_mrss();
@@ -64,6 +66,30 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
         $attributes = array('url' => UNL_MediaYak_Controller::$thumbnail_generator.urlencode($this->url),
                             //width="75" height="50" time="12:05:01.123"
                             );
+        $element->attributes = $attributes;
+        $element->save();
+        return true;
+    }
+    
+    function setMRSSContent()
+    {
+        list($width, $height) = getimagesize(UNL_MediaYak_Controller::$thumbnail_generator.urlencode($this->url));
+        if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_mrss::mediaHasElement($this->id, 'content')) {
+            // all good
+        } else {
+            $element = new UNL_MediaYak_Feed_Media_NamespacedElements_mrss();
+            $element->media_id = $this->id;
+            $element->element = 'content';
+        }
+        $attributes = array('url'      => $this->url,
+                            'fileSize' => $this->length,
+                            'type'     => $this->type,
+                            'width'    => $width,
+                            'height'   => $height,
+                            'lang'     => $en);
+        if (isset($element->attributes) && is_array($element->attributes)) {
+            $attributes = array_merge($element->attributes, $attributes);
+        }
         $element->attributes = $attributes;
         $element->save();
         return true;
