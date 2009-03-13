@@ -38,7 +38,9 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
     
     public function postInsert($event)
     {
-        $this->setMRSSThumbnail();
+        if (UNL_MediaYak_Media::isVideo($this->type)) {
+            $this->setMRSSThumbnail();
+        }
         $this->setMRSSContent();
     }
     
