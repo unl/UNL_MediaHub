@@ -85,12 +85,12 @@ var myEditor = new YAHOO.widget.Editor("description", {
 <div id="part1">
     <h1>Add new media:</h1>    
     <ul id="tabnav">
-    	<li class="selected"><a href="#" id="a_url">Add by URL</a></li>
-    	<li><a href="#" id="a_file">Upload a file</a></li>
+    	<li class="selected"><a href="#" id="a_url">Add by URL (http://&hellip;)</a></li>
+    	<!-- <li><a href="#" id="a_file">Upload a file</a></li> -->
     </ul>
     <div id="formContent">
 	    <input id="url" name="url" type="text" value="<?php echo htmlentities(@$this->media->url, ENT_QUOTES); ?>" />
-    	<input id="file_upload" name="file_upload" type="file" />
+	    <!-- <input id="file_upload" name="file_upload" type="file" /> -->
     	<input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
         <input id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" type="hidden" value="67108864" />
         <?php
@@ -118,6 +118,7 @@ var myEditor = new YAHOO.widget.Editor("description", {
         <legend>Required Information</legend>
         <ol>
             <li><label for="title" class="element">Title</label><div class="element"><input id="title" name="title" type="text" size="60" value="<?php echo htmlentities(@$this->media->title, ENT_QUOTES); ?>" /></div></li>
+            <li><label for="author" class="element">Author</label><div class="element"><input id="author" name="author" type="text" size="60" value="<?php echo htmlentities(@$this->media->author, ENT_QUOTES); ?>" /></div></li>
             <li>
                 <label for="description" class="element">Description</label>
                 <div class="element" id="description_wrapper"><textarea id="description" name="description" rows="5" cols="60"><?php echo htmlentities(@$this->media->description); ?></textarea></div>
@@ -147,7 +148,7 @@ var myEditor = new YAHOO.widget.Editor("description", {
     <fieldset id="enhanced_header">
         <legend>Enhanced Information</legend>
         <ol>
-            <li>
+            <li style="display:none;">
                 <label for="itunes_author" class="element">Author</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[0][element]" type="hidden" value="author"/>
@@ -155,20 +156,21 @@ var myEditor = new YAHOO.widget.Editor("description", {
                 </div>
             </li>
             <li>
-                <label for="itunes_block" class="element">Block</label>
+                <label for="itunes_block" class="element">Block from iTunes</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[1][element]" type="hidden" value="block"/>
                     <input id="itunes_block" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[1][value]" type="text" value="<?php echo getFieldValue($this->media, 'itunes', 'block'); ?>" size="55"/>
+                    <dl><dd>Set to 'yes' if you would like to block this element from iTunes</dd></dl>
                 </div>
             </li>
             <li>
-                <label for="itunes_duration" class="element">Duration</label>
+                <label for="itunes_duration" class="element">Duration (HH:MM:SS)</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[2][element]" type="hidden" value="duration"/>
                     <input id="itunes_duration" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[2][value]" type="text" value="<?php echo getFieldValue($this->media, 'itunes', 'duration'); ?>" size="55"/>
                 </div>
             </li>
-            <li>
+            <li style="display:none;">
                 <label for="itunes_explicit" class="element">Explicit</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[3][element]" type="hidden" value="explicit"/>
@@ -180,6 +182,7 @@ var myEditor = new YAHOO.widget.Editor("description", {
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[4][element]" type="hidden" value="keywords"/>
                     <input id="itunes_keywords" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[4][value]" type="text" value="<?php echo getFieldValue($this->media, 'itunes', 'keywords'); ?>" size="55"/>
+                    <dl><dd>A comma separated list of keywords, MAX 10</dd></dl>
                 </div>
             </li>
             <li>
@@ -196,7 +199,7 @@ var myEditor = new YAHOO.widget.Editor("description", {
                     <input id="itunes_summary" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[6][value]" type="text" value="<?php echo getFieldValue($this->media, 'itunes', 'summary'); ?>" size="55"/>
                 </div>
             </li>
-            <li>
+            <li style="display:none;">
                 <label for="mrss_group" class="element">Group</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[0][element]" type="hidden" value="group"/>
@@ -210,28 +213,28 @@ var myEditor = new YAHOO.widget.Editor("description", {
                 <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[1][value]" type="hidden" value="<?php echo getFieldValue($this->media, 'mrss', 'content'); ?>" />
                 <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[1][attributes]" type="hidden" value="<?php echo getFieldAttributes($this->media, 'mrss', 'content'); ?>" />
             </li>
-            <li>
+            <li style="display:none;">
                 <label for="mrss_rating" class="element">Rating</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[2][element]" type="hidden" value="rating"/>
                     <input id="mrss_rating" name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[2][value]" type="text" value="<?php echo getFieldValue($this->media, 'mrss', 'rating'); ?>" size="55"/>
                 </div>
             </li>
-            <li>
+            <li style="display:none;">
                 <label for="mrss_title" class="element">Title</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[3][element]" type="hidden" value="title"/>
                     <input id="mrss_title" name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[3][value]" type="text" value="<?php echo getFieldValue($this->media, 'mrss', 'title'); ?>" size="55"/>
                 </div>
             </li>
-            <li>
+            <li style="display:none;">
                 <label for="mrss_description" class="element">Description</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[4][element]" type="hidden" value="description"/>
                     <input id="mrss_description" name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[4][value]" type="text" value="<?php echo getFieldValue($this->media, 'mrss', 'description'); ?>" size="55"/>
                 </div>
             </li>
-            <li>
+            <li style="display:none;">
                 <label for="mrss_keywords" class="element">Keywords</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[5][element]" type="hidden" value="keywords"/>
@@ -252,7 +255,7 @@ var myEditor = new YAHOO.widget.Editor("description", {
                     <input id="mrss_category" name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[7][value]" type="text" value="<?php echo getFieldValue($this->media, 'mrss', 'category'); ?>" size="55"/>
                 </div>
             </li>
-            <li>
+            <li style="display:none;">
                 <label for="mrss_player" class="element">Player</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[8][element]" type="hidden" value="player"/>
@@ -274,13 +277,15 @@ var myEditor = new YAHOO.widget.Editor("description", {
                 </div>
             </li>
             <li>
-                <label for="mrss_text" class="element">Text</label>
+                <label for="mrss_text" class="element">Transcript/Captioning</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[11][element]" type="hidden" value="text"/>
-                    <input id="mrss_text" name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[11][value]" type="text" value="<?php echo getFieldValue($this->media, 'mrss', 'text'); ?>" size="55"/>
+                    <textarea rows="3" cols="50" id="mrss_text" name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[11][value]">
+                        <?php echo getFieldValue($this->media, 'mrss', 'text'); ?>
+                    </textarea>
                 </div>
             </li>
-            <li>
+            <li style="display:none;">
                 <label for="mrss_restriction" class="element">Restriction</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[12][element]" type="hidden" value="restriction"/>
