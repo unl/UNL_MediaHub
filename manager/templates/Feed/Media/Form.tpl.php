@@ -21,8 +21,11 @@ if (!isset($this->media)) {
     	return false;
     });
     ';
+    if (isset($_GET['feed_id'])) {
+        $jquery .= '$("#feedlist").hide();';
+    }
 } else {
-    $jquery .= '//$("#part1").hide();$("#feedlist").hide();';
+    $jquery .= '$("#part1").hide();$("#feedlist").hide();$("#part2").show(400);';
 }
 
 $jquery .= '
