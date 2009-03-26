@@ -26,13 +26,6 @@ h3 a {
 #maincontent form textarea {
     width:270px;
 }
-div.clr img {
-    float:left;
-    padding:6px 10px 16px 6px;
-}
-div.clr {
-    background:url(../images/fade700.png) no-repeat top left #FFFFFF;
-}
 .content_holder {
     background:url(../images/content_holder_fade.jpg) repeat-x top #FFFFFF;
 }
