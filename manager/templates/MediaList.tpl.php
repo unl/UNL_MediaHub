@@ -3,7 +3,7 @@ $addMediaURL = UNL_MediaYak_Manager::getURL().'?view=addmedia';
 if (isset($_GET['id'])) {
     $addMediaURL .= '&amp;feed_id='.$_GET['id'];
 }
-?><p><a class="add_media" href="<?php echo $addMediaURL; ?>">Add media</a></p> 
+?><p class="action"><a class="add_media" href="<?php echo $addMediaURL; ?>">Add media</a></p> 
 <?php
 if (count($this->items)) {
     echo '<ul class="medialist">';
@@ -36,4 +36,4 @@ if (count($this->items)) {
     echo '<p>This feed has no media yet.</p>';
 }
 ?>
-<p><a class="add_media" href="<?php echo $addMediaURL; ?>">Add media</a></p> 
+<p class="action"><a class="add_media" href="<?php echo $addMediaURL; ?>">Add media</a></p> 
