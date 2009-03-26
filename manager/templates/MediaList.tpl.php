@@ -27,7 +27,7 @@ if (count($this->items)) {
             $summary = str_replace('Related Links', '', $summary);
             ?>
             <p><?php echo $summary; ?></p>
-            <a class="edit" href="'.$addMediaURL.'&amp;id='.$media->id.'">Edit Details</a>
+            <a class="edit" href="<?php echo $addMediaURL; ?>&amp;id=<?php echo $media->id; ?>">Edit Details</a>
         </div>
         </li>
     <?php  
