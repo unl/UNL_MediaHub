@@ -174,7 +174,15 @@ var myEditor = new YAHOO.widget.Editor("description", {
                 <label for="itunes_block" class="element">Block from iTunes</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[1][element]" type="hidden" value="block"/>
-                    <input id="itunes_block" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[1][value]" type="text" value="<?php echo getFieldValue($this, 'itunes', 'block'); ?>" size="55"/>
+                    <select id="itunes_block" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[1][value]">
+                    	<?php 
+                    	if (getFieldValue($this, 'itunes', 'block') == "yes") {
+                    		echo '<option value="">No</option><option value="yes" selected="selected">Yes</option>';
+                    	} else {
+                    		echo '<option value="">No</option><option value="yes">Yes</option>';
+                    	}
+                    	?>
+                    </select>
                     <dl><dd>Set to 'yes' if you would like to block this element from iTunes</dd></dl>
                 </div>
             </li>
