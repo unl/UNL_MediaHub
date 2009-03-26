@@ -15,8 +15,10 @@ if (count($this->items)) {
             foreach ($media->$ns_class as $namespaced_element) {
                 $element = "{$namespaced_element['xmlns']}:{$namespaced_element['element']}";
                 $attribute_string = '';
-                foreach ($namespaced_element['attributes'] as $attribute=>$value) {
-                    $attribute_string .= " $attribute=\"$value\"";
+                if (!empty($namespaced_element['attributes'])) {
+                    foreach ($namespaced_element['attributes'] as $attribute=>$value) {
+                        $attribute_string .= " $attribute=\"$value\"";
+                    }
                 }
                 echo "<{$element}{$attribute_string}>{$namespaced_element['value']}</$element>\n";
             }
