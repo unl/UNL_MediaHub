@@ -19,3 +19,7 @@ ul.medialist li {
     border:1px solid #bd4141;
     color:#bd4141;
 }
+img.thumbnail {
+    float:left;
+    padding:6px 10px 16px 6px;
+}

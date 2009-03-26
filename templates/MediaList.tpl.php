@@ -19,8 +19,7 @@ if (count($this->items)) {
         <?php
         foreach ($this->items as $media) { ?>
             <li>
-            <div class="clr">
-                <div><a href="<?php echo UNL_MediaYak_Controller::getURL($media); ?>"><img src="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.urlencode($media->url); ?>" alt="Thumbnail preview for <?php echo $media->title; ?>" width="50" height="38" /></a></div>
+                <div><a href="<?php echo UNL_MediaYak_Controller::getURL($media); ?>"><img class="thumbnail" src="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.urlencode($media->url); ?>" alt="Thumbnail preview for <?php echo $media->title; ?>" width="50" height="38" /></a></div>
                 <h4><a href="<?php echo UNL_MediaYak_Controller::getURL($media); ?>"><?php echo htmlspecialchars($media->title); ?></a></h4>
                 <?php
                 if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_itunes::mediaHasElement($media->id, 'subtitle')) {
@@ -37,7 +36,6 @@ if (count($this->items)) {
                 $summary = str_replace('Related Links', '', $summary);
                 ?>
                 <p><?php echo $summary; ?></p>
-            </div>
             </li>
         <?php  
         } ?>
