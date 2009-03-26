@@ -28,7 +28,7 @@ form #thumbnail {
 }
 #maincontent form fieldset li #description_wrapper * {
 	margin:0;
-	font-size:85%;
+    font-size:9px;
 	max-width:520px;
 }
 #maincontent form fieldset li #description_wrapper iframe {
@@ -58,3 +58,6 @@ form #thumbnail {
 }
 
 iframe * {margin:0px}
+.yui-skin-sam .yui-editor-container ul {padding-left:0px !important;}
+.yui-skin-sam .yui-editor-container a {background:none;}
+.yui-skin-sam .yui-editor-container span {color:black !important;}
