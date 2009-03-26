@@ -40,7 +40,8 @@
                 $label = ucwords($element);
                 echo "<li><label for='{$class}_{$element}' class='element'>$label</label><div class='element'>
                 <input name='{$ns_class}[{$count}][element]' type='hidden' value='$element' />
-                <input id='{$class}_{$element}' name='{$ns_class}[{$count}][value]' type='text' value='$value' size='55' /></div></li>";
+                <input id='{$class}_{$element}' name='{$ns_class}[{$count}][value]' type='text' value='$value' size='55' />
+                </div></li>";
                 $count++;
             }
             ?>

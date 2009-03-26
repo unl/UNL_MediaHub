@@ -74,11 +74,17 @@ p.submit a {
     display:inline-block;
     padding:15px 45px 15px 10px;
 }
-#part1 p.caption {
+#part1 p.caption, dl.caption {
 	margin-top: 5px;
 	text-align: right;
 	color:#1091d1;
 }
+dl.caption {
+	text-align:left;
+	}
+#maincontent dl.caption dd {
+	padding-left:0px;
+	}
 div.headline_main {
 	background:url(images/headline_mainBG.png) no-repeat top left;
 	/*display:block;*/
