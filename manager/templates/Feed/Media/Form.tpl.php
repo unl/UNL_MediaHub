@@ -127,7 +127,7 @@ var myEditor = new YAHOO.widget.Editor("description", {
                 <div class="element" id="description_wrapper"><textarea id="description" name="description" rows="5" cols="60"><?php echo htmlentities(@$this->media->description); ?></textarea></div>
             </li>
 
-            <li><label for="submit_existing" class="element">&nbsp;</label><div class="element"><input id="submit_existing" name="submit_existing" value="Save" type="submit" /></div></li>
+            <li style="dispay:none;"><label for="submit_existing" class="element">&nbsp;</label><div class="element"><input id="submit_existing" name="submit_existing" value="Save" type="submit" /></div></li>
         </ol>
     </fieldset>
     <?php
@@ -160,6 +160,14 @@ var myEditor = new YAHOO.widget.Editor("description", {
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[0][element]" type="hidden" value="author"/>
                     <input id="itunes_author" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[0][value]" type="text" value="<?php echo getFieldValue($this, 'itunes', 'author'); ?>" size="55"/>
+                    
+                <div class="form-help">
+                    	<a href="#" class="imagelink" title="Get more information"><img src="templates/css/images/iconInfo.png" alt="Get More info on the Author attribute" /></a>
+                    	<div class="help-content">
+                    		<span class="help-pointer">&nbsp;</span>
+                    		<p>This is the text for the form help</p>
+                    	</div>
+                    </div>
                 </div>
             </li>
             <li>
@@ -295,12 +303,6 @@ var myEditor = new YAHOO.widget.Editor("description", {
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[12][element]" type="hidden" value="restriction"/>
                     <input id="mrss_restriction" name="UNL_MediaYak_Feed_Media_NamespacedElements_mrss[12][value]" type="text" value="<?php echo getFieldValue($this, 'mrss', 'restriction'); ?>" size="55"/>
-                </div>
-            </li>
-            <li>
-                <label for="enhanced_submit" class="element"/>
-                <div class="element">
-                    <input id="enhanced_submit" name="submit" value="Save" type="submit"/>
                 </div>
             </li>
         </ol>
