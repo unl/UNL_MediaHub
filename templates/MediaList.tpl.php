@@ -14,7 +14,7 @@ if (count($this->items)) {
     $pager_layout->setSelectedTemplate('{%page}');
     $pager_links = $pager_layout->display(null, true);
     ?>
-        <ul>
+        <ul class="medialist">
     
         <?php
         foreach ($this->items as $media) { ?>
