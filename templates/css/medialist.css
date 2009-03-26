@@ -1,0 +1,21 @@
+ul.medialist li {
+    list-style:none;
+    margin-left:-28px;
+    padding:10px;
+    margin-bottom:10px;
+    background:url(../images/fade700.png) no-repeat top left #FFFFFF;
+}
+.pager_links {
+    font-weight:bold;
+    margin:15px 0 15px 0;
+}
+.pager_links a {
+    border: 1px solid #4194bd;
+    padding:5px;
+    color:#4194bd;
+    background:none;
+}
+.pager_links a:hover {
+    border:1px solid #bd4141;
+    color:#bd4141;
+}

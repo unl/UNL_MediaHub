@@ -1,0 +1,46 @@
+#comments ul li {
+    list-style:none;
+    margin-left:-28px;
+    padding:10px;
+    margin-bottom:20px;
+    background:url(../images/fade.png) no-repeat top left #FFFFFF;
+}
+#comments ul li h4 {
+    float:left;
+}
+#comments ul li em {
+    float: right;
+    font-size:.8em;
+    color:#666666
+}
+.author, .addedDate {
+    color:#999999;
+    font-weight:bold;
+}
+h3 a {
+    font-size:.7em;
+}
+#maincontent form fieldset {
+    width:460px;
+}
+#maincontent form textarea {
+    width:270px;
+}
+div.clr img {
+    float:left;
+    padding:6px 10px 16px 6px;
+}
+div.clr {
+    background:url(../images/fade700.png) no-repeat top left #FFFFFF;
+}
+.content_holder {
+    background:url(../images/content_holder_fade.jpg) repeat-x top #FFFFFF;
+}
+.content_holder img {
+    margin-left: 15px;
+}
+blockquote {
+    background:url(../images/quote.png) no-repeat top left;
+    padding: 5px 5px 5px 48px;
+    clear:both;
+}
