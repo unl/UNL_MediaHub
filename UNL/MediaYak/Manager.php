@@ -107,28 +107,32 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
     
     function run()
     {
-        if (count($_POST)) {
-            $this->handlePost();
-        } else {
-            switch($this->options['view']) {
-            case 'feed':
-                $this->showFeed();
-                break;
-            case 'feedmetadata':
-                $this->editFeedMetaData();
-                break;
-            case 'permissions':
-                $this->editPermissions();
-                break;
-            case 'feeds':
-                $this->showFeeds(self::getUser());
-                break;
-            case 'addmedia':
-                $this->addMedia();
-            default:
-                $this->showFeeds(self::getUser());
-                break;
+        try {
+            if (count($_POST)) {
+                $this->handlePost();
+            } else {
+                switch($this->options['view']) {
+                case 'feed':
+                    $this->showFeed();
+                    break;
+                case 'feedmetadata':
+                    $this->editFeedMetaData();
+                    break;
+                case 'permissions':
+                    $this->editPermissions();
+                    break;
+                case 'feeds':
+                    $this->showFeeds(self::getUser());
+                    break;
+                case 'addmedia':
+                    $this->addMedia();
+                default:
+                    $this->showFeeds(self::getUser());
+                    break;
+                }
             }
+        } catch (Exception $e) {
+            $this->output = $e;
         }
     }
     
@@ -183,15 +187,20 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
     function showFeed()
     {
         $feed = UNL_MediaYak_Feed::getById($_GET['id']);
-        $this->output[] = $feed;
-        
-        $filter = new UNL_MediaYak_MediaList_Filter_ByFeed($feed);
-        $this->showMedia($filter);
+        if ($feed && $feed->userHasPermission(self::$user, UNL_MediaYak_Permission::getByID(
+                                                    UNL_MediaYak_Permission::USER_CAN_INSERT))){
+            $this->output[] = $feed;
+            
+            $filter = new UNL_MediaYak_MediaList_Filter_ByFeed($feed);
+            $this->showMedia($filter);
+        } else {
+            throw new Exception('You do not have permission for this feed.');
+        }
     }
     
     /**
      * This function accepts info posted to the system.
-     * 
+     *
      */
     function handlePost()
     {

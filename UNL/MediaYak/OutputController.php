@@ -111,6 +111,13 @@ class UNL_MediaYak_OutputController
                 $savant->$key = $var;
             }
         }
+        if ($object instanceof Exception) {
+            $savant->code    = $object->getCode();
+            $savant->line    = $object->getLine();
+            $savant->file    = $object->getFile();
+            $savant->message = $object->getMessage();
+            $savant->trace   = $object->getTrace();
+        }
         $templatefile = self::getTemplateFilename(get_class($object));
         if (file_exists($templatefile)) {
             if ($return) {
