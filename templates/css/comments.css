@@ -3,7 +3,7 @@
     margin-left:-28px;
     padding:10px;
     margin-bottom:20px;
-    background:url(../images/fade.png) no-repeat top left #FFFFFF;
+    background:url(images/fade.png) no-repeat top left #FFFFFF;
 }
 #comments ul li h4 {
     float:left;
@@ -27,13 +27,13 @@ h3 a {
     width:270px;
 }
 .content_holder {
-    background:url(../images/content_holder_fade.jpg) repeat-x top #FFFFFF;
+    background:url(images/content_holder_fade.jpg) repeat-x top #FFFFFF;
 }
 .content_holder img {
     margin-left: 15px;
 }
 blockquote {
-    background:url(../images/quote.png) no-repeat top left;
+    background:url(images/quote.png) no-repeat top left;
     padding: 5px 5px 5px 48px;
     clear:both;
 }
