@@ -60,20 +60,32 @@
 	font-size:2em;
 	color:#878c8e;
 	}
-p.submit {
+p.submit, p.action {
 	margin-top: 0px;
 	background:url(images/submitL.png) top left no-repeat;
 	display:inline-block;
 	height:45px;
 	padding-left:5px;
 }
-p.submit a {
+p.action {
+	background:url(images/actionL.png) top left no-repeat;
+	height:37px;
+	padding-left:5px;
+	display:block;
+	}
+p.submit a, p.action a {
     background:url(images/submitR.png) no-repeat top right;
     font-size:1.5em;
     color:#FFF;
     display:inline-block;
     padding:15px 45px 15px 10px;
 }
+p.action a {
+	background:url(images/actionR.png) no-repeat top right;
+	font-size:1em;
+	color:#6a6a6a;
+	padding:10px 25px 010px 10px;
+	}
 #part1 p.caption, dl.caption {
 	margin-top: 5px;
 	text-align: right;
