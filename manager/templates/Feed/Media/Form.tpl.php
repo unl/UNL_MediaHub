@@ -183,7 +183,7 @@ var myEditor = new YAHOO.widget.Editor("description", {
                     	}
                     	?>
                     </select>
-                    <dl><dd>Set to 'yes' if you would like to block this element from iTunes</dd></dl>
+                    <dl class="caption"><dd>Set to 'yes' if you would like to block this element from iTunes</dd></dl>
                 </div>
             </li>
             <li>
@@ -205,7 +205,7 @@ var myEditor = new YAHOO.widget.Editor("description", {
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[4][element]" type="hidden" value="keywords"/>
                     <input id="itunes_keywords" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[4][value]" type="text" value="<?php echo getFieldValue($this, 'itunes', 'keywords'); ?>" size="55"/>
-                    <dl><dd>A comma separated list of keywords, MAX 10</dd></dl>
+                    <dl class="caption"><dd>A comma separated list of keywords, MAX 10</dd></dl>
                 </div>
             </li>
             <li>
