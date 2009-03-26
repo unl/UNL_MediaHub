@@ -4,6 +4,7 @@ ul.medialist li {
     padding:10px;
     margin-bottom:10px;
     background:url(images/fade700.png) no-repeat top left #FFFFFF;
+    clear:both;
 }
 .pager_links {
     font-weight:bold;
