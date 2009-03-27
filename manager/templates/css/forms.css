@@ -56,40 +56,7 @@ form #thumbnail {
 	background-color:#CCC;
 	border:1px solid;
 }
-
-<<<<<<< .mine
-iframe * {margin:0px}
-
-div.form-help {
-	border:1px solid black;
-	float:right;
-}
-
-div.form-help a {
-	
-}
-/*
-div.form-help div.help-content {
-	width: 250px;
-  	margin: 0 0 0 14px;
-  	border: 1px solid #c93;
-  	padding: 10px 12px;
-  	background: #ffc;
-  	float:right;
-  	z-index:999;
-}
-
-div.form-help span.help-pointer {
-	background: url(images/pointer.gif) no-repeat top left;
-	width:10px;
-	height:19px;
-	display:block;
-	position:relative;
-	top:5px;
-	left:-22px;
-}*/
-=======
 iframe * {margin:0px}
 .yui-skin-sam .yui-editor-container ul {padding-left:0px !important;}
 .yui-skin-sam .yui-editor-container a {background:none;}
-.yui-skin-sam .yui-editor-container span {color:black !important;}>>>>>>> .r163
+.yui-skin-sam .yui-editor-container span {color:black !important;}
