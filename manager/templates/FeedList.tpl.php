@@ -16,7 +16,7 @@
         </p>';
     }
     echo '
-        <p>
+        <p class="action">
             <a class="add_feed" href="'.UNL_MediaYak_Manager::getURL().'?view=feedmetadata">Add channel</a>
         </p>';
     ?>
