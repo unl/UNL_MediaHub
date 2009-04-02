@@ -30,6 +30,12 @@ if (!isset($this->media)) {
 
 $jquery .= '
     $("#continue2").click(function() {
+            unl_check = /^http:\/\/([\w\d]+)\.unl\.edu\/(.*)/;
+            var r = unl_check.exec(document.getElementById("url").value);
+            if (r == null) {
+                alert(\'Sorry, you must use a .unl.edu URL!\');
+                return false;
+            }
             $("#feedlist").hide(400);
             $("#part1").hide(400);
             $("#part2").show(400);
