@@ -139,5 +139,13 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
         }
         return true;
     }
+    
+    static function getMediaDimensions($media_id)
+    {
+        if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_mrss::mediaHasElement($media_id, 'content')) {
+            return array('width'=>$element->attributes['width'], 'height'=>$element->attributes['height']);
+        }
+        return false;
+    }
 }
 

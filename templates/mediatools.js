@@ -1,19 +1,16 @@
 
-function writeUNLPlayer(mediaurl, id)
+function writeUNLPlayer(mediaurl, id, width, height)
 {
-    
-	
 	if (mediaurl.substr(mediaurl.length-3,3) == 'mp3') {
 	   // embed audio
 	   writeUNLAudioPlayer(mediaurl, id);
 	} else {
 	   // embed video
-	   writeUNLVideoPlayer(mediaurl, id);
+	   writeUNLVideoPlayer(mediaurl, id, width, height);
 	}
-    
 }
 
-function writeUNLVideoPlayer(mediaurl, id)
+function writeUNLVideoPlayer(mediaurl, id, width, height)
 {
     var image = UNL_MediaYak_thumbnail_generator+mediaurl;    
     
@@ -30,7 +27,7 @@ function writeUNLVideoPlayer(mediaurl, id)
     };
     
     swfobject.embedSWF('/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/player.swf',
-               id, "450", "358", "9.0.0",
+               id, width, height, "9.0.0",
                "/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/expressInstall.swf",
                flashvars, params);
 

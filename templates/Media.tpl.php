@@ -1,7 +1,11 @@
 <?php
-$type = 'video';
-if (substr($this->url, -4) == '.mp3') {
-    $type = 'audio';
+$type = 'audio';
+$height = 358;
+if (UNL_MediaYak_Media::isVideo($this->content_type)) {
+    $type = 'video';
+    $dimensions = UNL_MediaYak_Media::getMediaDimensions($this->id);
+    // Scale everything down to 358 wide
+    $height = (450/$dimensions['width'])*$dimensions['height']+20;
 }
 UNL_MediaYak_Controller::setReplacementData('title', 'UNL | Media Hub | '.htmlspecialchars($this->title));
 UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaYak_Controller::getURL().'">Media</a></li> <li>'.htmlspecialchars($this->title).'</li></ul>');
@@ -24,7 +28,7 @@ UNL_MediaYak_Controller::setReplacementData('head', $meta);
           </div>
         </div>
     </div>
-    <script type="text/javascript">writeUNLPlayer('<?php echo $this->url; ?>','preview');</script>
+    <script type="text/javascript">writeUNLPlayer('<?php echo $this->url; ?>','preview', 450, <?php echo $height; ?>);</script>
     <div id="comments">
     <h3><?php echo count($this->UNL_MediaYak_Media_Comment); ?> Comments | <a href="#commentForm">Leave Yours</a></h3>
     <?php
@@ -79,7 +83,7 @@ UNL_MediaYak_Controller::setReplacementData('head', $meta);
     <!-- ADDTHIS BUTTON END -->
     <h6>Embed</h6>
     <textarea cols="25" rows="3" onclick="this.select(); return false;"><?php
-        echo htmlentities('<div class="content_holder" id="preview_holder"><div class="unl_liquid_pictureframe"><div class="unl_liquid_pictureframe_inset"><object id="preview" height="358" width="450"><param value="true" name="allowfullscreen"></param><param value="always" name="allowscriptaccess"></param><embed src="http://www.unl.edu/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/player.swf?file='.$this->url.'&amp;image='.UNL_MediaYak_Controller::$thumbnail_generator.urlencode($this->url).'&amp;volume=100&amp;autostart=false" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" height="358" width="450"></embed></object><span class="unl_liquid_pictureframe_footer"></span></div></div></div>');
+        echo htmlentities('<div class="content_holder" id="preview_holder"><div class="unl_liquid_pictureframe"><div class="unl_liquid_pictureframe_inset"><object id="preview" height="'.$height.'" width="450"><param value="true" name="allowfullscreen"></param><param value="always" name="allowscriptaccess"></param><embed src="http://www.unl.edu/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/player.swf?file='.$this->url.'&amp;image='.UNL_MediaYak_Controller::$thumbnail_generator.urlencode($this->url).'&amp;volume=100&amp;autostart=false" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" height="'.$height.'" width="450"></embed></object><span class="unl_liquid_pictureframe_footer"></span></div></div></div>');
     ?></textarea>
     
     <h6 style="margin-top:1em;"><a href="<?php echo $this->url; ?>" class="video-x-generic">Download this media file</a></h6>
