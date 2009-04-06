@@ -9,22 +9,14 @@ $page->doctitle     = '<title>UNL | Media Hub</title>';
 $page->titlegraphic = '<h1>UNL Media Hub</h1><h2>Lights, Camera, Action</h2>';
 $page->addStyleSheet(UNL_MediaYak_Controller::getURL().'templates/css/all.css');
 $page->breadcrumbs = '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li>Media</li></ul>';
-$page->head .= '<script type="text/javascript">
-var UNL_MediaYak = function()
-{
-    return {
-        url : "'.UNL_MediaYak_Controller::getURL().'",
-        thumbnail_generator : "'.UNL_MediaYak_Controller::$thumbnail_generator.'",
-        getURL : function() {
-            return UNL_MediaYak.url;
-        }
-    };
-}();
-var UNL_MediaYak_thumbnail_generator = "'.UNL_MediaYak_Controller::$thumbnail_generator.'";
-</script>';
 $page->addScript('/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/swfobject.js');
 $page->addScript(UNL_MediaYak_Controller::getURL().'templates/jquery-1.2.6.min.js');
 $page->addScript(UNL_MediaYak_Controller::getURL().'templates/mediatools.js');
+$page->head .= '<script type="text/javascript">
+UNL_MediaYak.url  = "'.UNL_MediaYak_Controller::getURL().'";
+UNL_MediaYak.thumbnail_generator = "'.UNL_MediaYak_Controller::$thumbnail_generator.'";
+var UNL_MediaYak_thumbnail_generator = "'.UNL_MediaYak_Controller::$thumbnail_generator.'";
+</script>';
 $page->addScript(UNL_MediaYak_Controller::getURL().'templates/audio-player/audio-player-noswfobject.js');
 $page->maincontentarea = UNL_MediaYak_OutputController::display($this->output, true);
 $page->navlinks        = '

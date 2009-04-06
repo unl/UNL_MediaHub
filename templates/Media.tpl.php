@@ -4,8 +4,8 @@ $height = 358;
 if (UNL_MediaYak_Media::isVideo($this->content_type)) {
     $type = 'video';
     $dimensions = UNL_MediaYak_Media::getMediaDimensions($this->id);
-    // Scale everything down to 358 wide
-    $height = (450/$dimensions['width'])*$dimensions['height']+20;
+    // Scale everything down to 450 wide
+    $height = (450/$dimensions['width'])*$dimensions['height']+48;
 }
 UNL_MediaYak_Controller::setReplacementData('title', 'UNL | Media Hub | '.htmlspecialchars($this->title));
 UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaYak_Controller::getURL().'">Media</a></li> <li>'.htmlspecialchars($this->title).'</li></ul>');
@@ -20,15 +20,8 @@ if ($type == 'video') {
 UNL_MediaYak_Controller::setReplacementData('head', $meta);
 ?>
 <div class="two_col left">
-    <div class="content_holder" id="preview_holder">
-        <div class="unl_liquid_pictureframe">
-          <div class="unl_liquid_pictureframe_inset">
-            <div id="preview"></div>
-          <span class="unl_liquid_pictureframe_footer"></span>
-          </div>
-        </div>
-    </div>
-    <script type="text/javascript">writeUNLPlayer('<?php echo $this->url; ?>','preview', 450, <?php echo $height; ?>);</script>
+    <div id="preview"></div>
+    <script type="text/javascript">UNL_MediaYak.writePlayer('<?php echo addslashes($this->title); ?>','<?php echo $this->url; ?>','preview', 450, <?php echo $height; ?>);</script>
     <div id="comments">
     <h3><?php echo count($this->UNL_MediaYak_Media_Comment); ?> Comments | <a href="#commentForm">Leave Yours</a></h3>
     <?php
