@@ -1,11 +1,13 @@
 <?php
 $type = 'audio';
 $height = 358;
-if (UNL_MediaYak_Media::isVideo($this->content_type)) {
+if (UNL_MediaYak_Media::isVideo($this->type)) {
     $type = 'video';
     $dimensions = UNL_MediaYak_Media::getMediaDimensions($this->id);
-    // Scale everything down to 450 wide
-    $height = (450/$dimensions['width'])*$dimensions['height']+48;
+    if (isset($dimensions['width'])) {
+        // Scale everything down to 450 wide
+        $height = (450/$dimensions['width'])*$dimensions['height']+48;
+    }
 }
 UNL_MediaYak_Controller::setReplacementData('title', 'UNL | Media Hub | '.htmlspecialchars($this->title));
 UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaYak_Controller::getURL().'">Media</a></li> <li>'.htmlspecialchars($this->title).'</li></ul>');
