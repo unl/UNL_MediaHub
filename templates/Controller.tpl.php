@@ -33,14 +33,17 @@ $page->navlinks        = '
 </div>
 
 <ul>
-    <li><a href="'.UNL_MediaYak_Controller::getURL().'">Media Hub</a></li>
-</ul>';
+    <li><a href="'.UNL_MediaYak_Controller::getURL().'">Media Hub</a>';
 
 if (!UNL_MediaYak_Controller::isLoggedIn()) {
     $page->collegenavigationlist = '<ul><li><a href="https://login.unl.edu/cas/login?service='.urlencode(UNL_MediaYak_Controller::getURL()).'">Login</a></li></ul>';
 } else {
+    $page->navlinks        .='<ul><li><a href="'.UNL_MediaYak_Controller::getURL().'manager/">My Media</a></li></ul>';
     $page->collegenavigationlist = '<ul><li><a href="?logout">Logout</a></li></ul>';
 }
+
+$page->navlinks        .='
+</li></ul>';
 
 $page->leftcollinks = '
 <h3>Related Links</h3>
