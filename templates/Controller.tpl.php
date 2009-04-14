@@ -36,6 +36,12 @@ $page->navlinks        = '
     <li><a href="'.UNL_MediaYak_Controller::getURL().'">Media Hub</a></li>
 </ul>';
 
+if (!UNL_MediaYak_Controller::isLoggedIn()) {
+    $page->collegenavigationlist = '<ul><li><a href="https://login.unl.edu/cas/login?service='.urlencode(UNL_MediaYak_Controller::getURL()).'">Login</a></li></ul>';
+} else {
+    $page->collegenavigationlist = '<ul><li><a href="?logout">Logout</a></li></ul>';
+}
+
 $page->leftcollinks = '
 <h3>Related Links</h3>
 <ul>

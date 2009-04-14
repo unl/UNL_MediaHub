@@ -1,3 +1,5 @@
 @import url("/ucomm/templatedependents/templatecss/components/forms.css");
 @import url("comments.css");
 @import url("medialist.css");
+#title ul {margin-right:20px;}
+#title ul li{float:right;}
