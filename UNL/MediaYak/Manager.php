@@ -235,8 +235,6 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
                 $media = $this->mediayak->addMedia($details);
             }
             
-            // @TODO ADD NEW FEED HERE IF NECESSARY!
-            
             if (!empty($_POST['feed_id'])) {
                 if (is_array($_POST['feed_id'])) {
                     $feed_ids = array_keys($_POST['feed_id']);
@@ -252,8 +250,19 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
                     }
                     $feed->addMedia($media);
                 }
+            }
+            
+            if (!empty($_POST['new_feed'])) {
+                $data = array('title'       => $_POST['new_feed'],
+                              'description' => $_POST['new_feed']);
+                $feed = UNL_MediaYak_Feed::addFeed($data, self::getUser());
+                $feed->addMedia($media);
+            }
+            
+            if (isset($feed, $feed->id)) {
                 $this->redirect('?view=feed&id='.$feed->id);
             }
+            
             $this->redirect(UNL_MediaYak_Manager::getURL());
             break;
         case 'feed_users':
