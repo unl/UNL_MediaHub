@@ -181,7 +181,7 @@ var myEditor = new YAHOO.widget.Editor("description", {
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[1][element]" type="hidden" value="block"/>
                     <select id="itunes_block" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[1][value]">
-                    	<?php 
+                    	<?php
                     	if (getFieldValue($this, 'itunes', 'block') == "yes") {
                     		echo '<option value="">No</option><option value="yes" selected="selected">Yes</option>';
                     	} else {
@@ -334,7 +334,7 @@ var myEditor = new YAHOO.widget.Editor("description", {
                 echo '<li><label for="feed_id['.$feed->id.']" class="element">'.$feed->title.'</label><div class="element"><input id="feed_id['.$feed->id.']" name="feed_id['.$feed->id.']" type="checkbox" '.$checked.' /></div></li>';
             }
             ?>
-            <li><label for="new_feed" class="element">New Feed</label><div class="element"><input id="new_feed" id="new_feed" type="text" /></div></li>
+            <li><label for="new_feed" class="element">New Feed</label><div class="element"><input id="new_feed" name="new_feed" type="text" /></div></li>
         </ol>
     </fieldset>
     <p class="submit"><a class="continue"  id="continue3" href="#" onclick="document.getElementById('submit_existing').click();">Publish</a></p>
