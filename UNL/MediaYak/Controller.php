@@ -84,6 +84,9 @@ class UNL_MediaYak_Controller
         // Start authentication for comment system.
         include_once 'UNL/Auth.php';
         self::$auth = UNL_Auth::factory('SimpleCAS');
+        if (isset($_GET['logout'])) {
+            self::$auth->logout();
+        }
     }
     
     /**
