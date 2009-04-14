@@ -316,6 +316,13 @@ class UNL_MediaYak_Controller
         $this->output->loadReference('UNL_MediaYak_Media_Comment');
     }
     
+    /**
+     * Display a feed, either by feed_id or title
+     * 
+     * @see UNL_MediaYak_FeedAndMedia
+     * 
+     * @return void
+     */
     function showFeed()
     {
         if (isset($this->options['feed_id'])) {

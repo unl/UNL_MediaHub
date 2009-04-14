@@ -1,4 +1,9 @@
 <?php
+/**
+ * A feed within the mediayak system.
+ * 
+ * @author bbieber
+ */
 class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
 {
     protected $namespaces = array();
@@ -7,14 +12,6 @@ class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
      * Get by ID
      *
      * @param int $id The id of the feed to get
-     *
-     * @return UNL_MediaYak_Feed
-     */
-    
-    /**
-     * Get a feed by PK.
-     *
-     * @param int $id ID of the feed.
      *
      * @return UNL_MediaYak_Feed
      */
@@ -72,12 +69,8 @@ class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
      * Add a user with all permissions to this feed.
      *
      * @param UNL_MedaiYak_User $user The user to grant permission to
-     */
-    
-    /**
-     * Add all permissions for a user to this feed.
-     *
-     * @param UNL_MediaYak_User $user
+     * 
+     * @return void
      */
     function addUser(UNL_MediaYak_User $user)
     {
@@ -97,15 +90,6 @@ class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
      *
      * @return bool
      */
-    
-    /**
-     * check if user has a given permission for this feed
-     *
-     * @param UNL_MediaYak_User $user
-     * @param UNL_MediaYak_Permission $permission
-     *
-     * @return bool
-     */
     function userHasPermission(UNL_MediaYak_User $user, UNL_MediaYak_Permission $permission)
     {
         return UNL_MediaYak_Permission::userHasPermission($user, $permission, $this);
@@ -116,15 +100,6 @@ class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
      *
      * @param UNL_MediaYak_User       $user       User to grant permission for
      * @param UNL_MediaYak_Permission $permission Permission to grant
-     *
-     *
-     */
-    
-    /**
-     * Grant permission for a user.
-     *
-     * @param UNL_MediaYak_User $user
-     * @param UNL_MediaYak_Permission $permission
      *
      * @return bool
      */
