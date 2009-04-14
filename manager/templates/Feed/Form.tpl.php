@@ -12,8 +12,8 @@
 
         <legend><?php echo (isset($this->feed))?'Edit':'Create'; ?> Feed</legend>
         <ol>
-            <li><label for="title" class="element">Title</label><div class="element"><input id="title" name="title" type="text" value="<?php echo htmlentities($this->feed->title, ENT_QUOTES); ?>" size="55" /></div></li>
-            <li><label for="description" class="element">Description</label><div class="element"><textarea id="description" name="description" rows="5" cols="50"><?php echo htmlentities($this->feed->title); ?></textarea></div></li>
+            <li><label for="title" class="element">Title</label><div class="element"><input id="title" name="title" type="text" value="<?php echo (isset($this->feed))? htmlentities($this->feed->title, ENT_QUOTES):''; ?>" size="55" /></div></li>
+            <li><label for="description" class="element">Description</label><div class="element"><textarea id="description" name="description" rows="5" cols="50"><?php echo (isset($this->feed))?htmlentities($this->feed->title):''; ?></textarea></div></li>
             <li><label for="submit" class="element">&nbsp;</label><div class="element"><input id="submit" name="submit" value="Save" type="submit" /></div></li>
         </ol>
     </fieldset>
