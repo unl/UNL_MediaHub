@@ -1,4 +1,9 @@
 <?php
+/**
+ * An abstract class for a list of items
+ * 
+ * @author bbieber
+ */
 abstract class UNL_MediaYak_List implements Countable
 {
     public $options = array('page'=>0);
@@ -12,14 +17,29 @@ abstract class UNL_MediaYak_List implements Countable
     
     public $last;
     
+    /**
+     * The pager object
+     * 
+     * @var Doctrine_Pager
+     */
     public $pager;
     
+    /**
+     * How many results per page.
+     * 
+     * @var int
+     */
     static public $results_per_page = 10;
     
     public $label;
     
     static public $url;
     
+    /**
+     * The tables used in this list.
+     * 
+     * @var string
+     */
     public $tables = 'null';
     
     /**
@@ -61,16 +81,31 @@ abstract class UNL_MediaYak_List implements Countable
     
     abstract function setOrderBy(Doctrine_Query &$query);
     
+    /**
+     * Function to allow filtering input options
+     * 
+     * @return unknown_type
+     */
     function filterInputOptions()
     {
         
     }
     
+    /**
+     * Return the number of total items in the list.
+     * 
+     * @return int
+     */
     function count()
     {
         return $this->total;
     }
     
+    /**
+     * Returns a url to describe this specific list.
+     * 
+     * @return string
+     */
     function getURL()
     {
         $this->url = self::$url;

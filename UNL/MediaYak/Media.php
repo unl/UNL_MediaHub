@@ -31,11 +31,25 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
         return false;
     }
     
+    /**
+     * called before an item is inserted to the database
+     * 
+     * @param $event
+     * 
+     * @return void
+     */
     public function preInsert($event)
     {
         $this->setContentType();
     }
     
+    /**
+     * called after an item is inserted into the database
+     * 
+     * @param $event
+     * 
+     * @return void
+     */
     public function postInsert($event)
     {
         if (UNL_MediaYak_Media::isVideo($this->type)) {
@@ -73,6 +87,11 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
         return true;
     }
     
+    /**
+     * Set the Media RSS, mrss content namespaced element
+     * 
+     * @return true
+     */
     function setMRSSContent()
     {
         if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_mrss::mediaHasElement($this->id, 'content')) {
@@ -140,6 +159,13 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
         return true;
     }
     
+    /**
+     * Gets the dimensions for this specific piece of media.
+     * 
+     * @param int $media_id The media id within the system.
+     * 
+     * @return array
+     */
     static function getMediaDimensions($media_id)
     {
         if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_mrss::mediaHasElement($media_id, 'content')) {

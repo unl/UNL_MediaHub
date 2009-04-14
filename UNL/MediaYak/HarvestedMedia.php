@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Class for media that is harvested from the wild
+ * 
+ * @author bbieber
+ */
 class UNL_MediaYak_HarvestedMedia
 {
     protected $url;
