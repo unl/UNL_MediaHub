@@ -18,6 +18,9 @@ UNL_MediaYak.thumbnail_generator = "'.UNL_MediaYak_Controller::$thumbnail_genera
 var UNL_MediaYak_thumbnail_generator = "'.UNL_MediaYak_Controller::$thumbnail_generator.'";
 </script>';
 $page->addScript(UNL_MediaYak_Controller::getURL().'templates/audio-player/audio-player-noswfobject.js');
+if (!$this->output instanceof UNL_MediaYak_FeedAndMedia) {
+    $page->head .= '<link rel="alternate" type="application/rss+xml" title="UNL MediaHub" href="?format=xml" />';
+}
 $page->maincontentarea = UNL_MediaYak_OutputController::display($this->output, true);
 $page->navlinks        = '
 <div id="local_search">
@@ -38,11 +41,11 @@ $page->navlinks        = '
 if (!UNL_MediaYak_Controller::isLoggedIn()) {
     $page->collegenavigationlist = '<ul><li><a href="https://login.unl.edu/cas/login?service='.urlencode(UNL_MediaYak_Controller::getURL()).'">Login</a></li></ul>';
 } else {
-    $page->navlinks        .='<ul><li><a href="'.UNL_MediaYak_Controller::getURL().'manager/">My Media</a></li></ul>';
+    $page->navlinks .='<ul><li><a href="'.UNL_MediaYak_Controller::getURL().'manager/">My Media</a></li></ul>';
     $page->collegenavigationlist = '<ul><li><a href="?logout">Logout</a></li></ul>';
 }
 
-$page->navlinks        .='
+$page->navlinks .='
 </li></ul>';
 
 $page->leftcollinks = '
