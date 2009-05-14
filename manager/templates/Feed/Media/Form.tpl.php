@@ -30,7 +30,7 @@ if (!isset($this->media)) {
 
 $jquery .= '
     $("#continue2").click(function() {
-            unl_check = /^http:\/\/([\w\d]+)\.unl\.edu\/(.*)/;
+            unl_check = /^http:\/\/([^\/]+)\.unl\.edu\/(.*)/;
             var r = unl_check.exec(document.getElementById("url").value);
             if (r == null) {
                 alert(\'Sorry, you must use a .unl.edu URL!\');
