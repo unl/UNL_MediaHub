@@ -20,7 +20,7 @@ if (count($this->items)) {
                         $attribute_string .= " $attribute=\"$value\"";
                     }
                 }
-                echo "<{$element}{$attribute_string}>{$namespaced_element['value']}</$element>\n";
+                echo "<{$element}{$attribute_string}>".htmlspecialchars($namespaced_element['value'])."</$element>\n";
             }
         }
       ?>
