@@ -6,7 +6,7 @@ if (UNL_MediaYak_Media::isVideo($this->type)) {
     $dimensions = UNL_MediaYak_Media::getMediaDimensions($this->id);
     if (isset($dimensions['width'])) {
         // Scale everything down to 450 wide
-        $height = (450/$dimensions['width'])*$dimensions['height']+48;
+        $height = round((450/$dimensions['width'])*$dimensions['height']+48);
     }
 }
 UNL_MediaYak_Controller::setReplacementData('title', 'UNL | Media Hub | '.htmlspecialchars($this->title));
@@ -78,7 +78,16 @@ UNL_MediaYak_Controller::setReplacementData('head', $meta);
     <!-- ADDTHIS BUTTON END -->
     <h6>Embed</h6>
     <textarea cols="25" rows="3" onclick="this.select(); return false;"><?php
-        echo htmlentities('<div class="content_holder" id="preview_holder"><div class="unl_liquid_pictureframe"><div class="unl_liquid_pictureframe_inset"><object id="preview" height="'.$height.'" width="450"><param value="true" name="allowfullscreen"></param><param value="always" name="allowscriptaccess"></param><embed src="http://www.unl.edu/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/player.swf?file='.$this->url.'&amp;image='.UNL_MediaYak_Controller::$thumbnail_generator.urlencode($this->url).'&amp;volume=100&amp;autostart=false" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" height="'.$height.'" width="450"></embed></object><span class="unl_liquid_pictureframe_footer"></span></div></div></div>');
+        echo htmlentities(
+            '<object height="'.($dimensions['height']+48).'" width="'.$dimensions['width'].'">'.
+                '<param value="true" name="allowfullscreen"></param>'.
+                '<param value="always" name="allowscriptaccess"></param>'.
+                '<embed src="http://www.unl.edu/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/player.swf?file='.$this->url.'&amp;'.
+                             'image='.UNL_MediaYak_Controller::$thumbnail_generator.urlencode($this->url).'&amp;'.
+                             'volume=100&amp;'.
+                             'autostart=false&amp;'.
+                             'skin=http://www.unl.edu/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/UNLVideoSkin.swf" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" height="'.($dimensions['height']+48).'" width="'.$dimensions['width'].'"></embed>'.
+            '</object>');
     ?></textarea>
     
     <h6 style="margin-top:1em;"><a href="<?php echo $this->url; ?>" class="video-x-generic">Download this media file</a></h6>
