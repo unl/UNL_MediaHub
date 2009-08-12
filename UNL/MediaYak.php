@@ -77,7 +77,7 @@ class UNL_MediaYak
                 
                 
                 $media->UNL_MediaYak_Feed_Media_NamespacedElements_itunes->delete();
-                $media->UNL_MediaYak_Feed_Media_NamespacedElements_mrss->delete();
+                //$media->UNL_MediaYak_Feed_Media_NamespacedElements_mrss->delete();
                 $media->save();
                 $media->synchronizeWithArray(array_merge($media->toArray(), $add_ns_elements));
                 $media->save();
