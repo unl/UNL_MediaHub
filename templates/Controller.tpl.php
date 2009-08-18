@@ -1,6 +1,6 @@
 <?php
 require_once 'UNL/Templates.php';
-
+UNL_Templates::$options['version'] = 3;
 $page = UNL_Templates::factory('Fixed');
 if (isset($GLOBALS['UNLTEMPLATEDEPENDENTSPATH'])) {
     UNL_Templates::$options['templatedependentspath'] = $GLOBALS['UNLTEMPLATEDEPENDENTSPATH'];
@@ -16,35 +16,24 @@ $page->head .= '<script type="text/javascript">
 UNL_MediaYak.url  = "'.UNL_MediaYak_Controller::getURL().'";
 UNL_MediaYak.thumbnail_generator = "'.UNL_MediaYak_Controller::$thumbnail_generator.'";
 var UNL_MediaYak_thumbnail_generator = "'.UNL_MediaYak_Controller::$thumbnail_generator.'";
-</script>';
+</script>
+<link rel="search" href="'.UNL_MediaYak_Controller::getURL().'search/" />
+';
 $page->addScript(UNL_MediaYak_Controller::getURL().'templates/audio-player/audio-player-noswfobject.js');
 if (!$this->output instanceof UNL_MediaYak_FeedAndMedia) {
     $page->head .= '<link rel="alternate" type="application/rss+xml" title="UNL MediaHub" href="?format=xml" />';
 }
 $page->maincontentarea = UNL_MediaYak_OutputController::display($this->output, true);
 $page->navlinks        = '
-<div id="local_search">
- <form action="'.UNL_MediaYak_Controller::getURL().'search/" id="localSearchForm" method="get">
-  <div id="localSearchQuery">
-   <label for="localSearchQuery-field" class="overlabel">Search UNL Media</label>
-   <input id="localSearchQuery-field" type="text" name="q"  value="" />
-  </div>
-  <div id="localSearch">
-    <input type="image" alt="Search" src="/ucomm/templatedependents/templatecss/images/transpixel.gif" id="localSearch-Button" name="localSearch-Button"/>
-  </div>
- </form>
-</div>
-
 <ul>
     <li><a href="'.UNL_MediaYak_Controller::getURL().'">Media Hub</a>';
 
-if (!UNL_MediaYak_Controller::isLoggedIn()) {
-    $page->collegenavigationlist = '<ul><li><a href="https://login.unl.edu/cas/login?service='.urlencode(UNL_MediaYak_Controller::getURL()).'">Login</a></li></ul>';
-} else {
-    $page->navlinks .='<ul><li><a href="'.UNL_MediaYak_Controller::getURL().'manager/">My Media</a></li></ul>';
-    $page->collegenavigationlist = '<ul><li><a href="?logout">Logout</a></li></ul>';
-}
-
+    if (!UNL_MediaYak_Controller::isLoggedIn()) {
+        $page->collegenavigationlist = '<ul><li><a href="https://login.unl.edu/cas/login?service='.urlencode(UNL_MediaYak_Controller::getURL()).'">Login</a></li></ul>';
+    } else {
+        $page->navlinks .='<ul><li><a href="'.UNL_MediaYak_Controller::getURL().'manager/">My Media</a></li></ul>';
+        $page->collegenavigationlist = '<ul><li><a href="?logout">Logout</a></li></ul>';
+    }
 $page->navlinks .='
 </li></ul>';
 
@@ -54,6 +43,11 @@ $page->leftcollinks = '
     <li><a href="http://itunes.unl.edu/">UNL On iTunes U</a></li>
 </ul>
 ';
+$page->contactinfo = '<h3>Contacting Us</h3>
+<p>University of Nebraska&ndash;Lincoln<br />
+1400 R Street<br />
+Lincoln, NE 68588<br />
+402-472-7211</p>';
 $page->optionalfooter = '
 <p>
     The UNL Office of University Communications maintains this database of online media.
