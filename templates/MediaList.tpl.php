@@ -1,4 +1,4 @@
-<h3 class="sec_main">UNL Media<?php
+<h3>UNL Media<?php
 if (isset($this->label) && !empty($this->label)) {
     UNL_MediaYak_Controller::setReplacementData('title', 'UNL | Media | '.$this->label);
     UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaYak_Controller::getURL().'">Media</a></li> <li>'.$this->label.'</li></ul>');
