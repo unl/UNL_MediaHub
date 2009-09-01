@@ -23,7 +23,8 @@ $page->addScript(UNL_MediaYak_Controller::getURL().'templates/audio-player/audio
 if (!$this->output instanceof UNL_MediaYak_FeedAndMedia) {
     $page->head .= '<link rel="alternate" type="application/rss+xml" title="UNL MediaHub" href="?format=xml" />';
 }
-$page->maincontentarea = UNL_MediaYak_OutputController::display($this->output, true);
+$page->maincontentarea = '<div class="three_col left">'.UNL_MediaYak_OutputController::display($this->output, true).'</div>';
+
 $page->navlinks        = '
 <ul>
     <li><a href="'.UNL_MediaYak_Controller::getURL().'">Media Hub</a>';
