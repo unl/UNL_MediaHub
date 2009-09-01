@@ -1,11 +1,10 @@
-<h3>UNL Media<?php
+<?php 
 if (isset($this->label) && !empty($this->label)) {
     UNL_MediaYak_Controller::setReplacementData('title', 'UNL | Media | '.$this->label);
     UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaYak_Controller::getURL().'">Media</a></li> <li>'.$this->label.'</li></ul>');
-    echo ': '.$this->label;
+    echo '<h3>'.$this->label.'</h3>';
 }
-?></h3>
-<?php
+
 if (count($this->items)) {
     $pager_layout = new Doctrine_Pager_Layout($this->pager,
         new Doctrine_Pager_Range_Sliding(array('chunk'=>5)),
