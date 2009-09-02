@@ -18,7 +18,7 @@ $page->navlinks = '
 $page->breadcrumbs = '
 <ul>
     <li><a href="http://www.unl.edu/">UNL</a></li>
-    <li>MediaHub</li>
+    <li>Media Hub</li>
 </ul>';
 
 $page->collegenavigationlist = '
