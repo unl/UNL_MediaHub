@@ -290,7 +290,7 @@ class UNL_MediaYak_Controller
             }
         }
         
-        return trim($url, '?;&amp=');
+        return trim($url, '?;=');
     }
     
     /**
