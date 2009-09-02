@@ -1,7 +1,12 @@
 <?php
 
-class UNL_MediaYak_MediaList_Filter_Popular implements UNL_MediaYak_Filter, UNL_MediaYak_Cacheable
+class UNL_MediaYak_MediaList_Filter_Popular implements UNL_MediaYak_Filter
 {
+    function getCacheKey()
+    {
+        return 'popular';
+    }
+    
     function apply(Doctrine_Query &$query)
     {
         if (file_exists(dirname(__FILE__).'/../../../../scripts/popular.txt')) {

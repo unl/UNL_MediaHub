@@ -4,7 +4,7 @@
  * 
  * @author bbieber
  */
-abstract class UNL_MediaYak_List implements Countable
+abstract class UNL_MediaYak_List implements Countable, UNL_MediaYak_CacheableInterface
 {
     public $options = array('page'=>0);
     
@@ -51,20 +51,35 @@ abstract class UNL_MediaYak_List implements Countable
      */
     function __construct(UNL_MediaYak_Filter $filter = null)
     {
-    
         $this->options = array_merge($this->options, $_GET);
         $this->filterInputOptions();
+        if ($filter) {
+            $this->options['filter'] = $filter;
+        }
+    }
+    
+    function getCacheKey()
+    {
+        return serialize($this->options);
+    }
+    
+    function preRun()
+    {
         
+    }
+    
+    function run()
+    {
         $query = new Doctrine_Query();
         $query->from($this->tables);
         
         $this->setOrderBy($query);
-        
-        if ($filter) {
-            $this->options['filter'] = $filter;
-            $filter->apply($query);
-            $this->label = $filter->getLabel();
+        if (isset($this->options['filter'])) {
+            $this->options['filter']->apply($query);
+            $this->label = $this->options['filter']->getLabel();
         }
+        
+        
 
         $pager = new Doctrine_Pager($query, $this->options['page'], self::$results_per_page);
         $pager->setCountQuery($query);
