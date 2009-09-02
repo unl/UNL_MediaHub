@@ -1,7 +1,8 @@
 <?php
 UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_FeedAndMedia', 'FeedAndMediaXML');
 UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_MediaList', 'MediaListXML');
-if ($this->output instanceof UNL_MediaYak_MediaList) {
+if ($this->output instanceof UNL_MediaYak_MediaList
+    || (is_array($this->output) && $this->output[0] instanceof UNL_MediaYak_MediaList)) {
  echo '<?xml version="1.0"?>'; ?>
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:mrss="http://search.yahoo.com/mrss/">
   <channel>

@@ -161,7 +161,8 @@ class UNL_MediaYak_Controller
     function showDefaultContent()
     {
         if (!(isset($_GET['q'])
-            || isset($_GET['page']))) {
+            || isset($_GET['page']))
+            && $this->options['format'] != 'xml') {
             $this->showPopularMedia();
         }
         $this->showLatestMedia();
