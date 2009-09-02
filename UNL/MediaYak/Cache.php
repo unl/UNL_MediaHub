@@ -32,7 +32,7 @@ class UNL_MediaYak_Cache implements UNL_MediaYak_CacheInterface
      */
     function get($key)
     {
-        return $this->cache->get($key);
+        return $this->cache->get($key, 'mediayak');
     }
     
     /**
@@ -42,7 +42,7 @@ class UNL_MediaYak_Cache implements UNL_MediaYak_CacheInterface
      */
     function save($data, $key)
     {
-        return $this->cache->save($data, $key);
+        return $this->cache->save($data, $key, 'mediayak');
     }
 
 }
