@@ -349,7 +349,7 @@ class UNL_MediaYak_Controller
         if (isset($feed)) {
             $this->output[] = new UNL_MediaYak_FeedAndMedia($feed);
         } else {
-            $this->output[] = new UNL_MediaYak_FeedList();
+            $this->output[] = new UNL_MediaYak_FeedList(new UNL_MediaYak_FeedList_Filter_WithTitle());
         }
         
     }
