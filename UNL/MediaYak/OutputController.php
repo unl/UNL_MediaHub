@@ -35,6 +35,14 @@ class UNL_MediaYak_OutputController
         self::$cache = $cache;
     }
     
+    static public function getCacheInterface()
+    {
+        if (!isset(self::$cache)) {
+            self::setCacheInterface(new UNL_MediaYak_Cache());
+        }
+        return self::$cache;
+    }
+    
     static function displayArray($mixed, $return = false)
     {
         $output = '';
@@ -55,12 +63,11 @@ class UNL_MediaYak_OutputController
     
     static function displayObject($object, $return = false)
     {
-        if (method_exists($object, 'getCacheKey')
-            && method_exists($object, 'run')) {
+        if ($object instanceof UNL_MediaYak_CacheableInterface) {
             $key = $object->getCacheKey();
             
             // We have a valid key to store the output of this object.
-            if ($key !== false && $data = self::$cache->get($key)) {
+            if ($key !== false && $data = self::getCacheInterface()->get($key)) {
                 // Tell the object we have cached data and will output that.
                 $object->preRun(true);
             } else {
@@ -78,7 +85,7 @@ class UNL_MediaYak_OutputController
                 }
                 
                 if ($key !== false) {
-                    self::$cache->save($data);
+                    self::getCacheInterface()->save($data, $key);
                 }
                 ob_end_clean();
             }
