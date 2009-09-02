@@ -1,4 +1,5 @@
-<?php 
+<div class="three_col left">
+<?php
 if (isset($this->label) && !empty($this->label)) {
     UNL_MediaYak_Controller::setReplacementData('title', 'UNL | Media | '.$this->label);
     UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaYak_Controller::getURL().'">Media</a></li> <li>'.$this->label.'</li></ul>');
@@ -46,3 +47,4 @@ if (count($this->items)) {
     echo '<p>Sorry, no media could be found</p>';
 }
 ?>
+</div>

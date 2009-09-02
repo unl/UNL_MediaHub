@@ -154,8 +154,17 @@ class UNL_MediaYak_Controller
             break;
         case 'search':
         default:
-            $this->showLatestMedia();
+            $this->showDefaultContent();
         }
+    }
+    
+    function showDefaultContent()
+    {
+        if (!(isset($_GET['q'])
+            || isset($_GET['page']))) {
+            $this->showPopularMedia();
+        }
+        $this->showLatestMedia();
     }
     
     /**
@@ -296,7 +305,13 @@ class UNL_MediaYak_Controller
             $filter = new UNL_MediaYak_MediaList_Filter_TextSearch($this->options['q']);
         }
         
-        $this->output = new UNL_MediaYak_MediaList($filter);
+        $this->output[] = new UNL_MediaYak_MediaList($filter);
+    }
+    
+    function showPopularMedia()
+    {
+        $filter = new UNL_MediaYak_MediaList_Filter_Popular();
+        $this->output[] = new UNL_MediaYak_MediaList($filter);
     }
     
     /**
@@ -308,12 +323,12 @@ class UNL_MediaYak_Controller
      */
     function showMedia(UNL_MediaYak_Media $media)
     {
-        $this->output = $media;
-        if (!$this->output) {
+        if (!$media) {
             header('HTTP/1.0 404 Not Found');
             throw new Exception('Could not find that news release.');
         }
-        $this->output->loadReference('UNL_MediaYak_Media_Comment');
+        $media->loadReference('UNL_MediaYak_Media_Comment');
+        $this->output[] = $media;
     }
     
     /**
