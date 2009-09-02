@@ -340,12 +340,17 @@ class UNL_MediaYak_Controller
      */
     function showFeed()
     {
-        if (isset($this->options['feed_id'])) {
+        if (!empty($this->options['feed_id'])) {
             $feed = UNL_MediaYak_Feed::getById($this->options['feed_id']);
-        } elseif (isset($this->options['title'])) {
+        } elseif (!empty($this->options['title'])) {
             $feed = UNL_MediaYak_Feed::getByTitle($this->options['title']);
         }
-        $this->output[] = new UNL_MediaYak_FeedAndMedia($feed);
+        
+        if (isset($feed)) {
+            $this->output[] = new UNL_MediaYak_FeedAndMedia($feed);
+        } else {
+            $this->output[] = new UNL_MediaYak_FeedList();
+        }
         
     }
 }
