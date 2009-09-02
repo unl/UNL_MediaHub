@@ -8,7 +8,7 @@ if (isset($GLOBALS['UNLTEMPLATEDEPENDENTSPATH'])) {
 $page->doctitle     = '<title>UNL | Media Hub</title>';
 $page->titlegraphic = '<h1>UNL Media Hub</h1><h2>Lights, Camera, Action</h2>';
 $page->addStyleSheet(UNL_MediaYak_Controller::getURL().'templates/css/all.css');
-$page->breadcrumbs = '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li>Media</li></ul>';
+$page->breadcrumbs = '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li>Media Hub</li></ul>';
 $page->addScript('/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/swfobject.js');
 $page->addScript(UNL_MediaYak_Controller::getURL().'templates/jquery-1.2.6.min.js');
 $page->addScript(UNL_MediaYak_Controller::getURL().'templates/mediatools.js');
@@ -31,13 +31,15 @@ $page->navlinks        = '
     <li><a href="'.UNL_MediaYak_Controller::getURL().'">Media Hub</a>';
 
     if (!UNL_MediaYak_Controller::isLoggedIn()) {
-        $page->collegenavigationlist = '<ul><li><a href="https://login.unl.edu/cas/login?service='.urlencode(UNL_MediaYak_Controller::getURL()).'">Login</a></li></ul>';
+        $page->navlinks .= '<ul><li><a href="https://login.unl.edu/cas/login?service='.urlencode(UNL_MediaYak_Controller::getURL()).'">Login</a></li></ul>';
     } else {
         $page->navlinks .='<ul><li><a href="'.UNL_MediaYak_Controller::getURL().'manager/">My Media</a></li></ul>';
-        $page->collegenavigationlist = '<ul><li><a href="?logout">Logout</a></li></ul>';
+        $page->navlinks .= '<ul><li><a href="?logout">Logout</a></li></ul>';
     }
 $page->navlinks .='
-</li></ul>';
+</li>
+<li><a href="'.UNL_MediaYak_Controller::getURL().'channels/">Channels</a></li>
+</ul>';
 
 $page->leftcollinks = '
 <h3>Related Links</h3>
@@ -50,13 +52,10 @@ $page->contactinfo = '<h3>Contacting Us</h3>
 1400 R Street<br />
 Lincoln, NE 68588<br />
 402-472-7211</p>';
-$page->optionalfooter = '
-<p>
-    The UNL Office of University Communications maintains this database of online media.
-    If there are additional functions that would be of interest to you, please
-    <a href="http://www1.unl.edu/comments/">send us a comment</a>.
-</p>';
 
-$page->footercontent = '&copy; '.date('Y').' University of Nebraska&mdash;Lincoln | Lincoln, NE 68588 | 402-472-7211 | <a href="http://www1.unl.edu/comments/" title="Click here to direct your comments and questions">comments?</a>';
+$page->footercontent = '&copy; '.date('Y').' University of Nebraska&mdash;Lincoln | Lincoln, NE 68588 | 402-472-7211 | <a href="http://www1.unl.edu/comments/" title="Click here to direct your comments and questions">comments?</a><br />
+The UNL Office of University Communications maintains this database of online media.<br />
+    If there are additional functions that would be of interest to you, please
+    <a href="http://www1.unl.edu/comments/">send us a comment</a>.';
 $page->leftRandomPromo = '';
 echo $page;

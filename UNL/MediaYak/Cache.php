@@ -13,13 +13,16 @@ class UNL_MediaYak_Cache implements UNL_MediaYak_CacheInterface
      */
     protected $cache;
     
+    public $options = array('lifeTime'=>3600);
+    
     /**
      * Constructor
      */
-    function __construct()
+    function __construct($options = array())
     {
+        $this->options = array_merge($this->options, $options);
         include_once 'Cache/Lite.php';
-        $this->cache = new Cache_Lite(array('lifeTime'=>null));
+        $this->cache = new Cache_Lite($this->options);
     }
     
     /**
