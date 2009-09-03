@@ -6,7 +6,5 @@ ini_set('magic_quotes_runtime', false);
 
 $controller = new UNL_MediaYak_Controller($dsn);
 
-UNL_MediaYak_OutputController::setCacheInterface(new UNL_MediaYak_Cache());
-
 UNL_MediaYak_OutputController::display($controller);
 

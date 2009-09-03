@@ -4,7 +4,7 @@
  * 
  * @author bbieber
  */
-class UNL_MediaYak_Cache implements UNL_MediaYak_CacheInterface
+class UNL_MediaYak_CacheInterface_CacheLite implements UNL_MediaYak_CacheInterface
 {
     /**
      * Cache_Lite object
