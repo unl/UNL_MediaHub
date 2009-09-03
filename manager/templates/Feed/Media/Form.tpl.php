@@ -325,7 +325,8 @@ var myEditor = new YAHOO.widget.Editor("description", {
         <legend>Select Your Feeds</legend>
         <ol>
             <?php
-            foreach (UNL_MediaYak_Manager::getUser()->getFeeds()->items as $feed) {
+            $list = UNL_MediaYak_Manager::getUser()->getFeeds();
+            foreach ($list as $feed) {
                 $checked = '';
                 if ((isset($this->media) && ($feed->hasMedia($this->media))
                     || (isset($_GET['feed_id']) && $_GET['feed_id'] == $feed->id))) {
