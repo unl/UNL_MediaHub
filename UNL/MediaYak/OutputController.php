@@ -38,7 +38,7 @@ class UNL_MediaYak_OutputController
     static public function getCacheInterface()
     {
         if (!isset(self::$cache)) {
-            self::setCacheInterface(new UNL_MediaYak_Cache());
+            self::setCacheInterface(new UNL_MediaYak_CacheInterface_CacheLite());
         }
         return self::$cache;
     }
