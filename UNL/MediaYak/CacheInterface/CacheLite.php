@@ -4,7 +4,7 @@
  * 
  * @author bbieber
  */
-class UNL_MediaYak_CacheInterface_CacheLite implements UNL_MediaYak_CacheInterface
+class UNL_UndergraduateBulletin_CacheInterface_CacheLite implements UNL_UndergraduateBulletin_CacheInterface
 {
     /**
      * Cache_Lite object
@@ -28,21 +28,21 @@ class UNL_MediaYak_CacheInterface_CacheLite implements UNL_MediaYak_CacheInterfa
     /**
      * Get an item stored in the cache
      * 
-     * @see UNL/MediaYak/UNL_MediaYak_CacheInterface#get()
+     * @see UNL/UndergraduateBulletin/UNL_UndergraduateBulletin_CacheInterface#get()
      */
     function get($key)
     {
-        return $this->cache->get($key, 'mediayak');
+        return $this->cache->get($key, 'UndergraduateBulletin');
     }
     
     /**
      * Save an element to the cache
      * 
-     * @see UNL/MediaYak/UNL_MediaYak_CacheInterface#save()
+     * @see UNL/UndergraduateBulletin/UNL_UndergraduateBulletin_CacheInterface#save()
      */
     function save($data, $key)
     {
-        return $this->cache->save($data, $key, 'mediayak');
+        return $this->cache->save($data, $key, 'UndergraduateBulletin');
     }
 
 }
