@@ -5,7 +5,7 @@ require_once '../config.inc.php';
 
 
 $manager = new UNL_MediaYak_Manager($dsn);
-UNL_MediaYak_OutputController::setCacheInterface(new UNL_MediaYak_CacheInterface_CacheLite(array('lifeTime'=>30)));
+UNL_MediaYak_OutputController::setCacheInterface(new UNL_MediaYak_CacheInterface_Mock());
 if ($manager->isLoggedIn()) {
     UNL_MediaYak_OutputController::display($manager);
 } else {

@@ -326,14 +326,9 @@ var myEditor = new YAHOO.widget.Editor("description", {
         <ol>
             <?php
             $list = UNL_MediaYak_Manager::getUser()->getFeeds();
-            foreach ($list as $feed) {
-                $checked = '';
-                if ((isset($this->media) && ($feed->hasMedia($this->media))
-                    || (isset($_GET['feed_id']) && $_GET['feed_id'] == $feed->id))) {
-                    $checked = 'checked="checked"';
-                }
-                echo '<li><label for="feed_id['.$feed->id.']" class="element">'.$feed->title.'</label><div class="element"><input id="feed_id['.$feed->id.']" name="feed_id['.$feed->id.']" type="checkbox" '.$checked.' /></div></li>';
-            }
+            UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_FeedList', 'Feed_Media_FeedList');
+            UNL_MediaYak_OutputController::display($list);
+            UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_FeedList', 'FeedList');
             ?>
             <li><label for="new_feed" class="element">New Feed</label><div class="element"><input id="new_feed" name="new_feed" type="text" /></div></li>
         </ol>
