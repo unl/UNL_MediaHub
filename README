@@ -4,8 +4,8 @@ Installation instructions:
 pear channel-discover pear.unl.edu
 pear channel-discover pear.phpdoctrine.org
 pear channel-discover simplecas.googlecode.com/svn
-pear install unl/UNL_Autoload-alpha unl/UNL_Auth-alpha unl/UNL_Templates-alpha pear.phpdoctrine.org/Doctrine simplecas/SimpleCAS-alpha
-pear install http://phpsavant.com/Savant3-3.0.0.tgz
+pear channel-discover phpsavant.com
+pear install unl/UNL_Autoload-alpha unl/UNL_Auth-alpha unl/UNL_Templates-alpha pear.phpdoctrine.org/Doctrine simplecas/SimpleCAS-alpha savant/Savant3
 cp config.sample.php config.inc.php
 cp sample.htaccess .htaccess
 
