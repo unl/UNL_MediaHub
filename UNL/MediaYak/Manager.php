@@ -262,7 +262,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
             if (isset($feed, $feed->id)) {
                 $this->redirect('?view=feed&id='.$feed->id);
             }
-            
+            // @todo clean cache for this feed!
             $this->redirect(UNL_MediaYak_Manager::getURL());
             break;
         case 'feed_users':
