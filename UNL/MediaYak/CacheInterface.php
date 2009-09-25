@@ -23,4 +23,6 @@ interface UNL_MediaYak_CacheInterface
      * @return bool
      */
     public function save($data, $key);
+    
+    // @todo add cache cleaning support
 }
