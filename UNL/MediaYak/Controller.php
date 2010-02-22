@@ -138,7 +138,10 @@ class UNL_MediaYak_Controller
             break;
         case 'partial':
             UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_Controller', 'ControllerPartial');
-            break;    
+            break;
+        case 'json':
+            UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_Controller', 'ControllerJSON');
+            break;
         default:
             break;
         }
