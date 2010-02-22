@@ -131,6 +131,7 @@ class UNL_MediaYak_Controller
         }
         switch ($this->options['format']) {
         case 'xml':
+        case 'rss':
             // Send XML content-type headers, and assign XML output template.
             header('Content-type: text/xml');
             UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_Controller', 'ControllerXML');    
