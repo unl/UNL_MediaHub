@@ -120,6 +120,15 @@ class UNL_MediaYak_Controller
      */
     function preRun()
     {
+        // Send headers for CORS support so calendar bits can be pulled remotely
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: GET, OPTIONS');
+        header('Access-Control-Allow-Headers: X-Requested-With');
+        if (isset($_SERVER['REQUEST_METHOD'])
+            && $_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+            // short circuit execution for CORS OPTIONS reqeusts
+            exit();
+        }
         switch ($this->options['format']) {
         case 'xml':
             // Send XML content-type headers, and assign XML output template.
