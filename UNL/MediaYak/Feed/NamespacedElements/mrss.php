@@ -6,7 +6,7 @@
  */
 class UNL_MediaYak_Feed_NamespacedElements_mrss extends UNL_MediaYak_Feed_NamespacedElements
 {
-    protected $xmlns = 'mrss';
+    protected $xmlns = 'media';
     
     protected $uri = 'http://search.yahoo.com/mrss/';
     
