@@ -2,8 +2,8 @@
 if (count($this->items)) {
     foreach ($this->items as $media) { ?>
     <item>
-      <title><?php echo $media->title; ?></title>
-      <link><?php echo $media->url; ?></link>
+      <title><?php echo htmlspecialchars($media->title); ?></title>
+      <link><?php echo htmlspecialchars($media->url); ?></link>
       <description><![CDATA[
       <?php echo $media->description; ?>
       ]]></description>
