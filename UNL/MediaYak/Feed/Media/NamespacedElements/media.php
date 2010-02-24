@@ -4,7 +4,7 @@
  * http://search.yahoo.com/mrss/
  *
  */
-class UNL_MediaYak_Feed_Media_NamespacedElements_mrss extends UNL_MediaYak_Feed_Media_NamespacedElements
+class UNL_MediaYak_Feed_Media_NamespacedElements_media extends UNL_MediaYak_Feed_Media_NamespacedElements
 {
     protected $xmlns = 'media';
     

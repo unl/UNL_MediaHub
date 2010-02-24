@@ -302,9 +302,9 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
     {
         /** Remove linked records if they are not set anymore **/
         foreach (array('UNL_MediaYak_Feed_NamespacedElements_itunes'       => 'value',
-                       'UNL_MediaYak_Feed_NamespacedElements_mrss'         => 'value',
+                       'UNL_MediaYak_Feed_NamespacedElements_media'         => 'value',
                        'UNL_MediaYak_Feed_Media_NamespacedElements_itunes' => 'value',
-                       'UNL_MediaYak_Feed_Media_NamespacedElements_mrss'   => 'value') as $relation=>$field) {
+                       'UNL_MediaYak_Feed_Media_NamespacedElements_media'   => 'value') as $relation=>$field) {
             if (isset($_POST[$relation])) {
                 foreach ($_POST[$relation] as $key=>$values) {
                     if (empty($values[$field])

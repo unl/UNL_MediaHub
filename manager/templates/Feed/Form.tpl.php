@@ -18,7 +18,7 @@
         </ol>
     </fieldset>
     
-    <?php foreach(array('iTunes'=>'itunes', 'Media RSS'=>'mrss') as $label=>$class) { ?>
+    <?php foreach(array('iTunes'=>'itunes', 'Media RSS'=>'media') as $label=>$class) { ?>
     <fieldset id="<?php echo $class; ?>_header">
 
         <legend><?php echo $label; ?> Options</legend>
