@@ -6,7 +6,7 @@
  */
 class UNL_MediaYak_Feed_Media_NamespacedElements_mrss extends UNL_MediaYak_Feed_Media_NamespacedElements
 {
-    protected $xmlns = 'mrss';
+    protected $xmlns = 'media';
     
     protected $uri = 'http://search.yahoo.com/mrss/';
     
@@ -31,6 +31,6 @@ class UNL_MediaYak_Feed_Media_NamespacedElements_mrss extends UNL_MediaYak_Feed_
     
     public static function mediaHasElement($media_id, $element)
     {
-        return UNL_MediaYak_Feed_Media_NamespacedElements::mediaHasElement($media_id, $element, 'mrss');
+        return UNL_MediaYak_Feed_Media_NamespacedElements::mediaHasElement($media_id, $element, 'media');
     }
 }
