@@ -15,7 +15,7 @@ echo '<?xml version="1.0"?>'.PHP_EOL;
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>UNL_MediaYak 0.1.0</generator>
     <managingEditor>editor@example.com</managingEditor>
-    <webMaster>brett.bieber@gmail.com</webMaster>
+    <webMaster>brett.bieber@gmail.com (Brett Bieber)</webMaster>
     <ttl>5</ttl>
     <?php
     foreach (array('UNL_MediaYak_Feed_NamespacedElements_itunes',

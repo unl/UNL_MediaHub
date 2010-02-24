@@ -14,8 +14,8 @@ if ($this->output instanceof UNL_MediaYak_MediaList
     <lastBuildDate><?php echo date('r'); ?></lastBuildDate>
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>UNL_MediaYak 0.1.0</generator>
-    <managingEditor>brett.bieber@gmail.com</managingEditor>
-    <webMaster>brett.bieber@gmail.com</webMaster>
+    <managingEditor>brett.bieber@gmail.com (Brett Bieber)</managingEditor>
+    <webMaster>brett.bieber@gmail.com (Brett Bieber)</webMaster>
     <ttl>5</ttl>
     <?php 
     echo UNL_MediaYak_OutputController::display($this->output, true);
