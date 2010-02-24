@@ -72,10 +72,10 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
      */
     function setMRSSThumbnail()
     {
-        if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_mrss::mediaHasElement($this->id, 'thumbnail')) {
+        if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_media::mediaHasElement($this->id, 'thumbnail')) {
             // all ok
         } else {
-            $element = new UNL_MediaYak_Feed_Media_NamespacedElements_mrss();
+            $element = new UNL_MediaYak_Feed_Media_NamespacedElements_media();
             $element->media_id = $this->id;
             $element->element = 'thumbnail';
         }
@@ -94,10 +94,10 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
      */
     function setMRSSContent()
     {
-        if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_mrss::mediaHasElement($this->id, 'content')) {
+        if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_media::mediaHasElement($this->id, 'content')) {
             // all good
         } else {
-            $element = new UNL_MediaYak_Feed_Media_NamespacedElements_mrss();
+            $element = new UNL_MediaYak_Feed_Media_NamespacedElements_media();
             $element->media_id = $this->id;
             $element->element = 'content';
         }
@@ -168,7 +168,7 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
      */
     static function getMediaDimensions($media_id)
     {
-        if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_mrss::mediaHasElement($media_id, 'content')) {
+        if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_media::mediaHasElement($media_id, 'content')) {
             return array('width'=>$element->attributes['width'], 'height'=>$element->attributes['height']);
         }
         return false;

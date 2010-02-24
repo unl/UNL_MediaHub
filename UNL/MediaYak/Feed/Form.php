@@ -11,7 +11,7 @@ class UNL_MediaYak_Feed_Form
         if (isset($feed)) {
             $this->feed = $feed;
             $this->feed->loadReference('UNL_MediaYak_Feed_NamespacedElements_itunes');
-            $this->feed->loadReference('UNL_MediaYak_Feed_NamespacedElements_mrss');
+            $this->feed->loadReference('UNL_MediaYak_Feed_NamespacedElements_media');
         }
     }
 }

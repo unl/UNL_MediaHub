@@ -51,7 +51,7 @@ class UNL_MediaYak
                 foreach ($namespacedElements as $xmlns=>$elements) {
                     switch($xmlns) {
                         case 'media':
-                            $xmlns = 'mrss';
+                            $xmlns = 'media';
                         case 'unl':
                         case 'itunes':
                             $ns_class = 'UNL_MediaYak_Feed_Media_NamespacedElements_'.$xmlns;
@@ -70,14 +70,14 @@ class UNL_MediaYak
             if ($media = UNL_MediaYak_Media::getByURL($harvested_media->getURL())) {
                 // Already exists do update
                 $media->loadReference('UNL_MediaYak_Feed_Media_NamespacedElements_itunes');
-                $media->loadReference('UNL_MediaYak_Feed_Media_NamespacedElements_mrss');
+                $media->loadReference('UNL_MediaYak_Feed_Media_NamespacedElements_media');
                 $media->title       = $harvested_media->getTitle();
                 $media->description = $harvested_media->getDescription();
                 $media->datecreated = $harvested_media->getDatePublished();
                 
                 
                 $media->UNL_MediaYak_Feed_Media_NamespacedElements_itunes->delete();
-                //$media->UNL_MediaYak_Feed_Media_NamespacedElements_mrss->delete();
+                //$media->UNL_MediaYak_Feed_Media_NamespacedElements_media->delete();
                 $media->save();
                 $media->synchronizeWithArray(array_merge($media->toArray(), $add_ns_elements));
                 $media->save();

@@ -12,7 +12,7 @@ if (count($this->items)) {
       <?php
         try {
             foreach (array('UNL_MediaYak_Feed_Media_NamespacedElements_itunes',
-                           'UNL_MediaYak_Feed_Media_NamespacedElements_mrss') as $ns_class) {
+                           'UNL_MediaYak_Feed_Media_NamespacedElements_media') as $ns_class) {
                 foreach ($media->$ns_class as $namespaced_element) {
                     $element = "{$namespaced_element['xmlns']}:{$namespaced_element['element']}";
                     $attribute_string = '';
