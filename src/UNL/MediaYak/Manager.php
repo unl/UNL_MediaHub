@@ -361,7 +361,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
      */
     function redirect($location)
     {
-        //header('Location: '.$location);
+        header('Location: '.$location);
         exit();
     }
 }
