@@ -177,6 +177,157 @@ var myEditor = new YAHOO.widget.Editor("description", {
                 </div>
             </li>
             <li>
+                <label for="itunesu_category" class="element">Category</label>
+                <div class="element">
+                    <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunesu[0][element]" type="hidden" value="category" />
+                    <select id="itunes_block" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunesu[0][value]">
+                        <option value="">None</option>
+                        <optgroup label="Business">
+                            <option value="100">Business</option>
+                            <option value="100100">Economics</option>
+                            <option value="100101">Finance</option>
+                            <option value="100102">Hospitality</option>
+                            <option value="100103">Management</option>
+                            <option value="100104">Marketing</option>
+                            <option value="100105">Personal Finance</option>
+                            <option value="100106">Real Estate</option>
+                        </optgroup>
+                        <optgroup label="Engineering">
+                            <option value="101">Engineering</option>
+                            <option value="101100">Chemical & Petroleum</option>
+                            <option value="101101">Civil</option>
+                            <option value="101102">Computer Science</option>
+                            <option value="101103">Electrical</option>
+                            <option value="101104">Environmental</option>
+                            <option value="101105">Mechanical</option>
+                        </optgroup>
+                        <optgroup label="Fine Arts">
+                            <option value="102">Fine Arts</option>
+                            <option value="102100">Architecture</option>
+                            <option value="102101">Art</option>
+                            <option value="102102">Art History</option>
+                            <option value="102103">Dance</option>
+                            <option value="102104">Film</option>
+                            <option value="102105">Graphic Design</option>
+                            <option value="102106">Interior Design</option>
+                            <option value="102107">Music</option>
+                            <option value="102108">Theater</option>
+                        </optgroup>
+                        <optgroup label="Health & Medicine">
+                            <option value="103">Health & Medicine</option>
+                            <option value="103100">Anatomy & Physiology</option>
+                            <option value="103101">Behavioral Science</option>
+                            <option value="103102">Dentistry</option>
+                            <option value="103103">Diet & Nutrition</option>
+                            <option value="103104">Emergency</option>
+                            <option value="103105">Genetics</option>
+                            <option value="103106">Gerontology</option>
+                            <option value="103107">Health & Exercise Science</option>
+                            <option value="103108">Immunology</option>
+                            <option value="103109">Neuroscience</option>
+                            <option value="103110">Pharmacology & Toxicology</option>
+                            <option value="103111">Psychiatry</option>
+                            <option value="103112">Public Health</option>
+                            <option value="103113">Radiology</option>
+                        </optgroup>
+                        <optgroup label="History">
+                            <option value="104">History</option>
+                            <option value="104100">Ancient</option>
+                            <option value="104101">Medieval</option>
+                            <option value="104102">Military</option>
+                            <option value="104103">Modern</option>
+                            <option value="104104">African</option>
+                            <option value="104105">Asian</option>
+                            <option value="104106">European</option>
+                            <option value="104107">Middle Eastern</option>
+                            <option value="104108">North American</option>
+                            <option value="104109">South American</option>
+                        </optgroup>
+                        <optgroup label="Humanities">
+                            <option value="105">Humanities</option>
+                            <option value="105100">Communications</option>
+                            <option value="105101">Philosophy</option>
+                            <option value="105102">Religion</option>
+                        </optgroup>
+                        <optgroup label="Language">
+                            <option value="106">Language</option>
+                            <option value="106100">African</option>
+                            <option value="106101">Ancient</option>
+                            <option value="106102">Asian</option>
+                            <option value="106103">Eastern European/Slavic</option>
+                            <option value="106104">English</option>
+                            <option value="106105">English Language Learners</option>
+                            <option value="106106">French</option>
+                            <option value="106107">German</option>
+                            <option value="106108">Italian</option>
+                            <option value="106109">Linguistics</option>
+                            <option value="106110">Middle Eastern</option>
+                            <option value="106111">Spanish & Portuguese</option>
+                            <option value="106112">Speech Pathology</option>
+                        </optgroup>
+                        <optgroup label="Literature">
+                            <option value="107">Literature</option>
+                            <option value="107100">Anthologies</option>
+                            <option value="107101">Biography</option>
+                            <option value="107102">Classics</option>
+                            <option value="107103">Criticism</option>
+                            <option value="107104">Fiction</option>
+                            <option value="107105">Poetry</option>
+                        </optgroup>
+                        <optgroup label="Mathematics">
+                            <option value="108">Mathematics</option>
+                            <option value="108100">Advanced Mathematics</option>
+                            <option value="108101">Algebra</option>
+                            <option value="108102">Arithmetic</option>
+                            <option value="108103">Calculus</option>
+                            <option value="108104">Geometry</option>
+                            <option value="108105">Statistics</option>
+                        </optgroup>
+                        <optgroup label="Science">
+                            <option value="109">Science</option>
+                            <option value="109100">Agricultural</option>
+                            <option value="109101">Astronomy</option>
+                            <option value="109102">Atmospheric</option>
+                            <option value="109103">Biology</option>
+                            <option value="109104">Chemistry</option>
+                            <option value="109105">Ecology</option>
+                            <option value="109106">Geography</option>
+                            <option value="109107">Geology</option>
+                            <option value="109108">Physics</option>
+                        </optgroup>
+                        <optgroup label="Social Science">
+                            <option value="110">Social Science</option>
+                            <option value="110100">Law</option>
+                            <option value="110101">Political Science</option>
+                            <option value="110102">Public Administration</option>
+                            <option value="110103">Psychology</option>
+                            <option value="110104">Social Welfare</option>
+                            <option value="110105">Sociology</option>
+                        </optgroup>
+                        <optgroup label="Society">
+                            <option value="111">Society</option>
+                            <option value="111100">African-American Studies</option>
+                            <option value="111101">Asian Studies</option>
+                            <option value="111102">European & Russian Studies</option>
+                            <option value="111103">Indigenous Studies</option>
+                            <option value="111104">Latin & Caribbean Studies</option>
+                            <option value="111105">Middle Eastern Studies</option>
+                            <option value="111106">Women’s Studies</option>
+                        </optgroup>
+                        <optgroup label="Teaching & Education">
+                            <option value="112">Teaching & Education</option>
+                            <option value="112100">Curriculum & Teaching</option>
+                            <option value="112101">Educational Leadership</option>
+                            <option value="112102">Family & Childcare</option>
+                            <option value="112103">Learning Resources</option>
+                            <option value="112104">Psychology & Research</option>
+                            <option value="112105">Special Education
+                        </optgroup>
+                    </select>
+                    <dl class="caption"><dd>Choose a category for use within iTunes U</dd></dl>
+                </div>
+            </li>
+            <li>
                 <label for="itunes_block" class="element">Block from iTunes</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[1][element]" type="hidden" value="block"/>
