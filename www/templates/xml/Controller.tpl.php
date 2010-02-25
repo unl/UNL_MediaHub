@@ -1,6 +1,4 @@
 <?php
-UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_FeedAndMedia', 'FeedAndMediaXML');
-UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_MediaList', 'MediaListXML');
 if ($context->output instanceof UNL_MediaYak_MediaList
     || (is_array($context->output) && $context->output[0] instanceof UNL_MediaYak_MediaList)) {
  echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
