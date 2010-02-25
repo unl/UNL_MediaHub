@@ -55,36 +55,22 @@ $jquery .= '
       WDN.jQuery("#mrss_header ol").toggle(400);
       return false;
     });';
+$jquery .= '
+	WDN.loadJS("templates/scripts/tiny_mce/jquery.tinymce.js", function() {
+		WDN.jQuery("textarea#description").tinymce({
+				// Location of TinyMCE script
+				script_url : "templates/scripts/tiny_mce/tiny_mce.js",
+				theme : "simple"
+		});
+	});
+';
 
 UNL_MediaYak_Manager::setReplacementData('head','
-<style type="text/css">
-
-</style>
-<!-- Skin CSS file -->
-<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/assets/skins/sam/skin.css" />
-<!-- Utility Dependencies -->
-<script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
-<script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/element/element-beta-min.js"></script>
-<!-- Needed for Menus, Buttons and Overlays used in the Toolbar -->
-<script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/container/container_core-min.js"></script>
-<script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/menu/menu-min.js"></script>
-<script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/button/button-min.js"></script>
-<!-- Source file for Rich Text Editor-->
-<script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/editor/editor-min.js"></script>
 
 <script type="text/javascript">
 WDN.jQuery(document).ready(function() {
     '.$jquery.'
 });
-var myEditor = new YAHOO.widget.Editor("description", {
-    height: "300px",
-    width: "522px",
-    dompath: true, //Turns on the bar at the bottom
-    animate: true, //Animates the opening, closing and moving of Editor windows
-    handleSubmit: true
-    });
-    myEditor.render();
-
 </script>
 
 ');
