@@ -1,6 +1,6 @@
 RewriteEngine On
 
-RewriteBase /workspace/UNL_MediaYak/
+RewriteBase /workspace/UNL_MediaYak/www/
 
 # media rewrite
 RewriteRule ^media/([0-9]+)$ ?view=media&id=$1&%{QUERY_STRING} [L]
