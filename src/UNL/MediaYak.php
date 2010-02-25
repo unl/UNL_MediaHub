@@ -51,9 +51,9 @@ class UNL_MediaYak
                 foreach ($namespacedElements as $xmlns=>$elements) {
                     switch($xmlns) {
                         case 'media':
-                            $xmlns = 'media';
                         case 'unl':
                         case 'itunes':
+                        case 'itunesu':
                             $ns_class = 'UNL_MediaYak_Feed_Media_NamespacedElements_'.$xmlns;
                             foreach ($elements as $element=>$value) {
                                 $add_ns_elements[$ns_class][] = array('element'=>$element, 'value'=>$value);
@@ -69,6 +69,7 @@ class UNL_MediaYak
             // Try and find an existing one with this URL.
             if ($media = UNL_MediaYak_Media::getByURL($harvested_media->getURL())) {
                 // Already exists do update
+                $media->loadReference('UNL_MediaYak_Feed_Media_NamespacedElements_itunesu');
                 $media->loadReference('UNL_MediaYak_Feed_Media_NamespacedElements_itunes');
                 $media->loadReference('UNL_MediaYak_Feed_Media_NamespacedElements_media');
                 $media->title       = $harvested_media->getTitle();
