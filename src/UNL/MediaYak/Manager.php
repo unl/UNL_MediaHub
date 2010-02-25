@@ -303,6 +303,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
         /** Remove linked records if they are not set anymore **/
         foreach (array('UNL_MediaYak_Feed_NamespacedElements_itunes'       => 'value',
                        'UNL_MediaYak_Feed_NamespacedElements_media'         => 'value',
+                       'UNL_MediaYak_Feed_Media_NamespacedElements_itunesu' => 'value',
                        'UNL_MediaYak_Feed_Media_NamespacedElements_itunes' => 'value',
                        'UNL_MediaYak_Feed_Media_NamespacedElements_media'   => 'value') as $relation=>$field) {
             if (isset($_POST[$relation])) {
@@ -360,7 +361,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
      */
     function redirect($location)
     {
-        header('Location: '.$location);
+        //header('Location: '.$location);
         exit();
     }
 }

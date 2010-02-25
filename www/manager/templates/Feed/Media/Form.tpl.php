@@ -180,7 +180,7 @@ var myEditor = new YAHOO.widget.Editor("description", {
                 <label for="itunesu_category" class="element">Category</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunesu[0][element]" type="hidden" value="category" />
-                    <select id="itunes_block" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunesu[0][value]">
+                    <select id="itunes_block" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunesu[0][attributes]">
                         <option value="">None</option>
                         <optgroup label="Business">
                             <option value="100">Business</option>
