@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" packagerversion="1.8.0alpha1" version="2.0" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+ <name>UNL_Autoload</name>
+ <channel>pear.unl.edu</channel>
+ <summary>An autoloader implementation for UNL PEAR packages</summary>
+ <description>This package provides an autoloader for classes beginning
+ with UNL_ and is mainly used for autoloading package files from http://pear.unl.edu/.</description>
+ <lead>
+  <name>Brett Bieber</name>
+  <user>saltybeagle</user>
+  <email>brett.bieber@gmail.com</email>
+  <active>yes</active>
+ </lead>
+ <date>2010-02-24</date>
+ <time>18:55:45</time>
+ <version>
+  <release>0.5.0</release>
+  <api>0.5.0</api>
+ </version>
+ <stability>
+  <release>alpha</release>
+  <api>alpha</api>
+ </stability>
+ <license uri="http://www1.unl.edu/wdn/wiki/Software_License">BSD License</license>
+ <notes>* First release.</notes>
+ <contents>
+  <dir name="/">
+   <file baseinstalldir="/" md5sum="2d13c44763ebe506f915d211dcd8f00a" name="UNL/Autoload.php" role="php"/>
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.2.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.3</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <phprelease>
+  <changelog>
+   <release>
+    <version>
+     <release>0.5.0</release>
+     <api>0.5.0</api>
+    </version>
+    <stability>
+     <release>alpha</release>
+     <api>alpha</api>
+    </stability>
+    <date>2008-11-10</date>
+    <license uri="http://www1.unl.edu/wdn/wiki/Software_License">BSD License</license>
+    <notes>* First release.</notes>
+   </release>
+  </changelog>
+ </phprelease>
+</package>
