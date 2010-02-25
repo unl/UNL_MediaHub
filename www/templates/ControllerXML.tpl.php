@@ -1,8 +1,8 @@
 <?php
 UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_FeedAndMedia', 'FeedAndMediaXML');
 UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_MediaList', 'MediaListXML');
-if ($this->output instanceof UNL_MediaYak_MediaList
-    || (is_array($this->output) && $this->output[0] instanceof UNL_MediaYak_MediaList)) {
+if ($context->output instanceof UNL_MediaYak_MediaList
+    || (is_array($context->output) && $context->output[0] instanceof UNL_MediaYak_MediaList)) {
  echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:itunesu="http://www.itunesu.com/feed" xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
@@ -18,11 +18,11 @@ if ($this->output instanceof UNL_MediaYak_MediaList
     <webMaster>brett.bieber@gmail.com (Brett Bieber)</webMaster>
     <ttl>5</ttl>
     <?php 
-    echo UNL_MediaYak_OutputController::display($this->output, true);
+    echo $savvy->render($context->output);
     ?>
     </channel>
 </rss>
 <?php 
 } else {
-    echo UNL_MediaYak_OutputController::display($this->output, true);
+    echo $savvy->render($context->output);
 }

@@ -28,6 +28,6 @@ $page->navlinks .='
 <li><a href="'.UNL_MediaYak_Controller::getURL().'channels/">Channels</a></li>
 </ul>';
 
-$page->maincontentarea = UNL_MediaYak_OutputController::display($this->output, true);
+$page->maincontentarea = $savvy->render($context->output);
 $page->footercontent = '&copy; '.date('Y').' University of Nebraska&ndash;Lincoln | Lincoln, NE 68588 | 402-472-7211 | <a href="http://www1.unl.edu/comments/" title="Click here to direct your comments and questions">comments?</a>';
 echo $page;

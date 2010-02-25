@@ -6,5 +6,7 @@ ini_set('magic_quotes_runtime', false);
 
 $controller = new UNL_MediaYak_Controller($dsn);
 
-UNL_MediaYak_OutputController::display($controller);
+$outputcontroller = new UNL_MediaYak_OutputController();
+$outputcontroller->setTemplatePath(dirname(__FILE__).'/templates');
 
+echo $outputcontroller->render($controller);

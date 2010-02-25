@@ -1,8 +1,8 @@
 <?php
-UNL_MediaYak_Controller::setReplacementData('head', '<link rel="alternate" type="application/rss+xml" title="'.$this->feed->title.'" href="?format=xml" />');
+UNL_MediaYak_Controller::setReplacementData('head', '<link rel="alternate" type="application/rss+xml" title="'.$context->feed->title.'" href="?format=xml" />');
 ?>
-<h1><?php echo $this->feed->title; ?></h1>
-<p><?php echo $this->feed->description; ?></p>
+<h1><?php echo $context->feed->title; ?></h1>
+<p><?php echo $context->feed->description; ?></p>
 <?php
-UNL_MediaYak_OutputController::display($this->media_list);
+echo $savvy->render($context->media_list);
 ?>

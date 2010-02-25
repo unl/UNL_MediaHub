@@ -1,2 +1,2 @@
 <?php
-echo UNL_MediaYak_OutputController::display($this->output, true);
+echo $savvy->render($context->output);

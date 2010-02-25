@@ -1,7 +1,7 @@
 <?php
-foreach ($this->items as $item=>$feed) {
+foreach ($context->items as $item=>$feed) {
     $checked = '';
-    if ((isset($this->media) && ($feed->hasMedia($this->media))
+    if ((isset($context->media) && ($feed->hasMedia($context->media))
         || (isset($_GET['feed_id']) && $_GET['feed_id'] == $feed->id))) {
         $checked = 'checked="checked"';
     }

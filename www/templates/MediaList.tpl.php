@@ -1,15 +1,15 @@
 <div class="three_col left">
 <?php
-if (isset($this->label) && !empty($this->label)) {
-    UNL_MediaYak_Controller::setReplacementData('title', 'UNL | Media | '.$this->label);
-    UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaYak_Controller::getURL().'">Media Hub</a></li> <li>'.$this->label.'</li></ul>');
-    echo '<h3>'.$this->label.'</h3>';
+if (isset($context->label) && !empty($context->label)) {
+    UNL_MediaYak_Controller::setReplacementData('title', 'UNL | Media | '.$context->label);
+    UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaYak_Controller::getURL().'">Media Hub</a></li> <li>'.$context->label.'</li></ul>');
+    echo '<h3>'.$context->label.'</h3>';
 }
 
-if (count($this->items)) {
-    $pager_layout = new Doctrine_Pager_Layout($this->pager,
+if (count($context->items)) {
+    $pager_layout = new Doctrine_Pager_Layout($context->pager,
         new Doctrine_Pager_Range_Sliding(array('chunk'=>5)),
-        UNL_MediaYak_Controller::getURL(null, array_merge($this->options, array('page'=>'{%page_number}'))));
+        UNL_MediaYak_Controller::getURL(null, array_merge($context->options, array('page'=>'{%page_number}'))));
     $pager_layout->setTemplate(' <a href="{%url}">{%page}</a> ');
     $pager_layout->setSelectedTemplate('{%page}');
     $pager_links = $pager_layout->display(null, true);
@@ -17,7 +17,7 @@ if (count($this->items)) {
         <ul class="medialist">
     
         <?php
-        foreach ($this->items as $media) { ?>
+        foreach ($context->items as $media) { ?>
             <li>
                 <div><a href="<?php echo UNL_MediaYak_Controller::getURL($media); ?>"><img class="thumbnail" src="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.urlencode($media->url); ?>" alt="Thumbnail preview for <?php echo $media->title; ?>" width="50" height="38" /></a></div>
                 <h4><a href="<?php echo UNL_MediaYak_Controller::getURL($media); ?>"><?php echo htmlspecialchars($media->title); ?></a></h4>
@@ -40,7 +40,7 @@ if (count($this->items)) {
         <?php  
         } ?>
         </ul>
-        <em>Displaying <?php echo $this->first; ?> through <?php echo $this->last; ?> out of <?php echo $this->total; ?></em>
+        <em>Displaying <?php echo $context->first; ?> through <?php echo $context->last; ?> out of <?php echo $context->total; ?></em>
     <div class="pager_links"><?php echo $pager_links; ?></div>
 <?php
 } else {

@@ -1,2 +1,2 @@
 <?php
-echo json_encode($this);
+echo json_encode($context);

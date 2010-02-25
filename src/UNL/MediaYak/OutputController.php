@@ -1,33 +1,15 @@
 <?php
 
-class UNL_MediaYak_OutputController
+class UNL_MediaYak_OutputController extends Savvy
 {
     static $output_template       = array();
     
-    static $template_path         = '';
-    
-    static $directory_separator   = '_';
-    
-    static $classname_replacement = 'UNL_MediaYak_';
-    
     static protected $cache;
     
-    static function display($mixed, $return = false)
+    function __construct($options = array())
     {
-        if (is_array($mixed)) {
-            return self::displayArray($mixed, $return);
-        }
-        
-        if (is_object($mixed)) {
-            return self::displayObject($mixed, $return);
-        }
-        
-        if ($return) {
-            return $mixed;
-        }
-        
-        echo $mixed;
-        return true;
+        self::setClassNameReplacement('UNL_MediaYak_');
+        parent::__construct();
     }
     
     static public function setCacheInterface(UNL_MediaYak_CacheInterface $cache)
@@ -43,25 +25,7 @@ class UNL_MediaYak_OutputController
         return self::$cache;
     }
     
-    static function displayArray($mixed, $return = false)
-    {
-        $output = '';
-        foreach ($mixed as $m) {
-            if ($return) {
-                $output .= self::display($m, true);
-            } else {
-                self::display($m, true);
-            }
-        }
-        
-        if ($return) {
-            return $output;
-        }
-        
-        return true;
-    }
-    
-    static function displayObject($object, $return = false)
+    public function renderObject($object)
     {
         if ($object instanceof UNL_MediaYak_CacheableInterface) {
             $key = $object->getCacheKey();
@@ -77,12 +41,7 @@ class UNL_MediaYak_OutputController
                 $object->preRun(false);
                 $object->run();
                 
-                if ($return) {
-                    $data = self::sendObjectOutput($object, $return);
-                } else {
-                    self::sendObjectOutput($object, $return);
-                    $data = ob_get_contents();
-                }
+                $data = parent::renderObject($object);
                 
                 if ($key !== false) {
                     self::getCacheInterface()->save($data, $key);
@@ -94,73 +53,11 @@ class UNL_MediaYak_OutputController
                 $data = $object->postRun($data);
             }
             
-            if ($return) {
-                return $data;
-            }
-            
-            echo $data;
-            return true;
+            return $data;
         }
         
-        return self::sendObjectOutput($object, $return);
+        return parent::renderObject($object);
 
-    }
-    
-    static protected function sendObjectOutput(&$object, $return = false)
-    {
-        include_once 'Savant3.php';
-        $savant = new Savant3();
-        foreach (get_object_vars($object) as $key=>$var) {
-            $savant->$key = $var;
-        }
-        if (in_array('ArrayAccess', class_implements($object))) {
-            foreach ($object->toArray() as $key=>$var) {
-                $savant->$key = $var;
-            }
-        }
-        if ($object instanceof Exception) {
-            $savant->code    = $object->getCode();
-            $savant->line    = $object->getLine();
-            $savant->file    = $object->getFile();
-            $savant->message = $object->getMessage();
-            $savant->trace   = $object->getTrace();
-        }
-        $templatefile = self::getTemplateFilename(get_class($object));
-        if (file_exists($templatefile)) {
-            if ($return) {
-                ob_start();
-                $savant->display($templatefile);
-                $output = ob_get_clean();
-                return $output;
-            }
-            $savant->display($templatefile);
-            return true;
-        }
-        
-        throw new Exception('Sorry, '.$templatefile.' was not found.');
-    }
-    
-    static function getTemplateFilename($class)
-    {
-        if (isset(self::$output_template[$class])) {
-            $class = self::$output_template[$class];
-        }
-        
-        $class = str_replace(array(self::$classname_replacement,
-                                   self::$directory_separator),
-                             array('',
-                                   DIRECTORY_SEPARATOR),
-                             $class);
-        
-        if (!empty(self::$template_path)) {
-            $templatefile = self::$template_path
-                          . DIRECTORY_SEPARATOR . $class . '.tpl.php';
-        } else {
-            $templatefile = 'templates' . DIRECTORY_SEPARATOR
-                          . $class . '.tpl.php';
-        }
-        
-        return $templatefile;
     }
     
     static public function setOutputTemplate($class_name, $template_name)
@@ -168,7 +65,6 @@ class UNL_MediaYak_OutputController
         if (isset($template_name)) {
             self::$output_template[$class_name] = $template_name;
         }
-        return self::getTemplateFilename($class_name);
     }
     
     static public function setDirectorySeparator($separator)
@@ -178,7 +74,7 @@ class UNL_MediaYak_OutputController
     
     static public function setClassNameReplacement($replacement)
     {
-        self::$classname_replacement = $replacement;
+        Savvy_ClassToTemplateMapper::$classname_replacement = $replacement;
     }
 }
 

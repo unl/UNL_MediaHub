@@ -8,10 +8,21 @@ class UNL_MediaYak
         include_once 'Doctrine/lib/Doctrine.php';
 
         spl_autoload_register(array('Doctrine', 'autoload'));
-        
+
         Doctrine_Manager::getInstance()->setAttribute('model_loading', 'conservative');
         Doctrine::loadModels(dirname(dirname(__FILE__)).'/UNL/MediaYak/Media');
         Doctrine_Manager::connection($dsn);
+
+        spl_autoload_register(array(__CLASS__, 'loader'));
+
+    }
+    
+    public static function loader($class)
+    {
+
+        $class = str_replace('_', '/', $class);
+        include $class . '.php';
+
     }
     
     /**

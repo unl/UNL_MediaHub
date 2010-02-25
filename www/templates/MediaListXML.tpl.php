@@ -1,6 +1,6 @@
 <?php
-if (count($this->items)) {
-    foreach ($this->items as $media) { ?>
+if (count($context->items)) {
+    foreach ($context->items as $media) { ?>
     <item>
       <title><?php echo htmlspecialchars($media->title); ?></title>
       <link><?php echo htmlspecialchars($media->url); ?></link>

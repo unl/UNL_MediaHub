@@ -1,5 +1,5 @@
  
-<form action="<?php echo $this->action; ?>" method="post" id="commentForm">
+<form action="<?php echo $context->action; ?>" method="post" id="commentForm">
     <fieldset>
         <legend>Leave your comment</legend>
         <ol>
