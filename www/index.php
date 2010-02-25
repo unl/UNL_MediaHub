@@ -1,6 +1,6 @@
 <?php
 require_once 'UNL/Autoload.php';
-require_once 'config.inc.php';
+require_once dirname(__FILE__).'/../config.inc.php';
 ini_set('magic_quotes_gpc', false);
 ini_set('magic_quotes_runtime', false);
 
