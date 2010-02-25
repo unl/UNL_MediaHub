@@ -134,14 +134,12 @@ class UNL_MediaYak_Controller
         case 'rss':
             // Send XML content-type headers, and assign XML output template.
             header('Content-type: text/xml');
-            UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_Controller', 'ControllerXML');
             break;
         case 'partial':
             UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_Controller', 'ControllerPartial');
             break;
         case 'json':
             header('Content-type: application/json');
-            UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_Controller', 'ControllerJSON');
             break;
         default:
             break;

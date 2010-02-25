@@ -1,7 +1,6 @@
 <?php
 $context->feed->loadReference('UNL_MediaYak_Feed_NamespacedElements_itunes');
 $context->feed->loadReference('UNL_MediaYak_Feed_NamespacedElements_media');
-UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_MediaList', 'MediaListXML');
 echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
 ?>
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:itunesu="http://www.itunesu.com/feed" xmlns:media="http://search.yahoo.com/mrss/">
