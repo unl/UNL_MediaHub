@@ -3,56 +3,56 @@
 $jquery = '';
 if (!isset($this->media)) {
     $jquery .= '
-    //$("#part2").hide();
-    $("#file_upload").hide();
-    $("#a_url").click(function(){
-    	$(this).parent("li").addClass("selected");
-    	$(this).parent("li").siblings("li").removeClass("selected");
-    	$("#file_upload").hide(400);
-    	$("#url").show(400);
+    //WDN.jQuery("#part2").hide();
+    WDN.jQuery("#file_upload").hide();
+    WDN.jQuery("#a_url").click(function(){
+    	WDN.jQuery(this).parent("li").addClass("selected");
+    	WDN.jQuery(this).parent("li").siblings("li").removeClass("selected");
+    	WDN.jQuery("#file_upload").hide(400);
+    	WDN.jQuery("#url").show(400);
     	
     	return false;
     });
-    $("#a_file").click(function(){
-    	$(this).parent("li").addClass("selected");
-    	$(this).parent("li").siblings("li").removeClass("selected");
-    	$("#url").hide(400);
-    	$("#file_upload").show(400);
+    WDN.jQuery("#a_file").click(function(){
+    	WDN.jQuery(this).parent("li").addClass("selected");
+    	WDN.jQuery(this).parent("li").siblings("li").removeClass("selected");
+    	WDN.jQuery("#url").hide(400);
+    	WDN.jQuery("#file_upload").show(400);
     	return false;
     });
     ';
     if (isset($_GET['feed_id'])) {
-        $jquery .= '$("#feedlist").hide();';
+        $jquery .= 'WDN.jQuery("#feedlist").hide();';
     }
 } else {
-    $jquery .= '$("#part1").hide();$("#feedlist").hide();$("#part2").show(400);';
+    $jquery .= 'WDN.jQuery("#part1").hide();WDN.jQuery("#feedlist").hide();WDN.jQuery("#part2").show(400);';
 }
 
 $jquery .= '
-    $("#continue2").click(function() {
+    WDN.jQuery("#continue2").click(function() {
             unl_check = /^http:\/\/([^\/]+)\.unl\.edu\/(.*)/;
             var r = unl_check.exec(document.getElementById("url").value);
             if (r == null) {
                 alert(\'Sorry, you must use a .unl.edu URL!\');
                 return false;
             }
-            $("#feedlist").hide(400);
-            $("#part1").hide(400);
-            $("#part2").show(400);
+            WDN.jQuery("#feedlist").hide(400);
+            WDN.jQuery("#part1").hide(400);
+            WDN.jQuery("#part2").show(400);
             document.getElementById("thumbnail").src = "'.UNL_MediaYak_Controller::$thumbnail_generator.'"+document.getElementById("url").value;
             return false;
         }
     );';
 $jquery .= '
-    $("#itunes_header ol").hide();
-    $("#mrss_header ol").hide();
+    WDN.jQuery("#itunes_header ol").hide();
+    WDN.jQuery("#mrss_header ol").hide();
     
-    $("#itunes_header legend").click(function() {
-      $("#itunes_header ol").toggle(400);
+    WDN.jQuery("#itunes_header legend").click(function() {
+      WDN.jQuery("#itunes_header ol").toggle(400);
       return false;
     });
-    $("#mrss_header legend").click(function() {
-      $("#mrss_header ol").toggle(400);
+    WDN.jQuery("#mrss_header legend").click(function() {
+      WDN.jQuery("#mrss_header ol").toggle(400);
       return false;
     });';
 
@@ -73,7 +73,7 @@ UNL_MediaYak_Manager::setReplacementData('head','
 <script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/editor/editor-min.js"></script>
 
 <script type="text/javascript">
-$(document).ready(function() {
+WDN.jQuery(document).ready(function() {
     '.$jquery.'
 });
 var myEditor = new YAHOO.widget.Editor("description", {
