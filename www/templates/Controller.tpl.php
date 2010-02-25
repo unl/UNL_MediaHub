@@ -19,11 +19,11 @@ var UNL_MediaYak_thumbnail_generator = "'.UNL_MediaYak_Controller::$thumbnail_ge
 <link rel="search" href="'.UNL_MediaYak_Controller::getURL().'search/" />
 ';
 $page->addScript(UNL_MediaYak_Controller::getURL().'templates/audio-player/audio-player-noswfobject.js');
-if (!$this->output instanceof UNL_MediaYak_FeedAndMedia) {
+if (!$context->output instanceof UNL_MediaYak_FeedAndMedia) {
     $page->head .= '<link rel="alternate" type="application/rss+xml" title="UNL MediaHub" href="?format=xml" />';
 }
 
-$page->maincontentarea = UNL_MediaYak_OutputController::display($this->output, true);
+$page->maincontentarea = $savvy->render($context->output);
 
 $page->navlinks        = '
 <ul>

@@ -2,10 +2,10 @@
     <h1>My Feeds</h1>
     <p>Select a channel to add your media to, or create a new channel.</p>
     <?php
-    if (count($this->items)) {
-        echo 'You have '.$this->total. ' feeds:';
+    if (count($context->items)) {
+        echo 'You have '.$context->total. ' feeds:';
         echo '<ul>';
-        foreach ($this->items as $feed) {
+        foreach ($context->items as $feed) {
             echo '<li><a href="'.htmlentities(UNL_MediaYak_Manager::getURL($feed)).'">'.$feed->title.'</a> <a href="'.UNL_MediaYak_Controller::getURL($feed, array('format'=>'xml')).'" class="feed-icon"></a></li>'.PHP_EOL;
         }
         echo '</ul>';

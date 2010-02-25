@@ -1,4 +1,11 @@
 <?php
+function autoload($class)
+{
+    $class = str_replace('_', '/', $class);
+    include $class . '.php';
+}
+
+spl_autoload_register("autoload");
 
 // DSN for the mediyak database
 $dsn = 'mysql://mediayak:mediayak@localhost/mediayak;unix_socket=/var/mysql/mysql.sock';

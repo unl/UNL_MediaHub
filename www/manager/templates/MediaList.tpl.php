@@ -5,9 +5,9 @@ if (isset($_GET['id'])) {
 }
 ?><p class="action"><a class="add_media" href="<?php echo $addMediaURL; ?>">Add media</a></p> 
 <?php
-if (count($this->items)) {
+if (count($context->items)) {
     echo '<ul class="medialist">';
-    foreach ($this->items as $media) { ?>
+    foreach ($context->items as $media) { ?>
         <li>
             <div><a href="<?php echo UNL_MediaYak_Controller::getURL($media); ?>"><img class="thumbnail" src="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.urlencode($media->url); ?>" alt="Thumbnail preview for <?php echo $media->title; ?>" width="50" height="38" /></a></div>
             <h4><a href="<?php echo UNL_MediaYak_Controller::getURL($media); ?>"><?php echo htmlspecialchars($media->title); ?></a></h4>

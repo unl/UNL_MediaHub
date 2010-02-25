@@ -1,7 +1,7 @@
 <h1>Users</h1>
 <ul>
 <?php
-foreach ($this->items as $user) {
+foreach ($context->items as $user) {
     echo '<li>'.$user->uid.'</li>';
 }
 ?>
