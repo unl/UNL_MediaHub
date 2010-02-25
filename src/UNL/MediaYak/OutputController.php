@@ -2,7 +2,6 @@
 
 class UNL_MediaYak_OutputController extends Savvy
 {
-    static $output_template       = array();
     
     static protected $cache;
     
@@ -63,7 +62,7 @@ class UNL_MediaYak_OutputController extends Savvy
     static public function setOutputTemplate($class_name, $template_name)
     {
         if (isset($template_name)) {
-            self::$output_template[$class_name] = $template_name;
+            Savvy_ClassToTemplateMapper::$output_template[$class_name] = $template_name;
         }
     }
     
