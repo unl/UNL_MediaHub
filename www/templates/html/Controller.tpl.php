@@ -7,10 +7,10 @@ if (isset($GLOBALS['UNLTEMPLATEDEPENDENTSPATH'])) {
 }
 $page->doctitle     = '<title>UNL | Media Hub</title>';
 $page->titlegraphic = '<h1>UNL Media Hub</h1><h2>Lights, Camera, Action</h2>';
-$page->addStyleSheet(UNL_MediaYak_Controller::getURL().'templates/css/all.css');
+$page->addStyleSheet(UNL_MediaYak_Controller::getURL().'templates/html/css/all.css');
 $page->breadcrumbs = '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li>Media Hub</li></ul>';
 $page->addScript('/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/swfobject.js');
-$page->addScript(UNL_MediaYak_Controller::getURL().'templates/mediatools.js');
+$page->addScript(UNL_MediaYak_Controller::getURL().'templates/html/mediatools.js');
 $page->head .= '<script type="text/javascript">
 UNL_MediaYak.url  = "'.UNL_MediaYak_Controller::getURL().'";
 UNL_MediaYak.thumbnail_generator = "'.UNL_MediaYak_Controller::$thumbnail_generator.'";
@@ -18,7 +18,7 @@ var UNL_MediaYak_thumbnail_generator = "'.UNL_MediaYak_Controller::$thumbnail_ge
 </script>
 <link rel="search" href="'.UNL_MediaYak_Controller::getURL().'search/" />
 ';
-$page->addScript(UNL_MediaYak_Controller::getURL().'templates/audio-player/audio-player-noswfobject.js');
+$page->addScript(UNL_MediaYak_Controller::getURL().'templates/html/audio-player/audio-player-noswfobject.js');
 if (!$context->output instanceof UNL_MediaYak_FeedAndMedia) {
     $page->head .= '<link rel="alternate" type="application/rss+xml" title="UNL MediaHub" href="?format=xml" />';
 }

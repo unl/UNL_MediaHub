@@ -55,7 +55,7 @@ var UNL_MediaYak = function() {
 		      autostart: "yes"
 		    };
 		    
-		    swfobject.embedSWF(UNL_MediaYak.getURL()+'templates/audio-player/player.swf',
+		    swfobject.embedSWF(UNL_MediaYak.getURL()+'templates/html/audio-player/player.swf',
 		               id, "450", "358", "9.0.0",
 		               "/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/expressInstall.swf",
 		               flashvars);
