@@ -41,7 +41,7 @@ if (count($context->items)) {
         } ?>
         </ul>
         <em>Displaying <?php echo $context->first; ?> through <?php echo $context->last; ?> out of <?php echo $context->total; ?></em>
-    <div class="pager_links"><?php echo $pager_links; ?></div>
+    <div class="wdn_pagination"><?php echo $pager_links; ?></div>
 <?php
 } else {
     echo '<p>Sorry, no media could be found</p>';
