@@ -7,11 +7,9 @@ if (isset($context->label) && !empty($context->label)) {
 }
 
 if (count($context->items)) {
-    $pager_layout = new Doctrine_Pager_Layout($context->pager,
+    $pager_layout = new UNL_MediaYak_List_PagerLayout($context->pager,
         new Doctrine_Pager_Range_Sliding(array('chunk'=>5)),
         UNL_MediaYak_Controller::getURL(null, array_merge($context->options, array('page'=>'{%page_number}'))));
-    $pager_layout->setTemplate(' <a href="{%url}">{%page}</a> ');
-    $pager_layout->setSelectedTemplate('{%page}');
     $pager_links = $pager_layout->display(null, true);
     ?>
         <ul class="medialist">
@@ -41,7 +39,7 @@ if (count($context->items)) {
         } ?>
         </ul>
         <em>Displaying <?php echo $context->first; ?> through <?php echo $context->last; ?> out of <?php echo $context->total; ?></em>
-    <div class="wdn_pagination"><?php echo $pager_links; ?></div>
+        <?php echo $pager_links; ?>
 <?php
 } else {
     echo '<p>Sorry, no media could be found</p>';

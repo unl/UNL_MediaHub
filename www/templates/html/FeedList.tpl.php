@@ -3,11 +3,9 @@
     <p>Select a channel to view.</p>
     <?php
     if (count($context->items)) {
-        $pager_layout = new Doctrine_Pager_Layout($context->pager,
-        new Doctrine_Pager_Range_Sliding(array('chunk'=>5)),
-        UNL_MediaYak_Controller::getURL(null, array_merge($context->options, array('page'=>'{%page_number}'))));
-        $pager_layout->setTemplate(' <a href="{%url}">{%page}</a> ');
-        $pager_layout->setSelectedTemplate('{%page}');
+        $pager_layout = new UNL_MediaYak_List_PagerLayout($context->pager,
+            new Doctrine_Pager_Range_Sliding(array('chunk'=>5)),
+            UNL_MediaYak_Controller::getURL(null, array_merge($context->options, array('page'=>'{%page_number}'))));
         $pager_links = $pager_layout->display(null, true);
         echo '<ul>';
         foreach ($context->items as $feed) {
@@ -18,7 +16,7 @@
         echo '</ul>';
         ?>
         <em>Displaying <?php echo $context->first; ?> through <?php echo $context->last; ?> out of <?php echo $context->total; ?></em>
-        <div class="wdn_pagination"><?php echo $pager_links; ?></div>
+        <?php echo $pager_links; ?>
 <?php 
     } else {
         echo '
