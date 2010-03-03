@@ -1,5 +1,4 @@
 <?php
-UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_MediaList', '../templates/MediaList');
 UNL_Templates::$options['version'] = 3;
 $page = UNL_Templates::factory('Fixed');
 if (isset($GLOBALS['UNLTEMPLATEDEPENDENTSPATH'])) {
