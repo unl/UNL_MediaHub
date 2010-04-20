@@ -463,7 +463,9 @@ WDN.jQuery(document).ready(function() {
         <ol>
             <?php
             $list = UNL_MediaYak_Manager::getUser()->getFeeds();
-            echo $savvy->render($list, 'Feed_Media_FeedList');
+            UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_FeedList', 'Feed_Media_FeedList');
+            echo $savvy->render($list);
+            UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_FeedList', 'FeedList');
             ?>
             <li><label for="new_feed" class="element">New Feed</label><div class="element"><input id="new_feed" name="new_feed" type="text" /></div></li>
         </ol>
