@@ -71,7 +71,7 @@ UNL_MediaYak_Controller::setReplacementData('head', $meta);
     <h6>Embed</h6>
     <textarea cols="25" rows="6" onclick="this.select(); return false;"><?php
         echo htmlentities(
-            '<object type="application/x-shockwave-flash" style="width:'.$width.'px;height:'.($height+48) .'px" data="http://www.unl.edu/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/player.swf"'.
+            '<object type="application/x-shockwave-flash" style="width:'.$width.'px;height:'.($height+48) .'px" data="http://www.unl.edu/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/player.swf">'.
         		'<param name="movie" value="http://www.unl.edu/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/player.swf" ></param>'.
                 '<param name="allowfullscreen" value="true"></param>'.
                 '<param name="allowscriptaccess" value="always"></param>'.
