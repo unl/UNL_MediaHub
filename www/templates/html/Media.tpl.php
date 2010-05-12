@@ -72,16 +72,16 @@ UNL_MediaYak_Controller::setReplacementData('head', $meta);
     <textarea cols="25" rows="6" onclick="this.select(); return false;"><?php
         echo htmlentities(
             '<object type="application/x-shockwave-flash" style="width:'.$width.'px;height:'.($height+48) .'px" data="http://www.unl.edu/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/player.swf">'.
-        		'<param name="movie" value="http://www.unl.edu/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/player.swf" ></param>'.
+                '<param name="movie" value="http://www.unl.edu/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/player.swf" ></param>'.
                 '<param name="allowfullscreen" value="true"></param>'.
                 '<param name="allowscriptaccess" value="always"></param>'.
                 '<param name="wmode" value="transparent"></param>'.
-        		'<param name="flashvars" '. 
-        			'value="file='.$context->url.'&amp;'.
-        			'image='.UNL_MediaYak_Controller::$thumbnail_generator.urlencode($context->url).'&amp;'.
-        			'volume=100&amp;'.
-        			'autostart=false&amp;'.
-        			'skin=http://www.unl.edu/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/UNLVideoSkin.swf" /> '.
+                '<param name="flashvars" '. 
+                    'value="file='.$context->url.'&amp;'.
+                    'image='.UNL_MediaYak_Controller::$thumbnail_generator.urlencode($context->url).'&amp;'.
+                    'volume=100&amp;'.
+                    'autostart=false&amp;'.
+                    'skin=http://www.unl.edu/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/UNLVideoSkin.swf" /> '.
             '</object>');
     ?></textarea>
     
