@@ -26,7 +26,8 @@ class UNL_MediaYak_Controller
      *
      * @var array
      */
-    public $options;
+    public $options = array('view'   => 'search',
+                            'format' => 'html');
     
     /**
      * UNL template style to use.
@@ -59,6 +60,12 @@ class UNL_MediaYak_Controller
     
     static protected $replacements;
     
+    protected $view_map = array(
+        'search' => '',
+        'media'  => '',
+        'feed'   => '',
+        );
+    
     /**
      * Backend media system.
      *
@@ -77,9 +84,7 @@ class UNL_MediaYak_Controller
         $this->mediayak = new UNL_MediaYak($dsn);
         
         // Initialize default options
-        $this->options = $_GET + array('view'   => null,
-                                       'format' => null,
-                                       );
+        $this->options = $_GET + $this->options;
                                        
         // Start authentication for comment system.
         include_once 'UNL/Auth.php';
@@ -342,7 +347,7 @@ class UNL_MediaYak_Controller
     {
         if (!$media) {
             header('HTTP/1.0 404 Not Found');
-            throw new Exception('Could not find that news release.');
+            throw new Exception('Could not find that media.');
         }
         $media->loadReference('UNL_MediaYak_Media_Comment');
         $this->output[] = $media;
