@@ -10,7 +10,7 @@ if (isset($_SERVER['argv'],$_SERVER['argv'][1])) {
     $filter = new UNL_MediaYak_MediaList_Filter_TextSearch($_SERVER['argv'][1]);
 }
 
-UNL_MediaYak_MediaList::$results_per_page = 30;
+//UNL_MediaYak_MediaList::$results_per_page = 30;
 $list = new UNL_MediaYak_MediaList($filter);
 if (count($list->items)) {
     foreach ($list->items as $media) {
