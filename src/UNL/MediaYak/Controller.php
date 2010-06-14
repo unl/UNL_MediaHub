@@ -167,8 +167,7 @@ class UNL_MediaYak_Controller
         
         switch ($this->options['view']) {
         case 'media':
-            $media = $this->findRequestedMedia($this->options);
-            $this->showMedia($media);
+            $this->output[] = $this->findRequestedMedia($this->options);
             break;
         case 'feed':
             $this->showFeed();
@@ -334,23 +333,6 @@ class UNL_MediaYak_Controller
     {
         $filter = new UNL_MediaYak_MediaList_Filter_Popular();
         $this->output[] = new UNL_MediaYak_MediaList($filter);
-    }
-    
-    /**
-     * Prepare output for a piece of media.
-     *
-     * @param UNL_MediaYak_Media $media The media to display.
-     * 
-     * @return void
-     */
-    function showMedia(UNL_MediaYak_Media $media)
-    {
-        if (!$media) {
-            header('HTTP/1.0 404 Not Found');
-            throw new Exception('Could not find that media.');
-        }
-        $media->loadReference('UNL_MediaYak_Media_Comment');
-        $this->output[] = $media;
     }
     
     /**

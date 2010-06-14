@@ -2,6 +2,7 @@
 $type = 'audio';
 $height = 358;
 $width = 700;
+$context->loadReference('UNL_MediaYak_Media_Comment');
 if (UNL_MediaYak_Media::isVideo($context->type)) {
     $type = 'video';
     $dimensions = UNL_MediaYak_Media::getMediaDimensions($context->id);
