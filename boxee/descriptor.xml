@@ -11,7 +11,7 @@
    <type>rss</type>
    <platform>all</platform>
    <minversion>0.9.7</minversion>
-   <url>rss://ucommdev.unl.edu/boxee/</url>
+   <url>rss://mediahub.unl.edu/channels/?format=xml</url>
    <backgroundImageUrl></backgroundImageUrl>
    <test-app>true</test-app>
 </app>
