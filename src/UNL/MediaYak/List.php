@@ -6,7 +6,7 @@
  */
 abstract class UNL_MediaYak_List implements Countable, UNL_MediaYak_CacheableInterface
 {
-    public $options = array('page'=>0);
+    public $options = array('page'=>0, 'limit'=>10);
     
     /**
      * total number of items
@@ -23,13 +23,6 @@ abstract class UNL_MediaYak_List implements Countable, UNL_MediaYak_CacheableInt
      * @var Doctrine_Pager
      */
     public $pager;
-    
-    /**
-     * How many results per page.
-     * 
-     * @var int
-     */
-    static public $results_per_page = 10;
     
     public $label;
     
@@ -78,12 +71,10 @@ abstract class UNL_MediaYak_List implements Countable, UNL_MediaYak_CacheableInt
             $this->options['filter']->apply($query);
             $this->label = $this->options['filter']->getLabel();
         }
-        
-        
 
-        $pager = new Doctrine_Pager($query, $this->options['page'], self::$results_per_page);
+        $pager = new Doctrine_Pager($query, $this->options['page'], $this->options['limit']);
         $pager->setCountQuery($query);
-        
+
         $this->items = $pager->execute();
         $this->total = $pager->getNumResults();
         $this->first = $pager->getFirstIndice();
