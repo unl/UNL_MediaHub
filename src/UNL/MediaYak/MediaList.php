@@ -5,7 +5,8 @@ class UNL_MediaYak_MediaList extends UNL_MediaYak_List
     
     public $options = array('orderby' => 'datecreated',
                             'order'   => 'DESC',
-                            'page'    => 0);
+                            'page'    => 0,
+                            'limit'   => 10);
    
     public $tables = 'UNL_MediaYak_Media m';
     
