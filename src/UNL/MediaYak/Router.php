@@ -3,15 +3,6 @@ class UNL_MediaYak_Router
 {
     public static function getRoute($requestURI)
     {
-        var_dump($requestURI);
-
-        if (!empty($_SERVER['QUERY_STRING'])) {
-            $requestURI = substr(
-                $requestURI,
-                0,
-                -strlen($_SERVER['QUERY_STRING']) - 1
-            );
-        }
 
         $base       = UNL_MediaYak_Controller::getURL();
         $quotedBase = preg_quote($base, '/');
