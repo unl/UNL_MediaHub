@@ -1,4 +1,4 @@
-<form action="<?php echo $context->action; ?>" method="post" name="feed" id="feed">
+<form action="<?php echo $context->action; ?>" method="post" name="feed" id="feed" enctype="multipart/form-data">
     <div style="display: none;">
     <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed" />
     <?php
@@ -13,7 +13,19 @@
         <legend><?php echo (isset($context->feed))?'Edit':'Create'; ?> Feed</legend>
         <ol>
             <li><label for="title" class="element">Title</label><div class="element"><input id="title" name="title" type="text" value="<?php echo (isset($context->feed))? htmlentities($context->feed->title, ENT_QUOTES):''; ?>" size="55" /></div></li>
-            <li><label for="description" class="element">Description</label><div class="element"><textarea id="description" name="description" rows="5" cols="50"><?php echo (isset($context->feed))?htmlentities($context->feed->title):''; ?></textarea></div></li>
+            <li><label for="description" class="element">Description</label><div class="element"><textarea id="description" name="description" rows="5" cols="50"><?php echo (isset($context->feed))?htmlentities($context->feed->description):''; ?></textarea></div></li>
+            <li><label class="element">Image:</label>
+                <div class="element">
+                <p>Images should follow the standard UNL image standards.<br />For a sample template, click here:
+                <a href="http://ucommdev.unl.edu/iTunesU/design_files/icon_template.psd">iTunes U icon template</a><br /><br /></p>
+
+                <ol>
+                    <li><label for="image_file" class="element">File</label><div class="element"><input id="image_file" name="image_file" type="file" /></div></li>
+                    <li><label for="image_title" class="element">Image Title</label><div class="element"><input id="image_title" name="image_title" type="text" value="<?php echo (isset($context->feed))? htmlentities($context->feed->image_title, ENT_QUOTES):''; ?>" size="55" /></div></li>
+                    <li><label for="image_description" class="element">Image Description</label><div class="element"><textarea id="image_description" name="image_description" rows="5" cols="50"><?php echo (isset($context->feed))?htmlentities($context->feed->image_description):''; ?></textarea></div></li>
+                </ol>
+                </div>
+            </li>
             <li><label for="submit" class="element">&nbsp;</label><div class="element"><input id="submit" name="submit" value="Save" type="submit" /></div></li>
         </ol>
     </fieldset>
