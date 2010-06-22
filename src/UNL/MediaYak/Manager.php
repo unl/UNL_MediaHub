@@ -208,6 +208,13 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
         $this->filterPostData();
         switch($post_target) {
         case 'feed':
+            if (isset($_FILES['image_file'])
+                && is_uploaded_file($_FILES['image_file']['tmp_name'])) {
+                $_POST['image_data'] = file_get_contents($_FILES['image_file']['tmp_name']);
+                $_POST['image_type'] = $_FILES['image_file']['type'];
+                $_POST['image_size'] = $_FILES['image_file']['size'];
+            }
+
             // Insert or update a Feed/Channel
             if (isset($_POST['id'])) {
                 // Update an existing feed.
@@ -219,6 +226,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
                 $feed = UNL_MediaYak_Feed::addFeed($_POST, self::getUser());
             }
             $this->redirect('?view=feed&id='.$feed->id);
+            exit();
             break;
         case 'feed_media':
             // Add media to a feed/channel
