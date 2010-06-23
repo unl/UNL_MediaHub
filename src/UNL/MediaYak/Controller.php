@@ -78,13 +78,13 @@ class UNL_MediaYak_Controller
      *
      * @param string $dsn Database connection string
      */
-    function __construct($dsn)
+    function __construct($options, $dsn)
     {
         // Set up database
         $this->mediayak = new UNL_MediaYak($dsn);
         
         // Initialize default options
-        $this->options = $_GET + $this->options;
+        $this->options = $options + $this->options;
                                        
         // Start authentication for comment system.
         include_once 'UNL/Auth.php';
