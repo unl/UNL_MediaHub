@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<window type="window" id="14000">
+    <defaultcontrol always="true">100</defaultcontrol>
+    <allowoverlay>yes</allowoverlay>
+    <controls>
+        <control type="group">
+            <control type="image">
+                <posx>0</posx>
+                <posy>0</posy>
+                <width>1280</width>
+                <height>720</height>
+                <texture>background.jpg</texture>
+            </control>
+        </control>
+    </controls>
+</window>
