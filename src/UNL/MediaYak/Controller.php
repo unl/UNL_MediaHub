@@ -125,6 +125,10 @@ class UNL_MediaYak_Controller
      */
     function preRun()
     {
+        if ($this->options['view'] == 'feed_image') {
+            UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_Controller', 'ControllerPartial');
+            return false;
+        }
         // Send headers for CORS support so calendar bits can be pulled remotely
         header('Access-Control-Allow-Origin: *');
         header('Access-Control-Allow-Methods: GET, OPTIONS');
@@ -149,6 +153,7 @@ class UNL_MediaYak_Controller
         default:
             break;
         }
+
         return true;
     }
     
@@ -171,6 +176,9 @@ class UNL_MediaYak_Controller
             break;
         case 'feed':
             $this->showFeed();
+            break;
+        case 'feed_image':
+            $this->output[] = UNL_MediaYak_Feed_Image::getByTitle($this->options['title']);
             break;
         case 'search':
         default:
@@ -357,7 +365,6 @@ class UNL_MediaYak_Controller
         } else {
             $this->output[] = new UNL_MediaYak_FeedList(new UNL_MediaYak_FeedList_Filter_WithTitle());
         }
-        
     }
 }
 
