@@ -30,7 +30,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
      */
     protected $mediayak;
     
-    function __construct($dsn)
+    function __construct($options = array(), $dsn)
     {
         $this->mediayak = new UNL_MediaYak($dsn);
         
@@ -41,7 +41,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
             exit();
         }
         
-        $this->options = array_merge($this->options, $_GET);
+        $this->options = $options + $this->options;
         
         self::$user = UNL_MediaYak_User::getByUid($this->auth->getUser());
     }

@@ -7,12 +7,13 @@ class UNL_MediaYak_Router
         $base       = UNL_MediaYak_Controller::getURL();
         $quotedBase = preg_quote($base, '/');
 
+        if (!empty($_SERVER['QUERY_STRING'])) {
+            $requestURI = substr($requestURI, 0, -strlen(urldecode($_SERVER['QUERY_STRING'])) - 1);
+        }
+
         $options = array();
 
         switch(true) {
-            case preg_match('/'.$quotedBase.'channels\/$/', $requestURI, $matches):
-                $options['view'] = 'channels';
-                break;
             case preg_match('/'.$quotedBase.'search\/(.*)$/', $requestURI, $matches):
                 $options['view'] = 'search';
                 $options['q']    = $matches[1];
@@ -26,9 +27,9 @@ class UNL_MediaYak_Router
                 $options['title'] = urldecode($matches[1]);
                 break;
             case preg_match('/'.$quotedBase.'channels\/(.*)$/', $requestURI, $matches):
-                $options['view'] = 'channels';
+                $options['view'] = 'feed';
                 if (isset($matches[1])) {
-                    $options['title'] = $matches[1];
+                    $options['title'] = urldecode($matches[1]);
                 }
                 break;
             // Index page

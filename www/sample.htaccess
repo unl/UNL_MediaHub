@@ -1,10 +1,8 @@
+<IfModule mod_rewrite.c>
 RewriteEngine On
 
 RewriteBase /workspace/UNL_MediaYak/www/
-
-# media rewrite
-RewriteRule ^media/([0-9]+)$ ?view=media&id=$1&%{QUERY_STRING} [L]
-
-RewriteRule ^search/(.*) ?view=search&q=$1&%{QUERY_STRING} [L]
-
-RewriteRule ^channels/(.*)$ ?view=feed&title=$1&%{QUERY_STRING} [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . index.php [L]
+</IfModule>
