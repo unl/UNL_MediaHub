@@ -23,7 +23,7 @@ class UNL_MediaYak_Router
                 $options['id']   = $matches[1];
                 break;
             case preg_match('/'.$quotedBase.'channels\/(.+)\/image$/', $requestURI, $matches):
-                $options['view']  = 'channel_image';
+                $options['view']  = 'feed_image';
                 $options['title'] = urldecode($matches[1]);
                 break;
             case preg_match('/'.$quotedBase.'channels\/(.*)$/', $requestURI, $matches):

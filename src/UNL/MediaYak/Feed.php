@@ -17,7 +17,7 @@ class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
      */
     static function getById($id)
     {
-        return Doctrine::getTable('UNL_MediaYak_Feed')->find($id);
+        return Doctrine::getTable(__CLASS__)->find($id);
     }
     
     /**
@@ -29,7 +29,7 @@ class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
      */
     static function getByTitle($title)
     {
-        return Doctrine::getTable('UNL_MediaYak_Feed')->findOneByTitle($title);
+        return Doctrine::getTable(__CLASS__)->findOneByTitle($title);
     }
     
     /**

@@ -8,7 +8,7 @@ abstract class UNL_MediaYak_Models_BaseFeed extends Doctrine_Record
         $this->hasColumn('id',            'integer',   4,    array('unsigned' => 0, 'primary' => true, 'notnull' => true, 'autoincrement' => true));
         $this->hasColumn('title',         'string',    null, array('primary' => false, 'notnull' => true, 'autoincrement' => false));
         $this->hasColumn('description',   'string',    null, array('primary' => false, 'notnull' => false, 'autoincrement' => false));
-        $this->hasColumn('image_data',        'string',    null, array('primary' => false, 'notnull' => false, 'autoincrement' => false));
+        $this->hasColumn('image_data',        'blob');
         $this->hasColumn('image_type',        'string',    null, array('primary' => false, 'notnull' => false, 'autoincrement' => false));
         $this->hasColumn('image_size',        'string',    null, array('primary' => false, 'notnull' => false, 'autoincrement' => false));
         $this->hasColumn('image_title',       'string',    null, array('primary' => false, 'notnull' => false, 'autoincrement' => false));

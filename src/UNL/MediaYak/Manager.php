@@ -226,7 +226,6 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
                 $feed = UNL_MediaYak_Feed::addFeed($_POST, self::getUser());
             }
             $this->redirect('?view=feed&id='.$feed->id);
-            exit();
             break;
         case 'feed_media':
             // Add media to a feed/channel
