@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<app>
+   <id>UNL</id>
+   <name>University of Nebraska-Lincoln</name>
+   <version>0.20</version>
+   <description>University of Nebraska-Lincoln Video Content</description>
+   <thumb>http://mediahub.unl.edu/boxee/app_thumb.png</thumb>
+   <media>video</media>
+   <copyright>University of Nebraska-Lincoln</copyright>
+   <email>smeranda2@unl.edu</email>
+   <type>skin</type>
+   <startwindow>14000</startwindow>
+   <platform>all</platform>
+   <minversion>0.9.7</minversion>
+   <url>rss://mediahub.unl.edu/channels/?format=xml</url>
+   <test-app>true</test-app>
+</app>
