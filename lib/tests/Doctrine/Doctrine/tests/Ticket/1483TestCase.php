@@ -16,7 +16,7 @@
  *
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the LGPL. For more information, see
- * <http://www.phpdoctrine.org>.
+ * <http://www.doctrine-project.org>.
  */
 
 /**
@@ -26,7 +26,7 @@
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @category    Object Relational Mapping
- * @link        www.phpdoctrine.org
+ * @link        www.doctrine-project.org
  * @since       1.0
  * @version     $Revision$
  */
@@ -63,8 +63,8 @@ class Doctrine_Ticket_1483_TestCase extends Doctrine_UnitTestCase
     {
         $q = Doctrine_Query::create()
             ->from('Ticket_1483_User u')
-            ->leftJoin('u.Groups g WITH g.id = (SELECT SUM(1, 2, 3) AS testing)');
-        $this->assertEqual($q->getSqlQuery(), 'SELECT t.id AS t__id, t.username AS t__username, t2.id AS t2__id, t2.name AS t2__name FROM ticket_1483__user t LEFT JOIN ticket_1483__user_group t3 ON (t.id = t3.user_id) LEFT JOIN ticket_1483__group t2 ON t2.id = t3.group_id AND (t2.id = (SELECT SUM(1, 2, 3) AS testing))');
+            ->leftJoin('u.Groups g WITH g.id = (SELECT COUNT(*) FROM Ticket_1483_Group)');
+        $this->assertEqual($q->getSqlQuery(), 'SELECT t.id AS t__id, t.username AS t__username, t2.id AS t2__id, t2.name AS t2__name FROM ticket_1483__user t LEFT JOIN ticket_1483__user_group t3 ON (t.id = t3.user_id) LEFT JOIN ticket_1483__group t2 ON t2.id = t3.group_id AND (t2.id = (SELECT COUNT(*) AS t4__0 FROM ticket_1483__group t4))');
 
     }
 }

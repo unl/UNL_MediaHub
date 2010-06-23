@@ -16,7 +16,7 @@
  *
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the LGPL. For more information, see
- * <http://www.phpdoctrine.org>.
+ * <http://www.doctrine-project.org>.
  */
 
 /**
@@ -24,54 +24,27 @@
  *
  * @package     Doctrine
  * @subpackage  Doctrine_Cache
- * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
+ * @author      David Abdemoulaie <dave@hobodave.com>
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @category    Object Relational Mapping
- * @link        www.phpdoctrine.org
- * @since       1.0
+ * @link        www.doctrine-project.org
+ * @since       1.2
  * @version     $Revision$
  */
-class Doctrine_Cache_Apc_TestCase extends Doctrine_UnitTestCase 
+class Doctrine_Cache_Apc_TestCase extends Doctrine_Cache_Abstract_TestCase
 {
-    public function prepareTables()
+    protected function _clearCache()
     {
-        $this->tables = array('User');
-        parent::prepareTables();
+        apc_clear_cache('user');
     }
     
-    public function prepareData()
+    protected function _isEnabled()
     {
-        $user = new User();
-        $user->name = 'Hans';
-        $user->save();
+        return extension_loaded('apc');
     }
     
-    public function testApcAsResultCache()
+    protected function _getCacheDriver()
     {
-        if ( !extension_loaded("apc")) {
-            return;
-        }
-        
-        // clear user cache to make sure we always get the same behavior:
-        // 1st iteration cache miss, subsequent iterations cache hit.
-        apc_clear_cache("user");
-        
-        $cacheDriver = new Doctrine_Cache_Apc();
-        $this->conn->setAttribute(Doctrine_Core::ATTR_RESULT_CACHE, $cacheDriver);
-        
-        $queryCountBefore = $this->conn->count();
-        
-        for ($i = 0; $i < 10; $i++) {
-            $u = Doctrine_Query::create()
-                ->from('User u')
-                ->addWhere('u.name = ?', array('Hans'))
-                ->useResultCache()
-                ->execute();
-            $this->assertEqual(1, count($u));
-            $this->assertEqual("Hans", $u[0]->name);
-        }
-        
-        // Just 1 query should be run
-        $this->assertEqual($queryCountBefore + 1, $this->conn->count());
+        return new Doctrine_Cache_Apc();
     }
 }

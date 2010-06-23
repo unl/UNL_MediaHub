@@ -16,7 +16,7 @@
  *
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the LGPL. For more information, see
- * <http://www.phpdoctrine.org>.
+ * <http://www.doctrine-project.org>.
  */
 
 /**
@@ -26,11 +26,11 @@
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @category    Object Relational Mapping
- * @link        www.phpdoctrine.org
+ * @link        www.doctrine-project.org
  * @since       1.0
  * @version     $Revision$
  */
-class Doctrine_Ticket_DC112_TestCase extends Doctrine_UnitTestCase 
+class Doctrine_Ticket_DC112_TestCase extends Doctrine_UnitTestCase
 {
     public function testResultCacheSetHash()
     {
@@ -42,12 +42,12 @@ class Doctrine_Ticket_DC112_TestCase extends Doctrine_UnitTestCase
 
         $coll = $q1->execute();
 
-        $this->assertEqual($cacheDriver->count(), 1);
+        $this->assertTrue($cacheDriver->contains('test1'));
         $this->assertEqual(count($coll), 8);
 
         $coll = $q1->execute();
 
-        $this->assertEqual($cacheDriver->count(), 1);
+        $this->assertTrue($cacheDriver->contains('test1'));
         $this->assertEqual(count($coll), 8);
 
         $q2 = Doctrine_Query::create()
@@ -55,14 +55,16 @@ class Doctrine_Ticket_DC112_TestCase extends Doctrine_UnitTestCase
             ->useResultCache($cacheDriver, 3600, 'test2');
 
         $coll = $q2->execute();
-        $this->assertEqual($cacheDriver->count(), 2);
+        $this->assertTrue($cacheDriver->contains('test1'));
+        $this->assertTrue($cacheDriver->contains('test2'));
         $this->assertEqual(count($coll), 8);
 
         $q2->clearResultCache();
-        $this->assertEqual($cacheDriver->count(), 1);
+        $this->assertTrue($cacheDriver->contains('test1'));
+        $this->assertFalse($cacheDriver->contains('test2'));
 
         $cacheDriver->delete('test1');
-        $this->assertEqual($cacheDriver->count(), 0);
+        $this->assertFalse($cacheDriver->contains('test1'));
 
         $q = Doctrine_Query::create()
             ->from('User u')
@@ -95,7 +97,8 @@ class Doctrine_Ticket_DC112_TestCase extends Doctrine_UnitTestCase
 
         $count = $cacheDriver->deleteByRegex('/test_doctrine_query_.*/');
         $this->assertEqual($count, 2);
-        $this->assertEqual($cacheDriver->count(), 0);
+        $this->assertFalse($cacheDriver->contains('doctrine_query_one'));
+        $this->assertFalse($cacheDriver->contains('doctrine_query_two'));
     }
 
     public function testDeleteByPrefix()
@@ -116,7 +119,8 @@ class Doctrine_Ticket_DC112_TestCase extends Doctrine_UnitTestCase
 
         $count = $cacheDriver->deleteByPrefix('test_');
         $this->assertEqual($count, 2);
-        $this->assertEqual($cacheDriver->count(), 0);
+        $this->assertFalse($cacheDriver->contains('doctrine_query_one'));
+        $this->assertFalse($cacheDriver->contains('doctrine_query_two'));
     }
 
     public function testDeleteBySuffix()
@@ -135,7 +139,8 @@ class Doctrine_Ticket_DC112_TestCase extends Doctrine_UnitTestCase
 
         $count = $cacheDriver->deleteBySuffix('_query');
         $this->assertEqual($count, 2);
-        $this->assertEqual($cacheDriver->count(), 0);
+        $this->assertFalse($cacheDriver->contains('one_query'));
+        $this->assertFalse($cacheDriver->contains('two_query'));
     }
 
     public function testDeleteWithWildcard()
@@ -154,6 +159,7 @@ class Doctrine_Ticket_DC112_TestCase extends Doctrine_UnitTestCase
 
         $count = $cacheDriver->delete('user_query_*');
         $this->assertEqual($count, 2);
-        $this->assertEqual($cacheDriver->count(), 0);
+        $this->assertFalse($cacheDriver->contains('user_query_one'));
+        $this->assertFalse($cacheDriver->contains('user_query_two'));
     }
 }
