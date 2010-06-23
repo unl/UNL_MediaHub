@@ -16,7 +16,7 @@
  *
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the LGPL. For more information, see
- * <http://www.phpdoctrine.org>.
+ * <http://www.doctrine-project.org>.
  */
 
 /**
@@ -26,7 +26,7 @@
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @category    Object Relational Mapping
- * @link        www.phpdoctrine.org
+ * @link        www.doctrine-project.org
  * @since       1.0
  * @version     $Revision$
  */
@@ -331,7 +331,7 @@ class Doctrine_DataDict_Mysql_TestCase extends Doctrine_UnitTestCase
     {
         $a = array('type' => 'array', 'length' => 40);
 
-        $this->assertEqual($this->dataDict->GetNativeDeclaration($a), 'VARCHAR(40)');
+        $this->assertEqual($this->dataDict->GetNativeDeclaration($a), 'TINYTEXT');
     }
 
     public function testGetNativeDeclarationSupportsStringType() 
@@ -352,13 +352,13 @@ class Doctrine_DataDict_Mysql_TestCase extends Doctrine_UnitTestCase
     {
         $a = array('type' => 'array');
 
-        $this->assertEqual($this->dataDict->GetNativeDeclaration($a), 'TEXT');
+        $this->assertEqual($this->dataDict->GetNativeDeclaration($a), 'LONGTEXT');
     }
 
     public function testGetNativeDeclarationSupportsObjectType() 
     {
         $a = array('type' => 'object');
 
-        $this->assertEqual($this->dataDict->GetNativeDeclaration($a), 'TEXT');
+        $this->assertEqual($this->dataDict->GetNativeDeclaration($a), 'LONGTEXT');
     }
 }

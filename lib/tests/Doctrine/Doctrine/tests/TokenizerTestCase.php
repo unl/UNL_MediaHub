@@ -16,7 +16,7 @@
  *
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the LGPL. For more information, see
- * <http://www.phpdoctrine.org>.
+ * <http://www.doctrine-project.org>.
  */
 
 /**
@@ -26,7 +26,7 @@
  * @package     Doctrine
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @category    Object Relational Mapping
- * @link        www.phpdoctrine.org
+ * @link        www.doctrine-project.org
  * @since       1.0
  * @version     $Revision: 1181 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
@@ -125,8 +125,17 @@ class Doctrine_Tokenizer_TestCase extends Doctrine_UnitTestCase
         $str = 'foo.field and bar.field';
         $a   = $tokenizer->bracketExplode($str, array(' \&\& ', ' AND '), '(', ')');
         $this->assertEqual($a, array('foo.field', 'bar.field'));
-    }
 
+        // test the JOIN splitter as used in Doctrine_Query_From::parse()
+        $str = 'foo.field join bar.field';
+        $a   = $tokenizer->bracketExplode($str, 'JOIN');
+        $this->assertEqual($a, array('foo.field', 'bar.field'));
+
+        // test that table names including the split string are unaffected
+        $str = 'foojointable.field join bar.field';
+        $a   = $tokenizer->bracketExplode($str, 'JOIN');
+        $this->assertEqual($a, array('foojointable.field', 'bar.field'));
+    }
 
     public function testQuoteExplodedShouldQuoteArray()
     {

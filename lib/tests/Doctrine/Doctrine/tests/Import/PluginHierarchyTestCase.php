@@ -16,7 +16,7 @@
  *
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the LGPL. For more information, see
- * <http://www.phpdoctrine.org>.
+ * <http://www.doctrine-project.org>.
  */
 
 /**
@@ -27,7 +27,7 @@
  * @author      Brice Figureau <brice+doctrine@daysofwonder.com>
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @category    Object Relational Mapping
- * @link        www.phpdoctrine.org
+ * @link        www.doctrine-project.org
  * @since       1.0
  * @version     $Revision$
  */
@@ -73,7 +73,7 @@ END;
             1 => 'CREATE TABLE wiki_test_translation_index (keyword VARCHAR(200), field VARCHAR(50), position INTEGER, id INTEGER, lang CHAR(2), PRIMARY KEY(keyword, field, position, id, lang))',
             2 => 'CREATE TABLE wiki_test_translation (id INTEGER, title VARCHAR(255), content TEXT, lang CHAR(2), version INTEGER, slug VARCHAR(255), PRIMARY KEY(id, lang))',
             3 => 'CREATE TABLE wiki_test (id INTEGER PRIMARY KEY AUTOINCREMENT)',
-            4 => 'CREATE UNIQUE INDEX sluggable_idx ON wiki_test_translation (slug)',
+            4 => 'CREATE UNIQUE INDEX wiki_test_translation_sluggable_idx ON wiki_test_translation (slug)',
         );
             
         foreach($sql as $idx => $req) {

@@ -16,7 +16,7 @@
  *
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the LGPL. For more information, see
- * <http://www.phpdoctrine.org>.
+ * <http://www.doctrine-project.org>.
  */
 
 /**
@@ -26,7 +26,7 @@
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @category    Object Relational Mapping
- * @link        www.phpdoctrine.org
+ * @link        www.doctrine-project.org
  * @since       1.0
  * @version     $Revision$
  */
@@ -71,7 +71,7 @@ WHERE tc.table_name = :tableName ORDER BY column_id";
     {
         $this->import->listTables();
         
-        $q = "SELECT * FROM user_objects WHERE object_type = 'TABLE'";
+        $q = "SELECT * FROM user_objects WHERE object_type = 'TABLE' and object_name in (select table_name from user_tables)";
         $this->assertEqual($this->adapter->pop(), $q);
     }
     public function testListDatabasesExecutesSql()

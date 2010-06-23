@@ -16,7 +16,7 @@
  *
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the LGPL. For more information, see
- * <http://www.phpdoctrine.org>.
+ * <http://www.doctrine-project.org>.
  */
 
 /**
@@ -26,7 +26,7 @@
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @category    Object Relational Mapping
- * @link        www.phpdoctrine.org
+ * @link        www.doctrine-project.org
  * @since       1.0
  * @version     $Revision$
  */
@@ -237,7 +237,7 @@ class Doctrine_Search_Query_TestCase extends Doctrine_UnitTestCase
 
         $sql = 'SELECT COUNT(keyword) AS relevance, id '
              . 'FROM search_test_index WHERE keyword = ? '
-             . 'AND (position + 1) = (SELECT position FROM search_test_index WHERE keyword = ?) '
+             . 'AND (position + 1) IN (SELECT position FROM search_test_index WHERE keyword = ?) '
              . 'GROUP BY id ORDER BY relevance DESC';
 
         $this->assertEqual($q->getParams(), array('doctrine', 'orm'));
@@ -251,8 +251,8 @@ class Doctrine_Search_Query_TestCase extends Doctrine_UnitTestCase
 
         $sql = 'SELECT COUNT(keyword) AS relevance, id '
              . 'FROM search_test_index WHERE keyword = ? '
-             . 'AND (position + 1) = (SELECT position FROM search_test_index WHERE keyword = ?) '
-             . 'AND (position + 2) = (SELECT position FROM search_test_index WHERE keyword = ?) '
+             . 'AND (position + 1) IN (SELECT position FROM search_test_index WHERE keyword = ?) '
+             . 'AND (position + 2) IN (SELECT position FROM search_test_index WHERE keyword = ?) '
              . 'GROUP BY id ORDER BY relevance DESC';
 
         $this->assertEqual($q->getParams(), array('doctrine', 'orm', 'dbal'));
@@ -310,7 +310,7 @@ class Doctrine_Search_Query_TestCase extends Doctrine_UnitTestCase
              . 'FROM search_test_index '
              . 'WHERE id IN (SELECT id FROM search_test_index WHERE keyword = ?) '
              . 'AND id IN (SELECT id FROM search_test_index WHERE keyword = ? '
-             . 'AND (position + 1) = (SELECT position FROM search_test_index WHERE keyword = ?)) '
+             . 'AND (position + 1) IN (SELECT position FROM search_test_index WHERE keyword = ?)) '
              . 'GROUP BY id ORDER BY relevance DESC';
 
         $this->assertEqual($q->getParams(), array('doctrine', 'orm', 'database'));

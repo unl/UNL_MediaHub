@@ -16,7 +16,7 @@
  *
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the LGPL. For more information, see
- * <http://www.phpdoctrine.org>.
+ * <http://www.doctrine-project.org>.
  */
 
 /**
@@ -26,7 +26,7 @@
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @category    Object Relational Mapping
- * @link        www.phpdoctrine.org
+ * @link        www.doctrine-project.org
  * @since       1.0
  * @version     $Revision$
  */
@@ -48,6 +48,16 @@ class Doctrine_Ticket_DC57_TestCase extends Doctrine_UnitTestCase
         $test->date = '1985-09-01';
         $test->timestamp = '1985-09-01';
         $this->assertFalse($test->isModified());
+    }
+
+    public function testOldDates()
+    {
+        $test = new Ticket_DC57_Article();
+        $test->timestamp = '1776-07-04';
+        $test->save();
+        
+        $test->timestamp = '1492-09-01';
+        $this->assertTrue($test->isModified());
     }
 }
 
