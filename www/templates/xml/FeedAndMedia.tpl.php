@@ -17,6 +17,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
     <webMaster>brett.bieber@gmail.com (Brett Bieber)</webMaster>
     <ttl>5</ttl>
     <?php if (isset($context->feed->image_data, $context->feed->image_type)) : ?>
+    <itunes:image href="<?php echo UNL_MediaYak_Controller::getURL($context->feed); ?>/image" />
     <image>
         <url><?php echo UNL_MediaYak_Controller::getURL($context->feed); ?>/image</url>
         <title><?php echo $context->feed->image_title; ?></title>
