@@ -5,6 +5,9 @@ class UNL_MediaYak_Router
     {
 
         $base       = UNL_MediaYak_Controller::getURL();
+        if (filter_var($base, FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED)) {
+            $base = parse_url($base, PHP_URL_PATH);
+        }
         $quotedBase = preg_quote($base, '/');
 
         if (!empty($_SERVER['QUERY_STRING'])) {
