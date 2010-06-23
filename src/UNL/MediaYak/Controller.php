@@ -232,21 +232,23 @@ class UNL_MediaYak_Controller
     function postRun($me)
     {
         $scanned = new UNL_Templates_Scanner($me);
-        
-        if (isset(self::$replacements['title'])) {
+
+        if (isset(self::$replacements['title'], $scanned->doctitle)) {
             $me = str_replace($scanned->doctitle,
                               '<title>'.self::$replacements['title'].'</title>',
                               $me);
+            unset(self::$replacements['title']);
         }
         
         if (isset(self::$replacements['head'])) {
             $me = str_replace('</head>', self::$replacements['head'].'</head>', $me);
         }
 
-        if (isset(self::$replacements['breadcrumbs'])) {
+        if (isset(self::$replacements['breadcrumbs'], $scanned->breadcrumbs)) {
             $me = str_replace($scanned->breadcrumbs,
                               self::$replacements['breadcrumbs'],
                               $me);
+            unset(self::$replacements['breadcrumbs']);
         }
         
         return $me;
