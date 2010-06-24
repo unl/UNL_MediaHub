@@ -11,6 +11,62 @@
                 <height>720</height>
                 <texture>background.jpg</texture>
             </control>
+            <control type="image"> <!-- UNL Universal Header -->
+                <posx>0</posx>
+                <posy>0</posy>
+                <width>1280</width>
+                <height>118</height>
+                <texture>unlHeader.png</texture>
+            </control>
+            <control type="image"> <!-- Metadata box -->
+                <posx>600</posx>
+                <posy>80</posy>
+                <width>615</width>
+                <height>573</height>
+                <texture>metadataBox.png</texture>
+            </control>
+            <control type="wraplist" id="100">
+                <posx>54</posx>
+                <posy>123</posy>
+                <width>500</width>
+                <height>550</height>
+                <visible>true</visible>
+                <focusposition>3</focusposition>
+                <orientation>vertical</orientation>
+                <itemlayout width="500" height="67">
+                    <control type="label">
+                        <posx>40</posx>
+                        <posy>0</posy>
+                        <width>460</width>
+                        <height>60</height>
+                        <font>font26</font>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <info>ListItem.Label</info>
+                        <label>$INFO[ListItem.Label]</label>
+                        <visible>true</visible>
+                        <textcolor>60313131</textcolor>
+                    </control>
+                </itemlayout>
+                <focusedlayout width="500" height="67">
+                    <control type="label">
+                        <posx>40</posx>
+                        <posy>0</posy>
+                        <width>460</width>
+                        <height>60</height>
+                        <font>font40b</font>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <info>ListItem.Label</info>
+                        <label>$INFO[ListItem.Label]</label>
+                        <textcolor>FF313131</textcolor>
+                        <scroll>true</scroll>
+                        <animation effect="zoom" end="115,115" center="auto" time="100">Focus</animation>
+                        <animation effect="zoom" start="115,115" end="100,100" center="auto" time="200">Unfocus</animation>
+                    </control>
+                </focusedlayout>
+                <content type="url" url="rss://mediahub.unl.edu/channels/?format=xml"></content>
+            </control>
         </control>
     </controls>
 </window>

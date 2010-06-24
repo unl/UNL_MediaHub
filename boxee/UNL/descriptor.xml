@@ -12,6 +12,5 @@
    <startwindow>14000</startwindow>
    <platform>all</platform>
    <minversion>0.9.7</minversion>
-   <url>rss://mediahub.unl.edu/channels/?format=xml</url>
    <test-app>true</test-app>
 </app>
