@@ -25,7 +25,7 @@
                 <height>573</height>
                 <texture>metadataBox.png</texture>
             </control>
-            <control type="wraplist" id="100">
+            <control type="wraplist" id="100"><!-- Item list -->
                 <posx>54</posx>
                 <posy>123</posy>
                 <width>500</width>
@@ -66,6 +66,30 @@
                     </control>
                 </focusedlayout>
                 <content type="url" url="rss://mediahub.unl.edu/channels/?format=xml"></content>
+            </control>
+            <control type="group"><!--metadata box-->
+                <control type="image">
+                    <visible>true</visible>
+                    <posx>635></posx>
+                    <posy>265</posy>
+                    <width>160</width>
+                    <height>90</height>
+                    <texture>$INFO[Container(100).ListItem.Thumb]</texture>
+                 </control>
+                 <control type="label">
+                    <visible>true</visible>
+                    <posx>635</posx>
+                    <posy>500</posy>
+                    <width>560</width>
+                    <height>115</height>
+                    <font>light23</font>
+                    <align>left</align>
+                    <aligny>center</aligny>
+                    <label>[B]Description:[/B] $INFO[Container(100).ListItem.property(description)]</label>
+                    <background>grey</background>
+                    <textcolor>white</textcolor>
+                    <wrapmultiline>true</wrapmultiline>
+                 </control>
             </control>
         </control>
     </controls>
