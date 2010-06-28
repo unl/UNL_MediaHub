@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" packagerversion="1.8.2" version="2.0" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+ <name>UNL_DWT</name>
+ <channel>pear.unl.edu</channel>
+ <summary>This package generates php class files (objects) from Dreamweaver template files.</summary>
+ <description>This package generates php class files (objects) from Dreamweaver template files.</description>
+ <lead>
+  <name>Brett Bieber</name>
+  <user>saltybeagle</user>
+  <email>brett.bieber@gmail.com</email>
+  <active>yes</active>
+ </lead>
+ <date>2010-06-28</date>
+ <time>10:27:21</time>
+ <version>
+  <release>0.7.1</release>
+  <api>0.7.1</api>
+ </version>
+ <stability>
+  <release>beta</release>
+  <api>beta</api>
+ </stability>
+ <license uri="http://www1.unl.edu/wdn/wiki/Software_License">BSD</license>
+ <notes>
+Declare debug method correctly as static.
+ </notes>
+ <contents>
+  <dir name="/">
+   <file baseinstalldir="/" md5sum="d1fe9ae1c22c92cda6d57b9847fda7b2" name="UNL/DWT/Scanner.php" role="php"/>
+   <file baseinstalldir="/" md5sum="be81db10741075600fc87ebbc4c4ca53" name="UNL/DWT/Region.php" role="php"/>
+   <file baseinstalldir="/" md5sum="aea406280cedf3a0e9b32ab7ee354b3f" name="UNL/DWT/Generator.php" role="php"/>
+   <file baseinstalldir="/" md5sum="8ccd77b7def177033c20128da938d1ff" name="UNL/DWT/createTemplates.php" role="php"/>
+   <file baseinstalldir="/" md5sum="c8b1f16f587798a1e37574477d2627bd" name="UNL/DWT.php" role="php">
+    <tasks:replace from="@PHP_BIN@" to="php_bin" type="pear-config"/>
+    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
+    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
+    <tasks:replace from="@DOC_DIR@" to="doc_dir" type="pear-config"/>
+   </file>
+   <file baseinstalldir="/" md5sum="b524ef4684be7dba47ed8c245577347a" name="docs/examples/Template_style1.tpl" role="doc"/>
+   <file baseinstalldir="/" md5sum="3f97c4a024dfed9210b14db5068ba7d0" name="docs/examples/Template_style1.php" role="doc"/>
+   <file baseinstalldir="/" md5sum="0d5a4f5ca86e9c2a3c0050f39acbb034" name="docs/examples/template_style1.dwt" role="doc"/>
+   <file baseinstalldir="/" md5sum="fbc254138e8456e983e18c0c02cc7d30" name="docs/examples/scanner_example.php" role="doc"/>
+   <file baseinstalldir="/" md5sum="5d389d72ffe3a15a5dd597cd791a6963" name="docs/examples/example_style1.php" role="doc">
+    <tasks:replace from="@PHP_BIN@" to="php_bin" type="pear-config"/>
+    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
+    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
+    <tasks:replace from="@DOC_DIR@" to="doc_dir" type="pear-config"/>
+   </file>
+   <file baseinstalldir="/" md5sum="783c64aafb491c789fc71a5bf80d1755" name="docs/examples/example.ini" role="doc">
+    <tasks:replace from="@PHP_BIN@" to="php_bin" type="pear-config"/>
+    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
+    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
+    <tasks:replace from="@DOC_DIR@" to="doc_dir" type="pear-config"/>
+   </file>
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.0.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.3</min>
+   </pearinstaller>
+   <package>
+    <name>UNL_Templates</name>
+    <channel>pear.unl.edu</channel>
+    <max>0.5.2</max>
+    <conflicts/>
+   </package>
+  </required>
+ </dependencies>
+ <phprelease>
+  <changelog>
+   <release>
+    <version>
+     <release>0.1.0</release>
+     <api>0.1.0</api>
+    </version>
+    <stability>
+     <release>alpha</release>
+     <api>alpha</api>
+    </stability>
+    <date>2006-01-26</date>
+    <license>PHP License</license>
+    <notes>
+First release, only basic functionality.
+   </notes>
+   </release>
+   <release>
+    <version>
+     <release>0.1.1</release>
+     <api>0.1.0</api>
+    </version>
+    <stability>
+     <release>alpha</release>
+     <api>alpha</api>
+    </stability>
+    <date>2006-02-06</date>
+    <license>PHP License</license>
+    <notes>
+Added generator options generator_include/eclude_regex and extends and extends_location.
+Create dwt_location and tpl_location if it does not exist yet.
+Remove editable region tags for locked regions.
+   </notes>
+   </release>
+   <release>
+    <version>
+     <release>0.1.2</release>
+     <api>0.1.0</api>
+    </version>
+    <stability>
+     <release>alpha</release>
+     <api>alpha</api>
+    </stability>
+    <date>2006-02-24</date>
+    <license>PHP License</license>
+    <notes>
+* Added missing setOption function. Initially only debug option is available.
+* Renamed internally used function between to UNL_DWT_between
+* created externally callable replaceRegions function.
+* debug function for outputting messages levels 0-5.
+   </notes>
+   </release>
+   <release>
+    <version>
+     <release>0.5.0</release>
+     <api>0.1.0</api>
+    </version>
+    <stability>
+     <release>beta</release>
+     <api>beta</api>
+    </stability>
+    <date>2006-08-15</date>
+    <license uri="http://www.php.net/license">PHP License</license>
+    <notes>
+* Fix Bug #16: Locked regions arent detected correctly.
+				 * Fix Bug #1: Include path modified incorrectly.
+   </notes>
+   </release>
+   <release>
+    <version>
+     <release>0.5.1</release>
+     <api>0.1.0</api>
+    </version>
+    <stability>
+     <release>beta</release>
+     <api>beta</api>
+    </stability>
+    <date>2008-02-07</date>
+    <license uri="http://www.php.net/license">PHP License</license>
+    <notes>
+* Switch to using static properties, PHP 5, add docheader.
+   </notes>
+   </release>
+   <release>
+    <version>
+     <release>0.6.0</release>
+     <api>0.2.0</api>
+    </version>
+    <stability>
+     <release>beta</release>
+     <api>beta</api>
+    </stability>
+    <date>2008-03-26</date>
+    <license uri="http://www1.unl.edu/wdn/wiki/Software_License">BSD</license>
+    <notes>
+Move code around. DWT.php is now in UNL/DWT.php instead of UNL/DWT/DWT.php = not compatible with old versions of UNL_Templates!
+* Switch to using static properties
+* Upgrade a lot of code to PHP 5
+* Add phpdoc headers and coding standards fixes
+* Switch to BSD license.
+   </notes>
+   </release>
+   <release>
+    <version>
+     <release>0.6.1</release>
+     <api>0.2.0</api>
+    </version>
+    <stability>
+     <release>beta</release>
+     <api>beta</api>
+    </stability>
+    <date>2008-04-08</date>
+    <license uri="http://www1.unl.edu/wdn/wiki/Software_License">BSD</license>
+    <notes>
+Change is_a() to instanceof to fix warning.
+   </notes>
+   </release>
+   <release>
+    <version>
+     <release>0.7.0</release>
+     <api>0.7.0</api>
+    </version>
+    <stability>
+     <release>beta</release>
+     <api>beta</api>
+    </stability>
+    <date>2008-06-30</date>
+    <license uri="http://www1.unl.edu/wdn/wiki/Software_License">BSD</license>
+    <notes>
+Move region class into separate file.
+Add scanner for simply scanning a dwt for regions, this does not replace the
+generator, but supplements it.
+   </notes>
+   </release>
+   <release>
+    <version>
+     <release>0.7.1</release>
+     <api>0.7.1</api>
+    </version>
+    <stability>
+     <release>beta</release>
+     <api>beta</api>
+    </stability>
+    <date>2009-07-01</date>
+    <license uri="http://www1.unl.edu/wdn/wiki/Software_License">BSD</license>
+    <notes>
+Declare debug method correctly as static.
+   </notes>
+   </release>
+  </changelog>
+ </phprelease>
+</package>
