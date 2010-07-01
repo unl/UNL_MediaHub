@@ -127,5 +127,18 @@ class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
               ->where('feed_id = ? AND media_id = ?', array($this->id, $media->id));
         return $query->count();
     }
+
+    /**
+     * Check if the feed has an image set
+     * 
+     * @return bool
+     */
+    public function hasImage()
+    {
+        if (!empty($this->image_data)) {
+            return true;
+        }
+        return false;
+    }
 }
 ?>
