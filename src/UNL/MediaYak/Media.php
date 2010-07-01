@@ -139,9 +139,7 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
      */
     function setContentType()
     {
-        include_once 'Validate.php';
-        $validate = new Validate();
-        if (!$validate->uri($this->url)) {
+        if (!filter_var($this->url, FILTER_VALIDATE_URL)) {
             return false;
         }
         
