@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" packagerversion="1.5.2" version="2.0" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+ <name>UNL_Services_Peoplefinder</name>
+ <channel>pear.unl.edu</channel>
+ <summary>Peoplefinder services for UNL</summary>
+ <description>This package utilizes the peoplefinder web service to get information about uids at UNL.</description>
+ <lead>
+  <name>Brett Bieber</name>
+  <user>saltybeagle</user>
+  <email>brett.bieber@gmail.com</email>
+  <active>yes</active>
+ </lead>
+ <lead>
+  <name>Ned Hummel</name>
+  <user>nhummel2</user>
+  <email>nhummel2@math.unl.edu</email>
+  <active>yes</active>
+ </lead>
+ <date>2010-07-01</date>
+ <time>09:12:14</time>
+ <version>
+  <release>0.3.0</release>
+  <api>0.3.0</api>
+ </version>
+ <stability>
+  <release>beta</release>
+  <api>beta</api>
+ </stability>
+ <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+ <notes>Add Ned as a maintainer.
+Change references to peoplefinder.unl.edu (nhummel2)
+Add some unit tests.</notes>
+ <contents>
+  <dir name="/">
+   <file baseinstalldir="UNL/Services" md5sum="f07e6a17d80cfe6731abd4501122c1bf" name="tests/UNL_Services_PeoplefinderTest.php" role="test"/>
+   <file baseinstalldir="UNL/Services" md5sum="7f2bf7477493873e78d78a0624f63bc1" name="tests/CVS/Root" role="test"/>
+   <file baseinstalldir="UNL/Services" md5sum="547251cede41dbfa9f032c925745c866" name="tests/CVS/Repository" role="test"/>
+   <file baseinstalldir="UNL/Services" md5sum="a0ffe10df7db7cc87195888729110d4e" name="tests/CVS/Entries" role="test"/>
+   <file baseinstalldir="UNL/Services" md5sum="b35d8d1d0ec1773809f332d0bc5ccb76" name="Peoplefinder.php" role="php"/>
+   <file baseinstalldir="UNL/Services" md5sum="0f1aafc21298c059f242252be7353b95" name="docs/examples/getemail.php" role="doc"/>
+   <file baseinstalldir="UNL/Services" md5sum="9c9f95f60c8d4de4fc1d93e6ef3b2819" name="docs/examples/example.php" role="doc"/>
+   <file baseinstalldir="UNL/Services" md5sum="7f2bf7477493873e78d78a0624f63bc1" name="docs/examples/CVS/Root" role="doc"/>
+   <file baseinstalldir="UNL/Services" md5sum="9c32e348f3aaf3217e215e5d727309e4" name="docs/examples/CVS/Repository" role="doc"/>
+   <file baseinstalldir="UNL/Services" md5sum="ca3cb0b84bb9872e6e5969fd2874528c" name="docs/examples/CVS/Entries" role="doc"/>
+   <file baseinstalldir="UNL/Services" md5sum="7f2bf7477493873e78d78a0624f63bc1" name="docs/CVS/Root" role="doc"/>
+   <file baseinstalldir="UNL/Services" md5sum="29d14d2fbe95b00636c47e1f15abf066" name="docs/CVS/Repository" role="doc"/>
+   <file baseinstalldir="UNL/Services" md5sum="b54183649940fc11317102296fd05af8" name="docs/CVS/Entries" role="doc"/>
+   <file baseinstalldir="UNL/Services" md5sum="7f2bf7477493873e78d78a0624f63bc1" name="CVS/Root" role="data"/>
+   <file baseinstalldir="UNL/Services" md5sum="89d02048727ee05614a44176dc902925" name="CVS/Repository" role="data"/>
+   <file baseinstalldir="UNL/Services" md5sum="5250d66799024b7357d1552d59976139" name="CVS/Entries" role="data"/>
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.0.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.3</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <phprelease>
+  <changelog>
+   <release>
+    <version>
+     <release>0.1.0</release>
+     <api>0.1.0</api>
+    </version>
+    <stability>
+     <release>beta</release>
+     <api>beta</api>
+    </stability>
+    <date>2007-02-21</date>
+    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+    <notes>First Release only get Email works -- and only for faculty/staff of course.</notes>
+   </release>
+   <release>
+    <version>
+     <release>0.2.0</release>
+     <api>0.2.0</api>
+    </version>
+    <stability>
+     <release>beta</release>
+     <api>beta</api>
+    </stability>
+    <date>2007-02-21</date>
+    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+    <notes>The following functions all work now: getEmail,. getVCard, getHCard, getFullName</notes>
+   </release>
+   <release>
+    <version>
+     <release>0.3.0</release>
+     <api>0.3.0</api>
+    </version>
+    <stability>
+     <release>beta</release>
+     <api>beta</api>
+    </stability>
+    <date>2007-04-13</date>
+    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+    <notes>Add Ned as a maintainer.
+Change references to peoplefinder.unl.edu (nhummel2)
+Add some unit tests.</notes>
+   </release>
+   <release>
+    <version>
+     <release>0.3.1</release>
+     <api>0.3.1</api>
+    </version>
+    <stability>
+     <release>beta</release>
+     <api>beta</api>
+    </stability>
+    <date>2007-04-13</date>
+    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+    <notes>Fixes change of ucommxsrv1 to peoplefinder</notes>
+   </release>
+  </changelog>
+ </phprelease>
+</package>
