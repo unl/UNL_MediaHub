@@ -9,8 +9,8 @@
         $pager_links = $pager_layout->display(null, true);
         echo '<ul>';
         foreach ($context->items as $feed) {
-            echo '<li><a href="'.htmlentities(UNL_MediaYak_Controller::getURL($feed)).'">'.$feed->title.'</a> <a href="'.UNL_MediaYak_Controller::getURL($feed, array('format'=>'xml')).'" class="feed-icon"></a>
-            <div class="description">'.$feed->description.'</div>
+            echo '<li><a href="'.htmlentities(UNL_MediaYak_Controller::getURL($feed), ENT_QUOTES).'">'.htmlentities($feed->title).'</a> <a href="'.UNL_MediaYak_Controller::getURL($feed, array('format'=>'xml')).'" class="feed-icon"></a>
+            <div class="description">'.htmlentities($feed->description).'</div>
             </li>';
         }
         echo '</ul>';

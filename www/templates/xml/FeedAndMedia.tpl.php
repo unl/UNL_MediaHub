@@ -20,10 +20,10 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
     <itunes:image href="<?php echo UNL_MediaYak_Controller::getURL($context->feed); ?>/image" />
     <image>
         <url><?php echo UNL_MediaYak_Controller::getURL($context->feed); ?>/image</url>
-        <title><?php echo $context->feed->image_title; ?></title>
+        <title><?php echo htmlspecialchars($context->feed->image_title, ENT_QUOTES); ?></title>
         <link><?php echo UNL_MediaYak_Controller::getURL($context->feed); ?></link>
         <?php if (isset($context->feed->image_description)): ?>
-            <description><?php echo $context->feed->image_description; ?></description>
+            <description><?php echo htmlspecialchars($context->feed->image_description); ?></description>
         <?php endif; ?>
     </image>
     <?php endif;
