@@ -14,8 +14,8 @@ abstract class UNL_MediaYak_Models_BaseFeedHasNSElement extends Doctrine_Record
         
         $this->setSubclasses(array(
                 'UNL_MediaYak_Feed_NamespacedElements_itunes' => array('xmlns' => 'itunes'),
-                'UNL_MediaYak_Feed_NamespacedElements_media'   => array('xmlns' => 'media'),
-                'UNL_MediaYak_Feed_NamespacedElements_boxee'   => array('xmlns' => 'boxee')
+                'UNL_MediaYak_Feed_NamespacedElements_media'  => array('xmlns' => 'media'),
+                'UNL_MediaYak_Feed_NamespacedElements_boxee'  => array('xmlns' => 'boxee')
             )
         );
     
