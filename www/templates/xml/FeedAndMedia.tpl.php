@@ -3,7 +3,7 @@ $context->feed->loadReference('UNL_MediaYak_Feed_NamespacedElements_itunes');
 $context->feed->loadReference('UNL_MediaYak_Feed_NamespacedElements_media');
 echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
 ?>
-<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:itunesu="http://www.itunesu.com/feed" xmlns:media="http://search.yahoo.com/mrss/">
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:itunesu="http://www.itunesu.com/feed" xmlns:media="http://search.yahoo.com/mrss/"  xmlns:boxee="http://boxee.tv/spec/rss/">
   <channel>
     <title><?php echo $context->feed->title; ?></title>
     <link><?php echo UNL_MediaYak_Controller::getURL($context->feed); ?></link>
