@@ -26,10 +26,12 @@ abstract class UNL_MediaYak_Models_BaseMedia extends Doctrine_Record
                                                            'refClass' => 'UNL_MediaYak_Feed_Media'));
         $this->hasMany('UNL_MediaYak_Feed_Media_NamespacedElements_itunesu', array('local'   => 'id',
                                                                                    'foreign' => 'media_id'));
-        $this->hasMany('UNL_MediaYak_Feed_Media_NamespacedElements_itunes', array('local'   => 'id',
-                                                                                  'foreign' => 'media_id'));
+        $this->hasMany('UNL_MediaYak_Feed_Media_NamespacedElements_itunes',  array('local'   => 'id',
+                                                                                   'foreign' => 'media_id'));
         $this->hasMany('UNL_MediaYak_Feed_Media_NamespacedElements_media',   array('local'   => 'id',
-                                                                                  'foreign' => 'media_id'));
+                                                                                   'foreign' => 'media_id'));
+        $this->hasMany('UNL_MediaYak_Feed_Media_NamespacedElements_boxee',   array('local'   => 'id',
+                                                                                   'foreign' => 'media_id'));
         parent::setUp();
     }
 

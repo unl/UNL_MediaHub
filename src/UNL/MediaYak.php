@@ -83,6 +83,7 @@ class UNL_MediaYak
                 $media->loadReference('UNL_MediaYak_Feed_Media_NamespacedElements_itunesu');
                 $media->loadReference('UNL_MediaYak_Feed_Media_NamespacedElements_itunes');
                 $media->loadReference('UNL_MediaYak_Feed_Media_NamespacedElements_media');
+                $media->loadReference('UNL_MediaYak_Feed_Media_NamespacedElements_boxee');
                 $media->title       = $harvested_media->getTitle();
                 $media->description = $harvested_media->getDescription();
                 $media->datecreated = $harvested_media->getDatePublished();
