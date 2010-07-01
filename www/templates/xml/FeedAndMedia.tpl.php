@@ -6,7 +6,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:itunesu="http://www.itunesu.com/feed" xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title><?php echo $context->feed->title; ?></title>
-    <link><?php echo UNL_MediaYak_Controller::getURL($context); ?></link>
+    <link><?php echo UNL_MediaYak_Controller::getURL($context->feed); ?></link>
     <description><?php echo $context->feed->description; ?></description>
     <language>en-us</language>
     <pubDate><?php echo date('r'); ?></pubDate>
