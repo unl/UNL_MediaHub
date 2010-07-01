@@ -317,10 +317,10 @@ class UNL_MediaYak_Controller
         
         foreach ($params as $option=>$value) {
             if (!empty($value)) {
-                $url .= "&amp;$option=$value";
+                $url .= "&$option=$value";
             }
         }
-        
+        $url = str_replace('?&', '?', $url);
         return trim($url, '?;=');
     }
     

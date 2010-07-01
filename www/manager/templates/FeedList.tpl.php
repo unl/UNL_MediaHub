@@ -6,7 +6,7 @@
         echo 'You have '.$context->total. ' feeds:';
         echo '<ul>';
         foreach ($context->items as $feed) {
-            echo '<li><a href="'.htmlentities(UNL_MediaYak_Manager::getURL($feed)).'">'.$feed->title.'</a> <a href="'.UNL_MediaYak_Controller::getURL($feed, array('format'=>'xml')).'" class="feed-icon"></a></li>'.PHP_EOL;
+            echo '<li><a href="'.htmlspecialchars(UNL_MediaYak_Manager::getURL($feed), ENT_QUOTES).'">'.$feed->title.'</a> <a href="'.htmlspecialchars(UNL_MediaYak_Controller::getURL($feed, array('format'=>'xml'))).'" class="feed-icon"></a></li>'.PHP_EOL;
         }
         echo '</ul>';
     } else {

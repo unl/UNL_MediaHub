@@ -1,5 +1,5 @@
 <?php
-$feed_url = UNL_MediaYak_Controller::getURL().'channels/'.urlencode($context->title);
+$feed_url = htmlentities(UNL_MediaYak_Controller::getURL($context), ENT_QUOTES);
 ?>
 <h1><?php echo $context->title; ?></h1>
 <p><?php echo $context->description; ?></p>

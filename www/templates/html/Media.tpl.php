@@ -50,7 +50,7 @@ UNL_MediaYak_Controller::setReplacementData('head', $meta);
         $form = new UNL_MediaYak_Media_Comment_Form();
         echo $savvy->render($form);
     } else {
-        echo '<a href="https://login.unl.edu/cas/login?service='.urlencode(UNL_MediaYak_Controller::getURL()).'media/'.$context->id.'">Log in to post comments</a>';
+        echo '<a href="https://login.unl.edu/cas/login?service='.urlencode(UNL_MediaYak_Controller::getURL($context)).'">Log in to post comments</a>';
     }?>
 </div>
 <div class="col right">
@@ -78,13 +78,13 @@ UNL_MediaYak_Controller::setReplacementData('head', $meta);
                 '<param name="allowscriptaccess" value="always"></param>'.
                 '<param name="wmode" value="transparent"></param>'.
                 '<param name="flashvars" '. 
-                    'value="file='.$context->url.'&amp;'.
-                    'image='.UNL_MediaYak_Controller::$thumbnail_generator.urlencode($context->url).'&amp;'.
+                    'value="file='.urlencode($context->url).'&amp;'.
+                    'image='.urlencode(UNL_MediaYak_Controller::$thumbnail_generator.urlencode($context->url)).'&amp;'.
                     'volume=100&amp;'.
                     'autostart=false&amp;'.
                     'skin=http://www.unl.edu/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/UNLVideoSkin.swf" /> '.
             '</object>');
     ?></textarea>
     
-    <h6 style="margin-top:1em;"><a href="<?php echo $context->url; ?>" class="video-x-generic">Download this media file</a></h6>
+    <h6 style="margin-top:1em;"><a href="<?php echo htmlentities($context->url, ENT_QUOTES); ?>" class="video-x-generic">Download this media file</a></h6>
 </div>
