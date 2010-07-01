@@ -28,7 +28,8 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
     </image>
     <?php endif;
     foreach (array('UNL_MediaYak_Feed_NamespacedElements_itunes',
-                   'UNL_MediaYak_Feed_NamespacedElements_media') as $ns_class) {
+                   'UNL_MediaYak_Feed_NamespacedElements_media',
+                   'UNL_MediaYak_Feed_NamespacedElements_boxee') as $ns_class) {
         foreach ($context->feed->$ns_class as $namespaced_element) {
             $element = "{$namespaced_element['xmlns']}:{$namespaced_element['element']}";
             echo "<$element>{$namespaced_element['value']}</$element>\n";
