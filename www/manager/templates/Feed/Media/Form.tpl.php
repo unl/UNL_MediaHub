@@ -6,19 +6,19 @@ if (!isset($context->media)) {
     //WDN.jQuery("#part2").hide();
     WDN.jQuery("#file_upload").hide();
     WDN.jQuery("#a_url").click(function(){
-    	WDN.jQuery(this).parent("li").addClass("selected");
-    	WDN.jQuery(this).parent("li").siblings("li").removeClass("selected");
-    	WDN.jQuery("#file_upload").hide(400);
-    	WDN.jQuery("#url").show(400);
-    	
-    	return false;
+        WDN.jQuery(this).parent("li").addClass("selected");
+        WDN.jQuery(this).parent("li").siblings("li").removeClass("selected");
+        WDN.jQuery("#file_upload").hide(400);
+        WDN.jQuery("#url").show(400);
+        
+        return false;
     });
     WDN.jQuery("#a_file").click(function(){
-    	WDN.jQuery(this).parent("li").addClass("selected");
-    	WDN.jQuery(this).parent("li").siblings("li").removeClass("selected");
-    	WDN.jQuery("#url").hide(400);
-    	WDN.jQuery("#file_upload").show(400);
-    	return false;
+        WDN.jQuery(this).parent("li").addClass("selected");
+        WDN.jQuery(this).parent("li").siblings("li").removeClass("selected");
+        WDN.jQuery("#url").hide(400);
+        WDN.jQuery("#file_upload").show(400);
+        return false;
     });
     ';
     if (isset($_GET['feed_id'])) {
@@ -56,13 +56,13 @@ $jquery .= '
       return false;
     });';
 $jquery .= '
-	WDN.loadJS("templates/scripts/tiny_mce/jquery.tinymce.js", function() {
-		WDN.jQuery("textarea#description").tinymce({
-				// Location of TinyMCE script
-				script_url : "templates/scripts/tiny_mce/tiny_mce.js",
-				theme : "simple"
-		});
-	});
+    WDN.loadJS("templates/scripts/tiny_mce/jquery.tinymce.js", function() {
+        WDN.jQuery("textarea#description").tinymce({
+                // Location of TinyMCE script
+                script_url : "templates/scripts/tiny_mce/tiny_mce.js",
+                theme : "simple"
+        });
+    });
 ';
 
 UNL_MediaYak_Manager::setReplacementData('head','
@@ -80,13 +80,13 @@ WDN.jQuery(document).ready(function() {
 <div id="part1">
     <h1>Add new media:</h1>
     <ul id="tabnav">
-    	<li class="selected"><a href="#" id="a_url">Add by URL (http://&hellip;)</a></li>
-    	<!-- <li><a href="#" id="a_file">Upload a file</a></li> -->
+        <li class="selected"><a href="#" id="a_url">Add by URL (http://&hellip;)</a></li>
+        <!-- <li><a href="#" id="a_file">Upload a file</a></li> -->
     </ul>
     <div id="formContent">
-	    <input id="url" name="url" type="text" value="<?php echo htmlentities(@$context->media->url, ENT_QUOTES); ?>" />
-	    <!-- <input id="file_upload" name="file_upload" type="file" /> -->
-    	<input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
+        <input id="url" name="url" type="text" value="<?php echo htmlentities(@$context->media->url, ENT_QUOTES); ?>" />
+        <!-- <input id="file_upload" name="file_upload" type="file" /> -->
+        <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
         <input id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" type="hidden" value="67108864" />
         <?php
         if (isset($context->media->id)) {
@@ -100,14 +100,14 @@ WDN.jQuery(document).ready(function() {
 </div>
 <div id="part2" style="display:none;">
 <div class="headline_main">
-	<h1><?php echo (isset($context->media))?'Edit the details of your':'Tell us about your'; ?> media.</h1>
-	<?php
-	$thumbnail = 'templates/images/thumbs/placeholder.jpg';
-	if (isset($context->media)) {
-	    $thumbnail = UNL_MediaYak_Controller::$thumbnail_generator.urlencode($context->media->url);
-	}
-	?>
-	<img src="<?php echo $thumbnail; ?>" id="thumbnail" alt="Thumbnail preview2" />
+    <h1><?php echo (isset($context->media))?'Edit the details of your':'Tell us about your'; ?> media.</h1>
+    <?php
+    $thumbnail = 'templates/images/thumbs/placeholder.jpg';
+    if (isset($context->media)) {
+        $thumbnail = UNL_MediaYak_Controller::$thumbnail_generator.urlencode($context->media->url);
+    }
+    ?>
+    <img src="<?php echo $thumbnail; ?>" id="thumbnail" alt="Thumbnail preview2" />
 </div>
     <fieldset id="existing_media">
         <legend>Required Information</legend>
@@ -154,11 +154,11 @@ WDN.jQuery(document).ready(function() {
                     <input id="itunes_author" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[0][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'author'); ?>" size="55"/>
                     
                 <div class="form-help">
-                    	<a href="#" class="imagelink" title="Get more information"><img src="templates/css/images/iconInfo.png" alt="Get More info on the Author attribute" /></a>
-                    	<div class="help-content">
-                    		<span class="help-pointer">&nbsp;</span>
-                    		<p>This is the text for the form help</p>
-                    	</div>
+                        <a href="#" class="imagelink" title="Get more information"><img src="templates/css/images/iconInfo.png" alt="Get More info on the Author attribute" /></a>
+                        <div class="help-content">
+                            <span class="help-pointer">&nbsp;</span>
+                            <p>This is the text for the form help</p>
+                        </div>
                     </div>
                 </div>
             </li>
@@ -318,13 +318,13 @@ WDN.jQuery(document).ready(function() {
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[1][element]" type="hidden" value="block"/>
                     <select id="itunes_block" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[1][value]">
-                    	<?php
-                    	if (getFieldValue($context, 'itunes', 'block') == "yes") {
-                    		echo '<option value="">No</option><option value="yes" selected="selected">Yes</option>';
-                    	} else {
-                    		echo '<option value="">No</option><option value="yes">Yes</option>';
-                    	}
-                    	?>
+                        <?php
+                        if (getFieldValue($context, 'itunes', 'block') == "yes") {
+                            echo '<option value="">No</option><option value="yes" selected="selected">Yes</option>';
+                        } else {
+                            echo '<option value="">No</option><option value="yes">Yes</option>';
+                        }
+                        ?>
                     </select>
                     <dl class="caption"><dd>Set to 'yes' if you would like to block this element from iTunes</dd></dl>
                 </div>
