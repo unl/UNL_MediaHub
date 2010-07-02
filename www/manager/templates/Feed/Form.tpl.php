@@ -33,7 +33,7 @@
     function getFieldValue($savant, $xmlns, $element)
     {
         if (isset($savant->media)) {
-            $class = 'UNL_MediaYak_Feed_Media_NamespacedElements_'.$xmlns;
+            $class = 'UNL_MediaYak_Feed_NamespacedElements_'.$xmlns;
             if ($element = call_user_func($class .'::mediaHasElement', $savant->media->id, $element, $xmlns)) {
                 return htmlentities($element->value, ENT_QUOTES);
             }
@@ -43,7 +43,7 @@
     function getFieldAttributes($savant, $xmlns, $element)
     {
         if (isset($savant->media)) {
-            $class = 'UNL_MediaYak_Feed_Media_NamespacedElements_'.$xmlns;
+            $class = 'UNL_MediaYak_Feed_NamespacedElements_'.$xmlns;
             if ($element = call_user_func($class .'::mediaHasElement', $savant->media->id, $element, $xmlns)) {
                 return htmlentities(serialize($element->attributes), ENT_QUOTES);
             }
