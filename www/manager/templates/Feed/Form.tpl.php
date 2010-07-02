@@ -30,21 +30,21 @@
         </ol>
     </fieldset>
     <?php
-    function getFieldValue($savant, $xmlns, $element)
+    function getFieldValue($context, $xmlns, $element)
     {
-        if (isset($savant->media)) {
+        if (isset($context->feed)) {
             $class = 'UNL_MediaYak_Feed_NamespacedElements_'.$xmlns;
-            if ($element = call_user_func($class .'::mediaHasElement', $savant->media->id, $element, $xmlns)) {
+            if ($element = call_user_func($class .'::feedHasElement', $context->feed->id, $element, $xmlns)) {
                 return htmlentities($element->value, ENT_QUOTES);
             }
         }
         return '';
     }
-    function getFieldAttributes($savant, $xmlns, $element)
+    function getFieldAttributes($context, $xmlns, $element)
     {
-        if (isset($savant->media)) {
+        if (isset($context->feed)) {
             $class = 'UNL_MediaYak_Feed_NamespacedElements_'.$xmlns;
-            if ($element = call_user_func($class .'::mediaHasElement', $savant->media->id, $element, $xmlns)) {
+            if ($element = call_user_func($class .'::feedHasElement', $context->feed->id, $element, $xmlns)) {
                 return htmlentities(serialize($element->attributes), ENT_QUOTES);
             }
         }
