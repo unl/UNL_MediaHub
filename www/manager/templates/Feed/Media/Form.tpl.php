@@ -152,7 +152,7 @@ WDN.jQuery(document).ready(function() {
         <ol>
             <li style="display:none;">
                 <label for="itunes_author" class="element">Author</label>
-	                <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[0][element]" type="hidden" value="author"/>
+                    <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[0][element]" type="hidden" value="author"/>
                     <input id="itunes_author" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[0][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'author'); ?>"/>
             </li>
             <li>
@@ -455,14 +455,14 @@ WDN.jQuery(document).ready(function() {
                 <fieldset>
                     <legend>Select from your feeds or add to a new feed. </legend>
                         <ol>
-				            <?php
-				            $list = UNL_MediaYak_Manager::getUser()->getFeeds();
-				            UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_FeedList', 'Feed_Media_FeedList');
-				            echo $savvy->render($list);
-				            UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_FeedList', 'FeedList');
-				            ?>
-				            <li><label for="new_feed" class="element">New Feed</label><div class="element"><input id="new_feed" name="new_feed" type="text" /></div></li>
-			            </ol>
+                            <?php
+                            $list = UNL_MediaYak_Manager::getUser()->getFeeds();
+                            UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_FeedList', 'Feed_Media_FeedList');
+                            echo $savvy->render($list);
+                            UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_FeedList', 'FeedList');
+                            ?>
+                            <li><label for="new_feed" class="element">New Feed</label><div class="element"><input id="new_feed" name="new_feed" type="text" /></div></li>
+                        </ol>
                 </fieldset>
             </li>
         </ol>
