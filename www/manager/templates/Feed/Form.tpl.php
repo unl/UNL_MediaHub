@@ -1,4 +1,4 @@
-<form action="<?php echo $context->action; ?>" method="post" name="feed" id="feed" enctype="multipart/form-data">
+<form action="<?php echo $context->action; ?>" method="post" name="feed" id="feed" enctype="multipart/form-data" class="zenform">
     <div style="display: none;">
     <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed" />
     <?php

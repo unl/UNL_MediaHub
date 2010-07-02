@@ -3,7 +3,10 @@
 $jquery = '';
 if (!isset($context->media)) {
     $jquery .= '
-    //WDN.jQuery("#part2").hide();
+    //used for testing
+    WDN.jQuery("#part1").hide();
+    WDN.jQuery("#part2").show();
+    //remove above before going live
     WDN.jQuery("#file_upload").hide();
     WDN.jQuery("#a_url").click(function(){
         WDN.jQuery(this).parent("li").addClass("selected");
@@ -76,7 +79,17 @@ WDN.jQuery(document).ready(function() {
 ');
 
 ?>
-<form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data"  class="yui-skin-sam">
+<div class="headline_main">
+    <h1><?php echo (isset($context->media))?'Edit the details of your':'Tell us about your'; ?> media.</h1>
+    <?php
+    $thumbnail = 'templates/images/thumbs/placeholder.jpg';
+    if (isset($context->media)) {
+        $thumbnail = UNL_MediaYak_Controller::$thumbnail_generator.urlencode($context->media->url);
+    }
+    ?>
+    <img src="<?php echo $thumbnail; ?>" id="thumbnail" alt="Thumbnail preview2" />
+</div>
+<form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data"  class="zenform cool">
 <div id="part1">
     <h1>Add new media:</h1>
     <ul id="tabnav">
@@ -98,21 +111,11 @@ WDN.jQuery(document).ready(function() {
     <p class="submit"><a id="continue2" href="#">Continue</a></p>
     <div id="part1_close"></div>
 </div>
-<div id="part2" style="display:none;">
-<div class="headline_main">
-    <h1><?php echo (isset($context->media))?'Edit the details of your':'Tell us about your'; ?> media.</h1>
-    <?php
-    $thumbnail = 'templates/images/thumbs/placeholder.jpg';
-    if (isset($context->media)) {
-        $thumbnail = UNL_MediaYak_Controller::$thumbnail_generator.urlencode($context->media->url);
-    }
-    ?>
-    <img src="<?php echo $thumbnail; ?>" id="thumbnail" alt="Thumbnail preview2" />
-</div>
+
     <fieldset id="existing_media">
         <legend>Required Information</legend>
         <ol>
-            <li><label for="title" class="element">Title</label><div class="element"><input id="title" name="title" type="text" size="60" value="<?php echo htmlentities(@$context->media->title, ENT_QUOTES); ?>" /></div></li>
+            <li><label for="title" class="element">Title</label><input id="title" name="title" type="text" size="60" value="<?php echo htmlentities(@$context->media->title, ENT_QUOTES); ?>" /></li>
             <li><label for="author" class="element">Author</label><div class="element"><input id="author" name="author" type="text" size="60" value="<?php echo htmlentities(@$context->media->author, ENT_QUOTES); ?>" /></div></li>
             <li>
                 <label for="description" class="element">Description</label>
@@ -149,21 +152,11 @@ WDN.jQuery(document).ready(function() {
         <ol>
             <li style="display:none;">
                 <label for="itunes_author" class="element">Author</label>
-                <div class="element">
-                    <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[0][element]" type="hidden" value="author"/>
-                    <input id="itunes_author" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[0][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'author'); ?>" size="55"/>
-                    
-                <div class="form-help">
-                        <a href="#" class="imagelink" title="Get more information"><img src="templates/css/images/iconInfo.png" alt="Get More info on the Author attribute" /></a>
-                        <div class="help-content">
-                            <span class="help-pointer">&nbsp;</span>
-                            <p>This is the text for the form help</p>
-                        </div>
-                    </div>
-                </div>
+	                <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[0][element]" type="hidden" value="author"/>
+                    <input id="itunes_author" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[0][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'author'); ?>"/>
             </li>
             <li>
-                <label for="itunesu_category" class="element">Category</label>
+                <label for="itunesu_category" class="element">Category <span class="helper">Choose a category for use within iTunes U</span></label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunesu[0][element]" type="hidden" value="category" />
                     <select id="itunes_block" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunesu[0][attributes]">
@@ -310,11 +303,10 @@ WDN.jQuery(document).ready(function() {
                             <option value="112105">Special Education
                         </optgroup>
                     </select>
-                    <dl class="caption"><dd>Choose a category for use within iTunes U</dd></dl>
                 </div>
             </li>
             <li>
-                <label for="itunes_block" class="element">Block from iTunes</label>
+                <label for="itunes_block" class="element">Block from iTunes <span class="helper">Set to 'yes' if you would like to block this element from iTunes/span></label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[1][element]" type="hidden" value="block"/>
                     <select id="itunes_block" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[1][value]">
@@ -326,50 +318,48 @@ WDN.jQuery(document).ready(function() {
                         }
                         ?>
                     </select>
-                    <dl class="caption"><dd>Set to 'yes' if you would like to block this element from iTunes</dd></dl>
                 </div>
             </li>
             <li>
                 <label for="itunes_duration" class="element">Duration (HH:MM:SS)</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[2][element]" type="hidden" value="duration"/>
-                    <input id="itunes_duration" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[2][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'duration'); ?>" size="55"/>
+                    <input id="itunes_duration" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[2][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'duration'); ?>"/>
                 </div>
             </li>
             <li style="display:none;">
                 <label for="itunes_explicit" class="element">Explicit</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[3][element]" type="hidden" value="explicit"/>
-                    <input id="itunes_explicit" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[3][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'explicit'); ?>" size="55"/>
+                    <input id="itunes_explicit" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[3][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'explicit'); ?>"/>
                 </div>
             </li>
             <li>
-                <label for="itunes_keywords" class="element">Keywords</label>
+                <label for="itunes_keywords" class="element">Keywords <span class="helper">A comma separated list of keywords, MAX 10</span></label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[4][element]" type="hidden" value="keywords"/>
-                    <input id="itunes_keywords" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[4][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'keywords'); ?>" size="55"/>
-                    <dl class="caption"><dd>A comma separated list of keywords, MAX 10</dd></dl>
+                    <input id="itunes_keywords" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[4][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'keywords'); ?>"/>
                 </div>
             </li>
             <li>
                 <label for="itunes_subtitle" class="element">Subtitle</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[5][element]" type="hidden" value="subtitle"/>
-                    <input id="itunes_subtitle" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[5][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'subtitle'); ?>" size="55"/>
+                    <input id="itunes_subtitle" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[5][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'subtitle'); ?>"/>
                 </div>
             </li>
             <li>
                 <label for="itunes_summary" class="element">Summary</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[6][element]" type="hidden" value="summary"/>
-                    <input id="itunes_summary" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[6][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'summary'); ?>" size="55"/>
+                    <input id="itunes_summary" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[6][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'summary'); ?>"/>
                 </div>
             </li>
             <li style="display:none;">
                 <label for="mrss_group" class="element">Group</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_media[0][element]" type="hidden" value="group"/>
-                    <input id="mrss_group" name="UNL_MediaYak_Feed_Media_NamespacedElements_media[0][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'group'); ?>" size="55"/>
+                    <input id="mrss_group" name="UNL_MediaYak_Feed_Media_NamespacedElements_media[0][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'group'); ?>"/>
                 </div>
             </li>
             <li style="display:none">
@@ -383,28 +373,28 @@ WDN.jQuery(document).ready(function() {
                 <label for="mrss_rating" class="element">Rating</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_media[2][element]" type="hidden" value="rating"/>
-                    <input id="mrss_rating" name="UNL_MediaYak_Feed_Media_NamespacedElements_media[2][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'rating'); ?>" size="55"/>
+                    <input id="mrss_rating" name="UNL_MediaYak_Feed_Media_NamespacedElements_media[2][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'rating'); ?>"/>
                 </div>
             </li>
             <li style="display:none;">
                 <label for="mrss_title" class="element">Title</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_media[3][element]" type="hidden" value="title"/>
-                    <input id="mrss_title" name="UNL_MediaYak_Feed_Media_NamespacedElements_media[3][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'title'); ?>" size="55"/>
+                    <input id="mrss_title" name="UNL_MediaYak_Feed_Media_NamespacedElements_media[3][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'title'); ?>"/>
                 </div>
             </li>
             <li style="display:none;">
                 <label for="mrss_description" class="element">Description</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_media[4][element]" type="hidden" value="description"/>
-                    <input id="mrss_description" name="UNL_MediaYak_Feed_Media_NamespacedElements_media[4][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'description'); ?>" size="55"/>
+                    <input id="mrss_description" name="UNL_MediaYak_Feed_Media_NamespacedElements_media[4][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'description'); ?>"/>
                 </div>
             </li>
             <li style="display:none;">
                 <label for="mrss_keywords" class="element">Keywords</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_media[5][element]" type="hidden" value="keywords"/>
-                    <input id="mrss_keywords" name="UNL_MediaYak_Feed_Media_NamespacedElements_media[5][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'keywords'); ?>" size="55"/>
+                    <input id="mrss_keywords" name="UNL_MediaYak_Feed_Media_NamespacedElements_media[5][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'keywords'); ?>"/>
                 </div>
             </li>
             <li style="display:none;">
@@ -418,28 +408,28 @@ WDN.jQuery(document).ready(function() {
                 <label for="mrss_category" class="element">Category</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_media[7][element]" type="hidden" value="category"/>
-                    <input id="mrss_category" name="UNL_MediaYak_Feed_Media_NamespacedElements_media[7][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'category'); ?>" size="55"/>
+                    <input id="mrss_category" name="UNL_MediaYak_Feed_Media_NamespacedElements_media[7][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'category'); ?>"/>
                 </div>
             </li>
             <li style="display:none;">
                 <label for="mrss_player" class="element">Player</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_media[8][element]" type="hidden" value="player"/>
-                    <input id="mrss_player" name="UNL_MediaYak_Feed_Media_NamespacedElements_media[8][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'player'); ?>" size="55"/>
+                    <input id="mrss_player" name="UNL_MediaYak_Feed_Media_NamespacedElements_media[8][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'player'); ?>"/>
                 </div>
             </li>
             <li>
                 <label for="mrss_credit" class="element">Credit</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_media[9][element]" type="hidden" value="credit"/>
-                    <input id="mrss_credit" name="UNL_MediaYak_Feed_Media_NamespacedElements_media[9][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'credit'); ?>" size="55"/>
+                    <input id="mrss_credit" name="UNL_MediaYak_Feed_Media_NamespacedElements_media[9][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'credit'); ?>"/>
                 </div>
             </li>
             <li>
                 <label for="mrss_copyright" class="element">Copyright</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_media[10][element]" type="hidden" value="copyright"/>
-                    <input id="mrss_copyright" name="UNL_MediaYak_Feed_Media_NamespacedElements_media[10][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'copyright'); ?>" size="55"/>
+                    <input id="mrss_copyright" name="UNL_MediaYak_Feed_Media_NamespacedElements_media[10][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'copyright'); ?>"/>
                 </div>
             </li>
             <li>
@@ -453,23 +443,30 @@ WDN.jQuery(document).ready(function() {
                 <label for="mrss_restriction" class="element">Restriction</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_media[12][element]" type="hidden" value="restriction"/>
-                    <input id="mrss_restriction" name="UNL_MediaYak_Feed_Media_NamespacedElements_media[12][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'restriction'); ?>" size="55"/>
+                    <input id="mrss_restriction" name="UNL_MediaYak_Feed_Media_NamespacedElements_media[12][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'restriction'); ?>"/>
                 </div>
             </li>
         </ol>
     </fieldset>
     <fieldset>
-        <legend>Select Your Feeds</legend>
+        <legend>Select The Feeds</legend>
         <ol>
-            <?php
-            $list = UNL_MediaYak_Manager::getUser()->getFeeds();
-            UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_FeedList', 'Feed_Media_FeedList');
-            echo $savvy->render($list);
-            UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_FeedList', 'FeedList');
-            ?>
-            <li><label for="new_feed" class="element">New Feed</label><div class="element"><input id="new_feed" name="new_feed" type="text" /></div></li>
+            <li>
+                <fieldset>
+                    <legend>Select from your feeds or add to a new feed. </legend>
+                        <ol>
+				            <?php
+				            $list = UNL_MediaYak_Manager::getUser()->getFeeds();
+				            UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_FeedList', 'Feed_Media_FeedList');
+				            echo $savvy->render($list);
+				            UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_FeedList', 'FeedList');
+				            ?>
+				            <li><label for="new_feed" class="element">New Feed</label><div class="element"><input id="new_feed" name="new_feed" type="text" /></div></li>
+			            </ol>
+                </fieldset>
+            </li>
         </ol>
     </fieldset>
-    <p class="submit"><a class="continue"  id="continue3" href="#" onclick="document.getElementById('submit_existing').click();">Publish</a></p>
-</div>
+    <input type="submit" name="submit" id="continue3" value="Publish" onclick="document.getElementById('submit_existing').click();" />
+
 </form>
