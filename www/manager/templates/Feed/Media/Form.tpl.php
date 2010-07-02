@@ -180,7 +180,7 @@ WDN.jQuery(document).ready(function() {
                         </optgroup>
                         <optgroup label="Engineering">
                             <option value="101">Engineering</option>
-                            <option value="101100">Chemical & Petroleum</option>
+                            <option value="101100">Chemical &amp; Petroleum</option>
                             <option value="101101">Civil</option>
                             <option value="101102">Computer Science</option>
                             <option value="101103">Electrical</option>
@@ -199,19 +199,19 @@ WDN.jQuery(document).ready(function() {
                             <option value="102107">Music</option>
                             <option value="102108">Theater</option>
                         </optgroup>
-                        <optgroup label="Health & Medicine">
-                            <option value="103">Health & Medicine</option>
-                            <option value="103100">Anatomy & Physiology</option>
+                        <optgroup label="Health &amp; Medicine">
+                            <option value="103">Health &amp; Medicine</option>
+                            <option value="103100">Anatomy &amp; Physiology</option>
                             <option value="103101">Behavioral Science</option>
                             <option value="103102">Dentistry</option>
-                            <option value="103103">Diet & Nutrition</option>
+                            <option value="103103">Diet &amp; Nutrition</option>
                             <option value="103104">Emergency</option>
                             <option value="103105">Genetics</option>
                             <option value="103106">Gerontology</option>
-                            <option value="103107">Health & Exercise Science</option>
+                            <option value="103107">Health &amp; Exercise Science</option>
                             <option value="103108">Immunology</option>
                             <option value="103109">Neuroscience</option>
-                            <option value="103110">Pharmacology & Toxicology</option>
+                            <option value="103110">Pharmacology &amp; Toxicology</option>
                             <option value="103111">Psychiatry</option>
                             <option value="103112">Public Health</option>
                             <option value="103113">Radiology</option>
@@ -248,7 +248,7 @@ WDN.jQuery(document).ready(function() {
                             <option value="106108">Italian</option>
                             <option value="106109">Linguistics</option>
                             <option value="106110">Middle Eastern</option>
-                            <option value="106111">Spanish & Portuguese</option>
+                            <option value="106111">Spanish &amp; Portuguese</option>
                             <option value="106112">Speech Pathology</option>
                         </optgroup>
                         <optgroup label="Literature">
@@ -294,19 +294,19 @@ WDN.jQuery(document).ready(function() {
                             <option value="111">Society</option>
                             <option value="111100">African-American Studies</option>
                             <option value="111101">Asian Studies</option>
-                            <option value="111102">European & Russian Studies</option>
+                            <option value="111102">European &amp; Russian Studies</option>
                             <option value="111103">Indigenous Studies</option>
-                            <option value="111104">Latin & Caribbean Studies</option>
+                            <option value="111104">Latin &amp; Caribbean Studies</option>
                             <option value="111105">Middle Eastern Studies</option>
                             <option value="111106">Women's Studies</option>
                         </optgroup>
-                        <optgroup label="Teaching & Education">
-                            <option value="112">Teaching & Education</option>
-                            <option value="112100">Curriculum & Teaching</option>
+                        <optgroup label="Teaching &amp; Education">
+                            <option value="112">Teaching &amp; Education</option>
+                            <option value="112100">Curriculum &amp; Teaching</option>
                             <option value="112101">Educational Leadership</option>
-                            <option value="112102">Family & Childcare</option>
+                            <option value="112102">Family &amp; Childcare</option>
                             <option value="112103">Learning Resources</option>
-                            <option value="112104">Psychology & Research</option>
+                            <option value="112104">Psychology &amp; Research</option>
                             <option value="112105">Special Education
                         </optgroup>
                     </select>
