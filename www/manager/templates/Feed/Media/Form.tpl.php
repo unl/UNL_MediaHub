@@ -136,149 +136,155 @@ WDN.jQuery(document).ready(function() {
             <li>
                 <label for="itunesu_category" class="element">Category <span class="helper">Choose a category for use within iTunes U</span></label>
                 <div class="element">
+                    <?php
+                    $category = '';
+                    if ($value = UNL_MediaYak_Feed_Media_NamespacedElements_itunesu::mediaHasElement($context->media->id, 'category', 'itunesu')) {
+                        $category = $value['attributes']['itunesu:code'];
+                    }
+                    ?>
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunesu[0][element]" type="hidden" value="category" />
                     <select id="itunes_block" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunesu[0][attributes]">
                         <option value="">None</option>
                         <optgroup label="Business">
-                            <option value="100">Business</option>
-                            <option value="100100">Economics</option>
-                            <option value="100101">Finance</option>
-                            <option value="100102">Hospitality</option>
-                            <option value="100103">Management</option>
-                            <option value="100104">Marketing</option>
-                            <option value="100105">Personal Finance</option>
-                            <option value="100106">Real Estate</option>
+                            <option <?php if ($category == '100') echo 'selected="selected"'; ?> value="100">Business</option>
+                            <option <?php if ($category == '100100') echo 'selected="selected"'; ?> value="100100">Economics</option>
+                            <option <?php if ($category == '100101') echo 'selected="selected"'; ?> value="100101">Finance</option>
+                            <option <?php if ($category == '100102') echo 'selected="selected"'; ?> value="100102">Hospitality</option>
+                            <option <?php if ($category == '100103') echo 'selected="selected"'; ?> value="100103">Management</option>
+                            <option <?php if ($category == '100104') echo 'selected="selected"'; ?> value="100104">Marketing</option>
+                            <option <?php if ($category == '100105') echo 'selected="selected"'; ?> value="100105">Personal Finance</option>
+                            <option <?php if ($category == '100106') echo 'selected="selected"'; ?> value="100106">Real Estate</option>
                         </optgroup>
                         <optgroup label="Engineering">
-                            <option value="101">Engineering</option>
-                            <option value="101100">Chemical &amp; Petroleum</option>
-                            <option value="101101">Civil</option>
-                            <option value="101102">Computer Science</option>
-                            <option value="101103">Electrical</option>
-                            <option value="101104">Environmental</option>
-                            <option value="101105">Mechanical</option>
+                            <option <?php if ($category == '101') echo 'selected="selected"'; ?> value="101">Engineering</option>
+                            <option <?php if ($category == '101100') echo 'selected="selected"'; ?> value="101100">Chemical &amp; Petroleum</option>
+                            <option <?php if ($category == '101101') echo 'selected="selected"'; ?> value="101101">Civil</option>
+                            <option <?php if ($category == '101102') echo 'selected="selected"'; ?> value="101102">Computer Science</option>
+                            <option <?php if ($category == '101103') echo 'selected="selected"'; ?> value="101103">Electrical</option>
+                            <option <?php if ($category == '101104') echo 'selected="selected"'; ?> value="101104">Environmental</option>
+                            <option <?php if ($category == '101105') echo 'selected="selected"'; ?> value="101105">Mechanical</option>
                         </optgroup>
                         <optgroup label="Fine Arts">
-                            <option value="102">Fine Arts</option>
-                            <option value="102100">Architecture</option>
-                            <option value="102101">Art</option>
-                            <option value="102102">Art History</option>
-                            <option value="102103">Dance</option>
-                            <option value="102104">Film</option>
-                            <option value="102105">Graphic Design</option>
-                            <option value="102106">Interior Design</option>
-                            <option value="102107">Music</option>
-                            <option value="102108">Theater</option>
+                            <option <?php if ($category == '102') echo 'selected="selected"'; ?> value="102">Fine Arts</option>
+                            <option <?php if ($category == '102100') echo 'selected="selected"'; ?> value="102100">Architecture</option>
+                            <option <?php if ($category == '102101') echo 'selected="selected"'; ?> value="102101">Art</option>
+                            <option <?php if ($category == '102102') echo 'selected="selected"'; ?> value="102102">Art History</option>
+                            <option <?php if ($category == '102103') echo 'selected="selected"'; ?> value="102103">Dance</option>
+                            <option <?php if ($category == '102104') echo 'selected="selected"'; ?> value="102104">Film</option>
+                            <option <?php if ($category == '102105') echo 'selected="selected"'; ?> value="102105">Graphic Design</option>
+                            <option <?php if ($category == '102106') echo 'selected="selected"'; ?> value="102106">Interior Design</option>
+                            <option <?php if ($category == '102107') echo 'selected="selected"'; ?> value="102107">Music</option>
+                            <option <?php if ($category == '102108') echo 'selected="selected"'; ?> value="102108">Theater</option>
                         </optgroup>
                         <optgroup label="Health &amp; Medicine">
-                            <option value="103">Health &amp; Medicine</option>
-                            <option value="103100">Anatomy &amp; Physiology</option>
-                            <option value="103101">Behavioral Science</option>
-                            <option value="103102">Dentistry</option>
-                            <option value="103103">Diet &amp; Nutrition</option>
-                            <option value="103104">Emergency</option>
-                            <option value="103105">Genetics</option>
-                            <option value="103106">Gerontology</option>
-                            <option value="103107">Health &amp; Exercise Science</option>
-                            <option value="103108">Immunology</option>
-                            <option value="103109">Neuroscience</option>
-                            <option value="103110">Pharmacology &amp; Toxicology</option>
-                            <option value="103111">Psychiatry</option>
-                            <option value="103112">Public Health</option>
-                            <option value="103113">Radiology</option>
+                            <option <?php if ($category == '103') echo 'selected="selected"'; ?> value="103">Health &amp; Medicine</option>
+                            <option <?php if ($category == '103100') echo 'selected="selected"'; ?> value="103100">Anatomy &amp; Physiology</option>
+                            <option <?php if ($category == '103101') echo 'selected="selected"'; ?> value="103101">Behavioral Science</option>
+                            <option <?php if ($category == '103102') echo 'selected="selected"'; ?> value="103102">Dentistry</option>
+                            <option <?php if ($category == '103103') echo 'selected="selected"'; ?> value="103103">Diet &amp; Nutrition</option>
+                            <option <?php if ($category == '103104') echo 'selected="selected"'; ?> value="103104">Emergency</option>
+                            <option <?php if ($category == '103105') echo 'selected="selected"'; ?> value="103105">Genetics</option>
+                            <option <?php if ($category == '103106') echo 'selected="selected"'; ?> value="103106">Gerontology</option>
+                            <option <?php if ($category == '103107') echo 'selected="selected"'; ?> value="103107">Health &amp; Exercise Science</option>
+                            <option <?php if ($category == '103108') echo 'selected="selected"'; ?> value="103108">Immunology</option>
+                            <option <?php if ($category == '103109') echo 'selected="selected"'; ?> value="103109">Neuroscience</option>
+                            <option <?php if ($category == '103110') echo 'selected="selected"'; ?> value="103110">Pharmacology &amp; Toxicology</option>
+                            <option <?php if ($category == '103111') echo 'selected="selected"'; ?> value="103111">Psychiatry</option>
+                            <option <?php if ($category == '103112') echo 'selected="selected"'; ?> value="103112">Public Health</option>
+                            <option <?php if ($category == '103113') echo 'selected="selected"'; ?> value="103113">Radiology</option>
                         </optgroup>
                         <optgroup label="History">
-                            <option value="104">History</option>
-                            <option value="104100">Ancient</option>
-                            <option value="104101">Medieval</option>
-                            <option value="104102">Military</option>
-                            <option value="104103">Modern</option>
-                            <option value="104104">African</option>
-                            <option value="104105">Asian</option>
-                            <option value="104106">European</option>
-                            <option value="104107">Middle Eastern</option>
-                            <option value="104108">North American</option>
-                            <option value="104109">South American</option>
+                            <option <?php if ($category == '104') echo 'selected="selected"'; ?> value="104">History</option>
+                            <option <?php if ($category == '104100') echo 'selected="selected"'; ?> value="104100">Ancient</option>
+                            <option <?php if ($category == '104101') echo 'selected="selected"'; ?> value="104101">Medieval</option>
+                            <option <?php if ($category == '104102') echo 'selected="selected"'; ?> value="104102">Military</option>
+                            <option <?php if ($category == '104103') echo 'selected="selected"'; ?> value="104103">Modern</option>
+                            <option <?php if ($category == '104104') echo 'selected="selected"'; ?> value="104104">African</option>
+                            <option <?php if ($category == '104105') echo 'selected="selected"'; ?> value="104105">Asian</option>
+                            <option <?php if ($category == '104106') echo 'selected="selected"'; ?> value="104106">European</option>
+                            <option <?php if ($category == '104107') echo 'selected="selected"'; ?> value="104107">Middle Eastern</option>
+                            <option <?php if ($category == '104108') echo 'selected="selected"'; ?> value="104108">North American</option>
+                            <option <?php if ($category == '104109') echo 'selected="selected"'; ?> value="104109">South American</option>
                         </optgroup>
                         <optgroup label="Humanities">
-                            <option value="105">Humanities</option>
-                            <option value="105100">Communications</option>
-                            <option value="105101">Philosophy</option>
-                            <option value="105102">Religion</option>
+                            <option <?php if ($category == '105') echo 'selected="selected"'; ?> value="105">Humanities</option>
+                            <option <?php if ($category == '105100') echo 'selected="selected"'; ?> value="105100">Communications</option>
+                            <option <?php if ($category == '105101') echo 'selected="selected"'; ?> value="105101">Philosophy</option>
+                            <option <?php if ($category == '105102') echo 'selected="selected"'; ?> value="105102">Religion</option>
                         </optgroup>
                         <optgroup label="Language">
-                            <option value="106">Language</option>
-                            <option value="106100">African</option>
-                            <option value="106101">Ancient</option>
-                            <option value="106102">Asian</option>
-                            <option value="106103">Eastern European/Slavic</option>
-                            <option value="106104">English</option>
-                            <option value="106105">English Language Learners</option>
-                            <option value="106106">French</option>
-                            <option value="106107">German</option>
-                            <option value="106108">Italian</option>
-                            <option value="106109">Linguistics</option>
-                            <option value="106110">Middle Eastern</option>
-                            <option value="106111">Spanish &amp; Portuguese</option>
-                            <option value="106112">Speech Pathology</option>
+                            <option <?php if ($category == '106') echo 'selected="selected"'; ?> value="106">Language</option>
+                            <option <?php if ($category == '106100') echo 'selected="selected"'; ?> value="106100">African</option>
+                            <option <?php if ($category == '106101') echo 'selected="selected"'; ?> value="106101">Ancient</option>
+                            <option <?php if ($category == '106102') echo 'selected="selected"'; ?> value="106102">Asian</option>
+                            <option <?php if ($category == '106103') echo 'selected="selected"'; ?> value="106103">Eastern European/Slavic</option>
+                            <option <?php if ($category == '106104') echo 'selected="selected"'; ?> value="106104">English</option>
+                            <option <?php if ($category == '106105') echo 'selected="selected"'; ?> value="106105">English Language Learners</option>
+                            <option <?php if ($category == '106106') echo 'selected="selected"'; ?> value="106106">French</option>
+                            <option <?php if ($category == '106107') echo 'selected="selected"'; ?> value="106107">German</option>
+                            <option <?php if ($category == '106108') echo 'selected="selected"'; ?> value="106108">Italian</option>
+                            <option <?php if ($category == '106109') echo 'selected="selected"'; ?> value="106109">Linguistics</option>
+                            <option <?php if ($category == '106110') echo 'selected="selected"'; ?> value="106110">Middle Eastern</option>
+                            <option <?php if ($category == '106111') echo 'selected="selected"'; ?> value="106111">Spanish &amp; Portuguese</option>
+                            <option <?php if ($category == '106112') echo 'selected="selected"'; ?> value="106112">Speech Pathology</option>
                         </optgroup>
                         <optgroup label="Literature">
-                            <option value="107">Literature</option>
-                            <option value="107100">Anthologies</option>
-                            <option value="107101">Biography</option>
-                            <option value="107102">Classics</option>
-                            <option value="107103">Criticism</option>
-                            <option value="107104">Fiction</option>
-                            <option value="107105">Poetry</option>
+                            <option <?php if ($category == '1071') echo 'selected="selected"'; ?> value="107">Literature</option>
+                            <option <?php if ($category == '107100') echo 'selected="selected"'; ?> value="107100">Anthologies</option>
+                            <option <?php if ($category == '107101') echo 'selected="selected"'; ?> value="107101">Biography</option>
+                            <option <?php if ($category == '107102') echo 'selected="selected"'; ?> value="107102">Classics</option>
+                            <option <?php if ($category == '107103') echo 'selected="selected"'; ?> value="107103">Criticism</option>
+                            <option <?php if ($category == '107104') echo 'selected="selected"'; ?> value="107104">Fiction</option>
+                            <option <?php if ($category == '107105') echo 'selected="selected"'; ?> value="107105">Poetry</option>
                         </optgroup>
                         <optgroup label="Mathematics">
-                            <option value="108">Mathematics</option>
-                            <option value="108100">Advanced Mathematics</option>
-                            <option value="108101">Algebra</option>
-                            <option value="108102">Arithmetic</option>
-                            <option value="108103">Calculus</option>
-                            <option value="108104">Geometry</option>
-                            <option value="108105">Statistics</option>
+                            <option <?php if ($category == '108') echo 'selected="selected"'; ?> value="108">Mathematics</option>
+                            <option <?php if ($category == '108100') echo 'selected="selected"'; ?> value="108100">Advanced Mathematics</option>
+                            <option <?php if ($category == '108101') echo 'selected="selected"'; ?> value="108101">Algebra</option>
+                            <option <?php if ($category == '108102') echo 'selected="selected"'; ?> value="108102">Arithmetic</option>
+                            <option <?php if ($category == '108103') echo 'selected="selected"'; ?> value="108103">Calculus</option>
+                            <option <?php if ($category == '108104') echo 'selected="selected"'; ?> value="108104">Geometry</option>
+                            <option <?php if ($category == '108105') echo 'selected="selected"'; ?> value="108105">Statistics</option>
                         </optgroup>
                         <optgroup label="Science">
-                            <option value="109">Science</option>
-                            <option value="109100">Agricultural</option>
-                            <option value="109101">Astronomy</option>
-                            <option value="109102">Atmospheric</option>
-                            <option value="109103">Biology</option>
-                            <option value="109104">Chemistry</option>
-                            <option value="109105">Ecology</option>
-                            <option value="109106">Geography</option>
-                            <option value="109107">Geology</option>
-                            <option value="109108">Physics</option>
+                            <option <?php if ($category == '109') echo 'selected="selected"'; ?> value="109">Science</option>
+                            <option <?php if ($category == '109100') echo 'selected="selected"'; ?> value="109100">Agricultural</option>
+                            <option <?php if ($category == '109101') echo 'selected="selected"'; ?> value="109101">Astronomy</option>
+                            <option <?php if ($category == '109102') echo 'selected="selected"'; ?> value="109102">Atmospheric</option>
+                            <option <?php if ($category == '109103') echo 'selected="selected"'; ?> value="109103">Biology</option>
+                            <option <?php if ($category == '109104') echo 'selected="selected"'; ?> value="109104">Chemistry</option>
+                            <option <?php if ($category == '109105') echo 'selected="selected"'; ?> value="109105">Ecology</option>
+                            <option <?php if ($category == '109106') echo 'selected="selected"'; ?> value="109106">Geography</option>
+                            <option <?php if ($category == '109107') echo 'selected="selected"'; ?> value="109107">Geology</option>
+                            <option <?php if ($category == '109108') echo 'selected="selected"'; ?> value="109108">Physics</option>
                         </optgroup>
                         <optgroup label="Social Science">
-                            <option value="110">Social Science</option>
-                            <option value="110100">Law</option>
-                            <option value="110101">Political Science</option>
-                            <option value="110102">Public Administration</option>
-                            <option value="110103">Psychology</option>
-                            <option value="110104">Social Welfare</option>
-                            <option value="110105">Sociology</option>
+                            <option <?php if ($category == '110') echo 'selected="selected"'; ?> value="110">Social Science</option>
+                            <option <?php if ($category == '110100') echo 'selected="selected"'; ?> value="110100">Law</option>
+                            <option <?php if ($category == '110101') echo 'selected="selected"'; ?> value="110101">Political Science</option>
+                            <option <?php if ($category == '110102') echo 'selected="selected"'; ?> value="110102">Public Administration</option>
+                            <option <?php if ($category == '110103') echo 'selected="selected"'; ?> value="110103">Psychology</option>
+                            <option <?php if ($category == '110104') echo 'selected="selected"'; ?> value="110104">Social Welfare</option>
+                            <option <?php if ($category == '110105') echo 'selected="selected"'; ?> value="110105">Sociology</option>
                         </optgroup>
                         <optgroup label="Society">
-                            <option value="111">Society</option>
-                            <option value="111100">African-American Studies</option>
-                            <option value="111101">Asian Studies</option>
-                            <option value="111102">European &amp; Russian Studies</option>
-                            <option value="111103">Indigenous Studies</option>
-                            <option value="111104">Latin &amp; Caribbean Studies</option>
-                            <option value="111105">Middle Eastern Studies</option>
-                            <option value="111106">Women's Studies</option>
+                            <option <?php if ($category == '111') echo 'selected="selected"'; ?> value="111">Society</option>
+                            <option <?php if ($category == '111100') echo 'selected="selected"'; ?> value="111100">African-American Studies</option>
+                            <option <?php if ($category == '111101') echo 'selected="selected"'; ?> value="111101">Asian Studies</option>
+                            <option <?php if ($category == '111102') echo 'selected="selected"'; ?> value="111102">European &amp; Russian Studies</option>
+                            <option <?php if ($category == '111103') echo 'selected="selected"'; ?> value="111103">Indigenous Studies</option>
+                            <option <?php if ($category == '111104') echo 'selected="selected"'; ?> value="111104">Latin &amp; Caribbean Studies</option>
+                            <option <?php if ($category == '111105') echo 'selected="selected"'; ?> value="111105">Middle Eastern Studies</option>
+                            <option <?php if ($category == '111106') echo 'selected="selected"'; ?> value="111106">Women's Studies</option>
                         </optgroup>
                         <optgroup label="Teaching &amp; Education">
-                            <option value="112">Teaching &amp; Education</option>
-                            <option value="112100">Curriculum &amp; Teaching</option>
-                            <option value="112101">Educational Leadership</option>
-                            <option value="112102">Family &amp; Childcare</option>
-                            <option value="112103">Learning Resources</option>
-                            <option value="112104">Psychology &amp; Research</option>
-                            <option value="112105">Special Education
+                            <option <?php if ($category == '112') echo 'selected="selected"'; ?> value="112">Teaching &amp; Education</option>
+                            <option <?php if ($category == '112100') echo 'selected="selected"'; ?> value="112100">Curriculum &amp; Teaching</option>
+                            <option <?php if ($category == '112101') echo 'selected="selected"'; ?> value="112101">Educational Leadership</option>
+                            <option <?php if ($category == '112102') echo 'selected="selected"'; ?> value="112102">Family &amp; Childcare</option>
+                            <option <?php if ($category == '112103') echo 'selected="selected"'; ?> value="112103">Learning Resources</option>
+                            <option <?php if ($category == '112104') echo 'selected="selected"'; ?> value="112104">Psychology &amp; Research</option>
+                            <option <?php if ($category == '112105') echo 'selected="selected"'; ?> value="112105">Special Education
                         </optgroup>
                     </select>
                 </div>
