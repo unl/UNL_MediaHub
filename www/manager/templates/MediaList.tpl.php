@@ -32,7 +32,7 @@ if (count($context->items)) {
     } 
     echo '</ul>';
 } else {
-    echo '<p>This feed has no media yet.</p>';
+    echo '<p>This channel has no media yet.</p>';
 }
 ?>
 <p class="action"><a class="add_media" href="<?php echo $addMediaURL; ?>">Add media</a></p> 
