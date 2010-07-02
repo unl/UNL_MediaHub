@@ -32,7 +32,13 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
                    'UNL_MediaYak_Feed_NamespacedElements_boxee') as $ns_class) {
         foreach ($context->feed->$ns_class as $namespaced_element) {
             $element = "{$namespaced_element['xmlns']}:{$namespaced_element['element']}";
-            echo "<$element>{$namespaced_element['value']}</$element>\n";
+            $attribute_string = '';
+            if (!empty($namespaced_element['attributes'])) {
+                foreach ($namespaced_element['attributes'] as $attribute=>$value) {
+                    $attribute_string .= " $attribute=\"$value\"";
+                }
+            }
+            echo "<{$element}{$attribute_string}>".htmlspecialchars($namespaced_element['value'])."</$element>\n";
         }
     }
     echo $savvy->render($context->media_list);
