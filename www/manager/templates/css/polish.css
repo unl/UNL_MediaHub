@@ -106,17 +106,20 @@ dl.caption {
 	padding-left:0px;
 	}
 div.headline_main {
-	background:url(images/headline_mainBG.png) no-repeat top left;
-	/*display:block;*/
-	width:940px;
-	height:121px;
+	background:#ecf4f8;
+	width:900px;
+	height:100px;
 	padding:25px 20px 20px 20px;
+	margin-bottom:30px;
+    borer-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
 }
-#part2 div.headline_main h1 {
+#maincontent div.headline_main h1 {
 	font-size:3em;
 	float:left;
+	padding-top:26px;
 }
 div.headline_main img {
 	float:right;
-	margin-right:40px;
 }

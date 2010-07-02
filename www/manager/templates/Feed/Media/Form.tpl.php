@@ -115,11 +115,11 @@ WDN.jQuery(document).ready(function() {
     <fieldset id="existing_media">
         <legend>Required Information</legend>
         <ol>
-            <li><label for="title" class="element">Title</label><input id="title" name="title" type="text" size="60" value="<?php echo htmlentities(@$context->media->title, ENT_QUOTES); ?>" /></li>
-            <li><label for="author" class="element">Author</label><div class="element"><input id="author" name="author" type="text" size="60" value="<?php echo htmlentities(@$context->media->author, ENT_QUOTES); ?>" /></div></li>
+            <li><label for="title" class="element">Title</label><input id="title" name="title" type="text" value="<?php echo htmlentities(@$context->media->title, ENT_QUOTES); ?>" /></li>
+            <li><label for="author" class="element">Author</label><div class="element"><input id="author" name="author" type="text" value="<?php echo htmlentities(@$context->media->author, ENT_QUOTES); ?>" /></div></li>
             <li>
                 <label for="description" class="element">Description</label>
-                <div class="element" id="description_wrapper"><textarea id="description" name="description" rows="5" cols="60"><?php echo htmlentities(@$context->media->description); ?></textarea></div>
+                <div class="element" id="description_wrapper"><textarea id="description" name="description" rows="5"><?php echo htmlentities(@$context->media->description); ?></textarea></div>
             </li>
 
             <li style="display:none;"><label for="submit_existing" class="element">&nbsp;</label><div class="element"><input id="submit_existing" name="submit_existing" value="Save" type="submit" /></div></li>
@@ -436,7 +436,7 @@ WDN.jQuery(document).ready(function() {
                 <label for="mrss_text" class="element">Transcript/Captioning</label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_media[11][element]" type="hidden" value="text"/>
-                    <textarea rows="3" cols="50" id="mrss_text" name="UNL_MediaYak_Feed_Media_NamespacedElements_media[11][value]"><?php echo getFieldValue($context, 'media', 'text'); ?></textarea>
+                    <textarea rows="3" id="mrss_text" name="UNL_MediaYak_Feed_Media_NamespacedElements_media[11][value]"><?php echo getFieldValue($context, 'media', 'text'); ?></textarea>
                 </div>
             </li>
             <li style="display:none;">
@@ -468,5 +468,4 @@ WDN.jQuery(document).ready(function() {
         </ol>
     </fieldset>
     <input type="submit" name="submit" id="continue3" value="Publish" onclick="document.getElementById('submit_existing').click();" />
-
 </form>
