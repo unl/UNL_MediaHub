@@ -1,13 +1,7 @@
 #main_right {overflow:visible;}
 #enhanced_header, #existing_media, #feedSelect, #maincontent form.zenform #continue3, #file_upload {display:none;}
 #maincontent form.zenform {width:930px;margin-top:5px;}
-#feedlist h1 {
-	background: url(images/h1Feeds.png) no-repeat top left;
-	padding-left: 60px;
-	font-size: 2em;
-	border-bottom: 2px solid #e8e9ea;
-	margin:2em 0 1em 0;
-	}
+
 #tabnav {
 	list-style-type: none;
 	margin:30px 0  0 -30px;
@@ -64,20 +58,16 @@ p.action {
 	padding-left:5px;
 	display:block;
 	}
-p.submit a, p.action a {
+p.action a {
     background:url(images/submitR.png) no-repeat top right;
     font-size:1.5em;
-    color:#FFF !important;
     display:inline-block;
     padding:15px 45px 15px 10px;
-}
-#maincontent p.submit a:focus {
-    color:#fff !important;	
 }
 p.action a {
 	background:url(images/actionR.png) no-repeat top right;
 	font-size:1em;
-	color:#6a6a6a;
+	color:#6a6a6a !important;
 	padding:10px 25px 10px 5px;
 	}
 #media_form p.caption, dl.caption {
@@ -110,4 +100,30 @@ div.headline_main {
 }
 div.headline_main img {
 	float:right;
+}
+#feedlist h1 {
+    background: url('images/h1Feeds.png') no-repeat top left;
+    padding:14px 0 0 60px;
+    font-size: 2em;
+    border-bottom: 2px solid #e8e9ea;
+    margin:2em 0 1em 0;
+}
+#feedlist ul {
+	list-style:none;
+	padding-left:0;
+	margin-top:10px;
+}
+#feedlist ul li {
+    padding:5px;
+}
+#feedlist ul li:hover {
+    background:#d2e3fb;	
+}
+a.feed-icon{margin-right:3px;}
+a.edit_channel{
+	margin-right:10px;
+	background:url('images/iconChannel.png') no-repeat right bottom;
+	padding:3px 19px 0 0;
+	width:16px;
+	height:16px;
 }
