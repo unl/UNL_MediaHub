@@ -298,7 +298,7 @@ WDN.jQuery(document).ready(function() {
                             <option value="111103">Indigenous Studies</option>
                             <option value="111104">Latin & Caribbean Studies</option>
                             <option value="111105">Middle Eastern Studies</option>
-                            <option value="111106">Women’s Studies</option>
+                            <option value="111106">Women's Studies</option>
                         </optgroup>
                         <optgroup label="Teaching & Education">
                             <option value="112">Teaching & Education</option>
