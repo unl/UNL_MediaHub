@@ -59,14 +59,116 @@
             <li><label for='itunes_author' class='element'>Author</label><div class='element'>
                 <input name='UNL_MediaYak_Feed_NamespacedElements_itunes[0][element]' type='hidden' value='author' />
                 <input id='itunes_author' name='UNL_MediaYak_Feed_NamespacedElements_itunes[0][value]' type='text' value='<?php echo getFieldValue($context, 'itunes', 'author'); ?>' size='55' />
-                </div></li><li><label for='itunes_block' class='element'>Block</label><div class='element'>
+                </div></li>
+            <li><label for='itunes_block' class='element'>Block</label><div class='element'>
                 <input name='UNL_MediaYak_Feed_NamespacedElements_itunes[1][element]' type='hidden' value='block' />
                 <input id='itunes_block' name='UNL_MediaYak_Feed_NamespacedElements_itunes[1][value]' type='text' value='<?php echo getFieldValue($context, 'itunes', 'block'); ?>' size='55' />
-                </div></li><li><label for='itunes_category' class='element'>Category</label><div class='element'>
-
-                <input name='UNL_MediaYak_Feed_NamespacedElements_itunes[2][element]' type='hidden' value='category' />
-                <input id='itunes_category' name='UNL_MediaYak_Feed_NamespacedElements_itunes[2][value]' type='text' value='<?php echo getFieldValue($context, 'itunes', 'category'); ?>' size='55' />
-                </div></li><li><label for='itunes_image' class='element'>Image</label><div class='element'>
+                </div></li>
+            <li>
+                <label for='itunes_category' class='element'>Category</label>
+                <div class='element'>
+                    <input name='UNL_MediaYak_Feed_NamespacedElements_itunes[2][element]' type='hidden' value='category' />
+                    <?php
+                    $categories = array();
+                    if ($value = UNL_MediaYak_Feed_NamespacedElements_itunes::feedHasElement($context->feed->id, 'category', 'itunes')) {
+                        $categories = $value['attributes']['text'];
+                    }
+                    ?>
+                    <select id='itunes_category' name='UNL_MediaYak_Feed_NamespacedElements_itunes[2][attributes][]' multiple="multiple">
+                        <option <?php if (in_array('Arts', $categories)) echo 'selected="selected"'; ?> value="Arts">Arts</option>
+                        <optgroup label="Arts">
+                            <option <?php if (in_array('Arts:Design', $categories)) echo 'selected="selected"'; ?> value="Arts:Design">Design</option>
+                            <option <?php if (in_array('Arts:Fashion & Beauty', $categories)) echo 'selected="selected"'; ?> value="Arts:Fashion &amp; Beauty">Fashion &amp; Beauty</option>
+                            <option <?php if (in_array('Arts:Food', $categories)) echo 'selected="selected"'; ?> value="Arts:Food">Food</option>
+                            <option <?php if (in_array('Arts:Literature', $categories)) echo 'selected="selected"'; ?> value="Arts:Literature">Literature</option>
+                            <option <?php if (in_array('Arts:Performing Arts', $categories)) echo 'selected="selected"'; ?> value="Arts:Performing Arts">Performing Arts</option>
+                            <option <?php if (in_array('Arts:Visual Arts', $categories)) echo 'selected="selected"'; ?> value="Arts:Visual Arts">Visual Arts</option>
+                        </optgroup>
+                        <option <?php if (in_array('Business', $categories)) echo 'selected="selected"'; ?> value="Business">Business</option>
+                        <optgroup label="Business">
+                            <option <?php if (in_array('Business:Business News', $categories)) echo 'selected="selected"'; ?> value="Business:Business News">Business News</option>
+                            <option <?php if (in_array('Business:Careers', $categories)) echo 'selected="selected"'; ?> value="Business:Careers">Careers</option>
+                            <option <?php if (in_array('Business:Investing', $categories)) echo 'selected="selected"'; ?> value="Business:Investing">Investing</option>
+                            <option <?php if (in_array('Business:Management & Marketing', $categories)) echo 'selected="selected"'; ?> value="Business:Management &amp; Marketing">Management &amp; Marketing</option>
+                            <option <?php if (in_array('Business:Shopping', $categories)) echo 'selected="selected"'; ?> value="Business:Shopping">Shopping</option>
+                        </optgroup>
+                        <option <?php if (in_array('Comedy', $categories)) echo 'selected="selected"'; ?> value="Comedy">Comedy</option>
+                        <option <?php if (in_array('Education', $categories)) echo 'selected="selected"'; ?> value="Education">Education</option>
+                        <optgroup label="Education">
+                            <option <?php if (in_array('Education:Education Technology', $categories)) echo 'selected="selected"'; ?> value="Education:Education Technology">Education Technology</option>
+                            <option <?php if (in_array('Education:Higher Education', $categories)) echo 'selected="selected"'; ?> value="Education:Higher Education">Higher Education</option>
+                            <option <?php if (in_array('Education:K-12', $categories)) echo 'selected="selected"'; ?> value="Education:K-12">K-12</option>
+                            <option <?php if (in_array('Education:Language Courses', $categories)) echo 'selected="selected"'; ?> value="Education:Language Courses">Language Courses</option>
+                            <option <?php if (in_array('Education:Training', $categories)) echo 'selected="selected"'; ?> value="Education:Training">Training</option>
+                        </optgroup>
+                        <option <?php if (in_array('Games & Hobbies', $categories)) echo 'selected="selected"'; ?> value="Games &amp; Hobbies">Games &amp; Hobbies</option>
+                        <optgroup label="Games &amp; Hobbies">
+                            <option <?php if (in_array('Games & Hobbies:Automotive', $categories)) echo 'selected="selected"'; ?> value="Games &amp; Hobbies:Automotive">Automotive</option>
+                            <option <?php if (in_array('Games & Hobbies:Aviation', $categories)) echo 'selected="selected"'; ?> value="Games &amp; Hobbies:Aviation">Aviation</option>
+                            <option <?php if (in_array('Games & Hobbies:Hobbies', $categories)) echo 'selected="selected"'; ?> value="Games &amp; Hobbies:Hobbies">Hobbies</option>
+                            <option <?php if (in_array('Games & Hobbies:Other Games', $categories)) echo 'selected="selected"'; ?> value="Games &amp; Hobbies:Other Games">Other Games</option>
+                            <option <?php if (in_array('Games & Hobbies:Video Games', $categories)) echo 'selected="selected"'; ?> value="Games &amp; Hobbies:Video Games">Video Games</option>
+                        </optgroup>
+                        <option <?php if (in_array('Government & Organizations', $categories)) echo 'selected="selected"'; ?> value="Government &amp; Organizations">Government &amp; Organizations</option>
+                        <optgroup label="Government &amp; Organizations">
+                            <option <?php if (in_array('Government & Organizations:Local', $categories)) echo 'selected="selected"'; ?> value="Government &amp; Organizations:Local">Local</option>
+                            <option <?php if (in_array('Government & Organizations:National', $categories)) echo 'selected="selected"'; ?> value="Government &amp; Organizations:National">National</option>
+                            <option <?php if (in_array('Government & Organizations:Non-Profit', $categories)) echo 'selected="selected"'; ?> value="Government &amp; Organizations:Non-Profit">Non-Profit</option>
+                            <option <?php if (in_array('Government & Organizations:Regional', $categories)) echo 'selected="selected"'; ?> value="Government &amp; Organizations:Regional">Regional</option>
+                        </optgroup>
+                        <option <?php if (in_array('Health', $categories)) echo 'selected="selected"'; ?> value="Health">Health</option>
+                        <optgroup label="Health">
+                            <option <?php if (in_array('Health:Alternative Health', $categories)) echo 'selected="selected"'; ?> value="Health:Alternative Health">Alternative Health</option>
+                            <option <?php if (in_array('Health:Fitness & Nutrition', $categories)) echo 'selected="selected"'; ?> value="Health:Fitness &amp; Nutrition">Fitness &amp; Nutrition</option>
+                            <option <?php if (in_array('Health:Self-Help', $categories)) echo 'selected="selected"'; ?> value="Health:Self-Help">Self-Help</option>
+                            <option <?php if (in_array('Health:Sexuality', $categories)) echo 'selected="selected"'; ?> value="Health:Sexuality">Sexuality</option>
+                        </optgroup>
+                        <option <?php if (in_array('Kids & Family', $categories)) echo 'selected="selected"'; ?> value="Kids &amp; Family">Kids &amp; Family</option>
+                        <option <?php if (in_array('Music', $categories)) echo 'selected="selected"'; ?> value="Music">Music</option>
+                        <option <?php if (in_array('News & Politics', $categories)) echo 'selected="selected"'; ?> value="News &amp; Politics">News &amp; Politics</option>
+                        <option <?php if (in_array('Religion & Spirituality', $categories)) echo 'selected="selected"'; ?> value="Religion &amp; Spirituality">Religion &amp; Spirituality</option>
+                        <optgroup label="Religion &amp; Spirituality">
+                            <option <?php if (in_array('Religion & Spirituality:Buddhism', $categories)) echo 'selected="selected"'; ?> value="Religion &amp; Spirituality:Buddhism">Buddhism</option>
+                            <option <?php if (in_array('Religion & Spirituality:Christianity', $categories)) echo 'selected="selected"'; ?> value="Religion &amp; Spirituality:Christianity">Christianity</option>
+                            <option <?php if (in_array('Religion & Spirituality:Hinduism', $categories)) echo 'selected="selected"'; ?> value="Religion &amp; Spirituality:Hinduism">Hinduism</option>
+                            <option <?php if (in_array('Religion & Spirituality:Islam', $categories)) echo 'selected="selected"'; ?> value="Religion &amp; Spirituality:Islam">Islam</option>
+                            <option <?php if (in_array('Religion & Spirituality:Judaism', $categories)) echo 'selected="selected"'; ?> value="Religion &amp; Spirituality:Judaism">Judaism</option>
+                            <option <?php if (in_array('Religion & Spirituality:Other', $categories)) echo 'selected="selected"'; ?> value="Religion &amp; Spirituality:Other">Other</option>
+                            <option <?php if (in_array('Religion & Spirituality:Spirituality', $categories)) echo 'selected="selected"'; ?> value="Religion &amp; Spirituality:Spirituality">Spirituality</option>
+                        </optgroup>
+                        <option <?php if (in_array('Science & Medicine', $categories)) echo 'selected="selected"'; ?> value="Science &amp; Medicine">Science &amp; Medicine</option>
+                        <optgroup label="Science &amp; Medicine">
+                            <option <?php if (in_array('Science & Medicine:Medicine', $categories)) echo 'selected="selected"'; ?> value="Science &amp; Medicine:Medicine">Medicine</option>
+                            <option <?php if (in_array('Science & Medicine:Natural Sciences', $categories)) echo 'selected="selected"'; ?> value="Science &amp; Medicine:Natural Sciences">Natural Sciences</option>
+                            <option <?php if (in_array('Science & Medicine:Social Sciences', $categories)) echo 'selected="selected"'; ?> value="Science &amp; Medicine:Social Sciences">Social Sciences</option>
+                        </optgroup>
+                        <option <?php if (in_array('Society & Culture', $categories)) echo 'selected="selected"'; ?> value="Society &amp; Culture">Society &amp; Culture</option>
+                        <optgroup label="Society &amp; Culture">
+                            <option <?php if (in_array('', $categories)) echo 'selected="selected"'; ?> value="Society &amp; Culture:History">History</option>
+                            <option <?php if (in_array('', $categories)) echo 'selected="selected"'; ?> value="Society &amp; Culture:Personal Journals">Personal Journals</option>
+                            <option <?php if (in_array('', $categories)) echo 'selected="selected"'; ?> value="Society &amp; Culture:Philosophy">Philosophy</option>
+                            <option <?php if (in_array('', $categories)) echo 'selected="selected"'; ?> value="Society &amp; Culture:Places &amp; Travel">Places &amp; Travel</option>
+                        </optgroup>
+                        <option <?php if (in_array('', $categories)) echo 'selected="selected"'; ?> value="Sports &amp; Recreation">Sports &amp; Recreation</option>
+                        <optgroup label="Sports &amp; Recreation">
+                            <option <?php if (in_array('Sports & Recreation:Amateur', $categories)) echo 'selected="selected"'; ?> value="Sports &amp; Recreation:Amateur">Amateur</option>
+                            <option <?php if (in_array('Sports & Recreation:College &amp; High School', $categories)) echo 'selected="selected"'; ?> value="Sports &amp; Recreation:College &amp; High School">College &amp; High School</option>
+                            <option <?php if (in_array('Sports & Recreation:Outdoor', $categories)) echo 'selected="selected"'; ?> value="Sports &amp; Recreation:Outdoor">Outdoor</option>
+                            <option <?php if (in_array('Sports & Recreation:Professional', $categories)) echo 'selected="selected"'; ?> value="Sports &amp; Recreation:Professional">Professional</option>
+                        </optgroup>
+                        <option <?php if (in_array('Technology', $categories)) echo 'selected="selected"'; ?> value="Technology">Technology</option>
+                        <optgroup label="Technology">
+                            <option <?php if (in_array('Technology:Gadgets', $categories)) echo 'selected="selected"'; ?> value="Technology:Gadgets">Gadgets</option>
+                            <option <?php if (in_array('Technology:Podcasting', $categories)) echo 'selected="selected"'; ?> value="Technology:Podcasting">Podcasting</option>
+                            <option <?php if (in_array('Technology:Software How-To', $categories)) echo 'selected="selected"'; ?> value="Technology:Software How-To">Software How-To</option>
+                            <option <?php if (in_array('Technology:Tech News', $categories)) echo 'selected="selected"'; ?> value="Technology:Tech News">Tech News</option>
+                        </optgroup>
+                        <option <?php if (in_array('TV & Film', $categories)) echo 'selected="selected"'; ?> value="TV &amp; Film">TV &amp; Film</option>
+                    </select>
+                    <dl class="caption"><dd>Choose a category for use within iTunes and iTunes U</dd></dl>
+                </div>
+            </li>
+            <li><label for='itunes_image' class='element'>Image</label><div class='element'>
                 <input name='UNL_MediaYak_Feed_NamespacedElements_itunes[3][element]' type='hidden' value='image' />
                 <input id='itunes_image' name='UNL_MediaYak_Feed_NamespacedElements_itunes[3][value]' type='text' value='<?php echo getFieldValue($context, 'itunes', 'image'); ?>' size='55' />
                 </div></li>

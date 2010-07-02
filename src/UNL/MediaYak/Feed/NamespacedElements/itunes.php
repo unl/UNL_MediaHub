@@ -34,4 +34,25 @@ class UNL_MediaYak_Feed_NamespacedElements_itunes extends UNL_MediaYak_Feed_Name
             'summary',
             );
     }
+
+    function preInsert($event)
+    {
+        $this->checkCategory();
+        parent::preInsert($event);
+    }
+
+    function preUpdate($event)
+    {
+        $this->checkCategory();
+        parent::preUpdate($event);
+    }
+
+    function checkCategory()
+    {
+        if ($this->element == 'category'
+            && !empty($this->attributes)
+            && is_array($this->attributes)) {
+            $this->attributes = array('text'=>$this->attributes);
+        }
+    }
 }
