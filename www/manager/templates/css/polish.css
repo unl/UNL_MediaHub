@@ -51,8 +51,13 @@
 	color:white;
 	}
 #formContent {
-	margin-top:-5px;
-	background: #1091d1 url(images/formContentBG.png) bottom left no-repeat;
+	margin:-5px;
+	background: #1091d1;
+	borer-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	-moz-border-radius-topleft:0px;
+    -webkit-border-top-left-radius:0px;
 	padding:15px;
 	}
 #formContent input#url, #formContent input#file_upload {
@@ -76,9 +81,12 @@ p.action {
 p.submit a, p.action a {
     background:url(images/submitR.png) no-repeat top right;
     font-size:1.5em;
-    color:#FFF;
+    color:#FFF !important;
     display:inline-block;
     padding:15px 45px 15px 10px;
+}
+#maincontent p.submit a:focus {
+    color:#fff !important;	
 }
 p.action a {
 	background:url(images/actionR.png) no-repeat top right;
