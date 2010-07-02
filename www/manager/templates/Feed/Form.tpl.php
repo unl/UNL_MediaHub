@@ -69,11 +69,24 @@
                 </div></li><li><label for='itunes_image' class='element'>Image</label><div class='element'>
                 <input name='UNL_MediaYak_Feed_NamespacedElements_itunes[3][element]' type='hidden' value='image' />
                 <input id='itunes_image' name='UNL_MediaYak_Feed_NamespacedElements_itunes[3][value]' type='text' value='<?php echo getFieldValue($context, 'itunes', 'image'); ?>' size='55' />
-                </div></li><li><label for='itunes_explicit' class='element'>Explicit</label><div class='element'>
-                <input name='UNL_MediaYak_Feed_NamespacedElements_itunes[4][element]' type='hidden' value='explicit' />
-                <input id='itunes_explicit' name='UNL_MediaYak_Feed_NamespacedElements_itunes[4][value]' type='text' value='<?php echo getFieldValue($context, 'itunes', 'explicit'); ?>' size='55' />
-
-                </div></li><li><label for='itunes_keywords' class='element'>Keywords</label><div class='element'>
+                </div></li>
+                
+                <li><label for='itunes_explicit' class='element'>Explicit</label>
+                <div class='element'>
+                    <input name="UNL_MediaYak_Feed_NamespacedElements_itunes[4][element]" type="hidden" value="explicit"/>
+                    <select id="itunes_explicit" name="UNL_MediaYak_Feed_NamespacedElements_itunes[4][value]">
+                        <?php
+                        if (getFieldValue($context, 'itunes', 'explicit') == "yes") {
+                            echo '<option value="">No</option><option value="yes" selected="selected">Yes</option>';
+                        } else {
+                            echo '<option value="">No</option><option value="yes">Yes</option>';
+                        }
+                        ?>
+                    </select>
+                    <dl class="caption"><dd>Set to 'yes' if this feed contains explicit content</dd></dl>
+                </div></li>
+                
+                <li><label for='itunes_keywords' class='element'>Keywords</label><div class='element'>
                 <input name='UNL_MediaYak_Feed_NamespacedElements_itunes[5][element]' type='hidden' value='keywords' />
                 <input id='itunes_keywords' name='UNL_MediaYak_Feed_NamespacedElements_itunes[5][value]' type='text' value='<?php echo getFieldValue($context, 'itunes', 'keywords'); ?>' size='55' />
                 </div></li><li><label for='itunes_new-feed-url' class='element'>New-feed-url</label><div class='element'>
