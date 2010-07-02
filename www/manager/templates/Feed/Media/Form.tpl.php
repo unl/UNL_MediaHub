@@ -437,7 +437,7 @@ WDN.jQuery(document).ready(function() {
         <ol>
             <li>
                 <fieldset>
-                    <legend>Select from your feeds or add to a new feed</legend>
+                    <legend>Select from your channel or add to a new channel</legend>
                         <ol>
                             <?php
                             $list = UNL_MediaYak_Manager::getUser()->getFeeds();
