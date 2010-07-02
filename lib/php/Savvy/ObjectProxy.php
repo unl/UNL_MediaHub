@@ -27,7 +27,7 @@
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @link      http://svn.php.net/repository/pear2/Savvy
  */
-class Savvy_ObjectProxy
+class Savvy_ObjectProxy implements Countable
 {
     /**
      * The internal object
@@ -89,6 +89,17 @@ class Savvy_ObjectProxy
     }
     
     /**
+     * Allows direct access to the entire object for situations where the proxy
+     * interferes.
+     * 
+     * @return mixed The raw object
+     */
+    function getRawObject()
+    {
+        return $this->object;
+    }
+    
+    /**
      * Allows access to the raw member variables of the internal object.
      * 
      * @return mixed
@@ -134,7 +145,7 @@ class Savvy_ObjectProxy
      */
     function __call($name, $arguments)
     {
-        return call_user_func_array(array($this->object, $name), $arguments);
+        return $this->filterVar(call_user_func_array(array($this->object, $name), $arguments));
     }
     
     /**
@@ -167,5 +178,24 @@ class Savvy_ObjectProxy
             return new Savvy_ObjectProxy_ArrayAccess($object, $savvy);
         }
         return new self($object, $savvy);
+    }
+    
+    function __toString()
+    {
+        if (method_exists($this->object, '__toString')) {
+            return $this->savvy->escape($this->object->__toString());
+        }
+        throw new Savvy_BadMethodCallException('Object of class '.$this->__getClass().' could not be converted to string');
+    }
+    
+    /**
+     * Returns the number of elements if the object has implemented Countable,
+     * otherwise 1 is returned.
+     * 
+     * @return int
+     */
+    function count()
+    {
+        return count($this->object);
     }
 }
