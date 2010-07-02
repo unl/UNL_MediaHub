@@ -2,33 +2,11 @@
 
 $jquery = '';
 if (!isset($context->media)) {
-    $jquery .= '
-    //used for testing
-    WDN.jQuery("#part1").hide();
-    WDN.jQuery("#part2").show();
-    //remove above before going live
-    WDN.jQuery("#file_upload").hide();
-    WDN.jQuery("#a_url").click(function(){
-        WDN.jQuery(this).parent("li").addClass("selected");
-        WDN.jQuery(this).parent("li").siblings("li").removeClass("selected");
-        WDN.jQuery("#file_upload").hide(400);
-        WDN.jQuery("#url").show(400);
-        
-        return false;
-    });
-    WDN.jQuery("#a_file").click(function(){
-        WDN.jQuery(this).parent("li").addClass("selected");
-        WDN.jQuery(this).parent("li").siblings("li").removeClass("selected");
-        WDN.jQuery("#url").hide(400);
-        WDN.jQuery("#file_upload").show(400);
-        return false;
-    });
-    ';
-    if (isset($_GET['feed_id'])) {
-        $jquery .= 'WDN.jQuery("#feedlist").hide();';
+    if (isset($_GET['feed_id'])) { //if we already have a feed, don't show the initial feed list
+        $jquery .= 'WDN.jQuery("#feedlist").hide();'; 
     }
-} else {
-    $jquery .= 'WDN.jQuery("#part1").hide();WDN.jQuery("#feedlist").hide();WDN.jQuery("#part2").show(400);';
+} else { //if we have media (we're editing) show the appropriate part of the form
+    $jquery .= 'WDN.jQuery("#addMedia").hide();WDN.jQuery("#feedlist").hide();WDN.jQuery(".headline_main, #existing_media, #enhanced_header, #feedSelect, #maincontent form.zenform #continue3").show(400);';
 }
 
 $jquery .= '
@@ -39,9 +17,13 @@ $jquery .= '
                 alert(\'Sorry, you must use a .unl.edu URL!\');
                 return false;
             }
-            WDN.jQuery("#feedlist").hide(400);
-            WDN.jQuery("#part1").hide(400);
-            WDN.jQuery("#part2").show(400);
+            WDN.jQuery("form.zenform").nextAll("#feedlist").hide();
+            WDN.jQuery("#addMedia").slideUp(400, function() {
+                WDN.jQuery(".headline_main").slideDown(400, function() {
+                    WDN.jQuery("#existing_media, #enhanced_header, #feedSelect, #maincontent form.zenform #continue3").slideDown(400);
+                    WDN.jQuery("form.zenform").nextAll("#feedlist").show();
+                });
+            });
             document.getElementById("thumbnail").src = "'.UNL_MediaYak_Controller::$thumbnail_generator.'"+document.getElementById("url").value;
             return false;
         }
@@ -79,7 +61,7 @@ WDN.jQuery(document).ready(function() {
 ');
 
 ?>
-<div class="headline_main">
+<div class="headline_main" style="display:none;">
     <h1><?php echo (isset($context->media))?'Edit the details of your':'Tell us about your'; ?> media.</h1>
     <?php
     $thumbnail = 'templates/images/thumbs/placeholder.jpg';
@@ -87,38 +69,34 @@ WDN.jQuery(document).ready(function() {
         $thumbnail = UNL_MediaYak_Controller::$thumbnail_generator.urlencode($context->media->url);
     }
     ?>
-    <img src="<?php echo $thumbnail; ?>" id="thumbnail" alt="Thumbnail preview2" />
+    <img src="<?php echo $thumbnail; ?>" id="thumbnail" alt="Thumbnail preview2" width="164" height="95" />
 </div>
-<form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data"  class="zenform cool">
-<div id="part1">
-    <h1>Add new media:</h1>
-    <ul id="tabnav">
-        <li class="selected"><a href="#" id="a_url">Add by URL (http://&hellip;)</a></li>
-        <!-- <li><a href="#" id="a_file">Upload a file</a></li> -->
-    </ul>
-    <div id="formContent">
-        <input id="url" name="url" type="text" value="<?php echo htmlentities(@$context->media->url, ENT_QUOTES); ?>" />
-        <!-- <input id="file_upload" name="file_upload" type="file" /> -->
-        <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
-        <input id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" type="hidden" value="67108864" />
-        <?php
-        if (isset($context->media->id)) {
-            echo '<input type="hidden" id="id" name="id" value="'.$context->media->id.'" />';
-        }
-        ?>
-    </div>
-    <p class="caption">media types supported: .m4v, .mp4, .mp3</p>
-    <p class="submit"><a id="continue2" href="#">Continue</a></p>
-    <div id="part1_close"></div>
-</div>
-
-    <fieldset id="existing_media">
-        <legend>Required Information</legend>
+<form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data" class="zenform cool">
+    <fieldset id="addMedia">
+    <legend>Add New Media</legend>
         <ol>
-            <li><label for="title" class="element">Title</label><input id="title" name="title" type="text" value="<?php echo htmlentities(@$context->media->title, ENT_QUOTES); ?>" /></li>
-            <li><label for="author" class="element">Author</label><div class="element"><input id="author" name="author" type="text" value="<?php echo htmlentities(@$context->media->author, ENT_QUOTES); ?>" /></div></li>
             <li>
-                <label for="description" class="element">Description</label>
+                <label><span class="required">*</span>URL of Media File<span class="helper">Media types supported: .m4v, .mp4, .mp3</span></label>
+		        <input id="url" name="url" type="text" value="<?php echo htmlentities(@$context->media->url, ENT_QUOTES); ?>" />
+		        <!-- <input id="file_upload" name="file_upload" type="file" /> -->
+		        <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
+		        <input id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" type="hidden" value="67108864" />
+		        <?php
+		        if (isset($context->media->id)) {
+		            echo '<input type="hidden" id="id" name="id" value="'.$context->media->id.'" />';
+		        }
+		        ?>
+            </li>
+        </ol>
+    <input type="submit" name="submit" id="continue2" value="Continue" />
+    </fieldset>
+    <fieldset id="existing_media">
+        <legend>Basic Information</legend>
+        <ol>
+            <li><label for="title" class="element"><span class="required">*</span>Title</label><input id="title" name="title" type="text" value="<?php echo htmlentities(@$context->media->title, ENT_QUOTES); ?>" /></li>
+            <li><label for="author" class="element"><span class="required">*</span>Author</label><div class="element"><input id="author" name="author" type="text" value="<?php echo htmlentities(@$context->media->author, ENT_QUOTES); ?>" /></div></li>
+            <li>
+                <label for="description" class="element"><span class="required">*</span>Description</label>
                 <div class="element" id="description_wrapper"><textarea id="description" name="description" rows="5"><?php echo htmlentities(@$context->media->description); ?></textarea></div>
             </li>
 
@@ -448,12 +426,12 @@ WDN.jQuery(document).ready(function() {
             </li>
         </ol>
     </fieldset>
-    <fieldset>
-        <legend>Select The Feeds</legend>
+    <fieldset id="feedSelect">
+        <legend>For Which Feeds Shall this Media be Added?</legend>
         <ol>
             <li>
                 <fieldset>
-                    <legend>Select from your feeds or add to a new feed. </legend>
+                    <legend>Select from your feeds or add to a new feed</legend>
                         <ol>
                             <?php
                             $list = UNL_MediaYak_Manager::getUser()->getFeeds();

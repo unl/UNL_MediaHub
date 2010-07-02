@@ -1,20 +1,6 @@
 #main_right {overflow:visible;}
-#part1 {
-	background:#ecf4f8 url(images/focusBG.png) no-repeat top left;
-	padding:20px;
-	width:899px;
-}
-#part1_close {
-	background:url(images/focusBGBottom.png) no-repeat bottom left;
-	height:24px;
-	margin-bottom:-20px;
-	margin-left:-20px;
-}
-#part1 h1 {
-	background: url(images/h1Film.png) no-repeat top left;
-	padding-left: 60px;
-	font-size: 2em;
-	}
+#enhanced_header, #existing_media, #feedSelect, #maincontent form.zenform #continue3, #file_upload {display:none;}
+#maincontent form.zenform {width:930px;margin-top:5px;}
 #feedlist h1 {
 	background: url(images/h1Feeds.png) no-repeat top left;
 	padding-left: 60px;
@@ -94,10 +80,12 @@ p.action a {
 	color:#6a6a6a;
 	padding:10px 25px 10px 5px;
 	}
-#part1 p.caption, dl.caption {
+#media_form p.caption, dl.caption {
 	margin-top: 5px;
 	text-align: right;
 	color:#1091d1;
+	border:none;
+	background:none;
 }
 dl.caption {
 	text-align:left;
