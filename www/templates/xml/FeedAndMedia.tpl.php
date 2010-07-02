@@ -32,13 +32,38 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
                    'UNL_MediaYak_Feed_NamespacedElements_boxee') as $ns_class) {
         foreach ($context->feed->$ns_class as $namespaced_element) {
             $element = "{$namespaced_element['xmlns']}:{$namespaced_element['element']}";
-            $attribute_string = '';
-            if (!empty($namespaced_element['attributes'])) {
-                foreach ($namespaced_element['attributes'] as $attribute=>$value) {
-                    $attribute_string .= " $attribute=\"$value\"";
+            if ($namespaced_element['xmlns'] == 'itunes'
+                && $namespaced_element['element'] == 'category') {
+                // Handle this field special
+                if (!empty($namespaced_element['attributes'])
+                    && isset($namespaced_element['attributes']['text'])) {
+                    $categories = array();
+                    foreach ($namespaced_element['attributes']['text'] as $value) {
+                        $value = explode(':', $value);
+                        if (!isset($categories[$value[0]])) {
+                            $categories[$value[0]] = array();
+                        }
+                        if (isset($value[1])) {
+                            $categories[$value[0]][] = $value[1];
+                        }
+                    }
+                    foreach ($categories as $category=>$subcategories) {
+                        echo '    <itunes:category text="'.htmlspecialchars($category).'">';
+                        foreach ($subcategories as $subcategory) {
+                            echo PHP_EOL.'        <itunes:category text="'.htmlspecialchars($subcategory).'"></itunes:category>';
+                        }
+                        echo '</itunes:category>'.PHP_EOL;
+                    }
                 }
+            } else {
+                $attribute_string = '';
+                if (!empty($namespaced_element['attributes'])) {
+                    foreach ($namespaced_element['attributes'] as $attribute=>$value) {
+                        $attribute_string .= " $attribute=\"$value\"";
+                    }
+                }
+                echo "<{$element}{$attribute_string}>".htmlspecialchars($namespaced_element['value'])."</$element>\n";
             }
-            echo "<{$element}{$attribute_string}>".htmlspecialchars($namespaced_element['value'])."</$element>\n";
         }
     }
     echo $savvy->render($context->media_list);
