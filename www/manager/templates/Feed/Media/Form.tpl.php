@@ -41,13 +41,7 @@ $jquery .= '
       return false;
     });';
 $jquery .= '
-    WDN.loadJS("templates/scripts/tiny_mce/jquery.tinymce.js", function() {
-        WDN.jQuery("textarea#description").tinymce({
-                // Location of TinyMCE script
-                script_url : "templates/scripts/tiny_mce/tiny_mce.js",
-                theme : "simple"
-        });
-    });
+    
 ';
 
 UNL_MediaYak_Manager::setReplacementData('head','
@@ -56,6 +50,25 @@ UNL_MediaYak_Manager::setReplacementData('head','
 WDN.jQuery(document).ready(function() {
     '.$jquery.'
 });
+var jQuery = WDN.jQuery;
+    WDN.loadJS("templates/scripts/tiny_mce/jquery.tinymce.js", function() {
+        WDN.jQuery("textarea#description").tinymce({
+                // Location of TinyMCE script
+                script_url : "templates/scripts/tiny_mce/tiny_mce.js",
+                theme : "advanced",
+                skin : "unl",
+                
+                // Theme options
+		        theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,|,bullist,numlist,|,link,unlink,anchor,|,removeformat,cleanup,help,code,styleselect,formatselect,fontselect,fontsizeselect",
+		        theme_advanced_buttons2 : "",
+		        theme_advanced_buttons3 : "",
+		        theme_advanced_toolbar_location : "top",
+		        theme_advanced_toolbar_align : "left",
+		        theme_advanced_statusbar_location : "bottom",
+		        theme_advanced_resizing : true,
+                theme_advanced_row_height : 33,
+        });
+    });
 </script>
 
 ');
