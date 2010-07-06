@@ -84,7 +84,7 @@ var jQuery = WDN.jQuery;
     ?>
     <img src="<?php echo $thumbnail; ?>" id="thumbnail" alt="Thumbnail preview2" width="164" height="95" />
 </div>
-<form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data" class="zenform cool">
+<form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data" style="width:930px;" class="zenform cool">
     <fieldset id="addMedia">
     <legend>Add New Media</legend>
         <ol>
