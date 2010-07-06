@@ -200,13 +200,6 @@ div.headline_main {
 div.headline_main img {
 	float:right;
 }
-#feedlist h1 {
-    background: url('images/h1Feeds.png') no-repeat top left;
-    padding:14px 0 0 60px;
-    font-size: 2em;
-    border-bottom: 2px solid #e8e9ea;
-    margin:2em 0 1em 0;
-}
 #feedlist ul {
 	list-style:none;
 	padding-left:0;

@@ -1,5 +1,5 @@
-<div id="feedlist">
-    <h1>Your Channels</h1>
+<div id="feedlist" class="two_col left">
+    <h1 class="sec_header">Your Channels</h1>
     <h4>Channels are collections of your media. Use channels to organize specific shows (ex: Backyard Farmer).</h4>
     <?php
     if (count($context->items)) {
