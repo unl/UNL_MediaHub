@@ -44,32 +44,32 @@
 	width: 860px;
 	font-size:2em;
 	color:#878c8e;
-	}
-p.submit, p.action {
-	margin-top: 0px;
-	background:url(images/submitL.png) top left no-repeat;
-	display:inline-block;
-	height:45px;
-	padding-left:5px;
 }
-p.action {
-	background:url(images/actionL.png) top left no-repeat;
-	height:37px;
-	padding-left:5px;
-	display:block;
-	}
-p.action a {
-    background:url(images/submitR.png) no-repeat top right;
-    font-size:1.5em;
-    display:inline-block;
-    padding:15px 45px 15px 10px;
+.list_header {
+    border-bottom:1px solid #E8E9EA;  
+    margin-top:15px; 
 }
-p.action a {
-	background:url(images/actionR.png) no-repeat top right;
+a.action {
+	background:#389b3a;
+	background-image: url('images/iconPlus.png');
+	background-image: url('images/iconPlus.png'), -moz-linear-gradient(center bottom,rgb(56,155,58) 11%,rgb(72,181,74) 30%);
+	background-image: url('images/iconPlus.png'), -webkit-gradient(linear,left bottom,left top,color-stop(0.11, rgb(56,155,58)),color-stop(0.3, rgb(72,181,74)));
+	background-position:5% 50%;	
+	background-origin: padding-box;
+	background-repeat:no-repeat;
 	font-size:1em;
-	color:#6a6a6a !important;
-	padding:10px 25px 10px 5px;
-	}
+	font-weight:bold;
+	color:#fff !important;
+	padding:10px 10px 10px 25px;
+	border:1px solid #318432;
+	border-radius:5px;
+	-webkit-border-radius:5px;
+	-mox-border-radius:5px;
+    display:inline-block;
+}
+a.action:active {
+    background-image: url('images/iconPlus.png');	
+}
 #media_form p.caption, dl.caption {
 	margin-top: 5px;
 	text-align: right;
@@ -122,7 +122,7 @@ div.headline_main img {
 a.feed-icon{margin-right:3px;}
 a.edit_channel{
 	margin-right:10px;
-	background:url('images/iconChannel.png') no-repeat right bottom;
+	background:url('images/iconEdit.png') no-repeat right bottom;
 	padding:3px 19px 0 0;
 	width:16px;
 	height:16px;
