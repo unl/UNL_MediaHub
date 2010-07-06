@@ -17,11 +17,11 @@ $jquery .= '
                 alert(\'Sorry, you must use a .unl.edu URL!\');
                 return false;
             }
-            WDN.jQuery("form.zenform").nextAll("#feedlist").hide();
-            WDN.jQuery("#addMedia").slideUp(400, function() {
+            //WDN.jQuery("").hide();
+            WDN.jQuery("#addMedia, #feedlist").slideUp(400, function() {
                 WDN.jQuery(".headline_main").slideDown(400, function() {
+                    WDN.jQuery("#maincontent form.zenform").css({"width" : "930px"}).parent("div.two_col").removeClass("two_col right");
                     WDN.jQuery("#existing_media, #enhanced_header, #feedSelect, #maincontent form.zenform #continue3").slideDown(400);
-                    WDN.jQuery("form.zenform").nextAll("#feedlist").show();
                 });
             });
             document.getElementById("thumbnail").src = "'.UNL_MediaYak_Controller::$thumbnail_generator.'"+document.getElementById("url").value;
@@ -84,7 +84,8 @@ var jQuery = WDN.jQuery;
     ?>
     <img src="<?php echo $thumbnail; ?>" id="thumbnail" alt="Thumbnail preview2" width="164" height="95" />
 </div>
-<form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data" style="width:930px;" class="zenform cool">
+<div class="two_col right">
+<form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data" class="zenform cool">
     <fieldset id="addMedia">
     <legend>Add New Media</legend>
         <ol>
@@ -458,7 +459,7 @@ var jQuery = WDN.jQuery;
                             echo $savvy->render($list);
                             UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_FeedList', 'FeedList');
                             ?>
-                            <li><label for="new_feed" class="element">New Feed</label><div class="element"><input id="new_feed" name="new_feed" type="text" /></div></li>
+                            <li><label for="new_feed" class="element">New Channel</label><div class="element"><input id="new_feed" name="new_feed" type="text" /></div></li>
                         </ol>
                 </fieldset>
             </li>
@@ -466,3 +467,4 @@ var jQuery = WDN.jQuery;
     </fieldset>
     <input type="submit" name="submit" id="continue3" value="Publish" onclick="document.getElementById('submit_existing').click();" />
 </form>
+</div>
