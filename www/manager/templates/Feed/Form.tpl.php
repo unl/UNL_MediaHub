@@ -1,3 +1,16 @@
+<script type="text/javascript">
+WDN.jQuery(document).ready(function() {
+    WDN.jQuery('#extensions input').change(function() {
+        if(this.checked){
+            WDN.jQuery('#'+this.value+'_header').slideDown(400);
+        } else {
+            WDN.jQuery('#'+this.value+'_header').slideUp(400);
+        }
+        return true;
+    });
+});
+</script>
+<div class="three_col left">
 <form action="<?php echo $context->action; ?>" method="post" name="feed" id="feed" enctype="multipart/form-data" class="zenform">
     <div style="display: none;">
     <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed" />
@@ -10,23 +23,51 @@
 
     <fieldset id="feed_header">
 
-        <legend><?php echo (isset($context->feed))?'Edit':'Create'; ?> Feed</legend>
+        <legend><?php echo (isset($context->feed))?'Edit':'Create'; ?> Channel</legend>
         <ol>
-            <li><label for="title" class="element">Title</label><div class="element"><input id="title" name="title" type="text" value="<?php echo (isset($context->feed))? htmlentities($context->feed->title, ENT_QUOTES):''; ?>" size="55" /></div></li>
-            <li><label for="description" class="element">Description</label><div class="element"><textarea id="description" name="description" rows="5" cols="50"><?php echo (isset($context->feed))?htmlentities($context->feed->description):''; ?></textarea></div></li>
-            <li><label class="element">Image:</label>
-                <div class="element">
-                <p>Images should follow the standard UNL image standards.<br />For a sample template, click here:
-                <a href="http://ucommdev.unl.edu/iTunesU/design_files/icon_template.psd">iTunes U icon template</a><br /><br /></p>
-
-                <ol>
-                    <li><label for="image_file" class="element">File</label><div class="element"><input id="image_file" name="image_file" type="file" /></div></li>
-                    <li><label for="image_title" class="element">Image Title</label><div class="element"><input id="image_title" name="image_title" type="text" value="<?php echo (isset($context->feed))? htmlentities($context->feed->image_title, ENT_QUOTES):''; ?>" size="55" /></div></li>
-                    <li><label for="image_description" class="element">Image Description</label><div class="element"><textarea id="image_description" name="image_description" rows="5" cols="50"><?php echo (isset($context->feed))?htmlentities($context->feed->image_description):''; ?></textarea></div></li>
-                </ol>
-                </div>
+            <li>
+                <label for="title"><span class="required">*</span>Title</label>
+                <input id="title" name="title" type="text" value="<?php echo (isset($context->feed))? htmlentities($context->feed->title, ENT_QUOTES):''; ?>" size="55" />
             </li>
-            <li><label for="submit" class="element">&nbsp;</label><div class="element"><input id="submit" name="submit" value="Save" type="submit" /></div></li>
+            <li>
+                <label for="description"><span class="required">*</span>Description</label>
+                <textarea id="description" name="description" rows="5" cols="50"><?php echo (isset($context->feed))?htmlentities($context->feed->description):''; ?></textarea>
+            </li>
+            <li>
+                <fieldset>
+                    <legend>Consider my Channel for:</legend>
+                    <ol id="extensions">
+                        <li>
+                            <input type="checkbox" value="itunes" id="iTunesConsideration" name="iTunesConsideration" />
+                            <label for="iTunesConsideration">iTunesU</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" value="boxee" id="boxeeConsideration" name="boxeeConsideration" />
+                            <label for="boxeeConsideration">Boxee</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" value="youtube" id="youTubeConsideration" name="youTubeConsideration" />
+                            <label for="youTubeConsideration">YouTube</label>
+                        </li>
+                    </ol>
+                </fieldset>
+            </li>
+        </ol>
+        <legend>Channel Image</legend>
+            <ol>
+            <li>
+                <label class="element"><span class="required">*</span>Image File<span class="helper">Images should follow the standard UNL image standards. <a href="http://ucommdev.unl.edu/iTunesU/design_files/icon_template.psd">(get the sample template)</a>
+                </span></label>
+                <input id="image_file" name="image_file" type="file" />
+            </li>
+            <li>
+                <label for="image_title" class="element">Image Title</label>
+                <input id="image_title" name="image_title" type="text" value="<?php echo (isset($context->feed))? htmlentities($context->feed->image_title, ENT_QUOTES):''; ?>" size="55" />
+            </li>
+            <li>
+                <label for="image_description" class="element">Image Description</label>
+                <textarea id="image_description" name="image_description" rows="5" cols="50"><?php echo (isset($context->feed))?htmlentities($context->feed->image_description):''; ?></textarea>
+            </li>
         </ol>
     </fieldset>
     <?php
@@ -51,7 +92,7 @@
         return '';
     }
     ?>
-    <fieldset id="itunes_header">
+    <fieldset id="itunes_header" style="display:none">
 
         <legend>iTunes Options</legend>
 
@@ -208,6 +249,27 @@
                 </div></li>            <li><label for="itunes_submit" class="element">&nbsp;</label><div class="element"><input id="itunes_submit" name="submit" value="Save" type="submit" /></div></li>
         </ol>
     </fieldset>
+    <fieldset id="boxee_header" style="display:none">
+
+        <legend>Boxee Options</legend>
+
+        <ol>
+            <li><label for='boxee_expiry' class='element'>Expiry</label><div class='element'>
+                <input name='UNL_MediaYak_Feed_NamespacedElements_boxee[0][element]' type='hidden' value='expiry' />
+                <input id='boxee_expiry' name='UNL_MediaYak_Feed_NamespacedElements_boxee[0][value]' type='text' value='<?php echo getFieldValue($context, 'boxee', 'expiry'); ?>' size='55' />
+                </div></li><li><label for='boxee_background-image' class='element'>Background-image</label><div class='element'>
+                <input name='UNL_MediaYak_Feed_NamespacedElements_boxee[1][element]' type='hidden' value='background-image' />
+                <input id='boxee_background-image' name='UNL_MediaYak_Feed_NamespacedElements_boxee[1][value]' type='text' value='<?php echo getFieldValue($context, 'boxee', 'background-image'); ?>' size='55' />
+                </div></li><li><label for='boxee_interval' class='element'>Interval</label><div class='element'>
+
+                <input name='UNL_MediaYak_Feed_NamespacedElements_boxee[2][element]' type='hidden' value='interval' />
+                <input id='boxee_interval' name='UNL_MediaYak_Feed_NamespacedElements_boxee[2][value]' type='text' value='<?php echo getFieldValue($context, 'boxee', 'interval'); ?>' size='55' />
+                </div></li><li><label for='boxee_category' class='element'>Category</label><div class='element'>
+                <input name='UNL_MediaYak_Feed_NamespacedElements_boxee[3][element]' type='hidden' value='category' />
+                <input id='boxee_category' name='UNL_MediaYak_Feed_NamespacedElements_boxee[3][value]' type='text' value='<?php echo getFieldValue($context, 'boxee', 'category'); ?>' size='55' />
+                </div></li>            <li><label for="boxee_submit" class="element">&nbsp;</label><div class="element"><input id="boxee_submit" name="submit" value="Save" type="submit" /></div></li>
+        </ol>
+    </fieldset>
         <fieldset id="media_header">
 
         <legend>Media RSS Options</legend>
@@ -253,27 +315,7 @@
                 </div></li>            <li><label for="media_submit" class="element">&nbsp;</label><div class="element"><input id="media_submit" name="submit" value="Save" type="submit" /></div></li>
         </ol>
     </fieldset>
-        <fieldset id="boxee_header">
-
-        <legend>Boxee Options</legend>
-
-        <ol>
-            <li><label for='boxee_expiry' class='element'>Expiry</label><div class='element'>
-                <input name='UNL_MediaYak_Feed_NamespacedElements_boxee[0][element]' type='hidden' value='expiry' />
-                <input id='boxee_expiry' name='UNL_MediaYak_Feed_NamespacedElements_boxee[0][value]' type='text' value='<?php echo getFieldValue($context, 'boxee', 'expiry'); ?>' size='55' />
-                </div></li><li><label for='boxee_background-image' class='element'>Background-image</label><div class='element'>
-                <input name='UNL_MediaYak_Feed_NamespacedElements_boxee[1][element]' type='hidden' value='background-image' />
-                <input id='boxee_background-image' name='UNL_MediaYak_Feed_NamespacedElements_boxee[1][value]' type='text' value='<?php echo getFieldValue($context, 'boxee', 'background-image'); ?>' size='55' />
-                </div></li><li><label for='boxee_interval' class='element'>Interval</label><div class='element'>
-
-                <input name='UNL_MediaYak_Feed_NamespacedElements_boxee[2][element]' type='hidden' value='interval' />
-                <input id='boxee_interval' name='UNL_MediaYak_Feed_NamespacedElements_boxee[2][value]' type='text' value='<?php echo getFieldValue($context, 'boxee', 'interval'); ?>' size='55' />
-                </div></li><li><label for='boxee_category' class='element'>Category</label><div class='element'>
-                <input name='UNL_MediaYak_Feed_NamespacedElements_boxee[3][element]' type='hidden' value='category' />
-                <input id='boxee_category' name='UNL_MediaYak_Feed_NamespacedElements_boxee[3][value]' type='text' value='<?php echo getFieldValue($context, 'boxee', 'category'); ?>' size='55' />
-                </div></li>            <li><label for="boxee_submit" class="element">&nbsp;</label><div class="element"><input id="boxee_submit" name="submit" value="Save" type="submit" /></div></li>
-        </ol>
-    </fieldset>
+        
     
     <?php
     // Disable this rendering method for now since fields are hardcoded.
@@ -311,3 +353,13 @@
     <?php }
     } ?>
 </form>
+</div>
+<div class="one_col right" id="outpostExtension">
+<h3>Delivery Options</h3>
+<p>Channels in MediaHub can be delivered through different platforms. Make sure you take advantage of these:</p>
+<ul>
+    <li class="itunes"><a href="http://www.apple.com/education/itunes-u/">iTunesU</a></li>
+    <li class="boxee"><a href="http://www.boxee.tv/">Boxee</a></li>
+    <li class="youtube"><a href="http://www.youtube.com/">YouTube</a></li>
+</ul>
+</div>
