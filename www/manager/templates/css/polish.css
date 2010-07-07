@@ -117,8 +117,6 @@ a.action.users {
 a.action.users:active{background-image:url('images/iconUsers.png');}
 
 
-
-
 #maincontent #channelIntro {
     background:#f1f3ea;
     borer-radius:10px;
@@ -140,7 +138,7 @@ a.action.users:active{background-image:url('images/iconUsers.png');}
     padding:0px 10px 0 0;	
 }
 
-#maincontent .medialist, #maincontent #userList {
+#maincontent .medialist, #maincontent #userList, #maincontent #outpostExtension ul {
 	list-style:none;
 	padding:0;
 }
@@ -169,6 +167,43 @@ a.action.users:active{background-image:url('images/iconUsers.png');}
     display:block;	
 }
 #maincontent #userList li img {display:block;margin-left:auto;margin-right:auto;}
+
+#maincontent #outpostExtension h3 {
+	background:url('images/iconVideo.png') no-repeat left top;
+	padding-left:30px;
+}
+
+#maincontent #outpostExtension li a {
+	background:#E6E9DC;
+    background-image:url('images/iconBoxee.png');
+    background-image: url('images/iconBoxee.png'), -moz-linear-gradient(center bottom,rgb(206,209,197) 11%,rgb(230,233,220) 30%);
+    background-image: url('images/iconBoxee.png'), -webkit-gradient(linear,left bottom,left top,color-stop(0.11, rgb(206,209,197)),color-stop(0.3, rgb(230,233,220)));
+    background-position:5% 50%;
+    background-repeat:no-repeat;
+    border-radius:5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border:1px solid;
+    border-color:#bec1b4;
+    color:#4b4c47 !important;
+    padding:15px 15px 15px 50px;
+    margin-bottom:10px;
+    font-size:1.5em; 
+    font-weight:bold;
+    display:block;
+}
+#maincontent #outpostExtension li a:focus {color:#4b4c47 !important;}
+#maincontent #outpostExtension li.itunes a {
+	background-image:url('images/iconItunes.png');
+    background-image: url('images/iconItunes.png'), -moz-linear-gradient(center bottom,rgb(206,209,197) 11%,rgb(230,233,220) 30%);
+    background-image: url('images/iconItunes.png'), -webkit-gradient(linear,left bottom,left top,color-stop(0.11, rgb(206,209,197)),color-stop(0.3, rgb(230,233,220)));
+}
+#maincontent #outpostExtension li.youtube a {
+    background-image:url('images/iconYouTube.png');
+    background-image: url('images/iconYouTube.png'), -moz-linear-gradient(center bottom,rgb(206,209,197) 11%,rgb(230,233,220) 30%);
+    background-image: url('images/iconYouTube.png'), -webkit-gradient(linear,left bottom,left top,color-stop(0.11, rgb(206,209,197)),color-stop(0.3, rgb(230,233,220)));
+}
+
 #media_form p.caption, dl.caption {
 	margin-top: 5px;
 	text-align: right;
