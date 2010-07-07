@@ -235,13 +235,31 @@ div.headline_main {
 div.headline_main img {
 	float:right;
 }
-#feedlist ul {
-	list-style:none;
-	padding-left:0;
-	margin-top:10px;
+#feedlist div.aboutFeed{float:left;max-width:85%;}
+#feedlist h3 {
+    font-size:2.3em;
 }
-#feedlist ul li {
-    padding:5px;
+#feedlist p {}
+#feedlist  ul {list-style:none;padding-left:0;}
+#feedlist > ul {
+	margin-top:10px;
+	width:940px;
+}
+#feedlist > ul > li {
+    padding:15px;
+    display:block;
+    background:#E6E9DC;
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    min-height:85px;
+    margin:10px 0;
+}
+#feedlist h6.list_header+ul {width:auto;}
+#feedlist h6.list_header+ul li {min-height:0px;}
+#maincontent #feedlist ul li img {
+    float:left;
+    margin-right:15px;
 }
 #feedlist ul li:hover {
     background:#d2e3fb;	
