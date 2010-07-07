@@ -1,4 +1,3 @@
-<div class="three_col left">
 <?php
 if (isset($context->label) && !empty($context->label)) {
     UNL_MediaYak_Controller::setReplacementData('title', 'UNL | Media | '.$context->label);
@@ -12,12 +11,13 @@ if (count($context->items)) {
         UNL_MediaYak_Controller::getURL(null, array_merge($context->options, array('page'=>'{%page_number}'))));
     $pager_links = $pager_layout->display(null, true);
     ?>
+    <h3 class="sec_header" style="margin-top:10px;">Media in this Channel</h3>
         <ul class="medialist">
     
         <?php
         foreach ($context->items as $media) { ?>
             <li>
-                <div><a href="<?php echo UNL_MediaYak_Controller::getURL($media); ?>"><img class="thumbnail" src="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.urlencode($media->url); ?>" alt="Thumbnail preview for <?php echo $media->title; ?>" width="50" height="38" /></a></div>
+                <a href="<?php echo UNL_MediaYak_Controller::getURL($media); ?>"><img class="thumbnail" src="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.urlencode($media->url); ?>" alt="Thumbnail preview for <?php echo $media->title; ?>" width="100" height="76" /></a>
                 <h4><a href="<?php echo UNL_MediaYak_Controller::getURL($media); ?>"><?php echo htmlspecialchars($media->title); ?></a></h4>
                 <?php
                 if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_itunes::mediaHasElement($media->id, 'subtitle')) {
@@ -45,4 +45,3 @@ if (count($context->items)) {
     echo '<p>Sorry, no media could be found</p>';
 }
 ?>
-</div>

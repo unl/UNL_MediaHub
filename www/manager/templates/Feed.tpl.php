@@ -1,8 +1,9 @@
 <?php
 $feed_url = htmlentities(UNL_MediaYak_Controller::getURL($context), ENT_QUOTES);
+
 ?>
 <div id="channelIntro">
-    <img src="" /><?php //<-- @todo Brett- can you add the image to the src ? ?>
+    <img src="<?php ?>" /><?php //<-- @todo Brett- can you add the image to the src ? ?>
 	<h1><?php echo $context->title; ?></h1>
 	<p><?php echo $context->description; ?></p>
 	<?php //<-- @todo Brett- can we dynamically create this section ? ?>
