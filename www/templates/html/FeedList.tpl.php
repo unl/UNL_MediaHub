@@ -15,6 +15,7 @@
         }
         echo '</ul>';
         ?>
+        </div>
         <em>Displaying <?php echo $context->first; ?> through <?php echo $context->last; ?> out of <?php echo $context->total; ?></em>
         <?php echo $pager_links; ?>
 <?php 
@@ -25,4 +26,3 @@
         </p>';
     }
     ?>
-</div>
