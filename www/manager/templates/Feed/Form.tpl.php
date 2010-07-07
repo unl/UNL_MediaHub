@@ -356,7 +356,7 @@ WDN.jQuery(document).ready(function() {
 </div>
 <div class="one_col right" id="outpostExtension">
 <h3>Delivery Options</h3>
-<p>Channels in MediaHub can be delivered through different platforms. Make sure you take advantage of these:</p>
+<p>Channels in MediaHub can be delivered through <strong>official UNL outposts</strong>. Make sure you take advantage of these:</p>
 <ul>
     <li class="itunes"><a href="http://www.apple.com/education/itunes-u/">iTunesU</a></li>
     <li class="boxee"><a href="http://www.boxee.tv/">Boxee</a></li>

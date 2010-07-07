@@ -1,6 +1,7 @@
 <div id="feedlist">
     <h1>Available Channels</h1>
     <p>Select a channel to view.</p>
+    <div class="clear"></div>
     <?php
     if (count($context->items)) {
         $pager_layout = new UNL_MediaYak_List_PagerLayout($context->pager,
@@ -9,8 +10,16 @@
         $pager_links = $pager_layout->display(null, true);
         echo '<ul>';
         foreach ($context->items as $feed) {
-            echo '<li><a href="'.htmlentities(UNL_MediaYak_Controller::getURL($feed), ENT_QUOTES).'">'.htmlentities($feed->title).'</a> <a href="'.UNL_MediaYak_Controller::getURL($feed, array('format'=>'xml')).'" class="feed-icon"></a>
-            <div class="description">'.htmlentities($feed->description).'</div>
+        	echo '<li>
+        	<a href="'.htmlentities(UNL_MediaYak_Controller::getURL($feed), ENT_QUOTES).'"><img src="/" alt="'.htmlentities($feed->title).' image" width="100" height="76" class="frame" /></a>
+        	<div class="aboutFeed">
+        	<h3><a href="'.htmlentities(UNL_MediaYak_Controller::getURL($feed), ENT_QUOTES).'">'.htmlentities($feed->title).'</a> </h3>
+            <p>'.htmlentities($feed->description).'</p>
+            <ul>
+                <li><a href="'.UNL_MediaYak_Controller::getURL($feed, array('format'=>'xml')).'" class="feed-icon"></a></li>
+            </ul>
+            </div>
+            <div class="clear"></div>
             </li>';
         }
         echo '</ul>';
