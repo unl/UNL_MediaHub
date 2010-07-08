@@ -136,9 +136,18 @@ a.action.users:active{background-image:url('images/iconUsers.png');}
     -webkit-border-radius:10px;
     padding:15px 25px;
     width:890px;
+    min-height:175px;
 }
 #maincontent #channelIntro > img {
     float:right;
+}
+#maincontent #channelIntro h1 {
+    padding-bottom:0;	
+}
+#maincontent #channelIntro h6.subhead {
+    font-size:0.85em;
+    padding-top:0;
+    margin-bottom:15px;	
 }
 #maincontent #channelIntro ul{
     margin:10px 0;	
