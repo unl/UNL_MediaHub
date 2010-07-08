@@ -141,10 +141,10 @@ a.action.users:active{background-image:url('images/iconUsers.png');}
 #maincontent #channelIntro > img {
     float:right;
 }
-#maincontent #channelIntro h1 {
+#maincontent #channelIntro h1, #maincontent #feedlist h3 {
     padding-bottom:0;	
 }
-#maincontent #channelIntro h6.subhead {
+#maincontent #channelIntro h6.subhead, #maincontent #feedlist h6.subhead {
     font-size:0.85em;
     padding-top:0;
     margin-bottom:15px;	
