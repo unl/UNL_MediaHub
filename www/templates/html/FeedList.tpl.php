@@ -11,7 +11,7 @@
         echo '<ul>';
         foreach ($context->items as $feed) {
         	echo '<li>
-        	<a href="'.htmlentities(UNL_MediaYak_Controller::getURL($feed), ENT_QUOTES).'"><img src="/" alt="'.htmlentities($feed->title).' image" width="100" height="76" class="frame" /></a>
+        	<a href="'.htmlentities(UNL_MediaYak_Controller::getURL($feed), ENT_QUOTES).'"><img src="../manager/templates/css/images/iconTV.png" alt="'.htmlentities($feed->title).' image" width="150" height="84" /></a>
         	<div class="aboutFeed">
         	<h3><a href="'.htmlentities(UNL_MediaYak_Controller::getURL($feed), ENT_QUOTES).'">'.htmlentities($feed->title).'</a> </h3>
             <p>'.htmlentities($feed->description).'</p>
