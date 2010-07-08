@@ -1,6 +1,18 @@
 #main_right {overflow:visible;}
 #enhanced_header, #existing_media, #feedSelect, #maincontent form.zenform #continue3, #file_upload {display:none;}
-#maincontent form.zenform {max-width:930px;margin-top:5px;}
+#maincontent form.zenform {max-width:930px;margin-top:5px;background-color:#E6E9DC;
+    background-image:-webkit-gradient(
+                        linear,
+                        left bottom,
+                        left top,
+                        color-stop(0.2, rgb(230,233,220)),
+                        color-stop(1, rgb(244,247,234))
+                    );
+    background-image:-moz-linear-gradient(
+                        center bottom,
+                        rgb(230,233,220) 20%,
+                        rgb(244,247,234) 100%
+                    );}
 
 #tabnav {
 	list-style-type: none;
