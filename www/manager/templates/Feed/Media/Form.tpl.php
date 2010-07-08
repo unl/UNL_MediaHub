@@ -152,7 +152,8 @@ var jQuery = WDN.jQuery;
                 <div class="element">
                     <?php
                     $category = '';
-                    if ($value = UNL_MediaYak_Feed_Media_NamespacedElements_itunesu::mediaHasElement($context->media->id, 'category', 'itunesu')) {
+                    if (isset($context->media)
+                        && $value = UNL_MediaYak_Feed_Media_NamespacedElements_itunesu::mediaHasElement($context->media->id, 'category', 'itunesu')) {
                         $category = $value['attributes']['itunesu:code'];
                     }
                     ?>
