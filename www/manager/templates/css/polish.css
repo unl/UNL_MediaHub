@@ -123,7 +123,7 @@ a.action.users:active{background-image:url('images/iconUsers.png');}
     -moz-border-radius:10px;
     -webkit-border-radius:10px;
     padding:15px 25px;
-    	
+    width:890px;
 }
 #maincontent #channelIntro > img {
     float:right;
