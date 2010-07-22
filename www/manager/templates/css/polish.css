@@ -86,7 +86,7 @@ a.action { /*Setup the main UI for buttons*/
 	border:1px solid #78923a;
 	border-radius:5px;
 	-webkit-border-radius:5px;
-	-mox-border-radius:5px;
+	-moz-border-radius:5px;
     display:inline-block;
 }
 a.action:active {
