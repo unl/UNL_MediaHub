@@ -21,7 +21,8 @@ class UNL_MediaYak_FeedList extends UNL_MediaYak_List
      */
     public $options = array('orderby' => 'title',
                             'order'   => 'ASC',
-                            'page'    => 0);
+                            'page'    => 0,
+                            'limit'   => 10);
     
     /**
      * Customizes the ordering used in this list.

@@ -306,6 +306,9 @@ class UNL_MediaYak_Controller
             case 'UNL_MediaYak_Feed':
                 $url .= 'channels/'.urlencode($mixed->title);
                 break;
+            case 'UNL_MediaYak_FeedList':
+                $url .= 'channels/';
+                break;
             default:
                     
             }
