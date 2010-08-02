@@ -175,7 +175,9 @@ a.action.users:active{background-image:url('images/iconUsers.png');}
     -webkit-border-radius:5px;
     margin:0 10px 10px 0;
     text-align:center;
-    width:110px;
+    width:268px;
+    height:210px;
+    overflow:hidden;
 }
 #maincontent #userList li {
     display:inline-block;
