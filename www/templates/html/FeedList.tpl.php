@@ -6,7 +6,7 @@
     if (count($context->items)) {
         $pager_layout = new UNL_MediaYak_List_PagerLayout($context->pager,
             new Doctrine_Pager_Range_Sliding(array('chunk'=>5)),
-            UNL_MediaYak_Controller::getURL(null, array_merge($context->options, array('page'=>'{%page_number}'))));
+                    UNL_MediaYak_Controller::getURL($context, array_merge($context->options, array('page'=>'{%page_number}'))));
         $pager_links = $pager_layout->display(null, true);
         echo '<ul>';
         foreach ($context->items as $feed) {
