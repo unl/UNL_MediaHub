@@ -10,10 +10,10 @@
         $pager_links = $pager_layout->display(null, true);
         echo '<ul>';
         foreach ($context->items as $feed) {
-        	echo '<li>
-        	<a href="'.htmlentities(UNL_MediaYak_Controller::getURL($feed), ENT_QUOTES).'"><img src="../manager/templates/css/images/iconTV.png" alt="'.htmlentities($feed->title).' image" width="150" height="84" /></a>
-        	<div class="aboutFeed">
-        	<h3><a href="'.htmlentities(UNL_MediaYak_Controller::getURL($feed), ENT_QUOTES).'">'.htmlentities($feed->title).'</a> </h3>
+            echo '<li>
+            <a href="'.htmlentities(UNL_MediaYak_Controller::getURL($feed), ENT_QUOTES).'"><img src="../manager/templates/css/images/iconTV.png" alt="'.htmlentities($feed->title).' image" width="150" height="84" /></a>
+            <div class="aboutFeed">
+            <h3><a href="'.htmlentities(UNL_MediaYak_Controller::getURL($feed), ENT_QUOTES).'">'.htmlentities($feed->title).'</a> </h3>
             <h6 class="subhead">This channel was created by <a href="http://peoplefinder.unl.edu/?uid='.$feed->uidcreated.'" class="wdnPeoplefinder" title="'.UNL_Services_Peoplefinder::getFullName($feed->uidcreated).'\'s Peoplefinder Record">'.UNL_Services_Peoplefinder::getFullName($feed->uidcreated).'</a> on '.date("F j, Y, g:i a", strtotime($feed->datecreated)).'.</h6>
             <p>'.htmlentities($feed->description).'</p>
             <ul>
