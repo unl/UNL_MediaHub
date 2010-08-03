@@ -13,7 +13,11 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
     <lastBuildDate><?php echo date('r'); ?></lastBuildDate>
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>UNL_MediaYak 0.1.0</generator>
-    <managingEditor>editor@example.com</managingEditor>
+    <?php
+    if (!($editor = $context->getEditorEmail())) {
+        $editor = 'unlwdn@gmail.com';
+    } ?>
+    <managingEditor><?php echo $editor; ?></managingEditor>
     <webMaster>brett.bieber@gmail.com (Brett Bieber)</webMaster>
     <ttl>5</ttl>
     <?php if ($context->feed->hasImage()) : ?>

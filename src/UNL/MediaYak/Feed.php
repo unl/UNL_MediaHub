@@ -140,5 +140,16 @@ class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
         }
         return false;
     }
+
+    public function getEditorEmail()
+    {
+        if ($user = file_get_contents('http://peoplefinder.unl.edu/service.php?uid='.urlencode($this->uidcreated).'&format=json')) {
+            $user = json_decode($user);
+            if (isset($user->mail)) {
+                return $user->mail;
+            }
+        }
+        return false;
+    }
+    
 }
-?>
