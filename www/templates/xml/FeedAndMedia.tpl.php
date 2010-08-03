@@ -14,7 +14,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>UNL_MediaYak 0.1.0</generator>
     <?php
-    if (!($editor = $context->getEditorEmail())) {
+    if (!($editor = $context->feed->getEditorEmail())) {
         $editor = 'unlwdn@gmail.com';
     } ?>
     <managingEditor><?php echo $editor; ?></managingEditor>
