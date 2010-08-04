@@ -3,5 +3,6 @@
 @import url("../../../manager/templates/css/polish.css");
 @import url("comments.css");
 @import url("medialist.css");
+@import url("media.css");
 #title ul {margin-right:20px;}
 #title ul li{float:right;}

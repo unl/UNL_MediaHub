@@ -3,19 +3,12 @@
     margin-left:-28px;
     padding:10px;
     margin-bottom:20px;
-    background:url(images/fade700.png) no-repeat top left #FFFFFF;
-}
-#comments ul li h4 {
-    float:left;
+    border-bottom:1px dotted #bbb;
 }
 #comments ul li em {
-    float: right;
     font-size:.8em;
-    color:#666666
-}
-.author, .addedDate {
-    color:#999999;
-    font-weight:bold;
+    color:#666666;
+    margin-left:5px;
 }
 h3 a {
     font-size:.7em;
@@ -26,14 +19,15 @@ h3 a {
 #maincontent form textarea {
     width:270px;
 }
-.content_holder {
-    background:url(images/content_holder_fade.jpg) repeat-x top #FFFFFF;
-}
-.content_holder img {
-    margin-left: 15px;
-}
 blockquote {
-    background:url(images/quote.png) no-repeat top left;
     padding: 5px 5px 5px 48px;
     clear:both;
+}
+.profile_pic{
+    float:left;	
+}
+#maincontent h5.commenter {
+    font-weight:bold;
+    padding-left:53px;	
+    margin-bottom:0;
 }

@@ -1,14 +1,14 @@
 <?php
 $type = 'audio';
-$height = 358;
-$width = 700;
+$height = 529;
+$width = 940;
 $context->loadReference('UNL_MediaYak_Media_Comment');
 if (UNL_MediaYak_Media::isVideo($context->type)) {
     $type = 'video';
     $dimensions = UNL_MediaYak_Media::getMediaDimensions($context->id);
     if (isset($dimensions['width'])) {
         // Scale everything down to 450 wide
-        $height = round(($width/$dimensions['width'])*$dimensions['height']+48);
+        $height = round(($width/$dimensions['width'])*$dimensions['height']);
     }
 }
 UNL_MediaYak_Controller::setReplacementData('title', 'UNL | Media Hub | '.htmlspecialchars($context->title));
@@ -23,11 +23,38 @@ if ($type == 'video') {
 }
 UNL_MediaYak_Controller::setReplacementData('head', $meta);
 ?>
-<div class="three_col left">
-    <div id="preview"></div>
-    <script type="text/javascript">UNL_MediaYak.writePlayer('<?php echo addslashes($context->title); ?>','<?php echo $context->url; ?>','preview', <?php echo $width; ?>, <?php echo $height; ?>);</script>
+<?php 
+if ($type == 'video') {
+?>
+        <video height="<?php echo $height; ?>" width="<?php echo $width; ?>" src="<?php echo $context->url?>" controls autobuffer >
+            <source src="<?php echo $context->url?>" poster="<?php echo urlencode(UNL_MediaYak_Controller::$thumbnail_generator.urlencode($context->url))?>" type="video/mp4" />
+            
+            <object type="application/x-shockwave-flash" style="width:<?php echo $width; ?>px;height:<?php echo $height; ?>px" data="/wdn/templates_3.0/includes/swf/player4.3.swf">
+                <param name="movie" value="/wdn/templates_3.0/includes/swf/player4.3" ></param>
+                <param name="allowfullscreen" value="true"></param>
+                <param name="allowscriptaccess" value="always"></param>
+                <param name="wmode" value="transparent"></param>
+                <param name="flashvars" value="file=<?php echo urlencode($context->url)?>&amp;image=<?php echo urlencode(UNL_MediaYak_Controller::$thumbnail_generator.urlencode($context->url))?>&amp;volume=100&amp;controlbar=over&amp;autostart=true&amp;skin=/wdn/templates_3.0/includes/swf/UNLVideoSkin.swf" /> 
+            </object>
+        </video>
+<?php 
+}
+?>
+<div class="three_col left supportingContent">
+    <h2><?php echo $context->title; ?></h2>
+    <?php
+    if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_itunes::mediaHasElement($context->id, 'subtitle')) {
+        echo '<h3 class="itunes_subtitle">'.$element->value.'</h3>';
+    }
+    $summary = $context->description;
+    if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_itunes::mediaHasElement($context->id, 'summary')) {
+        $summary .= '<span class="itunes_summary">'.$element->value.'</span>';
+    }
+    ?>
+  <p><?php echo $summary; ?></p>
     <div id="comments">
-    <h3><?php echo count($context->UNL_MediaYak_Media_Comment); ?> Comments | <a href="#commentForm">Leave Yours</a></h3>
+    <h4>Comments</h4>
+    <span class="subhead"><?php echo count($context->UNL_MediaYak_Media_Comment); ?> Comments | <a href="#commentForm">Leave Yours</a></span>
     <?php
     if (count($context->UNL_MediaYak_Media_Comment)) {
         echo '<ul>';
@@ -36,8 +63,9 @@ UNL_MediaYak_Controller::setReplacementData('head', $meta);
             if ($name = UNL_Services_Peoplefinder::getFullName($comment['uid'])) {
                 
             }
-            echo '<h4>'.$name.'</h4>';
-            echo '<p><em>'.date('m/d/y g:i a', strtotime($comment['datecreated'])).'</em></p>';
+            echo '<img alt="Your Profile Pic" src="http://planetred.unl.edu/pg/icon/unl_'.$comment['uid'].'/small/" class="profile_pic small"> ';
+            echo '<h5 class="commenter sec_header">'.$name.'</h5>';
+            echo '<em>'.date('m/d/y g:i a', strtotime($comment['datecreated'])).'</em>';
             echo '<blockquote>'.htmlentities(strip_tags($comment['comment']), ENT_QUOTES).'</blockquote>';
             echo '</li>';
         }
@@ -53,27 +81,48 @@ UNL_MediaYak_Controller::setReplacementData('head', $meta);
         echo '<a href="https://login.unl.edu/cas/login?service='.urlencode(UNL_MediaYak_Controller::getURL($context)).'">Log in to post comments</a>';
     }?>
 </div>
-<div class="col right">
-  <h2><?php echo $context->title; ?></h2>
-  <?php
-    if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_itunes::mediaHasElement($context->id, 'subtitle')) {
-        echo '<h3 class="itunes_subtitle">'.$element->value.'</h3>';
-    }
-    $summary = $context->description;
-    if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_itunes::mediaHasElement($context->id, 'summary')) {
-        $summary .= '<span class="itunes_summary">'.$element->value.'</span>';
-    }
-    ?>
-  <p><?php echo $summary; ?><br />
-  <?php if (!empty($context->author)) { ?><span class="author">From:</span> <?php echo $context->author; ?><br />
+<div class="col right supportingContent" id="properties">
+    <div class="zenbox neutral">
+    <h3>About this Media</h3>
+    <?php 
+	   if ($type == 'video') {
+	?>
+	<span class="size"><?php echo $dimensions['width'] . 'x' .$dimensions['height'];?></span>
+	<?php } ?>
+    <span class="duration">00:02:03</span>
+    <span class="addedDate">Added: <?php echo date('m/d/Y', strtotime($context->datecreated)); ?></span>
+  <?php if (!empty($context->author)) { // @TODO present author with more info (standardize people records) ?>
+    <div class="author">
+        <p>Author: <?php echo $context->author; ?></p>
+    </div>
   <?php } ?>
-  <span class="addedDate">Added:</span> <?php echo date('m/d/Y', strtotime($context->datecreated)); ?>
-  </p>
-    <h6>Embed</h6>
+    <span class="embed">Embed</span>
+  </div>
+    <h5>Channels</h5>
+    <p class="">This media is part of the following channels:</p>
+    <ul>
+        <li></li>
+    </ul>
+    <h5>Tags</h5>
+    <ul>
+        <li>Tag 1</li>
+        <li>Tag 1</li>
+        <li>Tag 1</li>
+    </ul>
+    
+    <h6 style="margin-top:1em;"><a href="<?php echo htmlentities($context->url, ENT_QUOTES); ?>" class="video-x-generic">Download this media file</a></h6>
+</div>
+<script type="text/javascript">
+WDN.initializePlugin('videoPlayer');
+</script>
+<div id="sharing">
+    <h3>Embed</h3>
+    <p>Copy the following code into your unl.edu page</p>
     <textarea cols="25" rows="6" onclick="this.select(); return false;"><?php
         echo htmlentities(
+            '<video height="'. $height.'" width="'.$width.'" src="'.$context->url.'" controls autobuffer >'.
             '<object type="application/x-shockwave-flash" style="width:'.$width.'px;height:'.($height+48) .'px" data="http://www.unl.edu/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/player.swf">'.
-                '<param name="movie" value="http://www.unl.edu/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/player.swf" ></param>'.
+                '<param name="movie" value="/wdn/templates_3.0/includes/swf/player4.3" ></param>'.
                 '<param name="allowfullscreen" value="true"></param>'.
                 '<param name="allowscriptaccess" value="always"></param>'.
                 '<param name="wmode" value="transparent"></param>'.
@@ -82,9 +131,9 @@ UNL_MediaYak_Controller::setReplacementData('head', $meta);
                     'image='.urlencode(UNL_MediaYak_Controller::$thumbnail_generator.urlencode($context->url)).'&amp;'.
                     'volume=100&amp;'.
                     'autostart=false&amp;'.
-                    'skin=http://www.unl.edu/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/UNLVideoSkin.swf" /> '.
-            '</object>');
+                    'skin=/wdn/templates_3.0/includes/swf/player4.3" /> '.
+            '</object>'.
+            '</video>'.
+            '<script type="text/javascript">WDN.initializePlugin("videoPlayer");</script>');
     ?></textarea>
-    
-    <h6 style="margin-top:1em;"><a href="<?php echo htmlentities($context->url, ENT_QUOTES); ?>" class="video-x-generic">Download this media file</a></h6>
 </div>
