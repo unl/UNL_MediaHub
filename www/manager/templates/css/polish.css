@@ -174,7 +174,7 @@ a.action.users:active{background-image:url('images/iconUsers.png');}
     -moz-border-radius:5px;
     -webkit-border-radius:5px;
     margin:0 10px 10px 0;
-    text-align:center;
+    text-align:left;
     width:268px;
     height:210px;
     overflow:hidden;
@@ -259,7 +259,7 @@ div.headline_main img {
 	float:right;
 }
 #feedlist div.aboutFeed{float:left;max-width:85%;}
-#feedlist h3 {
+#feedlist h3, #maincontent .medialist h3 {
     font-size:2.3em;
 }
 #feedlist p {}

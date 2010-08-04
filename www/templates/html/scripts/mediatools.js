@@ -1,4 +1,3 @@
-
 var UNL_MediaYak = function() {
 	var player = false;
 	
@@ -153,3 +152,6 @@ function playerReady(thePlayer) {
 	UNL_MediaYak.player = document.getElementById(thePlayer.id);
 	UNL_MediaYak.addListeners();
 }
+WDN.jQuery(document).ready(function(){
+	WDN.jQuery('span.embed').colorbox({inline: true, href:'#sharing', width:'600px', height:'310px'});
+});
