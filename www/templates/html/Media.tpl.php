@@ -26,7 +26,7 @@ UNL_MediaYak_Controller::setReplacementData('head', $meta);
 <?php 
 if ($type == 'video') {
 ?>
-        <video height="<?php echo $height; ?>" width="<?php echo $width; ?>" src="<?php echo $context->url?>" controls autobuffer >
+        <video height="<?php echo $height; ?>" width="<?php echo $width; ?>" src="<?php echo $context->url?>" controls autobuffer autoplay >
             <source src="<?php echo $context->url?>" poster="<?php echo urlencode(UNL_MediaYak_Controller::$thumbnail_generator.urlencode($context->url))?>" type="video/mp4" />
             
             <object type="application/x-shockwave-flash" style="width:<?php echo $width; ?>px;height:<?php echo $height; ?>px" data="/wdn/templates_3.0/includes/swf/player4.3.swf">
@@ -89,7 +89,7 @@ if ($type == 'video') {
 	?>
 	<span class="size"><?php echo $dimensions['width'] . 'x' .$dimensions['height'];?></span>
 	<?php } ?>
-    <span class="duration">00:02:03</span>
+    <span class="duration"><?php echo $context->length;?></span>
     <span class="addedDate">Added: <?php echo date('m/d/Y', strtotime($context->datecreated)); ?></span>
   <?php if (!empty($context->author)) { // @TODO present author with more info (standardize people records) ?>
     <div class="author">
