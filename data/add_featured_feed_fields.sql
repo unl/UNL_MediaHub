@@ -1,0 +1,2 @@
+ALTER TABLE `feeds` ADD `itunes_uri` VARCHAR( 255 ) NULL COMMENT 'URI to this feed within iTunes or iTunes U'  AFTER `image_description` ,
+ADD `boxee` BOOL NOT NULL DEFAULT '0' COMMENT 'Flag indicating whether feed is included in Boxee' AFTER `itunes_uri` ;

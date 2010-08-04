@@ -13,6 +13,8 @@ abstract class UNL_MediaYak_Models_BaseFeed extends Doctrine_Record
         $this->hasColumn('image_size',        'string',    null, array('primary' => false, 'notnull' => false, 'autoincrement' => false));
         $this->hasColumn('image_title',       'string',    null, array('primary' => false, 'notnull' => false, 'autoincrement' => false));
         $this->hasColumn('image_description', 'string',    null, array('primary' => false, 'notnull' => false, 'autoincrement' => false));
+        $this->hasColumn('itunes_uri',        'string');
+        $this->hasColumn('boxee',             'bool');
         $this->hasColumn('uidcreated',        'string',    null, array('primary' => false, 'notnull' => true, 'autoincrement' => false));
         $this->hasColumn('datecreated',       'timestamp', null, array('primary' => false, 'notnull' => true, 'autoincrement' => false));
     }
