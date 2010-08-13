@@ -284,6 +284,15 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
             }
             $this->redirect('?view=feed&id='.$feed->id);
             break;
+        case 'delete_media':
+            $feed = UNL_MediaYak_Feed::getById($_POST['feed_id']);
+            $media = UNL_MediaYak_Media::getById($_POST['media_id']);
+            if ($feed->hasMedia($media)
+                && $feed->userHasPermission(self::getUser(), UNL_MediaYak_Permission::getByID(
+                                            UNL_MediaYak_Permission::USER_CAN_DELETE))) {
+                $media->delete();
+            }
+            $this->redirect('?view=feed&id='.$feed->id);
         }
     }
     
