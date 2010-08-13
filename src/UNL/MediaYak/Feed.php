@@ -45,7 +45,17 @@ class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
         $this->UNL_MediaYak_Media[] = $media;
         return $this->save();
     }
-    
+
+    function removeMedia(UNL_MediaYak_Media $media)
+    {
+        $q = Doctrine_Query::create()
+            ->delete('UNL_MediaYak_Feed_Media')
+            ->addWhere('feed_id = ?', $this->id)
+            ->addWhere('media_id = ?', $media->id);
+
+        return $q->execute();
+    }
+
     /**
      * Add a feed to the system
      *
