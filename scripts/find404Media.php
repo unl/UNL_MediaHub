@@ -1,11 +1,10 @@
 <?php
-require_once 'UNL/Autoload.php';
 require_once dirname(__FILE__).'/../config.inc.php';
 
 $mediayak = new UNL_MediaYak($dsn);
 
 $list = new UNL_MediaYak_MediaList();
-
+$list->options['limit'] = 3000;
 $list->run();
 
 if (count($list->items)) {
