@@ -28,6 +28,9 @@ if (count($context->items)) {
             ?>
             <p><?php echo $summary; ?></p>
             <a class="action edit" href="<?php echo $addMediaURL; ?>&amp;id=<?php echo $media->id; ?>">Edit Media</a>
+            <?php
+            echo $savvy->render($media, 'Media/DeleteForm.tpl.php');
+            ?>
         </li>
     <?php  
     } 
