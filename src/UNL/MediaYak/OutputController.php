@@ -24,7 +24,7 @@ class UNL_MediaYak_OutputController extends Savvy
         return self::$cache;
     }
     
-    public function renderObject($object)
+    public function renderObject($object, $template = null)
     {
         if ($object instanceof UNL_MediaYak_CacheableInterface) {
             $key = $object->getCacheKey();
@@ -40,7 +40,7 @@ class UNL_MediaYak_OutputController extends Savvy
                 $object->preRun(false);
                 $object->run();
                 
-                $data = parent::renderObject($object);
+                $data = parent::renderObject($object, $template);
                 
                 if ($key !== false) {
                     self::getCacheInterface()->save($data, $key);
@@ -55,7 +55,7 @@ class UNL_MediaYak_OutputController extends Savvy
             return $data;
         }
         
-        return parent::renderObject($object);
+        return parent::renderObject($object, $template);
 
     }
     
