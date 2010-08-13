@@ -111,13 +111,14 @@ if ($type == 'video') {
         <?php endforeach; ?>
     </ul>
     <?php endif; ?>
+    <?php if (false): ?>
     <h5>Tags</h5>
     <ul>
         <li>Tag 1</li>
         <li>Tag 1</li>
         <li>Tag 1</li>
     </ul>
-    
+    <?php endif; ?>
     <h6 style="margin-top:1em;"><a href="<?php echo htmlentities($context->url, ENT_QUOTES); ?>" class="video-x-generic">Download this media file</a></h6>
 </div>
 <script type="text/javascript">
