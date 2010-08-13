@@ -142,7 +142,7 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
         if (!filter_var($this->url, FILTER_VALIDATE_URL)) {
             return false;
         }
-        
+
         $headers = get_headers($this->url);
         if (count($headers)) {
             foreach($headers as $header) {
@@ -170,6 +170,37 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
             return array('width'=>$element->attributes['width'], 'height'=>$element->attributes['height']);
         }
         return false;
+    }
+
+    function getFeeds()
+    {
+        return new UNL_MediaYak_FeedList(new UNL_MediaYak_FeedList_Filter_WithMediaId($this->id));
+    }
+
+    function delete()
+    {
+        $feeds = $this->getFeeds();
+        $feeds->run();
+
+        if (count($feeds->items)) {
+            foreach ($feeds->items as $feed) {
+                $feed->removeMedia($this);
+            }
+        }
+
+        try {
+            foreach (array('UNL_MediaYak_Feed_Media_NamespacedElements_itunesu',
+                           'UNL_MediaYak_Feed_Media_NamespacedElements_itunes',
+                           'UNL_MediaYak_Feed_Media_NamespacedElements_media',
+                           'UNL_MediaYak_Feed_Media_NamespacedElements_boxee') as $ns_class) {
+                foreach ($this->$ns_class as $namespaced_element) {
+                    $namespaced_element->delete();
+                }
+            }
+        } catch (Exception $e) {
+            // Error, just skip this for now.
+        }
+        return parent::delete();
     }
 }
 
