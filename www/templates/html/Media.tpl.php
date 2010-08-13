@@ -98,11 +98,19 @@ if ($type == 'video') {
   <?php } ?>
     <span class="embed">Embed</span>
   </div>
+    <?php
+    $channels = $context->getFeeds();
+    $channels->run();
+    if (count($channels->items)) :
+    ?>
     <h5>Channels</h5>
     <p class="">This media is part of the following channels:</p>
     <ul>
-        <li></li>
+        <?php foreach ($channels->items as $channel): ?>
+        <li><a href="<?php echo UNL_MediaYak_Controller::getURL($channel); ?>"><?php echo $channel->title; ?></a></li>
+        <?php endforeach; ?>
     </ul>
+    <?php endif; ?>
     <h5>Tags</h5>
     <ul>
         <li>Tag 1</li>
