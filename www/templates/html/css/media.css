@@ -48,6 +48,24 @@ Supporting styles for individual presentation of media elements
     background:url('images/iconClock.png') no-repeat 0 3px;
     padding:0px 0 2px 17px;	
 }
+#maincontent ul.channels {
+    list-style:none;
+    padding:0;	
+    margin-bottom:10px;
+}
+#maincontent ul.channels li {
+    padding:5px;
+    border:2px solid #fff;
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+}
+#maincontent ul.channels li img {
+    max-width:206px;	
+}
+#maincontent ul.channels li:hover {
+    border-color:#bbb;	
+}
 #maincontent #sharing{display:none;}
 #colorbox h3 {
     font-size:2.4em;
