@@ -26,7 +26,7 @@ UNL_MediaYak_Controller::setReplacementData('head', $meta);
 <?php 
 if ($type == 'video') {
 ?>
-        <video height="<?php echo $height; ?>" width="<?php echo $width; ?>" src="<?php echo $context->url?>" controls autobuffer autoplay>
+        <video height="<?php echo $height; ?>" width="<?php echo $width; ?>" src="<?php echo $context->url?>" controls autobuffer>
             <source src="<?php echo $context->url?>" poster="<?php echo urlencode(UNL_MediaYak_Controller::$thumbnail_generator.urlencode($context->url))?>" type="video/mp4" />
             
             <object type="application/x-shockwave-flash" style="width:<?php echo $width; ?>px;height:<?php echo $height; ?>px" data="/wdn/templates_3.0/includes/swf/player4.3.swf">
@@ -107,7 +107,12 @@ if ($type == 'video') {
     <p class="">This media is part of the following channels:</p>
     <ul class="channels">
         <?php foreach ($channels->items as $channel): ?>
-        <li><a href="<?php echo UNL_MediaYak_Controller::getURL($channel); ?>"><img src="<?php echo UNL_MediaYak_Controller::getURL($channel).'/image'; ?>" alt="<?php echo $channel->title?>" /></a></li>
+        <li>
+            <a href="<?php echo UNL_MediaYak_Controller::getURL($channel); ?>">
+                <img src="<?php echo UNL_MediaYak_Controller::getURL($channel).'/image'; ?>" alt="<?php echo $channel->title?>" />
+                <span class="title"><?php echo $channel->title?></span>
+            </a>
+        </li>
         <?php endforeach; ?>
     </ul>
     <?php endif; ?>
