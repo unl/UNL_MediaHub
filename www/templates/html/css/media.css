@@ -48,7 +48,7 @@ Supporting styles for individual presentation of media elements
     background:url('images/iconClock.png') no-repeat 0 3px;
     padding:0px 0 2px 17px;	
 }
-#maincontent ul.channels {
+#maincontent ul.channels, #maincontent ul.tags {
     list-style:none;
     padding:0;	
     margin-bottom:10px;
@@ -84,6 +84,21 @@ ul.channels .title {
 	width:214px;
 	opacity:0.74;
 	border-bottom:1px solid #ebebeb;	
+}
+#maincontent ul.tags li {
+    display:inline;	
+}
+#maincontent ul.tags li:hover a {
+	background-color:#F7F7F7;
+}
+#maincontent ul.tags li a {
+    color:#999999;	
+    background: url('images/iconTag.png') no-repeat 2px 4px;
+    padding:2px 5px 2px 16px;
+    margin-right:1px;
+    border-radius:2px;
+    -moz-border-radius:2px;
+    -webkit-border-radius:2px;
 }
 #maincontent #sharing{display:none;}
 #colorbox h3 {
