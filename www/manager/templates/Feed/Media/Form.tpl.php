@@ -6,7 +6,7 @@ if (!isset($context->media)) {
         $jquery .= 'WDN.jQuery("#feedlist").hide();'; 
     }
 } else { //if we have media (we're editing) show the appropriate part of the form
-    $jquery .= 'WDN.jQuery("#addMedia").hide();WDN.jQuery("#feedlist").hide();WDN.jQuery(".headline_main, #existing_media, #enhanced_header, #feedSelect, #maincontent form.zenform #continue3").show(400);';
+    $jquery .= 'WDN.jQuery("#addMedia").hide();WDN.jQuery("#feedlist").hide();WDN.jQuery(".headline_main, #existing_media, #enhanced_header, #feedSelect, #maincontent form.zenform #continue3").show(400);WDN.jQuery(".two_col.right").removeClass("two_col right");';
 }
 
 $jquery .= '
