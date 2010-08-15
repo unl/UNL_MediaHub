@@ -39,7 +39,7 @@ WDN.jQuery(document).ready(function() {
                     <ol id="extensions">
                         <li>
                             <input type="checkbox" value="itunes" id="iTunesConsideration" name="iTunesConsideration" />
-                            <label for="iTunesConsideration">iTunesU</label>
+                            <label for="iTunesConsideration">iTunes U</label>
                         </li>
                         <li>
                             <input type="checkbox" value="boxee" id="boxeeConsideration" name="boxeeConsideration" />
@@ -94,7 +94,7 @@ WDN.jQuery(document).ready(function() {
     ?>
     <fieldset id="itunes_header" style="display:none">
 
-        <legend>iTunes Options</legend>
+        <legend>iTunes U Options</legend>
 
         <ol>
             <li><label for='itunes_author' class='element'>Author</label><div class='element'>
@@ -209,10 +209,10 @@ WDN.jQuery(document).ready(function() {
                     <dl class="caption"><dd>Choose a category for use within iTunes and iTunes U</dd></dl>
                 </div>
             </li>
-            <li><label for='itunes_image' class='element'>Image</label><div class='element'>
+            <!--<li><label for='itunes_image' class='element'>Image</label><div class='element'>
                 <input name='UNL_MediaYak_Feed_NamespacedElements_itunes[3][element]' type='hidden' value='image' />
                 <input id='itunes_image' name='UNL_MediaYak_Feed_NamespacedElements_itunes[3][value]' type='text' value='<?php echo getFieldValue($context, 'itunes', 'image'); ?>' size='55' />
-                </div></li>
+                </div></li>-->
                 
                 <li><label for='itunes_explicit' class='element'>Explicit</label>
                 <div class='element'>
@@ -257,10 +257,13 @@ WDN.jQuery(document).ready(function() {
             <li><label for='boxee_expiry' class='element'>Expiry</label><div class='element'>
                 <input name='UNL_MediaYak_Feed_NamespacedElements_boxee[0][element]' type='hidden' value='expiry' />
                 <input id='boxee_expiry' name='UNL_MediaYak_Feed_NamespacedElements_boxee[0][value]' type='text' value='<?php echo getFieldValue($context, 'boxee', 'expiry'); ?>' size='55' />
-                </div></li><li><label for='boxee_background-image' class='element'>Background-image</label><div class='element'>
+                </div></li>
+                <!--<li><label for='boxee_background-image' class='element'>Background-image</label><div class='element'>
                 <input name='UNL_MediaYak_Feed_NamespacedElements_boxee[1][element]' type='hidden' value='background-image' />
                 <input id='boxee_background-image' name='UNL_MediaYak_Feed_NamespacedElements_boxee[1][value]' type='text' value='<?php echo getFieldValue($context, 'boxee', 'background-image'); ?>' size='55' />
-                </div></li><li><label for='boxee_interval' class='element'>Interval</label><div class='element'>
+                </div></li>
+                -->
+                <li><label for='boxee_interval' class='element'>Interval</label><div class='element'>
 
                 <input name='UNL_MediaYak_Feed_NamespacedElements_boxee[2][element]' type='hidden' value='interval' />
                 <input id='boxee_interval' name='UNL_MediaYak_Feed_NamespacedElements_boxee[2][value]' type='text' value='<?php echo getFieldValue($context, 'boxee', 'interval'); ?>' size='55' />
