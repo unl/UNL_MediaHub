@@ -151,6 +151,7 @@ a.action.delete:active {background-image:url('images/iconDelete.png');}
 }
 #maincontent #channelIntro > img {
     float:right;
+    width:175px;
 }
 #maincontent #channelIntro h1, #maincontent #feedlist h3 {
     padding-bottom:0;	
