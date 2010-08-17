@@ -178,7 +178,11 @@ class UNL_MediaYak_Controller
             $this->showFeed();
             break;
         case 'feed_image':
-            $this->output[] = UNL_MediaYak_Feed_Image::getByTitle($this->options['title']);
+            if (isset($this->options['feed_id'])) {
+                $this->output[] = UNL_MediaYak_Feed_Image::getById($this->options['feed_id']);
+            } else {
+                $this->output[] = UNL_MediaYak_Feed_Image::getByTitle($this->options['title']);
+            }
             break;
         case 'search':
         default:
@@ -304,7 +308,7 @@ class UNL_MediaYak_Controller
                 $url = $mixed->getURL();
                 break;
             case 'UNL_MediaYak_Feed':
-                $url .= 'channels/'.urlencode($mixed->title);
+                $url .= 'channels/'.$mixed->id;
                 break;
             case 'UNL_MediaYak_FeedList':
                 $url .= 'channels/';
