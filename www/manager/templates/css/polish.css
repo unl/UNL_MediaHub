@@ -188,7 +188,6 @@ a.action.delete:active {background-image:url('images/iconDelete.png');}
     margin:0 10px 10px 0;
     text-align:left;
     width:268px;
-    height:210px;
     overflow:hidden;
 }
 #maincontent #userList li {
