@@ -269,7 +269,7 @@ div.headline_main {
 div.headline_main img {
 	float:right;
 }
-#feedlist div.aboutFeed{float:left;max-width:85%;}
+#feedlist div.aboutFeed{float:left;max-width:80%;}
 #feedlist h3, #maincontent .medialist h3 {
     font-size:2.3em;
 }
@@ -282,7 +282,7 @@ div.headline_main img {
 #feedlist > ul > li {
     padding:15px;
     display:block;
-    background:#E6E9DC;
+    background:#edf0e5;
     border-radius:10px;
     -webkit-border-radius:10px;
     -moz-border-radius:10px;
@@ -294,6 +294,7 @@ div.headline_main img {
 #maincontent #feedlist ul li img {
     float:left;
     margin-right:15px;
+    width:150px;
 }
 #feedlist ul li:hover {
     background:#d2e3fb;	
