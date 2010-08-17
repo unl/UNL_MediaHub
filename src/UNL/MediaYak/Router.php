@@ -27,11 +27,17 @@ class UNL_MediaYak_Router
                 break;
             case preg_match('/'.$quotedBase.'channels\/(.+)\/image$/', $requestURI, $matches):
                 $options['view']  = 'feed_image';
-                $options['title'] = urldecode($matches[1]);
+                if (preg_match('/^[\d]+$/', $matches[1])) {
+                    $options['feed_id'] = $matches[1];
+                } else {
+                    $options['title'] = urldecode($matches[1]);
+                }
                 break;
             case preg_match('/'.$quotedBase.'channels\/(.*)$/', $requestURI, $matches):
                 $options['view'] = 'feed';
-                if (isset($matches[1])) {
+                if (preg_match('/^[\d]+$/', $matches[1])) {
+                    $options['feed_id'] = $matches[1];
+                } else {
                     $options['title'] = urldecode($matches[1]);
                 }
                 break;
