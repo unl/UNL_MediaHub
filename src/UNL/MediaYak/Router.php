@@ -25,7 +25,7 @@ class UNL_MediaYak_Router
                 $options['view'] = 'media';
                 $options['id']   = $matches[1];
                 break;
-            case preg_match('/'.$quotedBase.'channels\/(.+)\/image$/', $requestURI, $matches):
+            case preg_match('/'.$quotedBase.'channels\/(.+)\/image(\.[\w]+)?$/', $requestURI, $matches):
                 $options['view']  = 'feed_image';
                 if (preg_match('/^[\d]+$/', $matches[1])) {
                     $options['feed_id'] = $matches[1];
