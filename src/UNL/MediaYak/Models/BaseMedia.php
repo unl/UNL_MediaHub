@@ -15,6 +15,7 @@ abstract class UNL_MediaYak_Models_BaseMedia extends Doctrine_Record
         $this->hasColumn('description',   'string',    null, array('fixed' => false, 'primary' => false, 'notnull' => true, 'autoincrement' => false));
         $this->hasColumn('author',        'string',    null, array('fixed' => false, 'primary' => false, 'notnull' => false, 'autoincrement' => false));
         $this->hasColumn('datecreated',   'timestamp', null, array('primary' => false, 'notnull' => true, 'autoincrement' => false));
+        $this->hasColumn('dateupdated',   'timestamp', null, array('primary' => false, 'notnull' => false, 'autoincrement' => false));
     }
     
     public function setUp()
