@@ -269,7 +269,7 @@ div.headline_main {
 div.headline_main img {
 	float:right;
 }
-#feedlist div.aboutFeed{float:left;max-width:80%;}
+#feedlist div.aboutFeed{float:left;max-width:55%;}
 #feedlist h3, #maincontent .medialist h3 {
     font-size:2.3em;
 }
@@ -280,14 +280,38 @@ div.headline_main img {
 	width:940px;
 }
 #feedlist > ul > li {
-    padding:15px;
+    padding:25px 15px;
     display:block;
-    background:#edf0e5;
-    border-radius:10px;
-    -webkit-border-radius:10px;
-    -moz-border-radius:10px;
     min-height:85px;
-    margin:10px 0;
+    margin:0;
+    border-bottom:1px dotted #c4c2c2;
+}
+#feedlist.two_col > ul > li { /*Override the manager list*/
+    padding:15px;	
+}
+#feedlist .mediaSamples {
+    float:right;
+    width:25%;	
+    border-left:1px dotted #d4d4d4;
+    padding-left:10px;
+}
+.mediaSamples h5 a {
+    text-indent:-99999px;
+    float:right;	
+}
+#maincontent #feedlist .mediaSamples img {
+    width:75px;	
+    max-height:42px;
+}
+#maincontent #feedlist .mediaSamples li {
+    font-size:11px;
+    min-height:47px;
+    font-weight:bold;
+    line-height:12px;
+    opacity:0.7;	
+}
+#maincontent #feedlist .mediaSamples li:hover {
+    opacity:1;	
 }
 #feedlist h6.list_header+ul {width:auto;}
 #feedlist h6.list_header+ul li {min-height:0px;}
@@ -297,5 +321,5 @@ div.headline_main img {
     width:150px;
 }
 #feedlist ul li:hover {
-    background:#d2e3fb;	
+    background:#eff2f7;	
 }
