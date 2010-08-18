@@ -20,8 +20,20 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
     <managingEditor><?php echo $editor; ?></managingEditor>
     <webMaster>brett.bieber@gmail.com (Brett Bieber)</webMaster>
     <ttl>5</ttl>
-    <?php if ($context->feed->hasImage()) : ?>
-    <itunes:image href="<?php echo UNL_MediaYak_Controller::getURL($context->feed); ?>/image" />
+    <?php if ($context->feed->hasImage()) :
+    switch ($context->feed->image_type) {
+        case 'image/png':
+            $ext = '.png';
+            break;
+        case 'image/jpeg';
+            $ext = '.jpg';
+            break;
+        default:
+            $ext = '';
+            break;
+    }
+    ?>
+    <itunes:image href="<?php echo UNL_MediaYak_Controller::getURL($context->feed); ?>/image<?php echo $ext; ?>" />
     <image>
         <url><?php echo UNL_MediaYak_Controller::getURL($context->feed); ?>/image</url>
         <title><?php echo htmlspecialchars($context->feed->image_title, ENT_QUOTES); ?></title>
