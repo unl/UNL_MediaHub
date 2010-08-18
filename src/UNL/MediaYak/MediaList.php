@@ -42,7 +42,7 @@ class UNL_MediaYak_MediaList extends UNL_MediaYak_List
     function getURL()
     {
         $this->url = UNL_MediaYak_Controller::getURL();
-        if (isset($this->options['filter'])) {
+        if (!empty($this->options['filter'])) {
             switch ($this->options['filter']->getType()) {
                 case 'tag':
                 case 'year':
