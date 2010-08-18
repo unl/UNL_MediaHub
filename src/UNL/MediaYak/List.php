@@ -67,7 +67,7 @@ abstract class UNL_MediaYak_List implements Countable, UNL_MediaYak_CacheableInt
         $query->from($this->tables);
         
         $this->setOrderBy($query);
-        if (isset($this->options['filter'])) {
+        if (!empty($this->options['filter'])) {
             $this->options['filter']->apply($query);
             $this->label = $this->options['filter']->getLabel();
         }
