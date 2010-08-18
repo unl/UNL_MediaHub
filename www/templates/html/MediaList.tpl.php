@@ -4,11 +4,17 @@ if (isset($context->label) && !empty($context->label)) {
     UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaYak_Controller::getURL().'">Media Hub</a></li> <li>'.$context->label.'</li></ul>');
     echo '<h3>'.$context->label.'</h3>';
 }
+if ($parent->context instanceof UNL_MediaYak_FeedAndMedia) {
+    // Use the feed url as the base for pagination links
+    $url = UNL_MediaYak_Controller::getURL($parent->context->feed, array_merge($context->options, array('page'=>'{%page_number}')));
+} else {
+    $url = UNL_MediaYak_Controller::getURL(null, array_merge($context->options, array('page'=>'{%page_number}')));
+}
 
 if (count($context->items)) {
     $pager_layout = new UNL_MediaYak_List_PagerLayout($context->pager,
         new Doctrine_Pager_Range_Sliding(array('chunk'=>5)),
-        UNL_MediaYak_Controller::getURL(null, array_merge($context->options, array('page'=>'{%page_number}'))));
+        $url);
     $pager_links = $pager_layout->display(null, true);
     ?>
     <h3 class="sec_header" style="margin-top:10px;">Media in this Channel</h3>
