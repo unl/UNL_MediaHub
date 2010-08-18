@@ -5,24 +5,32 @@ public function display($options = array(), $return = false)
     {
         $pager = $this->getPager();
 
+        if (!$pager->haveToPaginate()) {
+            return '';
+        }
+
         $this->setTemplate('<li><a href="{%url}" title="Go to page {%page}">{%page}</a></li>');
         $this->setSelectedTemplate('<li class="selected">{%page}</li>');
 
         $str = '<ul class="wdn_pagination">';
 
-        // Previous page
-        $this->addMaskReplacement('page', '&larr; prev', true);
-        $options['page_number'] = $pager->getPreviousPage();
-        $str .= $this->processPage($options);
+        if ($pager->getPage() !== 1) {
+            // Previous page
+            $this->addMaskReplacement('page', '&larr; prev', true);
+            $options['page_number'] = $pager->getPreviousPage();
+            $str .= $this->processPage($options);
+        }
 
         // Pages listing
         $this->removeMaskReplacement('page');
         $str .= parent::display($options, true);
 
-        // Next page
-        $this->addMaskReplacement('page', 'next &rarr;', true);
-        $options['page_number'] = $pager->getNextPage();
-        $str .= $this->processPage($options);
+        if ($pager->getPage() != $pager->getNextPage()) {
+            // Next page
+            $this->addMaskReplacement('page', 'next &rarr;', true);
+            $options['page_number'] = $pager->getNextPage();
+            $str .= $this->processPage($options);
+        }
 
         $str .= '</ul>';
 
