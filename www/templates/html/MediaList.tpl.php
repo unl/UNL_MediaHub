@@ -7,6 +7,9 @@ if (isset($context->label) && !empty($context->label)) {
 if ($parent->context instanceof UNL_MediaYak_FeedAndMedia) {
     // Use the feed url as the base for pagination links
     $url = UNL_MediaYak_Controller::getURL($parent->context->feed, array_merge($context->options, array('page'=>'{%page_number}')));
+} elseif ($parent->context->options['view'] == 'search') {
+    //blah
+    $url = $context->getURL().'&page={%page_number}';
 } else {
     $url = UNL_MediaYak_Controller::getURL(null, array_merge($context->options, array('page'=>'{%page_number}')));
 }

@@ -52,7 +52,7 @@ class UNL_MediaYak_MediaList extends UNL_MediaYak_List
                                . $this->options['filter']->getValue();
                     break;
                 case 'search':
-                    $this->url .= '&amp;view=search&amp;q='
+                    $this->url .= 'search/?q='
                                . urlencode($this->options['filter']->getValue());
                     break;
             }
