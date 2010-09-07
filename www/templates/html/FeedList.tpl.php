@@ -18,7 +18,6 @@
             <p>'.htmlentities($feed->description).'</p>
             
             </div>
-            <!--
             <div class="mediaSamples">
                 <h5>Latest Media <a href="'.UNL_MediaYak_Controller::getURL($feed, array('format'=>'xml')).'" class="feed-icon"> .</a></h5>
                 <h6 class="subhead">'.count($feed->UNL_MediaYak_Feed_Media).' items</h6>
@@ -33,7 +32,6 @@
                     </li>
                 </ul>
             </div>
-            -->
             <div class="clear"></div>
             </li>';
         }
