@@ -3,10 +3,10 @@
 $jquery = '';
 if (!isset($context->media)) {
     if (isset($_GET['feed_id'])) { //if we already have a feed, don't show the initial feed list
-        $jquery .= 'WDN.jQuery("#feedlist").hide();'; 
+        $jquery .= '//WDN.jQuery("#feedlist").hide();'; 
     }
 } else { //if we have media (we're editing) show the appropriate part of the form
-    $jquery .= 'WDN.jQuery("#addMedia").hide();WDN.jQuery("#feedlist").hide();WDN.jQuery(".headline_main, #existing_media, #enhanced_header, #feedSelect, #maincontent form.zenform #continue3").show(400);WDN.jQuery(".two_col.right").removeClass("two_col right");';
+    $jquery .= 'WDN.jQuery("#addMedia").hide();WDN.jQuery("#feedlist").hide();WDN.jQuery(".headline_main, #existing_media, #enhanced_header, #feedSelect, #continue3").show();WDN.jQuery(".two_col.right").removeClass("two_col right");';
 }
 
 $jquery .= '
@@ -22,6 +22,7 @@ $jquery .= '
                 WDN.jQuery(".headline_main").slideDown(400, function() {
                     WDN.jQuery("#maincontent form.zenform").css({"width" : "930px"}).parent("div.two_col").removeClass("two_col right");
                     WDN.jQuery("#existing_media, #enhanced_header, #feedSelect, #maincontent form.zenform #continue3").slideDown(400);
+                    WDN.jQuery("#media_url").attr("value", WDN.jQuery("#url").val());
                 });
             });
             document.getElementById("thumbnail").src = "'.UNL_MediaYak_Controller::$thumbnail_generator.'"+document.getElementById("url").value;
@@ -59,7 +60,7 @@ var jQuery = WDN.jQuery;
                 skin : "unl",
                 
                 // Theme options
-		        theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,|,bullist,numlist,|,link,unlink,anchor,|,removeformat,cleanup,help,code,styleselect,formatselect,fontselect,fontsizeselect",
+		        theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,|,bullist,numlist,|,link,unlink,anchor,|,removeformat,cleanup,help,code,styleselect,formatselect",
 		        theme_advanced_buttons2 : "",
 		        theme_advanced_buttons3 : "",
 		        theme_advanced_toolbar_location : "top",
@@ -107,6 +108,9 @@ var jQuery = WDN.jQuery;
     <fieldset id="existing_media">
         <legend>Basic Information</legend>
         <ol>
+            <li><label><span class="required">*</span>URL of Media File<span class="helper">Media types supported: .m4v, .mp4, .mp3</span></label>
+                <input id="media_url" name="url" type="text" value="<?php echo htmlentities(@$context->media->url, ENT_QUOTES); ?>" />
+            </li>
             <li><label for="title" class="element"><span class="required">*</span>Title</label><input id="title" name="title" type="text" value="<?php echo htmlentities(@$context->media->title, ENT_QUOTES); ?>" /></li>
             <li><label for="author" class="element"><span class="required">*</span>Author</label><div class="element"><input id="author" name="author" type="text" value="<?php echo htmlentities(@$context->media->author, ENT_QUOTES); ?>" /></div></li>
             <li>
