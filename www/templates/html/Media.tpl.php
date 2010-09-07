@@ -133,7 +133,6 @@ WDN.initializePlugin('videoPlayer');
     <textarea cols="25" rows="6" onclick="this.select(); return false;"><?php
         echo htmlentities(
             '<video height="'. $height.'" width="'.$width.'" src="'.$context->url.'" controls autobuffer poster="'.UNL_MediaYak_Controller::$thumbnail_generator.($context->url).'" style="background:url('.UNL_MediaYak_Controller::$thumbnail_generator.($context->url).') no-repeat;">'.
-            '<source src="'.$context->url.'" poster="'.UNL_MediaYak_Controller::$thumbnail_generator.($context->url).'" type="video/mp4" />'.
             '<object type="application/x-shockwave-flash" style="width:'.$width.'px;height:'.($height+48) .'px" data="http://www.unl.edu/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/player.swf">'.
                 '<param name="movie" value="/wdn/templates_3.0/includes/swf/player4.3" ></param>'.
                 '<param name="allowfullscreen" value="true"></param>'.
