@@ -316,7 +316,7 @@ UNL_MediaYak_Manager::setReplacementData('head', $js);
                 </div>
             </li>
             <li>
-                <label for="itunes_duration" class="element">Duration (HH:MM:SS)</label>
+                <label for="itunes_duration" class="element">Duration (HH:MM:SS)<span class="helper"><a href="#" onclick="mediaDetails.updateDuration();return false;">Find this</a></span></label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[2][element]" type="hidden" value="duration"/>
                     <input id="itunes_duration" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[2][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'duration'); ?>"/>
