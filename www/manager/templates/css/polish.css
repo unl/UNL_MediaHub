@@ -1,4 +1,13 @@
+/*These are experimental overrides, perhaps to update the templates forever upon success! */
+#maincontent {
+    padding:0;
+    background:url('images/promoBackground.jpg') no-repeat top left;
+    min-height:555px;
+}
+#maincontent .left {padding-left:10px;}
+#maincontent .right {padding-right:10px;}
 #main_right {overflow:visible;}
+
 #enhanced_header, #existing_media, #feedSelect, #maincontent form.zenform #continue3, #file_upload {display:none;}
 #maincontent form.zenform {max-width:930px;margin-top:5px;background-color:#E6E9DC;
     background-image:-webkit-gradient(
@@ -140,6 +149,37 @@ a.action.delete {
 }
 a.action.delete:active {background-image:url('images/iconDelete.png');}
 
+.headline_main {
+	background:#ECF4F8;
+	border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+	margin-bottom:15px;
+	padding:10px 0;
+}
+.headline_main ol {
+    font-size:1.2em;
+    line-height:1.4em;	
+}
+.headline_main #thumbnail {
+	margin: 0px auto;
+	width:230px;
+	float:left;
+}
+.headline_main .action {
+	float:right;
+	margin:50px;
+}
+#thumbnailStatus{
+	display:block;
+	float:right;
+	font-size:0.7em;
+	font-style:italic;
+	position:relative;
+	right:10px;
+	top:-45px;
+	width:200px;
+}
 #maincontent #channelIntro {
     background:#f1f3ea;
     borer-radius:10px;
@@ -250,24 +290,6 @@ dl.caption {
 	}
 #maincontent dl.caption dd {
 	padding-left:0px;
-	}
-div.headline_main {
-	background:#ecf4f8;
-	width:900px;
-	height:100px;
-	padding:25px 20px 20px 20px;
-	margin-bottom:30px;
-    borer-radius:5px;
-    -moz-border-radius:5px;
-    -webkit-border-radius:5px;
-}
-#maincontent div.headline_main h1 {
-	font-size:3em;
-	float:left;
-	padding-top:26px;
-}
-div.headline_main img {
-	float:right;
 }
 #feedlist div.aboutFeed{float:left;max-width:55%;}
 #feedlist h3, #maincontent .medialist h3 {

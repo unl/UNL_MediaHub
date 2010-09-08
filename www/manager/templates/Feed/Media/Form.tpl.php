@@ -1,91 +1,81 @@
 <?php
-
-$jquery = '';
+$formView = '';
 if (!isset($context->media)) {
     if (isset($_GET['feed_id'])) { //if we already have a feed, don't show the initial feed list
-        $jquery .= '//WDN.jQuery("#feedlist").hide();'; 
+        $formView .= '//WDN.jQuery("#feedlist").hide();'; 
     }
 } else { //if we have media (we're editing) show the appropriate part of the form
-    $jquery .= 'WDN.jQuery("#addMedia").hide();WDN.jQuery("#feedlist").hide();WDN.jQuery(".headline_main, #existing_media, #enhanced_header, #feedSelect, #continue3").show();WDN.jQuery(".two_col.right").removeClass("two_col right");';
+    $formView .= 'edit';
 }
 
-$jquery .= '
-    WDN.jQuery("#continue2").click(function() {
-            unl_check = /^http:\/\/([^\/]+)\.unl\.edu\/(.*)/;
-            var r = unl_check.exec(document.getElementById("url").value);
-            if (r == null) {
-                alert(\'Sorry, you must use a .unl.edu URL!\');
-                return false;
-            }
-            //WDN.jQuery("").hide();
-            WDN.jQuery("#addMedia, #feedlist").slideUp(400, function() {
-                WDN.jQuery(".headline_main").slideDown(400, function() {
-                    WDN.jQuery("#maincontent form.zenform").css({"width" : "930px"}).parent("div.two_col").removeClass("two_col right");
-                    WDN.jQuery("#existing_media, #enhanced_header, #feedSelect, #maincontent form.zenform #continue3").slideDown(400);
-                    WDN.jQuery("#media_url").attr("value", WDN.jQuery("#url").val());
-                });
-            });
-            document.getElementById("thumbnail").src = "'.UNL_MediaYak_Controller::$thumbnail_generator.'"+document.getElementById("url").value;
-            return false;
-        }
-    );';
-$jquery .= '
-    WDN.jQuery("#itunes_header ol").hide();
-    WDN.jQuery("#mrss_header ol").hide();
-    
-    WDN.jQuery("#itunes_header legend").click(function() {
-      WDN.jQuery("#itunes_header ol").toggle(400);
-      return false;
-    });
-    WDN.jQuery("#mrss_header legend").click(function() {
-      WDN.jQuery("#mrss_header ol").toggle(400);
-      return false;
-    });';
-$jquery .= '
-    
-';
 
-UNL_MediaYak_Manager::setReplacementData('head','
 
-<script type="text/javascript">
-WDN.jQuery(document).ready(function() {
-    '.$jquery.'
-});
-var jQuery = WDN.jQuery;
-    WDN.loadJS("templates/scripts/tiny_mce/jquery.tinymce.js", function() {
-        WDN.jQuery("textarea#description").tinymce({
-                // Location of TinyMCE script
-                script_url : "templates/scripts/tiny_mce/tiny_mce.js",
-                theme : "advanced",
-                skin : "unl",
-                
-                // Theme options
-		        theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,|,bullist,numlist,|,link,unlink,anchor,|,removeformat,cleanup,help,code,styleselect,formatselect",
-		        theme_advanced_buttons2 : "",
-		        theme_advanced_buttons3 : "",
-		        theme_advanced_toolbar_location : "top",
-		        theme_advanced_toolbar_align : "left",
-		        theme_advanced_statusbar_location : "bottom",
-		        theme_advanced_resizing : true,
-                theme_advanced_row_height : 33,
-        });
-    });
-</script>
+$js = '<script type="text/javascript">
+        var formView = "'.$formView.'";
+       </script>
+       <script type="text/javascript" src="'.UNL_MediaYak_Controller::getURL().'templates/html/scripts/mediaDetails.js"></script>
+       ';
 
-');
-
+UNL_MediaYak_Manager::setReplacementData('head', $js);
 ?>
 <div class="headline_main" style="display:none;">
-    <h1><?php echo (isset($context->media))?'Edit the details of your':'Tell us about your'; ?> media.</h1>
-    <?php
-    $thumbnail = 'templates/images/thumbs/placeholder.jpg';
-    if (isset($context->media)) {
-        $thumbnail = UNL_MediaYak_Controller::$thumbnail_generator.urlencode($context->media->url);
-    }
-    ?>
-    <img src="<?php echo $thumbnail; ?>" id="thumbnail" alt="Thumbnail preview2" width="164" height="95" />
+    <div id="videoData" class="two_col left">
+        <?php
+        $thumbnail = 'templates/images/thumbs/placeholder.jpg';
+        if (isset($context->media)) {
+            $thumbnail = UNL_MediaYak_Controller::$thumbnail_generator.urlencode($context->media->url);
+        }
+        ?>
+        <h1>Tell us about your media</h1>
+        <ol>
+            <li>Pause the video at the right at the frame which you want as the image representation.</li>
+            <li>Click the "Set Image" button to save this as your image representation.</li>
+            <li>Continue with the form below.</li>
+        </ol>
+        <h5 class="sec_header">Your Image</h5>
+        <img src="<?php echo $thumbnail; ?>" id="thumbnail" alt="Thumbnail preview" />
+        <a class="action" id="setImage" href="#">Set Image</a>
+        <p id="thumbnailStatus" style="display:none;">Depending on your video length, updating image may take a few minutes.</p>
+    </div>
+    <div id="videoDisplay" class="two_col right">
+    <?php if (isset($context->media)) {
+	    $type = 'audio';
+		$height = 253;
+		$width = 460;
+		if (UNL_MediaYak_Media::isVideo($context->media->type)) {
+		    $type = 'video';
+		    $dimensions = UNL_MediaYak_Media::getMediaDimensions($context->media->id);
+		    if (isset($dimensions['width'])) {
+		        // Scale everything down to 450 wide
+		        $height = round(($width/$dimensions['width'])*$dimensions['height']);
+		    }
+		}
+	?>
+        <video height="<?php echo $height; ?>" width="<?php echo $width; ?>" src="<?php echo $context->media->url?>" controls poster="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.($context->media->url)?>">
+            <object type="application/x-shockwave-flash" style="width:<?php echo $width; ?>px;height:<?php echo $height; ?>px" data="/wdn/templates_3.0/includes/swf/player4.3.swf">
+                <param name="movie" value="/wdn/templates_3.0/includes/swf/player4.3" />
+                <param name="allowfullscreen" value="true" />
+                <param name="allowscriptaccess" value="always" />
+                <param name="wmode" value="transparent" />
+                <param name="flashvars" value="file=<?php echo urlencode($context->media->url)?>&amp;image=<?php echo urlencode(UNL_MediaYak_Controller::$thumbnail_generator.urlencode($context->media->url))?>&amp;volume=100&amp;controlbar=over&amp;autostart=true&amp;skin=/wdn/templates_3.0/includes/swf/UNLVideoSkin.swf" /> 
+            </object>
+        </video>
+        <script type="text/javascript">WDN.initializePlugin("videoPlayer");</script>
+    <?php } else {?>
+        <video height="" width="" src="" controls >
+            <object type="application/x-shockwave-flash" data="/wdn/templates_3.0/includes/swf/player4.3.swf">
+                <param name="movie" value="/wdn/templates_3.0/includes/swf/player4.3" />
+                <param name="allowfullscreen" value="true" />
+                <param name="allowscriptaccess" value="always" />
+                <param name="wmode" value="transparent" />
+                <param name="flashvars" value="" /> 
+            </object>
+        </video>
+    <?php }?>
+    </div>
 </div>
-<div class="two_col right">
+<div class="clear"></div>
+<div id="formDetails" class="two_col right">
 <form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data" class="zenform cool">
     <fieldset id="addMedia">
     <legend>Add New Media</legend>
