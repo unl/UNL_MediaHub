@@ -33,9 +33,11 @@ UNL_MediaYak_Manager::setReplacementData('head', $js);
             <li>Continue with the form below.</li>
         </ol>
         <h5 class="sec_header">Your Image</h5>
+        <div id="imageOverlay">
+            <p>We're updating your image, but longer videos take more time. Now is a good time to make sure the information below is up to snuff!</p>
+        </div>
         <img src="<?php echo $thumbnail; ?>" id="thumbnail" alt="Thumbnail preview" />
         <a class="action" id="setImage" href="#">Set Image</a>
-        <p id="thumbnailStatus" style="display:none;">Depending on your video length, updating image may take a few minutes.</p>
     </div>
     <div id="videoDisplay" class="two_col right">
     <?php if (isset($context->media)) {
