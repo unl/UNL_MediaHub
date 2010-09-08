@@ -170,15 +170,18 @@ a.action.delete:active {background-image:url('images/iconDelete.png');}
 	float:right;
 	margin:50px;
 }
-#thumbnailStatus{
-	display:block;
-	float:right;
-	font-size:0.7em;
-	font-style:italic;
-	position:relative;
-	right:10px;
-	top:-45px;
-	width:200px;
+#imageOverlay {
+	font-style:bold;
+	position:absolute;
+	float:left;
+	padding:10px;
+	padding-left:50px;
+	background:#000 url('images/loading.gif') no-repeat 10px 10px;
+	color:#fff;
+	left:0px;
+	display:none;
+	margin-left:10px;
+	opacity:0.7;
 }
 #maincontent #channelIntro {
     background:#f1f3ea;
