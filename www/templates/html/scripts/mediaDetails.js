@@ -1,7 +1,12 @@
 var jQuery = WDN.jQuery;
 var mediaDetails = function() {
+	var video;
 	return {
 		imageURL : 'http://itunes.unl.edu/thumbnails.php?url=',
+		
+		setVideoType : function(){
+		
+		},
 		
 		updateDuration : function() {
 			WDN.jQuery('#itunes_duration').attr("value", mediaDetails.findDuration(WDN.jQuery('video')[0]));
@@ -15,10 +20,10 @@ var mediaDetails = function() {
 		updateThumbnail : function(currentTime) {
 			WDN.jQuery('#imageOverlay').css({'height' : WDN.jQuery("#thumbnail").height()-20 +'px' ,'width' : WDN.jQuery("#thumbnail").width()-60 +'px' }).show();
 			var newThumbnail = new Image();
-			newThumbnail.src = mediaDetails.imageURL+ escape(WDN.jQuery("#url").val()) + '&time='+mediaDetails.formatTime(currentTime)+'&rebuild';
+			newThumbnail.src = mediaDetails.imageURL + '&time='+mediaDetails.formatTime(currentTime)+'&rebuild';
 			WDN.log(newThumbnail.src);
 			newThumbnail.onload = function(){
-				WDN.jQuery('#thumbnail').attr('src', mediaDetails.imageURL+ escape(WDN.jQuery("#url").val()) );
+				WDN.jQuery('#thumbnail').attr('src', mediaDetails.imageURL );
 				WDN.jQuery('#imageOverlay').hide();
 			};
 			
@@ -39,11 +44,11 @@ var mediaDetails = function() {
 		
 		showVideo : function(){ //video has been updated, now parse it into to markup and show the user
 			WDN.jQuery('video').attr('src', WDN.jQuery("#url").val());
-			thumbURL = mediaDetails.imageURL+'&time='+mediaDetails.formatTime(0)+'&rebuild';
+			thumbURL = mediaDetails.imageURL;
 			WDN.jQuery('#videoDisplay param[name=flashvars]').attr('value','file='+WDN.jQuery("#url").val()+'&amp;image='+thumbURL+'&amp;volume=100&amp;controlbar=over&amp;autostart=false&amp;skin=/wdn/templates_3.0/includes/swf/UNLVideoSkin.swf');
 			//use the thumbnail generated to determine width and height
 			var thumbnail = new Image();
-			thumbnail.src = thumbURL;
+			thumbnail.src = thumbURL+'&time='+mediaDetails.formatTime(0)+'&rebuild';
 			thumbnail.onload = function(){
 				calcHeight = (this.height * 460)/this.width;
 				WDN.jQuery('video').attr('height', calcHeight);
@@ -63,6 +68,7 @@ WDN.jQuery(document).ready(function() {
         WDN.jQuery("#formDetails, #formDetails form, #formDetails fieldset, #continue3").not("#addMedia").css({"display" : "block"});
         WDN.jQuery(".headline_main").css({"display" : "inline-block"});
         WDN.jQuery("#formDetails").removeClass("two_col right").addClass('four_col left');
+    	mediaDetails.imageURL = mediaDetails.imageURL + escape(WDN.jQuery("#url").val());
     }
     WDN.jQuery("#continue2").click(function() { //called when a user adds media
             unl_check = /^http:\/\/([^\/]+)\.unl\.edu\/(.*)/;
@@ -103,7 +109,7 @@ WDN.jQuery(document).ready(function() {
       return false;
     });
     
-    
+    WDN.jQuery('span.embed').colorbox({inline: true, href:'#sharing', width:'600px', height:'310px'});
 });
 WDN.loadJS("templates/scripts/tiny_mce/jquery.tinymce.js", function() {
     WDN.jQuery("textarea#description").tinymce({
@@ -123,4 +129,5 @@ WDN.loadJS("templates/scripts/tiny_mce/jquery.tinymce.js", function() {
             theme_advanced_row_height : 33
     });
 });
+
 
