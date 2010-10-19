@@ -92,7 +92,7 @@ WDN.jQuery(document).ready(function() {
     );
     
     WDN.jQuery('a#setImage').click(function(){
-    		mediaDetails.updateThumbnail(WDN.jQuery(video)[0].currentTime);
+    	mediaDetails.updateThumbnail(WDN.jQuery(video)[0].currentTime);
     	return false;
     });
     
