@@ -17,6 +17,12 @@ $meta = '
 <meta name="title" content="'.htmlentities($context->title, ENT_QUOTES).'" />
 <meta name="description" content="'.htmlentities($context->description, ENT_QUOTES).'" />
 <link rel="image_src" href="'.UNL_MediaYak_Controller::$thumbnail_generator.urlencode($context->url).'" />
+<script type="text/javascript">
+function playerReady(thePlayer) {
+    //start the player and JS API
+    WDN.videoPlayer.createFallback.addJWListeners(document.getElementById(thePlayer.id));
+}
+</script>
 <meta name="medium" content="'.$type.'" />';
 if ($type == 'video') {
     $meta .= '<link rel="video_src" href="'.$context->url.'" />';
@@ -28,10 +34,10 @@ if ($type == 'video') {
 ?>
         <video height="<?php echo $height; ?>" width="<?php echo $width; ?>" src="<?php echo $context->url?>" controls poster="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.($context->url)?>">
             <object type="application/x-shockwave-flash" style="width:<?php echo $width; ?>px;height:<?php echo $height; ?>px" data="/wdn/templates_3.0/includes/swf/player4.3.swf">
-                <param name="movie" value="/wdn/templates_3.0/includes/swf/player4.3" ></param>
-                <param name="allowfullscreen" value="true"></param>
-                <param name="allowscriptaccess" value="always"></param>
-                <param name="wmode" value="transparent"></param>
+                <param name="movie" value="/wdn/templates_3.0/includes/swf/player4.3" />
+                <param name="allowfullscreen" value="true" />
+                <param name="allowscriptaccess" value="always" />
+                <param name="wmode" value="transparent" />
                 <param name="flashvars" value="file=<?php echo urlencode($context->url)?>&amp;image=<?php echo urlencode(UNL_MediaYak_Controller::$thumbnail_generator.urlencode($context->url))?>&amp;volume=100&amp;controlbar=over&amp;autostart=true&amp;skin=/wdn/templates_3.0/includes/swf/UNLVideoSkin.swf" /> 
             </object>
         </video>
