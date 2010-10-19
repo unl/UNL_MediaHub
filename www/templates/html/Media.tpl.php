@@ -32,7 +32,7 @@ UNL_MediaYak_Controller::setReplacementData('head', $meta);
 <?php 
 if ($type == 'video') {
 ?>
-        <video height="<?php echo $height; ?>" width="<?php echo $width; ?>" src="<?php echo $context->url?>" controls poster="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.($context->url)?>">
+        <video height="<?php echo $height; ?>" width="<?php echo $width; ?>" autoplay src="<?php echo $context->url?>" controls poster="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.($context->url)?>">
             <object type="application/x-shockwave-flash" style="width:<?php echo $width; ?>px;height:<?php echo $height; ?>px" data="/wdn/templates_3.0/includes/swf/player4.3.swf">
                 <param name="movie" value="/wdn/templates_3.0/includes/swf/player4.3" />
                 <param name="allowfullscreen" value="true" />
