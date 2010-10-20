@@ -18,6 +18,9 @@ $meta = '
 <meta name="description" content="'.htmlentities($context->description, ENT_QUOTES).'" />
 <link rel="image_src" href="'.UNL_MediaYak_Controller::$thumbnail_generator.urlencode($context->url).'" />
 <script type="text/javascript">
+WDN.jQuery(document).ready(function(){
+    WDN.jQuery(\'span.embed\').colorbox({inline: true, href:\'#sharing\', width:\'600px\', height:\'310px\'});
+});
 function playerReady(thePlayer) {
     //start the player and JS API
     WDN.videoPlayer.createFallback.addJWListeners(document.getElementById(thePlayer.id));
