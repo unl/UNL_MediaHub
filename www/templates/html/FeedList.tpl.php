@@ -18,20 +18,6 @@
             <p>'.htmlentities($feed->description).'</p>
             
             </div>
-            <div class="mediaSamples">
-                <h5>Latest Media <a href="'.UNL_MediaYak_Controller::getURL($feed, array('format'=>'xml')).'" class="feed-icon"> .</a></h5>
-                <h6 class="subhead">'.count($feed->UNL_MediaYak_Feed_Media).' items</h6>
-                <ul>
-                    <li>
-                       <a href="#"><img src="http://itunes.unl.edu/thumbnails.php?url=http%3A%2F%2Fwdn.unl.edu%2Ftraining%2Fvideos%2F20100401_MyRedAlerts.mov" alt="Title" />
-                       Vipers in the Grass - A Student Production</a>
-                    </li>
-                    <li>
-                       <img src="http://itunes.unl.edu/thumbnails.php?url=http%3A%2F%2Fwww.unl.edu%2Ffinearts%2Fnews%2F2010%2Fvipers%2Fvipers.mp4" alt="Title" />
-                       Vipers in the Grass - A Student Production
-                    </li>
-                </ul>
-            </div>
             <div class="clear"></div>
             </li>';
         }
