@@ -9,7 +9,7 @@ if ($parent->context instanceof UNL_MediaYak_FeedAndMedia) {
     $url = UNL_MediaYak_Controller::getURL($parent->context->feed, array_merge($context->options, array('page'=>'{%page_number}')));
 } elseif ($parent->context->options['view'] == 'search') {
     //blah
-    $url = $context->getURL().'&page={%page_number}';
+    $url = UNL_MediaYak_Controller::addURLParams($context->getURL(), array('page'=>'{%page_number}'));
 } else {
     $url = UNL_MediaYak_Controller::getURL(null, array_merge($context->options, array('page'=>'{%page_number}')));
 }
