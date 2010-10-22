@@ -9,12 +9,16 @@ var mediaDetails = function() {
 		},
 		
 		updateDuration : function() {
-			WDN.jQuery('#itunes_duration').attr("value", mediaDetails.findDuration(WDN.jQuery('video')[0]));
+			if (!WDN.jQuery('video')[0]){
+				WDN.jQuery('#itunes_duration').attr("value", mediaDetails.findDuration(WDN.videoPlayer.createFallback.getCurrentInfo("duration")));
+			} else {
+				WDN.log(WDN.jQuery('video')[0].duration);
+				WDN.jQuery('#itunes_duration').attr("value", mediaDetails.findDuration(WDN.jQuery('video')[0].duration));
+			}
 		},
 		
-		findDuration : function(video) {
-			duration = mediaDetails.formatTime(video.duration);
-			return duration;
+		findDuration : function(duration) {
+			return mediaDetails.formatTime(duration);
 		},
 		
 		updateThumbnail : function(currentTime) {
@@ -92,7 +96,12 @@ WDN.jQuery(document).ready(function() {
     );
     
     WDN.jQuery('a#setImage').click(function(){
-    	mediaDetails.updateThumbnail(WDN.jQuery(video)[0].currentTime);
+    	if (!WDN.jQuery('video')[0]){
+    		currentTime = WDN.videoPlayer.createFallback.getCurrentInfo("position") + .01;
+    	} else {
+    		currentTime = WDN.jQuery('video')[0].currentTime;
+    	}
+    	mediaDetails.updateThumbnail(currentTime);
     	return false;
     });
     
@@ -129,5 +138,3 @@ WDN.loadJS("templates/scripts/tiny_mce/jquery.tinymce.js", function() {
             theme_advanced_row_height : 33
     });
 });
-
-
