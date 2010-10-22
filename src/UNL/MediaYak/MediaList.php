@@ -41,26 +41,28 @@ class UNL_MediaYak_MediaList extends UNL_MediaYak_List
     
     function getURL()
     {
+        $params = array();
+
         $this->url = UNL_MediaYak_Controller::getURL();
         if (!empty($this->options['filter'])) {
             switch ($this->options['filter']->getType()) {
                 case 'tag':
                 case 'year':
-                    $this->url .= '&amp;filter='
-                               . $this->options['filter']->getType()
-                               . ':'
-                               . $this->options['filter']->getValue();
+                    $params['filter'] = $this->options['filter']->getType()
+                                        . ':'
+                                        . $this->options['filter']->getValue();
                     break;
                 case 'search':
-                    $this->url .= 'search/?q='
-                               . urlencode($this->options['filter']->getValue());
+                    $this->url .= 'search/';
+                    $params['q'] = urlencode($this->options['filter']->getValue());
                     break;
             }
         }
         
-        $this->url .= '&amp;orderby=' . $this->options['orderby'];
-        
-        $this->url .= '&amp;order=' . $this->options['order'];
+        $params['orderby'] = $this->options['orderby'];
+        $params['order']   = $this->options['order'];
+
+        $this->url = UNL_MediaYak_Controller::addURLParams($this->url, $params);
         
         return $this->url;
     }

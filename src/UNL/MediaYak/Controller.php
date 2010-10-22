@@ -320,9 +320,41 @@ class UNL_MediaYak_Controller
         
         $params = array_merge($params, $additional_params);
         
+        return self::addURLParams($url, $params);
+    }
+
+    /**
+     * Add unique querystring parameters to a URL
+     * 
+     * @param string $url               The URL
+     * @param array  $additional_params Additional querystring parameters to add
+     * 
+     * @return string
+     */
+    public static function addURLParams($url, $additional_params = array())
+    {
+        $params = array();
+        if (strpos($url, '?') !== false) {
+            list($url, $existing_params) = explode('?', $url);
+            $existing_params = explode('&', $existing_params);
+            foreach ($existing_params as $val) {
+                list($var, $val) = explode('=', $val);
+                $params[$var] = $val;
+            }
+        }
+
+        $params = array_merge($params, $additional_params);
+
         $url .= '?';
         
         foreach ($params as $option=>$value) {
+            if ($option == 'driver') {
+                continue;
+            }
+            if ($option == 'format'
+                && $value = 'html') {
+                continue;
+            }
             if (!empty($value)) {
                 $url .= "&$option=$value";
             }

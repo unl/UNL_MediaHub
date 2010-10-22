@@ -173,15 +173,21 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
     }
     
     
-    public static function getURL($mixed = null)
+    public static function getURL($mixed = null, $additional_params = array())
     {
+        $params = array();
+
         if (is_object($mixed)) {
             switch(get_class($mixed)) {
                 case 'UNL_MediaYak_Feed':
-                    return UNL_MediaYak_Controller::$url.'manager/?view=feed&id='.$mixed->id;
+                    $params['view'] = 'feed';
+                    $params['id']   = $mixed->id;
             }
         }
-        return UNL_MediaYak_Controller::$url.'manager/';
+
+        $params = array_merge($params, $additional_params);
+
+        return UNL_MediaYak_Controller::addURLParams(UNL_MediaYak_Controller::$url.'manager/', $params);
     }
     
     function showFeed()
