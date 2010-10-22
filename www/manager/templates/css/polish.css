@@ -314,6 +314,24 @@ dl.caption {
 #feedlist.two_col > ul > li { /*Override the manager list*/
     padding:15px;	
 }
+#feedlist.two_col > ul.wdn_pagination {
+	width:auto;
+	margin-bottom:30px;
+}
+#feedlist.two_col > ul.wdn_pagination li {
+	min-height:0;
+	border-bottom:none;
+	padding:0;
+	margin: 0 4px;
+}
+#feedlist.two_col > ul.wdn_pagination li.selected {
+	margin: -5px 0;
+	padding: 2px 6px;
+	min-height:0;
+}
+#feedlist.two_col > ul.wdn_pagination li:hover {
+	background:none;
+}
 #feedlist .mediaSamples {
     float:right;
     width:25%;	
