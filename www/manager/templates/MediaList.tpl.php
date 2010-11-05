@@ -3,10 +3,15 @@ $addMediaURL = UNL_MediaYak_Manager::getURL().'?view=addmedia';
 if (isset($_GET['id'])) {
     $addMediaURL .= '&amp;feed_id='.$_GET['id'];
 }
+$url = UNL_MediaYak_Manager::getURL(null, array_merge($context->options, array('page'=>'{%page_number}')));
 ?>
 <h3 class="sec_header">Media in this Channel</h3>
 <?php
 if (count($context->items)) {
+    $pager_layout = new UNL_MediaYak_List_PagerLayout($context->pager,
+        new Doctrine_Pager_Range_Sliding(array('chunk'=>5)),
+        $url);
+    $pager_links = $pager_layout->display(null, true);
     echo '<ul class="medialist">';
     foreach ($context->items as $media) { ?>
         <li>
@@ -35,6 +40,9 @@ if (count($context->items)) {
     <?php  
     } 
     echo '</ul>';
+    ?>
+    <em>Displaying <?php echo $context->first; ?> through <?php echo $context->last; ?> out of <?php echo $context->total; ?></em>
+    <?php echo $pager_links;
 } else {
     echo '<p>This channel has no media yet.</p>';
 }
