@@ -156,7 +156,10 @@ class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
         if ($user = file_get_contents('http://peoplefinder.unl.edu/service.php?uid='.urlencode($this->uidcreated).'&format=json')) {
             $user = json_decode($user);
             if (isset($user->mail)) {
-                return $user->mail;
+                if (is_object($user->mail)) {
+                    return current($user->mail);
+                }
+                return (string)$user->mail;
             }
         }
         return false;
