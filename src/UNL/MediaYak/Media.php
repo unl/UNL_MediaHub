@@ -126,7 +126,7 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
      */
     public static function isVideo($content_type)
     {
-        if (strpos($content_type, 'video') == 0) {
+        if (strpos($content_type, 'video') === 0) {
             return true;
         }
         return false;
