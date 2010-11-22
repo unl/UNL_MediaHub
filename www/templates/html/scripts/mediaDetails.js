@@ -74,27 +74,98 @@ WDN.jQuery(document).ready(function() {
         WDN.jQuery("#formDetails").removeClass("two_col right").addClass('four_col left');
     	mediaDetails.imageURL = mediaDetails.imageURL + escape(WDN.jQuery("#url").val());
     }
-    WDN.jQuery("#continue2").click(function() { //called when a user adds media
+    WDN.jQuery("#videoSubmit").click(function(event) { //called when a user adds video
             unl_check = /^http:\/\/([^\/]+)\.unl\.edu\/(.*)/;
             var r = unl_check.exec(document.getElementById("url").value);
             if (r == null) {
                 alert('Sorry, you must use a .unl.edu URL!');
                 return false;
             }
+            WDN.jQuery("#headline_main_audio").slideUp(0);
             WDN.jQuery("#addMedia, #feedlist").slideUp(400, function() {
-                WDN.jQuery(".headline_main").slideDown(400, function() {
+                WDN.jQuery("#headline_main_video").slideDown(400, function() {
                     WDN.jQuery("#maincontent form.zenform").css({"width" : "930px"}).parent("#formDetails").removeClass("two_col right");
                     WDN.jQuery("#existing_media, #enhanced_header, #feedSelect, #maincontent form.zenform #continue3").slideDown(400);
                     WDN.jQuery("#media_url").attr("value", WDN.jQuery("#url").val());
                     WDN.jQuery(this).css('display', 'inline-block');
                 });
             });
+            WDN.jQuery('input[id="video"]').attr('checked', true);
             mediaDetails.imageURL = mediaDetails.imageURL + escape(WDN.jQuery("#url").val());
             mediaDetails.showVideo();
-            return false;
+            event.preventDefault();
         }
     );
-    
+    WDN.jQuery("#video").click(function(event) { //called when a user adds video
+        WDN.jQuery("#headline_main_audio").slideUp(400);
+        WDN.jQuery("#addMedia, #feedlist").slideUp(400, function() {
+            WDN.jQuery("#headline_main_video").slideDown(400, function() {
+                WDN.jQuery("#maincontent form.zenform").css({"width" : "930px"}).parent("#formDetails").removeClass("two_col right");
+                WDN.jQuery("#existing_media, #enhanced_header, #feedSelect, #maincontent form.zenform #continue3").slideDown(400);
+                WDN.jQuery("#media_url").attr("value", WDN.jQuery("#url").val());
+                WDN.jQuery(this).css('display', 'inline-block');
+            });
+        });
+        WDN.jQuery('input[id="video"]').attr('checked', true);
+        mediaDetails.imageURL = mediaDetails.imageURL + escape(WDN.jQuery("#url").val());
+        mediaDetails.showVideo();
+    }
+);
+    WDN.jQuery("#audioSubmit").click(function(event) { //called when a user adds audio
+        unl_check = /^http:\/\/([^\/]+)\.unl\.edu\/(.*)/;
+        var r = unl_check.exec(document.getElementById("url").value);
+        if (r == null) {
+            alert('Sorry, you must use a .unl.edu URL!');
+            return false;
+        }
+        WDN.jQuery(".headline_main").slideUp(0);
+        WDN.jQuery("#addMedia, #feedlist").slideUp(400, function() {
+            WDN.jQuery("#headline_main_audio").slideDown(400, function() {
+                WDN.jQuery("#maincontent form.zenform").css({"width" : "930px"}).parent("#formDetails").removeClass("two_col right");
+                WDN.jQuery("#existing_media, #enhanced_header, #feedSelect, #maincontent form.zenform #continue3").slideDown(400);
+                WDN.jQuery("source").attr("src", WDN.jQuery("#url").val());
+                WDN.jQuery(this).css('display', 'inline-block');
+            });
+        });
+        if(WDN.jQuery('.audioplayer audio').length == 0){
+	        var elem = WDN.jQuery('<audio preload="auto"> \
+	        		<source src="' + WDN.jQuery("#url").val() + '" type="audio/mpeg"> \
+					<div class="fallback"> \
+						<div class="fallback-text"> \
+							<p>Please use a modern browser or install <a href="http://get.adobe.com/flashplayer/">Flash-Plugin</a></p> \
+						</div> \
+					</div> \
+				</audio> ');
+	        WDN.jQuery('.audioplayer').append(elem); // put it into the DOM
+        }
+        WDN.jQuery('input[id="audio"]').attr('checked', true);
+        mediaDetails.showVideo();
+        event.preventDefault();
+    });
+    WDN.jQuery("#audio").click(function(event) { //called when a user adds audio
+        WDN.jQuery("#headline_main_video").slideUp(400);
+        WDN.jQuery("#addMedia, #feedlist").slideUp(400, function() {
+            WDN.jQuery("#headline_main_audio").slideDown(400, function() {
+                WDN.jQuery("#maincontent form.zenform").css({"width" : "930px"}).parent("#formDetails").removeClass("two_col right");
+                WDN.jQuery("#existing_media, #enhanced_header, #feedSelect, #maincontent form.zenform #continue3").slideDown(400);
+                WDN.jQuery("source").attr("src", WDN.jQuery("#url").val());
+                WDN.jQuery(this).css('display', 'inline-block');
+            });
+        });
+        if(WDN.jQuery('.audioplayer audio').length == 0){
+	        var elem = WDN.jQuery('<audio preload="auto"> \
+	        		<source src="' + WDN.jQuery("#url").val() + '" type="audio/mpeg"> \
+					<div class="fallback"> \
+						<div class="fallback-text"> \
+							<p>Please use a modern browser or install <a href="http://get.adobe.com/flashplayer/">Flash-Plugin</a></p> \
+						</div> \
+					</div> \
+				</audio> ');
+	        WDN.jQuery('.audioplayer').append(elem); // put it into the DOM
+        }
+        WDN.jQuery('input[id="audio"]').attr('checked', true);
+        mediaDetails.showVideo();
+    });
     WDN.jQuery('a#setImage').click(function(){
     	if (!WDN.jQuery('video')[0]){
     		currentTime = WDN.videoPlayer.createFallback.getCurrentInfo("position") + .01;

@@ -46,6 +46,23 @@ if ($type == 'video') {
         </video>
 <?php 
 }
+if ($type == 'audio') {
+?>
+		<div class="audioplayer"> 
+		    	<audio preload="auto"> 
+				<source src="<?php echo $context->url?>" type="audio/mpeg"> 
+				<div class="fallback"> 
+					<div class="fallback-text"> 
+						<p>Please use a modern browser or install <a href="http://get.adobe.com/flashplayer/">Flash-Plugin</a></p> 
+						<ul> 
+							<li><a class="source" href="<?php echo $context->url?>"><?php echo $context->url?></a></li> 
+						</ul> 
+					</div> 
+				</div> 
+			</audio> 
+		</div>
+<?php 
+}
 ?>
 <div class="three_col left supportingContent">
     <h2><?php echo $context->title; ?></h2>
@@ -140,6 +157,7 @@ WDN.initializePlugin('videoPlayer');
     <h3>Embed</h3>
     <p>Copy the following code into your unl.edu page</p>
     <textarea cols="25" rows="6" onclick="this.select(); return false;"><?php
+    	if ($type == 'video') {
         echo htmlentities(
             '<video height="'. $height.'" width="'.$width.'" src="'.$context->url.'" controls autobuffer poster="'.UNL_MediaYak_Controller::$thumbnail_generator.($context->url).'" style="background:url('.UNL_MediaYak_Controller::$thumbnail_generator.($context->url).') no-repeat;">'.
             '<object type="application/x-shockwave-flash" style="width:'.$width.'px;height:'.($height+48) .'px" data="http://www.unl.edu/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/player.swf">'.
@@ -156,5 +174,20 @@ WDN.initializePlugin('videoPlayer');
             '</object>'.
             '</video>'.
             '<script type="text/javascript">WDN.initializePlugin("videoPlayer");</script>');
+    	} else {
+    		echo htmlentities(
+    		'<div class="audioplayer">'.
+		    	'<audio preload="auto">'.
+				'<source src="'.$context->url.'" type="audio/mpeg">'.
+				'<div class="fallback">'.
+					'<div class="fallback-text">'.
+						'<p>Please use a modern browser or install <a href="http://get.adobe.com/flashplayer/">Flash-Plugin</a></p>'.
+						'<p><a class="source" href="'.$context->url.'">'.$context->url.'</a></p>'.
+					'</div>'.
+				'</div>'.
+				'</audio>'.
+			'</div>'.
+            '<script type="text/javascript">WDN.initializePlugin("videoPlayer");</script>');
+    	}
     ?></textarea>
 </div>

@@ -2,7 +2,7 @@
 $formView = '';
 if (!isset($context->media)) {
     if (isset($_GET['feed_id'])) { //if we already have a feed, don't show the initial feed list
-        $formView .= '//WDN.jQuery("#feedlist").hide();'; 
+        $formView .= "//WDN.jQuery('#feedlist').hide();"; 
     }
 } else { //if we have media (we're editing) show the appropriate part of the form
     $formView .= 'edit';
@@ -18,7 +18,7 @@ $js = '<script type="text/javascript">
 
 UNL_MediaYak_Manager::setReplacementData('head', $js);
 ?>
-<div class="headline_main" style="display:none;">
+<div class="headline_main" id="headline_main_video" style="display:none;">
     <div id="videoData" class="two_col left">
         <?php
         $thumbnail = 'templates/images/thumbs/placeholder.jpg';
@@ -63,7 +63,7 @@ UNL_MediaYak_Manager::setReplacementData('head', $js);
             </object>
         </video>
         <script type="text/javascript">WDN.initializePlugin("videoPlayer");</script>
-    <?php } else {?>
+    <?php } else { ?>
         <video height="" width="" src="" controls >
             <object type="application/x-shockwave-flash" data="/wdn/templates_3.0/includes/swf/player4.3.swf">
                 <param name="movie" value="/wdn/templates_3.0/includes/swf/player4.3" />
@@ -76,6 +76,16 @@ UNL_MediaYak_Manager::setReplacementData('head', $js);
     <?php }?>
     </div>
 </div>
+<div class="headline_main" id="headline_main_audio" style="display:none;">
+	<div id="audioPreview" class="two_col left">
+    	<h1>Preview your Audio</h1>
+    </div>
+    <div id="audioDisplay" class="two_col right">
+    	<div class="audioplayer" style="min-height:50px;">
+    	</div>
+    <script type="text/javascript">WDN.initializePlugin("videoPlayer");</script>
+    </div>
+</div>
 <div class="clear"></div>
 <div id="formDetails" class="two_col right">
 <form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data" class="zenform cool">
@@ -83,7 +93,7 @@ UNL_MediaYak_Manager::setReplacementData('head', $js);
     <legend>Add New Media</legend>
         <ol>
             <li>
-                <label><span class="required">*</span>URL of Media File<span class="helper">Media types supported: .m4v, .mp4, .mp3</span></label>
+                <label><span class="required">*</span>URL of Media File<span class="helper">Media types supported: .m4v, .mp4, .mp3, .ogg</span></label>
 		        <input id="url" name="url" type="text" value="<?php echo htmlentities(@$context->media->url, ENT_QUOTES); ?>" />
 		        <!-- <input id="file_upload" name="file_upload" type="file" /> -->
 		        <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
@@ -95,12 +105,25 @@ UNL_MediaYak_Manager::setReplacementData('head', $js);
 		        ?>
             </li>
         </ol>
-    <input type="submit" name="submit" id="continue2" value="Continue" />
+    <input type="submit" name="submit" id="videoSubmit" value="Video" />
+    <input type="submit" name="submit" id="audioSubmit" value="Audio" />
     </fieldset>
     <fieldset id="existing_media">
         <legend>Basic Information</legend>
         <ol>
-            <li><label><span class="required">*</span>URL of Media File<span class="helper">Media types supported: .m4v, .mp4, .mp3</span></label>
+        	<li><label><span class="required">*</span>Media Type</label>
+			<ol>
+				<li>
+					<input type="radio" value="1" name="type" id="video" />
+					<label for="video">Video</label>
+				</li>
+				<li>
+					<input type="radio" value="0" name="type" id="audio" />
+					<label for="audio">Audio</label>
+				</li>
+			</ol>
+        	</li>
+            <li><label><span class="required">*</span>URL of Media File<span class="helper">Media types supported: .m4v, .mp4, .mp3, .ogg</span></label>
                 <input id="media_url" name="url" type="text" value="<?php echo htmlentities(@$context->media->url, ENT_QUOTES); ?>" />
             </li>
             <li><label for="title" class="element"><span class="required">*</span>Title</label><input id="title" name="title" type="text" value="<?php echo htmlentities(@$context->media->title, ENT_QUOTES); ?>" /></li>
