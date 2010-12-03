@@ -110,7 +110,7 @@ WDN.jQuery(document).ready(function() {
         });
         WDN.jQuery('input[id="video"]').attr('checked', true);
         mediaDetails.imageURL = mediaDetails.imageURL + escape(WDN.jQuery("#url").val());
-        //mediaDetails.showVideo();
+        mediaDetails.showVideo();
     });
     WDN.jQuery("#audioSubmit").click(function(event) { //called when a user adds audio
         unl_check = /^http:\/\/([^\/]+)\.unl\.edu\/(.*)/;
