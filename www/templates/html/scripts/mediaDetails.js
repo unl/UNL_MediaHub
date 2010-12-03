@@ -62,6 +62,10 @@ var mediaDetails = function() {
 			};
 			thumbnail.onerror = '';
 			WDN.initializePlugin('videoPlayer');
+		},
+		
+		showAudio : function(){
+			WDN.initializePlugin('videoPlayer');
 		}
 	};
 }();
@@ -81,7 +85,6 @@ WDN.jQuery(document).ready(function() {
                 alert('Sorry, you must use a .unl.edu URL!');
                 return false;
             }
-            WDN.jQuery("#headline_main_audio").slideUp(0);
             WDN.jQuery("#addMedia, #feedlist").slideUp(400, function() {
                 WDN.jQuery("#headline_main_video").slideDown(400, function() {
                     WDN.jQuery("#maincontent form.zenform").css({"width" : "930px"}).parent("#formDetails").removeClass("two_col right");
@@ -94,8 +97,7 @@ WDN.jQuery(document).ready(function() {
             mediaDetails.imageURL = mediaDetails.imageURL + escape(WDN.jQuery("#url").val());
             mediaDetails.showVideo();
             event.preventDefault();
-        }
-    );
+        });
     WDN.jQuery("#video").click(function(event) { //called when a user adds video
         WDN.jQuery("#headline_main_audio").slideUp(400);
         WDN.jQuery("#addMedia, #feedlist").slideUp(400, function() {
@@ -109,8 +111,7 @@ WDN.jQuery(document).ready(function() {
         WDN.jQuery('input[id="video"]').attr('checked', true);
         mediaDetails.imageURL = mediaDetails.imageURL + escape(WDN.jQuery("#url").val());
         mediaDetails.showVideo();
-    }
-);
+    });
     WDN.jQuery("#audioSubmit").click(function(event) { //called when a user adds audio
         unl_check = /^http:\/\/([^\/]+)\.unl\.edu\/(.*)/;
         var r = unl_check.exec(document.getElementById("url").value);
@@ -118,7 +119,6 @@ WDN.jQuery(document).ready(function() {
             alert('Sorry, you must use a .unl.edu URL!');
             return false;
         }
-        WDN.jQuery(".headline_main").slideUp(0);
         WDN.jQuery("#addMedia, #feedlist").slideUp(400, function() {
             WDN.jQuery("#headline_main_audio").slideDown(400, function() {
                 WDN.jQuery("#maincontent form.zenform").css({"width" : "930px"}).parent("#formDetails").removeClass("two_col right");
@@ -139,7 +139,7 @@ WDN.jQuery(document).ready(function() {
 	        WDN.jQuery('.audioplayer').append(elem); // put it into the DOM
         }
         WDN.jQuery('input[id="audio"]').attr('checked', true);
-        mediaDetails.showVideo();
+        mediaDetails.showAudio();
         event.preventDefault();
     });
     WDN.jQuery("#audio").click(function(event) { //called when a user adds audio
@@ -164,7 +164,7 @@ WDN.jQuery(document).ready(function() {
 	        WDN.jQuery('.audioplayer').append(elem); // put it into the DOM
         }
         WDN.jQuery('input[id="audio"]').attr('checked', true);
-        mediaDetails.showVideo();
+        mediaDetails.showAudio();
     });
     WDN.jQuery('a#setImage').click(function(){
     	if (!WDN.jQuery('video')[0]){
