@@ -110,7 +110,7 @@ WDN.jQuery(document).ready(function() {
         });
         WDN.jQuery('input[id="video"]').attr('checked', true);
         mediaDetails.imageURL = mediaDetails.imageURL + escape(WDN.jQuery("#url").val());
-        mediaDetails.showVideo();
+        //mediaDetails.showVideo();
     });
     WDN.jQuery("#audioSubmit").click(function(event) { //called when a user adds audio
         unl_check = /^http:\/\/([^\/]+)\.unl\.edu\/(.*)/;
@@ -127,7 +127,7 @@ WDN.jQuery(document).ready(function() {
                 WDN.jQuery(this).css('display', 'inline-block');
             });
         });
-        if(WDN.jQuery('.audioplayer audio').length == 0){
+        if(WDN.jQuery('.audioplayer').children().length == 0){
 	        var elem = WDN.jQuery('<audio preload="auto"> \
 	        		<source src="' + WDN.jQuery("#url").val() + '" type="audio/mpeg"> \
 					<div class="fallback"> \
@@ -152,7 +152,7 @@ WDN.jQuery(document).ready(function() {
                 WDN.jQuery(this).css('display', 'inline-block');
             });
         });
-        if(WDN.jQuery('.audioplayer audio').length == 0){
+        if(WDN.jQuery('.audioplayer').children().length == 0){
 	        var elem = WDN.jQuery('<audio preload="auto"> \
 	        		<source src="' + WDN.jQuery("#url").val() + '" type="audio/mpeg"> \
 					<div class="fallback"> \
@@ -162,9 +162,10 @@ WDN.jQuery(document).ready(function() {
 					</div> \
 				</audio> ');
 	        WDN.jQuery('.audioplayer').append(elem); // put it into the DOM
+	        mediaDetails.showAudio();
         }
         WDN.jQuery('input[id="audio"]').attr('checked', true);
-        mediaDetails.showAudio();
+       
     });
     WDN.jQuery('a#setImage').click(function(){
     	if (!WDN.jQuery('video')[0]){
