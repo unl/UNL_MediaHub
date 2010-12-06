@@ -49,7 +49,7 @@ if ($type == 'video') {
 if ($type == 'audio') {
 ?>
 		<div class="audioplayer"> 
-		    	<audio preload="auto"> 
+			<audio preload="auto"> 
 				<source src="<?php echo $context->url?>" type="audio/mpeg"> 
 				<div class="fallback"> 
 					<div class="fallback-text"> 
@@ -59,7 +59,8 @@ if ($type == 'audio') {
 						</ul> 
 					</div> 
 				</div> 
-			</audio> 
+			</audio>
+			<span class="title"><?php echo $context->title; ?><span>
 		</div>
 <?php 
 }
@@ -113,7 +114,12 @@ if ($type == 'audio') {
 	?>
 	<span class="size"><?php echo $dimensions['width'] . 'x' .$dimensions['height'];?></span>
 	<?php } ?>
-    <span class="duration"><?php echo $context->length;?></span>
+    <span class="duration"><?php 
+        if(!empty($context->length)) {
+            $s = array('bytes', 'kb', 'MB', 'GB');
+            $e = floor(log($context->length)/log(1024));
+            echo sprintf('%.2f '.$s[$e], ($context->length/pow(1024, floor($e))));
+        }?></span>
     <span class="addedDate">Added: <?php echo date('m/d/Y', strtotime($context->datecreated)); ?></span>
   <?php if (!empty($context->author)) { // @TODO present author with more info (standardize people records) ?>
     <div class="author">
@@ -186,6 +192,7 @@ WDN.initializePlugin('videoPlayer');
 					'</div>'.
 				'</div>'.
 				'</audio>'.
+    		'<span class="title">'.$context->title.'<span>'.
 			'</div>'.
             '<script type="text/javascript">WDN.initializePlugin("videoPlayer");</script>');
     	}
