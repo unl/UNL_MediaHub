@@ -10,10 +10,13 @@ var mediaDetails = function() {
 		
 		updateDuration : function() {
 			if (!WDN.jQuery('video')[0]){
-				WDN.jQuery('#itunes_duration').attr("value", mediaDetails.findDuration(WDN.videoPlayer.createFallback.getCurrentInfo("duration")));
+				WDN.jQuery('#itunes_duration').attr('value', mediaDetails.findDuration(WDN.videoPlayer.createFallback.getCurrentInfo('duration')));
+			} else if (WDN.jQuery('audio')[0] != undefined) {
+				WDN.log(WDN.jQuery('audio')[0].duration);
+				WDN.jQuery('#itunes_duration').attr('value', mediaDetails.findDuration(WDN.jQuery('audio')[0].duration));
 			} else {
 				WDN.log(WDN.jQuery('video')[0].duration);
-				WDN.jQuery('#itunes_duration').attr("value", mediaDetails.findDuration(WDN.jQuery('video')[0].duration));
+				WDN.jQuery('#itunes_duration').attr('value', mediaDetails.findDuration(WDN.jQuery('video')[0].duration));
 			}
 		},
 		
@@ -123,6 +126,7 @@ WDN.jQuery(document).ready(function() {
             WDN.jQuery("#headline_main_audio").slideDown(400, function() {
                 WDN.jQuery("#maincontent form.zenform").css({"width" : "930px"}).parent("#formDetails").removeClass("two_col right");
                 WDN.jQuery("#existing_media, #enhanced_header, #feedSelect, #maincontent form.zenform #continue3").slideDown(400);
+                WDN.jQuery("#media_url").attr("value", WDN.jQuery("#url").val());
                 WDN.jQuery("source").attr("src", WDN.jQuery("#url").val());
                 WDN.jQuery(this).css('display', 'inline-block');
             });
