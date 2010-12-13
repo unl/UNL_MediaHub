@@ -14,7 +14,9 @@
     
 </div>
 <div class="col right">
+    <a href="<?php echo UNL_MediaYak_Controller::getURL(); ?>manager/">Add your media</a>
     <?php
     echo $savvy->render($context->featured_channels);
     ?>
+    <a href="<?php echo UNL_MediaYak_Controller::getURL(); ?>channels/">See all channels</a>
 </div>
