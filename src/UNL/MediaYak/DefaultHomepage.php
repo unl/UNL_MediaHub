@@ -25,13 +25,12 @@ class UNL_MediaYak_DefaultHomepage implements UNL_MediaYak_CacheableInterface
     function run()
     {
         $options = $this->options;
-        $options['limit']  = 5;
+        
+        $options['limit']   = 5;
+        $this->latest_media = new UNL_MediaYak_MediaList($options);
+
         $options['filter'] = new UNL_MediaYak_MediaList_Filter_Popular();
         $this->top_media = new UNL_MediaYak_MediaList($options);
-
-        $options['filter'] = new UNL_MediaYak_MediaList_Filter_ShowRecent();
-        $options['limit']  = 5;
-        $this->latest_media = new UNL_MediaYak_MediaList($options);
 
         $options['filter'] = new UNL_MediaYak_FeedList_Filter_Popular();
         $options['limit']  = 3;
