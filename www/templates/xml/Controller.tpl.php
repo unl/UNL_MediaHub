@@ -2,7 +2,8 @@
 if ($context->output instanceof UNL_MediaYak_MediaList
     || (is_array($context->output) && (
         $context->output[0] instanceof UNL_MediaYak_MediaList
-        || $context->output[0] instanceof UNL_MediaYak_FeedList))) {
+        || $context->output[0] instanceof UNL_MediaYak_FeedList
+        || $context->output[0] instanceof UNL_MediaYak_DefaultHomepage))) {
  echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:itunesu="http://www.itunesu.com/feed" xmlns:media="http://search.yahoo.com/mrss/" xmlns:boxee="http://boxee.tv/spec/rss/">
   <channel>
