@@ -64,7 +64,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
      *
      * @return void
      */
-    static function setReplacementData($field, $data)
+    function setReplacementData($field, $data)
     {
         switch ($field) {
         case 'title':

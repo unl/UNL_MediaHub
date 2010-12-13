@@ -53,7 +53,7 @@ abstract class UNL_MediaYak_List implements Countable, UNL_MediaYak_CacheableInt
         return serialize($this->options);
     }
     
-    function preRun()
+    function preRun($cached)
     {
         
     }

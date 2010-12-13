@@ -124,7 +124,7 @@ class UNL_MediaYak_Controller
      *
      * @return bool
      */
-    function preRun()
+    function preRun($cached)
     {
         if ($this->options['view'] == 'feed_image') {
             UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_Controller', 'ControllerPartial');
@@ -267,7 +267,7 @@ class UNL_MediaYak_Controller
      * 
      * @return void
      */
-    static function setReplacementData($field, $data)
+    function setReplacementData($field, $data)
     {
         switch ($field) {
         case 'title':

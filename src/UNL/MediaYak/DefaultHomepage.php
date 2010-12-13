@@ -12,7 +12,7 @@ class UNL_MediaYak_DefaultHomepage implements UNL_MediaYak_CacheableInterface
         $this->options = $options + $this->options;
     }
 
-    function preRun()
+    function preRun($cached)
     {
         
     }

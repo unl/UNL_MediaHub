@@ -1,9 +1,5 @@
 <?php
 
-interface UNL_MediaYak_PostRunReplacements
+interface UNL_MediaYak_PostRunReplacements extends Savvy_Turbo_PostRunReplacements
 {
-    static function setReplacementData($field, $data);
-    public function postRun($data);
 }
-
-?>
