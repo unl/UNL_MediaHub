@@ -291,7 +291,11 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
                 throw new Exception('You do not have permission to add a user.');
             }
             if (!empty($_POST['uid'])) {
-                $feed->addUser(UNL_MediaYak_User::getByUid($_POST['uid']));
+                if (!empty($_POST['delete'])) {
+                    $feed->removeUser(UNL_MediaYak_User::getByUid($_POST['uid']));
+                } else {
+                    $feed->addUser(UNL_MediaYak_User::getByUid($_POST['uid']));
+                }
             }
             $this->redirect('?view=feed&id='.$feed->id);
             break;
