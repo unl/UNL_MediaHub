@@ -1,7 +1,6 @@
 /*These are experimental overrides, perhaps to update the templates forever upon success! */
 #maincontent {
     padding:0;
-    background:url('images/promoBackground.jpg') no-repeat top left;
     min-height:555px;
 }
 #maincontent .left {padding-left:10px;}
