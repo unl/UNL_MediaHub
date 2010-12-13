@@ -91,6 +91,16 @@ class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
             }
         }
     }
+
+    function removeUser(UNL_MediaYak_User $user)
+    {
+        $q = Doctrine_Query::create()
+            ->delete('UNL_MediaYak_User_Permission')
+            ->addWhere('feed_id = ?', $this->id)
+            ->addWhere('user_uid = ?', $user->uid);
+
+        return $q->execute();
+    }
     
     /**
      * Check if the user has a given permission for this feed.
