@@ -46,6 +46,6 @@ class UNL_MediaYak_User extends UNL_MediaYak_Models_BaseUser
     function getFeeds()
     {
         $filter = new UNL_MediaYak_FeedList_Filter_ByUser($this);
-        return new UNL_MediaYak_FeedList($filter);
+        return new UNL_MediaYak_FeedList(array('filter'=>$filter));
     }
 }

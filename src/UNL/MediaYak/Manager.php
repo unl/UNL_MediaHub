@@ -158,7 +158,10 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
     
     function showMedia(UNL_MediaYak_Filter $filter = null)
     {
-        $this->output[] = new UNL_MediaYak_MediaList($filter);
+        $options           = $this->options;
+        $options['filter'] = $filter;
+
+        $this->output[] = new UNL_MediaYak_MediaList($options);
     }
     
     function editPermissions()

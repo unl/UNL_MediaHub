@@ -26,7 +26,7 @@ class UNL_MediaYak_Controller
      *
      * @var array
      */
-    public $options = array('view'   => 'search',
+    public $options = array('view'   => 'default',
                             'format' => 'html');
     
     /**
@@ -61,9 +61,10 @@ class UNL_MediaYak_Controller
     static protected $replacements;
     
     protected $view_map = array(
-        'search' => '',
-        'media'  => '',
-        'feed'   => '',
+        'search'  => 'UNL_MediaYak_MediaList',
+        'default' => 'UNL_MediaYak_DefaultHomepage',
+        'media'   => '',
+        'feed'    => '',
         );
     
     /**
@@ -184,20 +185,12 @@ class UNL_MediaYak_Controller
                 $this->output[] = UNL_MediaYak_Feed_Image::getByTitle($this->options['title']);
             }
             break;
+        case 'default':
         case 'search':
-        default:
-            $this->showDefaultContent();
+            $class = $this->view_map[$this->options['view']];
+            $this->output[] = new $class($this->options);
+            break;
         }
-    }
-    
-    function showDefaultContent()
-    {
-        if (!(isset($_GET['q'])
-            || isset($_GET['page']))
-            && $this->options['format'] != 'xml') {
-            $this->showPopularMedia();
-        }
-        $this->showLatestMedia();
     }
     
     /**
@@ -363,25 +356,10 @@ class UNL_MediaYak_Controller
         return trim($url, '?;=');
     }
     
-    /**
-     * Prepare output for a list of media.
-     *
-     * @return void
-     */
-    function showLatestMedia()
-    {
-        $filter = null;
-        if (isset($this->options['q'])) {
-            $filter = new UNL_MediaYak_MediaList_Filter_TextSearch($this->options['q']);
-        }
-        
-        $this->output[] = new UNL_MediaYak_MediaList($filter);
-    }
-    
     function showPopularMedia()
     {
         $filter = new UNL_MediaYak_MediaList_Filter_Popular();
-        $this->output[] = new UNL_MediaYak_MediaList($filter);
+        $this->output[] = new UNL_MediaYak_MediaList(array('filter'=>$filter));
     }
     
     /**
@@ -402,7 +380,7 @@ class UNL_MediaYak_Controller
         if (isset($feed)) {
             $this->output[] = new UNL_MediaYak_FeedAndMedia($feed);
         } else {
-            $this->output[] = new UNL_MediaYak_FeedList(new UNL_MediaYak_FeedList_Filter_WithRelatedMedia());
+            $this->output[] = new UNL_MediaYak_FeedList(array('filter'=>new UNL_MediaYak_FeedList_Filter_WithRelatedMedia()));
         }
     }
 }
