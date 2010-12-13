@@ -1,5 +1,13 @@
+<?php
+$label = 'Available Channels';
+if (isset($context->label) && !empty($context->label)) {
+    UNL_MediaYak_Controller::setReplacementData('title', 'UNL | Media | '.$context->label);
+    UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaYak_Controller::getURL().'">Media Hub</a></li> <li>'.$context->label.'</li></ul>');
+    $label = $context->label;
+}
+?>
 <div id="feedlist">
-    <h1>Available Channels</h1>
+    <h1><?php echo $label; ?></h1>
     <p>Select a channel to view.</p>
     <div class="clear"></div>
     <?php
