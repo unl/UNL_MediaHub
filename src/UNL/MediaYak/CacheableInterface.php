@@ -4,11 +4,6 @@
  * 
  * @author bbieber
  */
-interface UNL_MediaYak_CacheableInterface
+interface UNL_MediaYak_CacheableInterface extends Savvy_Turbo_CacheableInterface
 {
-    public function getCacheKey();
-    public function run();
-    public function preRun();
 }
-
-?>

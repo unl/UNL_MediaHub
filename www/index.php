@@ -9,6 +9,9 @@ $controller = new UNL_MediaYak_Controller($_GET + UNL_MediaYak_Router::getRoute(
 $outputcontroller = new UNL_MediaYak_OutputController();
 $outputcontroller->setTemplatePath(dirname(__FILE__).'/templates/html');
 
+if (isset($cache)) {
+    $outputcontroller->setCacheInterface($cache);
+}
 
 switch($controller->options['format']) {
     case 'rss':

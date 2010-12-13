@@ -11,4 +11,4 @@ UNL_MediaYak::registerAutoloaders();
 UNL_MediaYak_Controller::$url = 'http://localhost/workspace/UNL_MediaYak/www/';
 UNL_MediaYak_Controller::$thumbnail_generator = 'http://itunes.unl.edu/thumbnails.php?url=';
 
-UNL_MediaYak_OutputController::setCacheInterface(new UNL_MediaYak_CacheInterface_Mock());
+$cache = new UNL_MediaYak_CacheInterface_Mock();
