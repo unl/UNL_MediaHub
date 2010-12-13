@@ -172,7 +172,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
     
     function showFeeds(UNL_MediaYak_User $user)
     {
-        $this->output[] = $user->getFeeds();
+        $this->output[] = $user->getFeeds($this->options);
     }
     
     
