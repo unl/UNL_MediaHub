@@ -51,7 +51,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
         return false;
     }
     
-    function preRun()
+    function preRun($cached)
     {
         return true;
     }
@@ -167,7 +167,9 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
     function editPermissions()
     {
         $feed = UNL_MediaYak_Feed::getById($_GET['feed_id']);
-        $this->output[] = new UNL_MediaYak_UserList(new UNL_MediaYak_UserList_Filter_ByFeed($feed));
+        $options = $this->options;
+        $options['filter'] = new UNL_MediaYak_UserList_Filter_ByFeed($feed);
+        $this->output[] = new UNL_MediaYak_UserList($options);
     }
     
     function showFeeds(UNL_MediaYak_User $user)
