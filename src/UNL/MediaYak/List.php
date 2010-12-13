@@ -42,13 +42,10 @@ abstract class UNL_MediaYak_List implements Countable, UNL_MediaYak_CacheableInt
      * 
      * @return UNL_MediaYak_List
      */
-    function __construct(UNL_MediaYak_Filter $filter = null)
+    function __construct($options = array())
     {
-        $this->options = array_merge($this->options, $_GET);
+        $this->options = $options + $this->options;
         $this->filterInputOptions();
-        if ($filter) {
-            $this->options['filter'] = $filter;
-        }
     }
     
     function getCacheKey()

@@ -174,7 +174,7 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
 
     function getFeeds()
     {
-        return new UNL_MediaYak_FeedList(new UNL_MediaYak_FeedList_Filter_WithMediaId($this->id));
+        return new UNL_MediaYak_FeedList(array('filter'=>new UNL_MediaYak_FeedList_Filter_WithMediaId($this->id)));
     }
 
     function delete()

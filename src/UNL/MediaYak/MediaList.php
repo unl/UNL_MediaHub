@@ -9,6 +9,21 @@ class UNL_MediaYak_MediaList extends UNL_MediaYak_List
                             'limit'   => 10);
    
     public $tables = 'UNL_MediaYak_Media m';
+
+    function __construct($options = array())
+    {
+        $this->options = $options + $this->options;
+        $this->filterInputOptions();
+        $this->setUpFilter();
+    }
+
+    function setUpFilter()
+    {
+        if (isset($this->options['q'])
+            && !empty($this->options['q'])) {
+            $this->options['filter'] = new UNL_MediaYak_MediaList_Filter_TextSearch($this->options['q']);
+        }
+    }
     
     function filterInputOptions()
     {
