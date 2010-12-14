@@ -26,4 +26,3 @@ class UNL_MediaYak_MediaList_Filter_NoContentType implements UNL_MediaYak_Filter
         return '';
     }
 }
-?>
