@@ -12,6 +12,9 @@ if (count($list->items)) {
         // Try and get the media
         if (substr($media->url, 0, 5) == 'http:') {
             $headers = get_headers($media->url);
+            if (false === $headers) {
+                echo 'DNS failure, did the server move?'.PHP_EOL;
+            }
             foreach ($headers as $header) {
                 if (strpos($header, 'HTTP/1.1 404 Not Found') !== false) {
                     // This file is GONE! Better remove it
