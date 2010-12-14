@@ -71,25 +71,6 @@ Supporting styles for individual presentation of media elements
     border:0;
     padding:2px 4px;
 }
-#maincontent #addTags {
-	display:inline;
-}
-#maincontent #addTags input {
-    margin-left:5px;
-}
-#maincontent #addTags input[type="text"] {
-	height:10px;
-}
-#maincontent #addTags input[type="submit"] {
-	background:#ac0302;
-	color:#fff;
-	font-weight:bold;
-	border-radius:3px;
-    -webkit-border-radius:3px;
-    -moz-border-radius:3px;
-    border:0;
-    padding:2px 4px;
-}
 .author, .addedDate, .duration, .embed, .subhead {
     color:#999999;
     font-size:0.7em;
