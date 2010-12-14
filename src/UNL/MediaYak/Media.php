@@ -144,7 +144,7 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
         }
 
         $headers = get_headers($this->url);
-        if (count($headers)) {
+        if (false !== $headers && count($headers)) {
             foreach($headers as $header) {
                 if (strpos($header, 'Content-Type: ') !== false) {
                     $this->type = substr($header, 14);
