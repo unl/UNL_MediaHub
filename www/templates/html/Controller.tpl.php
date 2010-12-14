@@ -10,9 +10,9 @@ $page->titlegraphic = '<h1>UNL Media Hub</h1><h2>Lights, Camera, Action</h2>';
 $page->addStyleSheet(UNL_MediaYak_Controller::getURL().'templates/html/css/all.css');
 $page->breadcrumbs = '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li>Media Hub</li></ul>';
 $page->addScript('/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/swfobject.js');
-$page->head .= '<link rel="search" href="'.UNL_MediaYak_Controller::getURL().'search/" />
-';
+$page->head .= '<link rel="search" href="'.UNL_MediaYak_Controller::getURL().'search/" />';
 $page->addScript(UNL_MediaYak_Controller::getURL().'templates/html/audio-player/audio-player-noswfobject.js');
+$page->addScript(UNL_MediaYak_Controller::getURL().'templates/html/scripts/mediatools.js');
 if (!$context->output instanceof UNL_MediaYak_FeedAndMedia) {
     $page->head .= '<link rel="alternate" type="application/rss+xml" title="UNL MediaHub" href="?format=xml" />';
 }

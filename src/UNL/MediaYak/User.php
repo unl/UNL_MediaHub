@@ -32,7 +32,7 @@ class UNL_MediaYak_User extends UNL_MediaYak_Models_BaseUser
         $user->fromArray($data);
         $user->save();
         // Create the defaul feed for the user
-        UNL_MediaYak_Feed::addFeed(array('title'       =>'My Channel ('.$user->uid.')',
+        UNL_MediaYak_Feed::addFeed(array('title'       =>'Your Channel ('.$user->uid.')',
                                          'description' =>'This is your default channel'),
                                    $user);
         return $user;

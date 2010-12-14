@@ -324,7 +324,7 @@ UNL_MediaYak_Manager::setReplacementData('head', $js);
                 </div>
             </li>
             <li>
-                <label for="itunes_block" class="element">Block from iTunes <span class="helper">Select 'yes' if you would like to block this element from iTunes</span></label>
+                <label for="itunes_block" class="element">Block from iTunes <span class="helper">Set to 'yes' if you would like to block this element from iTunes</span></label>
                 <div class="element">
                     <input name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[1][element]" type="hidden" value="block"/>
                     <select id="itunes_block" name="UNL_MediaYak_Feed_Media_NamespacedElements_itunes[1][value]">
