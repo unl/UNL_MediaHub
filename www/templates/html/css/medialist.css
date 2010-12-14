@@ -1,10 +1,53 @@
+#maincontent .medialist > li {
+    list-style:none;
+    display:inline-block;
+    text-align:left;
+    width:444px;
+    overflow:hidden;
+    height:115px;
+}
 ul.medialist li {
     list-style:none;
-    margin-left:-28px;
-    padding:10px;
-    margin-bottom:10px;
-    background:url(images/fade700.png) no-repeat top left #FFFFFF;
+    padding:10px 14px 10px 0;
+    margin:0 5px;
     clear:both;
+    border-bottom:1px dotted #c4c2c2;
+}
+ul.medialist li:hover {
+	background:#eff2f7;
+}
+.medialist .metaInfo {
+	float:right;
+	width:325px;
+}
+#maincontent .medialist h4 {
+	font-size:15px;
+	font-weight:bold;
+	text-shadow: rgba(218, 218, 218, 0.4) -1px -1px 0;
+	line-height:1;
+	margin-bottom:2px;
+}
+#maincontent .medialist h6.subhead {
+	margin-bottom:8px;
+}
+#maincontent .medialist p {
+	font-size:0.9em;
+	line-height:1.25em;
+	overflow:hidden;
+}
+#maincontent .medialist li img {float:left;}
+#maincontent .medialist div.actions{
+	position:absolute;
+	margin-top:87px;
+	margin-left:5px;
+	font-size:0.8em;
+	float:left;
+}
+#maincontent .medialist div.actions form {
+	display:inline;
+	margin-left:5px;
+	border-left:1px solid #c4c2c2;
+	padding-left:8px;
 }
 .pager_links {
     font-weight:bold;

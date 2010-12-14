@@ -203,6 +203,10 @@ a.action.delete:active {background-image:url('images/iconDelete.png');}
     padding-top:0;
     margin-bottom:15px;	
 }
+#maincontent .mediaSamples h6 {
+	font-size:0.75em;
+	color: #919191;
+}
 #maincontent #channelIntro ul{
     margin:10px 0;	
     padding:0;

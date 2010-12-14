@@ -77,6 +77,23 @@ if ($type == 'audio') {
     }
     ?>
   <p><?php echo $summary; ?></p>
+  
+    <ul id="mediaTags">
+    	<li><a href="#">Tag name</a></li>
+    	<li><a href="#">Tag name</a></li>
+    	<li><a href="#">Tag name</a></li>
+    	<li><a href="#">Tag name</a></li>
+    	<li><a href="#">Tag name</a></li>
+	    <?php
+	    if (UNL_MediaYak_Controller::isLoggedIn()) {
+	    	echo '<li id="mediaTagsAdd"><a href="#">Add tags</a><form id="addTags" method="post"><input type="text" value="" name="tags" /><input type="submit" value="Add" /></form></li>';
+	    }?>
+    </ul>
+    <?php
+	    if (UNL_MediaYak_Controller::isLoggedIn()) {
+	    	
+	    }
+	?>
     <div id="comments">
     <h4>Comments</h4>
     <span class="subhead"><?php echo count($context->UNL_MediaYak_Media_Comment); ?> Comments | <a href="#commentForm">Leave Yours</a></span>
