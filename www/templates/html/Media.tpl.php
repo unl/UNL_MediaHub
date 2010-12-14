@@ -45,8 +45,7 @@ if ($type == 'video') {
             </object>
         </video>
 <?php 
-}
-if ($type == 'audio') {
+} else if ($type == 'audio') {
 ?>
 		<div class="audioplayer"> 
 			<audio preload="auto"> 
@@ -77,6 +76,7 @@ if ($type == 'audio') {
     }
     ?>
   <p><?php echo $summary; ?></p>
+
   
     <ul id="mediaTags">
     	<li><a href="#">Tag name</a></li>
@@ -89,11 +89,7 @@ if ($type == 'audio') {
 	    	echo '<li id="mediaTagsAdd"><a href="#">Add tags</a><form id="addTags" method="post"><input type="text" value="" name="tags" /><input type="submit" value="Add" /></form></li>';
 	    }?>
     </ul>
-    <?php
-	    if (UNL_MediaYak_Controller::isLoggedIn()) {
-	    	
-	    }
-	?>
+
     <div id="comments">
     <h4>Comments</h4>
     <span class="subhead"><?php echo count($context->UNL_MediaYak_Media_Comment); ?> Comments | <a href="#commentForm">Leave Yours</a></span>
@@ -197,7 +193,7 @@ WDN.initializePlugin('videoPlayer');
             '</object>'.
             '</video>'.
             '<script type="text/javascript">WDN.initializePlugin("videoPlayer");</script>');
-    	} else {
+    	} else if ($type == 'audio') {
     		echo htmlentities(
     		'<div class="audioplayer">'.
 		    	'<audio preload="auto">'.
