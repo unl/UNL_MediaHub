@@ -197,7 +197,7 @@ WDN.initializePlugin('videoPlayer');
     		echo htmlentities(
     		'<div class="audioplayer">'.
 		    	'<audio preload="auto">'.
-				'<source src="'.$context->url.'" type="audio/mpeg">'.
+				'<source src="'.$context->url.'" type="audio/mpeg" />'.
 				'<div class="fallback">'.
 					'<div class="fallback-text">'.
 						'<p>Please use a modern browser or install <a href="http://get.adobe.com/flashplayer/">Flash-Plugin</a></p>'.
@@ -205,7 +205,7 @@ WDN.initializePlugin('videoPlayer');
 					'</div>'.
 				'</div>'.
 				'</audio>'.
-    		'<span class="title">'.$context->title.'<span>'.
+    		'<span class="title">'.$context->title.'</span>'.
 			'</div>'.
             '<script type="text/javascript">WDN.initializePlugin("videoPlayer");</script>');
     	}
