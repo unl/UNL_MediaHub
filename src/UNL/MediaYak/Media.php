@@ -202,5 +202,16 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
         }
         return parent::delete();
     }
+
+    function getTags()
+    {
+        $tags = array();
+        $class = 'UNL_MediaYak_Feed_Media_NamespacedElements_itunes';
+        if ($element = call_user_func($class .'::mediaHasElement', $this->id, 'keywords', 'itunes')) {
+            $tags = explode(',', $element->value);
+            array_walk($tags, 'trim');
+        }
+        return $tags;
+    }
 }
 
