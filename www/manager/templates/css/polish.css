@@ -222,20 +222,6 @@ a.action.delete:active {background-image:url('images/iconDelete.png');}
 	padding:0;
 }
 
-#maincontent .medialist > li {
-    list-style:none;
-    display:inline-block;
-    background: #E6E9DC;
-    padding:15px;
-    border:1px solid #bec1b4;
-    borer-radius:5px;
-    -moz-border-radius:5px;
-    -webkit-border-radius:5px;
-    margin:0 10px 10px 0;
-    text-align:left;
-    width:268px;
-    overflow:hidden;
-}
 #maincontent #userList li {
     display:inline-block;
     text-align:center;
