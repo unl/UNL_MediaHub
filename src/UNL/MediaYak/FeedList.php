@@ -23,7 +23,14 @@ class UNL_MediaYak_FeedList extends UNL_MediaYak_List
                             'order'   => 'ASC',
                             'page'    => 0,
                             'limit'   => 10);
-    
+
+    function __construct($options = array())
+    {
+        parent::__construct($options);
+        if (empty($this->options['filter'])) {
+            $this->options['filter'] = new UNL_MediaYak_FeedList_Filter_WithRelatedMedia();
+        }
+    }
     /**
      * Customizes the ordering used in this list.
      * 

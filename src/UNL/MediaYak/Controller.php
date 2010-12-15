@@ -63,8 +63,7 @@ class UNL_MediaYak_Controller
     protected $view_map = array(
         'search'  => 'UNL_MediaYak_MediaList',
         'default' => 'UNL_MediaYak_DefaultHomepage',
-        'media'   => '',
-        'feed'    => '',
+        'feeds'   => 'UNL_MediaYak_FeedList',
         );
     
     /**
@@ -187,6 +186,7 @@ class UNL_MediaYak_Controller
             break;
         case 'default':
         case 'search':
+        case 'feeds':
             $class = $this->view_map[$this->options['view']];
             $this->output[] = new $class($this->options);
             break;
@@ -379,8 +379,6 @@ class UNL_MediaYak_Controller
         
         if (isset($feed)) {
             $this->output[] = new UNL_MediaYak_FeedAndMedia($feed);
-        } else {
-            $this->output[] = new UNL_MediaYak_FeedList(array('filter'=>new UNL_MediaYak_FeedList_Filter_WithRelatedMedia()));
         }
     }
 }
