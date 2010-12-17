@@ -31,6 +31,11 @@ if ($type == 'video') {
     $meta .= '<link rel="video_src" href="'.$context->url.'" />';
 }
 UNL_MediaYak_Controller::setReplacementData('head', $meta);
+if ($_POST) {
+	foreach (explode(",", $_POST["tags"]) as $tag) {
+		$context->addTag(trim($tag));
+	}
+}
 ?>
 <?php 
 if ($type == 'video') {

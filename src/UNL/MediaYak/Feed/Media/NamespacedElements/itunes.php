@@ -24,4 +24,8 @@ class UNL_MediaYak_Feed_Media_NamespacedElements_itunes extends UNL_MediaYak_Fee
         return UNL_MediaYak_Feed_Media_NamespacedElements::mediaHasElement($media_id, $element, 'itunes');
     }
     
+	public static function mediaSetElement($media_id, $element, $value)
+    {
+        return UNL_MediaYak_Feed_Media_NamespacedElements::mediaSetElement($media_id, $element, 'itunes', $value);
+    }
 }

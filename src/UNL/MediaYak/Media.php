@@ -207,11 +207,28 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
     {
         $tags = array();
         $class = 'UNL_MediaYak_Feed_Media_NamespacedElements_itunes';
-        if ($element = call_user_func($class .'::mediaHasElement', $this->id, 'keywords', 'itunes')) {
+        if ($element = call_user_func($class .'::mediaHasElement', $this->id, 'keywords')) {
             $tags = explode(',', $element->value);
             array_walk($tags, 'trim');
         }
         return $tags;
+    }
+    
+    function addTag($newTag)
+    {
+    	$tags = array();
+        $class = 'UNL_MediaYak_Feed_Media_NamespacedElements_itunes';
+        if ($element = call_user_func($class .'::mediaHasElement', $this->id, 'keywords')) {
+            $tags = explode(',', $element->value);
+            array_walk($tags, 'trim');
+        }
+    	if (!in_array(strtolower($newTag), $tags)) {
+        	array_push($tags, strtolower($newTag));
+        	sort($tags);
+        	$tagStr = implode(",", $tags);
+        	return call_user_func($class .'::mediaSetElement', $this->id, 'keywords', $tagStr);
+        }
+    	return false;
     }
 }
 
