@@ -34,7 +34,7 @@ Supporting styles for individual presentation of media elements
 	display:inline;
 }
 #maincontent ul#mediaTags li:after {
-	content: ',';
+	content: ', ';
 }
 #maincontent ul#mediaTags li:last-of-type:after {
 	content: '';
