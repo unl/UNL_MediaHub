@@ -22,6 +22,7 @@ Supporting styles for individual presentation of media elements
     margin-bottom:3px;
 }
 #maincontent ul#mediaTags{
+	min-height:16px;
 	padding:5px 25px;
 	list-style:none;
 	background:url('images/iconTag.png') 5px 8px no-repeat #f7f7f7;
