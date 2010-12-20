@@ -206,20 +206,28 @@ class UNL_MediaYak_Controller
         if (isset($options['id'])) {
             $media = Doctrine::getTable('UNL_MediaYak_Media')->find($options['id']);
         }
-        
-        if (isset($_POST, $_POST['comment'])
+
+        if (!empty($_POST)
             && self::isLoggedIn()) {
-            
-            $data = array('uid'      => self::$auth->getUser(),
-                          'media_id' => $media->id,
-                          'comment'  => $_POST['comment']);
-            
-            $comment = new UNL_MediaYak_Media_Comment();
-            $comment->fromArray($data);
-            $comment->save();
+            $user = self::$auth->getUser();
+            if (!empty($_POST['comment'])) {
+                $data = array('uid'      => $user,
+                              'media_id' => $media->id,
+                              'comment'  => $_POST['comment']);
+                
+                $comment = new UNL_MediaYak_Media_Comment();
+                $comment->fromArray($data);
+                $comment->save();
+            }
+
+            if (!empty($_POST['tags'])) {
+                foreach (explode(',', $_POST['tags']) as $tag) {
+                    $media->addTag(trim($tag));
+                }
+            }
         }
-        
-        
+
+
         if ($media) {
             return $media;
         }
