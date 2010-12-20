@@ -216,12 +216,8 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
     
     function addTag($newTag)
     {
-    	$tags = array();
+    	$tags = $this->getTags();
         $class = 'UNL_MediaYak_Feed_Media_NamespacedElements_itunes';
-        if ($element = call_user_func($class .'::mediaHasElement', $this->id, 'keywords')) {
-            $tags = explode(',', $element->value);
-            array_walk($tags, 'trim');
-        }
     	if (!in_array(strtolower($newTag), $tags)) {
         	array_push($tags, strtolower($newTag));
         	sort($tags);
