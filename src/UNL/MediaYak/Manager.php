@@ -251,6 +251,8 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
                                  'title'      => $_POST['title'],
                                  'description'=> $_POST['description']);
                 $media = $this->mediayak->addMedia($details);
+                $media->synchronizeWithArray($_POST);
+                $media->save();
             }
             
             if (!empty($_POST['feed_id'])) {
