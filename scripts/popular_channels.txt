@@ -1,4 +1,5 @@
-      6 /channels/Football+Physics
-      5 /channels/Frame+By+Frame
-      4 /channels/N+The+Know
-      2 /channels/Put+Yourself+on+the+Map
+
+      6 /mediahub/channels/Football+Physics
+      5 /mediahub/channels/Frame+By+Frame
+      4 /mediahub/channels/N+The+Know
+      2 /mediahub/channels/Put+Yourself+on+the+Map
