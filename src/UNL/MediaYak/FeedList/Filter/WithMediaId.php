@@ -16,7 +16,7 @@ class UNL_MediaYak_FeedList_Filter_WithMediaId implements UNL_MediaYak_Filter
     
     function getLabel()
     {
-        return 'With Specific Media';
+        return 'Related Channels';
     }
     
     function getType()

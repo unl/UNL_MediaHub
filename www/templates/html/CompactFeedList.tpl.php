@@ -1,7 +1,7 @@
 <?php
 if (count($context->items)) :
 ?>
-<h5>Channels</h5>
+<h5><?php echo $context->label; ?></h5>
 <?php if ($parent->context instanceof UNL_MediaYak_Media): ?>
 <p class="">This media is part of the following channels:</p>
 <?php endif; ?>
