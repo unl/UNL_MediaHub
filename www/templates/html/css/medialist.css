@@ -75,7 +75,7 @@ ul.medialist li:hover {
 }
 /*
 
-Overrides for homepage display
+Overrides and specifics for homepage display
 
 */
 
@@ -94,7 +94,7 @@ Overrides for homepage display
 #maincontent .group {
 	border-bottom:1px solid #3b679e;
 }
-#maincontent .group h3 {
+#maincontent .group h3, #maincontent #exploreMedia h3 {
 	display:inline;
 	float:left;
 	color:#385E9B;
@@ -177,8 +177,50 @@ Overrides for homepage display
     background-image: url('images/iconPlusLg.png'), -moz-linear-gradient(top, #499bea 0%, #3665b2 100%);
     background-image: url('images/iconPlusLg.png'), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#499bea), color-stop(100%,#3665b2));
 }
+#maincontent .col.right h5 {
+	color:#71819a;
+    font-weight:bold;
+    padding-left:10px;
+    border-left:1px dotted #3b679e;
+    padding-top:8px;
+}
 #maincontent .col.right ul.channels {
     border-left:1px dotted #3b679e;
+}
+#maincontent #exploreMedia {
+	padding-top:25px;
+	clear:both;
+}
+#maincontent #exploreMedia h3 {
+    display:block;
+    border-bottom:1px solid #3b679e;
+    float:none;
+    padding-bottom:3px;
+}
+.box_display {
+    width:100%;	
+    padding-top:15px;
+}
+.box_display div {
+	display:inline-block;
+	float:left;
+	width:50%;
+}
+#maincontent #exploreMedia h4 {
+    color:#71819a;
+    font-weight:bold;
+}
+#maincontent #exploreMedia div {
+	min-height:90px;
+}
+#maincontent #exploreMedia div p {
+    width:60%;	
+}
+#maincontent #exploreMedia .exp_channels {
+	background:url('images/bwIconTV.png') no-repeat 90% 0%;
+}
+#maincontent #exploreMedia .exp_tags {
+    background:url('images/bwIconTag.png') no-repeat 90% 0%;
 }
 /*
 End Overrides for homepage
