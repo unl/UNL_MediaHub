@@ -23,11 +23,14 @@
     	<div class="box_display">
     		<div class="exp_channels">
     			<h4>Channels</h4>
-    			<p>Channel explanation</p>
+    			<p>Channels are groups of related media. Any media can be part of any channel. Create your own channel of your favorite media!</p>
+    			<a href="channels/">Explore all Channels</a>
     		</div>
     		<div class="exp_tags">
     			<h4>Tags</h4>
-    			<p>Tag explanation</p>
+    			<p>Coming soon!<br/>
+    			Tags will allow you to consume related media, build dynamic collections and discover new content!
+    			</p>
     		</div>
     	</div>
     </div>
