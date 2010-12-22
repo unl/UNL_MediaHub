@@ -27,7 +27,7 @@ class UNL_MediaYak_FeedList_Filter_Popular implements UNL_MediaYak_Filter
     
     function getLabel()
     {
-        return 'Popular Channels';
+        return 'Featured Channels';
     }
     
     function getType()
