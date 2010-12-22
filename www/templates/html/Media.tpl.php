@@ -141,22 +141,8 @@ if ($type == 'video') {
   </div>
     <?php
     $channels = $context->getFeeds();
-    $channels->run();
-    if (count($channels->items)) :
+    echo $savvy->render($channels, 'CompactFeedList.tpl.php');
     ?>
-    <h5>Channels</h5>
-    <p class="">This media is part of the following channels:</p>
-    <ul class="channels">
-        <?php foreach ($channels->items as $channel): ?>
-        <li>
-            <a href="<?php echo UNL_MediaYak_Controller::getURL($channel); ?>">
-                <img src="<?php echo UNL_MediaYak_Controller::getURL($channel).'/image'; ?>" alt="<?php echo $channel->title?>" />
-                <span class="title"><?php echo $channel->title?></span>
-            </a>
-        </li>
-        <?php endforeach; ?>
-    </ul>
-    <?php endif; ?>
     <?php if(false) :?>
     <h5>Tags</h5>
     <ul class="tags">
