@@ -20,13 +20,13 @@ if (count($context->items)) {
         $url);
     $pager_links = $pager_layout->display(null, true);
     ?>
-    <h3 class="sec_header" style="margin-top:10px;">Media in this Channel</h3>
+    <h3 class="sec_header" style="margin-top:10px;">All Media</h3>
         <ul class="medialist">
     
         <?php
         foreach ($context->items as $media) { ?>
             <li>
-                <a href="<?php echo UNL_MediaYak_Controller::getURL($media); ?>"><img class="thumbnail" src="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.urlencode($media->url); ?>" alt="Thumbnail preview for <?php echo $media->title; ?>" width="100" height="76" /></a>
+                <a href="<?php echo UNL_MediaYak_Controller::getURL($media); ?>"><img class="thumbnail" src="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.urlencode($media->url); ?>" alt="Thumbnail preview for <?php echo $media->title; ?>" /></a>
                 <div class="metaInfo">
                 <h4><a href="<?php echo UNL_MediaYak_Controller::getURL($media); ?>"><?php echo htmlspecialchars($media->title); ?></a></h4>
                 <?php
@@ -36,9 +36,6 @@ if (count($context->items)) {
                 $summary = $media->description;
                 if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_itunes::mediaHasElement($media->id, 'summary')) {
                     $summary .= '<span class="itunes_summary">'.$element->value.'</span>';
-                }
-                if (strlen($summary) >= 220) {
-                    $summary = substr($summary, 0, 220).'&hellip;';
                 }
                 $summary = strip_tags($summary, '<a><img>');
                 $summary = str_replace('Related Links', '', $summary);
