@@ -17,7 +17,7 @@ class UNL_MediaYak_FeedList_Filter_Popular implements UNL_MediaYak_Filter
                     $params[] = $matches[1];
                 } else {
                     $where .= 'f.title = ? OR ';
-                    $params = urldecode($matches[1]);
+                    $params[] = urldecode($matches[1]);
                 }
             }
         }
