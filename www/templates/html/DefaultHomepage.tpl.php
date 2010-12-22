@@ -23,7 +23,7 @@
 <div class="col right">
     <a href="<?php echo UNL_MediaYak_Controller::getURL(); ?>manager/" class="addMedia">Add your media</a>
     <?php
-    echo $savvy->render($context->featured_channels);
+    echo $savvy->render($context->featured_channels, 'CompactFeedList.tpl.php');
     ?>
     <a href="<?php echo UNL_MediaYak_Controller::getURL(); ?>channels/">See all channels</a>
 </div>
