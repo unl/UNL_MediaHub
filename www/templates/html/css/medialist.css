@@ -2,23 +2,35 @@
     list-style:none;
     display:inline-block;
     text-align:left;
-    width:444px;
+    width:460px;
     overflow:hidden;
-    height:115px;
+    height:105px;
+    float:left;
+}
+#maincontent .medialist > li:nth-child(odd){
+	
+}
+#maincontent .medialist > li:nth-child(even){
+    float:right;
+}
+#maincontent .three_col .medialist > li {
+	width:100%;
 }
 ul.medialist li {
     list-style:none;
-    padding:10px 14px 10px 0;
-    margin:0 5px;
-    clear:both;
+    padding:20px 0;
     border-bottom:1px dotted #c4c2c2;
 }
 ul.medialist li:hover {
 	background:#eff2f7;
 }
 .medialist .metaInfo {
-	float:right;
-	width:325px;
+	float:left;
+	width:324px;
+	margin-left:20px;
+}
+#maincontent .three_col .medialist .metaInfo {
+    width:530px;
 }
 #maincontent .medialist h4 {
 	font-size:15px;
@@ -31,11 +43,18 @@ ul.medialist li:hover {
 	margin-bottom:8px;
 }
 #maincontent .medialist p {
-	font-size:0.9em;
 	line-height:1.25em;
 	overflow:hidden;
+	text-overflow:ellipsis;
+	height:3.9em;
 }
-#maincontent .medialist li img {float:left;}
+#maincontent .medialist li a.imagelink {float:left;}
+#maincontent .medialist li img {
+	width:100px;
+}
+#maincontent .three_col .medialist li img {
+	width:150px;
+}
 #maincontent .medialist div.actions{
 	position:absolute;
 	margin-top:87px;
@@ -62,8 +81,4 @@ ul.medialist li:hover {
 .pager_links a:hover {
     border:1px solid #bd4141;
     color:#bd4141;
-}
-img.thumbnail {
-    float:left;
-    padding:6px 10px 16px 6px;
 }

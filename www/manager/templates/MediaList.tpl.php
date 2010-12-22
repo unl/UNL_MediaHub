@@ -32,9 +32,6 @@ if (count($context->items)) {
             if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_itunes::mediaHasElement($media->id, 'summary')) {
                 $summary .= '<span class="itunes_summary">'.$element->value.'</span>';
             }
-            if (strlen($summary) >= 220) {
-                $summary = substr($summary, 0, 220).'&hellip;';
-            }
             $summary = strip_tags($summary, '<a><img>');
             $summary = str_replace('Related Links', '', $summary);
             ?>

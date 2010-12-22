@@ -1,10 +1,7 @@
 /*These are experimental overrides, perhaps to update the templates forever upon success! */
 #maincontent {
-    padding:0;
     min-height:555px;
 }
-#maincontent .left {padding-left:10px;}
-#maincontent .right {padding-right:10px;}
 #main_right {overflow:visible;}
 
 #enhanced_header, #existing_media, #feedSelect, #maincontent form.zenform #continue3, #file_upload {display:none;}
