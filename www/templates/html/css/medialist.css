@@ -153,9 +153,9 @@ Overrides and specifics for homepage display
     font-size:1.4em;
     color:#fff;
     background-color: #385E9B;
-    background-image: url('images/iconPlusLg.png');
-    background-image: url('images/iconPlusLg.png'), -moz-linear-gradient(top, #499bea 0%, #385E9B 100%);
-    background-image: url('images/iconPlusLg.png'), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#499bea), color-stop(100%,#385E9B));
+    background-image: url('images/iconPlusLG.png');
+    background-image: url('images/iconPlusLG.png'), -moz-linear-gradient(top, #499bea 0%, #385E9B 100%);
+    background-image: url('images/iconPlusLG.png'), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#499bea), color-stop(100%,#385E9B));
     background-position:7% 50%;
     background-repeat:no-repeat;
     display:block;
@@ -173,9 +173,9 @@ Overrides and specifics for homepage display
 	-moz-box-shadow: inset 1px 1px 3px rgba(29, 59, 108, 0.4);
 	box-shadow: inset 1px 1px 3px rgba(29, 59, 108, 0.4); 
 	background-color: #3665b2;
-    background-image: url('images/iconPlusLg.png');
-    background-image: url('images/iconPlusLg.png'), -moz-linear-gradient(top, #499bea 0%, #3665b2 100%);
-    background-image: url('images/iconPlusLg.png'), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#499bea), color-stop(100%,#3665b2));
+    background-image: url('images/iconPlusLG.png');
+    background-image: url('images/iconPlusLG.png'), -moz-linear-gradient(top, #499bea 0%, #3665b2 100%);
+    background-image: url('images/iconPlusLG.png'), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#499bea), color-stop(100%,#3665b2));
 }
 #maincontent .col.right h5 {
 	color:#71819a;
