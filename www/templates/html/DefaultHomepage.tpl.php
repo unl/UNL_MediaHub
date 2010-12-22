@@ -18,7 +18,19 @@
             <?php echo $savvy->render($context->latest_media); ?>
         </div>
     </div>
-    <h3 class="sec_header">Explore Media Hub</h3>
+    <div id="exploreMedia">
+    	<h3>Explore Media Hub</h3>
+    	<div class="box_display">
+    		<div class="exp_channels">
+    			<h4>Channels</h4>
+    			<p>Channel explanation</p>
+    		</div>
+    		<div class="exp_tags">
+    			<h4>Tags</h4>
+    			<p>Tag explanation</p>
+    		</div>
+    	</div>
+    </div>
 </div>
 <div class="col right">
     <a href="<?php echo UNL_MediaYak_Controller::getURL(); ?>manager/" class="addMedia">Add your media</a>

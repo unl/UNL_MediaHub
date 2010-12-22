@@ -177,6 +177,9 @@ Overrides for homepage display
     background-image: url('images/iconPlusLg.png'), -moz-linear-gradient(top, #499bea 0%, #3665b2 100%);
     background-image: url('images/iconPlusLg.png'), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#499bea), color-stop(100%,#3665b2));
 }
+#maincontent .col.right ul.channels {
+    border-left:1px dotted #3b679e;
+}
 /*
 End Overrides for homepage
 */
