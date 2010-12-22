@@ -295,7 +295,7 @@ dl.caption {
     display:block;
     min-height:85px;
     margin:0;
-    border-bottom:1px dotted #c4c2c2;
+    border-bottom:1px dotted #3b679e;
 }
 #feedlist.two_col > ul > li { /*Override the manager list*/
     padding:15px;	
@@ -350,5 +350,5 @@ dl.caption {
     width:150px;
 }
 #feedlist ul li:hover {
-    background:#eff2f7;	
+    background:#f5f7f9;	
 }
