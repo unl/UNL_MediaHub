@@ -143,14 +143,6 @@ if ($type == 'video') {
     $channels = $context->getFeeds();
     echo $savvy->render($channels, 'CompactFeedList.tpl.php');
     ?>
-    <?php if(false) :?>
-    <h5>Tags</h5>
-    <ul class="tags">
-        <li><a href="#">Tag 1</a></li>
-        <li><a href="#">Tag 1</a></li>
-        <li><a href="#">Tag 1</a></li>
-    </ul>
-    <?php endif;?>
     <h6 style="margin-top:1em;"><a href="<?php echo htmlentities($context->url, ENT_QUOTES); ?>" class="video-x-generic">Download this media file</a></h6>
 </div>
 <script type="text/javascript">
