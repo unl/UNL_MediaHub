@@ -177,14 +177,14 @@ Overrides and specifics for homepage display
     background-image: url('images/iconPlusLG.png'), -moz-linear-gradient(top, #499bea 0%, #3665b2 100%);
     background-image: url('images/iconPlusLG.png'), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#499bea), color-stop(100%,#3665b2));
 }
-#maincontent .col.right h5 {
+#maincontent .col.right .addMedia + h5 {
 	color:#71819a;
     font-weight:bold;
     padding-left:10px;
     border-left:1px dotted #3b679e;
     padding-top:8px;
 }
-#maincontent .col.right ul.channels {
+#maincontent .col.right .addMedia + h5 + ul.channels {
     border-left:1px dotted #3b679e;
 }
 #maincontent #exploreMedia {
