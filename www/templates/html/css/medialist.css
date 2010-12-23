@@ -40,7 +40,7 @@ ul.medialist li:hover {
 	line-height:1.25em;
 	overflow:hidden;
 	text-overflow:ellipsis;
-	height:3.9em;
+	height:3.8em;
 }
 #maincontent .medialist li a.imagelink {float:left;}
 #maincontent .medialist li img {
