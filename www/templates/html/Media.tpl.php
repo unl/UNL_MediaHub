@@ -85,7 +85,11 @@ if ($type == 'video') {
         }
 	    if (UNL_MediaYak_Controller::isLoggedIn()) {
 	    	echo '<li id="mediaTagsAdd"><a href="#">Add tags</a><form id="addTags" method="post"><input type="text" value="" name="tags" /><input type="submit" value="Add" /></form></li>';
-	    }?>
+	    } else {
+	    	echo '<li id="mediaTagsAdd"><a href=href="https://login.unl.edu/cas/login?service='.urlencode(UNL_MediaYak_Controller::getURL()).'">Login to add tags </a>';
+	    }
+	    
+	    ?>
     </ul>
 
     <div id="comments">
