@@ -1,3 +1,12 @@
+/* 
+-------------------------------------------------
+Supporting styles for individual presentation of lists of media
+-------------------------------------------------
+*/
+#maincontent .medialist {
+    list-style:none;
+    padding:0;
+}
 #maincontent .medialist > li {
     list-style:none;
     display:inline-block;
@@ -35,6 +44,8 @@ ul.medialist li:hover {
 }
 #maincontent .medialist h6.subhead {
 	margin-bottom:8px;
+    font-size:0.75em;
+    color: #919191;
 }
 #maincontent .medialist p {
 	line-height:1.25em;
@@ -73,12 +84,11 @@ ul.medialist li:hover {
     border:1px solid #bd4141;
     color:#bd4141;
 }
-/*
-
-Overrides and specifics for homepage display
-
+/* 
+-------------------------------------------------
+Homepage overrides
+-------------------------------------------------
 */
-
 #maincontent .feature .medialist > li {
     width:100%;
 }
@@ -89,139 +99,5 @@ Overrides and specifics for homepage display
     width:530px;
 }
 #maincontent .feature .wdn_tabs_content em, #maincontent .feature .wdn_tabs_content .wdn_pagination, #maincontent .feature .wdn_tabs_content h3 {
-	display:none;
+    display:none;
 }
-#maincontent .group {
-	border-bottom:1px solid #3b679e;
-}
-#maincontent .group h3, #maincontent #exploreMedia h3 {
-	display:inline;
-	float:left;
-	color:#385E9B;
-    font-weight:bold;
-}
-#maincontent .group:after {
-	clear:both;
-	content: '.';
-	display:block;
-	height:0px;
-	visibility:hidden;
-}
-#maincontent .group .switcher {
-	list-style:none;
-	padding:0;
-    float:right;
-}
-#maincontent .group .switcher li {
-	display:inline;
-	margin-right:7px;
-	float:left;
-	margin-top:8px;
-}
-#maincontent .group .switcher li a {
-	padding: 5px 10px 6px;
-	border-radius:25px;
-    -moz-border-radius:25px;
-    -webkit-border-radius:25px;
-    color:#4f4f4f;
-    font-size:0.9em;
-}
-#maincontent .group .switcher li a:hover {
-    background: #f6f8f9;
-    background: -moz-linear-gradient(top, #f6f8f9 0%, #e5ebee 50%, #d7dee3 51%, #f5f7f9 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f6f8f9), color-stop(50%,#e5ebee), color-stop(51%,#d7dee3), color-stop(100%,#f5f7f9));
-}
-#maincontent .group .switcher li a.selected {
-	font-weight:bold;
-	color:#fff;
-	background: #3b679e;
-    text-shadow: rgba(33, 54, 88, 0.4) -1px -1px 0;
-    background: -moz-linear-gradient(top, #3b679e 0%, #2b88d9 50%, #207cca 51%, #7db9e8 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3b679e), color-stop(50%,#2b88d9), color-stop(51%,#207cca), color-stop(100%,#7db9e8));
-}
-#maincontent .group .switcher li a:focus {
-    color:#4f4f4f !important;  
-}
-#maincontent .group .switcher li a.selected:focus {
-    color:#fff !important;  
-}
-#maincontent .group .switcher li a.selected:focus {
-    color:#fff !important;	
-}
-#maincontent .addMedia {
-    font-weight:bold;
-    font-size:1.4em;
-    color:#fff;
-    background-color: #385E9B;
-    background-image: url('images/iconPlusLG.png');
-    background-image: url('images/iconPlusLG.png'), -moz-linear-gradient(top, #499bea 0%, #385E9B 100%);
-    background-image: url('images/iconPlusLG.png'), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#499bea), color-stop(100%,#385E9B));
-    background-position:7% 50%;
-    background-repeat:no-repeat;
-    display:block;
-    padding:20px 10px 20px 60px;
-    border-radius:10px;
-    -moz-border-radius:10px;
-    -webkit-border-radius:10px;
-    text-shadow: rgba(33, 54, 88, 0.4) -1px -1px 0;
-    border:2px solid #3572ac;
-    margin-bottom:20px;
-}
-#maincontent .addMedia:hover {
-	color:#fff;
-	-webkit-box-shadow: inset 1px 1px 3px rgba(29, 59, 108, 0.4);
-	-moz-box-shadow: inset 1px 1px 3px rgba(29, 59, 108, 0.4);
-	box-shadow: inset 1px 1px 3px rgba(29, 59, 108, 0.4); 
-	background-color: #3665b2;
-    background-image: url('images/iconPlusLG.png');
-    background-image: url('images/iconPlusLG.png'), -moz-linear-gradient(top, #499bea 0%, #3665b2 100%);
-    background-image: url('images/iconPlusLG.png'), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#499bea), color-stop(100%,#3665b2));
-}
-#maincontent .col.right .addMedia + h5 {
-	color:#71819a;
-    font-weight:bold;
-    padding-left:10px;
-    border-left:1px dotted #3b679e;
-    padding-top:8px;
-}
-#maincontent .col.right .addMedia + h5 + ul.channels {
-    border-left:1px dotted #3b679e;
-}
-#maincontent #exploreMedia {
-	padding-top:25px;
-	clear:both;
-}
-#maincontent #exploreMedia h3 {
-    display:block;
-    border-bottom:1px solid #3b679e;
-    float:none;
-    padding-bottom:3px;
-}
-.box_display {
-    width:100%;	
-    padding-top:15px;
-}
-.box_display div {
-	display:inline-block;
-	float:left;
-	width:50%;
-}
-#maincontent #exploreMedia h4 {
-    color:#71819a;
-    font-weight:bold;
-}
-#maincontent #exploreMedia div {
-	min-height:90px;
-}
-#maincontent #exploreMedia div p {
-    width:60%;	
-}
-#maincontent #exploreMedia .exp_channels {
-	background:url('images/bwIconTV.png') no-repeat 90% 0%;
-}
-#maincontent #exploreMedia .exp_tags {
-    background:url('images/bwIconTag.png') no-repeat 90% 0%;
-}
-/*
-End Overrides for homepage
-*/

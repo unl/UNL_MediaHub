@@ -1,0 +1,130 @@
+/* 
+-------------------------------------------------
+Supporting styles for listings of channels
+-------------------------------------------------
+*/
+
+#feedlist div.aboutFeed{float:left;max-width:55%;}
+#feedlist p {}
+#feedlist  ul {list-style:none;padding-left:0;}
+#feedlist > ul {
+    margin-top:10px;
+    width:940px;
+}
+#feedlist > ul > li {
+    padding:25px 15px;
+    display:block;
+    min-height:85px;
+    margin:0;
+    border-bottom:1px dotted #3b679e;
+}
+#feedlist.two_col > ul > li { /*Override the manager list*/
+    padding:15px;   
+}
+#feedlist.two_col > ul.wdn_pagination {
+    width:auto;
+    margin-bottom:30px;
+}
+#feedlist.two_col > ul.wdn_pagination li {
+    min-height:0;
+    border-bottom:none;
+    padding:0;
+    margin: 0 4px;
+}
+#feedlist.two_col > ul.wdn_pagination li.selected {
+    margin: -5px 0;
+    padding: 2px 6px;
+    min-height:0;
+}
+#feedlist.two_col > ul.wdn_pagination li:hover {
+    background:none;
+}
+#feedlist .mediaSamples {
+    float:right;
+    width:25%;  
+    border-left:1px dotted #d4d4d4;
+    padding-left:10px;
+}
+.mediaSamples h5 a {
+    text-indent:-99999px;
+    float:right;    
+}
+#maincontent #feedlist .mediaSamples img {
+    width:75px; 
+    max-height:42px;
+}
+#maincontent #feedlist .mediaSamples li {
+    font-size:11px;
+    min-height:47px;
+    font-weight:bold;
+    line-height:12px;
+    opacity:0.7;    
+}
+#maincontent #feedlist .mediaSamples li:hover {
+    opacity:1;  
+}
+#feedlist h6.list_header+ul {width:auto;}
+#feedlist h6.list_header+ul li {min-height:0px;}
+#maincontent #feedlist ul li img {
+    float:left;
+    margin-right:15px;
+    width:150px;
+}
+#feedlist ul li:hover {
+    background:#f5f7f9; 
+}
+#maincontent #feedlist h3 {
+    padding-bottom:0;   
+}
+#maincontent #feedlist h6.subhead {
+    font-size:0.85em;
+    padding-top:0;
+    margin-bottom:15px; 
+}
+#maincontent .mediaSamples h6 {
+    font-size:0.75em;
+    color: #919191;
+}
+/* 
+-------------------------------------------------
+One column, image only view
+-------------------------------------------------
+*/
+
+#maincontent ul.channels {
+    list-style:none;
+    padding:0;  
+    margin-bottom:10px;
+}
+#maincontent ul.channels li {
+    padding:5px;
+    border:2px solid #fff;
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    position:relative;
+}
+#maincontent ul.channels li img {
+    max-width:206px;    
+}
+#maincontent ul.channels li:hover {
+    border-color:#bbb;  
+}
+#maincontent ul.channels li:hover .title {
+    display:block; 
+}
+ul.channels .title {
+    text-transform:capitalize;
+    background:#F7F7F7;
+    color:#555555;
+    display:none;
+    font-weight:bold;
+    left:0;
+    padding:1px;
+    position:absolute;
+    text-transform:uppercase;
+    top:0;
+    width:214px;
+    opacity:0.84;
+    border-bottom:1px solid #ebebeb;    
+}

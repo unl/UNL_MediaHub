@@ -93,6 +93,9 @@ if ($type == 'video') {
     </ul>
 
     <div id="comments">
+    <script type="text/javascript">
+    	WDN.loadCSS('../templates/html/css/comments.css');
+    </script>
     <h4>Comments</h4>
     <span class="subhead"><?php echo count($context->UNL_MediaYak_Media_Comment); ?> Comments | <a href="#commentForm">Leave Yours</a></span>
     <?php

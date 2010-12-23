@@ -1,8 +1,7 @@
 @import url("/wdn/templates_3.0/css/content/zenform.css");
 @import url("/wdn/templates_3.0/css/content/pagination.css");
-@import url("../../../manager/templates/css/polish.css");
-@import url("comments.css");
-@import url("medialist.css");
 @import url("media.css");
-#title ul {margin-right:20px;}
-#title ul li{float:right;}
+@import url("medialist.css");
+@import url("channel.css");
+@import url("channellist.css");
+@import url("explore.css");

@@ -1,3 +1,8 @@
+/*
+
+Supporting styles for  the display of the COMMENTS used on media pages.
+
+*/
 #comments ul li {
     list-style:none;
     margin-left:-28px;
