@@ -28,9 +28,8 @@
     		</div>
     		<div class="exp_tags">
     			<h4>Tags</h4>
-    			<p>Coming soon!<br/>
-    			Tags will allow you to find related media, build dynamic collections and organize your media!
-    			</p>
+    			<p>Tags will allow you to find related media, build dynamic collections and organize your media!</p>
+    			<p>Coming soon!</p>
     		</div>
     	</div>
     </div>

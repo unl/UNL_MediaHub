@@ -6,7 +6,8 @@ if (isset($GLOBALS['UNLTEMPLATEDEPENDENTSPATH'])) {
 }
 $page->doctitle = '<title>UNL | Media Hub | Manager</title>';
 $page->titlegraphic = '<h1>UNL MediaHub Manager</h1><h2>Lights, Camera, Action</h2>';
-$page->addStyleSheet(UNL_MediaYak_Manager::getURL().'templates/css/all.css');
+$page->addStyleSheet(UNL_MediaYak_Controller::getURL().'templates/html/css/all.css');
+$page->addStyleSheet(UNL_MediaYak_Manager::getURL().'templates/css/all_manager.css');
 $page->leftRandomPromo = '';
 
 $page->breadcrumbs = '

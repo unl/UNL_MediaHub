@@ -1,19 +1,42 @@
+/* 
+-------------------------------------------------
+Supporting styles for the manager forms (add media, channel)
+-------------------------------------------------
+*/
+#enhanced_header, #existing_media, #feedSelect, #maincontent form.zenform #continue3, #file_upload {display:none;}
+#maincontent form.zenform {max-width:930px;margin-top:5px;background-color:#E6E9DC;
+    background-image:-webkit-gradient(
+                        linear,
+                        left bottom,
+                        left top,
+                        color-stop(0.2, rgb(230,233,220)),
+                        color-stop(1, rgb(244,247,234))
+                    );
+    background-image:-moz-linear-gradient(
+                        center bottom,
+                        rgb(230,233,220) 20%,
+                        rgb(244,247,234) 100%
+                    );}
 form #thumbnail {
     width:120px;
 }
+#imageOverlay {
+    font-style:bold;
+    position:absolute;
+    float:left;
+    padding:10px;
+    padding-left:50px;
+    background:#000 url('images/loading.gif') no-repeat 10px 10px;
+    color:#fff;
+    left:0px;
+    display:none;
+    margin-left:10px;
+    opacity:0.7;
+}
 #maincontent form fieldset {
 	width:940px;
-	background:#f4f4f4;
 	}
-#maincontent form fieldset legend {
-	border:none;
-	font-size:2em;
-	color:#585d5f;
-	margin:0 0 70px -5px;
-	}
-#maincontent form fieldset ol {
-	margin-top:-25px;
-	}
+
 
 #maincontent form fieldset li #description_wrapper li {
     list-style: inline;
@@ -22,14 +45,6 @@ form #thumbnail {
     display: normal;
     float: left;
     width: auto;
-}
-#maincontent form fieldset li #description_wrapper {
-	background-color:#FFF;
-}
-#maincontent form fieldset li #description_wrapper * {
-	margin:0;
-    font-size:9px;
-	max-width:520px;
 }
 #maincontent form fieldset li #description_wrapper iframe {
 	clear:both;
@@ -57,6 +72,3 @@ form #thumbnail {
 	border:1px solid;
 }
 iframe * {margin:0px}
-.yui-skin-sam .yui-editor-container ul {padding-left:0px !important;}
-.yui-skin-sam .yui-editor-container a {background:none;}
-.yui-skin-sam .yui-editor-container span {color:black !important;}
