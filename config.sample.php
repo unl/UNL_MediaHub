@@ -1,5 +1,8 @@
 <?php
 
+ini_set('display_errors', true);
+error_reporting(E_ALL);
+
 // DSN for the mediyak database
 $dsn = 'mysql://mediayak:mediayak@localhost/mediayak';
 
