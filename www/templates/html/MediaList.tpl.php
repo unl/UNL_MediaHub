@@ -6,7 +6,10 @@ if (isset($context->label) && !empty($context->label)) {
 }
 if ($parent->context instanceof UNL_MediaYak_FeedAndMedia) {
     // Use the feed url as the base for pagination links
-    $url = UNL_MediaYak_Controller::getURL($parent->context->feed, array_merge($context->options, array('page'=>'{%page_number}')));
+    $url = UNL_MediaYak_Controller::getURL(
+                $parent->context->feed,
+                    array_intersect_key(array_merge($context->options, array('page'=>'{%page_number}')), array('page'=>0, 'limit'=>0, 'order'=>0, 'orderby'=>0))
+            );
 } elseif ($parent->context->options['view'] == 'search') {
     //blah
     $url = UNL_MediaYak_Controller::addURLParams($context->getURL(), array('page'=>'{%page_number}'));
