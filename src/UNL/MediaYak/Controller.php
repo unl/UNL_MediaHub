@@ -64,6 +64,7 @@ class UNL_MediaYak_Controller
         'search'  => 'UNL_MediaYak_MediaList',
         'default' => 'UNL_MediaYak_DefaultHomepage',
         'feeds'   => 'UNL_MediaYak_FeedList',
+        'feed'    => 'UNL_MediaYak_FeedAndMedia'
         );
     
     /**
@@ -174,9 +175,6 @@ class UNL_MediaYak_Controller
         case 'media':
             $this->output[] = $this->findRequestedMedia($this->options);
             break;
-        case 'feed':
-            $this->showFeed();
-            break;
         case 'feed_image':
             if (isset($this->options['feed_id'])) {
                 $this->output[] = UNL_MediaYak_Feed_Image::getById($this->options['feed_id']);
@@ -187,6 +185,7 @@ class UNL_MediaYak_Controller
         case 'default':
         case 'search':
         case 'feeds':
+        case 'feed':
             $class = $this->view_map[$this->options['view']];
             $this->output[] = new $class($this->options);
             break;
@@ -368,26 +367,6 @@ class UNL_MediaYak_Controller
     {
         $filter = new UNL_MediaYak_MediaList_Filter_Popular();
         $this->output[] = new UNL_MediaYak_MediaList(array('filter'=>$filter));
-    }
-    
-    /**
-     * Display a feed, either by feed_id or title
-     * 
-     * @see UNL_MediaYak_FeedAndMedia
-     * 
-     * @return void
-     */
-    function showFeed()
-    {
-        if (!empty($this->options['feed_id'])) {
-            $feed = UNL_MediaYak_Feed::getById($this->options['feed_id']);
-        } elseif (!empty($this->options['title'])) {
-            $feed = UNL_MediaYak_Feed::getByTitle($this->options['title']);
-        }
-        
-        if (isset($feed)) {
-            $this->output[] = new UNL_MediaYak_FeedAndMedia($feed);
-        }
     }
 }
 
