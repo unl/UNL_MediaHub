@@ -1,5 +1,5 @@
 <h1>User Manager</h1>
-<h2><?php //@todo put title of channel here ?></h2>
+<h2><?php if (isset($context->options['feed'])) { echo $context->options['feed']->title; } ?></h2>
 <div class="two_col left">
 <h3 class="zenform cool">Add User</h3>
 <form action="" method="post" name="add_user" id="add_user" class="zenform cool" style="margin-top:-6px;">
