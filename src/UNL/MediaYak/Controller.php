@@ -60,6 +60,13 @@ class UNL_MediaYak_Controller
     
     static protected $replacements;
     
+    /**
+     * currently logged in user, if any
+     * 
+     * @var UNL_MediaYak_User
+     */
+    protected static $user;
+    
     protected $view_map = array(
         'search'  => 'UNL_MediaYak_MediaList',
         'default' => 'UNL_MediaYak_DefaultHomepage',
@@ -93,6 +100,10 @@ class UNL_MediaYak_Controller
         if (isset($_GET['logout'])) {
             self::$auth->logout();
         }
+
+        if (self::$auth->isLoggedIn()) {
+            self::$user = UNL_MediaYak_User::getByUid(self::$auth->getUser());
+        }
     }
     
     /**
@@ -107,6 +118,11 @@ class UNL_MediaYak_Controller
         }
         
         return false;
+    }
+
+    static function getUser()
+    {
+        return self::$user;
     }
     
     /**
