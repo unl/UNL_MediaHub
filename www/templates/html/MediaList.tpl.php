@@ -37,7 +37,18 @@ if (count($context->items)) {
         $userCanEdit = true;
     }
 ?>
-    <h3 class="sec_header" style="margin-top:10px;">All Media</h3>
+    <div class="group" style="margin-top:20px;">
+    	<h3>All Media</h3>
+    	<?php
+	    $addMediaURL = UNL_MediaYak_Manager::getURL().'?view=addmedia&amp;feed_id='.$parent->context->feed->id;
+	    if (UNL_MediaYak_Controller::isLoggedIn()
+	        && $parent->context->feed->userHasPermission(UNL_MediaYak_Controller::getUser(),
+	            UNL_MediaYak_Permission::getByID(UNL_MediaYak_Permission::USER_CAN_INSERT))) {
+	        echo '<a href="'.$addMediaURL.'" title="Add media to this feed" class="add_media" >Add media</a>';
+	    }
+	    
+	    ?>
+    </div>
         <ul class="medialist">
     
         <?php

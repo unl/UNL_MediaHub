@@ -84,6 +84,17 @@ ul.medialist li:hover {
     border:1px solid #bd4141;
     color:#bd4141;
 }
+#maincontent a.add_media {
+    background: url('images/iconPlus.png') no-repeat 0 0;
+    position:relative;
+    float:left;
+    text-indent:-99999px;
+    display:inline-block;
+    width:16px;
+    height:16px;
+    left:12px;
+    top:5px;
+}
 /* 
 -------------------------------------------------
 Homepage overrides

@@ -5,7 +5,10 @@ if (isset($_GET['id'])) {
 }
 $url = UNL_MediaYak_Manager::getURL(null, array_merge($context->options, array('page'=>'{%page_number}')));
 ?>
-<h3 class="sec_header">Media in this Channel</h3>
+<div class="group">
+	<h3>Media in this Channel</h3>
+	<a class="add_media" title="Add media to this feed" href="<?php echo $addMediaURL; ?>">Add media</a>
+</div>
 <?php
 if (count($context->items)) {
     $pager_layout = new UNL_MediaYak_List_PagerLayout($context->pager,
@@ -48,4 +51,4 @@ if (count($context->items)) {
     echo '<p>This channel has no media yet.</p>';
 }
 ?>
-<a class="action add_media" href="<?php echo $addMediaURL; ?>">Add media</a>
+
