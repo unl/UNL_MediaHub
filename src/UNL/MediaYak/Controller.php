@@ -362,11 +362,5 @@ class UNL_MediaYak_Controller
         $url = str_replace('?&', '?', $url);
         return trim($url, '?;=');
     }
-    
-    function showPopularMedia()
-    {
-        $filter = new UNL_MediaYak_MediaList_Filter_Popular();
-        $this->output[] = new UNL_MediaYak_MediaList(array('filter'=>$filter));
-    }
 }
 
