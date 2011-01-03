@@ -15,7 +15,15 @@ $feed_url = htmlentities(UNL_MediaYak_Controller::getURL($context->feed), ENT_QU
        <li><img src="../manager/templates/css/images/iconItunes.png" alt="Available in iTunesU" /></li>
        <li><img src="../manager/templates/css/images/iconBoxee.png" alt="Available in Boxee" /></li>
     </ul>
-    <?php //@TODO add a check if user is logged in and if has permissions to this feed to edit. If true, add edit/delete links here. ?>
+    <?php
+    $addMediaURL = UNL_MediaYak_Manager::getURL().'?view=addmedia&amp;feed_id='.$context->feed->id;
+    if (UNL_MediaYak_Controller::isLoggedIn()
+        && $context->feed->userHasPermission(UNL_MediaYak_Controller::getUser(),
+            UNL_MediaYak_Permission::getByID(UNL_MediaYak_Permission::USER_CAN_INSERT))) {
+        echo '<a href="'.$addMediaURL.'">Add media</a>';
+    }
+    
+    ?>
 </div>
 <?php
 echo $savvy->render($context->media_list);
