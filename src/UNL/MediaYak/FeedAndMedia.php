@@ -32,7 +32,7 @@ class UNL_MediaYak_FeedAndMedia
     function __construct($options = array())
     {
 
-        if (isset($options['feed'])) {
+        if (!empty($options['feed'])) {
             $this->feed = $options['feed'];
         } elseif (!empty($options['feed_id'])) {
             $this->feed = UNL_MediaYak_Feed::getById($options['feed_id']);
