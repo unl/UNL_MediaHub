@@ -23,16 +23,24 @@ class UNL_MediaYak_FeedAndMedia
     /**
      * Construct a Feed and Media object.
      * 
-     * @param UNL_MediaYak_Feed $feed The feed
+     * @param array $options Associative array of options
      * 
      * @see UNL_MediaYak_MediaList
      * 
      * @return void
      */
-    function __construct(UNL_MediaYak_Feed $feed)
+    function __construct($options = array())
     {
-        $this->feed = $feed;
-        $this->media_list = new UNL_MediaYak_MediaList(array('filter'=>new UNL_MediaYak_MediaList_Filter_ByFeed($feed)));
+
+        if (isset($options['feed'])) {
+            $this->feed = $options['feed'];
+        } elseif (!empty($options['feed_id'])) {
+            $this->feed = UNL_MediaYak_Feed::getById($options['feed_id']);
+        } elseif (!empty($options['title'])) {
+            $this->feed = UNL_MediaYak_Feed::getByTitle($this->options['title']);
+        }
+
+        $this->media_list = new UNL_MediaYak_MediaList(array('filter'=>new UNL_MediaYak_MediaList_Filter_ByFeed($this->feed))+$options);
     }
     
     /**
