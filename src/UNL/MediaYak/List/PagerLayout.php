@@ -1,7 +1,7 @@
 <?php
 class UNL_MediaYak_List_PagerLayout extends Doctrine_Pager_Layout
 {
-public function display($options = array(), $return = false)
+    public function display($options = array(), $return = false)
     {
         $pager = $this->getPager();
 
