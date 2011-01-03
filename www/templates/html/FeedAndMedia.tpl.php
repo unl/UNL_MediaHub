@@ -15,6 +15,7 @@ $feed_url = htmlentities(UNL_MediaYak_Controller::getURL($context->feed), ENT_QU
        <li><img src="../manager/templates/css/images/iconItunes.png" alt="Available in iTunesU" /></li>
        <li><img src="../manager/templates/css/images/iconBoxee.png" alt="Available in Boxee" /></li>
     </ul>
+    <?php //@TODO add a check if user is logged in and if has permissions to this feed to edit. If true, add edit/delete links here. ?>
 </div>
 <?php
 echo $savvy->render($context->media_list);

@@ -145,6 +145,7 @@ if ($type == 'video') {
     </div>
   <?php } ?>
     <span class="embed">Embed</span>
+    <?php //@TODO add a check if user is logged in and if has permissions to this feed to edit. If true, add edit/delete links here. ?>
   </div>
     <?php
     $channels = $context->getFeeds();

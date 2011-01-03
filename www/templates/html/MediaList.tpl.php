@@ -19,7 +19,12 @@ if (count($context->items)) {
         new Doctrine_Pager_Range_Sliding(array('chunk'=>5)),
         $url);
     $pager_links = $pager_layout->display(null, true);
-    ?>
+    
+	$addMediaURL = UNL_MediaYak_Manager::getURL().'?view=addmedia';
+	if (isset($_GET['id'])) {
+	    $addMediaURL .= '&amp;feed_id='.$_GET['id'];
+	}
+?>
     <h3 class="sec_header" style="margin-top:10px;">All Media</h3>
         <ul class="medialist">
     
@@ -27,6 +32,14 @@ if (count($context->items)) {
         foreach ($context->items as $media) { ?>
             <li>
                 <a href="<?php echo UNL_MediaYak_Controller::getURL($media); ?>"><img class="thumbnail" src="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.urlencode($media->url); ?>" alt="Thumbnail preview for <?php echo $media->title; ?>" /></a>
+                <?php if (1 == 0) {//@TODO add a check if user is logged in and if has permissions to this feed to edit. If true, add edit/delete links here. ?>
+	            <div class="actions">
+		            <a href="<?php echo $addMediaURL; ?>&amp;id=<?php echo $media->id; ?>">Edit</a>
+		            <?php
+		            echo $savvy->render($media, 'Media/DeleteForm.tpl.php');
+		            ?>
+	            </div>
+	            <?php }?>
                 <div class="metaInfo">
                 <h4><a href="<?php echo UNL_MediaYak_Controller::getURL($media); ?>"><?php echo htmlspecialchars($media->title); ?></a></h4>
                 <?php
