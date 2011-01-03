@@ -4,20 +4,22 @@ if (isset($context->label) && !empty($context->label)) {
     UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaYak_Controller::getURL().'">Media Hub</a></li> <li>'.$context->label.'</li></ul>');
     echo '<h3>'.$context->label.'</h3>';
 }
-if ($parent->context instanceof UNL_MediaYak_FeedAndMedia) {
-    // Use the feed url as the base for pagination links
-    $url = UNL_MediaYak_Controller::getURL(
-                $parent->context->feed,
-                    array_intersect_key(array_merge($context->options, array('page'=>'{%page_number}')), array('page'=>0, 'limit'=>0, 'order'=>0, 'orderby'=>0))
-            );
-} elseif ($parent->context->options['view'] == 'search') {
-    //blah
-    $url = UNL_MediaYak_Controller::addURLParams($context->getURL(), array('page'=>'{%page_number}'));
-} else {
-    $url = UNL_MediaYak_Controller::getURL(null, array_merge($context->options, array('page'=>'{%page_number}')));
-}
 
 if (count($context->items)) {
+
+    if ($parent->context instanceof UNL_MediaYak_FeedAndMedia) {
+        // Use the feed url as the base for pagination links
+        $url = UNL_MediaYak_Controller::getURL(
+                    $parent->context->feed,
+                        array_intersect_key(array_merge($context->options, array('page'=>'{%page_number}')), array('page'=>0, 'limit'=>0, 'order'=>0, 'orderby'=>0))
+                );
+    } elseif ($parent->context->options['view'] == 'search') {
+        //blah
+        $url = UNL_MediaYak_Controller::addURLParams($context->getURL(), array('page'=>'{%page_number}'));
+    } else {
+        $url = UNL_MediaYak_Controller::getURL(null, array_merge($context->options, array('page'=>'{%page_number}')));
+    }
+
     $pager_layout = new UNL_MediaYak_List_PagerLayout($context->pager,
         new Doctrine_Pager_Range_Sliding(array('chunk'=>5)),
         $url);
