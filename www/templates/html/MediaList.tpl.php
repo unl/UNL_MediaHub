@@ -29,6 +29,13 @@ if (count($context->items)) {
 	if (isset($_GET['id'])) {
 	    $addMediaURL .= '&amp;feed_id='.$_GET['id'];
 	}
+	$userCanEdit = false;
+	if (UNL_MediaYak_Controller::isLoggedIn()
+        && $parent->context instanceof UNL_MediaYak_FeedAndMedia
+        && $parent->context->feed->userHasPermission(UNL_MediaYak_Controller::getUser(),
+            UNL_MediaYak_Permission::getByID(UNL_MediaYak_Permission::USER_CAN_INSERT))) {
+        $userCanEdit = true;
+    }
 ?>
     <h3 class="sec_header" style="margin-top:10px;">All Media</h3>
         <ul class="medialist">
@@ -37,11 +44,11 @@ if (count($context->items)) {
         foreach ($context->items as $media) { ?>
             <li>
                 <a href="<?php echo UNL_MediaYak_Controller::getURL($media); ?>"><img class="thumbnail" src="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.urlencode($media->url); ?>" alt="Thumbnail preview for <?php echo $media->title; ?>" /></a>
-                <?php if (1 == 0) {//@TODO add a check if user is logged in and if has permissions to this feed to edit. If true, add edit/delete links here. ?>
+                <?php if ($userCanEdit) { ?>
 	            <div class="actions">
 		            <a href="<?php echo $addMediaURL; ?>&amp;id=<?php echo $media->id; ?>">Edit</a>
 		            <?php
-		            echo $savvy->render($media, 'Media/DeleteForm.tpl.php');
+		            echo $savvy->render($media, 'manager/templates/Media/DeleteForm.tpl.php');
 		            ?>
 	            </div>
 	            <?php }?>
