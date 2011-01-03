@@ -166,9 +166,9 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
     
     function editPermissions()
     {
-        $feed = UNL_MediaYak_Feed::getById($_GET['feed_id']);
         $options = $this->options;
-        $options['filter'] = new UNL_MediaYak_UserList_Filter_ByFeed($feed);
+        $options['feed'] = UNL_MediaYak_Feed::getById($_GET['feed_id']); 
+        $options['filter'] = new UNL_MediaYak_UserList_Filter_ByFeed($options['feed']);
         $this->output[] = new UNL_MediaYak_UserList($options);
     }
     
