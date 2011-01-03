@@ -1,5 +1,9 @@
 <?php
-require_once dirname(__FILE__).'/../config.inc.php';
+if (file_exists(dirname(__FILE__).'/../config.inc.php')) {
+    require_once dirname(__FILE__).'/../config.inc.php';
+} else {
+    require dirname(__FILE__).'/../config.sample.php';
+}
 
 ini_set('magic_quotes_gpc', false);
 ini_set('magic_quotes_runtime', false);
