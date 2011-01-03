@@ -23,9 +23,9 @@ if (isset($context->label) && !empty($context->label)) {
             <div class="aboutFeed">
             <h3><a href="'.htmlentities(UNL_MediaYak_Controller::getURL($feed), ENT_QUOTES).'">'.htmlentities($feed->title).'</a> </h3>
             '.$savvy->render($feed, 'Feed/Creator.tpl.php').'
-            <p>'.htmlentities($feed->description).'</p>
-            
-            </div>
+            <p>'.htmlentities($feed->description).'</p>';
+            //@TODO add a check if user is logged in and if has permissions to this feed to edit. If true, add edit/delete links here.
+            echo '</div>
             <div class="mediaSamples">
             	<h6>'.count($feed->UNL_MediaYak_Feed_Media).' items</h6>
                 <h5 class="subhead">Latest Media <a href="'.UNL_MediaYak_Controller::getURL($feed, array('format'=>'xml')).'" class="feed-icon"> .</a></h5>
