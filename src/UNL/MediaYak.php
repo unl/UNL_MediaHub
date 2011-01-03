@@ -12,6 +12,15 @@ class UNL_MediaYak
 
     }
 
+    /**
+     * 
+     * @return Doctrine_Connection
+     */
+    function getDB()
+    {
+    	return Doctrine_manager::getInstance()->getCurrentConnection();
+    }
+
     public static function registerAutoloaders()
     {
         include_once 'Doctrine/lib/Doctrine.php';
