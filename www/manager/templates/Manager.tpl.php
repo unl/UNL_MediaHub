@@ -4,7 +4,7 @@ $page = UNL_Templates::factory('Fixed');
 if (isset($GLOBALS['UNLTEMPLATEDEPENDENTSPATH'])) {
     UNL_Templates::$options['templatedependentspath'] = $GLOBALS['UNLTEMPLATEDEPENDENTSPATH'];
 }
-$page->doctitle = '<title>UNL | Media Hub | Manager</title>';
+$page->doctitle = '<title>UNL | MediaHub | Manager</title>';
 $page->titlegraphic = '<h1>UNL MediaHub Manager</h1><h2>Lights, Camera, Action</h2>';
 $page->addStyleSheet(UNL_MediaYak_Controller::getURL().'templates/html/css/all.css');
 $page->addStyleSheet(UNL_MediaYak_Manager::getURL().'templates/css/all_manager.css');
@@ -13,12 +13,12 @@ $page->leftRandomPromo = '';
 $page->breadcrumbs = '
 <ul>
     <li><a href="http://www.unl.edu/">UNL</a></li>
-    <li>Media Hub</li>
+    <li>MediaHub</li>
 </ul>';
 
 $page->navlinks        = '
 <ul>
-    <li><a href="'.UNL_MediaYak_Controller::getURL().'">Media Hub</a>';
+    <li><a href="'.UNL_MediaYak_Controller::getURL().'">MediaHub</a>';
         $page->navlinks .='<ul><li><a href="'.UNL_MediaYak_Controller::getURL().'manager/">Your Media</a></li></ul>';
         $page->navlinks .= '<ul><li><a href="?logout">Logout</a></li></ul>';
 $page->navlinks .='
