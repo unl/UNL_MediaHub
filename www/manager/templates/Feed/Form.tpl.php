@@ -358,11 +358,11 @@ WDN.jQuery(document).ready(function() {
 </form>
 </div>
 <div class="one_col right" id="outpostExtension">
-<h3>Delivery Options</h3>
+<h3>Delivery Options <span>Coming soon!</span></h3>
 <p>Channels in MediaHub can be delivered through <strong>official UNL outposts</strong>. Make sure you take advantage of these:</p>
 <ul>
     <li class="itunes"><a href="http://www.apple.com/education/itunes-u/">iTunesU</a></li>
     <li class="boxee"><a href="http://www.boxee.tv/">Boxee</a></li>
-    <li class="youtube"><a href="http://www.youtube.com/">YouTube</a></li>
+    <li class="youtube"><a href="http://www.youtube.com/unl">YouTube</a></li>
 </ul>
 </div>

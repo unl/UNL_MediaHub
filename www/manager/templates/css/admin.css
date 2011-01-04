@@ -132,6 +132,12 @@ a.action.delete:active {background-image:url('images/iconDelete.png');}
 	background:url('images/iconVideo.png') no-repeat left top;
 	padding-left:30px;
 }
+#maincontent #outpostExtension h3 span {
+	font-size:0.7em;
+	color:#385E9B;
+	text-transform:uppercase;
+	font-weight:bold;
+}
 
 #maincontent #outpostExtension li a {
 	background:#E6E9DC;
