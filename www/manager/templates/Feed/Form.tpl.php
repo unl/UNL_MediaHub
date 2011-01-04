@@ -310,7 +310,7 @@ WDN.jQuery(document).ready(function() {
                 </div></li><li><label for='media_copyright' class='element'>Copyright <span class="helper">Copyright information for media object.</span></label><div class='element'>
                 <input name='UNL_MediaYak_Feed_NamespacedElements_media[8][element]' type='hidden' value='copyright' />
                 <input id='media_copyright' name='UNL_MediaYak_Feed_NamespacedElements_media[8][value]' type='text' value='<?php echo getFieldValue($context, 'media', 'copyright'); ?>' size='55' />
-                </div></li><li><label for='media_text' class='element'>Text <span class="helper">Allows the inclusion of a text transcript, closed captioning, or lyrics of the media content.</span></label><div class='element'>
+                </div></li style="display:none;"><li><label for='media_text' class='element'>Text <span class="helper">Allows the inclusion of a text transcript, closed captioning, or lyrics of the media content.</span></label><div class='element'>
                 <input name='UNL_MediaYak_Feed_NamespacedElements_media[9][element]' type='hidden' value='text' />
                 <input id='media_text' name='UNL_MediaYak_Feed_NamespacedElements_media[9][value]' type='text' value='<?php echo getFieldValue($context, 'media', 'text'); ?>' size='55' />
                 </div></li><li><label for='media_restriction' class='element'>Restriction <span class="helper">Allows restrictions to be placed on the aggregator rendering the media in the feed.</span></label><div class='element'>
