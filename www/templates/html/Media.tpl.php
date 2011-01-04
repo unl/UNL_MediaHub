@@ -11,8 +11,8 @@ if (UNL_MediaYak_Media::isVideo($context->type)) {
         $height = round(($width/$dimensions['width'])*$dimensions['height']);
     }
 }
-UNL_MediaYak_Controller::setReplacementData('title', 'UNL | Media Hub | '.htmlspecialchars($context->title));
-UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaYak_Controller::getURL().'">Media Hub</a></li> <li>'.htmlspecialchars($context->title).'</li></ul>');
+UNL_MediaYak_Controller::setReplacementData('title', 'UNL | MediaHub | '.htmlspecialchars($context->title));
+UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaYak_Controller::getURL().'">MediaHub</a></li> <li>'.htmlspecialchars($context->title).'</li></ul>');
 $meta = '
 <meta name="title" content="'.htmlentities($context->title, ENT_QUOTES).'" />
 <meta name="description" content="'.htmlentities($context->description, ENT_QUOTES).'" />

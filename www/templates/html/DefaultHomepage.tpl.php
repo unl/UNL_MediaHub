@@ -19,7 +19,7 @@
         </div>
     </div>
     <div id="exploreMedia">
-    	<h3>Explore Media Hub</h3>
+    	<h3>Explore MediaHub</h3>
     	<div class="box_display">
     		<div class="exp_channels">
     			<h4>Channels</h4>

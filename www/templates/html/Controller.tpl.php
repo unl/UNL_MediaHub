@@ -5,10 +5,10 @@ $page = UNL_Templates::factory('Fixed');
 if (isset($GLOBALS['UNLTEMPLATEDEPENDENTSPATH'])) {
     UNL_Templates::$options['templatedependentspath'] = $GLOBALS['UNLTEMPLATEDEPENDENTSPATH'];
 }
-$page->doctitle     = '<title>UNL | Media Hub</title>';
-$page->titlegraphic = '<h1>UNL Media Hub</h1><h2>Lights, Camera, Action</h2>';
+$page->doctitle     = '<title>UNL | MediaHub</title>';
+$page->titlegraphic = '<h1>UNL MediaHub</h1><h2>Lights, Camera, Action</h2>';
 $page->addStyleSheet(UNL_MediaYak_Controller::getURL().'templates/html/css/all.css');
-$page->breadcrumbs = '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li>Media Hub</li></ul>';
+$page->breadcrumbs = '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li>MediaHub</li></ul>';
 $page->addScript('/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/swfobject.js');
 $page->head .= '<link rel="search" href="'.UNL_MediaYak_Controller::getURL().'search/" />';
 $page->addScript(UNL_MediaYak_Controller::getURL().'templates/html/audio-player/audio-player-noswfobject.js');
@@ -21,7 +21,7 @@ $page->maincontentarea = $savvy->render($context->output);
 
 $page->navlinks        = '
 <ul>
-    <li><a href="'.UNL_MediaYak_Controller::getURL().'">Media Hub</a>';
+    <li><a href="'.UNL_MediaYak_Controller::getURL().'">MediaHub</a>';
 
     if (!UNL_MediaYak_Controller::isLoggedIn()) {
         $page->navlinks .= '<ul><li><a href="https://login.unl.edu/cas/login?service='.urlencode(UNL_MediaYak_Controller::getURL()).'">Login</a></li></ul>';
