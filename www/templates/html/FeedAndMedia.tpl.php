@@ -12,11 +12,13 @@ $feed_url = htmlentities(UNL_MediaYak_Controller::getURL($context->feed), ENT_QU
     ?>
     <p><?php echo $context->feed->description; ?></p>
     <?php //<-- @todo Brett- can we dynamically create this section ? ?>
+    <!-- 
     <h6 class="list_header">This channel is also available in:</h6>
     <ul>
        <li><img src="../manager/templates/css/images/iconItunes.png" alt="Available in iTunesU" /></li>
        <li><img src="../manager/templates/css/images/iconBoxee.png" alt="Available in Boxee" /></li>
     </ul>
+     -->
 </div>
 <?php
 echo $savvy->render($context->media_list);
