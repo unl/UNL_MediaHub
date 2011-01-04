@@ -115,19 +115,70 @@ a.action.delete:active {background-image:url('images/iconDelete.png');}
 	list-style:none;
 	padding:0;
 }
-
+#maincontent #userList {
+    list-style:none;
+    padding:0;
+    background:#F1F3EA;
+    padding:10px;
+}
 #maincontent #userList li {
     display:inline-block;
     text-align:center;
     padding: 0 10px 10px 0;
+    position:relative;
 }
 #maincontent #userList li .uid {
     font-size:0.6em;
     color: #a8a8a8;
-    display:block;	
+    display:block;  
 }
 #maincontent #userList li img {display:block;margin-left:auto;margin-right:auto;}
+#maincontent #userList li form {
+    position:absolute;
+    top:6px;
+    right:7px;
+    display:none;
+}
+#maincontent #userList li:hover form {display:block;}
+#maincontent form input[type='submit'] {
+    background:#ac0302;
+    border:none;
+    border-radius:3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    color:#fff;
+    cursor:pointer;
+}
+#maincontent #userList li form input[type='submit'] {
+    -webkit-box-shadow: -1px 1px 3px #1a1a1a;
+    -moz-box-shadow: -1px 1px 3px #1a1a1a;
+    box-shadow: -1px 1px 3px #1a1a1a; 
+}
 
+#maincontent .addData {
+    background:#F1F3EA;
+    padding:10px;
+    border-top:2px solid #d5d5d5;
+    -webkit-box-shadow: inset 0px 1px 3px #e6e6e6;
+    -moz-box-shadow: inset 0px 1px 3px #e6e6e6;
+    box-shadow: inset 0px 1px 3px #e6e6e6; 
+}
+#maincontent .addData input[type='text']{
+    border:1px solid #d5d5d5;
+    padding:3px;
+    width:50%;
+    font-size:1.06em;
+    padding:5px 5px 5px 25px;
+}
+#maincontent #emailList + form input[type='text']{
+    display:block;
+    width:84%;
+    padding-left:25px;
+    background: #fff url('images/iconEmail.png') no-repeat 5px 50%;
+}
+#maincontent .addData input[type='submit']{
+    background: #616161;
+}
 #maincontent #outpostExtension h3 {
 	background:url('images/iconVideo.png') no-repeat left top;
 	padding-left:30px;

@@ -1,23 +1,5 @@
-<h1>User Manager</h1>
-<h2><?php if (isset($context->options['feed'])) { echo $context->options['feed']->title; } ?></h2>
-<div class="two_col left">
-<h3 class="zenform cool">Add User</h3>
-<form action="" method="post" name="add_user" id="add_user" class="zenform cool" style="margin-top:-6px;">
-    <fieldset id="addhead" class="daddhead_class">
-        <legend>Give us an ID</legend>
-        <ol>
-            <li><label for="uid" class="element"><span class="required">*</span>User Id <span class="helper">(like jdoe2)</span></label><div class="element"><input id="uid" name="uid" type="text" /></div></li>
-            <li><label for="submit" class="element">&nbsp;</label><div class="element"><input id="submit" name="submit" value="Add User" type="submit" /></div></li>
-        </ol>
-        <div style="display: none;">
-            <input type="hidden" id="feed_id" name="feed_id" value="<?php echo (int)$_GET['feed_id']; ?>" />
-            <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_users" />
-        </div>
-    </fieldset>
-</form>
-</div>
-<div class="two_col right">
-<h3>Users with Access</h3>
+<h1><?php if (isset($context->options['feed'])) { echo $context->options['feed']->title; } ?> Channel - User Manager</h1>
+<div class="four_col"></div>
 <ul id="userList">
 <?php
 foreach ($context->items as $user) {
@@ -27,4 +9,11 @@ foreach ($context->items as $user) {
 }
 ?>
 </ul>
+    <form action="?view=newsroom" method="post" id="addUser" class="addData">
+        <input type="hidden" id="feed_id" name="feed_id" value="<?php echo (int)$_GET['feed_id']; ?>" />
+        <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_users" />
+        <label for="uid">My.UNL Username</label>
+        <input id="uid" name="uid" type="text" />
+        <input type="submit" value="Add User" />
+    </form>
 </div>
