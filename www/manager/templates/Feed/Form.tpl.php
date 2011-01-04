@@ -8,6 +8,19 @@ WDN.jQuery(document).ready(function() {
         }
         return true;
     });
+    WDN.jQuery('#description').change(function(){
+		if (WDN.jQuery('#itunes_summary').val() == '') {
+			WDN.jQuery('#itunes_summary').val(WDN.jQuery(this).val());
+		}
+		if (WDN.jQuery('#media_description').val() == '') {
+			WDN.jQuery('#media_description').val(WDN.jQuery(this).val());
+		}
+    });
+    WDN.jQuery('#title').change(function(){
+		if (WDN.jQuery('#media_title').val() == '') {
+			WDN.jQuery('#media_title').val(WDN.jQuery(this).val());
+		}
+    });
 });
 </script>
 <div class="three_col left">
@@ -286,11 +299,13 @@ WDN.jQuery(document).ready(function() {
                 </div></li><li><label for='media_title' class='element'>Title</label><div class='element'>
                 <input name='UNL_MediaYak_Feed_NamespacedElements_media[1][element]' type='hidden' value='title' />
                 <input id='media_title' name='UNL_MediaYak_Feed_NamespacedElements_media[1][value]' type='text' value='<?php echo getFieldValue($context, 'media', 'title'); ?>' size='55' />
-                </div></li><li><label for='media_description' class='element'>Description</label><div class='element'>
-                <input name='UNL_MediaYak_Feed_NamespacedElements_media[2][element]' type='hidden' value='description' />
-                <input id='media_description' name='UNL_MediaYak_Feed_NamespacedElements_media[2][value]' type='text' value='<?php echo getFieldValue($context, 'media', 'description'); ?>' size='55' />
-
-                </div></li><li><label for='media_keywords' class='element'>Keywords<span class="helper">Comma seperated list of highly relevant keywords/tags describing the channel.</span></label><div class='element'>
+                </div></li>
+                <li>
+                	<label for='media_description' class='element'>Description</label>
+                	<input name='UNL_MediaYak_Feed_NamespacedElements_media[2][element]' type='hidden' value='description' />
+				    <textarea id="media_description" name="UNL_MediaYak_Feed_NamespacedElements_media[2][value]" rows="5" cols="50"><?php echo getFieldValue($context, 'media', 'description'); ?></textarea>
+				</li>
+				<li><label for='media_keywords' class='element'>Keywords<span class="helper">Comma seperated list of highly relevant keywords/tags describing the channel.</span></label><div class='element'>
                 <input name='UNL_MediaYak_Feed_NamespacedElements_media[3][element]' type='hidden' value='keywords' />
                 <input id='media_keywords' name='UNL_MediaYak_Feed_NamespacedElements_media[3][value]' type='text' value='<?php echo getFieldValue($context, 'media', 'keywords'); ?>' size='55' />
                 </div></li><li><label for='media_thumbnail' class='element'>Thumbnail <span class="helper">Allows particular images to be used as representative images for the media object.</span></label><div class='element'>
