@@ -6,6 +6,8 @@ Supporting styles for individual presentation of lists of media
 #maincontent .medialist {
     list-style:none;
     padding:0;
+    float:left;
+    width:100%;
 }
 #maincontent .medialist > li {
     list-style:none;
@@ -70,6 +72,9 @@ ul.medialist li:hover {
 	border-left:1px solid #c4c2c2;
 	padding-left:8px;
 }
+.medialist + em {
+	font-size:0.8em;
+}
 .pager_links {
     font-weight:bold;
     margin:15px 0 15px 0;
@@ -95,6 +100,7 @@ ul.medialist li:hover {
     left:12px;
     top:5px;
 }
+
 /* 
 -------------------------------------------------
 Homepage overrides
