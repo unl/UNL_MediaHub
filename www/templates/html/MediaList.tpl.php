@@ -40,13 +40,14 @@ if (count($context->items)) {
     <div class="group" style="margin-top:20px;">
     	<h3>All Media</h3>
     	<?php
-	    $addMediaURL = UNL_MediaYak_Manager::getURL().'?view=addmedia&amp;feed_id='.$parent->context->feed->id;
-	    if (UNL_MediaYak_Controller::isLoggedIn()
-	        && $parent->context->feed->userHasPermission(UNL_MediaYak_Controller::getUser(),
-	            UNL_MediaYak_Permission::getByID(UNL_MediaYak_Permission::USER_CAN_INSERT))) {
-	        echo '<a href="'.$addMediaURL.'" title="Add media to this feed" class="add_media" >Add media</a>';
-	    }
-	    
+    	if ($parent->context instanceof UNL_MediaYak_FeedAndMedia) {
+		    $addMediaURL = UNL_MediaYak_Manager::getURL().'?view=addmedia&amp;feed_id='.$parent->context->feed->id;
+		    if (UNL_MediaYak_Controller::isLoggedIn()
+		        && $parent->context->feed->userHasPermission(UNL_MediaYak_Controller::getUser(),
+		            UNL_MediaYak_Permission::getByID(UNL_MediaYak_Permission::USER_CAN_INSERT))) {
+		        echo '<a href="'.$addMediaURL.'" title="Add media to this feed" class="add_media" >Add media</a>';
+		    }
+    	}
 	    ?>
     </div>
         <ul class="medialist">

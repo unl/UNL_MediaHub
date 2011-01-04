@@ -109,6 +109,6 @@ Homepage overrides
 #maincontent .feature .medialist .metaInfo {
     width:530px;
 }
-#maincontent .feature .wdn_tabs_content em, #maincontent .feature .wdn_tabs_content .wdn_pagination, #maincontent .feature .wdn_tabs_content h3 {
+#maincontent .feature .wdn_tabs_content em, #maincontent .feature .wdn_tabs_content .wdn_pagination, #maincontent .feature .wdn_tabs_content h3, #maincontent .feature .wdn_tabs_content .group {
     display:none;
 }
