@@ -55,6 +55,11 @@ class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
 
         return $q->execute();
     }
+    
+    function getMediaList($options = array())
+    {
+    	 return new UNL_MediaYak_MediaList(array('filter'=>new UNL_MediaYak_MediaList_Filter_ByFeed($this))+$options); 
+    }
 
     /**
      * Add a feed to the system
