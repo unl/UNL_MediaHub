@@ -8,8 +8,6 @@ if (isset($context->label) && !empty($context->label)) {
 ?>
 <div id="feedlist">
     <h1><?php echo $label; ?></h1>
-    <p>Select a channel to view.</p>
-    <div class="clear"></div>
     <?php
     if (count($context->items)) {
         $pager_layout = new UNL_MediaYak_List_PagerLayout($context->pager,
@@ -26,7 +24,10 @@ if (isset($context->label) && !empty($context->label)) {
             <p>'.htmlentities($feed->description).'</p>';
             //@TODO add a check if user is logged in and if has permissions to this feed to edit. If true, add edit/delete links here.
             echo '</div>
-    		'.$savvy->render($feed->getMediaList(), 'CompactMediaList.tpl.php').'
+    		<div class="mediaSamples">
+    			'.$savvy->render($feed->getMediaList(), 'CompactMediaList.tpl.php').'
+    			<a href="'.htmlentities(UNL_MediaYak_Controller::getURL($feed), ENT_QUOTES).'" title="View all the media in this channel">See all media</a>
+    		</div>
     		<div class="clear"></div>
             </li>';
         }
