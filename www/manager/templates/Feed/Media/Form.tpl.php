@@ -93,7 +93,7 @@ UNL_MediaYak_Manager::setReplacementData('head', $js);
     <legend>Add New Media</legend>
         <ol>
             <li>
-                <label><span class="required">*</span>URL of Media File<span class="helper">Media types supported: .m4v, .mp4, .mp3, .ogg</span></label>
+                <label><span class="required">*</span>URL of Media File<span class="helper">Media types supported: .m4v, .mp4, .mp3</span></label>
 		        <input id="url" name="url" type="text" value="<?php echo htmlentities(@$context->media->url, ENT_QUOTES); ?>" />
 		        <!-- <input id="file_upload" name="file_upload" type="file" /> -->
 		        <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
