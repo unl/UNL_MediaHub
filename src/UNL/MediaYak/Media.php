@@ -42,6 +42,18 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
     {
         $this->setContentType();
     }
+
+    /**
+     * called before an item is updated in the database
+     * 
+     * @param $event
+     * 
+     * @return void
+     */
+    public function preUpdate($event)
+    {
+        $this->setContentType();
+    }
     
     /**
      * called after an item is inserted into the database
@@ -143,15 +155,13 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
             return false;
         }
 
-        $headers = get_headers($this->url);
+        $headers = get_headers($this->url, 1);
         if (false !== $headers && count($headers)) {
-            foreach($headers as $header) {
-                if (strpos($header, 'Content-Type: ') !== false) {
-                    $this->type = substr($header, 14);
-                }
-                if (strpos($header, 'Content-Length: ') !== false) {
-                    $this->length = substr($header, 16);
-                }
+            if (isset($headers['Content-Type'])) {
+                $this->type = $headers['Content-Type'];
+            }
+            if (isset($headers['Content-Length'])) {
+                $this->length = $headers['Content-Length'];
             }
         }
         return true;
