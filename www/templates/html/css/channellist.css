@@ -52,13 +52,23 @@ Supporting styles for listings of channels
 #maincontent #feedlist .mediaSamples img {
     width:75px; 
     max-height:42px;
+    margin-right:10px;
+}
+#maincontent #feedlist .mediaSamples span {
+	float:left;
+	display:inline;
+	width:134px;
 }
 #maincontent #feedlist .mediaSamples li {
     font-size:11px;
     min-height:47px;
     font-weight:bold;
-    line-height:12px;
-    opacity:0.7;    
+    line-height:12px; 
+    display:inline-block;
+    padding:3px; 
+}
+#maincontent #feedlist .mediaSamples li:hover {
+	background:#eee;
 }
 #maincontent #feedlist .mediaSamples li:hover {
     opacity:1;  
