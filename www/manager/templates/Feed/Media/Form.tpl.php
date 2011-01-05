@@ -111,20 +111,7 @@ UNL_MediaYak_Manager::setReplacementData('head', $js);
     <fieldset id="existing_media">
         <legend>Basic Information</legend>
         <ol>
-        	<li><fieldset><legend><span class="required">*</span>Media Type</legend>
-			<ol>
-				<li>
-					<input type="radio" value="1" name="type" id="video" />
-					<label for="video">Video</label>
-				</li>
-				<li>
-					<input type="radio" value="0" name="type" id="audio" />
-					<label for="audio">Audio</label>
-				</li>
-			</ol>
-			</fieldset>
-        	</li>
-            <li><label><span class="required">*</span>URL of Media File<span class="helper">Media types supported: .m4v, .mp4, .mp3, .ogg</span></label>
+        	<li><label><span class="required">*</span>URL of Media File<span class="helper">Media types supported: .m4v, .mp4, .mp3, .ogg</span></label>
                 <input id="media_url" name="url" type="text" value="<?php echo htmlentities(@$context->media->url, ENT_QUOTES); ?>" />
             </li>
             <li><label for="title" class="element"><span class="required">*</span>Title</label><input id="title" name="title" type="text" value="<?php echo htmlentities(@$context->media->title, ENT_QUOTES); ?>" /></li>
