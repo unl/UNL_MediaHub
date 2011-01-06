@@ -213,6 +213,11 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
         return parent::delete();
     }
 
+    /**
+     * Get the tags associated with this media file
+     * 
+     * @return array()
+     */
     function getTags()
     {
         $tags = array();
@@ -223,7 +228,12 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
         }
         return $tags;
     }
-    
+
+    /**
+     * Add a new tag for this media.
+     * 
+     * @param string $newTag Tag or comma separated list of tags to add
+     */
     function addTag($newTag)
     {
     	$tags = $this->getTags();
