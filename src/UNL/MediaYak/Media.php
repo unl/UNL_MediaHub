@@ -246,5 +246,13 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
         }
     	return false;
     }
+
+    function getStreamingURL()
+    {
+        if (false === strpos($this->url, 'http://real.unl.edu/podcast/')) {
+            return false;
+        }
+        return str_replace('http://real.unl.edu/podcast/', 'rtmp://real.unl.edu/content/podcast/', $this->url);
+    }
 }
 
