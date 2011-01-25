@@ -10,7 +10,8 @@ if (!$manager->isLoggedIn()) {
 
 $outputcontroller = new UNL_MediaYak_OutputController();
 $outputcontroller->setCacheInterface(new UNL_MediaYak_CacheInterface_Mock());
-$outputcontroller->setTemplatePath(dirname(__FILE__).'/templates');
+$outputcontroller->setTemplatePath(dirname(dirname(__FILE__)).'/templates/html');
+$outputcontroller->addTemplatePath(dirname(__FILE__).'/templates');
 
 echo $outputcontroller->render($manager);
 
