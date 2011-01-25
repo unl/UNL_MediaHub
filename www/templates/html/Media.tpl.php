@@ -2,7 +2,13 @@
 $type = 'audio';
 if (UNL_MediaYak_Media::isVideo($context->type)) {
     $type = 'video';
+    $height = 529;
+    $width = 940;
     $dimensions = UNL_MediaYak_Media::getMediaDimensions($context->id);
+    if (isset($dimensions['width'])) {
+        // Scale everything down to 450 wide
+        $height = round(($width/$dimensions['width'])*$dimensions['height']);
+    }
 }
 
 $context->loadReference('UNL_MediaYak_Media_Comment');
@@ -26,8 +32,12 @@ if ($type == 'video') {
     $meta .= '<link rel="video_src" href="'.$context->url.'" />';
 }
 UNL_MediaYak_Controller::setReplacementData('head', $meta);
+
+// Store the mediaplayer code in a variable, so we can re-use it for the embed
+$mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
+echo $mediaplayer;
 ?>
-<?php echo $savvy->render($context, 'MediaPlayer.tpl.php'); ?>
+
 <div class="three_col left supportingContent">
     <h2><?php echo $context->title; ?></h2>
     <?php
@@ -117,45 +127,10 @@ UNL_MediaYak_Controller::setReplacementData('head', $meta);
     ?>
     <h6 style="margin-top:1em;"><a href="<?php echo htmlentities($context->url, ENT_QUOTES); ?>" class="video-x-generic">Download this media file</a></h6>
 </div>
-<script type="text/javascript">
-WDN.initializePlugin('videoPlayer');
-</script>
 <div id="sharing">
     <h3>Embed</h3>
     <p>Copy the following code into your unl.edu page</p>
-    <textarea cols="25" rows="6" onclick="this.select(); return false;"><?php
-    	if ($type == 'video') {
-        echo htmlentities(
-            '<video height="'. $height.'" width="'.$width.'" src="'.$context->url.'" controls autobuffer poster="'.UNL_MediaYak_Controller::$thumbnail_generator.($context->url).'" style="background:url('.UNL_MediaYak_Controller::$thumbnail_generator.($context->url).') no-repeat;">'.
-            '<object type="application/x-shockwave-flash" style="width:'.$width.'px;height:'.($height+48) .'px" data="http://www.unl.edu/ucomm/templatedependents/templatesharedcode/scripts/components/mediaplayer/player.swf">'.
-                '<param name="movie" value="/wdn/templates_3.0/includes/swf/player4.3" ></param>'.
-                '<param name="allowfullscreen" value="true"></param>'.
-                '<param name="allowscriptaccess" value="always"></param>'.
-                '<param name="wmode" value="transparent"></param>'.
-                '<param name="flashvars" '. 
-                    'value="file='.urlencode($context->url).'&amp;'.
-                    'image='.urlencode(UNL_MediaYak_Controller::$thumbnail_generator.urlencode($context->url)).'&amp;'.
-                    'volume=100&amp;'.
-                    'autostart=false&amp;'.
-                    'skin=/wdn/templates_3.0/includes/swf/player4.3" /> '.
-            '</object>'.
-            '</video>'.
-            '<script type="text/javascript">WDN.initializePlugin("videoPlayer");</script>');
-    	} else if ($type == 'audio') {
-    		echo htmlentities(
-    		'<div class="audioplayer">'.
-		    	'<audio preload="auto">'.
-				'<source src="'.$context->url.'" type="audio/mpeg" />'.
-				'<div class="fallback">'.
-					'<div class="fallback-text">'.
-						'<p>Please use a modern browser or install <a href="http://get.adobe.com/flashplayer/">Flash-Plugin</a></p>'.
-						'<p><a class="source" href="'.$context->url.'">'.$context->url.'</a></p>'.
-					'</div>'.
-				'</div>'.
-				'</audio>'.
-    		'<span class="title">'.$context->title.'</span>'.
-			'</div>'.
-            '<script type="text/javascript">WDN.initializePlugin("videoPlayer");</script>');
-    	}
-    ?></textarea>
+    <textarea cols="25" rows="6" onclick="this.select(); return false;">
+    <?php echo htmlentities($mediaplayer); ?>
+    </textarea>
 </div>
