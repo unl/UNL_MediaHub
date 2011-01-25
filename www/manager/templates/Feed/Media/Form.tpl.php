@@ -40,40 +40,11 @@ UNL_MediaYak_Manager::setReplacementData('head', $js);
         <a class="action" id="setImage" href="#">Set Image</a>
     </div>
     <div id="videoDisplay" class="two_col right">
-    <?php if (isset($context->media)) {
-	    $type = 'audio';
-		$height = 253;
-		$width = 460;
-		if (UNL_MediaYak_Media::isVideo($context->media->type)) {
-		    $type = 'video';
-		    $dimensions = UNL_MediaYak_Media::getMediaDimensions($context->media->id);
-		    if (isset($dimensions['width'])) {
-		        // Scale everything down to 450 wide
-		        $height = round(($width/$dimensions['width'])*$dimensions['height']);
-		    }
-		}
-	?>
-        <video height="<?php echo $height; ?>" width="<?php echo $width; ?>" src="<?php echo $context->media->url?>" controls poster="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.($context->media->url)?>">
-            <object type="application/x-shockwave-flash" style="width:<?php echo $width; ?>px;height:<?php echo $height; ?>px" data="/wdn/templates_3.0/includes/swf/player4.3.swf">
-                <param name="movie" value="/wdn/templates_3.0/includes/swf/player4.3" />
-                <param name="allowfullscreen" value="true" />
-                <param name="allowscriptaccess" value="always" />
-                <param name="wmode" value="transparent" />
-                <param name="flashvars" value="file=<?php echo urlencode($context->media->url)?>&amp;image=<?php echo urlencode(UNL_MediaYak_Controller::$thumbnail_generator.urlencode($context->media->url))?>&amp;volume=100&amp;controlbar=over&amp;autostart=true&amp;skin=/wdn/templates_3.0/includes/swf/UNLVideoSkin.swf" /> 
-            </object>
-        </video>
-        <script type="text/javascript">WDN.initializePlugin("videoPlayer");</script>
-    <?php } else { ?>
-        <video height="" width="" src="" controls >
-            <object type="application/x-shockwave-flash" data="/wdn/templates_3.0/includes/swf/player4.3.swf">
-                <param name="movie" value="/wdn/templates_3.0/includes/swf/player4.3" />
-                <param name="allowfullscreen" value="true" />
-                <param name="allowscriptaccess" value="always" />
-                <param name="wmode" value="transparent" />
-                <param name="flashvars" value="" /> 
-            </object>
-        </video>
-    <?php }?>
+    <?php
+    if (isset($context->media)) {
+        echo $savvy->render($context->media, 'MediaPlayer.tpl.php');
+    }
+    ?>
     </div>
 </div>
 <div class="headline_main" id="headline_main_audio" style="display:none;">

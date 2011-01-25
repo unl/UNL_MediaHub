@@ -1,7 +1,15 @@
 <?php
-$type = 'audio';
+$type   = 'audio';
 $height = 529;
-$width = 940;
+$width  = 940;
+
+if ($parent->context instanceof UNL_MediaYak_Feed_Media_Form) {
+    // We use a smaller player size on the edit form
+    $height = 253;
+    $width = 460;
+}
+
+
 if (UNL_MediaYak_Media::isVideo($context->type)) {
     $type = 'video';
     $dimensions = UNL_MediaYak_Media::getMediaDimensions($context->id);
