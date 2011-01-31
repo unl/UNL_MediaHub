@@ -18,7 +18,7 @@ if (count($context->items)) {
     echo '<ul class="medialist">';
     foreach ($context->items as $media) { ?>
         <li>
-            <a href="<?php echo UNL_MediaYak_Controller::getURL($media); ?>"><img class="thumbnail" src="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.urlencode($media->url); ?>" alt="Thumbnail preview for <?php echo $media->title; ?>" width="100" height="76" /></a>
+            <a href="<?php echo UNL_MediaYak_Controller::getURL($media); ?>"><img class="thumbnail" src="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.urlencode($media->url); ?>" alt="Thumbnail preview for <?php echo htmlentities($media->title, ENT_QUOTES); ?>" width="100" height="76" /></a>
             <div class="actions">
             <a href="<?php echo $addMediaURL; ?>&amp;id=<?php echo $media->id; ?>">Edit</a>
             <?php

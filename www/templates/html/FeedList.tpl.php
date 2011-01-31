@@ -12,12 +12,12 @@ if (isset($context->label) && !empty($context->label)) {
     if (count($context->items)) {
         $pager_layout = new UNL_MediaYak_List_PagerLayout($context->pager,
             new Doctrine_Pager_Range_Sliding(array('chunk'=>5)),
-                    UNL_MediaYak_Controller::getURL($context, array_merge($context->options, array('page'=>'{%page_number}'))));
+                    htmlentities(UNL_MediaYak_Controller::getURL($context, array_merge($context->options, array('page'=>'{%page_number}')))));
         $pager_links = $pager_layout->display(null, true);
         echo '<ul>';
         foreach ($context->items as $feed) {
             echo '<li>
-            <a href="'.htmlentities(UNL_MediaYak_Controller::getURL($feed), ENT_QUOTES).'"><img src="'.htmlentities(UNL_MediaYak_Controller::getURL($feed), ENT_QUOTES).'/image" alt="'.htmlentities($feed->title).' image" /></a>
+            <a href="'.htmlentities(UNL_MediaYak_Controller::getURL($feed), ENT_QUOTES).'"><img src="'.htmlentities(UNL_MediaYak_Controller::getURL($feed), ENT_QUOTES).'/image" alt="'.htmlentities($feed->title, ENT_QUOTES).' image" /></a>
             <div class="aboutFeed">
             <h3><a href="'.htmlentities(UNL_MediaYak_Controller::getURL($feed), ENT_QUOTES).'">'.htmlentities($feed->title).'</a> </h3>
             '.$savvy->render($feed, 'Feed/Creator.tpl.php').'
