@@ -40,6 +40,10 @@ class UNL_MediaYak_FeedAndMedia
             $this->feed = UNL_MediaYak_Feed::getByTitle($this->options['title']);
         }
 
+        if (false === $this->feed) {
+            throw new Exception('That feed could not be found.', 404);
+        }
+
         $this->media_list = new UNL_MediaYak_MediaList(array('filter'=>new UNL_MediaYak_MediaList_Filter_ByFeed($this->feed))+$options);
     }
     
