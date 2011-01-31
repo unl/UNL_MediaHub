@@ -22,7 +22,7 @@ if (count($context->items)) {
 
     $pager_layout = new UNL_MediaYak_List_PagerLayout($context->pager,
         new Doctrine_Pager_Range_Sliding(array('chunk'=>5)),
-        $url);
+        htmlentities($url));
     $pager_links = $pager_layout->display(null, true);
     
 	$addMediaURL = UNL_MediaYak_Manager::getURL().'?view=addmedia';
@@ -55,7 +55,7 @@ if (count($context->items)) {
         <?php
         foreach ($context->items as $media) { ?>
             <li>
-                <a href="<?php echo UNL_MediaYak_Controller::getURL($media); ?>"><img class="thumbnail" src="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.urlencode($media->url); ?>" alt="Thumbnail preview for <?php echo $media->title; ?>" /></a>
+                <a href="<?php echo UNL_MediaYak_Controller::getURL($media); ?>"><img class="thumbnail" src="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.urlencode($media->url); ?>" alt="Thumbnail preview for <?php echo htmlspecialchars($media->title, ENT_QUOTES); ?>" /></a>
                 <?php if ($userCanEdit) { ?>
 	            <div class="actions">
 		            <a href="<?php echo $addMediaURL; ?>&amp;id=<?php echo $media->id; ?>">Edit</a>
