@@ -8,8 +8,8 @@ if (count($context->items)) :
 <ul class="channels">
     <?php foreach ($context->items as $channel): ?>
     <li>
-        <a href="<?php echo UNL_MediaYak_Controller::getURL($channel); ?>" title="<?php echo $channel->description; ?>">
-            <img src="<?php echo UNL_MediaYak_Controller::getURL($channel).'/image'; ?>" alt="<?php echo $channel->title?>" />
+        <a href="<?php echo UNL_MediaYak_Controller::getURL($channel); ?>" title="<?php echo htmlentities($channel->description, ENT_QUOTES); ?>">
+            <img src="<?php echo UNL_MediaYak_Controller::getURL($channel).'/image'; ?>" alt="<?php echo htmlentities($channel->title, ENT_QUOTES); ?>" />
             <span class="title"><?php echo $channel->title?></span>
         </a>
     </li>
