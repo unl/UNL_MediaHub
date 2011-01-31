@@ -186,25 +186,29 @@ class UNL_MediaYak_Controller
         if (self::isLoggedIn()) {
             // We're golden.
         }
-        
-        switch ($this->options['view']) {
-        case 'media':
-            $this->output[] = $this->findRequestedMedia($this->options);
-            break;
-        case 'feed_image':
-            if (isset($this->options['feed_id'])) {
-                $this->output[] = UNL_MediaYak_Feed_Image::getById($this->options['feed_id']);
-            } else {
-                $this->output[] = UNL_MediaYak_Feed_Image::getByTitle($this->options['title']);
+
+        try {
+            switch ($this->options['view']) {
+            case 'media':
+                $this->output[] = $this->findRequestedMedia($this->options);
+                break;
+            case 'feed_image':
+                if (isset($this->options['feed_id'])) {
+                    $this->output[] = UNL_MediaYak_Feed_Image::getById($this->options['feed_id']);
+                } else {
+                    $this->output[] = UNL_MediaYak_Feed_Image::getByTitle($this->options['title']);
+                }
+                break;
+            case 'default':
+            case 'search':
+            case 'feeds':
+            case 'feed':
+                $class = $this->view_map[$this->options['view']];
+                $this->output[] = new $class($this->options);
+                break;
             }
-            break;
-        case 'default':
-        case 'search':
-        case 'feeds':
-        case 'feed':
-            $class = $this->view_map[$this->options['view']];
-            $this->output[] = new $class($this->options);
-            break;
+        } catch(Exception $e) {
+            $this->output[] = $e;
         }
     }
     
