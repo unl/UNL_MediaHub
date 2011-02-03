@@ -50,5 +50,9 @@ if ($type == 'video') {
 }
 ?>
 <script type="text/javascript">
-WDN.initializePlugin('videoPlayer');
+if (typeof (WDN) == "undefined") {
+	if (typeof (jQuery) == "undefined") {var j = document.createElement("script"); j.setAttribute("type","text/javascript"); j.setAttribute("src", "http://www.unl.edu/wdn/templates_3.0/scripts/jquery.js"); document.getElementsByTagName("head")[0].appendChild(j);}
+	var s = document.createElement("script"); s.setAttribute("type","text/javascript"); s.setAttribute("src", "http://www.unl.edu/wdn/templates_3.0/scripts/wdn.js"); var c = document.createElement("link"); document.getElementsByTagName("head")[0].appendChild(c); c.setAttribute("type", "text/css"); c.setAttribute("rel", "stylesheet"); c.setAttribute("href", "http://www.unl.edu/wdn/templates_3.0/css/content/videoPlayer.css"); document.getElementsByTagName("head")[0].appendChild(s); 
+	window.onload=function(){ WDN.jQuery=jQuery.noConflict(true); WDN.initializePluginExternal("videoPlayer"); WDN.initializePluginExternal("analytics");};
+} else {WDN.initializePlugin("videoPlayer");}
 </script>
