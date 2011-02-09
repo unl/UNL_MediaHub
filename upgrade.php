@@ -24,7 +24,7 @@ function exec_sql($db, $sql, $message, $fail_ok = false)
 	   $result = $db->execute($sql);
 	} catch (Exception $e) {
 		if (!$fail_ok) {
-			echo 'The query failed:'.$result->errorInfo();
+			echo 'The query failed:'.$db->errorInfo();
 			exit();
 		}
 	}
