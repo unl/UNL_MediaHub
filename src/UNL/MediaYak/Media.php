@@ -155,13 +155,25 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
             return false;
         }
 
-        $headers = get_headers($this->url, 1);
-        if (false !== $headers && count($headers)) {
-            if (isset($headers['Content-Type'])) {
-                $this->type = $headers['Content-Type'];
-            }
-            if (isset($headers['Content-Length'])) {
-                $this->length = $headers['Content-Length'];
+        $context = stream_context_create(array('http'=>array(
+                'method'     => 'GET',
+                'user_agent' => 'UNL MediaHub/mediahub.unl.edu'
+                )));
+
+        $result = @file_get_contents($this->url, null, $context, -1, 8);
+        if (false === $result) {
+            // Could not retrieve the info about this piece of media
+            return false;
+        }
+
+        if (false !== $http_response_header && count($http_response_header)) {
+            foreach($http_response_header as $header) {
+                if (strpos($header, 'Content-Type: ') !== false) {
+                    $this->type = substr($header, 14);
+                }
+                if (strpos($header, 'Content-Length: ') !== false) {
+                    $this->length = substr($header, 16);
+                }
             }
         }
         return true;
