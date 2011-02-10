@@ -69,6 +69,7 @@ class UNL_MediaYak_Controller
     
     protected $view_map = array(
         'search'  => 'UNL_MediaYak_MediaList',
+    	'tags'    => 'UNL_MediaYak_MediaList',
         'default' => 'UNL_MediaYak_DefaultHomepage',
         'feeds'   => 'UNL_MediaYak_FeedList',
         'feed'    => 'UNL_MediaYak_FeedAndMedia'
@@ -201,6 +202,7 @@ class UNL_MediaYak_Controller
                 break;
             case 'default':
             case 'search':
+            case 'tags':
             case 'feeds':
             case 'feed':
                 $class = $this->view_map[$this->options['view']];
