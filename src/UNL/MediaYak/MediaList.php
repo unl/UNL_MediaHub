@@ -23,6 +23,10 @@ class UNL_MediaYak_MediaList extends UNL_MediaYak_List
             && !empty($this->options['q'])) {
             $this->options['filter'] = new UNL_MediaYak_MediaList_Filter_TextSearch($this->options['q']);
         }
+    	if (isset($this->options['t'])
+            && !empty($this->options['t'])) {
+            $this->options['filter'] = new UNL_MediaYak_MediaList_Filter_KeywordSearch($this->options['t']);
+        }
     }
     
     function filterInputOptions()
