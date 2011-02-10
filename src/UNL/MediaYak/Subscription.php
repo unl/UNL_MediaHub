@@ -23,12 +23,22 @@ class UNL_MediaYak_Subscription extends UNL_MediaYak_Models_BaseSubscription
         return $added;
     }
 
+    /**
+     * Get the media filter specified by this subscription
+     * 
+     * @return UNL_MediaYak_Filter
+     */
     protected function getFilter()
     {
-        $class  = $this->filter_class;
+        $class = $this->filter_class;
         return new $class($this->filter_option);
     }
 
+    /**
+     * Get the list of media matching this subscription
+     * 
+     * @return UNL_MediaYak_MediaList
+     */
     protected function getMediaList()
     {
         return new UNL_MediaYak_MediaList(array('filter'=>$this->getFilter()));
