@@ -19,11 +19,11 @@ class UNL_MediaYak_Router
         switch(true) {
             case preg_match('/'.$quotedBase.'search\/(.*)$/', $requestURI, $matches):
                 $options['view'] = 'search';
-                $options['q']    = $matches[1];
+                $options['q']    = urldecode($matches[1]);
                 break;
 			case preg_match('/'.$quotedBase.'tags\/(.*)$/', $requestURI, $matches):
                 $options['view'] = 'tags';
-                $options['t']    = $matches[1];
+                $options['t']    = urldecode($matches[1]);
                 break;
             case preg_match('/'.$quotedBase.'media\/([0-9]+)$/', $requestURI, $matches):
                 $options['view'] = 'media';
