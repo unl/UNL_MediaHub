@@ -16,7 +16,7 @@ class UNL_MediaYak_Subscription extends UNL_MediaYak_Models_BaseSubscription
         $feed_list  = $this->getFeedList();
         $feed_list->run();
 
-        foreach ($media_list as $media) {
+        foreach ($media_list->items as $media) {
             foreach ($feed_list->items as $feed) {
                 if (!$feed->hasMedia($media)) {
                     if ($feed->addMedia($media)) {
