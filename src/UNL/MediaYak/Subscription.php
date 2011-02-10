@@ -10,8 +10,7 @@ class UNL_MediaYak_Subscription extends UNL_MediaYak_Models_BaseSubscription
     public function process(UNL_MediaYak_Feed $feed)
     {
         $added      = 0;
-        $filter     = $this->getFilter();
-        $media_list = $this->getMediaList($filter);
+        $media_list = $this->getMediaList();
 
         foreach ($media_list as $media) {
             if (!$feed->hasMedia($media)) {
@@ -30,8 +29,8 @@ class UNL_MediaYak_Subscription extends UNL_MediaYak_Models_BaseSubscription
         return new $class($this->filter_option);
     }
 
-    protected function getMediaList(UNL_MediaYak_MediaList_Filter $filter)
+    protected function getMediaList()
     {
-        return new UNL_MediaYak_MediaList(array('filter'=>$filter));
+        return new UNL_MediaYak_MediaList(array('filter'=>$this->getFilter()));
     }
 }
