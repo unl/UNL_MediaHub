@@ -55,7 +55,7 @@ echo $mediaplayer;
     <ul id="mediaTags">
         <?php
         foreach ($context->getTags() as $tag) {
-            echo '<li><a href="'.UNL_MediaYak_Controller::$url.'tags/'.urlencode($tag).'">'.$tag.'</a></li>';
+            echo '<li><a href="'.UNL_MediaYak_Controller::$url.'tags/'.urlencode(trim($tag)).'">'.$tag.'</a></li>';
         }
 	    if (UNL_MediaYak_Controller::isLoggedIn()) {
 	    	echo '<li id="mediaTagsAdd"><a href="#">Add tags</a><form id="addTags" method="post"><input type="text" value="" name="tags" /><input type="submit" value="Add" /></form></li>';
