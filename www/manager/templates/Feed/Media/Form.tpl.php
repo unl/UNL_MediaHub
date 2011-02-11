@@ -427,22 +427,7 @@ UNL_MediaYak_Manager::setReplacementData('head', $js);
     </fieldset>
     <fieldset id="feedSelect">
         <legend>For Which Feeds Shall this Media be Added?</legend>
-        <ol>
-            <li>
-                <fieldset>
-                    <legend>Select from your channel or add to a new channel</legend>
-                        <ol>
-                            <?php
-                            $list = UNL_MediaYak_Manager::getUser()->getFeeds();
-                            UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_FeedList', 'Feed_Media_FeedList');
-                            echo $savvy->render($list);
-                            UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_FeedList', 'FeedList');
-                            ?>
-                            <li><label for="new_feed" class="element">New Channel</label><div class="element"><input id="new_feed" name="new_feed" type="text" /></div></li>
-                        </ol>
-                </fieldset>
-            </li>
-        </ol>
+        <?php echo $savvy->render($context, 'User/FeedSelection.tpl.php'); ?>
     </fieldset>
     <input type="submit" name="submit" id="continue3" value="Publish" onclick="document.getElementById('submit_existing').click();" />
 </form>
