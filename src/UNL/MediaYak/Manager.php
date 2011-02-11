@@ -110,8 +110,9 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
         try {
             if (count($_POST)) {
                 $this->handlePost();
-            } else {
-                switch($this->options['view']) {
+            }
+
+            switch($this->options['view']) {
                 case 'feed':
                     $this->showFeed();
                     break;
@@ -129,7 +130,6 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
                 default:
                     $this->showFeeds(self::getUser());
                     break;
-                }
             }
         } catch (Exception $e) {
             $this->output = $e;
