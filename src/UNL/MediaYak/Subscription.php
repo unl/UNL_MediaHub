@@ -54,4 +54,9 @@ class UNL_MediaYak_Subscription extends UNL_MediaYak_Models_BaseSubscription
     {
         return new UNL_MediaYak_MediaList(array('filter'=>$this->getFilter()));
     }
+
+    function getResultURL()
+    {
+        return $this->getMediaList()->getURL();
+    }
 }
