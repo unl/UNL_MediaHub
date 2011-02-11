@@ -6,10 +6,10 @@ class UNL_MediaYak_Feed_Form
     
     public $feed;
     
-    function __construct(UNL_MediaYak_Feed $feed = null)
+    function __construct($options = array())
     {
-        if (isset($feed)) {
-            $this->feed = $feed;
+        if (isset($options['id'])) {
+            $this->feed = UNL_MediaYak_Feed::getById($options['id']);
             $this->feed->loadReference('UNL_MediaYak_Feed_NamespacedElements_itunes');
             $this->feed->loadReference('UNL_MediaYak_Feed_NamespacedElements_media');
         }
