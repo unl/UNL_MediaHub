@@ -18,6 +18,11 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
     public $output;
     
     public $options = array('view'=>'addmedia');
+
+    protected $view_map = array(
+        'feedmetadata' => 'UNL_MediaYak_Feed_Form',
+        'permissions'  => 'UNL_MediaYak_Feed_UserList'
+        );
     
     protected static $replacements = array();
     
@@ -116,17 +121,17 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
                 case 'feed':
                     $this->showFeed();
                     break;
-                case 'feedmetadata':
-                    $this->editFeedMetaData();
-                    break;
-                case 'permissions':
-                    $this->editPermissions();
-                    break;
                 case 'feeds':
                     $this->showFeeds(self::getUser());
                     break;
+                case 'feedmetadata':
+                case 'permissions':
+                    $class = $this->view_map[$this->options['view']];
+                    $this->output[] = new $class($this->options);
+                    break;
                 case 'addmedia':
                     $this->addMedia();
+                    // intentional no break
                 default:
                     $this->showFeeds(self::getUser());
                     break;
@@ -162,11 +167,6 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
         $options['filter'] = $filter;
 
         $this->output[] = new UNL_MediaYak_MediaList($options + $this->options);
-    }
-    
-    function editPermissions()
-    {
-        $this->output[] = new UNL_MediaYak_Feed_UserList($this->options);
     }
     
     function showFeeds(UNL_MediaYak_User $user)
@@ -348,16 +348,6 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
         unset($_POST['__unlmy_posttarget']);
         unset($_POST['MAX_FILE_SIZE']);
         unset($_POST['submit_existing']);
-    }
-    
-    /**
-     * Display a form for editing a feed's details
-     *
-     * @return void
-     */
-    function editFeedMetaData()
-    {
-        $this->output[] = new UNL_MediaYak_Feed_Form($this->options);
     }
     
     function editFeedPublishers($feed)
