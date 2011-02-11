@@ -20,9 +20,10 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
     public $options = array('view'=>'addmedia');
 
     protected $view_map = array(
-        'feedmetadata' => 'UNL_MediaYak_Feed_Form',
-        'permissions'  => 'UNL_MediaYak_Feed_UserList',
-        'feeds'        => 'UNL_MediaYak_User_FeedList'
+        'feedmetadata'  => 'UNL_MediaYak_Feed_Form',
+        'permissions'   => 'UNL_MediaYak_Feed_UserList',
+        'feeds'         => 'UNL_MediaYak_User_FeedList',
+        'subscriptions' => 'UNL_MediaYak_User_Subscriptions'
         );
     
     protected static $replacements = array();
@@ -125,6 +126,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
                 case 'feedmetadata':
                 case 'permissions':
                 case 'feeds':
+                case 'subscriptions':
                     $class = $this->view_map[$this->options['view']];
                     $this->output[] = new $class($this->options);
                     break;
