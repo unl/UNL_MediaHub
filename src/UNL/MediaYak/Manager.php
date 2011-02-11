@@ -21,7 +21,8 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
 
     protected $view_map = array(
         'feedmetadata' => 'UNL_MediaYak_Feed_Form',
-        'permissions'  => 'UNL_MediaYak_Feed_UserList'
+        'permissions'  => 'UNL_MediaYak_Feed_UserList',
+        'feeds'        => 'UNL_MediaYak_User_FeedList'
         );
     
     protected static $replacements = array();
@@ -121,11 +122,9 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
                 case 'feed':
                     $this->showFeed();
                     break;
-                case 'feeds':
-                    $this->showFeeds(self::getUser());
-                    break;
                 case 'feedmetadata':
                 case 'permissions':
+                case 'feeds':
                     $class = $this->view_map[$this->options['view']];
                     $this->output[] = new $class($this->options);
                     break;
@@ -133,7 +132,8 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
                     $this->addMedia();
                     // intentional no break
                 default:
-                    $this->showFeeds(self::getUser());
+                    $class = $this->view_map['feeds'];
+                    $this->output[] = new $class($this->options);
                     break;
             }
         } catch (Exception $e) {
@@ -168,12 +168,6 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
 
         $this->output[] = new UNL_MediaYak_MediaList($options + $this->options);
     }
-    
-    function showFeeds(UNL_MediaYak_User $user)
-    {
-        $this->output[] = $user->getFeeds($this->options + array('limit'=>10));
-    }
-    
     
     public static function getURL($mixed = null, $additional_params = array())
     {
