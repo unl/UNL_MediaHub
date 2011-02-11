@@ -357,12 +357,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
      */
     function editFeedMetaData()
     {
-        if (isset($_GET['id'])) {
-            $this->output = new UNL_MediaYak_Feed_Form(UNL_MediaYak_Feed::getById($_GET['id']));
-            return;
-        }
-        
-        $this->output[] = new UNL_MediaYak_Feed_Form();
+        $this->output[] = new UNL_MediaYak_Feed_Form($this->options);
     }
     
     function editFeedPublishers($feed)
