@@ -42,4 +42,9 @@ class UNL_MediaYak_MediaList_Filter_Popular implements UNL_MediaYak_Filter
     {
         return '';
     }
+
+    public static function getDescription()
+    {
+        return 'Find popular media';
+    }
 }

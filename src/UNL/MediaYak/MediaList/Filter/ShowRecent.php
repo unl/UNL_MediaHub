@@ -26,4 +26,9 @@ class UNL_MediaYak_MediaList_Filter_ShowRecent implements UNL_MediaYak_Filter
     {
         return '';
     }
+
+    public static function getDescription()
+    {
+        return 'Find recently added media';
+    }
 }

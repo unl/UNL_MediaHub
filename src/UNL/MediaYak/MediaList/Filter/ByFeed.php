@@ -33,4 +33,9 @@ class UNL_MediaYak_MediaList_Filter_ByFeed implements UNL_MediaYak_Filter
     {
         return '';
     }
+
+    public static function getDescription()
+    {
+        return 'Find media added to a specific feed';
+    }
 }

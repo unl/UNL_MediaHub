@@ -32,5 +32,9 @@ class UNL_MediaYak_MediaList_Filter_TextSearch implements UNL_MediaYak_Filter
     {
         return '';
     }
+
+    public static function getDescription()
+    {
+        return 'Find media with matching title or description fields';
+    }
 }
-?>
