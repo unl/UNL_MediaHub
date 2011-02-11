@@ -10,7 +10,7 @@ if (count($subscriptions->items)) {
         $media_added = 0;
         foreach ($subscriptions->items as $subscription) {
             echo 'Processing '.$subscription->filter_class.'('.$subscription->filter_option.'):'.PHP_EOL;
-            $media_added = $subscription->process();
+            $media_added += $subscription->process();
         }
     } while($media_added > 0);
 }
