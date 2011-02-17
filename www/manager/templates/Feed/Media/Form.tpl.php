@@ -40,21 +40,15 @@ UNL_MediaYak_Manager::setReplacementData('head', $js);
         <a class="action" id="setImage" href="#">Set Image</a>
     </div>
     <div id="videoDisplay" class="two_col right">
-    <?php
-    if (isset($context->media)) {
-        echo $savvy->render($context->media, 'MediaPlayer.tpl.php');
-    }
-    ?>
+		<?php echo $savvy->render($context->media, 'MediaPlayer.tpl.php'); ?>
     </div>
 </div>
 <div class="headline_main" id="headline_main_audio" style="display:none;">
 	<div id="audioPreview" class="two_col left">
-    	<h1>Preview your Audio</h1>
+    	<h1 style="padding: 25px 0 0 20px;">Preview your Audio</h1>
     </div>
     <div id="audioDisplay" class="two_col right">
-    	<div class="audioplayer" style="min-height:50px;">
-    	</div>
-    <script type="text/javascript">WDN.initializePlugin("videoPlayer");</script>
+    	<?php echo $savvy->render($context->media, 'MediaPlayer.tpl.php'); ?>
     </div>
 </div>
 <div class="clear"></div>
