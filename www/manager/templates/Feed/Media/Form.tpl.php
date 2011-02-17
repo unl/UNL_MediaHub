@@ -40,15 +40,15 @@ UNL_MediaYak_Manager::setReplacementData('head', $js);
         <a class="action" id="setImage" href="#">Set Image</a>
     </div>
     <div id="videoDisplay" class="two_col right">
-		<?php echo $savvy->render($context->media, 'MediaPlayer.tpl.php'); ?>
+		<?php echo $savvy->render('videoDisplay', 'MediaPlayer.tpl.php'); ?>
     </div>
 </div>
 <div class="headline_main" id="headline_main_audio" style="display:none;">
 	<div id="audioPreview" class="two_col left">
-    	<h1 style="padding: 25px 0 0 20px;">Preview your Audio</h1>
+    	<h1 style="padding: 15px 0 0 20px;">Preview your Audio</h1>
     </div>
     <div id="audioDisplay" class="two_col right">
-    	<?php echo $savvy->render($context->media, 'MediaPlayer.tpl.php'); ?>
+    	<?php echo $savvy->render('audioDisplay', 'MediaPlayer.tpl.php'); ?>
     </div>
 </div>
 <div class="clear"></div>
