@@ -4,7 +4,8 @@ $height = 529;
 $width  = 940;
 $inForm = $parent->context instanceof UNL_MediaYak_Feed_Media_Form;
 
-if ($inForm) { ?>
+if ($inForm) { 
+	if ($context == 'videoDisplay') { ?>
 		<video height="" width="" src="" controls >	 
              <object type="application/x-shockwave-flash" data="/wdn/templates_3.0/includes/swf/player4.3.swf">	 
                  <param name="movie" value="/wdn/templates_3.0/includes/swf/player4.3" />	 
@@ -14,8 +15,11 @@ if ($inForm) { ?>
                  <param name="flashvars" value="" />	 
              </object>
          </video>
+<?php
+	} else if ($context == 'audioDisplay') { ?>
          <div class="audioplayer" style="min-height:50px;"></div>
 <?php 
+	}
 } else if (isset($context->media) || !$inForm) {
 	if (UNL_MediaYak_Media::isVideo($context->type)) {
 	    $type = 'video';
