@@ -30,7 +30,7 @@ var mediaDetails = function() {
 			newThumbnail.src = mediaDetails.imageURL + '&time='+mediaDetails.formatTime(currentTime)+'&rebuild';
 			WDN.log(newThumbnail.src);
 			newThumbnail.onload = function(){
-				WDN.jQuery('#thumbnail').attr('src', mediaDetails.imageURL );
+				WDN.jQuery('#thumbnail').attr('src', newThumbnail.src );
 				WDN.jQuery('#imageOverlay').hide();
 			};
 			
@@ -96,7 +96,6 @@ WDN.jQuery(document).ready(function() {
                     WDN.jQuery(this).css('display', 'inline-block');
                 });
             });
-            WDN.jQuery('input[id="video"]').attr('checked', true);
             mediaDetails.imageURL = mediaDetails.imageURL + escape(WDN.jQuery("#url").val());
             mediaDetails.showVideo();
             event.preventDefault();
@@ -111,7 +110,6 @@ WDN.jQuery(document).ready(function() {
                 WDN.jQuery(this).css('display', 'inline-block');
             });
         });
-        WDN.jQuery('input[id="video"]').attr('checked', true);
         mediaDetails.imageURL = mediaDetails.imageURL + escape(WDN.jQuery("#url").val());
         mediaDetails.showVideo();
     });
@@ -142,7 +140,6 @@ WDN.jQuery(document).ready(function() {
 				</audio> ');
 	        WDN.jQuery('.audioplayer').append(elem); // put it into the DOM
         }
-        WDN.jQuery('input[id="audio"]').attr('checked', true);
         mediaDetails.showAudio();
         event.preventDefault();
     });
@@ -168,8 +165,6 @@ WDN.jQuery(document).ready(function() {
 	        WDN.jQuery('.audioplayer').append(elem); // put it into the DOM
 	        mediaDetails.showAudio();
         }
-        WDN.jQuery('input[id="audio"]').attr('checked', true);
-       
     });
     WDN.jQuery('a#setImage').click(function(){
     	if (!WDN.jQuery('video')[0]){
