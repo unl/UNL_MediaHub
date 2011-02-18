@@ -1,10 +1,16 @@
 <?php
 $formView = '';
+$mediaType = '';
 if (!isset($context->media)) {
     if (isset($_GET['feed_id'])) { //if we already have a feed, don't show the initial feed list
         $formView .= "//WDN.jQuery('#feedlist').hide();"; 
     }
 } else { //if we have media (we're editing) show the appropriate part of the form
+	if (strncasecmp($context->media->type, 'audio', 5) == 0) {
+		$mediaType = 'audio';
+	} else if (strncasecmp($context->media->type, 'video', 5) == 0) {
+		$mediaType = 'video';
+	}
     $formView .= 'edit';
 }
 
@@ -12,6 +18,7 @@ if (!isset($context->media)) {
 
 $js = '<script type="text/javascript">
         var formView = "'.$formView.'";
+        var mediaType = "'.$mediaType.'";
        </script>
        <script type="text/javascript" src="'.UNL_MediaYak_Controller::getURL().'templates/html/scripts/mediaDetails.js"></script>
        ';

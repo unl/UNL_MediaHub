@@ -61,13 +61,24 @@ var mediaDetails = function() {
 				WDN.jQuery('video').attr('height', calcHeight);
 				WDN.jQuery('video').attr('width', 460);
 				WDN.jQuery('#videoDisplay object').attr('style', 'width:460px;height:'+calcHeight);
-				WDN.jQuery('#thumbnail').attr('src',mediaDetails.imageURL);
+				//WDN.jQuery('#thumbnail').attr('src',thumbURL);
 			};
 			thumbnail.onerror = '';
 			WDN.initializePlugin('videoPlayer');
 		},
 		
 		showAudio : function(){
+			if(WDN.jQuery('.audioplayer').children().length == 0){
+    	        var elem = WDN.jQuery('<audio preload="auto"> \
+    	        		<source src="' + WDN.jQuery("#url").val() + '" type="audio/mpeg"> \
+    					<div class="fallback"> \
+    						<div class="fallback-text"> \
+    							<p>Please use a modern browser or install <a href="http://get.adobe.com/flashplayer/">Flash-Plugin</a></p> \
+    						</div> \
+    					</div> \
+    				</audio> ');
+    	        WDN.jQuery('.audioplayer').append(elem); // put it into the DOM
+            }
 			WDN.initializePlugin('videoPlayer');
 		}
 	};
@@ -79,7 +90,14 @@ WDN.jQuery(document).ready(function() {
         WDN.jQuery("#formDetails, #formDetails form, #formDetails fieldset, #continue3").not("#addMedia").css({"display" : "block"});
         WDN.jQuery(".headline_main").css({"display" : "inline-block"});
         WDN.jQuery("#formDetails").removeClass("two_col right").addClass('four_col left');
-    	mediaDetails.imageURL = mediaDetails.imageURL + escape(WDN.jQuery("#url").val());
+    	if (mediaType == 'audio') {
+    		WDN.jQuery("#headline_main_video").hide();
+    		mediaDetails.showAudio();
+    	} else if (mediaType == 'video') {
+    		mediaDetails.imageURL = mediaDetails.imageURL + escape(WDN.jQuery("#url").val());
+    		WDN.jQuery("#headline_main_audio").hide();
+    		mediaDetails.showVideo();
+    	}
     }
     WDN.jQuery("#videoSubmit").click(function(event) { //called when a user adds video
             unl_check = /^http:\/\/([^\/]+)\.unl\.edu\/(.*)/;
@@ -129,17 +147,6 @@ WDN.jQuery(document).ready(function() {
                 WDN.jQuery(this).css('display', 'inline-block');
             });
         });
-        if(WDN.jQuery('.audioplayer').children().length == 0){
-	        var elem = WDN.jQuery('<audio preload="auto"> \
-	        		<source src="' + WDN.jQuery("#url").val() + '" type="audio/mpeg"> \
-					<div class="fallback"> \
-						<div class="fallback-text"> \
-							<p>Please use a modern browser or install <a href="http://get.adobe.com/flashplayer/">Flash-Plugin</a></p> \
-						</div> \
-					</div> \
-				</audio> ');
-	        WDN.jQuery('.audioplayer').append(elem); // put it into the DOM
-        }
         mediaDetails.showAudio();
         event.preventDefault();
     });
@@ -153,18 +160,7 @@ WDN.jQuery(document).ready(function() {
                 WDN.jQuery(this).css('display', 'inline-block');
             });
         });
-        if(WDN.jQuery('.audioplayer').children().length == 0){
-	        var elem = WDN.jQuery('<audio preload="auto"> \
-	        		<source src="' + WDN.jQuery("#url").val() + '" type="audio/mpeg"> \
-					<div class="fallback"> \
-						<div class="fallback-text"> \
-							<p>Please use a modern browser or install <a href="http://get.adobe.com/flashplayer/">Flash-Plugin</a></p> \
-						</div> \
-					</div> \
-				</audio> ');
-	        WDN.jQuery('.audioplayer').append(elem); // put it into the DOM
-	        mediaDetails.showAudio();
-        }
+        mediaDetails.showAudio();
     });
     WDN.jQuery('a#setImage').click(function(){
     	if (!WDN.jQuery('video')[0]){
