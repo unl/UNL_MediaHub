@@ -19,6 +19,9 @@ class UNL_MediaYak_Router
         }
 
         switch (true) {
+            case preg_match('/^developers\/?$/', $requestURI):
+                $options['view'] = 'dev';
+                break;
             case preg_match('/^search\/(.*)$/', $requestURI, $matches):
                 $options['view'] = 'search';
                 $options['q']    = urldecode($matches[1]);
