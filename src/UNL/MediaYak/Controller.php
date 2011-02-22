@@ -72,7 +72,8 @@ class UNL_MediaYak_Controller
     	'tags'    => 'UNL_MediaYak_MediaList',
         'default' => 'UNL_MediaYak_DefaultHomepage',
         'feeds'   => 'UNL_MediaYak_FeedList',
-        'feed'    => 'UNL_MediaYak_FeedAndMedia'
+        'feed'    => 'UNL_MediaYak_FeedAndMedia',
+        'dev'     => 'UNL_MediaYak_Developers',
         );
     
     /**
@@ -205,6 +206,7 @@ class UNL_MediaYak_Controller
             case 'tags':
             case 'feeds':
             case 'feed':
+            case 'dev':
                 $class = $this->view_map[$this->options['view']];
                 $this->output[] = new $class($this->options);
                 break;
