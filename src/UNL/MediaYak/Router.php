@@ -37,6 +37,15 @@ class UNL_MediaYak_Router
             case preg_match('/^channels\/$/', $requestURI):
                 $options['view'] = 'feeds';
                 break;
+            // Live stream view for a channel
+            case preg_match('/^channels\/(.+)\/live$/', $requestURI, $matches):
+                $options['view'] = 'live';
+                if (preg_match('/^[\d]+$/', $matches[1])) {
+                    $options['feed_id'] = $matches[1];
+                } else {
+                    $options['title'] = urldecode($matches[1]);
+                }
+                break;
             case preg_match('/^channels\/(.+)\/image(\.[\w]+)?$/', $requestURI, $matches):
                 $options['view'] = 'feed_image';
                 if (preg_match('/^[\d]+$/', $matches[1])) {
