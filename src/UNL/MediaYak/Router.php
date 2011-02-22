@@ -4,43 +4,45 @@ class UNL_MediaYak_Router
     public static function getRoute($requestURI)
     {
 
-        $base       = UNL_MediaYak_Controller::getURL();
-        if (filter_var($base, FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED)) {
-            $base = parse_url($base, PHP_URL_PATH);
-        }
-        $quotedBase = preg_quote($base, '/');
-
         if (!empty($_SERVER['QUERY_STRING'])) {
             $requestURI = substr($requestURI, 0, -strlen(urldecode($_SERVER['QUERY_STRING'])) - 1);
         }
 
+        // Trim the base part of the URL
+        $requestURI = substr($requestURI, strlen(parse_url(UNL_MediaYak_Controller::getURL(), PHP_URL_PATH)));
+
         $options = array();
 
-        switch(true) {
-            case preg_match('/'.$quotedBase.'search\/(.*)$/', $requestURI, $matches):
+        if (empty($requestURI)) {
+            // Default view/homepage
+            return $options;
+        }
+
+        switch (true) {
+            case preg_match('/^search\/(.*)$/', $requestURI, $matches):
                 $options['view'] = 'search';
                 $options['q']    = urldecode($matches[1]);
                 break;
-			case preg_match('/'.$quotedBase.'tags\/(.*)$/', $requestURI, $matches):
+			case preg_match('/^tags\/(.*)$/', $requestURI, $matches):
                 $options['view'] = 'tags';
                 $options['t']    = urldecode($matches[1]);
                 break;
-            case preg_match('/'.$quotedBase.'media\/([0-9]+)$/', $requestURI, $matches):
+            case preg_match('/^media\/([0-9]+)$/', $requestURI, $matches):
                 $options['view'] = 'media';
                 $options['id']   = $matches[1];
                 break;
-            case preg_match('/'.$quotedBase.'channels\/$/', $requestURI):
+            case preg_match('/^channels\/$/', $requestURI):
                 $options['view'] = 'feeds';
                 break;
-            case preg_match('/'.$quotedBase.'channels\/(.+)\/image(\.[\w]+)?$/', $requestURI, $matches):
-                $options['view']  = 'feed_image';
+            case preg_match('/^channels\/(.+)\/image(\.[\w]+)?$/', $requestURI, $matches):
+                $options['view'] = 'feed_image';
                 if (preg_match('/^[\d]+$/', $matches[1])) {
                     $options['feed_id'] = $matches[1];
                 } else {
                     $options['title'] = urldecode($matches[1]);
                 }
                 break;
-            case preg_match('/'.$quotedBase.'channels\/(.*)$/', $requestURI, $matches):
+            case preg_match('/^channels\/(.*)$/', $requestURI, $matches):
                 $options['view'] = 'feed';
                 if (preg_match('/^[\d]+$/', $matches[1])) {
                     $options['feed_id'] = $matches[1];
@@ -48,12 +50,8 @@ class UNL_MediaYak_Router
                     $options['title'] = urldecode($matches[1]);
                 }
                 break;
-            // Index page
-            case preg_match('/'.$quotedBase.'$/', $requestURI, $matches):
-                break;
             default:
-                throw new Exception('Unknown route: '.$requestURI);
-                break;
+                throw new Exception('Unknown route: '.$requestURI, 404);
         }
         return $options;
     }
