@@ -9,29 +9,38 @@ UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '
     <li>Live</li>
 </ul>');
 ?>
-<h2><?php echo htmlspecialchars($context->feed->title); ?> Live Streaming</h2>
-<div id="wdn_live_stream"></div>
-<script type='text/javascript'>
-WDN.loadJS('wdn/templates_3.0/scripts/plugins/swfobject/jquery.swfobject.1-1-1.min.js', function(){
-	//Fallback for flash
-	WDN.jQuery('#wdn_live_stream').prepend('<p>To view this video you should download <a href="http://get.adobe.com/flashplayer/">Adobe Flash Player</a> or use a browser that supports H264/WebM video.</p>');
-	
-	WDN.jQuery('#wdn_live_stream').flash(
-		{     
-			swf: WDN.template_path + 'wdn/templates_3.0/includes/swf/player5.4.swf',   
-			allowfullscreen: 'false',
-			allowscriptaccess: 'always',
-			flashvars: {   
-				'file': 'myStream.sdp',   
-				'autostart': 'true',
-				'streamer': 'rtmp://real.unl.edu/live/'
-			},
-			height: '360',
-			width: '640',
-			id: 'jwPlayer',
-			name: 'jwPlayer'
-		}
-	);
-	
-});
-</script>
+<div class="wdn_notice live">
+	<h2><?php echo htmlspecialchars($context->feed->title); ?> Live Streaming</h2>
+	<p>The event began at 10:00 AM CST</p>
+</div>
+<div class="col left">
+	<h4>Title of video</h4>
+	<p>Short description</p>
+</div>
+<div class="three_col right">
+	<div id="wdn_live_stream"></div>
+	<script type='text/javascript'>
+	WDN.loadJS('wdn/templates_3.0/scripts/plugins/swfobject/jquery.swfobject.1-1-1.min.js', function(){
+		//Fallback for flash
+		WDN.jQuery('#wdn_live_stream').prepend('<p>To view this video you should download <a href="http://get.adobe.com/flashplayer/">Adobe Flash Player</a> or use a browser that supports H264/WebM video.</p>');
+		
+		WDN.jQuery('#wdn_live_stream').flash(
+			{     
+				swf: WDN.template_path + 'wdn/templates_3.0/includes/swf/player5.4.swf',   
+				allowfullscreen: 'false',
+				allowscriptaccess: 'always',
+				flashvars: {   
+					'file': 'myStream.sdp',   
+					'autostart': 'true',
+					'streamer': 'rtmp://real.unl.edu/live/'
+				},
+				height: '360',
+				width: '640',
+				id: 'jwPlayer',
+				name: 'jwPlayer'
+			}
+		);
+		
+	});
+	</script>
+</div>
