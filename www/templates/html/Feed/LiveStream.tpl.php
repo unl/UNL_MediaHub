@@ -1,7 +1,13 @@
 <?php
-UNL_MediaYak_Controller::setReplacementData('title', 'UNL | MediaHub | '.htmlspecialchars($context->feed->title). ' | Live');
-UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaYak_Controller::getURL().'">MediaHub</a></li> <li>'.htmlspecialchars($context->feed->title).'</li> <li>Live</li></ul>');
 $feed_url = htmlentities(UNL_MediaYak_Controller::getURL($context->feed), ENT_QUOTES);
+UNL_MediaYak_Controller::setReplacementData('title', 'UNL | MediaHub | '.htmlspecialchars($context->feed->title). ' | Live');
+UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '
+<ul>
+    <li><a href="http://www.unl.edu/">UNL</a></li>
+    <li><a href="'.UNL_MediaYak_Controller::getURL().'">MediaHub</a></li>
+    <li><a href="'.$feed_url.'">'.htmlspecialchars($context->feed->title).'</a></li>
+    <li>Live</li>
+</ul>');
 ?>
 <h2><?php echo htmlspecialchars($context->feed->title); ?> Live Streaming</h2>
 <div id="wdn_live_stream"></div>
