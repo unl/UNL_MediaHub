@@ -1,10 +1,26 @@
 
-<div id="preview"></div>
-<script type='text/javascript' src='http://real.unl.edu/FlashFiles/swfobject1.js'></script>
+<div id="wdn_live_stream"></div>
 <script type='text/javascript'>
-    var s1 = new SWFObject('/wdn/templates_3.0/includes/swf/player5.4.swf','player','585','360','10');
-    s1.addParam('allowfullscreen','true');
-    s1.addParam('allowscriptaccess','always');
-    s1.addParam('flashvars','file=myStream.sdp&streamer=rtmp://real.unl.edu/live/&skin=/workspace/UNL_VideoPlaya/includes/skin/unl_3.0.zip');
-    s1.write('preview');
+WDN.loadJS('wdn/templates_3.0/scripts/plugins/swfobject/jquery.swfobject.1-1-1.min.js', function(){
+	//Fallback for flash
+	WDN.jQuery('#wdn_live_stream').prepend('<p>To view this video you should download <a href="http://get.adobe.com/flashplayer/">Adobe Flash Player</a> or use a browser that supports H264/WebM video.</p>');
+	
+	WDN.jQuery('#wdn_live_stream').flash(
+		{     
+			swf: WDN.template_path + 'wdn/templates_3.0/includes/swf/player5.4.swf',   
+			allowfullscreen: 'false',
+			allowscriptaccess: 'always',
+			flashvars: {   
+				'file': 'myStream.sdp',   
+				'autostart': 'true',
+				'streamer': 'rtmp://real.unl.edu/live/'
+			},
+			height: '360',
+			width: '640',
+			id: 'jwPlayer',
+			name: 'jwPlayer'
+		}
+	);
+	
+});
 </script>
