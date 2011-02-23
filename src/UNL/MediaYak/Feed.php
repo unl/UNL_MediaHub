@@ -180,5 +180,14 @@ class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
         }
         return false;
     }
+
+    public function hasLiveStream()
+    {
+        if ($this->id == 89) {
+            return true;
+        }
+
+        return false;
+    }
     
 }
