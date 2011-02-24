@@ -1,4 +1,9 @@
 <?php
+
+if (!$context->feed->hasLiveStream()) {
+    echo '<h3>This channel is not configured for live streaming events.</h3>';
+}
+
 $feed_url = htmlentities(UNL_MediaYak_Controller::getURL($context->feed), ENT_QUOTES);
 UNL_MediaYak_Controller::setReplacementData('title', 'UNL | MediaHub | '.htmlspecialchars($context->feed->title). ' | Live');
 UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '
@@ -11,12 +16,16 @@ UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '
 ?>
 <div class="wdn_notice live">
 	<h2><?php echo htmlspecialchars($context->feed->title); ?> Live Streaming</h2>
-	<p>The event began at 10:00 AM CST</p>
+	<p>Live streaming events will be broadcasted from this page. Check the schedule below for upcoming event date and times.</p>
 </div>
 <div class="col left">
-	<h4>Title of video</h4>
-	<p>Short description</p>
+	<div id="wdn_calendarDisplay"></div>
 </div>
+<script type="text/javascript">WDN.initializePlugin('events', function(){
+    WDN.events.calURL = 'http://events.unl.edu/livenews/';
+	WDN.events.limit  = 5;
+	WDN.events.initialize();
+	});</script>
 <div class="three_col right">
 	<div id="wdn_live_stream"></div>
 	<script type='text/javascript'>
