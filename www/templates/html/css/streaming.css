@@ -24,6 +24,7 @@ Live Streaming
     border-radius:5px;
     -webkit-border-radius:5px;
     -moz-border-radius:5px;
+    margin-bottom:1.4em;
 }
 #wdn_live_stream_wrapper .liveIndicator {
     color:#fff;
@@ -53,5 +54,7 @@ Live Streaming
 }
 #wdn_live_stream_wrapper p {
     margin-left:68px;
-    
+}
+a.archive {
+	
 }
