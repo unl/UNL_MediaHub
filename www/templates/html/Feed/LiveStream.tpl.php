@@ -18,6 +18,7 @@ UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '
 <h2><?php echo htmlspecialchars($context->feed->title); ?> Live Streaming</h2>
 <div class="col left">
 	<div id="wdn_calendarDisplay"></div>
+	<a href="<?php echo $feed_url;?>">Archived Events</a>
 </div>
 <script type="text/javascript">WDN.initializePlugin('events', function(){
     WDN.events.calURL = 'http://events.unl.edu/livenews/';
@@ -40,9 +41,10 @@ UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '
 					allowfullscreen: 'false',
 					allowscriptaccess: 'always',
 					flashvars: {   
-						'file': 'myStream.sdp',   
+						'file': 'live_3.sdp',   
 						'autostart': 'true',
-						'streamer': 'rtmp://real.unl.edu/live/'
+						'streamer': 'rtmp://real.unl.edu/live_3/',
+						'image': '<?php echo UNL_MediaYak_Controller::getURL();?>templates/html/css/images/innovation_campus.jpg'
 					},
 					height: '358',
 					width: '600',
@@ -53,7 +55,7 @@ UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '
 			
 		});
 		</script>
-		<h4>Title of video</h4>
-		<p>Short description</p>
+		<h4>Major Innovation Campus Announcement</h4>
+		<p>University officials will make a major announcement about Nebraska Innovation Campus at 10 a.m., today in the State Capitol Rotunda.</p>
 	</div>
 </div>
