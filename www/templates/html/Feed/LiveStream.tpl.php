@@ -38,7 +38,7 @@ UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '
 			WDN.jQuery('#wdn_live_stream').flash(
 				{     
 					swf: WDN.template_path + 'wdn/templates_3.0/includes/swf/player5.4.swf',   
-					allowfullscreen: 'false',
+					allowfullscreen: 'true',
 					allowscriptaccess: 'always',
 					flashvars: {   
 						'file': 'live_3.sdp',   
