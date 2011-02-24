@@ -2,6 +2,7 @@
 
 if (!$context->feed->hasLiveStream()) {
     echo '<h3>This channel is not configured for live streaming events.</h3>';
+    return;
 }
 
 $feed_url = htmlentities(UNL_MediaYak_Controller::getURL($context->feed), ENT_QUOTES);
@@ -22,7 +23,8 @@ UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '
     WDN.events.calURL = 'http://events.unl.edu/livenews/';
 	WDN.events.limit  = 5;
 	WDN.events.initialize();
-	});</script>
+	});
+</script>
 <div class="three_col right">
 	<div id="wdn_live_stream_wrapper">
 		<span class="liveIndicator">Live</span>
