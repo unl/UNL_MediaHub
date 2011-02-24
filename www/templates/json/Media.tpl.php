@@ -7,5 +7,5 @@ echo '{ "id":'.$context->id.',
         "image":"'.UNL_MediaYak_Controller::getURL($context).'/image",
         "type":"'.htmlspecialchars($context->type).'",
         "author":"'.htmlspecialchars($context->author).'",
-        "datecreated":"'.$context->datecreated.'",
+        "pubDate":"'.$context->datecreated.'",
         "dateupdated":"'.$context->dateupdated.'"}';
