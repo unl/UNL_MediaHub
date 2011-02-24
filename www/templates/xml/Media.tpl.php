@@ -1,16 +1,11 @@
-<item xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:itunesu="http://www.itunesu.com/feed" xmlns:media="http://search.yahoo.com/mrss/" xmlns:boxee="http://boxee.tv/spec/rss/">
+<item>
   <title><?php echo htmlspecialchars($context->title); ?></title>
   <link><?php echo htmlspecialchars($context->url); ?></link>
   <description><![CDATA[
   <?php echo $context->description; ?>
   ]]></description>
   <guid><?php echo htmlspecialchars($context->url); ?></guid>
-  <id><?php echo $context->id; ?></id>
-  <author><?php echo htmlspecialchars($context->author); ?></author>
-  <length><?php echo $context->length; ?></length>
-  <type><?php echo htmlspecialchars($context->type); ?></type>
-  <pubDate><?php echo $context->datecreated; ?></pubDate>
-  <dateupdated><?php echo $context->dateupdated; ?></dateupdated>
+  <pubDate><?php echo date('r', strtotime($context->datecreated)); ?></pubDate>
   <?php
     try {
         foreach (array('UNL_MediaYak_Feed_Media_NamespacedElements_itunesu',
