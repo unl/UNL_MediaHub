@@ -15,7 +15,8 @@ if (!$context->output instanceof UNL_MediaYak_FeedAndMedia) {
     $page->head .= '<link rel="alternate" type="application/rss+xml" title="UNL MediaHub" href="?format=xml" />';
 }
 
-$page->maincontentarea = $savvy->render($context->output);
+$page->maincontentarea = '<div id="wdn_app_search"><form method="get" action="'.UNL_MediaYak_Controller::getURL().'search/"><label for="q_app">Search MediaHub</label><input id="q_app" name="q" type="text" /><input type="submit" class="search_submit_button" value="Go"></form></div>';
+$page->maincontentarea .= $savvy->render($context->output);
 
 $page->navlinks        = '
 <ul>
