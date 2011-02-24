@@ -1,5 +1,4 @@
 
-      6 /mediahub/channels/Football+Physics
+      6 /mediahub/channels/UNL+News
       5 /mediahub/channels/Frame+By+Frame
-      4 /mediahub/channels/N+The+Know
       2 /mediahub/channels/Put+Yourself+on+the+Map
