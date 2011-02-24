@@ -1,11 +1,11 @@
 <?php
 echo '{ "id":'.$context->id.',
-        "url":"'.$context->url.'",
-        "title":"'.$context->title.'",
+        "url":"'.htmlspecialchars($context->url).'",
+        "title":"'.htmlspecialchars($context->title).'",
         "description":"'.trim(strip_tags($context->description)).'",
         "length":'.$context->length.',
         "image":"'.UNL_MediaYak_Controller::getURL($context).'/image",
-        "type":"'.$context->type.'",
-        "author":"'.$context->author.'",
+        "type":"'.htmlspecialchars($context->type).'",
+        "author":"'.htmlspecialchars($context->author).'",
         "datecreated":"'.$context->datecreated.'",
         "dateupdated":"'.$context->dateupdated.'"}';
