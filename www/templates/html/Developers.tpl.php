@@ -16,6 +16,11 @@
          border-left: #F0F0F0 5px solid;
          margin-bottom: 20px;
     }
+    a.resources 
+    {
+        float:right;
+        font-size:12px
+    }
 </style>
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
@@ -34,7 +39,7 @@
 
 <div class="three_col left">
     <div class="resource">
-        <h1 id="instance" class="sec_main">Media Instance Resource</h1>
+        <h1 id="instance" class="sec_main">Media Instance Resource <a href='#resources' class='resources'>Go to the list of resources.</a></h1>
         <h3>Details</h3>
         <ul>
             <li>
@@ -238,7 +243,7 @@
     </div>
 
     <div class="resource">
-        <h1 id="channels" class="sec_main">Channel Resource</h1>
+        <h1 id="channels" class="sec_main">Channel Resource <a href='#resources' class='resources'>Go to the list of resources.</a></h1>
         <h3>Details</h3>
         <ul>
             <li>
@@ -436,7 +441,7 @@
     </div>
 
     <div class="resource">
-        <h1 id="tags" class="sec_main">Tags Resource</h1>
+        <h1 id="tags" class="sec_main">Tags Resource <a href='#resources' class='resources'>Go to the list of resources.</a></h1>
         <h3>Details</h3>
         <ul>
             <li>
@@ -544,7 +549,7 @@
     </div>
     
         <div class="resource">
-        <h1 id="search" class="sec_main">Search Resource</h1>
+        <h1 id="search" class="sec_main">Search Resource <a href='#resources' class='resources'>Go to the list of resources.</a></h1>
         <h3>Details</h3>
         <ul>
             <li>
@@ -652,7 +657,7 @@
     </div>
 </div>
 <div class="col right">
-    <div class="zenbox primary" style="width:200px">
+    <div id='resources' class="zenbox primary" style="width:200px">
         <h3>MediaHub API</h3>
         <p>The following is a list of resources for MediaHub.</p>
         <ul>
