@@ -211,12 +211,6 @@
                 <thead><tr><th>Property</th><th>Description</th><th>JSON</th><th>XML</th></tr></thead>
                   <tbody>
                    <tr>
-                    <td>id</td>
-                    <td>int: A numerical id for the channel. </td>
-                    <td>no</td>
-                    <td>yes</td>
-                   </tr>
-                   <tr>
                     <td>title</td>
                     <td>Text: The Title of the channel</td>
                     <td>no</td>
