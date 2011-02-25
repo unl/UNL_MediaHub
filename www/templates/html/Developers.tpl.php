@@ -253,22 +253,46 @@
                 <thead><tr><th>Property</th><th>Description</th><th>JSON</th><th>XML</th></tr></thead>
                   <tbody>
                    <tr>
+                    <td>id</td>
+                    <td>Int: The id of the selected channel</td>
+                    <td>yes</td>
+                    <td>no</td>
+                   </tr>
+                   <tr>
                     <td>title</td>
                     <td>Text: The Title of the channel</td>
-                    <td>no</td>
+                    <td>yes</td>
                     <td>yes</td>
                    </tr>
                    <tr>
                     <td>link</td>
                     <td>URL: The URL to the channel</td>
-                    <td>no</td>
+                    <td>yes</td>
                     <td>yes</td>
                    </tr>
                    <tr>
                     <td>description</td>
                     <td>Text: The descripton of the channel.</td>
-                    <td>no</td>
                     <td>yes</td>
+                    <td>yes</td>
+                   </tr>
+                   <tr>
+                    <td>image</td>
+                    <td>URL: The URL to the image for the channel</td>
+                    <td>yes</td>
+                    <td>no</td>
+                   </tr>
+                   <tr>
+                    <td>pubDate</td>
+                    <td>Date: The date that the channel was published.</td>
+                    <td>yes</td>
+                    <td>no</td>
+                   </tr>
+                   <tr>
+                    <td>uidcreated</td>
+                    <td>Text: The UID of the user who created the channel</td>
+                    <td>yes</td>
+                    <td>no</td>
                    </tr>
                    <tr>
                     <td>language</td>
