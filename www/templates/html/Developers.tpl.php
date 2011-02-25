@@ -52,11 +52,17 @@
                     <td>id</td>
                     <td>int: A numerical id for the media. </td>
                     <td>yes</td>
-                    <td>yes</td>
+                    <td>no</td>
                    </tr>
                    <tr>
                     <td>url</td>
                     <td>URL: A url to the actual media file.</td>
+                    <td>yes</td>
+                    <td>no</td>
+                   </tr>
+                   <tr>
+                    <td>link</td>
+                    <td>URL: The url to the media file on Media Hub.</td>
                     <td>yes</td>
                     <td>yes</td>
                    </tr>
@@ -76,25 +82,25 @@
                     <td>length</td>
                     <td>Int: The size of the media file in bytes.</td>
                     <td>yes</td>
-                    <td>yes</td>
+                    <td>no</td>
                    </tr>
                    <tr>
                     <td>image</td>
                     <td>URL: A url to the image of the media.</td>
                     <td>yes</td>
-                    <td>yes</td>
+                    <td>no</td>
                    </tr>
                    <tr>
                     <td>type</td>
                     <td>Text: The type of media.</td>
                     <td>yes</td>
-                    <td>yes</td>
+                    <td>no</td>
                    </tr>
                    <tr>
                     <td>author</td>
                     <td>Text: The author of the media.</td>
                     <td>yes</td>
-                    <td>yes</td>
+                    <td>no</td>
                    </tr>
                    <tr>
                     <td>pubDate</td>
@@ -106,6 +112,42 @@
                     <td>dateupdated</td>
                     <td>Date: The date the media was last updated. YYYY-MM-DD HH:MM:SS.</td>
                     <td>yes</td>
+                    <td>no</td>
+                   </tr>
+                   <tr>
+                    <td>lastBuildDate</td>
+                    <td>Date: The date and time that the feed was last built.</td>
+                    <td>no</td>
+                    <td>yes</td>
+                   </tr>
+                   <tr>
+                    <td>docs</td>
+                    <td>URL: Link to RSS specification</td>
+                    <td>no</td>
+                    <td>yes</td>
+                   </tr>
+                   <tr>
+                    <td>generator</td>
+                    <td>Text: Name and version of the generator used to generate the channel.</td>
+                    <td>no</td>
+                    <td>yes</td>
+                   </tr>
+                   <tr>
+                    <td>managingEditor</td>
+                    <td>Text: Details about the managing Editor.</td>
+                    <td>no</td>
+                    <td>yes</td>
+                   </tr>
+                   <tr>
+                    <td>webMaster</td>
+                    <td>Text: Details about the webmaster.</td>
+                    <td>no</td>
+                    <td>yes</td>
+                   </tr>
+                   <tr>
+                    <td>ttl</td>
+                    <td>Int: The maximum number of minutes the chanel has to live before referesing from the source.</td>
+                    <td>no</td>
                     <td>yes</td>
                    </tr>
                   </tbody>
