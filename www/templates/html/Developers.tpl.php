@@ -344,7 +344,7 @@
                    </tr>
                    <tr>
                     <td>{media}</td>
-                    <td>A lit of the <a href="#instance">media instances</a> in the channel. </td>
+                    <td>A list of the <a href="#instance">media instances</a> in the channel. </td>
                     <td>yes</td>
                     <td>yes</td>
                    </tr>
@@ -452,7 +452,7 @@
                   <tbody>
                    <tr>
                     <td>{results}</td>
-                    <td>A lit of the <a href="#instance">media instances</a> that were found for the query tag. </td>
+                    <td>A list of the <a href="#instance">media instances</a> that were found for the query tag. </td>
                     <td>yes</td>
                     <td>yes</td>
                    </tr>
@@ -560,7 +560,7 @@
                   <tbody>
                    <tr>
                     <td>{results}</td>
-                    <td>A lit of the <a href="#instance">media instances</a> that were found for the search term. </td>
+                    <td>A list of the <a href="#instance">media instances</a> that were found for the search term. </td>
                     <td>yes</td>
                     <td>yes</td>
                    </tr>
