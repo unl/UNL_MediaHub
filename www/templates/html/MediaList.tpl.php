@@ -87,6 +87,6 @@ if (count($context->items)) {
         <?php echo $pager_links; ?>
 <?php
 } else {
-    echo '<p>Sorry, no media could be found</p>';
+    echo "<div style='width:940px'><p>Sorry, no media could be found</p></div>";
 }
 ?>
