@@ -13,7 +13,7 @@
     }
     
     div.resource {
-         border-left: #F0F0F0 5px solid;
+         border-bottom: #F0F0F0 5px solid;
          margin-bottom: 20px;
     }
     a.resources 
