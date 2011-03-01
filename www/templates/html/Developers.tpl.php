@@ -32,7 +32,8 @@
     }
 </style>
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+<script type="text/javascript">jQuery = $ = WDN.jQuery;</script>
+
 <script type="text/javascript" src="templates/html/scripts/jquery.beautyOfCode.js"></script>
 
 <script type="text/javascript">
