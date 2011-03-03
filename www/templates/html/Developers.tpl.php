@@ -113,9 +113,20 @@
                                     if (!$result = file_get_contents($resource->exampleURI."?format=$format")) {
                                         $result = "Error getting file contents.";
                                     }
+                                    
+                                    switch($format) {
+                                        case "json":
+                                            $code = 'javascript';
+                                            break;
+                                        case "xml":
+                                            $code = "xml";
+                                            break;
+                                        default:
+                                            $code = "html";
+                                    }
                                     ?>
                                     <pre class="code">
-                                        <code class="javascript"><?php echo htmlentities($result); ?></code>
+                                        <code class="<?php echo $code; ?>"><?php echo htmlentities($result); ?></code>
                                     </pre>
                                 </li>
                             </ul>
