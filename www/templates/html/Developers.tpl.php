@@ -40,6 +40,7 @@
     $.beautyOfCode.init({
         theme: "RDark",
         brushes: ['Xml', 'JScript', 'CSharp', 'Plain', 'Php'],
+        defaults: {'wrap-lines':false},
         ready: function() {
             $.beautyOfCode.beautifyAll();
 
