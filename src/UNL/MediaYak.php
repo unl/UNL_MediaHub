@@ -23,7 +23,7 @@ class UNL_MediaYak
 
     public static function registerAutoloaders()
     {
-        include_once 'Doctrine/lib/Doctrine.php';
+        include_once 'Doctrine.php';
 
         spl_autoload_register(array('Doctrine', 'autoload'));
         spl_autoload_register(array(__CLASS__, 'loader'));
