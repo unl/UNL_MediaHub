@@ -72,6 +72,15 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
                         }
                     }
                     break;
+                case 'itunes:owner':
+                    // We were only collecting one value before, fake it to fix validation
+                    echo '
+    <itunes:owner>
+        <itunes:name>'.htmlspecialchars($namespaced_element['value']).'</itunes:name>
+        <itunes:email>unlwdn@gmail.com</itunes:email>
+    </itunes:owner>
+                    ';
+                    break;
                 default:
                     $attribute_string = '';
                     if (!empty($namespaced_element['attributes'])) {
