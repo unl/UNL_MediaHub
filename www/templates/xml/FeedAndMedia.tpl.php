@@ -48,8 +48,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
                    'UNL_MediaYak_Feed_NamespacedElements_boxee') as $ns_class) {
         foreach ($context->feed->$ns_class as $namespaced_element) {
             $element = "{$namespaced_element['xmlns']}:{$namespaced_element['element']}";
-            if ($namespaced_element['xmlns'] == 'itunes'
-                && $namespaced_element['element'] == 'category') {
+            if ($element == 'itunes:category') {
                 // Handle this field special
                 if (!empty($namespaced_element['attributes'])
                     && isset($namespaced_element['attributes']['text'])) {
