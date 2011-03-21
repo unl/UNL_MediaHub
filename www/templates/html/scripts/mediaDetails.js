@@ -42,9 +42,10 @@ var mediaDetails = function() {
 		},
 		
 		formatTime : function(totalSec) { //time is coming in milliseconds
+		    WDN.log(totalSec);
 			hours = parseInt( totalSec / 3600 ) % 24;
 			minutes = parseInt( totalSec / 60 ) % 60;
-			seconds = Math.round((totalSec % 60)*100)/100;
+			seconds = Math.round(((totalSec % 60)*100)/100);
 
 			return ((hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds  < 10 ? "0" + seconds : seconds));
 		},
