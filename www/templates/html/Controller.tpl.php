@@ -49,6 +49,14 @@ Lincoln, NE 68588<br />
 $page->footercontent = '&copy; '.date('Y').' University of Nebraska&mdash;Lincoln | Lincoln, NE 68588 | 402-472-7211 | <a href="http://www1.unl.edu/comments/" title="Click here to direct your comments and questions">comments?</a><br />
 The UNL Office of University Communications maintains this database of online media.<br />
     If there are additional functions that would be of interest to you, please
-    <a href="http://www1.unl.edu/comments/">send us a comment</a>.';
+    <a href="http://www1.unl.edu/comments/">send us a comment</a>.
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push([\'_setAccount\', \'UA-22295578-1\']);
+_gaq.push([\'_setDomainName\', \'.unl.edu\']);
+_gaq.push([\'_setAllowLinker\', true]);
+_gaq.push([\'_setAllowHash\', false]);
+_gaq.push([\'_trackPageview\']);
+</script>';
 $page->leftRandomPromo = '';
 echo $page;
