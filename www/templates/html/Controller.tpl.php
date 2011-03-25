@@ -36,6 +36,7 @@ $page->navlinks .='
 $page->leftcollinks = '
 <h3>Related Links</h3>
 <ul>
+    <li><a href="'.UNL_MediaYak_Controller::getURL().'developers" title="Documentation for developers that want to use MediaHub">Developer Documentation</a></li>
     <li><a href="http://itunes.unl.edu/">UNL On iTunes U</a></li>
 </ul>
 ';
