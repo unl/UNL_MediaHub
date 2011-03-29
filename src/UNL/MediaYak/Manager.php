@@ -193,15 +193,16 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
     function showFeed()
     {
         $feed = UNL_MediaYak_Feed::getById($_GET['id']);
-        if ($feed && $feed->userHasPermission(self::$user, UNL_MediaYak_Permission::getByID(
-                                                    UNL_MediaYak_Permission::USER_CAN_INSERT))){
-            $this->output[] = $feed;
-            
-            $filter = new UNL_MediaYak_MediaList_Filter_ByFeed($feed);
-            $this->showMedia($filter);
-        } else {
+        if (!($feed && $feed->userHasPermission(self::$user, UNL_MediaYak_Permission::getByID(
+                                                    UNL_MediaYak_Permission::USER_CAN_INSERT)))) {
             throw new Exception('You do not have permission for this feed.');
         }
+
+        $this->output[] = $feed;
+
+        $filter = new UNL_MediaYak_MediaList_Filter_ByFeed($feed);
+        $this->showMedia($filter);
+
     }
     
     /**
