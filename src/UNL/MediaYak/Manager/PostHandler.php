@@ -37,7 +37,7 @@ class UNL_MediaYak_Manager_PostHandler
                 $feed->save();
             } else {
                 // Add a new feed for this user.
-                $feed = UNL_MediaYak_Feed::addFeed($this->post, self::getUser());
+                $feed = UNL_MediaYak_Feed::addFeed($this->post, UNL_MediaYak_Manager::getUser());
             }
             $this->redirect('?view=feed&id='.$feed->id);
             break;
@@ -66,7 +66,7 @@ class UNL_MediaYak_Manager_PostHandler
                 }
                 foreach ($feed_ids as $feed_id) {
                     $feed = UNL_MediaYak_Feed::getById($feed_id);
-                    if (!$feed->userHasPermission(self::getUser(),
+                    if (!$feed->userHasPermission(UNL_MediaYak_Manager::getUser(),
                                                   UNL_MediaYak_Permission::getByID(
                                                     UNL_MediaYak_Permission::USER_CAN_INSERT))) {
                         throw new Exception('You do not have permission to do this.');
@@ -78,7 +78,7 @@ class UNL_MediaYak_Manager_PostHandler
             if (!empty($this->post['new_feed'])) {
                 $data = array('title'       => $this->post['new_feed'],
                               'description' => $this->post['new_feed']);
-                $feed = UNL_MediaYak_Feed::addFeed($data, self::getUser());
+                $feed = UNL_MediaYak_Feed::addFeed($data, UNL_MediaYak_Manager::getUser());
                 $feed->addMedia($media);
             }
             
@@ -90,7 +90,7 @@ class UNL_MediaYak_Manager_PostHandler
             break;
         case 'feed_users':
             $feed = UNL_MediaYak_Feed::getById($this->post['feed_id']);
-            if (!$feed->userHasPermission(self::getUser(),
+            if (!$feed->userHasPermission(UNL_MediaYak_Manager::getUser(),
                                           UNL_MediaYak_Permission::getByID(
                                             UNL_MediaYak_Permission::USER_CAN_ADD_USER))) {
                 throw new Exception('You do not have permission to add a user.');
@@ -108,8 +108,9 @@ class UNL_MediaYak_Manager_PostHandler
             $feed = UNL_MediaYak_Feed::getById($this->post['feed_id']);
             $media = UNL_MediaYak_Media::getById($this->post['media_id']);
             if ($feed->hasMedia($media)
-                && $feed->userHasPermission(self::getUser(), UNL_MediaYak_Permission::getByID(
-                                            UNL_MediaYak_Permission::USER_CAN_DELETE))) {
+                && $feed->userHasPermission(UNL_MediaYak_Manager::getUser(),
+                                            UNL_MediaYak_Permission::getByID(
+                                                UNL_MediaYak_Permission::USER_CAN_DELETE))) {
                 $media->delete();
             }
             $this->redirect('?view=feed&id='.$feed->id);
