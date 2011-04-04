@@ -1,7 +1,15 @@
 <?php
 require_once 'UNL/Templates.php';
 UNL_Templates::$options['version'] = 3;
-$page = UNL_Templates::factory('Fixed');
+
+$template = 'Fixed';
+
+if ($context->options['mobile']) {
+    $template = 'Mobile';
+}
+
+$page = UNL_Templates::factory($template);
+
 if (isset($GLOBALS['UNLTEMPLATEDEPENDENTSPATH'])) {
     UNL_Templates::$options['templatedependentspath'] = $GLOBALS['UNLTEMPLATEDEPENDENTSPATH'];
 }
