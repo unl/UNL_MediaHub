@@ -377,7 +377,7 @@ UNL_MediaYak_Manager::setReplacementData('head', $js);
             </li>
             <li style="display:none;">
                 <!-- mrss hidden elements that are handled automatically -->
-                <input name="UNL_MediaYak_Feed_Media_NamespacedElements_media[6][media_id]" type="hidden" value="<?php echo $context->media->id; ?>"/>
+                <input name="UNL_MediaYak_Feed_Media_NamespacedElements_media[6][media_id]" type="hidden" value="<?php echo getFieldValue($context, 'media', 'id'); ?>"/>
                 <input name="UNL_MediaYak_Feed_Media_NamespacedElements_media[6][element]" type="hidden" value="thumbnail"/>
                 <input name="UNL_MediaYak_Feed_Media_NamespacedElements_media[6][value]" type="hidden" value="<?php echo getFieldValue($context, 'media', 'thumbnail'); ?>" />
                 <input name="UNL_MediaYak_Feed_Media_NamespacedElements_media[6][attributes]" type="hidden" value="<?php echo getFieldAttributes($context, 'media', 'thumbnail'); ?>" />
