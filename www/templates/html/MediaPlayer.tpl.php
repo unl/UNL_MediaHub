@@ -8,7 +8,7 @@ if ($inForm) {
 	if ($context == 'videoDisplay') { ?>
 		<video height="" width="" src="" controls >	 
              <object type="application/x-shockwave-flash" data="/wdn/templates_3.0/includes/swf/player4.3.swf">	 
-                 <param name="movie" value="/wdn/templates_3.0/includes/swf/player4.3" />	 
+                 <param name="movie" value="/wdn/templates_3.0/includes/swf/player4.3.swf" />	 
                  <param name="allowfullscreen" value="true" />	 
                  <param name="allowscriptaccess" value="always" />	 
                  <param name="wmode" value="transparent" />	 
@@ -34,7 +34,7 @@ if ($inForm) {
 	?>
 	<video height="<?php echo $height; ?>" width="<?php echo $width; ?>" autoplay src="<?php echo $context->url?>" controls poster="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.($context->url)?>">
 	    <object type="application/x-shockwave-flash" style="width:<?php echo $width; ?>px;height:<?php echo $height; ?>px" data="/wdn/templates_3.0/includes/swf/player4.3.swf">
-	        <param name="movie" value="/wdn/templates_3.0/includes/swf/player4.3" />
+	        <param name="movie" value="/wdn/templates_3.0/includes/swf/player4.3.swf" />
 	        <param name="allowfullscreen" value="true" />
 	        <param name="allowscriptaccess" value="always" />
 	        <param name="wmode" value="transparent" />
