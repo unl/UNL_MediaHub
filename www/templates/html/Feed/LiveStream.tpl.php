@@ -55,7 +55,9 @@ UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '
 			
 		});
 		</script>
+<!--
 		<h4>Major Innovation Campus Announcement</h4>
 		<p>University officials will make a major announcement about Nebraska Innovation Campus at 10 a.m., today in the State Capitol Rotunda.</p>
+-->
 	</div>
 </div>
