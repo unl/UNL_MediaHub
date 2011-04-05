@@ -212,6 +212,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
     function handlePost()
     {
         $handler = new UNL_MediaYak_Manager_PostHandler($this->options, $_POST, $_FILES);
+        $handler->setMediaYak($this->mediayak);
         return $handler->handle();
     }
     

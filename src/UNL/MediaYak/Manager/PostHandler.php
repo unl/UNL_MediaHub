@@ -4,7 +4,8 @@ class UNL_MediaYak_Manager_PostHandler
     public $options = array();
     public $post    = array();
     public $files   = array();
-    
+    public $mediayak;
+
     function __construct($options = array(),
                          $post    = array(),
                          $files   = array())
@@ -12,6 +13,11 @@ class UNL_MediaYak_Manager_PostHandler
         $this->options = $options;
         $this->post    = $post;
         $this->files   = $files;
+    }
+
+    function setMediaYak(UNL_MediaYak $mediayak)
+    {
+        $this->mediayak = $mediayak;
     }
 
     function handle()
