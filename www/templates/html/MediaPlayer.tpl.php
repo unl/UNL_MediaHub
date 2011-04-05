@@ -46,15 +46,7 @@ if ($inForm) {
 	?>
 	<div class="audioplayer"> 
 	    <audio preload="auto"> 
-	        <source src="<?php echo $context->url?>" type="audio/mpeg"> 
-	        <div class="fallback"> 
-	            <div class="fallback-text"> 
-	                <p>Please use a modern browser or install <a href="http://get.adobe.com/flashplayer/">Flash-Plugin</a></p> 
-	                <ul> 
-	                    <li><a class="source" href="<?php echo $context->url?>"><?php echo $context->url?></a></li> 
-	                </ul> 
-	            </div> 
-	        </div> 
+	        <source src="<?php echo $context->url?>" type="audio/mpeg" /> 
 	    </audio>
 	    <span class="title"><?php echo $context->title; ?></span>
 	</div>
