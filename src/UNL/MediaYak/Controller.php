@@ -249,6 +249,8 @@ class UNL_MediaYak_Controller
                 $class = $this->view_map[$this->options['view']];
                 $this->output[] = new $class($this->options);
                 break;
+            default:
+            	throw new Exception('Unknown view', 404);
             }
         } catch(Exception $e) {
             $this->output[] = $e;
