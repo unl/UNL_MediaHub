@@ -25,6 +25,7 @@ var mediaDetails = function() {
 		},
 		
 		updateThumbnail : function(currentTime) {
+			console.log('updating thumbnail');
 			WDN.jQuery('#imageOverlay').css({'height' : WDN.jQuery("#thumbnail").height()-20 +'px' ,'width' : WDN.jQuery("#thumbnail").width()-60 +'px' }).show();
 			var newThumbnail = new Image();
 			newThumbnail.src = mediaDetails.imageURL + '&time='+mediaDetails.formatTime(currentTime)+'&rebuild';
@@ -37,8 +38,7 @@ var mediaDetails = function() {
 		},
 		
 		currentPostion : function(video) {
-			currentTime = mediaDetails.formatTime(video.currentTime);
-			return currentTime;
+			return mediaDetails.formatTime(video.currentTime);
 		},
 		
 		formatTime : function(totalSec) { //time is coming in milliseconds
@@ -56,7 +56,7 @@ var mediaDetails = function() {
 			WDN.jQuery('#videoDisplay param[name=flashvars]').attr('value','file='+WDN.jQuery("#url").val()+'&amp;image='+thumbURL+'&amp;volume=100&amp;controlbar=over&amp;autostart=false&amp;skin=/wdn/templates_3.0/includes/swf/UNLVideoSkin.swf');
 			//use the thumbnail generated to determine width and height
 			var thumbnail = new Image();
-			thumbnail.src = thumbURL+'&time='+mediaDetails.formatTime(0)+'&rebuild';
+			thumbnail.src = thumbURL+'&time='+mediaDetails.formatTime(0);
 			thumbnail.onload = function(){
 				calcHeight = (this.height * 460)/this.width;
 				WDN.jQuery('video').attr('height', calcHeight);
@@ -164,6 +164,8 @@ WDN.jQuery(document).ready(function() {
         mediaDetails.showAudio();
     });
     WDN.jQuery('a#setImage').click(function(){
+    	console.log('setImage clicked');
+    	var currentTime;
     	if (!WDN.jQuery('video')[0]){
     		currentTime = WDN.videoPlayer.createFallback.getCurrentInfo("position") + .01;
     	} else {
