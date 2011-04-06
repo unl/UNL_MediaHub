@@ -63,7 +63,7 @@ class UNL_MediaYak_Router
                 }
                 break;
             default:
-                throw new Exception('Unknown route: '.$requestURI, 404);
+                $options['view'] = 'unknown';
         }
         return $options;
     }
