@@ -32,7 +32,7 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
     public static $url;
     
     /**
-     * MediaYak
+     * MediaHub
      *
      * @var UNL_MediaHub
      */
@@ -212,7 +212,7 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
     function handlePost()
     {
         $handler = new UNL_MediaHub_Manager_PostHandler($this->options, $_POST, $_FILES);
-        $handler->setMediaYak($this->mediahub);
+        $handler->setMediaHub($this->mediahub);
         return $handler->handle();
     }
     

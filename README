@@ -1,4 +1,4 @@
-UNL MediaYak system running at http://mediahub.unl.edu/
+UNL MediaHub system running at http://mediahub.unl.edu/
 
 cp config.sample.php config.inc.php
 cp sample.htaccess .htaccess
