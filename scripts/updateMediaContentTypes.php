@@ -2,7 +2,7 @@
 require_once 'UNL/Autoload.php';
 require_once dirname(__FILE__).'/../config.inc.php';
 
-$mediayak = new UNL_MediaHub($dsn);
+$mediahub = new UNL_MediaHub($dsn);
 
 $options = array('filter' => new UNL_MediaHub_MediaList_Filter_NoContentType(),
                  'limit'  => 100);

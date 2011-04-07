@@ -30,7 +30,7 @@ function exec_sql($db, $sql, $message, $fail_ok = false)
 	}
 	echo 'finished.<br />';
 }
-exec_sql($db, file_get_contents(dirname(__FILE__).'/data/mediayak.sql'), 'Initializing database structure');
+exec_sql($db, file_get_contents(dirname(__FILE__).'/data/mediahub.sql'), 'Initializing database structure');
 exec_sql($db, file_get_contents(dirname(__FILE__).'/data/add_dateupdated.sql'), 'Add date updated', true);
 exec_sql($db, file_get_contents(dirname(__FILE__).'/data/add_feed_image.sql'), 'Adding feed image support', true);
 exec_sql($db, file_get_contents(dirname(__FILE__).'/data/add_featured_feed_fields.sql'), 'Adding featured feeds support', true);

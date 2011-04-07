@@ -3,7 +3,7 @@ require_once 'UNL/Autoload.php';
 require_once dirname(__FILE__).'/../config.inc.php';
 
 // Set up system with DSN
-$mediayak = new UNL_MediaHub($dsn);
+$mediahub = new UNL_MediaHub($dsn);
 
 $filter = null;
 if (isset($_SERVER['argv'],$_SERVER['argv'][1])) {

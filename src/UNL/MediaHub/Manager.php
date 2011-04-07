@@ -36,11 +36,11 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
      *
      * @var UNL_MediaHub
      */
-    protected $mediayak;
+    protected $mediahub;
     
     function __construct($options = array(), $dsn)
     {
-        $this->mediayak = new UNL_MediaHub($dsn);
+        $this->mediahub = new UNL_MediaHub($dsn);
         
         $this->auth = UNL_Auth::factory('SimpleCAS');
         $this->auth->login();
@@ -212,7 +212,7 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
     function handlePost()
     {
         $handler = new UNL_MediaHub_Manager_PostHandler($this->options, $_POST, $_FILES);
-        $handler->setMediaYak($this->mediayak);
+        $handler->setMediaYak($this->mediahub);
         return $handler->handle();
     }
     

@@ -4,7 +4,7 @@ class UNL_MediaHub_Manager_PostHandler
     public $options = array();
     public $post    = array();
     public $files   = array();
-    public $mediayak;
+    public $mediahub;
 
     function __construct($options = array(),
                          $post    = array(),
@@ -15,9 +15,9 @@ class UNL_MediaHub_Manager_PostHandler
         $this->files   = $files;
     }
 
-    function setMediaYak(UNL_MediaHub $mediayak)
+    function setMediaYak(UNL_MediaHub $mediahub)
     {
-        $this->mediayak = $mediayak;
+        $this->mediahub = $mediahub;
     }
 
     function handle()
@@ -59,7 +59,7 @@ class UNL_MediaHub_Manager_PostHandler
                 $details = array('url'        => $this->post['url'],
                                  'title'      => $this->post['title'],
                                  'description'=> $this->post['description']);
-                $media = $this->mediayak->addMedia($details);
+                $media = $this->mediahub->addMedia($details);
                 $media->synchronizeWithArray($this->post);
                 $media->save();
             }

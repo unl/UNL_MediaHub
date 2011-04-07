@@ -84,7 +84,7 @@ class UNL_MediaHub_Controller
      *
      * @var UNL_MediaHub
      */
-    protected $mediayak;
+    protected $mediahub;
     
     /**
      * Construct a new controller.
@@ -94,7 +94,7 @@ class UNL_MediaHub_Controller
     function __construct($options, $dsn)
     {
         // Set up database
-        $this->mediayak = new UNL_MediaHub($dsn);
+        $this->mediahub = new UNL_MediaHub($dsn);
         
         // Initialize default options
         $this->options = $options + $this->options;
