@@ -5,7 +5,7 @@
             <li>
                 <h4 id="instance-uri"><a href="#instance-uri">Resource URI</a></h4>
                 <blockquote>
-                    <p><?php echo UNL_MediaYak_Controller::$url; ?>media/{id}</p>
+                    <p><?php echo UNL_MediaHub_Controller::$url; ?>media/{id}</p>
                 </blockquote>
             </li>
             <li>
@@ -143,7 +143,7 @@
                                 Provides this:
                                 <?php 
                                 //Get the output.
-                                if (!$result = file_get_contents(UNL_MediaYak_Controller::$url."media/1?format=json")) {
+                                if (!$result = file_get_contents(UNL_MediaHub_Controller::$url."media/1?format=json")) {
                                     $result = "Error getting file contents.";
                                 }
                                 ?>
@@ -165,7 +165,7 @@
                                 Provides this:
                                 <?php 
                                 //Get the output.
-                                if (!$result = file_get_contents(UNL_MediaYak_Controller::$url."media/1?format=xml")) {
+                                if (!$result = file_get_contents(UNL_MediaHub_Controller::$url."media/1?format=xml")) {
                                     $result = "Error getting file contents.";
                                 }
                                 ?>
@@ -187,7 +187,7 @@
                                 Provides this:
                                 <?php 
                                 //Get the output.
-                                if (!$partial = file_get_contents(UNL_MediaYak_Controller::$url."media/1?format=partial")) {
+                                if (!$partial = file_get_contents(UNL_MediaHub_Controller::$url."media/1?format=partial")) {
                                     $partial = "Error getting file contents.";
                                 }
                                 ?>

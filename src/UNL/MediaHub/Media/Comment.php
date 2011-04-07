@@ -1,5 +1,5 @@
 <?php
-class UNL_MediaYak_Media_Comment extends UNL_MediaYak_Models_BaseMediaComment
+class UNL_MediaHub_Media_Comment extends UNL_MediaHub_Models_BaseMediaComment
 {
 
 

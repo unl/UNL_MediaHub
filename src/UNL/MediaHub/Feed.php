@@ -4,7 +4,7 @@
  * 
  * @author bbieber
  */
-class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
+class UNL_MediaHub_Feed extends UNL_MediaHub_Models_BaseFeed
 {
     protected $namespaces = array();
     
@@ -13,7 +13,7 @@ class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
      *
      * @param int $id The id of the feed to get
      *
-     * @return UNL_MediaYak_Feed
+     * @return UNL_MediaHub_Feed
      */
     static function getById($id)
     {
@@ -25,7 +25,7 @@ class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
      *
      * @param string $title Title of the feed/channel
      *
-     * @return UNL_MediaYak_Feed
+     * @return UNL_MediaHub_Feed
      */
     static function getByTitle($title)
     {
@@ -35,22 +35,22 @@ class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
     /**
      * Add Media to the feed
      *
-     * @param UNL_MediaYak_Media          $media    The media to add
-     * @param UNL_MediaYak_Media_MetaData $metadata unused
+     * @param UNL_MediaHub_Media          $media    The media to add
+     * @param UNL_MediaHub_Media_MetaData $metadata unused
      *
      * @return unknown
      */
-    function addMedia(UNL_MediaYak_Media $media, UNL_MediaYak_Media_MetaData $metadata = null)
+    function addMedia(UNL_MediaHub_Media $media, UNL_MediaHub_Media_MetaData $metadata = null)
     {
-        $this->UNL_MediaYak_Media[] = $media;
+        $this->UNL_MediaHub_Media[] = $media;
         $this->save();
         return true;
     }
 
-    function removeMedia(UNL_MediaYak_Media $media)
+    function removeMedia(UNL_MediaHub_Media $media)
     {
         $q = Doctrine_Query::create()
-            ->delete('UNL_MediaYak_Feed_Media')
+            ->delete('UNL_MediaHub_Feed_Media')
             ->addWhere('feed_id = ?', $this->id)
             ->addWhere('media_id = ?', $media->id);
 
@@ -59,18 +59,18 @@ class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
     
     function getMediaList($options = array())
     {
-    	 return new UNL_MediaYak_MediaList(array('filter'=>new UNL_MediaYak_MediaList_Filter_ByFeed($this))+$options); 
+    	 return new UNL_MediaHub_MediaList(array('filter'=>new UNL_MediaHub_MediaList_Filter_ByFeed($this))+$options); 
     }
 
     /**
      * Add a feed to the system
      *
      * @param array             $data Associative array of details.
-     * @param UNL_MediaYak_User $user User creating this feed
+     * @param UNL_MediaHub_User $user User creating this feed
      *
-     * @return UNL_MediaYak_Feed
+     * @return UNL_MediaHub_Feed
      */
-    public static function addFeed($data, UNL_MediaYak_User $user)
+    public static function addFeed($data, UNL_MediaHub_User $user)
     {
         $data = array_merge($data, array('datecreated' => date('Y-m-d H:i:s'),
                                          'uidcreated'  => $user->uid));
@@ -88,20 +88,20 @@ class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
      * 
      * @return void
      */
-    function addUser(UNL_MediaYak_User $user)
+    function addUser(UNL_MediaHub_User $user)
     {
-        $permissions = new ReflectionClass('UNL_MediaYak_Permission');
+        $permissions = new ReflectionClass('UNL_MediaHub_Permission');
         foreach($permissions->getConstants() as $key=>$permission) {
             if (substr($key, 0, 9) == 'USER_CAN_') {
-                $this->grantUserPermission($user, UNL_MediaYak_Permission::getByID($permission));
+                $this->grantUserPermission($user, UNL_MediaHub_Permission::getByID($permission));
             }
         }
     }
 
-    function removeUser(UNL_MediaYak_User $user)
+    function removeUser(UNL_MediaHub_User $user)
     {
         $q = Doctrine_Query::create()
-            ->delete('UNL_MediaYak_User_Permission')
+            ->delete('UNL_MediaHub_User_Permission')
             ->addWhere('feed_id = ?', $this->id)
             ->addWhere('user_uid = ?', $user->uid);
 
@@ -111,30 +111,30 @@ class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
     /**
      * Check if the user has a given permission for this feed.
      *
-     * @param UNL_MediaYak_User       $user       User to check
-     * @param UNL_MediaYak_Permission $permission Permission
+     * @param UNL_MediaHub_User       $user       User to check
+     * @param UNL_MediaHub_Permission $permission Permission
      *
      * @return bool
      */
-    function userHasPermission(UNL_MediaYak_User $user, UNL_MediaYak_Permission $permission)
+    function userHasPermission(UNL_MediaHub_User $user, UNL_MediaHub_Permission $permission)
     {
-        return UNL_MediaYak_Permission::userHasPermission($user, $permission, $this);
+        return UNL_MediaHub_Permission::userHasPermission($user, $permission, $this);
     }
     
     /**
      * Grant a user permission over the feed.
      *
-     * @param UNL_MediaYak_User       $user       User to grant permission for
-     * @param UNL_MediaYak_Permission $permission Permission to grant
+     * @param UNL_MediaHub_User       $user       User to grant permission for
+     * @param UNL_MediaHub_Permission $permission Permission to grant
      *
      * @return bool
      */
-    function grantUserPermission(UNL_MediaYak_User $user, UNL_MediaYak_Permission $permission)
+    function grantUserPermission(UNL_MediaHub_User $user, UNL_MediaHub_Permission $permission)
     {
-        return UNL_MediaYak_Permission::grantUserPermission($user, $permission, $this);
+        return UNL_MediaHub_Permission::grantUserPermission($user, $permission, $this);
     }
     
-    function addNamespace(UNL_MediaYak_Feed_NamespacedAttributes $namespace)
+    function addNamespace(UNL_MediaHub_Feed_NamespacedAttributes $namespace)
     {
         
     }
@@ -142,14 +142,14 @@ class UNL_MediaYak_Feed extends UNL_MediaYak_Models_BaseFeed
     /**
      * Check if this feed is linked to the related media.
      *
-     * @param UNL_MediaYak_Media $media The media file we're checking
+     * @param UNL_MediaHub_Media $media The media file we're checking
      *
      * @return bool
      */
-    public function hasMedia(UNL_MediaYak_Media $media)
+    public function hasMedia(UNL_MediaHub_Media $media)
     {
         $query = new Doctrine_Query();
-        $query->from('UNL_MediaYak_Feed_Media')
+        $query->from('UNL_MediaHub_Feed_Media')
               ->where('feed_id = ? AND media_id = ?', array($this->id, $media->id));
         return $query->count();
     }

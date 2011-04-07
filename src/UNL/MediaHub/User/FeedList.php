@@ -1,5 +1,5 @@
 <?php
-class UNL_MediaYak_User_FeedList extends UNL_MediaYak_FeedList
+class UNL_MediaHub_User_FeedList extends UNL_MediaHub_FeedList
 {
     function __construct($options = array())
     {
@@ -8,8 +8,8 @@ class UNL_MediaYak_User_FeedList extends UNL_MediaYak_FeedList
         }
 
         if (empty($options['filter'])) {
-            $user = UNL_MediaYak_Manager::getUser();
-            $options['filter'] = new UNL_MediaYak_FeedList_Filter_ByUser($user);
+            $user = UNL_MediaHub_Manager::getUser();
+            $options['filter'] = new UNL_MediaHub_FeedList_Filter_ByUser($user);
         }
         parent::__construct($options);
     }

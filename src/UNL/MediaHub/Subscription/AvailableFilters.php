@@ -1,5 +1,5 @@
 <?php
-class UNL_MediaYak_Subscription_AvailableFilters extends GlobIterator
+class UNL_MediaHub_Subscription_AvailableFilters extends GlobIterator
 {
     function __construct($options = array())
     {
@@ -9,7 +9,7 @@ class UNL_MediaYak_Subscription_AvailableFilters extends GlobIterator
     function current()
     {
         $filename = parent::current()->getFileName();
-        $filter_class = 'UNL_MediaYak_MediaList_Filter_'.substr($filename, 0, -4);
+        $filter_class = 'UNL_MediaHub_MediaList_Filter_'.substr($filename, 0, -4);
         return $filter_class;
     }
 }

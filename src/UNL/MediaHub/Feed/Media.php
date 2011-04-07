@@ -1,6 +1,6 @@
 <?php
 
-class UNL_MediaYak_Feed_Media extends UNL_MediaYak_Models_BaseFeedHasMedia
+class UNL_MediaHub_Feed_Media extends UNL_MediaHub_Models_BaseFeedHasMedia
 {
     
 }

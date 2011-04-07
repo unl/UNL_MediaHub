@@ -1,17 +1,17 @@
 <?php
 
-class UNL_MediaYak_MediaList_Filter_ByFeed implements UNL_MediaYak_Filter
+class UNL_MediaHub_MediaList_Filter_ByFeed implements UNL_MediaHub_Filter
 {
     protected $feed;
     
-    function __construct(UNL_MediaYak_Feed $feed)
+    function __construct(UNL_MediaHub_Feed $feed)
     {
         $this->feed = $feed;
     }
     
     function apply(Doctrine_Query &$query)
     {
-        $query->where('UNL_MediaYak_Feed_Media.feed_id = ? AND UNL_MediaYak_Feed_Media.media_id = m.id', $this->feed->id);
+        $query->where('UNL_MediaHub_Feed_Media.feed_id = ? AND UNL_MediaHub_Feed_Media.media_id = m.id', $this->feed->id);
     }
     
     function getLabel()

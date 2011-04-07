@@ -1,5 +1,5 @@
 <?php
-class UNL_MediaYak_Router
+class UNL_MediaHub_Router
 {
     public static function getRoute($requestURI)
     {
@@ -9,7 +9,7 @@ class UNL_MediaYak_Router
         }
 
         // Trim the base part of the URL
-        $requestURI = substr($requestURI, strlen(parse_url(UNL_MediaYak_Controller::getURL(), PHP_URL_PATH)));
+        $requestURI = substr($requestURI, strlen(parse_url(UNL_MediaHub_Controller::getURL(), PHP_URL_PATH)));
 
         $options = array();
 

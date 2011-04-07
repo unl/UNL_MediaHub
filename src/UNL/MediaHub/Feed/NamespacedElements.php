@@ -1,5 +1,5 @@
 <?php
-abstract class UNL_MediaYak_Feed_NamespacedElements extends UNL_MediaYak_Models_BaseFeedHasNSElement
+abstract class UNL_MediaHub_Feed_NamespacedElements extends UNL_MediaHub_Models_BaseFeedHasNSElement
 {
     public function getXMLNS()
     {
@@ -16,7 +16,7 @@ abstract class UNL_MediaYak_Feed_NamespacedElements extends UNL_MediaYak_Models_
     public static function feedHasElement($feed_id, $element, $xmlns)
     {
         $query = new Doctrine_Query();
-        $query->from('UNL_MediaYak_Feed_NamespacedElements_'.$xmlns);
+        $query->from('UNL_MediaHub_Feed_NamespacedElements_'.$xmlns);
         $query->where('xmlns = ? AND feed_id = ? AND element = ?', array($xmlns, $feed_id, $element));
         return $query->fetchOne();
     }

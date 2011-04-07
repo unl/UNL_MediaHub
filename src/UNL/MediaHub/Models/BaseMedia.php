@@ -1,5 +1,5 @@
 <?php
-abstract class UNL_MediaYak_Models_BaseMedia extends Doctrine_Record
+abstract class UNL_MediaHub_Models_BaseMedia extends Doctrine_Record
 {
 
     public function setTableDefinition()
@@ -20,18 +20,18 @@ abstract class UNL_MediaYak_Models_BaseMedia extends Doctrine_Record
     
     public function setUp()
     {
-        $this->hasMany('UNL_MediaYak_Media_Comment', array('local'    => 'id',
+        $this->hasMany('UNL_MediaHub_Media_Comment', array('local'    => 'id',
                                                            'foreign'  => 'media_id'));
-        $this->hasMany('UNL_MediaYak_Feed',          array('local'    => 'media_id',
+        $this->hasMany('UNL_MediaHub_Feed',          array('local'    => 'media_id',
                                                            'foreign'  => 'feed_id',
-                                                           'refClass' => 'UNL_MediaYak_Feed_Media'));
-        $this->hasMany('UNL_MediaYak_Feed_Media_NamespacedElements_itunesu', array('local'   => 'id',
+                                                           'refClass' => 'UNL_MediaHub_Feed_Media'));
+        $this->hasMany('UNL_MediaHub_Feed_Media_NamespacedElements_itunesu', array('local'   => 'id',
                                                                                    'foreign' => 'media_id'));
-        $this->hasMany('UNL_MediaYak_Feed_Media_NamespacedElements_itunes',  array('local'   => 'id',
+        $this->hasMany('UNL_MediaHub_Feed_Media_NamespacedElements_itunes',  array('local'   => 'id',
                                                                                    'foreign' => 'media_id'));
-        $this->hasMany('UNL_MediaYak_Feed_Media_NamespacedElements_media',   array('local'   => 'id',
+        $this->hasMany('UNL_MediaHub_Feed_Media_NamespacedElements_media',   array('local'   => 'id',
                                                                                    'foreign' => 'media_id'));
-        $this->hasMany('UNL_MediaYak_Feed_Media_NamespacedElements_boxee',   array('local'   => 'id',
+        $this->hasMany('UNL_MediaHub_Feed_Media_NamespacedElements_boxee',   array('local'   => 'id',
                                                                                    'foreign' => 'media_id'));
         parent::setUp();
     }

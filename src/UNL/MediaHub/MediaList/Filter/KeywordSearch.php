@@ -1,5 +1,5 @@
 <?php 
-class UNL_MediaYak_MediaList_Filter_KeywordSearch implements UNL_MediaYak_Filter
+class UNL_MediaHub_MediaList_Filter_KeywordSearch implements UNL_MediaHub_Filter
 {
     protected $query;
     
@@ -10,7 +10,7 @@ class UNL_MediaYak_MediaList_Filter_KeywordSearch implements UNL_MediaYak_Filter
     
     function apply(Doctrine_Query &$query)
     {
-        $query->where('UNL_MediaYak_Feed_Media_NamespacedElements_itunes.media_id = m.id AND UNL_MediaYak_Feed_Media_NamespacedElements_itunes.element = "keywords" AND UNL_MediaYak_Feed_Media_NamespacedElements_itunes.value LIKE ?', array('%'.$this->query.'%'));
+        $query->where('UNL_MediaHub_Feed_Media_NamespacedElements_itunes.media_id = m.id AND UNL_MediaHub_Feed_Media_NamespacedElements_itunes.element = "keywords" AND UNL_MediaHub_Feed_Media_NamespacedElements_itunes.value LIKE ?', array('%'.$this->query.'%'));
     }
     
     function getLabel()

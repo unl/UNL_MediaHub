@@ -4,7 +4,7 @@
  * 
  * @author bbieber
  */
-interface UNL_MediaYak_CacheInterface
+interface UNL_MediaHub_CacheInterface
 {
     /**
      * Get an item from the cache

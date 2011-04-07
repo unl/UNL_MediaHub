@@ -1,6 +1,6 @@
 <?php
 
-class UNL_MediaYak_MediaList_Filter_ShowRecent implements UNL_MediaYak_Filter
+class UNL_MediaHub_MediaList_Filter_ShowRecent implements UNL_MediaHub_Filter
 {
     function apply(Doctrine_Query &$query)
     {

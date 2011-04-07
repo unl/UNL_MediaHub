@@ -1,5 +1,5 @@
 <?php
-class UNL_MediaYak_User_Permission extends UNL_MediaYak_Models_BaseUserHasPermission
+class UNL_MediaHub_User_Permission extends UNL_MediaHub_Models_BaseUserHasPermission
 {
     
 }

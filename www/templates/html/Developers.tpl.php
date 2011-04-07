@@ -51,7 +51,7 @@
 <div class="three_col left">
     
     <?php
-        $resource = "UNL_MediaYak_Developers_" . $context->resource;
+        $resource = "UNL_MediaHub_Developers_" . $context->resource;
         $resource = new $resource;
         ?>
         <div class="resource">

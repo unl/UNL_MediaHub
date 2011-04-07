@@ -8,10 +8,10 @@
   <pubDate><?php echo date('r', strtotime($context->datecreated)); ?></pubDate>
   <?php
     try {
-        foreach (array('UNL_MediaYak_Feed_Media_NamespacedElements_itunesu',
-                       'UNL_MediaYak_Feed_Media_NamespacedElements_itunes',
-                       'UNL_MediaYak_Feed_Media_NamespacedElements_media',
-                       'UNL_MediaYak_Feed_Media_NamespacedElements_boxee') as $ns_class) {
+        foreach (array('UNL_MediaHub_Feed_Media_NamespacedElements_itunesu',
+                       'UNL_MediaHub_Feed_Media_NamespacedElements_itunes',
+                       'UNL_MediaHub_Feed_Media_NamespacedElements_media',
+                       'UNL_MediaHub_Feed_Media_NamespacedElements_boxee') as $ns_class) {
             foreach ($context->$ns_class as $namespaced_element) {
                 $element = "{$namespaced_element['xmlns']}:{$namespaced_element['element']}";
                 $attribute_string = '';

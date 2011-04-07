@@ -5,14 +5,14 @@
  * @author bbieber
  *
  */
-class UNL_MediaYak_FeedList extends UNL_MediaYak_List
+class UNL_MediaHub_FeedList extends UNL_MediaHub_List
 {
     /**
      * The list of tables in the database used by this list
      * 
      * @var string
      */
-    public $tables = 'UNL_MediaYak_Feed f';
+    public $tables = 'UNL_MediaHub_Feed f';
     
     /**
      * Array of options for this list
@@ -28,13 +28,13 @@ class UNL_MediaYak_FeedList extends UNL_MediaYak_List
     {
         parent::__construct($options);
         if (empty($this->options['filter'])) {
-            $this->options['filter'] = new UNL_MediaYak_FeedList_Filter_WithRelatedMedia();
+            $this->options['filter'] = new UNL_MediaHub_FeedList_Filter_WithRelatedMedia();
         }
     }
     /**
      * Customizes the ordering used in this list.
      * 
-     * @see UNL/MediaYak/UNL_MediaYak_List#setOrderBy()
+     * @see UNL/MediaHub/UNL_MediaHub_List#setOrderBy()
      */
     function setOrderBy(Doctrine_Query &$query)
     {

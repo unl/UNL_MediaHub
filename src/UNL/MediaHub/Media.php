@@ -1,18 +1,18 @@
 <?php
 
 
-class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
+class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia
 {
     /**
      * Get a piece of media by PK.
      *
      * @param int $id ID of the media.
      *
-     * @return UNL_MediaYak_Media
+     * @return UNL_MediaHub_Media
      */
     static function getById($id)
     {
-        return Doctrine::getTable('UNL_MediaYak_Media')->find($id);
+        return Doctrine::getTable('UNL_MediaHub_Media')->find($id);
     }
     
     /**
@@ -20,11 +20,11 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
      *
      * @param string $url URL to the video/audio file
      * 
-     * @return UNL_MediaYak_Media
+     * @return UNL_MediaHub_Media
      */
     public static function getByURL($url)
     {
-        $media = Doctrine::getTable('UNL_MediaYak_Media')->findOneByURL($url);
+        $media = Doctrine::getTable('UNL_MediaHub_Media')->findOneByURL($url);
         if ($media) {
             return $media;
         }
@@ -64,7 +64,7 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
      */
     public function postInsert($event)
     {
-        if (UNL_MediaYak_Media::isVideo($this->type)) {
+        if (UNL_MediaHub_Media::isVideo($this->type)) {
             $this->setMRSSThumbnail();
         }
         $this->setMRSSContent();
@@ -84,14 +84,14 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
      */
     function setMRSSThumbnail()
     {
-        if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_media::mediaHasElement($this->id, 'thumbnail')) {
+        if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_media::mediaHasElement($this->id, 'thumbnail')) {
             // all ok
         } else {
-            $element = new UNL_MediaYak_Feed_Media_NamespacedElements_media();
+            $element = new UNL_MediaHub_Feed_Media_NamespacedElements_media();
             $element->media_id = $this->id;
             $element->element = 'thumbnail';
         }
-        $attributes = array('url' => UNL_MediaYak_Controller::$thumbnail_generator.urlencode($this->url),
+        $attributes = array('url' => UNL_MediaHub_Controller::$thumbnail_generator.urlencode($this->url),
                             //width="75" height="50" time="12:05:01.123"
                             );
         $element->attributes = $attributes;
@@ -106,10 +106,10 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
      */
     function setMRSSContent()
     {
-        if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_media::mediaHasElement($this->id, 'content')) {
+        if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_media::mediaHasElement($this->id, 'content')) {
             // all good
         } else {
-            $element = new UNL_MediaYak_Feed_Media_NamespacedElements_media();
+            $element = new UNL_MediaHub_Feed_Media_NamespacedElements_media();
             $element->media_id = $this->id;
             $element->element = 'content';
         }
@@ -117,8 +117,8 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
                             'fileSize' => $this->length,
                             'type'     => $this->type,
                             'lang'     => 'en');
-        if (UNL_MediaYak_Media::isVideo($this->type)) {
-            list($width, $height) = getimagesize(UNL_MediaYak_Controller::$thumbnail_generator.urlencode($this->url));
+        if (UNL_MediaHub_Media::isVideo($this->type)) {
+            list($width, $height) = getimagesize(UNL_MediaHub_Controller::$thumbnail_generator.urlencode($this->url));
             $attributes['width']  = $width;
             $attributes['height'] = $height;
         }
@@ -188,7 +188,7 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
      */
     static function getMediaDimensions($media_id)
     {
-        if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_media::mediaHasElement($media_id, 'content')) {
+        if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_media::mediaHasElement($media_id, 'content')) {
             return array('width'=>$element->attributes['width'], 'height'=>$element->attributes['height']);
         }
         return false;
@@ -196,7 +196,7 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
 
     function getFeeds()
     {
-        return new UNL_MediaYak_FeedList(array('limit'=>null, 'filter'=>new UNL_MediaYak_FeedList_Filter_WithMediaId($this->id)));
+        return new UNL_MediaHub_FeedList(array('limit'=>null, 'filter'=>new UNL_MediaHub_FeedList_Filter_WithMediaId($this->id)));
     }
 
     function delete()
@@ -211,10 +211,10 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
         }
 
         try {
-            foreach (array('UNL_MediaYak_Feed_Media_NamespacedElements_itunesu',
-                           'UNL_MediaYak_Feed_Media_NamespacedElements_itunes',
-                           'UNL_MediaYak_Feed_Media_NamespacedElements_media',
-                           'UNL_MediaYak_Feed_Media_NamespacedElements_boxee') as $ns_class) {
+            foreach (array('UNL_MediaHub_Feed_Media_NamespacedElements_itunesu',
+                           'UNL_MediaHub_Feed_Media_NamespacedElements_itunes',
+                           'UNL_MediaHub_Feed_Media_NamespacedElements_media',
+                           'UNL_MediaHub_Feed_Media_NamespacedElements_boxee') as $ns_class) {
                 foreach ($this->$ns_class as $namespaced_element) {
                     $namespaced_element->delete();
                 }
@@ -233,7 +233,7 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
     function getTags()
     {
         $tags = array();
-        $class = 'UNL_MediaYak_Feed_Media_NamespacedElements_itunes';
+        $class = 'UNL_MediaHub_Feed_Media_NamespacedElements_itunes';
         if ($element = call_user_func($class .'::mediaHasElement', $this->id, 'keywords')) {
             $tags = explode(',', $element->value);
             array_walk($tags, 'trim');
@@ -249,7 +249,7 @@ class UNL_MediaYak_Media extends UNL_MediaYak_Models_BaseMedia
     function addTag($newTag)
     {
     	$tags = $this->getTags();
-        $class = 'UNL_MediaYak_Feed_Media_NamespacedElements_itunes';
+        $class = 'UNL_MediaHub_Feed_Media_NamespacedElements_itunes';
     	if (!in_array(strtolower($newTag), $tags)) {
         	array_push($tags, strtolower($newTag));
         	sort($tags);

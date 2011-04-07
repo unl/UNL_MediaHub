@@ -6,10 +6,10 @@ if (count($context->items)) {
     <item>
         <title>'.htmlspecialchars($feed->title).'</title>
         <description>'.htmlspecialchars($feed->description).'</description>
-        <link>'.str_replace('http://', 'rss://', UNL_MediaYak_Controller::getURL($feed)).'?format=xml</link>';
+        <link>'.str_replace('http://', 'rss://', UNL_MediaHub_Controller::getURL($feed)).'?format=xml</link>';
         if ($feed->hasImage()) {
-            echo '<media:thumbnail url="'.UNL_MediaYak_Controller::getURL($feed).'/image"></media:thumbnail>'.PHP_EOL;
-            echo '<boxee:image>'.UNL_MediaYak_Controller::getURL($feed).'/image</boxee:image>'.PHP_EOL;
+            echo '<media:thumbnail url="'.UNL_MediaHub_Controller::getURL($feed).'/image"></media:thumbnail>'.PHP_EOL;
+            echo '<boxee:image>'.UNL_MediaHub_Controller::getURL($feed).'/image</boxee:image>'.PHP_EOL;
         }
     echo '
     </item>';

@@ -1,5 +1,5 @@
 <?php
-abstract class UNL_MediaYak_Models_BasePermission extends Doctrine_Record
+abstract class UNL_MediaHub_Models_BasePermission extends Doctrine_Record
 {
 
     public function setTableDefinition()

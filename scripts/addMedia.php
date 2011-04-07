@@ -5,7 +5,7 @@
  * PHP version 5
  *
  * @category  Media
- * @package   UNL_MediaYak
+ * @package   UNL_MediaHub
  * @author    Brett Bieber <brett.bieber@gmail.com>
  * @copyright 2009 Regents of the University of Nebraska
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
@@ -19,7 +19,7 @@ if (!isset($_SERVER['argv'],$_SERVER['argv'][1])
     require_once 'UNL/Autoload.php';
     require_once dirname(__FILE__).'/../config.inc.php';
     
-    $my = new UNL_MediaYak($dsn);
+    $my = new UNL_MediaHub($dsn);
     $my->addMedia(array('url'   => $_SERVER['argv'][1],
                         'title' => $_SERVER['argv'][2],
                         'description' => $_SERVER['argv'][3]));

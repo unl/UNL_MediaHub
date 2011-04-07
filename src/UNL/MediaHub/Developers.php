@@ -1,5 +1,5 @@
 <?php
-class UNL_MediaYak_Developers
+class UNL_MediaHub_Developers
 {
     public $resources = array('Media', "Channel", "Tag", "Search");
     

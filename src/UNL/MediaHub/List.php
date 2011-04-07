@@ -4,7 +4,7 @@
  * 
  * @author bbieber
  */
-abstract class UNL_MediaYak_List implements Countable, UNL_MediaYak_CacheableInterface
+abstract class UNL_MediaHub_List implements Countable, UNL_MediaHub_CacheableInterface
 {
     public $options = array('page'=>0, 'limit'=>10);
     
@@ -40,7 +40,7 @@ abstract class UNL_MediaYak_List implements Countable, UNL_MediaYak_CacheableInt
      * 
      * @param $filter Filter to use when filtering.
      * 
-     * @return UNL_MediaYak_List
+     * @return UNL_MediaHub_List
      */
     function __construct($options = array())
     {

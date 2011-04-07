@@ -1,5 +1,5 @@
 <?php
-class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_MediaYak_PostRunReplacements
+class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_MediaHub_PostRunReplacements
 {
     /**
      * The auth object.
@@ -11,7 +11,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
     /**
      * The user that's logged in.
      *
-     * @var UNL_MediaYak_User
+     * @var UNL_MediaHub_User
      */
     protected static $user;
     
@@ -20,11 +20,11 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
     public $options = array('view'=>'addmedia');
 
     protected $view_map = array(
-        'feedmetadata'    => 'UNL_MediaYak_Feed_Form',
-        'permissions'     => 'UNL_MediaYak_Feed_UserList',
-        'feeds'           => 'UNL_MediaYak_User_FeedList',
-        'subscriptions'   => 'UNL_MediaYak_User_Subscriptions',
-        'addsubscription' => 'UNL_MediaYak_Subscription_Form',
+        'feedmetadata'    => 'UNL_MediaHub_Feed_Form',
+        'permissions'     => 'UNL_MediaHub_Feed_UserList',
+        'feeds'           => 'UNL_MediaHub_User_FeedList',
+        'subscriptions'   => 'UNL_MediaHub_User_Subscriptions',
+        'addsubscription' => 'UNL_MediaHub_Subscription_Form',
         );
     
     protected static $replacements = array();
@@ -34,13 +34,13 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
     /**
      * MediaYak
      *
-     * @var UNL_MediaYak
+     * @var UNL_MediaHub
      */
     protected $mediayak;
     
     function __construct($options = array(), $dsn)
     {
-        $this->mediayak = new UNL_MediaYak($dsn);
+        $this->mediayak = new UNL_MediaHub($dsn);
         
         $this->auth = UNL_Auth::factory('SimpleCAS');
         $this->auth->login();
@@ -51,7 +51,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
         
         $this->options = $options + $this->options;
         
-        self::$user = UNL_MediaYak_User::getByUid($this->auth->getUser());
+        self::$user = UNL_MediaHub_User::getByUid($this->auth->getUser());
     }
     
     function getCacheKey()
@@ -158,19 +158,19 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
     /**
      * Get the user
      *
-     * @return UNL_MediaYak_User
+     * @return UNL_MediaHub_User
      */
     public static function getUser()
     {
         return self::$user;
     }
     
-    function showMedia(UNL_MediaYak_Filter $filter = null)
+    function showMedia(UNL_MediaHub_Filter $filter = null)
     {
         $options           = $this->options;
         $options['filter'] = $filter;
 
-        $this->output[] = new UNL_MediaYak_MediaList($options + $this->options);
+        $this->output[] = new UNL_MediaHub_MediaList($options + $this->options);
     }
     
     public static function getURL($mixed = null, $additional_params = array())
@@ -179,7 +179,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
 
         if (is_object($mixed)) {
             switch(get_class($mixed)) {
-                case 'UNL_MediaYak_Feed':
+                case 'UNL_MediaHub_Feed':
                     $params['view'] = 'feed';
                     $params['id']   = $mixed->id;
             }
@@ -187,20 +187,20 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
 
         $params = array_merge($params, $additional_params);
 
-        return UNL_MediaYak_Controller::addURLParams(UNL_MediaYak_Controller::$url.'manager/', $params);
+        return UNL_MediaHub_Controller::addURLParams(UNL_MediaHub_Controller::$url.'manager/', $params);
     }
     
     function showFeed()
     {
-        $feed = UNL_MediaYak_Feed::getById($_GET['id']);
-        if (!($feed && $feed->userHasPermission(self::$user, UNL_MediaYak_Permission::getByID(
-                                                    UNL_MediaYak_Permission::USER_CAN_INSERT)))) {
+        $feed = UNL_MediaHub_Feed::getById($_GET['id']);
+        if (!($feed && $feed->userHasPermission(self::$user, UNL_MediaHub_Permission::getByID(
+                                                    UNL_MediaHub_Permission::USER_CAN_INSERT)))) {
             throw new Exception('You do not have permission for this feed.');
         }
 
         $this->output[] = $feed;
 
-        $filter = new UNL_MediaYak_MediaList_Filter_ByFeed($feed);
+        $filter = new UNL_MediaHub_MediaList_Filter_ByFeed($feed);
         $this->showMedia($filter);
 
     }
@@ -211,7 +211,7 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
      */
     function handlePost()
     {
-        $handler = new UNL_MediaYak_Manager_PostHandler($this->options, $_POST, $_FILES);
+        $handler = new UNL_MediaHub_Manager_PostHandler($this->options, $_POST, $_FILES);
         $handler->setMediaYak($this->mediayak);
         return $handler->handle();
     }
@@ -228,10 +228,10 @@ class UNL_MediaYak_Manager implements UNL_MediaYak_CacheableInterface, UNL_Media
     function addMedia()
     {
         if (isset($_GET['id'])) {
-            $this->output[] = new UNL_MediaYak_Feed_Media_Form(UNL_MediaYak_Media::getById($_GET['id']));
+            $this->output[] = new UNL_MediaHub_Feed_Media_Form(UNL_MediaHub_Media::getById($_GET['id']));
             return;
         }
         
-        $this->output[] = new UNL_MediaYak_Feed_Media_Form();
+        $this->output[] = new UNL_MediaHub_Feed_Media_Form();
     }
 }

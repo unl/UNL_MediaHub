@@ -1,5 +1,5 @@
 <?php
-class UNL_MediaYak_CacheInterface_Mock implements Savvy_Turbo_CacheInterface
+class UNL_MediaHub_CacheInterface_Mock implements Savvy_Turbo_CacheInterface
 {
     function get($key)
     {

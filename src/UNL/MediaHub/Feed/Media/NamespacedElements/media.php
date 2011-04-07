@@ -4,7 +4,7 @@
  * http://search.yahoo.com/mrss/
  *
  */
-class UNL_MediaYak_Feed_Media_NamespacedElements_media extends UNL_MediaYak_Feed_Media_NamespacedElements
+class UNL_MediaHub_Feed_Media_NamespacedElements_media extends UNL_MediaHub_Feed_Media_NamespacedElements
 {
     protected $xmlns = 'media';
     
@@ -31,6 +31,6 @@ class UNL_MediaYak_Feed_Media_NamespacedElements_media extends UNL_MediaYak_Feed
     
     public static function mediaHasElement($media_id, $element)
     {
-        return UNL_MediaYak_Feed_Media_NamespacedElements::mediaHasElement($media_id, $element, 'media');
+        return UNL_MediaHub_Feed_Media_NamespacedElements::mediaHasElement($media_id, $element, 'media');
     }
 }

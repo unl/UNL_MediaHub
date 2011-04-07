@@ -1,6 +1,6 @@
 <?php
 
-class UNL_MediaYak_Permission extends UNL_MediaYak_Models_BasePermission
+class UNL_MediaHub_Permission extends UNL_MediaHub_Models_BasePermission
 {
     const USER_CAN_INSERT = 1;
     const USER_CAN_UPDATE = 2;
@@ -10,10 +10,10 @@ class UNL_MediaYak_Permission extends UNL_MediaYak_Models_BasePermission
     
     const USER_CAN_ADD_USER = 20;
     
-    public static function userHasPermission(UNL_MediaYak_User $user, UNL_MediaYak_Permission $permission, UNL_MediaYak_Feed $feed)
+    public static function userHasPermission(UNL_MediaHub_User $user, UNL_MediaHub_Permission $permission, UNL_MediaHub_Feed $feed)
     {
         $query = new Doctrine_Query();
-        $query->from('UNL_MediaYak_User_Permission u')
+        $query->from('UNL_MediaHub_User_Permission u')
               ->where('u.user_uid = ? AND u.permission_id = ? AND u.feed_id = ?',
                       array($user->uid, $permission->id, $feed->id));
         $results = $query->execute();
@@ -23,7 +23,7 @@ class UNL_MediaYak_Permission extends UNL_MediaYak_Models_BasePermission
     
     public static function getByID($id)
     {
-        $permission = Doctrine::getTable('UNL_MediaYak_Permission')->find($id);
+        $permission = Doctrine::getTable('UNL_MediaHub_Permission')->find($id);
         if ($permission) {
             return $permission;
         }
@@ -36,15 +36,15 @@ class UNL_MediaYak_Permission extends UNL_MediaYak_Models_BasePermission
     
     public static function getByTitle($title)
     {
-        return Doctrine::getTable('UNL_MediaYak_Permission')->findByTitle($title);
+        return Doctrine::getTable('UNL_MediaHub_Permission')->findByTitle($title);
     }
     
-    public static function grantUserPermission(UNL_MediaYak_User $user, UNL_MediaYak_Permission $permission, UNL_MediaYak_Feed $feed)
+    public static function grantUserPermission(UNL_MediaHub_User $user, UNL_MediaHub_Permission $permission, UNL_MediaHub_Feed $feed)
     {
         $data = array('user_uid'      => $user->uid,
                       'permission_id' => $permission->id,
                       'feed_id'       => $feed->id);
-        $user_permission = new UNL_MediaYak_User_Permission();
+        $user_permission = new UNL_MediaHub_User_Permission();
         $user_permission->fromArray($data);
         return $user_permission->save();
     }

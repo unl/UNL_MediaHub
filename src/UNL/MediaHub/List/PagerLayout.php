@@ -1,5 +1,5 @@
 <?php
-class UNL_MediaYak_List_PagerLayout extends Doctrine_Pager_Layout
+class UNL_MediaHub_List_PagerLayout extends Doctrine_Pager_Layout
 {
     public function display($options = array(), $return = false)
     {

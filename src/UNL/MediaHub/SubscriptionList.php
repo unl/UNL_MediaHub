@@ -1,12 +1,12 @@
 <?php
-class UNL_MediaYak_SubscriptionList extends UNL_MediaYak_List
+class UNL_MediaHub_SubscriptionList extends UNL_MediaHub_List
 {
     public $options = array('orderby' => 'datecreated',
                             'order'   => 'DESC',
                             'page'    => 0,
                             'limit'   => -1);
    
-    public $tables = 'UNL_MediaYak_Subscription s';
+    public $tables = 'UNL_MediaHub_Subscription s';
 
     function setOrderBy(Doctrine_Query &$query)
     {

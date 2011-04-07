@@ -1,5 +1,5 @@
 <?php
-class UNL_MediaYak_Feed_LiveStream
+class UNL_MediaHub_Feed_LiveStream
 {
 
     public $feed;
@@ -9,9 +9,9 @@ class UNL_MediaYak_Feed_LiveStream
         if (!empty($options['feed'])) {
             $this->feed = $options['feed'];
         } elseif (!empty($options['feed_id'])) {
-            $this->feed = UNL_MediaYak_Feed::getById($options['feed_id']);
+            $this->feed = UNL_MediaHub_Feed::getById($options['feed_id']);
         } elseif (!empty($options['title'])) {
-            $this->feed = UNL_MediaYak_Feed::getByTitle($this->options['title']);
+            $this->feed = UNL_MediaHub_Feed::getByTitle($this->options['title']);
         }
     }
 }

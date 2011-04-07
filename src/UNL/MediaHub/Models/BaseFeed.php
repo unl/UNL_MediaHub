@@ -1,5 +1,5 @@
 <?php
-abstract class UNL_MediaYak_Models_BaseFeed extends Doctrine_Record
+abstract class UNL_MediaHub_Models_BaseFeed extends Doctrine_Record
 {
 
     public function setTableDefinition()
@@ -21,14 +21,14 @@ abstract class UNL_MediaYak_Models_BaseFeed extends Doctrine_Record
 
     public function setUp()
     {
-        $this->hasMany('UNL_MediaYak_Media',    array('local'    => 'feed_id',
+        $this->hasMany('UNL_MediaHub_Media',    array('local'    => 'feed_id',
                                                       'foreign'  => 'media_id',
-                                                      'refClass' => 'UNL_MediaYak_Feed_Media'));
-        $this->hasMany('UNL_MediaYak_Feed_NamespacedElements_itunes',    array('local'    => 'id',
+                                                      'refClass' => 'UNL_MediaHub_Feed_Media'));
+        $this->hasMany('UNL_MediaHub_Feed_NamespacedElements_itunes',    array('local'    => 'id',
                                                                                'foreign'  => 'feed_id'));
-        $this->hasMany('UNL_MediaYak_Feed_NamespacedElements_media',      array('local'    => 'id',
+        $this->hasMany('UNL_MediaHub_Feed_NamespacedElements_media',      array('local'    => 'id',
                                                                                 'foreign'  => 'feed_id'));
-        $this->hasMany('UNL_MediaYak_Feed_NamespacedElements_boxee',      array('local'    => 'id',
+        $this->hasMany('UNL_MediaHub_Feed_NamespacedElements_boxee',      array('local'    => 'id',
                                                                                 'foreign'  => 'feed_id'));
         parent::setUp();
     }

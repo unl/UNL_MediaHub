@@ -8,9 +8,9 @@ if (file_exists(dirname(__FILE__).'/../config.inc.php')) {
 ini_set('magic_quotes_gpc', false);
 ini_set('magic_quotes_runtime', false);
 
-$controller = new UNL_MediaYak_Controller($_GET + UNL_MediaYak_Router::getRoute($_SERVER['REQUEST_URI']), $dsn);
+$controller = new UNL_MediaHub_Controller($_GET + UNL_MediaHub_Router::getRoute($_SERVER['REQUEST_URI']), $dsn);
 
-$outputcontroller = new UNL_MediaYak_OutputController();
+$outputcontroller = new UNL_MediaHub_OutputController();
 $outputcontroller->setTemplatePath(dirname(__FILE__).'/templates/html');
 
 if (isset($cache)) {

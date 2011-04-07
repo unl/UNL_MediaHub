@@ -1,6 +1,6 @@
 <?php
 
-class UNL_MediaYak_Feed_NamespacedElements_boxee extends UNL_MediaYak_Feed_NamespacedElements
+class UNL_MediaHub_Feed_NamespacedElements_boxee extends UNL_MediaHub_Feed_NamespacedElements
 {
     protected $xmlns = 'boxee';
     

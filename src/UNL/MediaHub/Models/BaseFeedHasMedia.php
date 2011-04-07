@@ -1,6 +1,6 @@
 <?php
 
-abstract class UNL_MediaYak_Models_BaseFeedHasMedia extends Doctrine_Record
+abstract class UNL_MediaHub_Models_BaseFeedHasMedia extends Doctrine_Record
 {
 
     public function setTableDefinition()
@@ -12,9 +12,9 @@ abstract class UNL_MediaYak_Models_BaseFeedHasMedia extends Doctrine_Record
     
     public function setUp()
     {
-        $this->hasOne('UNL_MediaYak_Feed',  array('local'   => 'feed_id',
+        $this->hasOne('UNL_MediaHub_Feed',  array('local'   => 'feed_id',
                                                   'foreign' => 'id'));
-        $this->hasOne('UNL_MediaYak_Media', array('local'   => 'media_id',
+        $this->hasOne('UNL_MediaHub_Media', array('local'   => 'media_id',
                                                   'foreign' => 'id'));
         parent::setUp();
     }

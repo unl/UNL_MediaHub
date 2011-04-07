@@ -1,5 +1,5 @@
 <?php
-class UNL_MediaYak_FeedList_Filter_WithTitle implements UNL_MediaYak_Filter
+class UNL_MediaHub_FeedList_Filter_WithTitle implements UNL_MediaHub_Filter
 {
     
     function apply(Doctrine_Query &$query)

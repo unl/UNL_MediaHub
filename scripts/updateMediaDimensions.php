@@ -3,20 +3,20 @@ require_once 'UNL/Autoload.php';
 require_once dirname(__FILE__).'/../config.inc.php';
 
 // Set up system with DSN
-$mediayak = new UNL_MediaYak($dsn);
+$mediayak = new UNL_MediaHub($dsn);
 
 $filter = null;
 if (isset($_SERVER['argv'],$_SERVER['argv'][1])) {
-    $filter = new UNL_MediaYak_MediaList_Filter_TextSearch($_SERVER['argv'][1]);
+    $filter = new UNL_MediaHub_MediaList_Filter_TextSearch($_SERVER['argv'][1]);
 }
 
 $options = array('filter' => $filter,
                  'limit'  => 100);
-$list = new UNL_MediaYak_MediaList($options);
+$list = new UNL_MediaHub_MediaList($options);
 $list->run();
 if (count($list->items)) {
     foreach ($list->items as $media) {
-        // @var UNL_MediaYak_Media $media
+        // @var UNL_MediaHub_Media $media
         $media->setMRSSContent();
         $media->setMRSSThumbnail();
         echo 'saved'.PHP_EOL;

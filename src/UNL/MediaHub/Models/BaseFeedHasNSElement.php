@@ -1,6 +1,6 @@
 <?php
 
-abstract class UNL_MediaYak_Models_BaseFeedHasNSElement extends Doctrine_Record
+abstract class UNL_MediaHub_Models_BaseFeedHasNSElement extends Doctrine_Record
 {
 
     public function setTableDefinition()
@@ -13,9 +13,9 @@ abstract class UNL_MediaYak_Models_BaseFeedHasNSElement extends Doctrine_Record
         $this->hasColumn('value',      'string',  null, array('primary' => false, 'notnull' => false, 'autoincrement' => false));
         
         $this->setSubclasses(array(
-                'UNL_MediaYak_Feed_NamespacedElements_itunes' => array('xmlns' => 'itunes'),
-                'UNL_MediaYak_Feed_NamespacedElements_media'  => array('xmlns' => 'media'),
-                'UNL_MediaYak_Feed_NamespacedElements_boxee'  => array('xmlns' => 'boxee')
+                'UNL_MediaHub_Feed_NamespacedElements_itunes' => array('xmlns' => 'itunes'),
+                'UNL_MediaHub_Feed_NamespacedElements_media'  => array('xmlns' => 'media'),
+                'UNL_MediaHub_Feed_NamespacedElements_boxee'  => array('xmlns' => 'boxee')
             )
         );
     
@@ -23,7 +23,7 @@ abstract class UNL_MediaYak_Models_BaseFeedHasNSElement extends Doctrine_Record
     
     public function setUp()
     {
-        $this->hasOne('UNL_MediaYak_Feed',  array('local'   => 'feed_id',
+        $this->hasOne('UNL_MediaHub_Feed',  array('local'   => 'feed_id',
                                                   'foreign' => 'id'));
         parent::setUp();
     }
