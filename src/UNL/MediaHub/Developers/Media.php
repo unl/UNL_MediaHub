@@ -1,5 +1,5 @@
 <?php
-class UNL_MediaYak_Developers_Media
+class UNL_MediaHub_Developers_Media
 {
     public $title       = "Media Instance";
     
@@ -31,7 +31,7 @@ class UNL_MediaYak_Developers_Media
     
     function __construct()
     {
-        $this->uri = UNL_MediaYak_Controller::$url . $this->uri;
-        $this->exampleURI  = UNL_MediaYak_Controller::$url . $this->exampleURI;
+        $this->uri = UNL_MediaHub_Controller::$url . $this->uri;
+        $this->exampleURI  = UNL_MediaHub_Controller::$url . $this->exampleURI;
     }
 }

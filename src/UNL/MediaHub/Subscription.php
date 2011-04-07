@@ -1,5 +1,5 @@
 <?php
-class UNL_MediaYak_Subscription extends UNL_MediaYak_Models_BaseSubscription
+class UNL_MediaHub_Subscription extends UNL_MediaHub_Models_BaseSubscription
 {
     /**
      * Processes this subscription and adds media not currently
@@ -31,13 +31,13 @@ class UNL_MediaYak_Subscription extends UNL_MediaYak_Models_BaseSubscription
 
     function getFeedList()
     {
-        return new UNL_MediaYak_FeedList(array('filter'=>new UNL_MediaYak_FeedList_Filter_BySubscription($this)));
+        return new UNL_MediaHub_FeedList(array('filter'=>new UNL_MediaHub_FeedList_Filter_BySubscription($this)));
     }
 
     /**
      * Get the media filter specified by this subscription
      * 
-     * @return UNL_MediaYak_Filter
+     * @return UNL_MediaHub_Filter
      */
     protected function getFilter()
     {
@@ -48,11 +48,11 @@ class UNL_MediaYak_Subscription extends UNL_MediaYak_Models_BaseSubscription
     /**
      * Get the list of media matching this subscription
      * 
-     * @return UNL_MediaYak_MediaList
+     * @return UNL_MediaHub_MediaList
      */
     protected function getMediaList()
     {
-        return new UNL_MediaYak_MediaList(array('filter'=>$this->getFilter()));
+        return new UNL_MediaHub_MediaList(array('filter'=>$this->getFilter()));
     }
 
     function getResultURL()

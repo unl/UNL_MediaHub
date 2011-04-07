@@ -1,5 +1,5 @@
 <?php
-abstract class UNL_MediaYak_Models_BaseUserHasPermission extends Doctrine_Record
+abstract class UNL_MediaHub_Models_BaseUserHasPermission extends Doctrine_Record
 {
 
     public function setTableDefinition()
@@ -12,11 +12,11 @@ abstract class UNL_MediaYak_Models_BaseUserHasPermission extends Doctrine_Record
     
     public function setUp()
     {
-        $this->hasOne('UNL_MediaYak_User',       array('local'   => 'user_uid',
+        $this->hasOne('UNL_MediaHub_User',       array('local'   => 'user_uid',
                                                        'foreign' => 'uid'));
-        $this->hasOne('UNL_MediaYak_Permission', array('local'   => 'permission_id',
+        $this->hasOne('UNL_MediaHub_Permission', array('local'   => 'permission_id',
                                                        'foreign' => 'id'));
-        $this->hasOne('UNL_MediaYak_Feed',       array('local'   => 'feed_id',
+        $this->hasOne('UNL_MediaHub_Feed',       array('local'   => 'feed_id',
                                                        'foreign' => 'id'));
         parent::setUp();
     }

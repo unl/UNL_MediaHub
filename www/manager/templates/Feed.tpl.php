@@ -1,5 +1,5 @@
 <?php
-$feed_url = htmlentities(UNL_MediaYak_Controller::getURL($context), ENT_QUOTES);
+$feed_url = htmlentities(UNL_MediaHub_Controller::getURL($context), ENT_QUOTES);
 
 ?>
 <div id="channelIntro">
@@ -36,8 +36,8 @@ $feed_url = htmlentities(UNL_MediaYak_Controller::getURL($context), ENT_QUOTES);
 </div>
 <div class="one_col right">
     <div class="actionItems" style="margin-top:35px;">
-        <a class="action edit details" href="<?php echo UNL_MediaYak_Manager::getURL(); ?>?view=feedmetadata&amp;id=<?php echo $context->id; ?>">Edit Channel Details</a>
-        <a class="action edit users" href="<?php echo UNL_MediaYak_Manager::getURL(); ?>?view=permissions&amp;feed_id=<?php echo $context->id; ?>">Edit Channel Users</a>
+        <a class="action edit details" href="<?php echo UNL_MediaHub_Manager::getURL(); ?>?view=feedmetadata&amp;id=<?php echo $context->id; ?>">Edit Channel Details</a>
+        <a class="action edit users" href="<?php echo UNL_MediaHub_Manager::getURL(); ?>?view=permissions&amp;feed_id=<?php echo $context->id; ?>">Edit Channel Users</a>
     </div>
 </div>
 <div class="clear"></div>

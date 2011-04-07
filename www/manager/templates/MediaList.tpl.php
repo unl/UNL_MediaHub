@@ -1,9 +1,9 @@
 <?php
-$addMediaURL = UNL_MediaYak_Manager::getURL().'?view=addmedia';
+$addMediaURL = UNL_MediaHub_Manager::getURL().'?view=addmedia';
 if (isset($_GET['id'])) {
     $addMediaURL .= '&amp;feed_id='.$_GET['id'];
 }
-$url = UNL_MediaYak_Manager::getURL(null, array_merge($context->options, array('page'=>'{%page_number}')));
+$url = UNL_MediaHub_Manager::getURL(null, array_merge($context->options, array('page'=>'{%page_number}')));
 ?>
 <div class="group">
 	<h3>Media in this Channel</h3>
@@ -11,14 +11,14 @@ $url = UNL_MediaYak_Manager::getURL(null, array_merge($context->options, array('
 </div>
 <?php
 if (count($context->items)) {
-    $pager_layout = new UNL_MediaYak_List_PagerLayout($context->pager,
+    $pager_layout = new UNL_MediaHub_List_PagerLayout($context->pager,
         new Doctrine_Pager_Range_Sliding(array('chunk'=>5)),
         $url);
     $pager_links = $pager_layout->display(null, true);
     echo '<ul class="medialist">';
     foreach ($context->items as $media) { ?>
         <li>
-            <a href="<?php echo UNL_MediaYak_Controller::getURL($media); ?>"><img class="thumbnail" src="<?php echo UNL_MediaYak_Controller::$thumbnail_generator.urlencode($media->url); ?>" alt="Thumbnail preview for <?php echo htmlentities($media->title, ENT_QUOTES); ?>" width="100" height="76" /></a>
+            <a href="<?php echo UNL_MediaHub_Controller::getURL($media); ?>"><img class="thumbnail" src="<?php echo UNL_MediaHub_Controller::$thumbnail_generator.urlencode($media->url); ?>" alt="Thumbnail preview for <?php echo htmlentities($media->title, ENT_QUOTES); ?>" width="100" height="76" /></a>
             <div class="actions">
             <a href="<?php echo $addMediaURL; ?>&amp;id=<?php echo $media->id; ?>">Edit</a>
             <?php
@@ -26,13 +26,13 @@ if (count($context->items)) {
             ?>
             </div>
             <div class="metaInfo">
-            <h4><a href="<?php echo UNL_MediaYak_Controller::getURL($media); ?>"><?php echo htmlspecialchars($media->title); ?></a></h4>
+            <h4><a href="<?php echo UNL_MediaHub_Controller::getURL($media); ?>"><?php echo htmlspecialchars($media->title); ?></a></h4>
             <?php
             $element = $media->datecreated;
                     echo '<h6 class="subhead">Added on '.date("F j, Y, g:i a", strtotime($element)).'</h6>';
                     
             $summary = $media->description;
-            if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_itunes::mediaHasElement($media->id, 'summary')) {
+            if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_itunes::mediaHasElement($media->id, 'summary')) {
                 $summary .= '<span class="itunes_summary">'.$element->value.'</span>';
             }
             $summary = strip_tags($summary, '<a><img>');

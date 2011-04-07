@@ -1,9 +1,9 @@
 <?php
 require_once dirname(__FILE__).'/../config.inc.php';
 
-$mediayak = new UNL_MediaYak($dsn);
+$mediayak = new UNL_MediaHub($dsn);
 
-$list = new UNL_MediaYak_MediaList();
+$list = new UNL_MediaHub_MediaList();
 $list->options['limit'] = 3000;
 $list->run();
 

@@ -4,6 +4,6 @@
  * 
  * @author bbieber
  */
-interface UNL_MediaYak_CacheableInterface extends Savvy_Turbo_CacheableInterface
+interface UNL_MediaHub_CacheableInterface extends Savvy_Turbo_CacheableInterface
 {
 }

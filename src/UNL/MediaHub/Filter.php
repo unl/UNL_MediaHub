@@ -1,10 +1,10 @@
 <?php
 /**
- * A filter which can be applied to a UNL_MediaYak_List
+ * A filter which can be applied to a UNL_MediaHub_List
  * 
  * @author bbieber
  */
-interface UNL_MediaYak_Filter
+interface UNL_MediaHub_Filter
 {
     /**
      * Applies the filter to the query

@@ -1,5 +1,5 @@
 <?php
-class UNL_MediaYak_FeedList_Filter_WithMediaId implements UNL_MediaYak_Filter
+class UNL_MediaHub_FeedList_Filter_WithMediaId implements UNL_MediaHub_Filter
 {
     public $id;
 
@@ -10,7 +10,7 @@ class UNL_MediaYak_FeedList_Filter_WithMediaId implements UNL_MediaYak_Filter
     
     function apply(Doctrine_Query &$query)
     {
-        $query->where('UNL_MediaYak_Feed_Media.media_id = '.(int)$this->id.' AND UNL_MediaYak_Feed_Media.feed_id = f.id');
+        $query->where('UNL_MediaHub_Feed_Media.media_id = '.(int)$this->id.' AND UNL_MediaHub_Feed_Media.feed_id = f.id');
         $query->distinct();
     }
     

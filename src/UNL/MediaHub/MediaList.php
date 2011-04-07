@@ -1,6 +1,6 @@
 <?php
 
-class UNL_MediaYak_MediaList extends UNL_MediaYak_List
+class UNL_MediaHub_MediaList extends UNL_MediaHub_List
 {
     
     public $options = array('orderby' => 'datecreated',
@@ -8,7 +8,7 @@ class UNL_MediaYak_MediaList extends UNL_MediaYak_List
                             'page'    => 0,
                             'limit'   => 10);
    
-    public $tables = 'UNL_MediaYak_Media m';
+    public $tables = 'UNL_MediaHub_Media m';
 
     function __construct($options = array())
     {
@@ -21,11 +21,11 @@ class UNL_MediaYak_MediaList extends UNL_MediaYak_List
     {
         if (isset($this->options['q'])
             && !empty($this->options['q'])) {
-            $this->options['filter'] = new UNL_MediaYak_MediaList_Filter_TextSearch($this->options['q']);
+            $this->options['filter'] = new UNL_MediaHub_MediaList_Filter_TextSearch($this->options['q']);
         }
     	if (isset($this->options['t'])
             && !empty($this->options['t'])) {
-            $this->options['filter'] = new UNL_MediaYak_MediaList_Filter_KeywordSearch($this->options['t']);
+            $this->options['filter'] = new UNL_MediaHub_MediaList_Filter_KeywordSearch($this->options['t']);
         }
     }
     
@@ -62,7 +62,7 @@ class UNL_MediaYak_MediaList extends UNL_MediaYak_List
     {
         $params = array();
 
-        $this->url = UNL_MediaYak_Controller::getURL();
+        $this->url = UNL_MediaHub_Controller::getURL();
         if (!empty($this->options['filter'])) {
             switch ($this->options['filter']->getType()) {
                 case 'tag':
@@ -81,7 +81,7 @@ class UNL_MediaYak_MediaList extends UNL_MediaYak_List
         $params['orderby'] = $this->options['orderby'];
         $params['order']   = $this->options['order'];
 
-        $this->url = UNL_MediaYak_Controller::addURLParams($this->url, $params);
+        $this->url = UNL_MediaHub_Controller::addURLParams($this->url, $params);
         
         return $this->url;
     }

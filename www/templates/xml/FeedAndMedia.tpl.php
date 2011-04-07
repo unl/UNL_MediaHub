@@ -1,18 +1,18 @@
 <?php
-$context->feed->loadReference('UNL_MediaYak_Feed_NamespacedElements_itunes');
-$context->feed->loadReference('UNL_MediaYak_Feed_NamespacedElements_media');
+$context->feed->loadReference('UNL_MediaHub_Feed_NamespacedElements_itunes');
+$context->feed->loadReference('UNL_MediaHub_Feed_NamespacedElements_media');
 echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
 ?>
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:itunesu="http://www.itunesu.com/feed" xmlns:media="http://search.yahoo.com/mrss/"  xmlns:boxee="http://boxee.tv/spec/rss/">
   <channel>
     <title><?php echo $context->feed->title; ?></title>
-    <link><?php echo UNL_MediaYak_Controller::getURL($context->feed); ?></link>
+    <link><?php echo UNL_MediaHub_Controller::getURL($context->feed); ?></link>
     <description><?php echo $context->feed->description; ?></description>
     <language>en-us</language>
     <pubDate><?php echo date('r'); ?></pubDate>
     <lastBuildDate><?php echo date('r'); ?></lastBuildDate>
     <docs>http://www.rssboard.org/rss-specification</docs>
-    <generator>UNL_MediaYak 0.1.0</generator>
+    <generator>UNL_MediaHub 0.1.0</generator>
     <?php
     if (!($editor = $context->feed->getEditorEmail())) {
         $editor = 'unlwdn@gmail.com';
@@ -33,19 +33,19 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
             break;
     }
     ?>
-    <itunes:image href="<?php echo UNL_MediaYak_Controller::getURL($context->feed); ?>/image<?php echo $ext; ?>" />
+    <itunes:image href="<?php echo UNL_MediaHub_Controller::getURL($context->feed); ?>/image<?php echo $ext; ?>" />
     <image>
-        <url><?php echo UNL_MediaYak_Controller::getURL($context->feed); ?>/image</url>
+        <url><?php echo UNL_MediaHub_Controller::getURL($context->feed); ?>/image</url>
         <title><?php echo htmlspecialchars($context->feed->image_title, ENT_QUOTES); ?></title>
-        <link><?php echo UNL_MediaYak_Controller::getURL($context->feed); ?></link>
+        <link><?php echo UNL_MediaHub_Controller::getURL($context->feed); ?></link>
         <?php if (isset($context->feed->image_description)): ?>
             <description><?php echo htmlspecialchars($context->feed->image_description); ?></description>
         <?php endif; ?>
     </image>
     <?php endif;
-    foreach (array('UNL_MediaYak_Feed_NamespacedElements_itunes',
-                   'UNL_MediaYak_Feed_NamespacedElements_media',
-                   'UNL_MediaYak_Feed_NamespacedElements_boxee') as $ns_class) {
+    foreach (array('UNL_MediaHub_Feed_NamespacedElements_itunes',
+                   'UNL_MediaHub_Feed_NamespacedElements_media',
+                   'UNL_MediaHub_Feed_NamespacedElements_boxee') as $ns_class) {
         foreach ($context->feed->$ns_class as $namespaced_element) {
             $element = "{$namespaced_element['xmlns']}:{$namespaced_element['element']}";
             switch ($element) {

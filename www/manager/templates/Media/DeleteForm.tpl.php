@@ -1,10 +1,10 @@
 <?php
 $action = '#';
 
-if ($parent->parent->context instanceof UNL_MediaYak_FeedAndMedia) {
+if ($parent->parent->context instanceof UNL_MediaHub_FeedAndMedia) {
     $feed_id = (int)$parent->parent->context->feed->id;
     $action = '?view=feed&amp;id='.$feed_id;
-} elseif ($parent->parent->context instanceof UNL_MediaYak_Manager) {
+} elseif ($parent->parent->context instanceof UNL_MediaHub_Manager) {
     $feed_id = (int)$parent->parent->context->options['id'];
     $action = '?view=feed&amp;id='.(int)$parent->parent->context->options['id'];
 }

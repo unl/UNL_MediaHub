@@ -1,9 +1,9 @@
 <?php
 require_once dirname(__FILE__).'/../config.inc.php';
 
-$mediayak = new UNL_MediaYak($dsn);
+$mediayak = new UNL_MediaHub($dsn);
 
-$subscriptions = new UNL_MediaYak_SubscriptionList();
+$subscriptions = new UNL_MediaHub_SubscriptionList();
 $subscriptions->run();
 
 if (count($subscriptions->items)) {    
@@ -12,7 +12,7 @@ if (count($subscriptions->items)) {
         $media_added = 0;
         foreach ($subscriptions->items as $subscription) {
             /**
-             * @var $subscription UNL_MediaYak_Subscription 
+             * @var $subscription UNL_MediaHub_Subscription 
              */
             echo 'Processing '.$subscription->filter_class.'('.$subscription->filter_option.'):'.PHP_EOL;
             $media_added += $subscription->process();

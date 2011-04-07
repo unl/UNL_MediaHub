@@ -1,7 +1,7 @@
 <?php
 
 
-class UNL_MediaYak_Feed_Media_NamespacedElements_itunesu extends UNL_MediaYak_Feed_Media_NamespacedElements
+class UNL_MediaHub_Feed_Media_NamespacedElements_itunesu extends UNL_MediaHub_Feed_Media_NamespacedElements
 {
     protected $xmlns = 'itunesu';
     
@@ -16,7 +16,7 @@ class UNL_MediaYak_Feed_Media_NamespacedElements_itunesu extends UNL_MediaYak_Fe
     
     public static function mediaHasElement($media_id, $element)
     {
-        return UNL_MediaYak_Feed_Media_NamespacedElements::mediaHasElement($media_id, $element, 'itunesu');
+        return UNL_MediaHub_Feed_Media_NamespacedElements::mediaHasElement($media_id, $element, 'itunesu');
     }
     
     function preInsert($event)

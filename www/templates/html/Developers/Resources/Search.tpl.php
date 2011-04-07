@@ -5,7 +5,7 @@
             <li>
                 <h4 id="search-uri"><a href="#search-uri">Resource URI</a></h4>
                 <blockquote>
-                    <p><?php echo UNL_MediaYak_Controller::$url; ?>search/{query}</p>
+                    <p><?php echo UNL_MediaHub_Controller::$url; ?>search/{query}</p>
                 </blockquote>
             </li>
             <li>
@@ -47,7 +47,7 @@
                                 Provides this:
                                 <?php 
                                 //Get the output.
-                                if (!$result = file_get_contents(UNL_MediaYak_Controller::$url."search/idk?format=json")) {
+                                if (!$result = file_get_contents(UNL_MediaHub_Controller::$url."search/idk?format=json")) {
                                     $result = "Error getting file contents.";
                                 }
                                 ?>
@@ -69,7 +69,7 @@
                                 Provides this:
                                 <?php 
                                 //Get the output.
-                                if (!$result = file_get_contents(UNL_MediaYak_Controller::$url."search/idk?format=xml")) {
+                                if (!$result = file_get_contents(UNL_MediaHub_Controller::$url."search/idk?format=xml")) {
                                     $result = "Error getting file contents.";
                                 }
                                 ?>
@@ -91,7 +91,7 @@
                                 Provides this:
                                 <?php 
                                 //Get the output.
-                                if (!$partial = file_get_contents(UNL_MediaYak_Controller::$url."search/idk?format=partial")) {
+                                if (!$partial = file_get_contents(UNL_MediaHub_Controller::$url."search/idk?format=partial")) {
                                     $partial = "Error getting file contents.";
                                 }
                                 ?>

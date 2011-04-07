@@ -6,7 +6,7 @@ if (file_exists(dirname(__FILE__).'/config.inc.php')) {
 }
 
 echo 'Connecting to the database&hellip;';
-$mediahub = new UNL_MediaYak($dsn);
+$mediahub = new UNL_MediaHub($dsn);
 $db = $mediahub->getDB();
 echo 'connected successfully!<br />';
 /**

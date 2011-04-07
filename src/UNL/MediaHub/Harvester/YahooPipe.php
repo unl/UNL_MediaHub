@@ -1,6 +1,6 @@
 <?php
 
-class UNL_MediaYak_Harvester_YahooPipe extends UNL_MediaYak_Harvester
+class UNL_MediaHub_Harvester_YahooPipe extends UNL_MediaHub_Harvester
 {
     
     protected $feed;
@@ -67,7 +67,7 @@ class UNL_MediaYak_Harvester_YahooPipe extends UNL_MediaYak_Harvester
         }
         
         // @TODO Namespaced attributes need to be supported!
-        return new UNL_MediaYak_HarvestedMedia($this->feed['value']['items'][$this->current]['link'],
+        return new UNL_MediaHub_HarvestedMedia($this->feed['value']['items'][$this->current]['link'],
                                                $title,
                                                $description,
                                                $pubDate,

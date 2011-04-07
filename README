@@ -10,7 +10,7 @@ mysql -u root
 CREATE DATABASE mediayak;
 GRANT ALL ON mediayak.* TO mediayak@localhost IDENTIFIED BY 'mediayak';
 
-mysql -u mediayak -p mediayak < UNL_MediaYak/data/mediayak.sql
+mysql -u mediayak -p mediayak < UNL_MediaHub/data/mediayak.sql
 
 
 username: mediayak

@@ -5,12 +5,12 @@ if (!$context->feed->hasLiveStream()) {
     return;
 }
 
-$feed_url = htmlentities(UNL_MediaYak_Controller::getURL($context->feed), ENT_QUOTES);
-UNL_MediaYak_Controller::setReplacementData('title', 'UNL | MediaHub | '.htmlspecialchars($context->feed->title). ' | Live');
-UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '
+$feed_url = htmlentities(UNL_MediaHub_Controller::getURL($context->feed), ENT_QUOTES);
+UNL_MediaHub_Controller::setReplacementData('title', 'UNL | MediaHub | '.htmlspecialchars($context->feed->title). ' | Live');
+UNL_MediaHub_Controller::setReplacementData('breadcrumbs', '
 <ul>
     <li><a href="http://www.unl.edu/">UNL</a></li>
-    <li><a href="'.UNL_MediaYak_Controller::getURL().'">MediaHub</a></li>
+    <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li>
     <li><a href="'.$feed_url.'">'.htmlspecialchars($context->feed->title).'</a></li>
     <li>Live</li>
 </ul>');
@@ -44,7 +44,7 @@ UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '
 						'file': 'live_3.sdp',   
 						'autostart': 'true',
 						'streamer': 'rtmp://real.unl.edu/live_3/'
-						//'image': '<?php echo UNL_MediaYak_Controller::getURL();?>templates/html/css/images/innovation_campus.jpg'
+						//'image': '<?php echo UNL_MediaHub_Controller::getURL();?>templates/html/css/images/innovation_campus.jpg'
 					},
 					height: '358',
 					width: '600',

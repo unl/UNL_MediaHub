@@ -1,7 +1,7 @@
 <?php
 
 
-class UNL_MediaYak_Feed_Media_NamespacedElements_boxee extends UNL_MediaYak_Feed_Media_NamespacedElements
+class UNL_MediaHub_Feed_Media_NamespacedElements_boxee extends UNL_MediaHub_Feed_Media_NamespacedElements
 {
     protected $xmlns = 'boxee';
     
@@ -36,7 +36,7 @@ class UNL_MediaYak_Feed_Media_NamespacedElements_boxee extends UNL_MediaYak_Feed
     
     public static function mediaHasElement($media_id, $element)
     {
-        return UNL_MediaYak_Feed_Media_NamespacedElements::mediaHasElement($media_id, $element, 'boxee');
+        return UNL_MediaHub_Feed_Media_NamespacedElements::mediaHasElement($media_id, $element, 'boxee');
     }
     
     function preInsert($event)

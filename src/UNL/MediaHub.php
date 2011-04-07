@@ -1,5 +1,5 @@
 <?php
-class UNL_MediaYak
+class UNL_MediaHub
 {
     public $dsn;
     
@@ -7,7 +7,7 @@ class UNL_MediaYak
     {
 
         Doctrine_Manager::getInstance()->setAttribute('model_loading', 'conservative');
-        Doctrine::loadModels(dirname(dirname(__FILE__)).'/UNL/MediaYak/Media');
+        Doctrine::loadModels(dirname(dirname(__FILE__)).'/UNL/MediaHub/Media');
         Doctrine_Manager::connection($dsn);
 
     }
@@ -42,11 +42,11 @@ class UNL_MediaYak
      *
      * @param array $details
      *
-     * @return UNL_MediaYak_Media
+     * @return UNL_MediaHub_Media
      */
     function addMedia(array $details)
     {
-        $media = new UNL_MediaYak_Media();
+        $media = new UNL_MediaHub_Media();
         $media->fromArray($details);
         $media->save();
         return $media;
@@ -55,16 +55,16 @@ class UNL_MediaYak
     /**
      * Add media from a Harvester.
      *
-     * @param UNL_MediaYak_Harvester $harvester A harvester that can returned harvested media.
+     * @param UNL_MediaHub_Harvester $harvester A harvester that can returned harvested media.
      *
      * @return bool
      */
-    function harvest(UNL_MediaYak_Harvester $harvester)
+    function harvest(UNL_MediaHub_Harvester $harvester)
     {
         foreach ($harvester as $url=>$harvested_media) {
             
-            if (!($harvested_media instanceof UNL_MediaYak_HarvestedMedia)) {
-                throw new Exception('Harvesters must return a UNL_MediaYak_HarvestedMedia class!');
+            if (!($harvested_media instanceof UNL_MediaHub_HarvestedMedia)) {
+                throw new Exception('Harvesters must return a UNL_MediaHub_HarvestedMedia class!');
             }
             
             // Collect the namespaced elements first
@@ -77,7 +77,7 @@ class UNL_MediaYak
                         case 'unl':
                         case 'itunes':
                         case 'itunesu':
-                            $ns_class = 'UNL_MediaYak_Feed_Media_NamespacedElements_'.$xmlns;
+                            $ns_class = 'UNL_MediaHub_Feed_Media_NamespacedElements_'.$xmlns;
                             foreach ($elements as $element=>$value) {
                                 $add_ns_elements[$ns_class][] = array('element'=>$element, 'value'=>$value);
                             }
@@ -90,19 +90,19 @@ class UNL_MediaYak
             }
             
             // Try and find an existing one with this URL.
-            if ($media = UNL_MediaYak_Media::getByURL($harvested_media->getURL())) {
+            if ($media = UNL_MediaHub_Media::getByURL($harvested_media->getURL())) {
                 // Already exists do update
-                $media->loadReference('UNL_MediaYak_Feed_Media_NamespacedElements_itunesu');
-                $media->loadReference('UNL_MediaYak_Feed_Media_NamespacedElements_itunes');
-                $media->loadReference('UNL_MediaYak_Feed_Media_NamespacedElements_media');
-                $media->loadReference('UNL_MediaYak_Feed_Media_NamespacedElements_boxee');
+                $media->loadReference('UNL_MediaHub_Feed_Media_NamespacedElements_itunesu');
+                $media->loadReference('UNL_MediaHub_Feed_Media_NamespacedElements_itunes');
+                $media->loadReference('UNL_MediaHub_Feed_Media_NamespacedElements_media');
+                $media->loadReference('UNL_MediaHub_Feed_Media_NamespacedElements_boxee');
                 $media->title       = $harvested_media->getTitle();
                 $media->description = $harvested_media->getDescription();
                 $media->datecreated = $harvested_media->getDatePublished();
                 
                 
-                $media->UNL_MediaYak_Feed_Media_NamespacedElements_itunes->delete();
-                //$media->UNL_MediaYak_Feed_Media_NamespacedElements_media->delete();
+                $media->UNL_MediaHub_Feed_Media_NamespacedElements_itunes->delete();
+                //$media->UNL_MediaHub_Feed_Media_NamespacedElements_media->delete();
                 $media->save();
                 $media->synchronizeWithArray(array_merge($media->toArray(), $add_ns_elements));
                 $media->save();

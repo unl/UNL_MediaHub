@@ -350,9 +350,9 @@ class UNL_Templates extends UNL_DWT
 
     static public function getDataDir()
     {
-        if ('/Users/bbieber/Documents/workspace/UNL_MediaYak/lib/data' != '@DATA_DIR'.'@') {
+        if ('/Users/bbieber/Documents/workspace/UNL_MediaHub/lib/data' != '@DATA_DIR'.'@') {
             // pear/pyrus installation
-            return '/Users/bbieber/Documents/workspace/UNL_MediaYak/lib/data/UNL_Templates/data/';
+            return '/Users/bbieber/Documents/workspace/UNL_MediaHub/lib/data/UNL_Templates/data/';
         }
         
         if (file_exists(dirname(__FILE__).'/../data/tpl_cache')) {

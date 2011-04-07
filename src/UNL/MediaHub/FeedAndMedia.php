@@ -4,19 +4,19 @@
  * 
  * @author bbieber
  */
-class UNL_MediaYak_FeedAndMedia
+class UNL_MediaHub_FeedAndMedia
 {
     /**
      * The Feed object
      * 
-     * @var UNL_MediaYak_Feed
+     * @var UNL_MediaHub_Feed
      */
     public $feed;
     
     /**
      * List of associated media.
      * 
-     * @var UNL_MediaYak_MediaList
+     * @var UNL_MediaHub_MediaList
      */
     public $media_list;
     
@@ -25,7 +25,7 @@ class UNL_MediaYak_FeedAndMedia
      * 
      * @param array $options Associative array of options
      * 
-     * @see UNL_MediaYak_MediaList
+     * @see UNL_MediaHub_MediaList
      * 
      * @return void
      */
@@ -35,26 +35,26 @@ class UNL_MediaYak_FeedAndMedia
         if (!empty($options['feed'])) {
             $this->feed = $options['feed'];
         } elseif (!empty($options['feed_id'])) {
-            $this->feed = UNL_MediaYak_Feed::getById($options['feed_id']);
+            $this->feed = UNL_MediaHub_Feed::getById($options['feed_id']);
         } elseif (!empty($options['title'])) {
-            $this->feed = UNL_MediaYak_Feed::getByTitle($options['title']);
+            $this->feed = UNL_MediaHub_Feed::getByTitle($options['title']);
         }
 
         if (false === $this->feed) {
             throw new Exception('That feed could not be found.', 404);
         }
 
-        $this->media_list = new UNL_MediaYak_MediaList(array('filter'=>new UNL_MediaYak_MediaList_Filter_ByFeed($this->feed))+$options);
+        $this->media_list = new UNL_MediaHub_MediaList(array('filter'=>new UNL_MediaHub_MediaList_Filter_ByFeed($this->feed))+$options);
     }
     
     /**
      * Set the media list
      * 
-     * @param UNL_MediaYak_MediaList $media_list The list of media
+     * @param UNL_MediaHub_MediaList $media_list The list of media
      * 
      * @return void
      */
-    public function setMediaList(UNL_MediaYak_MediaList $media_list)
+    public function setMediaList(UNL_MediaHub_MediaList $media_list)
     {
         $this->media_list = $media_list;
     }

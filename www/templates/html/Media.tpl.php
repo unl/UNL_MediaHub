@@ -1,23 +1,23 @@
 <?php
 $type = 'audio';
-if (UNL_MediaYak_Media::isVideo($context->type)) {
+if (UNL_MediaHub_Media::isVideo($context->type)) {
     $type = 'video';
     $height = 529;
     $width = 940;
-    $dimensions = UNL_MediaYak_Media::getMediaDimensions($context->id);
+    $dimensions = UNL_MediaHub_Media::getMediaDimensions($context->id);
     if (isset($dimensions['width'])) {
         // Scale everything down to 450 wide
         $height = round(($width/$dimensions['width'])*$dimensions['height']);
     }
 }
 
-$context->loadReference('UNL_MediaYak_Media_Comment');
-UNL_MediaYak_Controller::setReplacementData('title', 'UNL | MediaHub | '.htmlspecialchars($context->title));
-UNL_MediaYak_Controller::setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaYak_Controller::getURL().'">MediaHub</a></li> <li>'.htmlspecialchars($context->title).'</li></ul>');
+$context->loadReference('UNL_MediaHub_Media_Comment');
+UNL_MediaHub_Controller::setReplacementData('title', 'UNL | MediaHub | '.htmlspecialchars($context->title));
+UNL_MediaHub_Controller::setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li>'.htmlspecialchars($context->title).'</li></ul>');
 $meta = '
 <meta name="title" content="'.htmlentities($context->title, ENT_QUOTES).'" />
 <meta name="description" content="'.htmlentities($context->description, ENT_QUOTES).'" />
-<link rel="image_src" href="'.UNL_MediaYak_Controller::$thumbnail_generator.urlencode($context->url).'" />
+<link rel="image_src" href="'.UNL_MediaHub_Controller::$thumbnail_generator.urlencode($context->url).'" />
 <script type="text/javascript">
 WDN.jQuery(document).ready(function(){
     WDN.jQuery(\'span.embed\').colorbox({inline: true, href:\'#sharing\', width:\'600px\', height:\'310px\'});
@@ -31,7 +31,7 @@ function playerReady(thePlayer) {
 if ($type == 'video') {
     $meta .= '<link rel="video_src" href="'.$context->url.'" />';
 }
-UNL_MediaYak_Controller::setReplacementData('head', $meta);
+UNL_MediaHub_Controller::setReplacementData('head', $meta);
 
 // Store the mediaplayer code in a variable, so we can re-use it for the embed
 $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
@@ -41,11 +41,11 @@ echo $mediaplayer;
 <div class="three_col left supportingContent">
     <h2><?php echo $context->title; ?></h2>
     <?php
-    if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_itunes::mediaHasElement($context->id, 'subtitle')) {
+    if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_itunes::mediaHasElement($context->id, 'subtitle')) {
         echo '<h3 class="itunes_subtitle">'.$element->value.'</h3>';
     }
     $summary = $context->description;
-    if ($element = UNL_MediaYak_Feed_Media_NamespacedElements_itunes::mediaHasElement($context->id, 'summary')) {
+    if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_itunes::mediaHasElement($context->id, 'summary')) {
         $summary .= '<span class="itunes_summary">'.$element->value.'</span>';
     }
     ?>
@@ -55,12 +55,12 @@ echo $mediaplayer;
     <ul id="mediaTags">
         <?php
         foreach ($context->getTags() as $tag) {
-            echo '<li><a href="'.UNL_MediaYak_Controller::$url.'tags/'.urlencode(trim($tag)).'">'.$tag.'</a></li>';
+            echo '<li><a href="'.UNL_MediaHub_Controller::$url.'tags/'.urlencode(trim($tag)).'">'.$tag.'</a></li>';
         }
-	    if (UNL_MediaYak_Controller::isLoggedIn()) {
+	    if (UNL_MediaHub_Controller::isLoggedIn()) {
 	    	echo '<li id="mediaTagsAdd"><a href="#">Add tags</a><form id="addTags" method="post"><input type="text" value="" name="tags" /><input type="submit" value="Add" /></form></li>';
 	    } else {
-	    	echo '<li id="mediaTagsAdd"><a href="https://login.unl.edu/cas/login?service='.urlencode(UNL_MediaYak_Controller::getURL()).'">Login to add tags </a></li>';
+	    	echo '<li id="mediaTagsAdd"><a href="https://login.unl.edu/cas/login?service='.urlencode(UNL_MediaHub_Controller::getURL()).'">Login to add tags </a></li>';
 	    }
 
 	    ?>
@@ -71,11 +71,11 @@ echo $mediaplayer;
     	WDN.loadCSS('../templates/html/css/comments.css');
     </script>
     <h4>Comments</h4>
-    <span class="subhead"><?php echo count($context->UNL_MediaYak_Media_Comment); ?> Comments | <a href="#commentForm">Leave Yours</a></span>
+    <span class="subhead"><?php echo count($context->UNL_MediaHub_Media_Comment); ?> Comments | <a href="#commentForm">Leave Yours</a></span>
     <?php
-    if (count($context->UNL_MediaYak_Media_Comment)) {
+    if (count($context->UNL_MediaHub_Media_Comment)) {
         echo '<ul>';
-        foreach ($context->UNL_MediaYak_Media_Comment as $comment) {
+        foreach ($context->UNL_MediaHub_Media_Comment as $comment) {
             echo '<li>';
             if ($name = UNL_Services_Peoplefinder::getFullName($comment['uid'])) {
                 
@@ -90,12 +90,12 @@ echo $mediaplayer;
     }?>
     </div>
     <?php
-    if (UNL_MediaYak_Controller::isLoggedIn()) {
+    if (UNL_MediaHub_Controller::isLoggedIn()) {
         // show the form!
-        $form = new UNL_MediaYak_Media_Comment_Form();
+        $form = new UNL_MediaHub_Media_Comment_Form();
         echo $savvy->render($form);
     } else {
-        echo '<a href="https://login.unl.edu/cas/login?service='.urlencode(UNL_MediaYak_Controller::getURL($context)).'">Log in to post comments</a>';
+        echo '<a href="https://login.unl.edu/cas/login?service='.urlencode(UNL_MediaHub_Controller::getURL($context)).'">Log in to post comments</a>';
     }?>
 </div>
 <div class="col right supportingContent" id="properties">

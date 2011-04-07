@@ -4,7 +4,7 @@
  * 
  * @author bbieber
  */
-class UNL_MediaYak_HarvestedMedia
+class UNL_MediaHub_HarvestedMedia
 {
     protected $url;
     protected $title;

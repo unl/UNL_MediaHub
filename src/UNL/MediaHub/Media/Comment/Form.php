@@ -1,5 +1,5 @@
 <?php
-class UNL_MediaYak_Media_Comment_Form
+class UNL_MediaHub_Media_Comment_Form
 {
     public $media;
     

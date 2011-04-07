@@ -11,8 +11,8 @@
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
  * @link      http://code.google.com/p/unl-event-publisher/
  */
-class UNL_MediaYak_Controller
-    implements UNL_MediaYak_CacheableInterface, UNL_MediaYak_PostRunReplacements
+class UNL_MediaHub_Controller
+    implements UNL_MediaHub_CacheableInterface, UNL_MediaHub_PostRunReplacements
 {
     /**
      * Auth object for the client.
@@ -65,24 +65,24 @@ class UNL_MediaYak_Controller
     /**
      * currently logged in user, if any
      * 
-     * @var UNL_MediaYak_User
+     * @var UNL_MediaHub_User
      */
     protected static $user;
     
     protected $view_map = array(
-        'search'  => 'UNL_MediaYak_MediaList',
-    	'tags'    => 'UNL_MediaYak_MediaList',
-        'default' => 'UNL_MediaYak_DefaultHomepage',
-        'feeds'   => 'UNL_MediaYak_FeedList',
-        'feed'    => 'UNL_MediaYak_FeedAndMedia',
-        'dev'     => 'UNL_MediaYak_Developers',
-        'live'    => 'UNL_MediaYak_Feed_LiveStream',
+        'search'  => 'UNL_MediaHub_MediaList',
+    	'tags'    => 'UNL_MediaHub_MediaList',
+        'default' => 'UNL_MediaHub_DefaultHomepage',
+        'feeds'   => 'UNL_MediaHub_FeedList',
+        'feed'    => 'UNL_MediaHub_FeedAndMedia',
+        'dev'     => 'UNL_MediaHub_Developers',
+        'live'    => 'UNL_MediaHub_Feed_LiveStream',
         );
     
     /**
      * Backend media system.
      *
-     * @var UNL_MediaYak
+     * @var UNL_MediaHub
      */
     protected $mediayak;
     
@@ -94,7 +94,7 @@ class UNL_MediaYak_Controller
     function __construct($options, $dsn)
     {
         // Set up database
-        $this->mediayak = new UNL_MediaYak($dsn);
+        $this->mediayak = new UNL_MediaHub($dsn);
         
         // Initialize default options
         $this->options = $options + $this->options;
@@ -112,7 +112,7 @@ class UNL_MediaYak_Controller
         }
 
         if (self::$auth->isLoggedIn()) {
-            self::$user = UNL_MediaYak_User::getByUid(self::$auth->getUser());
+            self::$user = UNL_MediaHub_User::getByUid(self::$auth->getUser());
         }
     }
 
@@ -183,7 +183,7 @@ class UNL_MediaYak_Controller
     function preRun($cached)
     {
         if ($this->options['view'] == 'feed_image') {
-            UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_Controller', 'ControllerPartial');
+            UNL_MediaHub_OutputController::setOutputTemplate('UNL_MediaHub_Controller', 'ControllerPartial');
             return false;
         }
         // Send headers for CORS support so calendar bits can be pulled remotely
@@ -202,7 +202,7 @@ class UNL_MediaYak_Controller
             header('Content-type: text/xml');
             break;
         case 'partial':
-            UNL_MediaYak_OutputController::setOutputTemplate('UNL_MediaYak_Controller', 'ControllerPartial');
+            UNL_MediaHub_OutputController::setOutputTemplate('UNL_MediaHub_Controller', 'ControllerPartial');
             break;
         case 'json':
             header('Content-type: application/json');
@@ -234,9 +234,9 @@ class UNL_MediaYak_Controller
                 break;
             case 'feed_image':
                 if (isset($this->options['feed_id'])) {
-                    $this->output[] = UNL_MediaYak_Feed_Image::getById($this->options['feed_id']);
+                    $this->output[] = UNL_MediaHub_Feed_Image::getById($this->options['feed_id']);
                 } else {
-                    $this->output[] = UNL_MediaYak_Feed_Image::getByTitle($this->options['title']);
+                    $this->output[] = UNL_MediaHub_Feed_Image::getByTitle($this->options['title']);
                 }
                 break;
             case 'default':
@@ -262,13 +262,13 @@ class UNL_MediaYak_Controller
      *
      * @param array $options Associative array of options $options['id']
      * 
-     * @return UNL_MediaYak_Media
+     * @return UNL_MediaHub_Media
      */
     function findRequestedMedia($options)
     {
         $media = false;
         if (isset($options['id'])) {
-            $media = Doctrine::getTable('UNL_MediaYak_Media')->find($options['id']);
+            $media = Doctrine::getTable('UNL_MediaHub_Media')->find($options['id']);
         }
 
         if (!empty($_POST)
@@ -279,7 +279,7 @@ class UNL_MediaYak_Controller
                               'media_id' => $media->id,
                               'comment'  => $_POST['comment']);
                 
-                $comment = new UNL_MediaYak_Media_Comment();
+                $comment = new UNL_MediaHub_Media_Comment();
                 $comment->fromArray($data);
                 $comment->save();
             }
@@ -362,20 +362,20 @@ class UNL_MediaYak_Controller
     {
         $params = array();
          
-        $url = UNL_MediaYak_Controller::$url;
+        $url = UNL_MediaHub_Controller::$url;
         
         if (is_object($mixed)) {
             switch (get_class($mixed)) {
-            case 'UNL_MediaYak_Media':
+            case 'UNL_MediaHub_Media':
                 $url .= 'media/'.$mixed->id;
                 break;
-            case 'UNL_MediaYak_MediaList':
+            case 'UNL_MediaHub_MediaList':
                 $url = $mixed->getURL();
                 break;
-            case 'UNL_MediaYak_Feed':
+            case 'UNL_MediaHub_Feed':
                 $url .= 'channels/'.$mixed->id;
                 break;
-            case 'UNL_MediaYak_FeedList':
+            case 'UNL_MediaHub_FeedList':
                 $url .= 'channels/';
                 break;
             default:

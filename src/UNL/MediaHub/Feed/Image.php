@@ -1,12 +1,12 @@
 <?php
-class UNL_MediaYak_Feed_Image extends UNL_MediaYak_Feed
+class UNL_MediaHub_Feed_Image extends UNL_MediaHub_Feed
 {
     /**
      * Get by ID
      *
      * @param int $id The id of the feed to get
      *
-     * @return UNL_MediaYak_Feed
+     * @return UNL_MediaHub_Feed
      */
     static function getById($id)
     {

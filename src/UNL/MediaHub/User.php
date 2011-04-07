@@ -1,16 +1,16 @@
 <?php
-class UNL_MediaYak_User extends UNL_MediaYak_Models_BaseUser
+class UNL_MediaHub_User extends UNL_MediaHub_Models_BaseUser
 {
     /**
      * Get a user by uid/username
      *
      * @param string $uid
      *
-     * @return UNL_MediaYak_User
+     * @return UNL_MediaHub_User
      */
     public static function getByUid($uid)
     {
-        $user = Doctrine::getTable('UNL_MediaYak_User')->find($uid);
+        $user = Doctrine::getTable('UNL_MediaHub_User')->find($uid);
         if ($user) {
             return $user;
         }
@@ -22,7 +22,7 @@ class UNL_MediaYak_User extends UNL_MediaYak_Models_BaseUser
      *
      * @param string $uid User id
      *
-     * @return UNL_MediaYak_User
+     * @return UNL_MediaHub_User
      */
     public static function addUser($uid)
     {
@@ -32,7 +32,7 @@ class UNL_MediaYak_User extends UNL_MediaYak_Models_BaseUser
         $user->fromArray($data);
         $user->save();
         // Create the defaul feed for the user
-        UNL_MediaYak_Feed::addFeed(array('title'       =>'Your Channel ('.$user->uid.')',
+        UNL_MediaHub_Feed::addFeed(array('title'       =>'Your Channel ('.$user->uid.')',
                                          'description' =>'This is your default channel'),
                                    $user);
         return $user;
@@ -41,11 +41,11 @@ class UNL_MediaYak_User extends UNL_MediaYak_Models_BaseUser
     /**
      * return a list of feeds for this user.
      *
-     * @return UNL_MediaYak_FeedList
+     * @return UNL_MediaHub_FeedList
      */
     function getFeeds($options = array())
     {
-        $options['filter'] = new UNL_MediaYak_FeedList_Filter_ByUser($this);
-        return new UNL_MediaYak_User_FeedList($options);
+        $options['filter'] = new UNL_MediaHub_FeedList_Filter_ByUser($this);
+        return new UNL_MediaHub_User_FeedList($options);
     }
 }
