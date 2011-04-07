@@ -4,18 +4,18 @@ cp config.sample.php config.inc.php
 cp sample.htaccess .htaccess
 
 Database:
-Create a database for mediayak
+Create a database for mediahub
 mysql -u root
 
-CREATE DATABASE mediayak;
-GRANT ALL ON mediayak.* TO mediayak@localhost IDENTIFIED BY 'mediayak';
+CREATE DATABASE mediahub;
+GRANT ALL ON mediahub.* TO mediahub@localhost IDENTIFIED BY 'mediahub';
 
-mysql -u mediayak -p mediayak < UNL_MediaHub/data/mediayak.sql
+mysql -u mediahub -p mediahub < UNL_MediaHub/data/mediahub.sql
 
 
-username: mediayak
-password: mediayak
-Create the database using the data/mediayak.sql
+username: mediahub
+password: mediahub
+Create the database using the data/mediahub.sql
 
 Requirements:
 PHP 5

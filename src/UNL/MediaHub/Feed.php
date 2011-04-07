@@ -1,6 +1,6 @@
 <?php
 /**
- * A feed within the mediayak system.
+ * A feed within the mediahub system.
  * 
  * @author bbieber
  */

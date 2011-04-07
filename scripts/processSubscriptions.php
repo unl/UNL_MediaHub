@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__FILE__).'/../config.inc.php';
 
-$mediayak = new UNL_MediaHub($dsn);
+$mediahub = new UNL_MediaHub($dsn);
 
 $subscriptions = new UNL_MediaHub_SubscriptionList();
 $subscriptions->run();
