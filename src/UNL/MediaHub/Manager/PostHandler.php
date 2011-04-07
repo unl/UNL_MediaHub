@@ -15,7 +15,7 @@ class UNL_MediaHub_Manager_PostHandler
         $this->files   = $files;
     }
 
-    function setMediaYak(UNL_MediaHub $mediahub)
+    function setMediaHub(UNL_MediaHub $mediahub)
     {
         $this->mediahub = $mediahub;
     }

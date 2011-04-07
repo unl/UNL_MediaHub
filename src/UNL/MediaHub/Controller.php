@@ -1,6 +1,6 @@
 <?php
 /**
- * Controller for the public frontend to the MediaYak system.
+ * Controller for the public frontend to the MediaHub system.
  * 
  * PHP version 5
  * 
