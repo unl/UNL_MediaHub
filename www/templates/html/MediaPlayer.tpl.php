@@ -6,15 +6,17 @@ $inForm = $parent->context instanceof UNL_MediaHub_Feed_Media_Form;
 
 if ($inForm) { 
 	if ($context == 'videoDisplay') { ?>
-		<video height="" width="" src="" controls >	 
-             <object type="application/x-shockwave-flash" data="/wdn/templates_3.0/includes/swf/player4.3.swf">	 
-                 <param name="movie" value="/wdn/templates_3.0/includes/swf/player4.3.swf" />	 
-                 <param name="allowfullscreen" value="true" />	 
-                 <param name="allowscriptaccess" value="always" />	 
-                 <param name="wmode" value="transparent" />	 
-                 <param name="flashvars" value="" />	 
-             </object>
-         </video>
+		<div class="videoplayer">
+			<video height="" width="" src="" controls >	 
+	             <object type="application/x-shockwave-flash" data="/wdn/templates_3.0/includes/swf/player4.3.swf">	 
+	                 <param name="movie" value="/wdn/templates_3.0/includes/swf/player4.3.swf" />	 
+	                 <param name="allowfullscreen" value="true" />	 
+	                 <param name="allowscriptaccess" value="always" />	 
+	                 <param name="wmode" value="transparent" />	 
+	                 <param name="flashvars" value="" />	 
+	             </object>
+	         </video>
+         </div>
 <?php
 	} else if ($context == 'audioDisplay') { ?>
          <div class="audioplayer" style="min-height:50px;"></div>
@@ -32,15 +34,17 @@ if ($inForm) {
 	
 	if ($type == 'video') {
 	?>
-	<video height="<?php echo $height; ?>" width="<?php echo $width; ?>" autoplay src="<?php echo $context->url?>" controls poster="<?php echo UNL_MediaHub_Controller::$thumbnail_generator.($context->url)?>">
-	    <object type="application/x-shockwave-flash" style="width:<?php echo $width; ?>px;height:<?php echo $height; ?>px" data="/wdn/templates_3.0/includes/swf/player4.3.swf">
-	        <param name="movie" value="/wdn/templates_3.0/includes/swf/player4.3.swf" />
-	        <param name="allowfullscreen" value="true" />
-	        <param name="allowscriptaccess" value="always" />
-	        <param name="wmode" value="transparent" />
-	        <param name="flashvars" value="file=<?php echo urlencode($context->url)?>&amp;image=<?php echo urlencode(UNL_MediaHub_Controller::$thumbnail_generator.urlencode($context->url))?>&amp;volume=100&amp;controlbar=over&amp;autostart=true&amp;skin=/wdn/templates_3.0/includes/swf/UNLVideoSkin.swf" /> 
-	    </object>
-	</video>
+	<div class="videoplayer">
+		<video height="<?php echo $height; ?>" width="<?php echo $width; ?>" autoplay src="<?php echo $context->url?>" controls poster="<?php echo UNL_MediaHub_Controller::$thumbnail_generator.($context->url)?>">
+		    <object type="application/x-shockwave-flash" style="width:<?php echo $width; ?>px;height:<?php echo $height; ?>px" data="/wdn/templates_3.0/includes/swf/player4.3.swf">
+		        <param name="movie" value="/wdn/templates_3.0/includes/swf/player4.3.swf" />
+		        <param name="allowfullscreen" value="true" />
+		        <param name="allowscriptaccess" value="always" />
+		        <param name="wmode" value="transparent" />
+		        <param name="flashvars" value="file=<?php echo urlencode($context->url)?>&amp;image=<?php echo urlencode(UNL_MediaHub_Controller::$thumbnail_generator.urlencode($context->url))?>&amp;volume=100&amp;controlbar=over&amp;autostart=true&amp;skin=/wdn/templates_3.0/includes/swf/UNLVideoSkin.swf" /> 
+		    </object>
+		</video>
+	</div>
 	<?php 
 	} else if ($type == 'audio') {
 	?>
