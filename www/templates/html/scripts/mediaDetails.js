@@ -51,17 +51,17 @@ var mediaDetails = function() {
 		
 		showVideo : function(){ //video has been updated, now parse it into to markup and show the user
 			WDN.jQuery('video').attr('src', WDN.jQuery("#url").val());
-			thumbURL = mediaDetails.imageURL;
+			var thumbURL = mediaDetails.imageURL;
 			WDN.jQuery('#videoDisplay param[name=flashvars]').attr('value','file='+WDN.jQuery("#url").val()+'&amp;image='+thumbURL+'&amp;volume=100&amp;controlbar=over&amp;autostart=false&amp;skin=/wdn/templates_3.0/includes/swf/UNLVideoSkin.swf');
 			//use the thumbnail generated to determine width and height
 			var thumbnail = new Image();
 			thumbnail.src = thumbURL+'&time='+mediaDetails.formatTime(0);
 			thumbnail.onload = function(){
-				calcHeight = (this.height * 460)/this.width;
-				WDN.jQuery('video').attr('height', calcHeight);
-				WDN.jQuery('video').attr('width', 460);
+				var calcHeight = (this.height * 460)/this.width;
+				WDN.jQuery('#jwPlayer_0, video').attr('height', calcHeight);
+				WDN.jQuery('#jwPlayer_0, video').attr('width', 460);
 				WDN.jQuery('#videoDisplay object').attr('style', 'width:460px;height:'+calcHeight);
-				//WDN.jQuery('#thumbnail').attr('src',thumbURL);
+				WDN.jQuery('#thumbnail').attr('src',thumbURL);
 			};
 			thumbnail.onerror = '';
 			WDN.initializePlugin('videoPlayer');
