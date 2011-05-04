@@ -25,7 +25,6 @@ var mediaDetails = function() {
 		},
 		
 		updateThumbnail : function(currentTime) {
-			console.log('updating thumbnail');
 			WDN.jQuery('#imageOverlay').css({'height' : WDN.jQuery("#thumbnail").height()-20 +'px' ,'width' : WDN.jQuery("#thumbnail").width()-60 +'px' }).show();
 			var newThumbnail = new Image();
 			newThumbnail.src = mediaDetails.imageURL + '&time='+mediaDetails.formatTime(currentTime)+'&rebuild';
@@ -164,10 +163,9 @@ WDN.jQuery(document).ready(function() {
         mediaDetails.showAudio();
     });
     WDN.jQuery('a#setImage').click(function(){
-    	console.log('setImage clicked');
     	var currentTime;
     	if (!WDN.jQuery('video')[0]){
-    		currentTime = WDN.videoPlayer.createFallback.getCurrentInfo("position") + .01;
+    		currentTime = WDN.videoPlayer.createFallback.getCurrentPosition() + .01;
     	} else {
     		currentTime = WDN.jQuery('video')[0].currentTime;
     	}
