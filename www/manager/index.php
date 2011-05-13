@@ -9,6 +9,7 @@ if (!$manager->isLoggedIn()) {
 }
 
 $outputcontroller = new UNL_MediaHub_OutputController();
+$outputcontroller->addGlobal('controller', $manager);
 $outputcontroller->setCacheInterface(new UNL_MediaHub_CacheInterface_Mock());
 $outputcontroller->setTemplatePath(dirname(dirname(__FILE__)).'/templates/html');
 $outputcontroller->addTemplatePath(dirname(__FILE__).'/templates');
