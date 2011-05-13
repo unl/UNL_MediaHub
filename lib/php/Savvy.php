@@ -93,7 +93,13 @@ class Savvy
      * @var MapperInterface
      */
     protected $class_to_template;
-    
+
+    /**
+     * Array of globals available within every template
+     * 
+     * @var array
+     */
+    protected $globals = array();
     // -----------------------------------------------------------------
     //
     // Constructor and magic methods
@@ -136,45 +142,171 @@ class Savvy
             $this->addFilters($config['filters']);
         }
     }
-    
+
+    /**
+     * Basic output controller
+     * 
+     * @param mixed $context The context passed to the template
+     * @param mixed $parent  Parent template with context and parents $parent->context
+     * @param mixed $file    The filename to include
+     * @param Savvy $savvy   The Savvy templating system
+     * 
+     * @return string
+     */
     protected static function basicOutputController($context, $parent, $file, $savvy)
     {
+        foreach ($savvy->getGlobals() as $__name => $__value) {
+            $$__name = $__value;
+        }
+        unset($__name, $__value);
         ob_start();
         include $file;
         return ob_get_clean();
     }
-    
+
+    /**
+     * Basic output controller
+     * 
+     * @param mixed $context The context passed to the template
+     * @param mixed $parent  Parent template with context and parents $parent->context
+     * @param mixed $file    The filename to include
+     * @param Savvy $savvy   The Savvy templating system
+     * 
+     * @return string
+     */
     protected static function filterOutputController($context, $parent, $file, $savvy)
     {
+        foreach ($savvy->getGlobals() as $__name => $__value) {
+            $$__name = $__value;
+        }
+        unset($__name, $__value);
         ob_start();
         include $file;
         return $savvy->applyFilters(ob_get_clean());
     }
-    
+
+    /**
+     * Basic output controller
+     * 
+     * @param mixed $context The context passed to the template
+     * @param mixed $parent  Parent template with context and parents $parent->context
+     * @param mixed $file    The filename to include
+     * @param Savvy $savvy   The Savvy templating system
+     * 
+     * @return string
+     */
     protected static function basicCompiledOutputController($context, $parent, $file, $savvy)
     {
+        foreach ($savvy->getGlobals() as $__name => $__value) {
+            $$__name = $__value;
+        }
+        unset($__name, $__value);
         ob_start();
         include $savvy->template($file);
         return ob_get_clean();
     }
-    
+
+    /**
+     * Basic output controller
+     * 
+     * @param mixed $context The context passed to the template
+     * @param mixed $parent  Parent template with context and parents $parent->context
+     * @param mixed $file    The filename to include
+     * @param Savvy $savvy   The Savvy templating system
+     * 
+     * @return string
+     */
     protected static function filterCompiledOutputController($context, $parent, $file, $savvy)
     {
+        foreach ($savvy->getGlobals() as $__name => $__value) {
+            $$__name = $__value;
+        }
+        unset($__name, $__value);
         ob_start();
         include $savvy->template($file);
         return $savvy->applyFilters(ob_get_clean());
     }
-    
+
+    /**
+     * Basic output controller
+     * 
+     * @param mixed $context The context passed to the template
+     * @param mixed $parent  Parent template with context and parents $parent->context
+     * @param mixed $file    The filename to include
+     * @param Savvy $savvy   The Savvy templating system
+     * 
+     * @return string
+     */
     protected static function basicFastCompiledOutputController($context, $parent, $file, $savvy)
     {
         return include $savvy->template($file);
     }
-    
+
+    /**
+     * Basic output controller
+     * 
+     * @param mixed $context The context passed to the template
+     * @param mixed $parent  Parent template with context and parents $parent->context
+     * @param mixed $file    The filename to include
+     * @param Savvy $savvy   The Savvy templating system
+     * 
+     * @return string
+     */
     protected static function filterFastCompiledOutputController($context, $parent, $file, $savvy)
     {
         return $savvy->applyFilters(include $savvy->template($file));
     }
-    
+
+    /**
+     * Add a global variable which will be available inside every template
+     * 
+     * @param string $var   The global variable name
+     * @param mixed  $value The value
+     * 
+     * @return void
+     */
+    function addGlobal($name, $value)
+    {
+        switch ($name) {
+            case 'context':
+            case 'parent':
+            case 'template':
+            case 'savvy':
+            case 'this':
+                throw new Savvy_BadMethodCallException('Invalid global variable name');
+        }
+
+        if ($this->__config['escape']) {
+            switch (gettype($value)) {
+                case 'object':
+                    if (!$value instanceof Savvy_ObjectProxy) {
+                        $value = Savvy_ObjectProxy::factory($value, $this);
+                    }
+                    break;
+                case 'string':
+                case 'int':
+                case 'double':
+                    $value = $this->escape($value);
+                    break;
+                case 'array':
+                    $value = new Savvy_ObjectProxy_ArrayIterator($value, $this);
+                    break;
+            }
+        }
+
+        $this->globals[$name] = $value;
+    }
+
+    /**
+     * Get the array of assigned globals
+     * 
+     * @return array
+     */
+    function getGlobals()
+    {
+        return $this->globals;
+    }
+
     /**
      * Return the current template set (if any)
      * 
@@ -637,6 +769,15 @@ class Savvy
         return $ret;
     }
 
+    protected function renderArrayAccess(ArrayAccess $array, $template = null)
+    {
+        $ret = '';
+        foreach ($array as $key => $element) {
+            $ret .= $this->render($element, $template);
+        }
+        return $ret;
+    }
+
     /**
      * Render an if else conditional template output.
      * 
@@ -667,9 +808,15 @@ class Savvy
      */
     protected function renderObject($object, $template = null)
     {
-        if ($this->__config['escape']
-            && !$object instanceof Savvy_ObjectProxy) {
-            $object = Savvy_ObjectProxy::factory($object, $this);
+        if ($this->__config['escape']) {
+
+            if (!$object instanceof Savvy_ObjectProxy) {
+                $object = Savvy_ObjectProxy::factory($object, $this);
+            }
+
+            if ($object instanceof Savvy_ObjectProxy_ArrayIterator) {
+                return $this->renderArrayAccess($object);
+            }
         }
         return $this->fetch($object, $template);
     }

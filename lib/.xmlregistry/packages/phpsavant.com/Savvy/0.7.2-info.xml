@@ -20,10 +20,10 @@ don't need to learn a new markup system.</description>
   <email>cellog@php.net</email>
   <active>yes</active>
  </lead>
- <date>2011-03-21</date>
- <time>13:56:08</time>
+ <date>2011-05-13</date>
+ <time>15:41:02</time>
  <version>
-  <release>0.6.1</release>
+  <release>0.7.2</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -31,8 +31,9 @@ don't need to learn a new markup system.</description>
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>Fix:
-* Also filter the return values of methods.
+ <notes>Bugfix Release:
+
+ * Refactor auto-escaping for arrays to preserve standard array interaction. [saltybeagle]
 
 
 Package Savvy API release notes for version 0.1.0.</notes>
@@ -45,6 +46,11 @@ Package Savvy API release notes for version 0.1.0.</notes>
    <file role="test" name="tests/render/fastcompile.phpt" md5sum="923e958a495177f4be567abd6d7d37f6"/>
    <file role="test" name="tests/render/echostring.tpl.php" md5sum="138231e0b170c36ff602c09eaaa1690f"/>
    <file role="test" name="tests/render/array.phpt" md5sum="3f284e6ec2d710398f4b67378f373de4"/>
+   <file role="test" name="tests/globals/escape.phpt" md5sum="d1b9276341877c681e62ddad93d2d1dc"/>
+   <file role="test" name="tests/globals/escape.nestedarrays.phpt" md5sum="7f1e04a1302995ed6c0a43d525ebd73d"/>
+   <file role="test" name="tests/globals/escape.arrays.phpt" md5sum="20312ab95ea7901b79e21fdd61f5dca4"/>
+   <file role="test" name="tests/globals/basic.tpl.php" md5sum="7898705f5a0a5792a191cca28501e22e"/>
+   <file role="test" name="tests/globals/basic.phpt" md5sum="ac2ae80d9f5344694e6f2d90c0417b2c"/>
    <file role="test" name="tests/escape/string.phpt" md5sum="4fd594fef7e7621e79cefa341c2439a0"/>
    <file role="test" name="tests/escape/raw.tpl.php" md5sum="2e7b87c466f106a575d6740258356109"/>
    <file role="test" name="tests/escape/object.phpt" md5sum="7012a6b97c7cb20391bde8243b582e1b"/>
@@ -53,8 +59,8 @@ Package Savvy API release notes for version 0.1.0.</notes>
    <file role="php" name="src/Savvy/UnexpectedValueException.php" md5sum="bc88ee83b651bea0cb3190c4785be447"/>
    <file role="php" name="src/Savvy/TemplateException.php" md5sum="0dcf725a67d3db2457f4f9793654e8d1"/>
    <file role="php" name="src/Savvy/ObjectProxy/Traversable.php" md5sum="d8ecfde88e9de6d70e051ac27c1f5952"/>
-   <file role="php" name="src/Savvy/ObjectProxy/ArrayAccess.php" md5sum="a18cde5a30fcd4f6c5b6437a1fa702d9"/>
-   <file role="php" name="src/Savvy/ObjectProxy.php" md5sum="7405216723a277699ec7169931d5b196"/>
+   <file role="php" name="src/Savvy/ObjectProxy/ArrayIterator.php" md5sum="29760d5edf5eb6bfcb6f65e32e4e43c5"/>
+   <file role="php" name="src/Savvy/ObjectProxy.php" md5sum="681b904abe178e1a1ca9b33d23ac4cf4"/>
    <file role="php" name="src/Savvy/MapperInterface.php" md5sum="127c43a259b071872044a492d101faca"/>
    <file role="php" name="src/Savvy/FilterAbstract.php" md5sum="dc9abe43fa8f2a7ec038d8bc4e2fd0da"/>
    <file role="php" name="src/Savvy/FastCompilerInterface.php" md5sum="213b589107a0b18d2074167f2d0fe864"/>
@@ -65,7 +71,7 @@ Package Savvy API release notes for version 0.1.0.</notes>
    <file role="php" name="src/Savvy/BasicFastCompiler.php" md5sum="313d6d9ac280509c7f0e072e6841d80d"/>
    <file role="php" name="src/Savvy/BadMethodCallException.php" md5sum="e5d06612d101d72bc82709df7ae0426e"/>
    <file role="php" name="src/Savvy/Autoload.php" md5sum="c0ee9b9628bed191991bc641721a39d8"/>
-   <file role="php" name="src/Savvy.php" md5sum="a9982446453ade6d12c996ded3c38bf5"/>
+   <file role="php" name="src/Savvy.php" md5sum="15a9925335b9d9e2065526d89f7a6660"/>
    <file role="doc" name="examples/templates/StringView.tpl.php" md5sum="b4746d9c4e29624cb75c4bbf74600371"/>
    <file role="doc" name="examples/templates/stdClass.tpl.php" md5sum="ecb083ab102eac7b1bc6d5306092b36d"/>
    <file role="doc" name="examples/templates/MyTemplate.tpl.php" md5sum="b7004c1f5eed19602e5c7afe97dbbd27"/>

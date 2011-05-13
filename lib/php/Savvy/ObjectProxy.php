@@ -81,9 +81,10 @@ class Savvy_ObjectProxy implements Countable
             return self::factory($var, $this->savvy);
         case 'string':
         case 'int':
-        case 'bool':
         case 'double':
             return $this->savvy->escape($var);
+        case 'array':
+            return new Savvy_ObjectProxy_ArrayIterator($var, $this->savvy);
         }
         return $var;
     }
@@ -174,8 +175,8 @@ class Savvy_ObjectProxy implements Countable
         if ($object instanceof Traversable) {
             return new Savvy_ObjectProxy_Traversable($object, $savvy);
         }
-        if ($object instanceof ArrayAccess) {
-            return new Savvy_ObjectProxy_ArrayAccess($object, $savvy);
+        if ($object instanceof ArrayIterator) {
+            return new Savvy_ObjectProxy_ArrayIterator($object, $savvy);
         }
         return new self($object, $savvy);
     }
