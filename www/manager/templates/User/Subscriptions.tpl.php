@@ -20,6 +20,9 @@ if (count($context->items)) : ?>
             <td>
                 <!-- Link to LinkSubscription view &id=$subscription->id -->
                 <!-- Remove form! -->
+                <?php
+                echo $savvy->render(null, 'User/FeedSelection.tpl.php');
+                ?>
             </td>
         </tr>
     <?php endforeach; ?>
