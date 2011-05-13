@@ -25,7 +25,6 @@ var mediaDetails = function() {
 		},
 		
 		updateThumbnail : function(currentTime) {
-			console.log('updating thumbnail');
 			WDN.jQuery('#imageOverlay').css({'height' : WDN.jQuery("#thumbnail").height()-20 +'px' ,'width' : WDN.jQuery("#thumbnail").width()-60 +'px' }).show();
 			var newThumbnail = new Image();
 			newThumbnail.src = mediaDetails.imageURL + '&time='+mediaDetails.formatTime(currentTime)+'&rebuild';
@@ -52,17 +51,17 @@ var mediaDetails = function() {
 		
 		showVideo : function(){ //video has been updated, now parse it into to markup and show the user
 			WDN.jQuery('video').attr('src', WDN.jQuery("#url").val());
-			thumbURL = mediaDetails.imageURL;
+			var thumbURL = mediaDetails.imageURL;
 			WDN.jQuery('#videoDisplay param[name=flashvars]').attr('value','file='+WDN.jQuery("#url").val()+'&amp;image='+thumbURL+'&amp;volume=100&amp;controlbar=over&amp;autostart=false&amp;skin=/wdn/templates_3.0/includes/swf/UNLVideoSkin.swf');
 			//use the thumbnail generated to determine width and height
 			var thumbnail = new Image();
 			thumbnail.src = thumbURL+'&time='+mediaDetails.formatTime(0);
 			thumbnail.onload = function(){
-				calcHeight = (this.height * 460)/this.width;
-				WDN.jQuery('video').attr('height', calcHeight);
-				WDN.jQuery('video').attr('width', 460);
+				var calcHeight = (this.height * 460)/this.width;
+				WDN.jQuery('#jwPlayer_0, video').attr('height', calcHeight);
+				WDN.jQuery('#jwPlayer_0, video').attr('width', 460);
 				WDN.jQuery('#videoDisplay object').attr('style', 'width:460px;height:'+calcHeight);
-				//WDN.jQuery('#thumbnail').attr('src',thumbURL);
+				WDN.jQuery('#thumbnail').attr('src',thumbURL);
 			};
 			thumbnail.onerror = '';
 			WDN.initializePlugin('videoPlayer');
@@ -164,10 +163,9 @@ WDN.jQuery(document).ready(function() {
         mediaDetails.showAudio();
     });
     WDN.jQuery('a#setImage').click(function(){
-    	console.log('setImage clicked');
     	var currentTime;
     	if (!WDN.jQuery('video')[0]){
-    		currentTime = WDN.videoPlayer.createFallback.getCurrentInfo("position") + .01;
+    		currentTime = WDN.videoPlayer.createFallback.getCurrentPosition() + .01;
     	} else {
     		currentTime = WDN.jQuery('video')[0].currentTime;
     	}
