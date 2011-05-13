@@ -26,20 +26,7 @@ if (!$context->output instanceof UNL_MediaHub_FeedAndMedia) {
 $page->maincontentarea = '<div id="wdn_app_search"><form method="get" action="'.UNL_MediaHub_Controller::getURL().'search/"><label for="q_app">Search MediaHub</label><input id="q_app" name="q" type="text" /><input type="submit" class="search_submit_button" value="Go" /></form></div>';
 $page->maincontentarea .= $savvy->render($context->output);
 
-$page->navlinks        = '
-<ul>
-    <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a>';
-
-    if (!UNL_MediaHub_Controller::isLoggedIn()) {
-        $page->navlinks .= '<ul><li><a href="https://login.unl.edu/cas/login?service='.urlencode(UNL_MediaHub_Controller::getURL()).'">Login</a></li></ul>';
-    } else {
-        $page->navlinks .='<ul><li><a href="'.UNL_MediaHub_Controller::getURL().'manager/">Your Media</a></li></ul>';
-        $page->navlinks .= '<ul><li><a href="?logout">Logout</a></li></ul>';
-    }
-$page->navlinks .='
-</li>
-<li><a href="'.UNL_MediaHub_Controller::getURL().'channels/">Channels</a></li>
-</ul>';
+$page->navlinks = $savvy->render(null, 'Navigation.tpl.php');
 
 $page->leftcollinks = '
 <h3>Related Links</h3>
