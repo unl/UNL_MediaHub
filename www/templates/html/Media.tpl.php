@@ -22,10 +22,6 @@ $meta = '
 WDN.jQuery(document).ready(function(){
     WDN.jQuery(\'span.embed\').colorbox({inline: true, href:\'#sharing\', width:\'600px\', height:\'310px\'});
 });
-function playerReady(thePlayer) {
-    //start the player and JS API
-    WDN.videoPlayer.createFallback.addJWListeners(document.getElementById(thePlayer.id));
-}
 </script>
 <meta name="medium" content="'.$type.'" />';
 if ($type == 'video') {
