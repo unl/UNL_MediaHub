@@ -48,20 +48,19 @@ if ($inForm) {
 	<?php 
 	} else if ($type == 'audio') {
 	?>
-	<div class="audioplayer"> 
-	    <audio preload="auto"> 
-	        <source src="<?php echo $context->url?>" type="audio/mpeg" /> 
-	    </audio>
-	    <span class="title"><?php echo $context->title; ?></span>
-	</div>
+    <audio preload="auto"> 
+        <source src="<?php echo $context->url?>" type="audio/mpeg" /> 
+    </audio>
 	<?php 
 	} ?>
+
 <script type="text/javascript">
 if (typeof(WDN) == "undefined") {
 	if (typeof(jQuery) == "undefined"){var j=document.createElement("script"); j.setAttribute("type","text/javascript"); j.setAttribute("src", "http://www.unl.edu/wdn/templates_3.0/scripts/jquery.js"); document.getElementsByTagName("head")[0].appendChild(j);}
-	var s=document.createElement("script"); s.setAttribute("type","text/javascript"); s.setAttribute("src", "http://www.unl.edu/wdn/templates_3.0/scripts/wdn.js"); var c=document.createElement("link"); c.setAttribute("type", "text/css"); c.setAttribute("rel", "stylesheet"); c.setAttribute("href", "http://www.unl.edu/wdn/templates_3.0/css/content/videoPlayer.css"); document.getElementsByTagName("head")[0].appendChild(c); document.getElementsByTagName("head")[0].appendChild(s);
-	window.onload=function(){WDN.jQuery=jQuery.noConflict(true); WDN.template_path="http://www.unl.edu/"; WDN.initializePlugin("videoPlayer"); WDN.initializePlugin("analytics");};
-} else {WDN.initializePlugin("videoPlayer");}
+} else {jQuery = WDN.jQuery;}
+var s=document.createElement("script"); s.setAttribute("type","text/javascript"); s.setAttribute("src", "/wdn/templates_3.0/scripts/mediaelement.js"); var c=document.createElement("link"); c.setAttribute("type", "text/css"); c.setAttribute("rel", "stylesheet"); c.setAttribute("href", "/wdn/templates_3.0/css/content/mediaelement.css"); document.getElementsByTagName("head")[0].appendChild(c); document.getElementsByTagName("head")[0].appendChild(s);
+window.onload=function(){ jQuery('video,audio').mediaelementplayer(); };
 </script>
+
 <?php 
 } ?>
