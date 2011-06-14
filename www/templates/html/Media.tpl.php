@@ -126,7 +126,5 @@ echo $mediaplayer;
 <div id="sharing">
     <h3>Embed</h3>
     <p>Copy the following code into your unl.edu page</p>
-    <textarea cols="25" rows="6" onclick="this.select(); return false;">
-    <?php echo htmlentities($mediaplayer); ?>
-    </textarea>
+    <textarea cols="25" rows="6" onclick="this.select(); return false;"><?php echo htmlentities($mediaplayer); ?></textarea>
 </div>
