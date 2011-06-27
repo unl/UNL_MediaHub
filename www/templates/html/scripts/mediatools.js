@@ -3,7 +3,7 @@ function playerReady(thePlayer) {
     WDN.videoPlayer.createFallback.addJWListeners(document.getElementById(thePlayer.id));
 };
 
-WDN.jQuery(document).ready(function(){
+WDN.loadJQuery(function(){
 	WDN.jQuery('span.embed').colorbox({inline: true, href:'#sharing', width:'600px', height:'310px'});
 	WDN.jQuery('form#addTags').hide();
 	WDN.jQuery('#mediaTagsAdd a[href="#"]').click(function(){
