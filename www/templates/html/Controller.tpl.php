@@ -17,6 +17,7 @@ $page->doctitle     = '<title>UNL | MediaHub</title>';
 $page->titlegraphic = '<h1>UNL MediaHub</h1><h2>Lights, Camera, Action</h2>';
 $page->addStyleSheet(UNL_MediaHub_Controller::getURL().'templates/html/css/all.css');
 $page->breadcrumbs = '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li>MediaHub</li></ul>';
+$page->head .= '<link rel="logout" href="'.UNL_MediaHub_Controller::getURL().'?logout" title="Log out" />';
 //$page->head .= '<link rel="search" href="'.UNL_MediaHub_Controller::getURL().'search/" />';
 $page->addScript(UNL_MediaHub_Controller::getURL().'templates/html/scripts/mediatools.js');
 if (!$context->output instanceof UNL_MediaHub_FeedAndMedia) {
