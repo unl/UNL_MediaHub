@@ -113,14 +113,14 @@ Embed
     color:#7d7d7d;
 }
 #maincontent #sharing{display:none;}
-#colorbox h3 {
+#sharing h3 {
     font-size:2.4em;
     font-weight:bold;
     letter-spacing:-1px;
     margin: 10px 0;
     text-transform:capitalize;
 }
-#colorbox p {
+#sharing p {
     margin:15px 0;  
 }
-#colorbox textarea {width:96%;}
+#sharing textarea {width:96%;}
