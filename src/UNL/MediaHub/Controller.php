@@ -182,7 +182,8 @@ class UNL_MediaHub_Controller
      */
     function preRun($cached)
     {
-        if ($this->options['view'] == 'feed_image') {
+        if ($this->options['view'] == 'feed_image'
+            || $this->options['view'] == 'media_image') {
             UNL_MediaHub_OutputController::setOutputTemplate('UNL_MediaHub_Controller', 'ControllerPartial');
             return false;
         }
@@ -238,6 +239,9 @@ class UNL_MediaHub_Controller
                 } else {
                     $this->output[] = UNL_MediaHub_Feed_Image::getByTitle($this->options['title']);
                 }
+                break;
+            case 'media_image':
+                $this->output[] = UNL_MediaHub_Media_Image::getById($this->options['id']);
                 break;
             case 'default':
             case 'search':
