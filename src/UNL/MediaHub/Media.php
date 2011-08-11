@@ -91,7 +91,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia
             $element->media_id = $this->id;
             $element->element = 'thumbnail';
         }
-        $attributes = array('url' => UNL_MediaHub_Controller::$thumbnail_generator.urlencode($this->url),
+        $attributes = array('url' => $this->getThumbnailURL(),
                             //width="75" height="50" time="12:05:01.123"
                             );
         $element->attributes = $attributes;
@@ -118,7 +118,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia
                             'type'     => $this->type,
                             'lang'     => 'en');
         if (UNL_MediaHub_Media::isVideo($this->type)) {
-            list($width, $height) = getimagesize(UNL_MediaHub_Controller::$thumbnail_generator.urlencode($this->url));
+            list($width, $height) = getimagesize($this->getThumbnailURL());
             $attributes['width']  = $width;
             $attributes['height'] = $height;
         }
@@ -257,6 +257,16 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia
         	return call_user_func($class .'::mediaSetElement', $this->id, 'keywords', $tagStr);
         }
     	return false;
+    }
+
+    /**
+     * Get the URL to the thumbnail for this image
+     *
+     * @return string
+     */
+    function getThumbnailURL()
+    {
+        return UNL_MediaHub_Controller::$thumbnail_generator.urlencode($this->url);
     }
 
     function getStreamingURL()
