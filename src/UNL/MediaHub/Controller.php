@@ -71,7 +71,7 @@ class UNL_MediaHub_Controller
     
     protected $view_map = array(
         'search'  => 'UNL_MediaHub_MediaList',
-    	'tags'    => 'UNL_MediaHub_MediaList',
+        'tags'    => 'UNL_MediaHub_MediaList',
         'default' => 'UNL_MediaHub_DefaultHomepage',
         'feeds'   => 'UNL_MediaHub_FeedList',
         'feed'    => 'UNL_MediaHub_FeedAndMedia',
@@ -250,7 +250,7 @@ class UNL_MediaHub_Controller
                 $this->output[] = new $class($this->options);
                 break;
             default:
-            	throw new Exception('Unknown view', 404);
+                throw new Exception('Unknown view', 404);
             }
         } catch(Exception $e) {
             $this->output[] = $e;
