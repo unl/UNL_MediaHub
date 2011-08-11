@@ -12,7 +12,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia
      */
     static function getById($id)
     {
-        return Doctrine::getTable('UNL_MediaHub_Media')->find($id);
+        return Doctrine::getTable(__CLASS__)->find($id);
     }
     
     /**
@@ -24,7 +24,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia
      */
     public static function getByURL($url)
     {
-        $media = Doctrine::getTable('UNL_MediaHub_Media')->findOneByURL($url);
+        $media = Doctrine::getTable(__CLASS__)->findOneByURL($url);
         if ($media) {
             return $media;
         }
