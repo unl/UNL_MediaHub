@@ -26,7 +26,7 @@ if ($inForm) {
 	
 	if ($type == 'video') { ?>
 <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-<video height="<?php echo $height; ?>" width="<?php echo $width; ?>" autoplay src="<?php echo $context->url?>" controls poster="<?php echo UNL_MediaHub_Controller::$thumbnail_generator.($context->url)?>"></video>
+<video height="<?php echo $height; ?>" width="<?php echo $width; ?>" autoplay src="<?php echo $context->url?>" controls poster="<?php echo $context->getThumbnailURL(); ?>"></video>
 <?php } else if ($type == 'audio') { ?>
 <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 <audio preload="auto" src="<?php echo $context->url?>"></audio>

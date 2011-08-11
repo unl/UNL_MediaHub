@@ -30,7 +30,7 @@ UNL_MediaHub_Manager::setReplacementData('head', $js);
         <?php
         $thumbnail = 'templates/images/thumbs/placeholder.jpg';
         if (isset($context->media)) {
-            $thumbnail = UNL_MediaHub_Controller::$thumbnail_generator.urlencode($context->media->url);
+            $thumbnail = $context->media->getThumbnailURL();
         }
         ?>
         <h1>Tell us about your media</h1>

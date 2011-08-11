@@ -55,7 +55,7 @@ if (count($context->items)) {
         <?php
         foreach ($context->items as $media) { ?>
             <li>
-                <a href="<?php echo UNL_MediaHub_Controller::getURL($media); ?>"><img class="thumbnail" src="<?php echo UNL_MediaHub_Controller::$thumbnail_generator.urlencode($media->url); ?>" alt="Thumbnail preview for <?php echo htmlspecialchars($media->title, ENT_QUOTES); ?>" /></a>
+                <a href="<?php echo UNL_MediaHub_Controller::getURL($media); ?>"><img class="thumbnail" src="<?php echo $media->getThumbnailURL(); ?>" alt="Thumbnail preview for <?php echo htmlspecialchars($media->title, ENT_QUOTES); ?>" /></a>
                 <?php if ($userCanEdit) { ?>
 	            <div class="actions">
 		            <a href="<?php echo $addMediaURL; ?>&amp;id=<?php echo $media->id; ?>">Edit</a>
