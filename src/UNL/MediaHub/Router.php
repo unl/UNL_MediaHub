@@ -26,7 +26,7 @@ class UNL_MediaHub_Router
                 $options['view'] = 'search';
                 $options['q']    = urldecode($matches[1]);
                 break;
-			case preg_match('/^tags\/(.*)$/', $requestURI, $matches):
+            case preg_match('/^tags\/(.*)$/', $requestURI, $matches):
                 $options['view'] = 'tags';
                 $options['t']    = urldecode($matches[1]);
                 break;
