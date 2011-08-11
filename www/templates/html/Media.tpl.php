@@ -17,7 +17,7 @@ UNL_MediaHub_Controller::setReplacementData('breadcrumbs', '<ul> <li><a href="ht
 $meta = '
 <meta name="title" content="'.htmlentities($context->title, ENT_QUOTES).'" />
 <meta name="description" content="'.htmlentities($context->description, ENT_QUOTES).'" />
-<link rel="image_src" href="'.UNL_MediaHub_Controller::$thumbnail_generator.urlencode($context->url).'" />
+<link rel="image_src" href="'.$context->getThumbnailURL().'" />
 <script type="text/javascript">
 WDN.jQuery(document).ready(function(){
     WDN.jQuery(\'span.embed\').colorbox({inline: true, href:\'#sharing\', width:\'600px\', height:\'310px\'});
