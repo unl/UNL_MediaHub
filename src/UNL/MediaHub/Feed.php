@@ -59,7 +59,7 @@ class UNL_MediaHub_Feed extends UNL_MediaHub_Models_BaseFeed
     
     function getMediaList($options = array())
     {
-    	 return new UNL_MediaHub_MediaList(array('filter'=>new UNL_MediaHub_MediaList_Filter_ByFeed($this))+$options); 
+         return new UNL_MediaHub_MediaList(array('filter'=>new UNL_MediaHub_MediaList_Filter_ByFeed($this))+$options); 
     }
 
     /**
