@@ -279,7 +279,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia
 
     function getVideoTextTrackURL()
     {
-    	return UNL_MediaHub_Controller::$url.'media/'.$this->id.'/vtt';
+        return UNL_MediaHub_Controller::$url.'media/'.$this->id.'/vtt';
     }
 }
 
