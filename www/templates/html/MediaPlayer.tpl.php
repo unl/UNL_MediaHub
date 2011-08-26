@@ -27,7 +27,7 @@ if ($inForm) {
 	if ($type == 'video') { ?>
 <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 <video height="<?php echo $height; ?>" width="<?php echo $width; ?>" autoplay src="<?php echo $context->url?>" controls poster="<?php echo $context->getThumbnailURL(); ?>">
-	<track src="<?php echo $context->getVideoTextTrackURL(); ?>" kind="captions" type="text/vtt" srclang="en" />
+	<track src="<?php echo $context->getVideoTextTrackURL(); ?>" kind="subtitles" type="text/vtt" srclang="en" />
 </video>
 <?php } else if ($type == 'audio') { ?>
 <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
