@@ -30,6 +30,10 @@ class UNL_MediaHub_Router
                 $options['view'] = 'tags';
                 $options['t']    = urldecode($matches[1]);
                 break;
+            case preg_match('/^media\/([0-9]+)\/vtt$/', $requestURI, $matches):
+                $options['view'] = 'media_vtt';
+                $options['id']   = $matches[1];
+                break;
             case preg_match('/^media\/([0-9]+)\/image(\.[\w]+)?$/', $requestURI, $matches):
                 $options['view'] = 'media_image';
                 $options['id']   = $matches[1];

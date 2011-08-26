@@ -276,5 +276,10 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia
         }
         return str_replace('http://real.unl.edu/podcast/', 'rtmp://real.unl.edu/content/podcast/', $this->url);
     }
+
+    function getVideoTextTrackURL()
+    {
+    	return UNL_MediaHub_Controller::$url.'/media/'.$this->id.'/vtt';
+    }
 }
 
