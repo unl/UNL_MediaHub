@@ -7,5 +7,5 @@ if ($vtt === false
     || $vtt == '') {
     $savvy->render(new Exception('No text track found', 404));
 }
-
+echo 'WEBVTT'.PHP_EOL.PHP_EOL;
 echo $vtt;
