@@ -25,7 +25,13 @@ WDN.jQuery(document).ready(function(){
 </script>
 <meta name="medium" content="'.$type.'" />';
 if ($type == 'video') {
-    $meta .= '<link rel="video_src" href="'.$context->url.'" />';
+    $meta .= '<link rel="video_src" href="'.$context->url.'" />
+    <meta property="og:video" content="'.htmlentities($context->url, ENT_QUOTES).'" />
+	<meta property="og:video:height" content="'.$height.'" />
+	<meta property="og:video:width" content="'.$width.'" />
+	<meta property="og:video:type" content="'.$context->type.'" />';
+} else {
+	$meta .= '<meta property="og:audio" content="'.$context->url.'" />';
 }
 UNL_MediaHub_Controller::setReplacementData('head', $meta);
 
