@@ -23,13 +23,18 @@ WDN.jQuery(document).ready(function(){
     WDN.jQuery(\'span.embed\').colorbox({inline: true, href:\'#sharing\', width:\'600px\', height:\'310px\'});
 });
 </script>
-<meta name="medium" content="'.$type.'" />';
+<meta name="medium" content="'.$type.'" />
+<meta property="og:type" content="'.$type.'">
+';
 if ($type == 'video') {
-    $meta .= '<link rel="video_src" href="'.$context->url.'" />
+    $meta .= '
+    <link rel="video_src" href="'.$context->url.'" />
     <meta property="og:video" content="'.htmlentities($context->url, ENT_QUOTES).'" />
 	<meta property="og:video:height" content="'.$height.'" />
 	<meta property="og:video:width" content="'.$width.'" />
-	<meta property="og:video:type" content="'.$context->type.'" />';
+	<meta property="og:video:type" content="'.$context->type.'" />
+    <meta property="og:image" content="'.$context->getThumbnailURL().'">
+	';
 } else {
 	$meta .= '
 	<meta property="og:audio" content="'.$context->url.'" />
