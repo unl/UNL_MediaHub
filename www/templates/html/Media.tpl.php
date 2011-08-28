@@ -31,7 +31,11 @@ if ($type == 'video') {
 	<meta property="og:video:width" content="'.$width.'" />
 	<meta property="og:video:type" content="'.$context->type.'" />';
 } else {
-	$meta .= '<meta property="og:audio" content="'.$context->url.'" />';
+	$meta .= '
+	<meta property="og:audio" content="'.$context->url.'" />
+	<meta property="og:audio:title" content="'.htmlentities($context->title, ENT_QUOTES).'" />
+	<meta property="og:audio:type" content="'.$context->type.'" />
+	';
 }
 UNL_MediaHub_Controller::setReplacementData('head', $meta);
 
