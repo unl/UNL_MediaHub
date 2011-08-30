@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><!-- InstanceBegin template="/Templates/shared_column_left.dwt" codeOutsideHTMLIsLocked="false" -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><!-- InstanceBegin template="/Templates/shared_column_left.dwt" codeOutsideHTMLIsLocked="false" -->
 <head>
 <!--
     Membership and regular participation in the UNL Web Developer Network
@@ -13,7 +13,7 @@
     create a derivative work.
     This message may not be removed from any pages based on the UNL site template.
     
-    $Id: shared_column_left.dwt 536 2009-07-23 15:47:30Z bbieber2 $
+    $Id: shared_column_left.dwt 1390 2010-11-18 15:24:33Z bbieber2 $
 -->
 <link rel="stylesheet" type="text/css" media="screen" href="/wdn/templates_3.0/css/all.css" />
 <link rel="stylesheet" type="text/css" media="print" href="/wdn/templates_3.0/css/print.css" />

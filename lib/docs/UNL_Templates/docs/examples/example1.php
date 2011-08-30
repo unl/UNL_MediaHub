@@ -7,7 +7,7 @@
  */
 ini_set('display_errors', true);
 error_reporting(E_ALL);
-set_include_path(realpath(dirname(__FILE__).'/../../').PATH_SEPARATOR.realpath(dirname(__FILE__).'/../../lib/php'));
+set_include_path(realpath(dirname(__FILE__).'/../../').PATH_SEPARATOR.realpath(dirname(__FILE__).'/../../../../php'));
 require_once 'UNL/Templates.php';
 UNL_Templates::$options['version'] = 3;
 
