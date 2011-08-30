@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- InstanceBegin template="/Templates/mobile.dwt" codeOutsideHTMLIsLocked="false" -->
+<html lang="en"><!-- InstanceBegin template="/Templates/fixed_html5.dwt" codeOutsideHTMLIsLocked="false" -->
 <head>
 <!--#include virtual="/wdn/templates_3.0/includes/metanfavico_html5.html" -->
 <!--
@@ -14,11 +14,11 @@
     create a derivative work.
     This message may not be removed from any pages based on the UNL site template.
     
-    $Id: mobile.dwt 756 2009-09-15 02:31:02Z bbieber2 $
+    $Id: fixed_html5.dwt 1918 2011-07-07 15:59:13Z bbieber2 $
 -->
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width" />
-<link rel="stylesheet" type="text/css" media="screen" href="/wdn/templates_3.0/css/mobile.css" />
-<script type="text/javascript" src="/wdn/templates_3.0/scripts/mobile.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="/wdn/templates_3.0/css/all.css" />
+<link rel="stylesheet" type="text/css" media="print" href="/wdn/templates_3.0/css/print.css" />
+<script type="text/javascript" src="/wdn/templates_3.0/scripts/all.js"></script>
 <!--#include virtual="/wdn/templates_3.0/includes/browserspecifics_html5.html" -->
 <!-- InstanceBeginEditable name="doctitle" -->
 <title>UNL | Department | New Page</title>
@@ -27,12 +27,12 @@
 <!-- Place optional header elements here -->
 <!-- InstanceEndEditable -->
 </head>
-<body class="html5 mobile">
+<body class="html5 fixed">
 <p class="skipnav"> <a class="skipnav" href="#maincontent">Skip Navigation</a> </p>
 <div id="wdn_wrapper">
-    <div id="header"> <a href="http://m.unl.edu/" title="UNL website"><img src="/wdn/templates_3.0/images/logo.png" alt="UNL graphic identifier" id="logo" /></a>
+    <div id="header"> <a href="http://www.unl.edu/" title="UNL website"><img src="/wdn/templates_3.0/images/logo.png" alt="UNL graphic identifier" id="logo" /></a>
         <h1>University of Nebraska&ndash;Lincoln</h1>
-        <!--#include virtual="/wdn/templates_3.0/includes/wdnTools_html5.html" -->
+        <!--#include virtual="/wdn/templates_3.0/includes/wdnTools.html" -->
     </div>
     <div id="wdn_navigation_bar">
         <div id="breadcrumbs">

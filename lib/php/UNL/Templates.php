@@ -128,7 +128,7 @@ class UNL_Templates extends UNL_DWT
     function getCache()
     {
         $cache = self::getCachingService();
-        $cache_key = self::$options['version'].$this->__template;
+        $cache_key = self::$options['version'].self::$options['templatedependentspath'].$this->__template;
         // Test if there is a valid cache for this template
         if ($data = $cache->get($cache_key)) {
             // Content is in $data
@@ -350,17 +350,27 @@ class UNL_Templates extends UNL_DWT
 
     static public function getDataDir()
     {
-        if ('/Users/bbieber/Documents/workspace/UNL_MediaHub/lib/data' != '@DATA_DIR'.'@') {
-            // pear/pyrus installation
-            return '/Users/bbieber/Documents/workspace/UNL_MediaHub/lib/data/UNL_Templates/data/';
+
+        if (file_exists(dirname(__FILE__).'/../../data/UNL_Templates/data')) {
+            // relative package installation layout
+            return dirname(__FILE__).'/../../data/UNL_Templates/data';
         }
-        
+
         if (file_exists(dirname(__FILE__).'/../data/tpl_cache')) {
             // svn checkout
             return realpath(dirname(__FILE__).'/../data');
         }
 
-        // new pear2 package & pyrus installation layout
-        return dirname(__FILE__).'/../../data/UNL_Templates/pear.unl.edu/data';
+        if (file_exists(dirname(__FILE__).'/../../data/pear.unl.edu/UNL_Templates/data')) {
+            // new pear2 package & pyrus installation layout
+            return dirname(__FILE__).'/../../data/pear.unl.edu/UNL_Templates/data';
+        }
+
+        if ('/Users/bbieber/Documents/workspace/UNL_MediaHub/lib/data' != '@DATA_DIR'.'@') {
+            // pear/pyrus installation
+            return '/Users/bbieber/Documents/workspace/UNL_MediaHub/lib/data/UNL_Templates/data/';
+        }
+
+        throw new Exception('Cannot determine data directory!');
     }
 }

@@ -16,10 +16,10 @@
   <email>nhummel2@math.unl.edu</email>
   <active>yes</active>
  </lead>
- <date>2011-03-21</date>
- <time>13:55:47</time>
+ <date>2011-08-30</date>
+ <time>16:37:36</time>
  <version>
-  <release>1.1.0</release>
+  <release>1.2.0</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -28,13 +28,26 @@
  </stability>
  <license uri="http://www1.unl.edu/wdn/wiki/Software_License">BSD License</license>
  <notes>
-Feature Release!
-* Added the mobile template.
-* Fix support for version 2 templates.
-* Only set templatedependentspath if it has not been set.
+Update .tpl cache so template files are in sync with latest wdntemplates.
+Allow underscores within Version3 template include files.
+
+New templates!
+
+ * Fixed_html5
+ * Unlaffiliate
+
+Template updates:
+
+ * Meta lang fixes
+ * Remove IDM region from the secure template
+ * Mobile template now supports navigation and move to HTML5
  </notes>
  <contents>
   <dir name="/">
+   <file baseinstalldir="/" md5sum="40eeca840e02c9e5b2b2b7846bd73397" name="UNL/Templates/Version3/Unlaffiliate.php" role="php">
+    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
+    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
+   </file>
    <file baseinstalldir="/" md5sum="f9b3c237b7a6b8500ef0d18f4e1c9595" name="UNL/Templates/Version3/Shared_column_right.php" role="php">
     <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
     <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
@@ -43,7 +56,7 @@ Feature Release!
     <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
     <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
    </file>
-   <file baseinstalldir="/" md5sum="e6bcc877d8fe24beb229aec454710e5e" name="UNL/Templates/Version3/Secure.php" role="php">
+   <file baseinstalldir="/" md5sum="7586ee8d6db673dbef56fe491a0ac517" name="UNL/Templates/Version3/Secure.php" role="php">
     <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
     <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
    </file>
@@ -51,11 +64,15 @@ Feature Release!
     <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
     <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
    </file>
-   <file baseinstalldir="/" md5sum="da29bd0de202f2fe27d593c1a35c4d65" name="UNL/Templates/Version3/Mobile.php" role="php">
+   <file baseinstalldir="/" md5sum="88ed3fab2afd3f989c53db231ea99715" name="UNL/Templates/Version3/Mobile.php" role="php">
     <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
     <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
    </file>
    <file baseinstalldir="/" md5sum="5ae65bf4c045a5b9b65b726b52d6cd26" name="UNL/Templates/Version3/Liquid.php" role="php">
+    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
+    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
+   </file>
+   <file baseinstalldir="/" md5sum="183165807ee292fa17a03314c5455a6b" name="UNL/Templates/Version3/Fixed_html5.php" role="php">
     <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
     <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
    </file>
@@ -75,7 +92,7 @@ Feature Release!
     <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
     <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
    </file>
-   <file baseinstalldir="/" md5sum="95edca2102f2160a7b53162ca94a8b99" name="UNL/Templates/Version3.php" role="php">
+   <file baseinstalldir="/" md5sum="ac6b2ddcaa8204679eb0c8fd86cd7ed1" name="UNL/Templates/Version3.php" role="php">
     <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
     <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
    </file>
@@ -139,7 +156,7 @@ Feature Release!
     <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
     <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
    </file>
-   <file baseinstalldir="/" md5sum="1b3de8279d951ccb05f8ad61903f6b03" name="UNL/Templates.php" role="php">
+   <file baseinstalldir="/" md5sum="2c228caecb506e35cf3259cabbcec9c1" name="UNL/Templates.php" role="php">
     <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
     <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
    </file>
@@ -151,7 +168,7 @@ Feature Release!
     <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
     <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
    </file>
-   <file baseinstalldir="/" md5sum="3a3851e70662c3e0bb3ffbc7e5765325" name="docs/examples/example1.php" role="doc">
+   <file baseinstalldir="/" md5sum="445545ee84172f82ed09219931fa288e" name="docs/examples/example1.php" role="doc">
     <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
     <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
    </file>
@@ -171,43 +188,51 @@ Feature Release!
     <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
     <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
    </file>
-   <file baseinstalldir="/" md5sum="742720269e3488e0fa34f0ad53b2cb00" name="data/tpl_cache/Version3/Shared_column_right.tpl" role="data">
+   <file baseinstalldir="/" md5sum="6644923a681f49bfd425f5768d01e4a3" name="data/tpl_cache/Version3/Unlaffiliate.tpl" role="data">
     <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
     <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
    </file>
-   <file baseinstalldir="/" md5sum="d33744a26d2f229c5b9172557733f35f" name="data/tpl_cache/Version3/Shared_column_left.tpl" role="data">
+   <file baseinstalldir="/" md5sum="84cc265b12115d9c2733a6d03f5a4d85" name="data/tpl_cache/Version3/Shared_column_right.tpl" role="data">
     <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
     <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
    </file>
-   <file baseinstalldir="/" md5sum="3d0a70139d0d736d7b5a1c9db203407f" name="data/tpl_cache/Version3/Secure.tpl" role="data">
+   <file baseinstalldir="/" md5sum="6003b105b79241b8e001d0f375265747" name="data/tpl_cache/Version3/Shared_column_left.tpl" role="data">
     <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
     <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
    </file>
-   <file baseinstalldir="/" md5sum="806405f82ed8f12e584e44b6f8d42dc8" name="data/tpl_cache/Version3/Popup.tpl" role="data">
+   <file baseinstalldir="/" md5sum="6a5f82b61c2c2191494af9fe1384bdca" name="data/tpl_cache/Version3/Secure.tpl" role="data">
     <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
     <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
    </file>
-   <file baseinstalldir="/" md5sum="922b27d1257d43020214ab70e2da5829" name="data/tpl_cache/Version3/Mobile.tpl" role="data">
+   <file baseinstalldir="/" md5sum="1f3b340e18024423748839343369443d" name="data/tpl_cache/Version3/Popup.tpl" role="data">
     <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
     <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
    </file>
-   <file baseinstalldir="/" md5sum="962756c965f0f2881e88c83a72fe0545" name="data/tpl_cache/Version3/Liquid.tpl" role="data">
+   <file baseinstalldir="/" md5sum="aa53260716fc4f1d2fc31d149416b7e0" name="data/tpl_cache/Version3/Mobile.tpl" role="data">
     <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
     <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
    </file>
-   <file baseinstalldir="/" md5sum="d264bf1f5ae2655836aa69a8bcfbd4e6" name="data/tpl_cache/Version3/Fixed.tpl" role="data">
+   <file baseinstalldir="/" md5sum="4b576a99e001b22d3c77b01f72789546" name="data/tpl_cache/Version3/Liquid.tpl" role="data">
     <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
     <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
    </file>
-   <file baseinstalldir="/" md5sum="636db467eaccd481f1697e85b4f1d814" name="data/tpl_cache/Version3/Document.tpl" role="data">
+   <file baseinstalldir="/" md5sum="9cedaa7c695c654e0f16fa534e35ec32" name="data/tpl_cache/Version3/Fixed_html5.tpl" role="data">
     <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
     <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
    </file>
-   <file baseinstalldir="/" md5sum="deae0c7ac5529cdc5713e11febd022f0" name="data/tpl_cache/Version3/Debug.tpl" role="data">
+   <file baseinstalldir="/" md5sum="783216b7dc343283a21ba3f8a8e5396b" name="data/tpl_cache/Version3/Fixed.tpl" role="data">
     <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
     <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
    </file>
-   <file baseinstalldir="/" md5sum="8d735ef7de849049870801a47d7098e2" name="data/tpl_cache/Version3/Absolute.tpl" role="data">
+   <file baseinstalldir="/" md5sum="8a7ecbc31b2a4d85bad056f7c0d06039" name="data/tpl_cache/Version3/Document.tpl" role="data">
+    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
+    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
+   </file>
+   <file baseinstalldir="/" md5sum="fe52677e48d48d798d70e9cad4b5c0ed" name="data/tpl_cache/Version3/Debug.tpl" role="data">
+    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
+    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
+   </file>
+   <file baseinstalldir="/" md5sum="b3cf17273448a34ac869d4369663e819" name="data/tpl_cache/Version3/Absolute.tpl" role="data">
     <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
     <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
    </file>
@@ -799,6 +824,33 @@ Feature Release!
 * Added the mobile template.
 * Fix support for version 2 templates.
 * Only set templatedependentspath if it has not been set.
+   </notes>
+   </release>
+   <release>
+    <version>
+     <release>1.2.0</release>
+     <api>1.0.0</api>
+    </version>
+    <stability>
+     <release>stable</release>
+     <api>stable</api>
+    </stability>
+    <date>2011-08-17</date>
+    <license uri="http://www1.unl.edu/wdn/wiki/Software_License">BSD License</license>
+    <notes>
+Update .tpl cache so template files are in sync with latest wdntemplates.
+Allow underscores within Version3 template include files.
+
+New templates!
+
+ * Fixed_html5
+ * Unlaffiliate
+
+Template updates:
+
+ * Meta lang fixes
+ * Remove IDM region from the secure template
+ * Mobile template now supports navigation and move to HTML5
    </notes>
    </release>
   </changelog>

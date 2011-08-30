@@ -1,7 +1,6 @@
-<!DOCTYPE html>
-<html lang="en"><!-- InstanceBegin template="/Templates/mobile.dwt" codeOutsideHTMLIsLocked="false" -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><!-- InstanceBegin template="/Templates/unlaffiliate.dwt" codeOutsideHTMLIsLocked="false" -->
 <head>
-<!--#include virtual="/wdn/templates_3.0/includes/metanfavico_html5.html" -->
 <!--
     Membership and regular participation in the UNL Web Developer Network
     is required to use the UNL templates. Visit the WDN site at 
@@ -14,12 +13,14 @@
     create a derivative work.
     This message may not be removed from any pages based on the UNL site template.
     
-    $Id: mobile.dwt 756 2009-09-15 02:31:02Z bbieber2 $
+    $Id: unlaffiliate.dwt 1390 2010-11-18 15:24:33Z bbieber2 $
 -->
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width" />
-<link rel="stylesheet" type="text/css" media="screen" href="/wdn/templates_3.0/css/mobile.css" />
-<script type="text/javascript" src="/wdn/templates_3.0/scripts/mobile.js"></script>
-<!--#include virtual="/wdn/templates_3.0/includes/browserspecifics_html5.html" -->
+<link rel="stylesheet" type="text/css" media="screen" href="/wdn/templates_3.0/css/all.css" />
+<link rel="stylesheet" type="text/css" media="print" href="/wdn/templates_3.0/css/print.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="../sharedcode/affiliate.css" />
+<script type="text/javascript" src="/wdn/templates_3.0/scripts/all.js"></script>
+<!--#include virtual="/wdn/templates_3.0/includes/browserspecifics.html" -->
+<!--#include virtual="/wdn/templates_3.0/includes/metanfavico.html" -->
 <!-- InstanceBeginEditable name="doctitle" -->
 <title>UNL | Department | New Page</title>
 <!-- InstanceEndEditable -->
@@ -27,12 +28,19 @@
 <!-- Place optional header elements here -->
 <!-- InstanceEndEditable -->
 </head>
-<body class="html5 mobile">
+<body class="fixed">
 <p class="skipnav"> <a class="skipnav" href="#maincontent">Skip Navigation</a> </p>
 <div id="wdn_wrapper">
-    <div id="header"> <a href="http://m.unl.edu/" title="UNL website"><img src="/wdn/templates_3.0/images/logo.png" alt="UNL graphic identifier" id="logo" /></a>
-        <h1>University of Nebraska&ndash;Lincoln</h1>
-        <!--#include virtual="/wdn/templates_3.0/includes/wdnTools_html5.html" -->
+    <div id="header"> 	
+		
+<!-- InstanceBeginEditable name="sitebranding" -->
+		<div id="affiliate_note"><a href="http://www.unl.edu" title="University of Nebraska&ndash;Lincoln">An affiliate of the University of Nebraska&ndash;Lincoln</a></div>
+		<a href="/" title="Through the Eyes of the Child Initiative"><img src="../sharedcode/affiliate_imgs/affiliate_logo.png" alt="Through the Eyes of the Child Initiative" id="logo" /></a>
+    	<h1>Through the Eyes of the Child Initiative</h1>
+		<div id='tag_line'>A Nebraska Supreme Court Initiative</div>
+		
+<!-- InstanceEndEditable -->
+		<!--#include virtual="/wdn/templates_3.0/includes/wdnTools.html" -->
     </div>
     <div id="wdn_navigation_bar">
         <div id="breadcrumbs">
