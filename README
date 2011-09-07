@@ -22,6 +22,5 @@ PHP 5
 PDO Mysql
 
 Sources:
-Audio player from http://wpaudioplayer.com/
-JQuery
-YUI Editor
+Audio and video player from http://mediaelementjs.com/
+jQuery from http://jquery.com/
