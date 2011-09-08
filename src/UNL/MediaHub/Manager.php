@@ -172,7 +172,17 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
 
         $this->output[] = new UNL_MediaHub_MediaList($options + $this->options);
     }
-    
+
+    /**
+     * Get the path to the directory where uploads are stored
+     *
+     * @return string
+     */
+    public static function getUploadDirectory()
+    {
+        return dirname(dirname(dirname(dirname(__FILE__)))).'/www/uploads';
+    }
+
     public static function getURL($mixed = null, $additional_params = array())
     {
         $params = array();
