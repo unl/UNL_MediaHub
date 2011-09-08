@@ -48,6 +48,21 @@ var mediaDetails = function() {
 
 			return ((hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds  < 10 ? "0" + seconds : seconds));
 		},
+
+		/**
+		 * Check if the given URL meets requirements
+		 * 
+		 * @return bool
+		 */
+		validURL : function(url) {
+			unl_check = /^http:\/\/([^\/]+)\.unl\.edu\/(.*)/;
+	        var r = unl_check.exec(url);
+	        if (r == null) {
+	            alert('Sorry, you must use a .unl.edu URL, or upload a valid file.');
+	            return false;
+	        }
+	        return true;
+		},
 		
 		showVideo : function(){ //video has been updated, now parse it into to markup and show the user
 			WDN.jQuery('video').attr('src', WDN.jQuery("#url").val());
@@ -100,12 +115,13 @@ WDN.jQuery(document).ready(function() {
     	}
     }
     WDN.jQuery("#videoSubmit").click(function(event) { //called when a user adds video
-            unl_check = /^http:\/\/([^\/]+)\.unl\.edu\/(.*)/;
-            var r = unl_check.exec(document.getElementById("url").value);
-            if (r == null) {
-                alert('Sorry, you must use a .unl.edu URL!');
-                return false;
-            }
+
+    		if (document.getElementById("file_upload").value == '') {
+    			if (!mediaDetails.validURL(document.getElementById("url").value)) {
+    				return false;
+    			}
+    		}
+
             WDN.jQuery("#addMedia, #feedlist").slideUp(400, function() {
                 WDN.jQuery("#headline_main_video").slideDown(400, function() {
                     WDN.jQuery("#maincontent form.zenform").css({"width" : "930px"}).parent("#formDetails").removeClass("two_col right");
@@ -132,12 +148,13 @@ WDN.jQuery(document).ready(function() {
         mediaDetails.showVideo();
     });
     WDN.jQuery("#audioSubmit").click(function(event) { //called when a user adds audio
-        unl_check = /^http:\/\/([^\/]+)\.unl\.edu\/(.*)/;
-        var r = unl_check.exec(document.getElementById("url").value);
-        if (r == null) {
-            alert('Sorry, you must use a .unl.edu URL!');
-            return false;
-        }
+    	
+    	if (document.getElementById("file_upload").value == '') {
+			if (!mediaDetails.validURL(document.getElementById("url").value)) {
+				return false;
+			}
+		}
+    	
         WDN.jQuery("#addMedia, #feedlist").slideUp(400, function() {
             WDN.jQuery("#headline_main_audio").slideDown(400, function() {
                 WDN.jQuery("#maincontent form.zenform").css({"width" : "930px"}).parent("#formDetails").removeClass("two_col right");

@@ -3,7 +3,7 @@
 Supporting styles for the manager forms (add media, channel)
 -------------------------------------------------
 */
-#enhanced_header, #existing_media, #feedSelect, #maincontent form.zenform #continue3, #file_upload {display:none;}
+#enhanced_header, #existing_media, #feedSelect, #maincontent form.zenform #continue3 {display:none;}
 #maincontent form.zenform {max-width:930px;margin-top:5px;background-color:#E6E9DC;
     background-image:-webkit-gradient(
                         linear,
