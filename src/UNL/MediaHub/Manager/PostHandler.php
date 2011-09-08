@@ -42,6 +42,54 @@ class UNL_MediaHub_Manager_PostHandler
         }
     }
 
+    /**
+     * Handles new media file uploads
+     * 
+     * @return string URL to media
+     */
+    function handleMediaFileUpload()
+    {
+        if (!isset($this->files['file_upload'])) {
+            // nothing to do
+            return false;
+        }
+
+        if ($this->files['file_upload']['error'] != UPLOAD_ERR_OK) {
+            throw new Exception('Error uploading the file', 500);
+        }
+
+        // Verify extension
+        if (!self::validMediaFileName($this->files['file_upload']['name'])) {
+            throw new Exception('Invalid file extension uploaded '.$this->files['file_upload']['name'], 500);
+        }
+
+        $extension = strtolower(pathinfo($this->files['file_upload']['name'], PATHINFO_EXTENSION));
+
+        $filename = md5(time()) . '.'. $extension;
+
+        // Copy file to uploads diretory
+        if (false == copy($this->files['file_upload']['tmp_name'],
+                          UNL_MediaHub_Manager::getUploadDirectory()
+                          . DIRECTORY_SEPARATOR .$filename)) {
+            throw new Exception('Error copying file from temp location to permanent location', 500);
+        }
+
+        return UNL_MediaHub_Controller::$url.'/uploads/'.$filename;
+    }
+
+    /**
+     * Checks if the filename is supported.
+     * 
+     * @param string $filename Filename to check
+     * 
+     * @return bool
+     */
+    public static function validMediaFileName($filename)
+    {
+        $allowedExtensions = array('mp4', 'm4v', 'mp3', 'ogg');
+        return in_array(end(explode('.', strtolower($filename))), $allowedExtensions);
+    }
+
     function handleFeed()
     {
         if (isset($this->files['image_file'])
@@ -66,6 +114,10 @@ class UNL_MediaHub_Manager_PostHandler
 
     function handleFeedMedia()
     {
+        if (!empty($this->files)) {
+            $this->post['url'] = $this->handleMediaFileUpload();
+        }
+
         // Add media to a feed/channel
         if (isset($this->post['id'])) {
             // Editing media details
@@ -73,8 +125,8 @@ class UNL_MediaHub_Manager_PostHandler
         } else {
             // Insert a new piece of media
             $details = array('url'        => $this->post['url'],
-                                         'title'      => $this->post['title'],
-                                         'description'=> $this->post['description']);
+                             'title'      => $this->post['title'],
+                             'description'=> $this->post['description']);
             $media = $this->mediahub->addMedia($details);
         }
 
