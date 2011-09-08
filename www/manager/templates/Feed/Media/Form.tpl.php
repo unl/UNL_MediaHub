@@ -67,7 +67,7 @@ UNL_MediaHub_Manager::setReplacementData('head', $js);
             <li>
                 <label><span class="required">*</span>URL of Media File<span class="helper">Media types supported: .m4v, .mp4, .mp3</span></label>
                 <input id="url" name="url" type="text" value="<?php echo htmlentities(@$context->media->url, ENT_QUOTES); ?>" />
-                <!-- <input id="file_upload" name="file_upload" type="file" /> -->
+                <input id="file_upload" name="file_upload" type="file" />
                 <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
                 <input id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" type="hidden" value="67108864" />
                 <?php
