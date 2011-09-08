@@ -28,99 +28,120 @@ class UNL_MediaHub_Manager_PostHandler
 
         switch ($postTarget) {
         case 'feed':
-            if (isset($this->files['image_file'])
-                && is_uploaded_file($this->files['image_file']['tmp_name'])) {
-                $this->post['image_data'] = file_get_contents($this->files['image_file']['tmp_name']);
-                $this->post['image_type'] = $this->files['image_file']['type'];
-                $this->post['image_size'] = $this->files['image_file']['size'];
-            }
-
-            // Insert or update a Feed/Channel
-            if (isset($this->post['id'])) {
-                // Update an existing feed.
-                $feed = UNL_MediaHub_Feed::getById($this->post['id']);
-                $feed->synchronizeWithArray($this->post);
-                $feed->save();
-            } else {
-                // Add a new feed for this user.
-                $feed = UNL_MediaHub_Feed::addFeed($this->post, UNL_MediaHub_Manager::getUser());
-            }
-            $this->redirect('?view=feed&id='.$feed->id);
+            $this->handleFeed();
             break;
         case 'feed_media':
-            // Add media to a feed/channel
-            if (isset($this->post['id'])) {
-                // Editing media details
-                $media = UNL_MediaHub_Media::getById($this->post['id']);
-            } else {
-                // Insert a new piece of media
-                $details = array('url'        => $this->post['url'],
-                                 'title'      => $this->post['title'],
-                                 'description'=> $this->post['description']);
-                $media = $this->mediahub->addMedia($details);
-            }
-
-            // Save details
-            $media->synchronizeWithArray($this->post);
-            $media->save();
-
-            if (!empty($this->post['feed_id'])) {
-                if (is_array($this->post['feed_id'])) {
-                    $feed_ids = array_keys($this->post['feed_id']);
-                } else {
-                    $feed_ids = array($this->post['feed_id']);
-                }
-                foreach ($feed_ids as $feed_id) {
-                    $feed = UNL_MediaHub_Feed::getById($feed_id);
-                    if (!$feed->userHasPermission(UNL_MediaHub_Manager::getUser(),
-                                                  UNL_MediaHub_Permission::getByID(
-                                                    UNL_MediaHub_Permission::USER_CAN_INSERT))) {
-                        throw new Exception('You do not have permission to do this.');
-                    }
-                    $feed->addMedia($media);
-                }
-            }
-            
-            if (!empty($this->post['new_feed'])) {
-                $data = array('title'       => $this->post['new_feed'],
-                              'description' => $this->post['new_feed']);
-                $feed = UNL_MediaHub_Feed::addFeed($data, UNL_MediaHub_Manager::getUser());
-                $feed->addMedia($media);
-            }
-            
-            if (isset($feed, $feed->id)) {
-                $this->redirect('?view=feed&id='.$feed->id);
-            }
-            // @todo clean cache for this feed!
-            $this->redirect(UNL_MediaHub_Manager::getURL());
+            $this->handleFeedMedia();
             break;
         case 'feed_users':
-            $feed = UNL_MediaHub_Feed::getById($this->post['feed_id']);
-            if (!$feed->userHasPermission(UNL_MediaHub_Manager::getUser(),
-                                          UNL_MediaHub_Permission::getByID(
-                                            UNL_MediaHub_Permission::USER_CAN_ADD_USER))) {
-                throw new Exception('You do not have permission to add a user.');
-            }
-            if (!empty($this->post['uid'])) {
-                if (!empty($this->post['delete'])) {
-                    $feed->removeUser(UNL_MediaHub_User::getByUid($this->post['uid']));
-                } else {
-                    $feed->addUser(UNL_MediaHub_User::getByUid($this->post['uid']));
-                }
-            }
-            $this->redirect('?view=feed&id='.$feed->id);
+            $this->handleFeedUsers();
             break;
         case 'delete_media':
-            $feed = UNL_MediaHub_Feed::getById($this->post['feed_id']);
-            $media = UNL_MediaHub_Media::getById($this->post['media_id']);
-            if ($feed->hasMedia($media)
-                && $feed->userHasPermission(UNL_MediaHub_Manager::getUser(),
-                                            UNL_MediaHub_Permission::getByID(
-                                                UNL_MediaHub_Permission::USER_CAN_DELETE))) {
-                $media->delete();
+            $this->handleDeleteMedia();
+            break;
+        }
+    }
+
+    function handleFeed()
+    {
+        if (isset($this->files['image_file'])
+            && is_uploaded_file($this->files['image_file']['tmp_name'])) {
+            $this->post['image_data'] = file_get_contents($this->files['image_file']['tmp_name']);
+            $this->post['image_type'] = $this->files['image_file']['type'];
+            $this->post['image_size'] = $this->files['image_file']['size'];
+        }
+
+        // Insert or update a Feed/Channel
+        if (isset($this->post['id'])) {
+            // Update an existing feed.
+            $feed = UNL_MediaHub_Feed::getById($this->post['id']);
+            $feed->synchronizeWithArray($this->post);
+            $feed->save();
+        } else {
+            // Add a new feed for this user.
+            $feed = UNL_MediaHub_Feed::addFeed($this->post, UNL_MediaHub_Manager::getUser());
+        }
+        $this->redirect('?view=feed&id='.$feed->id);
+    }
+
+    function handleFeedMedia()
+    {
+        // Add media to a feed/channel
+        if (isset($this->post['id'])) {
+            // Editing media details
+            $media = UNL_MediaHub_Media::getById($this->post['id']);
+        } else {
+            // Insert a new piece of media
+            $details = array('url'        => $this->post['url'],
+                                         'title'      => $this->post['title'],
+                                         'description'=> $this->post['description']);
+            $media = $this->mediahub->addMedia($details);
+        }
+
+        // Save details
+        $media->synchronizeWithArray($this->post);
+        $media->save();
+
+        if (!empty($this->post['feed_id'])) {
+            if (is_array($this->post['feed_id'])) {
+                $feed_ids = array_keys($this->post['feed_id']);
+            } else {
+                $feed_ids = array($this->post['feed_id']);
             }
+            foreach ($feed_ids as $feed_id) {
+                $feed = UNL_MediaHub_Feed::getById($feed_id);
+                if (!$feed->userHasPermission(UNL_MediaHub_Manager::getUser(),
+                UNL_MediaHub_Permission::getByID(
+                UNL_MediaHub_Permission::USER_CAN_INSERT))) {
+                    throw new Exception('You do not have permission to do this.');
+                }
+                $feed->addMedia($media);
+            }
+        }
+
+        if (!empty($this->post['new_feed'])) {
+            $data = array('title'       => $this->post['new_feed'],
+                                      'description' => $this->post['new_feed']);
+            $feed = UNL_MediaHub_Feed::addFeed($data, UNL_MediaHub_Manager::getUser());
+            $feed->addMedia($media);
+        }
+
+        if (isset($feed, $feed->id)) {
             $this->redirect('?view=feed&id='.$feed->id);
         }
+        // @todo clean cache for this feed!
+        $this->redirect(UNL_MediaHub_Manager::getURL());
+    }
+
+    function handleFeedUsers()
+    {
+        $feed = UNL_MediaHub_Feed::getById($this->post['feed_id']);
+        if (!$feed->userHasPermission(UNL_MediaHub_Manager::getUser(),
+        UNL_MediaHub_Permission::getByID(
+        UNL_MediaHub_Permission::USER_CAN_ADD_USER))) {
+            throw new Exception('You do not have permission to add a user.');
+        }
+        if (!empty($this->post['uid'])) {
+            if (!empty($this->post['delete'])) {
+                $feed->removeUser(UNL_MediaHub_User::getByUid($this->post['uid']));
+            } else {
+                $feed->addUser(UNL_MediaHub_User::getByUid($this->post['uid']));
+            }
+        }
+        $this->redirect('?view=feed&id='.$feed->id);
+    }
+
+    function handleDeleteMedia()
+    {
+        $feed = UNL_MediaHub_Feed::getById($this->post['feed_id']);
+        $media = UNL_MediaHub_Media::getById($this->post['media_id']);
+        if ($feed->hasMedia($media)
+        && $feed->userHasPermission(UNL_MediaHub_Manager::getUser(),
+        UNL_MediaHub_Permission::getByID(
+        UNL_MediaHub_Permission::USER_CAN_DELETE))) {
+            $media->delete();
+        }
+        $this->redirect('?view=feed&id='.$feed->id);
     }
 
     /**
