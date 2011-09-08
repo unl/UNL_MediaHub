@@ -50,20 +50,20 @@ class UNL_MediaHub_Manager_PostHandler
         case 'feed_media':
             // Add media to a feed/channel
             if (isset($this->post['id'])) {
-                // all ok
+                // Editing media details
                 $media = UNL_MediaHub_Media::getById($this->post['id']);
-                $media->synchronizeWithArray($this->post);
-                $media->save();
             } else {
                 // Insert a new piece of media
                 $details = array('url'        => $this->post['url'],
                                  'title'      => $this->post['title'],
                                  'description'=> $this->post['description']);
                 $media = $this->mediahub->addMedia($details);
-                $media->synchronizeWithArray($this->post);
-                $media->save();
             }
-            
+
+            // Save details
+            $media->synchronizeWithArray($this->post);
+            $media->save();
+
             if (!empty($this->post['feed_id'])) {
                 if (is_array($this->post['feed_id'])) {
                     $feed_ids = array_keys($this->post['feed_id']);
