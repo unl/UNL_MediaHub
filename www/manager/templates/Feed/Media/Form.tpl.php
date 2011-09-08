@@ -6,11 +6,11 @@ if (!isset($context->media)) {
         $formView .= "//WDN.jQuery('#feedlist').hide();"; 
     }
 } else { //if we have media (we're editing) show the appropriate part of the form
-	if (strncasecmp($context->media->type, 'audio', 5) == 0) {
-		$mediaType = 'audio';
-	} else if (strncasecmp($context->media->type, 'video', 5) == 0) {
-		$mediaType = 'video';
-	}
+    if (strncasecmp($context->media->type, 'audio', 5) == 0) {
+        $mediaType = 'audio';
+    } else if (strncasecmp($context->media->type, 'video', 5) == 0) {
+        $mediaType = 'video';
+    }
     $formView .= 'edit';
 }
 
@@ -47,15 +47,15 @@ UNL_MediaHub_Manager::setReplacementData('head', $js);
         <a class="action" id="setImage" href="#">Set Image</a>
     </div>
     <div id="videoDisplay" class="two_col right">
-		<?php echo $savvy->render('videoDisplay', 'MediaPlayer.tpl.php'); ?>
+        <?php echo $savvy->render('videoDisplay', 'MediaPlayer.tpl.php'); ?>
     </div>
 </div>
 <div class="headline_main" id="headline_main_audio" style="display:none;">
-	<div id="audioPreview" class="two_col left">
-    	<h1 style="padding: 15px 0 0 20px;">Preview your Audio</h1>
+    <div id="audioPreview" class="two_col left">
+        <h1 style="padding: 15px 0 0 20px;">Preview your Audio</h1>
     </div>
     <div id="audioDisplay" class="two_col right">
-    	<?php echo $savvy->render('audioDisplay', 'MediaPlayer.tpl.php'); ?>
+        <?php echo $savvy->render('audioDisplay', 'MediaPlayer.tpl.php'); ?>
     </div>
 </div>
 <div class="clear"></div>
@@ -66,15 +66,15 @@ UNL_MediaHub_Manager::setReplacementData('head', $js);
         <ol>
             <li>
                 <label><span class="required">*</span>URL of Media File<span class="helper">Media types supported: .m4v, .mp4, .mp3</span></label>
-		        <input id="url" name="url" type="text" value="<?php echo htmlentities(@$context->media->url, ENT_QUOTES); ?>" />
-		        <!-- <input id="file_upload" name="file_upload" type="file" /> -->
-		        <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
-		        <input id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" type="hidden" value="67108864" />
-		        <?php
-		        if (isset($context->media->id)) {
-		            echo '<input type="hidden" id="id" name="id" value="'.$context->media->id.'" />';
-		        }
-		        ?>
+                <input id="url" name="url" type="text" value="<?php echo htmlentities(@$context->media->url, ENT_QUOTES); ?>" />
+                <!-- <input id="file_upload" name="file_upload" type="file" /> -->
+                <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
+                <input id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" type="hidden" value="67108864" />
+                <?php
+                if (isset($context->media->id)) {
+                    echo '<input type="hidden" id="id" name="id" value="'.$context->media->id.'" />';
+                }
+                ?>
             </li>
         </ol>
     <input type="submit" name="submit" id="videoSubmit" value="Video" />
@@ -83,7 +83,7 @@ UNL_MediaHub_Manager::setReplacementData('head', $js);
     <fieldset id="existing_media">
         <legend>Basic Information</legend>
         <ol>
-        	<li><label><span class="required">*</span>URL of Media File<span class="helper">Media types supported: .m4v, .mp4, .mp3, .ogg</span></label>
+            <li><label><span class="required">*</span>URL of Media File<span class="helper">Media types supported: .m4v, .mp4, .mp3, .ogg</span></label>
                 <input id="media_url" name="url" type="text" value="<?php echo htmlentities(@$context->media->url, ENT_QUOTES); ?>" />
             </li>
             <li><label for="title" class="element"><span class="required">*</span>Title</label><input id="title" name="title" type="text" value="<?php echo htmlentities(@$context->media->title, ENT_QUOTES); ?>" /></li>
