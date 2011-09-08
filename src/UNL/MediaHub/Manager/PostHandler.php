@@ -22,7 +22,7 @@ class UNL_MediaHub_Manager_PostHandler
 
     function handle()
     {
-    	$postTarget = $this->determinePostTarget();
+        $postTarget = $this->determinePostTarget();
 
         $this->filterPostData();
 
