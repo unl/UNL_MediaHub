@@ -95,10 +95,11 @@ var upload = function() {
 }()
 </script>
 <form onsubmit="upload.start()" target="uploadtarget" action="?" enctype="multipart/form-data" method="post">
-    <input type="hidden" name="UPLOAD_IDENTIFIER" value="<?php echo $upload_id;?>" /> 
-    <label>Select File:</label> 
+    <input type="hidden" name="UPLOAD_IDENTIFIER" value="<?php echo $upload_id;?>" />
+    <input type="hidden" name="__unlmy_posttarget" value="upload_media" />
+    <label>Select File:</label>
     <input type="file" name="file_upload" />
-    <label>Upload File:</label> 
+    <label>Upload File:</label>
     <input type="submit" value="Upload File" />
 </form>
 <iframe name="uploadtarget" width="200px" height="100px" id="uploadtarget"></iframe>
