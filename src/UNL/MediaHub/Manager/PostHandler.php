@@ -27,6 +27,9 @@ class UNL_MediaHub_Manager_PostHandler
         $this->filterPostData();
 
         switch ($postTarget) {
+        case 'upload_media':
+            $this->handleMediaFileUpload();
+            break;
         case 'feed':
             $this->handleFeed();
             break;
@@ -49,7 +52,8 @@ class UNL_MediaHub_Manager_PostHandler
      */
     function handleMediaFileUpload()
     {
-        if (!isset($this->files['file_upload'])) {
+        if (empty($this->files)
+            || !isset($this->files['file_upload'])) {
             // nothing to do
             return false;
         }
@@ -65,7 +69,7 @@ class UNL_MediaHub_Manager_PostHandler
 
         $extension = strtolower(pathinfo($this->files['file_upload']['name'], PATHINFO_EXTENSION));
 
-        $filename = md5(time()) . '.'. $extension;
+        $filename = md5(microtime() + rand()) . '.'. $extension;
 
         // Copy file to uploads diretory
         if (false == copy($this->files['file_upload']['tmp_name'],
