@@ -24,7 +24,7 @@ var upload = function() {
     
     /* private variables */
     
-    var ifr = null;
+    var uploadprogress = null;
     
     var startTime = null;
     var upload_max_filesize = <?php echo return_bytes(ini_get('upload_max_filesize'));?>;
@@ -48,7 +48,7 @@ var upload = function() {
     
     return {
         start: function() {
-           ifr = document.getElementById("ifr");
+           ifr = document.getElementById("uploadprogress");
            startTime = new Date();
            infoUpdated = 0;
            this.requestInfo();
@@ -73,7 +73,7 @@ var upload = function() {
            startTime = null;
         },
         requestInfo: function() {
-                ifr.src="info.php?ID=<?php echo $upload_id; ?>&"+new Date();
+                uploadprogress.src="?view=uploadprogress&id=<?php echo $upload_id; ?>&"+new Date();
         },
         
         updateInfo: function(uploaded, total, estimatedSeconds) {
@@ -88,7 +88,7 @@ var upload = function() {
                 } else {
                     writeStatus("Download started since " + (new Date() - startTime)/1000 + " seconds. No progress info yet");
                 }
-                window.setTimeout("upload.requestInfo()",1000);
+                window.setTimeout("upload.requestInfo()", 1000);
             }
         }
     }
@@ -102,4 +102,5 @@ var upload = function() {
     <label>Upload File:</label>
     <input type="submit" value="Upload File" />
 </form>
-<iframe name="uploadtarget" width="200px" height="100px" id="uploadtarget"></iframe>
+<iframe name="uploadprogress" width="200px" height="100px" id="uploadprogress"></iframe>
+<iframe name="uploadtarget" width="200px" height="50px" id="uploadtarget"></iframe>

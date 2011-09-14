@@ -25,6 +25,7 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
         'feeds'           => 'UNL_MediaHub_User_FeedList',
         'subscriptions'   => 'UNL_MediaHub_User_Subscriptions',
         'addsubscription' => 'UNL_MediaHub_Subscription_Form',
+        'uploadprogress'  => 'UNL_MediaHub_FileUpload_Progress',
         );
     
     protected static $replacements = array();
