@@ -84,7 +84,7 @@ class UNL_MediaHub_Manager_PostHandler
         }
 
         if ($this->files['file_upload']['error'] != UPLOAD_ERR_OK) {
-            throw new Exception('Error uploading the file', 500);
+            throw new UNL_MediaHub_Manager_PostHandler_UploadException($this->files['file_upload']['error'], 500);
         }
 
         // Verify extension
