@@ -203,7 +203,11 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
     
     function showFeed()
     {
-        $feed = UNL_MediaHub_Feed::getById($_GET['id']);
+        if (empty($this->options['id'])) {
+            throw new Exception('No feed selected to show.');
+        }
+
+        $feed = UNL_MediaHub_Feed::getById($this->options['id']);
         if (!($feed && $feed->userHasPermission(self::$user, UNL_MediaHub_Permission::getByID(
                                                     UNL_MediaHub_Permission::USER_CAN_INSERT)))) {
             throw new Exception('You do not have permission for this feed.');
