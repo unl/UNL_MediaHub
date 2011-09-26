@@ -117,7 +117,7 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
     function run()
     {
         try {
-            if (count($_POST)) {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $this->handlePost();
             }
 
