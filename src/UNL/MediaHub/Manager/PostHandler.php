@@ -22,6 +22,8 @@ class UNL_MediaHub_Manager_PostHandler
 
     function handle()
     {
+        $this->verifyPost();
+
         $postTarget = $this->determinePostTarget();
 
         $this->filterPostData();
@@ -45,6 +47,28 @@ class UNL_MediaHub_Manager_PostHandler
         }
     }
 
+    function verifyPost()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'
+            && empty($this->post)
+            && empty($this->files)
+            && isset($_SERVER['CONTENT_LENGTH'])
+            && $_SERVER['CONTENT_LENGTH'] > 0 ) {
+
+            $maxSize = ini_get('post_max_size');
+
+            switch (substr($maxSize,-1)){
+            case 'G':
+                $maxSize = $maxSize * 1024;
+            case 'M':
+                $maxSize = $maxSize * 1024;
+            case 'K':
+                $maxSize = $maxSize * 1024;
+            }
+            throw new Exception('Sorry, the amount of data POSTed exceeded the maximum amount ('.$maxSize.' bytes)', 413);
+        }
+    }
+
     /**
      * Handles new media file uploads
      * 
@@ -52,6 +76,7 @@ class UNL_MediaHub_Manager_PostHandler
      */
     function handleMediaFileUpload()
     {
+
         if (empty($this->files)
             || !isset($this->files['file_upload'])) {
             // nothing to do
