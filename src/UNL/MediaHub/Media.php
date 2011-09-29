@@ -260,15 +260,15 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia
      */
     function addTag($newTag)
     {
-    	$tags = $this->getTags();
+        $tags = $this->getTags();
         $class = 'UNL_MediaHub_Feed_Media_NamespacedElements_itunes';
-    	if (!in_array(strtolower($newTag), $tags)) {
-        	array_push($tags, strtolower($newTag));
-        	sort($tags);
-        	$tagStr = implode(",", $tags);
-        	return call_user_func($class .'::mediaSetElement', $this->id, 'keywords', $tagStr);
+        if (!in_array(strtolower($newTag), $tags)) {
+            array_push($tags, strtolower($newTag));
+            sort($tags);
+            $tagStr = implode(",", $tags);
+            return call_user_func($class .'::mediaSetElement', $this->id, 'keywords', $tagStr);
         }
-    	return false;
+        return false;
     }
 
     /**
