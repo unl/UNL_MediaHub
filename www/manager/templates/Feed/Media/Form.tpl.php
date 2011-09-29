@@ -24,8 +24,14 @@ $js = '<script type="text/javascript">
        ';
 
 UNL_MediaHub_Manager::setReplacementData('head', $js);
-echo $savvy->render($context, 'Media/Preview.tpl.php')
 ?>
+<div class="headline_main" id="headline_main" style="display:none;">
+<?php
+if (isset($context->media)) {
+    echo $savvy->render($context->media, 'Media/Preview.tpl.php');
+}
+?>
+</div>
 <div class="clear"></div>
 <div id="formDetails" class="two_col right">
 <form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data" class="zenform cool">
