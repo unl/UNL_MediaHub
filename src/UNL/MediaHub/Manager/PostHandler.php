@@ -184,7 +184,7 @@ class UNL_MediaHub_Manager_PostHandler
 
         if (!empty($this->post['new_feed'])) {
             $data = array('title'       => $this->post['new_feed'],
-                                      'description' => $this->post['new_feed']);
+                          'description' => $this->post['new_feed']);
             $feed = UNL_MediaHub_Feed::addFeed($data, UNL_MediaHub_Manager::getUser());
             $feed->addMedia($media);
         }
