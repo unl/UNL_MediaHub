@@ -71,10 +71,23 @@ class UNL_MediaHub_Manager_PostHandler
 
     /**
      * Handles new media file uploads
+     *
+     * @return void
+     */
+    public function handleMediaFileUpload()
+    {
+
+        $url = $this->_handleMediaFileUpload();
+        $this->redirect(UNL_MediaHub_Manager::getURL().'?view=mediapreview&url='.urlencode($url));
+
+    }
+
+    /**
+     * Handles new media file uploads
      * 
      * @return string URL to media
      */
-    function handleMediaFileUpload()
+    protected function _handleMediaFileUpload()
     {
 
         if (empty($this->files)
@@ -146,7 +159,7 @@ class UNL_MediaHub_Manager_PostHandler
         // Check if a file was uploaded
         if (empty($this->post['url'])
             && !empty($this->files)) {
-            $this->post['url'] = $this->handleMediaFileUpload();
+            $this->post['url'] = $this->_handleMediaFileUpload();
         }
 
         // Add media to a feed/channel
