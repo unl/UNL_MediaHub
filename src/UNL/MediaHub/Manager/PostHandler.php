@@ -143,7 +143,9 @@ class UNL_MediaHub_Manager_PostHandler
 
     function handleFeedMedia()
     {
-        if (!empty($this->files)) {
+        // Check if a file was uploaded
+        if (empty($this->post['url'])
+            && !empty($this->files)) {
             $this->post['url'] = $this->handleMediaFileUpload();
         }
 
