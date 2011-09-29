@@ -173,9 +173,11 @@ class UNL_MediaHub_Manager_PostHandler
             }
             foreach ($feed_ids as $feed_id) {
                 $feed = UNL_MediaHub_Feed::getById($feed_id);
-                if (!$feed->userHasPermission(UNL_MediaHub_Manager::getUser(),
-                UNL_MediaHub_Permission::getByID(
-                UNL_MediaHub_Permission::USER_CAN_INSERT))) {
+                if (!$feed->userHasPermission(
+                        UNL_MediaHub_Manager::getUser(),
+                        UNL_MediaHub_Permission::getByID(UNL_MediaHub_Permission::USER_CAN_INSERT)
+                        )
+                    ) {
                     throw new Exception('You do not have permission to do this.', 403);
                 }
                 $feed->addMedia($media);
@@ -199,9 +201,11 @@ class UNL_MediaHub_Manager_PostHandler
     function handleFeedUsers()
     {
         $feed = UNL_MediaHub_Feed::getById($this->post['feed_id']);
-        if (!$feed->userHasPermission(UNL_MediaHub_Manager::getUser(),
-        UNL_MediaHub_Permission::getByID(
-        UNL_MediaHub_Permission::USER_CAN_ADD_USER))) {
+        if (!$feed->userHasPermission(
+                UNL_MediaHub_Manager::getUser(),
+                UNL_MediaHub_Permission::getByID(UNL_MediaHub_Permission::USER_CAN_ADD_USER)
+                )
+            ) {
             throw new Exception('You do not have permission to add a user.', 403);
         }
         if (!empty($this->post['uid'])) {
@@ -219,9 +223,11 @@ class UNL_MediaHub_Manager_PostHandler
         $feed = UNL_MediaHub_Feed::getById($this->post['feed_id']);
         $media = UNL_MediaHub_Media::getById($this->post['media_id']);
         if ($feed->hasMedia($media)
-            && $feed->userHasPermission(UNL_MediaHub_Manager::getUser(),
-            UNL_MediaHub_Permission::getByID(
-            UNL_MediaHub_Permission::USER_CAN_DELETE))) {
+            && $feed->userHasPermission(
+                    UNL_MediaHub_Manager::getUser(),
+                    UNL_MediaHub_Permission::getByID(UNL_MediaHub_Permission::USER_CAN_DELETE)
+                )
+            ) {
             $media->delete();
         }
         $this->redirect('?view=feed&id='.$feed->id);
