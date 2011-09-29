@@ -121,18 +121,15 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
                 $this->handlePost();
             }
 
+            if (isset($this->options['view'], $this->view_map[$this->options['view']])) {
+                $class = $this->view_map[$this->options['view']];
+                $this->output[] = new $class($this->options);
+                return;
+            }
+
             switch($this->options['view']) {
                 case 'feed':
                     $this->showFeed();
-                    break;
-                case 'feedmetadata':
-                case 'permissions':
-                case 'feeds':
-                case 'subscriptions':
-                case 'addsubscription':
-                case 'uploadprogress':
-                    $class = $this->view_map[$this->options['view']];
-                    $this->output[] = new $class($this->options);
                     break;
                 case 'addmedia':
                     $this->addMedia();
