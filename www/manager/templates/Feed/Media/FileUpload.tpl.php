@@ -48,7 +48,7 @@ var upload = function() {
     
     return {
         start: function() {
-           ifr = document.getElementById("uploadprogress");
+           uploadprogress = document.getElementById("uploadprogress");
            startTime = new Date();
            infoUpdated = 0;
            this.requestInfo();
