@@ -11,7 +11,6 @@ if (false !== $context->info) {
 <?php
 print "Date : " . date('c', time()) . "\n";
 print "ID   : ". $context->options['id'] ."\n";
-print var_dump($context->info): . "\n";
-var_dump($info);
+print var_dump($context->info) . "\n";
 ?>
 </pre>
