@@ -176,7 +176,7 @@ class UNL_MediaHub_Manager_PostHandler
                 if (!$feed->userHasPermission(UNL_MediaHub_Manager::getUser(),
                 UNL_MediaHub_Permission::getByID(
                 UNL_MediaHub_Permission::USER_CAN_INSERT))) {
-                    throw new Exception('You do not have permission to do this.');
+                    throw new Exception('You do not have permission to do this.', 403);
                 }
                 $feed->addMedia($media);
             }
@@ -202,7 +202,7 @@ class UNL_MediaHub_Manager_PostHandler
         if (!$feed->userHasPermission(UNL_MediaHub_Manager::getUser(),
         UNL_MediaHub_Permission::getByID(
         UNL_MediaHub_Permission::USER_CAN_ADD_USER))) {
-            throw new Exception('You do not have permission to add a user.');
+            throw new Exception('You do not have permission to add a user.', 403);
         }
         if (!empty($this->post['uid'])) {
             if (!empty($this->post['delete'])) {
