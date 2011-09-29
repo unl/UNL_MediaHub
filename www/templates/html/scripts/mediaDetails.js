@@ -120,6 +120,9 @@ WDN.jQuery(document).ready(function() {
     			if (!mediaDetails.validURL(document.getElementById("url").value)) {
     				return false;
     			}
+    		} else {
+    			// Hide the url field, user is uploading a file
+    			WDN.jQuery('#media_url').closest('li').hide();
     		}
 
             WDN.jQuery("#addMedia, #feedlist").slideUp(400, function() {
