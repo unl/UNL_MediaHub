@@ -219,9 +219,9 @@ class UNL_MediaHub_Manager_PostHandler
         $feed = UNL_MediaHub_Feed::getById($this->post['feed_id']);
         $media = UNL_MediaHub_Media::getById($this->post['media_id']);
         if ($feed->hasMedia($media)
-        && $feed->userHasPermission(UNL_MediaHub_Manager::getUser(),
-        UNL_MediaHub_Permission::getByID(
-        UNL_MediaHub_Permission::USER_CAN_DELETE))) {
+            && $feed->userHasPermission(UNL_MediaHub_Manager::getUser(),
+            UNL_MediaHub_Permission::getByID(
+            UNL_MediaHub_Permission::USER_CAN_DELETE))) {
             $media->delete();
         }
         $this->redirect('?view=feed&id='.$feed->id);
