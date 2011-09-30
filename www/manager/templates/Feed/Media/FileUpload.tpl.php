@@ -112,12 +112,6 @@ var upload = function() {
                 ?>
                 <label>Or, Upload Media <span class="helper"><?php echo "Maximum upload file size is ".($max_upload_size/(1024*1024))."MB." ?></span></label>
                 <input id="file_upload" name="file_upload" type="file" />
-                <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
-                <?php
-                if (isset($context->media->id)) {
-                    echo '<input type="hidden" id="id" name="id" value="'.$context->media->id.'" />';
-                }
-                ?>
             </li>
         </ol>
         <input type="submit" name="submit" id="mediaSubmit" value="Add Media" />
