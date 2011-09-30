@@ -71,20 +71,24 @@ var mediaDetails = function() {
 				// Place the preview markup into the preview div
 				WDN.jQuery('#headline_main').html(data);
 
-				// Now scale down the player
-				var thumbnail = new Image();
-				thumbnail.src = WDN.jQuery('#thumbnail').attr('src')+'&time='+mediaDetails.formatTime(0);
-				thumbnail.onload = function(){
-					var calcHeight = (this.height * 460)/this.width;
-					WDN.jQuery('#jwPlayer_0, video').attr('height', calcHeight);
-					WDN.jQuery('#jwPlayer_0, video').attr('width', 460);
-					WDN.jQuery('#videoDisplay object').attr('style', 'width:460px;height:'+calcHeight);
-					WDN.jQuery('#thumbnail').attr('src',thumbURL);
-				};
-				thumbnail.onerror = '';
+				mediaDetails.scalePlayer();
 
 				WDN.initializePlugin('videoPlayer');
 			});
+		},
+
+		scalePlayer: function() {
+			// Now scale down the player
+			var thumbnail = new Image();
+			thumbnail.src = WDN.jQuery('#thumbnail').attr('src')+'&time='+mediaDetails.formatTime(0);
+			thumbnail.onload = function(){
+				var calcHeight = (this.height * 460)/this.width;
+				WDN.jQuery('#jwPlayer_0, video').attr('height', calcHeight);
+				WDN.jQuery('#jwPlayer_0, video').attr('width', 460);
+				WDN.jQuery('#videoDisplay object').attr('style', 'width:460px;height:'+calcHeight);
+				WDN.jQuery('#thumbnail').attr('src',thumbURL);
+			};
+			thumbnail.onerror = '';
 		}
 	};
 }();
@@ -97,6 +101,7 @@ WDN.jQuery(document).ready(function() {
         WDN.jQuery("#formDetails").removeClass("two_col right").addClass('four_col left');
     	if (mediaType == 'video') {
     		mediaDetails.imageURL = mediaDetails.imageURL + escape(WDN.jQuery("#url").val());
+    		mediaDetails.scalePlayer();
     	}
     }
     WDN.jQuery("#mediaSubmit").click(function(event) { //called when a user adds video
