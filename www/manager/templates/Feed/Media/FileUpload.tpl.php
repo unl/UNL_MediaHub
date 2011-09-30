@@ -77,7 +77,7 @@ var upload = function() {
            startTime = null;
         },
         requestInfo: function() {
-            uploadprogress.src="?view=uploadprogress&id=<?php echo $upload_id; ?>&"+new Date();
+            uploadprogress.src="?view=uploadprogress&format=barebones&id=<?php echo $upload_id; ?>&"+new Date();
         },
         
         updateInfo: function(uploaded, total, estimatedSeconds) {
