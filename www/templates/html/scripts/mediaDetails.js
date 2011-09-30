@@ -63,38 +63,28 @@ var mediaDetails = function() {
 	        }
 	        return true;
 		},
-		
-		showVideo : function(){ //video has been updated, now parse it into to markup and show the user
-			WDN.jQuery('video').attr('src', WDN.jQuery("#url").val());
-			var thumbURL = mediaDetails.imageURL;
-			WDN.jQuery('#videoDisplay param[name=flashvars]').attr('value','file='+WDN.jQuery("#url").val()+'&amp;image='+thumbURL+'&amp;volume=100&amp;controlbar=over&amp;autostart=false&amp;skin=/wdn/templates_3.0/includes/swf/UNLVideoSkin.swf');
-			//use the thumbnail generated to determine width and height
-			var thumbnail = new Image();
-			thumbnail.src = thumbURL+'&time='+mediaDetails.formatTime(0);
-			thumbnail.onload = function(){
-				var calcHeight = (this.height * 460)/this.width;
-				WDN.jQuery('#jwPlayer_0, video').attr('height', calcHeight);
-				WDN.jQuery('#jwPlayer_0, video').attr('width', 460);
-				WDN.jQuery('#videoDisplay object').attr('style', 'width:460px;height:'+calcHeight);
-				WDN.jQuery('#thumbnail').attr('src',thumbURL);
-			};
-			thumbnail.onerror = '';
-			WDN.initializePlugin('videoPlayer');
-		},
-		
-		showAudio : function(){
-			if(WDN.jQuery('.audioplayer').children().length == 0){
-    	        var elem = WDN.jQuery('<audio preload="auto"> \
-    	        		<source src="' + WDN.jQuery("#url").val() + '" type="audio/mpeg"> \
-    					<div class="fallback"> \
-    						<div class="fallback-text"> \
-    							<p>Please use a modern browser or install <a href="http://get.adobe.com/flashplayer/">Flash-Plugin</a></p> \
-    						</div> \
-    					</div> \
-    				</audio> ');
-    	        WDN.jQuery('.audioplayer').append(elem); // put it into the DOM
-            }
-			WDN.initializePlugin('videoPlayer');
+
+		// Grab the preview markup for the URL requested
+		getPreview : function(url) {
+			WDN.get('?view=mediapreview&format=partial&url='+url, function(data, textStatus){
+
+				// Place the preview markup into the preview div
+				WDN.jQuery('#headline_main').html(data);
+
+				// Now scale down the player
+				var thumbnail = new Image();
+				thumbnail.src = WDN.jQuery('#thumbnail').attr('src')+'&time='+mediaDetails.formatTime(0);
+				thumbnail.onload = function(){
+					var calcHeight = (this.height * 460)/this.width;
+					WDN.jQuery('#jwPlayer_0, video').attr('height', calcHeight);
+					WDN.jQuery('#jwPlayer_0, video').attr('width', 460);
+					WDN.jQuery('#videoDisplay object').attr('style', 'width:460px;height:'+calcHeight);
+					WDN.jQuery('#thumbnail').attr('src',thumbURL);
+				};
+				thumbnail.onerror = '';
+
+				WDN.initializePlugin('videoPlayer');
+			});
 		}
 	};
 }();
@@ -105,83 +95,38 @@ WDN.jQuery(document).ready(function() {
         WDN.jQuery("#formDetails, #formDetails form, #formDetails fieldset, #continue3").not("#addMedia").css({"display" : "block"});
         WDN.jQuery(".headline_main").css({"display" : "inline-block"});
         WDN.jQuery("#formDetails").removeClass("two_col right").addClass('four_col left');
-    	if (mediaType == 'audio') {
-    		WDN.jQuery("#headline_main_video").hide();
-    		mediaDetails.showAudio();
-    	} else if (mediaType == 'video') {
+    	if (mediaType == 'video') {
     		mediaDetails.imageURL = mediaDetails.imageURL + escape(WDN.jQuery("#url").val());
-    		WDN.jQuery("#headline_main_audio").hide();
-    		mediaDetails.showVideo();
     	}
     }
-    WDN.jQuery("#videoSubmit").click(function(event) { //called when a user adds video
+    WDN.jQuery("#mediaSubmit").click(function(event) { //called when a user adds video
 
     		if (document.getElementById("file_upload").value == '') {
     			if (!mediaDetails.validURL(document.getElementById("url").value)) {
     				return false;
     			}
+    			mediaDetails.getPreview(WDN.jQuery("#url").val());
+
     		} else {
     			// Hide the url field, user is uploading a file
     			WDN.jQuery('#media_url').closest('li').hide();
     		}
 
+    		WDN.jQuery('#fileUpload').hide();
+
             WDN.jQuery("#addMedia, #feedlist").slideUp(400, function() {
-                WDN.jQuery("#headline_main_video").slideDown(400, function() {
-                    WDN.jQuery("#maincontent form.zenform").css({"width" : "930px"}).parent("#formDetails").removeClass("two_col right");
+                WDN.jQuery("#headline_main").slideDown(400, function() {
+                    WDN.jQuery("#media_form").show().css({"width" : "930px"}).parent("#formDetails").removeClass("two_col right");
                     WDN.jQuery("#existing_media, #enhanced_header, #feedSelect, #maincontent form.zenform #continue3").slideDown(400);
                     WDN.jQuery("#media_url").attr("value", WDN.jQuery("#url").val());
                     WDN.jQuery(this).css('display', 'inline-block');
                 });
             });
-            mediaDetails.imageURL = mediaDetails.imageURL + escape(WDN.jQuery("#url").val());
-            mediaDetails.showVideo();
+
+            // Do not allow the form to follow through and submit
             event.preventDefault();
         });
-    WDN.jQuery("#video").click(function(event) { //called when a user adds video
-        WDN.jQuery("#headline_main_audio").slideUp(400);
-        WDN.jQuery("#addMedia, #feedlist").slideUp(400, function() {
-            WDN.jQuery("#headline_main_video").slideDown(400, function() {
-                WDN.jQuery("#maincontent form.zenform").css({"width" : "930px"}).parent("#formDetails").removeClass("two_col right");
-                WDN.jQuery("#existing_media, #enhanced_header, #feedSelect, #maincontent form.zenform #continue3").slideDown(400);
-                WDN.jQuery("#media_url").attr("value", WDN.jQuery("#url").val());
-                WDN.jQuery(this).css('display', 'inline-block');
-            });
-        });
-        mediaDetails.imageURL = mediaDetails.imageURL + escape(WDN.jQuery("#url").val());
-        mediaDetails.showVideo();
-    });
-    WDN.jQuery("#audioSubmit").click(function(event) { //called when a user adds audio
-    	
-    	if (document.getElementById("file_upload").value == '') {
-			if (!mediaDetails.validURL(document.getElementById("url").value)) {
-				return false;
-			}
-		}
-    	
-        WDN.jQuery("#addMedia, #feedlist").slideUp(400, function() {
-            WDN.jQuery("#headline_main_audio").slideDown(400, function() {
-                WDN.jQuery("#maincontent form.zenform").css({"width" : "930px"}).parent("#formDetails").removeClass("two_col right");
-                WDN.jQuery("#existing_media, #enhanced_header, #feedSelect, #maincontent form.zenform #continue3").slideDown(400);
-                WDN.jQuery("#media_url").attr("value", WDN.jQuery("#url").val());
-                WDN.jQuery("source").attr("src", WDN.jQuery("#url").val());
-                WDN.jQuery(this).css('display', 'inline-block');
-            });
-        });
-        mediaDetails.showAudio();
-        event.preventDefault();
-    });
-    WDN.jQuery("#audio").click(function(event) { //called when a user adds audio
-        WDN.jQuery("#headline_main_video").slideUp(400);
-        WDN.jQuery("#addMedia, #feedlist").slideUp(400, function() {
-            WDN.jQuery("#headline_main_audio").slideDown(400, function() {
-                WDN.jQuery("#maincontent form.zenform").css({"width" : "930px"}).parent("#formDetails").removeClass("two_col right");
-                WDN.jQuery("#existing_media, #enhanced_header, #feedSelect, #maincontent form.zenform #continue3").slideDown(400);
-                WDN.jQuery("source").attr("src", WDN.jQuery("#url").val());
-                WDN.jQuery(this).css('display', 'inline-block');
-            });
-        });
-        mediaDetails.showAudio();
-    });
+
     WDN.jQuery('a#setImage').click(function(){
     	var currentTime;
     	if (!WDN.jQuery('video')[0]){

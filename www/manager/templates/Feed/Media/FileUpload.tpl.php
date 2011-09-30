@@ -3,19 +3,23 @@ $upload_id = md5(microtime() . rand());
 
 function return_bytes($val)
 {
-    $val = trim($val);
-    $last = strtolower($val[strlen($val)-1]);
-    switch($last) {
-        // The 'G' modifier is available since PHP 5.1.0
-        case 'g':
-            $val *= 1024;
-        case 'm':
-            $val *= 1024;
-        case 'k':
-            $val *= 1024;
+    //This function transforms the php.ini notation for numbers (like '2M') to an integer (2*1024*1024 in this case)
+    $l = substr($val, -1);
+    $ret = substr($val, 0, -1);
+    switch(strtoupper($l)){
+        case 'P':
+            $ret *= 1024;
+        case 'T':
+            $ret *= 1024;
+        case 'G':
+            $ret *= 1024;
+        case 'M':
+            $ret *= 1024;
+        case 'K':
+            $ret *= 1024;
+            break;
     }
-
-    return $val;
+    return $ret;
 }
 
 ?>
@@ -73,7 +77,7 @@ var upload = function() {
            startTime = null;
         },
         requestInfo: function() {
-                uploadprogress.src="?view=uploadprogress&id=<?php echo $upload_id; ?>&"+new Date();
+            uploadprogress.src="?view=uploadprogress&id=<?php echo $upload_id; ?>&"+new Date();
         },
         
         updateInfo: function(uploaded, total, estimatedSeconds) {
@@ -94,13 +98,30 @@ var upload = function() {
     }
 }()
 </script>
-<form onsubmit="upload.start()" target="uploadtarget" action="?" enctype="multipart/form-data" method="post">
+<form id="fileUpload" onsubmit="upload.start()" target="uploadtarget" action="?" enctype="multipart/form-data" method="post" class="zenform cool">
     <input type="hidden" name="UPLOAD_IDENTIFIER" value="<?php echo $upload_id;?>" />
     <input type="hidden" name="__unlmy_posttarget" value="upload_media" />
-    <label>Select File:</label>
-    <input type="file" name="file_upload" />
-    <label>Upload File:</label>
-    <input type="submit" value="Upload File" />
+    <fieldset id="addMedia">
+    <legend>Add New Media</legend>
+        <ol>
+            <li>
+                <label><span class="required">*</span>URL of Media File <span class="helper">Media types supported: .m4v, .mp4, .mp3</span></label>
+                <input id="url" name="url" type="text" value="<?php echo htmlentities(@$context->media->url, ENT_QUOTES); ?>" />
+                <?php
+                $max_upload_size = min(return_bytes(ini_get('post_max_size')), return_bytes(ini_get('upload_max_filesize')));
+                ?>
+                <label>Or, Upload Media <span class="helper"><?php echo "Maximum upload file size is ".($max_upload_size/(1024*1024))."MB." ?></span></label>
+                <input id="file_upload" name="file_upload" type="file" />
+                <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
+                <?php
+                if (isset($context->media->id)) {
+                    echo '<input type="hidden" id="id" name="id" value="'.$context->media->id.'" />';
+                }
+                ?>
+            </li>
+        </ol>
+        <input type="submit" name="submit" id="mediaSubmit" value="Add Media" />
+    </fieldset>
 </form>
-<iframe name="uploadprogress" width="200px" height="100px" id="uploadprogress"></iframe>
+<iframe name="uploadprogress" width="200px" height="50px" id="uploadprogress"></iframe>
 <iframe name="uploadtarget" width="200px" height="50px" id="uploadtarget"></iframe>
