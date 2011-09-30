@@ -1,13 +1,13 @@
 <?php
 $type = 'audio';
-if (UNL_MediaHub_Media::isVideo($context->type)) {
+if ($context->isVideo()) {
     $type = 'video';
     $height = 529;
     $width = 940;
-    $dimensions = UNL_MediaHub_Media::getMediaDimensions($context->id);
-    if (isset($dimensions['width'])) {
+    $dimensions = $context->getVideoDimensions();
+    if (isset($dimensions[0])) {
         // Scale everything down to 450 wide
-        $height = round(($width/$dimensions['width'])*$dimensions['height']);
+        $height = round(($width/$dimensions[0])*$dimensions[1]);
     }
 }
 
@@ -115,7 +115,7 @@ echo $mediaplayer;
     <?php 
 	   if ($type == 'video') {
 	?>
-	<span class="size"><?php echo $dimensions['width'] . 'x' .$dimensions['height'];?></span>
+	<span class="size"><?php echo $dimensions[0] . 'x' .$dimensions[1];?></span>
 	<?php } ?>
     <span class="duration"><?php 
         if(!empty($context->length)) {

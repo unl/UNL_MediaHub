@@ -1,6 +1,6 @@
 <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 <?php
-if (UNL_MediaHub_Media::isVideo($context->url)) {
+if ($context->isVideo()) {
     echo $savvy->render($context, 'MediaPlayer/Video.tpl.php');
 } else {
     echo $savvy->render($context, 'MediaPlayer/Audio.tpl.php');
