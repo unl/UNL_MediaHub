@@ -36,7 +36,7 @@ var upload = function() {
     var infoUpdated = 0;
     
     var writeStatus = function(text,color) {
-        var statDiv = document.getElementById("status");
+        var statDiv = document.getElementById("uploadstatus");
         if (color == 1 ) {
             statDiv.style.backgroundColor = "green";
         } else if (color == 2 ) {
@@ -48,8 +48,7 @@ var upload = function() {
         }
         statDiv.innerHTML = text;
     }
-    
-    
+
     return {
         start: function() {
            uploadprogress = document.getElementById("uploadprogress");
@@ -57,8 +56,8 @@ var upload = function() {
            infoUpdated = 0;
            this.requestInfo();
         },
-        stop: function(files) {
-           if (typeof files == 'undefined' || files) {
+        stop: function(url) {
+           if (typeof url == 'undefined' || url) {
                 var secs = (new Date() - startTime)/1000;
                 var statusText = "Upload succeeded, it took " + secs + " seconds. <br/> ";
                 if (infoUpdated > 0) {
@@ -70,7 +69,8 @@ var upload = function() {
                     } else {
                       writeStatus(statusText + "Your upload should have taken long enough to have an progress update. Maybe it really does not work...",3);
                     }
-                } 
+                }
+                mediaDetails.getPreview(url); 
            } else {
                writeStatus('PHP did not report any uploaded file, maybe it was too large, try a smaller one (post_max_size: <?php echo ini_get('post_max_size');?>)',3);
            }
@@ -117,5 +117,6 @@ var upload = function() {
         <input type="submit" name="submit" id="mediaSubmit" value="Add Media" />
     </fieldset>
 </form>
+<div id="uploadstatus"></div>
 <iframe name="uploadprogress" width="200px" height="50px" id="uploadprogress"></iframe>
 <iframe name="uploadtarget" width="200px" height="50px" id="uploadtarget"></iframe>
