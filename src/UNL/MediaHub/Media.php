@@ -1,7 +1,7 @@
 <?php
 
 
-class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia
+class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_MediaHub_MediaInterface
 {
     /**
      * Get a piece of media by PK.
@@ -64,12 +64,12 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia
      */
     public function postInsert($event)
     {
-        if (UNL_MediaHub_Media::isVideo($this->type)) {
+        if ($this->isVideo()) {
             $this->setMRSSThumbnail();
         }
         $this->setMRSSContent();
     }
-    
+
     public function postSave()
     {
 //        var_dump('postsave');
@@ -98,7 +98,15 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia
         $element->save();
         return true;
     }
-    
+
+    function getVideoDimensions()
+    {
+        if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_media::mediaHasElement($this->id, 'content')) {
+            return array(0=>$element->attributes['width'], 1=>$element->attributes['height']);
+        }
+        return getimagesize($this->getThumbnailURL());
+    }
+
     /**
      * Set the Media RSS, mrss content namespaced element
      * 
@@ -117,12 +125,12 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia
                             'fileSize' => $this->length,
                             'type'     => $this->type,
                             'lang'     => 'en');
-        if (UNL_MediaHub_Media::isVideo($this->type)) {
-            list($width, $height) = getimagesize($this->getThumbnailURL());
+        if ($this->isVideo()) {
+            list($width, $height) = $this->getVideoDimensions();
             $attributes['width']  = $width;
             $attributes['height'] = $height;
         }
-        
+
         if (isset($element->attributes) && is_array($element->attributes)) {
             $attributes = array_merge($element->attributes, $attributes);
         }
@@ -138,22 +146,9 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia
      * 
      * @return bool
      */
-    public static function isVideo($media)
+    public function isVideo()
     {
-        if (filter_var($media, FILTER_VALIDATE_URL)) {
-            // This is a URL, use file extension to check
-            switch (pathinfo(strtolower($media), PATHINFO_EXTENSION)) {
-                case 'mp3':
-                    return false;
-                default:
-                    return true;
-            }
-        }
-
-        if (strpos($media, 'video') === 0) {
-            return true;
-        }
-        return false;
+        return UNL_MediaHub::isVideo($this->type);
     }
     
     /**
@@ -189,21 +184,6 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia
             }
         }
         return true;
-    }
-    
-    /**
-     * Gets the dimensions for this specific piece of media.
-     * 
-     * @param int $media_id The media id within the system.
-     * 
-     * @return array
-     */
-    static function getMediaDimensions($media_id)
-    {
-        if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_media::mediaHasElement($media_id, 'content')) {
-            return array('width'=>$element->attributes['width'], 'height'=>$element->attributes['height']);
-        }
-        return false;
     }
 
     function getFeeds()

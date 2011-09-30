@@ -118,5 +118,32 @@ class UNL_MediaHub
                 echo 'Added '.$media->title.PHP_EOL;
             }
         }
+
     }
+
+    /**
+     * Check if this media is a video file.
+     *
+     * @param string URL or content-type
+     *
+     * @return bool
+     */
+    public static function isVideo($media)
+    {
+        if (filter_var($media, FILTER_VALIDATE_URL)) {
+            // This is a URL, use file extension to check
+            switch (pathinfo(strtolower($media), PATHINFO_EXTENSION)) {
+                case 'mp3':
+                    return false;
+                default:
+                    return true;
+            }
+        }
+    
+        if (strpos($media, 'video') === 0) {
+            return true;
+        }
+        return false;
+    }
+
 }
