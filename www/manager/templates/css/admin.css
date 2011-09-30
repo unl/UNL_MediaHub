@@ -113,10 +113,6 @@ a.action.delete:active {background-image:url('images/iconDelete.png');}
 	margin:50px;
 }
 
-.media-preview #videoDisplay * {
-	max-width:440px;
-}
-
 #maincontent #userList, #maincontent #outpostExtension ul {
 	list-style:none;
 	padding:0;
