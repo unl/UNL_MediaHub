@@ -78,7 +78,7 @@ class UNL_MediaHub_Manager_PostHandler
     {
 
         $url = $this->_handleMediaFileUpload();
-        $this->redirect(UNL_MediaHub_Manager::getURL().'?view=mediapreview&url='.urlencode($url));
+        $this->redirect(UNL_MediaHub_Manager::getURL().'?view=uploadcomplete&format=barebones&url='.urlencode($url));
 
     }
 
