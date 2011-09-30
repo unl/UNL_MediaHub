@@ -63,6 +63,11 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
     
     function preRun($cached)
     {
+        switch ($this->options['format']) {
+        case 'partial':
+            UNL_MediaHub_OutputController::setOutputTemplate('UNL_MediaHub_Manager', 'ControllerPartial');
+            break;
+        }
         return true;
     }
     
