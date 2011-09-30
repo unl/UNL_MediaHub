@@ -1,20 +1,14 @@
 <?php
-$formView = '';
-$mediaType = '';
-if (!isset($context->media)) {
-    if (isset($_GET['feed_id'])) { //if we already have a feed, don't show the initial feed list
-        $formView .= "//WDN.jQuery('#feedlist').hide();"; 
-    }
-} else { //if we have media (we're editing) show the appropriate part of the form
-    if (strncasecmp($context->media->type, 'audio', 5) == 0) {
-        $mediaType = 'audio';
-    } else if (strncasecmp($context->media->type, 'video', 5) == 0) {
+$formView  = '';
+$mediaType = 'audio';
+
+if (isset($context->media)) {
+    //if we have media (we're editing) show the appropriate part of the form
+    if ($context->isVideo()) {
         $mediaType = 'video';
     }
     $formView .= 'edit';
 }
-
-
 
 $js = '<script type="text/javascript">
         var formView = "'.$formView.'";
@@ -34,6 +28,7 @@ if (isset($context->media)) {
 </div>
 <div class="clear"></div>
 <div id="formDetails" class="two_col right">
+<?php echo $savvy->render($context, 'Feed/Media/FileUpload.tpl.php'); ?>
 <form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data" class="zenform cool">
     <fieldset id="addMedia">
     <legend>Add New Media</legend>
