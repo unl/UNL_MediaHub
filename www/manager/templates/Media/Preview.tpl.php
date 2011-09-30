@@ -1,3 +1,4 @@
+<div class="media-preview">
 <?php
 
 $template = 'Media/Preview/Audio.tpl.php';
@@ -8,3 +9,4 @@ if ($context->isVideo()) {
 
 echo $savvy->render($context, $template);
 ?>
+</div>
