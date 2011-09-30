@@ -17,7 +17,7 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
     
     public $output;
     
-    public $options = array('view'=>'addmedia');
+    public $options = array('view'=>'addmedia', 'format'=>'html');
 
     protected $view_map = array(
         'feedmetadata'    => 'UNL_MediaHub_Feed_Form',
