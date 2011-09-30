@@ -1,7 +1,4 @@
 <div id="videoData" class="two_col left">
-    <?php
-    $thumbnail = UNL_MediaHub_Controller::$thumbnail_generator.urlencode($context->url);
-    ?>
     <h1>Tell us about your media</h1>
     <ol>
         <li>Pause the video at the right at the frame which you want as the image representation.</li>
@@ -12,7 +9,7 @@
     <div id="imageOverlay">
         <p>We're updating your image, this may take a few minutes depending on video length. <strong>Now is a good time to make sure the information below is up to snuff!</strong></p>
     </div>
-    <img src="<?php echo $thumbnail; ?>" id="thumbnail" alt="Thumbnail preview" />
+    <img src="<?php echo $context->getThumbnailURL(); ?>" id="thumbnail" alt="Thumbnail preview" />
     <a class="action" id="setImage" href="#">Set Image</a>
 </div>
 <div id="videoDisplay" class="two_col right">
