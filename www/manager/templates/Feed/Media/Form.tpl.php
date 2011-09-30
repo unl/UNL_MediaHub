@@ -4,7 +4,7 @@ $mediaType = 'audio';
 
 if (isset($context->media)) {
     //if we have media (we're editing) show the appropriate part of the form
-    if ($context->isVideo()) {
+    if ($context->media->isVideo()) {
         $mediaType = 'video';
     }
     $formView .= 'edit';
