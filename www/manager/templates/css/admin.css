@@ -90,27 +90,33 @@ a.action.delete {
 }
 a.action.delete:active {background-image:url('images/iconDelete.png');}
 
-.headline_main {
+.media-preview {
 	background:#ECF4F8;
 	border-radius:5px;
     -moz-border-radius:5px;
     -webkit-border-radius:5px;
 	margin-bottom:15px;
+	overflow: auto;
 	padding:10px 0;
 }
-.headline_main ol {
+.media-preview ol {
     font-size:1.2em;
     line-height:1.4em;	
 }
-.headline_main #thumbnail {
+.media-preview #thumbnail {
 	margin: 0px auto;
 	width:230px;
 	float:left;
 }
-.headline_main .action {
+.media-preview .action {
 	float:right;
 	margin:50px;
 }
+
+.media-preview #videoDisplay * {
+	max-width:440px;
+}
+
 #maincontent #userList, #maincontent #outpostExtension ul {
 	list-style:none;
 	padding:0;
