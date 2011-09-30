@@ -3,10 +3,10 @@
 $height = 529;
 $width  = 940;
 
-$dimensions = UNL_MediaHub_Media::getMediaDimensions($context->id);
-if (isset($dimensions['width'])) {
+$dimensions = $context->getVideoDimensions();
+if (isset($dimensions[0])) {
     // Scale everything down to 450 wide
-    $height = round(($width/$dimensions['width'])*$dimensions['height']);
+    $height = round(($width/$dimensions[0])*$dimensions[1]);
 }
 ?>
 <video height="<?php echo $height; ?>" width="<?php echo $width; ?>" autoplay src="<?php echo $context->url?>" controls poster="<?php echo $context->getThumbnailURL(); ?>">

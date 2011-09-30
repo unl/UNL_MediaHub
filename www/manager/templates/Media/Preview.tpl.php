@@ -2,7 +2,7 @@
 
 $template = 'Media/Preview/Audio.tpl.php';
 
-if (UNL_MediaHub_Media::isVideo($context->url)) {
+if ($context->isVideo()) {
     $template = 'Media/Preview/Video.tpl.php';
 }
 
