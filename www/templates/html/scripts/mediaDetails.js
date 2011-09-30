@@ -128,8 +128,6 @@ WDN.jQuery(document).ready(function() {
                 });
             });
 
-            // Do not allow the form to follow through and submit
-            event.preventDefault();
         });
 
     WDN.jQuery('a#setImage').click(function(){
