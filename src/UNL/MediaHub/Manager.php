@@ -197,7 +197,8 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
     public static function getUploadDirectory()
     {
         if (!isset(self::$uploadDirectory)) {
-            $this->setUploadDirectory(dirname(dirname(dirname(dirname(__FILE__)))).'/www/uploads');
+            // set the default upload directory
+            self::setUploadDirectory(dirname(dirname(dirname(dirname(__FILE__)))).'/www/uploads');
         }
 
         return self::$uploadDirectory;
