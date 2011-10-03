@@ -19,6 +19,7 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
 
     function setUpFilter()
     {
+
         if (isset($this->options['q'])
             && !empty($this->options['q'])) {
             $this->options['filter'] = new UNL_MediaHub_MediaList_Filter_TextSearch($this->options['q']);
@@ -27,6 +28,12 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
             && !empty($this->options['t'])) {
             $this->options['filter'] = new UNL_MediaHub_MediaList_Filter_KeywordSearch($this->options['t']);
         }
+
+        // Default filter
+        if (!isset($this->options['filter'])) {
+            $this->options['filter'] = new UNL_MediaHub_MediaList_Filter_ShowRecent();
+        }
+
     }
     
     function filterInputOptions()
