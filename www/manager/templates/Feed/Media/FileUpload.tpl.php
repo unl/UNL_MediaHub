@@ -65,7 +65,6 @@ var upload = function() {
                 var statusText = "Upload succeeded, it took " + secs + " seconds. <br/> ";
                 if (infoUpdated > 0) {
                     // Upload succeeded and we had intermediate status updates
-                    WDN.jQuery('.meter').hide();
                     writeStatus(statusText + "You had " + infoUpdated + " updates from the progress meter, looks like it's working fine",1);
                 } else {
                     statusText += "BUT there were no progress meter updates<br/> ";
@@ -75,7 +74,10 @@ var upload = function() {
                       writeStatus(statusText + "Your upload should have taken long enough to have an progress update. Maybe it really does not work...",3);
                     }
                 }
-                mediaDetails.getPreview(url); 
+
+                WDN.jQuery('.meter').hide();
+                mediaDetails.getPreview(url);
+
            } else {
                writeStatus('PHP did not report any uploaded file, maybe it was too large, try a smaller one (post_max_size: <?php echo ini_get('post_max_size');?>)',3);
            }

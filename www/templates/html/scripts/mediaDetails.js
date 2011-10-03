@@ -66,6 +66,7 @@ var mediaDetails = function() {
 
 		// Grab the preview markup for the URL requested
 		getPreview : function(url) {
+			WDN.jQuery('#headline_main').html('Generating a thumbnail and setting up the media player. <img src="/wdn/templates_3.0/scripts/plugins/tinymce/themes/advanced/skins/unl/img/progress.gif" alt="progress animated gif" />');
 			WDN.get('?view=mediapreview&format=partial&url='+url, function(data, textStatus){
 
 				// Place the preview markup into the preview div
