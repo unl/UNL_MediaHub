@@ -87,12 +87,12 @@ var upload = function() {
                 if (total > upload_max_filesize) {
                     writeStatus("The file is too large and won't be available for PHP after the upload<br/> Your file size is " + total + " bytes. Allowed is " + upload_max_filesize + " bytes. That's " + Math.round (total / upload_max_filesize * 100) + "% too large<br/> Upload started since " + (new Date() - startTime)/1000 + " seconds. " + Math.floor(uploaded / total * 100) + "% done, " + estimatedSeconds + "  seconds to go",2);
                 } else {
-                    writeStatus("Upload started since " + (new Date() - startTime)/1000 + " seconds. " + Math.floor(uploaded / total * 100) + "% done, " + estimatedSeconds + "  seconds to go");
+                    writeStatus(Math.floor(uploaded / total * 100) + "% done");
                 }
             } else {
                 writeStatus("Upload started since " + (new Date() - startTime)/1000 + " seconds. No progress info yet");
             }
-            window.setTimeout("upload.requestInfo()", 1000);
+            window.setTimeout("upload.requestInfo()", 500);
         }
     }
 }()
