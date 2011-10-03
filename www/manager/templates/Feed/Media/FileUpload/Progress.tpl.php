@@ -6,9 +6,12 @@ header('Cache-Control: no-cache, must-revalidate');
 <script type="text/javascript">
 <?php
 if (false !== $context->info) {
-    print "parent.upload.updateInfo(".$context->info['current'].",".$context->info['total'].",".$context->info['start_time'].")";
-} else {
-    print "parent.upload.updateInfo()";
+
+    $percentComplete = $context->getPercentComplete();
+
+    if ($percentComplete < 100) {
+        echo "parent.upload.updateInfo(".$context->info['current'].", ".$context->info['total'].", ".$context->info['start_time'].", ".$context->getPercentComplete().")";
+    }
 }
 ?>
 </script>
