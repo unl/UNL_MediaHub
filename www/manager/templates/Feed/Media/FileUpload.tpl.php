@@ -75,7 +75,13 @@ var upload = function() {
                     }
                 }
 
+                // Hide upload progress
                 WDN.jQuery('.meter').hide();
+
+                // Set the URL within the form
+                WDN.jQuery("#media_url").attr("value", url);
+
+                // Grab the preview & player
                 mediaDetails.getPreview(url);
 
            } else {
