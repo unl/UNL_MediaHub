@@ -215,7 +215,7 @@ var upload = function() {
     }
 }
 </style>
-<form id="fileUpload" onsubmit="upload.start()" target="uploadtarget" action="?" enctype="multipart/form-data" method="post" class="zenform cool">
+<form id="fileUpload" onsubmit="upload.start()" target="uploadtarget" action="?format=barebones" enctype="multipart/form-data" method="post" class="zenform cool">
     <input type="hidden" name="APC_UPLOAD_PROGRESS" value="<?php echo $upload_id;?>" />
     <input type="hidden" name="__unlmy_posttarget" value="upload_media" />
     <fieldset id="addMedia">
