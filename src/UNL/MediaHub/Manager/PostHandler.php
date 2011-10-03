@@ -102,7 +102,7 @@ class UNL_MediaHub_Manager_PostHandler
 
         // Verify extension
         if (!self::validMediaFileName($this->files['file_upload']['name'])) {
-            throw new Exception('Invalid file extension uploaded '.$this->files['file_upload']['name'], 500);
+            throw new UNL_MediaHub_Manager_PostHandler_UploadException('Invalid file extension uploaded '.$this->files['file_upload']['name'], 500);
         }
 
         $extension = strtolower(pathinfo($this->files['file_upload']['name'], PATHINFO_EXTENSION));
@@ -113,7 +113,7 @@ class UNL_MediaHub_Manager_PostHandler
         if (false == copy($this->files['file_upload']['tmp_name'],
                           UNL_MediaHub_Manager::getUploadDirectory()
                           . DIRECTORY_SEPARATOR .$filename)) {
-            throw new Exception('Error copying file from temp location to permanent location', 500);
+            throw new UNL_MediaHub_Manager_PostHandler_UploadException('Error copying file from temp location to permanent location', 500);
         }
 
         return UNL_MediaHub_Controller::$url.'/uploads/'.$filename;
