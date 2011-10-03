@@ -23,7 +23,7 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
             && !empty($this->options['q'])) {
             $this->options['filter'] = new UNL_MediaHub_MediaList_Filter_TextSearch($this->options['q']);
         }
-    	if (isset($this->options['t'])
+        if (isset($this->options['t'])
             && !empty($this->options['t'])) {
             $this->options['filter'] = new UNL_MediaHub_MediaList_Filter_KeywordSearch($this->options['t']);
         }
