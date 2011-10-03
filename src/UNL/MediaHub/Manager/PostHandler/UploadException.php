@@ -32,7 +32,7 @@ class UNL_MediaHub_Manager_PostHandler_UploadException extends Exception
                 break;
 
             default:
-                $message = "Unknown upload error";
+                $message = "Upload error: ".$code;
                 break;
         }
         return $message;
