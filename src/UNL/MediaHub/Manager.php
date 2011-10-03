@@ -39,8 +39,15 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
      *
      * @var UNL_MediaHub
      */
-    protected $mediahub;
-    
+    protected static $mediahub;
+
+    /**
+     * Directory where uploaded files are stored
+     * 
+     * @var string
+     */
+    protected $uploadDirectory;
+
     function __construct($options = array(), $dsn)
     {
         $this->mediahub = new UNL_MediaHub($dsn);
@@ -189,7 +196,26 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
      */
     public static function getUploadDirectory()
     {
-        return dirname(dirname(dirname(dirname(__FILE__)))).'/www/uploads';
+        if (!isset(self::$uploadDirectory)) {
+            $this->setUploadDirectory(dirname(dirname(dirname(dirname(__FILE__)))).'/www/uploads');
+        }
+
+        return self::$uploadDirectory;
+    }
+
+    /**
+     * Setter for the upload directory where media will be save
+     *
+     * @param string $uploadDirectory Directory on the filesystem
+     * @throws Exception
+     */
+    public static function setUploadDirectory($uploadDirectory)
+    {
+        if (!is_dir($uploadDirectory)) {
+            throw new Exception('Invalid upload directory '.$uploadDirectory);
+        }
+
+        self::$uploadDirectory = $uploadDirectory;
     }
 
     public static function getURL($mixed = null, $additional_params = array())
