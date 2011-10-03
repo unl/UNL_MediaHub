@@ -116,7 +116,7 @@ class UNL_MediaHub_Manager_PostHandler
             throw new UNL_MediaHub_Manager_PostHandler_UploadException('Error copying file from temp location to permanent location', 500);
         }
 
-        return UNL_MediaHub_Controller::$url.'/uploads/'.$filename;
+        return UNL_MediaHub_Controller::$url.'uploads/'.$filename;
     }
 
     /**
