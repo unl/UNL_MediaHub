@@ -65,7 +65,7 @@ class UNL_MediaHub_Manager_PostHandler
             case 'K':
                 $maxSize = $maxSize * 1024;
             }
-            throw new Exception('Sorry, the amount of data POSTed exceeded the maximum amount ('.$maxSize.' bytes)', 413);
+            throw new UNL_MediaHub_Manager_PostHandler_UploadException('Sorry, the amount of data POSTed exceeded the maximum amount ('.$maxSize.' bytes)', 413);
         }
     }
 
