@@ -87,7 +87,7 @@ var mediaDetails = function() {
 				WDN.jQuery('#jwPlayer_0, video').attr('height', calcHeight);
 				WDN.jQuery('#jwPlayer_0, video').attr('width', 460);
 				WDN.jQuery('#videoDisplay object').attr('style', 'width:460px;height:'+calcHeight);
-				WDN.jQuery('#thumbnail').attr('src',thumbURL);
+				WDN.jQuery('#thumbnail').attr('src', WDN.jQuery('#thumbnail').attr('src'));
 			};
 			thumbnail.onerror = '';
 		}
