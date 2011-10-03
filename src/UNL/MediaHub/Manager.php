@@ -46,7 +46,7 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
      * 
      * @var string
      */
-    protected $uploadDirectory;
+    protected static $uploadDirectory;
 
     function __construct($options = array(), $dsn)
     {
