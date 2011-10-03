@@ -1,4 +1,5 @@
 <?php
+// generate a random upload identifier
 $upload_id = md5(microtime() . rand());
 
 function return_bytes($val)
@@ -80,26 +81,24 @@ var upload = function() {
             uploadprogress.src="?view=uploadprogress&format=barebones&id=<?php echo $upload_id; ?>&"+new Date();
         },
         
-        updateInfo: function(uploaded, total, estimatedSeconds) {
-            if (startTime) {
-                if (uploaded) {
-                    infoUpdated++;
-                    if (total > upload_max_filesize) {
-                        writeStatus("The file is too large and won't be available for PHP after the upload<br/> Your file size is " + total + " bytes. Allowed is " + upload_max_filesize + " bytes. That's " + Math.round (total / upload_max_filesize * 100) + "% too large<br/> Download started since " + (new Date() - startTime)/1000 + " seconds. " + Math.floor(uploaded / total * 100) + "% done, " + estimatedSeconds + "  seconds to go",2);
-                    } else {
-                        writeStatus("Download started since " + (new Date() - startTime)/1000 + " seconds. " + Math.floor(uploaded / total * 100) + "% done, " + estimatedSeconds + "  seconds to go");
-                    }
+        updateInfo: function(uploaded, total, startTime) {
+            if (uploaded) {
+                infoUpdated++;
+                if (total > upload_max_filesize) {
+                    writeStatus("The file is too large and won't be available for PHP after the upload<br/> Your file size is " + total + " bytes. Allowed is " + upload_max_filesize + " bytes. That's " + Math.round (total / upload_max_filesize * 100) + "% too large<br/> Upload started since " + (new Date() - startTime)/1000 + " seconds. " + Math.floor(uploaded / total * 100) + "% done, " + estimatedSeconds + "  seconds to go",2);
                 } else {
-                    writeStatus("Download started since " + (new Date() - startTime)/1000 + " seconds. No progress info yet");
+                    writeStatus("Upload started since " + (new Date() - startTime)/1000 + " seconds. " + Math.floor(uploaded / total * 100) + "% done, " + estimatedSeconds + "  seconds to go");
                 }
-                window.setTimeout("upload.requestInfo()", 1000);
+            } else {
+                writeStatus("Upload started since " + (new Date() - startTime)/1000 + " seconds. No progress info yet");
             }
+            window.setTimeout("upload.requestInfo()", 1000);
         }
     }
 }()
 </script>
 <form id="fileUpload" onsubmit="upload.start()" target="uploadtarget" action="?" enctype="multipart/form-data" method="post" class="zenform cool">
-    <input type="hidden" name="UPLOAD_IDENTIFIER" value="<?php echo $upload_id;?>" />
+    <input type="hidden" name="APC_UPLOAD_PROGRESS" value="<?php echo $upload_id;?>" />
     <input type="hidden" name="__unlmy_posttarget" value="upload_media" />
     <fieldset id="addMedia">
     <legend>Add New Media</legend>
