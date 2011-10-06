@@ -7,20 +7,18 @@ body.fixed #maincontent {
     overflow:visible;	
 }
 #wdn_app_search {
-    float:right;
-    position:relative;
-    top:-15px;
-    border-radius:5px;
-    -webkit-border-radius:5px;
-    -moz-border-radius:5px;
     padding:10px;
-    margin-bottom:10px;
+    margin-bottom:20px;
     padding-right:0;
+}
+#wdn_app_search form {
+    float: right;
+    position: relative;
 }
 #wdn_app_search label {
 	position:absolute;
 	left:15px;
-	top:12px;
+	top:3px;
 	z-index:10;
 	display:none;
 }
