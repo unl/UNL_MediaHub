@@ -43,13 +43,14 @@ if ($type == 'video') {
 	';
 }
 UNL_MediaHub_Controller::setReplacementData('head', $meta);
+UNL_MediaHub_Controller::setReplacementData('pagetitle', '<h2>'.$context->title.'</h2>');
 
 // Store the mediaplayer code in a variable, so we can re-use it for the embed
 $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
 echo $mediaplayer;
 ?>
 
-<div class="three_col left supportingContent">
+<div class="grid8 first supportingContent">
     <h2><?php echo $context->title; ?></h2>
     <?php
     if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_itunes::mediaHasElement($context->id, 'subtitle')) {
@@ -109,7 +110,7 @@ echo $mediaplayer;
         echo '<a href="https://login.unl.edu/cas/login?service='.urlencode(UNL_MediaHub_Controller::getURL($context)).'">Log in to post comments</a>';
     }?>
 </div>
-<div class="col right supportingContent" id="properties">
+<div class="grid4 supportingContent" id="properties">
     <div class="zenbox neutral">
     <h3>About this Media</h3>
     <?php 
