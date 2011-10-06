@@ -49,12 +49,12 @@ The UNL Office of University Communications maintains this database of online me
     If there are additional functions that would be of interest to you, please
     <a href="http://www1.unl.edu/comments/">send us a comment</a>.
 <script type="text/javascript">
-var _gaq = _gaq || [];
-_gaq.push([\'_setAccount\', \'UA-22295578-1\']);
-_gaq.push([\'_setDomainName\', \'.unl.edu\']);
-_gaq.push([\'_setAllowLinker\', true]);
-_gaq.push([\'_setAllowHash\', false]);
-_gaq.push([\'_trackPageview\']);
+    var _gaq = _gaq || [];
+    _gaq.push([\'_setAccount\', \'UA-22295578-1\']);
+    _gaq.push([\'_setDomainName\', \'.unl.edu\']);
+    _gaq.push([\'_setAllowLinker\', true]);
+    _gaq.push([\'_setAllowHash\', false]);
+    _gaq.push([\'_trackPageview\']);
 </script>';
 $page->leftRandomPromo = '';
 echo $page;
