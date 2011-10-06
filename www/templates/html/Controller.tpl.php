@@ -57,4 +57,8 @@ The UNL Office of University Communications maintains this database of online me
     _gaq.push([\'_trackPageview\']);
 </script>';
 $page->leftRandomPromo = '';
+
+if ($title = $context->getReplacementData('pagetitle')) {
+    $page->pagetitle = $title;
+}
 echo $page;

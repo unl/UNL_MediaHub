@@ -323,7 +323,7 @@ class UNL_MediaHub_Controller
                               $me);
             unset(self::$replacements['title']);
         }
-        
+
         if (isset(self::$replacements['head'])) {
             $me = str_replace('</head>', self::$replacements['head'].'</head>', $me);
         }
@@ -334,7 +334,7 @@ class UNL_MediaHub_Controller
                               $me);
             unset(self::$replacements['breadcrumbs']);
         }
-        
+
         return $me;
     }
     
@@ -348,15 +348,25 @@ class UNL_MediaHub_Controller
      */
     function setReplacementData($field, $data)
     {
-        switch ($field) {
-        case 'title':
-        case 'head':
-        case 'breadcrumbs':
-            self::$replacements[$field] = $data;
-            break;
-        }
+        self::$replacements[$field] = $data;
     }
-    
+
+    /**
+     * Gets replacement data
+     *
+     * @param string $field Key for the data to get
+     *
+     * @return string|boolean False on failure
+     */
+    public static function getReplacementData($field)
+    {
+        if (isset(self::$replacements[$field])) {
+            return self::$replacements[$field];
+        }
+
+        return false;
+    }
+
     /**
      * Get the URL for the system or a specific object this controller can display.
      *
