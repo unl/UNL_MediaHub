@@ -1,7 +1,7 @@
 <?php
 
-$height = 529;
-$width  = 940;
+$height = 540;
+$width  = 960;
 
 $dimensions = $context->getVideoDimensions();
 if (isset($dimensions[0])) {
