@@ -2,7 +2,7 @@
 UNL_MediaHub_Controller::setReplacementData('title', 'UNL | MediaHub | Your Media');
 UNL_MediaHub_Controller::setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li>Your Media</li></ul>');
 ?>
-<div id="feedlist" class="two_col left">
+<div id="feedlist" class="grid6 first">
     <h1 class="sec_header">Your Channels</h1>
     <h4>Channels are collections of your media. Use channels to organize specific shows (ex: Backyard Farmer).</h4>
     <?php

@@ -48,7 +48,7 @@
     });
 </script>
 
-<div class="three_col left">
+<div class="grid8 first">
     
     <?php
         $resource = "UNL_MediaHub_Developers_" . $context->resource;
@@ -142,7 +142,7 @@
     </div>
     
 </div>
-<div class="col right">
+<div class="grid4">
     <div id='resources' class="zenbox primary" style="width:200px">
         <h3>MediaHub API</h3>
         <p>The following is a list of resources for MediaHub.</p>
