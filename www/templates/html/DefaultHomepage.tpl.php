@@ -1,4 +1,4 @@
-<div class="three_col left feature">
+<div class="grid9 first feature">
 	<div class="group">
 		<h3>Media</h3>
 		<ul class="switcher">
@@ -34,7 +34,7 @@
     	</div>
     </div>
 </div>
-<div class="col right">
+<div class="grid3">
     <a href="<?php echo UNL_MediaHub_Controller::getURL(); ?>manager/" class="addMedia">Add your media</a>
     <?php
     echo $savvy->render($context->featured_channels, 'CompactFeedList.tpl.php');

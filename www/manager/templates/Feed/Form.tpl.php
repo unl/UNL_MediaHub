@@ -23,7 +23,7 @@ WDN.jQuery(document).ready(function() {
     });
 });
 </script>
-<div class="three_col left">
+<div class="grid9 first">
 <form action="<?php echo $context->action; ?>" method="post" name="feed" id="feed" enctype="multipart/form-data" class="zenform">
     <div style="display: none;">
     <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed" />
@@ -374,7 +374,7 @@ WDN.jQuery(document).ready(function() {
     } ?>
 </form>
 </div>
-<div class="one_col right" id="outpostExtension">
+<div class="grid3" id="outpostExtension">
 <h3>Delivery Options <span>Coming soon!</span></h3>
 <p>Channels in MediaHub can be delivered through <strong>official UNL outposts</strong>. Make sure you take advantage of these:</p>
 <ul>

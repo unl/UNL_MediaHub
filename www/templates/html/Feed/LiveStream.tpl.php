@@ -16,7 +16,7 @@ UNL_MediaHub_Controller::setReplacementData('breadcrumbs', '
 </ul>');
 ?>
 <h2><?php echo htmlspecialchars($context->feed->title); ?> Live Streaming</h2>
-<div class="col left">
+<div class="grid4 first">
 	<div id="wdn_calendarDisplay"></div>
 	<a class="archive" href="<?php echo $feed_url;?>">Archived Events</a>
 </div>
@@ -26,7 +26,7 @@ UNL_MediaHub_Controller::setReplacementData('breadcrumbs', '
 	WDN.events.initialize();
 	});
 </script>
-<div class="three_col right">
+<div class="grid8">
 	<div id="wdn_live_stream_wrapper">
 		<span class="liveIndicator">Live</span>
 		<div id="wdn_live_stream"></div>
