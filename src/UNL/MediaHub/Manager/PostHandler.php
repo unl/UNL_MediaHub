@@ -1,4 +1,8 @@
 <?php
+/**
+ * Class which handles post data and media uploads
+ * @author bbieber
+ */
 class UNL_MediaHub_Manager_PostHandler
 {
     public $options = array();
@@ -15,11 +19,21 @@ class UNL_MediaHub_Manager_PostHandler
         $this->files   = $files;
     }
 
+    /**
+     * Set the mediahub instance
+     *
+     * @param UNL_MediaHub $mediahub
+     */
     function setMediaHub(UNL_MediaHub $mediahub)
     {
         $this->mediahub = $mediahub;
     }
 
+    /**
+     * Process data sent through the request
+     *
+     * @return void
+     */
     function handle()
     {
         $this->verifyPost();
@@ -47,6 +61,12 @@ class UNL_MediaHub_Manager_PostHandler
         }
     }
 
+    /**
+     * Verify the server captured all the data sent by the client
+     *
+     * @throws UNL_MediaHub_Manager_PostHandler_UploadException
+     * @return void
+     */
     function verifyPost()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST'
@@ -84,6 +104,12 @@ class UNL_MediaHub_Manager_PostHandler
 
     /**
      * Handles new media file uploads
+     * 
+     * Copies any files posted to the uploads directory, with a unique filename.
+     * 
+     * After the file has been saved, the URL to the media is returned.
+     * 
+     * @see UNL_MediaHub_Manager::getUploadDirectory()
      * 
      * @return string URL to media
      */
@@ -132,6 +158,11 @@ class UNL_MediaHub_Manager_PostHandler
         return in_array(end(explode('.', strtolower($filename))), $allowedExtensions);
     }
 
+    /**
+     * Saves meta data for feeds
+     *
+     * @return void
+     */
     function handleFeed()
     {
         if (isset($this->files['image_file'])
@@ -154,6 +185,11 @@ class UNL_MediaHub_Manager_PostHandler
         $this->redirect('?view=feed&id='.$feed->id);
     }
 
+    /**
+     * Handle adding media, and associating it to feeds
+     *
+     * @throws Exception
+     */
     function handleFeedMedia()
     {
         // Check if a file was uploaded
@@ -215,6 +251,11 @@ class UNL_MediaHub_Manager_PostHandler
         $this->redirect(UNL_MediaHub_Manager::getURL());
     }
 
+    /**
+     * Adding users to a channel/feed
+     *
+     * @throws Exception
+     */
     function handleFeedUsers()
     {
         $feed = UNL_MediaHub_Feed::getById($this->post['feed_id']);
@@ -235,6 +276,11 @@ class UNL_MediaHub_Manager_PostHandler
         $this->redirect('?view=feed&id='.$feed->id);
     }
 
+    /**
+     * Delete specific media
+     *
+     * @return void
+     */
     function handleDeleteMedia()
     {
         $feed = UNL_MediaHub_Feed::getById($this->post['feed_id']);
