@@ -162,6 +162,10 @@ class UNL_MediaHub_Manager_PostHandler
             $this->post['url'] = $this->_handleMediaFileUpload();
         }
 
+        if (empty($this->post['url'])) {
+            throw new Exception('Either no URL was submitted, or your file upload failed', 400);
+        }
+
         // Add media to a feed/channel
         if (isset($this->post['id'])) {
             // Editing media details
