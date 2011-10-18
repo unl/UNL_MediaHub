@@ -112,6 +112,7 @@ WDN.jQuery(document).ready(function() {
     				return false;
     			}
     			mediaDetails.getPreview(WDN.jQuery("#url").val());
+    			event.preventDefault();
 
     		} else {
     			// Hide the url field, user is uploading a file
