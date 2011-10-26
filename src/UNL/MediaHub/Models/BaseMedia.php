@@ -33,6 +33,8 @@ abstract class UNL_MediaHub_Models_BaseMedia extends Doctrine_Record
                                                                                    'foreign' => 'media_id'));
         $this->hasMany('UNL_MediaHub_Feed_Media_NamespacedElements_boxee',   array('local'   => 'id',
                                                                                    'foreign' => 'media_id'));
+        $this->hasMany('UNL_MediaHub_Feed_Media_NamespacedElements_geo',     array('local'   => 'id',
+                                                                                   'foreign' => 'media_id'));
         parent::setUp();
     }
 

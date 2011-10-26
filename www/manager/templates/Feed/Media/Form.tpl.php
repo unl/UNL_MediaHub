@@ -14,6 +14,8 @@ $js = '<script type="text/javascript">
         var formView = "'.$formView.'";
         var mediaType = "'.$mediaType.'";
        </script>
+       <link type="text/css" rel="stylesheet" href="/wdn/templates_3.0/css/content/formvalidator.css" />
+       <script type="text/javascript" src="/wdn/templates_3.0/scripts/plugins/validator/jquery.validator.min.js"></script>
        <script type="text/javascript" src="'.UNL_MediaHub_Controller::getURL().'templates/html/scripts/mediaDetails.js"></script>
        ';
 
@@ -74,6 +76,25 @@ if (isset($context->media)) {
         return '';
     }
     ?>
+    <fieldset id="enhanced_header">
+        <legend>Geo Location</legend>
+        <ol>
+            <li>
+                <label for="geo_lat" class="element">Latitude</label>
+                <div class="element">
+                    <input name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[0][element]" type="hidden" value="lat"/>
+                    <input id="geo_lat" name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[0][value]" class='geo_lat' type="text" value="<?php echo getFieldValue($context, 'geo', 'lat'); ?>"/>
+                </div>
+            </li>
+            <li>
+                <label for="geo_long" class="element">Longitude</label>
+                <div class="element">
+                    <input name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[1][element]" type="hidden" value="long"/>
+                    <input id="geo_long" name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[1][value]" class='geo_long' type="text" value="<?php echo getFieldValue($context, 'geo', 'long'); ?>"/>
+                </div>
+            </li>
+        </ol>
+    </fieldset>
     <fieldset id="enhanced_header">
         <legend>Enhanced Information</legend>
         <ol>
