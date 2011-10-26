@@ -154,7 +154,7 @@ class UNL_MediaHub_Manager_PostHandler
      */
     public static function validMediaFileName($filename)
     {
-        $allowedExtensions = array('mp4', 'm4v', 'mp3', 'ogg');
+        $allowedExtensions = array('mp4', 'm4v', 'mp3', 'ogg', '3gp');
         return in_array(end(explode('.', strtolower($filename))), $allowedExtensions);
     }
 
