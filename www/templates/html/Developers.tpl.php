@@ -64,6 +64,14 @@
                     <p><?php echo $resource->uri; ?></p>
                 </blockquote>
             </li>
+            <?php if (isset($resource->note)):?>
+            <li>
+                <h4 id="instance-uri"><a href="#instance-uri">Note</a></h4>
+                <blockquote>
+                    <p><?php echo $resource->note; ?></p>
+                </blockquote>
+            </li>
+            <?php endif;?>
             <li>
                 <h4 id="instance-properties"><a href="#instance-properties">Resource Properties</a></h4> 
                 <table class="zentable neutral">

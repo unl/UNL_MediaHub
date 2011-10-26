@@ -7,6 +7,9 @@ class UNL_MediaHub_Developers_Media
     
     public $exampleURI  = "media/1";
     
+    public $note        = "All xml extra xml elements for media will be outputed to JSON with a '(namespace)_(key)':'(value)' pattern.  These elements
+                          include, but are not limited to: geo infomration, itunes details, media details, and boxee information.  These values will only display if they are set.";
+    
     public $properties  = array(
                                 array("id", "int: A numerical id for the media.", true, false),
                                 array("url", "URL: A url to the actual media file.", true, false),
