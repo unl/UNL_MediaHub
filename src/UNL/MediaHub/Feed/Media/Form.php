@@ -13,6 +13,7 @@ class UNL_MediaHub_Feed_Media_Form
             $this->media->loadReference('UNL_MediaHub_Feed_Media_NamespacedElements_itunesu');
             $this->media->loadReference('UNL_MediaHub_Feed_Media_NamespacedElements_itunes');
             $this->media->loadReference('UNL_MediaHub_Feed_Media_NamespacedElements_media');
+            $this->media->loadReference('UNL_MediaHub_Feed_Media_NamespacedElements_geo');
         }
     }
 }
