@@ -156,6 +156,9 @@ WDN.jQuery(document).ready(function() {
     });
     
     WDN.jQuery('span.embed').colorbox({inline: true, href:'#sharing', width:'600px', height:'310px'});
+    WDN.jQuery.validation.addMethod('geo_long', 'This must be a valid longitude.', {min:-180, max:180});
+    WDN.jQuery.validation.addMethod('geo_lat', 'This must be a valid latitude.', {min:-90, max:90});
+	WDN.jQuery('#media_form').validation();
 });
 WDN.loadJS("/wdn/templates_3.0/scripts/plugins/tinymce/jquery.tinymce.js", function() {
     WDN.jQuery("textarea#description").tinymce({
