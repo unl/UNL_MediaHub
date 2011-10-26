@@ -45,7 +45,8 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
     <?php endif;
     foreach (array('UNL_MediaHub_Feed_NamespacedElements_itunes',
                    'UNL_MediaHub_Feed_NamespacedElements_media',
-                   'UNL_MediaHub_Feed_NamespacedElements_boxee') as $ns_class) {
+                   'UNL_MediaHub_Feed_NamespacedElements_boxee',
+                   'UNL_MediaHub_Feed_NamespacedElements_geo') as $ns_class) {
         foreach ($context->feed->$ns_class as $namespaced_element) {
             $element = "{$namespaced_element['xmlns']}:{$namespaced_element['element']}";
             switch ($element) {
