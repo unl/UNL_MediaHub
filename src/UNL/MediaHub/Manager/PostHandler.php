@@ -133,6 +133,12 @@ class UNL_MediaHub_Manager_PostHandler
 
         $extension = strtolower(pathinfo($this->files['file_upload']['name'], PATHINFO_EXTENSION));
 
+        //3gp doesnt work with mediaelement. Right now call it an mp4 (won't always work because 3gps are not always h264.)
+        //TODO: Handle this better.  perhaps check the file encoding or convert it instead of just renaming it.
+        if ($extension == '3gp') {
+            $extension = 'mp4';
+        }
+        
         $filename = md5(microtime() + rand()) . '.'. $extension;
 
         // Copy file to uploads diretory
