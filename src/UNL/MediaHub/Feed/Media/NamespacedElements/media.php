@@ -6,9 +6,9 @@
  */
 class UNL_MediaHub_Feed_Media_NamespacedElements_media extends UNL_MediaHub_Feed_Media_NamespacedElements
 {
-    protected $xmlns = 'media';
+    public static $xmlns = 'media';
     
-    protected $uri = 'http://search.yahoo.com/mrss/';
+    public static $uri = 'http://search.yahoo.com/mrss/';
     
     function getItemElements()
     {

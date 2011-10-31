@@ -3,9 +3,9 @@
 
 class UNL_MediaHub_Feed_Media_NamespacedElements_geo extends UNL_MediaHub_Feed_Media_NamespacedElements
 {
-    protected $xmlns = 'geo';
+    public static $xmlns = 'geo';
     
-    protected $uri = 'http://www.w3.org/2003/01/geo/wgs84_pos#';
+    public static $uri = 'http://www.w3.org/2003/01/geo/wgs84_pos#';
         
     function getItemElements()
     {

@@ -2,9 +2,9 @@
 
 class UNL_MediaHub_Feed_Media_NamespacedElements_itunes extends UNL_MediaHub_Feed_Media_NamespacedElements
 {
-    protected $xmlns = 'itunes';
+    public static $xmlns = 'itunes';
     
-    protected $uri = 'http://www.itunes.com/dtds/podcast-1.0.dtd';
+    public static $uri = 'http://www.itunes.com/dtds/podcast-1.0.dtd';
         
     function getItemElements()
     {

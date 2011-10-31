@@ -12,12 +12,7 @@ $details = array('id'          => $context->id,
                  'dateupdated' => $context->dateupdated);
 
 try{
-    foreach (array('UNL_MediaHub_Feed_Media_NamespacedElements_itunesu',
-               'UNL_MediaHub_Feed_Media_NamespacedElements_itunes',
-               'UNL_MediaHub_Feed_Media_NamespacedElements_media',
-               'UNL_MediaHub_Feed_Media_NamespacedElements_boxee',
-               'UNL_MediaHub_Feed_Media_NamespacedElements_geo',
-               'UNL_MediaHub_Feed_Media_NamespacedElements_mediahub') as $ns_class) {
+    foreach (UNL_MediaHub_Controller::$usedMediaNameSpaces as $ns_class) {
         foreach ($context->$ns_class as $namespaced_element) {
             $element = $namespaced_element['xmlns'] . "_" . $namespaced_element['element'];
             switch ($element) {

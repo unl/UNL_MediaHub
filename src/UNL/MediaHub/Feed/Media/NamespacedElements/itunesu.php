@@ -3,9 +3,9 @@
 
 class UNL_MediaHub_Feed_Media_NamespacedElements_itunesu extends UNL_MediaHub_Feed_Media_NamespacedElements
 {
-    protected $xmlns = 'itunesu';
+    public static $xmlns = 'itunesu';
     
-    protected $uri = 'http://www.itunesu.com/feed';
+    public static $uri = 'http://www.itunesu.com/feed';
         
     function getItemElements()
     {

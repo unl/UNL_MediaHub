@@ -10,11 +10,10 @@ class UNL_MediaHub_Feed_Media_Form
     {
         if (isset($media)) {
             $this->media = $media;
-            $this->media->loadReference('UNL_MediaHub_Feed_Media_NamespacedElements_itunesu');
-            $this->media->loadReference('UNL_MediaHub_Feed_Media_NamespacedElements_itunes');
-            $this->media->loadReference('UNL_MediaHub_Feed_Media_NamespacedElements_media');
-            $this->media->loadReference('UNL_MediaHub_Feed_Media_NamespacedElements_geo');
-            $this->media->loadReference('UNL_MediaHub_Feed_Media_NamespacedElements_mediahub');
+            
+            foreach (UNL_MediaHub_Controller::$usedMediaNameSpaces as $class) {
+                $this->media->loadReference($class);
+            }
         }
     }
 }

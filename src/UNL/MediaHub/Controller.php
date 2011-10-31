@@ -86,6 +86,14 @@ class UNL_MediaHub_Controller
      */
     protected $mediahub;
     
+    public static $usedMediaNameSpaces = array(
+                       'UNL_MediaHub_Feed_Media_NamespacedElements_itunesu',
+                       'UNL_MediaHub_Feed_Media_NamespacedElements_itunes',
+                       'UNL_MediaHub_Feed_Media_NamespacedElements_media',
+                       'UNL_MediaHub_Feed_Media_NamespacedElements_boxee',
+                       'UNL_MediaHub_Feed_Media_NamespacedElements_geo',
+                       'UNL_MediaHub_Feed_Media_NamespacedElements_mediahub');
+    
     /**
      * Construct a new controller.
      *
@@ -114,6 +122,8 @@ class UNL_MediaHub_Controller
         if (self::$auth->isLoggedIn()) {
             self::$user = UNL_MediaHub_User::getByUid(self::$auth->getUser());
         }
+        
+        UNL_MediaHub_Feed_Media_NamespacedElements_mediahub::$uri = UNL_MediaHub_Controller::$url . "schema/mediahub.xsd";
     }
 
     public static function isMobileClient($options = array())

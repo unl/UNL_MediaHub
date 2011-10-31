@@ -7,16 +7,9 @@
  */
 class UNL_MediaHub_Feed_Media_NamespacedElements_mediahub extends UNL_MediaHub_Feed_Media_NamespacedElements
 {
-    protected $xmlns = 'mediahub';
+    public static $xmlns = 'mediahub';
     
-    protected $uri = '';
-    
-    function __construct($table = null, $isNewEntry = false) {
-        $this->uri = UNL_MediaHub_Controller::$url . "schema/mediahub.xsd";
-        
-        parent::__construct($table, $isNewEntry);
-    }
-    
+    public static $uri = '';
     
     function getItemElements()
     {

@@ -219,9 +219,10 @@ class UNL_MediaHub_Manager_PostHandler
                              'description'=> $this->post['description']);
             $media = $this->mediahub->addMedia($details);
         }
-
+        
         // Save details
         $media->synchronizeWithArray($this->post);
+        
         $media->save();
 
         if (!empty($this->post['feed_id'])) {
@@ -323,12 +324,12 @@ class UNL_MediaHub_Manager_PostHandler
     function filterPostData()
     {
         /** Remove linked records if they are not set anymore **/
-        foreach (array('UNL_MediaHub_Feed_NamespacedElements_itunes'        => 'value',
-                       'UNL_MediaHub_Feed_NamespacedElements_geo'           => 'value',
-                       'UNL_MediaHub_Feed_NamespacedElements_media'         => 'value',
-                       'UNL_MediaHub_Feed_Media_NamespacedElements_itunesu' => 'value',
-                       'UNL_MediaHub_Feed_Media_NamespacedElements_itunes'  => 'value',
-                       'UNL_MediaHub_Feed_Media_NamespacedElements_media'   => 'value') as $relation=>$field) {
+        foreach (array('UNL_MediaHub_Feed_NamespacedElements_itunes'         => 'value',
+                       'UNL_MediaHub_Feed_NamespacedElements_geo'            => 'value',
+                       'UNL_MediaHub_Feed_NamespacedElements_media'          => 'value',
+                       'UNL_MediaHub_Feed_Media_NamespacedElements_itunesu'  => 'value',
+                       'UNL_MediaHub_Feed_Media_NamespacedElements_itunes'   => 'value',
+                       'UNL_MediaHub_Feed_Media_NamespacedElements_media'    => 'value') as $relation=>$field) {
             if (isset($this->post[$relation])) {
                 foreach ($this->post[$relation] as $key=>$values) {
                     if (empty($values[$field])

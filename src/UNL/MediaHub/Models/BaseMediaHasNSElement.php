@@ -55,15 +55,4 @@ abstract class UNL_MediaHub_Models_BaseMediaHasNSElement extends Doctrine_Record
             }
         }
     }
-    
-    /**
-     * return the xmlnamespace shortname
-     *
-     * @return string
-     */
-    function getXMLNS()
-    {
-        return $this->xmlns;
-    }
-
 }
