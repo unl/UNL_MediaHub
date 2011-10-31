@@ -96,6 +96,25 @@ if (isset($context->media)) {
         </ol>
     </fieldset>
     <fieldset id="enhanced_header">
+        <legend>Other Information</legend>
+        <ol>
+            <li>
+                <label for="water_maf" class="element">Water: MAF</label>
+                <div class="element">
+                    <input name="UNL_MediaHub_Feed_Media_NamespacedElements_mediahub[0][element]" type="hidden" value="water_maf"/>
+                    <input id="water_maf" name="UNL_MediaHub_Feed_Media_NamespacedElements_mediahub[0][value]" type="text" value="<?php echo getFieldValue($context, 'mediahub', 'water_maf'); ?>"/>
+                </div>
+            </li>
+            <li>
+                <label for="water_cfs" class="element">Water: CFS</label>
+                <div class="element">
+                    <input name="UNL_MediaHub_Feed_Media_NamespacedElements_mediahub[1][element]" type="hidden" value="water_cfs"/>
+                    <input id="water_cfs" name="UNL_MediaHub_Feed_Media_NamespacedElements_mediahub[1][value]" type="text" value="<?php echo getFieldValue($context, 'mediahub', 'water_cfs'); ?>"/>
+                </div>
+            </li>
+        </ol>
+    </fieldset>
+    <fieldset id="enhanced_header">
         <legend>Enhanced Information</legend>
         <ol>
             <li style="display:none;">

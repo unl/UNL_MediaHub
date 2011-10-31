@@ -3,7 +3,7 @@ $context->feed->loadReference('UNL_MediaHub_Feed_NamespacedElements_itunes');
 $context->feed->loadReference('UNL_MediaHub_Feed_NamespacedElements_media');
 echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
 ?>
-<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:itunesu="http://www.itunesu.com/feed" xmlns:media="http://search.yahoo.com/mrss/"  xmlns:boxee="http://boxee.tv/spec/rss/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#">
+<rss version="2.0"  xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:itunesu="http://www.itunesu.com/feed" xmlns:media="http://search.yahoo.com/mrss/"  xmlns:boxee="http://boxee.tv/spec/rss/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:mediahub="<?php echo UNL_MediaHub_Controller::$url?>schema/mediahub.xsd">
   <channel>
     <title><?php echo $context->feed->title; ?></title>
     <link><?php echo UNL_MediaHub_Controller::getURL($context->feed); ?></link>
