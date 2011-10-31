@@ -1,16 +1,6 @@
 <?php
 abstract class UNL_MediaHub_Feed_NamespacedElements extends UNL_MediaHub_Models_BaseFeedHasNSElement
 {
-    public function getXMLNS()
-    {
-        return $this->xmlns;
-    }
-    
-    public function getURI()
-    {
-        return $this->uri;
-    }
-    
     abstract function getChannelElements();
     
     public static function feedHasElement($feed_id, $element, $xmlns)
