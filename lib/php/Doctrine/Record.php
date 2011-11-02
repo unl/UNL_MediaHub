@@ -1458,9 +1458,6 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
 
     protected function _set($fieldName, $value, $load = true)
     {
-        if ($fieldName == 'UNL_MediaHub_Feed_Media_NamespacedElements_geo') {
-//         var_dump($fieldName, $value);
-        }
         if (array_key_exists($fieldName, $this->_values)) {
             $this->_values[$fieldName] = $value;
         } else if (array_key_exists($fieldName, $this->_data)) {
@@ -1817,8 +1814,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
         if (empty($array)) {
             $modifiedFields = $this->_modified;
         }
-var_dump($this->_modified);
-//$this->_set($name, $value)
+
         foreach ($modifiedFields as $field) {
             $type = $this->_table->getTypeOf($field);
 
@@ -1854,7 +1850,6 @@ var_dump($this->_modified);
                     } else {
                         $a[$field] = $this->_data[$field];
                     }
-                    var_dump($a);
                     
                     /** TODO:
                     if ($this->_data[$v] === null) {
