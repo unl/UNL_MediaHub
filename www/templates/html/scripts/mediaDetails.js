@@ -159,7 +159,28 @@ WDN.jQuery(document).ready(function() {
     WDN.jQuery('span.embed').colorbox({inline: true, href:'#sharing', width:'600px', height:'310px'});
     WDN.jQuery.validation.addMethod('geo_long', 'This must be a valid longitude.', {min:-180, max:180});
     WDN.jQuery.validation.addMethod('geo_lat', 'This must be a valid latitude.', {min:-90, max:90});
-	WDN.jQuery('#media_form').validation();
+    WDN.jQuery('#media_form').validation();
+    
+    //water info.
+    if (WDN.jQuery('#water_cfs').val() == '') {
+      WDN.jQuery('#water_cfs_form').hide();
+    }
+    
+    if (WDN.jQuery('#water_maf').val() == '') {
+        WDN.jQuery('#water_maf_form').hide();
+    }
+    
+    WDN.jQuery('#show_cfs').click(function(){
+      WDN.jQuery('#water_cfs_form').show();
+      WDN.jQuery('#water_maf_form').hide();
+      return false;
+    });
+    
+    WDN.jQuery('#show_maf').click(function(){
+      WDN.jQuery('#water_maf_form').show();
+      WDN.jQuery('#water_cfs_form').hide();
+      return false;
+    });
 });
 WDN.loadJS("/wdn/templates_3.0/scripts/plugins/tinymce/jquery.tinymce.js", function() {
     WDN.jQuery("textarea#description").tinymce({
