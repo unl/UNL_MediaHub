@@ -15,9 +15,7 @@ abstract class UNL_MediaHub_Models_BaseFeedHasNSElement extends Doctrine_Record
         $this->setSubclasses(array(
                 'UNL_MediaHub_Feed_NamespacedElements_itunes'   => array('xmlns' => 'itunes'),
                 'UNL_MediaHub_Feed_NamespacedElements_media'    => array('xmlns' => 'media'),
-                'UNL_MediaHub_Feed_NamespacedElements_boxee'    => array('xmlns' => 'boxee'),
-                'UNL_MediaHub_Feed_NamespacedElements_geo'      => array('xmlns' => 'geo'),
-                'UNL_MediaHub_Feed_NamespacedElements_mediahub' => array('xmlns' => 'mediahub'),
+                'UNL_MediaHub_Feed_NamespacedElements_boxee'    => array('xmlns' => 'boxee')
             )
         );
     
