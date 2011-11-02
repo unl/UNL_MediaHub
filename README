@@ -1,3 +1,5 @@
+MediaHub is a video/audio aggregator for educational institutions
+
 UNL MediaHub system running at http://mediahub.unl.edu/
 
 cp config.sample.php config.inc.php
