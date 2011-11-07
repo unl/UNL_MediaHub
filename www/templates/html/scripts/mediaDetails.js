@@ -95,7 +95,7 @@ var mediaDetails = function() {
 }();
 WDN.jQuery(document).ready(function() {
     if (formView == 'edit'){ //we're editting, so hide the introduction and go straight to the form
-    	WDN.jQuery("#addMedia").hide();
+    	
         WDN.jQuery("#feedlist").hide();
         WDN.jQuery("#formDetails, #formDetails form, #formDetails fieldset, #continue3").not("#addMedia").css({"display" : "block"});
         WDN.jQuery(".headline_main").css({"display" : "inline-block"});
@@ -104,6 +104,7 @@ WDN.jQuery(document).ready(function() {
     		mediaDetails.imageURL = mediaDetails.imageURL + escape(WDN.jQuery("#url").val());
     		mediaDetails.scalePlayer();
     	}
+    	WDN.jQuery("#fileUpload").hide();
     }
     WDN.jQuery("#mediaSubmit").click(function(event) { //called when a user adds video
 
