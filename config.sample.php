@@ -14,4 +14,13 @@ UNL_MediaHub::registerAutoloaders();
 UNL_MediaHub_Controller::$url = 'http://localhost/workspace/UNL_MediaHub/www/';
 UNL_MediaHub_Controller::$thumbnail_generator = 'http://itunes.unl.edu/thumbnails.php?url=';
 
+
+// Set custom mediahub namespaced item elements
+$itemElements = array(
+    'water_af'  => 'Volume of water in acre-feet (af)',
+    'water_cfs' => 'Speed of water in cubic feet per second (cfs)',
+    );
+
+UNL_MediaHub_Feed_Media_NamespacedElements_mediahub::setCustomElements($itemElements);
+
 $cache = new UNL_MediaHub_CacheInterface_Mock();
