@@ -1,1 +1,1 @@
-<audio preload="auto" src="<?php echo $context->url?>"></audio>
+<audio id='player' preload="auto" src="<?php echo $context->url?>"></audio>

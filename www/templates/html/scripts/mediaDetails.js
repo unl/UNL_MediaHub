@@ -1,4 +1,5 @@
 var jQuery = WDN.jQuery;
+var player = null;
 var mediaDetails = function() {
 	var video;
 	return {
@@ -135,11 +136,12 @@ WDN.jQuery(document).ready(function() {
 
     WDN.jQuery('a#setImage').click(function(){
     	var currentTime;
-    	if (!WDN.jQuery('video')[0]){
+    	if (!player){
     		currentTime = WDN.videoPlayer.createFallback.getCurrentPosition() + .01;
     	} else {
-    		currentTime = WDN.jQuery('video')[0].currentTime;
+    		currentTime = player.getCurrentTime();
     	}
+    	
     	mediaDetails.updateThumbnail(currentTime);
     	return false;
     });
