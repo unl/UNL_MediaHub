@@ -15,6 +15,6 @@ if ($parent->context instanceof UNL_MediaHub_Media_Preview) {
 }
 
 ?>
-<video height="<?php echo $height; ?>" width="<?php echo $width; ?>" <?php echo $autoplay; ?> src="<?php echo $context->url?>" controls poster="<?php echo $context->getThumbnailURL(); ?>">
+<video id='player' height="<?php echo $height; ?>" width="<?php echo $width; ?>" <?php echo $autoplay; ?> src="<?php echo $context->url?>" controls poster="<?php echo $context->getThumbnailURL(); ?>">
 	<track src="<?php echo $context->getVideoTextTrackURL(); ?>" kind="subtitles" type="text/vtt" srclang="en" />
 </video>
