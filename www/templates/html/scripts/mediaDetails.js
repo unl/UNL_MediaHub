@@ -30,8 +30,8 @@ var mediaDetails = function() {
 			var newThumbnail = new Image();
 			newThumbnail.src = mediaDetails.imageURL + '&time='+mediaDetails.formatTime(currentTime)+'&rebuild';
 			WDN.log(newThumbnail.src);
-			newThumbnail.onload = function(){
-				WDN.jQuery('#thumbnail').attr('src', newThumbnail.src ).load(function(){
+			newThumbnail.onload = function() {
+				WDN.jQuery('#thumbnail').attr('src', newThumbnail.src).ready(function() {
 					WDN.jQuery('#imageOverlay').hide();
 				});
 			};
@@ -184,6 +184,10 @@ WDN.jQuery(document).ready(function() {
       WDN.jQuery('#water_cfs_form').hide();
       return false;
     });
+    
+    WDN.jQuery('#media_form').submit(function() {
+        WDN.jQuery('#continue3').attr('disabled', 'disabled');
+    })
 });
 WDN.loadJS("/wdn/templates_3.0/scripts/plugins/tinymce/jquery.tinymce.js", function() {
     WDN.jQuery("textarea#description").tinymce({
