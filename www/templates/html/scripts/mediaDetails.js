@@ -31,7 +31,7 @@ var mediaDetails = function() {
 			newThumbnail.src = mediaDetails.imageURL + '&time='+mediaDetails.formatTime(currentTime)+'&rebuild';
 			WDN.log(newThumbnail.src);
 			newThumbnail.onload = function() {
-				WDN.jQuery('#thumbnail').attr('src', newThumbnail.src).load(function() {
+				WDN.jQuery('#thumbnail').attr('src', newThumbnail.src).ready(function() {
 					WDN.jQuery('#imageOverlay').hide();
 				});
 			};
