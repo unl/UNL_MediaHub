@@ -444,7 +444,7 @@ class UNL_MediaHub_Controller
                 continue;
             }
             if ($option == 'format'
-                && $value = 'html') {
+                && $value == 'html') {
                 continue;
             }
             if (!empty($value)) {
