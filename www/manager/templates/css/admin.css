@@ -90,7 +90,7 @@ a.action.delete {
 }
 a.action.delete:active {background-image:url('images/iconDelete.png');}
 
-.media-preview {
+.media-preview, #progress {
 	background:#ECF4F8;
 	border-radius:5px;
     -moz-border-radius:5px;
@@ -99,6 +99,11 @@ a.action.delete:active {background-image:url('images/iconDelete.png');}
 	overflow: auto;
 	padding:10px 0;
 }
+
+.uploading {
+    display:none;
+}
+
 .media-preview ol {
     font-size:1.2em;
     line-height:1.4em;	

@@ -420,6 +420,6 @@ if (isset($context->media)) {
         <legend>For Which Feeds Shall this Media be Added?</legend>
         <?php echo $savvy->render($context, 'User/FeedSelection.tpl.php'); ?>
     </fieldset>
-    <input type="submit" name="submit" id="continue3" value="Publish" onclick="document.getElementById('submit_existing').click();" />
+    <input type="submit" name="submit" id="continue3" value="Publish" onclick="document.getElementById('submit_existing').click();" /> <img class='uploading' src="/wdn/templates_3.0/scripts/plugins/tinymce/themes/advanced/skins/unl/img/progress.gif" alt="progress animated gif" />
 </form>
 </div>

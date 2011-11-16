@@ -55,8 +55,15 @@ var upload = function() {
            uploadprogress = document.getElementById("uploadprogress");
            startTime = new Date();
            infoUpdated = 0;
+           
            // Show progress bar
-           WDN.jQuery('.meter').show();
+           WDN.jQuery('#progress').show();
+           
+           // Hide the submit button until the upload is complete.
+           WDN.jQuery('#continue3').attr('disabled', 'disabled');
+           
+           WDN.jQuery('.uploading').show();
+           
            this.requestInfo();
         },
         stop: function(url) {
@@ -76,7 +83,12 @@ var upload = function() {
                 }
 
                 // Hide upload progress
-                WDN.jQuery('.meter').hide();
+                WDN.jQuery('#progress').hide();
+                
+                WDN.jQuery('.uploading').hide();
+                
+                //Show the continue button.
+                WDN.jQuery('#continue3').removeAttr('disabled');
 
                 // Set the URL within the form
                 WDN.jQuery("#media_url").attr("value", url);
@@ -94,6 +106,9 @@ var upload = function() {
         },
 
         updateInfo: function(uploaded, total, startTime, percentage) {
+            //We made it this far, that means the progress bar should be working in older browsers.
+            WDN.jQuery('.meter').show();
+            
             if (uploaded) {
                 infoUpdated++;
                 if (total > upload_max_filesize) {
@@ -109,16 +124,21 @@ var upload = function() {
                 writeStatus("Upload started since " + (new Date() - startTime)/1000 + " seconds. No progress info yet");
             }
             window.setTimeout("upload.requestInfo()", 1000);
+            //WDN.jQuery('#media_form').html(uploaded);
         }
     }
 }()
 </script>
 <style type="text/css">
+#progress{
+    display: none;
+    padding: 10px;
+}
 .meter {
     display:none; /* Hide by default */
     height: 20px;  /* Can be anything */
     position: relative;
-    margin: 60px 0 20px 0; /* Just for demo spacing */
+    margin: 10px 0 20px 0; /* Just for demo spacing */
     background: #555;
     -moz-border-radius: 25px;
     -webkit-border-radius: 25px;
@@ -242,8 +262,12 @@ var upload = function() {
         <input type="submit" name="submit" id="mediaSubmit" value="Add Media" />
     </fieldset>
 </form>
-<div class="meter animate">
-<span style="width:0%;"><span></span></span>
+<div id='progress' class='grid11'>
+    <h2>Your media is being uploaded <img class='uploading' src="/wdn/templates_3.0/scripts/plugins/tinymce/themes/advanced/skins/unl/img/progress.gif" alt="progress animated gif" /></h2>
+    <div class="meter animate">
+        <span style="width:0%;"><span></span></span>
+    </div>
+    <span>While you wait, please fill out the form bellow.</span>
 </div>
 <div id="uploadstatus" style="display:none;"></div>
 <iframe name="uploadprogress" width="1" height="1" id="uploadprogress"></iframe>
