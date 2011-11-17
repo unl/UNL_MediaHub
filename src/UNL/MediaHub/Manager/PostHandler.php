@@ -32,7 +32,8 @@ class UNL_MediaHub_Manager_PostHandler
      * 
      * @return null
      */
-    function sortPostFeedElements() {
+    private function sortPostFeedElements()
+    {
         foreach($this->post as $key=>$value) {
             if (is_array($value) && strpos($key, 'UNL_MediaHub_Feed') !== false) {
                 usort($value, array($this,'comparePostFeedElements'));
@@ -49,7 +50,8 @@ class UNL_MediaHub_Manager_PostHandler
      * 
      * @return int 1 if greater, -1 if less than, 0 if the same.
      */
-    function comparePostFeedElements($a, $b) {
+    private function comparePostFeedElements($a, $b)
+    {
         //We must be compairing arrays here.
         if (!(is_array($a) && is_array($b))) {
             return 0;
