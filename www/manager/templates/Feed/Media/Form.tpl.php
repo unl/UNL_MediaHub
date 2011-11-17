@@ -103,7 +103,7 @@ if (isset($context->media)) {
         
         <ol>
             <?php foreach ($customFields as $customField=>$description): ?>
-            <li><?php echo $savvy->render(null, 'Feed/Media/NamespacedElements/mediahub/'.$customField.'.tpl.php'); ?></li>
+            <li><?php echo $savvy->render($context, 'Feed/Media/NamespacedElements/mediahub/'.$customField.'.tpl.php'); ?></li>
             <?php endforeach; ?>
         </ol>
     </fieldset>
