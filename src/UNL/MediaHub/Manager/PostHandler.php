@@ -17,6 +17,54 @@ class UNL_MediaHub_Manager_PostHandler
         $this->options = $options;
         $this->post    = $post;
         $this->files   = $files;
+
+        /**
+         * Sort the feed elements so that their elements are ALWAYS
+         * alphabetical.  There is a bug in Doctrine that will try
+         * to save duplicate primary keys if they are not.
+         */
+        $this->sortPostFeedElements();
+    }
+    
+    /**
+     * Sorts feed elements in the post attribute so that the elements are listed
+     * alphabetically.
+     * 
+     * @return null
+     */
+    function sortPostFeedElements() {
+        foreach($this->post as $key=>$value) {
+            if (is_array($value) && strpos($key, 'UNL_MediaHub_Feed') !== false) {
+                usort($value, array($this,'comparePostFeedElements'));
+                $this->post[$key] = $value;
+            }
+        }
+    }
+    
+    /**
+     * Compares two feed elements
+     * 
+     * @param $a the first element to compare
+     * @param $b the second elemenet to compare
+     * 
+     * @return int 1 if greater, -1 if less than, 0 if the same.
+     */
+    function comparePostFeedElements($a, $b) {
+        //We must be compairing arrays here.
+        if (!(is_array($a) && is_array($b))) {
+            return 0;
+        }
+        
+        //element must be defined inorder to sort.
+        if (!(isset($a['element']) && isset($b['element']))) {
+            return 0;
+        }
+        
+        if ($a['element'] == $b['element']) {
+            return 0;
+        }
+        
+        return ($a['element'] < $b['element']) ? -1 : 1;
     }
 
     /**
