@@ -4,7 +4,6 @@ header('Expires: Tue, 08 Oct 1991 00:00:00 GMT');
 header('Cache-Control: no-cache, must-revalidate');
 ?>
 <script type="text/javascript">
-//alert('here');
 <?php
 if (false !== $context->info) {
     $percentComplete = $context->getPercentComplete();
