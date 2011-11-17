@@ -267,7 +267,7 @@ var upload = function() {
     <div class="meter animate">
         <span style="width:0%;"><span></span></span>
     </div>
-    <span>While you wait, please fill out the form bellow.</span>
+    <span>While you wait, please fill out the form below.</span>
 </div>
 <div id="uploadstatus" style="display:none;"></div>
 <iframe name="uploadprogress" width="1" height="1" id="uploadprogress"></iframe>
