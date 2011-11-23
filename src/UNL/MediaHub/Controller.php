@@ -125,7 +125,18 @@ class UNL_MediaHub_Controller
         
         UNL_MediaHub_Feed_Media_NamespacedElements_mediahub::$uri = UNL_MediaHub_Controller::$url . "schema/mediahub.xsd";
     }
-
+    
+    public static function getNamespaceDefinationString()
+    {
+        $namespaces = "";
+        foreach (UNL_MediaHub_Controller::$usedMediaNameSpaces as $class) {
+            $class = new ReflectionClass($class);
+            $namespaces .= "xmlns:" . $class->getStaticPropertyValue('xmlns') . "='" . $class->getStaticPropertyValue('uri') . "' ";
+        }
+        
+        return $namespaces;
+    }
+    
     public static function isMobileClient($options = array())
     {
         if (!isset($_SERVER['HTTP_ACCEPT'], $_SERVER['HTTP_USER_AGENT'])) {

@@ -3,14 +3,8 @@ $context->feed->loadReference('UNL_MediaHub_Feed_NamespacedElements_itunes');
 $context->feed->loadReference('UNL_MediaHub_Feed_NamespacedElements_media');
 echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
 
-$namespaces = "";
-foreach (UNL_MediaHub_Controller::$usedMediaNameSpaces as $class) {
-    $class = new ReflectionClass($class);
-    $namespaces .= "xmlns:" . $class->getStaticPropertyValue('xmlns') . "='" . $class->getStaticPropertyValue('uri') . "' ";
-}
-
 ?>
-<rss version="2.0" <?php echo $namespaces?>>
+<rss version="2.0" <?php echo UNL_MediaHub_Controller::getNamespaceDefinationString();?>>
   <channel>
     <title><?php echo $context->feed->title; ?></title>
     <link><?php echo UNL_MediaHub_Controller::getURL($context->feed); ?></link>
