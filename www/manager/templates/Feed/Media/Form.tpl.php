@@ -98,7 +98,7 @@ if (isset($context->media)) {
     <?php
     $customFields = UNL_MediaHub_Feed_Media_NamespacedElements_mediahub::getCustomElements();
     if (count($customFields)): ?>
-    <fieldset id="enhanced_header">
+    <fieldset id="other_header">
         <legend>Other Information</legend>
         
         <ol>
