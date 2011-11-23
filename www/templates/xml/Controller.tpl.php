@@ -1,10 +1,4 @@
 <?php
-$namespaces = "";
-foreach (UNL_MediaHub_Controller::$usedMediaNameSpaces as $class) {
-    $class = new ReflectionClass($class);
-    $namespaces .= "xmlns:" . $class->getStaticPropertyValue('xmlns') . "='" . $class->getStaticPropertyValue('uri') . "' ";
-}
-
 if ($context->output instanceof UNL_MediaHub_MediaList
     || (is_array($context->output) && (
         $context->output[0] instanceof UNL_MediaHub_MediaList
@@ -12,7 +6,7 @@ if ($context->output instanceof UNL_MediaHub_MediaList
         || $context->output[0] instanceof UNL_MediaHub_Media
         || $context->output[0] instanceof UNL_MediaHub_DefaultHomepage))) {
  echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
-<rss version="2.0" <?php echo $namespaces;?>>
+<rss version="2.0" <?php echo UNL_MediaHub_Controller::getNamespaceDefinationString();?>>
   <channel>
     <title>UNL MediaHub</title>
     <link><?php echo UNL_MediaHub_Controller::getURL(); ?></link>
