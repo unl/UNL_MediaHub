@@ -185,6 +185,12 @@ WDN.jQuery(document).ready(function() {
     WDN.jQuery('#media_form').submit(function() {
         WDN.jQuery('#continue3').attr('disabled', 'disabled');
     })
+    
+    //Collapisible forms.
+    WDN.jQuery('.collapsible > ol').hide();
+    WDN.jQuery('.collapsible > legend').click(function(){
+        WDN.jQuery(this).next('ol').toggle();
+    });
 });
 WDN.loadJS("/wdn/templates_3.0/scripts/plugins/tinymce/jquery.tinymce.js", function() {
     WDN.jQuery("textarea#description").tinymce({

@@ -76,7 +76,7 @@ if (isset($context->media)) {
         return '';
     }
     ?>
-    <fieldset id="enhanced_header">
+    <fieldset class='collapsible' id="enhanced_header">
         <legend>Geo Location</legend>
         <ol>
             <li>
@@ -98,7 +98,7 @@ if (isset($context->media)) {
     <?php
     $customFields = UNL_MediaHub_Feed_Media_NamespacedElements_mediahub::getCustomElements();
     if (count($customFields)): ?>
-    <fieldset id="other_header">
+    <fieldset class='collapsible' id="other_header">
         <legend>Other Information</legend>
         
         <ol>
@@ -108,7 +108,7 @@ if (isset($context->media)) {
         </ol>
     </fieldset>
     <?php endif; ?>
-    <fieldset id="enhanced_header">
+    <fieldset class='collapsible' id="enhanced_header">
         <legend>Enhanced Information</legend>
         <ol>
             <li style="display:none;">
