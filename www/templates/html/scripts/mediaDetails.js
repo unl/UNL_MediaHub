@@ -10,14 +10,11 @@ var mediaDetails = function() {
 		},
 		
 		updateDuration : function() {
-			if (!WDN.jQuery('video')[0]){
+			if (!player){
 				WDN.jQuery('#itunes_duration').attr('value', mediaDetails.findDuration(WDN.videoPlayer.createFallback.getCurrentInfo('duration')));
-			} else if (WDN.jQuery('audio')[0] != undefined) {
-				WDN.log(WDN.jQuery('audio')[0].duration);
-				WDN.jQuery('#itunes_duration').attr('value', mediaDetails.findDuration(WDN.jQuery('audio')[0].duration));
 			} else {
-				WDN.log(WDN.jQuery('video')[0].duration);
-				WDN.jQuery('#itunes_duration').attr('value', mediaDetails.findDuration(WDN.jQuery('video')[0].duration));
+				WDN.log(player.media.duration);
+				WDN.jQuery('#itunes_duration').attr('value', mediaDetails.findDuration(player.media.duration));
 			}
 		},
 		
