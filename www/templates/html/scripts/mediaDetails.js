@@ -187,9 +187,16 @@ WDN.jQuery(document).ready(function() {
     })
     
     //Collapisible forms.
+    WDN.jQuery('.collapsible > legend').append("<span class='toggle'>Expand</span>");
     WDN.jQuery('.collapsible > ol').hide();
     WDN.jQuery('.collapsible > legend').click(function(){
-        WDN.jQuery(this).next('ol').toggle();
+        if (WDN.jQuery(this).next('ol').is(":visible")) {
+            WDN.jQuery(this).next('ol').hide(200);
+            WDN.jQuery(this).find('.toggle').html('Expand');
+        } else {
+            WDN.jQuery(this).next('ol').show(200);
+            WDN.jQuery(this).find('.toggle').html('Collapse');
+        }
     });
 });
 WDN.loadJS("/wdn/templates_3.0/scripts/plugins/tinymce/jquery.tinymce.js", function() {
