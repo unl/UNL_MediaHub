@@ -72,3 +72,22 @@ form #thumbnail {
 	border:1px solid;
 }
 iframe * {margin:0px}
+
+#maincontent .collapsible legend {
+    border-bottom: 1px solid #D5D4D4;
+    width: 99%;
+    cursor: pointer;
+}
+
+#maincontent .collapsible ol {
+    border: none;
+}
+
+#maincontent #media_form > fieldset > legend + ol > li:first-child {
+    border-bottom: 1px solid #ffff;
+}
+
+#maincontent .collapsible .toggle {
+    float: right;
+    font-size: 10px;
+}
