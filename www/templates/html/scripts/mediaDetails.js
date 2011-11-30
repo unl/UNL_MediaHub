@@ -68,11 +68,16 @@ var mediaDetails = function() {
 			WDN.get('?view=mediapreview&format=partial&url='+url, function(data, textStatus){
 
 				// Place the preview markup into the preview div
-				WDN.jQuery('#headline_main').html(data);
-
-				mediaDetails.scalePlayer();
-
-				WDN.initializePlugin('videoPlayer');
+				WDN.jQuery('#headline_main').html(data).ready(function(){
+		    		mediaDetails.scalePlayer();
+		    		//Wait for it to scale and then load the mediaelement player.
+		    		WDN.jQuery('#jwPlayer_0, video').load(function(){
+		    			jQuery.getScript('http://www.unl.edu/wdn/templates_3.0/scripts/mediaelement.js', function(){
+		    				player = new MediaElementPlayer('#player');
+		    			});
+		    		});
+				});
+				
 			});
 		},
 
