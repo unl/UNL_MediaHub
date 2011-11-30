@@ -71,18 +71,10 @@ var mediaDetails = function() {
 		getPreview : function(url) {
 			WDN.jQuery('#headline_main').html('Generating a thumbnail and setting up the media player. <img src="/wdn/templates_3.0/scripts/plugins/tinymce/themes/advanced/skins/unl/img/progress.gif" alt="progress animated gif" />');
 			WDN.get('?view=mediapreview&format=partial&url='+url, function(data, textStatus){
-
 				// Place the preview markup into the preview div
 				WDN.jQuery('#headline_main').html(data).ready(function(){
 		    		mediaDetails.scalePlayer();
-		    		//Wait for it to scale and then load the mediaelement player.
-		    		WDN.jQuery('#jwPlayer_0, video').load(function(){
-		    			jQuery.getScript('http://www.unl.edu/wdn/templates_3.0/scripts/mediaelement.js', function(){
-		    				player = new MediaElementPlayer('#player');
-		    			});
-		    		});
 				});
-				
 			});
 		},
 
@@ -92,8 +84,11 @@ var mediaDetails = function() {
 			thumbnail.src = WDN.jQuery('#thumbnail').attr('src')+'&time='+mediaDetails.formatTime(0);
 			thumbnail.onload = function(){
 				var calcHeight = (this.height * 460)/this.width;
-				WDN.jQuery('#jwPlayer_0, video').attr('height', calcHeight);
-				WDN.jQuery('#jwPlayer_0, video').attr('width', 460);
+				WDN.jQuery('#player').attr('height', calcHeight).attr('width', 460).ready(function(){
+					jQuery.getScript('http://www.unl.edu/wdn/templates_3.0/scripts/mediaelement.js', function(){
+						player = new MediaElementPlayer('#player');
+					});
+				});
 				WDN.jQuery('#videoDisplay object').attr('style', 'width:460px;height:'+calcHeight);
 				WDN.jQuery('#thumbnail').attr('src', thumbnail.src);
 			};
