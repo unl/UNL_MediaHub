@@ -3,10 +3,14 @@ var player = null;
 var mediaDetails = function() {
 	var video;
 	return {
-		imageURL : 'http://itunes.unl.edu/thumbnails.php?url=',
+		imageBaseURL: 'http://itunes.unl.edu/thumbnails.php?url=',
 		
 		setVideoType : function(){
 		
+		},
+		
+		getImageURL: function() {
+		    return mediaDetails.imageBaseURL + WDN.jQuery('#player').attr('src');
 		},
 		
 		updateDuration : function() {
@@ -24,14 +28,15 @@ var mediaDetails = function() {
 		
 		updateThumbnail : function(currentTime) {
 			WDN.jQuery('#imageOverlay').css({'height' : WDN.jQuery("#thumbnail").height()-20 +'px' ,'width' : WDN.jQuery("#thumbnail").width()-60 +'px' }).show();
-			var newThumbnail = new Image();
-			newThumbnail.src = mediaDetails.imageURL + '&time='+mediaDetails.formatTime(currentTime)+'&rebuild';
-			WDN.log(newThumbnail.src);
-			newThumbnail.onload = function() {
-				WDN.jQuery('#thumbnail').attr('src', newThumbnail.src).ready(function() {
-					WDN.jQuery('#imageOverlay').hide();
-				});
-			};
+			
+			var src = mediaDetails.getImageURL() + '&time='+mediaDetails.formatTime(currentTime)+'&rebuild';
+			
+			WDN.log(src);
+			
+			WDN.jQuery.ajax(src).always(function() {
+	    		WDN.jQuery('#thumbnail').attr('src', src.replace('&rebuild', ''));
+	    		WDN.jQuery('#imageOverlay').hide();
+	    	});
 		},
 		
 		currentPostion : function(video) {
@@ -66,13 +71,10 @@ var mediaDetails = function() {
 		getPreview : function(url) {
 			WDN.jQuery('#headline_main').html('Generating a thumbnail and setting up the media player. <img src="/wdn/templates_3.0/scripts/plugins/tinymce/themes/advanced/skins/unl/img/progress.gif" alt="progress animated gif" />');
 			WDN.get('?view=mediapreview&format=partial&url='+url, function(data, textStatus){
-
 				// Place the preview markup into the preview div
-				WDN.jQuery('#headline_main').html(data);
-
-				mediaDetails.scalePlayer();
-
-				WDN.initializePlugin('videoPlayer');
+				WDN.jQuery('#headline_main').html(data).ready(function(){
+		    		mediaDetails.scalePlayer();
+				});
 			});
 		},
 
@@ -82,8 +84,11 @@ var mediaDetails = function() {
 			thumbnail.src = WDN.jQuery('#thumbnail').attr('src')+'&time='+mediaDetails.formatTime(0);
 			thumbnail.onload = function(){
 				var calcHeight = (this.height * 460)/this.width;
-				WDN.jQuery('#jwPlayer_0, video').attr('height', calcHeight);
-				WDN.jQuery('#jwPlayer_0, video').attr('width', 460);
+				WDN.jQuery('#player').attr('height', calcHeight).attr('width', 460).ready(function(){
+					jQuery.getScript('http://www.unl.edu/wdn/templates_3.0/scripts/mediaelement.js', function(){
+						player = new MediaElementPlayer('#player');
+					});
+				});
 				WDN.jQuery('#videoDisplay object').attr('style', 'width:460px;height:'+calcHeight);
 				WDN.jQuery('#thumbnail').attr('src', thumbnail.src);
 			};
@@ -91,6 +96,7 @@ var mediaDetails = function() {
 		}
 	};
 }();
+
 WDN.jQuery(document).ready(function() {
     if (formView == 'edit'){ //we're editting, so hide the introduction and go straight to the form
     	
@@ -99,11 +105,11 @@ WDN.jQuery(document).ready(function() {
         WDN.jQuery(".headline_main").css({"display" : "inline-block"});
         WDN.jQuery("#formDetails").removeClass("two_col right").addClass('four_col left');
     	if (mediaType == 'video') {
-    		mediaDetails.imageURL = mediaDetails.imageURL + escape(WDN.jQuery("#url").val());
     		mediaDetails.scalePlayer();
     	}
     	WDN.jQuery("#fileUpload").hide();
     }
+    
     WDN.jQuery("#mediaSubmit").click(function(event) { //called when a user adds video
 
     		if (document.getElementById("file_upload").value == '') {
@@ -130,8 +136,8 @@ WDN.jQuery(document).ready(function() {
             });
 
         });
-
-    WDN.jQuery('a#setImage').click(function(){
+    
+    WDN.jQuery('a#setImage').live('click', function(){
     	var currentTime;
     	if (!player){
     		currentTime = WDN.videoPlayer.createFallback.getCurrentPosition() + .01;
@@ -140,6 +146,7 @@ WDN.jQuery(document).ready(function() {
     	}
     	
     	mediaDetails.updateThumbnail(currentTime);
+    
     	return false;
     });
     
