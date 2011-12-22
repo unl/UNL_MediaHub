@@ -17,6 +17,7 @@ $js = '<script type="text/javascript">
        <link type="text/css" rel="stylesheet" href="/wdn/templates_3.0/css/content/formvalidator.css" />
        <script type="text/javascript" src="/wdn/templates_3.0/scripts/plugins/validator/jquery.validator.min.js"></script>
        <script type="text/javascript" src="'.UNL_MediaHub_Controller::getURL().'templates/html/scripts/mediaDetails.js"></script>
+       <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
        ';
 
 UNL_MediaHub_Manager::setReplacementData('head', $js);
@@ -93,8 +94,31 @@ if (isset($context->media)) {
                     <input id="geo_long" name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[1][value]" class='geo_long' type="text" value="<?php echo getFieldValue($context, 'geo', 'long'); ?>"/>
                 </div>
             </li>
+            <li>
+            <div id="map_canvas" style="width:500px;height:300px;"></div>
+            </li>
         </ol>
     </fieldset>
+    <script type="text/javascript">
+        WDN.jQuery('#enhanced_header legend').click(function() {
+            var map;
+            var myOptions = {
+              zoom: 6,
+              center: new google.maps.LatLng(41.5299085734404, -99.591595703125),
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            map = new google.maps.Map(document.getElementById('map_canvas'), myOptions);
+            var marker = false;
+            google.maps.event.addListener(map, 'click', function(event) {
+              if (marker != false) {
+                  marker.setMap(null);
+              }
+              marker = new google.maps.Marker({position: event.latLng, map: map});
+              WDN.jQuery('#geo_lat').attr('value', event.latLng.lat());
+              WDN.jQuery('#geo_long').attr('value', event.latLng.lng());
+            });
+        });
+    </script>
     <?php $customFields = UNL_MediaHub_Feed_Media_NamespacedElements_mediahub::getCustomElements(); ?>
     <fieldset class='collapsible' id="other_header">
         <legend>Other Information</legend>
