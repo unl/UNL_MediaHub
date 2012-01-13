@@ -16,7 +16,7 @@ UNL_MediaHub_Controller::setReplacementData('title', 'UNL | MediaHub | '.htmlspe
 UNL_MediaHub_Controller::setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li>'.htmlspecialchars($context->title).'</li></ul>');
 $meta = '
 <meta name="title" content="'.htmlentities($context->title, ENT_QUOTES).'" />
-<meta name="description" content="'.htmlentities($context->description, ENT_QUOTES).'" />
+<meta name="description" content="'.htmlentities(strip_tags($context->description), ENT_QUOTES).'" />
 <link rel="image_src" href="'.$context->getThumbnailURL().'" />
 <script type="text/javascript">
 WDN.jQuery(document).ready(function(){
@@ -34,6 +34,8 @@ if ($type == 'video') {
 	<meta property="og:video:width" content="'.$width.'" />
 	<meta property="og:video:type" content="'.$context->type.'" />
     <meta property="og:image" content="'.$context->getThumbnailURL().'">
+    <meta property="og:video" content="'.UNL_MediaHub_Controller::getURL($context).'" />
+    <meta property="og:video:type" content="text/html" />
 	';
 } else {
 	$meta .= '
