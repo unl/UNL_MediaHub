@@ -19,7 +19,7 @@ UNL_MediaHub_Controller::$thumbnail_generator = 'http://itunes.unl.edu/thumbnail
 $itemElements = array(
     'water_af'  => 'Volume of water in acre-feet (af)',
     'water_cfs' => 'Speed of water in cubic feet per second (cfs)',
-    'media_creation_date' => 'Date of the creation of the media',
+    'creation_date' => 'Date of the creation of the media',
     );
 
 UNL_MediaHub_Feed_Media_NamespacedElements_mediahub::setCustomElements($itemElements);
