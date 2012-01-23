@@ -229,6 +229,9 @@ class UNL_MediaHub_Controller
         case 'json':
             header('Content-type: application/json');
             break;
+        case 'vtt':
+            header('Content-type: text/vtt');
+            break;
         default:
             break;
         }
