@@ -12,6 +12,11 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
 
     function __construct($options = array())
     {
+        //Dont paginate if we are not viewing html.
+        if (isset($options['format']) && $options['format'] !== 'html') {
+            $options['limit'] = 0;
+        }
+        
         $this->options = $options + $this->options;
         $this->filterInputOptions();
         $this->setUpFilter();
