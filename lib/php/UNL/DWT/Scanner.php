@@ -82,7 +82,7 @@ class UNL_DWT_Scanner
             } else {
                 if ($newRegion===true) {
                     // Add the value of this region.
-                    $region->value .= trim($fileregion)." ";
+                    $region->value .= trim($fileregion).PHP_EOL;
                 }
             }
         }
