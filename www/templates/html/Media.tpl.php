@@ -12,16 +12,16 @@ if ($context->isVideo()) {
 }
 
 $context->loadReference('UNL_MediaHub_Media_Comment');
-UNL_MediaHub_Controller::setReplacementData('title', 'UNL | MediaHub | '.htmlspecialchars($context->title));
+UNL_MediaHub_Controller::setReplacementData('title', htmlspecialchars($context->title) . ' | MediaHub | University of Nebraska-Lincoln');
 UNL_MediaHub_Controller::setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li>'.htmlspecialchars($context->title).'</li></ul>');
 $meta = '
 <meta name="title" content="'.htmlentities($context->title, ENT_QUOTES).'" />
 <meta name="description" content="'.htmlentities(strip_tags($context->description), ENT_QUOTES).'" />
 <link rel="image_src" href="'.$context->getThumbnailURL().'" />
 <script type="text/javascript">
-WDN.jQuery(document).ready(function(){
-    WDN.jQuery(\'span.embed\').colorbox({inline: true, href:\'#sharing\', width:\'600px\', height:\'310px\'});
-});
+    WDN.initializePlugin("modal", [function() {
+        WDN.jQuery(\'span.embed\').colorbox({inline: true, href:\'#sharing\', width:\'600px\', height:\'310px\'});
+    }]);
 </script>
 <meta name="medium" content="'.$type.'" />
 <meta property="og:type" content="'.$type.'">
@@ -45,7 +45,7 @@ if ($type == 'video') {
 	';
 }
 UNL_MediaHub_Controller::setReplacementData('head', $meta);
-UNL_MediaHub_Controller::setReplacementData('pagetitle', '<h2>'.$context->title.'</h2>');
+UNL_MediaHub_Controller::setReplacementData('pagetitle', '<h1>'.$context->title.'</h1>');
 
 // Store the mediaplayer code in a variable, so we can re-use it for the embed
 $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
