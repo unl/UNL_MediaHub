@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" packagerversion="1.9.1" version="2.0" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+<package xmlns="http://pear.php.net/dtd/package-2.1" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.1" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.1     http://pear.php.net/dtd/package-2.1.xsd" packagerversion="2.0.0">
  <name>UNL_Templates</name>
  <channel>pear.unl.edu</channel>
- <summary>The UNL HTML Templates as a PEAR Package.</summary>
- <description>This package allows you to render UNL Template styled pages using PHP Objects.</description>
+ <summary>The UNL HTML Templates as a PEAR Package.
+</summary>
+ <description>
+This package allows you to render UNL Template styled pages using PHP Objects.
+</description>
  <lead>
   <name>Brett Bieber</name>
   <user>saltybeagle</user>
@@ -16,258 +19,92 @@
   <email>nhummel2@math.unl.edu</email>
   <active>yes</active>
  </lead>
- <date>2011-08-30</date>
- <time>16:37:36</time>
+ <date>2012-03-30</date>
+ <time>14:00:16</time>
  <version>
-  <release>1.2.0</release>
+  <release>1.3.0RC2</release>
   <api>1.0.0</api>
  </version>
  <stability>
-  <release>stable</release>
+  <release>beta</release>
   <api>stable</api>
  </stability>
  <license uri="http://www1.unl.edu/wdn/wiki/Software_License">BSD License</license>
- <notes>
-Update .tpl cache so template files are in sync with latest wdntemplates.
-Allow underscores within Version3 template include files.
+ <notes>New features:
 
-New templates!
-
- * Fixed_html5
- * Unlaffiliate
-
-Template updates:
-
- * Meta lang fixes
- * Remove IDM region from the secure template
- * Mobile template now supports navigation and move to HTML5
- </notes>
+ - Add support for version 3.1 of the UNL Templates</notes>
  <contents>
   <dir name="/">
-   <file baseinstalldir="/" md5sum="40eeca840e02c9e5b2b2b7846bd73397" name="UNL/Templates/Version3/Unlaffiliate.php" role="php">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="f9b3c237b7a6b8500ef0d18f4e1c9595" name="UNL/Templates/Version3/Shared_column_right.php" role="php">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="c8e40b9ff760f0d6da578f6f52e85ab2" name="UNL/Templates/Version3/Shared_column_left.php" role="php">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="7586ee8d6db673dbef56fe491a0ac517" name="UNL/Templates/Version3/Secure.php" role="php">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="1d63a45e6f7e86585182a09ff8e33962" name="UNL/Templates/Version3/Popup.php" role="php">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="88ed3fab2afd3f989c53db231ea99715" name="UNL/Templates/Version3/Mobile.php" role="php">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="5ae65bf4c045a5b9b65b726b52d6cd26" name="UNL/Templates/Version3/Liquid.php" role="php">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="183165807ee292fa17a03314c5455a6b" name="UNL/Templates/Version3/Fixed_html5.php" role="php">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="041aae52a187c4986e495a8643b43ae4" name="UNL/Templates/Version3/Fixed.php" role="php">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="01035abd6b488663747399e74d0065bc" name="UNL/Templates/Version3/Document.php" role="php">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="05eb7e3f0639e79aeb2e4f5061a356f1" name="UNL/Templates/Version3/Debug.php" role="php">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="315f0d6be4459208f7733e6e29f99c91" name="UNL/Templates/Version3/Absolute.php" role="php">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="ac6b2ddcaa8204679eb0c8fd86cd7ed1" name="UNL/Templates/Version3.php" role="php">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="48a0fd1e66226418db0c7c5202343881" name="UNL/Templates/Version2/Unlstandardtemplate.php" role="php">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="e902fc42cdcb7633fbe07f4d509a1b97" name="UNL/Templates/Version2/Unlframework.php" role="php">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="bdac0dc69918a491efcee2450d99738f" name="UNL/Templates/Version2/Unlaffiliate.php" role="php">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="f43c4b5320cf2def6d90c71f3e22c1fb" name="UNL/Templates/Version2/Secure.php" role="php">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="0a1b634408248289e89649a49bd7759c" name="UNL/Templates/Version2/Popup.php" role="php">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="55c715aa91f18226f5be4c3f427b2dea" name="UNL/Templates/Version2/Liquid.php" role="php">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="3fbccc1b6e7a0287577972b4c25a0d19" name="UNL/Templates/Version2/Fixed.php" role="php">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="ef2068426bb8f73ac706b18a472df967" name="UNL/Templates/Version2/Document.php" role="php">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="4c1b93f62221e5229be657196f07f048" name="UNL/Templates/Version2.php" role="php">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="c7df0501ec102431d7be6a6cfd133b5b" name="UNL/Templates/Version.php" role="php">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="82740c1fadfd1160bb9c67006947ab3b" name="UNL/Templates/Scanner.php" role="php">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="4fa04418d0aa08834b4795caeae5b8c8" name="UNL/Templates/CachingService/UNLCacheLite.php" role="php">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="47991f0e5cffed6d138725a3294f4e6a" name="UNL/Templates/CachingService/Null.php" role="php">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="5b09b184e7d59a2520e99c0b5c66428a" name="UNL/Templates/CachingService/CacheLite.php" role="php">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="07884c3a9bf75657e54782423a088eb4" name="UNL/Templates/CachingService.php" role="php">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="2c228caecb506e35cf3259cabbcec9c1" name="UNL/Templates.php" role="php">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="12aa5989d1255dccc299a3dcdd6c6ba8" name="tests/UNL_TemplatesTest.php" role="test">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="9a7ce82868ddb7afc2b291b0b0ec6bd1" name="docs/examples/scanner.php" role="doc">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="445545ee84172f82ed09219931fa288e" name="docs/examples/example1.php" role="doc">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="e9769bdf0cf9ec36430b3f70ec687037" name="docs/examples/customization/customization_example.php" role="doc">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="26c8d867af8ffd4d8d60e348573f9c3d" name="docs/examples/customization/customization_example.html" role="doc">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="7e35aab85f95ad61fe43e50fbf1719a2" name="docs/examples/customization/CustomClass.php" role="doc">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="a7114a3868d0ba54d4ff76b370ea3201" name="docs/examples/convert.php" role="doc">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="6644923a681f49bfd425f5768d01e4a3" name="data/tpl_cache/Version3/Unlaffiliate.tpl" role="data">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="84cc265b12115d9c2733a6d03f5a4d85" name="data/tpl_cache/Version3/Shared_column_right.tpl" role="data">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="6003b105b79241b8e001d0f375265747" name="data/tpl_cache/Version3/Shared_column_left.tpl" role="data">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="6a5f82b61c2c2191494af9fe1384bdca" name="data/tpl_cache/Version3/Secure.tpl" role="data">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="1f3b340e18024423748839343369443d" name="data/tpl_cache/Version3/Popup.tpl" role="data">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="aa53260716fc4f1d2fc31d149416b7e0" name="data/tpl_cache/Version3/Mobile.tpl" role="data">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="4b576a99e001b22d3c77b01f72789546" name="data/tpl_cache/Version3/Liquid.tpl" role="data">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="9cedaa7c695c654e0f16fa534e35ec32" name="data/tpl_cache/Version3/Fixed_html5.tpl" role="data">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="783216b7dc343283a21ba3f8a8e5396b" name="data/tpl_cache/Version3/Fixed.tpl" role="data">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="8a7ecbc31b2a4d85bad056f7c0d06039" name="data/tpl_cache/Version3/Document.tpl" role="data">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="fe52677e48d48d798d70e9cad4b5c0ed" name="data/tpl_cache/Version3/Debug.tpl" role="data">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="b3cf17273448a34ac869d4369663e819" name="data/tpl_cache/Version3/Absolute.tpl" role="data">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="2082f29e6219b9fdad0faffb2bf9a427" name="data/tpl_cache/Version2/Unlstandardtemplate.tpl" role="data">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="465cb4e7eef89560faf0c63065d8a9d3" name="data/tpl_cache/Version2/Unlframework.tpl" role="data">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="9f4650a475623a3cf293998c0e5b3233" name="data/tpl_cache/Version2/Unlaffiliate.tpl" role="data">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="962fecd9908d504e4749f7eb79dc4736" name="data/tpl_cache/Version2/Secure.tpl" role="data">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="a70442037d218c0dc948638bca8e5e08" name="data/tpl_cache/Version2/Popup.tpl" role="data">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="1a936fdcd4d17383490bd5aef1219ce8" name="data/tpl_cache/Version2/Liquid.tpl" role="data">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="df5ce334e93b844794699f3cc62d20b9" name="data/tpl_cache/Version2/Fixed.tpl" role="data">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="61cc4ae92fac84a7d38131769c2298ba" name="data/tpl_cache/Version2/Document.tpl" role="data">
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-   </file>
+   <file role="test" name="test/pear.unl.edu/UNL_Templates/UNL_TemplatesTest.php" md5sum="12aa5989d1255dccc299a3dcdd6c6ba8"/>
+   <file role="php" name="php/UNL/Templates/Version3x1/Unlaffiliate_local.php" md5sum="9f3867901ad594901d11ffff07b36843"/>
+   <file role="php" name="php/UNL/Templates/Version3x1/Unlaffiliate_debug.php" md5sum="4e006ca79895e0f9676d0ac792d2376a"/>
+   <file role="php" name="php/UNL/Templates/Version3x1/Unlaffiliate.php" md5sum="d04b37bd1e8da510610b9ad66de26487"/>
+   <file role="php" name="php/UNL/Templates/Version3x1/Local.php" md5sum="bab0b09eabc5d2fe041c4379dfa0634c"/>
+   <file role="php" name="php/UNL/Templates/Version3x1/Fixed.php" md5sum="8800d08ea41dcd31b7f444924d0e96c6"/>
+   <file role="php" name="php/UNL/Templates/Version3x1/Debug.php" md5sum="53764519ccbb2cda9d35f77843d85a61"/>
+   <file role="php" name="php/UNL/Templates/Version3x1.php" md5sum="3db6efc4892a2b68869a27941673bb5a"/>
+   <file role="php" name="php/UNL/Templates/Version3/Unlaffiliate.php" md5sum="40eeca840e02c9e5b2b2b7846bd73397"/>
+   <file role="php" name="php/UNL/Templates/Version3/Shared_column_right.php" md5sum="f9b3c237b7a6b8500ef0d18f4e1c9595"/>
+   <file role="php" name="php/UNL/Templates/Version3/Shared_column_left.php" md5sum="c8e40b9ff760f0d6da578f6f52e85ab2"/>
+   <file role="php" name="php/UNL/Templates/Version3/Secure.php" md5sum="7586ee8d6db673dbef56fe491a0ac517"/>
+   <file role="php" name="php/UNL/Templates/Version3/Popup.php" md5sum="1d63a45e6f7e86585182a09ff8e33962"/>
+   <file role="php" name="php/UNL/Templates/Version3/Mobile.php" md5sum="88ed3fab2afd3f989c53db231ea99715"/>
+   <file role="php" name="php/UNL/Templates/Version3/Liquid.php" md5sum="5ae65bf4c045a5b9b65b726b52d6cd26"/>
+   <file role="php" name="php/UNL/Templates/Version3/Fixed_html5.php" md5sum="183165807ee292fa17a03314c5455a6b"/>
+   <file role="php" name="php/UNL/Templates/Version3/Fixed.php" md5sum="041aae52a187c4986e495a8643b43ae4"/>
+   <file role="php" name="php/UNL/Templates/Version3/Document.php" md5sum="01035abd6b488663747399e74d0065bc"/>
+   <file role="php" name="php/UNL/Templates/Version3/Debug.php" md5sum="05eb7e3f0639e79aeb2e4f5061a356f1"/>
+   <file role="php" name="php/UNL/Templates/Version3/Absolute.php" md5sum="315f0d6be4459208f7733e6e29f99c91"/>
+   <file role="php" name="php/UNL/Templates/Version3.php" md5sum="7edb40844a43918f467f6cf881424aaf"/>
+   <file role="php" name="php/UNL/Templates/Version2/Unlstandardtemplate.php" md5sum="48a0fd1e66226418db0c7c5202343881"/>
+   <file role="php" name="php/UNL/Templates/Version2/Unlframework.php" md5sum="e902fc42cdcb7633fbe07f4d509a1b97"/>
+   <file role="php" name="php/UNL/Templates/Version2/Unlaffiliate.php" md5sum="bdac0dc69918a491efcee2450d99738f"/>
+   <file role="php" name="php/UNL/Templates/Version2/Secure.php" md5sum="f43c4b5320cf2def6d90c71f3e22c1fb"/>
+   <file role="php" name="php/UNL/Templates/Version2/Popup.php" md5sum="0a1b634408248289e89649a49bd7759c"/>
+   <file role="php" name="php/UNL/Templates/Version2/Liquid.php" md5sum="55c715aa91f18226f5be4c3f427b2dea"/>
+   <file role="php" name="php/UNL/Templates/Version2/Fixed.php" md5sum="3fbccc1b6e7a0287577972b4c25a0d19"/>
+   <file role="php" name="php/UNL/Templates/Version2/Document.php" md5sum="ef2068426bb8f73ac706b18a472df967"/>
+   <file role="php" name="php/UNL/Templates/Version2.php" md5sum="8472e8942eb062eb06568386c237f9c1"/>
+   <file role="php" name="php/UNL/Templates/Version.php" md5sum="c7df0501ec102431d7be6a6cfd133b5b"/>
+   <file role="php" name="php/UNL/Templates/Scanner.php" md5sum="82740c1fadfd1160bb9c67006947ab3b"/>
+   <file role="php" name="php/UNL/Templates/CachingService/UNLCacheLite.php" md5sum="4fa04418d0aa08834b4795caeae5b8c8"/>
+   <file role="php" name="php/UNL/Templates/CachingService/Null.php" md5sum="47991f0e5cffed6d138725a3294f4e6a"/>
+   <file role="php" name="php/UNL/Templates/CachingService/CacheLite.php" md5sum="5b09b184e7d59a2520e99c0b5c66428a"/>
+   <file role="php" name="php/UNL/Templates/CachingService.php" md5sum="07884c3a9bf75657e54782423a088eb4"/>
+   <file role="php" name="php/UNL/Templates.php" md5sum="1f39ddc40f5a2b2ba0f68ca3367de923"/>
+   <file role="doc" name="doc/pear.unl.edu/UNL_Templates/examples/scanner.php" md5sum="2b116cf09b8d73c439718217d83a32c2"/>
+   <file role="doc" name="doc/pear.unl.edu/UNL_Templates/examples/example1.php" md5sum="c3de6bfef1cee16be4135f310e5e601d"/>
+   <file role="doc" name="doc/pear.unl.edu/UNL_Templates/examples/customization/customization_example.php" md5sum="e9769bdf0cf9ec36430b3f70ec687037"/>
+   <file role="doc" name="doc/pear.unl.edu/UNL_Templates/examples/customization/customization_example.html" md5sum="26c8d867af8ffd4d8d60e348573f9c3d"/>
+   <file role="doc" name="doc/pear.unl.edu/UNL_Templates/examples/customization/CustomClass.php" md5sum="43bc783b2215f9668800ce2e80ad457b"/>
+   <file role="doc" name="doc/pear.unl.edu/UNL_Templates/examples/convert.php" md5sum="a7114a3868d0ba54d4ff76b370ea3201"/>
+   <file role="data" name="data/pear.unl.edu/UNL_Templates/tpl_cache/Version3x1/Unlaffiliate_local.tpl" md5sum="8801aaa43aaca9d820728f665ed6e64d"/>
+   <file role="data" name="data/pear.unl.edu/UNL_Templates/tpl_cache/Version3x1/Unlaffiliate_debug.tpl" md5sum="6c2891e91facb216e7f4c13d5be3c339"/>
+   <file role="data" name="data/pear.unl.edu/UNL_Templates/tpl_cache/Version3x1/Unlaffiliate.tpl" md5sum="26907bf294eba52039c49cbde60b2693"/>
+   <file role="data" name="data/pear.unl.edu/UNL_Templates/tpl_cache/Version3x1/Local.tpl" md5sum="278f3cefa48d8aca1b6f316909ed3a50"/>
+   <file role="data" name="data/pear.unl.edu/UNL_Templates/tpl_cache/Version3x1/Fixed.tpl" md5sum="1e00218790ec2552d5b02e7a1e83c1fd"/>
+   <file role="data" name="data/pear.unl.edu/UNL_Templates/tpl_cache/Version3x1/Debug.tpl" md5sum="8074ddde1770dd571bd8c21917cf3607"/>
+   <file role="data" name="data/pear.unl.edu/UNL_Templates/tpl_cache/Version3/Unlaffiliate.tpl" md5sum="6644923a681f49bfd425f5768d01e4a3"/>
+   <file role="data" name="data/pear.unl.edu/UNL_Templates/tpl_cache/Version3/Shared_column_right.tpl" md5sum="84cc265b12115d9c2733a6d03f5a4d85"/>
+   <file role="data" name="data/pear.unl.edu/UNL_Templates/tpl_cache/Version3/Shared_column_left.tpl" md5sum="6003b105b79241b8e001d0f375265747"/>
+   <file role="data" name="data/pear.unl.edu/UNL_Templates/tpl_cache/Version3/Secure.tpl" md5sum="6a5f82b61c2c2191494af9fe1384bdca"/>
+   <file role="data" name="data/pear.unl.edu/UNL_Templates/tpl_cache/Version3/Popup.tpl" md5sum="1f3b340e18024423748839343369443d"/>
+   <file role="data" name="data/pear.unl.edu/UNL_Templates/tpl_cache/Version3/Mobile.tpl" md5sum="aa53260716fc4f1d2fc31d149416b7e0"/>
+   <file role="data" name="data/pear.unl.edu/UNL_Templates/tpl_cache/Version3/Liquid.tpl" md5sum="4b576a99e001b22d3c77b01f72789546"/>
+   <file role="data" name="data/pear.unl.edu/UNL_Templates/tpl_cache/Version3/Fixed_html5.tpl" md5sum="9cedaa7c695c654e0f16fa534e35ec32"/>
+   <file role="data" name="data/pear.unl.edu/UNL_Templates/tpl_cache/Version3/Fixed.tpl" md5sum="783216b7dc343283a21ba3f8a8e5396b"/>
+   <file role="data" name="data/pear.unl.edu/UNL_Templates/tpl_cache/Version3/Document.tpl" md5sum="8a7ecbc31b2a4d85bad056f7c0d06039"/>
+   <file role="data" name="data/pear.unl.edu/UNL_Templates/tpl_cache/Version3/Debug.tpl" md5sum="fe52677e48d48d798d70e9cad4b5c0ed"/>
+   <file role="data" name="data/pear.unl.edu/UNL_Templates/tpl_cache/Version3/Absolute.tpl" md5sum="b3cf17273448a34ac869d4369663e819"/>
+   <file role="data" name="data/pear.unl.edu/UNL_Templates/tpl_cache/Version2/Unlstandardtemplate.tpl" md5sum="2082f29e6219b9fdad0faffb2bf9a427"/>
+   <file role="data" name="data/pear.unl.edu/UNL_Templates/tpl_cache/Version2/Unlframework.tpl" md5sum="465cb4e7eef89560faf0c63065d8a9d3"/>
+   <file role="data" name="data/pear.unl.edu/UNL_Templates/tpl_cache/Version2/Unlaffiliate.tpl" md5sum="9f4650a475623a3cf293998c0e5b3233"/>
+   <file role="data" name="data/pear.unl.edu/UNL_Templates/tpl_cache/Version2/Secure.tpl" md5sum="962fecd9908d504e4749f7eb79dc4736"/>
+   <file role="data" name="data/pear.unl.edu/UNL_Templates/tpl_cache/Version2/Popup.tpl" md5sum="a70442037d218c0dc948638bca8e5e08"/>
+   <file role="data" name="data/pear.unl.edu/UNL_Templates/tpl_cache/Version2/Liquid.tpl" md5sum="1a936fdcd4d17383490bd5aef1219ce8"/>
+   <file role="data" name="data/pear.unl.edu/UNL_Templates/tpl_cache/Version2/Fixed.tpl" md5sum="df5ce334e93b844794699f3cc62d20b9"/>
+   <file role="data" name="data/pear.unl.edu/UNL_Templates/tpl_cache/Version2/Document.tpl" md5sum="61cc4ae92fac84a7d38131769c2298ba"/>
+   <file role="data" name="data/pear.unl.edu/UNL_Templates/cssUNLTemplates.ini" md5sum="a56a41abc8a324ef7029dd8b485204bf"/>
   </dir>
  </contents>
  <dependencies>
@@ -276,7 +113,7 @@ Template updates:
     <min>5.0.0</min>
    </php>
    <pearinstaller>
-    <min>1.4.3</min>
+    <min>2.0.0a1</min>
    </pearinstaller>
    <package>
     <name>UNL_DWT</name>
