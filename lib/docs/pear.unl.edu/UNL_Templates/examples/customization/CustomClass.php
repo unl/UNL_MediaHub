@@ -1,5 +1,8 @@
 <?php
 
+set_include_path(dirname(dirname(dirname(__DIR__))).'/src'.PATH_SEPARATOR.dirname(dirname(dirname(__DIR__))).'/vendor/php');
+
+
 require_once 'UNL/Templates.php';
 
 class CustomClass

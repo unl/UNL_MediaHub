@@ -162,8 +162,9 @@ WDN.jQuery(document).ready(function() {
       WDN.jQuery("#mrss_header ol").toggle(400);
       return false;
     });
-    
-    WDN.jQuery('span.embed').colorbox({inline: true, href:'#sharing', width:'600px', height:'310px'});
+    WDN.initializePlugin('modal', [function() {
+        WDN.jQuery('span.embed').colorbox({inline: true, href:'#sharing', width:'600px', height:'310px'});
+    }]);
     WDN.jQuery.validation.addMethod('geo_long', 'This must be a valid longitude.', {min:-180, max:180});
     WDN.jQuery.validation.addMethod('geo_lat', 'This must be a valid latitude.', {min:-90, max:90});
     WDN.jQuery('#media_form').validation();

@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" packagerversion="1.8.2" version="2.0" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+<package xmlns="http://pear.php.net/dtd/package-2.1" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.1" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.1     http://pear.php.net/dtd/package-2.1.xsd" packagerversion="2.0.0">
  <name>UNL_DWT</name>
  <channel>pear.unl.edu</channel>
- <summary>This package generates php class files (objects) from Dreamweaver template files.</summary>
- <description>This package generates php class files (objects) from Dreamweaver template files.</description>
+ <summary>This package generates php class files (objects) from Dreamweaver template files.
+</summary>
+ <description>
+This package generates php class files (objects) from Dreamweaver template files.
+</description>
  <lead>
   <name>Brett Bieber</name>
   <user>saltybeagle</user>
   <email>brett.bieber@gmail.com</email>
   <active>yes</active>
  </lead>
- <date>2011-03-21</date>
- <time>13:55:47</time>
+ <date>2012-03-30</date>
+ <time>14:00:16</time>
  <version>
-  <release>0.7.1</release>
+  <release>0.7.2</release>
   <api>0.7.1</api>
  </version>
  <stability>
@@ -21,37 +24,21 @@
   <api>beta</api>
  </stability>
  <license uri="http://www1.unl.edu/wdn/wiki/Software_License">BSD</license>
- <notes>
-Declare debug method correctly as static.
- </notes>
+ <notes>Scanner fix - do not replace newlines with spaces in scanned content</notes>
  <contents>
   <dir name="/">
-   <file baseinstalldir="/" md5sum="d1fe9ae1c22c92cda6d57b9847fda7b2" name="UNL/DWT/Scanner.php" role="php"/>
-   <file baseinstalldir="/" md5sum="be81db10741075600fc87ebbc4c4ca53" name="UNL/DWT/Region.php" role="php"/>
-   <file baseinstalldir="/" md5sum="aea406280cedf3a0e9b32ab7ee354b3f" name="UNL/DWT/Generator.php" role="php"/>
-   <file baseinstalldir="/" md5sum="8ccd77b7def177033c20128da938d1ff" name="UNL/DWT/createTemplates.php" role="php"/>
-   <file baseinstalldir="/" md5sum="c8b1f16f587798a1e37574477d2627bd" name="UNL/DWT.php" role="php">
-    <tasks:replace from="@PHP_BIN@" to="php_bin" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@DOC_DIR@" to="doc_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="b524ef4684be7dba47ed8c245577347a" name="docs/examples/Template_style1.tpl" role="doc"/>
-   <file baseinstalldir="/" md5sum="3f97c4a024dfed9210b14db5068ba7d0" name="docs/examples/Template_style1.php" role="doc"/>
-   <file baseinstalldir="/" md5sum="0d5a4f5ca86e9c2a3c0050f39acbb034" name="docs/examples/template_style1.dwt" role="doc"/>
-   <file baseinstalldir="/" md5sum="fbc254138e8456e983e18c0c02cc7d30" name="docs/examples/scanner_example.php" role="doc"/>
-   <file baseinstalldir="/" md5sum="5d389d72ffe3a15a5dd597cd791a6963" name="docs/examples/example_style1.php" role="doc">
-    <tasks:replace from="@PHP_BIN@" to="php_bin" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@DOC_DIR@" to="doc_dir" type="pear-config"/>
-   </file>
-   <file baseinstalldir="/" md5sum="783c64aafb491c789fc71a5bf80d1755" name="docs/examples/example.ini" role="doc">
-    <tasks:replace from="@PHP_BIN@" to="php_bin" type="pear-config"/>
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config"/>
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config"/>
-    <tasks:replace from="@DOC_DIR@" to="doc_dir" type="pear-config"/>
-   </file>
+   <file role="php" name="src/UNL/DWT/Scanner.php" md5sum="80ab5854ed8c2ab159c53cd5adc757b2"/>
+   <file role="php" name="src/UNL/DWT/Region.php" md5sum="be81db10741075600fc87ebbc4c4ca53"/>
+   <file role="php" name="src/UNL/DWT/Generator.php" md5sum="aea406280cedf3a0e9b32ab7ee354b3f"/>
+   <file role="php" name="src/UNL/DWT/createTemplates.php" md5sum="8ccd77b7def177033c20128da938d1ff"/>
+   <file role="php" name="src/UNL/DWT.php" md5sum="c8b1f16f587798a1e37574477d2627bd"/>
+   <file role="doc" name="docs/examples/Template_style1.tpl" md5sum="b524ef4684be7dba47ed8c245577347a"/>
+   <file role="doc" name="docs/examples/Template_style1.php" md5sum="3f97c4a024dfed9210b14db5068ba7d0"/>
+   <file role="doc" name="docs/examples/template_style1.dwt" md5sum="0d5a4f5ca86e9c2a3c0050f39acbb034"/>
+   <file role="doc" name="docs/examples/scanner_example.php" md5sum="e29437d89b8193aede3fc400ef1f363d"/>
+   <file role="doc" name="docs/examples/example_style1.php" md5sum="8fc92f34a5d56e8664ae669bb39ba763"/>
+   <file role="doc" name="docs/examples/example.test.ini" md5sum="28a080af44b5db3f28c73fa91cdabe99"/>
+   <file role="doc" name="docs/examples/example.ini" md5sum="783c64aafb491c789fc71a5bf80d1755"/>
   </dir>
  </contents>
  <dependencies>
@@ -134,7 +121,7 @@ Remove editable region tags for locked regions.
     <date>2006-08-15</date>
     <license uri="http://www.php.net/license">PHP License</license>
     <notes>
-* Fix Bug #16: Locked regions arent detected correctly.
+* Fix Bug #16: Locked regions aren't detected correctly.
 				 * Fix Bug #1: Include path modified incorrectly.
    </notes>
    </release>
