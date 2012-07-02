@@ -25,8 +25,10 @@ class UNL_MediaHub_DefaultHomepage implements UNL_MediaHub_CacheableInterface
     function run()
     {
         $options = $this->options;
-        
-        $options['limit']   = 5;
+
+        if (empty($options['limit'])) {
+            $options['limit']   = 5;
+        }
         $this->latest_media = new UNL_MediaHub_MediaList($options);
 
         $options['filter'] = new UNL_MediaHub_MediaList_Filter_Popular();
