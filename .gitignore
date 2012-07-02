@@ -1,7 +1,11 @@
 /config.inc.php
 /www/.htaccess
+/www/wdn
 /.settings
 /.buildpath
 /.project
 *.espressostorage
 www/uploads
+/scripts/popular.sh
+/scripts/popular.txt
+
