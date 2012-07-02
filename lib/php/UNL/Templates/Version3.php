@@ -41,9 +41,12 @@ class UNL_Templates_Version3 implements UNL_Templates_Version
             $template = 'Absolute.tpl';
         }
 
+        // Set a timeout for the HTTP download of the template file
+        $http_context = stream_context_create(array('http' => array('timeout' => UNL_Templates::$options['timeout'])));
+
         // Always try and retrieve the latest
         if (!(UNL_Templates::getCachingService() instanceof UNL_Templates_CachingService_Null)
-            && $tpl = file_get_contents('http://pear.unl.edu/UNL/Templates/server.php?version=3&template='.$template)) {
+            && $tpl = file_get_contents('http://pear.unl.edu/UNL/Templates/server.php?version=3&template='.$template, false, $http_context)) {
             return $tpl;
         }
 

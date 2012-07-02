@@ -1,6 +1,6 @@
 <?php
 /**
- * Base class for version 2 (2006) of the template files.
+ * Base class for Version 3 (2009) template files.
  * 
  * PHP version 5
  *  
@@ -14,38 +14,52 @@
  */
 require_once 'UNL/Templates/Version.php';
 
-class UNL_Templates_Version2 implements UNL_Templates_Version
+/**
+ * Base class for Version 3 (2009) template files.
+ * 
+ * @category  Templates
+ * @package   UNL_Templates
+ * @author    Brett Bieber <brett.bieber@gmail.com>
+ * @copyright 2009 Regents of the University of Nebraska
+ * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
+ * @link      http://pear.unl.edu/
+ */
+class UNL_Templates_Version3x1 implements UNL_Templates_Version
 { 
     function getConfig()
     {
-        return array('class_location' => 'UNL/Templates/Version2/',
-                     'class_prefix'   => 'UNL_Templates_Version2_');
+        return array('class_location' => 'UNL/Templates/Version3x1/',
+                     'class_prefix'   => 'UNL_Templates_Version3x1_');
     }
     
     function getTemplate($template)
     {
-        // Set a timeout for the HTTP download of the template file
-        $http_context = stream_context_create(array('http' => array('timeout' => UNL_Templates::$options['timeout'])));
+        if (!file_exists(UNL_Templates::$options['templatedependentspath'].'/wdn/templates_3.1')) {
+            UNL_Templates::debug('ERROR You should have a local copy of wdn/templates_3.1!'
+                                 . ' Overriding your specified template to use absolute references' ,
+                                 'getTemplate', 1);
+            $template = 'Absolute.tpl';
+        }
 
         // Always try and retrieve the latest
         if (!(UNL_Templates::getCachingService() instanceof UNL_Templates_CachingService_Null)
-            && $tpl = file_get_contents('http://pear.unl.edu/UNL/Templates/server.php?version=2&template='.$template, false, $http_context)) {
+            && $tpl = file_get_contents('http://pear.unl.edu/UNL/Templates/server.php?version=3x1&template='.$template)) {
             return $tpl;
         }
 
-        if (file_exists(UNL_Templates::getDataDir().'/tpl_cache/Version2/'.$template)) {
-            return file_get_contents($template);
+        if (file_exists(UNL_Templates::getDataDir().'/tpl_cache/Version3x1/'.$template)) {
+            return file_get_contents(UNL_Templates::getDataDir().'/tpl_cache/Version3x1/'.$template);
         }
 
         throw new Exception('Could not get the template file!');
     }
-    
+
     function makeIncludeReplacements($html)
     {
         UNL_Templates::debug('Now making template include replacements.',
                      'makeIncludeReplacements', 3);
         $includes = array();
-        preg_match_all('<!--#include virtual="(/ucomm/templatedependents/[A-Za-z0-9\.\/]+)" -->',
+        preg_match_all('<!--#include virtual="(/wdn/templates_3.1/[A-Za-z0-9\.\/_]+)" -->',
                         $html, $includes);
         UNL_Templates::debug(print_r($includes, true), 'makeIncludeReplacements', 3);
         foreach ($includes[1] as $include) {
