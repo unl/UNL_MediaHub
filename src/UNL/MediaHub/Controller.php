@@ -26,7 +26,7 @@ class UNL_MediaHub_Controller
      *
      * @var array
      */
-    public $options = array('view'   => 'default',
+    public $options = array('model'  => false,
                             'format' => 'html',
                             'mobile' => false,
     );
@@ -203,9 +203,9 @@ class UNL_MediaHub_Controller
      */
     function preRun($cached)
     {
-        if ($this->options['view'] == 'feed_image'
-            || $this->options['view'] == 'media_image'
-            || $this->options['view'] == 'media_vtt') {
+        if ($this->options['model'] == 'feed_image'
+            || $this->options['model'] == 'media_image'
+            || $this->options['model'] == 'media_vtt') {
             UNL_MediaHub_OutputController::setOutputTemplate('UNL_MediaHub_Controller', 'ControllerPartial');
         }
         // Send headers for CORS support so calendar bits can be pulled remotely
@@ -253,7 +253,11 @@ class UNL_MediaHub_Controller
         }
 
         try {
-            switch ($this->options['view']) {
+            if (!isset($this->options['model'])
+                || false === $this->options['model']) {
+                throw new Exception('Un-registered view', 404);
+            }
+            switch ($this->options['model']) {
             case 'media':
                 $this->output[] = $this->findRequestedMedia($this->options);
                 break;
@@ -270,18 +274,8 @@ class UNL_MediaHub_Controller
             case 'media_image':
                 $this->output[] = UNL_MediaHub_Media_Image::getById($this->options['id']);
                 break;
-            case 'default':
-            case 'search':
-            case 'tags':
-            case 'feeds':
-            case 'feed':
-            case 'dev':
-            case 'live':
-                $class = $this->view_map[$this->options['view']];
-                $this->output[] = new $class($this->options);
-                break;
             default:
-                throw new Exception('Unknown view', 404);
+                $this->output[] = new $this->options['model']($this->options);
             }
         } catch(Exception $e) {
             $this->output[] = $e;

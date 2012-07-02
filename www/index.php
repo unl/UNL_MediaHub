@@ -8,7 +8,18 @@ if (file_exists(dirname(__FILE__).'/../config.inc.php')) {
 ini_set('magic_quotes_gpc', false);
 ini_set('magic_quotes_runtime', false);
 
-$controller = new UNL_MediaHub_Controller($_GET + UNL_MediaHub_Router::getRoute($_SERVER['REQUEST_URI']), $dsn);
+
+$routes = include __DIR__ . '/../data/routes.php';
+
+$router = new RegExpRouter\Router(array('baseURL' => UNL_MediaHub_Controller::$url));
+
+$router->setRoutes($routes);
+
+if (isset($_GET['model'])) {
+    unset($_GET['model']);
+}
+
+$controller = new UNL_MediaHub_Controller($router->route($_SERVER['REQUEST_URI'], $_GET), $dsn);
 
 $outputcontroller = new UNL_MediaHub_OutputController();
 $outputcontroller->addGlobal('controller', $controller);

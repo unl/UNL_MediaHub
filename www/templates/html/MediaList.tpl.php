@@ -13,7 +13,7 @@ if (count($context->items)) {
                     $parent->context->feed,
                         array_intersect_key(array_merge($context->options, array('page'=>'{%page_number}')), array('page'=>0, 'limit'=>0, 'order'=>0, 'orderby'=>0))
                 );
-    } elseif ($parent->context->options['view'] == 'search') {
+    } elseif ($parent->context->options['model'] == 'UNL_MediaHub_MediaList') {
         //blah
         $url = UNL_MediaHub_Controller::addURLParams($context->getURL(), array('page'=>'{%page_number}'));
     } else {
