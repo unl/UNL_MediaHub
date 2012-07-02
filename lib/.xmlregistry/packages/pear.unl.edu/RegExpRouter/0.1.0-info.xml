@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://pear.php.net/dtd/package-2.1" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.1" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.1     http://pear.php.net/dtd/package-2.1.xsd" packagerversion="2.0.0">
+ <name>RegExpRouter</name>
+ <channel>pear.unl.edu</channel>
+ <summary>h1. RegExpRouter
+</summary>
+ <description>
+h2. Introduction
+
+RegExpRouter is a php router system that routes clean URLs based on regular expressions and support PSR-0 complient projects.
+
+*Possible Options for a new Router:*
+$options = array(
+'baseURL'=&gt;'yoururl', //required: the full url: http://www.yoururl.com/
+'srcDir'=&gt;'yourSrcDir' //Only required if you want to scan your models.  *Must* be a full system path to your source directory.
+);
+
+h2. Methods of routing:
+
+1. *Scanning*
+
+The router will scan though your models and load routes.  You will need a file called Routes.php within each of your model's directories (ie: project/exampleModel/Routes.php).  This Routes.php file must extend RegExpRouter\RoutesInterface and define all of the routes for that model.
+
+For each Model that has a route, you will need to place a file named &quot;Routes&quot; within that class, which implements RegExpRouter\RoutesInterface and define the regex routes for the model.
+
+Routes are defined as an array of routes. And example route would look like this: $routes = array(array('yourRegex' =&gt; 'referenceModel'), array('moreRegex' =&gt; 'anotherModel'));
+The reference model should be the name of a class within the current model *without* it's namespace.  The namespace will be added to it automatically.
+
+*Here is some example code for scanning your models:*
+
+$options = array('baseURL'=&gt;'yoururl', 'srcDir'=&gt;'yourSrcDir');
+$router  = new RegExpRouter\Router($options);
+$router-&gt;route($_SERVER['REQUEST_URI'], $_GET);
+
+2. *User Defined Mapping*
+
+You can compile the array of regex to model mapping yourself and call the RegExpRouter-&gt;setRoutes(array) method:
+
+*Here is some example code for using your own mapping:*
+
+Routes are the same as the scaning method, except you should *always* define the fulll namesapce to the class within the model that you are referencing.
+
+$options = array('baseURL'=&gt;'yoururl');
+$router = new RegExpRouter\Router($options);
+$router-&gt;setRoutes(array('/^home$/i' =&gt; 'ExampleProject\ExampleModel\View'));
+$router-&gt;route($_SERVER['REQUEST_URI'], $_GET);
+
+h2. Example
+
+To view the very simple Example application in the Example folder to get a better feel of how it works.
+
+To set up the example application you will have to do the following:
+1) Copy the config.sample.php to a new file called config.inc.php in the same folder.
+2) Change the Example\Controller::$url in config.inc.php to a url that works with your setup.
+3) Copy the sample.htaccess file to a new file called .htaccess in the same folder.
+4) In .htaccess change the RewriteBase path to work with your setup.</description>
+ <lead>
+  <name>Brett Bieber</name>
+  <user>saltybeagle</user>
+  <email>brett.bieber@gmail.com</email>
+  <active>yes</active>
+ </lead>
+ <lead>
+  <name>Michael Fairchild</name>
+  <user>mfairchild365</user>
+  <email>mfairchild365@gmail.com</email>
+  <active>yes</active>
+ </lead>
+ <date>2012-07-02</date>
+ <time>13:41:15</time>
+ <version>
+  <release>0.1.0</release>
+  <api>0.1.0</api>
+ </version>
+ <stability>
+  <release>alpha</release>
+  <api>alpha</api>
+ </stability>
+ <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+ <notes>First release with basic regular expression route support
+
+
+Initial API
+</notes>
+ <contents>
+  <dir name="/">
+   <file role="test" name="test/pear.unl.edu/RegExpRouter/Route/route_setRoutes.phpt" md5sum="9b4c54ada9207e97360bf698e0c382ea"/>
+   <file role="test" name="test/pear.unl.edu/RegExpRouter/Route/route.phpt" md5sum="9a9ba581d9fe855e8309026ee392ed61"/>
+   <file role="test" name="test/pear.unl.edu/RegExpRouter/Route/cacheRoute.phpt" md5sum="54f6ceb663a8f1342d96e8b7974ec460"/>
+   <file role="php" name="php/RegExpRouter/RoutesInterface.php" md5sum="05fd0b95f0db5a8c999870d2cf95097b"/>
+   <file role="php" name="php/RegExpRouter/Router.php" md5sum="96038c2abf43c7efe90981879d67b3e6"/>
+   <file role="doc" name="doc/pear.unl.edu/RegExpRouter/examples/src/Example/Home/examples/src/Example/Home/View.php" md5sum="8baf713b1d31ece2b2b1fd21b04de833"/>
+   <file role="doc" name="doc/pear.unl.edu/RegExpRouter/examples/src/Example/Home/examples/src/Example/Home/Routes.php" md5sum="2e6a914c2b4cee54d208a10efca24d79"/>
+   <file role="doc" name="doc/pear.unl.edu/RegExpRouter/examples/src/Example/Home/examples/src/Example/Home/Edit.php" md5sum="7ac78644f1052f4d68d6acd798c00f4c"/>
+   <file role="doc" name="doc/pear.unl.edu/RegExpRouter/examples/src/Example/examples/src/Example/Controller.php" md5sum="96572cf4a42a697f9a0c0ff361b9c626"/>
+   <file role="doc" name="doc/pear.unl.edu/RegExpRouter/examples/src/Example/Account/examples/src/Example/Account/View.php" md5sum="3e9d4646712398fdf0f2ab48714d169a"/>
+   <file role="doc" name="doc/pear.unl.edu/RegExpRouter/examples/src/Example/Account/examples/src/Example/Account/Routes.php" md5sum="56352249065d8a27f603d40a421169d0"/>
+   <file role="doc" name="doc/pear.unl.edu/RegExpRouter/examples/examples/sample.htaccess" md5sum="cc0d3150b6ce09cbab8fba7891341645"/>
+   <file role="doc" name="doc/pear.unl.edu/RegExpRouter/examples/examples/index.php" md5sum="8c7297dddd30289ff571fbd42ffb5b6a"/>
+   <file role="doc" name="doc/pear.unl.edu/RegExpRouter/examples/examples/config.sample.php" md5sum="20edc00ee4b949503bde4fdaab64b0b6"/>
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.2.0</min>
+   </php>
+   <pearinstaller>
+    <min>2.0.0a1</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <phprelease/>
+</package>
