@@ -1,0 +1,20 @@
+Deploying the MediaHub website
+============================================
+
+Prerequisites
+-------------
+The developer needs a SSH account on `mediahub.unl.edu` and
+has to be in the `ucomm` group.
+
+
+Local setup
+-----------
+::
+
+$ git remote add live ssh://mediahub.unl.edu/var/www/html/mediahub.unl.edu
+
+Deployment
+----------
+::
+
+$ git push live master
