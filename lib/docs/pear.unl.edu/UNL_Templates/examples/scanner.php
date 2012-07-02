@@ -1,4 +1,7 @@
 <?php
+
+set_include_path(dirname(dirname(__DIR__)).'/src'.PATH_SEPARATOR.dirname(dirname(__DIR__)).'/vendor/php');
+
 highlight_file(__FILE__);
 require_once 'UNL/Templates/Scanner.php';
 

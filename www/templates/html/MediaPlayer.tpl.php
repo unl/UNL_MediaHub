@@ -7,13 +7,26 @@ if ($context->isVideo()) {
 }
 ?>
 <script type="text/javascript">
-	if (typeof(WDN) === "undefined") {
-		if (typeof(jQuery) === "undefined"){var j=document.createElement("script"); j.setAttribute("type","text/javascript"); j.setAttribute("src", "https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"); document.getElementsByTagName("head")[0].appendChild(j);}
-	} else {jQuery = WDN.jQuery;}
-	var c=document.createElement("link"); c.setAttribute("type", "text/css"); c.setAttribute("rel", "stylesheet"); c.setAttribute("href", "http://www.unl.edu/wdn/templates_3.0/css/content/mediaelement.css"); document.getElementsByTagName("head")[0].appendChild(c);
-	window.onload=function(){
-		jQuery.getScript('http://www.unl.edu/wdn/templates_3.0/scripts/mediaelement.js', function(){
-			player = new MediaElementPlayer('#player');
-		});
-	};
+(function() {
+var j, l, t, r = function() {
+    WDN.initializePlugin('mediaelement_wdn', [function(){
+        WDN.jQuery('#player').mediaelementplayer();
+    }]);
+};
+if (typeof(WDN) === 'undefined') {
+    t = '//www.unl.edu/';
+    l = function() {
+        l = function(){}; WDN.template_path = t; r();
+    };
+    j = document.createElement('script'); j.type = 'text/javascript'; j.src = t + 'wdn/templates_3.1/scripts/wdn.js';
+    j.onreadystatechange = function() {
+        if (j.readyState == 'loaded' || j.readyState == 'complete') {
+            l();
+        }
+    };
+    j.onload = l; document.getElementsByTagName("head")[0].appendChild(j);
+} else {
+    r();
+}
+})();
 </script>
