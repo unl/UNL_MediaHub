@@ -1,11 +1,13 @@
 <?php
-UNL_Templates::$options['version'] = 3;
+UNL_Templates::setCachingService(new UNL_Templates_CachingService_Null());
+UNL_Templates::$options['version'] = 3.1;
 $page = UNL_Templates::factory('Fixed');
 if (isset($GLOBALS['UNLTEMPLATEDEPENDENTSPATH'])) {
     UNL_Templates::$options['templatedependentspath'] = $GLOBALS['UNLTEMPLATEDEPENDENTSPATH'];
 }
-$page->doctitle = '<title>UNL | MediaHub | Manager</title>';
-$page->titlegraphic = '<h1>UNL MediaHub Manager</h1><h2>Lights, Camera, Action</h2>';
+$page->doctitle     = '<title>Manager | MediaHub | University of Nebraska-Lincoln</title>';
+$page->titlegraphic = 'UNL MediaHub Manager';
+$page->pagetitle    = '';
 $page->addStyleSheet(UNL_MediaHub_Controller::getURL().'templates/html/css/all.css');
 $page->addStyleSheet(UNL_MediaHub_Manager::getURL().'templates/css/all_manager.css');
 $page->leftRandomPromo = '';
