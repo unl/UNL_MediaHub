@@ -9,7 +9,7 @@ if ($context->isVideo()) {
 (function() {
 var j, l, t, r = function() {
     WDN.initializePlugin('mediaelement_wdn', [function(){
-        WDN.jQuery('#player').mediaelementplayer();
+        WDN.jQuery('.wdn_mediahub_player').mediaelementplayer();
     }]);
 };
 if (typeof(WDN) === 'undefined') {
