@@ -1,4 +1,3 @@
-<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 <?php
 if ($context->isVideo()) {
     echo $savvy->render($context, 'MediaPlayer/Video.tpl.php');
