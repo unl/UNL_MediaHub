@@ -1,4 +1,3 @@
-<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 <?php
 if ($context->isVideo()) {
     echo $savvy->render($context, 'MediaPlayer/Video.tpl.php');
@@ -10,7 +9,7 @@ if ($context->isVideo()) {
 (function() {
 var j, l, t, r = function() {
     WDN.initializePlugin('mediaelement_wdn', [function(){
-        WDN.jQuery('#player').mediaelementplayer();
+        WDN.jQuery('.wdn_mediahub_player').mediaelementplayer();
     }]);
 };
 if (typeof(WDN) === 'undefined') {
