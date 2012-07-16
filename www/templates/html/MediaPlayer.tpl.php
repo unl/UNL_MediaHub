@@ -8,9 +8,7 @@ if ($context->isVideo()) {
 <script type="text/javascript">
 (function() {
 var j, l, t, r = function() {
-    WDN.initializePlugin('mediaelement_wdn', [function(){
-        WDN.jQuery('.wdn_mediahub_player').mediaelementplayer();
-    }]);
+    WDN.initializePlugin('mediaelement_wdn');
 };
 if (typeof(WDN) === 'undefined') {
     t = '//www.unl.edu/';
