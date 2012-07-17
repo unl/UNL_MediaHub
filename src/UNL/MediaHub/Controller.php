@@ -1,15 +1,6 @@
 <?php
 /**
  * Controller for the public frontend to the MediaHub system.
- * 
- * PHP version 5
- * 
- * @category  Events 
- * @package   UNL_UCBCN
- * @author    Brett Bieber <brett.bieber@gmail.com>
- * @copyright 2009 Regents of the University of Nebraska
- * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
- * @link      http://code.google.com/p/unl-event-publisher/
  */
 class UNL_MediaHub_Controller
     implements UNL_MediaHub_CacheableInterface, UNL_MediaHub_PostRunReplacements
@@ -30,45 +21,45 @@ class UNL_MediaHub_Controller
                             'format' => 'html',
                             'mobile' => false,
     );
-    
+
     /**
      * UNL template style to use.
      *
      * @var string
      */
     public $template = 'Fixed';
-    
+
     /**
-     * Any output prepared by this controller will go here. This could be 
+     * Any output prepared by this controller will go here. This could be
      * any type of data, string, array or object.
      *
      * @var mixed
      */
     public $output;
-    
+
     /**
      * URL to this controller.
      *
      * @var string
      */
     public static $url;
-    
+
     /**
      * URL to a thumbnail generator for media files.
      *
      * @var string
      */
     public static $thumbnail_generator;
-    
+
     static protected $replacements;
-    
+
     /**
      * currently logged in user, if any
-     * 
+     *
      * @var UNL_MediaHub_User
      */
     protected static $user;
-    
+
     protected $view_map = array(
         'search'  => 'UNL_MediaHub_MediaList',
         'tags'    => 'UNL_MediaHub_MediaList',
@@ -78,14 +69,14 @@ class UNL_MediaHub_Controller
         'dev'     => 'UNL_MediaHub_Developers',
         'live'    => 'UNL_MediaHub_Feed_LiveStream',
         );
-    
+
     /**
      * Backend media system.
      *
      * @var UNL_MediaHub
      */
     protected $mediahub;
-    
+
     public static $usedMediaNameSpaces = array(
                        'UNL_MediaHub_Feed_Media_NamespacedElements_itunesu',
                        'UNL_MediaHub_Feed_Media_NamespacedElements_itunes',
@@ -93,7 +84,7 @@ class UNL_MediaHub_Controller
                        'UNL_MediaHub_Feed_Media_NamespacedElements_boxee',
                        'UNL_MediaHub_Feed_Media_NamespacedElements_geo',
                        'UNL_MediaHub_Feed_Media_NamespacedElements_mediahub');
-    
+
     /**
      * Construct a new controller.
      *
@@ -103,7 +94,7 @@ class UNL_MediaHub_Controller
     {
         // Set up database
         $this->mediahub = new UNL_MediaHub($dsn);
-        
+
         // Initialize default options
         $this->options = $options + $this->options;
 
@@ -111,7 +102,7 @@ class UNL_MediaHub_Controller
             && $this->options['mobile'] != 'no') {
             $this->options['mobile'] = self::isMobileClient();
         }
-                                       
+
         // Start authentication for comment system.
         include_once 'UNL/Auth.php';
         self::$auth = UNL_Auth::factory('SimpleCAS');
@@ -122,10 +113,10 @@ class UNL_MediaHub_Controller
         if (self::$auth->isLoggedIn()) {
             self::$user = UNL_MediaHub_User::getByUid(self::$auth->getUser());
         }
-        
+
         UNL_MediaHub_Feed_Media_NamespacedElements_mediahub::$uri = UNL_MediaHub_Controller::$url . "schema/mediahub.xsd";
     }
-    
+
     public static function getNamespaceDefinationString()
     {
         $namespaces = "";
@@ -133,10 +124,10 @@ class UNL_MediaHub_Controller
             $class = new ReflectionClass($class);
             $namespaces .= "xmlns:" . $class->getStaticPropertyValue('xmlns') . "='" . $class->getStaticPropertyValue('uri') . "' ";
         }
-        
+
         return $namespaces;
     }
-    
+
     public static function isMobileClient($options = array())
     {
         if (!isset($_SERVER['HTTP_ACCEPT'], $_SERVER['HTTP_USER_AGENT'])) {
@@ -152,7 +143,7 @@ class UNL_MediaHub_Controller
 
         if ( // Check the http_accept and user agent and see
             preg_match('/text\/vnd\.wap\.wml|application\/vnd\.wap\.xhtml\+xml/i', $_SERVER['HTTP_ACCEPT'])
-                || 
+                ||
             (preg_match('/'.
                'sony|symbian|nokia|samsung|mobile|windows ce|epoc|opera mini|' .
                'nitro|j2me|midp-|cldc-|netfront|mot|up\.browser|up\.link|audiovox|' .
@@ -166,7 +157,7 @@ class UNL_MediaHub_Controller
 
         return false;
     }
-    
+
     /**
      * Check if the user is logged in or not.
      *
@@ -177,7 +168,7 @@ class UNL_MediaHub_Controller
         if (self::$auth->isLoggedIn()) {
             return true;
         }
-        
+
         return false;
     }
 
@@ -185,7 +176,7 @@ class UNL_MediaHub_Controller
     {
         return self::$user;
     }
-    
+
     /**
      * Get the cache key for the data prepared by the controller
      *
@@ -195,7 +186,7 @@ class UNL_MediaHub_Controller
     {
         return false;
     }
-    
+
     /**
      * function called before output, cached or otherwise is sent.
      *
@@ -238,12 +229,12 @@ class UNL_MediaHub_Controller
 
         return true;
     }
-    
+
     /**
      * Main hub for the controller.
-     * 
+     *
      * This will be called when cached output cannot be found.
-     * 
+     *
      * @return void
      */
     function run()
@@ -274,6 +265,9 @@ class UNL_MediaHub_Controller
             case 'media_image':
                 $this->output[] = UNL_MediaHub_Media_Image::getById($this->options['id']);
                 break;
+            case 'media_file':
+                $this->output[] = UNL_MediaHub_Media_File::getById($this->options['id']);
+                break;
             default:
                 $this->output[] = new $this->options['model']($this->options);
             }
@@ -281,12 +275,12 @@ class UNL_MediaHub_Controller
             $this->output[] = $e;
         }
     }
-    
+
     /**
      * Find a specific piece of media.
      *
      * @param array $options Associative array of options $options['id']
-     * 
+     *
      * @return UNL_MediaHub_Media
      */
     function findRequestedMedia($options)
@@ -303,7 +297,7 @@ class UNL_MediaHub_Controller
                 $data = array('uid'      => $user,
                               'media_id' => $media->id,
                               'comment'  => $_POST['comment']);
-                
+
                 $comment = new UNL_MediaHub_Media_Comment();
                 $comment->fromArray($data);
                 $comment->save();
@@ -320,15 +314,15 @@ class UNL_MediaHub_Controller
         if ($media) {
             return $media;
         }
-        
+
         throw new Exception('Cannot determine the media to display.');
     }
-    
+
     /**
      * Called after run - with all output contents.
      *
      * @param string $me The content from the outputcontroller
-     * 
+     *
      * @return string
      */
     function postRun($me)
@@ -355,13 +349,13 @@ class UNL_MediaHub_Controller
 
         return $me;
     }
-    
+
     /**
      * Allows you to set dynamic data when cached output is sent.
      *
      * @param string $field Area to be replaced
      * @param string $data  Data to replace the field with.
-     * 
+     *
      * @return void
      */
     function setReplacementData($field, $data)
@@ -390,15 +384,15 @@ class UNL_MediaHub_Controller
      *
      * @param mixed $mixed             Optional object to get a URL for.
      * @param array $additional_params Extra parameters to adjust the URL.
-     * 
+     *
      * @return string
      */
     function getURL($mixed = null, $additional_params = array())
     {
         $params = array();
-         
+
         $url = UNL_MediaHub_Controller::$url;
-        
+
         if (is_object($mixed)) {
             switch (get_class($mixed)) {
             case 'UNL_MediaHub_Media':
@@ -414,21 +408,21 @@ class UNL_MediaHub_Controller
                 $url .= 'channels/';
                 break;
             default:
-                    
+
             }
         }
-        
+
         $params = array_merge($params, $additional_params);
-        
+
         return self::addURLParams($url, $params);
     }
 
     /**
      * Add unique querystring parameters to a URL
-     * 
+     *
      * @param string $url               The URL
      * @param array  $additional_params Additional querystring parameters to add
-     * 
+     *
      * @return string
      */
     public static function addURLParams($url, $additional_params = array())
@@ -446,7 +440,7 @@ class UNL_MediaHub_Controller
         $params = array_merge($params, $additional_params);
 
         $url .= '?';
-        
+
         foreach ($params as $option=>$value) {
             if ($option == 'driver') {
                 continue;
