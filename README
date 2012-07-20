@@ -1,5 +1,18 @@
 MediaHub is a video/audio aggregator for educational institutions
 
+Reasons why MediaHub might be a good idea for your institution:
+
+* RSS Feeds for syndication to other sites (iTunes U)
+** iTunes and iTunes U Attributes included in RSS Feeds
+* Captioning integration with Amara Universal Subtitles
+* Support for multiple users and channels
+* Complete branding control, with no external advertisements
+* Local storage
+* HTML5 video player
+* Caption support on all iOS devices
+* Integrates with enterprise authentication systems
+* Web Services and APIs, including XML, JSON, partial HTML views
+
 UNL MediaHub system running at http://mediahub.unl.edu/
 
 cp config.sample.php config.inc.php
