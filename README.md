@@ -10,10 +10,11 @@ MediaHub is a video/audio aggregator for educational institutions, and is curren
 * Support for multiple users and channels
 * Complete branding control, with no external advertisements
 * Local storage
-* HTML5 video player
+* HTML5 video and audio support
 * Caption support on all iOS devices
 * Integrates with enterprise authentication systems
 * Web Services and APIs, including XML, JSON, partial HTML views
+* Sample scripts for importing from existing RSS Feeds
 
 ##Installation
 
