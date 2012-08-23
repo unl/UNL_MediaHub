@@ -6,10 +6,6 @@ UNL_Templates::$options['version'] = 3.1;
 
 $template = 'Fixed';
 
-if ($context->options['mobile']) {
-    $template = 'Mobile';
-}
-
 $page = UNL_Templates::factory($template);
 
 if (isset($GLOBALS['UNLTEMPLATEDEPENDENTSPATH'])) {
