@@ -9,3 +9,7 @@ www/uploads
 /scripts/popular.sh
 /scripts/popular.txt
 
+
+/data/mediahub_dump.sql
+/UNL_MediaHub.sublime-workspace
+/UNL_MediaHub.sublime-project
