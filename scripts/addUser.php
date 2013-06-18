@@ -4,8 +4,8 @@ require_once dirname(__FILE__).'/../config.inc.php';
 if (!isset($_SERVER['argv'],$_SERVER['argv'][1])
     || $_SERVER['argv'][1] == '--help' || $_SERVER['argc'] != 3) {
         echo "This program requires 2 arguments.\n";
-        echo "addMedia.php url title description\n\n";
-        echo "Example: addUser.php channel-id username\n";
+        echo "addUser.php channel-id username\n\n";
+        echo "Example: addUser.php 126 hhusker2\n";
 } else {
     require_once dirname(__FILE__).'/../config.inc.php';
 
