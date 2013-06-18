@@ -69,7 +69,7 @@ WDN.jQuery(document).ready(function() {
         <legend>Channel Image</legend>
             <ol>
             <li>
-                <label class="element"><span class="required">*</span>Image File<span class="helper">Images should follow the standard UNL image standards. <a href="http://ucommdev.unl.edu/iTunesU/design_files/icon_template.psd">(get the sample template)</a>
+                <label class="element"><span class="required">*</span>Image File<span class="helper">Images should follow the standard UNL image standards. <a href="https://github.com/unl/UNL_MediaHub/raw/master/designFiles/feedTemplate.psd">(get the sample template)</a>
                 </span></label>
                 <input id="image_file" name="image_file" type="file" />
             </li>
