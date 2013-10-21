@@ -10,7 +10,7 @@ var mediaDetails = function() {
 		},
 		
 		getImageURL: function() {
-		    return mediaDetails.imageBaseURL + WDN.jQuery('#player').attr('src');
+		    return mediaDetails.imageBaseURL + mejs.players[0].media.src;
 		},
 		
 		updateDuration : function() {
@@ -140,7 +140,7 @@ WDN.jQuery(document).ready(function() {
     WDN.jQuery('a#setImage').live('click', function(){
     	var currentTime;
     	if (!player){
-    		currentTime = WDN.videoPlayer.createFallback.getCurrentPosition() + .01;
+    		currentTime = mejs.players[0].getCurrentTime() + .01;
     	} else {
     		currentTime = player.getCurrentTime();
     	}
