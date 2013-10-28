@@ -25,5 +25,11 @@ if (typeof(WDN) === 'undefined') {
 } else {
     r();
 }
+var v = document.querySelectorAll('.wdn_player');
+for (var i = 0, length = v.length; i < length; i++) {
+  if (v[i].textTracks) {
+    v[i].textTracks[0].mode = "hidden";
+  }
+}
 })();
 </script>
