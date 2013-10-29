@@ -55,7 +55,7 @@ if (isset($context->media)) {
                 <label for="privacy" class="element">Privacy</label>
                 <select id="privacy" name="privacy">
                     <?php
-                    $table = $context->media->getTable();
+                    $table = Doctrine::getTable('UNL_MediaHub_Media');
                     $column = $table->getColumnDefinition('privacy');
                     foreach ($column['values'] as $value) {
                         //TODO: implement the PRIVATE privacy setting (don't allow access unless logged in).
