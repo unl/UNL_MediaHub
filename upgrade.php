@@ -33,6 +33,8 @@ function exec_sql($db, $sql, $message, $fail_ok = false)
 exec_sql($db, file_get_contents(dirname(__FILE__).'/data/mediahub.sql'), 'Initializing database structure');
 exec_sql($db, file_get_contents(dirname(__FILE__).'/data/add_dateupdated.sql'), 'Add date updated', true);
 exec_sql($db, file_get_contents(dirname(__FILE__).'/data/add_feed_image.sql'), 'Adding feed image support', true);
+exec_sql($db, file_get_contents(dirname(__FILE__).'/data/add_show_in_lists.sql'), 'Adding feed image support', true);
 exec_sql($db, file_get_contents(dirname(__FILE__).'/data/add_featured_feed_fields.sql'), 'Adding featured feeds support', true);
+exec_sql($db, file_get_contents(dirname(__FILE__).'/data/add_media_privacy.sql'), 'Adding media privacy settings');
 
 echo 'Upgrade complete!';
