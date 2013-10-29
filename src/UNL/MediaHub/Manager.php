@@ -250,7 +250,7 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
 
         $this->output[] = $feed;
 
-        $filter = new UNL_MediaHub_MediaList_Filter_ByFeed($feed);
+        $filter = new UNL_MediaHub_MediaList_Filter_ByFeed($feed, 'ALL');
         $this->showMedia($filter);
 
     }
