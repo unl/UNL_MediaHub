@@ -250,7 +250,31 @@ class UNL_MediaHub_Controller
             }
             switch ($this->options['model']) {
             case 'media':
-                $this->output[] = $this->findRequestedMedia($this->options);
+                $media = $this->findRequestedMedia($this->options);
+                
+                //Protect private media
+                if ($media->privacy == 'PRIVATE') {
+                    //Default to no permissions
+                    $userCanView = false;
+                    
+                    if (UNL_MediaHub_Controller::isLoggedIn()) {
+                        //Loop though each feed and check if the user has permission to edit.
+                        $feeds = $media->getFeeds();
+                        $feeds->run();
+                        foreach ($feeds->items as $feed) {
+                            if ($feed->userHasPermission(UNL_MediaHub_Controller::getUser(),
+                                UNL_MediaHub_Permission::getByID(UNL_MediaHub_Permission::USER_CAN_INSERT))) {
+                                $userCanView = true;
+                            }
+                        }
+                    }
+                    
+                    if (!$userCanView) {
+                        throw new Exception('You do not have permission to do this.', 403);
+                    }
+                }
+                
+                $this->output[] = $media;
                 break;
             case 'feed_image':
                 if (isset($this->options['feed_id'])) {
