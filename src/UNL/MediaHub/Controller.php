@@ -251,30 +251,9 @@ class UNL_MediaHub_Controller
             switch ($this->options['model']) {
             case 'media':
                 $media = $this->findRequestedMedia($this->options);
-                
-                //Protect private media
-                if ($media->privacy == 'PRIVATE') {
-                    //Default to no permissions
-                    $userCanView = false;
-                    
-                    if (UNL_MediaHub_Controller::isLoggedIn()) {
-                        //Get a list of feeds for this user that contain this media
-                        $feeds = new UNL_MediaHub_FeedList(array(
-                            'limit'=>null, 
-                            'filter'=>new UNL_MediaHub_FeedList_Filter_ByUserWithMediaId(UNL_MediaHub_Controller::getUser(), $media->id)
-                        ));
-                        
-                        $feeds->run();
-                        
-                        //Allow the user to view it if they are a member of the at least one of the feeds (specific permissions don't matter).
-                        if (!empty($feeds->items)) {
-                            $userCanView = true;
-                        }
-                    }
-                    
-                    if (!$userCanView) {
-                        throw new Exception('You do not have permission to do this.', 403);
-                    }
+
+                if (!$media->canView()) {
+                    throw new Exception('You do not have permission to do this.', 403);
                 }
                 
                 $this->output[] = $media;
