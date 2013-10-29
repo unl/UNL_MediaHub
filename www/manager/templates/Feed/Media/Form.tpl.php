@@ -58,11 +58,6 @@ if (isset($context->media)) {
                     $table = Doctrine::getTable('UNL_MediaHub_Media');
                     $column = $table->getColumnDefinition('privacy');
                     foreach ($column['values'] as $value) {
-                        //TODO: implement the PRIVATE privacy setting (don't allow access unless logged in).
-                        if ($value == 'PRIVATE') {
-                            continue;
-                        }
-                        
                         $selected = '';
                         if ($value == @$context->media->privacy) {
                             $selected = 'selected="selected"';
