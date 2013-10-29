@@ -265,6 +265,7 @@ class UNL_MediaHub_Controller
                             if ($feed->userHasPermission(UNL_MediaHub_Controller::getUser(),
                                 UNL_MediaHub_Permission::getByID(UNL_MediaHub_Permission::USER_CAN_INSERT))) {
                                 $userCanView = true;
+                                break;
                             }
                         }
                     }
