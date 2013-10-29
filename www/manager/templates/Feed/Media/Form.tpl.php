@@ -52,7 +52,10 @@ if (isset($context->media)) {
                 <div class="element" id="description_wrapper"><textarea id="description" name="description" rows="5"><?php echo htmlentities(@$context->media->description); ?></textarea></div>
             </li>
             <li>
-                <label for="privacy" class="element">Privacy</label>
+                <label for="privacy" class="element">
+                    Privacy
+                    <span class="helper"><strong>Public</strong> - Anyone can access the media.  <strong>Unlisted</strong> - Media will not be included in public MediaHub listings.  <strong>Private</strong> - Only members of channels that the media is included in can access it.</span>
+                </label>
                 <select id="privacy" name="privacy">
                     <?php
                     $table = Doctrine::getTable('UNL_MediaHub_Media');
