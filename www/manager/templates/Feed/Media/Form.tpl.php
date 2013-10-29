@@ -58,9 +58,7 @@ if (isset($context->media)) {
                 </label>
                 <select id="privacy" name="privacy">
                     <?php
-                    $table = Doctrine::getTable('UNL_MediaHub_Media');
-                    $column = $table->getColumnDefinition('privacy');
-                    foreach ($column['values'] as $value) {
+                    foreach (UNL_MediaHub_Media::getPossiblePrivacyValues() as $value) {
                         $selected = '';
                         if ($value == @$context->media->privacy) {
                             $selected = 'selected="selected"';
