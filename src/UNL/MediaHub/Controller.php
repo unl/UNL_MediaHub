@@ -259,11 +259,17 @@ class UNL_MediaHub_Controller
                     
                     if (UNL_MediaHub_Controller::isLoggedIn()) {
                         //Loop though each feed and check if the user has permission to edit.
-                        $feeds = $media->getFeeds();
+                        $feeds = new UNL_MediaHub_FeedList(array(
+                            'limit'=>null, 
+                            'filter'=>new UNL_MediaHub_FeedList_Filter_ByUserWithMediaId(UNL_MediaHub_Controller::getUser(), $media->id)
+                        ));
+                        
                         $feeds->run();
+                        $permission = UNL_MediaHub_Permission::getByID(UNL_MediaHub_Permission::USER_CAN_INSERT);
+                        
                         foreach ($feeds->items as $feed) {
                             if ($feed->userHasPermission(UNL_MediaHub_Controller::getUser(),
-                                UNL_MediaHub_Permission::getByID(UNL_MediaHub_Permission::USER_CAN_INSERT))) {
+                                $permission)) {
                                 $userCanView = true;
                                 break;
                             }
