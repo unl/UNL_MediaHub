@@ -273,11 +273,19 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     {
         return UNL_MediaHub_Controller::$url.'media/'.$this->id.'/vtt';
     }
+    
+    static function getPossiblePrivacyValues()
+    {
+        $table = Doctrine::getTable('UNL_MediaHub_Media');
+        $column = $table->getColumnDefinition('privacy');
+        return $column['values'];
+    }
 
     /**
      * @return bool
      */
-    function canView() {
+    function canView()
+    {
         //If its not private, anyone can view it.
         if ($this->privacy != 'PRIVATE') {
             return true;
