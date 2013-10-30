@@ -250,7 +250,13 @@ class UNL_MediaHub_Controller
             }
             switch ($this->options['model']) {
             case 'media':
-                $this->output[] = $this->findRequestedMedia($this->options);
+                $media = $this->findRequestedMedia($this->options);
+
+                if (!$media->canView()) {
+                    throw new Exception('You do not have permission to do this.', 403);
+                }
+                
+                $this->output[] = $media;
                 break;
             case 'feed_image':
                 if (isset($this->options['feed_id'])) {
