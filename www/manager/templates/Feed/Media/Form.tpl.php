@@ -51,7 +51,24 @@ if (isset($context->media)) {
                 <label for="description" class="element"><span class="required">*</span>Description<span class="helper">Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.</span></label>
                 <div class="element" id="description_wrapper"><textarea id="description" name="description" rows="5"><?php echo htmlentities(@$context->media->description); ?></textarea></div>
             </li>
-
+            <li>
+                <label for="privacy" class="element">
+                    Privacy
+                    <span class="helper"><strong>Public</strong> - Anyone can access the media.  <strong>Unlisted</strong> - Media will not be included in public MediaHub listings.  <strong>Private</strong> - Only members of channels that the media is included in can access it.</span>
+                </label>
+                <select id="privacy" name="privacy">
+                    <?php
+                    foreach (UNL_MediaHub_Media::getPossiblePrivacyValues() as $value) {
+                        $selected = '';
+                        if ($value == @$context->media->privacy) {
+                            $selected = 'selected="selected"';
+                        }
+                        
+                        echo "<option value='$value' " . $selected . ">" . ucfirst(strtolower($value)) . "</option>";
+                    }
+                    ?>
+                </select>
+            </li>
             <li style="display:none;"><label for="submit_existing" class="element">&nbsp;</label><div class="element"><input id="submit_existing" name="submit_existing" value="Save" type="submit" /></div></li>
         </ol>
     </fieldset>
