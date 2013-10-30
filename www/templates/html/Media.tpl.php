@@ -26,6 +26,11 @@ $meta = '
 <meta name="medium" content="'.$type.'" />
 <meta property="og:type" content="'.$type.'">
 ';
+
+if ($context->privacy !== 'PUBLIC') {
+    $meta .= '<meta name="robots" content="noindex">';
+}
+
 if ($type == 'video') {
     $meta .= '
     <link rel="video_src" href="'.$context->url.'" />
