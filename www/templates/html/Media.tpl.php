@@ -132,6 +132,9 @@ echo $mediaplayer;
             echo sprintf('%.2f '.$s[$e], ($context->length/pow(1024, floor($e))));
         }?></span>
     <span class="addedDate">Added: <?php echo date('m/d/Y', strtotime($context->datecreated)); ?></span>
+    <div class="play_count">
+        Played <?php echo $context->play_count ?> times
+    </div>
   <?php if (!empty($context->author)) { // @TODO present author with more info (standardize people records) ?>
     <div class="author">
         <p>Author: <?php echo $context->author; ?></p>
