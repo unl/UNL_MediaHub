@@ -9,9 +9,9 @@ if ($context->isVideo()) {
 (function() {
 var j, l, t, r = function() {
     WDN.setPluginParam('mediaelement_wdn', 'options', {
-        success: function(mediaElement) {
+        success: function(m) {
             var w = false, u = '<?php echo $controller->getURL($context) ?>';
-            mediaElement.addEventListener('play', function() {
+            m.addEventListener('play', function() {
                 if (!w) {
                     WDN.jQuery.post(u, {action: "playcount"});
                     w = true;
