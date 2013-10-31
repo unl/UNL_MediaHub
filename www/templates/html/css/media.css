@@ -21,7 +21,7 @@ Supporting styles for individual presentation of media pages
     padding:0px 0 2px 23px;
     margin-bottom:3px;
 }
-.author, .addedDate, .duration, .embed, .subhead {
+.author, .addedDate, .duration, .embed, .subhead, .play_count {
     color:#999999;
     font-size:0.7em;
     display:block;
