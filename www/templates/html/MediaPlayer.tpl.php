@@ -8,6 +8,17 @@ if ($context->isVideo()) {
 <script type="text/javascript">
 (function() {
 var j, l, t, r = function() {
+    WDN.setPluginParam('mediaelement_wdn', 'options', {
+        success: function(m) {
+            var w = false, u = '<?php echo $controller->getURL($context) ?>';
+            m.addEventListener('play', function() {
+                if (!w) {
+                    WDN.jQuery.post(u, {action: "playcount"});
+                    w = true;
+                }
+            });
+        }
+    });
     WDN.initializePlugin('mediaelement_wdn');
 };
 if (typeof(WDN) === 'undefined') {
