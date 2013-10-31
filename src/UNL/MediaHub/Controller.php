@@ -295,7 +295,19 @@ class UNL_MediaHub_Controller
         if (isset($options['id'])) {
             $media = Doctrine::getTable('UNL_MediaHub_Media')->find($options['id']);
         }
-
+        
+        if (!empty($_POST) && isset($_POST['action'])) {
+            switch ($_POST['action']) {
+              case 'playcount':
+                //Increase play count.
+                $media->play_count++;
+                $media->save();
+                //Don't need to send a response, so stop here.
+                exit();
+                break;
+            }
+        }
+        
         if (!empty($_POST)
             && self::isLoggedIn()) {
             $user = self::$auth->getUser();
