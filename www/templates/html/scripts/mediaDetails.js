@@ -170,11 +170,14 @@ WDN.jQuery(document).ready(function() {
         WDN.jQuery.validation.addMethod('geo_long', 'This must be a valid longitude.', {min:-180, max:180});
         WDN.jQuery.validation.addMethod('geo_lat', 'This must be a valid latitude.', {min:-90, max:90});
         WDN.jQuery('#media_form').validation();
+
+        WDN.jQuery('#media_form').bind('validate-form', function(event, result) {
+            if (result) {
+                //prevent duplicate submissions
+                WDN.jQuery('#continue3').attr('disabled', 'disabled');
+            }
+        });
     }]);
-    
-    WDN.jQuery('#media_form').submit(function() {
-        WDN.jQuery('#continue3').attr('disabled', 'disabled');
-    })
     
     //Collapisible forms.
     WDN.jQuery('.collapsible > legend').append("<span class='toggle'>Expand</span>");
