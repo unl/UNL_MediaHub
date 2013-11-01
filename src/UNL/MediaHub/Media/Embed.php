@@ -11,7 +11,7 @@ class UNL_MediaHub_Media_Embed
     /**
      * Get by ID
      *
-     * @param int $id The id of the feed to get
+     * @param int $id The id of the media to get
      *
      * @return UNL_MediaHub_Media_Embed
      */
