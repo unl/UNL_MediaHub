@@ -102,6 +102,10 @@ class UNL_MediaHub_Controller
             && $this->options['mobile'] != 'no') {
             $this->options['mobile'] = self::isMobileClient();
         }
+        
+        if ($this->options['model'] == 'media_embed') {
+            $this->options['format'] = 'js';
+        }
 
         // Start authentication for comment system.
         include_once 'UNL/Auth.php';
@@ -196,6 +200,7 @@ class UNL_MediaHub_Controller
     {
         if ($this->options['model'] == 'feed_image'
             || $this->options['model'] == 'media_image'
+            || $this->options['model'] == 'media_embed'
             || $this->options['model'] == 'media_vtt') {
             UNL_MediaHub_OutputController::setOutputTemplate('UNL_MediaHub_Controller', 'ControllerPartial');
         }
@@ -207,6 +212,9 @@ class UNL_MediaHub_Controller
             && $_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
             // short circuit execution for CORS OPTIONS reqeusts
             exit();
+        }
+        if ($this->options['model'] == 'media_embed') {
+            $this->options['format'] = 'js';
         }
         switch ($this->options['format']) {
         case 'xml':
@@ -223,10 +231,13 @@ class UNL_MediaHub_Controller
         case 'vtt':
             header('Content-type: text/vtt');
             break;
+        case 'js':
+            header('Content-type: text/javascript');
+            break;
         default:
             break;
         }
-
+        
         return true;
     }
 
@@ -270,6 +281,10 @@ class UNL_MediaHub_Controller
                 break;
             case 'media_image':
                 $this->output[] = UNL_MediaHub_Media_Image::getById($this->options['id']);
+                break;
+            case 'media_embed':
+                //print_r($this->options);
+                $this->output[] = UNL_MediaHub_Media_Embed::getById($this->options['id']);
                 break;
             case 'media_file':
                 $this->output[] = UNL_MediaHub_Media_File::getById($this->options['id']);
