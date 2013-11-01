@@ -13,7 +13,7 @@ class UNL_MediaHub_Media_Embed
      *
      * @param int $id The id of the feed to get
      *
-     * @return UNL_MediaHub_Media
+     * @return UNL_MediaHub_Media_Embed
      */
     static function getById($id)
     {
