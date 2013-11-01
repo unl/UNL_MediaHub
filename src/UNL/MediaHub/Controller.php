@@ -213,9 +213,7 @@ class UNL_MediaHub_Controller
             // short circuit execution for CORS OPTIONS reqeusts
             exit();
         }
-        if ($this->options['model'] == 'media_embed') {
-            $this->options['format'] = 'js';
-        }
+        
         switch ($this->options['format']) {
         case 'xml':
         case 'rss':
