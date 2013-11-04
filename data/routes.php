@@ -18,7 +18,7 @@ $routes['/^media\/(?P<id>[0-9]+)\/(?P<format>vtt)$/'] = 'media_vtt';
 
 $routes['/^media\/(?P<id>[0-9]+)\/image(\.[\w]+)?$/'] = 'media_image';
 
-$routes['/^media\/(?P<id>[0-9]+)\/embed$/'] = 'media_embed';
+$routes['/^media\/((?P<id>[0-9]+)\/)?embed$/'] = 'media_embed';
 
 $routes['/^media\/(?P<id>[0-9]+)\/file(\.[\w]+)?$/'] = 'media_file';
 

@@ -1,5 +1,6 @@
 (function () {
     var j, l, t, r = function () {
+        <?php if ($context->media) { ?>
         WDN.setPluginParam('mediaelement_wdn', 'options', {
             success: function (m) {
                 var w = false, u = '<?php echo $controller->getURL($context->media) ?>';
@@ -11,6 +12,7 @@
                 });
             }
         });
+        <?php } ?>
         WDN.initializePlugin('mediaelement_wdn');
     };
     if (typeof(WDN) === 'undefined') {

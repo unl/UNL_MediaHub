@@ -281,7 +281,11 @@ class UNL_MediaHub_Controller
                 $this->output[] = UNL_MediaHub_Media_Image::getById($this->options['id']);
                 break;
             case 'media_embed':
-                $this->output[] = UNL_MediaHub_Media_Embed::getById($this->options['id']);
+                $id = null;
+                if (isset($this->options['id'])) {
+                    $id = $this->options['id'];
+                }
+                $this->output[] = UNL_MediaHub_Media_Embed::getById($id);
                 break;
             case 'media_file':
                 $this->output[] = UNL_MediaHub_Media_File::getById($this->options['id']);
