@@ -5,4 +5,4 @@ if ($context->isVideo()) {
     echo $savvy->render($context, 'MediaPlayer/Audio.tpl.php');
 }
 ?>
-<script type="text/javascript" src="<?php echo $controller->getURL($context)?>/embed"></script>
+<script type="text/javascript" src="<?php echo UNL_MediaHub_Controller::$url?>media/<?php echo $context->id ?>/embed"></script>
