@@ -179,10 +179,12 @@ WDN.jQuery(document).ready(function() {
         }
     });
 });
-WDN.loadJS("/wdn/templates_3.0/scripts/plugins/tinymce/jquery.tinymce.js", function() {
+
+WDN.loadJS("../tinymce/jquery.tinymce.js", function() {
+    
     WDN.jQuery("textarea#description").tinymce({
             // Location of TinyMCE script
-            script_url : "/wdn/templates_3.0/scripts/plugins/tinymce/tiny_mce.js",
+            script_url : "../tinymce/tiny_mce.js",
             theme : "advanced",
             skin : "unl",
             
