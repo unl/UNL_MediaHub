@@ -1,5 +1,4 @@
 var jQuery = WDN.jQuery;
-var player = null;
 var mediaDetails = function() {
 	var video;
 	return {
@@ -84,11 +83,6 @@ var mediaDetails = function() {
 			thumbnail.src = WDN.jQuery('#thumbnail').attr('src')+'&time='+mediaDetails.formatTime(0);
 			thumbnail.onload = function(){
 				var calcHeight = (this.height * 460)/this.width;
-				WDN.jQuery('#player').attr('height', calcHeight).attr('width', 460).ready(function(){
-					jQuery.getScript('http://www.unl.edu/wdn/templates_3.0/scripts/mediaelement.js', function(){
-						player = new MediaElementPlayer('#player');
-					});
-				});
 				WDN.jQuery('#videoDisplay object').attr('style', 'width:460px;height:'+calcHeight);
 				WDN.jQuery('#thumbnail').attr('src', thumbnail.src);
 			};
@@ -139,11 +133,9 @@ WDN.jQuery(document).ready(function() {
     
     WDN.jQuery('a#setImage').live('click', function(){
     	var currentTime;
-    	if (!player){
-    		currentTime = mejs.players[0].getCurrentTime() + .01;
-    	} else {
-    		currentTime = player.getCurrentTime();
-    	}
+
+        currentTime = mejs.players[0].getCurrentTime() + .01;
+
     	
     	mediaDetails.updateThumbnail(currentTime);
     
