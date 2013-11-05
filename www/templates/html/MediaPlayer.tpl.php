@@ -8,7 +8,7 @@ if ($context->isVideo()) {
 
 <script type="text/javascript">
     (function () {
-        var j, l, t, i, r = function () {
+        var i, e = function () {
             <?php if ($context->id) { ?>
             i = <?php echo $context->id ?>;
             WDN.setPluginParam('mediaelement_wdn', 'options', {
@@ -25,26 +25,6 @@ if ($context->isVideo()) {
             <?php } ?>
             WDN.initializePlugin('mediaelement_wdn');
         };
-        if (typeof(WDN) === 'undefined') {
-            t = '//www.unl.edu/';
-            l = function () {
-                l = function () {
-                };
-                WDN.template_path = t;
-                r();
-            };
-            j = document.createElement('script');
-            j.type = 'text/javascript';
-            j.src = t + 'wdn/templates_3.1/scripts/wdn.js';
-            j.onreadystatechange = function () {
-                if (j.readyState == 'loaded' || j.readyState == 'complete') {
-                    l();
-                }
-            };
-            j.onload = l;
-            document.getElementsByTagName("head")[0].appendChild(j);
-        } else {
-            r();
-        }
+        e();
     })();
 </script>
