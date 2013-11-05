@@ -3,7 +3,7 @@ class UNL_MediaHub_Media_Embed
 {
     public $media;
 
-    function __construct(UNL_MediaHub_Media $media)
+    function __construct(UNL_MediaHub_Media $media = null)
     {
         $this->media = $media;
     }
@@ -15,8 +15,12 @@ class UNL_MediaHub_Media_Embed
      *
      * @return UNL_MediaHub_Media_Embed
      */
-    static function getById($id)
+    static function getById($id = null)
     {
+        if (!$id) {
+            return new self();
+        }
+        
         return new self(Doctrine::getTable('UNL_Mediahub_Media')->find($id));
     }
 }
