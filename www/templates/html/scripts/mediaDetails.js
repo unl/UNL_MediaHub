@@ -13,12 +13,7 @@ var mediaDetails = function() {
 		},
 		
 		updateDuration : function() {
-			if (!player){
-				WDN.jQuery('#itunes_duration').attr('value', mediaDetails.findDuration(WDN.videoPlayer.createFallback.getCurrentInfo('duration')));
-			} else {
-				WDN.log(player.media.duration);
-				WDN.jQuery('#itunes_duration').attr('value', mediaDetails.findDuration(player.media.duration));
-			}
+            WDN.jQuery('#itunes_duration').attr('value', mediaDetails.findDuration(mejs.players[0].media.duration));
 		},
 		
 		findDuration : function(duration) {
