@@ -30,7 +30,7 @@ if (isset($context->media)) {
 ?>
 </div>
 <div class="clear"></div>
-<div id="formDetails" class="grid6 first">
+<div id="formDetails">
 <?php echo $savvy->render($context, 'Feed/Media/FileUpload.tpl.php'); ?>
 <form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data" class="zenform cool" style="<?php echo (isset($context->media))?'':'display:none;' ?>">
     <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
