@@ -1,9 +1,24 @@
 <?php
 class UNL_MediaHub_Media_Embed
 {
+    /**
+     * @var UNL_MediaHub_Media
+     */
     public $media;
+
+    /**
+     * @var int
+     */
     public $version = 1;
+
+    /**
+     * @var array
+     */
     public $options = array();
+
+    /**
+     * @var array
+     */
     protected $allowed_versions = array(1, 2);
 
     function __construct(UNL_MediaHub_Media $media = null, $version = 1, $options = array())
