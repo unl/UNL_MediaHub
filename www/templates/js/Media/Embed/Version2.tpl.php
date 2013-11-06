@@ -3,11 +3,11 @@ $data = array();
 $data['markup'] = $savvy->render($context->media, 'MediaPlayer.tpl.php');
 $data['id'] = $context->media->id;
 ?>
-var data = <?php echo json_encode($data);?>;
 
 (function () {
     var j, l, t, i, r = function () {
         WDN.loadJQuery(function() {
+            var data = <?php echo json_encode($data);?>;
             WDN.jQuery('#mediahub_embed_' + data.id).html(data.markup);
         });
     };
