@@ -8,13 +8,28 @@ class UNL_MediaHub_Media_Embed
 
     function __construct(UNL_MediaHub_Media $media = null, $version = 1, $options = array())
     {
-        if (!in_array($version, $this->allowed_versions)) {
+        //Validate the version
+        if (!$this->versionIsAllowed($version)) {
             throw new Exception('The version "' . $version . '" is not allowed', 500);
         }
         
         $this->media = $media;
         $this->version = $version;
         $this->options += $options;
+    }
+
+    /**
+     * Check if a given version is allowed
+     * 
+     * @param $version
+     * @return bool
+     */
+    function versionIsAllowed($version) {
+        if (!in_array($version, $this->allowed_versions)) {
+            return false;
+        }
+        
+        return true;
     }
 
     /**
