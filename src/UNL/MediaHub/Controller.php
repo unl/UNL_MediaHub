@@ -285,7 +285,11 @@ class UNL_MediaHub_Controller
                 if (isset($this->options['id'])) {
                     $id = $this->options['id'];
                 }
-                $this->output[] = UNL_MediaHub_Media_Embed::getById($id);
+                $version = 1;
+                if (isset($this->options['version'])) {
+                    $version = $this->options['version'];
+                }
+                $this->output[] = UNL_MediaHub_Media_Embed::getById($id, $version, $this->options);
                 break;
             case 'media_file':
                 $this->output[] = UNL_MediaHub_Media_File::getById($this->options['id']);
