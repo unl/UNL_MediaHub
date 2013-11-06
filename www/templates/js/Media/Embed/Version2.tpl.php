@@ -1,18 +1,14 @@
 <?php
-$markup = $savvy->render($context->media, 'MediaPlayer.tpl.php');
-
-//Add slashes so that it is javascirpt safe
-$markup = addslashes($markup);
-
-//Replace newlines with spaces
-$markup = trim(preg_replace('/\s+/', ' ', $markup));
+$data = array();
+$data['markup'] = $savvy->render($context->media, 'MediaPlayer.tpl.php');
+$data['id'] = $context->media->id;
 ?>
-var markup = "<?php echo $markup?>";
+var data = <?php echo json_encode($data);?>;
 
 (function () {
     var j, l, t, i, r = function () {
         WDN.loadJQuery(function() {
-            WDN.jQuery('#mediahub_embed_<?php echo $context->media->id?>').html(markup);
+            WDN.jQuery('#mediahub_embed_' + data.id).html(data.markup);
         });
     };
     if (typeof(WDN) === 'undefined') {
