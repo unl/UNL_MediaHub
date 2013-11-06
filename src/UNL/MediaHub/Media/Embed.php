@@ -4,9 +4,14 @@ class UNL_MediaHub_Media_Embed
     public $media;
     public $version = 1;
     public $options = array();
+    protected $allowed_versions = array(1, 2);
 
     function __construct(UNL_MediaHub_Media $media = null, $version = 1, $options = array())
     {
+        if (!in_array($version, $this->allowed_versions)) {
+            throw new Exception('The version "' . $version . '" is not allowed', 500);
+        }
+        
         $this->media = $media;
         $this->version = $version;
         $this->options += $options;
