@@ -1,5 +1,4 @@
 var jQuery = WDN.jQuery;
-var player = null;
 var mediaDetails = function() {
 	var video;
 	return {
@@ -14,12 +13,7 @@ var mediaDetails = function() {
 		},
 		
 		updateDuration : function() {
-			if (!player){
-				WDN.jQuery('#itunes_duration').attr('value', mediaDetails.findDuration(WDN.videoPlayer.createFallback.getCurrentInfo('duration')));
-			} else {
-				WDN.log(player.media.duration);
-				WDN.jQuery('#itunes_duration').attr('value', mediaDetails.findDuration(player.media.duration));
-			}
+            WDN.jQuery('#itunes_duration').attr('value', mediaDetails.findDuration(mejs.players[0].media.duration));
 		},
 		
 		findDuration : function(duration) {
@@ -84,11 +78,6 @@ var mediaDetails = function() {
 			thumbnail.src = WDN.jQuery('#thumbnail').attr('src')+'&time='+mediaDetails.formatTime(0);
 			thumbnail.onload = function(){
 				var calcHeight = (this.height * 460)/this.width;
-				WDN.jQuery('#player').attr('height', calcHeight).attr('width', 460).ready(function(){
-					jQuery.getScript('http://www.unl.edu/wdn/templates_3.0/scripts/mediaelement.js', function(){
-						player = new MediaElementPlayer('#player');
-					});
-				});
 				WDN.jQuery('#videoDisplay object').attr('style', 'width:460px;height:'+calcHeight);
 				WDN.jQuery('#thumbnail').attr('src', thumbnail.src);
 			};
@@ -139,11 +128,9 @@ WDN.jQuery(document).ready(function() {
     
     WDN.jQuery('a#setImage').live('click', function(){
     	var currentTime;
-    	if (!player){
-    		currentTime = mejs.players[0].getCurrentTime() + .01;
-    	} else {
-    		currentTime = player.getCurrentTime();
-    	}
+
+        currentTime = mejs.players[0].getCurrentTime() + .01;
+
     	
     	mediaDetails.updateThumbnail(currentTime);
     
@@ -191,22 +178,23 @@ WDN.jQuery(document).ready(function() {
             WDN.jQuery(this).find('.toggle').html('Collapse');
         }
     });
-});
-WDN.loadJS("/wdn/templates_3.0/scripts/plugins/tinymce/jquery.tinymce.js", function() {
-    WDN.jQuery("textarea#description").tinymce({
+
+    WDN.loadJS("../tinymce/jquery.tinymce.js", function() {
+        WDN.jQuery("textarea#description").tinymce({
             // Location of TinyMCE script
-            script_url : "/wdn/templates_3.0/scripts/plugins/tinymce/tiny_mce.js",
+            script_url : "../tinymce/tiny_mce.js",
             theme : "advanced",
             skin : "unl",
-            
+
             // Theme options
-	        theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,|,bullist,numlist,|,link,unlink,anchor,|,removeformat,cleanup,help,code,styleselect,formatselect",
-	        theme_advanced_buttons2 : "",
-	        theme_advanced_buttons3 : "",
-	        theme_advanced_toolbar_location : "top",
-	        theme_advanced_toolbar_align : "left",
-	        theme_advanced_statusbar_location : "bottom",
-	        theme_advanced_resizing : true,
+            theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,|,bullist,numlist,|,link,unlink,anchor,|,removeformat,cleanup,help,code,styleselect,formatselect",
+            theme_advanced_buttons2 : "",
+            theme_advanced_buttons3 : "",
+            theme_advanced_toolbar_location : "top",
+            theme_advanced_toolbar_align : "left",
+            theme_advanced_statusbar_location : "bottom",
+            theme_advanced_resizing : true,
             theme_advanced_row_height : 33
+        });
     });
 });
