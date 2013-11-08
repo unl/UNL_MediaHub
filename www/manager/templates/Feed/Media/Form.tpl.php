@@ -69,7 +69,13 @@ if (isset($context->media)) {
                     ?>
                 </select>
             </li>
-            <li><label>URL of custom poster image<span class="helper">If filled in, this image will be displayed as the thumbnail for the media.</span></label>
+            <?php
+            $text = '';
+            if (isset($context->media) && $context->media->isVideo()) {
+                $text = 'This image will override the one chosen above.';
+            }
+            ?>
+            <li><label>URL of custom poster image<span class="helper">If filled in, this image will be displayed as the thumbnail for the media.  <?php echo $text; ?></span></label>
                 <input id="media_poster" name="poster" type="text" class="validate-url" value="<?php echo htmlentities(@$context->media->poster, ENT_QUOTES); ?>" />
             </li>
             <li style="display:none;"><label for="submit_existing" class="element">&nbsp;</label><div class="element"><input id="submit_existing" name="submit_existing" value="Save" type="submit" /></div></li>
