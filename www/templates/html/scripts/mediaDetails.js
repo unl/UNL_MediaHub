@@ -92,6 +92,7 @@ var mediaDetails = function() {
         showPosterPicker: function() {
             WDN.jQuery('#poster_picker').show();
             WDN.jQuery('#poster_picker_disabled').hide();
+            mediaDetails.updateThumbnail();
         }
 	};
 }();
@@ -119,6 +120,7 @@ WDN.jQuery(document).ready(function() {
         if (this.value == '') {
             mediaDetails.showPosterPicker();
         } else {
+            WDN.jQuery('#thumbnail').attr('src', this.value);
             mediaDetails.hidePosterPicker();
         }
     });
