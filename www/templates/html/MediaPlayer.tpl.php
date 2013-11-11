@@ -24,27 +24,24 @@ if ($context->isVideo()) {
 
                     //Social Sharing via https://xparkmedia.com/blog/mediaelements-add-a-share-button-to-video-elements-using-jquery/
                     var initSharing = function(m, v) {
-                        if (v.tagName.toUpperCase() != 'VIDEO') {
-                            return;
-                        }
-
                         var $           = WDN.jQuery;
                         var $inner      = false;
                         var $video      = $(v);
                         var $title      = $video.attr('title');
                         var share_url   = $video.attr('data-url');
+                        var media_type  = v.tagName.charAt(0).toUpperCase() + v.tagName.slice(1).toLowerCase();
                         
                         if (!share_url) {
                             return;
                         }
                         
-                        if ($inner = $(v).parents('.mejs-video')) {
+                        if ($inner = $(v).parents('.mejs-container')) {
                             // share urls
                             var sharelinks = {
-                                tw:     'http://twitter.com/share?text=Video: ' + $title + '&url=' + share_url, // twitter
+                                tw:     'http://twitter.com/share?text=' + media_type + ': ' + $title + '&url=' + share_url, // twitter
                                 fb:     'https://www.facebook.com/sharer/sharer.php?u=' + share_url,	// facebook
                                 gp:     'https://plus.google.com/share?url=' + share_url, //google plus
-                                em:     'mailto:?body=Check out this video: ' + share_url + '&subject=Video : ' + $title
+                                em:     'mailto:?body=Checkout this ' + media_type + ': ' + share_url + '&subject=' + media_type + ' : ' + $title
                             }
 
                             //create share links
