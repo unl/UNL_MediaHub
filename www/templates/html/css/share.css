@@ -1,6 +1,6 @@
 /* Share media
 -------------------------------------------------------------- */
-a.share-video-link {
+#maincontent a.share-video-link {
     background:rgba( 0, 0, 0, .5);
     color:#fff;
     position:absolute;
@@ -13,9 +13,9 @@ a.share-video-link {
     font: bold 11px/120% Helvetica, sans-serif;
     cursor:pointer;
 }
-a.share-video-link:hover,
-a.share-video-link:active,
-a.share-video-link.video-active {
+#maincontenta .share-video-link:hover,
+#maincontent a.share-video-link:active,
+#maincontent a.share-video-link.video-active {
     background:#3caac8
 }
 .share-overlay {
@@ -38,7 +38,7 @@ a.share-video-link.video-active {
 .mobile .share-video-form{
     margin-top:5%;
 }
-.share-video-form h4 {
+#maincontent .share-video-form h4 {
     margin-top: -10px;
     font: bold 15px/120% Helvetica, sans-serif;
     text-transform: uppercase;
