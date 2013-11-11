@@ -3,7 +3,10 @@ require_once dirname(__FILE__).'/../config.inc.php';
 
 $mediahub = new UNL_MediaHub($dsn);
 
-$list = new UNL_MediaHub_MediaList();
+$list = new UNL_MediaHub_MediaList(array(
+    'filter' => new UNL_MediaHub_MediaList_Filter_WithPoster()
+));
+
 $list->options['limit'] = 3000;
 $list->run();
 
