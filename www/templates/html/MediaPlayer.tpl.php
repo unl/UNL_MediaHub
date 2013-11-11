@@ -48,7 +48,7 @@ if ($context->isVideo()) {
                                 fb:     'https://www.facebook.com/sharer/sharer.php?url=' + share_url,	// facebook
                                 su:     'http://www.stumbleupon.com/submit?title=' + $title + '&url=' + share_url, //stumble upon
                                 gp:     'https://plus.google.com/share?url=' + share_url, //google plus
-                                em:     'http://api.addthis.com/oexchange/0.8/forward/email/offer?url=' + share_url //email
+                                em:     'mailto:?body=Check out this video: ' + share_url + '&subject=Video : ' + $title
                             }
 
                             //create share links
