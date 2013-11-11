@@ -96,8 +96,8 @@ if ($context->isVideo()) {
 
                             // show / hide video form
                             $closelink.bind('click', video_close_share_form );
-                            $sharelink.bind('click', function(){
-
+                            $sharelink.bind('click', function(e){
+                                e.preventDefault();
                                 if($sharefrom.is(':hidden')) {
                                     $sharefrom.show( );
                                     $sharelink.addClass('video-active');
