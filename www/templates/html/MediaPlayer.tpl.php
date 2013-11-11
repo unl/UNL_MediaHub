@@ -60,7 +60,7 @@ if ($context->isVideo()) {
                             $inner.prepend('<a href="#" rel="nofollow" class="share-video-link">' + 'Share' + '</a>');
 
                             var html   = '<div class="share-video-form">';
-                            html += '<em class="share-video-close">x</em><h4>' + 'share video' + '</h4>';
+                            html += '<em class="share-video-close">x</em><h4>' + 'share this video' + '</h4>';
                             html += '<em>'+ 'link' +'</em><input type="text" class="share-video-lnk share-data" value="' + share_url + '" />' ;
 
                             html += '<div class="video-social-share">' + links + '</div>' ;
