@@ -56,33 +56,37 @@ if ($context->isVideo()) {
                                 links += '<a href="#" rel="nofollow" class="'+key+'"></a>';
                             }
 
-                            $inner.prepend('<div class="media-content-title">' + $title + '</div>');
-                            $inner.prepend('<a href="#" rel="nofollow" class="share-video-link">' + 'Share' + '</a>');
-
-                            var html   = '<div class="share-video-form">';
+                            var html = '<div class="media-content-head">';
+                            html += '<div class="media-content-title">' + $title + '</div>';
+                            html += '<a href="#" rel="nofollow" class="share-video-link">' + 'Share' + '</a>';
+                            html += '<div class="share-video-form">';
                             html += '<em class="share-video-close">x</em><h4>' + 'share this video' + '</h4>';
                             html += '<em>'+ 'link' +'</em><input type="text" class="share-video-lnk share-data" value="' + share_url + '" />' ;
 
                             html += '<div class="video-social-share">' + links + '</div>' ;
-                            $inner.prepend(html + '</div>');
+                            html += '</div>';
+                            html += '</div>';
+                            $inner.prepend(html);
 
                             // start listeners
                             $sharelink  = $inner.find('.share-video-link');
                             $sharefrom  = $inner.find('.share-video-form');
                             $closelink  = $inner.find('.share-video-close');
                             $videotitle = $inner.find('.media-content-title');
+                            $videohead  = $inner.find('.media-content-head');
 
                             // hide form when video is playing
                             m.addEventListener('play', function(e) {
-                                $sharelink.hide(); $sharefrom.hide(); $videotitle.hide();
+                                //$sharelink.hide();  $videotitle.hide();
+                                $videohead.hide();
+                                $sharefrom.hide();
                             }, false );
 
                             // show form when video is paused
                             m.addEventListener('pause', function(e) {
                                 $sharelink.removeClass('video-active');
                                 $inner.find('.mejs-overlay-button').show( );
-                                $videotitle.show();
-                                $sharelink.show();
+                                $videohead.show();
                             }, false );
 
                             // close video form
