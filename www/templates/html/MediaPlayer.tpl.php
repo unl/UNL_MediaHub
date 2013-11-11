@@ -22,7 +22,7 @@ if ($context->isVideo()) {
                         }
                     });
 
-                    //Social Sharing
+                    //Social Sharing via https://xparkmedia.com/blog/mediaelements-add-a-share-button-to-video-elements-using-jquery/
                     var initSharing = function(m, v) {
                         if (v.tagName != 'VIDEO') {
                             return;
