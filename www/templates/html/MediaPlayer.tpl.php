@@ -24,7 +24,7 @@ if ($context->isVideo()) {
 
                     //Social Sharing
                     var initSharing = function(m, v) {
-                        if( v.tagName != 'VIDEO' ) {
+                        if (v.tagName != 'VIDEO') {
                             return;
                         }
                         
