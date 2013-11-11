@@ -14,7 +14,8 @@ if (count($list->items)) {
         }
         
         // Try and get the poster
-        if (substr($media->poster, 0, 5) == 'http:') {
+        if (substr($media->poster, 0, 5) == 'http:'
+            || substr($media->poster, 0, 6) == 'https:') {
             $context = stream_context_create(array('http'=>array(
                 'method'     => 'GET',
                 'user_agent' => 'UNL MediaHub/mediahub.unl.edu'
