@@ -27,9 +27,6 @@ if ($context->isVideo()) {
                         if (v.tagName.toUpperCase() != 'VIDEO') {
                             return;
                         }
-                        
-                        //Load the CSS
-                        WDN.loadCSS('<?php echo UNL_MediaHub_Controller::$url; ?>templates/html/css/share.css');
 
                         var $ = WDN.jQuery.noConflict( );
                         var $inner      = false;
@@ -123,7 +120,10 @@ if ($context->isVideo()) {
                         }
                     }
 
-                    initSharing(m, v);
+                    //Load the CSS
+                    WDN.loadCSS('<?php echo UNL_MediaHub_Controller::$url; ?>templates/html/css/share.css', function() {
+                        initSharing(m, v);
+                    });
                 }
             });
             <?php } ?>
