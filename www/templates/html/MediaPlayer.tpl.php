@@ -24,7 +24,7 @@ if ($context->isVideo()) {
 
                     //Social Sharing via https://xparkmedia.com/blog/mediaelements-add-a-share-button-to-video-elements-using-jquery/
                     var initSharing = function(m, v) {
-                        if (v.tagName != 'VIDEO') {
+                        if (v.tagName.toUpperCase() != 'VIDEO') {
                             return;
                         }
                         
@@ -53,11 +53,11 @@ if ($context->isVideo()) {
                             //create share links
                             var links = '';
                             for (var key in sharelinks) {
-                                links += '<a href="#" rel="nofollow" class="'+key+'">';
+                                links += '<a href="#" rel="nofollow" class="'+key+'"></a>';
                             }
 
                             $inner.prepend('<div class="media-content-title">' + $title + '</div>');
-                            $inner.prepend('<a her="#" rel="nofollow" class="share-video-link">' + 'Share' + '</a>');
+                            $inner.prepend('<a href="#" rel="nofollow" class="share-video-link">' + 'Share' + '</a>');
 
                             var html   = '<div class="share-video-form">';
                             html += '<em class="share-video-close">x</em><h4>' + 'share video' + '</h4>';
@@ -98,7 +98,7 @@ if ($context->isVideo()) {
                             $closelink.bind('click', video_close_share_form );
                             $sharelink.bind('click', function(){
 
-                                if( $sharefrom.is(':hidden')) {
+                                if($sharefrom.is(':hidden')) {
                                     $sharefrom.show( );
                                     $sharelink.addClass('video-active');
 
