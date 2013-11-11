@@ -29,7 +29,7 @@ if ($context->isVideo()) {
                         }
                         
                         //Load the CSS
-                        WDN.loadCSS('<?php echo $controller->getURL(); ?>templates/html/css/share.css');
+                        WDN.loadCSS('<?php echo UNL_MediaHub_Controller::$url; ?>templates/html/css/share.css');
 
                         var $ = WDN.jQuery.noConflict( );
                         var $inner      = false;
