@@ -8,9 +8,8 @@ if ($context->isVideo()) {
 
 <script type="text/javascript">
     (function () {
-        var i, e = function () {
+        var e = function () {
             <?php if (isset($context->id) && $context->id) { ?>
-            i = <?php echo $context->id ?>;
             WDN.setPluginParam('mediaelement_wdn', 'options', {
                 success: function (m, v) {
                     //Playcount
