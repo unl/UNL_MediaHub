@@ -98,7 +98,7 @@ a.share-video-link.video-active {
     display:inline-block;
     width:17px;
     height:17px;
-    margin: 0 10px;
+    margin: 0 5px;
     background: url(images/share-icons.png) no-repeat 0 0;
     border: none;
 }
@@ -119,3 +119,10 @@ a.share-video-link.video-active {
     height: 100% !important;
 }
 
+
+@media (max-width: 480px) {
+    .share-video-form {
+        width: 70%;
+        margin:10% 15% 0;
+    }
+}
