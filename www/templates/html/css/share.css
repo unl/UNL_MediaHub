@@ -113,4 +113,8 @@ a.share-video-link.video-active {
 .video-social-share a.em{
     background-position:0 -69px;
 }
+.mejs-overlay {
+    background-color: rgba(0,0,0,0.75);
+    height: 100% !important;
+}
 
