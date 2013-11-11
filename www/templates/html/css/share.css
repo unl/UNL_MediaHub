@@ -4,9 +4,9 @@ a.share-video-link {
     background:rgba( 0, 0, 0, .5);
     color:#fff;
     position:absolute;
-    top:45%;
+    top:1%;
     z-index:150;
-    left:1%;
+    right:1%;
     padding:5px 6px;
     text-decoration:none;
     text-transform:uppercase;
@@ -50,7 +50,7 @@ a.share-video-link.video-active {
     font: normal 12px/120% Halvetica, sans-serif;
     padding: 1% 2%;
     position: absolute;
-    width: 98%;
+    width: 85%;
     z-index: 150;
 }
 .share-video-form em {
