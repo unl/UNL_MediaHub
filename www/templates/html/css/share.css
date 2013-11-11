@@ -23,6 +23,7 @@ a.share-video-link.video-active {
 }
 .share-video-form {
     display:none;
+    background-color: black;
     background:rgba( 0, 0, 0, .85);
     padding:4% 3%;
     position:absolute;
