@@ -14,7 +14,7 @@
     cursor:pointer;
     border: none;
 }
-#maincontenta .share-video-link:hover,
+#maincontent a .share-video-link:hover,
 #maincontent a.share-video-link:active,
 #maincontent a.share-video-link.video-active {
     background:#3caac8;
