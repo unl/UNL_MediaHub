@@ -28,7 +28,7 @@ if ($context->isVideo()) {
                             return;
                         }
 
-                        var $ = WDN.jQuery.noConflict( );
+                        var $           = WDN.jQuery;
                         var $inner      = false;
                         var $video      = $(v);
                         var $title      = $video.attr('title');
