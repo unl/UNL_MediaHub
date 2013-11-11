@@ -46,7 +46,6 @@ if ($context->isVideo()) {
                             var sharelinks = {
                                 tw:     'http://twitter.com/share?text=Video: ' + $title + '&url=' + share_url, // twitter
                                 fb:     'https://www.facebook.com/sharer/sharer.php?url=' + share_url,	// facebook
-                                su:     'http://www.stumbleupon.com/submit?title=' + $title + '&url=' + share_url, //stumble upon
                                 gp:     'https://plus.google.com/share?url=' + share_url, //google plus
                                 em:     'mailto:?body=Check out this video: ' + share_url + '&subject=Video : ' + $title
                             }
