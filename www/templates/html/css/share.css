@@ -4,9 +4,9 @@
     background: #fff;
     color:#000;
     position:absolute;
-    top:1%;
+    top:5px;
     z-index:150;
-    right:1%;
+    right:5px;
     padding:5px 6px;
     text-decoration:none;
     text-transform:uppercase;
@@ -116,9 +116,12 @@
 .video-social-share a.em{
     background-position:0 -69px;
 }
-.mejs-overlay {
+.media-content-head {
     background-color: rgba(0,0,0,0.75);
-    height: 100% !important;
+    height: 35px;
+    width: 100%;
+    position: absolute;
+    z-index: 100;
 }
 
 
