@@ -107,7 +107,8 @@ if ($context->isVideo()) {
                             });
 
                             // add share links listener
-                            $inner.find('.video-social-share a').click( function(){
+                            $inner.find('.video-social-share a').click(function(e){
+                                e.preventDefault();
                                 key = $(this).attr('class');
                                 if(sharelinks[key]) {
                                     window.open(sharelinks[key]);
