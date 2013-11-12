@@ -82,7 +82,18 @@ var mediaDetails = function() {
 				WDN.jQuery('#thumbnail').attr('src', thumbnail.src);
 			};
 			thumbnail.onerror = '';
-		}
+		},
+        
+        hidePosterPicker: function() {
+            WDN.jQuery('#poster_picker').hide();
+            WDN.jQuery('#poster_picker_disabled').show();
+        },
+        
+        showPosterPicker: function() {
+            WDN.jQuery('#poster_picker').show();
+            WDN.jQuery('#poster_picker_disabled').hide();
+            mediaDetails.updateThumbnail();
+        }
 	};
 }();
 
@@ -98,6 +109,26 @@ WDN.jQuery(document).ready(function() {
     	}
     	WDN.jQuery("#fileUpload").hide();
     }
+    
+    if (WDN.jQuery('#media_poster').val() !== '') {
+        WDN.jQuery('#poster_picker').hide();
+    } else {
+        WDN.jQuery('#poster_picker_disabled').hide();
+    }
+
+    WDN.jQuery('#media_poster').on('keyup', function() {
+        if (this.value == '') {
+            mediaDetails.showPosterPicker();
+        } else {
+            WDN.jQuery('#thumbnail').attr('src', this.value);
+            mediaDetails.hidePosterPicker();
+        }
+    });
+    
+    WDN.jQuery('#enable_poster_picker').click(function() {
+        WDN.jQuery('#media_poster').val('');
+        mediaDetails.showPosterPicker();
+    });
     
     WDN.jQuery("#mediaSubmit").click(function(event) { //called when a user adds video
 
