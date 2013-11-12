@@ -10,7 +10,10 @@
     padding:5px 6px;
     text-decoration:none;
     text-transform:uppercase;
-    font: bold 11px/120% Helvetica, sans-serif;
+    font-family: "Gotham SSm A", "Gotham SSm B", Helvetica, "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 10px;
     cursor:pointer;
     border: none;
 }
@@ -42,7 +45,10 @@
 }
 #maincontent .share-video-form h4 {
     margin-top: -10px;
-    font: bold 15px/120% Helvetica, sans-serif;
+    font-family: "Gotham SSm A", "Gotham SSm B", Helvetica, "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 13px;
     text-transform: uppercase;
     margin-bottom: 10px;
     color:#3caac8;
@@ -118,7 +124,7 @@
 }
 .media-content-head {
     background-color: rgba(0,0,0,0.75);
-    height: 35px;
+    height: 40px;
     width: 100%;
     position: absolute;
     z-index: 100;
