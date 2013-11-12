@@ -258,6 +258,10 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
      */
     function getThumbnailURL()
     {
+        if (!empty($this->poster)) {
+            return $this->poster;
+        }
+        
         return UNL_MediaHub_Controller::$thumbnail_generator.urlencode($this->url);
     }
 

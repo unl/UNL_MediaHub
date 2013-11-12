@@ -14,6 +14,11 @@ if ($parent->context instanceof UNL_MediaHub_Media_Preview) {
     $autoplay = '';
 }
 
+//Don't auto play on the addmedia view
+if (isset($controller->options['view']) && $controller->options['view'] == 'addmedia') {
+    $autoplay = '';
+}
+
 if (isset($controller->options['autoplay']) && !$controller->options['autoplay']) {
     $autoplay = '';
 }
