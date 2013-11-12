@@ -68,6 +68,7 @@ var mediaDetails = function() {
 				// Place the preview markup into the preview div
 				WDN.jQuery('#headline_main').html(data).ready(function(){
 		    		mediaDetails.scalePlayer();
+                    WDN.jQuery('#poster_picker_disabled').hide();
 				});
 			});
 		},
