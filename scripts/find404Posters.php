@@ -29,17 +29,17 @@ if (count($list->items)) {
                 continue;
             }
 
-            if (false === $http_response_header) {
+            if (!isset($http_response_header) || 
+                false === $http_response_header) {
                 echo 'DNS failure, did the server move?'.PHP_EOL;
             }
 
-            foreach ($http_response_header as $header) {
-                if (strpos($header, 'HTTP/1.1 404 Not Found') !== false) {
-                    // This file is GONE! Better remove it
-                    echo 'REMOVING POSTER-'.PHP_EOL.'ID:    '.$media->id.PHP_EOL.'Title: '.$media->title.PHP_EOL.'POSTER URL:   '.$media->poster.PHP_EOL.PHP_EOL;
-                    $media->poster = '';
-                    $media->save();
-                }
+            if (!isset($http_response_header[0])
+                || strpos($http_response_header[0], '200') === false) {
+                // This file is GONE! Better remove it
+                echo 'REMOVING POSTER-'.PHP_EOL.'ID:    '.$media->id.PHP_EOL.'Title: '.$media->title.PHP_EOL.'POSTER URL:   '.$media->poster.PHP_EOL.PHP_EOL;
+                $media->poster = '';
+                $media->save();
             }
         }
     }
