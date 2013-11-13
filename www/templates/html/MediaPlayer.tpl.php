@@ -78,32 +78,49 @@ if ($context->isVideo()) {
                             // show form when video is paused
                             m.addEventListener('pause', function(e) {
                                 $sharelink.removeClass('video-active');
-                                $inner.find('.mejs-overlay-button').show( );
+                                $inner.find('.mejs-overlay-button').show();
                                 $videohead.show();
                             }, false );
 
                             // close video form
-                            var video_close_share_form = function(){
-                                $sharefrom.hide();
-                                $sharelink.removeClass('video-active');
+                            //TODO: fix this.
+                            var video_close_share_form = function($inner, $form) {
+                                $form.hide();
+                                $form.removeClass('video-active');
 
                                 $inner.find('.mejs-overlay-play')
                                     .removeClass('share-overlay');
                             };
+                            var video_open_share_form = function($inner, $form) {
+                                $form.show();
+                                $(this).addClass('video-active');
+
+                                $inner.find('.mejs-overlay-play')
+                                    .addClass('share-overlay').show();
+                            }
+                            var toggle_share_form = function($inner) {
+                                var $form = $inner.find('.share-video-form');
+
+                                if($form.is(':hidden')) {
+                                    video_open_share_form($inner, $form);
+                                } else {
+                                    video_close_share_form($inner, $form);
+                                }
+                            }
 
                             // show / hide video form
-                            $closelink.bind('click', video_close_share_form );
+                            $closelink.bind('click', function(e) {
+                                e.preventDefault();
+                                
+                                var $inner = $(this).parents('.mejs-container');
+                                var $form = $inner.find('.share-video-form');
+                                video_close_share_form($inner, $form);
+                            });
+                            
                             $sharelink.bind('click', function(e){
                                 e.preventDefault();
-                                if($sharefrom.is(':hidden')) {
-                                    $sharefrom.show( );
-                                    $sharelink.addClass('video-active');
-
-                                    $inner.find('.mejs-overlay-play')
-                                        .addClass('share-overlay').show();
-                                } else {
-                                    video_close_share_form();
-                                }
+                                
+                                toggle_share_form($(this).parents('.mejs-container'));
                             });
 
                             // add share links listener
