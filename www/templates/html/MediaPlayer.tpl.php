@@ -62,11 +62,11 @@ if ($context->isVideo()) {
                             $inner.prepend(html);
 
                             // start listeners
-                            $sharelink  = $inner.find('.share-video-link');
-                            $sharefrom  = $inner.find('.share-video-form');
-                            $closelink  = $inner.find('.share-video-close');
-                            $videotitle = $inner.find('.media-content-title');
-                            $videohead  = $inner.find('.media-content-head');
+                            var $sharelink  = $inner.find('.share-video-link');
+                            var $sharefrom  = $inner.find('.share-video-form');
+                            var $closelink  = $inner.find('.share-video-close');
+                            var $videotitle = $inner.find('.media-content-title');
+                            var $videohead  = $inner.find('.media-content-head');
 
                             // hide form when video is playing
                             m.addEventListener('play', function(e) {
