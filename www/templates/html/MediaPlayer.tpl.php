@@ -83,7 +83,6 @@ if ($context->isVideo()) {
                             }, false );
 
                             // close video form
-                            //TODO: fix this.
                             var video_close_share_form = function($inner, $form) {
                                 $form.hide();
                                 $form.removeClass('video-active');
