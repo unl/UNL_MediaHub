@@ -54,6 +54,13 @@ class UNL_MediaHub_Controller
     static protected $replacements;
 
     /**
+     * The current embed version to serve
+     * 
+     * @var int
+     */
+    public static $current_embed_version = 2;
+
+    /**
      * currently logged in user, if any
      *
      * @var UNL_MediaHub_User
