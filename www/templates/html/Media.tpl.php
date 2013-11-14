@@ -154,7 +154,7 @@ echo $mediaplayer;
     <p>Copy the following code into your unl.edu page</p>
     
     <?php 
-    $embed = $savvy->render(UNL_MediaHub_Media_Embed::getById($context->id, 2));
+    $embed = $savvy->render(UNL_MediaHub_Media_Embed::getById($context->id, UNL_MediaHub_Controller::$current_embed_version));
     ?>
     <textarea cols="25" rows="6" onclick="this.select(); return false;"><?php echo htmlentities($embed); ?></textarea>
 </div>
