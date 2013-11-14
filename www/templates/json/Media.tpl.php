@@ -11,6 +11,9 @@ $details = array('id'          => $context->id,
                  'pubDate'     => $context->datecreated,
                  'dateupdated' => $context->dateupdated);
 
+$embed = $savvy->render(UNL_MediaHub_Media_Embed::getById($context->id, UNL_MediaHub_Controller::$current_embed_version));
+$details['embed']= $embed;
+
 try{
     foreach (UNL_MediaHub_Controller::$usedMediaNameSpaces as $ns_class) {
         foreach ($context->$ns_class as $namespaced_element) {
