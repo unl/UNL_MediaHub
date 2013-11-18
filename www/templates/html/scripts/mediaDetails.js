@@ -130,33 +130,33 @@ WDN.jQuery(document).ready(function() {
         WDN.jQuery('#media_poster').val('');
         mediaDetails.showPosterPicker();
     });
-    
-    WDN.jQuery("#mediaSubmit").click(function(event) { //called when a user adds video
 
-    		if (document.getElementById("file_upload").value == '') {
-    			if (!mediaDetails.validURL(document.getElementById("url").value)) {
-    				return false;
-    			}
-    			mediaDetails.getPreview(WDN.jQuery("#url").val());
-    			event.preventDefault();
+    WDN.jQuery("#mediaSubmit").click(function (event) { //called when a user adds video
 
-    		} else {
-    			// Hide the url field, user is uploading a file
-    			WDN.jQuery('#media_url').closest('li').hide();
-    		}
+        if (document.getElementById("file_upload").value == '') {
+            if (!mediaDetails.validURL(document.getElementById("url").value)) {
+                return false;
+            }
+            mediaDetails.getPreview(WDN.jQuery("#url").val());
+            event.preventDefault();
 
-    		WDN.jQuery('#fileUpload').hide();
+        } else {
+            // Hide the url field, user is uploading a file
+            WDN.jQuery('#media_url').closest('li').hide();
+        }
 
-            WDN.jQuery("#addMedia, #feedlist").slideUp(400, function() {
-                WDN.jQuery("#headline_main").slideDown(400, function() {
-                    WDN.jQuery("#media_form").show().css({"width" : "930px"}).parent("#formDetails").removeClass("two_col right");
-                    WDN.jQuery("#existing_media, #enhanced_header, #feedSelect, #maincontent form.zenform #continue3").slideDown(400);
-                    WDN.jQuery("#media_url").attr("value", WDN.jQuery("#url").val());
-                    WDN.jQuery(this).css('display', 'inline-block');
-                });
+        WDN.jQuery('#fileUpload').hide();
+
+        WDN.jQuery("#addMedia, #feedlist").slideUp(400, function () {
+            WDN.jQuery("#headline_main").slideDown(400, function () {
+                WDN.jQuery("#media_form").show().css({"width": "930px"}).parent("#formDetails").removeClass("two_col right");
+                WDN.jQuery("#existing_media, #enhanced_header, #feedSelect, #maincontent form.zenform #continue3").slideDown(400);
+                //WDN.jQuery("#media_url").attr("value", WDN.jQuery("#url").val());
+                WDN.jQuery(this).css('display', 'inline-block');
             });
-
         });
+
+    });
     
     WDN.jQuery('a#setImage').live('click', function(){
     	var currentTime;
