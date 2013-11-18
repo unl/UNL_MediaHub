@@ -132,7 +132,8 @@ WDN.jQuery(document).ready(function() {
     });
 
     WDN.jQuery("#mediaSubmit").click(function (event) { //called when a user adds video
-
+        var isUpload = false;
+        
         if (document.getElementById("file_upload").value == '') {
             if (!mediaDetails.validURL(document.getElementById("url").value)) {
                 return false;
@@ -141,6 +142,7 @@ WDN.jQuery(document).ready(function() {
             event.preventDefault();
 
         } else {
+            isUpload = true;
             // Hide the url field, user is uploading a file
             WDN.jQuery('#media_url').closest('li').hide();
         }
@@ -151,7 +153,12 @@ WDN.jQuery(document).ready(function() {
             WDN.jQuery("#headline_main").slideDown(400, function () {
                 WDN.jQuery("#media_form").show().css({"width": "930px"}).parent("#formDetails").removeClass("two_col right");
                 WDN.jQuery("#existing_media, #enhanced_header, #feedSelect, #maincontent form.zenform #continue3").slideDown(400);
-                //WDN.jQuery("#media_url").attr("value", WDN.jQuery("#url").val());
+                
+                //set the url if this is not an upload.
+                if (!isUpload) {
+                    WDN.jQuery("#media_url").attr("value", WDN.jQuery("#url").val());
+                }
+                
                 WDN.jQuery(this).css('display', 'inline-block');
             });
         });
