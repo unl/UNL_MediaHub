@@ -7,11 +7,12 @@
  */
 ini_set('display_errors', true);
 error_reporting(E_ALL);
-set_include_path(dirname(dirname(__DIR__)).'/src'.PATH_SEPARATOR.dirname(dirname(__DIR__)).'/vendor/php');
+set_include_path(dirname(dirname(__DIR__)).'/src'.PATH_SEPARATOR.dirname(dirname(__DIR__)).'/../UNL_DWT/src');
 require_once 'UNL/Templates.php';
 
 // Optionally set the version you'd like to use
-UNL_Templates::$options['version'] = 3.1;
+UNL_Templates::$options['version'] = 4;
+UNL_Templates::$options['templatedependentspath'] = 'https://raw.github.com/unl/wdntemplates/4.0';
 
 $page = UNL_Templates::factory('Fixed', array('sharedcodepath' => 'sharedcode'));
 $page->addScript('test.js');
@@ -25,4 +26,4 @@ $page->navlinks         = '<ul><li><a href="#">Hello world!</a></li></ul>';
 $page->leftRandomPromo  = '';
 $page->maincontentarea  .= highlight_file(__FILE__, true);
 $page->loadSharedcodeFiles();
-echo $page;
+echo $page->toHTML();
