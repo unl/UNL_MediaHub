@@ -1,9 +1,9 @@
 <?php
 /**
- * Handles scanning a dwt file for regions.
- * 
+ * Handles scanning a dwt file for regions and rendering.
+ *
  * PHP version 5
- * 
+ *
  * @category  Templates
  * @package   UNL_DWT
  * @author    Brett Bieber <brett.bieber@gmail.com>
@@ -12,6 +12,7 @@
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
  * @link      http://pear.unl.edu/package/UNL_DWT
  */
+require_once 'UNL/DWT.php';
 require_once 'UNL/DWT/Region.php';
 
 /**
@@ -23,10 +24,10 @@ require_once 'UNL/DWT/Region.php';
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
  * @link      http://pear.unl.edu/package/UNL_DWT
  */
-class UNL_DWT_Scanner
+class UNL_DWT_Scanner extends UNL_DWT
 {
     protected $_regions;
-    
+
     /**
      * The contents of the .dwt file you wish to scan.
      *
@@ -34,20 +35,31 @@ class UNL_DWT_Scanner
      */
     function __construct($dwt)
     {
+        $this->__template = $dwt;
         $this->scanRegions($dwt);
     }
-    
+
+    /**
+     * Return the template markup
+     *
+     * @return string
+     */
+    function getTemplateFile()
+    {
+        return $this->__template;
+    }
+
     function scanRegions($dwt)
     {
         $this->_regions[] = array();
-        
+
         $dwt = str_replace("\r", "\n", $dwt);
         $dwt = preg_replace("/(\<\!-- InstanceBeginEditable name=\"([A-Za-z0-9]*)\" -->)/i", "\n\\0\n", $dwt);
         $dwt = preg_replace("/(\<\!-- TemplateBeginEditable name=\"([A-Za-z0-9]*)\" -->)/i", "\n\\0\n", $dwt);
         $dwt = preg_replace("/\<\!-- InstanceEndEditable -->/", "\n\\0\n", $dwt);
         $dwt = preg_replace("/\<\!-- TemplateEndEditable -->/", "\n\\0\n", $dwt);
         $dwt = explode("\n", $dwt);
-        
+
         $newRegion = false;
         $region    = new UNL_DWT_Region();
         foreach ($dwt as $key=>$fileregion) {
@@ -87,12 +99,12 @@ class UNL_DWT_Scanner
             }
         }
     }
-    
+
     /**
      * returns the region object
      *
      * @param string $region
-     * 
+     *
      * @return UNL_DWT_Region
      */
     public function getRegion($region)
@@ -102,7 +114,7 @@ class UNL_DWT_Scanner
         }
         return null;
     }
-    
+
     /**
      * returns array of all the regions found
      *
@@ -112,18 +124,18 @@ class UNL_DWT_Scanner
     {
         return $this->_regions;
     }
-    
+
     public function __isset($region)
     {
         return isset($this->_regions[$region]);
     }
-    
+
     public function __get($region)
     {
         if (isset($this->_regions[$region])) {
             return $this->_regions[$region]->value;
         }
-        
+
         $trace = debug_backtrace();
         trigger_error(
             'Undefined property: ' . $region .
@@ -132,7 +144,15 @@ class UNL_DWT_Scanner
             E_USER_NOTICE);
         return null;
     }
-    
-}
 
-?>
+    /**
+     * Allow directly rendering
+     *
+     * @return string
+     */
+    function __toString()
+    {
+        return $this->toHtml();
+    }
+
+}

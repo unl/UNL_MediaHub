@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="ie iem7"><!-- InstanceBegin template="/Templates/unlaffiliate_debug.dwt" codeOutsideHTMLIsLocked="false" --><![endif]-->
-<!--[if lt IE 7 ]><html class="ie ie6" lang="en"><!-- InstanceBegin template="/Templates/unlaffiliate_debug.dwt" codeOutsideHTMLIsLocked="false" --><![endif]-->
-<!--[if IE 7 ]><html class="ie ie7" lang="en"><!-- InstanceBegin template="/Templates/unlaffiliate_debug.dwt" codeOutsideHTMLIsLocked="false" --><![endif]-->
-<!--[if IE 8 ]><html class="ie ie8" lang="en"><!-- InstanceBegin template="/Templates/unlaffiliate_debug.dwt" codeOutsideHTMLIsLocked="false" --><![endif]-->
-<!--[if (gte IE 9)|(gt IEMobile 7) ]><html class="ie" lang="en"><!-- InstanceBegin template="/Templates/unlaffiliate_debug.dwt" codeOutsideHTMLIsLocked="false" --><![endif]-->
+<!--[if IEMobile 7 ]><html class="ie iem7"><![endif]-->
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"><![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"><![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"><![endif]-->
+<!--[if (gte IE 9)|(gt IEMobile 7) ]><html class="ie" lang="en"><![endif]-->
 <!--[if !(IEMobile) | !(IE)]><!--><html lang="en"><!-- InstanceBegin template="/Templates/unlaffiliate_debug.dwt" codeOutsideHTMLIsLocked="false" --><!--<![endif]-->
 <head>
 <!--#include virtual="/wdn/templates_3.1/includes/metanfavico.html" -->
@@ -31,7 +31,7 @@
 <link rel="stylesheet" type="text/css" media="screen" href="../sharedcode/affiliate.css" />
 <link href="../sharedcode/affiliate_imgs/favicon.ico" rel="shortcut icon" />
 <!-- InstanceEndEditable -->
-<!-- TemplateParam name="class" type="text" value="fixed debug" -->
+<!-- InstanceParam name="class" type="text" value="fixed debug" -->
 </head>
 <body class="@@(_document['class'])@@" data-version="3.1">
     <nav class="skipnav">

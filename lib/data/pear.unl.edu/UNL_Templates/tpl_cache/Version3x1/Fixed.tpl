@@ -30,7 +30,7 @@
 <!-- Place optional header elements here -->
 
 <!-- InstanceEndEditable -->
-<!-- TemplateParam name="class" type="text" value="fixed" -->
+<!-- InstanceParam name="class" type="text" value="fixed" -->
 </head>
 <body class="@@(_document['class'])@@" data-version="3.1">
     <nav class="skipnav">
