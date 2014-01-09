@@ -13,10 +13,10 @@ This package generates php class files (objects) from Dreamweaver template files
   <email>brett.bieber@gmail.com</email>
   <active>yes</active>
  </lead>
- <date>2012-03-30</date>
- <time>14:00:16</time>
+ <date>2014-01-09</date>
+ <time>11:45:42</time>
  <version>
-  <release>0.7.2</release>
+  <release>0.9.0</release>
   <api>0.7.1</api>
  </version>
  <stability>
@@ -24,21 +24,27 @@ This package generates php class files (objects) from Dreamweaver template files
   <api>beta</api>
  </stability>
  <license uri="http://www1.unl.edu/wdn/wiki/Software_License">BSD</license>
- <notes>Scanner fix - do not replace newlines with spaces in scanned content</notes>
+ <notes>Feature Release
+* Add support for immedaitely rendering a scanned DWT [saltybeagle]
+
+Bug Fixes
+ * Prevent greedy matching of template regions [spam38]
+</notes>
  <contents>
   <dir name="/">
-   <file role="php" name="src/UNL/DWT/Scanner.php" md5sum="80ab5854ed8c2ab159c53cd5adc757b2"/>
-   <file role="php" name="src/UNL/DWT/Region.php" md5sum="be81db10741075600fc87ebbc4c4ca53"/>
-   <file role="php" name="src/UNL/DWT/Generator.php" md5sum="aea406280cedf3a0e9b32ab7ee354b3f"/>
-   <file role="php" name="src/UNL/DWT/createTemplates.php" md5sum="8ccd77b7def177033c20128da938d1ff"/>
-   <file role="php" name="src/UNL/DWT.php" md5sum="c8b1f16f587798a1e37574477d2627bd"/>
-   <file role="doc" name="docs/examples/Template_style1.tpl" md5sum="b524ef4684be7dba47ed8c245577347a"/>
-   <file role="doc" name="docs/examples/Template_style1.php" md5sum="3f97c4a024dfed9210b14db5068ba7d0"/>
-   <file role="doc" name="docs/examples/template_style1.dwt" md5sum="0d5a4f5ca86e9c2a3c0050f39acbb034"/>
-   <file role="doc" name="docs/examples/scanner_example.php" md5sum="e29437d89b8193aede3fc400ef1f363d"/>
-   <file role="doc" name="docs/examples/example_style1.php" md5sum="8fc92f34a5d56e8664ae669bb39ba763"/>
-   <file role="doc" name="docs/examples/example.test.ini" md5sum="28a080af44b5db3f28c73fa91cdabe99"/>
-   <file role="doc" name="docs/examples/example.ini" md5sum="783c64aafb491c789fc71a5bf80d1755"/>
+   <file role="php" name="php/UNL/DWT/Scanner.php" md5sum="276e82e5db587c9c18a100e1e877082e"/>
+   <file role="php" name="php/UNL/DWT/Region.php" md5sum="858136d43bf29868dca876783e51d196"/>
+   <file role="php" name="php/UNL/DWT/Generator.php" md5sum="a3b933a0d7f8d81f72836bb2c5fb6914"/>
+   <file role="php" name="php/UNL/DWT/Exception.php" md5sum="5b99b44fbfde7349c6b9e6d9be78e9dc"/>
+   <file role="php" name="php/UNL/DWT/createTemplates.php" md5sum="9089565d275b52e0cd65c52edd50ef18"/>
+   <file role="php" name="php/UNL/DWT.php" md5sum="ca9d707c266ad9150e39d1a9a60c5643"/>
+   <file role="doc" name="doc/pear.unl.edu/UNL_DWT/examples/scanner_example.php" md5sum="2d16f0e62c4227aa28108bf78d74156a"/>
+   <file role="doc" name="doc/pear.unl.edu/UNL_DWT/examples/basic/Template_style1.tpl" md5sum="b524ef4684be7dba47ed8c245577347a"/>
+   <file role="doc" name="doc/pear.unl.edu/UNL_DWT/examples/basic/Template_style1.php" md5sum="096998b112a1e27bddc6c171380d590e"/>
+   <file role="doc" name="doc/pear.unl.edu/UNL_DWT/examples/basic/template_style1.dwt" md5sum="0d5a4f5ca86e9c2a3c0050f39acbb034"/>
+   <file role="doc" name="doc/pear.unl.edu/UNL_DWT/examples/basic/example_style1.php" md5sum="d3f43ac017b9bdf1819cf05a4c4a33a2"/>
+   <file role="doc" name="doc/pear.unl.edu/UNL_DWT/examples/basic/example.test.ini" md5sum="28a080af44b5db3f28c73fa91cdabe99"/>
+   <file role="doc" name="doc/pear.unl.edu/UNL_DWT/examples/basic/example.ini" md5sum="d5f99a1b621d226611d2fe93761db93d"/>
   </dir>
  </contents>
  <dependencies>
@@ -47,7 +53,7 @@ This package generates php class files (objects) from Dreamweaver template files
     <min>5.0.0</min>
    </php>
    <pearinstaller>
-    <min>1.4.3</min>
+    <min>2.0.0a1</min>
    </pearinstaller>
    <package>
     <name>UNL_Templates</name>

@@ -22,6 +22,14 @@ class UNL_Templates_Version3x1_Fixed extends UNL_Templates
     public $optionalfooter = "";                 // string()  
     public $footercontent = "<!--#include virtual=\"../sharedcode/footer.html\" -->";                  // string()  
 
+    public $__params = array (
+  'class' => 
+  array (
+    'name' => 'class',
+    'type' => 'text',
+    'value' => 'fixed',
+  ),
+);
     /* Static get */
     function staticGet($k,$v=NULL) { return UNL_DWT::staticGet('UNL_Templates_Version3x1_Fixed',$k,$v); }
 

@@ -34,7 +34,7 @@ class UNL_Templates_Version2 implements UNL_Templates_Version
         }
 
         if (file_exists(UNL_Templates::getDataDir().'/tpl_cache/Version2/'.$template)) {
-            return file_get_contents($template);
+            return file_get_contents(UNL_Templates::getDataDir().'/tpl_cache/Version2/'.$template);
         }
 
         throw new Exception('Could not get the template file!');

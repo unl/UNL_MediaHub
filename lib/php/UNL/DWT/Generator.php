@@ -4,7 +4,7 @@
  * Dreamweaver Template files.
  *
  * PHP version 5
- *  
+ *
  * @category  Templates
  * @package   UNL_DWT
  * @author    Brett Bieber <brett.bieber@gmail.com>
@@ -15,12 +15,13 @@
  */
 
 require_once 'UNL/DWT.php';
+require_once 'UNL/DWT/Exception.php';
 require_once 'UNL/DWT/Region.php';
 
 /**
  * The generator parses actual .dwt Dreamweaver Template files to create object relationship
  * files which have member variables for editable regions within the dreamweaver templates.
- * 
+ *
  * @category  Templates
  * @package   UNL_DWT
  * @author    Brett Bieber <brett.bieber@gmail.com>
@@ -36,18 +37,24 @@ class UNL_DWT_Generator extends UNL_DWT
      * Array of template names.
      */
     var $templates;
-    
+
     /**
      * Current template being output
      */
     var $template;
-    
+
     /**
      * Assoc array of template region names.
      * $_regions[$template] = array();
      */
     var $_regions;
-    
+
+    /**
+     * Assoc array of template params
+     * $_params[$template] = array();
+     */
+    var $_params;
+
     /**
      * class being extended (can be overridden by
      * [UNL_DWT_Generator] extends=xxxx
@@ -56,7 +63,7 @@ class UNL_DWT_Generator extends UNL_DWT
      * @access private
      */
     var $_extends = 'UNL_DWT';
-    
+
     /**
      * line to use for require_once 'UNL/DWT.php';
      *
@@ -64,7 +71,7 @@ class UNL_DWT_Generator extends UNL_DWT
      * @access private
      */
     var $_extendsFile = 'UNL/DWT.php';
-    
+
     /**
      * begins generation of template files
      *
@@ -77,10 +84,10 @@ class UNL_DWT_Generator extends UNL_DWT
         $this->generateTemplates();
         $this->generateClasses();
     }
-    
+
     /**
      * Generates .tpl files from .dwt
-     * 
+     *
      * @return void
      */
     function generateTemplates()
@@ -90,14 +97,14 @@ class UNL_DWT_Generator extends UNL_DWT
             include_once 'System.php';
             System::mkdir(array('-p', UNL_DWT::$options['dwt_location']));
         }
-        if (!file_exists($options['tpl_location'])) {
+        if (!file_exists(UNL_DWT::$options['tpl_location'])) {
             include_once 'System.php';
             System::mkdir(array('-p', UNL_DWT::$options['tpl_location']));
         }
         foreach ($this->templates as $this->template) {
             $dwt = file_get_contents($dwt_location.$this->template);
             $dwt = $this->scanRegions($dwt);
-            
+
             $sanitizedName = $this->sanitizeTemplateName($this->template);
             //Write out the .tpl file?
             if (strpos(UNL_DWT::$options['tpl_location'], '%s') !== false) {
@@ -105,23 +112,23 @@ class UNL_DWT_Generator extends UNL_DWT
             } else {
                 $outfilename = UNL_DWT::$options['tpl_location']."/{$sanitizedName}.tpl";
             }
-            $this->debug("Writing {$sanitizedName} to {$outfilename}", 
+            $this->debug("Writing {$sanitizedName} to {$outfilename}",
                          'generateTemplates');
             $fh = fopen($outfilename, "w");
             fputs($fh, $dwt);
             fclose($fh);
         }
     }
-    
+
     /**
      * Create a list of dwts
-     * 
+     *
      * @return void
      */
     function createTemplateList()
     {
         $this->templates = array();
-        
+
         $dwt_location = UNL_DWT::$options['dwt_location'];
         if (is_dir($dwt_location)) {
             $handle = opendir($dwt_location);
@@ -143,19 +150,19 @@ class UNL_DWT_Generator extends UNL_DWT
             throw new UNL_DWT_Exception("dwt_location is incorrect\n");
         }
     }
-    
+
     /**
      * Generate the classes for templates in $this->templates
      *
      * @return void
      */
     function generateClasses()
-    {        
+    {
         if ($extends = @UNL_DWT::$options['extends']) {
             $this->_extends     = $extends;
             $this->_extendsFile = UNL_DWT::$options['extends_location'];
         }
-        
+
         foreach ($this->templates as $this->template) {
             $this->classname = $this->generateClassName($this->template);
             if (strpos(UNL_DWT::$options['class_location'], '%s') !== false) {
@@ -170,19 +177,19 @@ class UNL_DWT_Generator extends UNL_DWT
                 $oldcontents = implode('', file($outfilename));
             }
             $out = $this->_generateClassTemplate($oldcontents);
-            $this->debug("Writing {$this->classname} to {$outfilename}", 
+            $this->debug("Writing {$this->classname} to {$outfilename}",
                         'generateClasses');
             $fh = fopen($outfilename, "w");
             fputs($fh, $out);
             fclose($fh);
         }
     }
-    
+
     /**
      * Generates the class name from a filename.
-     * 
+     *
      * @param string $filename The filename of the template.
-     * 
+     *
      * @return string Sanitized filename prefixed with the class_prefix
      *                defined in the ini.
      */
@@ -193,40 +200,41 @@ class UNL_DWT_Generator extends UNL_DWT
         }
         return $class_prefix.$this->sanitizeTemplateName($filename);;
     }
-    
+
     /**
      * Cleans the template filename.
      *
      * @param string $filename Filename of the template
-     * 
+     *
      * @return string Sanitized template name
      */
     function sanitizeTemplateName($filename)
     {
-        return preg_replace('/[^A-Z0-9]/i', '_', 
+        return preg_replace('/[^A-Z0-9]/i', '_',
                         ucfirst(str_replace('.dwt', '', $filename)));
     }
-    
+
     /**
      * Scans the .dwt for regions - all found are loaded into assoc array
      * $this->_regions[$template].
      *
      * @param string $dwt Dreamweaver template file to scan.
-     * 
+     *
      * @return string derived template file.
      */
     function scanRegions($dwt)
     {
 
         $this->_regions[$this->template] = array();
-        
+        $this->_params[$this->template] = array();
+
         $dwt = str_replace("\r", "\n", $dwt);
         $dwt = preg_replace("/(\<\!-- InstanceBeginEditable name=\"([A-Za-z0-9]*)\" -->)/i", "\n\\0\n", $dwt);
         $dwt = preg_replace("/(\<\!-- TemplateBeginEditable name=\"([A-Za-z0-9]*)\" -->)/i", "\n\\0\n", $dwt);
         $dwt = preg_replace("/\<\!-- InstanceEndEditable -->/", "\n\\0\n", $dwt);
         $dwt = preg_replace("/\<\!-- TemplateEndEditable -->/", "\n\\0\n", $dwt);
         $dwt = explode("\n", $dwt);
-        
+
         $newRegion = false;
         $region    = new UNL_DWT_Region();
         $this->debug("Checking {$this->template}", 'scanRegions', 0);
@@ -267,27 +275,42 @@ class UNL_DWT_Generator extends UNL_DWT
             }
         }
         $dwt = implode("\n", $dwt);
-        $dwt = preg_replace("/<!--"." InstanceParam name=\"([\w]*)\" type=\"([\w]*)\" value=\"([\w]*)\" -->/", '', $dwt);
+
+        preg_match_all("/<!-- (?:Instance|Template)Param name=\"([^\"]*)\" type=\"([^\"]*)\" value=\"([^\"]*)\" -->/", $dwt, $matches, PREG_SET_ORDER);
+        foreach ($matches as $match) {
+            if (!empty($match[1])) {
+                $this->_params[$this->template][$match[1]] = array(
+                    'name'  => $match[1],
+                    'type'  => $match[2],
+                    'value' => $match[3]
+                );
+            }
+        }
         $dwt = str_replace(array(    "<!--"." TemplateBeginEditable ",
                                     "<!--"." TemplateEndEditable -->",
+                                    "<!-- TemplateParam ",
                                     "\n\n"),
                             array(    "<!--"." InstanceBeginEditable ",
                                     "<!--"." InstanceEndEditable -->",
+                                    "<!-- InstanceParam ",
                                     "\n"), $dwt);
         if (preg_match("<!--"." InstanceBegin template=\"([\/\w\d\.]+)\" codeOutsideHTMLIsLocked=\"([\w]+)\" -->", $dwt)) {
             $dwt = preg_replace("/<!--"." InstanceBegin template=\"([\/\w\d\.]+)\" codeOutsideHTMLIsLocked=\"([\w]+)\" -->/", "<!--"." InstanceBegin template=\"/Templates/{$this->template}\" codeOutsideHTMLIsLocked=\"\\2\" -->", $dwt);
         } else {
-            $dwt = preg_replace("/<html[^>]*>/", "\\0<!--"." InstanceBegin template=\"/Templates/{$this->template}\" codeOutsideHTMLIsLocked=\"false\" -->", $dwt);
+            $pos = strpos($dwt, ">", strripos($dwt, "<html") + 5) + 1;
+            $dwt = substr($dwt, 0, $pos) .
+                "<!--"." InstanceBegin template=\"/Templates/{$this->template}\" codeOutsideHTMLIsLocked=\"false\" -->" .
+                substr($dwt, $pos);
         }
         $dwt = str_replace('@@(" ")@@', '', $dwt);
         return $dwt;
     }
-    
+
     /**
      * The template class geneation part - single file.
      *
      * @param string $input file to generate a class for.
-     * 
+     *
      * @return  updated .php file
      */
     private function _generateClassTemplate($input = '')
@@ -308,13 +331,13 @@ class UNL_DWT_Generator extends UNL_DWT
         if ($padding < 2) {
             $padding =2;
         }
-        $p = str_repeat(' ', $padding);        
-        
+        $p = str_repeat(' ', $padding);
+
         $var   = (substr(phpversion(), 0, 1) > 4) ? 'public' : 'var';
         $body .= "    {$var} \$__template = '".$this->sanitizeTemplateName($this->template).".tpl';  {$p}// template name\n";
-        
+
         $regions = $this->_regions[$this->template];
-        
+
         foreach ($regions as $t) {
             if (!strlen(trim($t->name))) {
                 continue;
@@ -322,25 +345,28 @@ class UNL_DWT_Generator extends UNL_DWT
             $padding = (30 - strlen($t->name));
             if ($padding < 2) $padding =2;
             $p = str_repeat(' ', $padding);
-            
+
             $body .="    {$var} \${$t->name} = \"".addslashes($t->value)."\"; {$p}// {$t->type}({$t->len})  {$t->flags}\n";
         }
-        
+
+        $body .= "\n";
+        $body .= "    {$var} \$__params = " . var_export($this->_params[$this->template], true) . ";\n";
+
         // simple creation tools ! (static stuff!)
         $body .= "\n";
         $body .= "    /* Static get */\n";
         $body .= "    function staticGet(\$k,\$v=NULL) { return UNL_DWT::staticGet('{$this->classname}',\$k,\$v); }\n";
-        
+
         // generate getter and setter methods
         $body .= $this->_generateGetters($input);
         $body .= $this->_generateSetters($input);
-        
+
         $body .= "\n    /* the code above is auto generated do not remove the tag below */";
         $body .= "\n    ###END_AUTOCODE\n";
-        
+
         $foot .= "}\n";
         $full  = $head . $body . $foot;
-        
+
         if (!$input) {
             return $full;
         }
@@ -350,7 +376,7 @@ class UNL_DWT_Generator extends UNL_DWT
         if (!preg_match('/(\n|\r\n)\s*###END_AUTOCODE(\n|\r\n)/s', $input)) {
             return $full;
         }
-        
+
         $class_rewrite = 'UNL_DWT';
         if (!($class_rewrite = @UNL_DWT::$options['generator_class_rewrite'])) {
             $class_rewrite = 'UNL_DWT';
@@ -361,17 +387,17 @@ class UNL_DWT_Generator extends UNL_DWT
         $input = preg_replace('/(\n|\r\n)class\s*[a-z0-9_]+\s*extends\s*' .$class_rewrite . '\s*\{(\n|\r\n)/si',
                 "\nclass {$this->classname} extends {$this->_extends} \n{\n",
                 $input);
-        
+
         return preg_replace('/(\n|\r\n)\s*###START_AUTOCODE(\n|\r\n).*(\n|\r\n)\s*###END_AUTOCODE(\n|\r\n)/s',
                             $body, $input);
-        
+
     }
-    
+
     /**
     * Generate getter methods for class definition
     *
     * @param string $input Existing class contents
-    * 
+    *
     * @return string
     */
     function _generateGetters($input)
@@ -416,7 +442,7 @@ class UNL_DWT_Generator extends UNL_DWT
             $getters .= "        return \$this->{$t->name};\n";
             $getters .= "    }\n\n";
         }
-   
+
         return $getters;
     }
 
@@ -424,12 +450,11 @@ class UNL_DWT_Generator extends UNL_DWT
      * Generate setter methods for class definition
      *
      * @param string $input Existing class contents
-     * 
+     *
      * @return string
      */
     function _generateSetters($input)
     {
-
         $setters = '';
 
         // only generate if option is set to true
@@ -469,8 +494,7 @@ class UNL_DWT_Generator extends UNL_DWT
             $setters .= "        \$this->{$t->name} = \$value;\n";
             $setters .= "    }\n\n";
         }
-        
-        return $setters;
-    } 
 
+        return $setters;
+    }
 }
