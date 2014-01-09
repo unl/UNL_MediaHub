@@ -38,7 +38,7 @@ class UNL_Templates_Version3x1 implements UNL_Templates_Version
             UNL_Templates::debug('ERROR You should have a local copy of wdn/templates_3.1!'
                                  . ' Overriding your specified template to use absolute references' ,
                                  'getTemplate', 1);
-            $template = 'Absolute.tpl';
+            $template = 'Local.tpl';
         }
 
         // Always try and retrieve the latest

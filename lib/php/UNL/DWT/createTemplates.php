@@ -2,9 +2,9 @@
 <?php
 /**
  * Tool to generate objects for dreamweaver template files.
- * 
+ *
  * PHP version 5
- *  
+ *
  * @package   UNL_DWT
  * @author    Brett Bieber <brett.bieber@gmail.com>
  * @created   01/18/2006
@@ -13,10 +13,12 @@
  * @link      http://pear.unl.edu/package/UNL_DWT
  */
 
-// since this version doesnt use overload, 
+// since this version doesnt use overload,
 // and I assume anyone using custom generators should add this..
 define('UNL_DWT_NO_OVERLOAD',1);
 ini_set('display_errors',true);
+
+set_include_path(dirname(__DIR__).'/../../src');
 require_once 'UNL/DWT/Generator.php';
 
 if (!ini_get('register_argc_argv')) {
@@ -24,7 +26,7 @@ if (!ini_get('register_argc_argv')) {
 }
 
 if (!@$_SERVER['argv'][1]) {
-    throw new Exception("\nERROR: createTemplates.php usage:\n\nC:\php\pear\UNL\DWT\createTemplates.php example.ini\n\n");
+    throw new Exception("\nERROR: createTemplates.php usage: 'php phpdwtparser/src/UNL/DWT/createTemplates.php example.ini'\n\n");
 }
 
 $config = parse_ini_file($_SERVER['argv'][1], true);
@@ -41,4 +43,3 @@ set_time_limit(0);
 //UNL_DWT::debugLevel(1);
 $generator = new UNL_DWT_Generator;
 $generator->start();
- 
