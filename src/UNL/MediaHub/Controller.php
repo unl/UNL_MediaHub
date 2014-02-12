@@ -208,6 +208,7 @@ class UNL_MediaHub_Controller
         if ($this->options['model'] == 'feed_image'
             || $this->options['model'] == 'media_image'
             || $this->options['model'] == 'media_embed'
+            || $this->options['model'] == 'media_srt'
             || $this->options['model'] == 'media_vtt') {
             UNL_MediaHub_OutputController::setOutputTemplate('UNL_MediaHub_Controller', 'ControllerPartial');
         }
