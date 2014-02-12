@@ -26,6 +26,11 @@ $meta = '
 <meta name="medium" content="'.$type.'" />
 <meta property="og:type" content="'.$type.'">
 ';
+
+if ($context->privacy !== 'PUBLIC') {
+    $meta .= '<meta name="robots" content="noindex">';
+}
+
 if ($type == 'video') {
     $meta .= '
     <link rel="video_src" href="'.$context->url.'" />
@@ -127,6 +132,9 @@ echo $mediaplayer;
             echo sprintf('%.2f '.$s[$e], ($context->length/pow(1024, floor($e))));
         }?></span>
     <span class="addedDate">Added: <?php echo date('m/d/Y', strtotime($context->datecreated)); ?></span>
+    <div class="play_count">
+        Played <?php echo $context->play_count ?> times
+    </div>
   <?php if (!empty($context->author)) { // @TODO present author with more info (standardize people records) ?>
     <div class="author">
         <p>Author: <?php echo $context->author; ?></p>
@@ -144,5 +152,9 @@ echo $mediaplayer;
 <div id="sharing">
     <h3>Embed</h3>
     <p>Copy the following code into your unl.edu page</p>
-    <textarea cols="25" rows="6" onclick="this.select(); return false;"><?php echo htmlentities($mediaplayer); ?></textarea>
+    
+    <?php 
+    $embed = $savvy->render(UNL_MediaHub_Media_Embed::getById($context->id, UNL_MediaHub_Controller::$current_embed_version));
+    ?>
+    <textarea cols="25" rows="6" onclick="this.select(); return false;"><?php echo htmlentities($embed); ?></textarea>
 </div>

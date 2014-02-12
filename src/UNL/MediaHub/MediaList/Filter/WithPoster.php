@@ -1,27 +1,31 @@
 <?php
-
-class UNL_MediaHub_MediaList_Filter_ShowRecent implements UNL_MediaHub_Filter
+class UNL_MediaHub_MediaList_Filter_WithPoster implements UNL_MediaHub_Filter
 {
+    function __construct()
+    {
+        
+    }
+
     function apply(Doctrine_Query &$query)
     {
-        $query->where('m.datecreated < ? AND m.privacy = ?', array(date('Y-m-d H:i:s'), 'PUBLIC'));
+        $query->where('m.poster IS NOT NULL AND m.poster != ""');
     }
-    
+
     function getLabel()
     {
-        return 'Recent Media';
+        return 'Media with posters';
     }
-    
+
     function getType()
     {
         return '';
     }
-    
+
     function getValue()
     {
         return '';
     }
-    
+
     function __toString()
     {
         return '';
@@ -29,6 +33,6 @@ class UNL_MediaHub_MediaList_Filter_ShowRecent implements UNL_MediaHub_Filter
 
     public static function getDescription()
     {
-        return 'Find recently added media';
+        return 'Find media with custom poster images defined';
     }
 }

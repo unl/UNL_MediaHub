@@ -1,5 +1,4 @@
 var jQuery = WDN.jQuery;
-var player = null;
 var mediaDetails = function() {
 	var video;
 	return {
@@ -14,12 +13,7 @@ var mediaDetails = function() {
 		},
 		
 		updateDuration : function() {
-			if (!player){
-				WDN.jQuery('#itunes_duration').attr('value', mediaDetails.findDuration(WDN.videoPlayer.createFallback.getCurrentInfo('duration')));
-			} else {
-				WDN.log(player.media.duration);
-				WDN.jQuery('#itunes_duration').attr('value', mediaDetails.findDuration(player.media.duration));
-			}
+            WDN.jQuery('#itunes_duration').attr('value', mediaDetails.findDuration(mejs.players[0].media.duration));
 		},
 		
 		findDuration : function(duration) {
@@ -74,6 +68,7 @@ var mediaDetails = function() {
 				// Place the preview markup into the preview div
 				WDN.jQuery('#headline_main').html(data).ready(function(){
 		    		mediaDetails.scalePlayer();
+                    WDN.jQuery('#poster_picker_disabled').hide();
 				});
 			});
 		},
@@ -84,16 +79,22 @@ var mediaDetails = function() {
 			thumbnail.src = WDN.jQuery('#thumbnail').attr('src')+'&time='+mediaDetails.formatTime(0);
 			thumbnail.onload = function(){
 				var calcHeight = (this.height * 460)/this.width;
-				WDN.jQuery('#player').attr('height', calcHeight).attr('width', 460).ready(function(){
-					jQuery.getScript('http://www.unl.edu/wdn/templates_3.0/scripts/mediaelement.js', function(){
-						player = new MediaElementPlayer('#player');
-					});
-				});
 				WDN.jQuery('#videoDisplay object').attr('style', 'width:460px;height:'+calcHeight);
 				WDN.jQuery('#thumbnail').attr('src', thumbnail.src);
 			};
 			thumbnail.onerror = '';
-		}
+		},
+        
+        hidePosterPicker: function() {
+            WDN.jQuery('#poster_picker').hide();
+            WDN.jQuery('#poster_picker_disabled').show();
+        },
+        
+        showPosterPicker: function() {
+            WDN.jQuery('#poster_picker').show();
+            WDN.jQuery('#poster_picker_disabled').hide();
+            mediaDetails.updateThumbnail();
+        }
 	};
 }();
 
@@ -110,40 +111,65 @@ WDN.jQuery(document).ready(function() {
     	WDN.jQuery("#fileUpload").hide();
     }
     
-    WDN.jQuery("#mediaSubmit").click(function(event) { //called when a user adds video
+    if (WDN.jQuery('#media_poster').val() !== '') {
+        WDN.jQuery('#poster_picker').hide();
+    } else {
+        WDN.jQuery('#poster_picker_disabled').hide();
+    }
 
-    		if (document.getElementById("file_upload").value == '') {
-    			if (!mediaDetails.validURL(document.getElementById("url").value)) {
-    				return false;
-    			}
-    			mediaDetails.getPreview(WDN.jQuery("#url").val());
-    			event.preventDefault();
+    WDN.jQuery('#media_poster').on('keyup', function() {
+        if (this.value == '') {
+            mediaDetails.showPosterPicker();
+        } else {
+            WDN.jQuery('#thumbnail').attr('src', this.value);
+            mediaDetails.hidePosterPicker();
+        }
+    });
+    
+    WDN.jQuery('#enable_poster_picker').click(function() {
+        WDN.jQuery('#media_poster').val('');
+        mediaDetails.showPosterPicker();
+    });
 
-    		} else {
-    			// Hide the url field, user is uploading a file
-    			WDN.jQuery('#media_url').closest('li').hide();
-    		}
+    WDN.jQuery("#mediaSubmit").click(function (event) { //called when a user adds video
+        var isUpload = false;
+        
+        if (document.getElementById("file_upload").value == '') {
+            if (!mediaDetails.validURL(document.getElementById("url").value)) {
+                return false;
+            }
+            mediaDetails.getPreview(WDN.jQuery("#url").val());
+            event.preventDefault();
 
-    		WDN.jQuery('#fileUpload').hide();
+        } else {
+            isUpload = true;
+            // Hide the url field, user is uploading a file
+            WDN.jQuery('#media_url').closest('li').hide();
+        }
 
-            WDN.jQuery("#addMedia, #feedlist").slideUp(400, function() {
-                WDN.jQuery("#headline_main").slideDown(400, function() {
-                    WDN.jQuery("#media_form").show().css({"width" : "930px"}).parent("#formDetails").removeClass("two_col right");
-                    WDN.jQuery("#existing_media, #enhanced_header, #feedSelect, #maincontent form.zenform #continue3").slideDown(400);
+        WDN.jQuery('#fileUpload').hide();
+
+        WDN.jQuery("#addMedia, #feedlist").slideUp(400, function () {
+            WDN.jQuery("#headline_main").slideDown(400, function () {
+                WDN.jQuery("#media_form").show().css({"width": "930px"}).parent("#formDetails").removeClass("two_col right");
+                WDN.jQuery("#existing_media, #enhanced_header, #feedSelect, #maincontent form.zenform #continue3").slideDown(400);
+                
+                //set the url if this is not an upload.
+                if (!isUpload) {
                     WDN.jQuery("#media_url").attr("value", WDN.jQuery("#url").val());
-                    WDN.jQuery(this).css('display', 'inline-block');
-                });
+                }
+                
+                WDN.jQuery(this).css('display', 'inline-block');
             });
-
         });
+
+    });
     
     WDN.jQuery('a#setImage').live('click', function(){
     	var currentTime;
-    	if (!player){
-    		currentTime = mejs.players[0].getCurrentTime() + .01;
-    	} else {
-    		currentTime = player.getCurrentTime();
-    	}
+
+        currentTime = mejs.players[0].getCurrentTime() + .01;
+
     	
     	mediaDetails.updateThumbnail(currentTime);
     
@@ -165,13 +191,19 @@ WDN.jQuery(document).ready(function() {
     WDN.initializePlugin('modal', [function() {
         WDN.jQuery('span.embed').colorbox({inline: true, href:'#sharing', width:'600px', height:'310px'});
     }]);
-    WDN.jQuery.validation.addMethod('geo_long', 'This must be a valid longitude.', {min:-180, max:180});
-    WDN.jQuery.validation.addMethod('geo_lat', 'This must be a valid latitude.', {min:-90, max:90});
-    WDN.jQuery('#media_form').validation();
-    
-    WDN.jQuery('#media_form').submit(function() {
-        WDN.jQuery('#continue3').attr('disabled', 'disabled');
-    })
+
+    WDN.initializePlugin('form_validation', [function() {
+        WDN.jQuery.validation.addMethod('geo_long', 'This must be a valid longitude.', {min:-180, max:180});
+        WDN.jQuery.validation.addMethod('geo_lat', 'This must be a valid latitude.', {min:-90, max:90});
+        WDN.jQuery('#media_form').validation();
+
+        WDN.jQuery('#media_form').bind('validate-form', function(event, result) {
+            if (result) {
+                //prevent duplicate submissions
+                WDN.jQuery('#continue3').attr('disabled', 'disabled');
+            }
+        });
+    }]);
     
     //Collapisible forms.
     WDN.jQuery('.collapsible > legend').append("<span class='toggle'>Expand</span>");
@@ -185,22 +217,23 @@ WDN.jQuery(document).ready(function() {
             WDN.jQuery(this).find('.toggle').html('Collapse');
         }
     });
-});
-WDN.loadJS("/wdn/templates_3.0/scripts/plugins/tinymce/jquery.tinymce.js", function() {
-    WDN.jQuery("textarea#description").tinymce({
+
+    WDN.loadJS("../tinymce/jquery.tinymce.js", function() {
+        WDN.jQuery("textarea#description").tinymce({
             // Location of TinyMCE script
-            script_url : "/wdn/templates_3.0/scripts/plugins/tinymce/tiny_mce.js",
+            script_url : "../tinymce/tiny_mce.js",
             theme : "advanced",
             skin : "unl",
-            
+
             // Theme options
-	        theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,|,bullist,numlist,|,link,unlink,anchor,|,removeformat,cleanup,help,code,styleselect,formatselect",
-	        theme_advanced_buttons2 : "",
-	        theme_advanced_buttons3 : "",
-	        theme_advanced_toolbar_location : "top",
-	        theme_advanced_toolbar_align : "left",
-	        theme_advanced_statusbar_location : "bottom",
-	        theme_advanced_resizing : true,
+            theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,|,bullist,numlist,|,link,unlink,anchor,|,removeformat,cleanup,help,code,styleselect,formatselect",
+            theme_advanced_buttons2 : "",
+            theme_advanced_buttons3 : "",
+            theme_advanced_toolbar_location : "top",
+            theme_advanced_toolbar_align : "left",
+            theme_advanced_statusbar_location : "bottom",
+            theme_advanced_resizing : true,
             theme_advanced_row_height : 33
+        });
     });
 });

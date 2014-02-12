@@ -30,7 +30,7 @@ if (isset($context->media)) {
 ?>
 </div>
 <div class="clear"></div>
-<div id="formDetails" class="grid6 first">
+<div id="formDetails">
 <?php echo $savvy->render($context, 'Feed/Media/FileUpload.tpl.php'); ?>
 <form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data" class="zenform cool" style="<?php echo (isset($context->media))?'':'display:none;' ?>">
     <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
@@ -51,7 +51,33 @@ if (isset($context->media)) {
                 <label for="description" class="element"><span class="required">*</span>Description<span class="helper">Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.</span></label>
                 <div class="element" id="description_wrapper"><textarea id="description" name="description" rows="5"><?php echo htmlentities(@$context->media->description); ?></textarea></div>
             </li>
-
+            <li>
+                <label for="privacy" class="element">
+                    Privacy
+                    <span class="helper"><strong>Public</strong> - Anyone can access the media.  <strong>Unlisted</strong> - Media will not be included in public MediaHub listings.  <strong>Private</strong> - Only members of channels that the media is included in can access it.</span>
+                </label>
+                <select id="privacy" name="privacy">
+                    <?php
+                    foreach (UNL_MediaHub_Media::getPossiblePrivacyValues() as $value) {
+                        $selected = '';
+                        if ($value == @$context->media->privacy) {
+                            $selected = 'selected="selected"';
+                        }
+                        
+                        echo "<option value='$value' " . $selected . ">" . ucfirst(strtolower($value)) . "</option>";
+                    }
+                    ?>
+                </select>
+            </li>
+            <?php
+            $text = '';
+            if (isset($context->media) && $context->media->isVideo()) {
+                $text = 'This image will override the one chosen above.';
+            }
+            ?>
+            <li><label>URL of custom poster image<span class="helper">If filled in, this image will be displayed as the thumbnail for the media.  <?php echo $text; ?></span></label>
+                <input id="media_poster" name="poster" type="text" class="validate-url" value="<?php echo htmlentities(@$context->media->poster, ENT_QUOTES); ?>" />
+            </li>
             <li style="display:none;"><label for="submit_existing" class="element">&nbsp;</label><div class="element"><input id="submit_existing" name="submit_existing" value="Save" type="submit" /></div></li>
         </ol>
     </fieldset>
@@ -440,6 +466,6 @@ if (isset($context->media)) {
         <legend>For Which Feeds Shall this Media be Added?</legend>
         <?php echo $savvy->render($context, 'User/FeedSelection.tpl.php'); ?>
     </fieldset>
-    <input type="submit" name="submit" id="continue3" value="Publish" onclick="document.getElementById('submit_existing').click();" /> <img class='uploading' src="/wdn/templates_3.0/scripts/plugins/tinymce/themes/advanced/skins/unl/img/progress.gif" alt="progress animated gif" />
+    <input type="submit" name="submit" id="continue3" value="Publish" onclick="document.getElementById('submit_existing').click(); return false;" /> <img class='uploading' src="/wdn/templates_3.0/scripts/plugins/tinymce/themes/advanced/skins/unl/img/progress.gif" alt="progress animated gif" />
 </form>
 </div>
