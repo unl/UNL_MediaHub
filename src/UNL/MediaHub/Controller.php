@@ -220,6 +220,9 @@ class UNL_MediaHub_Controller
         case 'json':
             header('Content-type: application/json');
             break;
+        case 'srt':
+            header('Content-type: text/srt');
+            break;
         case 'vtt':
             header('Content-type: text/vtt');
             break;
@@ -258,6 +261,9 @@ class UNL_MediaHub_Controller
                 } else {
                     $this->output[] = UNL_MediaHub_Feed_Image::getByTitle($this->options['title']);
                 }
+                break;
+            case 'media_srt':
+                $this->output[] = UNL_MediaHub_Media_VideoTextTrack::getById($this->options['id']);
                 break;
             case 'media_vtt':
                 $this->output[] = UNL_MediaHub_Media_VideoTextTrack::getById($this->options['id']);

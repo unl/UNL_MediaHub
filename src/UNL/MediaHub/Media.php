@@ -269,9 +269,9 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         return str_replace('http://real.unl.edu/podcast/', 'rtmp://real.unl.edu/content/podcast/', $this->url);
     }
 
-    function getVideoTextTrackURL()
+    public function getVideoTextTrackURL($format = 'srt')
     {
-        return UNL_MediaHub_Controller::$url.'media/'.$this->id.'/vtt';
+        return UNL_MediaHub_Controller::$url.'media/'.$this->id.'/'.$format;
     }
 }
 
