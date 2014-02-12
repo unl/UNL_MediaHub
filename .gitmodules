@@ -1,0 +1,3 @@
+[submodule "www/tinymce"]
+	path = www/tinymce
+	url = git@git.unl.edu:iim/TinyMCE.git

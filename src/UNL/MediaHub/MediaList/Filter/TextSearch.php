@@ -10,7 +10,7 @@ class UNL_MediaHub_MediaList_Filter_TextSearch implements UNL_MediaHub_Filter
     
     function apply(Doctrine_Query &$query)
     {
-        $query->where('m.title LIKE ? OR m.description LIKE ?', array('%'.$this->query.'%', '%'.$this->query.'%'));
+        $query->where('(m.title LIKE ? OR m.description LIKE ?) AND m.privacy = ?', array('%'.$this->query.'%', '%'.$this->query.'%', 'PUBLIC'));
     }
     
     function getLabel()

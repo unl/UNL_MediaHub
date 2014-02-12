@@ -6,3 +6,7 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . index.php [L]
 </IfModule>
+
+AddType video/mp4 .mp4
+AddType video/m4v .m4v
+AddType audio/mp3 .mp3

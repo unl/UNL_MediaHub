@@ -54,6 +54,13 @@ class UNL_MediaHub_Controller
     static protected $replacements;
 
     /**
+     * The current embed version to serve
+     * 
+     * @var int
+     */
+    public static $current_embed_version = 2;
+
+    /**
      * currently logged in user, if any
      *
      * @var UNL_MediaHub_User
@@ -101,6 +108,10 @@ class UNL_MediaHub_Controller
         if ($this->options['format'] == 'html'
             && $this->options['mobile'] != 'no') {
             $this->options['mobile'] = self::isMobileClient();
+        }
+        
+        if ($this->options['model'] == 'media_embed') {
+            $this->options['format'] = 'js';
         }
 
         // Start authentication for comment system.
@@ -196,6 +207,7 @@ class UNL_MediaHub_Controller
     {
         if ($this->options['model'] == 'feed_image'
             || $this->options['model'] == 'media_image'
+            || $this->options['model'] == 'media_embed'
             || $this->options['model'] == 'media_vtt') {
             UNL_MediaHub_OutputController::setOutputTemplate('UNL_MediaHub_Controller', 'ControllerPartial');
         }
@@ -208,6 +220,7 @@ class UNL_MediaHub_Controller
             // short circuit execution for CORS OPTIONS reqeusts
             exit();
         }
+        
         switch ($this->options['format']) {
         case 'xml':
         case 'rss':
@@ -226,10 +239,13 @@ class UNL_MediaHub_Controller
         case 'vtt':
             header('Content-type: text/vtt');
             break;
+        case 'js':
+            header('Content-type: text/javascript');
+            break;
         default:
             break;
         }
-
+        
         return true;
     }
 
@@ -253,7 +269,13 @@ class UNL_MediaHub_Controller
             }
             switch ($this->options['model']) {
             case 'media':
-                $this->output[] = $this->findRequestedMedia($this->options);
+                $media = $this->findRequestedMedia($this->options);
+
+                if (!$media->canView()) {
+                    throw new Exception('You do not have permission to do this.', 403);
+                }
+                
+                $this->output[] = $media;
                 break;
             case 'feed_image':
                 if (isset($this->options['feed_id'])) {
@@ -270,6 +292,17 @@ class UNL_MediaHub_Controller
                 break;
             case 'media_image':
                 $this->output[] = UNL_MediaHub_Media_Image::getById($this->options['id']);
+                break;
+            case 'media_embed':
+                $id = null;
+                if (isset($this->options['id'])) {
+                    $id = $this->options['id'];
+                }
+                $version = 1;
+                if (isset($this->options['version'])) {
+                    $version = $this->options['version'];
+                }
+                $this->output[] = UNL_MediaHub_Media_Embed::getById($id, $version, $this->options);
                 break;
             case 'media_file':
                 $this->output[] = UNL_MediaHub_Media_File::getById($this->options['id']);
@@ -295,7 +328,19 @@ class UNL_MediaHub_Controller
         if (isset($options['id'])) {
             $media = Doctrine::getTable('UNL_MediaHub_Media')->find($options['id']);
         }
-
+        
+        if (!empty($_POST) && isset($_POST['action'])) {
+            switch ($_POST['action']) {
+              case 'playcount':
+                //Increase play count.
+                $media->play_count++;
+                $media->save();
+                //Don't need to send a response, so stop here.
+                exit();
+                break;
+            }
+        }
+        
         if (!empty($_POST)
             && self::isLoggedIn()) {
             $user = self::$auth->getUser();

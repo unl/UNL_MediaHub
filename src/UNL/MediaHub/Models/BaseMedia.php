@@ -9,11 +9,14 @@ abstract class UNL_MediaHub_Models_BaseMedia extends Doctrine_Record
         $this->hasColumn('url',           'string',    null, array('fixed' => false, 'primary' => false, 'notnull' => true, 'autoincrement' => false,
                                                                    'regexp' => '/^(https?):\/\/([^\/])+unl\.edu\/.*/',
                                                                    'notblank' => true));
+        $this->hasColumn('poster',        'string',    null, array('fixed' => false, 'primary' => false, 'notnull' => false, 'autoincrement' => false));
         $this->hasColumn('length',        'integer',   4,    array('unsigned' => 0, 'primary' => false, 'notnull' => false, 'autoincrement' => false));
         $this->hasColumn('type',          'string',    null, array('fixed' => false, 'primary' => false, 'notnull' => true, 'autoincrement' => false));
         $this->hasColumn('title',         'string',    null, array('fixed' => false, 'primary' => false, 'notnull' => true, 'autoincrement' => false));
         $this->hasColumn('description',   'string',    null, array('fixed' => false, 'primary' => false, 'notnull' => true, 'autoincrement' => false));
         $this->hasColumn('author',        'string',    null, array('fixed' => false, 'primary' => false, 'notnull' => false, 'autoincrement' => false));
+        $this->hasColumn('privacy',       'enum',      null, array('primary' => false, 'notnull' => true, 'autoincrement' => false, 'values' => array('PUBLIC', 'UNLISTED', 'PRIVATE'), 'default' => 'PUBLIC'));
+        $this->hasColumn('play_count',    'integer',   null, array('unsigned' => 0, 'primary' => false, 'notnull' => true, 'autoincrement' => true));
         $this->hasColumn('datecreated',   'timestamp', null, array('primary' => false, 'notnull' => true, 'autoincrement' => false));
         $this->hasColumn('dateupdated',   'timestamp', null, array('primary' => false, 'notnull' => false, 'autoincrement' => false));
     }

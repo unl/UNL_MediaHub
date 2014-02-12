@@ -258,6 +258,10 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
      */
     function getThumbnailURL()
     {
+        if (!empty($this->poster)) {
+            return $this->poster;
+        }
+        
         return UNL_MediaHub_Controller::$thumbnail_generator.urlencode($this->url);
     }
 
@@ -272,6 +276,44 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     public function getVideoTextTrackURL($format = 'srt')
     {
         return UNL_MediaHub_Controller::$url.'media/'.$this->id.'/'.$format;
+    }
+    
+    static function getPossiblePrivacyValues()
+    {
+        $table = Doctrine::getTable('UNL_MediaHub_Media');
+        $column = $table->getColumnDefinition('privacy');
+        return $column['values'];
+    }
+
+    /**
+     * @return bool
+     */
+    function canView()
+    {
+        //If its not private, anyone can view it.
+        if ($this->privacy != 'PRIVATE') {
+            return true;
+        }
+
+        //At this point a user needs to be logged in.
+        if (!UNL_MediaHub_Controller::isLoggedIn()) {
+            return false;
+        }
+        
+        //Get a list of feeds for this user that contain this media.
+        $feeds = new UNL_MediaHub_FeedList(array(
+            'limit'=>null,
+            'filter'=>new UNL_MediaHub_FeedList_Filter_ByUserWithMediaId(UNL_MediaHub_Controller::getUser(), $this->id)
+        ));
+
+        $feeds->run();
+
+        //Can view only if they are a member of the at least one of the feeds (specific permissions don't matter).
+        if (empty($feeds->items)) {
+            return false;
+        }
+        
+        return true;
     }
 }
 

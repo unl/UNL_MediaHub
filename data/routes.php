@@ -19,6 +19,8 @@ $routes['/^media\/(?P<id>[0-9]+)\/(?P<format>srt)$/'] = 'media_srt';
 
 $routes['/^media\/(?P<id>[0-9]+)\/image(\.[\w]+)?$/'] = 'media_image';
 
+$routes['/^media\/((?P<id>[0-9]+)\/)?embed(\/(?P<version>[0-9]+))?$/'] = 'media_embed';
+
 $routes['/^media\/(?P<id>[0-9]+)\/file(\.[\w]+)?$/'] = 'media_file';
 
 $routes['/^media\/(?P<id>[0-9]+)$/'] = 'media';

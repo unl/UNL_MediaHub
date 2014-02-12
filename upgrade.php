@@ -34,5 +34,9 @@ exec_sql($db, file_get_contents(dirname(__FILE__).'/data/mediahub.sql'), 'Initia
 exec_sql($db, file_get_contents(dirname(__FILE__).'/data/add_dateupdated.sql'), 'Add date updated', true);
 exec_sql($db, file_get_contents(dirname(__FILE__).'/data/add_feed_image.sql'), 'Adding feed image support', true);
 exec_sql($db, file_get_contents(dirname(__FILE__).'/data/add_featured_feed_fields.sql'), 'Adding featured feeds support', true);
+exec_sql($db, file_get_contents(dirname(__FILE__).'/data/add_media_privacy.sql'), 'Adding media privacy settings', true);
+exec_sql($db, file_get_contents(dirname(__FILE__).'/data/add_media_play_count.sql'), 'Adding media play count', true);
+exec_sql($db, file_get_contents(dirname(__FILE__).'/data/add_media_poster.sql'), 'Adding media poster', true);
+
 
 echo 'Upgrade complete!';
