@@ -4,7 +4,8 @@ $track = false;
 
 $ctx = stream_context_create(array(
     'http' => array(
-        'timeout' => 5,
+        // How long to wait for Amara to respond
+        'timeout' => 2,
         )
     )
 ); 
