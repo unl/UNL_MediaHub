@@ -2,8 +2,15 @@
 
 $track = false;
 
+$ctx = stream_context_create(array(
+    'http' => array(
+        'timeout' => 5,
+        )
+    )
+); 
+
 // Check if universal subtitles has info on this media
-if ($info_json = @file_get_contents('http://www.amara.org/api2/partners/videos/?video_url='.$context->url.'&format=json')) {
+if ($info_json = @file_get_contents('http://www.amara.org/api2/partners/videos/?video_url='.$context->url.'&format=json', false, $ctx)) {
     $json = json_decode($info_json);
 
 
@@ -15,7 +22,7 @@ if ($info_json = @file_get_contents('http://www.amara.org/api2/partners/videos/?
     
     if ($json->meta->total_count >= 1) {
         // Try grabbing the vtt or srt from Universal Subtitles
-        $track = @file_get_contents('http://www.amara.org/api2/partners/videos/'.$json->objects[0]->id.'/languages/en/subtitles/?format='.$format);
+        $track = @file_get_contents('http://www.amara.org/api2/partners/videos/'.$json->objects[0]->id.'/languages/en/subtitles/?format='.$format, false, $ctx);
     }
 }
 
