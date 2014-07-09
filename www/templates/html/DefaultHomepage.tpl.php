@@ -1,5 +1,5 @@
 <div class="wdn-grid-set">
-    <div class="wdn-col-three-fourths feature">
+    <div class="bp1-wdn-col-three-fourths feature">
         <div class="group">
             <h3>Media</h3>
             <ul class="switcher">
@@ -35,7 +35,7 @@
             </div>
         </div>
     </div>
-    <div class="wdn-col-one-fourth">
+    <div class="bp1-wdn-col-one-fourth">
         <a href="<?php echo UNL_MediaHub_Controller::getURL(); ?>manager/" class="addMedia">Add your media</a>
         <?php
         echo $savvy->render($context->featured_channels, 'CompactFeedList.tpl.php');
