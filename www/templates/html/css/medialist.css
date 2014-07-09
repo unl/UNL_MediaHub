@@ -6,12 +6,11 @@ Supporting styles for individual presentation of lists of media
 #maincontent .medialist {
     list-style:none;
     padding:0;
-    float:left;
-    width:100%;
 }
 #maincontent .medialist > li {
     list-style:none;
     display:inline-block;
+    width: 100%;
 }
 #maincontent .medialist > li:nth-child(odd){
 	
@@ -49,11 +48,7 @@ ul.medialist li:hover {
 	width:100px;
 }
 #maincontent .medialist div.actions{
-	position:absolute;
-	margin-top:87px;
-	margin-left:5px;
-	font-size:0.8em;
-	float:left;
+	font-size:0.6em;
 }
 #maincontent .medialist div.actions form {
 	display:inline;
@@ -88,6 +83,9 @@ ul.medialist li:hover {
     height:16px;
     left:12px;
     top:5px;
+}
+.center-text {
+    text-align: center;
 }
 
 /* 

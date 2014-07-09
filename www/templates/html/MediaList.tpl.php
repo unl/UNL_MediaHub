@@ -13,7 +13,7 @@ if (count($context->items)) {
                     $parent->context->feed,
                         array_intersect_key(array_merge($context->options, array('page'=>'{%page_number}')), array('page'=>0, 'limit'=>0, 'order'=>0, 'orderby'=>0))
                 );
-    } elseif ($parent->context->options['model'] == 'UNL_MediaHub_MediaList') {
+    } elseif (isset($parent->context->options['model']) && $parent->context->options['model'] == 'UNL_MediaHub_MediaList') {
         //blah
         $url = UNL_MediaHub_Controller::addURLParams($context->getURL(), array('page'=>'{%page_number}'));
     } else {
@@ -30,7 +30,8 @@ if (count($context->items)) {
 	    $addMediaURL .= '&amp;feed_id='.$_GET['id'];
 	}
 	$userCanEdit = false;
-	if (UNL_MediaHub_Controller::isLoggedIn()
+
+	if ($controller->isLoggedIn()
         && $parent->context instanceof UNL_MediaHub_FeedAndMedia
         && $parent->context->feed->userHasPermission(UNL_MediaHub_Controller::getUser(),
             UNL_MediaHub_Permission::getByID(UNL_MediaHub_Permission::USER_CAN_INSERT))) {
@@ -56,7 +57,7 @@ if (count($context->items)) {
         foreach ($context->items as $media) { ?>
             <li>
                 <div class="wdn-grid-set">
-                    <div class="wdn-col-one-fourth">
+                    <div class="wdn-col-one-fourth center-text">
                         <a href="<?php echo UNL_MediaHub_Controller::getURL($media); ?>"><img class="thumbnail" src="<?php echo $media->getThumbnailURL(); ?>" alt="Thumbnail preview for <?php echo htmlspecialchars($media->title, ENT_QUOTES); ?>" /></a>
                         <?php if ($userCanEdit) { ?>
                             <div class="actions">
