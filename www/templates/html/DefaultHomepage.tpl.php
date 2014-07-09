@@ -36,11 +36,11 @@
         </div>
     </div>
     <div class="bp1-wdn-col-one-fourth">
-        <a href="<?php echo UNL_MediaHub_Controller::getURL(); ?>manager/" class="addMedia">Add your media</a>
+        <a href="<?php echo UNL_MediaHub_Controller::getURL(); ?>manager/" class="wdn-button wdn-button-triad">Add your media</a>
         <?php
         echo $savvy->render($context->featured_channels, 'CompactFeedList.tpl.php');
         ?>
-        <a href="<?php echo UNL_MediaHub_Controller::getURL(); ?>channels/">See all channels</a>
+        <a href="<?php echo UNL_MediaHub_Controller::getURL(); ?>channels/" class="wdn-button">See all channels</a>
     </div>
 </div>
 <script type="text/javascript">

@@ -73,46 +73,6 @@ Heading view switcher
 Add Media Button
 -------------------------------------------------
 */
-#maincontent .addMedia {
-    font-weight:bold;
-    font-size:1.4em;
-    color:#fff;
-    background-color: #385E9B;
-    background-image: url('images/iconPlusLG.png');
-    background-image: url('images/iconPlusLG.png'), -moz-linear-gradient(top, #499bea 0%, #385E9B 100%);
-    background-image: url('images/iconPlusLG.png'), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#499bea), color-stop(100%,#385E9B));
-    background-position:7% 50%;
-    background-repeat:no-repeat;
-    display:block;
-    padding:20px 10px 20px 60px;
-    border-radius:10px;
-    -moz-border-radius:10px;
-    -webkit-border-radius:10px;
-    text-shadow: rgba(33, 54, 88, 0.4) -1px -1px 0;
-    border:2px solid #3572ac;
-    margin-bottom:20px;
-}
-#maincontent .addMedia:hover {
-    color:#fff;
-    -webkit-box-shadow: inset 1px 1px 3px rgba(29, 59, 108, 0.4);
-    -moz-box-shadow: inset 1px 1px 3px rgba(29, 59, 108, 0.4);
-    box-shadow: inset 1px 1px 3px rgba(29, 59, 108, 0.4); 
-    background-color: #3665b2;
-    background-image: url('images/iconPlusLG.png');
-    background-image: url('images/iconPlusLG.png'), -moz-linear-gradient(top, #499bea 0%, #3665b2 100%);
-    background-image: url('images/iconPlusLG.png'), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#499bea), color-stop(100%,#3665b2));
-}
-#maincontent .col.right .addMedia + h5 {
-    color:#71819a;
-    font-weight:bold;
-    padding-left:10px;
-    border-left:1px dotted #3b679e;
-    padding-top:8px;
-}
-#maincontent .col.right .addMedia + h5 + ul.channels {
-    border-left:1px dotted #3b679e;
-}
-
 #maincontent #exploreMedia {
     padding-top:25px;
     clear:both;
