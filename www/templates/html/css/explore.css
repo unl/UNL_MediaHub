@@ -15,7 +15,6 @@ Heading view switcher
 }
 #maincontent .group h3, #maincontent #exploreMedia h3 {
     display:inline;
-    float:left;
     color:#385E9B;
     font-weight:bold;
 }
@@ -30,6 +29,7 @@ Heading view switcher
     list-style:none;
     padding:0;
     float:right;
+    margin-top:0px;
 }
 #maincontent .group .switcher li {
     display:inline;
@@ -44,6 +44,7 @@ Heading view switcher
     -webkit-border-radius:25px;
     color:#4f4f4f;
     font-size:0.9em;
+    border-bottom: none;
 }
 #maincontent .group .switcher li a:hover {
     background: #f6f8f9;
