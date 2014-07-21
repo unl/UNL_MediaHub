@@ -13,33 +13,18 @@ body.fixed #maincontent {
 #wdn_app_search form {
     float: right;
     position: relative;
+    font-size: 1em;
 }
 #wdn_app_search label {
 	position:absolute;
 	left:15px;
-	top:3px;
+	top:7px;
 	z-index:10;
 	display:none;
 }
-#q_app {
-	padding: 2px;
-    width: 200px;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-    background-color: #eee;
-    border: 1px solid #BBBBBB;
-    color: #999999;
+form .wdn-input-group {
     font-size: 12px;
-    font-weight: bold;
-    height: 14px;
-    margin: 0;
-    margin-right:5px;
 }
-.search_submit_button {
-	width:20px;
-	text-indent:-9999em;
-	height:20px;
-	background:url("images/magnifyingGlass.png") no-repeat scroll 0 0 transparent;
-	border:none;
+form .wdn-input-group .wdn-input-group-btn * {
+    font-size: 12px;
 }
