@@ -37,24 +37,25 @@ if ($context->isVideo()) {
                         if ($inner = $(v).parents('.mejs-container')) {
                             // share urls
                             var sharelinks = {
-                                tw:     'http://twitter.com/share?text=' + media_type + ': ' + $title + '&url=' + share_url, // twitter
-                                fb:     'https://www.facebook.com/sharer/sharer.php?u=' + share_url,	// facebook
-                                gp:     'https://plus.google.com/share?url=' + share_url, //google plus
-                                em:     'mailto:?body=Checkout this ' + media_type + ': ' + share_url + '&subject=' + media_type + ' : ' + $title
+                                tw:     {title: 'Twitter', url:'http://twitter.com/share?text=' + media_type + ': ' + $title + '&url=' + share_url}, // twitter
+                                fb:     {title: 'Facebook', url:'https://www.facebook.com/sharer/sharer.php?u=' + share_url},	// facebook
+                                gp:     {title: 'Google Plus', url:'https://plus.google.com/share?url=' + share_url}, //google plus
+                                em:     {title: 'Email', url:'mailto:?body=Checkout this ' + media_type + ': ' + share_url + '&subject=' + media_type + ' : ' + $title}
                             }
 
                             //create share links
                             var links = '';
                             for (var key in sharelinks) {
-                                links += '<a href="#" rel="nofollow" class="'+key+'"></a>';
+                                links += '<a href="#" rel="nofollow" class="'+key+'" title="Share on '+sharelinks[key].title+'"></a>';
                             }
 
                             var html = '<div class="media-content-head">';
                             html += '<div class="media-content-title">' + $title + '</div>';
                             html += '<a href="#" rel="nofollow" class="share-video-link">' + 'Share' + '</a>';
                             html += '<div class="share-video-form">';
-                            html += '<em class="share-video-close">x</em><h4>' + 'share this video' + '</h4>';
-                            html += '<em>'+ 'link' +'</em><input type="text" class="share-video-lnk share-data" value="' + share_url + '" />' ;
+                            html += '<em class="share-video-close">x</em>';
+                            html += '<label for="share-video-lnk"><h4>' + 'share this video' + '</h4></label>';
+                            html += '<em>'+ 'link' +'</em><input type="text" id= "share-video-lnk" class="share-video-lnk share-data" value="' + share_url + '" />' ;
 
                             html += '<div class="video-social-share">' + links + '</div>' ;
                             html += '</div>';
@@ -127,7 +128,7 @@ if ($context->isVideo()) {
                                 e.preventDefault();
                                 key = $(this).attr('class');
                                 if(sharelinks[key]) {
-                                    window.open(sharelinks[key]);
+                                    window.open(sharelinks[key].url);
                                 }
                             });
                         }
