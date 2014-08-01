@@ -29,6 +29,7 @@ if ($context->isVideo()) {
                         var $title      = $video.attr('title');
                         var share_url   = $video.attr('data-url');
                         var media_type  = v.tagName.charAt(0).toUpperCase() + v.tagName.slice(1).toLowerCase();
+                        var mediahub_id = $video.attr('data-mediahub-id');
                         
                         if (!share_url) {
                             return;
@@ -55,8 +56,8 @@ if ($context->isVideo()) {
                             html += '<div class="share-video-form">';
                             html += '<em class="share-video-close">x</em>';
                             html += '<h4>' + 'share this video' + '</h4>';
-                            html += '<label for="share-video-lnk-<?php echo $context->id?>"><em>'+ 'link' +'</em></label>';
-                            html += '<input type="text" id= "share-video-lnk-<?php echo $context->id?>" class="share-video-lnk share-data" value="' + share_url + '" />' ;
+                            html += '<label for="share-video-lnk-'+mediahub_id+'"><em>'+ 'link' +'</em></label>';
+                            html += '<input type="text" id="share-video-lnk-'+mediahub_id+'" class="share-video-lnk share-data" value="' + share_url + '" />' ;
 
                             html += '<div class="video-social-share">' + links + '</div>' ;
                             html += '</div>';
