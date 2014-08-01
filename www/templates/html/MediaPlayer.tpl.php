@@ -54,8 +54,9 @@ if ($context->isVideo()) {
                             html += '<a href="#" rel="nofollow" class="share-video-link">' + 'Share' + '</a>';
                             html += '<div class="share-video-form">';
                             html += '<em class="share-video-close">x</em>';
-                            html += '<label for="share-video-lnk-<?php echo $context->id?>"><h4>' + 'share this video' + '</h4></label>';
-                            html += '<em>'+ 'link' +'</em><input type="text" id= "share-video-lnk-<?php echo $context->id?>" class="share-video-lnk share-data" value="' + share_url + '" />' ;
+                            html += '<h4>' + 'share this video' + '</h4>';
+                            html += '<label for="share-video-lnk-<?php echo $context->id?>"><em>'+ 'link' +'</em></label>';
+                            html += '<input type="text" id= "share-video-lnk-<?php echo $context->id?>" class="share-video-lnk share-data" value="' + share_url + '" />' ;
 
                             html += '<div class="video-social-share">' + links + '</div>' ;
                             html += '</div>';
