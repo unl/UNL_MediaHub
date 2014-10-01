@@ -20,4 +20,6 @@ if [ ! -f ${$BASEDIR}/config.inc.php ]; then
     cp ${$BASEDIR}/config.sample.php ${$BASEDIR}/config.inc.php
 fi
 
+php ${$BASEDIR}/upgrade.php
+
 echo "FINISHED installing mediahub"
