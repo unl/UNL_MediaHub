@@ -8,6 +8,7 @@
 www/uploads
 /scripts/popular.sh
 /scripts/popular.txt
+/vagrant/dev/.vagrant
 
 
 /data/mediahub_dump.sql
