@@ -11,7 +11,7 @@ set_include_path(dirname(__FILE__).'/src'.PATH_SEPARATOR.dirname(__FILE__).'/lib
 require_once 'UNL/MediaHub.php';
 UNL_MediaHub::registerAutoloaders();
 
-UNL_MediaHub_Controller::$url = 'http://localhost/workspace/UNL_MediaHub/www/';
+UNL_MediaHub_Controller::$url = 'http://localhost:8007/';
 UNL_MediaHub_Controller::$thumbnail_generator = 'http://itunes.unl.edu/thumbnails.php?url=';
 
 
