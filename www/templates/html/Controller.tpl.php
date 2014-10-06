@@ -22,22 +22,11 @@ if (!$context->output instanceof UNL_MediaHub_FeedAndMedia) {
     $page->head .= '<link rel="alternate" type="application/rss+xml" title="UNL MediaHub" href="?format=xml" />';
 }
 
-$page->maincontentarea = '<div id="wdn_app_search" class="wdn-band">
-    <div class="wdn-inner-wrapper wdn-inner-padding-sm ">
-        <form method="get" action="'.UNL_MediaHub_Controller::getURL().'search/">
-            <div class="wdn-input-group">
-                <label for="q_app">Search MediaHub</label><input id="q_app" name="q" type="text" />
-                <span class="wdn-input-group-btn"><input type="submit" class="search_submit_button" value="Go" /></span>
-            </div>
-        </form>
-    </div>
-</div>
-<script>
-WDN.jQuery("#wdn_search_form").attr("action","'.UNL_MediaHub_Controller::getURL().'search/");
-WDN.jQuery("#wdn_search_form").unbind();
-WDN.jQuery("#wdn_search_query").unbind("keyup");
-</script>';
-$page->maincontentarea .= '<div class="wdn-band"><div class="wdn-inner-wrapper wdn-inner-padding-no-top">' . $savvy->render($context->output) . '</div></div>';
+
+$page->maincontentarea = '';
+
+$page->maincontentarea .= $savvy->render($context->output);
+
 
 $page->navlinks = $savvy->render(null, 'Navigation.tpl.php');
 

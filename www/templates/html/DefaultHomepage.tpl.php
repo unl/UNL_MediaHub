@@ -1,4 +1,45 @@
+<div class="parallax-parent wdn-band" id="apply">
+        <div class="parallax-container">
+            <div class="parallax-image band-020">
+                <div id="video-container">
+                    <video id="video-player" preload="metadata" autoplay="autoplay" loop="" class="fillWidth">
+                        <source src="http://admissions.unl.edu/includes/videos/apply/apply-loop.mp4" type="video/mp4">
+                        <source src="http://admissions.unl.edu/includes/videos/apply/apply-loop.webm" type="video/webm">
+                        <source src="http://admissions.unl.edu/includes/videos/apply/apply-loop.ogg" type="video/ogg">
+                        Your browser does not support the video tag. I suggest you upgrade your browser.
+                    </video>
+                </div>
+            </div>
+
+<div class="parallax-content">
+    <div id="wdn_app_search" class="wdn-band">
+         <div class="wdn-inner-wrapper wdn-inner-padding-sm ">
+             <form method="get" action="'.UNL_MediaHub_Controller::getURL().'search/">
+                 <div class="wdn-input-group bp3-wdn-col-one-third centered" style="position:relative;">
+                     <label for="q_app">Search MediaHub</label><input id="q_app" name="q" type="text" />
+                     <span class="wdn-input-group-btn "><input type="submit" class="search_submit_button" value="Go" /></span>
+                 </div>
+             </form>
+         </div>
+    </div>
+ <script>
+WDN.jQuery("#wdn_search_form").attr("action","'.UNL_MediaHub_Controller::getURL().'search/");
+WDN.jQuery("#wdn_search_form").unbind();
+WDN.jQuery("#wdn_search_query").unbind("keyup");
+</script>'
+                
+            </div>
+        </div>
+    </div>
+
+
+<div class="wdn-band">
+    <div class="wdn-grid-set"></div>
+</div>
+
+
 <div class="wdn-grid-set">
+
     <div class="bp1-wdn-col-three-fourths feature">
         <div class="group">
             <h3>Media</h3>

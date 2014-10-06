@@ -1,0 +1,18 @@
+video.fillWidth {
+	width: 100%;
+}
+
+.parallax-parent {
+	position: relative;
+}
+
+.parallax-content {
+	position: absolute;
+	top: 40%;
+	width: 100%;
+}
+
+.parallax-container {
+	height: 450px;
+	overflow: hidden;
+}
