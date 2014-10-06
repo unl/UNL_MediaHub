@@ -17,8 +17,8 @@ body.fixed #maincontent {
 }
 #wdn_app_search label {
 	position:absolute;
-	left:15px;
-	top:7px;
+    left: 20px;
+    top: 6px;
 	z-index:10;
 	display:none;
 }
