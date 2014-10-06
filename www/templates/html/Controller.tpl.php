@@ -1,7 +1,6 @@
 <?php
 require_once 'UNL/Templates.php';
 
-UNL_Templates::setCachingService(new UNL_Templates_CachingService_Null());
 UNL_Templates::$options['version'] = 4.0;
 
 $template = 'Fixed';
