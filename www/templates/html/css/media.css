@@ -124,3 +124,28 @@ Embed
     margin:15px 0;  
 }
 #sharing textarea {width:96%;}
+
+
+.mh-video-thumb {
+    overflow: hidden;
+    min-height: 14.204em;
+    position: relative;
+}
+
+.mh-video-thumb img{
+    position: absolute;
+    left: 0;
+}
+
+.mh-video-label{
+    background-color: rgba(208, 0, 0, .8);
+    padding: 0.75em;
+    position: absolute;
+    width: 100%;
+    bottom: 0em;
+}
+
+.mh-video-label * {
+    color: #fff;
+    margin: 0;
+}
