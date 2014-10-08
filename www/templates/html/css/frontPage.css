@@ -8,13 +8,14 @@ video.fillWidth {
 
 .parallax-content {
 	position: absolute;
-	top: 40%;
+	top: 30%;
 	width: 100%;
 }
 
 .parallax-container {
 	height: 450px;
 	overflow: hidden;
+	position: relative;
 }
 
 .mh-featured-icon {
@@ -25,13 +26,40 @@ video.fillWidth {
 }
 
 #video-container {
-margin-top: -10%;
+	margin-top: -10%;
 }
 
 .mh-featured-icon [class*="wdn-icon"] {
 
-		padding-top: 0.9em;
-		font-size: 2.369em;
-		color: #fff;
+	padding-top: 0.9em;
+	font-size: 2.369em;
+	color: #fff;
 
 }
+
+.mh-featured-icon [class*="wdn-icon-"]:before {
+	margin-right: 0;
+}
+
+form .wdn-input-group .wdn-input-group-btn * {
+	font-size: 13px;
+}
+
+#wdn_app_search input[type=text]{
+	padding: 1.333em;
+}
+
+@media only screen and (max-width : 768px) {
+	.parallax-image {
+		display: none;
+	}
+	.parallax-container{
+		height: 140px;
+	}
+	.parallax-content {
+		position: absolute;
+		top: 10%;
+		width: 100%;
+	}
+}
+
