@@ -130,6 +130,7 @@ Embed
     overflow: hidden;
     min-height: 14.204em;
     position: relative;
+    margin-bottom: 1.333em;
 }
 
 .mh-video-thumb img{

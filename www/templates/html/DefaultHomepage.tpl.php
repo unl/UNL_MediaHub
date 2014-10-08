@@ -27,7 +27,7 @@ WDN.jQuery("#wdn_search_form").attr("action","'.UNL_MediaHub_Controller::getURL(
 WDN.jQuery("#wdn_search_form").unbind();
 WDN.jQuery("#wdn_search_query").unbind("keyup");
 </script>'
-                
+
             </div>
         </div>
     </div>
@@ -35,20 +35,20 @@ WDN.jQuery("#wdn_search_query").unbind("keyup");
 
 <div class="wdn-band">
     <div class="wdn-inner-wrapper"><div class="bp2-wdn-grid-set-thirds wdn-center">
-            
+
         <div class="wdn-col">
-        <div class="mh-featured-icon centered"><div class="wdn-icon-wrench"></div></div>
-        <h3>MANAGE MEDIA</h3>
+        <div class="mh-featured-icon centered" style="background-color:#D00000;"><div class="wdn-icon-wrench"></div></div>
+        <h3 class="wdn-brand">MANAGE MEDIA</h3>
         <p>Channels are groups of related media. Any media can be part of any channel. Create your own.</p>
     </div>
         <div class="wdn-col">
-         <div class="mh-featured-icon centered"><div class="wdn-icon-search"></div></div>
-         <h3>BROWSE VIDEOS</h3>
+         <div class="mh-featured-icon centered" style="background-color:#00BD3C;"><div class="wdn-icon-search"></div></div>
+         <h3 class="wdn-brand">BROWSE VIDEOS</h3>
         <p>Channels are groups of related media. Any media can be part of any channel. Create your own.</p>
     </div>
         <div class="wdn-col">
-         <div class="mh-featured-icon centered"><div class="wdn-icon-info"></div></div>
-         <h3>EXPLORE CHANNELS</h3>
+         <div class="mh-featured-icon centered" style="background-color:#1B9AE8;"><div class="wdn-icon-info"></div></div>
+         <h3 class="wdn-brand">EXPLORE CHANNELS</h3>
         <p>Channels are groups of related media. Any media can be part of any channel. Create your own.</p>
         </div>
 
@@ -58,21 +58,44 @@ WDN.jQuery("#wdn_search_query").unbind("keyup");
 
 <div class="wdn-band">
 
-<div class="wdn-inner-wrapper"><div class="bp1-wdn-grid-set-thirds">
-	
+<div class="wdn-inner-wrapper">
+<div class="bp1-wdn-grid-set-thirds">
+
+    <h3 class="wdn-brand wdn-center">Latest Video</h3>
+
 <div class="wdn-col">
-	
 <div class="mh-video-thumb wdn-center">
 <img src="http://localhost:8007/channels/620/image">
 <div class="mh-video-label">
-	<h6 class="wdn-brand">Video Title<span class="wdn-subhead">September 19, 2014, 8:33 am</span></h6>
+    <h6 class="wdn-brand"><a href="#">Video Title</a><span class="wdn-subhead">September 19, 2014, 8:33 am</span></h6>
+</div>
 </div>
 </div>
 
+<div class="wdn-col">
+<div class="mh-video-thumb wdn-center">
+<img src="http://localhost:8007/channels/620/image">
+<div class="mh-video-label">
+    <h6 class="wdn-brand"><a href="#">Video Title</a><span class="wdn-subhead">September 19, 2014, 8:33 am</span></h6>
+</div>
+</div>
 </div>
 
-</div></div>
+<div class="wdn-col">
+<div class="mh-video-thumb wdn-center">
+<img src="http://localhost:8007/channels/620/image">
+<div class="mh-video-label">
+    <h6 class="wdn-brand"><a href="#">Video Title</a><span class="wdn-subhead">September 19, 2014, 8:33 am</span></h6>
+</div>
+</div>
+</div>
 
+
+</div>
+</div>
+
+
+</div>
 </div>
 
 
