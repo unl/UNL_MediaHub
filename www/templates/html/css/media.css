@@ -128,13 +128,11 @@ Embed
 
 .mh-video-thumb {
     overflow: hidden;
-    min-height: 14.204em;
     position: relative;
     margin-bottom: 1.333em;
 }
 
 .mh-video-thumb img{
-    position: absolute;
     left: 0;
 }
 
@@ -143,10 +141,32 @@ Embed
     padding: 0.75em;
     position: absolute;
     width: 100%;
-    bottom: 0em;
+    bottom: 0.5em;
 }
 
-.mh-video-label * {
+.mh-video-label *, .mh-video-label a:visited {
     color: #fff;
     margin: 0;
+}
+
+.mh-video-thumb:hover .mh-play-button:after {
+    display: block;
+}
+
+.mh-play-button:after {
+    display: none;
+    font-family: wdn-icon;
+    font-style: normal;
+    font-weight: 400;
+    height: 4.997em;
+    width: 4.997em;
+    border-radius: 3em;
+    background-color: rgba(208, 0, 0, .8);
+    content: '\e807';
+    position: absolute;
+    left: 50%;
+    top: 19%;
+    margin-left: -2.4985em;
+    line-height: 4.833em;
+    color: #fff;
 }
