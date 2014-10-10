@@ -74,7 +74,7 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
     {
         $params = array();
 
-        $this->url = UNL_MediaHub_Controller::getURL();
+        self::$url = UNL_MediaHub_Controller::getURL();
         if (!empty($this->options['filter'])) {
             switch ($this->options['filter']->getType()) {
                 case 'tag':
@@ -93,9 +93,9 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
         $params['orderby'] = $this->options['orderby'];
         $params['order']   = $this->options['order'];
 
-        $this->url = UNL_MediaHub_Controller::addURLParams($this->url, $params);
+        self::$url = UNL_MediaHub_Controller::addURLParams(self::$url, $params);
         
-        return $this->url;
+        return self::$url;
     }
 }
 

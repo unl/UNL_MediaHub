@@ -21,11 +21,11 @@ class UNL_MediaHub_Feed_Media_NamespacedElements_itunes extends UNL_MediaHub_Fee
     
     public static function mediaHasElement($media_id, $element)
     {
-        return UNL_MediaHub_Feed_Media_NamespacedElements::mediaHasElement($media_id, $element, 'itunes');
+        return parent::mediaHasElementNS($media_id, $element, self::$xmlns);
     }
     
 	public static function mediaSetElement($media_id, $element, $value)
     {
-        return UNL_MediaHub_Feed_Media_NamespacedElements::mediaSetElement($media_id, $element, 'itunes', $value);
+        return parent::mediaSetElementNS($media_id, $element, self::$xmlns, $value);
     }
 }
