@@ -78,8 +78,6 @@ abstract class UNL_MediaHub_List implements Countable, UNL_MediaHub_CacheableInt
         $this->last  = $pager->getLastIndice();
 
         $this->pager = $pager;
-        
-        $this->getURL();
     }
     
     abstract function setOrderBy(Doctrine_Query &$query);
@@ -102,22 +100,6 @@ abstract class UNL_MediaHub_List implements Countable, UNL_MediaHub_CacheableInt
     function count()
     {
         return $this->total;
-    }
-    
-    /**
-     * Returns a url to describe this specific list.
-     * 
-     * @return string
-     */
-    function getURL()
-    {
-        $this->url = self::$url;
-        
-        $this->url .= '&amp;orderby=' . $this->options['orderby'];
-        
-        $this->url .= '&amp;order=' . $this->options['order'];
-        
-        return $this->url;
     }
 }
 ?>

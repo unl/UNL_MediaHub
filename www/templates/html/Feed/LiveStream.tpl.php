@@ -6,8 +6,8 @@ if (!$context->feed->hasLiveStream()) {
 }
 
 $feed_url = htmlentities(UNL_MediaHub_Controller::getURL($context->feed), ENT_QUOTES);
-UNL_MediaHub_Controller::setReplacementData('title', 'UNL | MediaHub | '.htmlspecialchars($context->feed->title). ' | Live');
-UNL_MediaHub_Controller::setReplacementData('breadcrumbs', '
+$controller->setReplacementData('title', 'UNL | MediaHub | '.htmlspecialchars($context->feed->title). ' | Live');
+$controller->setReplacementData('breadcrumbs', '
 <ul>
     <li><a href="http://www.unl.edu/">UNL</a></li>
     <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li>

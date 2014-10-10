@@ -1,7 +1,7 @@
 <?php
 if (isset($context->label) && !empty($context->label)) {
-    UNL_MediaHub_Controller::setReplacementData('title', 'UNL | Media | '.$context->label);
-    UNL_MediaHub_Controller::setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li>'.$context->label.'</li></ul>');
+    $controller->setReplacementData('title', 'UNL | Media | '.$context->label);
+    $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li>'.$context->label.'</li></ul>');
     echo '<h3>'.$context->label.'</h3>';
 }
 

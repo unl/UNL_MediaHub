@@ -70,7 +70,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         $this->setMRSSContent();
     }
 
-    public function postSave()
+    public function postSave($event)
     {
 //        var_dump('postsave');
 //        $this->setMRSSThumbnail();
@@ -191,7 +191,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         return new UNL_MediaHub_FeedList(array('limit'=>null, 'filter'=>new UNL_MediaHub_FeedList_Filter_WithMediaId($this->id)));
     }
 
-    function delete()
+    function delete(Doctrine_Connection $conn = null)
     {
         $feeds = $this->getFeeds();
         $feeds->run();
@@ -214,7 +214,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         } catch (Exception $e) {
             // Error, just skip this for now.
         }
-        return parent::delete();
+        return parent::delete($conn);
     }
 
     /**
