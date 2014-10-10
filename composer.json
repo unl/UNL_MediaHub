@@ -1,0 +1,52 @@
+{
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/unl/phpdwtparser.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/unl/phpunltemplates.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/saltybeagle/SimpleCAS.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/unlpear/UNL_Auth.git"
+        },
+        {
+            "type": "pear",
+            "url": "http://pear.php.net"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/unlpear/UNL_Cache_Lite.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/saltybeagle/Savvy.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/saltybeagle/Savvy_Turbo.git"
+            
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/unl/RegExpRouter.git"
+        }
+    ],
+    "require": {
+        "unl/php-dwt-parser": "dev-master",
+        "unl/php-unl-templates": "dev-master",
+        "unl/auth": "dev-master",
+        "unl/unl_cache_lite": "dev-master",
+        "unl/reg-exp-router": "dev-master",
+        "pear-pear.php.net/HTTP_Request2": "*",
+        "simple-cas/simple-cas": "dev-master",
+        "saltybeagle/savvy": "dev-master",
+        "saltybeagle/savvy_turbo": "dev-master"
+    }
+}

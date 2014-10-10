@@ -24,7 +24,7 @@ class UNL_MediaHub
     public static function registerAutoloaders()
     {
         include_once 'Doctrine.php';
-
+        require_once __DIR__ . '/../../vendor/autoload.php';
         spl_autoload_register(array('Doctrine', 'autoload'));
         spl_autoload_register(array(__CLASS__, 'loader'));
     }
