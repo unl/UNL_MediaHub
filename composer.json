@@ -47,6 +47,6 @@
         "pear-pear.php.net/HTTP_Request2": "2.2.*",
         "simple-cas/simple-cas": "0.7.0",
         "saltybeagle/savvy": "0.8.1",
-        "saltybeagle/savvy_turbo": "dev-master"
+        "saltybeagle/savvy_turbo": "0.1.*"
     }
 }
