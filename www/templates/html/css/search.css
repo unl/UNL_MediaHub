@@ -20,7 +20,6 @@ body.fixed #maincontent {
     left: 25px;
     top: 13px;
     z-index:10;
-    display:none;
 }
 form .wdn-input-group {
     font-size: 12px;

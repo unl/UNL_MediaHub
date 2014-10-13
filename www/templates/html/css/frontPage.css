@@ -49,6 +49,23 @@ form .wdn-input-group .wdn-input-group-btn * {
 	padding: 1.333em;
 }
 
+.mh-featured p {
+	font-style: italic;
+}
+
+.mh-featured h2 {
+	margin-top: 1.333em;
+}
+
+.mh-red {background-color:#D00000;}
+.mh-green {background-color:#00BD3C;}
+.mh-blue {background-color:#1B9AE8;}
+
+.wdn-input-group {
+	position: relative;
+}
+
+
 @media only screen and (max-width : 768px) {
 	.parallax-image {
 		display: none;

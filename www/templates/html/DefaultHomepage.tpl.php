@@ -14,9 +14,9 @@
             <div id="wdn_app_search" class="wdn-band">
                 <div class="wdn-inner-wrapper wdn-inner-padding-sm ">
                     <form method="get" action="'.UNL_MediaHub_Controller::getURL().'search/">
-                        <div class="wdn-input-group bp3-wdn-col-one-third centered" style="position:relative;">
+                        <div class="wdn-input-group bp3-wdn-col-one-third centered">
                             <label for="q_app">Search MediaHub</label>
-                            <input id="q_app" name="q" type="text" />
+                            <input id="q_app" name="q" type="text" required />
                             <span class="wdn-input-group-btn ">
                                 <input type="submit" class="search_submit_button" value="Go" />
                             </span>
@@ -31,49 +31,49 @@
 <div class="wdn-band">
     <div class="wdn-inner-wrapper">
         <div class="bp2-wdn-grid-set-thirds wdn-center">
-            <div class="wdn-col">
-                <div class="mh-featured-icon centered" style="background-color:#D00000;">
-                    <a href="#">
+            <div class="wdn-col mh-featured">
+                <div class="mh-featured-icon centered mh-red">
+                    <a href="#" title="MANAGE MEDIA">
                         <div class="wdn-icon-wrench"></div>
                     </a>
                 </div>
-                <h3 class="wdn-brand">
+                <h2 class="wdn-brand">
                     <a href="#">MANAGE MEDIA</a>
-                </h3>
+                </h2>
                 <p> 
-                    <em>
+                
                         Channels are groups of related media. Any media can be part of any channel. Create your own.
-                    </em> 
+                 
                 </p>
             </div>
-            <div class="wdn-col">
-                <div class="mh-featured-icon centered" style="background-color:#00BD3C;">
-                    <a href="#">
+            <div class="wdn-col mh-featured">
+                <div class="mh-featured-icon centered mh-green">
+                    <a href="#" title="BROWSE VIDEOS">
                         <div class="wdn-icon-search"></div>
                     </a>
                 </div>
-                <h3 class="wdn-brand">
+                <h2 class="wdn-brand">
                     <a href="#">BROWSE VIDEOS</a>
-                </h3>
+                </h2>
                 <p> 
-                    <em>
+                
                         Channels are groups of related media. Any media can be part of any channel. Create your own.
-                    </em> 
+                 
                 </p>
             </div>
-            <div class="wdn-col">
-                <div class="mh-featured-icon centered" style="background-color:#1B9AE8;">
-                    <a href="#">
+            <div class="wdn-col mh-featured">
+                <div class="mh-featured-icon centered mh-blue">
+                    <a href="#" title="EXPLORE CHANNELS">
                         <div class="wdn-icon-info"></div>
                     </a>
                 </div>
-                <h3 class="wdn-brand">
+                <h2 class="wdn-brand">
                     <a href="#">EXPLORE CHANNELS</a>
-                </h3>
+                </h2>
                 <p>
-                    <em>
+                
                         Channels are groups of related media. Any media can be part of any channel. Create your own.
-                    </em>
+                
                 </p>
             </div>
 

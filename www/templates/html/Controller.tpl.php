@@ -23,9 +23,7 @@ if (!$context->output instanceof UNL_MediaHub_FeedAndMedia) {
 }
 
 
-$page->maincontentarea = '';
-
-$page->maincontentarea .= $savvy->render($context->output);
+$page->maincontentarea = $savvy->render($context->output);
 
 
 $page->navlinks = $savvy->render(null, 'Navigation.tpl.php');
