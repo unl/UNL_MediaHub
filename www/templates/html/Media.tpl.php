@@ -12,8 +12,8 @@ if ($context->isVideo()) {
 }
 
 $context->loadReference('UNL_MediaHub_Media_Comment');
-UNL_MediaHub_Controller::setReplacementData('title', htmlspecialchars($context->title) . ' | MediaHub | University of Nebraska-Lincoln');
-UNL_MediaHub_Controller::setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li>'.htmlspecialchars($context->title).'</li></ul>');
+$controller->setReplacementData('title', htmlspecialchars($context->title) . ' | MediaHub | University of Nebraska-Lincoln');
+$controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li>'.htmlspecialchars($context->title).'</li></ul>');
 $meta = '
 <meta name="title" content="'.htmlentities($context->title, ENT_QUOTES).'" />
 <meta name="description" content="'.htmlentities(strip_tags($context->description), ENT_QUOTES).'" />
@@ -49,8 +49,8 @@ if ($type == 'video') {
 	<meta property="og:audio:type" content="'.$context->type.'" />
 	';
 }
-UNL_MediaHub_Controller::setReplacementData('head', $meta);
-UNL_MediaHub_Controller::setReplacementData('pagetitle', '<h1>'.$context->title.'</h1>');
+$controller->setReplacementData('head', $meta);
+$controller->setReplacementData('pagetitle', '<h1>'.$context->title.'</h1>');
 
 // Store the mediaplayer code in a variable, so we can re-use it for the embed
 $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
