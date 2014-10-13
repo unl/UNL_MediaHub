@@ -410,7 +410,7 @@ class UNL_MediaHub_Controller
      *
      * @return void
      */
-    function setReplacementData($field, $data)
+    public function setReplacementData($field, $data)
     {
         self::$replacements[$field] = $data;
     }
@@ -439,7 +439,7 @@ class UNL_MediaHub_Controller
      *
      * @return string
      */
-    function getURL($mixed = null, $additional_params = array())
+    public static function getURL($mixed = null, $additional_params = array())
     {
         $params = array();
 
