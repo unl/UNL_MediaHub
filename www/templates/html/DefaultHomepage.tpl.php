@@ -78,52 +78,19 @@
 
 <div class="wdn-band wdn-light-neutral-band">
     <div class="wdn-inner-wrapper">
-        <h3 class="wdn-brand wdn-center">
+        <h2 class="wdn-brand wdn-center">
             <span class="wdn-subhead">Latest Video</span>
-        </h3>
+        </h2>
         <div class="bp2-wdn-grid-set-thirds">
-            <div class="wdn-col">
-                <a href="#">
-                    <div class="mh-video-thumb wdn-center">
-                        <img src="http://localhost:8007/channels/620/image">
-                        <div class="mh-play-button"></div>
-                        <div class="mh-video-label">
-                            <h6 class="wdn-brand">
-                                <a href="#">Video Title</a>
-                                <span class="wdn-subhead">September 19, 2014, 8:33 am</span>
-                            </h6>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="wdn-col">
-                <a href="#">
-                    <div class="mh-video-thumb wdn-center">
-                        <img src="http://localhost:8007/channels/620/image">
-                        <div class="mh-play-button"></div>
-                        <div class="mh-video-label">
-                            <h6 class="wdn-brand">
-                                <a href="#">Video Title</a>
-                                <span class="wdn-subhead">September 19, 2014, 8:33 am</span>
-                            </h6>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="wdn-col">
-                <a href="#">
-                    <div class="mh-video-thumb wdn-center">
-                        <img src="http://localhost:8007/channels/620/image">
-                        <div class="mh-play-button"></div>
-                        <div class="mh-video-label">
-                            <h6 class="wdn-brand">
-                                <a href="#">Video Title</a>
-                                <span class="wdn-subhead">September 19, 2014, 8:33 am</span>
-                            </h6>
-                        </div>
-                    </div>
-                </a>
-            </div>
+            <?php
+            foreach ($context->latest_media->items as $media):
+                ?>
+                <div class="wdn-col">
+                    <?php echo $savvy->render($media, 'templates/html/Media/teaser.tpl.php'); ?>
+                </div>
+                <?php
+            endforeach;
+            ?>
         </div>
     </div>
 </div>
