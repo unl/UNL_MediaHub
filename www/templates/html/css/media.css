@@ -158,15 +158,17 @@ Embed
     font-family: wdn-icon;
     font-style: normal;
     font-weight: 400;
-    height: 4.997em;
-    width: 4.997em;
-    border-radius: 3em;
+    font-size: 200%;
+    height: 0;
+    width: 30%;
+    padding: 15% 0;
+    border-radius: 50%;
     background-color: rgba(208, 0, 0, .8);
     content: '\e807';
     position: absolute;
     left: 50%;
     top: 19%;
-    margin-left: -2.4985em;
-    line-height: 4.833em;
+    margin-left: -15%;
+    line-height: 0;
     color: #fff;
 }
