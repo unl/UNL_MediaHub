@@ -1,6 +1,6 @@
 <div class="wdn-band">
-    <div class="parallax-container">
-        <div class="parallax-image band-020">
+    <div class="mh-search-container">
+        <div class="mh-search-image">
             <div id="video-container">
                 <video id="video-player" preload="metadata" autoplay="autoplay" loop="" class="fillWidth">
                     <source src="http://admissions.unl.edu/includes/videos/why-unl/why-unl.mp4" type="video/mp4">
@@ -10,10 +10,11 @@
                 </video>
             </div>
         </div>
-        <div class="parallax-content">
-            <div id="wdn_app_search" class="wdn-band">
+        <div class="mh-search">
+            <div id="wdn_app_search">
                 <div class="wdn-inner-wrapper wdn-inner-padding-sm ">
-                    <form method="get" action="'.UNL_MediaHub_Controller::getURL().'search/">
+                    <form method="get" action='<?php echo UNL_MediaHub_Controller::getURL() ?>
+                        ' search/>
                         <div class="wdn-input-group bp3-wdn-col-one-third centered">
                             <label for="q_app">Search MediaHub</label>
                             <input id="q_app" name="q" type="text" required />
@@ -40,10 +41,8 @@
                 <h2 class="wdn-brand">
                     <a href="#">MANAGE MEDIA</a>
                 </h2>
-                <p> 
-                
-                        Channels are groups of related media. Any media can be part of any channel. Create your own.
-                 
+                <p>
+                    Channels are groups of related media. Any media can be part of any channel. Create your own.
                 </p>
             </div>
             <div class="wdn-col mh-featured">
@@ -55,10 +54,8 @@
                 <h2 class="wdn-brand">
                     <a href="#">BROWSE VIDEOS</a>
                 </h2>
-                <p> 
-                
-                        Channels are groups of related media. Any media can be part of any channel. Create your own.
-                 
+                <p>
+                    Channels are groups of related media. Any media can be part of any channel. Create your own.
                 </p>
             </div>
             <div class="wdn-col mh-featured">
@@ -71,9 +68,7 @@
                     <a href="#">EXPLORE CHANNELS</a>
                 </h2>
                 <p>
-                
-                        Channels are groups of related media. Any media can be part of any channel. Create your own.
-                
+                    Channels are groups of related media. Any media can be part of any channel. Create your own.
                 </p>
             </div>
 

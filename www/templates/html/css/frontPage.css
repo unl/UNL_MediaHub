@@ -2,18 +2,18 @@ video.fillWidth {
 	width: 100%;
 }
 
-.parallax-parent {
+.mh-search-parent {
 	position: relative;
 }
 
-.parallax-content {
+.mh-search {
 	position: absolute;
 	top: 30%;
 	width: 100%;
 }
 
-.parallax-container {
-	height: 450px;
+.mh-search-container {
+	height: 25.24em;
 	overflow: hidden;
 	position: relative;
 }
@@ -67,13 +67,13 @@ form .wdn-input-group .wdn-input-group-btn * {
 
 
 @media only screen and (max-width : 768px) {
-	.parallax-image {
+	.mh-search-image {
 		display: none;
 	}
-	.parallax-container{
+	.mh-search-container{
 		height: 140px;
 	}
-	.parallax-content {
+	.mh-search {
 		position: absolute;
 		top: 10%;
 		width: 100%;
