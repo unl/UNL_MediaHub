@@ -1,5 +1,4 @@
-@import url("/wdn/templates_3.0/css/content/zenform.css");
-@import url("/wdn/templates_3.0/css/content/pagination.css");
+@import url("//unlcms.unl.edu/wdn/templates_4.0/css/modules/pagination.css");
 @import url("media.css");
 @import url("medialist.css");
 @import url("channel.css");
