@@ -494,7 +494,7 @@ class UNL_MediaHub_Controller
         $url .= '?';
 
         foreach ($params as $option=>$value) {
-            if ($option == 'driver') {
+            if (in_array($option, array('driver', 'model', 'filter'))) {
                 continue;
             }
             if ($option == 'format'
