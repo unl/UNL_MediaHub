@@ -17,10 +17,9 @@ body.fixed #maincontent {
 }
 #wdn_app_search label {
 	position:absolute;
-    left: 20px;
-    top: 6px;
-	z-index:10;
-	display:none;
+    left: 25px;
+    top: 13px;
+    z-index:10;
 }
 form .wdn-input-group {
     font-size: 12px;

@@ -2,17 +2,81 @@ video.fillWidth {
 	width: 100%;
 }
 
-.parallax-parent {
+.mh-search-parent {
 	position: relative;
 }
 
-.parallax-content {
+.mh-search {
 	position: absolute;
-	top: 40%;
+	top: 30%;
 	width: 100%;
 }
 
-.parallax-container {
-	height: 450px;
+.mh-search-container {
+	height: 25.24em;
 	overflow: hidden;
+	position: relative;
 }
+
+.mh-featured-icon {
+	height: 9em;
+	width: 9em;
+	border-radius: 5em;
+
+}
+
+#video-container {
+	margin-top: -10%;
+}
+
+.mh-featured-icon [class*="wdn-icon"] {
+
+	padding-top: 0.9em;
+	font-size: 2.369em;
+	color: #fff;
+
+}
+
+.mh-featured-icon [class*="wdn-icon-"]:before {
+	margin-right: 0;
+}
+
+form .wdn-input-group .wdn-input-group-btn * {
+	font-size: 13px;
+}
+
+#wdn_app_search input[type=text]{
+	padding: 1.333em;
+}
+
+.mh-featured p {
+	font-style: italic;
+}
+
+.mh-featured h2 {
+	margin-top: 1.333em;
+}
+
+.mh-red {background-color:#D00000;}
+.mh-green {background-color:#00BD3C;}
+.mh-blue {background-color:#1B9AE8;}
+
+.wdn-input-group {
+	position: relative;
+}
+
+
+@media only screen and (max-width : 768px) {
+	.mh-search-image {
+		display: none;
+	}
+	.mh-search-container{
+		height: 140px;
+	}
+	.mh-search {
+		position: absolute;
+		top: 10%;
+		width: 100%;
+	}
+}
+

@@ -13,7 +13,7 @@
  * 
  * @package UNL_Services_Peoplefinder
  */
-class UNL_Services_Peoplefinder
+abstract class UNL_Services_Peoplefinder
 {
     
     /**
@@ -22,7 +22,7 @@ class UNL_Services_Peoplefinder
      * @param string $uid
      * @return string|false
      */
-    function getFullName($uid)
+    public static function getFullName($uid)
     {
         if ($vcard = UNL_Services_Peoplefinder::getVCard($uid)) {
             $matches = array();
@@ -43,7 +43,7 @@ class UNL_Services_Peoplefinder
      * @param string $uid
      * @return string|false
      */
-    function getEmail($uid)
+    public static function getEmail($uid)
     {
         if ($hcard = UNL_Services_Peoplefinder::getHCard($uid)) {
             $matches = array();
@@ -64,7 +64,7 @@ class UNL_Services_Peoplefinder
      * @param string $uid
      * @return string|false
      */
-    function getHCard($uid)
+    public static function getHCard($uid)
     {
         if ($hcard = file_get_contents('http://peoplefinder.unl.edu/hcards/'.$uid)) {
             return $hcard;
@@ -79,7 +79,7 @@ class UNL_Services_Peoplefinder
      * @param string $uid
      * @return string|false
      */
-    function getVCard($uid)
+    public static function getVCard($uid)
     {
         if ($vcard = file_get_contents('http://peoplefinder.unl.edu/vcards/'.$uid)) {
             return $vcard;

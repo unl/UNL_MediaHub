@@ -20,7 +20,7 @@ $js = '<script type="text/javascript">
        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
        ';
 
-UNL_MediaHub_Manager::setReplacementData('head', $js);
+$controller->setReplacementData('head', $js);
 ?>
 <div class="headline_main" id="headline_main">
 <?php
