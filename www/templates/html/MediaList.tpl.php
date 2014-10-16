@@ -2,7 +2,7 @@
 if (isset($context->label) && !empty($context->label)) {
     $controller->setReplacementData('title', 'UNL | Media | '.$context->label);
     $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li>'.$context->label.'</li></ul>');
-    echo '<h3>'.$context->label.'</h3>';
+    echo '<h1>'.$context->label.'</h1>';
 }
 
 if (count($context->items)) {
@@ -38,8 +38,7 @@ if (count($context->items)) {
         $userCanEdit = true;
     }
 ?>
-    <div class="group" style="margin-top:20px;">
-    	<h3>All Media</h3>
+    <div class="group">
     	<?php
     	if ($parent->context instanceof UNL_MediaHub_FeedAndMedia) {
 		    $addMediaURL = UNL_MediaHub_Manager::getURL().'?view=addmedia&amp;feed_id='.$parent->context->feed->id;
