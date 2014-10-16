@@ -10,7 +10,7 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
    
     public $tables = 'UNL_MediaHub_Media m';
 
-    function __construct($options = array())
+    public function __construct($options = array())
     {
         //Dont paginate if we are not viewing html.
         if (isset($options['format']) && $options['format'] !== 'html') {
@@ -22,7 +22,7 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
         $this->setUpFilter();
     }
 
-    function setUpFilter()
+    public function setUpFilter()
     {
 
         if (isset($this->options['q'])
@@ -41,7 +41,7 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
 
     }
     
-    function filterInputOptions()
+    public function filterInputOptions()
     {
         switch ($this->options['order']) {
             case 'ASC':
@@ -65,16 +65,16 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
         $this->options['page'] = (int)$this->options['page'];
     }
     
-    function setOrderBy(Doctrine_Query &$query)
+    public function setOrderBy(Doctrine_Query &$query)
     {
         $query->orderby('m.'.$this->options['orderby'].' '.$this->options['order']);
     }
     
-    function getURL()
+    public function getURL()
     {
         $params = array();
 
-        $this->url = UNL_MediaHub_Controller::getURL();
+        self::$url = UNL_MediaHub_Controller::getURL();
         if (!empty($this->options['filter'])) {
             switch ($this->options['filter']->getType()) {
                 case 'tag':
@@ -93,10 +93,8 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
         $params['orderby'] = $this->options['orderby'];
         $params['order']   = $this->options['order'];
 
-        $this->url = UNL_MediaHub_Controller::addURLParams($this->url, $params);
+        self::$url = UNL_MediaHub_Controller::addURLParams(self::$url, $params);
         
-        return $this->url;
+        return self::$url;
     }
 }
-
-?>

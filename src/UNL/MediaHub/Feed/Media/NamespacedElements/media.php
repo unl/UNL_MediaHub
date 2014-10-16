@@ -31,6 +31,6 @@ class UNL_MediaHub_Feed_Media_NamespacedElements_media extends UNL_MediaHub_Feed
     
     public static function mediaHasElement($media_id, $element)
     {
-        return UNL_MediaHub_Feed_Media_NamespacedElements::mediaHasElement($media_id, $element, 'media');
+        return parent::mediaHasElementNS($media_id, $element, self::$xmlns);
     }
 }

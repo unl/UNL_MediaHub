@@ -27,8 +27,20 @@ class UNL_MediaHub_FeedList extends UNL_MediaHub_List
     function __construct($options = array())
     {
         parent::__construct($options);
-        if (empty($this->options['filter'])) {
+    }
+    
+    public function filterInputOptions()
+    {
+        if (empty($this->options['filter']) || !($this->options['filter'] instanceof UNL_MediaHub_Filter)) {
             $this->options['filter'] = new UNL_MediaHub_FeedList_Filter_WithRelatedMedia();
+        }
+        
+        if (!in_array($this->options['order'], array('ASC', 'DESC'))) {
+            $this->options['order'] = 'ASC';
+        }
+        
+        if (!in_array($this->options['orderby'], array('title', 'datecreated', 'plays'))) {
+            $this->options['orderby'] = 'title';
         }
     }
     /**
@@ -38,6 +50,11 @@ class UNL_MediaHub_FeedList extends UNL_MediaHub_List
      */
     function setOrderBy(Doctrine_Query &$query)
     {
-        $query->orderby('f.'.$this->options['orderby'].' '.$this->options['order']);
+        if ($this->options['orderby'] == 'plays') {
+            $query->orderBy('SUM(f.UNL_MediaHub_Media.play_count) '.$this->options['order']);
+            $query->groupBy('f.id');
+        } else {
+            $query->orderby('f.'.$this->options['orderby'].' '.$this->options['order']);
+        }
     }
 }
