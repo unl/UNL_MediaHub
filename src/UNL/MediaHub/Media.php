@@ -31,6 +31,25 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         return false;
     }
     
+    public static function formatNumber($number, $precision = 0)
+    {
+        $suffix = '';
+        $exp = floor(log($number, 10));
+        
+        if ($exp >= 6) {
+            $exp = 6;
+            $suffix = ' M';
+        } elseif ($exp >= 4) {
+            $exp = 3;
+            $suffix = ' k';
+        } else {
+            $exp = 0;
+        }
+        
+        $value = round($number / pow(10, $exp), $precision) . $suffix;
+        return $value;
+    }
+    
     /**
      * called before an item is inserted to the database
      * 

@@ -6,4 +6,4 @@ if ($creator) {
     $creator = $context->uidcreated;
 }
 ?>
-<h6 class="subhead">This channel was created by <?php echo $creator; ?> on <?php echo date("F j, Y, g:i a", strtotime($context->datecreated));?>.</h6>
+<p class="mh-feed-author">This channel was created by <?php echo $creator; ?></p>
