@@ -14,7 +14,7 @@ if (isset($context->label) && !empty($context->label)) {
     <div class="mh-list-header">
         <h1 class="wdn-brand"><?php echo $label; ?></h1>
         <?php if (count($context->items) && $context->pager->getLastPage() > 1): ?>
-        <p>Page <?php echo $context->pager->getPage() ?> of <?php echo $context->pager->getLastPage() ?></p>
+            <p>Page <?php echo $context->pager->getPage() ?> of <?php echo $context->pager->getLastPage() ?></p>
         <?php endif; ?>
     </div>
     <?php if (count($context->items)): ?>
@@ -40,7 +40,15 @@ if (isset($context->label) && !empty($context->label)) {
                     </div>
                     <div class="bp2-wdn-col-three-fourths">
                         <p><?php echo htmlentities($feed->description) ?></p>
-                        <?php echo $savvy->render($feed->getMediaList(), 'CompactMediaList.tpl.php') ?>
+                        <?php $feed->getStats() ?>
+                        <div class="wdn-grid-set">
+                            <div class="bp2-wdn-col-two-thirds mh-media-samples">
+                                <?php echo $savvy->render($feed->getMediaList(), 'CompactMediaList.tpl.php') ?>
+                            </div>
+                            <div class="bp2-wdn-col-one-third mh-feed-stats">
+                                <?php echo $savvy->render($feed, 'Feed/Stats.tpl.php') ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
         		<p class="mh-more-info wdn-sans-serif"><a href="<?php echo $url ?>">See channel…</a></p>
