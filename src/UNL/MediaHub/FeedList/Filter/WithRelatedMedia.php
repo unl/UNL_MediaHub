@@ -4,13 +4,13 @@ class UNL_MediaHub_FeedList_Filter_WithRelatedMedia implements UNL_MediaHub_Filt
     
 function apply(Doctrine_Query &$query)
     {
-        $query->where('UNL_MediaHub_Feed_Media.media_id IS NOT NULL AND UNL_MediaHub_Feed_Media.feed_id = f.id');
-        $query->distinct();
+        $query->select('f.*');
+        $query->innerJoin('f.UNL_MediaHub_Media');
     }
     
     function getLabel()
     {
-        return 'Available Channels';
+        return 'All Channels';
     }
     
     function getType()
