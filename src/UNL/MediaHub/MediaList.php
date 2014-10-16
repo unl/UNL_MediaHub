@@ -10,7 +10,7 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
    
     public $tables = 'UNL_MediaHub_Media m';
 
-    function __construct($options = array())
+    public function __construct($options = array())
     {
         //Dont paginate if we are not viewing html.
         if (isset($options['format']) && $options['format'] !== 'html') {
@@ -22,7 +22,7 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
         $this->setUpFilter();
     }
 
-    function setUpFilter()
+    public function setUpFilter()
     {
 
         if (isset($this->options['q'])
@@ -41,7 +41,7 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
 
     }
     
-    function filterInputOptions()
+    public function filterInputOptions()
     {
         switch ($this->options['order']) {
             case 'ASC':
@@ -65,12 +65,12 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
         $this->options['page'] = (int)$this->options['page'];
     }
     
-    function setOrderBy(Doctrine_Query &$query)
+    public function setOrderBy(Doctrine_Query &$query)
     {
         $query->orderby('m.'.$this->options['orderby'].' '.$this->options['order']);
     }
     
-    function getURL()
+    public function getURL()
     {
         $params = array();
 
@@ -98,5 +98,3 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
         return self::$url;
     }
 }
-
-?>
