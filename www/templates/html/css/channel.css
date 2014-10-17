@@ -4,33 +4,14 @@ Supporting styles for individual presentation of channel pages
 -------------------------------------------------
 */
 
-#maincontent #channelIntro {
-    background:#f1f3ea;
-    borer-radius:10px;
-    -moz-border-radius:10px;
-    -webkit-border-radius:10px;
-    padding:15px 25px;
-    width:890px;
-    min-height:175px;
+.mh-feed-info h1 {
+	margin-top: 0;
 }
-#maincontent #channelIntro > img {
-    float:right;
-    width:175px;
+
+.mh-feed-info .mh-feed-stats {
+	display: block;
 }
-#maincontent #channelIntro h1 {
-    padding-bottom:0;   
-}
-#maincontent #channelIntro h6.subhead {
-    font-size:0.85em;
-    padding-top:0.3em;
-    margin-bottom:15px; 
-}
-#maincontent #channelIntro ul{
-    margin:10px 0;  
-    padding:0;
-}
-#maincontent #channelIntro ul li {
-    list-style:none;
-    display:inline; 
-    padding:0px 10px 0 0;   
+
+.mh-feed-info img {
+	width: 100%;
 }
