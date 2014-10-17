@@ -4,22 +4,22 @@ $controller->setReplacementData('title', 'UNL | MediaHub | '.htmlspecialchars($c
 $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li>'.htmlspecialchars($context->feed->title).'</li></ul>');
 $feed_url = htmlentities(UNL_MediaHub_Controller::getURL($context->feed), ENT_QUOTES);
 ?>
-<div id="channelIntro" class="clear">
-    <img src="<?php echo $feed_url; ?>/image" alt="<?php echo htmlentities($context->feed->title, ENT_QUOTES); ?> Image" />
-    <h1><?php echo $context->feed->title; ?></h1>
-    <?php
-    echo $savvy->render($context->feed, 'Feed/Creator.tpl.php');
-    ?>
-    <p><?php echo $context->feed->description; ?></p>
-    <?php //<-- @todo Brett- can we dynamically create this section ? ?>
-    <!-- 
-    <h6 class="list_header">This channel is also available in:</h6>
-    <ul>
-       <li><img src="../manager/templates/css/images/iconItunes.png" alt="Available in iTunesU" /></li>
-       <li><img src="../manager/templates/css/images/iconBoxee.png" alt="Available in Boxee" /></li>
-    </ul>
-     -->
+<div class="wdn-band wdn-light-neutral-band mh-feed-info">
+    <div class="wdn-inner-wrapper">
+        <h1><?php echo htmlentities($context->feed->title) ?></h1>
+        <?php echo $savvy->render($context->feed, 'Feed/Creator.tpl.php') ?>
+        <div class="wdn-grid-set">
+            <div class="bp2-wdn-col-one-fourth wdn-pull-right">
+                <img src="<?php echo $feed_url; ?>/image" alt="<?php echo htmlentities($context->feed->title, ENT_QUOTES); ?> Image" />
+            </div>
+            <div class="bp2-wdn-col-three-fourths">
+                <p><?php echo htmlentities($context->feed->description) ?></p>
+            </div>
+            <div class="bp2-wdn-col-one-fourth wdn-pull-right mh-feed-stats">
+                <?php echo $savvy->render($context->feed, 'Feed/Stats.tpl.php') ?>
+            </div>
+        </div>
+    </div>
 </div>
-<?php
-echo $savvy->render($context->media_list);
-?>
+
+<?php echo $savvy->render($context->media_list); ?>
