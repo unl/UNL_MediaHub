@@ -15,16 +15,4 @@ WDN.loadJQuery(function(){
 		});
 		return false;
 	});
-	/*
-	 * Search Box functionality
-	 */
-	WDN.jQuery('#wdn_app_search label').css({display: "block"});
-	WDN.jQuery('#q_app').focus(function(){
-		WDN.jQuery(this).siblings("label").hide();
-	});
-	WDN.jQuery('#q_app').blur(function(){
-		if (WDN.jQuery('#q_app').val() == "") {
-			WDN.jQuery(this).siblings("label").show();
-		};
-	}); 
 });
