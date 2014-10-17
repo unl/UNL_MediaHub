@@ -30,8 +30,10 @@ if (isset($context->media)) {
 ?>
 </div>
 <div class="clear"></div>
-<div id="formDetails">
+
 <?php echo $savvy->render($context, 'Feed/Media/FileUpload.tpl.php'); ?>
+
+<div id="formDetails">
 <form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data" class="zenform cool" style="<?php echo (isset($context->media))?'':'display:none;' ?>">
     <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
     <?php
@@ -405,7 +407,7 @@ if (isset($context->media)) {
                             <option <?php if ($category == '112102') echo 'selected="selected"'; ?> value="112102">Family &amp; Childcare</option>
                             <option <?php if ($category == '112103') echo 'selected="selected"'; ?> value="112103">Learning Resources</option>
                             <option <?php if ($category == '112104') echo 'selected="selected"'; ?> value="112104">Psychology &amp; Research</option>
-                            <option <?php if ($category == '112105') echo 'selected="selected"'; ?> value="112105">Special Education
+                            <option <?php if ($category == '112105') echo 'selected="selected"'; ?> value="112105">Special Education</option>
                         </optgroup>
                     </select>
                 </div>

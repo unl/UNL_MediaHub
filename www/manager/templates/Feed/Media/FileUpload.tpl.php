@@ -129,7 +129,111 @@ var upload = function() {
     }
 }()
 </script>
-<form id="fileUpload" onsubmit="upload.start()" target="uploadtarget" action="?format=barebones" enctype="multipart/form-data" method="post" class="zenform cool">
+
+
+<div class="wdn-band wdn-light-neutral-band">
+    
+
+    <div class="wdn-inner-wrapper">
+    <h1 class="wdn-brand">Manage Media</h1>
+
+    <form action="?" method="post"><div class="wdn-grid-set">
+            
+            <div class="wdn-col-three-sevenths">
+                <div class="mh-upload-box wdn-center">
+                    <h2>+<span class="wdn-subhead">Add Media</span></h2>
+                    <p>.mp4, .mov, .mp3, .wav, .aac</p>
+                </div>
+            </div>
+    
+            <div class="wdn-col-four-sevenths">
+                <div class="wdn-grid-set">
+                    <div class="wdn-col-three-fifths">
+                        <ol>
+                         <li class="clear-top">
+                         <label for="title">
+                         Title
+                         <span class="required">*</span>
+                         </label>
+                         <input type="text" id="title" name="title">
+                         </li>
+                         <li>
+                         <label for="author">
+                         Author
+                         <span class="required">*</span>
+                         <span class="helper">Name of media creator</span>
+                         </label>
+                         <input type="text" id="author" name="author">
+                         </li>
+                         <li>
+                         <label for="description">
+                         Description
+                         <span class="required">*</span>
+                         </label>
+                         <textarea rows="4" type="text" id="description" name="description">Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.
+                         </textarea>
+                         </li>
+                         <input type="submit" name="publish" value="Publish">
+                        </ol>
+                    </div>
+                    <div class="wdn-col-two-fifths">
+                        <ol>
+                         <li class="clear-top">
+
+                         <label for="privacy">Privacy</label>
+                         <span class="wdn-icon-info mh-tool-tip">
+                         <div>
+                         <ul>
+                         <li><span class="heading">Public</span> - Anyone can access the media. </li>
+                          <li><span class="heading">Unlisted</span> - Media will not be included in public MediaHub listings.</li> 
+                          <li><span class="heading">Private</span> - Only members of channels that the media is included in can access it.</li>
+                          </ul>
+                        </div>
+                         </span>
+
+                         <select name="privacy" id="privacy">
+                         <option value="Public" selected="selected">Public</option>
+                         <option value="unlisted">Unlisted</option>
+                         <option value="Privacy">privacy</option>
+                         </select>
+                         </li>
+
+
+                         <li>
+                         <label for="channels">Channels
+                          <span class="required">*</span>
+                          </label>
+                         <div class="mh-channel-box">                  
+                            <ul>
+
+                             <li><input type="checkbox" name="channels" value="Bike">This is a channel name</li>
+                             <li><input type="checkbox" name="channels" value="Car">Peanut butter biscuits</li> 
+                             <li><input type="checkbox" name="channels" value="Car">Spencer's Channel</li>    
+                             <li><input type="checkbox" name="channels" value="Car">Okay then</li> 
+                             <li><input type="checkbox" name="channels" value="Car">Peanut butter</li> 
+                             <li><input type="checkbox" name="channels" value="Car">WOO butter</li> 
+                             <li><input type="checkbox" name="channels" value="Car">Peanut gutter</li> 
+                             <li><input type="checkbox" name="channels" value="Car">Okay then</li> 
+                             <li><input type="checkbox" name="channels" value="Car">Peanut butter</li> 
+
+                          </ul>
+                          </div>
+                        </li>
+                        </ol>
+
+                    </div>
+                </div>
+            </div>
+    
+        </div></form>               
+
+    </div>
+
+
+</div>
+
+
+    <form id="fileUpload" onsubmit="upload.start()" target="uploadtarget" action="?format=barebones" enctype="multipart/form-data" method="post" class="zenform cool">
     <input type="hidden" name="APC_UPLOAD_PROGRESS" value="<?php echo $upload_id;?>" />
     <input type="hidden" name="__unlmy_posttarget" value="upload_media" />
     <fieldset id="addMedia">
@@ -148,6 +252,9 @@ var upload = function() {
         <input type="submit" name="submit" id="mediaSubmit" value="Add Media" />
     </fieldset>
 </form>
+
+
+
 <div id='progress' class='grid11' style="display:none;">
     <h2>Your media is being uploaded <img class='uploading' src="/wdn/templates_3.0/scripts/plugins/tinymce/themes/advanced/skins/unl/img/progress.gif" alt="progress animated gif" /></h2>
     <div class="meter animate">
@@ -158,3 +265,8 @@ var upload = function() {
 <div id="uploadstatus" style="display:none;"></div>
 <iframe name="uploadprogress" width="1" height="1" id="uploadprogress"></iframe>
 <iframe name="uploadtarget" width="1" height="1" id="uploadtarget"></iframe>
+
+
+<script type="text/javascript">
+WDN.initializePlugin('tooltip');
+</script>
