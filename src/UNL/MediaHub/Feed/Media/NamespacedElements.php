@@ -4,7 +4,7 @@ abstract class UNL_MediaHub_Feed_Media_NamespacedElements extends UNL_MediaHub_M
 {
     abstract function getItemElements();
     
-    public static function mediaHasElement($media_id, $element, $xmlns)
+    protected static function mediaHasElementNS($media_id, $element, $xmlns)
     {
         $query = new Doctrine_Query();
         $query->from('UNL_MediaHub_Feed_Media_NamespacedElements_'.$xmlns);
@@ -12,7 +12,7 @@ abstract class UNL_MediaHub_Feed_Media_NamespacedElements extends UNL_MediaHub_M
         return $query->fetchOne();
     }
     
-    public static function mediaSetElement($media_id, $element, $xmlns, $value)
+    protected static function mediaSetElementNS($media_id, $element, $xmlns, $value)
     {
         $class = 'UNL_MediaHub_Feed_Media_NamespacedElements_' . $xmlns;
         if (call_user_func($class . '::mediaHasElement', $media_id, $element)){

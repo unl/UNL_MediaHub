@@ -2,22 +2,19 @@ video.fillWidth {
 	width: 100%;
 }
 
-.parallax-parent {
+.mh-search-parent {
 	position: relative;
 }
 
-.parallax-content {
+.mh-search {
 	position: absolute;
-	top: 40%;
+	top: 30%;
 	width: 100%;
 }
 
-.parallax-container {
-	height: 450px;
+.mh-search-container {
+	height: 25.24em;
 	overflow: hidden;
-<<<<<<< Updated upstream
-}
-=======
 	position: relative;
 }
 
@@ -46,10 +43,6 @@ video.fillWidth {
 
 form .wdn-input-group .wdn-input-group-btn * {
 	font-size: 13px;
-}
-
-.mh-search #wdn_app_search {
-	padding: 0;
 }
 
 #wdn_app_search input[type=text]{
@@ -87,4 +80,3 @@ form .wdn-input-group .wdn-input-group-btn * {
 	}
 }
 
->>>>>>> Stashed changes

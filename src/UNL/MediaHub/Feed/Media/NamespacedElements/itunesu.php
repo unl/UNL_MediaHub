@@ -16,7 +16,7 @@ class UNL_MediaHub_Feed_Media_NamespacedElements_itunesu extends UNL_MediaHub_Fe
     
     public static function mediaHasElement($media_id, $element)
     {
-        return UNL_MediaHub_Feed_Media_NamespacedElements::mediaHasElement($media_id, $element, 'itunesu');
+        return parent::mediaHasElementNS($media_id, $element, self::$xmlns);
     }
     
     function preInsert($event)

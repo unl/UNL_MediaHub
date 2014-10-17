@@ -1,6 +1,6 @@
 <?php 
-UNL_MediaHub_Controller::setReplacementData('title', 'UNL | MediaHub | Your Media');
-UNL_MediaHub_Controller::setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li>Your Media</li></ul>');
+$controller->setReplacementData('title', 'UNL | MediaHub | Your Media');
+$controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li>Your Media</li></ul>');
 ?>
 <div id="feedlist" class="grid6 first">
     <h1 class="sec_header">Your Channels</h1>
