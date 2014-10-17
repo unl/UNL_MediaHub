@@ -20,6 +20,6 @@ $page->breadcrumbs = '
 
 $page->navlinks = $savvy->render(null, 'Navigation.tpl.php');
 
-$page->maincontentarea = '<div class="wdn-band"><div class="wdn-inner-wrapper wdn-inner-padding-no-top">' . $savvy->render($context->output) . '</div></div>';
+$page->maincontentarea =  $savvy->render($context->output);
 $page->footercontent = '&copy; '.date('Y').' University of Nebraska&ndash;Lincoln | Lincoln, NE 68588 | 402-472-7211 | <a href="http://www1.unl.edu/comments/" title="Click here to direct your comments and questions">comments?</a>';
 echo $page;
