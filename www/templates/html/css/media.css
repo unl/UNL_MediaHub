@@ -129,7 +129,6 @@ Embed
 .mh-video-thumb {
     overflow: hidden;
     position: relative;
-    /*margin-bottom: 1.333em;*/
     min-height: 7.478em;
 }
 
@@ -192,23 +191,4 @@ margin-top: -10px;
 	line-height: 0;
 	color: #fff;
 	z-index: 10;
-}
-
-@-moz-document url-prefix() { 
-
-    .mh-search #wdn_app_search .wdn-input-group-btn  {
-		margin-top: -1px;
-		position: absolute;
-		top: 0px;
-		right: 65px;
-    }
-
-    #wdn_app_search input[type="text"] {
-        width: 99%;
-    }
-
-}
-
-.mh-search #wdn_app_search form {
-    float: none;
 }
