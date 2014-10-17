@@ -12,7 +12,7 @@
         </div>
         <div class="mh-search">
             <div id="wdn_app_search">
-           
+                <div class="wdn-inner-wrapper wdn-inner-padding-sm ">
                     <form method="get" action='<?php echo UNL_MediaHub_Controller::getURL() ?>
                         ' search/>
                         <div class="wdn-input-group bp3-wdn-col-one-third centered">
@@ -23,7 +23,7 @@
                             </span>
                         </div>
                     </form>
-       
+                </div>
             </div>
         </div>
     </div>
@@ -81,7 +81,7 @@
         <h2 class="wdn-brand wdn-center">
             <span class="wdn-subhead">Latest Video</span>
         </h2>
-        <div class="bp1-wdn-grid-set-thirds">
+        <div class="bp2-wdn-grid-set-thirds">
             <?php
             foreach ($context->latest_media->items as $media):
                 ?>
