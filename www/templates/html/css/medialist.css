@@ -3,105 +3,23 @@
 Supporting styles for individual presentation of lists of media
 -------------------------------------------------
 */
-#maincontent .medialist {
-    list-style:none;
-    padding:0;
-}
-#maincontent .medialist > li {
-    list-style:none;
-    display:inline-block;
-    width: 100%;
-}
-#maincontent .medialist > li:nth-child(odd){
-	
-}
-#maincontent .medialist > li:nth-child(even){
-    float:right;
-}
-ul.medialist li {
-    list-style:none;
-    padding:.5em 0;
-    border-bottom:1px dotted #3b679e;
-}
-ul.medialist li:hover {
-	background:#f5f7f9;    
-}
-#maincontent .medialist h4 {
-	font-size:15px;
-	font-weight:bold;
-	text-shadow: rgba(218, 218, 218, 0.4) -1px -1px 0;
-	line-height:1;
-	margin-bottom:2px;
-}
-#maincontent .medialist h6.subhead {
-	margin-bottom:8px;
-    font-size:0.75em;
-    color: #919191;
-}
-#maincontent .medialist p {
-	line-height:1.25em;
-	overflow:hidden;
-	max-height:3.8em;
-}
-#maincontent .medialist li a.imagelink {float:left;}
-#maincontent .medialist li img {
-	width:100px;
-}
-#maincontent .medialist div.actions{
-	font-size:0.6em;
-}
-#maincontent .medialist div.actions form {
-	display:inline;
-	margin-left:5px;
-	border-left:1px solid #c4c2c2;
-	padding-left:8px;
-}
-.medialist + em {
-	font-size:0.8em;
-}
-.pager_links {
-    font-weight:bold;
-    margin:15px 0 15px 0;
-}
-.pager_links a {
-    border: 1px solid #4194bd;
-    padding:5px;
-    color:#4194bd;
-    background:none;
-}
-.pager_links a:hover {
-    border:1px solid #bd4141;
-    color:#bd4141;
-}
-#maincontent a.add_media {
-    background: url('images/iconPlus.png') no-repeat 0 0;
-    position:relative;
-    float:left;
-    text-indent:-99999px;
-    display:inline-block;
-    width:16px;
-    height:16px;
-    left:12px;
-    top:5px;
-}
-.center-text {
-    text-align: center;
+
+.mh-media h1 {
+	margin-top: 0;
 }
 
-/* 
--------------------------------------------------
-Homepage overrides
--------------------------------------------------
-*/
-#maincontent .feature .wdn_tabs_content {
-    padding: 1rem 0;
+.mh-media .wdn_pagination {
+	text-align: center;
+	padding: 0;
 }
-#maincontent .feature .medialist > li {
-    width:100%;
+
+.mh-media .wdn_pagination li {
+	display: inline-block;
+	float: none;
 }
-#maincontent .feature .medialist li img {
-    width:150px;
-}
-#maincontent .feature .wdn_tabs_content em, #maincontent .feature .wdn_tabs_content .wdn_pagination, #maincontent .feature .wdn_tabs_content h3, #maincontent .feature .wdn_tabs_content .group {
-    display:none;
+
+@media (min-width: 768px) {
+	.mh-media-browse.page-1 > :first-child {
+		width: 66.6666%;
+	}
 }

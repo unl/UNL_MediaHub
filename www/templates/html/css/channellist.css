@@ -12,6 +12,10 @@ Supporting styles for listings of channels
 	margin-bottom: 0;
 }
 
+.mh-list-header .wdn-subhead {
+	margin: 0;
+}
+
 .mh-list-header p {
 	margin-top: 0;
 }

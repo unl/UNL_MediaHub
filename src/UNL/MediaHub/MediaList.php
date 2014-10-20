@@ -56,6 +56,7 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
             case 'datecreated':
             case 'eventdate':
             case 'headline':
+            case 'play_count':
                 break;
             default:
                 $this->options['orderby'] = 'datecreated';
@@ -70,11 +71,9 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
         $query->orderby('m.'.$this->options['orderby'].' '.$this->options['order']);
     }
     
-    public function getURL()
+    public function getURL($params = array())
     {
-        $params = array();
-
-        self::$url = UNL_MediaHub_Controller::getURL();
+        $url = UNL_MediaHub_Controller::getURL();
         if (!empty($this->options['filter'])) {
             switch ($this->options['filter']->getType()) {
                 case 'tag':
@@ -83,18 +82,23 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
                                         . ':'
                                         . $this->options['filter']->getValue();
                     break;
-                case 'search':
-                    $this->url .= 'search/';
+                default:
+                    $url .= 'search/';
                     $params['q'] = urlencode($this->options['filter']->getValue());
                     break;
             }
         }
         
-        $params['orderby'] = $this->options['orderby'];
-        $params['order']   = $this->options['order'];
+        if (!isset($params['orderby'])) {
+            $params['orderby'] = $this->options['orderby'];
+        }
 
-        self::$url = UNL_MediaHub_Controller::addURLParams(self::$url, $params);
+        if (!isset($params['order'])) {
+            $params['order'] = $this->options['order'];
+        }
         
-        return self::$url;
+        $url = UNL_MediaHub_Controller::addURLParams($url, $params);
+        
+        return $url;
     }
 }

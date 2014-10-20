@@ -41,20 +41,14 @@ video.fillWidth {
 	margin-right: 0;
 }
 
-form .wdn-input-group .wdn-input-group-btn * {
-	font-size: 13px;
-}
-
-#wdn_app_search input[type=text]{
-	padding: 1.333em;
-}
-
 .mh-featured p {
 	font-style: italic;
 }
 
 .mh-featured h2 {
 	margin-top: 1.333em;
+	text-transform: uppercase;
+	color: inherit;
 }
 
 .mh-red {background-color:#D00000;}
