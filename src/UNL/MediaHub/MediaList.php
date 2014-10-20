@@ -10,6 +10,7 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
         'limit'              => 12,
         'filter'             => null,
         'additional_filters' => array(),
+        'f'                  => '',
     );
    
     public $tables = 'UNL_MediaHub_Media m';
