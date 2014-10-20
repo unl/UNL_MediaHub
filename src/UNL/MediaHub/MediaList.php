@@ -3,10 +3,14 @@
 class UNL_MediaHub_MediaList extends UNL_MediaHub_List
 {
     
-    public $options = array('orderby' => 'datecreated',
-                            'order'   => 'DESC',
-                            'page'    => 0,
-                            'limit'   => 12);
+    public $options = array(
+        'orderby'            => 'datecreated',
+        'order'              => 'DESC',
+        'page'               => 0,
+        'limit'              => 12,
+        'filter'             => null,
+        'additional_filters' => array(),
+    );
    
     public $tables = 'UNL_MediaHub_Media m';
 
@@ -39,6 +43,16 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
             $this->options['filter'] = new UNL_MediaHub_MediaList_Filter_ShowRecent();
         }
 
+        if (isset($this->options['f'])) {
+            switch ($this->options['f']) {
+                case 'video':
+                    $this->options['additional_filters'][] = new UNL_MediaHub_MediaList_Filter_Video();
+                    break;
+                case 'audio':
+                    $this->options['additional_filters'][] = new UNL_MediaHub_MediaList_Filter_Audio();
+                    break;
+            }
+        }
     }
     
     public function filterInputOptions()
