@@ -173,7 +173,22 @@ iframe * {margin:0px}
 }
 
 .mh-tool-tip:hover > div {
-
     display: block;
+}
+
+.mh-video-thumb.mh-featured-channel .mh-thumbnail-clip {
+
+    padding: 0 0 70.7% 0;
 
 }
+
+.mh-your-channels .mh-upload-box{
+    padding: 25% 0 55% 0;
+}
+
+.mh-your-channels .mh-video-label h6{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
