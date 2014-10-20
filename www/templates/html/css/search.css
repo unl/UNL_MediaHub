@@ -3,27 +3,36 @@
 Supporting styles for search box
 -------------------------------------------------
 */
-body.fixed #maincontent {
-    overflow:visible;	
-}
 #wdn_app_search {
     padding:10px;
     padding-right:0;
 }
 #wdn_app_search form {
-    float: right;
     position: relative;
     font-size: 1em;
+    margin: auto;
 }
-#wdn_app_search label {
-	position:absolute;
-    left: 25px;
-    top: 13px;
-    z-index:10;
+
+@media (min-width: 768px) {
+	#wdn_app_search form {
+	    width: 33.3333%
+	}
+	
+	#wdn_app_search label {
+		color: #fff;
+	}
 }
-form .wdn-input-group {
-    font-size: 12px;
+
+form .wdn-input-group .wdn-input-group-btn > input[type="submit"],
+form .wdn-input-group .wdn-input-group-btn > input[type="button"],
+form .wdn-input-group .wdn-input-group-btn > button {
+	font-size: 0.75em;
 }
-form .wdn-input-group .wdn-input-group-btn * {
-    font-size: 12px;
+
+.mh-app-search {
+	margin: 2em 0 1em;
+}
+
+.mh-app-search > * {
+	font-size: 0.75em;
 }
