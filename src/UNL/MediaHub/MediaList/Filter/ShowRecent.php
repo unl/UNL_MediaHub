@@ -9,12 +9,12 @@ class UNL_MediaHub_MediaList_Filter_ShowRecent implements UNL_MediaHub_Filter
     
     function getLabel()
     {
-        return 'Recent Media';
+        return 'All Media';
     }
     
     function getType()
     {
-        return '';
+        return 'browse';
     }
     
     function getValue()
