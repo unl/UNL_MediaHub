@@ -192,3 +192,6 @@ iframe * {margin:0px}
     overflow: hidden;
 }
 
+
+#fileUpload {display: none;} /*Hide upload form for now.*/
+
