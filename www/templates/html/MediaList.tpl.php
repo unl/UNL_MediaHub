@@ -69,7 +69,9 @@ if (isset($context->label) && !empty($context->label)) {
                 <input type="radio" name="f" value="audio" id="additional_filter_audio" <?php echo ($context->options['f'] == 'audio')?'checked="checked"':'' ?>><label for="additional_filter_audio">Audio</label>
                 <input type="radio" name="f" value="video" id="additional_filter_video" <?php echo ($context->options['f'] == 'video')?'checked="checked"':'' ?>><label for="additional_filter_video">Video</label>
                 <input type="radio" name="f" value="" id="additional_filter_all" <?php echo ($context->options['f'] == '')?'checked="checked"':'' ?>><label for="additional_filter_all">All</label>
-                <input type="hidden" name="q" value="<?php echo (isset($context->options['q']))?$context->options['q']:'';?>">
+                <?php if ($context->options['filter']->getType() == 'search'): ?>
+                    <input type="hidden" name="q" value="<?php echo (isset($context->options['q']))?$context->options['q']:'';?>">
+                <?php endif; ?>
                 <input type="submit" value="Filter"/>
             </form>
             
