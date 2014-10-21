@@ -78,6 +78,7 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
                 break;
         }
         
+        $this->options['additional_filters'] = array();
         $this->options['page'] = (int)$this->options['page'];
     }
     
