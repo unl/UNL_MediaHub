@@ -113,6 +113,10 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
             $params['order'] = $this->options['order'];
         }
         
+        if (!isset($params['f'])) {
+            $params['f'] = $this->options['f'];
+        }
+        
         $url = UNL_MediaHub_Controller::addURLParams($url, $params);
         
         return $url;
