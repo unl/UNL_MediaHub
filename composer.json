@@ -1,4 +1,9 @@
 {
+    "autoload": {
+        "psr-0": {
+            "UNL_": ["src", "lib/php"]
+        }
+    },
     "repositories": [
         {
             "type": "vcs",
@@ -47,6 +52,7 @@
         "pear-pear.php.net/HTTP_Request2": "2.2.*",
         "simple-cas/simple-cas": "0.7.0",
         "saltybeagle/savvy": "0.8.1",
-        "saltybeagle/savvy_turbo": "0.1.*"
+        "saltybeagle/savvy_turbo": "0.1.*",
+        "phpunit/phpunit": "~4.3"
     }
 }
