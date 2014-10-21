@@ -133,372 +133,106 @@ var upload = function() {
 
 <div class="wdn-band wdn-light-neutral-band">
 
-    <div class="wdn-inner-wrapper">
+  <div class="wdn-inner-wrapper">
     <h1 class="wdn-brand">Manage Media</h1>
 
     <form action="?" method="post"><div class="wdn-grid-set">
-            
-            <div class="wdn-col-three-sevenths">
-                <div class="mh-upload-box wdn-center">
-                    <h2>+<span class="wdn-subhead">Add Media</span></h2>
-                    <p>.mp4, .mov, .mp3, .wav, .aac</p>
-                </div>
-            </div>
-    
-            <div class="wdn-col-four-sevenths">
-                <div class="wdn-grid-set">
-                    <div class="wdn-col-three-fifths">
-                        <ol>
-                         <li class="clear-top">
-                         <label for="title">
-                         Title
-                         <span class="required">*</span>
-                         </label>
-                         <input type="text" id="title" name="title">
-                         </li>
-                         <li>
-                         <label for="author">
-                         Author
-                         <span class="required">*</span>
-                         <span class="helper">Name of media creator</span>
-                         </label>
-                         <input type="text" id="author" name="author">
-                         </li>
-                         <li>
-                         <label for="description">
-                         Description
-                         <span class="required">*</span>
-                         </label>
-                         <textarea rows="4" type="text" id="description" name="description">Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.
-                         </textarea>
-                         </li>
-                         <input type="submit" name="publish" value="Publish">
-                        </ol>
-                    </div>
-                    <div class="wdn-col-two-fifths">
-                        <ol>
-                         <li class="clear-top">
 
-                         <label for="privacy">Privacy</label>
-                         <span class="wdn-icon-info mh-tool-tip">
-                         <div>
-                         <ul>
-                         <li><span class="heading">Public</span> - Anyone can access the media. </li>
-                          <li><span class="heading">Unlisted</span> - Media will not be included in public MediaHub listings.</li> 
-                          <li><span class="heading">Private</span> - Only members of channels that the media is included in can access it.</li>
-                          </ul>
-                        </div>
-                         </span>
+      <div class="wdn-col-three-sevenths">
+        <div class="mh-upload-box wdn-center">
+          <h2>+<span class="wdn-subhead">Add Media</span></h2>
+          <p>.mp4, .mov, .mp3, .wav, .aac</p>
+        </div>
+      </div>
 
-                         <select name="privacy" id="privacy">
-                         <option value="Public" selected="selected">Public</option>
-                         <option value="unlisted">Unlisted</option>
-                         <option value="Privacy">privacy</option>
-                         </select>
-                         </li>
-
-
-                         <li>
-                         <label for="channels">Channels
-                          <span class="required">*</span>
-                          </label>
-                         <div class="mh-channel-box">                  
-                            <ul>
-
-                             <li><input type="checkbox" name="channels" value="Bike">This is a channel name</li>
-                             <li><input type="checkbox" name="channels" value="Car">Peanut butter biscuits</li> 
-                             <li><input type="checkbox" name="channels" value="Car">Spencer's Channel</li>    
-                             <li><input type="checkbox" name="channels" value="Car">Okay then</li> 
-                             <li><input type="checkbox" name="channels" value="Car">Peanut butter</li> 
-                             <li><input type="checkbox" name="channels" value="Car">WOO butter</li> 
-                             <li><input type="checkbox" name="channels" value="Car">Peanut gutter</li> 
-                             <li><input type="checkbox" name="channels" value="Car">Okay then</li> 
-                             <li><input type="checkbox" name="channels" value="Car">Peanut butter</li> 
-
-                          </ul>
-                          </div>
-                        </li>
-                        </ol>
-
-                    </div>
-                </div>
-            </div>
-    
-        </div></form>               
-
-    </div>
-
-</div>
-
-
-
-
-<div class="wdn-band mh-your-channels">
-
-    <div class="wdn-inner-wrapper">
-        <h2 class="wdn-brand">Your Channels</h2>
-
+      <div class="wdn-col-four-sevenths">
         <div class="wdn-grid-set">
+          <div class="wdn-col-three-fifths">
+            <ol>
+              <li class="clear-top">
+                <label for="title">
+                  Title
+                  <span class="required">*</span>
+                </label>
+                <input type="text" id="title" name="title">
+              </li>
+              <li>
+                <label for="author">
+                  Author
+                  <span class="required">*</span>
+                  <span class="helper">Name of media creator</span>
+                </label>
+                <input type="text" id="author" name="author">
+              </li>
+              <li>
+                <label for="description">
+                  Description
+                  <span class="required">*</span>
+                </label>
+                <textarea rows="4" type="text" id="description" name="description">Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.
+                </textarea>
+              </li>
+              <input type="submit" name="publish" value="Publish">
+            </ol>
+          </div>
+          <div class="wdn-col-two-fifths">
+            <ol>
+              <li class="clear-top">
 
-            <div class="bp2-wdn-col-one-half">
-                <a href="#">
-                    <div class="mh-video-thumb mh-featured-channel wdn-center">
-                        <div class="mh-thumbnail-clip">
-                            <img src="http://itunes.unl.edu/thumbnails.php?url=http%3A%2F%2Fmediahub.unl.edu%2Fuploads%2Fa0a49c759323ef5fb77254b8312d4d79.mp4">
-                        </div>
-                        <div class="mh-play-button"></div>
-                    </div>
-                    <div class="mh-video-label wdn-center">
-                        <h6 class="wdn-brand">
-                            <a href="#">
-                                Celebrating the State of the University 2014
-                            </a>
-                            <span class="wdn-subhead">
-                                OCTOBER 2, 2014, 1:49 PM
-                            </span>
-                        </h6>
-                    </div>
-                </a>          
-            </div>
+                <label for="privacy">Privacy</label>
+                <span class="wdn-icon-info mh-tool-tip">
+                  <div>
+                    <ul>
+                      <li><span class="heading">Public</span> - Anyone can access the media. </li>
+                      <li><span class="heading">Unlisted</span> - Media will not be included in public MediaHub listings.</li> 
+                      <li><span class="heading">Private</span> - Only members of channels that the media is included in can access it.</li>
+                    </ul>
+                  </div>
+                </span>
 
-            <div class="bp2-wdn-col-one-fourth">
-                <a href="#">
-                    <div class="mh-video-thumb wdn-center">
-                        <div class="mh-thumbnail-clip">
-                            <img src="http://itunes.unl.edu/thumbnails.php?url=http%3A%2F%2Fmediahub.unl.edu%2Fuploads%2Fa0a49c759323ef5fb77254b8312d4d79.mp4">
-                        </div>
-                        <div class="mh-play-button"></div>
-                    </div>
-                    <div class="mh-video-label wdn-center">
-                        <h6 class="wdn-brand">
-                            <a href="#">
-                                Celebrating the State of the University 2014
-                            </a>
-                            <span class="wdn-subhead">
-                                OCTOBER 2, 2014, 1:49 PM
-                            </span>
-                        </h6>
-                    </div>
-                </a>           
-            </div>
+                <select name="privacy" id="privacy">
+                  <option value="Public" selected="selected">Public</option>
+                  <option value="unlisted">Unlisted</option>
+                  <option value="Privacy">privacy</option>
+                </select>
+              </li>
 
-            <div class="bp2-wdn-col-one-fourth">
-                <a href="#">
-                    <div class="mh-video-thumb wdn-center">
-                        <div class="mh-thumbnail-clip">
-                            <img src="http://itunes.unl.edu/thumbnails.php?url=http%3A%2F%2Fmediahub.unl.edu%2Fuploads%2Fa0a49c759323ef5fb77254b8312d4d79.mp4">
-                        </div>
-                        <div class="mh-play-button"></div>
-                    </div>
-                    <div class="mh-video-label wdn-center">
-                        <h6 class="wdn-brand">
-                            <a href="#">
-                                Celebrating the State of the University 2014
-                            </a>
-                            <span class="wdn-subhead">
-                                OCTOBER 2, 2014, 1:49 PM
-                            </span>
-                        </h6>
-                    </div>
-                </a>
-            </div>
 
-            <div class="bp2-wdn-col-one-fourth">
-                <a href="#">
-                    <div class="mh-video-thumb wdn-center">
-                        <div class="mh-thumbnail-clip">
-                            <img src="http://itunes.unl.edu/thumbnails.php?url=http%3A%2F%2Fmediahub.unl.edu%2Fuploads%2Fa0a49c759323ef5fb77254b8312d4d79.mp4">
-                        </div>
-                        <div class="mh-play-button"></div>
-                    </div>
-                    <div class="mh-video-label wdn-center">
-                        <h6 class="wdn-brand">
-                            <a href="#">
-                                Celebrating the State of the University 2014
-                            </a>
-                            <span class="wdn-subhead">
-                                OCTOBER 2, 2014, 1:49 PM
-                            </span>
-                        </h6>
-                    </div>
-                </a> 
-            </div>
+              <li>
+                <label for="channels">Channels
+                  <span class="required">*</span>
+                </label>
+                <div class="mh-channel-box">                  
+                  <ul>
 
-            <div class="bp2-wdn-col-one-fourth">
-                <a href="#">
-                    <div class="mh-upload-box wdn-center">
-                        <h2>+<span class="wdn-subhead">New Channel</span></h2>
-                    </div>
-                </a>
-            </div>
+                    <li><input type="checkbox" name="channels" value="Bike">This is a channel name</li>
+                    <li><input type="checkbox" name="channels" value="Car">Peanut butter biscuits</li> 
+                    <li><input type="checkbox" name="channels" value="Car">Spencer's Channel</li>    
+                    <li><input type="checkbox" name="channels" value="Car">Okay then</li> 
+                    <li><input type="checkbox" name="channels" value="Car">Peanut butter</li> 
+                    <li><input type="checkbox" name="channels" value="Car">WOO butter</li> 
+                    <li><input type="checkbox" name="channels" value="Car">Peanut gutter</li> 
+                    <li><input type="checkbox" name="channels" value="Car">Okay then</li> 
+                    <li><input type="checkbox" name="channels" value="Car">Peanut butter</li> 
 
+                  </ul>
+                </div>
+              </li>
+            </ol>
+
+          </div>
         </div>
-    </div>
-</div>
-
-<div class="wdn-band wdn-light-neutral-band">
-    
-    <div class="wdn-inner-wrapper">
-    <h2 class="wdn-brand">Your Videos</h2>
-
-    <div class="wdn-grid-set">
-
-        <div class="bp1-wdn-col-one-third">
-
-            <a href="#">
-                <div class="mh-video-thumb wdn-center">
-                    <div class="mh-thumbnail-clip">
-                        <img src="http://itunes.unl.edu/thumbnails.php?url=http%3A%2F%2Fmediahub.unl.edu%2Fuploads%2Fa0a49c759323ef5fb77254b8312d4d79.mp4">
-                    </div>
-                    <div class="mh-play-button"></div>
-                </div>
-                <div class="mh-video-label wdn-center">
-                    <h6 class="wdn-brand">
-                        <a href="#">
-                            Celebrating the State of the University 2014
-                        </a>
-                        <span class="wdn-subhead">
-                            OCTOBER 2, 2014, 1:49 PM
-                        </span>
-                    </h6>
-                </div>
-            </a>
-            
-        </div>
-
-        <div class="bp1-wdn-col-one-third">
-
-            <a href="#">
-                <div class="mh-video-thumb wdn-center">
-                    <div class="mh-thumbnail-clip">
-                        <img src="http://itunes.unl.edu/thumbnails.php?url=http%3A%2F%2Fmediahub.unl.edu%2Fuploads%2Fa0a49c759323ef5fb77254b8312d4d79.mp4">
-                    </div>
-                    <div class="mh-play-button"></div>
-                </div>
-                <div class="mh-video-label wdn-center">
-                    <h6 class="wdn-brand">
-                        <a href="#">
-                            Celebrating the State of the University 2014
-                        </a>
-                        <span class="wdn-subhead">
-                            OCTOBER 2, 2014, 1:49 PM
-                        </span>
-                    </h6>
-                </div>
-            </a>
-            
-        </div>
-
-        <div class="bp1-wdn-col-one-third">
-            <a href="#">
-                <div class="mh-video-thumb wdn-center">
-                    <div class="mh-thumbnail-clip">
-                        <img src="http://itunes.unl.edu/thumbnails.php?url=http%3A%2F%2Fmediahub.unl.edu%2Fuploads%2Fa0a49c759323ef5fb77254b8312d4d79.mp4">
-                    </div>
-                    <div class="mh-play-button"></div>
-                </div>
-                <div class="mh-video-label wdn-center">
-                    <h6 class="wdn-brand">
-                        <a href="#">
-                            Celebrating the State of the University 2014
-                        </a>
-                        <span class="wdn-subhead">
-                            OCTOBER 2, 2014, 1:49 PM
-                        </span>
-                    </h6>
-                </div>
-            </a>
-            
-        </div>
-
+      </div>
 
     </div>
-
-    </div>
+  </form>               
 
 </div>
 
-<div class="wdn-band">
-    
-    <div class="wdn-inner-wrapper">
-    <h2 class="wdn-brand">Your Audio</h2>
-
-    <div class="wdn-grid-set">
-
-        <div class="bp1-wdn-col-one-third">
-
-            <a href="#">
-                <div class="mh-video-thumb wdn-center">
-                    <div class="mh-thumbnail-clip">
-                        <img src="http://itunes.unl.edu/thumbnails.php?url=http%3A%2F%2Fmediahub.unl.edu%2Fuploads%2Fa0a49c759323ef5fb77254b8312d4d79.mp4">
-                    </div>
-                    <div class="mh-play-button"></div>
-                </div>
-                <div class="mh-video-label wdn-center">
-                    <h6 class="wdn-brand">
-                        <a href="#">
-                            Celebrating the State of the University 2014
-                        </a>
-                        <span class="wdn-subhead">
-                            OCTOBER 2, 2014, 1:49 PM
-                        </span>
-                    </h6>
-                </div>
-            </a>
-            
-        </div>
-
-        <div class="bp1-wdn-col-one-third">
-
-            <a href="#">
-                <div class="mh-video-thumb wdn-center">
-                    <div class="mh-thumbnail-clip">
-                        <img src="http://itunes.unl.edu/thumbnails.php?url=http%3A%2F%2Fmediahub.unl.edu%2Fuploads%2Fa0a49c759323ef5fb77254b8312d4d79.mp4">
-                    </div>
-                    <div class="mh-play-button"></div>
-                </div>
-                <div class="mh-video-label wdn-center">
-                    <h6 class="wdn-brand">
-                        <a href="#">
-                            Celebrating the State of the University 2014
-                        </a>
-                        <span class="wdn-subhead">
-                            OCTOBER 2, 2014, 1:49 PM
-                        </span>
-                    </h6>
-                </div>
-            </a>
-            
-        </div>
-
-        <div class="bp1-wdn-col-one-third">
-            <a href="#">
-                <div class="mh-video-thumb wdn-center">
-                    <div class="mh-thumbnail-clip">
-                        <img src="http://itunes.unl.edu/thumbnails.php?url=http%3A%2F%2Fmediahub.unl.edu%2Fuploads%2Fa0a49c759323ef5fb77254b8312d4d79.mp4">
-                    </div>
-                    <div class="mh-play-button"></div>
-                </div>
-                <div class="mh-video-label wdn-center">
-                    <h6 class="wdn-brand">
-                        <a href="#">
-                            Celebrating the State of the University 2014
-                        </a>
-                        <span class="wdn-subhead">
-                            OCTOBER 2, 2014, 1:49 PM
-                        </span>
-                    </h6>
-                </div>
-            </a>
-            
-        </div>
-
-
-    </div>
-
-    </div>
-
 </div>
+
+
+
 
 
     <form id="fileUpload" onsubmit="upload.start()" target="uploadtarget" action="?format=barebones" enctype="multipart/form-data" method="post" class="zenform cool">
