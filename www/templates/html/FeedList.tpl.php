@@ -40,7 +40,6 @@ if (isset($context->label) && !empty($context->label)) {
                     </div>
                     <div class="bp2-wdn-col-three-fourths">
                         <p><?php echo htmlentities($feed->description) ?></p>
-                        <?php $feed->getStats() ?>
                         <div class="wdn-grid-set">
                             <div class="bp2-wdn-col-two-thirds mh-media-samples">
                                 <?php echo $savvy->render($feed->getMediaList(), 'CompactMediaList.tpl.php') ?>
