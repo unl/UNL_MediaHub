@@ -47,6 +47,12 @@ Create the database using the `data/mediahub.sql`
 * PHP 5
 * PDO Mysql
 
+###Testing:
+Once installed, run this command from the project root:
+```
+php vendor/bin/phpunit --bootstrap tests/init.php tests
+```
+
 ###Sources:
 
 * Audio and video player from http://mediaelementjs.com/
