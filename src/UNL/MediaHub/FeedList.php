@@ -19,10 +19,13 @@ class UNL_MediaHub_FeedList extends UNL_MediaHub_List
      * 
      * @var array
      */
-    public $options = array('orderby' => 'title',
-                            'order'   => 'ASC',
-                            'page'    => 0,
-                            'limit'   => 10);
+    public $options = array(
+        'orderby'            => 'title',
+        'order'              => 'ASC',
+        'page'               => 0,
+        'limit'              => 10,
+        'additional_filters' => array(),
+    );
 
     function __construct($options = array())
     {
