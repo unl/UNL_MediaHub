@@ -129,7 +129,6 @@ Embed
 .mh-video-thumb {
     overflow: hidden;
     position: relative;
-    /*margin-bottom: 1.333em;*/
     min-height: 7.478em;
 }
 
@@ -152,22 +151,12 @@ height: 100%;
 position: absolute;
 }
 
-/*.mh-video-label{
-    background-color: rgba(208, 0, 0, .5);
-    padding: 0.75em;
-    position: absolute;
-    width: 100%;
-    bottom: 0.5em;
-}*/
-
 .mh-video-label{
-/*background-color: rgba(208, 0, 0, 1);*/
 padding: 0.75em;
 width: 100%;
 margin-top: -10px;
 }
 .mh-video-label *, .mh-video-label a:visited {
-    /*color: #fff;*/
     margin: 0;
 }
 
@@ -197,20 +186,6 @@ margin-top: -10px;
 	z-index: 10;
 }
 
-@-moz-document url-prefix() { 
-
-    .mh-search #wdn_app_search .wdn-input-group-btn  {
-		margin-top: -1px;
-		position: absolute;
-		top: 0px;
-		right: 65px;
-    }
-
-    #wdn_app_search input[type="text"] {
-        width: 99%;
-    }
-
-}
 
 .mh-search #wdn_app_search form {
     float: none;
