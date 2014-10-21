@@ -34,7 +34,20 @@ if (isset($context->label) && !empty($context->label)) {
                 </div>
             </div>
         </div>
-        
+
+        <p class="mh-sort-options">
+            <a href="<?php echo $context->getURL(array('orderby' => 'datecreated', 'order' => 'DESC')) ?>" class="wdn-button wdn-button-brand">Most Recent</a>
+            <a href="<?php echo $context->getURL(array('orderby' => 'play_count', 'order' => 'DESC')) ?>" class="wdn-button wdn-button-brand">Most Viewed</a>
+        </p>
+        <form action="">
+            <input type="radio" name="f" value="audio" id="additional_filter_audio" <?php echo ($context->options['f'] == 'audio')?'checked="checked"':'' ?>><label for="additional_filter_audio">Audio</label>
+            <input type="radio" name="f" value="video" id="additional_filter_video" <?php echo ($context->options['f'] == 'video')?'checked="checked"':'' ?>><label for="additional_filter_video">Video</label>
+            <input type="radio" name="f" value="" id="additional_filter_all" <?php echo ($context->options['f'] == '')?'checked="checked"':'' ?>><label for="additional_filter_all">All</label>
+            <?php if ($context->options['filter']->getType() == 'search'): ?>
+                <input type="hidden" name="q" value="<?php echo (isset($context->options['q']))?$context->options['q']:'';?>">
+            <?php endif; ?>
+            <input type="submit" value="Filter"/>
+        </form>
         
         <?php if (count($context->items)): ?>
             <?php
@@ -60,20 +73,6 @@ if (isset($context->label) && !empty($context->label)) {
                 $mediaListClass = ' mh-media-browse page-' . $context->pager->getPage();
             }
             ?>
-            
-            <p class="mh-sort-options">
-                <a href="<?php echo $context->getURL(array('orderby' => 'datecreated', 'order' => 'DESC')) ?>" class="wdn-button wdn-button-brand">Most Recent</a>
-                <a href="<?php echo $context->getURL(array('orderby' => 'play_count', 'order' => 'DESC')) ?>" class="wdn-button wdn-button-brand">Most Viewed</a>
-            </p>
-            <form action="">
-                <input type="radio" name="f" value="audio" id="additional_filter_audio" <?php echo ($context->options['f'] == 'audio')?'checked="checked"':'' ?>><label for="additional_filter_audio">Audio</label>
-                <input type="radio" name="f" value="video" id="additional_filter_video" <?php echo ($context->options['f'] == 'video')?'checked="checked"':'' ?>><label for="additional_filter_video">Video</label>
-                <input type="radio" name="f" value="" id="additional_filter_all" <?php echo ($context->options['f'] == '')?'checked="checked"':'' ?>><label for="additional_filter_all">All</label>
-                <?php if ($context->options['filter']->getType() == 'search'): ?>
-                    <input type="hidden" name="q" value="<?php echo (isset($context->options['q']))?$context->options['q']:'';?>">
-                <?php endif; ?>
-                <input type="submit" value="Filter"/>
-            </form>
             
             <ul class="bp2-wdn-grid-set-thirds wdn-grid-clear mh-media-list<?php echo $mediaListClass ?>">
                 <?php foreach ($context->items as $media): ?>
