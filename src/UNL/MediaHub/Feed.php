@@ -61,6 +61,21 @@ class UNL_MediaHub_Feed extends UNL_MediaHub_Models_BaseFeed
     {
          return new UNL_MediaHub_MediaList(array('filter'=>new UNL_MediaHub_MediaList_Filter_ByFeed($this))+$options); 
     }
+    
+    public function getStats()
+    {
+        $db = Doctrine_Manager::getInstance()->getCurrentConnection();
+        $q = $db->prepare("SELECT 
+            COUNT(IF(type LIKE 'video%', 1, NULL)) AS video, 
+            COUNT(IF(type LIKE 'video%', NULL, 1)) AS audio, 
+            SUM(play_count) AS plays 
+            FROM media m
+            INNER JOIN feed_has_media fm ON fm.feed_id = ? AND m.id = fm.media_id;");
+        
+        $q->execute(array($this->id));
+        $result = $q->fetchAll();
+        return current($result);
+    }
 
     /**
      * Add a feed to the system
