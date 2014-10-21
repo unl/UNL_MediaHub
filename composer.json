@@ -1,4 +1,9 @@
 {
+    "autoload": {
+        "psr-0": {
+            "UNL_": ["src", "lib/php"]
+        }
+    },
     "repositories": [
         {
             "type": "vcs",
