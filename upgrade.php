@@ -37,6 +37,6 @@ exec_sql($db, file_get_contents(dirname(__FILE__).'/data/add_featured_feed_field
 exec_sql($db, file_get_contents(dirname(__FILE__).'/data/add_media_privacy.sql'), 'Adding media privacy settings', true);
 exec_sql($db, file_get_contents(dirname(__FILE__).'/data/add_media_play_count.sql'), 'Adding media play count', true);
 exec_sql($db, file_get_contents(dirname(__FILE__).'/data/add_media_poster.sql'), 'Adding media poster', true);
-exec_sql($db, file_get_contents(dirname(__FILE__).'/data/add_media_uidcreated.sql'), 'Adding uidcreated to media', true);
+exec_sql($db, file_get_contents(dirname(__FILE__).'/data/add_media_uid.sql'), 'Adding uidcreated and uidupdated to media', true);
 
 echo 'Upgrade complete!';
