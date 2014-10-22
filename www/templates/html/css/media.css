@@ -134,11 +134,23 @@ Embed
     padding: 0 0 60% 0;
 }
 
+.mh-video-thumb img{
+    left: 0;
+}
+
 .mh-thumbnail-clip {
 	overflow: hidden;
+	height: 0;
 	margin-bottom: .75em;
+    position: relative;
+    padding: 0 0 60% 0;
+
 }
 .mh-thumbnail-clip img {
+min-width: 100%;
+max-width: none;
+height: 100%;
+position: absolute;
 }
 
 .mh-video-label{
@@ -174,4 +186,9 @@ margin-top: -10px;
 	line-height: 0;
 	color: #fff;
 	z-index: 10;
+}
+
+
+.mh-search #wdn_app_search form {
+    float: none;
 }
