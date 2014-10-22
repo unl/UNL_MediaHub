@@ -18,7 +18,7 @@ if (isset($context->label) && !empty($context->label)) {
                         <span class="wdn-subhead">Search results for</span>
                         <?php echo htmlentities($context->options['filter']->getValue()) ?>
                     </h1>
-                <?php elseif ($parent->context instanceof UNL_MediaHub_FeedAndMedia): ?>
+                <?php elseif ($context->options['filter']->getType() == 'feed'): ?>
                     <h2 class="wdn-brand"><?php echo $label ?></h2>
                 <?php else: ?>
                     <h1 class="wdn-brand"><?php echo $label ?></h1>
@@ -35,33 +35,19 @@ if (isset($context->label) && !empty($context->label)) {
             </div>
         </div>
 
-        <p class="mh-sort-options">
+        <p class="mh-sort-filter">
             <a href="<?php echo $context->getURL(array('orderby' => 'datecreated', 'order' => 'DESC')) ?>" class="wdn-button wdn-button-brand">Most Recent</a>
             <a href="<?php echo $context->getURL(array('orderby' => 'play_count', 'order' => 'DESC')) ?>" class="wdn-button wdn-button-brand">Most Viewed</a>
+            <span class="mh-btn-group">
+                <a href="<?php echo $context->getURL(array('f' => '')) ?>" class="wdn-button<?php echo ($context->options['f'] == '') ? ' active' : '' ?>">All</a>
+                <a href="<?php echo $context->getURL(array('f' => 'audio')) ?>" class="wdn-button<?php echo ($context->options['f'] == 'audio') ? ' active' : '' ?>">Audio</a>
+                <a href="<?php echo $context->getURL(array('f' => 'video')) ?>" class="wdn-button<?php echo ($context->options['f'] == 'video') ? ' active' : '' ?>">Video</a>
+            </span>
         </p>
-        <form action="">
-            <input type="radio" name="f" value="audio" id="additional_filter_audio" <?php echo ($context->options['f'] == 'audio')?'checked="checked"':'' ?>><label for="additional_filter_audio">Audio</label>
-            <input type="radio" name="f" value="video" id="additional_filter_video" <?php echo ($context->options['f'] == 'video')?'checked="checked"':'' ?>><label for="additional_filter_video">Video</label>
-            <input type="radio" name="f" value="" id="additional_filter_all" <?php echo ($context->options['f'] == '')?'checked="checked"':'' ?>><label for="additional_filter_all">All</label>
-            <?php if ($context->options['filter']->getType() == 'search'): ?>
-                <input type="hidden" name="q" value="<?php echo (isset($context->options['q']))?$context->options['q']:'';?>">
-            <?php endif; ?>
-            <input type="submit" value="Filter"/>
-        </form>
         
         <?php if (count($context->items)): ?>
             <?php
-            if ($parent->context instanceof UNL_MediaHub_FeedAndMedia) {
-                // Use the feed url as the base for pagination links
-                $url = UNL_MediaHub_Controller::getURL(
-                    $parent->context->feed,
-                    array_intersect_key(array_merge($context->options, array('page'=>'{%page_number}')), array('page'=>0, 'limit'=>0, 'order'=>0, 'orderby'=>0))
-                );
-            } elseif ($context instanceof UNL_MediaHub_MediaList) {
-                $url = UNL_MediaHub_Controller::addURLParams($context->getURL(), array('page'=>'{%page_number}'));
-            } else {
-                $url = UNL_MediaHub_Controller::getURL(null, array_merge($context->options, array('page'=>'{%page_number}')));
-            }
+            $url = $context->getURL(array('page'=>'{%page_number}'));
         
             $pager_layout = new UNL_MediaHub_List_PagerLayout($context->pager,
                 new Doctrine_Pager_Range_Sliding(array('chunk'=>5)),

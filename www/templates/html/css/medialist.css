@@ -8,6 +8,32 @@ Supporting styles for individual presentation of lists of media
 	margin-top: 0;
 }
 
+.mh-btn-group {
+	display: inline-block;
+	vertical-align: middle;
+	position: relative;
+}
+
+.mh-btn-group > .wdn-button {
+	float: left;
+	position: relative;
+	border-radius: 0;
+}
+
+.mh-btn-group > .wdn-button:first-child {
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px;
+}
+
+.mh-btn-group > .wdn-button:last-child {
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+
+.mh-btn-group > .wdn-button.active {
+	background-color: #2e240c;
+}
+
 .mh-media .wdn_pagination {
 	text-align: center;
 	padding: 0;
