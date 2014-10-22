@@ -30,8 +30,272 @@ if (isset($context->media)) {
 ?>
 </div>
 <div class="clear"></div>
-<div id="formDetails">
+
 <?php echo $savvy->render($context, 'Feed/Media/FileUpload.tpl.php'); ?>
+
+
+
+
+<div class="wdn-band mh-your-channels">
+
+    <div class="wdn-inner-wrapper">
+        <h2 class="wdn-brand">Your Channels</h2>
+
+        <div class="wdn-grid-set">
+
+            <div class="bp2-wdn-col-one-half">
+                <a href="#">
+                    <div class="mh-video-thumb mh-featured-channel wdn-center">
+                        <div class="mh-thumbnail-clip">
+                            <img src="http://itunes.unl.edu/thumbnails.php?url=http%3A%2F%2Fmediahub.unl.edu%2Fuploads%2Fa0a49c759323ef5fb77254b8312d4d79.mp4">
+                        </div>
+                        <div class="mh-play-button"></div>
+                    </div>
+                    <div class="mh-video-label wdn-center">
+                        <h6 class="wdn-brand">
+                            <a href="#">
+                                Celebrating the State of the University 2014
+                            </a>
+                            <span class="wdn-subhead">
+                                OCTOBER 2, 2014, 1:49 PM
+                            </span>
+                        </h6>
+                    </div>
+                </a>          
+            </div>
+
+            <div class="bp2-wdn-col-one-fourth">
+                <a href="#">
+                    <div class="mh-video-thumb wdn-center">
+                        <div class="mh-thumbnail-clip">
+                            <img src="http://itunes.unl.edu/thumbnails.php?url=http%3A%2F%2Fmediahub.unl.edu%2Fuploads%2Fa0a49c759323ef5fb77254b8312d4d79.mp4">
+                        </div>
+                        <div class="mh-play-button"></div>
+                    </div>
+                    <div class="mh-video-label wdn-center">
+                        <h6 class="wdn-brand">
+                            <a href="#">
+                                Celebrating the State of the University 2014
+                            </a>
+                            <span class="wdn-subhead">
+                                OCTOBER 2, 2014, 1:49 PM
+                            </span>
+                        </h6>
+                    </div>
+                </a>           
+            </div>
+
+            <div class="bp2-wdn-col-one-fourth">
+                <a href="#">
+                    <div class="mh-video-thumb wdn-center">
+                        <div class="mh-thumbnail-clip">
+                            <img src="http://itunes.unl.edu/thumbnails.php?url=http%3A%2F%2Fmediahub.unl.edu%2Fuploads%2Fa0a49c759323ef5fb77254b8312d4d79.mp4">
+                        </div>
+                        <div class="mh-play-button"></div>
+                    </div>
+                    <div class="mh-video-label wdn-center">
+                        <h6 class="wdn-brand">
+                            <a href="#">
+                                Celebrating the State of the University 2014
+                            </a>
+                            <span class="wdn-subhead">
+                                OCTOBER 2, 2014, 1:49 PM
+                            </span>
+                        </h6>
+                    </div>
+                </a>
+            </div>
+
+            <div class="bp2-wdn-col-one-fourth">
+                <a href="#">
+                    <div class="mh-video-thumb wdn-center">
+                        <div class="mh-thumbnail-clip">
+                            <img src="http://itunes.unl.edu/thumbnails.php?url=http%3A%2F%2Fmediahub.unl.edu%2Fuploads%2Fa0a49c759323ef5fb77254b8312d4d79.mp4">
+                        </div>
+                        <div class="mh-play-button"></div>
+                    </div>
+                    <div class="mh-video-label wdn-center">
+                        <h6 class="wdn-brand">
+                            <a href="#">
+                                Celebrating the State of the University 2014
+                            </a>
+                            <span class="wdn-subhead">
+                                OCTOBER 2, 2014, 1:49 PM
+                            </span>
+                        </h6>
+                    </div>
+                </a> 
+            </div>
+
+            <div class="bp2-wdn-col-one-fourth">
+                <a href="#">
+                    <div class="mh-upload-box wdn-center">
+                        <h2>+<span class="wdn-subhead">New Channel</span></h2>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="wdn-band wdn-light-neutral-band">
+
+    <div class="wdn-inner-wrapper">
+        <h2 class="wdn-brand">Your Videos</h2>
+
+        <div class="wdn-grid-set">
+
+            <div class="bp1-wdn-col-one-third">
+                <a href="#">
+                    <div class="mh-video-thumb wdn-center">
+                        <div class="mh-thumbnail-clip">
+                            <img src="http://itunes.unl.edu/thumbnails.php?url=http%3A%2F%2Fmediahub.unl.edu%2Fuploads%2Fa0a49c759323ef5fb77254b8312d4d79.mp4">
+                        </div>
+                        <div class="mh-play-button"></div>
+                    </div>
+                    <div class="mh-video-label wdn-center">
+                        <h6 class="wdn-brand">
+                            <a href="#">
+                                Celebrating the State of the University 2014
+                            </a>
+                            <span class="wdn-subhead">
+                                OCTOBER 2, 2014, 1:49 PM
+                            </span>
+                        </h6>
+                    </div>
+                </a>
+            </div>
+
+            <div class="bp1-wdn-col-one-third">
+                <a href="#">
+                    <div class="mh-video-thumb wdn-center">
+                        <div class="mh-thumbnail-clip">
+                            <img src="http://itunes.unl.edu/thumbnails.php?url=http%3A%2F%2Fmediahub.unl.edu%2Fuploads%2Fa0a49c759323ef5fb77254b8312d4d79.mp4">
+                        </div>
+                        <div class="mh-play-button"></div>
+                    </div>
+                    <div class="mh-video-label wdn-center">
+                        <h6 class="wdn-brand">
+                            <a href="#">
+                                Celebrating the State of the University 2014
+                            </a>
+                            <span class="wdn-subhead">
+                                OCTOBER 2, 2014, 1:49 PM
+                            </span>
+                        </h6>
+                    </div>
+                </a>
+            </div>
+
+            <div class="bp1-wdn-col-one-third">
+                <a href="#">
+                    <div class="mh-video-thumb wdn-center">
+                        <div class="mh-thumbnail-clip">
+                            <img src="http://itunes.unl.edu/thumbnails.php?url=http%3A%2F%2Fmediahub.unl.edu%2Fuploads%2Fa0a49c759323ef5fb77254b8312d4d79.mp4">
+                        </div>
+                        <div class="mh-play-button"></div>
+                    </div>
+                    <div class="mh-video-label wdn-center">
+                        <h6 class="wdn-brand">
+                            <a href="#">
+                                Celebrating the State of the University 2014
+                            </a>
+                            <span class="wdn-subhead">
+                                OCTOBER 2, 2014, 1:49 PM
+                            </span>
+                        </h6>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="wdn-band">
+
+    <div class="wdn-inner-wrapper">
+    
+        <h2 class="wdn-brand">Your Audio</h2>
+
+        <div class="wdn-grid-set">
+
+            <div class="bp1-wdn-col-one-third">
+                <a href="#">
+                    <div class="mh-video-thumb wdn-center">
+                        <div class="mh-thumbnail-clip">
+                            <img src="http://itunes.unl.edu/thumbnails.php?url=http%3A%2F%2Fmediahub.unl.edu%2Fuploads%2Fa0a49c759323ef5fb77254b8312d4d79.mp4">
+                        </div>
+                        <div class="mh-play-button"></div>
+                    </div>
+                    <div class="mh-video-label wdn-center">
+                        <h6 class="wdn-brand">
+                            <a href="#">
+                                Celebrating the State of the University 2014
+                            </a>
+                            <span class="wdn-subhead">
+                                OCTOBER 2, 2014, 1:49 PM
+                            </span>
+                        </h6>
+                    </div>
+                </a>
+            </div>
+
+            <div class="bp1-wdn-col-one-third">
+                <a href="#">
+                    <div class="mh-video-thumb wdn-center">
+                        <div class="mh-thumbnail-clip">
+                            <img src="http://itunes.unl.edu/thumbnails.php?url=http%3A%2F%2Fmediahub.unl.edu%2Fuploads%2Fa0a49c759323ef5fb77254b8312d4d79.mp4">
+                        </div>
+                        <div class="mh-play-button"></div>
+                    </div>
+                    <div class="mh-video-label wdn-center">
+                        <h6 class="wdn-brand">
+                            <a href="#">
+                                Celebrating the State of the University 2014
+                            </a>
+                            <span class="wdn-subhead">
+                                OCTOBER 2, 2014, 1:49 PM
+                            </span>
+                        </h6>
+                    </div>
+                </a>
+            </div>
+
+            <div class="bp1-wdn-col-one-third">
+                <a href="#">
+                    <div class="mh-video-thumb wdn-center">
+                        <div class="mh-thumbnail-clip">
+                            <img src="http://itunes.unl.edu/thumbnails.php?url=http%3A%2F%2Fmediahub.unl.edu%2Fuploads%2Fa0a49c759323ef5fb77254b8312d4d79.mp4">
+                        </div>
+                        <div class="mh-play-button"></div>
+                    </div>
+                    <div class="mh-video-label wdn-center">
+                        <h6 class="wdn-brand">
+                            <a href="#">
+                                Celebrating the State of the University 2014
+                            </a>
+                            <span class="wdn-subhead">
+                                OCTOBER 2, 2014, 1:49 PM
+                            </span>
+                        </h6>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<div id="formDetails">
 <form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data" class="zenform cool" style="<?php echo (isset($context->media))?'':'display:none;' ?>">
     <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
     <?php
@@ -405,7 +669,7 @@ if (isset($context->media)) {
                             <option <?php if ($category == '112102') echo 'selected="selected"'; ?> value="112102">Family &amp; Childcare</option>
                             <option <?php if ($category == '112103') echo 'selected="selected"'; ?> value="112103">Learning Resources</option>
                             <option <?php if ($category == '112104') echo 'selected="selected"'; ?> value="112104">Psychology &amp; Research</option>
-                            <option <?php if ($category == '112105') echo 'selected="selected"'; ?> value="112105">Special Education
+                            <option <?php if ($category == '112105') echo 'selected="selected"'; ?> value="112105">Special Education</option>
                         </optgroup>
                     </select>
                 </div>
