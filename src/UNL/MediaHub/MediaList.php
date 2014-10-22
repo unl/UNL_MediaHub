@@ -89,16 +89,13 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
     
     public function getURL($params = array())
     {
-        $url = UNL_MediaHub_Controller::getURL();
         if (!empty($this->options['filter'])) {
             switch ($this->options['filter']->getType()) {
-                case 'tag':
-                case 'year':
-                    $params['filter'] = $this->options['filter']->getType()
-                                        . ':'
-                                        . $this->options['filter']->getValue();
+                case 'feed':
+                    $url = UNL_MediaHub_Controller::getURL($this->options['filter']->getValue());
                     break;
                 default:
+                    $url = UNL_MediaHub_Controller::getURL();
                     $url .= 'search/';
                     $params['q'] = urlencode($this->options['filter']->getValue());
                     break;
