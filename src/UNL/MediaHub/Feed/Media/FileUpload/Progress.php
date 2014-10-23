@@ -2,30 +2,19 @@
 class UNL_MediaHub_Feed_Media_FileUpload_Progress
 {
     public $options = array();
-
-    /**
-     * information about the file upload
-     *
-     * @var array
-     */
-    public $info = false;
+    
+    protected $percent_complete = 100;
 
     function __construct($options = array())
     {
         $this->options = $options + $this->options;
 
-        if (empty($this->options['id'])) {
-            throw new Exception('Upload ID must be passed to retieve progress info.', 404);
+        $key = ini_get("session.upload_progress.prefix") . "media_upload";
+        if (!empty($_SESSION[$key])) {
+            $current = $_SESSION[$key]["bytes_processed"];
+            $total = $_SESSION[$key]["content_length"];
+            $this->percent_complete = $current < $total ? ceil($current / $total * 100) : 100;
         }
-
-        if (
-            function_exists('apc_fetch')
-            && ini_get('apc.enabled')
-            && ini_get('apc.rfc1867')
-            ) {
-            $this->info = apc_fetch('upload_'.$this->options['id']);
-        }
-
     }
 
     /**
@@ -35,18 +24,6 @@ class UNL_MediaHub_Feed_Media_FileUpload_Progress
      */
     function getPercentComplete()
     {
-        if (!$this->info) {
-            return false;
-        }
-
-        if ($this->info['done']) {
-            return 100;
-        }
-
-        if (!$this->info['total']) {
-            return 0;
-        }
-
-        return $this->info['current'] / $this->info['total'] * 100;
+        return $this->percent_complete;
     }
 }
