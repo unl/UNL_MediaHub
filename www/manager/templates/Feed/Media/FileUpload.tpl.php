@@ -105,25 +105,18 @@ var upload = function() {
             uploadprogress.src="?view=uploadprogress&format=barebones&id=<?php echo $upload_id; ?>&"+new Date();
         },
 
-        updateInfo: function(uploaded, total, startTime, percentage) {
+        updateInfo: function(percentage) {
             //We made it this far, that means the progress bar should be working in older browsers.
             WDN.jQuery('.meter').show();
             
-            if (uploaded) {
-                infoUpdated++;
-                if (total > upload_max_filesize) {
-                    writeStatus("The file is too large and won't be available for PHP after the upload<br/> Your file size is " + total + " bytes. Allowed is " + upload_max_filesize + " bytes.", 2);
-                } else {
 
-                    WDN.jQuery(".meter > span").animate({
-                      width: percentage+'%'
-                    }, 1000);
+            WDN.jQuery(".meter > span").animate({
+              width: percentage+'%'
+            }, 1000);
 
-                }
-            } else {
-                writeStatus("Upload started since " + (new Date() - startTime)/1000 + " seconds. No progress info yet");
+            if (percentage < 100) {
+                window.setTimeout("upload.requestInfo()", 1000);
             }
-            window.setTimeout("upload.requestInfo()", 1000);
             //WDN.jQuery('#media_form').html(uploaded);
         }
     }
@@ -231,43 +224,41 @@ var upload = function() {
 
 </div>
 
+<div class="wdn-band wdn-light-neutral-band">
+    <div class="wdn-inner-wrapper">
+        <div id='progress' style="display:none;">
+            <h2>Your media is being uploaded</h2>
+            <div class="meter animate">
+                <span style="width:0%;"><span></span></span>
+            </div>
+            <span>While you wait, please fill out the form below.</span>
+        </div>
+        <div id="uploadstatus" style="display:none;"></div>
+        <iframe name="uploadprogress" width="1" height="1" id="uploadprogress" style="display:none"></iframe>
+        <iframe name="uploadtarget" width="1" height="1" id="uploadtarget" style="display:none"></iframe>
 
-
-
-
-    <form id="fileUpload" onsubmit="upload.start()" target="uploadtarget" action="?format=barebones" enctype="multipart/form-data" method="post" class="zenform cool">
-    <input type="hidden" name="APC_UPLOAD_PROGRESS" value="<?php echo $upload_id;?>" />
-    <input type="hidden" name="__unlmy_posttarget" value="upload_media" />
-    <fieldset id="addMedia">
-    <legend>Add New Media</legend>
-        <ol>
-            <li>
-                <label><span class="required">*</span>URL of Media File <span class="helper">Media types supported: .m4v, .mp4, .mp3</span></label>
-                <input id="url" name="url" type="text" value="<?php echo htmlentities(@$context->media->url, ENT_QUOTES); ?>" />
-                <?php
-                $max_upload_size = min(return_bytes(ini_get('post_max_size')), return_bytes(ini_get('upload_max_filesize')));
-                ?>
-                <label>Or, Upload Media <span class="helper"><?php echo "Maximum upload file size is ".($max_upload_size/(1024*1024))."MB." ?></span></label>
-                <input id="file_upload" name="file_upload" type="file" />
-            </li>
-        </ol>
-        <input type="submit" name="submit" id="mediaSubmit" value="Add Media" />
-    </fieldset>
-</form>
-
-
-
-<div id='progress' class='grid11' style="display:none;">
-    <h2>Your media is being uploaded <img class='uploading' src="/wdn/templates_3.0/scripts/plugins/tinymce/themes/advanced/skins/unl/img/progress.gif" alt="progress animated gif" /></h2>
-    <div class="meter animate">
-        <span style="width:0%;"><span></span></span>
+        <form id="fileUpload" onsubmit="upload.start()" target="uploadtarget" action="?format=barebones"
+              enctype="multipart/form-data" method="post">
+            <input type="hidden" name="__unlmy_posttarget" value="upload_media"/>
+            <input type="hidden" value="media_upload" name="<?php echo ini_get("session.upload_progress.name"); ?>">
+            <fieldset id="addMedia">
+                <legend>Add New Media</legend>
+                <ol>
+                    <li>
+                        <?php
+                        $max_upload_size = min(return_bytes(ini_get('post_max_size')), return_bytes(ini_get('upload_max_filesize')));
+                        ?>
+                        <label>Or, Upload Media <span
+                                class="helper"><?php echo "Maximum upload file size is " . ($max_upload_size / (1024 * 1024)) . "MB." ?></span>
+                            <span class="helper">Media types supported: .m4v, .mp4, .mp3</span></label>
+                        <input id="file_upload" name="file_upload" type="file"/>
+                    </li>
+                </ol>
+                <input type="submit" name="submit" id="mediaSubmit" value="Add Media"/>
+            </fieldset>
+        </form>
     </div>
-    <span>While you wait, please fill out the form below.</span>
 </div>
-<div id="uploadstatus" style="display:none;"></div>
-<iframe name="uploadprogress" width="1" height="1" id="uploadprogress"></iframe>
-<iframe name="uploadtarget" width="1" height="1" id="uploadtarget"></iframe>
-
 
 <script type="text/javascript">
 WDN.initializePlugin('tooltip');
