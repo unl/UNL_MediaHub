@@ -118,7 +118,7 @@ WDN.initializePlugin('tooltip');
         runtimes : 'html5,flash,silverlight,html4',
         browse_button : 'mh_upload_media', // you can pass in id...
         container: document.getElementById('mh_upload_media_container'), // ... or DOM Element itself
-        url : '<?php echo UNL_MediaHub_Controller::getURL()?>manager/?format=json',
+        url : '<?php echo UNL_MediaHub_Controller::getURL()?>manager/?view=upload&format=json',
         flash_swf_url : '<?php echo UNL_MediaHub_Controller::getURL()?>templates/html/scripts/plupload/Moxie.swf',
         silverlight_xap_url : '<?php echo UNL_MediaHub_Controller::getURL()?>templates/html/scripts/plupload/Moxie.xap',
         drop_element: "mh_upload_media",

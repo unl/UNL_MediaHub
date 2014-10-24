@@ -28,6 +28,7 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
         'uploadprogress'  => 'UNL_MediaHub_Feed_Media_FileUpload_Progress',
         'mediapreview'    => 'UNL_MediaHub_Media_Preview',
         'uploadcomplete'  => 'UNL_MediaHub_Feed_Media_FileUpload_Complete',
+        'upload'          => 'UNL_MediaHub_Feed_Media_FileUpload',
         );
     
     protected static $replacements = array();
