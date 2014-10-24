@@ -160,6 +160,7 @@ iframe * {margin:0px}
     left: -720%;
     width: 300px;
     text-align: left;
+    z-index: 250;
 }
 
 .mh-tool-tip ul li{
