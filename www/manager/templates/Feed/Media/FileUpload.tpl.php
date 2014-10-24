@@ -1,128 +1,6 @@
 <?php
-// generate a random upload identifier
-$upload_id = md5(microtime() . rand());
-
-function return_bytes($val)
-{
-    //This function transforms the php.ini notation for numbers (like '2M') to an integer (2*1024*1024 in this case)
-    $l = substr($val, -1);
-    $ret = substr($val, 0, -1);
-    switch(strtoupper($l)){
-        case 'P':
-            $ret *= 1024;
-        case 'T':
-            $ret *= 1024;
-        case 'G':
-            $ret *= 1024;
-        case 'M':
-            $ret *= 1024;
-        case 'K':
-            $ret *= 1024;
-            break;
-    }
-    return $ret;
-}
-
+$page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plupload/plupload.full.min.js');
 ?>
-<script type="text/javascript">
-var upload = function() {
-    
-    /* private variables */
-    
-    var uploadprogress = null;
-    
-    var startTime = null;
-    var upload_max_filesize = <?php echo return_bytes(ini_get('upload_max_filesize'));?>;
-    
-    var infoUpdated = 0;
-    
-    var writeStatus = function(text,color) {
-        var statDiv = document.getElementById("uploadstatus");
-        if (color == 1 ) {
-            statDiv.style.backgroundColor = "green";
-        } else if (color == 2 ) {
-            statDiv.style.backgroundColor = "orange";
-        } else if (color == 3 ) {
-            statDiv.style.backgroundColor = "red";
-        } else {
-            statDiv.style.backgroundColor = "white";
-        }
-        statDiv.innerHTML = text;
-    }
-
-    return {
-        start: function() {
-           uploadprogress = document.getElementById("uploadprogress");
-           startTime = new Date();
-           infoUpdated = 0;
-           
-           // Show progress bar
-           WDN.jQuery('#progress').show();
-           
-           // Hide the submit button until the upload is complete.
-           WDN.jQuery('#continue3').attr('disabled', 'disabled');
-           
-           WDN.jQuery('.uploading').show();
-           
-           this.requestInfo();
-        },
-        stop: function(url) {
-           if (typeof url == 'undefined' || url) {
-                var secs = (new Date() - startTime)/1000;
-                var statusText = "Upload succeeded, it took " + secs + " seconds. <br/> ";
-                if (infoUpdated > 0) {
-                    // Upload succeeded and we had intermediate status updates
-                    writeStatus(statusText + "You had " + infoUpdated + " updates from the progress meter, looks like it's working fine",1);
-                } else {
-                    statusText += "BUT there were no progress meter updates<br/> ";
-                    if (secs < 3) {
-                      writeStatus(statusText + "Your upload was maybe too short, try with a bigger file or a slower connection",2);
-                    } else {
-                      writeStatus(statusText + "Your upload should have taken long enough to have an progress update. Maybe it really does not work...",3);
-                    }
-                }
-
-                // Hide upload progress
-                WDN.jQuery('#progress').hide();
-                
-                WDN.jQuery('.uploading').hide();
-                
-                //Show the continue button.
-                WDN.jQuery('#continue3').removeAttr('disabled');
-
-                // Set the URL within the form
-                WDN.jQuery("#media_url").attr("value", url);
-
-                // Grab the preview & player
-                mediaDetails.getPreview(url);
-
-           } else {
-               writeStatus('PHP did not report any uploaded file, maybe it was too large, try a smaller one (post_max_size: <?php echo ini_get('post_max_size');?>)',3);
-           }
-           startTime = null;
-        },
-        requestInfo: function() {
-            uploadprogress.src="?view=uploadprogress&format=barebones&id=<?php echo $upload_id; ?>&"+new Date();
-        },
-
-        updateInfo: function(percentage) {
-            //We made it this far, that means the progress bar should be working in older browsers.
-            WDN.jQuery('.meter').show();
-            
-
-            WDN.jQuery(".meter > span").animate({
-              width: percentage+'%'
-            }, 1000);
-
-            if (percentage < 100) {
-                window.setTimeout("upload.requestInfo()", 1000);
-            }
-            //WDN.jQuery('#media_form').html(uploaded);
-        }
-    }
-}()
-</script>
-
 
 <div class="wdn-band wdn-light-neutral-band">
 
@@ -131,11 +9,14 @@ var upload = function() {
 
     <form action="?" method="post"><div class="wdn-grid-set">
 
-      <div class="wdn-col-three-sevenths">
-        <div class="mh-upload-box wdn-center">
-          <h2>+<span class="wdn-subhead">Add Media</span></h2>
-          <p>.mp4, .mov, .mp3, .wav, .aac</p>
-        </div>
+      <div id="mh_upload_media_container" class="wdn-col-three-sevenths">
+          <a id="mh_upload_media" class="mh-upload-box wdn-center" href="javascript:;">
+              <h2>+<span class="wdn-subhead">Add Media</span></h2>
+              <p>.mp4, .mov, .mp3, .wav, .aac</p>
+          </a>
+          <div id="filelist" class="mh-upload-box wdn-center">
+              Your browser doesn't have Flash, Silverlight or HTML5 support.
+          </div>
       </div>
 
       <div class="wdn-col-four-sevenths">
@@ -224,42 +105,66 @@ var upload = function() {
 
 </div>
 
-<div class="wdn-band wdn-light-neutral-band">
-    <div class="wdn-inner-wrapper">
-        <div id='progress' style="display:none;">
-            <h2>Your media is being uploaded</h2>
-            <div class="meter animate">
-                <span style="width:0%;"><span></span></span>
-            </div>
-            <span>While you wait, please fill out the form below.</span>
-        </div>
-        <div id="uploadstatus" style="display:none;"></div>
-        <iframe name="uploadprogress" width="1" height="1" id="uploadprogress" style="display:none"></iframe>
-        <iframe name="uploadtarget" width="1" height="1" id="uploadtarget" style="display:none"></iframe>
-
-        <form id="fileUpload" onsubmit="upload.start()" target="uploadtarget" action="?format=barebones"
-              enctype="multipart/form-data" method="post">
-            <input type="hidden" name="__unlmy_posttarget" value="upload_media"/>
-            <input type="hidden" value="media_upload" name="<?php echo ini_get("session.upload_progress.name"); ?>">
-            <fieldset id="addMedia">
-                <legend>Add New Media</legend>
-                <ol>
-                    <li>
-                        <?php
-                        $max_upload_size = min(return_bytes(ini_get('post_max_size')), return_bytes(ini_get('upload_max_filesize')));
-                        ?>
-                        <label>Or, Upload Media <span
-                                class="helper"><?php echo "Maximum upload file size is " . ($max_upload_size / (1024 * 1024)) . "MB." ?></span>
-                            <span class="helper">Media types supported: .m4v, .mp4, .mp3</span></label>
-                        <input id="file_upload" name="file_upload" type="file"/>
-                    </li>
-                </ol>
-                <input type="submit" name="submit" id="mediaSubmit" value="Add Media"/>
-            </fieldset>
-        </form>
-    </div>
-</div>
-
 <script type="text/javascript">
 WDN.initializePlugin('tooltip');
+</script>
+
+
+<script type="text/javascript">
+    // Custom example logic
+
+    var max_file_count = 1;
+    var uploader = new plupload.Uploader({
+        runtimes : 'html5,flash,silverlight,html4',
+        browse_button : 'mh_upload_media', // you can pass in id...
+        container: document.getElementById('mh_upload_media_container'), // ... or DOM Element itself
+        url : '<?php echo UNL_MediaHub_Controller::getURL()?>manager/?format=json',
+        flash_swf_url : '<?php echo UNL_MediaHub_Controller::getURL()?>templates/html/scripts/plupload/Moxie.swf',
+        silverlight_xap_url : '<?php echo UNL_MediaHub_Controller::getURL()?>templates/html/scripts/plupload/Moxie.xap',
+        drop_element: "mh_upload_media",
+        chunk_size: '1mb',
+        multi_selection:false,
+        multipart_params: {
+            __unlmy_posttarget: 'upload_media'
+        },
+        filters : {
+            max_file_size : '900mb',
+            mime_types: [
+                {title : "Video files", extensions : "mp4,mov,mp3"},
+                {title : "Audio files", extensions : "mp3"}
+            ]
+        },
+
+        init: {
+            PostInit: function() {
+                WDN.jQuery('#filelist').text('').hide();
+            },
+
+            FilesAdded: function(up, files) {
+                plupload.each(files, function(file) {
+                    if (up.files.length > max_file_count) {
+                        up.removeFile(file);
+                        return;
+                    }
+                    
+                    document.getElementById('filelist').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
+                });
+                uploader.disableBrowse();
+                WDN.jQuery('#mh_upload_media').hide();
+                WDN.jQuery('#filelist').show();
+                uploader.start();
+            },
+
+            UploadProgress: function(up, file) {
+                document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+            },
+
+            Error: function(up, err) {
+                alert("Error #" + err.code + ": " + err.message);
+            }
+        }
+    });
+
+    uploader.init();
+
 </script>
