@@ -205,6 +205,16 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
     }
 
     /**
+     * Get the path to the directory where temp (uncompleted) uploads are stored
+     *
+     * @return string
+     */
+    public static function getTmpUploadDirectory()
+    {
+        return self::getUploadDirectory() . '/tmp';
+    }
+
+    /**
      * Setter for the upload directory where media will be save
      *
      * @param string $uploadDirectory Directory on the filesystem

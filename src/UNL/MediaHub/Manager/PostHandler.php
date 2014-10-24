@@ -146,10 +146,9 @@ class UNL_MediaHub_Manager_PostHandler
      */
     public function handleMediaFileUpload()
     {
-
-        $url = $this->_handleMediaFileUpload();
-        $this->redirect(UNL_MediaHub_Manager::getURL().'?view=uploadcomplete&format=barebones&url='.urlencode($url));
-
+        if ($url = $this->_handleMediaFileUpload()) {
+            $this->redirect(UNL_MediaHub_Manager::getURL().'?view=uploadcomplete&format=barebones&url='.urlencode($url));
+        }
     }
 
     /**
@@ -165,40 +164,101 @@ class UNL_MediaHub_Manager_PostHandler
      */
     protected function _handleMediaFileUpload()
     {
-
-        if (empty($this->files)
-            || !isset($this->files['file_upload'])) {
-            // nothing to do
-            return false;
+        // Settings
+        $targetDir = UNL_MediaHub_Manager::getTmpUploadDirectory();
+        //$targetDir = 'uploads';
+        $cleanupTargetDir = true; // Remove old files
+        $maxFileAge = 5 * 3600; // Temp file age in seconds (5 hours)
+        
+        // Create target dir
+        if (!file_exists($targetDir)) {
+            @mkdir($targetDir);
         }
 
-        if ($this->files['file_upload']['error'] != UPLOAD_ERR_OK) {
-            throw new UNL_MediaHub_Manager_PostHandler_UploadException($this->files['file_upload']['error'], 500);
-        }
-
-        // Verify extension
-        if (!self::validMediaFileName($this->files['file_upload']['name'])) {
-            throw new UNL_MediaHub_Manager_PostHandler_UploadException('Invalid file extension uploaded '.$this->files['file_upload']['name'], 500);
-        }
-
-        $extension = strtolower(pathinfo($this->files['file_upload']['name'], PATHINFO_EXTENSION));
-
-        //3gp doesnt work with mediaelement. Right now call it an mp4 (won't always work because 3gps are not always h264.)
-        //TODO: Handle this better.  perhaps check the file encoding or convert it instead of just renaming it.
-        if ($extension == '3gp') {
-            $extension = 'mp4';
+        // Get a file name
+        if (isset($this->post['name'])) {
+            $fileName = $this->post['name'];
+        } elseif (!empty($this->files)) {
+            $fileName = $this->files['file']['name'];
+        } else {
+            $fileName = uniqid('file_');
         }
         
-        $filename = md5(microtime() + rand()) . '.'. $extension;
+        $filePath = $targetDir . DIRECTORY_SEPARATOR . $fileName;
 
-        // Copy file to uploads diretory
-        if (false == copy($this->files['file_upload']['tmp_name'],
-                          UNL_MediaHub_Manager::getUploadDirectory()
-                          . DIRECTORY_SEPARATOR .$filename)) {
-            throw new UNL_MediaHub_Manager_PostHandler_UploadException('Error copying file from temp location to permanent location', 500);
+        // Chunking might be enabled
+        $chunk = isset($this->post["chunk"]) ? intval($this->post["chunk"]) : 0;
+        $chunks = isset($this->post["chunks"]) ? intval($this->post["chunks"]) : 0;
+        
+        // Remove old temp files
+        if ($cleanupTargetDir) {
+            if (!is_dir($targetDir) || !$dir = opendir($targetDir)) {
+                throw new UNL_MediaHub_Manager_PostHandler_UploadException('Failed to open temp directory.', 500);
+            }
+
+            while (($file = readdir($dir)) !== false) {
+                $tmpfilePath = $targetDir . DIRECTORY_SEPARATOR . $file;
+
+                // If temp file is current file proceed to the next
+                if ($tmpfilePath == "{$filePath}.part") {
+                    continue;
+                }
+
+                // Remove temp file if it is older than the max age and is not the current file
+                if (preg_match('/\.part$/', $file) && (filemtime($tmpfilePath) < time() - $maxFileAge)) {
+                    @unlink($tmpfilePath);
+                }
+            }
+            closedir($dir);
         }
 
-        return UNL_MediaHub_Controller::$url.'uploads/'.$filename;
+
+        // Open temp file
+        if (!$out = @fopen("{$filePath}.part", $chunks ? "ab" : "wb")) {
+            throw new UNL_MediaHub_Manager_PostHandler_UploadException('Failed to open output stream.', 500);
+        }
+
+        if (!empty($this->files)) {
+            if ($this->files["file"]["error"] || !is_uploaded_file($this->files["file"]["tmp_name"])) {
+                throw new UNL_MediaHub_Manager_PostHandler_UploadException('Failed to move uploaded file.', 500);
+            }
+
+            // Read binary input stream and append it to temp file
+            if (!$in = @fopen($this->files["file"]["tmp_name"], "rb")) {
+                throw new UNL_MediaHub_Manager_PostHandler_UploadException('Failed to open input stream.', 500);
+            }
+        } else {
+            if (!$in = @fopen("php://input", "rb")) {
+                throw new UNL_MediaHub_Manager_PostHandler_UploadException('Failed to open input stream.', 500);
+            }
+        }
+
+        while ($buff = fread($in, 4096)) {
+            fwrite($out, $buff);
+        }
+
+        @fclose($out);
+        @fclose($in);
+
+        // Check if file has been uploaded
+        if (!$chunks || $chunk == $chunks - 1) {
+            $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+            //3gp doesnt work with mediaelement. Right now call it an mp4 (won't always work because 3gps are not always h264.)
+            //TODO: Handle this better.  perhaps check the file encoding or convert it instead of just renaming it.
+            if ($extension == '3gp') {
+                $extension = 'mp4';
+            }
+
+            $finalName = md5(microtime() + rand()) . '.'. $extension;
+            $finalPath = UNL_MediaHub_Manager::getUploadDirectory() . DIRECTORY_SEPARATOR . $finalName;
+            
+            // Strip the temp .part suffix off 
+            rename("{$filePath}.part", $finalPath);
+            return UNL_MediaHub_Controller::$url.'uploads/'.$finalName;
+        }
+
+        return false;
     }
 
     /**
