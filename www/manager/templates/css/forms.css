@@ -97,8 +97,8 @@ iframe * {margin:0px}
     padding: 37% 0 63% 0;
     height: 0;
     border: 2px dashed RGB(213,213,210);
-    line-height: 0;
     background-color: RGBA(255,255,255,.75);
+    display: block;
 }
 .mh-upload-box h2 {
     font-size: 4.499rem;
