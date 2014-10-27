@@ -6,7 +6,12 @@
  */
 abstract class UNL_MediaHub_List implements Countable, UNL_MediaHub_CacheableInterface
 {
-    public $options = array('page'=>0, 'limit'=>10);
+    public $options = array(
+        'page'               => 0,
+        'limit'              => 10,
+        'filter'             => null,
+        'additional_filters' => array(),
+    );
     
     /**
      * total number of items
@@ -67,6 +72,10 @@ abstract class UNL_MediaHub_List implements Countable, UNL_MediaHub_CacheableInt
         if (!empty($this->options['filter'])) {
             $this->options['filter']->apply($query);
             $this->label = $this->options['filter']->getLabel();
+        }
+        
+        foreach ($this->options['additional_filters'] as $filter) {
+            $filter->apply($query);
         }
 
         $pager = new Doctrine_Pager($query, $this->options['page'], $this->options['limit']);

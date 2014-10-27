@@ -35,12 +35,12 @@ class UNL_MediaHub_MediaList_Filter_ByFeed implements UNL_MediaHub_Filter
     
     function getType()
     {
-        return '';
+        return 'feed';
     }
     
     function getValue()
     {
-        return '';
+        return $this->feed;
     }
     
     function __toString()

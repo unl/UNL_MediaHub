@@ -25,9 +25,9 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
         'feeds'           => 'UNL_MediaHub_User_FeedList',
         'subscriptions'   => 'UNL_MediaHub_User_Subscriptions',
         'addsubscription' => 'UNL_MediaHub_Subscription_Form',
-        'uploadprogress'  => 'UNL_MediaHub_Feed_Media_FileUpload_Progress',
         'mediapreview'    => 'UNL_MediaHub_Media_Preview',
         'uploadcomplete'  => 'UNL_MediaHub_Feed_Media_FileUpload_Complete',
+        'upload'          => 'UNL_MediaHub_Feed_Media_FileUpload',
         );
     
     protected static $replacements = array();
@@ -202,6 +202,16 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
         }
 
         return self::$uploadDirectory;
+    }
+
+    /**
+     * Get the path to the directory where temp (uncompleted) uploads are stored
+     *
+     * @return string
+     */
+    public static function getTmpUploadDirectory()
+    {
+        return self::getUploadDirectory() . '/tmp';
     }
 
     /**
