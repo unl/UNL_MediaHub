@@ -18,7 +18,7 @@ if (isset($context->label) && !empty($context->label)) {
                         <span class="wdn-subhead">Search results for</span>
                         <?php echo htmlentities($context->options['filter']->getValue()) ?>
                     </h1>
-                <?php elseif ($parent->context instanceof UNL_MediaHub_FeedAndMedia): ?>
+                <?php elseif ($context->options['filter']->getType() == 'feed'): ?>
                     <h2 class="wdn-brand"><?php echo $label ?></h2>
                 <?php else: ?>
                     <h1 class="wdn-brand"><?php echo $label ?></h1>
@@ -34,21 +34,20 @@ if (isset($context->label) && !empty($context->label)) {
                 </div>
             </div>
         </div>
-        
+
+        <p class="mh-sort-filter">
+            <a href="<?php echo $context->getURL(array('orderby' => 'datecreated', 'order' => 'DESC')) ?>" class="wdn-button wdn-button-brand">Most Recent</a>
+            <a href="<?php echo $context->getURL(array('orderby' => 'play_count', 'order' => 'DESC')) ?>" class="wdn-button wdn-button-brand">Most Viewed</a>
+            <span class="mh-btn-group">
+                <a href="<?php echo $context->getURL(array('f' => '')) ?>" class="wdn-button<?php echo ($context->options['f'] == '') ? ' active' : '' ?>">All</a>
+                <a href="<?php echo $context->getURL(array('f' => 'audio')) ?>" class="wdn-button<?php echo ($context->options['f'] == 'audio') ? ' active' : '' ?>">Audio</a>
+                <a href="<?php echo $context->getURL(array('f' => 'video')) ?>" class="wdn-button<?php echo ($context->options['f'] == 'video') ? ' active' : '' ?>">Video</a>
+            </span>
+        </p>
         
         <?php if (count($context->items)): ?>
             <?php
-            if ($parent->context instanceof UNL_MediaHub_FeedAndMedia) {
-                // Use the feed url as the base for pagination links
-                $url = UNL_MediaHub_Controller::getURL(
-                    $parent->context->feed,
-                    array_intersect_key(array_merge($context->options, array('page'=>'{%page_number}')), array('page'=>0, 'limit'=>0, 'order'=>0, 'orderby'=>0))
-                );
-            } elseif ($context instanceof UNL_MediaHub_MediaList) {
-                $url = UNL_MediaHub_Controller::addURLParams($context->getURL(), array('page'=>'{%page_number}'));
-            } else {
-                $url = UNL_MediaHub_Controller::getURL(null, array_merge($context->options, array('page'=>'{%page_number}')));
-            }
+            $url = $context->getURL(array('page'=>'{%page_number}'));
         
             $pager_layout = new UNL_MediaHub_List_PagerLayout($context->pager,
                 new Doctrine_Pager_Range_Sliding(array('chunk'=>5)),
@@ -60,11 +59,6 @@ if (isset($context->label) && !empty($context->label)) {
                 $mediaListClass = ' mh-media-browse page-' . $context->pager->getPage();
             }
             ?>
-            
-            <p class="mh-sort-options">
-                <a href="<?php echo $context->getURL(array('orderby' => 'datecreated', 'order' => 'DESC')) ?>" class="wdn-button wdn-button-brand">Most Recent</a>
-            <a href="<?php echo $context->getURL(array('orderby' => 'play_count', 'order' => 'DESC')) ?>" class="wdn-button wdn-button-brand">Most Viewed</a>
-            </p>
             
             <ul class="bp2-wdn-grid-set-thirds wdn-grid-clear mh-media-list<?php echo $mediaListClass ?>">
                 <?php foreach ($context->items as $media): ?>

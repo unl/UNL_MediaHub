@@ -128,8 +128,10 @@ Embed
 
 .mh-video-thumb {
     overflow: hidden;
+    height: 0;
+    margin-bottom: .75em;
     position: relative;
-    min-height: 7.478em;
+    padding: 0 0 60% 0;
 }
 
 .mh-video-thumb img{
