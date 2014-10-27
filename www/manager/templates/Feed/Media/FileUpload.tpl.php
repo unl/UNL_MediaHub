@@ -131,23 +131,23 @@ var upload = function() {
 </script>
 
 
-<div class="wdn-band wdn-light-neutral-band">
+<div class="wdn-band wdn-light-neutral-band mh-upload-band">
 
   <div class="wdn-inner-wrapper">
     <h1 class="wdn-brand">Manage Media</h1>
 
     <form action="?" method="post"><div class="wdn-grid-set">
 
-      <div class="wdn-col-three-sevenths">
+      <div class="bp2-wdn-col-three-sevenths">
         <div class="mh-upload-box wdn-center">
           <h2>+<span class="wdn-subhead">Add Media</span></h2>
           <p>.mp4, .mov, .mp3, .wav, .aac</p>
         </div>
       </div>
 
-      <div class="wdn-col-four-sevenths">
+      <div class="bp2-wdn-col-four-sevenths">
         <div class="wdn-grid-set">
-          <div class="wdn-col-three-fifths">
+          <div class="bp1-wdn-col-three-fifths">
             <ol>
               <li class="clear-top">
                 <label for="title">
@@ -172,10 +172,10 @@ var upload = function() {
                 <textarea rows="4" type="text" id="description" name="description">Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.
                 </textarea>
               </li>
-              <input type="submit" name="publish" value="Publish">
+              
             </ol>
           </div>
-          <div class="wdn-col-two-fifths">
+          <div class="bp1-wdn-col-two-fifths">
             <ol>
               <li class="clear-top">
 
@@ -193,7 +193,7 @@ var upload = function() {
                 <select name="privacy" id="privacy">
                   <option value="Public" selected="selected">Public</option>
                   <option value="unlisted">Unlisted</option>
-                  <option value="Privacy">privacy</option>
+                  <option value="Privacy">Private</option>
                 </select>
               </li>
 
@@ -222,6 +222,9 @@ var upload = function() {
 
           </div>
         </div>
+
+        <input type="submit" name="publish" value="Publish">
+
       </div>
 
     </div>
