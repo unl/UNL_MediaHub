@@ -193,6 +193,14 @@ iframe * {margin:0px}
     overflow: hidden;
 }
 
-
 #fileUpload {display: none;} /*Hide upload form for now.*/
+
+@media only screen and (max-width : 768px) {
+
+    .mh-upload-band .mh-upload-box{
+    padding: 15% 0 35% 0;
+    margin-bottom: 1em;
+    }
+
+}
 
