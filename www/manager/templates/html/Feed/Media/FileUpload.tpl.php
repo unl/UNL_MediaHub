@@ -2,14 +2,14 @@
 $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plupload/plupload.full.min.js');
 ?>
 
-<div class="wdn-band wdn-light-neutral-band">
+<div class="wdn-band wdn-light-neutral-band mh-upload-band">
 
   <div class="wdn-inner-wrapper">
     <h1 class="wdn-brand">Manage Media</h1>
 
     <form action="?" method="post"><div class="wdn-grid-set">
 
-      <div id="mh_upload_media_container" class="wdn-col-three-sevenths">
+      <div id="mh_upload_media_container" class="bp2-wdn-col-three-sevenths">
           <a id="mh_upload_media" class="mh-upload-box wdn-center" href="javascript:;">
               <h2>+<span class="wdn-subhead">Add Media</span></h2>
               <p>.mp4, .mov, .mp3, .wav, .aac</p>
@@ -19,9 +19,9 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
           </div>
       </div>
 
-      <div class="wdn-col-four-sevenths">
+      <div class="bp2-wdn-col-four-sevenths">
         <div class="wdn-grid-set">
-          <div class="wdn-col-three-fifths">
+          <div class="bp1-wdn-col-three-fifths">
             <ol>
               <li class="clear-top">
                 <label for="title">
@@ -49,7 +49,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
               <input type="submit" name="publish" value="Publish">
             </ol>
           </div>
-          <div class="wdn-col-two-fifths">
+          <div class="bp1-wdn-col-two-fifths">
             <ol>
               <li class="clear-top">
 
@@ -67,7 +67,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
                 <select name="privacy" id="privacy">
                   <option value="Public" selected="selected">Public</option>
                   <option value="unlisted">Unlisted</option>
-                  <option value="Privacy">privacy</option>
+                  <option value="Privacy">Private</option>
                 </select>
               </li>
 
