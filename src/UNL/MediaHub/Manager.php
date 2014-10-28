@@ -17,7 +17,7 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
     
     public $output;
     
-    public $options = array('view'=>'addmedia', 'format'=>'html');
+    public $options = array('view'=>'home', 'format'=>'html');
 
     protected $view_map = array(
         'feedmetadata'    => 'UNL_MediaHub_Feed_Form',
@@ -28,6 +28,7 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
         'mediapreview'    => 'UNL_MediaHub_Media_Preview',
         'uploadcomplete'  => 'UNL_MediaHub_Feed_Media_FileUpload_Complete',
         'upload'          => 'UNL_MediaHub_Feed_Media_FileUpload',
+        'home'            => 'UNL_MediaHub_Manager_ManagerHome'
         );
     
     protected static $replacements = array();
