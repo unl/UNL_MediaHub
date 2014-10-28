@@ -8,10 +8,10 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
         <form action="?" method="post">
             <div class="wdn-grid-set">
                 <div id="mh_upload_media_container" class="bp2-wdn-col-three-sevenths">
-                    <a id="mh_upload_media" class="mh-upload-box wdn-center" href="javascript:;">
+                    <div id="mh_upload_media" class="mh-upload-box wdn-center">
                         <h2>+<span class="wdn-subhead">Add Media</span></h2>
                         <p>.mp4, .mov, .mp3, .wav, .aac</p>
-                    </a>
+                    </div>
                     <div id="filelist" class="mh-upload-box wdn-center">
                         Your browser doesn't have Flash, Silverlight or HTML5 support.
                     </div>
@@ -158,6 +158,14 @@ WDN.initializePlugin('tooltip');
         init: {
             PostInit: function() {
                 WDN.jQuery('#filelist').text('').hide();
+                var input = WDN.jQuery('#mh_upload_media_container').find('input').each(function() {
+                    var label = WDN.jQuery('<label/>', {
+                        'for': this.id,
+                        'class': 'wdn-text-hidden',
+                        'text': 'Browse for media'
+                    });
+                    WDN.jQuery(this).before(label);
+                });
             },
 
             FilesAdded: function(up, files) {
