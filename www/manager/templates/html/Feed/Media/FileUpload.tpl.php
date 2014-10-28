@@ -45,8 +45,8 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
                 </label>
                 <textarea rows="4" type="text" id="description" name="description">Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.
                 </textarea>
+                <input type="submit" name="publish" value="Publish">
               </li>
-              <input type="submit" name="publish" value="Publish">
             </ol>
           </div>
           <div class="bp1-wdn-col-two-fifths">
@@ -54,7 +54,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
               <li class="clear-top">
 
                 <label for="privacy">Privacy</label>
-                <span class="wdn-icon-info mh-tool-tip">
+                <div class="wdn-icon-info mh-tool-tip">
                   <div>
                     <ul>
                       <li><span class="heading">Public</span> - Anyone can access the media. </li>
@@ -62,7 +62,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
                       <li><span class="heading">Private</span> - Only members of channels that the media is included in can access it.</li>
                     </ul>
                   </div>
-                </span>
+                </div>
 
                 <select name="privacy" id="privacy">
                   <option value="Public" selected="selected">Public</option>
