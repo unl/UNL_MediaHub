@@ -160,6 +160,7 @@ iframe * {margin:0px}
     left: -720%;
     width: 300px;
     text-align: left;
+    z-index: 250;
 }
 
 .mh-tool-tip ul li{
@@ -194,4 +195,12 @@ iframe * {margin:0px}
 
 
 
+@media only screen and (max-width : 768px) {
+
+    .mh-upload-band .mh-upload-box{
+    padding: 15% 0 35% 0;
+    margin-bottom: 1em;
+    }
+
+}
 
