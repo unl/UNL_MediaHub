@@ -77,15 +77,42 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
                                     </label>
                                     <div class="mh-channel-box">
                                         <ul>
-                                            <li><input type="checkbox" name="channels" value="Bike">This is a channelname</li>
-                                            <li><input type="checkbox" name="channels" value="Car">Peanut butter biscuits</li>
-                                            <li><input type="checkbox" name="channels" value="Car">Spencer's Channel</li>
-                                            <li><input type="checkbox" name="channels" value="Car">Okay then</li>
-                                            <li><input type="checkbox" name="channels" value="Car">Peanut butter</li>
-                                            <li><input type="checkbox" name="channels" value="Car">WOO butter</li>
-                                            <li><input type="checkbox" name="channels" value="Car">Peanut gutter</li>
-                                            <li><input type="checkbox" name="channels" value="Car">Okay then</li>
-                                            <li><input type="checkbox" name="channels" value="Car">Peanut butter</li>
+                                            <li>
+                                                <input type="checkbox" id="channels_1" name="channels" value="Bike">
+                                                <label for="channels_1">This is a channelname</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="channels_2" name="channels" value="Car">
+                                                <label for="channels_2">Peanut butter biscuits</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="channels_3" name="channels" value="Car">
+                                                <label for="channels_3">Spencer's Channel</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="channels_4" name="channels" value="Car">
+                                                <label for="channels_4">Okay then</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="channels_5" name="channels" value="Car">
+                                                <label for="channels_5">Peanut butter</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="channels_6" name="channels" value="Car">
+                                                <label for="channels_6">WOO butter</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="channels_7" name="channels" value="Car">
+                                                <label for="channels_7">Peanut gutter</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="channels_8" name="channels" value="Car">
+                                                <label for="channels_8">Okay then</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="channels_9" name="channels" value="Car">
+                                                <label for="channels_9">Peanut butter</label>
+                                            </li>
                                         </ul>
                                     </div>
                                 </li>
