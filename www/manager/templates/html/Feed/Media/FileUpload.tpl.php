@@ -3,106 +3,126 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
 ?>
 
 <div class="wdn-band wdn-light-neutral-band mh-upload-band">
-
-  <div class="wdn-inner-wrapper">
-    <h1 class="wdn-brand">Manage Media</h1>
-
-    <form action="?" method="post"><div class="wdn-grid-set">
-
-      <div id="mh_upload_media_container" class="bp2-wdn-col-three-sevenths">
-          <a id="mh_upload_media" class="mh-upload-box wdn-center" href="javascript:;">
-              <h2>+<span class="wdn-subhead">Add Media</span></h2>
-              <p>.mp4, .mov, .mp3, .wav, .aac</p>
-          </a>
-          <div id="filelist" class="mh-upload-box wdn-center">
-              Your browser doesn't have Flash, Silverlight or HTML5 support.
-          </div>
-      </div>
-
-      <div class="bp2-wdn-col-four-sevenths">
-        <div class="wdn-grid-set">
-          <div class="bp1-wdn-col-three-fifths">
-            <ol>
-              <li class="clear-top">
-                <label for="title">
-                  Title
-                  <span class="required">*</span>
-                </label>
-                <input type="text" id="title" name="title">
-              </li>
-              <li>
-                <label for="author">
-                  Author
-                  <span class="required">*</span>
-                  <span class="helper">Name of media creator</span>
-                </label>
-                <input type="text" id="author" name="author">
-              </li>
-              <li>
-                <label for="description">
-                  Description
-                  <span class="required">*</span>
-                </label>
-                <textarea rows="4" type="text" id="description" name="description">Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.
-                </textarea>
-              </li>
-              <input type="submit" name="publish" value="Publish">
-            </ol>
-          </div>
-          <div class="bp1-wdn-col-two-fifths">
-            <ol>
-              <li class="clear-top">
-
-                <label for="privacy">Privacy</label>
-                <span class="wdn-icon-info mh-tool-tip">
-                  <div>
-                    <ul>
-                      <li><span class="heading">Public</span> - Anyone can access the media. </li>
-                      <li><span class="heading">Unlisted</span> - Media will not be included in public MediaHub listings.</li> 
-                      <li><span class="heading">Private</span> - Only members of channels that the media is included in can access it.</li>
-                    </ul>
-                  </div>
-                </span>
-
-                <select name="privacy" id="privacy">
-                  <option value="Public" selected="selected">Public</option>
-                  <option value="unlisted">Unlisted</option>
-                  <option value="Privacy">Private</option>
-                </select>
-              </li>
-
-
-              <li>
-                <label for="channels">Channels
-                  <span class="required">*</span>
-                </label>
-                <div class="mh-channel-box">                  
-                  <ul>
-
-                    <li><input type="checkbox" name="channels" value="Bike">This is a channel name</li>
-                    <li><input type="checkbox" name="channels" value="Car">Peanut butter biscuits</li> 
-                    <li><input type="checkbox" name="channels" value="Car">Spencer's Channel</li>    
-                    <li><input type="checkbox" name="channels" value="Car">Okay then</li> 
-                    <li><input type="checkbox" name="channels" value="Car">Peanut butter</li> 
-                    <li><input type="checkbox" name="channels" value="Car">WOO butter</li> 
-                    <li><input type="checkbox" name="channels" value="Car">Peanut gutter</li> 
-                    <li><input type="checkbox" name="channels" value="Car">Okay then</li> 
-                    <li><input type="checkbox" name="channels" value="Car">Peanut butter</li> 
-
-                  </ul>
+    <div class="wdn-inner-wrapper">
+        <h1 class="wdn-brand">Manage Media</h1>
+        <form action="?" method="post">
+            <div class="wdn-grid-set">
+                <div id="mh_upload_media_container" class="bp2-wdn-col-three-sevenths">
+                    <div id="mh_upload_media" class="mh-upload-box wdn-center">
+                        <h2>+<span class="wdn-subhead">Add Media</span></h2>
+                        <p>.mp4, .mov, .mp3, .wav, .aac</p>
+                    </div>
+                    <div id="filelist" class="mh-upload-box wdn-center">
+                        Your browser doesn't have Flash, Silverlight or HTML5 support.
+                    </div>
                 </div>
-              </li>
-            </ol>
-
-          </div>
-        </div>
-      </div>
-
+                <div class="bp2-wdn-col-four-sevenths">
+                    <div class="wdn-grid-set">
+                        <div class="bp1-wdn-col-three-fifths">
+                            <ol>
+                                <li class="clear-top">
+                                    <label for="title">
+                                        Title
+                                        <span class="required">*</span>
+                                    </label>
+                                    <input type="text" id="title" name="title">
+                                </li>
+                                <li>
+                                    <label for="author">
+                                        Author
+                                        <span class="required">*</span>
+                                        <span class="helper">Name of media creator</span>
+                                    </label>
+                                    <input type="text" id="author" name="author">
+                                </li>
+                                <li>
+                                    <label for="description">
+                                        Description
+                                        <span class="required">*</span>
+                                    </label>
+                                    <textarea rows="4" type="text" id="description" name="description">Explain what this
+                                        media is all about. Use a few sentences, but keep it to 1 paragraph.
+                                    </textarea>
+                                    <input type="submit" name="publish" value="Publish">
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="bp1-wdn-col-two-fifths">
+                            <ol>
+                                <li class="clear-top">
+                                    <label for="privacy">Privacy</label>
+                                    <div class="wdn-icon-info mh-tool-tip">
+                                        <div>
+                                            <ul>
+                                                <li><span class="heading">Public</span> - Anyone can access the media.
+                                                </li>
+                                                <li><span class="heading">Unlisted</span> - Media will not be included
+                                                    in public MediaHub listings.
+                                                </li>
+                                                <li><span class="heading">Private</span> - Only members of channels that
+                                                    the media is included in can access it.
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <select name="privacy" id="privacy">
+                                        <option value="Public" selected="selected">Public</option>
+                                        <option value="unlisted">Unlisted</option>
+                                        <option value="Privacy">Private</option>
+                                    </select>
+                                </li>
+                                <li>
+                                    <label for="channels">Channels
+                                        <span class="required">*</span>
+                                    </label>
+                                    <div class="mh-channel-box">
+                                        <ul>
+                                            <li>
+                                                <input type="checkbox" id="channels_1" name="channels" value="Bike">
+                                                <label for="channels_1">This is a channelname</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="channels_2" name="channels" value="Car">
+                                                <label for="channels_2">Peanut butter biscuits</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="channels_3" name="channels" value="Car">
+                                                <label for="channels_3">Spencer's Channel</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="channels_4" name="channels" value="Car">
+                                                <label for="channels_4">Okay then</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="channels_5" name="channels" value="Car">
+                                                <label for="channels_5">Peanut butter</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="channels_6" name="channels" value="Car">
+                                                <label for="channels_6">WOO butter</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="channels_7" name="channels" value="Car">
+                                                <label for="channels_7">Peanut gutter</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="channels_8" name="channels" value="Car">
+                                                <label for="channels_8">Okay then</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="channels_9" name="channels" value="Car">
+                                                <label for="channels_9">Peanut butter</label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
-  </form>               
-
-</div>
-
 </div>
 
 <script type="text/javascript">
@@ -138,6 +158,14 @@ WDN.initializePlugin('tooltip');
         init: {
             PostInit: function() {
                 WDN.jQuery('#filelist').text('').hide();
+                var input = WDN.jQuery('#mh_upload_media_container').find('input').each(function() {
+                    var label = WDN.jQuery('<label/>', {
+                        'for': this.id,
+                        'class': 'wdn-text-hidden',
+                        'text': 'Browse for media'
+                    });
+                    WDN.jQuery(this).before(label);
+                });
             },
 
             FilesAdded: function(up, files) {
