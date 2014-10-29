@@ -6,6 +6,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
     <div class="wdn-inner-wrapper">
         <h1 class="wdn-brand">Manage Media</h1>
         <form action="?" method="post">
+            <input type="hidden" name="__unlmy_posttarget" value="feed_media" />
             <div class="wdn-grid-set">
                 <div id="mh_upload_media_container" class="bp2-wdn-col-three-sevenths">
                     <div id="mh_upload_media" class="mh-upload-box wdn-center">
