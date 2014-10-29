@@ -5,7 +5,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
 <div class="wdn-band wdn-light-neutral-band mh-upload-band">
     <div class="wdn-inner-wrapper">
         <h1 class="wdn-brand">Manage Media</h1>
-        <form action="?" method="post">
+        <form action="?" method="post" id="add_media">
             <input type="hidden" name="__unlmy_posttarget" value="feed_media" />
             <input type="hidden" id="media_url" name="url" value="">
             <div class="wdn-grid-set">
@@ -27,7 +27,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
                                         Title
                                         <span class="required">*</span>
                                     </label>
-                                    <input type="text" id="title" name="title">
+                                    <input type="text" id="title" name="title" class="required-entry">
                                 </li>
                                 <li>
                                     <label for="author">
@@ -35,16 +35,18 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
                                         <span class="required">*</span>
                                         <span class="helper">Name of media creator</span>
                                     </label>
-                                    <input type="text" id="author" name="author">
+                                    <input type="text" id="author" name="author" class="required-entry">
                                 </li>
                                 <li>
                                     <label for="description">
                                         Description
                                         <span class="required">*</span>
                                     </label>
-                                    <textarea rows="4" type="text" id="description" name="description">Explain what this
+                                    <textarea rows="4" type="text" id="description" name="description" class="required-entry">Explain what this
                                         media is all about. Use a few sentences, but keep it to 1 paragraph.
                                     </textarea>
+                                </li>
+                                <li>
                                     <input type="submit" id="publish" name="publish" value="Publish" disabled="disabled">
                                 </li>
                             </ol>
@@ -87,6 +89,9 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
 
 <script type="text/javascript">
 WDN.initializePlugin('tooltip');
+WDN.initializePlugin('form_validation', [function() {
+    WDN.jQuery('#add_media').validation({immediate: true});
+}]);
 </script>
 
 
