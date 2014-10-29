@@ -47,7 +47,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
                                     </textarea>
                                 </li>
                                 <li>
-                                    <input type="submit" id="publish" name="publish" value="Publish" disabled="disabled">
+                                    <input type="submit" id="publish" name="publish" value="Publish">
                                 </li>
                             </ol>
                         </div>
