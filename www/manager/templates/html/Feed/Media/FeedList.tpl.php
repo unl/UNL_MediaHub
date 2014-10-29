@@ -7,4 +7,3 @@ foreach ($context->items as $item=>$feed) {
     }
     echo '<li><input id="feed_id['.$feed->id.']" name="feed_id['.$feed->id.']" type="checkbox" '.$checked.' /> <label for="feed_id['.$feed->id.']">'.$feed->title.'</label></li>';
 }
-?>
