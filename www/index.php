@@ -32,8 +32,11 @@ if (isset($cache)) {
 switch($controller->options['format']) {
     case 'rss':
     case 'xml':
-    case 'json':
     case 'js':
+        $outputcontroller->addTemplatePath(dirname(__FILE__).'/templates/'.$controller->options['format']);
+        break;
+    case 'json':
+        header('Content-type:application/json');
         $outputcontroller->addTemplatePath(dirname(__FILE__).'/templates/'.$controller->options['format']);
         break;
     default:

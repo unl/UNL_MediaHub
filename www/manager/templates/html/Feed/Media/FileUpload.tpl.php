@@ -7,6 +7,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
         <h1 class="wdn-brand">Manage Media</h1>
         <form action="?" method="post">
             <input type="hidden" name="__unlmy_posttarget" value="feed_media" />
+            <input type="hidden" id="media_url" name="url" value="">
             <div class="wdn-grid-set">
                 <div id="mh_upload_media_container" class="bp2-wdn-col-three-sevenths">
                     <div id="mh_upload_media" class="mh-upload-box wdn-center">
@@ -44,7 +45,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
                                     <textarea rows="4" type="text" id="description" name="description">Explain what this
                                         media is all about. Use a few sentences, but keep it to 1 paragraph.
                                     </textarea>
-                                    <input type="submit" name="publish" value="Publish">
+                                    <input type="submit" id="publish" name="publish" value="Publish" disabled="disabled">
                                 </li>
                             </ol>
                         </div>
@@ -144,6 +145,24 @@ WDN.initializePlugin('tooltip');
 
             UploadProgress: function(up, file) {
                 document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+            },
+
+            FileUploaded: function(up, file, info) {
+                // Called when file has finished uploading
+                var response = WDN.jQuery.parseJSON(info.response);
+                if (typeof response.result === 'undefined') {
+                    //Bad response, fail for now.
+                    return;
+                }
+                
+                if (response.result !== 'complete') {
+                    //did not complete
+                    return;
+                }
+                
+                WDN.jQuery('#media_url').attr('value', response.url);
+                WDN.jQuery('#publish').enable();
+                
             },
 
             Error: function(up, err) {

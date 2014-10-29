@@ -147,7 +147,7 @@ class UNL_MediaHub_Manager_PostHandler
     public function handleMediaFileUpload()
     {
         if ($url = $this->_handleMediaFileUpload()) {
-            $this->redirect(UNL_MediaHub_Manager::getURL().'?view=uploadcomplete&format=barebones&url='.urlencode($url));
+            $this->redirect(UNL_MediaHub_Manager::getURL().'?view=uploadcomplete&format=json&url='.urlencode($url));
         }
     }
 
