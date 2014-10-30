@@ -334,13 +334,13 @@ class UNL_MediaHub_Manager_PostHandler
         $media->synchronizeWithArray($this->post);
         
         $media->save();
-print_r($_POST);
+
         if (!empty($this->post['feed_id'])) {
             if (is_array($this->post['feed_id'])) {
                 $feed_ids = $this->post['feed_id'];
             } else {
                 $feed_ids = array($this->post['feed_id']);
-            }print_r($feed_ids);exit();
+            }
             foreach ($feed_ids as $feed_id) {
                 $feed = UNL_MediaHub_Feed::getById($feed_id);
                 if (!$feed->userHasPermission(
