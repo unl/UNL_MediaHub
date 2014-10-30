@@ -309,7 +309,7 @@ class UNL_MediaHub_Manager_PostHandler
     function handleFeedMedia()
     {
         // Check for required fields
-        if (!isset($this->post['url']) || empty($this->post['url'])) {
+        if (empty($this->post['url'])) {
             throw new Exception('The required field "media url" is missing', 400);
         }
         
@@ -317,19 +317,19 @@ class UNL_MediaHub_Manager_PostHandler
             throw new Exception('The provided value for field "url" is invalid.  It must be a valid absolute URL.', 400);
         }
 
-        if (!isset($this->post['title']) || empty($this->post['title'])) {
+        if (empty($this->post['title'])) {
             throw new Exception('The required field "title" is missing', 400);
         }
 
-        if (!isset($this->post['author']) || empty($this->post['author'])) {
+        if (empty($this->post['author'])) {
             throw new Exception('The required field "author" is missing', 400);
         }
 
-        if (!isset($this->post['description']) || empty($this->post['description'])) {
+        if (empty($this->post['description'])) {
             throw new Exception('The required field "description" is missing', 400);
         }
 
-        if (!isset($this->post['feed_id']) || empty($this->post['feed_id'])) {
+        if (empty($this->post['feed_id'])) {
             throw new Exception('The required field "Channels" is missing.', 400);
         }
 
