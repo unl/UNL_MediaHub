@@ -26,7 +26,10 @@ Supporting styles for individual presentation of media pages
     font-size:0.7em;
     display:block;
 }
-.subhead {margin-top:-5px;border-bottom:1px solid #eee;margin-bottom:10px;}
+.subhead {
+    margin-top:-5px;
+    margin-bottom:10px;
+}
 
 .duration {
     background:url('images/iconClock.png') no-repeat 0 3px;
@@ -43,9 +46,6 @@ Tags
     min-height:16px;
     padding: 15px 0px;
     list-style:none;
-    /*background:url('images/iconTag.png') 5px 8px no-repeat #f7f7f7;*/
-    border-top:1px solid #ededed;
-    border-bottom:1px solid #ededed;
     margin-bottom:10px;
 }
 #maincontent ul#mediaTags li {

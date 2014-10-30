@@ -60,7 +60,7 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
 <div class="wdn-band">
 
     <div class="wdn-inner-wrapper wdn-inner-padding-no-bottom">
-        <?php //echo $mediaplayer; ?>
+        <?php echo $mediaplayer; ?>
     </div>
 
 </div>
@@ -85,21 +85,20 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
                         $summary .= '<span class="itunes_summary">'.$element->value.'</span>';
                     }
                     ?>
-                  <p><?php echo $summary; ?></p>
                     
-                    <div class="wdn-grid-set-fifths wdn-center">
+                    <div class="wdn-grid-set wdn-center">
 
-                                        <div class="wdn-col mh-stat">
+                                        <div class="wdn-col-one-seventh mh-stat">
                                             <span class="mh-count wdn-brand"><?php echo $context->play_count ?></span>
                                             <span class="mh-context wdn-sans-serif">Plays</span>
                                         </div> 
                                         
-                                        <div class="wdn-col mh-stat">
+                                        <div class="wdn-col-one-seventh mh-stat">
                                             <span class="mh-count wdn-brand"><?php echo count($context->UNL_MediaHub_Media_Comment); ?></span>
                                             <span class="mh-context wdn-sans-serif">Comments</span>
                                         </div> 
 
-                                        <div class="wdn-col mh-stat">
+                                        <div class="wdn-col-one-third mh-stat">
                                             <span class="mh-ratio wdn-brand"><?php echo $dimensions[0] . 'x' .$dimensions[1];?></span>
                                             <span class="mh-size wdn-brand">
                                                 <?php 
@@ -110,9 +109,11 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
                                                 }?>
                                             </span>
                                         </div>  
+                    </div>          
 
-                    </div>  
-                    
+                    <?php echo $summary; ?>
+
+                    <hr>
                     <ul id="mediaTags" class="wdn-sans-serif">
                     <li class="wdn-sans-serif mh-tag-label">Tags:</li>
                         <?php
@@ -127,12 +128,12 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
         
                         ?>
                     </ul>
-        
+                    <hr>
                     <div id="comments">
                     <script type="text/javascript">
                         WDN.loadCSS('../templates/html/css/comments.css');
                     </script>
-                    <h4>Comments</h4>
+                    <h6 class="wdn-sans-serif">COMMENTS</h6>
                     <span class="subhead"><?php echo count($context->UNL_MediaHub_Media_Comment); ?> Comments | <a href="#commentForm">Leave Yours</a></span>
                     <?php
                     if (count($context->UNL_MediaHub_Media_Comment)) {
@@ -142,10 +143,14 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
                             if ($name = UNL_Services_Peoplefinder::getFullName($comment['uid'])) {
                                 
                             }
-                            echo '<img alt="Your Profile Pic" src="http://planetred.unl.edu/pg/icon/unl_'.$comment['uid'].'/small/" class="profile_pic small"> ';
-                            echo '<h5 class="commenter sec_header">'.$name.'</h5>';
-                            echo '<em>'.date('m/d/y g:i a', strtotime($comment['datecreated'])).'</em>';
                             echo '<blockquote>'.htmlentities(strip_tags($comment['comment']), ENT_QUOTES).'</blockquote>';
+                            echo '<div class="mh-user">';
+                            echo '<img alt="Your Profile Pic" src="http://planetred.unl.edu/pg/icon/unl_'.$comment['uid'].'/small/" class="profile_pic small"> ';
+                            echo '<div class="commenter wdn-sans-serif sec_header clear-top">'.$name.'</div>';
+                            echo '<em>'.date('m/d/y g:i a', strtotime($comment['datecreated'])).'</em>';
+                            echo '</div>';
+                            echo '<div class="clear"></div>';
+                            echo '<hr>';
                             echo '</li>';
                         }
                         echo '</ul>';

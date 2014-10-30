@@ -3,12 +3,14 @@
 Supporting styles for  the display of the COMMENTS used on media pages.
 
 */
+
+#comments ul {
+    padding: 0;
+}
+
 #comments ul li {
     list-style:none;
-    margin-left:-28px;
-    padding:10px;
     margin-bottom:20px;
-    border-bottom:1px dotted #bbb;
 }
 #comments ul li em {
     font-size:.8em;
@@ -18,21 +20,82 @@ Supporting styles for  the display of the COMMENTS used on media pages.
 h3 a {
     font-size:.7em;
 }
-#maincontent form fieldset {
-    width:460px;
+
+#comments .subhead {
+    font-style: italic;
 }
-#maincontent form textarea {
-    width:270px;
+
+#comments blockquote {
+    padding: 20px;
+    clear: both;
+    margin: 0;
+    background-color: #fff;
+    box-shadow: 0px 2px 4px RGBA(0,0,0,0.25);
+    position: relative;
 }
-blockquote {
-    padding: 5px 5px 5px 48px;
-    clear:both;
+
+#comments blockquote:before {
+    background-color: white;
+    content: "";
+    display: block;
+    width: 20px; 
+    height: 20px; 
+    position:absolute;
+    bottom: -10px;
+    left: 7%;
+    margin-left: -18px;
+    transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    box-shadow: 0px 0px 4px RGBA(0,0,0,0.25);
 }
+
+#comments blockquote:after {
+    content:"";
+    height:20px;
+    width:40px;
+    background-color:#fff;
+    display:block;
+    position:absolute;
+    bottom: 0px;
+    left: 7%;
+    margin-left: -28px;
+}
+
 .profile_pic{
     float:left;	
+    margin: 10px;
 }
 #maincontent h5.commenter {
     font-weight:bold;
     padding-left:53px;	
     margin-bottom:0;
+}
+
+.mh-user {
+    padding: 10px;  
+}
+
+
+@media only screen and (max-width: 768px)  {
+
+    .profile_pic{
+        float:left; 
+        margin: 0 10px 0 0;
+    }
+
+    #comments blockquote:before, #comments blockquote:after {
+
+    left: 10%;
+
+    }
+
+    .mh-user {
+    padding: 20px 10px 10px 10px;
+    }
+
+
+
 }
