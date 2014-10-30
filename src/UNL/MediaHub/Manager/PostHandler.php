@@ -310,7 +310,7 @@ class UNL_MediaHub_Manager_PostHandler
     {
         // Check for required fields
         if (empty($this->post['url'])) {
-            throw new Exception('The required field "media url" is missing', 400);
+            throw new Exception('Please provide a URL for this media.', 400);
         }
         
         if (!filter_var($this->post['url'], FILTER_VALIDATE_URL)) {
@@ -318,19 +318,19 @@ class UNL_MediaHub_Manager_PostHandler
         }
 
         if (empty($this->post['title'])) {
-            throw new Exception('The required field "title" is missing', 400);
+            throw new Exception('Please provide a title for this media.', 400);
         }
 
         if (empty($this->post['author'])) {
-            throw new Exception('The required field "author" is missing', 400);
+            throw new Exception('Please provide an author for this media.', 400);
         }
 
         if (empty($this->post['description'])) {
-            throw new Exception('The required field "description" is missing', 400);
+            throw new Exception('Please provide a description for this media.', 400);
         }
 
         if (empty($this->post['feed_id'])) {
-            throw new Exception('The required field "Channels" is missing.', 400);
+            throw new Exception('Please pick which channel(s) this media should be associated with.', 400);
         }
 
         // Add media to a feed/channel
