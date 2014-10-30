@@ -147,7 +147,7 @@ class UNL_MediaHub_Manager_PostHandler
     public function handleMediaFileUpload()
     {
         if ($url = $this->_handleMediaFileUpload()) {
-            $this->redirect(UNL_MediaHub_Manager::getURL().'?view=uploadcomplete&format=barebones&url='.urlencode($url));
+            $this->redirect(UNL_MediaHub_Manager::getURL().'?view=uploadcomplete&format=json&url='.urlencode($url));
         }
     }
 
@@ -337,7 +337,7 @@ class UNL_MediaHub_Manager_PostHandler
 
         if (!empty($this->post['feed_id'])) {
             if (is_array($this->post['feed_id'])) {
-                $feed_ids = array_keys($this->post['feed_id']);
+                $feed_ids = $this->post['feed_id'];
             } else {
                 $feed_ids = array($this->post['feed_id']);
             }
