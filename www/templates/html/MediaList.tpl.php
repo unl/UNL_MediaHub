@@ -6,6 +6,8 @@ if (isset($context->label) && !empty($context->label)) {
 } else {
     $label = 'All Media';
 }
+
+$feeds = $context->getRelatedFeeds(array('limit'=>6));
 ?>
 
 <div class="wdn-band mh-media">
@@ -59,6 +61,17 @@ if (isset($context->label) && !empty($context->label)) {
                 $mediaListClass = ' mh-media-browse page-' . $context->pager->getPage();
             }
             ?>
+
+            <?php if ($feeds && count($feeds->items)): ?>
+                <h2 class="wdn-brand">
+                    <span class="wdn-subhead">Related Channels</span>
+                </h2>
+                <ul>
+                    <?php foreach ($feeds->items as $feed): ?>
+                        <li><a href="<?php UNL_MediaHub_Controller::getURL($feed) ?>"><?php echo $feed->title ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif ?>
             
             <ul class="bp2-wdn-grid-set-thirds wdn-grid-clear mh-media-list<?php echo $mediaListClass ?>">
                 <?php foreach ($context->items as $media): ?>
