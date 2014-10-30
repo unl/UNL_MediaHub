@@ -308,14 +308,29 @@ class UNL_MediaHub_Manager_PostHandler
      */
     function handleFeedMedia()
     {
-        // Check if a file was uploaded
-        if (empty($this->post['url'])
-            && !empty($this->files)) {
-            $this->post['url'] = $this->_handleMediaFileUpload();
+        // Check for required fields
+        if (!isset($this->post['url']) || empty($this->post['url'])) {
+            throw new Exception('The required field "media url" is missing', 400);
+        }
+        
+        if (!filter_var($this->post['url'], FILTER_VALIDATE_URL)) {
+            throw new Exception('The provided value for field "url" is invalid.  It must be a valid absolute URL.', 400);
         }
 
-        if (empty($this->post['url'])) {
-            throw new Exception('Either no URL was submitted, or your file upload failed', 400);
+        if (!isset($this->post['title']) || empty($this->post['title'])) {
+            throw new Exception('The required field "title" is missing', 400);
+        }
+
+        if (!isset($this->post['author']) || empty($this->post['author'])) {
+            throw new Exception('THe required field "author" is missing', 400);
+        }
+
+        if (!isset($this->post['description']) || empty($this->post['description'])) {
+            throw new Exception('The required field "description" is missing', 400);
+        }
+
+        if (!isset($this->post['feed_id']) || empty($this->post['feed_id'])) {
+            throw new Exception('The required field "Channels" is missing.', 400);
         }
 
         // Add media to a feed/channel
@@ -324,9 +339,13 @@ class UNL_MediaHub_Manager_PostHandler
             $media = UNL_MediaHub_Media::getById($this->post['id']);
         } else {
             // Insert a new piece of media
-            $details = array('url'        => $this->post['url'],
-                             'title'      => $this->post['title'],
-                             'description'=> $this->post['description']);
+            $details = array(
+                'url'        => $this->post['url'],
+                'title'      => $this->post['title'],
+                'description'=> $this->post['description'],
+                'author'     => $this->post['author'],
+            );
+                             
             $media = $this->mediahub->addMedia($details);
         }
         
