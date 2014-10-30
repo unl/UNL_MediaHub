@@ -33,10 +33,6 @@ form #thumbnail {
     margin-left:10px;
     opacity:0.7;
 }
-#maincontent form fieldset {
-	width:940px;
-	}
-
 
 #maincontent form fieldset li #description_wrapper li {
     list-style: inline;
