@@ -85,6 +85,14 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
                         $summary .= '<span class="itunes_summary">'.$element->value.'</span>';
                     }
                     ?>
+
+                    <p>
+                    <?php if (!empty($context->author)) { // @TODO present author with more info (standardize people records) ?>
+                        <div class="wdn-sans-serif">Author: <?php echo $context->author; ?></div>
+                        <?php } ?>
+    
+                        <div class="wdn-sans-serif">Added: <?php echo date('m/d/Y', strtotime($context->datecreated)); ?></div>
+                    </p>
                     
                     <div class="wdn-grid-set wdn-center">
 
@@ -168,7 +176,7 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
                 <div class="bp2-wdn-col-one-fourth mh-sidebar">
                     <div>
 
-                    <a href="#" class="wdn-button wdn-button-brand"><span class="wdn-icon-rocket wdn-icon"></span>Embed</a>
+                    <a class="wdn-button wdn-button-brand cboxElement"><span class="wdn-icon-rocket wdn-icon"></span>Embed</a>
                     <br>
                     <a href="<?php echo htmlentities($context->url, ENT_QUOTES); ?>" target="_blank" class="wdn-button wdn-button-brand"><span class="wdn-icon-rocket wdn-icon"></span>Download</a>
                     
@@ -186,7 +194,7 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
 
 
 
-<!-- <div id="sharing">
+<div id="sharing">
     <h3>Embed</h3>
     <p>Copy the following code into your unl.edu page</p>
     
@@ -194,4 +202,4 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
     $embed = $savvy->render(UNL_MediaHub_Media_Embed::getById($context->id, UNL_MediaHub_Controller::$current_embed_version));
     ?>
     <textarea cols="25" rows="6" onclick="this.select(); return false;"><?php echo htmlentities($embed, ENT_COMPAT | ENT_HTML401, "UTF-8"); ?></textarea>
-</div> -->
+</div> 
