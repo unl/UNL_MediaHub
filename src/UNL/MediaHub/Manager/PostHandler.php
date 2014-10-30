@@ -322,7 +322,7 @@ class UNL_MediaHub_Manager_PostHandler
         }
 
         if (!isset($this->post['author']) || empty($this->post['author'])) {
-            throw new Exception('THe required field "author" is missing', 400);
+            throw new Exception('The required field "author" is missing', 400);
         }
 
         if (!isset($this->post['description']) || empty($this->post['description'])) {
