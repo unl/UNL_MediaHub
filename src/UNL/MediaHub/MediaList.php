@@ -118,4 +118,22 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
         
         return $url;
     }
+
+    /**
+     * Get related feeds for the current list
+     *
+     * @param array $options
+     * @return UNL_MediaHub_User_FeedList
+     */
+    public function getRelatedFeeds($options = array())
+    {
+        if ($this->options['filter']->getType() != 'search') {
+            return false;
+        }
+        
+        $options['filter'] = new UNL_MediaHub_FeedList_Filter_WithTerm($this->options['filter']->getValue());
+        $feeds = new UNL_MediaHub_FeedList($options);
+        $feeds->run();
+        return $feeds;
+    }
 }

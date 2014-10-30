@@ -5,7 +5,9 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
 <div class="wdn-band wdn-light-neutral-band mh-upload-band">
     <div class="wdn-inner-wrapper">
         <h1 class="wdn-brand">Manage Media</h1>
-        <form action="?" method="post">
+        <form action="?" method="post" id="add_media">
+            <input type="hidden" name="__unlmy_posttarget" value="feed_media" />
+            <input type="hidden" id="media_url" name="url" value="">
             <div class="wdn-grid-set">
                 <div id="mh_upload_media_container" class="bp2-wdn-col-three-sevenths">
                     <div id="mh_upload_media" class="mh-upload-box wdn-center">
@@ -25,7 +27,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
                                         Title
                                         <span class="required">*</span>
                                     </label>
-                                    <input type="text" id="title" name="title">
+                                    <input type="text" id="title" name="title" class="required-entry">
                                 </li>
                                 <li>
                                     <label for="author">
@@ -33,17 +35,19 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
                                         <span class="required">*</span>
                                         <span class="helper">Name of media creator</span>
                                     </label>
-                                    <input type="text" id="author" name="author">
+                                    <input type="text" id="author" name="author" class="required-entry">
                                 </li>
                                 <li>
                                     <label for="description">
                                         Description
                                         <span class="required">*</span>
                                     </label>
-                                    <textarea rows="4" type="text" id="description" name="description">Explain what this
+                                    <textarea rows="4" type="text" id="description" name="description" class="required-entry">Explain what this
                                         media is all about. Use a few sentences, but keep it to 1 paragraph.
                                     </textarea>
-                                    <input type="submit" name="publish" value="Publish">
+                                </li>
+                                <li>
+                                    <input type="submit" id="publish" name="publish" value="Publish" disabled="disabled">
                                 </li>
                             </ol>
                         </div>
@@ -72,49 +76,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
                                     </select>
                                 </li>
                                 <li>
-                                    <label for="channels">Channels
-                                        <span class="required">*</span>
-                                    </label>
-                                    <div class="mh-channel-box">
-                                        <ul>
-                                            <li>
-                                                <input type="checkbox" id="channels_1" name="channels" value="Bike">
-                                                <label for="channels_1">This is a channelname</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="channels_2" name="channels" value="Car">
-                                                <label for="channels_2">Peanut butter biscuits</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="channels_3" name="channels" value="Car">
-                                                <label for="channels_3">Spencer's Channel</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="channels_4" name="channels" value="Car">
-                                                <label for="channels_4">Okay then</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="channels_5" name="channels" value="Car">
-                                                <label for="channels_5">Peanut butter</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="channels_6" name="channels" value="Car">
-                                                <label for="channels_6">WOO butter</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="channels_7" name="channels" value="Car">
-                                                <label for="channels_7">Peanut gutter</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="channels_8" name="channels" value="Car">
-                                                <label for="channels_8">Okay then</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="channels_9" name="channels" value="Car">
-                                                <label for="channels_9">Peanut butter</label>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                    <?php echo $savvy->render($context, 'User/FeedSelection.tpl.php'); ?>
                                 </li>
                             </ol>
                         </div>
@@ -127,6 +89,9 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
 
 <script type="text/javascript">
 WDN.initializePlugin('tooltip');
+WDN.initializePlugin('form_validation', [function() {
+    WDN.jQuery('#add_media').validation({immediate: true});
+}]);
 </script>
 
 
@@ -185,6 +150,24 @@ WDN.initializePlugin('tooltip');
 
             UploadProgress: function(up, file) {
                 document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+            },
+
+            FileUploaded: function(up, file, info) {
+                // Called when file has finished uploading
+                var response = WDN.jQuery.parseJSON(info.response);
+                if (typeof response.result === 'undefined') {
+                    //Bad response, fail for now.
+                    return;
+                }
+                
+                if (response.result !== 'complete') {
+                    //did not complete
+                    return;
+                }
+                
+                WDN.jQuery('#media_url').attr('value', response.url);
+                WDN.jQuery('#publish').removeAttr('disabled');
+                
             },
 
             Error: function(up, err) {

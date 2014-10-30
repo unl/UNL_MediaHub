@@ -147,7 +147,7 @@ class UNL_MediaHub_Manager_PostHandler
     public function handleMediaFileUpload()
     {
         if ($url = $this->_handleMediaFileUpload()) {
-            $this->redirect(UNL_MediaHub_Manager::getURL().'?view=uploadcomplete&format=barebones&url='.urlencode($url));
+            $this->redirect(UNL_MediaHub_Manager::getURL().'?view=uploadcomplete&format=json&url='.urlencode($url));
         }
     }
 
@@ -308,14 +308,29 @@ class UNL_MediaHub_Manager_PostHandler
      */
     function handleFeedMedia()
     {
-        // Check if a file was uploaded
-        if (empty($this->post['url'])
-            && !empty($this->files)) {
-            $this->post['url'] = $this->_handleMediaFileUpload();
+        // Check for required fields
+        if (empty($this->post['url'])) {
+            throw new Exception('Please provide a URL for this media.', 400);
+        }
+        
+        if (!filter_var($this->post['url'], FILTER_VALIDATE_URL)) {
+            throw new Exception('The provided value for field "url" is invalid.  It must be a valid absolute URL.', 400);
         }
 
-        if (empty($this->post['url'])) {
-            throw new Exception('Either no URL was submitted, or your file upload failed', 400);
+        if (empty($this->post['title'])) {
+            throw new Exception('Please provide a title for this media.', 400);
+        }
+
+        if (empty($this->post['author'])) {
+            throw new Exception('Please provide an author for this media.', 400);
+        }
+
+        if (empty($this->post['description'])) {
+            throw new Exception('Please provide a description for this media.', 400);
+        }
+
+        if (empty($this->post['feed_id'])) {
+            throw new Exception('Please pick which channel(s) this media should be associated with.', 400);
         }
 
         // Add media to a feed/channel
@@ -324,9 +339,13 @@ class UNL_MediaHub_Manager_PostHandler
             $media = UNL_MediaHub_Media::getById($this->post['id']);
         } else {
             // Insert a new piece of media
-            $details = array('url'        => $this->post['url'],
-                             'title'      => $this->post['title'],
-                             'description'=> $this->post['description']);
+            $details = array(
+                'url'        => $this->post['url'],
+                'title'      => $this->post['title'],
+                'description'=> $this->post['description'],
+                'author'     => $this->post['author'],
+            );
+                             
             $media = $this->mediahub->addMedia($details);
         }
         
@@ -337,7 +356,7 @@ class UNL_MediaHub_Manager_PostHandler
 
         if (!empty($this->post['feed_id'])) {
             if (is_array($this->post['feed_id'])) {
-                $feed_ids = array_keys($this->post['feed_id']);
+                $feed_ids = $this->post['feed_id'];
             } else {
                 $feed_ids = array($this->post['feed_id']);
             }
