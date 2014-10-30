@@ -70,8 +70,8 @@ Tags
     -moz-border-radius:3px;
     border: dashed 2px #B8B8B8;
     text-align: center;
-    height: 2.532em;
-    width: 2.532em;
+    min-height: 2.532em;
+    min-width: 2.532em;
     box-shadow: none;
 }
 #maincontent ul#mediaTags li a {
@@ -82,9 +82,6 @@ Tags
 }
 #maincontent #addTags {
     display:inline;
-}
-#maincontent #addTags input {
-    margin-left:5px;
 }
 #maincontent #addTags input[type="text"] {
     height:10px;
