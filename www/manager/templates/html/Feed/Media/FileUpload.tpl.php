@@ -47,7 +47,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
                                     </textarea>
                                 </li>
                                 <li>
-                                    <input type="submit" id="publish" name="publish" value="Publish">
+                                    <input type="submit" id="publish" name="publish" value="Publish" disabled="disabled">
                                 </li>
                             </ol>
                         </div>
@@ -166,7 +166,7 @@ WDN.initializePlugin('form_validation', [function() {
                 }
                 
                 WDN.jQuery('#media_url').attr('value', response.url);
-                WDN.jQuery('#publish').enable();
+                WDN.jQuery('#publish').removeAttr('disabled');
                 
             },
 
