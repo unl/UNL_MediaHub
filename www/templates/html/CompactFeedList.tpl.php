@@ -2,12 +2,8 @@
 if (count($context->items)) :
 ?>
 <h5><?php echo $context->label; ?></h5>
-<?php if ($parent->context instanceof UNL_MediaHub_Media): ?>
-<?php endif; ?>
 <div class="channels">
     <?php foreach ($context->items as $channel): ?>
-
-
 		<a href="<?php echo UNL_MediaHub_Controller::getURL($channel); ?>" title="<?php echo htmlentities($channel->description, ENT_QUOTES); ?>">
 		    <div class="mh-video-thumb wdn-center">
 		        <div class="mh-thumbnail-clip">
@@ -21,9 +17,6 @@ if (count($context->items)) :
 		        </div>
 		    </div>
 		</a>
-
-
-
     <?php endforeach; ?>
 </div>
 <?php endif; ?>
