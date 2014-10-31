@@ -11,10 +11,8 @@ if (count($context->items)) :
 		        </div>
 		        <div class="mh-play-button"></div>
 		    </div>
-		    <div class="mh-video-label wdn-center">
-		        <div class="wdn-sans-serif">
-		                <span class="title"><?php echo $channel->title?></span>
-		        </div>
+		    <div class="mh-video-label wdn-center wdn-sans-serif">
+		                <span class="title"><?php echo $channel->title?></span>	       
 		    </div>
 		</a>
     <?php endforeach; ?>
