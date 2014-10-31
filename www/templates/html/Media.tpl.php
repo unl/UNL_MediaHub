@@ -35,13 +35,13 @@ if ($type == 'video') {
     $meta .= '
     <link rel="video_src" href="'.$context->url.'" />
     <meta property="og:video" content="'.htmlentities($context->url, ENT_QUOTES).'" />
-	<meta property="og:video:height" content="'.$height.'" />
-	<meta property="og:video:width" content="'.$width.'" />
-	<meta property="og:video:type" content="'.$context->type.'" />
+    <meta property="og:video:height" content="'.$height.'" />
+    <meta property="og:video:width" content="'.$width.'" />
+    <meta property="og:video:type" content="'.$context->type.'" />
     <meta property="og:image" content="'.$context->getThumbnailURL().'">
     <meta property="og:video" content="'.UNL_MediaHub_Controller::getURL($context).'" />
     <meta property="og:video:type" content="text/html" />
-	';
+    ';
 } else {
 	$meta .= '
 	<meta property="og:audio" content="'.$context->url.'" />
@@ -50,111 +50,155 @@ if ($type == 'video') {
 	';
 }
 $controller->setReplacementData('head', $meta);
-$controller->setReplacementData('pagetitle', '<h1>'.$context->title.'</h1>');
 
 // Store the mediaplayer code in a variable, so we can re-use it for the embed
 $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
-echo $mediaplayer;
 ?>
 
-<div class="grid8 first supportingContent">
-    <h2><?php echo $context->title; ?></h2>
-    <?php
-    if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_itunes::mediaHasElement($context->id, 'subtitle')) {
-        echo '<h3 class="itunes_subtitle">'.$element->value.'</h3>';
-    }
-    $summary = $context->description;
-    if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_itunes::mediaHasElement($context->id, 'summary')) {
-        $summary .= '<span class="itunes_summary">'.$element->value.'</span>';
-    }
-    ?>
-  <p><?php echo $summary; ?></p>
 
-  
-    <ul id="mediaTags">
-        <?php
-        foreach ($context->getTags() as $tag) {
-            echo '<li><a href="'.UNL_MediaHub_Controller::$url.'tags/'.urlencode(trim($tag)).'">'.$tag.'</a></li>';
-        }
-	    if (UNL_MediaHub_Controller::isLoggedIn()) {
-	    	echo '<li id="mediaTagsAdd"><a href="#">Add tags</a><form id="addTags" method="post"><input type="text" value="" name="tags" /><input type="submit" value="Add" /></form></li>';
-	    } else {
-	    	echo '<li id="mediaTagsAdd"><a href="https://login.unl.edu/cas/login?service='.urlencode(UNL_MediaHub_Controller::getURL()).'">Login to add tags </a></li>';
-	    }
+<div class="wdn-band">
 
-	    ?>
-    </ul>
-
-    <div id="comments">
-    <script type="text/javascript">
-    	WDN.loadCSS('../templates/html/css/comments.css');
-    </script>
-    <h4>Comments</h4>
-    <span class="subhead"><?php echo count($context->UNL_MediaHub_Media_Comment); ?> Comments | <a href="#commentForm">Leave Yours</a></span>
-    <?php
-    if (count($context->UNL_MediaHub_Media_Comment)) {
-        echo '<ul>';
-        foreach ($context->UNL_MediaHub_Media_Comment as $comment) {
-            echo '<li>';
-            if ($name = UNL_Services_Peoplefinder::getFullName($comment['uid'])) {
-                
-            }
-            echo '<img alt="Your Profile Pic" src="http://planetred.unl.edu/pg/icon/unl_'.$comment['uid'].'/small/" class="profile_pic small"> ';
-            echo '<h5 class="commenter sec_header">'.$name.'</h5>';
-            echo '<em>'.date('m/d/y g:i a', strtotime($comment['datecreated'])).'</em>';
-            echo '<blockquote>'.htmlentities(strip_tags($comment['comment']), ENT_QUOTES).'</blockquote>';
-            echo '</li>';
-        }
-        echo '</ul>';
-    }?>
+    <div class="wdn-inner-wrapper wdn-inner-padding-no-bottom">
+    <?php echo $mediaplayer; ?>
     </div>
-    <?php
-    if (UNL_MediaHub_Controller::isLoggedIn()) {
-        // show the form!
-        $form = new UNL_MediaHub_Media_Comment_Form();
-        echo $savvy->render($form);
-    } else {
-        echo '<a href="https://login.unl.edu/cas/login?service='.urlencode(UNL_MediaHub_Controller::getURL($context)).'">Log in to post comments</a>';
-    }?>
+
 </div>
-<div class="grid4 supportingContent" id="properties">
-    <div class="zenbox neutral">
-    <h3>About this Media</h3>
-    <?php 
-	   if ($type == 'video') {
-	?>
-	<span class="size"><?php echo $dimensions[0] . 'x' .$dimensions[1];?></span>
-	<?php } ?>
-    <span class="duration"><?php 
-        if(!empty($context->length)) {
-            $s = array('bytes', 'kb', 'MB', 'GB');
-            $e = floor(log($context->length)/log(1024));
-            echo sprintf('%.2f '.$s[$e], ($context->length/pow(1024, floor($e))));
-        }?></span>
-    <span class="addedDate">Added: <?php echo date('m/d/Y', strtotime($context->datecreated)); ?></span>
-    <div class="play_count">
-        Played <?php echo $context->play_count ?> times
+
+<div class="wdn-band">
+    <div class="wdn-inner-wrapper"> 
+        <div class="wdn-grid-set">
+            <div class="bp2-wdn-col-one-fourth mh-sidebar wdn-pull-right">
+                <div>
+                    <a href="#" class="wdn-button wdn-button-brand"><span class="wdn-icon-rocket wdn-icon"></span>Edit Page</a>
+                </div>
+
+            </div>
+            <div class="bp2-wdn-col-three-fourths">
+                <h1 class="wdn-brand clear-top"><?php echo $context->title; ?></h1>
+                <?php if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_itunes::mediaHasElement($context->id, 'subtitle')): ?>
+                    <h3 class="itunes_subtitle"><?php echo $element->value ?></h3>
+                <?php endif; ?>
+                <?php $summary = $context->description;
+                if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_itunes::mediaHasElement($context->id, 'summary')):
+                    $summary .= '<span class="itunes_summary">'.$element->value.'</span>';
+                endif;
+                ?>
+
+                <p>
+                    <?php if (!empty($context->author)): // @TODO present author with more info (standardize people records) ?>
+                        <div class="wdn-sans-serif">Author: <?php echo $context->author; ?></div>
+                    <?php endif; ?>
+
+                    <div class="wdn-sans-serif">Added: <?php echo date('m/d/Y', strtotime($context->datecreated)); ?></div>
+                </p>
+
+                <div class="wdn-grid-set wdn-center">
+
+                    <div class="wdn-col-one-seventh mh-stat">
+                        <span class="mh-count wdn-brand"><?php echo $context->play_count ?></span>
+                        <span class="mh-context wdn-sans-serif">Plays</span>
+                    </div> 
+
+                    <div class="wdn-col-one-seventh mh-stat">
+                        <span class="mh-count wdn-brand"><?php echo count($context->UNL_MediaHub_Media_Comment); ?></span>
+                        <span class="mh-context wdn-sans-serif">Comments</span>
+                    </div> 
+
+                    <div class="wdn-col-one-third mh-stat">
+                        <span class="mh-ratio wdn-brand"><?php echo $dimensions[0] . 'x' .$dimensions[1];?></span>
+                        <span class="mh-size wdn-brand">
+                            <?php 
+                            if(!empty($context->length)) {
+                                $s = array('bytes', 'kb', 'MB', 'GB');
+                                $e = floor(log($context->length)/log(1024));
+                                echo sprintf('%.2f '.$s[$e], ($context->length/pow(1024, floor($e))));
+                            }
+                            ?>
+                        </span>
+                    </div>  
+                </div>          
+
+                <?php echo $summary; ?>
+
+                <hr>
+                <ul id="mediaTags" class="wdn-sans-serif">
+                    <li class="wdn-sans-serif mh-tag-label">Tags:</li>
+
+                    <?php foreach ($context->getTags() as $tag): ?>
+                        <li><a href="<?php echo UNL_MediaHub_Controller::$url.'tags/'.urlencode(trim($tag)) ?>"><?php echo $tag ?></a></li>
+                    <?php endforeach; ?>
+
+                    <?php if (UNL_MediaHub_Controller::isLoggedIn()): ?>
+                        <li id="mediaTagsAdd"><a href="#"></a><form id="addTags" method="post"><input type="text" value="" name="tags" ><input type="submit" value="Add" ></form></li>
+                    <?php else: ?>
+                        <li id="mediaTagsAdd"><a href="https://login.unl.edu/cas/login?service=<?php echo urlencode(UNL_MediaHub_Controller::getURL()) ?>">Login to add tags </a></li>
+                    <?php endif; ?>
+
+                </ul>
+                <hr>
+                <div id="comments">
+                    <script type="text/javascript">
+                        WDN.loadCSS('../templates/html/css/comments.css');
+                    </script>
+                    <h6 class="wdn-sans-serif">COMMENTS</h6>
+                    <span class="subhead"><?php echo count($context->UNL_MediaHub_Media_Comment); ?> Comments | <a href="#commentForm">Leave Yours</a></span>
+                    <?php if (count($context->UNL_MediaHub_Media_Comment)): ?>
+                        <ul>
+                            <?php foreach ($context->UNL_MediaHub_Media_Comment as $comment): ?>
+                                <li>
+                                    <?php if ($name = UNL_Services_Peoplefinder::getFullName($comment['uid'])): ?>
+                                    <?php endif; ?>
+
+                                    <blockquote><?php echo htmlentities(strip_tags($comment['comment']), ENT_QUOTES); ?></blockquote>
+                                    <div class="mh-user">
+                                        <img alt="Your Profile Pic" src="http://planetred.unl.edu/pg/icon/unl_<?php echo $comment['uid']; ?>/small/" class="profile_pic small"> 
+                                        <div class="commenter wdn-sans-serif sec_header clear-top"><?php echo $name; ?></div>
+                                        <em><?php echo date('m/d/y g:i a', strtotime($comment['datecreated'])); ?></em>
+                                    </div>
+                                    <div class="clear"></div>
+                                    <hr>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
+                </div>
+
+                <?php if (UNL_MediaHub_Controller::isLoggedIn()): ?>
+
+                    <?php $form = new UNL_MediaHub_Media_Comment_Form(); ?>
+                    <?php echo $savvy->render($form); ?>
+                <?php else: ?>
+                    <a href="https://login.unl.edu/cas/login?service='<?php urlencode(UNL_MediaHub_Controller::getURL($context)) ?>">Log in to post comments</a>
+                <?php endif; ?>
+
+            </div>
+            <div class="bp2-wdn-col-one-fourth mh-sidebar">
+                <div>
+
+                    <a class="wdn-button wdn-button-brand cboxElement"><span class="wdn-icon-rocket wdn-icon"></span>Embed</a>
+                    <br>
+                    <a href="<?php echo htmlentities($context->url, ENT_QUOTES); ?>" target="_blank" class="wdn-button wdn-button-brand"><span class="wdn-icon-rocket wdn-icon"></span>Download</a>
+
+                </div>
+
+                <?php
+                $channels = $context->getFeeds();
+                echo $savvy->render($channels, 'CompactFeedList.tpl.php');
+                ?>
+
+            </div>
+        </div>
     </div>
-  <?php if (!empty($context->author)) { // @TODO present author with more info (standardize people records) ?>
-    <div class="author">
-        <p>Author: <?php echo $context->author; ?></p>
-    </div>
-  <?php } ?>
-    <span class="embed">Embed</span>
-    <?php //@TODO add a check if user is logged in and if has permissions to this feed to edit. If true, add edit/delete links here. ?>
-  </div>
-    <?php
-    $channels = $context->getFeeds();
-    echo $savvy->render($channels, 'CompactFeedList.tpl.php');
-    ?>
-    <h6 style="margin-top:1em;"><a href="<?php echo htmlentities($context->url, ENT_QUOTES); ?>" class="video-x-generic">Download this media file</a></h6>
 </div>
+
+
+
 <div id="sharing">
     <h3>Embed</h3>
     <p>Copy the following code into your unl.edu page</p>
-    
+
     <?php 
     $embed = $savvy->render(UNL_MediaHub_Media_Embed::getById($context->id, UNL_MediaHub_Controller::$current_embed_version));
     ?>
     <textarea cols="25" rows="6" onclick="this.select(); return false;"><?php echo htmlentities($embed, ENT_COMPAT | ENT_HTML401, "UTF-8"); ?></textarea>
-</div>
+</div> 
