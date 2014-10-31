@@ -221,3 +221,11 @@ margin-top: -10px;
     display: block;
     white-space: nowrap;
 }
+
+@media only screen and (max-width: 768px)  {
+
+    .mh-sidebar {
+    margin-top: 3.375em;
+    }
+
+}
