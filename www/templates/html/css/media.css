@@ -225,7 +225,7 @@ margin-top: -10px;
 @media only screen and (max-width: 480px)  {
 
     .mh-hide-bp1 {
-        display: none;
+        display: none !important;
     }
 
 }
@@ -237,7 +237,7 @@ margin-top: -10px;
     }
 
     .mh-hide-bp2 {
-        display: none;
+        display: none !important;
     }
 
 }
@@ -245,7 +245,7 @@ margin-top: -10px;
 @media only screen and (max-width: 960px)  {
 
     .mh-hide-bp3 {
-        display: none;
+        display: none !important;
     }
 
 }
@@ -253,7 +253,7 @@ margin-top: -10px;
 @media only screen and (max-width: 1044px)  {
 
     .mh-hide-bp4 {
-        display: none;
+        display: none !important;
     }
 
 }
