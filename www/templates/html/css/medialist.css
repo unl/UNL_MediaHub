@@ -20,14 +20,19 @@ Supporting styles for individual presentation of lists of media
 	border-radius: 0;
 }
 
-.mh-btn-group > .wdn-button:first-child {
-	border-top-left-radius: 3px;
-	border-bottom-left-radius: 3px;
+.mh-sort-filter .mh-btn-group > .wdn-button:first-child {
+	border-top-left-radius: 15px;
+	border-bottom-left-radius: 15px;
 }
 
-.mh-btn-group > .wdn-button:last-child {
-	border-top-right-radius: 3px;
-	border-bottom-right-radius: 3px;
+.mh-sort-filter .mh-btn-group > .wdn-button:last-child {
+	border-top-right-radius: 15px;
+	border-bottom-right-radius: 15px;
+}
+
+.mh-sort-filter .mh-btn-group > .wdn-button {
+	background-color: #d00000;
+	margin-right: 0;
 }
 
 .mh-btn-group > .wdn-button.active {
