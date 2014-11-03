@@ -36,3 +36,28 @@ form .wdn-input-group .wdn-input-group-btn > button {
 .mh-app-search > * {
 	font-size: 0.75em;
 }
+
+.mh-channel-buttons li {
+	float: left;
+	list-style: none;
+	margin:0 .75em .75em 0;
+}
+
+.mh-channel-buttons li .wdn-icon{
+	padding: 0 1em 0 0;
+}
+
+ul.mh-channel-buttons {
+	padding-left: 0;
+}
+
+.mh-sort-filter .wdn-button{
+	border-radius: 15px;
+	padding: .75em 1em;
+	margin-right: 1em;
+}
+
+.mh-sort-filter .mh-btn-group .wdn-button{
+	border-radius: 0;
+}
+
