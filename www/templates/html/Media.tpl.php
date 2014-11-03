@@ -59,7 +59,7 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
 <div class="wdn-band">
 
     <div class="wdn-inner-wrapper wdn-inner-padding-no-bottom">
-    <?php echo $mediaplayer; ?>
+    <?php //echo $mediaplayer; ?>
     </div>
 
 </div>
@@ -140,7 +140,7 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
                     <script type="text/javascript">
                         WDN.loadCSS('../templates/html/css/comments.css');
                     </script>
-                    <h6 class="wdn-sans-serif">COMMENTS</h6>
+                    <h6 class="wdn-sans-serif">COMMENTS <span class="wdn-icon wdn-icon-comment"></span></h6>
                     <span class="subhead"><?php echo count($context->UNL_MediaHub_Media_Comment); ?> Comments | <a href="#commentForm">Leave Yours</a></span>
                     <?php if (count($context->UNL_MediaHub_Media_Comment)): ?>
                         <ul>
