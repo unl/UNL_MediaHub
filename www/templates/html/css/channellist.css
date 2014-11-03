@@ -16,8 +16,13 @@ Supporting styles for listings of channels
 	margin: 0;
 }
 
+.mh-list-header h1 .wdn-subhead{
+	font-size:.23em;
+}
+
 .mh-list-header p {
 	margin-top: 0;
+	font-style: italic;
 }
 
 .mh-feed-list {
