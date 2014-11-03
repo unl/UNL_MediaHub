@@ -10,33 +10,37 @@ if (isset($context->label) && !empty($context->label)) {
 $feeds = $context->getRelatedFeeds(array('limit'=>6));
 ?>
 
-<div class="wdn-band mh-media">
-    <div class="wdn-inner-wrapper">
+<div class="wdn-band">
+    <div class="wdn-inner-wrapper wdn-inner-padding-no-bottom">
         <div class="mh-list-header">
             <div class="wdn-grid-set">
                 <div class="bp2-wdn-col-three-fourths">
-                <?php if ($context->options['filter']->getType() == 'search'): ?>
-                    <h1 class="wdn-brand">
-                        <span class="wdn-subhead">Search results for</span>
-                        <?php echo htmlentities($context->options['filter']->getValue()) ?>
-                    </h1>
-                <?php elseif ($context->options['filter']->getType() == 'feed'): ?>
-                    <h2 class="wdn-brand"><?php echo $label ?></h2>
-                <?php else: ?>
-                    <h1 class="wdn-brand"><?php echo $label ?></h1>
-                <?php endif; ?>
-                <?php if (count($context->items) && $context->pager->getLastPage() > 1): ?>
-                    <p>Page <?php echo $context->pager->getPage() ?> of <?php echo $context->pager->getLastPage() ?></p>
-                <?php endif; ?>
+                    <?php if ($context->options['filter']->getType() == 'search'): ?>
+                        <h1>
+                            <span class="wdn-subhead">Search results for</span>
+                            <?php echo htmlentities($context->options['filter']->getValue()) ?>
+                        </h1>
+                    <?php elseif ($context->options['filter']->getType() == 'feed'): ?>
+                        <h2 class="wdn-brand"><?php echo $label ?></h2>
+                    <?php else: ?>
+                        <h1 class="wdn-brand"><?php echo $label ?></h1>
+                    <?php endif; ?>
+                    <?php if (count($context->items) && $context->pager->getLastPage() > 1): ?>
+                        <p>Page <?php echo $context->pager->getPage() ?> of <?php echo $context->pager->getLastPage() ?></p>
+                    <?php endif; ?>
                 </div>
                 <div class="bp2-wdn-col-one-fourth">
-                <?php if (in_array($context->options['filter']->getType(), array('search', 'browse'))): ?>
-                    <?php echo $savvy->render($context->options['filter'], 'SearchBox.tpl.php'); ?>
-                <?php endif; ?>
+                    <?php if (in_array($context->options['filter']->getType(), array('search', 'browse'))): ?>
+                        <?php echo $savvy->render($context->options['filter'], 'SearchBox.tpl.php'); ?>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
+<div class="wdn-band">
+    <div class="wdn-inner-wrapper wdn-inner-padding-no-top wdn-inner-padding-sm">
         <p class="mh-sort-filter">
             <a href="<?php echo $context->getURL(array('orderby' => 'datecreated', 'order' => 'DESC')) ?>" class="wdn-button wdn-button-brand">Most Recent</a>
             <a href="<?php echo $context->getURL(array('orderby' => 'play_count', 'order' => 'DESC')) ?>" class="wdn-button wdn-button-brand">Most Viewed</a>
@@ -46,33 +50,47 @@ $feeds = $context->getRelatedFeeds(array('limit'=>6));
                 <a href="<?php echo $context->getURL(array('f' => 'video')) ?>" class="wdn-button<?php echo ($context->options['f'] == 'video') ? ' active' : '' ?>">Video</a>
             </span>
         </p>
-        
-        <?php if (count($context->items)): ?>
-            <?php
-            $url = $context->getURL(array('page'=>'{%page_number}'));
-        
-            $pager_layout = new UNL_MediaHub_List_PagerLayout($context->pager,
-                new Doctrine_Pager_Range_Sliding(array('chunk'=>5)),
-                htmlentities($url));
-            $pager_links = $pager_layout->display(null, true);
-            
-            $mediaListClass = '';
-            if ($context->options['filter']->getType() == 'browse') {
-                $mediaListClass = ' mh-media-browse page-' . $context->pager->getPage();
-            }
-            ?>
+    </div>
+</div>
 
-            <?php if ($feeds && count($feeds->items)): ?>
-                <h2 class="wdn-brand">
-                    <span class="wdn-subhead">Related Channels</span>
+
+
+<?php if (count($context->items)): ?>
+    <?php
+    $url = $context->getURL(array('page'=>'{%page_number}'));
+
+    $pager_layout = new UNL_MediaHub_List_PagerLayout($context->pager,
+        new Doctrine_Pager_Range_Sliding(array('chunk'=>5)),
+        htmlentities($url));
+    $pager_links = $pager_layout->display(null, true);
+    
+    $mediaListClass = '';
+    if ($context->options['filter']->getType() == 'browse') {
+        $mediaListClass = ' mh-media-browse page-' . $context->pager->getPage();
+    }
+    ?>
+
+    <?php if ($feeds && count($feeds->items) && $context->pager->getPage() < 2): ?>
+
+        <div class="wdn-band wdn-light-triad-band">
+            <div class="wdn-inner-wrapper wdn-inner-padding-sm">
+
+                <h2 class="wdn-brand clear-top">
+                    <span class="wdn-subhead">Channel Search</span>
                 </h2>
-                <ul>
+                <ul class="mh-channel-buttons">
                     <?php foreach ($feeds->items as $feed): ?>
-                        <li><a href="<?php UNL_MediaHub_Controller::getURL($feed) ?>"><?php echo $feed->title ?></a></li>
+                        <li><a class="wdn-button wdn-button-complement" href="<?php echo UNL_MediaHub_Controller::getURL($feed); ?>"><span class="wdn-icon wdn-icon-rocket"></span><?php echo $feed->title ?></a></li>
                     <?php endforeach; ?>
                 </ul>
-            <?php endif ?>
-            
+            </div>
+        </div>       
+
+    <?php endif ?>
+
+
+    <div class="wdn-band mh-media">
+        <div class="wdn-inner-wrapper wdn-inner-padding-sm">
             <ul class="bp2-wdn-grid-set-thirds wdn-grid-clear mh-media-list<?php echo $mediaListClass ?>">
                 <?php foreach ($context->items as $media): ?>
                     <li class="wdn-col">
@@ -80,10 +98,17 @@ $feeds = $context->getRelatedFeeds(array('limit'=>6));
                     </li>
                 <?php endforeach; ?>
             </ul>
-                
+
             <?php echo $pager_links; ?>
-        <?php else: ?>
+
+        </div>
+    </div>          
+<?php else: ?>
+    <div class="wdn-band mh-media">
+        <div class="wdn-inner-wrapper wdn-inner-padding-sm">
             <p>Sorry, no media could be found</p>
-        <?php endif; ?>
+        </div>
     </div>
-</div>
+<?php endif; ?>
+
+
