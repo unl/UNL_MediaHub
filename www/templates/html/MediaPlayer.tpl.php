@@ -138,12 +138,6 @@ if ($context->isVideo()) {
                         initSharing(m, v);
                     });
 
-                    <?php if (!$context->isVideo()) { ?>
-                        setInterval(function(){
-                            WDN.jQuery(".mh-ratio").text(WDN.jQuery(".mejs-duration").text());
-                         },0);  
-                    <?php }; ?>
-
                 }
             });
             <?php } ?>

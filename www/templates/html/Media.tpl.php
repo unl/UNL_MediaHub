@@ -78,6 +78,9 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
                     <h3 class="itunes_subtitle"><?php echo $element->value ?></h3>
                 <?php endif; ?>
                 <?php $summary = $context->description;
+                
+                 $summary = strip_tags($summary, "<a><br><p><ul><ol><li><strong><em>");
+                
                 if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_itunes::mediaHasElement($context->id, 'summary')):
                     $summary .= '<span class="itunes_summary">'.$element->value.'</span>';
                 endif;
@@ -131,7 +134,7 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
                     </div>  
                 </div>          
 
-                <p><?php echo strip_tags($summary, "<a><br><p><ul><ol><li><strong><em>"); ?></p>
+                <p><?php echo $summary; ?></p>
 
 
                 <hr>
