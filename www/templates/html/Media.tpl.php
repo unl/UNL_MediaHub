@@ -57,9 +57,8 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
 
 
 <div class="wdn-band">
-
     <div class="wdn-inner-wrapper wdn-inner-padding-no-bottom">
-    <?php //echo $mediaplayer; ?>
+    <?php echo $mediaplayer; ?>
     </div>
 
 </div>
@@ -105,20 +104,35 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
                     </div> 
 
                     <div class="wdn-col-one-third mh-stat">
-                        <span class="mh-ratio wdn-brand"><?php echo $dimensions[0] . 'x' .$dimensions[1];?></span>
-                        <span class="mh-size wdn-brand">
-                            <?php 
-                            if(!empty($context->length)) {
-                                $s = array('bytes', 'kb', 'MB', 'GB');
-                                $e = floor(log($context->length)/log(1024));
-                                echo sprintf('%.2f '.$s[$e], ($context->length/pow(1024, floor($e))));
-                            }
-                            ?>
-                        </span>
+                        <?php if($type == "video"): ?>
+                            <span class="mh-ratio wdn-brand"><?php echo $dimensions[0] . 'x' .$dimensions[1];?></span>
+                            <span class="mh-size wdn-brand">
+                                <?php 
+                                if(!empty($context->length)) {
+                                    $s = array('bytes', 'kb', 'MB', 'GB');
+                                    $e = floor(log($context->length)/log(1024));
+                                    echo sprintf('%.2f '.$s[$e], ($context->length/pow(1024, floor($e))));
+                                }
+                                ?>
+                            </span>
+                        <?php else: ?>
+                            <span class="mh-size wdn-brand">
+                                <?php 
+                                if(!empty($context->length)) {
+                                    $s = array('bytes', 'kb', 'MB', 'GB');
+                                    $e = floor(log($context->length)/log(1024));
+                                    echo sprintf('%.2f '.$s[$e], ($context->length/pow(1024, floor($e))));
+                                }
+                                ?>
+                            </span>
+                            <span class="mh-ratio wdn-brand"></span>
+                        <?php endif; ?>
+                        
                     </div>  
                 </div>          
 
-                <?php echo $summary; ?>
+                <p><?php echo strip_tags($summary, "<a><br><p><ul><ol><li><strong><em>"); ?></p>
+
 
                 <hr>
                 <ul id="mediaTags" class="wdn-sans-serif">
