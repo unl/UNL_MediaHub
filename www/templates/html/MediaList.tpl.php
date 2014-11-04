@@ -42,8 +42,10 @@ $feeds = $context->getRelatedFeeds(array('limit'=>6));
 <div class="wdn-band">
     <div class="wdn-inner-wrapper wdn-inner-padding-no-top wdn-inner-padding-sm">
         <p class="mh-sort-filter">
-            <a href="<?php echo $context->getURL(array('orderby' => 'datecreated', 'order' => 'DESC')) ?>" class="wdn-button wdn-button-brand">Most Recent</a>
-            <a href="<?php echo $context->getURL(array('orderby' => 'play_count', 'order' => 'DESC')) ?>" class="wdn-button wdn-button-brand">Most Viewed</a>
+            <span class="mh-btn-group">
+                 <a href="<?php echo $context->getURL(array('orderby' => 'datecreated', 'order' => 'DESC')) ?>" class="wdn-button wdn-button-brand <?php echo ($context->options['orderby'] == 'datecreated') ? ' active' : '' ?>">Recent</a>
+                 <a href="<?php echo $context->getURL(array('orderby' => 'play_count', 'order' => 'DESC')) ?>" class="wdn-button wdn-button-brand <?php echo ($context->options['orderby'] == 'play_count') ? ' active' : '' ?>">Popular</a>
+            </span>
             <span class="mh-btn-group">
                 <a href="<?php echo $context->getURL(array('f' => '')) ?>" class="wdn-button<?php echo ($context->options['f'] == '') ? ' active' : '' ?>">All</a>
                 <a href="<?php echo $context->getURL(array('f' => 'audio')) ?>" class="wdn-button<?php echo ($context->options['f'] == 'audio') ? ' active' : '' ?>">Audio</a>
