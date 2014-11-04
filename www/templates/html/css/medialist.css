@@ -14,6 +14,10 @@ Supporting styles for individual presentation of lists of media
 	position: relative;
 }
 
+.mh-sort-filter .mh-btn-group {
+	margin-right: 1em;
+}
+
 .mh-btn-group > .wdn-button {
 	float: left;
 	position: relative;
@@ -35,8 +39,8 @@ Supporting styles for individual presentation of lists of media
 	margin-right: 0;
 }
 
-.mh-btn-group > .wdn-button.active {
-	background-color: #2e240c;
+.mh-sort-filter .mh-btn-group > .wdn-button.active {
+	background-color: #a70000;
 }
 
 .mh-media .wdn_pagination {
