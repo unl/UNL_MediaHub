@@ -137,6 +137,13 @@ if ($context->isVideo()) {
                     WDN.loadCSS('<?php echo UNL_MediaHub_Controller::$url; ?>templates/html/css/share.css', function() {
                         initSharing(m, v);
                     });
+
+                    <?php if (!$context->isVideo()) { ?>
+                        setInterval(function(){
+                            WDN.jQuery(".mh-ratio").text(WDN.jQuery(".mejs-duration").text());
+                         },0);  
+                    <?php }; ?>
+
                 }
             });
             <?php } ?>
