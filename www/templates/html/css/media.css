@@ -222,10 +222,38 @@ margin-top: -10px;
     white-space: nowrap;
 }
 
+@media only screen and (max-width: 480px)  {
+
+    .mh-hide-bp1 {
+        display: none !important;
+    }
+
+}
+
 @media only screen and (max-width: 768px)  {
 
     .mh-sidebar {
     margin-top: 3.375em;
+    }
+
+    .mh-hide-bp2 {
+        display: none !important;
+    }
+
+}
+
+@media only screen and (max-width: 960px)  {
+
+    .mh-hide-bp3 {
+        display: none !important;
+    }
+
+}
+
+@media only screen and (max-width: 1044px)  {
+
+    .mh-hide-bp4 {
+        display: none !important;
     }
 
 }
