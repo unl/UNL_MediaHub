@@ -307,7 +307,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     /**
      * @return bool
      */
-    function canView()
+    public function canView()
     {
         //If its not private, anyone can view it.
         if ($this->privacy != 'PRIVATE') {
@@ -333,6 +333,47 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         }
         
         return true;
+    }
+
+    /**
+     * @param UNL_MediaHub_User $user
+     * @return bool
+     */
+    public function userCanEdit(UNL_MediaHub_User $user)
+    {
+        return $this->userHasPermission($user, UNL_MediaHub_Permission::USER_CAN_UPDATE);
+    }
+
+    /**
+     * @param UNL_MediaHub_User $user
+     * @param $permission_id - the id of the permission to check against
+     * @return bool
+     */
+    public function userHasPermission(UNL_MediaHub_User $user, $permission_id)
+    {
+        //Is the user logged in?
+        if (!$user) {
+            return false;
+        }
+        
+        if (!$permission = UNL_MediaHub_Permission::getByID($permission_id)) {
+            return false;
+        }
+
+        $feeds = new UNL_MediaHub_FeedList(array(
+            'limit'=>null,
+            'filter'=>new UNL_MediaHub_FeedList_Filter_ByUserWithMediaId($user, $this->id)
+        ));
+
+        $feeds->run();
+
+        foreach($feeds->items as $feed) {
+            if ($feed->userHasPermission($user, $permission)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
 

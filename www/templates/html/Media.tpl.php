@@ -67,9 +67,12 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
     <div class="wdn-inner-wrapper"> 
         <div class="wdn-grid-set">
             <div class="bp2-wdn-col-one-fourth mh-sidebar wdn-pull-right">
+                
+            <?php if ($user && $context->userCanEdit($user)): ?>
                 <div>
-                    <a href="#" class="wdn-button wdn-button-brand"><span class="wdn-icon-rocket wdn-icon"></span>Edit Page</a>
+                    <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=addmedia&id=' . $context->id ?>" class="wdn-button wdn-button-brand"><span class="wdn-icon-rocket wdn-icon"></span>Edit Page</a>
                 </div>
+            <?php endif; ?>
 
             </div>
             <div class="bp2-wdn-col-three-fourths">
