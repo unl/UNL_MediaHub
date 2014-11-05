@@ -17,6 +17,6 @@ class UNL_MediaHub_Feed_Media_NamespacedElements_geo extends UNL_MediaHub_Feed_M
     
     public static function mediaHasElement($media_id, $element)
     {
-        return UNL_MediaHub_Feed_Media_NamespacedElements::mediaHasElement($media_id, $element, 'geo');
+        return UNL_MediaHub_Feed_Media_NamespacedElements::mediaHasElementNS($media_id, $element, 'geo');
     }
 }
