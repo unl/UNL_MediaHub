@@ -57,7 +57,6 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
 
 
 <div class="wdn-band">
-
     <div class="wdn-inner-wrapper wdn-inner-padding-no-bottom">
     <?php echo $mediaplayer; ?>
     </div>
@@ -79,6 +78,9 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
                     <h3 class="itunes_subtitle"><?php echo $element->value ?></h3>
                 <?php endif; ?>
                 <?php $summary = $context->description;
+                
+                 $summary = strip_tags($summary, "<a><br><p><ul><ol><li><strong><em>");
+                
                 if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_itunes::mediaHasElement($context->id, 'summary')):
                     $summary .= '<span class="itunes_summary">'.$element->value.'</span>';
                 endif;
@@ -105,20 +107,35 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
                     </div> 
 
                     <div class="wdn-col-one-third mh-stat">
-                        <span class="mh-ratio wdn-brand"><?php echo $dimensions[0] . 'x' .$dimensions[1];?></span>
-                        <span class="mh-size wdn-brand">
-                            <?php 
-                            if(!empty($context->length)) {
-                                $s = array('bytes', 'kb', 'MB', 'GB');
-                                $e = floor(log($context->length)/log(1024));
-                                echo sprintf('%.2f '.$s[$e], ($context->length/pow(1024, floor($e))));
-                            }
-                            ?>
-                        </span>
+                        <?php if($type == "video"): ?>
+                            <span class="mh-ratio wdn-brand"><?php echo $dimensions[0] . 'x' .$dimensions[1];?></span>
+                            <span class="mh-size wdn-brand">
+                                <?php 
+                                if(!empty($context->length)) {
+                                    $s = array('bytes', 'kb', 'MB', 'GB');
+                                    $e = floor(log($context->length)/log(1024));
+                                    echo sprintf('%.2f '.$s[$e], ($context->length/pow(1024, floor($e))));
+                                }
+                                ?>
+                            </span>
+                        <?php else: ?>
+                            <span class="mh-size wdn-brand">
+                                <?php 
+                                if(!empty($context->length)) {
+                                    $s = array('bytes', 'kb', 'MB', 'GB');
+                                    $e = floor(log($context->length)/log(1024));
+                                    echo sprintf('%.2f '.$s[$e], ($context->length/pow(1024, floor($e))));
+                                }
+                                ?>
+                            </span>
+                            <span class="mh-ratio wdn-brand"></span>
+                        <?php endif; ?>
+                        
                     </div>  
                 </div>          
 
-                <?php echo $summary; ?>
+                <p><?php echo $summary; ?></p>
+
 
                 <hr>
                 <ul id="mediaTags" class="wdn-sans-serif">
@@ -140,7 +157,7 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
                     <script type="text/javascript">
                         WDN.loadCSS('../templates/html/css/comments.css');
                     </script>
-                    <h6 class="wdn-sans-serif">COMMENTS</h6>
+                    <h6 class="wdn-sans-serif">COMMENTS <span class="wdn-icon wdn-icon-comment"></span></h6>
                     <span class="subhead"><?php echo count($context->UNL_MediaHub_Media_Comment); ?> Comments | <a href="#commentForm">Leave Yours</a></span>
                     <?php if (count($context->UNL_MediaHub_Media_Comment)): ?>
                         <ul>
@@ -175,9 +192,9 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
             <div class="bp2-wdn-col-one-fourth mh-sidebar">
                 <div>
 
-                    <a class="wdn-button wdn-button-brand cboxElement"><span class="wdn-icon-rocket wdn-icon"></span>Embed</a>
+                    <a class="wdn-button wdn-button-brand cboxElement mh-hide-bp2"><span class="wdn-icon-rocket wdn-icon"></span>Embed</a>
                     <br>
-                    <a href="<?php echo htmlentities($context->url, ENT_QUOTES); ?>" target="_blank" class="wdn-button wdn-button-brand"><span class="wdn-icon-rocket wdn-icon"></span>Download</a>
+                    <a href="<?php echo htmlentities($context->url, ENT_QUOTES); ?>" target="_blank" class="wdn-button wdn-button-brand mh-hide-bp2"><span class="wdn-icon-rocket wdn-icon"></span>Download</a>
 
                 </div>
 
