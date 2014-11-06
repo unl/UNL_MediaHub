@@ -2,7 +2,7 @@
 
 require_once dirname(__FILE__).'/../../config.inc.php';
 
-$manager = new UNL_MediaHub_Manager($_GET, $dsn);
+$manager = new UNL_MediaHub_Manager($_GET);
 
 if (!$manager->isLoggedIn()) {
     throw new Exception('Not logged in!');

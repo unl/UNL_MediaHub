@@ -97,10 +97,10 @@ class UNL_MediaHub_Controller
      *
      * @param string $dsn Database connection string
      */
-    function __construct($options, $dsn)
+    function __construct($options)
     {
         // Set up database
-        $this->mediahub = new UNL_MediaHub($dsn);
+        $this->mediahub = new UNL_MediaHub();
 
         // Initialize default options
         $this->options = $options + $this->options;
