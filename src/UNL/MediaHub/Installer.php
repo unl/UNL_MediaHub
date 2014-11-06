@@ -34,6 +34,11 @@ class UNL_MediaHub_Installer
         
         return $messages;
     }
+    
+    public function uninstall()
+    {
+        
+    }
 
     protected function exec_sql($sql, $message, $fail_ok = false)
     {
