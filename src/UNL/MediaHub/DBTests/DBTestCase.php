@@ -21,6 +21,22 @@ class UNL_MediaHub_DBTests_DBTestCase extends \PHPUnit_Framework_TestCase {
         $this->installer = new UNL_MediaHub_Installer($this->mediahub);
     }
 
+    /**
+     * Prepare for a new db Test (clean database and install mock data).
+     * 
+     * @param UNL_MediaHub_DBTests_MockTestDataInstallerInterface $installer
+     */
+    protected function prepareTestDB(UNL_MediaHub_DBTests_MockTestDataInstallerInterface $installer = NULL)
+    {
+        if (!$installer) {
+            $installer = new UNL_MediaHub_DBTests_BaseTestDataInstaller();
+        }
+
+        $this->cleanDB();
+        $this->installBaseDB();
+        $this->installMockData($installer);
+    }
+
     public function cleanDB()
     {
         $this->installer->uninstall();
