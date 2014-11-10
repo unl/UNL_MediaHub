@@ -3,7 +3,11 @@
 Supporting styles for the manager forms (add media, channel)
 -------------------------------------------------
 */
-#enhanced_header, #existing_media, #feedSelect, #maincontent form.zenform #continue3 {display:none;}
+
+/*#enhanced_header, #existing_media, #feedSelect, #maincontent form.zenform #continue3 {display: none;}*/
+
+
+
 #maincontent form.zenform {max-width:930px;margin-top:5px;background-color:#E6E9DC;
     background-image:-webkit-gradient(
                         linear,
@@ -173,6 +177,10 @@ iframe * {margin:0px}
     display: block;
 }
 
+.mh-tool-tip p {
+    margin: 0;
+}
+
 .mh-video-thumb.mh-featured-channel .mh-thumbnail-clip {
 
     padding: 0 0 70.7% 0;
@@ -189,7 +197,27 @@ iframe * {margin:0px}
     overflow: hidden;
 }
 
+#videoDisplay {
+    position: relative;
+}
 
+#setImage {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    z-index: 100;
+}
+
+#videoDisplay .share-video-link {
+    display: none;
+}
+.mh-edit-media fieldset{
+    margin:0;
+}
+
+.mh-edit-media fieldset li {
+    list-style: none;
+}
 
 @media only screen and (max-width : 768px) {
 

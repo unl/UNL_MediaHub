@@ -103,7 +103,8 @@ WDN.jQuery(document).ready(function() {
     	
         WDN.jQuery("#feedlist").hide();
         WDN.jQuery("#formDetails, #formDetails form, #formDetails fieldset, #continue3").not("#addMedia").css({"display" : "block"});
-        WDN.jQuery(".headline_main").css({"display" : "inline-block"});
+        //WDN.jQuery(".headline_main").css({"display" : "inline-block"});
+        WDN.jQuery(".share-video-link").css("display","none");
         WDN.jQuery("#formDetails").removeClass("two_col right").addClass('four_col left');
     	if (mediaType == 'video') {
     		mediaDetails.scalePlayer();
