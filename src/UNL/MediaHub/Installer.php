@@ -37,7 +37,21 @@ class UNL_MediaHub_Installer
     
     public function uninstall()
     {
+        $sql = '
+        SET FOREIGN_KEY_CHECKS = 0;
+        drop table if exists users;
+        drop table if exists feed_has_media;
+        drop table if exists feed_has_nselement;
+        drop table if exists feed_has_subscription;
+        drop table if exists feeds;
+        drop table if exists media;
+        drop table if exists media_has_nselement;
+        drop table if exists subscriptions;
+        drop table if exists user_has_permission;
+        SET FOREIGN_KEY_CHECKS = 1;
+        ';
         
+        return $this->exec_sql($sql, 'Uninstall');
     }
 
     protected function exec_sql($sql, $message, $fail_ok = false)
