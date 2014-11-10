@@ -6,7 +6,7 @@ if (file_exists(dirname(__FILE__).'/config.inc.php')) {
 }
 
 echo 'Connecting to the database&hellip;';
-$mediahub  = new UNL_MediaHub($dsn);
+$mediahub  = new UNL_MediaHub();
 $installer = new UNL_MediaHub_Installer($mediahub);
 $messages  = $installer->install();
 
