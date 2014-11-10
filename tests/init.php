@@ -8,3 +8,6 @@ if (file_exists(__DIR__ . '/../config.inc.php')) {
 }
 
 require_once $config_file;
+
+//Make sure that the default DSN is NEVER used
+UNL_MediaHub::$dsn = '';
