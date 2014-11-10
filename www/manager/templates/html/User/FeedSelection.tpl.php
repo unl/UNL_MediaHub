@@ -1,7 +1,6 @@
 <fieldset>
     <legend>
-        Channels
-        <span class="required">*</span>
+        Channels<span class="required">*</span>
     </legend>
     <div class="mh-channel-box">
         <ul>

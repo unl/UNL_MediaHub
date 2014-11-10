@@ -22,39 +22,112 @@ $js = '<script type="text/javascript">
 
 $controller->setReplacementData('head', $js);
 ?>
-<div class="headline_main" id="headline_main">
-<?php
-if (isset($context->media)) {
-    echo $savvy->render($context->media, 'Media/Preview.tpl.php');
-}
-?>
+<div class="wdn-band wdn-light-triad-band">
+    <div class="wdn-inner-wrapper">    
+        <div class="wdn-grid-set" id="headline_main">
+        <?php
+        if (isset($context->media)) {
+            echo $savvy->render($context->media, 'Media/Preview.tpl.php');
+        }
+        ?>
+        </div>
+    </div>
 </div>
 <div class="clear"></div>
 
-<div id="formDetails">
-<form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data" class="zenform cool" style="<?php echo (isset($context->media))?'':'display:none;' ?>">
-    <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
-    <?php
-    if (isset($context->media->id)) {
-        echo '<input type="hidden" id="id" name="id" value="'.$context->media->id.'" />';
-    }
-    ?>
-    <fieldset id="existing_media">
-        <legend>Basic Information</legend>
-        <ol>
-            <li><label><span class="required">*</span>URL of Media File<span class="helper">Media types supported: .m4v, .mp4, .mp3, .ogg</span></label>
+<div class="wdn-band mh-edit-media">
+<div class="wdn-inner-wrapper">
+<div class="wdn-grid-set">
+<form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data" style="<?php echo (isset($context->media))?'':'display:none;' ?>">
+
+    <div class="wdn-col"><input type="submit" name="submit" value="Save" class="wdn-pull-right" onclick="document.getElementById('submit_existing').click(); return false;" />
+<h2 class="clear-top">Basic Information</h2></div>
+
+    <div class="bp2-wdn-col-five-sevenths">
+        <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
+        <?php
+        if (isset($context->media->id)) {
+            echo '<input type="hidden" id="id" name="id" value="'.$context->media->id.'" />';
+        }
+        ?>
+        <fieldset id="existing_media">
+               
+            <li><label>URL of Media File<span class="required">*</span> <span class="helper">Media types supported: .m4v, .mp4, .mp3, .ogg</span></label>
                 <input id="media_url" name="url" type="text" value="<?php echo htmlentities(@$context->media->url, ENT_QUOTES); ?>" />
             </li>
-            <li><label for="title" class="element"><span class="required">*</span>Title</label><input id="title" name="title" type="text" value="<?php echo htmlentities(@$context->media->title, ENT_QUOTES); ?>" /></li>
-            <li><label for="author" class="element"><span class="required">*</span>Author<span class="helper">Name of media creator.</span></label><div class="element"><input id="author" name="author" type="text" value="<?php echo htmlentities(@$context->media->author, ENT_QUOTES); ?>" /></div></li>
+            <li><label for="title" class="element">Title<span class="required">*</span> </label><input id="title" name="title" type="text" value="<?php echo htmlentities(@$context->media->title, ENT_QUOTES); ?>" /></li>
+            
+            <div class="wdn-grid-set">
+                <div class="bp2-wdn-col-one-half">
+                     <li>
+                         <label for="author" class="element">
+                            Author<span class="required">*</span><span class="helper"> Name of media creator.</span>
+                         </label>
+                         <div class="element">
+                            <input id="author" name="author" type="text" value="<?php echo htmlentities(@$context->media->author, ENT_QUOTES); ?>" />
+                         </div>
+                     </li>
+                </div>           
+                <div class="bp2-wdn-col-one-half">
+                    <li>
+                        <label for="mrss_credit" class="element">
+                        Credit 
+                        <div class="wdn-icon-info mh-tool-tip">
+                            <div>
+                                <p>
+                                   <em>Notable entity and the contribution to the creation of the media object.</em>
+                                </p>
+                            </div>
+                        </div>
+                        </label>
+                        <div class="element">
+                            <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[9][element]" type="hidden" value="credit"/>
+                            <input id="mrss_credit" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[9][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'credit'); ?>"/>
+                        </div>
+                    </li>
+                </div>
+            </div>
+
             <li>
-                <label for="description" class="element"><span class="required">*</span>Description<span class="helper">Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.</span></label>
+                <label for="description" class="element">Description<span class="required">*</span> <span class="helper">Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.</span></label>
                 <div class="element" id="description_wrapper"><textarea id="description" name="description" rows="5"><?php echo htmlentities(@$context->media->description); ?></textarea></div>
             </li>
+
+            
+            
+            <?php
+            $text = '';
+            if (isset($context->media) && $context->media->isVideo()) {
+                $text = 'This image will override the one chosen above.';
+            }
+            ?>
+            <li><label>URL of custom poster image<span class="helper">If filled in, this image will be displayed as the thumbnail for the media.  <?php echo $text; ?></span></label>
+                <input id="media_poster" name="poster" type="text" class="validate-url" value="<?php echo htmlentities(@$context->media->poster, ENT_QUOTES); ?>" />
+            </li>
+            <li style="display:none;"><label for="submit_existing" class="element">&nbsp;</label><div class="element"><input id="submit_existing" name="submit_existing" value="Save" type="submit" /></div></li>
+
+        </fieldset>
+    </div>
+
+    <div class="bp2-wdn-col-two-sevenths">
+        <ol>
             <li>
                 <label for="privacy" class="element">
                     Privacy
-                    <span class="helper"><strong>Public</strong> - Anyone can access the media.  <strong>Unlisted</strong> - Media will not be included in public MediaHub listings.  <strong>Private</strong> - Only members of channels that the media is included in can access it.</span>
+                    <div class="wdn-icon-info mh-tool-tip">
+                        <div>
+                            <ul>
+                                <li><span class="heading">Public</span> - Anyone can access the media.
+                                </li>
+                                <li><span class="heading">Unlisted</span> - Media will not be included
+                                    in public MediaHub listings.
+                                </li>
+                                <li><span class="heading">Private</span> - Only members of channels that
+                                    the media is included in can access it.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </label>
                 <select id="privacy" name="privacy">
                     <?php
@@ -69,18 +142,17 @@ if (isset($context->media)) {
                     ?>
                 </select>
             </li>
-            <?php
-            $text = '';
-            if (isset($context->media) && $context->media->isVideo()) {
-                $text = 'This image will override the one chosen above.';
-            }
-            ?>
-            <li><label>URL of custom poster image<span class="helper">If filled in, this image will be displayed as the thumbnail for the media.  <?php echo $text; ?></span></label>
-                <input id="media_poster" name="poster" type="text" class="validate-url" value="<?php echo htmlentities(@$context->media->poster, ENT_QUOTES); ?>" />
+            <li>
+                <fieldset id="feedSelect">
+                    <?php echo $savvy->render($context, 'User/FeedSelection.tpl.php'); ?>
+                </fieldset>
             </li>
-            <li style="display:none;"><label for="submit_existing" class="element">&nbsp;</label><div class="element"><input id="submit_existing" name="submit_existing" value="Save" type="submit" /></div></li>
-        </ol>
-    </fieldset>
+        </ol>  
+    </div>
+
+
+
+
     <?php
     function getFieldValue($savant, $xmlns, $element)
     {
@@ -216,7 +288,7 @@ if (isset($context->media)) {
                 </div>
             </li>
             <li>
-                <label for="mrss_credit" class="element">Credit<span class="helper">Notable entity and the contribution to the creation of the media object.</span></label>
+                <label for="mrss_credit" class="element">Credit<span class="helper"> Notable entity and the contribution to the creation of the media object.</span></label>
                 <div class="element">
                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[9][element]" type="hidden" value="credit"/>
                     <input id="mrss_credit" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[9][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'credit'); ?>"/>
@@ -462,10 +534,9 @@ if (isset($context->media)) {
             </li>
         </ol>
     </fieldset>
-    <fieldset id="feedSelect">
-        <legend>For Which Feeds Shall this Media be Added?</legend>
-        <?php echo $savvy->render($context, 'User/FeedSelection.tpl.php'); ?>
-    </fieldset>
-    <input type="submit" name="submit" id="continue3" value="Publish" onclick="document.getElementById('submit_existing').click(); return false;" /> <img class='uploading' src="/wdn/templates_3.0/scripts/plugins/tinymce/themes/advanced/skins/unl/img/progress.gif" alt="progress animated gif" />
+    
+    <input type="submit" name="submit" id="continue3" value="Save" onclick="document.getElementById('submit_existing').click(); return false;" /> <img class='uploading' src="/wdn/templates_3.0/scripts/plugins/tinymce/themes/advanced/skins/unl/img/progress.gif" alt="progress animated gif" />
 </form>
+</div>
+</div>
 </div>
