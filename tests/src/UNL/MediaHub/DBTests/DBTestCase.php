@@ -13,7 +13,7 @@ class UNL_MediaHub_DBTests_DBTestCase extends \PHPUnit_Framework_TestCase {
     protected function setUp()
     {
         try {
-            $this->mediahub = new UNL_MediaHub(true);
+            $this->mediahub = new UNL_MediaHub();
         } catch (\Exception $e) {
             $this->markTestSkipped('Test database is not available, database tests were skipped: ' . $e->getMessage());
         }
