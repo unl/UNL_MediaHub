@@ -1,7 +1,7 @@
 {
     "autoload": {
         "psr-0": {
-            "UNL_": ["src", "lib/php"]
+            "UNL_": ["src", "lib/php", "tests/src"]
         }
     },
     "repositories": [
