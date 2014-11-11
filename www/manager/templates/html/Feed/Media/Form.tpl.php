@@ -40,76 +40,12 @@ $controller->setReplacementData('head', $js);
 <div class="wdn-grid-set">
 <form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data" style="<?php echo (isset($context->media))?'':'display:none;' ?>">
 
-    <div class="wdn-col"><input type="submit" name="submit" value="Save" class="wdn-pull-right" onclick="document.getElementById('submit_existing').click(); return false;" />
-<h2 class="clear-top">Basic Information</h2></div>
+    <div class="wdn-col">
+    <input type="submit" name="submit" value="Save" class="wdn-pull-right" onclick="document.getElementById('submit_existing').click(); return false;" />
+    <h2 class="clear-top">Basic Information</h2></div>
 
-    <div class="bp2-wdn-col-five-sevenths">
-        <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
-        <?php
-        if (isset($context->media->id)) {
-            echo '<input type="hidden" id="id" name="id" value="'.$context->media->id.'" />';
-        }
-        ?>
-        <fieldset id="existing_media">
-               
-            <li><label>URL of Media File<span class="required">*</span> <span class="helper">Media types supported: .m4v, .mp4, .mp3, .ogg</span></label>
-                <input id="media_url" name="url" type="text" value="<?php echo htmlentities(@$context->media->url, ENT_QUOTES); ?>" />
-            </li>
-            <li><label for="title" class="element">Title<span class="required">*</span> </label><input id="title" name="title" type="text" value="<?php echo htmlentities(@$context->media->title, ENT_QUOTES); ?>" /></li>
-            
-            <div class="wdn-grid-set">
-                <div class="bp2-wdn-col-one-half">
-                     <li>
-                         <label for="author" class="element">
-                            Author<span class="required">*</span><span class="helper"> Name of media creator.</span>
-                         </label>
-                         <div class="element">
-                            <input id="author" name="author" type="text" value="<?php echo htmlentities(@$context->media->author, ENT_QUOTES); ?>" />
-                         </div>
-                     </li>
-                </div>           
-                <div class="bp2-wdn-col-one-half">
-                    <li>
-                        <label for="mrss_credit" class="element">
-                        Credit 
-                        <div class="wdn-icon-info mh-tool-tip">
-                            <div>
-                                <p>
-                                   <em>Notable entity and the contribution to the creation of the media object.</em>
-                                </p>
-                            </div>
-                        </div>
-                        </label>
-                        <div class="element">
-                            <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[9][element]" type="hidden" value="credit"/>
-                            <input id="mrss_credit" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[9][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'credit'); ?>"/>
-                        </div>
-                    </li>
-                </div>
-            </div>
 
-            <li>
-                <label for="description" class="element">Description<span class="required">*</span> <span class="helper">Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.</span></label>
-                <div class="element" id="description_wrapper"><textarea id="description" name="description" rows="5"><?php echo htmlentities(@$context->media->description); ?></textarea></div>
-            </li>
-
-            
-            
-            <?php
-            $text = '';
-            if (isset($context->media) && $context->media->isVideo()) {
-                $text = 'This image will override the one chosen above.';
-            }
-            ?>
-            <li><label>URL of custom poster image<span class="helper">If filled in, this image will be displayed as the thumbnail for the media.  <?php echo $text; ?></span></label>
-                <input id="media_poster" name="poster" type="text" class="validate-url" value="<?php echo htmlentities(@$context->media->poster, ENT_QUOTES); ?>" />
-            </li>
-            <li style="display:none;"><label for="submit_existing" class="element">&nbsp;</label><div class="element"><input id="submit_existing" name="submit_existing" value="Save" type="submit" /></div></li>
-
-        </fieldset>
-    </div>
-
-    <div class="bp2-wdn-col-two-sevenths">
+    <div class="bp2-wdn-col-two-sevenths wdn-pull-right">
         <ol>
             <li>
                 <label for="privacy" class="element">
@@ -147,10 +83,133 @@ $controller->setReplacementData('head', $js);
                     <?php echo $savvy->render($context, 'User/FeedSelection.tpl.php'); ?>
                 </fieldset>
             </li>
+            <li>
+                <label>URL of custom poster image 
+                    <div class="wdn-icon-info mh-tool-tip">
+                        <div>
+                            <p>
+                            If filled in, this image will be displayed as the thumbnail for the media.  <?php echo $text; ?>
+                            </p>
+                        </div>
+                    </div>
+                </label>
+                <input id="media_poster" name="poster" type="text" class="validate-url" value="<?php echo htmlentities(@$context->media->poster, ENT_QUOTES); ?>" />
+            </li>
         </ol>  
     </div>
 
 
+    <div class="bp2-wdn-col-five-sevenths">
+        <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
+        <?php
+        if (isset($context->media->id)) {
+            echo '<input type="hidden" id="id" name="id" value="'.$context->media->id.'" />';
+        }
+        ?>
+        <fieldset id="existing_media">
+               
+            <li><label>URL of Media File<span class="required">*</span> <span class="helper">Media types supported: .m4v, .mp4, .mp3, .ogg</span></label>
+                <input id="media_url" name="url" type="text" value="<?php echo htmlentities(@$context->media->url, ENT_QUOTES); ?>" />
+            </li>
+            <li><label for="title" class="element">Title<span class="required">*</span> </label><input id="title" name="title" type="text" value="<?php echo htmlentities(@$context->media->title, ENT_QUOTES); ?>" /></li>
+            
+            <div class="wdn-grid-set">
+                <div class="bp2-wdn-col-one-half">
+                    <li>
+                         <label for="author" class="element">
+                            Author<span class="required">*</span><span class="helper"> Name of media creator.</span>
+                         </label>
+                         <div class="element">
+                            <input id="author" name="author" type="text" value="<?php echo htmlentities(@$context->media->author, ENT_QUOTES); ?>" />
+                         </div>
+                    </li>
+                    <li>
+                        <label for="mrss_copyright" class="element">Copyright<span class="helper"> Copyright information for media object.</span></label>
+                        <div class="element">
+                            <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[10][element]" type="hidden" value="copyright"/>
+                            <input id="mrss_copyright" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[10][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'copyright'); ?>"/>
+                        </div>
+                    </li>
+                </div>           
+                <div class="bp2-wdn-col-one-half">
+                    <li>
+                        <label for="mrss_credit" class="element">
+                        Credit 
+                        <div class="wdn-icon-info mh-tool-tip">
+                            <div>
+                                <p>
+                                   <em>Notable entity and the contribution to the creation of the media object.</em>
+                                </p>
+                            </div>
+                        </div>
+                        </label>
+                        <div class="element">
+                            <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[9][element]" type="hidden" value="credit"/>
+                            <input id="mrss_credit" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[9][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'credit'); ?>"/>
+                        </div>
+                    </li>
+                    <li>
+                        <label for="mrss_category" class="element">
+                        Category
+                        <div class="wdn-icon-info mh-tool-tip">
+                            <div>
+                                <p>
+                                   <em>Allows a taxonomy to be set that gives an indication of the type of media content, and its particular contents. </em>
+                                </p>
+                            </div>
+                        </div>
+                        </label>
+                        <div class="element">
+                            <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[7][element]" type="hidden" value="category"/>
+                            <input id="mrss_category" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[7][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'category'); ?>"/>
+                        </div>
+                    </li>
+
+                </div>
+            </div>
+
+            <li>
+                <label for="description" class="element">Description<span class="required">*</span> <span class="helper">Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.</span></label>
+                <div class="element" id="description_wrapper"><textarea id="description" name="description" rows="5"><?php echo htmlentities(@$context->media->description); ?></textarea></div>
+            </li>
+
+            
+            <?php
+            $text = '';
+            if (isset($context->media) && $context->media->isVideo()) {
+                $text = 'This image will override the one chosen above.';
+            }
+            ?>
+
+            <li style="display:none;"><label for="submit_existing" class="element">&nbsp;</label><div class="element"><input id="submit_existing" name="submit_existing" value="Save" type="submit" /></div></li>
+
+            <div id="enhanced_header">
+                <h2>Geo Location</h2>
+                <ol>
+                    <li>
+                        <label for="geo_lat" class="element">Latitude</label>
+                        <div class="element">
+                            <input name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[0][element]" type="hidden" value="lat"/>
+                            <input id="geo_lat" name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[0][value]" class='geo_lat' type="text" value="<?php echo getFieldValue($context, 'geo', 'lat'); ?>"/>
+                        </div>
+                    </li>
+                    <li>
+                        <label for="geo_long" class="element">Longitude</label>
+                        <div class="element">
+                            <input name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[1][element]" type="hidden" value="long"/>
+                            <input id="geo_long" name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[1][value]" class='geo_long' type="text" value="<?php echo getFieldValue($context, 'geo', 'long'); ?>"/>
+                        </div>
+                    </li>
+                    <li>
+                    <div id="map_canvas" style="width:500px;height:300px;"></div>
+                    </li>
+                </ol>
+            </div>   
+
+        </fieldset>
+    </div>
+
+    
 
 
     <?php
@@ -175,28 +234,9 @@ $controller->setReplacementData('head', $js);
         return '';
     }
     ?>
-    <fieldset class='collapsible' id="enhanced_header">
-        <legend>Geo Location</legend>
-        <ol>
-            <li>
-                <label for="geo_lat" class="element">Latitude</label>
-                <div class="element">
-                    <input name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[0][element]" type="hidden" value="lat"/>
-                    <input id="geo_lat" name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[0][value]" class='geo_lat' type="text" value="<?php echo getFieldValue($context, 'geo', 'lat'); ?>"/>
-                </div>
-            </li>
-            <li>
-                <label for="geo_long" class="element">Longitude</label>
-                <div class="element">
-                    <input name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[1][element]" type="hidden" value="long"/>
-                    <input id="geo_long" name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[1][value]" class='geo_long' type="text" value="<?php echo getFieldValue($context, 'geo', 'long'); ?>"/>
-                </div>
-            </li>
-            <li>
-            <div id="map_canvas" style="width:500px;height:300px;"></div>
-            </li>
-        </ol>
-    </fieldset>
+
+    
+
     <script type="text/javascript">
         WDN.jQuery('#enhanced_header legend').click(function() {
             var map;
@@ -221,9 +261,7 @@ $controller->setReplacementData('head', $js);
     <fieldset class='collapsible' id="other_header">
         <legend>Other Information</legend>
         <ol>
-            <?php foreach ($customFields as $customField=>$description): ?>
-            <li><?php echo $savvy->render($context, 'Feed/Media/NamespacedElements/mediahub/'.$customField.'.tpl.php'); ?></li>
-            <?php endforeach; ?>
+
             <li style="display:none;">
                 <label for="mrss_group" class="element">Group</label>
                 <div class="element">
@@ -273,13 +311,7 @@ $controller->setReplacementData('head', $js);
                 <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[6][value]" type="hidden" value="<?php echo getFieldValue($context, 'media', 'thumbnail'); ?>" />
                 <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[6][attributes]" type="hidden" value="<?php echo getFieldAttributes($context, 'media', 'thumbnail'); ?>" />
             </li>
-            <li>
-                <label for="mrss_category" class="element">Category<span class="helper">Allows a taxonomy to be set that gives an indication of the type of media content, and its particular contents</span></label>
-                <div class="element">
-                    <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[7][element]" type="hidden" value="category"/>
-                    <input id="mrss_category" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[7][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'category'); ?>"/>
-                </div>
-            </li>
+
             <li style="display:none;">
                 <label for="mrss_player" class="element">Player<span class="helper">Allows the media object to be accessed through a web browser media player console.</span></label>
                 <div class="element">
@@ -294,13 +326,7 @@ $controller->setReplacementData('head', $js);
                     <input id="mrss_credit" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[9][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'credit'); ?>"/>
                 </div>
             </li>
-            <li>
-                <label for="mrss_copyright" class="element">Copyright<span class="helper">Copyright information for media object.</span></label>
-                <div class="element">
-                    <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[10][element]" type="hidden" value="copyright"/>
-                    <input id="mrss_copyright" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[10][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'copyright'); ?>"/>
-                </div>
-            </li>
+
             <li>
                 <label for="mrss_text" class="element">Transcript/Captioning<span class="helper">Allows the inclusion of a text transcript, closed captioning, or lyrics of the media content.</span></label>
                 <div class="element">
