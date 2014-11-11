@@ -2,20 +2,12 @@
 class UNL_MediaHub
 {
     public static $dsn;
-    public static $test_dsn;
-    public $in_test_mode = false;
     
-    function __construct($test_mode = false)
+    function __construct()
     {
         Doctrine_Manager::getInstance()->setAttribute('model_loading', 'conservative');
         Doctrine::loadModels(dirname(dirname(__FILE__)).'/UNL/MediaHub/Media');
-        
-        if ($test_mode) {
-            $this->in_test_mode = true;
-            Doctrine_Manager::connection(self::$test_dsn);
-        } else {
-            Doctrine_Manager::connection(self::$dsn);
-        }
+        Doctrine_Manager::connection(self::$dsn);
     }
 
     /**
