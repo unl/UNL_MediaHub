@@ -166,10 +166,10 @@ WDN.jQuery(document).ready(function() {
 
     });
     
-    WDN.jQuery('a#setImage').live('click', function(){
+    WDN.jQuery('a#setImage').on('click', function(){
     	var currentTime;
 
-        currentTime = mejs.players[0].getCurrentTime() + .01;
+        currentTime = mejs.players.mep_0.getCurrentTime() + .01;
 
     	
     	mediaDetails.updateThumbnail(currentTime);
