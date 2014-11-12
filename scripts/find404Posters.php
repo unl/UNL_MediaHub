@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__FILE__).'/../config.inc.php';
 
-$mediahub = new UNL_MediaHub($dsn);
+$mediahub = new UNL_MediaHub();
 
 $list = new UNL_MediaHub_MediaList(array(
     'filter' => new UNL_MediaHub_MediaList_Filter_WithPoster()

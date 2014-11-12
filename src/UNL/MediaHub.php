@@ -1,15 +1,13 @@
 <?php
 class UNL_MediaHub
 {
-    public $dsn;
+    public static $dsn;
     
-    function __construct($dsn)
+    function __construct()
     {
-
         Doctrine_Manager::getInstance()->setAttribute('model_loading', 'conservative');
         Doctrine::loadModels(dirname(dirname(__FILE__)).'/UNL/MediaHub/Media');
-        Doctrine_Manager::connection($dsn);
-
+        Doctrine_Manager::connection(self::$dsn);
     }
 
     /**

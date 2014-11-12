@@ -4,7 +4,7 @@ ini_set('display_errors', true);
 error_reporting(E_ALL);
 
 // DSN for the mediyak database
-$dsn = 'mysql://mediahub:mediahub@localhost/mediahub';
+UNL_MediaHub::$dsn = 'mysql://mediahub:mediahub@localhost/mediahub';
 
 set_include_path(
     dirname(__FILE__).'/src'

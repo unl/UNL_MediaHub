@@ -49,9 +49,9 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
      */
     protected static $uploadDirectory;
 
-    function __construct($options = array(), $dsn)
+    function __construct($options = array())
     {
-        self::$mediahub = new UNL_MediaHub($dsn);
+        self::$mediahub = new UNL_MediaHub();
         
         $this->auth = UNL_Auth::factory('SimpleCAS');
         $this->auth->login();
