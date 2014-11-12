@@ -88,8 +88,8 @@ iframe * {margin:0px}
 }
 
 #maincontent .collapsible .toggle {
-    float: right;
-    font-size: 10px;
+    width: .75em;
+    display: inline-block;
 }
 
 .mh-upload-box {
