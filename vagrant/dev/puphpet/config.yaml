@@ -177,6 +177,13 @@ mysql:
             user: mediahub
             password: mediahub
             sql_file: /var/www/html/data/mediahub.sql
+        kNrIsAgY9gxy:
+            grant:
+                - ALL
+            name: mediahub_test
+            host: localhost
+            user: mediahub_test
+            password: mediahub_test
 postgresql:
     install: '0'
     settings:
