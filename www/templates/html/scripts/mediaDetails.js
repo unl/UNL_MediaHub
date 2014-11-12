@@ -207,15 +207,15 @@ WDN.jQuery(document).ready(function() {
     }]);
     
     //Collapisible forms.
-    WDN.jQuery('.collapsible > legend').append("<span class='toggle'>Expand</span>");
+    WDN.jQuery('.collapsible > h4').prepend("<span class='toggle'>+</span>");
     WDN.jQuery('.collapsible > ol').hide();
-    WDN.jQuery('.collapsible > legend').click(function(){
+    WDN.jQuery('.collapsible > h4').click(function(){
         if (WDN.jQuery(this).next('ol').is(":visible")) {
             WDN.jQuery(this).next('ol').hide(200);
-            WDN.jQuery(this).find('.toggle').html('Expand');
+            WDN.jQuery(this).find('.toggle').html('+');
         } else {
             WDN.jQuery(this).next('ol').show(200);
-            WDN.jQuery(this).find('.toggle').html('Collapse');
+            WDN.jQuery(this).find('.toggle').html('-');
         }
     });
 
