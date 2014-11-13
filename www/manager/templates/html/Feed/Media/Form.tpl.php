@@ -110,7 +110,12 @@ $controller->setReplacementData('head', $js);
                 <div class="bp2-wdn-col-five-sevenths">
                     <fieldset id="existing_media">
                         <legend>Basic Information</legend>
-<label for="title" class="element">Title<span class="required">*</span> </label><input id="title" name="title" type="text" value="<?php echo htmlentities(@$context->media->title, ENT_QUOTES); ?>" />
+                        
+                        <label for="title" class="element">
+                            Title<span class="required">*</span>
+                        </label>
+                        <input id="title" name="title" type="text" value="<?php echo htmlentities(@$context->media->title, ENT_QUOTES); ?>" />
+                        
                         <div class="wdn-grid-set">
                             <div class="bp2-wdn-col-one-half">
                                 <ol>
@@ -171,19 +176,23 @@ $controller->setReplacementData('head', $js);
 
                         <ol>
                             <li>
-                                <label for="description" class="element">Description<span class="required">*</span> <span class="helper">Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.</span></label>
+                                <label for="description" class="element">
+                                    Description<span class="required">*</span>
+                                    <span class="helper">Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.</span>
+                                </label>
                                 <div class="element" id="description_wrapper"><textarea id="description" name="description" rows="5"><?php echo htmlentities(@$context->media->description); ?></textarea></div>
                             </li>
     
                             <li>
-                                <label for="mrss_text" class="element">Transcript/Captioning<span class="helper">Allows the inclusion of a text transcript, closed captioning, or lyrics of the media content.</span></label>
+                                <label for="mrss_text" class="element">
+                                    Transcript/Captioning
+                                    <span class="helper">Allows the inclusion of a text transcript, closed captioning, or lyrics of the media content.</span>
+                                </label>
                                 <div class="element">
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[11][element]" type="hidden" value="text"/>
                                     <textarea rows="3" id="mrss_text" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[11][value]"><?php echo getFieldValue($context, 'media', 'text'); ?></textarea>
                                 </div>
                             </li>
-    
-                            <li style="display:none;"><label for="submit_existing" class="element">&nbsp;</label><div class="element"><input id="submit_existing" name="submit_existing" value="Save" type="submit" /></div></li>
                         </ol>
                         <div id="enhanced_header" class="collapsible">
                             <h4>Geo Location</h4>
