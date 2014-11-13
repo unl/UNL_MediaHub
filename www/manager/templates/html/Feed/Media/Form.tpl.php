@@ -23,6 +23,7 @@ WDN.loadJS(WDN.getTemplateFilePath("scripts/plugins/validator/jquery.validator.m
 $controller->setReplacementData('head', $js);
 ?>
 <form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data">
+    <input id="media_url" name="url" type="hidden" value="<?php echo htmlentities($context->media->url, ENT_QUOTES); ?>" />
     <div class="wdn-band wdn-light-triad-band">
         <div class="wdn-inner-wrapper">
             <div class="wdn-col">
@@ -112,9 +113,7 @@ $controller->setReplacementData('head', $js);
                     ?>
                     <fieldset id="existing_media">
                         <legend>Basic Information</legend>
-                        <li><label>URL of Media File<span class="required">*</span> <span class="helper">Media types supported: .m4v, .mp4, .mp3, .ogg</span></label>
-                            <input id="media_url" name="url" type="text" value="<?php echo htmlentities(@$context->media->url, ENT_QUOTES); ?>" />
-                        </li>
+                        
                         <li><label for="title" class="element">Title<span class="required">*</span> </label><input id="title" name="title" type="text" value="<?php echo htmlentities(@$context->media->title, ENT_QUOTES); ?>" /></li>
 
                         <div class="wdn-grid-set">
