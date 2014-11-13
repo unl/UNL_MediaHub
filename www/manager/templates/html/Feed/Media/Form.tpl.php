@@ -24,6 +24,9 @@ $controller->setReplacementData('head', $js);
 ?>
 <form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data">
     <input id="media_url" name="url" type="hidden" value="<?php echo htmlentities($context->media->url, ENT_QUOTES); ?>" />
+    <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
+    <input type="hidden" id="id" name="id" value="<?php $context->media->id ?>" />
+    
     <div class="wdn-band wdn-light-triad-band">
         <div class="wdn-inner-wrapper">
             <div class="wdn-col">
@@ -105,12 +108,6 @@ $controller->setReplacementData('head', $js);
 
 
                 <div class="bp2-wdn-col-five-sevenths">
-                    <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
-                    <?php
-                    if (isset($context->media->id)) {
-                        echo '<input type="hidden" id="id" name="id" value="'.$context->media->id.'" />';
-                    }
-                    ?>
                     <fieldset id="existing_media">
                         <legend>Basic Information</legend>
                         
