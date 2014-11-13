@@ -81,9 +81,7 @@ $controller->setReplacementData('head', $js);
                             </select>
                         </li>
                         <li>
-                            <fieldset id="feedSelect">
-                                <?php echo $savvy->render($context, 'User/FeedSelection.tpl.php'); ?>
-                            </fieldset>
+                            <?php echo $savvy->render($context, 'User/FeedSelection.tpl.php'); ?>
                         </li>
                         <li>
                             <label>URL of custom poster image 
