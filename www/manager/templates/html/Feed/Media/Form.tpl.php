@@ -22,30 +22,28 @@ WDN.loadJS(WDN.getTemplateFilePath("scripts/plugins/validator/jquery.validator.m
 
 $controller->setReplacementData('head', $js);
 ?>
-<div class="wdn-band wdn-light-triad-band">
-    <div class="wdn-inner-wrapper">    
-        <div class="wdn-grid-set" id="headline_main">
-            <?php
-            if (isset($context->media)) {
-                echo $savvy->render($context->media, 'Media/Preview.tpl.php');
-            }
-            ?>
+<form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data">
+    <div class="wdn-band wdn-light-triad-band">
+        <div class="wdn-inner-wrapper">
+            <div class="wdn-col">
+                <input type="submit" name="submit" value="Save" class="wdn-pull-right" onclick="document.getElementById('submit_existing').click(); return false;" />
+                <h1 class="clear-top">Edit Media Details for <?php echo $context->media->title ?></h1>
+            </div>
+            
+            <div class="wdn-grid-set" id="headline_main">
+                <?php
+                if (isset($context->media)) {
+                    echo $savvy->render($context->media, 'Media/Preview.tpl.php');
+                }
+                ?>
+            </div>
         </div>
     </div>
-</div>
-<div class="clear"></div>
-
-<div class="wdn-band mh-edit-media">
-    <div class="wdn-inner-wrapper">
-        <div class="wdn-grid-set">
-            <form action="?view=feed" method="post" name="media_form" id="media_form" enctype="multipart/form-data" style="<?php echo (isset($context->media))?'':'display:none;' ?>">
-
-                <div class="wdn-col">
-                    <input type="submit" name="submit" value="Save" class="wdn-pull-right" onclick="document.getElementById('submit_existing').click(); return false;" />
-                    <h2 class="clear-top">Basic Information</h2>
-                </div>
-
-
+    <div class="clear"></div>
+    
+    <div class="wdn-band mh-edit-media">
+        <div class="wdn-inner-wrapper">
+            <div class="wdn-grid-set">
                 <div class="bp2-wdn-col-two-sevenths wdn-pull-right">
                     <ol>
                         <li>
@@ -113,7 +111,7 @@ $controller->setReplacementData('head', $js);
                     }
                     ?>
                     <fieldset id="existing_media">
-
+                        <legend>Basic Information</legend>
                         <li><label>URL of Media File<span class="required">*</span> <span class="helper">Media types supported: .m4v, .mp4, .mp3, .ogg</span></label>
                             <input id="media_url" name="url" type="text" value="<?php echo htmlentities(@$context->media->url, ENT_QUOTES); ?>" />
                         </li>
@@ -536,10 +534,11 @@ $controller->setReplacementData('head', $js);
 
 
                 
-            </form>
+            
+            </div>
         </div>
     </div>
-</div>
+</form>
 
 <script type="text/javascript">
     WDN.jQuery('#enhanced_header legend').click(function() {
