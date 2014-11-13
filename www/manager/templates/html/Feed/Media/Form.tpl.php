@@ -84,7 +84,7 @@ $controller->setReplacementData('head', $js);
                             <?php echo $savvy->render($context, 'User/FeedSelection.tpl.php'); ?>
                         </li>
                         <li>
-                            <label>URL of custom poster image 
+                            <label for="media_poster">URL of custom poster image 
                                 <div class="wdn-icon-info mh-tool-tip">
                                     <div>
                                         <p>
