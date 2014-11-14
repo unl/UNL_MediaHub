@@ -11,12 +11,11 @@
         <div class="mh-play-button"></div>
     </div>
     <div class="mh-video-label wdn-center">
-        <p>
+        <h6 class="wdn-brand">
+                <?php echo $context->title; ?>
             <span class="wdn-subhead">
                 <?php echo date('F j, Y, g:i a', strtotime($context->datecreated)) ?>
             </span>
-            <?php echo $context->title; ?>
-
-        </p>
+        </h6>
     </div>
 </a>
