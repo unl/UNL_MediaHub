@@ -133,11 +133,12 @@ Embed
 
 
 .mh-video-thumb {
+    border: solid #d00000 5px;
     overflow: hidden;
     height: 0;
     margin-bottom: .75em;
     position: relative;
-    padding: 0 0 60% 0;
+    padding: 0 0 54% 0;
 }
 
 .mh-video-thumb img{
@@ -145,18 +146,14 @@ Embed
 }
 
 .mh-thumbnail-clip {
-	overflow: hidden;
-	height: 0;
-	margin-bottom: .75em;
+    overflow: hidden;
+    margin-bottom: .75em;
     position: relative;
-    padding: 0 0 60% 0;
-
 }
-.mh-thumbnail-clip img {
-min-width: 100%;
-max-width: none;
-height: 100%;
-position: absolute;
+.mh-video-thumb img {
+    max-width: 100%;
+    max-height: 100%;
+
 }
 
 .mh-video-label{
