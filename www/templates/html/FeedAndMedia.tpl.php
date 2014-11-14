@@ -18,6 +18,9 @@ $feed_url = htmlentities(UNL_MediaHub_Controller::getURL($context->feed), ENT_QU
             <div class="bp2-wdn-col-one-fourth wdn-pull-right mh-feed-stats">
                 <?php echo $savvy->render($context->feed, 'Feed/Stats.tpl.php') ?>
             </div>
+            <?php if ($context->feed->userCanEdit($user)): ?>
+                <a href="<?php echo UNL_MediaHub_Manager::getURL()?>?view=feedmetadata&amp;id=<?php echo $context->feed->id ?>" class="wdn-button wdn-pull-right">Edit</a>
+            <?php endif ?>
         </div>
     </div>
 </div>
