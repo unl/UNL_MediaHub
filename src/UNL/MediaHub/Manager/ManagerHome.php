@@ -23,4 +23,8 @@ class UNL_MediaHub_Manager_ManagerHome implements UNL_MediaHub_CacheableInterfac
         $options = $this->options;
     }
 
+    public function getFeeds($options = array())
+    {
+        return new UNL_MediaHub_User_FeedList($options);
+    }
 }
