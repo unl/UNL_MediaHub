@@ -14,17 +14,4 @@ www/uploads
 /data/mediahub_dump.sql
 /UNL_MediaHub.sublime-workspace
 /UNL_MediaHub.sublime-project
-www/templates/html/css/images/eastern-box-turtle.jpg
-www/templates/html/css/images/eastern-box-turtle2.jpg
-mediahub-10-3-2014-0.sql
-.gitignore
-.idea/.name
-.idea/deployment.xml
-.idea/encodings.xml
-.idea/misc.xml
-.idea/modules.xml
-.idea/UNL_MediaHub.iml
-.idea/vcs.xml
-.idea/workspace.xml
-.idea/scopes/scope_settings.xml
-www/templates/html/Media.tpl copy.php
+
