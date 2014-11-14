@@ -9,7 +9,7 @@ if (!isset($_SERVER['argv'],$_SERVER['argv'][1])
 } else {
     require_once dirname(__FILE__).'/../config.inc.php';
 
-    $my = new UNL_MediaHub($dsn);
+    $my = new UNL_MediaHub();
 
     $feed = UNL_MediaHub_Feed::getById($_SERVER['argv'][1]);
     $user = UNL_MediaHub_User::getByUid($_SERVER['argv'][2]);
