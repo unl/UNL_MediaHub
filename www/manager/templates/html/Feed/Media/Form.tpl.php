@@ -30,7 +30,7 @@ $controller->setReplacementData('head', $js);
     <div class="wdn-band wdn-light-triad-band">
         <div class="wdn-inner-wrapper">
             <div class="wdn-col">
-                <input type="submit" name="submit" value="Save" class="wdn-pull-right" onclick="document.getElementById('submit_existing').click(); return false;" />
+                <input type="submit" name="submit" value="Save" class="wdn-pull-right" />
                 <h1 class="clear-top">Edit Media Details for <?php echo $context->media->title ?></h1>
             </div>
             
@@ -509,7 +509,7 @@ $controller->setReplacementData('head', $js);
                         </ol>
                     </fieldset>
                     <br>
-                    <input type="submit" name="submit" id="continue3" value="Save" onclick="document.getElementById('submit_existing').click(); return false;" /> 
+                    <input type="submit" name="submit" id="continue3" value="Save" /> 
                     <img class='uploading' src="/wdn/templates_3.0/scripts/plugins/tinymce/themes/advanced/skins/unl/img/progress.gif" alt="progress animated gif" />
                 </div>
 
