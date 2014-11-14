@@ -135,6 +135,17 @@ class UNL_MediaHub_Feed extends UNL_MediaHub_Models_BaseFeed
     {
         return UNL_MediaHub_Permission::userHasPermission($user, $permission, $this);
     }
+
+    /**
+     * Determine if a user has edit permission
+     * 
+     * @param UNL_MediaHub_User $user
+     * @return bool
+     */
+    public function userCanEdit(UNL_MediaHub_User $user)
+    {
+        return $this->userHasPermission($user, UNL_MediaHub_permission::getByID(UNL_MediaHub_permission::USER_CAN_UPDATE));
+    }
     
     /**
      * Grant a user permission over the feed.

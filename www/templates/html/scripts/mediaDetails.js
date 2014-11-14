@@ -9,11 +9,11 @@ var mediaDetails = function() {
 		},
 		
 		getImageURL: function() {
-		    return mediaDetails.imageBaseURL + mejs.players[0].media.src;
+		    return mediaDetails.imageBaseURL + mejs.players.mep_0.media.src;
 		},
 		
 		updateDuration : function() {
-            WDN.jQuery('#itunes_duration').attr('value', mediaDetails.findDuration(mejs.players[0].media.duration));
+            WDN.jQuery('#itunes_duration').attr('value', mediaDetails.findDuration(mejs.players.mep_0.media.duration));
 		},
 		
 		findDuration : function(duration) {
