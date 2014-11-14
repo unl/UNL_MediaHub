@@ -41,6 +41,10 @@ video.fillWidth {
 	margin-right: 0;
 }
 
+.mh-featured-icon .wdn-icon > img {
+	max-width: 55%;
+}
+
 .mh-featured p {
 	font-style: italic;
 }
