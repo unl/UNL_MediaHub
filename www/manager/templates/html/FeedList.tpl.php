@@ -1,32 +1,34 @@
-<?php 
-$controller->setReplacementData('title', 'UNL | MediaHub | Your Media');
-$controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li>Your Media</li></ul>');
-?>
-<div id="feedlist" class="grid6 first">
-    <h1 class="sec_header">Your Channels</h1>
-    <h4>Channels are collections of your media. Use channels to organize specific shows (ex: Backyard Farmer).</h4>
-    <?php
-    if (count($context->items)) {
-        $pager_layout = new UNL_MediaHub_List_PagerLayout($context->pager,
-            new Doctrine_Pager_Range_Sliding(array('chunk'=>5)),
-                    UNL_MediaHub_Manager::getURL($context, array_merge($context->options, array('page'=>'{%page_number}'))));
-        $pager_links = $pager_layout->display(null, true);
-        echo '<h6 class="list_header">You have '.$context->total. ' channel(s):</h6>';
-        echo '<ul>';
-        foreach ($context->items as $feed) {
-            echo '<li><a href="'.htmlspecialchars(UNL_MediaHub_Controller::getURL($feed, array('format'=>'xml'))).'" title="RSS feed for this channel" class="feed-icon"></a> <a href="'.UNL_MediaHub_Manager::getURL().'?view=feedmetadata&amp;id='.$feed->id.'" title="Edit this channel" class="edit solo"></a> <a href="'.htmlspecialchars(UNL_MediaHub_Manager::getURL($feed), ENT_QUOTES).'">'.$feed->title.'</a> </li>'.PHP_EOL;
-        }
-        echo '</ul>';
-        echo '<em>Displaying '.$context->first.' through '.$context->last.' out of '.$context->total.'</em>'.
-        $pager_links;
-    } else {
-        echo '
-        <p>
-            Sorry, you have no channels.
-            <a href="'.UNL_MediaHub_Manager::getURL().'?view=feedmetadata">Would you like to create one?</a>
-        </p>';
-    }
-    echo '
-        <a class="action add_feed" href="'.UNL_MediaHub_Manager::getURL().'?view=feedmetadata">Create a channel</a>';
-    ?>
+<div class="wdn-band mh-your-channels">
+    <div class="wdn-inner-wrapper">
+        <h2 class="wdn-brand">Your Channels</h2>
+        <div class="wdn-grid-set">
+            <?php foreach ($context->items as $index=>$feed): ?>
+                <?php $feed_url = htmlentities(UNL_MediaHub_Controller::getURL($feed), ENT_QUOTES); ?>
+                <div class="<?php echo ($index==0)?'bp2-wdn-col-one-half':'bp2-wdn-col-one-fourth' ?>">
+                    <a href="<?php echo $feed_url ?>">
+                        <div class="mh-video-thumb mh-featured-channel wdn-center">
+                            <div class="mh-thumbnail-clip">
+                                <img
+                                    src="<?php echo $feed_url; ?>/image"
+                                    alt="<?php echo htmlentities($feed->title, ENT_QUOTES); ?> Image">
+                            </div>
+                            <div class="mh-play-button"></div>
+                        </div>
+                        <div class="mh-video-label wdn-center">
+                            <div class="wdn-brand">
+                                <?php echo $feed->title; ?>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            <?php endforeach; ?>
+            <div class="bp2-wdn-col-one-fourth">
+                <a href="<?php echo UNL_MediaHub_Manager::getURL() ?>?view=feedmetadata">
+                    <div class="mh-upload-box wdn-center">
+                        <h2>+<span class="wdn-subhead">New Channel</span></h2>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
