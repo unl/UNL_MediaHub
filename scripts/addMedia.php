@@ -19,7 +19,7 @@ if (!isset($_SERVER['argv'],$_SERVER['argv'][1])
     require_once 'UNL/Autoload.php';
     require_once dirname(__FILE__).'/../config.inc.php';
     
-    $my = new UNL_MediaHub($dsn);
+    $my = new UNL_MediaHub();
     $my->addMedia(array('url'   => $_SERVER['argv'][1],
                         'title' => $_SERVER['argv'][2],
                         'description' => $_SERVER['argv'][3]));

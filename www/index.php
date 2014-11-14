@@ -19,7 +19,7 @@ if (isset($_GET['model'])) {
     unset($_GET['model']);
 }
 
-$controller = new UNL_MediaHub_Controller($router->route($_SERVER['REQUEST_URI'], $_GET), $dsn);
+$controller = new UNL_MediaHub_Controller($router->route($_SERVER['REQUEST_URI'], $_GET));
 
 $outputcontroller = new UNL_MediaHub_OutputController();
 $outputcontroller->addGlobal('controller', $controller);
