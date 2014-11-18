@@ -1,7 +1,7 @@
 <?php
-$limit = 6;
+$limit = 3;
 ?>
-<ul class="wdn-grid-set-fourths bp2-wdn-grid-set-sixths ">
+<ul class="bp2-wdn-grid-set-thirds ">
 	<?php $i = 0; ?>
 	<?php foreach ($context->items as $media): ?>
 	<li class="wdn-col">
