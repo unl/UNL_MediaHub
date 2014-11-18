@@ -200,7 +200,11 @@ Embed
 	padding: 15% 0;
 	border-radius: 50%;
 	background-color: rgba(208, 0, 0, 0.7);
-	content: '\e813';
+	background-image: url(images/play-icon-white.png);
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    content: '';
 	position: absolute;
 	left: 50%;
 	top: 50%;
