@@ -280,6 +280,10 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         if (!empty($this->poster)) {
             return $this->poster;
         }
+
+        if (!$this->isVideo()) {
+            return UNL_MediaHub_Controller::getURL()."templates/html/css/images/waveform.png";
+        }
         
         return UNL_MediaHub_Controller::$thumbnail_generator.urlencode($this->url);
     }
