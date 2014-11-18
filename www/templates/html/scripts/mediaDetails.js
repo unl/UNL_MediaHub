@@ -196,7 +196,6 @@ WDN.jQuery(document).ready(function() {
     WDN.initializePlugin('form_validation', [function() {
         WDN.jQuery.validation.addMethod('geo_long', 'This must be a valid longitude.', {min:-180, max:180});
         WDN.jQuery.validation.addMethod('geo_lat', 'This must be a valid latitude.', {min:-90, max:90});
-        WDN.jQuery.validation.addMethod('channel', 'This must be a valid latitude.', {min:-90, max:90});
         WDN.jQuery('#media_form').validation({
             containerClassName: 'validation-container',
             immediate: true
