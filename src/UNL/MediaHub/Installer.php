@@ -31,6 +31,7 @@ class UNL_MediaHub_Installer
         $messages[] = $this->exec_sql(file_get_contents(dirname(__FILE__).'/../../../data/add_media_play_count.sql'), 'Adding media play count', true);
         $messages[] = $this->exec_sql(file_get_contents(dirname(__FILE__).'/../../../data/add_media_poster.sql'), 'Adding media poster', true);
         $messages[] = $this->exec_sql(file_get_contents(dirname(__FILE__).'/../../../data/add_media_uid.sql'), 'Adding uidcreated and uidupdated to media', true);
+        $messages[] = $this->exec_sql(file_get_contents(dirname(__FILE__).'/../../../data/add_permissions.sql'), 'Adding permissions table', true);
         
         return $messages;
     }
@@ -48,6 +49,7 @@ class UNL_MediaHub_Installer
         drop table if exists media_has_nselement;
         drop table if exists subscriptions;
         drop table if exists user_has_permission;
+        drop table if exists permissions;
         SET FOREIGN_KEY_CHECKS = 1;
         ';
         
