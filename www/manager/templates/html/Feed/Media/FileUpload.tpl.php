@@ -90,7 +90,10 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
 <script type="text/javascript">
 WDN.initializePlugin('tooltip');
 WDN.initializePlugin('form_validation', [function() {
-    WDN.jQuery('#add_media').validation({immediate: true});
+    WDN.jQuery('#add_media').validation({
+        containerClassName: 'validation-container',
+        immediate: true
+    });
 }]);
 </script>
 
