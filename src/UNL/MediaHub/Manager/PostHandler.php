@@ -332,6 +332,10 @@ class UNL_MediaHub_Manager_PostHandler
         if (empty($this->post['feed_id'])) {
             throw new Exception('Please pick which channel(s) this media should be associated with.', 400);
         }
+        
+        if (!isset($this->post['feed_id']) && empty($this->post['new_feed'])) {
+            throw new Exception('You must select a feed for the media', 400);
+        }
 
         // Add media to a feed/channel
         if (isset($this->post['id'])) {
