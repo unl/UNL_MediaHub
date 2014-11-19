@@ -16,29 +16,8 @@ $feed_url = htmlentities(UNL_MediaHub_Controller::getURL($context), ENT_QUOTES);
       -->
     <p>This channel was created by <a href="http://peoplefinder.unl.edu/?uid=<?php echo $context->uidcreated?>" class="wdnPeoplefinder" title="<?php echo @UNL_Services_Peoplefinder::getFullName($context->uidcreated);?>'s Peoplefinder Record"><?php echo @UNL_Services_Peoplefinder::getFullName($context->uidcreated);?></a> on <?php echo date("F j, Y, g:i a", strtotime($context->datecreated));?>.</p>
 </div>
-<div class="grid9 first">
-    <form action="#" class="zenform neutral" style="background:none;-webkit-box-shadow:none;">
-    <fieldset>
-        <ol>
-            <li style="padding-left:0px;">
-              <label>
-                  <a href="<?php echo $feed_url; ?>" class="external">Web Address:</a>
-              </label> 
-              <input type="text" size="75" name="feed_address" value="<?php echo $feed_url; ?>" onclick="this.select();" /></li>
-            <li style="padding-left:0px;">
-              <label>
-                  <a href="<?php echo $feed_url; ?>?format=xml" class="feed-icon">RSS Address:</a>
-              </label>
-              <input type="text" size="75" name="feed_address" value="<?php echo $feed_url; ?>?format=xml" onclick="this.select();" /></li>
-        </ol>
-    </fieldset>
-    </form>
-</div>
+
 <div class="grid3">
-    <div class="actionItems" style="margin-top:35px;">
-        <a class="action edit details" href="<?php echo UNL_MediaHub_Manager::getURL(); ?>?view=feedmetadata&amp;id=<?php echo $context->id; ?>">Edit Channel Details</a>
-        <a class="action edit subscriptions" href="<?php echo UNL_MediaHub_Manager::getURL(); ?>?view=subscriptions&amp;feed_id=<?php echo $context->id; ?>">Edit Channel Subscriptions</a>
-        <a class="action edit users" href="<?php echo UNL_MediaHub_Manager::getURL(); ?>?view=permissions&amp;feed_id=<?php echo $context->id; ?>">Edit Channel Users</a>
-    </div>
+    
 </div>
 <div class="clear"></div>
