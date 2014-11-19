@@ -3,8 +3,16 @@
 class UNL_MediaHub_Feed_Media_Form
 {
     public $action;
-    
+
+    /**
+     * @var UNL_MediaHub_Media
+     */
     public $media;
+
+    /**
+     * @var UNL_MediaHub_Feed_Media_FeedSelection
+     */
+    public $feed_selection;
     
     function __construct(UNL_MediaHub_Media $media = null)
     {
@@ -15,5 +23,7 @@ class UNL_MediaHub_Feed_Media_Form
                 $this->media->loadReference($class);
             }
         }
+ 
+        $this->feed_selection = new UNL_MediaHub_Feed_Media_FeedSelection(UNL_MediaHub_Manager::getUser(), $this->media);
     }
 }
