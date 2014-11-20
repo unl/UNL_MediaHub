@@ -298,7 +298,7 @@ class UNL_MediaHub_Manager_PostHandler
             // Add a new feed for this user.
             $feed = UNL_MediaHub_Feed::addFeed($this->post, UNL_MediaHub_Manager::getUser());
         }
-        $this->redirect('?view=feed&id='.$feed->id);
+        $this->redirect('?view=feedmetadata&id='.$feed->id);
     }
 
     /**
@@ -380,11 +380,8 @@ class UNL_MediaHub_Manager_PostHandler
             $feed->addMedia($media);
         }
 
-        if (isset($feed, $feed->id)) {
-            $this->redirect('?view=feed&id='.$feed->id);
-        }
         // @todo clean cache for this feed!
-        $this->redirect(UNL_MediaHub_Manager::getURL());
+        $this->redirect(UNL_MediaHub_Controller::getURL($media));
     }
 
     /**
@@ -409,7 +406,7 @@ class UNL_MediaHub_Manager_PostHandler
                 $feed->addUser(UNL_MediaHub_User::getByUid($this->post['uid']));
             }
         }
-        $this->redirect('?view=feed&id='.$feed->id);
+        $this->redirect('?view=permissions&feed_id='.$feed->id);
     }
 
     /**
@@ -429,7 +426,7 @@ class UNL_MediaHub_Manager_PostHandler
             ) {
             $media->delete();
         }
-        $this->redirect('?view=feed&id='.$feed->id);
+        $this->redirect(UNL_MediaHub_Manager::getURL());
     }
 
     /**
