@@ -21,21 +21,22 @@ Supporting styles for the manager forms (add media, channel)
                         rgb(230,233,220) 20%,
                         rgb(244,247,234) 100%
                     );}
-form #thumbnail {
-    width:120px;
-}
+
 #imageOverlay {
     font-style:bold;
-    position:absolute;
+    position:fixed;
     float:left;
-    padding:10px;
-    padding-left:50px;
+    padding: 1% 1% 1% 5em;
     background:#000 url('images/loading.gif') no-repeat 10px 10px;
+    background-position: 1.8em;
     color:#fff;
-    left:0px;
     display:none;
-    margin-left:10px;
+    left: 50%;
+    width: 50%;
+    margin-left: -25%;
+    top: 50%;
     opacity:0.7;
+    z-index: 105;
 }
 
 #maincontent form fieldset li #description_wrapper li {
