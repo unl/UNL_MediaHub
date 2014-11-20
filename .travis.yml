@@ -4,5 +4,6 @@ php:
 - 5.4
 before_script:
 - mysql -e 'create database mediahub_test;'
+- composer install
 - php upgrade.php
 script: phpunit --verbose --bootstrap tests/init.php tests
