@@ -20,11 +20,9 @@ var mediaType = "'.$mediaType.'";
 
 $controller->setReplacementData('head', $js);
 ?>
-<<<<<<< HEAD
-<form action="?view=feed" method="post" name="media_form" id="media_form" class="wdn-band" enctype="multipart/form-data">
-=======
-<form action="?" method="post" name="media_form" id="media_form" enctype="multipart/form-data">
->>>>>>> 271190782bb99dee2683d8de1fd75b00bbe97075
+
+<form action="?" method="post" name="media_form" id="media_form" class="wdn-band" enctype="multipart/form-data">
+
     <input id="media_url" name="url" type="hidden" value="<?php echo htmlentities($context->media->url, ENT_QUOTES); ?>" />
     <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
     <input type="hidden" id="id" name="id" value="<?php $context->media->id ?>" />
