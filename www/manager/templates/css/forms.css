@@ -75,7 +75,6 @@ Supporting styles for the manager forms (add media, channel)
 iframe * {margin:0px}
 
 #maincontent .collapsible legend {
-    border-bottom: 1px solid #D5D4D4;
     width: 99%;
     cursor: pointer;
 }
@@ -218,6 +217,14 @@ iframe * {margin:0px}
 
 .mh-edit-media fieldset li {
     list-style: none;
+}
+
+form legend {
+    margin: 0;
+    font-size: 1.899em;
+    line-height: 1em;
+    border: none;
+    font-weight: 400;
 }
 
 @media only screen and (max-width : 768px) {
