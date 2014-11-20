@@ -15,9 +15,6 @@ UNL_MediaHub::registerAutoloaders();
 
 // DSN for the mediyak database
 UNL_MediaHub::$dsn = 'mysql://mediahub:mediahub@localhost/mediahub';
-if (getenv('TRAVIS')) {
-    UNL_MediaHub::$dsn = 'mysql://travis@127.0.0.1/mediahub_test';
-}
 
 UNL_MediaHub_Controller::$url = 'http://localhost:8007/';
 UNL_MediaHub_Controller::$thumbnail_generator = 'http://itunes.unl.edu/thumbnails.php?url=';
