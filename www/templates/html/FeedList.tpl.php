@@ -35,8 +35,9 @@ if (isset($context->label) && !empty($context->label)) {
     <div class="wdn-inner-wrapper wdn-inner-padding-none">
         <p class="mh-sort-filter">
             <span class="mh-btn-group">
-                <a href="?orderby=datecreated&amp;order=DESC" class="wdn-button wdn-button-brand <?php echo ($context->options['orderby'] == 'datecreated') ? ' active' : '' ?>">Most Recent</a>
-                <a href="?orderby=plays&amp;order=DESC" class="wdn-button wdn-button-brand <?php echo ($context->options['orderby'] == 'plays') ? ' active' : '' ?>">Most Viewed</a>
+                <a href="/channels/" class="wdn-button wdn-button-brand <?php echo (($context->options['orderby'] != 'datecreated') && ($context->options['orderby'] != 'plays')) ? ' active' : '' ?>">Alphabetical</a>
+                <a href="?orderby=datecreated&amp;order=DESC" class="wdn-button wdn-button-brand <?php echo ($context->options['orderby'] == 'datecreated') ? ' active' : '' ?>">Recent</a>
+                <a href="?orderby=plays&amp;order=DESC" class="wdn-button wdn-button-brand <?php echo ($context->options['orderby'] == 'plays') ? ' active' : '' ?>">Popular</a>
             </span>
         </p>
     </div>
