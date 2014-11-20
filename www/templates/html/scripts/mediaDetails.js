@@ -21,7 +21,7 @@ var mediaDetails = function() {
 		},
 		
 		updateThumbnail : function(currentTime) {
-			WDN.jQuery('#imageOverlay').css({'height' : WDN.jQuery("#thumbnail").height()-20 +'px' ,'width' : WDN.jQuery("#thumbnail").width()-60 +'px' }).show();
+			WDN.jQuery('#imageOverlay').show();
 			
 			var src = mediaDetails.getImageURL() + '&time='+mediaDetails.formatTime(currentTime)+'&rebuild';
 			
