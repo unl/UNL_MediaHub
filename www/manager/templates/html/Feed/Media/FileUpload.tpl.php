@@ -76,7 +76,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
                                     </select>
                                 </li>
                                 <li>
-                                    <?php echo $savvy->render($context, 'User/FeedSelection.tpl.php'); ?>
+                                    <?php echo $savvy->render($context->feed_selection); ?>
                                 </li>
                             </ol>
                         </div>
