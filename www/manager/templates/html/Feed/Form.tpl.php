@@ -1,3 +1,4 @@
+<?php $feed_url = htmlentities(UNL_MediaHub_Controller::getURL($context), ENT_QUOTES); ?>
 <script type="text/javascript">
 WDN.jQuery(document).ready(function() {
     WDN.jQuery('#extensions input').change(function() {
@@ -23,6 +24,24 @@ WDN.jQuery(document).ready(function() {
     });
 });
 </script>
+<div class="grid9 first">
+    <form action="#" class="zenform neutral" style="background:none;-webkit-box-shadow:none;">
+        <fieldset>
+            <ol>
+                <li style="padding-left:0px;">
+                    <label>
+                        <a href="<?php echo $feed_url; ?>" class="external">Web Address:</a>
+                    </label>
+                    <input type="text" size="75" name="feed_address" value="<?php echo $feed_url; ?>" onclick="this.select();" /></li>
+                <li style="padding-left:0px;">
+                    <label>
+                        <a href="<?php echo $feed_url; ?>?format=xml" class="feed-icon">RSS Address:</a>
+                    </label>
+                    <input type="text" size="75" name="feed_address" value="<?php echo $feed_url; ?>?format=xml" onclick="this.select();" /></li>
+            </ol>
+        </fieldset>
+    </form>
+</div>
 <div class="grid9 first">
 <form action="<?php echo $context->action; ?>" method="post" name="feed" id="feed" enctype="multipart/form-data" class="zenform">
     <div style="display: none;">
@@ -375,11 +394,7 @@ WDN.jQuery(document).ready(function() {
 </form>
 </div>
 <div class="grid3" id="outpostExtension">
-<h3>Delivery Options <span>Coming soon!</span></h3>
-<p>Channels in MediaHub can be delivered through <strong>official UNL outposts</strong>. Make sure you take advantage of these:</p>
-<ul>
-    <li class="itunes"><a href="http://www.apple.com/education/itunes-u/">iTunesU</a></li>
-    <li class="boxee"><a href="http://www.boxee.tv/">Boxee</a></li>
-    <li class="youtube"><a href="http://www.youtube.com/unl">YouTube</a></li>
-</ul>
+    <div class="actionItems">
+        <a class="action edit users" href="<?php echo UNL_MediaHub_Manager::getURL(); ?>?view=permissions&amp;feed_id=<?php echo $context->feed->id; ?>">Edit Channel Users</a>
+    </div>
 </div>
