@@ -21,7 +21,7 @@ var mediaDetails = function() {
 		},
 		
 		updateThumbnail : function(currentTime) {
-			WDN.jQuery('#imageOverlay').css({'height' : WDN.jQuery("#thumbnail").height()-20 +'px' ,'width' : WDN.jQuery("#thumbnail").width()-60 +'px' }).show();
+			WDN.jQuery('#imageOverlay').show();
 			
 			var src = mediaDetails.getImageURL() + '&time='+mediaDetails.formatTime(currentTime)+'&rebuild';
 			
@@ -210,9 +210,9 @@ WDN.jQuery(document).ready(function() {
     }]);
     
     //Collapisible forms.
-    WDN.jQuery('.collapsible > h4').prepend("<span class='toggle'>+</span>");
+    WDN.jQuery('.collapsible > legend').prepend("<span class='toggle'>+</span>");
     WDN.jQuery('.collapsible > ol').hide();
-    WDN.jQuery('.collapsible > h4').click(function(){
+    WDN.jQuery('.collapsible > legend').click(function(){
         if (WDN.jQuery(this).next('ol').is(":visible")) {
             WDN.jQuery(this).next('ol').hide(200);
             WDN.jQuery(this).find('.toggle').html('+');
@@ -236,7 +236,6 @@ WDN.jQuery(document).ready(function() {
             theme_advanced_toolbar_location : "top",
             theme_advanced_toolbar_align : "left",
             theme_advanced_statusbar_location : "bottom",
-            theme_advanced_resizing : true,
             theme_advanced_row_height : 33
         });
     });

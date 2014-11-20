@@ -1,7 +1,7 @@
-<div id="videoData" class="bp2-wdn-col-two-sevenths">
+<div id="videoData" class="bp2-wdn-col-two-sevenths wdn-pull-right">
     <h5 class="clear-top">Set a Thumbnail</h5>
     <ol>
-        <li>Pause the video at the right at the frame which you want as the image representation.</li>
+        <li>Pause the video at the left at the frame which you want as the image representation.</li>
         <li>Click the "Set Image" button to save this as your image representation.</li>
         <li>Continue with the form below.</li>
     </ol>

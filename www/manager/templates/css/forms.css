@@ -21,21 +21,22 @@ Supporting styles for the manager forms (add media, channel)
                         rgb(230,233,220) 20%,
                         rgb(244,247,234) 100%
                     );}
-form #thumbnail {
-    width:120px;
-}
+
 #imageOverlay {
     font-style:bold;
-    position:absolute;
+    position:fixed;
     float:left;
-    padding:10px;
-    padding-left:50px;
+    padding: 2% 2% 2% 5em;
     background:#000 url('images/loading.gif') no-repeat 10px 10px;
+    background-position: 1.8em;
     color:#fff;
-    left:0px;
     display:none;
-    margin-left:10px;
+    left: 50%;
+    width: 50%;
+    margin-left: -25%;
+    top: 40%;
     opacity:0.7;
+    z-index: 105;
 }
 
 #maincontent form fieldset li #description_wrapper li {
@@ -74,7 +75,6 @@ form #thumbnail {
 iframe * {margin:0px}
 
 #maincontent .collapsible legend {
-    border-bottom: 1px solid #D5D4D4;
     width: 99%;
     cursor: pointer;
 }
@@ -217,6 +217,14 @@ iframe * {margin:0px}
 
 .mh-edit-media fieldset li {
     list-style: none;
+}
+
+form legend {
+    margin: 0;
+    font-size: 1.899em;
+    line-height: 1em;
+    border: none;
+    font-weight: 400;
 }
 
 @media only screen and (max-width : 768px) {
