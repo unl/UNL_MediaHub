@@ -20,7 +20,9 @@ var mediaType = "'.$mediaType.'";
 
 $controller->setReplacementData('head', $js);
 ?>
-<form action="?" method="post" name="media_form" id="media_form" enctype="multipart/form-data">
+
+<form action="?" method="post" name="media_form" id="media_form" class="wdn-band" enctype="multipart/form-data">
+
     <input id="media_url" name="url" type="hidden" value="<?php echo htmlentities($context->media->url, ENT_QUOTES); ?>" />
     <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
     <input type="hidden" id="id" name="id" value="<?php $context->media->id ?>" />
@@ -193,7 +195,7 @@ $controller->setReplacementData('head', $js);
                             </li>
                         </ol>
                         <div id="enhanced_header" class="collapsible">
-                            <h4>Geo Location</h4>
+                            <legend>Geo Location</legend>
                             <ol>
                                 <li>
                                     <label for="geo_lat" class="element">Latitude</label>
@@ -210,7 +212,7 @@ $controller->setReplacementData('head', $js);
                                     </div>
                                 </li>
                                 <li>
-                                    <!-- <div id="map_canvas" style="width:500px;height:300px;"></div> -->
+                                    <div id="map_canvas" style="width:500px;height:300px;"></div>
                                 </li>
                             </ol>
                         </div>   
@@ -291,7 +293,7 @@ $controller->setReplacementData('head', $js);
                     </fieldset>
 
                     <fieldset class='collapsible' id="enhanced_header">
-                        <h4>iTunes Information</h4>
+                        <legend>iTunes Information</legend>
                         <ol>
                             <li style="display:none;">
                                 <label for="itunes_author" class="element">Author<span class="helper">Name of media creator.</span></label>
