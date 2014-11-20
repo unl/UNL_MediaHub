@@ -21,6 +21,7 @@ Supporting styles for search box
 	#wdn_app_search label {
 		color: #fff;
 	}
+
 }
 
 form .wdn-input-group .wdn-input-group-btn > input[type="submit"],
@@ -30,7 +31,7 @@ form .wdn-input-group .wdn-input-group-btn > button {
 }
 
 .mh-app-search {
-	margin: 2em 0 1em;
+	margin: 4em 0 1em 0;
 }
 
 .mh-app-search > * {
@@ -61,3 +62,10 @@ ul.mh-channel-buttons {
 	border-radius: 0;
 }
 
+@media (max-width: 768px) {
+
+	.mh-app-search {
+		margin: 1em 0 1em 0;
+	}
+
+}
