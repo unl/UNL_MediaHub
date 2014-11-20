@@ -62,6 +62,6 @@ class UNL_MediaHub_Media_Embed
             return new self();
         }
         
-        return new self(Doctrine::getTable('UNL_Mediahub_Media')->find($id), $version, $options);
+        return new self(Doctrine::getTable('UNL_MediaHub_Media')->find($id), $version, $options);
     }
 }

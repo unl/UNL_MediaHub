@@ -15,12 +15,12 @@ class UNL_MediaHub_DBTests_BaseTestDataInstaller implements UNL_MediaHub_DBTests
         $user_b->save();
         
         //Create some channels
-        $feed_a = new UNL_Mediahub_Feed();
+        $feed_a = new UNL_MediaHub_Feed();
         $feed_a->title = 'test a';
         $feed_a->uidcreated = $user_a->uid;
         $feed_a->save();
 
-        $feed_b = new UNL_Mediahub_Feed();
+        $feed_b = new UNL_MediaHub_Feed();
         $feed_b->title = 'test b';
         $feed_b->uidcreated = $user_b->uid;
         $feed_b->save();
