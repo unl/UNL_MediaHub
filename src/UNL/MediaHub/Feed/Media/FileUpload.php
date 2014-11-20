@@ -2,10 +2,13 @@
 
 class UNL_MediaHub_Feed_Media_FileUpload
 {
-    public $options;
+    /**
+     * @var UNL_MediaHub_Feed_Media_FeedSelection
+     */
+    public $feed_selection;
 
-    function __construct($options = array())
+    function __construct()
     {
-        $this->options = $options;
+        $this->feed_selection = new UNL_MediaHub_Feed_Media_FeedSelection(UNL_MediaHub_Manager::getUser());
     }
 }

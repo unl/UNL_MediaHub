@@ -13,9 +13,7 @@ if (isset($context->media)) {
 $js = '<script type="text/javascript">
 var formView = "'.$formView.'";
 var mediaType = "'.$mediaType.'";
-WDN.loadJS(WDN.getTemplateFilePath("scripts/plugins/validator/jquery.validator.min.js"));
 </script>
-<link type="text/css" rel="stylesheet" href="/wdn/templates_3.1/css/content/formvalidator.css" />
 <script type="text/javascript" src="'.UNL_MediaHub_Controller::getURL().'templates/html/scripts/mediaDetails.js"></script>
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 ';
@@ -83,7 +81,7 @@ $controller->setReplacementData('head', $js);
                             </select>
                         </li>
                         <li>
-                            <?php echo $savvy->render($context, 'User/FeedSelection.tpl.php'); ?>
+                            <?php echo $savvy->render($context->feed_selection); ?>
                         </li>
                         <li>
                             <label for="media_poster">URL of custom poster image 

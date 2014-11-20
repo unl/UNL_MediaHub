@@ -1,4 +1,4 @@
-<?php echo $savvy->render($context, 'Feed/Media/FileUpload.tpl.php'); ?>
+<?php echo $savvy->render($context->getUploader()); ?>
 
 <?php echo $savvy->render($context->getFeeds()); ?>
 
