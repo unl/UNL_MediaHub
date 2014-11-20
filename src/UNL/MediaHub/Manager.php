@@ -146,9 +146,6 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
             }
 
             switch($this->options['view']) {
-                case 'feed':
-                    $this->showFeed();
-                    break;
                 case 'addmedia':
                     $this->addMedia();
                     // intentional no break
@@ -230,40 +227,9 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
         self::$uploadDirectory = $uploadDirectory;
     }
 
-    public static function getURL($mixed = null, $additional_params = array())
+    public static function getURL()
     {
-        $params = array();
-
-        if (is_object($mixed)) {
-            switch(get_class($mixed)) {
-                case 'UNL_MediaHub_Feed':
-                    $params['view'] = 'feed';
-                    $params['id']   = $mixed->id;
-            }
-        }
-
-        $params = array_merge($params, $additional_params);
-
-        return UNL_MediaHub_Controller::addURLParams(UNL_MediaHub_Controller::$url.'manager/', $params);
-    }
-    
-    function showFeed()
-    {
-        if (empty($this->options['id'])) {
-            throw new Exception('No feed selected to show.');
-        }
-
-        $feed = UNL_MediaHub_Feed::getById($this->options['id']);
-        if (!($feed && $feed->userHasPermission(self::$user, UNL_MediaHub_Permission::getByID(
-                                                    UNL_MediaHub_Permission::USER_CAN_INSERT)))) {
-            throw new Exception('You do not have permission for this feed.');
-        }
-
-        $this->output[] = $feed;
-
-        $filter = new UNL_MediaHub_MediaList_Filter_ByFeed($feed, 'ALL');
-        $this->showMedia($filter);
-
+        return UNL_MediaHub_Controller::$url.'manager/';
     }
     
     /**

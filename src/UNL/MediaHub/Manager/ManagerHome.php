@@ -27,4 +27,9 @@ class UNL_MediaHub_Manager_ManagerHome implements UNL_MediaHub_CacheableInterfac
     {
         return new UNL_MediaHub_User_FeedList($options);
     }
+    
+    public function getUploader()
+    {
+        return new UNL_MediaHub_Feed_Media_FileUpload();
+    }
 }
