@@ -47,7 +47,7 @@ class UNL_MediaHub_DBTests_DBTestCase extends \PHPUnit_Framework_TestCase {
         $this->installer->install();
     }
 
-    public function installMockData(UNL_Mediahub_DBTests_MockTestDataInstallerInterface $installer)
+    public function installMockData(UNL_MediaHub_DBTests_MockTestDataInstallerInterface $installer)
     {
         $installer->install();
     }
