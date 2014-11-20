@@ -195,7 +195,7 @@ $controller->setReplacementData('head', $js);
                             </li>
                         </ol>
                         <div id="enhanced_header" class="collapsible">
-                            <h4>Geo Location</h4>
+                            <legend>Geo Location</legend>
                             <ol>
                                 <li>
                                     <label for="geo_lat" class="element">Latitude</label>
@@ -212,7 +212,7 @@ $controller->setReplacementData('head', $js);
                                     </div>
                                 </li>
                                 <li>
-                                    <!-- <div id="map_canvas" style="width:500px;height:300px;"></div> -->
+                                    <div id="map_canvas" style="width:500px;height:300px;"></div>
                                 </li>
                             </ol>
                         </div>   
@@ -293,7 +293,7 @@ $controller->setReplacementData('head', $js);
                     </fieldset>
 
                     <fieldset class='collapsible' id="enhanced_header">
-                        <h4>iTunes Information</h4>
+                        <legend>iTunes Information</legend>
                         <ol>
                             <li style="display:none;">
                                 <label for="itunes_author" class="element">Author<span class="helper">Name of media creator.</span></label>
