@@ -10,7 +10,9 @@ $feed_url = htmlentities(UNL_MediaHub_Controller::getURL($context->feed), ENT_QU
         <?php echo $savvy->render($context->feed, 'Feed/Creator.tpl.php') ?>
         <div class="wdn-grid-set">
             <div class="bp2-wdn-col-one-fourth wdn-pull-right">
-                <img src="<?php echo $feed_url; ?>/image" alt="<?php echo htmlentities($context->feed->title, ENT_QUOTES); ?> Image" />
+                <div class="mh-channel-thumb">
+                    <img src="<?php echo $feed_url; ?>/image" alt="<?php echo htmlentities($context->feed->title, ENT_QUOTES); ?> Image" />
+                </div>
             </div>
             <div class="bp2-wdn-col-three-fourths">
                 <p><?php echo htmlentities($context->feed->description) ?></p>
