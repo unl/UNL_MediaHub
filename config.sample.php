@@ -3,12 +3,6 @@
 ini_set('display_errors', true);
 error_reporting(E_ALL);
 
-// DSN for the mediyak database
-UNL_MediaHub::$dsn = 'mysql://mediahub:mediahub@localhost/mediahub';
-if (getenv('TRAVIS')) {
-    UNL_MediaHub::$dsn = 'mysql://travis@127.0.0.1/sitemaster_test';
-}
-
 set_include_path(
     dirname(__FILE__).'/src'
     .PATH_SEPARATOR.dirname(__FILE__).'/lib/php'
@@ -18,6 +12,12 @@ set_include_path(
 
 require_once 'UNL/MediaHub.php';
 UNL_MediaHub::registerAutoloaders();
+
+// DSN for the mediyak database
+UNL_MediaHub::$dsn = 'mysql://mediahub:mediahub@localhost/mediahub';
+if (getenv('TRAVIS')) {
+    UNL_MediaHub::$dsn = 'mysql://travis@127.0.0.1/sitemaster_test';
+}
 
 UNL_MediaHub_Controller::$url = 'http://localhost:8007/';
 UNL_MediaHub_Controller::$thumbnail_generator = 'http://itunes.unl.edu/thumbnails.php?url=';
