@@ -5,6 +5,9 @@ error_reporting(E_ALL);
 
 // DSN for the mediyak database
 UNL_MediaHub::$dsn = 'mysql://mediahub:mediahub@localhost/mediahub';
+if (getenv('TRAVIS')) {
+    UNL_MediaHub::$dsn = 'mysql://travis@127.0.0.1/sitemaster_test';
+}
 
 set_include_path(
     dirname(__FILE__).'/src'
