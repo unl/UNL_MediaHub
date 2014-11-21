@@ -10,7 +10,7 @@ class UNL_MediaHub_MediaDBTest extends UNL_MediaHub_DBTests_DBTestCase
     {
         $this->prepareTestDB();
         
-        $media_a = UNL_Mediahub_Media::getById(1);
+        $media_a = UNL_MediaHub_Media::getById(1);
         
         $user_a = UNL_MediaHub_User::getByUid('test_a');
         $user_b = UNL_MediaHub_User::getByUid('test_b');

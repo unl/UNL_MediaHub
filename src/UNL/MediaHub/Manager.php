@@ -28,7 +28,8 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
         'mediapreview'    => 'UNL_MediaHub_Media_Preview',
         'uploadcomplete'  => 'UNL_MediaHub_Feed_Media_FileUpload_Complete',
         'upload'          => 'UNL_MediaHub_Feed_Media_FileUpload',
-        'home'            => 'UNL_MediaHub_Manager_ManagerHome'
+        'home'            => 'UNL_MediaHub_Manager_ManagerHome',
+        'addmedia'        => 'UNL_MediaHub_Feed_Media_Form',
         );
     
     protected static $replacements = array();
@@ -144,16 +145,6 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
                 $this->output[] = new $class($this->options);
                 return;
             }
-
-            switch($this->options['view']) {
-                case 'addmedia':
-                    $this->addMedia();
-                    // intentional no break
-                default:
-                    $class = $this->view_map['feeds'];
-                    $this->output[] = new $class($this->options);
-                    break;
-            }
         } catch (Exception $e) {
             $this->output = $e;
         }
@@ -177,14 +168,6 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
     public static function getUser()
     {
         return self::$user;
-    }
-    
-    function showMedia(UNL_MediaHub_Filter $filter = null)
-    {
-        $options           = $this->options;
-        $options['filter'] = $filter;
-
-        $this->output[] = new UNL_MediaHub_MediaList($options + $this->options);
     }
 
     /**
@@ -245,20 +228,5 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
     
     function editFeedPublishers($feed)
     {
-    }
-    
-    /**
-     * Show the form to add media to a feed.
-     *
-     * @return void
-     */
-    function addMedia()
-    {
-        if (isset($_GET['id'])) {
-            $this->output[] = new UNL_MediaHub_Feed_Media_Form(UNL_MediaHub_Media::getById($_GET['id']));
-            return;
-        }
-        
-        $this->output[] = new UNL_MediaHub_Feed_Media_Form();
     }
 }
