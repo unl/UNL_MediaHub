@@ -219,6 +219,10 @@ iframe * {margin:0px}
     list-style: none;
 }
 
+.mh-channel-edit form fieldset {
+    margin: 0;
+}
+
 form legend {
     margin: 0;
     font-size: 1.899em;
