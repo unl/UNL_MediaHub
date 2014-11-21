@@ -3,7 +3,7 @@
 <ul id="userList">
 <?php
 foreach ($context->items as $user) {
-    echo '<li><img class="profile_pic medium" src="http://planetred.unl.edu/pg/icon/unl_'.$user->uid.'/medium/" />'.UNL_Services_Peoplefinder::getFullName($user->uid) .'<span class="uid">('.$user->uid.')</span>';
+    echo '<li><img class="profile_pic medium" src="http://planetred.unl.edu/pg/icon/unl_'.$user->uid.'/medium/" />'.@UNL_Services_Peoplefinder::getFullName($user->uid) .'<span class="uid">('.$user->uid.')</span>';
     echo $savvy->render($user, 'DeleteUserForm.tpl.php');
     echo '</li>';
 }
