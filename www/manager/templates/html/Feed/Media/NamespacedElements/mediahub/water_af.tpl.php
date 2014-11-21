@@ -1,3 +1,11 @@
+<?php
+//Only show if this media is part of the Water Media channel
+$water_media = UNL_MediaHub_Feed::getById(319);
+if (!$water_media->hasMedia($context->media)) {
+    return;
+}
+?>
+
 <script type="text/javascript">
     //<![CDATA[ 
     WDN.jQuery(document).ready(function() { 
