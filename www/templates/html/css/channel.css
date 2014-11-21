@@ -15,3 +15,7 @@ Supporting styles for individual presentation of channel pages
 .mh-feed-info img {
 	width: 100%;
 }
+
+.mh-rss {
+	font-size: 1.899em;
+}
