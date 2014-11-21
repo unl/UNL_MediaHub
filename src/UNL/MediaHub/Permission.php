@@ -29,6 +29,26 @@ class UNL_MediaHub_Permission extends UNL_MediaHub_Models_BasePermission
         }
         $permission = new self();
         $data = array('id'=>$id);
+        switch ($id) {
+            case self::USER_CAN_INSERT:
+                $data['title'] = 'User Can Insert';
+                break;
+            case self::USER_CAN_UPDATE:
+                $data['title'] = 'User Can Update';
+                break;
+            case self::USER_CAN_DELETE:
+                $data['title'] = 'User Can Delete';
+                break;
+            case self::USER_CAN_UPLOAD:
+                $data['title'] = 'User Can Upload';
+                break;
+            case self::USER_CAN_ADD_USER:
+                $data['title'] = 'User Can Add User';
+                break;
+            default:
+                return $permission;
+        }
+        
         $permission->fromArray($data);
         $permission->save();
         return $permission;
