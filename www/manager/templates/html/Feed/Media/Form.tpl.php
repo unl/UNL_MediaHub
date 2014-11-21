@@ -215,14 +215,17 @@ $controller->setReplacementData('head', $js);
                                     <div id="map_canvas" style="width:500px;height:300px;"></div>
                                 </li>
                             </ol>
-                        </div>   
+                        </div>
 
                     </fieldset>
 
                     <?php $customFields = UNL_MediaHub_Feed_Media_NamespacedElements_mediahub::getCustomElements(); ?>
                     <fieldset class='collapsible' id="other_header">
+                        <legend>Other</legend>
                         <ol>
-
+                            <?php foreach ($customFields as $customField=>$description): ?>
+                                <li><?php echo $savvy->render($context, 'Feed/Media/NamespacedElements/mediahub/'.$customField.'.tpl.php'); ?></li>
+                            <?php endforeach; ?>
                             <li style="display:none;">
                                 <label for="mrss_group" class="element">Group</label>
                                 <div class="element">
