@@ -227,6 +227,10 @@ iframe * {margin:0px}
     font-size: .75em;
 }
 
+.wdn-button-brand {
+    background-color: #d00000 !important;
+}
+
 form legend {
     margin: 0;
     font-size: 1.899em;
