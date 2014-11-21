@@ -114,7 +114,7 @@ $controller->setReplacementData('head', $js);
                         <label for="title" class="element">
                             Title<span class="required">*</span>
                         </label>
-                        <input id="title" name="title" type="text" value="<?php echo htmlentities(@$context->media->title, ENT_QUOTES); ?>" />
+                        <input id="title" name="title" type="text" class="required-entry" value="<?php echo htmlentities(@$context->media->title, ENT_QUOTES); ?>" />
                         
                         <div class="wdn-grid-set">
                             <div class="bp2-wdn-col-one-half">
@@ -124,7 +124,7 @@ $controller->setReplacementData('head', $js);
                                             Author<span class="required">*</span><span class="helper"> Name of media creator.</span>
                                         </label>
                                         <div class="element">
-                                            <input id="author" name="author" type="text" value="<?php echo htmlentities(@$context->media->author, ENT_QUOTES); ?>" />
+                                            <input id="author" name="author" class="required-entry" type="text" value="<?php echo htmlentities(@$context->media->author, ENT_QUOTES); ?>" />
                                         </div>
                                     </li>
                                     <li>
@@ -180,7 +180,7 @@ $controller->setReplacementData('head', $js);
                                     Description<span class="required">*</span>
                                     <span class="helper">Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.</span>
                                 </label>
-                                <div class="element" id="description_wrapper"><textarea id="description" name="description" rows="5"><?php echo htmlentities(@$context->media->description); ?></textarea></div>
+                                <div class="element" id="description_wrapper"><textarea id="description" name="description" class="required-entry" rows="5"><?php echo htmlentities(@$context->media->description); ?></textarea></div>
                             </li>
     
                             <li>
