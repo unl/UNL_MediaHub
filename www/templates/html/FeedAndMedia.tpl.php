@@ -6,21 +6,27 @@ $feed_url = htmlentities(UNL_MediaHub_Controller::getURL($context->feed), ENT_QU
 ?>
 <div class="wdn-band wdn-light-neutral-band mh-feed-info">
     <div class="wdn-inner-wrapper">
-        <h1><?php echo htmlentities($context->feed->title) ?></h1>
+        <h1 class="wdn-brand wdn-pull-left"><?php echo htmlentities($context->feed->title) ?></h1>
+        <div class="wdn-pull-right mh-rss"><a href="?format=xml" title="RSS feed for this channel"><span class="wdn-icon-rss-squared"></span></a></div>
+        <?php if ($context->feed->userCanEdit($user)): ?>
+            <a href="<?php echo UNL_MediaHub_Manager::getURL()?>?view=feedmetadata&amp;id=<?php echo $context->feed->id ?>" class="wdn-button wdn-button-brand wdn-pull-right">Edit</a>
+        <?php endif ?>
+        <div class="clear"></div>
         <?php echo $savvy->render($context->feed, 'Feed/Creator.tpl.php') ?>
         <div class="wdn-grid-set">
             <div class="bp2-wdn-col-one-fourth wdn-pull-right">
-                <img src="<?php echo $feed_url; ?>/image" alt="<?php echo htmlentities($context->feed->title, ENT_QUOTES); ?> Image" />
+                <div class="mh-channel-thumb">
+                    <img src="<?php echo $feed_url; ?>/image" alt="<?php echo htmlentities($context->feed->title, ENT_QUOTES); ?> Image" />
+                </div>
             </div>
             <div class="bp2-wdn-col-three-fourths">
                 <p><?php echo htmlentities($context->feed->description) ?></p>
             </div>
             <div class="bp2-wdn-col-one-fourth wdn-pull-right mh-feed-stats">
                 <?php echo $savvy->render($context->feed, 'Feed/Stats.tpl.php') ?>
+
             </div>
-            <?php if ($context->feed->userCanEdit($user)): ?>
-                <a href="<?php echo UNL_MediaHub_Manager::getURL()?>?view=feedmetadata&amp;id=<?php echo $context->feed->id ?>" class="wdn-button wdn-pull-right">Edit</a>
-            <?php endif ?>
+
         </div>
     </div>
 </div>

@@ -12,7 +12,6 @@
                                     src="<?php echo $feed_url; ?>/image"
                                     alt="<?php echo htmlentities($feed->title, ENT_QUOTES); ?> Image">
                             </div>
-                            <div class="mh-play-button"></div>
                         </div>
                         <div class="mh-video-label wdn-center">
                             <div class="wdn-brand">

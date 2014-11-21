@@ -82,6 +82,7 @@ Supporting styles for listings of channels
 .mh-stat .mh-count {
 	font-size: 40px;
 	display: block;
+	white-space: nowrap;
 }
 
 .mh-stat .mh-context {
@@ -95,4 +96,15 @@ Supporting styles for listings of channels
 
 p.mh-more-info a {
 	border: 0;
+}
+
+.mh-channel-thumb {
+	border: solid rgba(174, 167, 141, 0.21) 10px;
+	overflow: hidden;
+	margin-bottom: .75em;
+	position: relative;
+}
+
+.mh-channel-thumb img{
+	margin-bottom: -9px;
 }
