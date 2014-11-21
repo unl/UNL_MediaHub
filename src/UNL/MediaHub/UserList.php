@@ -3,7 +3,7 @@ class UNL_MediaHub_UserList extends UNL_MediaHub_List
 {
     public $tables = 'UNL_MediaHub_User u';
     
-    public $options = array('orderby'=>'uid', 'order'=>'ASC', 'page'=>0, 'limit'=>null);
+    public $options = array('orderby'=>'uid', 'order'=>'ASC', 'page'=>0, 'limit'=>null, 'additional_filters' => array());
     
     function setOrderBy(Doctrine_Query &$query)
     {
