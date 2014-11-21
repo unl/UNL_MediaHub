@@ -54,26 +54,9 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
                         <div class="bp1-wdn-col-two-fifths">
                             <ol>
                                 <li class="clear-top">
-                                    <label for="privacy">Privacy</label>
-                                    <div class="wdn-icon-info mh-tool-tip">
-                                        <div>
-                                            <ul>
-                                                <li><span class="heading">Public</span> - Anyone can access the media.
-                                                </li>
-                                                <li><span class="heading">Unlisted</span> - Media will not be included
-                                                    in public MediaHub listings.
-                                                </li>
-                                                <li><span class="heading">Private</span> - Only members of channels that
-                                                    the media is included in can access it.
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <select name="privacy" id="privacy">
-                                        <option value="Public" selected="selected">Public</option>
-                                        <option value="unlisted">Unlisted</option>
-                                        <option value="Privacy">Private</option>
-                                    </select>
+                                <li>
+                                    <?php echo $savvy->render($context, 'Feed/Media/fields/privacy.tpl.php'); ?>
+                                </li>
                                 </li>
                                 <li>
                                     <?php echo $savvy->render($context->feed_selection); ?>

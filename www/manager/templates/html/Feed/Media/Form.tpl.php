@@ -25,7 +25,7 @@ $controller->setReplacementData('head', $js);
 
     <input id="media_url" name="url" type="hidden" value="<?php echo htmlentities($context->media->url, ENT_QUOTES); ?>" />
     <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
-    <input type="hidden" id="id" name="id" value="<?php $context->media->id ?>" />
+    <input type="hidden" id="id" name="id" value="<?php echo $context->media->id ?>" />
     
     <div class="wdn-band wdn-light-triad-band">
         <div class="wdn-inner-wrapper">
@@ -51,36 +51,7 @@ $controller->setReplacementData('head', $js);
                 <div class="bp2-wdn-col-two-sevenths wdn-pull-right">
                     <ol>
                         <li>
-                            <label for="privacy" class="element">
-                                Privacy
-                                <div class="wdn-icon-info mh-tool-tip">
-                                    <div>
-                                        <ul>
-                                            <li>
-                                                <span class="heading">Public</span> - Anyone can access the media.
-                                            </li>
-                                            <li>
-                                                <span class="heading">Unlisted</span> - Media will not be included in public MediaHub listings.
-                                            </li>
-                                            <li>
-                                                <span class="heading">Private</span> - Only members of channels that the media is included in can access it.
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </label>
-                            <select id="privacy" name="privacy">
-                                <?php
-                                foreach (UNL_MediaHub_Media::getPossiblePrivacyValues() as $value) {
-                                    $selected = '';
-                                    if ($value == @$context->media->privacy) {
-                                        $selected = 'selected="selected"';
-                                    }
-
-                                    echo "<option value='$value' " . $selected . ">" . ucfirst(strtolower($value)) . "</option>";
-                                }
-                                ?>
-                            </select>
+                            <?php echo $savvy->render($context, 'Feed/Media/fields/privacy.tpl.php'); ?>
                         </li>
                         <li>
                             <?php echo $savvy->render($context->feed_selection); ?>
@@ -114,7 +85,7 @@ $controller->setReplacementData('head', $js);
                         <label for="title" class="element">
                             Title<span class="required">*</span>
                         </label>
-                        <input id="title" name="title" type="text" value="<?php echo htmlentities(@$context->media->title, ENT_QUOTES); ?>" />
+                        <input id="title" name="title" type="text" class="required-entry" value="<?php echo htmlentities(@$context->media->title, ENT_QUOTES); ?>" />
                         
                         <div class="wdn-grid-set">
                             <div class="bp2-wdn-col-one-half">
@@ -124,7 +95,7 @@ $controller->setReplacementData('head', $js);
                                             Author<span class="required">*</span><span class="helper"> Name of media creator.</span>
                                         </label>
                                         <div class="element">
-                                            <input id="author" name="author" type="text" value="<?php echo htmlentities(@$context->media->author, ENT_QUOTES); ?>" />
+                                            <input id="author" name="author" class="required-entry" type="text" value="<?php echo htmlentities(@$context->media->author, ENT_QUOTES); ?>" />
                                         </div>
                                     </li>
                                     <li>
@@ -180,7 +151,7 @@ $controller->setReplacementData('head', $js);
                                     Description<span class="required">*</span>
                                     <span class="helper">Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.</span>
                                 </label>
-                                <div class="element" id="description_wrapper"><textarea id="description" name="description" rows="5"><?php echo htmlentities(@$context->media->description); ?></textarea></div>
+                                <div class="element" id="description_wrapper"><textarea id="description" name="description" class="required-entry" rows="5"><?php echo htmlentities(@$context->media->description); ?></textarea></div>
                             </li>
     
                             <li>
@@ -194,7 +165,7 @@ $controller->setReplacementData('head', $js);
                                 </div>
                             </li>
                         </ol>
-                        <div id="enhanced_header" class="collapsible">
+                        <div id="geo_location" class="collapsible">
                             <legend>Geo Location</legend>
                             <ol>
                                 <li>
@@ -215,14 +186,17 @@ $controller->setReplacementData('head', $js);
                                     <div id="map_canvas" style="width:500px;height:300px;"></div>
                                 </li>
                             </ol>
-                        </div>   
+                        </div>
 
                     </fieldset>
 
                     <?php $customFields = UNL_MediaHub_Feed_Media_NamespacedElements_mediahub::getCustomElements(); ?>
                     <fieldset class='collapsible' id="other_header">
+                        <legend>Other Information</legend>
                         <ol>
-
+                            <?php foreach ($customFields as $customField=>$description): ?>
+                                <li><?php echo $savvy->render($context, 'Feed/Media/NamespacedElements/mediahub/'.$customField.'.tpl.php'); ?></li>
+                            <?php endforeach; ?>
                             <li style="display:none;">
                                 <label for="mrss_group" class="element">Group</label>
                                 <div class="element">
@@ -292,7 +266,7 @@ $controller->setReplacementData('head', $js);
                         </ol>
                     </fieldset>
 
-                    <fieldset class='collapsible' id="enhanced_header">
+                    <fieldset class='collapsible'>
                         <legend>iTunes Information</legend>
                         <ol>
                             <li style="display:none;">
@@ -301,7 +275,7 @@ $controller->setReplacementData('head', $js);
                                 <input id="itunes_author" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[0][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'author'); ?>"/>
                             </li>
                             <li>
-                                <label for="itunesu_category" class="element">Category <span class="helper">Choose a category for use within iTunes U</span></label>
+                                <label for="itunes_category" class="element">Category <span class="helper">Choose a category for use within iTunes U</span></label>
                                 <div class="element">
                                     <?php
                                     $category = '';
@@ -310,7 +284,7 @@ $controller->setReplacementData('head', $js);
                                     }
                                     ?>
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunesu[0][element]" type="hidden" value="category" />
-                                    <select id="itunes_block" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunesu[0][attributes]">
+                                    <select id="itunes_category" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunesu[0][attributes]">
                                         <option value="">None</option>
                                         <optgroup label="Business">
                                             <option <?php if ($category == '100') echo 'selected="selected"'; ?> value="100">Business</option>
@@ -548,7 +522,7 @@ $controller->setReplacementData('head', $js);
 </form>
 
 <script type="text/javascript">
-    WDN.jQuery('#enhanced_header legend').click(function() {
+    WDN.jQuery('#geo_location').click(function() {
         var map;
         var myOptions = {
             zoom: 6,
