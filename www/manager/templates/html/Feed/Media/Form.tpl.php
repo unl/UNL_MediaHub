@@ -194,7 +194,7 @@ $controller->setReplacementData('head', $js);
                                 </div>
                             </li>
                         </ol>
-                        <div id="enhanced_header" class="collapsible">
+                        <div id="geo_location" class="collapsible">
                             <legend>Geo Location</legend>
                             <ol>
                                 <li>
@@ -295,7 +295,7 @@ $controller->setReplacementData('head', $js);
                         </ol>
                     </fieldset>
 
-                    <fieldset class='collapsible' id="enhanced_header">
+                    <fieldset class='collapsible'>
                         <legend>iTunes Information</legend>
                         <ol>
                             <li style="display:none;">
@@ -304,7 +304,7 @@ $controller->setReplacementData('head', $js);
                                 <input id="itunes_author" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[0][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'author'); ?>"/>
                             </li>
                             <li>
-                                <label for="itunesu_category" class="element">Category <span class="helper">Choose a category for use within iTunes U</span></label>
+                                <label for="itunes_category" class="element">Category <span class="helper">Choose a category for use within iTunes U</span></label>
                                 <div class="element">
                                     <?php
                                     $category = '';
@@ -313,7 +313,7 @@ $controller->setReplacementData('head', $js);
                                     }
                                     ?>
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunesu[0][element]" type="hidden" value="category" />
-                                    <select id="itunes_block" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunesu[0][attributes]">
+                                    <select id="itunes_category" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunesu[0][attributes]">
                                         <option value="">None</option>
                                         <optgroup label="Business">
                                             <option <?php if ($category == '100') echo 'selected="selected"'; ?> value="100">Business</option>
@@ -551,7 +551,7 @@ $controller->setReplacementData('head', $js);
 </form>
 
 <script type="text/javascript">
-    WDN.jQuery('#enhanced_header legend').click(function() {
+    WDN.jQuery('#geo_location').click(function() {
         var map;
         var myOptions = {
             zoom: 6,
