@@ -24,15 +24,95 @@ WDN.jQuery(document).ready(function() {
     });
 });
 </script>
+
 <div class="wdn-band mh-channel-edit">
     <div class="wdn-inner-wrapper">
-    <h1 class="wdn-brand wdn-pull-left clear-top"><?php echo (isset($context->feed))?'Edit':'Create'; ?> a Channel</h1>
+    <h1 class="wdn-brand wdn-pull-left clear-top"><?php echo (isset($context->feed))?'Edit':'Create'; ?> a Channel
+        <span class="wdn-subhead"><a class="users" href="<?php echo UNL_MediaHub_Manager::getURL(); ?>?view=permissions&amp;feed_id=<?php echo $context->feed->id; ?>"><span class="wdn-icon wdn-icon-user"></span> Edit Channel Users</a></span>
+    </h1>
     <input id="media_submit" name="submit" value="Save" class="wdn-button wdn-button-brand wdn-pull-right" type="submit" />
     <div class="clear"></div>
+    
+<form action="<?php echo $context->action; ?>" method="post" name="feed" id="feed" enctype="multipart/form-data" class="">
         <div class="wdn-grid-set">
 
-        <div class="bp2-wdn-col-three-fifths">
-            <form action="<?php echo $context->action; ?>" method="post" name="feed" id="feed" enctype="multipart/form-data" class="">
+        
+            <div class="bp2-wdn-col-three-fifths">
+                <legend>Basic Information</legend> 
+                <fieldset>
+                    <ol>
+                        <li>
+                            <label for="title">Title<span class="required">*</span> <span class="helper">Channel name displayed everywhere.</span></label>
+                            <input id="title" name="title" type="text" value="<?php echo (isset($context->feed))? htmlentities($context->feed->title, ENT_QUOTES):''; ?>" size="55" />
+                        </li>
+                        <li>
+                            <label for="description">Description<span class="required">*</span> <span class="helper">Explain what this channel is all about. Use a few sentences, but keep it to 1 paragraph.</span></label>
+                            <textarea id="description" name="description" rows="5" cols="50"><?php echo (isset($context->feed))?htmlentities($context->feed->description):''; ?></textarea>
+                        </li>
+                    </ol>
+                </fieldset>
+            </div>
+
+            <div class="bp2-wdn-col-two-fifths wdn-pull-right">
+                <legend>Channel URLs</legend> 
+                <fieldset>
+                    <ol>
+                        <li>
+                            <label>
+                                <a href="<?php echo $feed_url; ?>" class="external">Web Address:</a>
+                            </label>
+                            <input type="text" size="75" name="feed_address" value="<?php echo $feed_url; ?>" onclick="this.select();" />
+                        </li>
+                        <li>
+                            <label>
+                                <a href="<?php echo $feed_url; ?>?format=xml" class="feed-icon">RSS Address:</a>
+                            </label>
+                            <input type="text" size="75" name="feed_address" value="<?php echo $feed_url; ?>?format=xml" onclick="this.select();" />
+                        </li>
+
+                        <li>
+                            <legend>Consider this channel for: </legend>
+                            <ol id="extensions">
+                                <li>
+                                    <input type="checkbox" value="itunes" id="iTunesConsideration" name="iTunesConsideration" />
+                                    <label for="iTunesConsideration">iTunes U</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" value="boxee" id="boxeeConsideration" name="boxeeConsideration" />
+                                    <label for="boxeeConsideration">Boxee</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" value="youtube" id="youTubeConsideration" name="youTubeConsideration" />
+                                    <label for="youTubeConsideration">YouTube</label>
+                                </li>
+
+                            </ol>   
+                        </li>
+                        
+                    </ol>
+                </fieldset>
+                <fieldset id="feed_header">
+                    <legend>Channel Image</legend>
+                    <ol>
+                        <li>
+                            <label class="element">Image File<span class="required">*</span> <span class="helper">Images should follow the standard UNL image standards. <a href="https://github.com/unl/UNL_MediaHub/raw/master/designFiles/feedTemplate.psd">(get the sample template)</a>
+                            </span></label>
+                            <input id="image_file" name="image_file" type="file" />
+                        </li>
+                        <li>
+                            <label for="image_title" class="element">Image Title <span class="helper">Give the image a title, used in RSS feeds.</span></label>
+                            <input id="image_title" name="image_title" type="text" value="<?php echo (isset($context->feed))? htmlentities($context->feed->image_title, ENT_QUOTES):''; ?>" size="55" />
+                        </li>
+                        <li>
+                            <label for="image_description" class="element">Image Description <span class="helper">Describe your image, used in RSS feeds.</span></label>
+                            <textarea id="image_description" name="image_description" rows="5" cols="50"><?php echo (isset($context->feed))?htmlentities($context->feed->image_description):''; ?></textarea>
+                        </li>
+                    </ol>
+                </fieldset>
+            </div>
+
+            <div class="bp2-wdn-col-three-fifths">
+            
                     <div style="display: none;">
                         <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed" />
                         <?php
@@ -42,41 +122,9 @@ WDN.jQuery(document).ready(function() {
                         ?>
                     </div>
 
-                    <fieldset>
-                        <ol>
-                            <li>
-                                <label for="title">Title<span class="required">*</span> <span class="helper">Channel name displayed everywhere.</span></label>
-                                <input id="title" name="title" type="text" value="<?php echo (isset($context->feed))? htmlentities($context->feed->title, ENT_QUOTES):''; ?>" size="55" />
-                            </li>
-                            <li>
-                                <label for="description">Description<span class="required">*</span> <span class="helper">Explain what this channel is all about. Use a few sentences, but keep it to 1 paragraph.</span></label>
-                                <textarea id="description" name="description" rows="5" cols="50"><?php echo (isset($context->feed))?htmlentities($context->feed->description):''; ?></textarea>
-                            </li>
-                            
-                        </ol>
-                    </fieldset>
 
-                    <fieldset id="feed_header">
 
-                        
-                        
-                        <legend>Channel Image</legend>
-                        <ol>
-                            <li>
-                                <label class="element">Image File<span class="required">*</span> <span class="helper">Images should follow the standard UNL image standards. <a href="https://github.com/unl/UNL_MediaHub/raw/master/designFiles/feedTemplate.psd">(get the sample template)</a>
-                                </span></label>
-                                <input id="image_file" name="image_file" type="file" />
-                            </li>
-                            <li>
-                                <label for="image_title" class="element">Image Title <span class="helper">Give the image a title, used in RSS feeds.</span></label>
-                                <input id="image_title" name="image_title" type="text" value="<?php echo (isset($context->feed))? htmlentities($context->feed->image_title, ENT_QUOTES):''; ?>" size="55" />
-                            </li>
-                            <li>
-                                <label for="image_description" class="element">Image Description <span class="helper">Describe your image, used in RSS feeds.</span></label>
-                                <textarea id="image_description" name="image_description" rows="5" cols="50"><?php echo (isset($context->feed))?htmlentities($context->feed->image_description):''; ?></textarea>
-                            </li>
-                        </ol>
-                    </fieldset>
+                    
                     <?php
                     function getFieldValue($context, $xmlns, $element)
                     {
@@ -404,54 +452,20 @@ if (false) {
 </fieldset>
 <?php }
 } ?>
-</form>
+
 </div>
-            <div class="bp2-wdn-col-two-fifths">
-                <form action="#" class="zenform neutral" style="background:none;-webkit-box-shadow:none;">
-                    <fieldset>
-                        <ol>
-                            <li style="padding-left:0px;">
-                                <label>
-                                    <a href="<?php echo $feed_url; ?>" class="external">Web Address:</a>
-                                </label>
-                                <input type="text" size="75" name="feed_address" value="<?php echo $feed_url; ?>" onclick="this.select();" />
-                            </li>
-                            <li style="padding-left:0px;">
-                                <label>
-                                    <a href="<?php echo $feed_url; ?>?format=xml" class="feed-icon">RSS Address:</a>
-                                </label>
-                                <input type="text" size="75" name="feed_address" value="<?php echo $feed_url; ?>?format=xml" onclick="this.select();" />
-                            </li>
-                            <li>
-                                <legend>Consider this channel for: </legend>
-                                <ol id="extensions">
-                                    <li>
-                                        <input type="checkbox" value="itunes" id="iTunesConsideration" name="iTunesConsideration" />
-                                        <label for="iTunesConsideration">iTunes U</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" value="boxee" id="boxeeConsideration" name="boxeeConsideration" />
-                                        <label for="boxeeConsideration">Boxee</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" value="youtube" id="youTubeConsideration" name="youTubeConsideration" />
-                                        <label for="youTubeConsideration">YouTube</label>
-                                    </li>
-                                </ol>   
-                            </li>
-                        </ol>
-                    </fieldset>
-                </form>
-                <a class="wdn-button wdn-button-brand users" href="<?php echo UNL_MediaHub_Manager::getURL(); ?>?view=permissions&amp;feed_id=<?php echo $context->feed->id; ?>"><span class="wdn-icon wdn-icon-user"></span> Edit Channel Users</a>
-                
-            </div>
-        </div>
+
+</div>
+
+</form>
+    
+        
     </div>
 </div>
+
 <div class="wdn-band">
     <div class="wdn-inner-wrapper">
         <div class="wdn-grid-set">
-            
-</div>
-</div>
+        </div>
+    </div>
 </div>
