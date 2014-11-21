@@ -25,7 +25,7 @@ $controller->setReplacementData('head', $js);
 
     <input id="media_url" name="url" type="hidden" value="<?php echo htmlentities($context->media->url, ENT_QUOTES); ?>" />
     <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
-    <input type="hidden" id="id" name="id" value="<?php $context->media->id ?>" />
+    <input type="hidden" id="id" name="id" value="<?php echo $context->media->id ?>" />
     
     <div class="wdn-band wdn-light-triad-band">
         <div class="wdn-inner-wrapper">
