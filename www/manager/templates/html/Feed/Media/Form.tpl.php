@@ -51,36 +51,7 @@ $controller->setReplacementData('head', $js);
                 <div class="bp2-wdn-col-two-sevenths wdn-pull-right">
                     <ol>
                         <li>
-                            <label for="privacy" class="element">
-                                Privacy
-                                <div class="wdn-icon-info mh-tool-tip">
-                                    <div>
-                                        <ul>
-                                            <li>
-                                                <span class="heading">Public</span> - Anyone can access the media.
-                                            </li>
-                                            <li>
-                                                <span class="heading">Unlisted</span> - Media will not be included in public MediaHub listings.
-                                            </li>
-                                            <li>
-                                                <span class="heading">Private</span> - Only members of channels that the media is included in can access it.
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </label>
-                            <select id="privacy" name="privacy">
-                                <?php
-                                foreach (UNL_MediaHub_Media::getPossiblePrivacyValues() as $value) {
-                                    $selected = '';
-                                    if ($value == @$context->media->privacy) {
-                                        $selected = 'selected="selected"';
-                                    }
-
-                                    echo "<option value='$value' " . $selected . ">" . ucfirst(strtolower($value)) . "</option>";
-                                }
-                                ?>
-                            </select>
+                            <?php echo $savvy->render($context, 'Feed/Media/fields/privacy.tpl.php'); ?>
                         </li>
                         <li>
                             <?php echo $savvy->render($context->feed_selection); ?>
