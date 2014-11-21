@@ -223,6 +223,10 @@ iframe * {margin:0px}
     margin: 0;
 }
 
+.mh-channel-edit .wdn-subhead a.users {
+    font-size: .75em;
+}
+
 form legend {
     margin: 0;
     font-size: 1.899em;
