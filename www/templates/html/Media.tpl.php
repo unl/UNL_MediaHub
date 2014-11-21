@@ -151,7 +151,7 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
                     <?php if (UNL_MediaHub_Controller::isLoggedIn()): ?>
                         <li id="mediaTagsAdd"><a href="#"></a><form id="addTags" method="post"><input type="text" value="" name="tags" ><input type="submit" value="Add" ></form></li>
                     <?php else: ?>
-                        <li id="mediaTagsAdd"><a href="https://login.unl.edu/cas/login?service=<?php echo urlencode(UNL_MediaHub_Controller::getURL()) ?>">Login to add tags </a></li>
+                        <li id="mediaTagsAdd"><a href="https://login.unl.edu/cas/login?service=<?php echo urlencode(UNL_MediaHub_Controller::getURL($context)) ?>">Log in to add tags </a></li>
                     <?php endif; ?>
 
                 </ul>
@@ -188,7 +188,7 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
                     <?php $form = new UNL_MediaHub_Media_Comment_Form(); ?>
                     <?php echo $savvy->render($form); ?>
                 <?php else: ?>
-                    <a href="https://login.unl.edu/cas/login?service='<?php urlencode(UNL_MediaHub_Controller::getURL($context)) ?>">Log in to post comments</a>
+                    <a href="https://login.unl.edu/cas/login?service=<?php echo urlencode(UNL_MediaHub_Controller::getURL($context)) ?>">Log in to post comments</a>
                 <?php endif; ?>
 
             </div>
