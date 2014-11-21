@@ -3,7 +3,7 @@
 <ul id="userList">
     <?php foreach ($context->items as $user):?>
         <li>
-            <img class="profile_pic medium" src="http://planetred.unl.edu/pg/icon/unl_'.$user->uid.'/medium/" />
+            <img class="profile_pic medium" src="http://planetred.unl.edu/pg/icon/unl_<?php echo $user->uid ?>/medium/" />
             <?php echo @UNL_Services_Peoplefinder::getFullName($user->uid); ?>
             <span class="uid"><?php echo $user->uid ?></span>
             <?php echo $savvy->render($user, 'DeleteUserForm.tpl.php'); ?>
