@@ -61,9 +61,7 @@ if (isset($context->label) && !empty($context->label)) {
                             <?php echo $savvy->render($feed, 'Feed/Creator.tpl.php') ?>
                             <div class="wdn-grid-set">
                                 <div class="bp2-wdn-col-one-fourth wdn-pull-right">
-                                    <div class="mh-channel-thumb">
-                                        <a href="<?php echo $url ?>"><img src="<?php echo $url ?>/image" alt="<?php echo htmlentities($feed->title, ENT_QUOTES) ?> image" /></a>
-                                    </div>
+                                    <a href="<?php echo $url ?>"><img src="<?php echo $url ?>/image" alt="<?php echo htmlentities($feed->title, ENT_QUOTES) ?> image" class="mh-channel-thumb"/></a>
                                 </div>
                                 <div class="bp2-wdn-col-three-fourths">
                                     <p><?php echo htmlentities($feed->description) ?></p>
