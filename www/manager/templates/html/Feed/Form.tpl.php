@@ -27,21 +27,21 @@
 
 <div class="wdn-band mh-channel-edit">
     <div class="wdn-inner-wrapper">
-     <form action="<?php echo $context->action; ?>" method="post" name="feed" id="feed" enctype="multipart/form-data" class="">
-        <h1 class="wdn-brand clear-top wdn-pull-left">
-            <?php echo (isset($context->feed))?'Edit':'Create'; ?> a Channel
-            <span class="wdn-subhead">
-                <a class="users" href="<?php echo UNL_MediaHub_Manager::getURL(); ?>?view=permissions&amp;feed_id=<?php echo $context->feed->id; ?>">
-                    <span class="wdn-icon wdn-icon-user">
-                    </span> Edit Channel Users</a>
-                </span>
-            </h1>
-            <input id="media_submit" name="submit" value="Save" class="wdn-button wdn-button-brand wdn-pull-right" type="submit" />
+        <form action="<?php echo $context->action; ?>" method="post" name="feed" id="feed" enctype="multipart/form-data" class="">
+            <h1 class="wdn-brand clear-top wdn-pull-left">
+                <?php echo (isset($context->feed))?'Edit':'Create'; ?> a Channel
+                <span class="wdn-subhead">
+                    <a class="users" href="<?php echo UNL_MediaHub_Manager::getURL(); ?>?view=permissions&amp;feed_id=<?php echo $context->feed->id; ?>">
+                        <span class="wdn-icon wdn-icon-user">
+                        </span> Edit Channel Users</a>
+                    </span>
+                </h1>
+                <input id="media_submit" name="submit" value="Save" class="wdn-button wdn-button-brand wdn-pull-right" type="submit" />
 
                 <div class="clear">
                 </div>
                 <div class="wdn-grid-set">
-                    <div class="bp2-wdn-col-full">
+                    <div class="bp2-wdn-col-three-fifths">
                         <legend>Basic Information</legend> 
                         <fieldset>
                             <ol>
@@ -62,31 +62,9 @@
                             </ol>
                         </fieldset>
                     </div>
-
                     <div class="bp2-wdn-col-two-fifths wdn-pull-right">
-                        
-                            <ol>
-                                <li>
-                                    <legend>Consider this channel for: </legend>
-                                    <fieldset>
-                                        <ol id="extensions">
-                                            <li>
-                                                <input type="checkbox" value="itunes" id="iTunesConsideration" name="iTunesConsideration" />
-                                                <label for="iTunesConsideration">iTunes U</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" value="boxee" id="boxeeConsideration" name="boxeeConsideration" />
-                                                <label for="boxeeConsideration">Boxee</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" value="youtube" id="youTubeConsideration" name="youTubeConsideration" />
-                                                <label for="youTubeConsideration">YouTube</label>
-                                            </li>
-                                        </ol>   
-                                    </fieldset>
-                                </li>
-                            </ol>
-                        
+
+
                         <fieldset id="feed_header">
                             <legend>Channel Image</legend>
                             <ol>
@@ -111,9 +89,11 @@
                                 </li>
                             </ol>
                         </fieldset>
+
                     </div>
 
                     <div class="bp2-wdn-col-three-fifths">
+
 
                         <div style="display: none;">
                             <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed" />
@@ -369,122 +349,134 @@
                                         <input name='UNL_MediaHub_Feed_NamespacedElements_boxee[3][element]' type='hidden' value='category' />
                                         <input id='boxee_category' name='UNL_MediaHub_Feed_NamespacedElements_boxee[3][value]' type='text' value='<?php echo getFieldValue($context, 'boxee', 'category'); ?>' size='55' />
                                     </div>
-                                </li>            <li>
-                                <label for="boxee_submit" class="element">&nbsp;</label>
-                                <div class="element">
-                                    <input id="boxee_submit" name="submit" value="Save" type="submit" />
-                                </div>
-                            </li>
-                        </ol>
-                    </fieldset>
-                    <fieldset id="media_header">
-                        <legend>Media RSS Options</legend>
-                        <ol>
-                            <li>
-                                <label for='media_rating' class='element'>Rating <span class="helper">Appropriate audience: adult or nonadult. Leave blank if no restrictions.</span>
-                                </label>
-                                <div class='element'>
-                                    <input name='UNL_MediaHub_Feed_NamespacedElements_media[0][element]' type='hidden' value='rating' />
-                                    <input id='media_rating' name='UNL_MediaHub_Feed_NamespacedElements_media[0][value]' type='text' value='<?php echo getFieldValue($context, 'media', 'rating'); ?>' size='55' />
-                                </div>
-                            </li>
+                                </li>            
+                                <li>
+                                    <label for="boxee_submit" class="element">&nbsp;</label>
+                                    <div class="element">
+                                        <input id="boxee_submit" name="submit" value="Save" type="submit" />
+                                    </div>
+                                </li>
+                            </ol>
+                        </fieldset>
+                        <fieldset id="media_header">
+                            <legend>Media RSS Options</legend>
+                            <ol>
+                                <li>
+                                    <label for='media_rating' class='element'>Rating <span class="helper">Appropriate audience: adult or nonadult. Leave blank if no restrictions.</span></label>
+                                    <div class='element'>
+                                        <input name='UNL_MediaHub_Feed_NamespacedElements_media[0][element]' type='hidden' value='rating' />
+                                        <input id='media_rating' name='UNL_MediaHub_Feed_NamespacedElements_media[0][value]' type='text' value='<?php echo getFieldValue($context, 'media', 'rating'); ?>' size='55' />
+                                    </div>
+                                </li>
 
-                            <li>
-                                <label for='media_title' class='element'>Title</label>
-                                <div class='element'>
-                                    <input name='UNL_MediaHub_Feed_NamespacedElements_media[1][element]' type='hidden' value='title' />
-                                    <input id='media_title' name='UNL_MediaHub_Feed_NamespacedElements_media[1][value]' type='text' value='<?php echo getFieldValue($context, 'media', 'title'); ?>' size='55' />
-                                </div>
-                            </li>
-                            <li>
-                                <label for='media_description' class='element'>Description</label>
-                                <input name='UNL_MediaHub_Feed_NamespacedElements_media[2][element]' type='hidden' value='description' />
-                                <textarea id="media_description" name="UNL_MediaHub_Feed_NamespacedElements_media[2][value]" rows="5" cols="50">
-                                    <?php echo getFieldValue($context, 'media', 'description'); ?>
-                                </textarea>
-                            </li>
-                            <li>
-                                <label for='media_keywords' class='element'>Keywords <span class="helper">Comma seperated list of highly relevant keywords/tags describing the channel.</span>
-                                </label>
-                                <div class='element'>
-                                    <input name='UNL_MediaHub_Feed_NamespacedElements_media[3][element]' type='hidden' value='keywords' />
-                                    <input id='media_keywords' name='UNL_MediaHub_Feed_NamespacedElements_media[3][value]' type='text' value='<?php echo getFieldValue($context, 'media', 'keywords'); ?>' size='55' />
-                                </div>
-                            </li>
-                            <li>
-                                <label for='media_thumbnail' class='element'>Thumbnail <span class="helper">Allows particular images to be used as representative images for the media object.</span>
-                                </label>
-                                <div class='element'>
-                                    <input name='UNL_MediaHub_Feed_NamespacedElements_media[4][element]' type='hidden' value='thumbnail' />
-                                    <input id='media_thumbnail' name='UNL_MediaHub_Feed_NamespacedElements_media[4][value]' type='text' value='<?php echo getFieldValue($context, 'media', 'thumbnail'); ?>' size='55' />
-                                </div>
-                            </li>
-                            <li>
-                                <label for='media_category' class='element'>Category <span class="helper">Allows a taxonomy to be set that gives an indication of the type of media content, and its particular contents</span>
-                                </label>
-                                <div class='element'>
-                                    <input name='UNL_MediaHub_Feed_NamespacedElements_media[5][element]' type='hidden' value='category' />
-                                    <input id='media_category' name='UNL_MediaHub_Feed_NamespacedElements_media[5][value]' type='text' value='<?php echo getFieldValue($context, 'media', 'category'); ?>' size='55' />
-                                </div>
-                            </li>
-                            <li>
-                                <label for='media_player' class='element'>Player <span class="helper">Allows the media object to be accessed through a web browser media player console.</span>
-                                </label>
-                                <div class='element'>
-                                    <input name='UNL_MediaHub_Feed_NamespacedElements_media[6][element]' type='hidden' value='player' />
-                                    <input id='media_player' name='UNL_MediaHub_Feed_NamespacedElements_media[6][value]' type='text' value='<?php echo getFieldValue($context, 'media', 'player'); ?>' size='55' />
-                                </div>
-                            </li>
-                            <li>
-                                <label for='media_credit' class='element'>Credit <span class="helper">Notable entity and the contribution to the creation of the media object.</span>
-                                </label>
-                                <div class='element'>
-                                    <input name='UNL_MediaHub_Feed_NamespacedElements_media[7][element]' type='hidden' value='credit' />
-                                    <input id='media_credit' name='UNL_MediaHub_Feed_NamespacedElements_media[7][value]' type='text' value='<?php echo getFieldValue($context, 'media', 'credit'); ?>' size='55' />
-                                </div>
-                            </li>
-                            <li>
-                                <label for='media_copyright' class='element'>Copyright <span class="helper">Copyright information for media object.</span>
-                                </label>
-                                <div class='element'>
-                                    <input name='UNL_MediaHub_Feed_NamespacedElements_media[8][element]' type='hidden' value='copyright' />
-                                    <input id='media_copyright' name='UNL_MediaHub_Feed_NamespacedElements_media[8][value]' type='text' value='<?php echo getFieldValue($context, 'media', 'copyright'); ?>' size='55' />
-                                </div>
-                            </li>
-                            <li style="display:none;">
-                                <label for='media_text' class='element'>Text <span class="helper">Allows the inclusion of a text transcript, closed captioning, or lyrics of the media content.</span>
-                                </label>
-                                <div class='element'>
-                                    <input name='UNL_MediaHub_Feed_NamespacedElements_media[9][element]' type='hidden' value='text' />
-                                    <input id='media_text' name='UNL_MediaHub_Feed_NamespacedElements_media[9][value]' type='text' value='<?php echo getFieldValue($context, 'media', 'text'); ?>' size='55' />
-                                </div>
-                            </li>
-                            <li>
-                                <label for='media_restriction' class='element'>Restriction <span class="helper">Allows restrictions to be placed on the aggregator rendering the media in the feed.</span>
-                                </label>
-                                <div class='element'>
-                                    <input name='UNL_MediaHub_Feed_NamespacedElements_media[10][element]' type='hidden' value='restriction' />
-                                    <input id='media_restriction' name='UNL_MediaHub_Feed_NamespacedElements_media[10][value]' type='text' value='<?php echo getFieldValue($context, 'media', 'restriction'); ?>' size='55' />
-                                </div>
-                            </li>
-                            <li>
-                                <label for="media_submit" class="element">&nbsp;</label>
-                                <div class="element">
-                                    <input id="media_submit" name="submit" value="Save" class="wdn-button wdn-button-brand" type="submit" />
-                                </div>
-                            </li>
+                                <li>
+                                    <label for='media_title' class='element'>Title</label>
+                                    <div class='element'>
+                                        <input name='UNL_MediaHub_Feed_NamespacedElements_media[1][element]' type='hidden' value='title' />
+                                        <input id='media_title' name='UNL_MediaHub_Feed_NamespacedElements_media[1][value]' type='text' value='<?php echo getFieldValue($context, 'media', 'title'); ?>' size='55' />
+                                    </div>
+                                </li>
+                                <li>
+                                    <label for='media_description' class='element'>Description</label>
+                                    <input name='UNL_MediaHub_Feed_NamespacedElements_media[2][element]' type='hidden' value='description' />
+                                    <textarea id="media_description" name="UNL_MediaHub_Feed_NamespacedElements_media[2][value]" rows="5" cols="50">
+                                        <?php echo getFieldValue($context, 'media', 'description'); ?>
+                                    </textarea>
+                                </li>
+                                <li>
+                                    <label for='media_keywords' class='element'>Keywords <span class="helper">Comma seperated list of highly relevant keywords/tags describing the channel.</span></label>
+                                    <div class='element'>
+                                        <input name='UNL_MediaHub_Feed_NamespacedElements_media[3][element]' type='hidden' value='keywords' />
+                                        <input id='media_keywords' name='UNL_MediaHub_Feed_NamespacedElements_media[3][value]' type='text' value='<?php echo getFieldValue($context, 'media', 'keywords'); ?>' size='55' />
+                                    </div>
+                                </li>
+                                <li>
+                                    <label for='media_thumbnail' class='element'>Thumbnail <span class="helper">Allows particular images to be used as representative images for the media object.</span></label>
+                                    <div class='element'>
+                                        <input name='UNL_MediaHub_Feed_NamespacedElements_media[4][element]' type='hidden' value='thumbnail' />
+                                        <input id='media_thumbnail' name='UNL_MediaHub_Feed_NamespacedElements_media[4][value]' type='text' value='<?php echo getFieldValue($context, 'media', 'thumbnail'); ?>' size='55' />
+                                    </div>
+                                </li>
+                                <li>
+                                    <label for='media_category' class='element'>Category <span class="helper">Allows a taxonomy to be set that gives an indication of the type of media content, and its particular contents</span></label>
+                                    <div class='element'>
+                                        <input name='UNL_MediaHub_Feed_NamespacedElements_media[5][element]' type='hidden' value='category' />
+                                        <input id='media_category' name='UNL_MediaHub_Feed_NamespacedElements_media[5][value]' type='text' value='<?php echo getFieldValue($context, 'media', 'category'); ?>' size='55' />
+                                    </div>
+                                </li>
+                                <li>
+                                    <label for='media_player' class='element'>Player <span class="helper">Allows the media object to be accessed through a web browser media player console.</span></label>
+                                    <div class='element'>
+                                        <input name='UNL_MediaHub_Feed_NamespacedElements_media[6][element]' type='hidden' value='player' />
+                                        <input id='media_player' name='UNL_MediaHub_Feed_NamespacedElements_media[6][value]' type='text' value='<?php echo getFieldValue($context, 'media', 'player'); ?>' size='55' />
+                                    </div>
+                                </li>
+                                <li>
+                                    <label for='media_credit' class='element'>Credit <span class="helper">Notable entity and the contribution to the creation of the media object.</span></label>
+                                    <div class='element'>
+                                        <input name='UNL_MediaHub_Feed_NamespacedElements_media[7][element]' type='hidden' value='credit' />
+                                        <input id='media_credit' name='UNL_MediaHub_Feed_NamespacedElements_media[7][value]' type='text' value='<?php echo getFieldValue($context, 'media', 'credit'); ?>' size='55' />
+                                    </div>
+                                </li>
+                                <li>
+                                    <label for='media_copyright' class='element'>Copyright <span class="helper">Copyright information for media object.</span></label>
+                                    <div class='element'>
+                                        <input name='UNL_MediaHub_Feed_NamespacedElements_media[8][element]' type='hidden' value='copyright' />
+                                        <input id='media_copyright' name='UNL_MediaHub_Feed_NamespacedElements_media[8][value]' type='text' value='<?php echo getFieldValue($context, 'media', 'copyright'); ?>' size='55' />
+                                    </div>
+                                </li>
+                                <li style="display:none;">
+                                    <label for='media_text' class='element'>Text <span class="helper">Allows the inclusion of a text transcript, closed captioning, or lyrics of the media content.</span></label>
+                                    <div class='element'>
+                                        <input name='UNL_MediaHub_Feed_NamespacedElements_media[9][element]' type='hidden' value='text' />
+                                        <input id='media_text' name='UNL_MediaHub_Feed_NamespacedElements_media[9][value]' type='text' value='<?php echo getFieldValue($context, 'media', 'text'); ?>' size='55' />
+                                    </div>
+                                </li>
+                                <li>
+                                    <label for='media_restriction' class='element'>Restriction <span class="helper">Allows restrictions to be placed on the aggregator rendering the media in the feed.</span></label>
+                                    <div class='element'>
+                                        <input name='UNL_MediaHub_Feed_NamespacedElements_media[10][element]' type='hidden' value='restriction' />
+                                        <input id='media_restriction' name='UNL_MediaHub_Feed_NamespacedElements_media[10][value]' type='text' value='<?php echo getFieldValue($context, 'media', 'restriction'); ?>' size='55' />
+                                    </div>
+                                </li>
+                                <li>
+                                    <label for="media_submit" class="element">&nbsp;</label>
+                                    <div class="element">
+                                        <input id="media_submit" name="submit" value="Save" class="wdn-button wdn-button-brand" type="submit" />
+                                    </div>
+                                </li>
 
-                        </ol>
-                    </fieldset>
+                            </ol>
+                        </fieldset>
+
+
+                    </div>
+
+                    <div class="wdn-col-two-fifths wdn-pull-right">
+
+                        <legend>Consider this channel for: </legend>
+                        <fieldset>
+                            <ol id="extensions">
+                                <li>
+                                    <input type="checkbox" value="itunes" id="iTunesConsideration" name="iTunesConsideration" />
+                                    <label for="iTunesConsideration">iTunes U</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" value="boxee" id="boxeeConsideration" name="boxeeConsideration" />
+                                    <label for="boxeeConsideration">Boxee</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" value="youtube" id="youTubeConsideration" name="youTubeConsideration" />
+                                    <label for="youTubeConsideration">YouTube</label>
+                                </li>
+                            </ol>   
+                        </fieldset>
+
+                    </div>
+
+
                 </div>
-            </div>
-        </form>
-    </div>
-</div>
-
-<div class="wdn-band">
-    <div class="wdn-inner-wrapper">
-        <div class="wdn-grid-set">
+            </form>
         </div>
     </div>
-</div>
+
