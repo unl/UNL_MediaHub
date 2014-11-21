@@ -35,8 +35,9 @@ if (isset($context->label) && !empty($context->label)) {
     <div class="wdn-inner-wrapper wdn-inner-padding-none">
         <p class="mh-sort-filter">
             <span class="mh-btn-group">
-                <a href="?orderby=datecreated&amp;order=DESC" class="wdn-button wdn-button-brand <?php echo ($context->options['orderby'] == 'datecreated') ? ' active' : '' ?>">Most Recent</a>
-                <a href="?orderby=plays&amp;order=DESC" class="wdn-button wdn-button-brand <?php echo ($context->options['orderby'] == 'plays') ? ' active' : '' ?>">Most Viewed</a>
+                <a href="/channels/" class="wdn-button wdn-button-brand <?php echo (($context->options['orderby'] != 'datecreated') && ($context->options['orderby'] != 'plays')) ? ' active' : '' ?>">Alphabetical</a>
+                <a href="?orderby=datecreated&amp;order=DESC" class="wdn-button wdn-button-brand <?php echo ($context->options['orderby'] == 'datecreated') ? ' active' : '' ?>">Recent</a>
+                <a href="?orderby=plays&amp;order=DESC" class="wdn-button wdn-button-brand <?php echo ($context->options['orderby'] == 'plays') ? ' active' : '' ?>">Popular</a>
             </span>
         </p>
     </div>
@@ -60,7 +61,7 @@ if (isset($context->label) && !empty($context->label)) {
                             <?php echo $savvy->render($feed, 'Feed/Creator.tpl.php') ?>
                             <div class="wdn-grid-set">
                                 <div class="bp2-wdn-col-one-fourth wdn-pull-right">
-                                    <a href="<?php echo $url ?>"><img src="<?php echo $url ?>/image" alt="<?php echo htmlentities($feed->title, ENT_QUOTES) ?> image" /></a>
+                                    <a href="<?php echo $url ?>"><img src="<?php echo $url ?>/image" alt="<?php echo htmlentities($feed->title, ENT_QUOTES) ?> image" class="mh-channel-thumb"/></a>
                                 </div>
                                 <div class="bp2-wdn-col-three-fourths">
                                     <p><?php echo htmlentities($feed->description) ?></p>

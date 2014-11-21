@@ -147,15 +147,7 @@ a.action.delete:active {background-image:url('images/iconDelete.png');}
     display:none;
 }
 #maincontent #userList li:hover form {display:block;}
-#maincontent form input[type='submit'] {
-    background:#ac0302;
-    border:none;
-    border-radius:3px;
-    -webkit-border-radius:3px;
-    -moz-border-radius:3px;
-    color:#fff;
-    cursor:pointer;
-}
+
 #maincontent #userList li form input[type='submit'] {
     -webkit-box-shadow: -1px 1px 3px #1a1a1a;
     -moz-box-shadow: -1px 1px 3px #1a1a1a;
