@@ -189,9 +189,6 @@ WDN.jQuery(document).ready(function() {
       WDN.jQuery("#mrss_header ol").toggle(400);
       return false;
     });
-    WDN.initializePlugin('modal', [function() {
-        WDN.jQuery('span.embed').colorbox({inline: true, href:'#sharing', width:'600px', height:'310px'});
-    }]);
 
     WDN.initializePlugin('form_validation', [function() {
         WDN.jQuery.validation.addMethod('geo_long', 'This must be a valid longitude.', {min:-180, max:180});
