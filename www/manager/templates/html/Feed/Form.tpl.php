@@ -59,9 +59,7 @@
                                     <label for="description">Description<span class="required">*</span> 
                                         <span class="helper">Explain what this channel is all about. Use a few sentences, but keep it to 1 paragraph.</span>
                                     </label>
-                                    <textarea id="description" name="description" rows="5" cols="50">
-                                        <?php echo (isset($context->feed))?htmlentities($context->feed->description):''; ?>
-                                    </textarea>
+                                    <textarea id="description" name="description" rows="5" cols="50"><?php echo (isset($context->feed))?htmlentities($context->feed->description):''; ?></textarea>
                                 </li>
                             </ol>
                         </fieldset>
@@ -87,9 +85,7 @@
                                 <li>
                                     <label for="image_description" class="element">Image Description <span class="helper">Describe your image, used in RSS feeds.</span>
                                     </label>
-                                    <textarea id="image_description" name="image_description" rows="5" cols="50">
-                                        <?php echo (isset($context->feed))?htmlentities($context->feed->image_description):''; ?>
-                                    </textarea>
+                                    <textarea id="image_description" name="image_description" rows="5" cols="50"><?php echo (isset($context->feed))?htmlentities($context->feed->image_description):''; ?></textarea>
                                 </li>
                             </ol>
                         </fieldset>
@@ -314,9 +310,7 @@
                                     <label for='itunes_summary' class='element'>Summary <span class="helper">The contents of this tag are shown in a separate window that appears when the "circled i" in the Description column is clicked. It also appears on the iTunes page for your podcast.</span>
                                     </label>
                                     <input name='UNL_MediaHub_Feed_NamespacedElements_itunes[9][element]' type='hidden' value='summary' />
-                                    <textarea id="itunes_summary" name="UNL_MediaHub_Feed_NamespacedElements_itunes[9][value]" rows="5" cols="50">
-                                        <?php echo getFieldValue($context, 'itunes', 'summary'); ?>
-                                    </textarea>
+                                    <textarea id="itunes_summary" name="UNL_MediaHub_Feed_NamespacedElements_itunes[9][value]" rows="5" cols="50"><?php echo getFieldValue($context, 'itunes', 'summary'); ?></textarea>
                                 </li>
                                 <li>
                                     <label for="itunes_submit" class="element">&nbsp;</label>
@@ -383,9 +377,7 @@
                                 <li>
                                     <label for='media_description' class='element'>Description</label>
                                     <input name='UNL_MediaHub_Feed_NamespacedElements_media[2][element]' type='hidden' value='description' />
-                                    <textarea id="media_description" name="UNL_MediaHub_Feed_NamespacedElements_media[2][value]" rows="5" cols="50">
-                                        <?php echo getFieldValue($context, 'media', 'description'); ?>
-                                    </textarea>
+                                    <textarea id="media_description" name="UNL_MediaHub_Feed_NamespacedElements_media[2][value]" rows="5" cols="50"><?php echo getFieldValue($context, 'media', 'description'); ?></textarea>
                                 </li>
                                 <li>
                                     <label for='media_keywords' class='element'>Keywords <span class="helper">Comma seperated list of highly relevant keywords/tags describing the channel.</span></label>
