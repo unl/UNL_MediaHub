@@ -181,14 +181,12 @@ iframe * {margin:0px}
     margin: 0;
 }
 
-.mh-video-thumb.mh-featured-channel .mh-thumbnail-clip {
-
-    padding: 0 0 70.7% 0;
-
+[class*=col-one-half] .mh-video-thumb.mh-featured-channel {
+    padding: 0 0 70% 0;
 }
 
-.mh-your-channels .mh-upload-box{
-    padding: 25% 0 55% 0;
+.mh-your-channels .mh-upload-box {
+    padding: 14% 0 46% 0;
 }
 
 .mh-your-channels .mh-video-label h6{
