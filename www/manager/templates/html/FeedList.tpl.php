@@ -1,10 +1,10 @@
 <div class="wdn-band mh-your-channels">
     <div class="wdn-inner-wrapper">
         <h2 class="wdn-brand">Your Channels</h2>
-        <div class="wdn-grid-set">
+        <div class="bp2-wdn-grid-set-fourths wdn-grid-clear">
             <?php foreach ($context->items as $index=>$feed): ?>
                 <?php $feed_url = htmlentities(UNL_MediaHub_Controller::getURL($feed), ENT_QUOTES); ?>
-                <div class="<?php echo ($index==0)?'bp2-wdn-col-one-half':'bp2-wdn-col-one-fourth' ?>">
+                <div class="wdn-col">
                     <a href="<?php echo $feed_url ?>">
                         <div class="mh-video-thumb mh-featured-channel wdn-center">
                             <div class="mh-thumbnail-clip">
@@ -14,9 +14,9 @@
                             </div>
                         </div>
                         <div class="mh-video-label wdn-center">
-                            <div class="wdn-brand">
+                            <p>
                                 <?php echo $feed->title; ?>
-                            </div>
+                            </p>
                         </div>
                     </a>
                 </div>
