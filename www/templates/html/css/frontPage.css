@@ -37,6 +37,11 @@ video.fillWidth {
 
 }
 
+.mh-featured-icon img {
+	width: 35%;
+	margin-top: 32%;
+}
+
 .mh-featured-icon [class*="wdn-icon-"]:before {
 	margin-right: 0;
 }
