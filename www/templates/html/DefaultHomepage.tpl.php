@@ -41,7 +41,7 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
             <div class="wdn-col mh-featured">
                 <a href="<?php echo $baseUrl ?>manager/">
                     <div class="mh-featured-icon centered mh-red">
-                        <div class="wdn-icon-wrench"></div>
+                        <img src="<?php echo $baseUrl; ?>/templates/html/css/images/gear-icon-white.png">
                     </div>
                     <h2 class="wdn-brand">Manage Media</h2>
                 </a>
@@ -52,7 +52,7 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
             <div class="wdn-col mh-featured">
                 <a href="<?php echo $baseUrl ?>search/">
                     <div class="mh-featured-icon centered mh-green">
-                        <div class="wdn-icon-search"></div>
+                        <img src="<?php echo $baseUrl; ?>/templates/html/css/images/play-icon-white.png">
                     </div>
                     <h2 class="wdn-brand">Browse Media</h2>
                 </a>
@@ -63,7 +63,7 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
             <div class="wdn-col mh-featured">
                 <a href="<?php echo $baseUrl ?>channels/">
                     <div class="mh-featured-icon centered mh-blue">
-                        <div class="wdn-icon-info"></div>
+                        <img src="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon-white.png">
                     </div>
                     <h2 class="wdn-brand">Explore Channels</h2>
                 </a>
