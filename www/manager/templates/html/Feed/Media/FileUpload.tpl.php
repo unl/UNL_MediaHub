@@ -54,9 +54,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
                         <div class="bp1-wdn-col-two-fifths">
                             <ol>
                                 <li class="clear-top">
-                                <li>
                                     <?php echo $savvy->render($context, 'Feed/Media/fields/privacy.tpl.php'); ?>
-                                </li>
                                 </li>
                                 <li>
                                     <?php echo $savvy->render($context->feed_selection); ?>
