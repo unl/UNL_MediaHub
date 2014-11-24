@@ -30,11 +30,15 @@
         <form action="<?php echo $context->action; ?>" method="post" name="feed" id="feed" enctype="multipart/form-data" class="">
             <h1 class="wdn-brand clear-top wdn-pull-left">
                 <?php echo (isset($context->feed))?'Edit':'Create'; ?> a Channel
+                <?php if(isset($context->feed->id)): ?>
                 <span class="wdn-subhead">
                     <a class="users" href="<?php echo UNL_MediaHub_Manager::getURL(); ?>?view=permissions&amp;feed_id=<?php echo $context->feed->id; ?>">
                         <span class="wdn-icon wdn-icon-user">
-                        </span> Edit Channel Users</a>
+                        </span> 
+                        Edit Channel Users
+                        </a>
                     </span>
+                <?php endif; ?>    
                 </h1>
                 <input id="media_submit" name="submit" value="Save" class="wdn-button wdn-button-brand wdn-pull-right" type="submit" />
 
