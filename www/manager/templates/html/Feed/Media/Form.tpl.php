@@ -482,14 +482,9 @@ $controller->setReplacementData('head', $js);
                             </li>
                         </ol>
                     </fieldset>
-                    <br>
-                    <input type="submit" name="submit" id="continue3" value="Save" /> 
-                    <img class='uploading' src="/wdn/templates_3.0/scripts/plugins/tinymce/themes/advanced/skins/unl/img/progress.gif" alt="progress animated gif" />
+                    <input type="submit" name="submit" id="continue3" value="Save" />
                 </div>
-
-
-
-
+                
                 <?php
                 function getFieldValue($savant, $xmlns, $element)
                 {
@@ -512,14 +507,12 @@ $controller->setReplacementData('head', $js);
                     return '';
                 }
                 ?>
-
-
-                
-            
             </div>
         </div>
     </div>
 </form>
+
+<?php echo $savvy->render($context->media, 'Media/DeleteForm.tpl.php'); ?>
 
 <script type="text/javascript">
     WDN.jQuery('#geo_location').click(function() {
