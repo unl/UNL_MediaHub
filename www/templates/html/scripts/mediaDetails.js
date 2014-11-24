@@ -218,14 +218,6 @@ WDN.jQuery(document).ready(function() {
             WDN.jQuery(this).find('.toggle').html('-');
         }
     });
-    
-    WDN.jQuery('.confirm-delete').submit(function() {
-        if (confirm('Are you sure? This will delete this media, and remove it from any associated channels.')) {
-            return true;
-        }
-        
-        return false;
-    });
 
     WDN.loadJS("../tinymce/jquery.tinymce.js", function() {
         WDN.jQuery("textarea#description").tinymce({
