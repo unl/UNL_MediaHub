@@ -164,6 +164,13 @@ $controller->setReplacementData('head', $js);
                                     <textarea rows="3" id="mrss_text" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[11][value]"><?php echo getFieldValue($context, 'media', 'text'); ?></textarea>
                                 </div>
                             </li>
+                            <li>
+                                <label for="itunes_keywords" class="element">Tags <span class="helper">A comma separated list of highly relevant keywords, MAX 10. Tags also serve as iTunes Keywords.</span></label>
+                                <div class="element">
+                                    <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[4][element]" type="hidden" value="keywords"/>
+                                    <input id="itunes_keywords" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[4][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'keywords'); ?>"/>
+                                </div>
+                            </li>
                         </ol>
                         <div id="geo_location" class="collapsible">
                             <legend>Geo Location</legend>
@@ -459,13 +466,7 @@ $controller->setReplacementData('head', $js);
                                     <input id="itunes_explicit" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[3][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'explicit'); ?>"/>
                                 </div>
                             </li>
-                            <li>
-                                <label for="itunes_keywords" class="element">Keywords <span class="helper">A comma separated list of highly relevant keywords, MAX 10</span></label>
-                                <div class="element">
-                                    <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[4][element]" type="hidden" value="keywords"/>
-                                    <input id="itunes_keywords" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[4][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'keywords'); ?>"/>
-                                </div>
-                            </li>
+
                             <li>
                                 <label for="itunes_subtitle" class="element">Subtitle<span class="helper">The contents of this tag are shown in the Description column in iTunes. The subtitle displays best if it is only a few words long.</span></label>
                                 <div class="element">
