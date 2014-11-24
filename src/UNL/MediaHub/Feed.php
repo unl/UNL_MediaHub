@@ -56,10 +56,63 @@ class UNL_MediaHub_Feed extends UNL_MediaHub_Models_BaseFeed
 
         return $q->execute();
     }
+
+    /**
+     * @param Doctrine_Connection $conn
+     * @return bool|void
+     */
+    public function delete(Doctrine_Connection $conn = null)
+    {
+        //Delete feed_has_media records
+        $media_list = $this->getMediaList();
+        $media_list->run();
+
+        if (count($media_list->items)) {
+            foreach ($media_list->items as $media) {
+                $this->removeMedia($media);
+            }
+        }
+        
+        //delete user records
+        $user_list = $this->getUserList();
+        $user_list->run();
+
+        if (count($user_list->items)) {
+            foreach ($user_list->items as $user) {
+                $this->removeUser($user);
+            }
+        }
+        
+        //Delete NamespacedElements
+        try {
+            foreach (array(
+                         'UNL_MediaHub_Feed_NamespacedElements_itunes',
+                         'UNL_MediaHub_Feed_NamespacedElements_boxee',
+                         'UNL_MediaHub_Feed_NamespacedElements_media',
+                     ) 
+                     as $ns_class) {
+                foreach ($this->$ns_class as $namespaced_element) {
+                    $namespaced_element->delete();
+                }
+            }
+        } catch (Exception $e) {
+            // Error, just skip this for now.
+        }
+        parent::delete($conn);
+    }
     
-    function getMediaList($options = array())
+    public function getMediaList($options = array())
     {
          return new UNL_MediaHub_MediaList(array('filter'=>new UNL_MediaHub_MediaList_Filter_ByFeed($this))+$options); 
+    }
+
+    /**
+     * @param array $options
+     * @return UNL_MediaHub_Feed_UserList
+     */
+    public function getUserList($options = array())
+    {
+        return new UNL_MediaHub_Feed_UserList(array('feed_id'=>$this->id)+$options);
     }
     
     public function getStats()
