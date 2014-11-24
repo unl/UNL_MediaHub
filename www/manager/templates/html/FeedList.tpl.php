@@ -21,7 +21,7 @@
                     </a>
                 </div>
             <?php endforeach; ?>
-            <div class="bp2-wdn-col-one-fourth">
+            <div class="wdn-col">
                 <a href="<?php echo UNL_MediaHub_Manager::getURL() ?>?view=feedmetadata">
                     <div class="mh-upload-box wdn-center">
                         <h2>+<span class="wdn-subhead">New Channel</span></h2>
