@@ -5,7 +5,7 @@ function playerReady(thePlayer) {
 
 WDN.loadJQuery(function(){
 	WDN.initializePlugin('modal', [function() {
-		WDN.jQuery('span.embed').colorbox({inline: true, href:'#sharing', width:'600px', height:'310px'});
+		WDN.jQuery('.embed').colorbox({inline: true, href:'#sharing', width:'600px', height:'310px'});
 	}]);
 	WDN.jQuery('form#addTags').hide();
 	WDN.jQuery('#mediaTagsAdd a[href="#"]').click(function(){
