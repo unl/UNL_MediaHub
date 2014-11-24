@@ -412,20 +412,19 @@ class UNL_MediaHub_Manager_PostHandler
     /**
      * Delete specific media
      *
+     * @throws Exception
      * @return void
      */
     function handleDeleteMedia()
     {
-        $feed = UNL_MediaHub_Feed::getById($this->post['feed_id']);
         $media = UNL_MediaHub_Media::getById($this->post['media_id']);
-        if ($feed->hasMedia($media)
-            && $feed->userHasPermission(
-                    UNL_MediaHub_Manager::getUser(),
-                    UNL_MediaHub_Permission::getByID(UNL_MediaHub_Permission::USER_CAN_DELETE)
-                )
-            ) {
-            $media->delete();
+        
+        if (!$media->userHasPermission(UNL_MediaHub_Manager::getUser(), UNL_MediaHub_Permission::USER_CAN_DELETE)) {
+            throw new Exception('You do not have permission to delete this.', 403);
         }
+
+        $media->delete();
+        
         $this->redirect(UNL_MediaHub_Manager::getURL());
     }
 
