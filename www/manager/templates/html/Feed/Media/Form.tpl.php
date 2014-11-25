@@ -81,11 +81,13 @@ $controller->setReplacementData('head', $js);
                 <div class="bp2-wdn-col-five-sevenths">
                     <fieldset id="existing_media">
                         <legend>Basic Information</legend>
-                        
-                        <label for="title" class="element">
-                            Title<span class="required">*</span>
-                        </label>
-                        <input id="title" name="title" type="text" class="required-entry" value="<?php echo htmlentities(@$context->media->title, ENT_QUOTES); ?>" />
+
+                        <div class="validation-container">
+                            <label for="title" class="element">
+                                Title<span class="required">*</span>
+                            </label>
+                            <input id="title" name="title" type="text" class="required-entry" value="<?php echo htmlentities(@$context->media->title, ENT_QUOTES); ?>" />
+                        </div>
                         
                         <div class="wdn-grid-set">
                             <div class="bp2-wdn-col-one-half">
