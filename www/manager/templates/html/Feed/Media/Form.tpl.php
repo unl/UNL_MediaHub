@@ -172,29 +172,28 @@ $controller->setReplacementData('head', $js);
                                 </div>
                             </li>
                         </ol>
-                        <div id="geo_location" class="collapsible">
-                            <legend>Geo Location</legend>
-                            <ol>
-                                <li>
-                                    <label for="geo_lat" class="element">Latitude</label>
-                                    <div class="element">
-                                        <input name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[0][element]" type="hidden" value="lat"/>
-                                        <input id="geo_lat" name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[0][value]" class='geo_lat' type="text" value="<?php echo getFieldValue($context, 'geo', 'lat'); ?>"/>
-                                    </div>
-                                </li>
-                                <li>
-                                    <label for="geo_long" class="element">Longitude</label>
-                                    <div class="element">
-                                        <input name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[1][element]" type="hidden" value="long"/>
-                                        <input id="geo_long" name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[1][value]" class='geo_long' type="text" value="<?php echo getFieldValue($context, 'geo', 'long'); ?>"/>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div id="map_canvas" style="width:500px;height:300px;"></div>
-                                </li>
-                            </ol>
-                        </div>
-
+                    </fieldset>
+                    <fieldset id="geo_location" class="collapsible">
+                        <legend>Geo Location</legend>
+                        <ol>
+                            <li>
+                                <label for="geo_lat" class="element">Latitude</label>
+                                <div class="element">
+                                    <input name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[0][element]" type="hidden" value="lat"/>
+                                    <input id="geo_lat" name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[0][value]" class='geo_lat' type="text" value="<?php echo getFieldValue($context, 'geo', 'lat'); ?>"/>
+                                </div>
+                            </li>
+                            <li>
+                                <label for="geo_long" class="element">Longitude</label>
+                                <div class="element">
+                                    <input name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[1][element]" type="hidden" value="long"/>
+                                    <input id="geo_long" name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[1][value]" class='geo_long' type="text" value="<?php echo getFieldValue($context, 'geo', 'long'); ?>"/>
+                                </div>
+                            </li>
+                            <li>
+                                <div id="map_canvas" style="width:500px;height:300px;"></div>
+                            </li>
+                        </ol>
                     </fieldset>
 
                     <?php $customFields = UNL_MediaHub_Feed_Media_NamespacedElements_mediahub::getCustomElements(); ?>
