@@ -58,7 +58,7 @@ $controller->setReplacementData('head', $js);
                         </li>
                         <li>
                             <label for="media_poster">URL of custom poster image</label>
-                            <div class="wdn-icon-info mh-tooltip">
+                            <div class="wdn-icon-info hang-left mh-tooltip">
                                 <div>
                                     <p>
                                         <?php
@@ -112,7 +112,7 @@ $controller->setReplacementData('head', $js);
                                         <label for="mrss_credit" class="element">
                                             Credit 
                                         </label>
-                                        <div class="wdn-icon-info mh-tooltip">
+                                        <div class="wdn-icon-info hang-right mh-tooltip">
                                             <div>
                                                 <p>
                                                     <em>Notable entity and the contribution to the creation of the media object.</em>
@@ -126,7 +126,7 @@ $controller->setReplacementData('head', $js);
                                     </li>
                                     <li>
                                         <label for="mrss_category" class="element">Category</label>
-                                        <div class="wdn-icon-info mh-tooltip">
+                                        <div class="wdn-icon-info hang-right mh-tooltip">
                                             <div>
                                                 <p>
                                                     <em>Allows a taxonomy to be set that gives an indication of the type of media content, and its particular contents. </em>

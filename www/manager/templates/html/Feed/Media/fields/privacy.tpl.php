@@ -1,5 +1,5 @@
 <label for="privacy" class="element">Privacy</label>
-<div class="wdn-icon-info mh-tooltip">
+<div class="wdn-icon-info mh-tooltip hang-right">
     <div>
         <ul>
             <li>
