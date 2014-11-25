@@ -358,21 +358,55 @@ class UNL_MediaHub_Manager_PostHandler
         $media->save();
 
         if (!empty($this->post['feed_id'])) {
+            $feed_selector = new UNL_MediaHub_Feed_Media_FeedSelection(UNL_MediaHub_Manager::getUser(), $media);
+            $feed_selection_data = $feed_selector->getFeedSelectionData();
+            
             if (is_array($this->post['feed_id'])) {
                 $feed_ids = $this->post['feed_id'];
             } else {
                 $feed_ids = array($this->post['feed_id']);
             }
+            
+            //Add feeds
             foreach ($feed_ids as $feed_id) {
                 $feed = UNL_MediaHub_Feed::getById($feed_id);
-                if (!$feed->userHasPermission(
-                        UNL_MediaHub_Manager::getUser(),
-                        UNL_MediaHub_Permission::getByID(UNL_MediaHub_Permission::USER_CAN_INSERT)
-                        )
-                    ) {
-                    throw new Exception('You do not have permission to do this.', 403);
+                
+                //Make sure it is in the list of current/available feeds
+                if (!isset($feed_selection_data[$feed_id])) {
+                    throw new Exception('Feed ' .$feed->title . ' can not be selected by you.', 403);
                 }
+
+                //Check if it was already added
+                if ($feed_selection_data[$feed_id]['selected']) {
+                    continue;
+                }
+
+                //Make sure that they can add the feed
+                if ($feed_selection_data[$feed_id]['readonly']) {
+                    throw new Exception('Feed ' .$feed->title . ' can not be selected by you.', 403);
+                }
+                
                 $feed->addMedia($media);
+            }
+            
+            //Remove Feeds
+            foreach ($feed_selection_data as $feed_id => $data) {
+                //Check if it needs to be removed
+                if (in_array($feed_id, $feed_ids)) {
+                    continue;
+                }
+
+                //If it was not already selected, there is no need to remove it
+                if (!$data['selected']) {
+                    continue;
+                }
+                
+                //Make sure that they can remove the feed
+                if ($data['readonly']) {
+                    throw new Exception('Feed ' .$data['feed']->title . ' can not be removed by you.', 403);
+                }
+                
+                $data['feed']->removeMedia($media);
             }
         }
 
