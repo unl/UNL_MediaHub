@@ -59,9 +59,20 @@ class UNL_MediaHub_DBTests_BaseTestDataInstaller implements UNL_MediaHub_DBTests
         $media_b->title       = 'Test Media B';
         $media_b->description = 'Test Media B Description';
         $media_b->save();
+
+        $media_c = new UNL_MediaHub_Media();
+        $media_c->url         = 'http://example.org/C.mov';
+        $media_c->uidcreated  = $user_a->uid;
+        $media_c->uidupdated  = $user_a->uid;
+        $media_c->type        = 'audio/mp3';
+        $media_c->title       = 'Test Media C';
+        $media_c->description = 'Test Media C Description';
+        $media_c->save();
         
         //Add media to channels
         $feed_a->addMedia($media_a);
         $feed_b->addMedia($media_b);
+        $feed_a->addMedia($media_c);
+        $feed_b->addMedia($media_c);
     }
 }
