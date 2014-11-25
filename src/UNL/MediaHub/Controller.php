@@ -264,6 +264,10 @@ class UNL_MediaHub_Controller
         }
 
         try {
+            if (!empty($_POST)) {
+                $this->handlePost($_POST);
+            }
+            
             if (!isset($this->options['model'])
                 || false === $this->options['model']) {
                 throw new Exception('Un-registered view', 404);
@@ -321,6 +325,7 @@ class UNL_MediaHub_Controller
      *
      * @param array $options Associative array of options $options['id']
      *
+     * @throws Exception
      * @return UNL_MediaHub_Media
      */
     function findRequestedMedia($options)
@@ -330,44 +335,64 @@ class UNL_MediaHub_Controller
             $media = Doctrine::getTable('UNL_MediaHub_Media')->find($options['id']);
         }
         
-        if (!empty($_POST) && isset($_POST['action'])) {
-            switch ($_POST['action']) {
-              case 'playcount':
-                //Increase play count.
-                $media->play_count++;
-                $media->save();
-                //Don't need to send a response, so stop here.
-                exit();
-                break;
-            }
-        }
-        
-        if (!empty($_POST)
-            && self::isLoggedIn()) {
-            $user = self::$auth->getUser();
-            if (!empty($_POST['comment'])) {
-                $data = array('uid'      => $user,
-                              'media_id' => $media->id,
-                              'comment'  => $_POST['comment']);
-
-                $comment = new UNL_MediaHub_Media_Comment();
-                $comment->fromArray($data);
-                $comment->save();
-            }
-
-            if (!empty($_POST['tags'])) {
-                foreach (explode(',', $_POST['tags']) as $tag) {
-                    $media->addTag(trim($tag));
-                }
-            }
-        }
-
-
         if ($media) {
             return $media;
         }
 
         throw new Exception('Cannot determine the media to display.');
+    }
+
+    /**
+     * @param $post
+     * @throws Exception
+     */
+    protected function handlePost($post)
+    {
+        if (!$media = $this->findRequestedMedia($this->options)) {
+            throw new Exception('Media ID must be passed.');
+        }
+        
+        if (isset($post['action'])) {
+            switch ($post['action']) {
+                case 'playcount':
+                    //Increase play count.
+                    $media->play_count++;
+                    $media->save();
+                    //Don't need to send a response, so stop here.
+                    exit();
+                    break;
+            }
+        }
+
+        if (!empty($post['comment'])) {
+            if (!$user = self::getUser()) {
+                throw new Exception('You must be logged in to make a comment.', 403);
+            }
+            
+            $data = array(
+                'uid'      => $user->uid,
+                'media_id' => $media->id,
+                'comment'  => $post['comment']
+            );
+
+            $comment = new UNL_MediaHub_Media_Comment();
+            $comment->fromArray($data);
+            $comment->save();
+        }
+
+        if (!empty($post['tags'])) {
+            if (!$user = self::getUser()) {
+                throw new Exception('You must be logged in to add a tag.', 403);
+            }
+            
+            if (!$media->userCanEdit($user)) {
+                throw new Exception('You do not have permission to add a tag.', 403);
+            }
+            
+            foreach (explode(',', $post['tags']) as $tag) {
+                $media->addTag(trim($tag));
+            }
+        }
     }
 
     /**

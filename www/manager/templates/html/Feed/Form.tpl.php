@@ -471,6 +471,9 @@
                 </div>
             </div>
         </form>
+        <?php if (isset($context->feed)): ?>
+            <?php echo $savvy->render($context->feed, 'Feed/DeleteForm.tpl.php'); ?>
+        <?php endif; ?>
     </div>
 </div>
 

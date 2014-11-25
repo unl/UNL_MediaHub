@@ -24,7 +24,7 @@ $controller->setReplacementData('head', $js);
 <form action="?" method="post" name="media_form" id="media_form" class="wdn-band" enctype="multipart/form-data">
 
     <input id="media_url" name="url" type="hidden" value="<?php echo htmlentities($context->media->url, ENT_QUOTES); ?>" />
-    <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_media" />
+    <input type="hidden" name="__unlmy_posttarget" value="feed_media" />
     <input type="hidden" id="id" name="id" value="<?php echo $context->media->id ?>" />
     
     <div class="wdn-band wdn-light-triad-band">
@@ -80,11 +80,13 @@ $controller->setReplacementData('head', $js);
                 <div class="bp2-wdn-col-five-sevenths">
                     <fieldset id="existing_media">
                         <legend>Basic Information</legend>
-                        
-                        <label for="title" class="element">
-                            Title<span class="required">*</span>
-                        </label>
-                        <input id="title" name="title" type="text" class="required-entry" value="<?php echo htmlentities(@$context->media->title, ENT_QUOTES); ?>" />
+
+                        <div class="validation-container">
+                            <label for="title" class="element">
+                                Title<span class="required">*</span>
+                            </label>
+                            <input id="title" name="title" type="text" class="required-entry" value="<?php echo htmlentities(@$context->media->title, ENT_QUOTES); ?>" />
+                        </div>
                         
                         <div class="wdn-grid-set">
                             <div class="bp2-wdn-col-one-half">
@@ -169,29 +171,28 @@ $controller->setReplacementData('head', $js);
                                 </div>
                             </li>
                         </ol>
-                        <div id="geo_location" class="collapsible">
-                            <legend>Geo Location</legend>
-                            <ol>
-                                <li>
-                                    <label for="geo_lat" class="element">Latitude</label>
-                                    <div class="element">
-                                        <input name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[0][element]" type="hidden" value="lat"/>
-                                        <input id="geo_lat" name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[0][value]" class='geo_lat' type="text" value="<?php echo getFieldValue($context, 'geo', 'lat'); ?>"/>
-                                    </div>
-                                </li>
-                                <li>
-                                    <label for="geo_long" class="element">Longitude</label>
-                                    <div class="element">
-                                        <input name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[1][element]" type="hidden" value="long"/>
-                                        <input id="geo_long" name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[1][value]" class='geo_long' type="text" value="<?php echo getFieldValue($context, 'geo', 'long'); ?>"/>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div id="map_canvas" style="width:500px;height:300px;"></div>
-                                </li>
-                            </ol>
-                        </div>
-
+                    </fieldset>
+                    <fieldset id="geo_location" class="collapsible">
+                        <legend>Geo Location</legend>
+                        <ol>
+                            <li>
+                                <label for="geo_lat" class="element">Latitude</label>
+                                <div class="element">
+                                    <input name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[0][element]" type="hidden" value="lat"/>
+                                    <input id="geo_lat" name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[0][value]" class='geo_lat' type="text" value="<?php echo getFieldValue($context, 'geo', 'lat'); ?>"/>
+                                </div>
+                            </li>
+                            <li>
+                                <label for="geo_long" class="element">Longitude</label>
+                                <div class="element">
+                                    <input name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[1][element]" type="hidden" value="long"/>
+                                    <input id="geo_long" name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[1][value]" class='geo_long' type="text" value="<?php echo getFieldValue($context, 'geo', 'long'); ?>"/>
+                                </div>
+                            </li>
+                            <li>
+                                <div id="map_canvas" style="width:500px;height:300px;"></div>
+                            </li>
+                        </ol>
                     </fieldset>
 
                     <?php $customFields = UNL_MediaHub_Feed_Media_NamespacedElements_mediahub::getCustomElements(); ?>
@@ -210,7 +211,6 @@ $controller->setReplacementData('head', $js);
                             </li>
                             <li style="display:none">
                                 <!-- mrss hidden elements that are handled automatically -->
-                                <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[1][media_id]" type="hidden" value="<?php echo getFieldValue($context, 'media', 'id'); ?>"/>
                                 <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[1][element]" type="hidden" value="content" />
                                 <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[1][value]" type="hidden" value="<?php echo getFieldValue($context, 'media', 'content'); ?>" />
                                 <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[1][attributes]" type="hidden" value="<?php echo getFieldAttributes($context, 'media', 'content'); ?>" />
@@ -245,7 +245,6 @@ $controller->setReplacementData('head', $js);
                             </li>
                             <li style="display:none;">
                                 <!-- mrss hidden elements that are handled automatically -->
-                                <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[6][media_id]" type="hidden" value="<?php echo getFieldValue($context, 'media', 'id'); ?>"/>
                                 <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[6][element]" type="hidden" value="thumbnail"/>
                                 <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[6][value]" type="hidden" value="<?php echo getFieldValue($context, 'media', 'thumbnail'); ?>" />
                                 <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[6][attributes]" type="hidden" value="<?php echo getFieldAttributes($context, 'media', 'thumbnail'); ?>" />
@@ -480,14 +479,9 @@ $controller->setReplacementData('head', $js);
                             </li>
                         </ol>
                     </fieldset>
-                    <br>
-                    <input type="submit" name="submit" id="continue3" value="Save" /> 
-                    <img class='uploading' src="/wdn/templates_3.0/scripts/plugins/tinymce/themes/advanced/skins/unl/img/progress.gif" alt="progress animated gif" />
+                    <input type="submit" name="submit" id="continue3" value="Save" />
                 </div>
-
-
-
-
+                
                 <?php
                 function getFieldValue($savant, $xmlns, $element)
                 {
@@ -510,14 +504,12 @@ $controller->setReplacementData('head', $js);
                     return '';
                 }
                 ?>
-
-
-                
-            
             </div>
         </div>
     </div>
 </form>
+
+<?php echo $savvy->render($context->media, 'Media/DeleteForm.tpl.php'); ?>
 
 <script type="text/javascript">
 

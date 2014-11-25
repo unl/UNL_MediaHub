@@ -126,10 +126,12 @@ Embed
     margin: 10px 0;
     text-transform:capitalize;
 }
-#sharing p {
-    margin:15px 0;  
+#sharing {
+    padding: 1em;
 }
-#sharing textarea {width:96%;}
+#sharing textarea {width:96%;}  
+body #cboxLoadedContent {background-color:#fff;}
+body #cboxOverlay {background-color:#000;}
 
 
 .mh-video-thumb {
