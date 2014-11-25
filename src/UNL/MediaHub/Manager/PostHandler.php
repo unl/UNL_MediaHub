@@ -108,6 +108,9 @@ class UNL_MediaHub_Manager_PostHandler
         case 'delete_media':
             $this->handleDeleteMedia();
             break;
+        case 'delete_feed':
+            $this->handleDeleteFeed();
+            break;
         }
     }
 
@@ -412,20 +415,45 @@ class UNL_MediaHub_Manager_PostHandler
     /**
      * Delete specific media
      *
+     * @throws Exception
+     * @return void
+     */
+    function handleDeleteFeed()
+    {
+        if (empty($this->post['feed_id'])) {
+            throw new Exception('Please provide a feed id to delete.', 400);
+        }
+        
+        $feed = UNL_MediaHub_Feed::getById($this->post['feed_id']);
+        
+        if (!$feed->userHasPermission(
+                UNL_MediaHub_Manager::getUser(), 
+                UNL_MediaHub_Permission::getByID(UNL_MediaHub_Permission::USER_CAN_DELETE
+            ))) {
+            throw new Exception('You do not have permission to delete this.', 403);
+        }
+
+        $feed->delete();
+        
+        $this->redirect(UNL_MediaHub_Manager::getURL());
+    }
+
+    /**
+     * Delete specific media
+     *
+     * @throws Exception
      * @return void
      */
     function handleDeleteMedia()
     {
-        $feed = UNL_MediaHub_Feed::getById($this->post['feed_id']);
         $media = UNL_MediaHub_Media::getById($this->post['media_id']);
-        if ($feed->hasMedia($media)
-            && $feed->userHasPermission(
-                    UNL_MediaHub_Manager::getUser(),
-                    UNL_MediaHub_Permission::getByID(UNL_MediaHub_Permission::USER_CAN_DELETE)
-                )
-            ) {
-            $media->delete();
+
+        if (!$media->userHasPermission(UNL_MediaHub_Manager::getUser(), UNL_MediaHub_Permission::USER_CAN_DELETE)) {
+            throw new Exception('You do not have permission to delete this.', 403);
         }
+
+        $media->delete();
+
         $this->redirect(UNL_MediaHub_Manager::getURL());
     }
 
