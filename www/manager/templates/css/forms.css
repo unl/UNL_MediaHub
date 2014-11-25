@@ -119,65 +119,22 @@ iframe * {margin:0px}
     max-height: 15.25em;
 }
 
-.mh-tool-tip {
-    background-color: #1B9AE8;
-    border-radius: 2em;
-    height: 1.5em;
-    width: 1.5em;
-    padding: 0 0.2em;
-    color: #fff;
-    display: inline-block;
-    text-align: center;
-    font-size: 0.85em;
-    line-height: 1.6em;
-    position: relative;
-    font-size: .8125rem;
-}
 
-.mh-tool-tip > div:after {
-    background-color: transparent;
-    content: "";
-    display: block;
-    width: 0; 
-    height: 0; 
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 10px solid #fff;
-    position:absolute;
-    bottom:-10px;
-    left:50%;
-    margin-left:-10px;
-}
-
-.mh-tool-tip > div {
-    position: absolute;
-    display: none;
-    background-color: #fff;
-    color: #000;
-    box-shadow: 0px 1px 4px RGBA(0,0,0,0.2);
-    padding: .75em;
-    bottom: 160%;
-    left: -720%;
-    width: 300px;
-    text-align: left;
-    z-index: 250;
-}
-
-.mh-tool-tip ul li{
+.mh-tooltip ul li{
     margin-bottom: .75em;
 }
 
-.mh-tool-tip span.heading{
+.mh-tooltip span.heading{
 
     font-family: "Tungsten A","Tungsten B",HelveticaNeueCondensed,HelveticaNeue-Condensed,"Helvetica Neue Condensed",HelveticaNeueRomanCondensed,HelveticaNeue-Roman-Condensed,"Helvetica Neue Roman Condensed","Arial Narrow",HelveticaNeue,"Helvetica Neue",HelveticaNeueRoman,HelveticaNeue-Roman,"Helvetica Neue Roman",Helvetica,Tahoma,Geneva,Arial,sans-serif;
     font-size: 1.777em;
 }
 
-.mh-tool-tip:hover > div {
+.mh-tooltip:hover > div {
     display: block;
 }
 
-.mh-tool-tip p {
+.mh-tooltip p {
     margin: 0;
 }
 
@@ -237,12 +194,101 @@ form legend {
     font-weight: 400;
 }
 
+.mh-tooltip {
+    background-color: #1B9AE8;
+    border-radius: 2em;
+    height: 1.5em;
+    width: 1.5em;
+    padding: 0 0.2em;
+    color: #fff;
+    display: inline-block;
+    text-align: center;
+    font-size: 0.85em;
+    line-height: 1.6em;
+    position: relative;
+    font-size: .8125rem;
+}
+
+
+.mh-tooltip > div {
+    position: absolute;
+    display: none;
+    background-color: #fff;
+    color: #000;
+    box-shadow: 0px 1px 4px RGBA(0,0,0,0.2);
+    padding: .75em;
+    bottom: 160%;
+    left: -720%;
+    width: 300px;
+    text-align: left;
+    z-index: 250;
+}
+
+.mh-tooltip > div:before {
+    background-color: white;
+    content: "";
+    display: block;
+    width: 15px; 
+    height: 15px; 
+    position:absolute;
+    bottom: -8px;
+    left: 50%;
+    margin-left: -7px;
+    transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    box-shadow: 0px 0px 4px RGBA(0,0,0,0.25);
+}
+
+.mh-tooltip > div:after {
+    content:"";
+    height:10px;
+    width:40px;
+    background-color:#fff;
+    display:block;
+    position:absolute;
+    bottom: 0px;
+    left: 50%;
+    margin-left: -24px;
+}
+
 @media only screen and (max-width : 768px) {
 
     .mh-upload-band .mh-upload-box{
-    padding: 15% 0 35% 0;
-    margin-bottom: 1em;
+        padding: 15% 0 35% 0;
+        margin-bottom: 1em;
+    }
+
+    .mh-tooltip > div {
+        left: -22px;
+        margin-left: -25%;
+        width: 300px;
+        bottom: 25px;
+        text-align: left;
+        z-index: 250;
+    }
+
+    .mh-tooltip > div:before {
+        left: 11%;
+        margin-left: -7px;
+    }
+
+    .mh-tooltip > div:after {
+        
+        height:10px;
+        width:40px;
+        left: 11%;
+        margin-left: -24px;
+
     }
 
 }
+
+
+
+
+
+
 
