@@ -48,7 +48,7 @@ class UNL_MediaHub_Feed_Media_FeedSelection
         foreach ($user_feeds->items as $feed) {
             if (isset($selection_data[$feed->id])) {
                 //Already selected.
-                $all_feeds[$feed->id]['readonly'] = false;
+                $selection_data[$feed->id]['readonly'] = false;
                 continue;
             }
             $selection_data[$feed->id] = array(
