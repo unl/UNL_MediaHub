@@ -350,6 +350,15 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
 
     /**
      * @param UNL_MediaHub_User $user
+     * @return bool
+     */
+    public function userCanDelete(UNL_MediaHub_User $user)
+    {
+        return $this->userHasPermission($user, UNL_MediaHub_Permission::USER_CAN_DELETE);
+    }
+
+    /**
+     * @param UNL_MediaHub_User $user
      * @param $permission_id - the id of the permission to check against
      * @return bool
      */
