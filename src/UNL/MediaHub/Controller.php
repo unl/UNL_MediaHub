@@ -365,14 +365,12 @@ class UNL_MediaHub_Controller
         }
 
         if (!empty($post['comment'])) {
-            if (!self::isLoggedIn()) {
+            if (!$user = self::getUser()) {
                 throw new Exception('You must be logged in to make a comment.', 403);
             }
             
-            $user = self::$auth->getUser();
-            
             $data = array(
-                'uid'      => $user,
+                'uid'      => $user->uid,
                 'media_id' => $media->id,
                 'comment'  => $post['comment']
             );
@@ -383,10 +381,16 @@ class UNL_MediaHub_Controller
         }
 
         if (!empty($post['tags'])) {
-            if ($media->user) {
-                foreach (explode(',', $post['tags']) as $tag) {
-                    $media->addTag(trim($tag));
-                }
+            if (!$user = self::getUser()) {
+                throw new Exception('You must be logged in to add a tag.', 403);
+            }
+            
+            if (!$media->userCanEdit($user)) {
+                throw new Exception('You do not have permission to add a tag.', 403);
+            }
+            
+            foreach (explode(',', $post['tags']) as $tag) {
+                $media->addTag(trim($tag));
             }
         }
     }
