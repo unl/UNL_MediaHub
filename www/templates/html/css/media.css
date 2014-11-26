@@ -170,9 +170,10 @@ body #cboxOverlay {background-color:#000;}
     font-family: "Tungsten A","Tungsten B",HelveticaNeueCondensed,HelveticaNeue-Condensed,"Helvetica Neue Condensed",HelveticaNeueRomanCondensed,HelveticaNeue-Roman-Condensed,"Helvetica Neue Roman Condensed","Arial Narrow",HelveticaNeue,"Helvetica Neue",HelveticaNeueRoman,HelveticaNeue-Roman,"Helvetica Neue Roman",Helvetica,Tahoma,Geneva,Arial,sans-serif;
  }
 
- .mh-media-browse.page-1 > :first-child .mh-video-label .wdn-subhead {
+ .mh-media-browse.page-1 > :first-child .mh-video-label .wdn-subhead:not(.edit-button) {
     margin: 0 0 0 0;   
  }
+
 
  .mh-video-label .wdn-subhead {     
     font-size: 10px;       
