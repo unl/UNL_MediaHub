@@ -19,3 +19,7 @@ Supporting styles for individual presentation of channel pages
 .mh-rss {
 	font-size: 1.899em;
 }
+
+.mh-channel-edit-button {
+	margin: .75em 0 0 .75em;
+}
