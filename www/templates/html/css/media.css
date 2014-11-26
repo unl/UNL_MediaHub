@@ -99,20 +99,7 @@ Embed
 -------------------------------------------------
 */
 .embed {
-    background-image: url('images/iconCode.png') no-repeat 5px 4px;
-    padding-left:23px;
-    font-weight:bold;
-    font-size:0.9em;
-    border:1px solid #ddd;
-    border-radius:3px;
-    -moz-border-radius:3px;
-    -webkit-border-radius:3px;
-    margin-top:3px;
-}
-.embed:hover {
-    border-color:#bbb;
-    cursor:pointer;
-    color:#7d7d7d;
+    cursor: pointer;
 }
 #maincontent #sharing{display:none;}
 #sharing h3 {
@@ -231,6 +218,10 @@ body #cboxOverlay {background-color:#000;}
     display: block;
 }
 
+#media_submit {
+    margin-right: .75em;
+}
+
 #maincontent ul#mediaTags li.mh-tag-label {
     background: transparent;
     box-shadow: none;
@@ -240,6 +231,16 @@ body #cboxOverlay {background-color:#000;}
     font-size: 1.777em;
     display: block;
     white-space: nowrap;
+}
+
+.mh-flip-180 {
+    -ms-transform: rotate(180deg); /* IE 9 */
+    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+    transform: rotate(180deg);
+}
+
+#continue3 {
+    margin-right: .75em;
 }
 
 @media only screen and (max-width: 480px)  {
