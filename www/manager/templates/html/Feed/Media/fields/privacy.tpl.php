@@ -1,5 +1,5 @@
 <label for="privacy" class="element">Privacy</label>
-<div class="wdn-icon-info mh-tooltip hang-right">
+<div class="wdn-icon-info mh-tooltip hang-right" id="privacy-details">
     <div>
         <ul>
             <li>
@@ -14,7 +14,7 @@
         </ul>
     </div>
 </div>
-<select id="privacy" name="privacy">
+<select id="privacy" name="privacy" aria-describedby="privacy-details">
     <?php
     foreach (UNL_MediaHub_Media::getPossiblePrivacyValues() as $value) {
         $selected = '';

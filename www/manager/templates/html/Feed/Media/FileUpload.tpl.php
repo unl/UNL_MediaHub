@@ -33,25 +33,25 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
                                     <label for="author">
                                         Author
                                         <span class="required">*</span>
-                                        <div class="mh-tooltip wdn-icon-info">
+                                        <div class="mh-tooltip wdn-icon-info" id="author-details">
                                             <div>
                                                 Name of media creator
                                             </div>
                                         </div>
                                     </label>
-                                    <input type="text" id="author" name="author" class="required-entry">
+                                    <input type="text" id="author" name="author" class="required-entry" aria-describedby="author-details">
                                 </li>
                                 <li>
                                     <label for="description">
                                         Description
                                         <span class="required">*</span>
                                     </label>
-                                    <div class="mh-tooltip wdn-icon-info">
+                                    <div class="mh-tooltip wdn-icon-info" id="description-details">
                                         <div>
                                             Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.
                                         </div>
                                     </div>
-                                    <textarea rows="4" type="text" id="description" name="description" class="required-entry"></textarea>
+                                    <textarea rows="4" type="text" id="description" name="description" class="required-entry" aria-describedby="description-details"></textarea>
                                 </li>
                             </ol>
                         </div>
@@ -74,7 +74,6 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
 </div>
 
 <script type="text/javascript">
-WDN.initializePlugin('tooltip');
 WDN.initializePlugin('form_validation', [function() {
     WDN.jQuery('#add_media').validation({
         containerClassName: 'validation-container',
