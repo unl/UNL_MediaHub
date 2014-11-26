@@ -129,7 +129,7 @@
                         return '';
                     }
                     ?>
-                    <fieldset id="itunes_header" style="display:none">
+                    <fieldset id="itunes_header" >
 
                         <legend>iTunes U Options</legend>
 
@@ -314,42 +314,6 @@
                             </li>
                         </ol>
                     </fieldset>
-                    <fieldset id="boxee_header" style="display:none">
-
-                        <legend>Boxee Options</legend>
-
-                        <ol>
-                            <li>
-                                <label for='boxee_expiry' class='element'>Expiry</label>
-                                <div class='element'>
-                                    <input name='UNL_MediaHub_Feed_NamespacedElements_boxee[0][element]' type='hidden' value='expiry' />
-                                    <input id='boxee_expiry' name='UNL_MediaHub_Feed_NamespacedElements_boxee[0][value]' type='text' value='<?php echo getFieldValue($context, 'boxee', 'expiry'); ?>' size='55' />
-                                </div>
-                            </li>
-
-                            <li>
-                                <label for='boxee_interval' class='element'>Interval</label>
-                                <div class='element'>
-
-                                    <input name='UNL_MediaHub_Feed_NamespacedElements_boxee[2][element]' type='hidden' value='interval' />
-                                    <input id='boxee_interval' name='UNL_MediaHub_Feed_NamespacedElements_boxee[2][value]' type='text' value='<?php echo getFieldValue($context, 'boxee', 'interval'); ?>' size='55' />
-                                </div>
-                            </li>
-                            <li>
-                                <label for='boxee_category' class='element'>Category</label>
-                                <div class='element'>
-                                    <input name='UNL_MediaHub_Feed_NamespacedElements_boxee[3][element]' type='hidden' value='category' />
-                                    <input id='boxee_category' name='UNL_MediaHub_Feed_NamespacedElements_boxee[3][value]' type='text' value='<?php echo getFieldValue($context, 'boxee', 'category'); ?>' size='55' />
-                                </div>
-                            </li>            
-                            <li>
-                                <label for="boxee_submit" class="element">&nbsp;</label>
-                                <div class="element">
-                                    <input id="boxee_submit" name="submit" value="Save" type="submit" />
-                                </div>
-                            </li>
-                        </ol>
-                    </fieldset>
                     <fieldset id="media_header">
                         <legend>Media RSS Options</legend>
                         <ol>
@@ -432,7 +396,10 @@
                             <li>
                                 <label for="media_submit" class="element">&nbsp;</label>
                                 <div class="element">
-                                    <input id="media_submit" name="submit" value="Save" class="wdn-button wdn-button-brand" type="submit" />
+                                    <input id="media_submit" class="wdn-pull-left"name="submit" value="Save" class="wdn-button wdn-button-brand" type="submit" />
+                                            <?php if (isset($context->feed)): ?>
+                                                <?php echo $savvy->render($context->feed, 'Feed/DeleteForm.tpl.php'); ?>
+                                            <?php endif; ?>
                                 </div>
                             </li>
 
@@ -442,32 +409,9 @@
 
                 </div>
 
-                <div class="wdn-col-two-fifths wdn-pull-right">
-
-                    <legend>Consider this channel for: </legend>
-                    <fieldset>
-                        <ol id="extensions">
-                            <li>
-                                <input type="checkbox" value="itunes" id="iTunesConsideration" name="iTunesConsideration" />
-                                <label for="iTunesConsideration">iTunes U</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" value="boxee" id="boxeeConsideration" name="boxeeConsideration" />
-                                <label for="boxeeConsideration">Boxee</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" value="youtube" id="youTubeConsideration" name="youTubeConsideration" />
-                                <label for="youTubeConsideration">YouTube</label>
-                            </li>
-                        </ol>   
-                    </fieldset>
-
-                </div>
             </div>
         </form>
-        <?php if (isset($context->feed)): ?>
-            <?php echo $savvy->render($context->feed, 'Feed/DeleteForm.tpl.php'); ?>
-        <?php endif; ?>
+
     </div>
 </div>
 
