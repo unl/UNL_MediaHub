@@ -57,21 +57,20 @@ $controller->setReplacementData('head', $js);
                             <?php echo $savvy->render($context->feed_selection); ?>
                         </li>
                         <li>
-                            <label for="media_poster">URL of custom poster image 
-                                <div class="wdn-icon-info mh-tool-tip">
-                                    <div>
-                                        <p>
-                                            <?php
-                                            $text = '';
-                                            if (isset($context->media) && $context->media->isVideo()) {
-                                                $text = 'This image will override the one chosen above.';
-                                            }
-                                            ?>
-                                            If filled in, this image will be displayed as the thumbnail for the media.  <?php echo $text; ?>
-                                        </p>
-                                    </div>
+                            <label for="media_poster">URL of custom poster image</label>
+                            <div class="wdn-icon-info hang-left mh-tooltip">
+                                <div>
+                                    <p>
+                                        <?php
+                                        $text = '';
+                                        if (isset($context->media) && $context->media->isVideo()) {
+                                            $text = 'This image will override the one chosen above.';
+                                        }
+                                        ?>
+                                        If filled in, this image will be displayed as the thumbnail for the media.  <?php echo $text; ?>
+                                    </p>
                                 </div>
-                            </label>
+                            </div>
                             <input id="media_poster" name="poster" type="text" class="validate-url" value="<?php echo htmlentities(@$context->media->poster, ENT_QUOTES); ?>" />
                         </li>
                     </ol>  
@@ -114,30 +113,28 @@ $controller->setReplacementData('head', $js);
                                     <li>
                                         <label for="mrss_credit" class="element">
                                             Credit 
-                                            <div class="wdn-icon-info mh-tool-tip">
-                                                <div>
-                                                    <p>
-                                                        <em>Notable entity and the contribution to the creation of the media object.</em>
-                                                    </p>
-                                                </div>
-                                            </div>
                                         </label>
+                                        <div class="wdn-icon-info hang-right mh-tooltip">
+                                            <div>
+                                                <p>
+                                                    <em>Notable entity and the contribution to the creation of the media object.</em>
+                                                </p>
+                                            </div>
+                                        </div>
                                         <div class="element">
                                             <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[9][element]" type="hidden" value="credit"/>
                                             <input id="mrss_credit" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[9][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'credit'); ?>"/>
                                         </div>
                                     </li>
                                     <li>
-                                        <label for="mrss_category" class="element">
-                                            Category
-                                            <div class="wdn-icon-info mh-tool-tip">
-                                                <div>
-                                                    <p>
-                                                        <em>Allows a taxonomy to be set that gives an indication of the type of media content, and its particular contents. </em>
-                                                    </p>
-                                                </div>
+                                        <label for="mrss_category" class="element">Category</label>
+                                        <div class="wdn-icon-info hang-right mh-tooltip">
+                                            <div>
+                                                <p>
+                                                    <em>Allows a taxonomy to be set that gives an indication of the type of media content, and its particular contents. </em>
+                                                </p>
                                             </div>
-                                        </label>
+                                        </div>
                                         <div class="element">
                                             <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[7][element]" type="hidden" value="category"/>
                                             <input id="mrss_category" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[7][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'category'); ?>"/>
@@ -515,6 +512,14 @@ $controller->setReplacementData('head', $js);
 <?php echo $savvy->render($context->media, 'Media/DeleteForm.tpl.php'); ?>
 
 <script type="text/javascript">
+
+require(['jquery', 'tooltip'], function($,tooltip) {
+
+
+
+});
+
+
     WDN.jQuery('#geo_location').click(function() {
         var map;
         var myOptions = {
