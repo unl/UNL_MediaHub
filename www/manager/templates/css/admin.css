@@ -233,3 +233,13 @@ dl.caption {
 #maincontent dl.caption dd {
 	padding-left:0px;
 }
+
+#filelist {
+    font-family: "Gotham SSm A","Gotham SSm B",Verdana,"Verdana Ref",Geneva,Tahoma,"Lucida Grande","Lucida Sans Unicode","Lucida Sans","DejaVu Sans","Bitstream Vera Sans","Liberation Sans",sans-serif;
+}
+
+#filelist b {
+    font-family: "Tungsten A","Tungsten B",Impact,Haettenschweiler,"Arial Narrow Bold","Franklin Gothic Bold",Charcoal,"Helvetica Inserat","Bitstream Vera Sans Bold","Arial Black",sans-serif;
+    font-size: 2.369em;
+    display: block;
+}
