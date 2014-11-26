@@ -53,9 +53,6 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
                                     </div>
                                     <textarea rows="4" type="text" id="description" name="description" class="required-entry"></textarea>
                                 </li>
-                                <li>
-                                    <input type="submit" id="publish" name="publish" value="Publish" disabled="disabled">
-                                </li>
                             </ol>
                         </div>
                         <div class="bp1-wdn-col-two-fifths">
@@ -67,8 +64,9 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
                                     <?php echo $savvy->render($context->feed_selection); ?>
                                 </li>
                             </ol>
-                        </div>
+                        </div>                                                     
                     </div>
+                    <input type="submit" id="publish" name="publish" value="Publish" class="wdn-button-brand" disabled="disabled"> 
                 </div>
             </div>
         </form>

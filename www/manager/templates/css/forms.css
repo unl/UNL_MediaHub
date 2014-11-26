@@ -116,7 +116,7 @@ iframe * {margin:0px}
     border: 1px solid #d5d5d2;
     background-color: #fff;
     overflow: scroll;
-    max-height: 15.25em;
+    max-height: 13.35em;
 }
 
 
@@ -184,6 +184,13 @@ iframe * {margin:0px}
 
 .wdn-button-brand {
     background-color: #d00000 !important;
+}
+
+form input[type="submit"].wdn-button-brand[disabled] {
+    -webkit-box-shadow: none; 
+    -moz-box-shadow: none;
+    box-shadow: none; 
+    background-color: #963838 !important;
 }
 
 form legend {
@@ -292,15 +299,6 @@ form legend {
         padding: 15% 0 35% 0;
         margin-bottom: 1em;
     }
-
-/*    .mh-tooltip.hang-left > div {
-        margin-left: -25%;
-        width: 200px;
-        bottom: 25px;
-        text-align: left;
-        z-index: 250;
-    }*/
-
 
 }
 
