@@ -71,7 +71,7 @@
                         <legend>Channel Image</legend>
                         <ol>
                             <li>
-                                <label class="element">Image File<span class="required">*</span> 
+                                <label class="element">Image File
                                     <span class="helper">Images should follow the standard UNL image standards. <a href="https://github.com/unl/UNL_MediaHub/raw/master/designFiles/feedTemplate.psd">(get the sample template)</a>
                                     </span>
                                 </label>
@@ -311,12 +311,6 @@
                                 </label>
                                 <input name='UNL_MediaHub_Feed_NamespacedElements_itunes[9][element]' type='hidden' value='summary' />
                                 <textarea id="itunes_summary" name="UNL_MediaHub_Feed_NamespacedElements_itunes[9][value]" rows="5" cols="50"><?php echo getFieldValue($context, 'itunes', 'summary'); ?></textarea>
-                            </li>
-                            <li>
-                                <label for="itunes_submit" class="element">&nbsp;</label>
-                                <div class="element">
-                                    <input id="itunes_submit" name="submit" value="Save" type="submit" />
-                                </div>
                             </li>
                         </ol>
                     </fieldset>
