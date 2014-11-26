@@ -83,18 +83,14 @@ Tags
 #maincontent #addTags {
     display:inline;
 }
-#maincontent #addTags input[type="text"] {
-    height:10px;
+#addTags input[type="text"]{
+    width: 75%;
+    margin-right: 2%;
+    padding: 0.64em 0.75em;
 }
-#maincontent #addTags input[type="submit"] {
-    background:#ac0302;
-    color:#fff;
-    font-weight:bold;
-    border-radius:3px;
-    -webkit-border-radius:3px;
-    -moz-border-radius:3px;
-    border:0;
-    padding:2px 4px;
+#addTags input[type="submit"]{
+    position: relative;
+    top: -2px;
 }
 
 /* 
