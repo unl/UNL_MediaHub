@@ -33,7 +33,11 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
                                     <label for="author">
                                         Author
                                         <span class="required">*</span>
-                                        <span class="helper">Name of media creator</span>
+                                        <div class="mh-tooltip wdn-icon-info">
+                                            <div>
+                                                Name of media creator
+                                            </div>
+                                        </div>
                                     </label>
                                     <input type="text" id="author" name="author" class="required-entry">
                                 </li>
@@ -42,12 +46,12 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
                                         Description
                                         <span class="required">*</span>
                                     </label>
-                                    <textarea rows="4" type="text" id="description" name="description" class="required-entry">Explain what this
-                                        media is all about. Use a few sentences, but keep it to 1 paragraph.
-                                    </textarea>
-                                </li>
-                                <li>
-                                    <input type="submit" id="publish" name="publish" value="Publish" disabled="disabled">
+                                    <div class="mh-tooltip wdn-icon-info">
+                                        <div>
+                                            Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.
+                                        </div>
+                                    </div>
+                                    <textarea rows="4" type="text" id="description" name="description" class="required-entry"></textarea>
                                 </li>
                             </ol>
                         </div>
@@ -60,8 +64,9 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
                                     <?php echo $savvy->render($context->feed_selection); ?>
                                 </li>
                             </ol>
-                        </div>
+                        </div>                                                     
                     </div>
+                    <input type="submit" id="publish" name="publish" value="Publish" class="wdn-button-brand" disabled="disabled"> 
                 </div>
             </div>
         </form>
