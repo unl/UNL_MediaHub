@@ -15,7 +15,7 @@
     <p>
         <?php if ($user && $context->userCanEdit($user)): ?>
             <span class="wdn-subhead edit-button">
-                <a href="#">Edit</a> | <a href="#">Delete</a>
+                <a href="<?php echo UNL_MediaHub_Manager::getURL() . '?view=addmedia&amp;id=' . $context->id ?>">Edit</a> | <a href="#">Delete</a>
             </span>
         <?php endif; ?>
 

@@ -1,7 +1,7 @@
 /* Share media
 -------------------------------------------------------------- */
 #maincontent a.share-video-link {
-    background: #fff;
+    background: #D00000;
     color:#000;
     position:absolute;
     top:5px;
@@ -15,8 +15,33 @@
     font-style: normal;
     font-size: 10px;
     cursor:pointer;
+    border-radius: 3px;
     border: none;
 }
+
+.mh-share-video a{
+    color: #fff;
+    margin-right: .75em;
+}
+
+#maincontent a.share-video-link:before{
+    font-family: wdn-icon;
+    font-style: normal;
+    font-weight: 400;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    color: #fff;
+    font-size: 1em;
+    content: '\e81c';
+    text-align: center;
+}
+
 #maincontent a .share-video-link:hover,
 #maincontent a.share-video-link:active,
 #maincontent a.share-video-link.video-active {
