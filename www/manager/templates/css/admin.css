@@ -125,7 +125,6 @@ a.action.delete:active {background-image:url('images/iconDelete.png');}
 #maincontent #userList {
     list-style:none;
     padding:0;
-    background:#F1F3EA;
     padding:10px;
 }
 #maincontent #userList li {
@@ -155,12 +154,9 @@ a.action.delete:active {background-image:url('images/iconDelete.png');}
 }
 
 #maincontent .addData {
-    background:#F1F3EA;
     padding:10px;
     border-top:2px solid #d5d5d5;
-    -webkit-box-shadow: inset 0px 1px 3px #e6e6e6;
-    -moz-box-shadow: inset 0px 1px 3px #e6e6e6;
-    box-shadow: inset 0px 1px 3px #e6e6e6; 
+
 }
 #maincontent .addData input[type='text']{
     border:1px solid #d5d5d5;

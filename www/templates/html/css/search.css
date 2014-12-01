@@ -7,10 +7,20 @@ Supporting styles for search box
     padding:10px;
     padding-right:0;
 }
+
+#wdn_app_search .wdn-input-group-btn {
+	top: -1px;
+	position: relative;
+}
+
 #wdn_app_search form {
     position: relative;
     font-size: 1em;
     margin: auto;
+}
+
+.wdn-icon-search {
+	border-bottom:1px solid #137cbd;
 }
 
 @media (min-width: 768px) {

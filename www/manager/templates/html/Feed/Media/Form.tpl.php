@@ -58,7 +58,7 @@ $controller->setReplacementData('head', $js);
                         </li>
                         <li>
                             <label for="media_poster">URL of custom poster image</label>
-                            <div class="wdn-icon-info hang-left mh-tooltip">
+                            <div class="wdn-icon-info hang-left mh-tooltip" id="poster-details">
                                 <div>
                                     <p>
                                         <?php
@@ -71,7 +71,7 @@ $controller->setReplacementData('head', $js);
                                     </p>
                                 </div>
                             </div>
-                            <input id="media_poster" name="poster" type="text" class="validate-url" value="<?php echo htmlentities(@$context->media->poster, ENT_QUOTES); ?>" />
+                            <input id="media_poster" name="poster" type="text" class="validate-url" value="<?php echo htmlentities(@$context->media->poster, ENT_QUOTES); ?>" aria-describedby="poster-details" />
                         </li>
                     </ol>  
                 </div>
@@ -114,7 +114,7 @@ $controller->setReplacementData('head', $js);
                                         <label for="mrss_credit" class="element">
                                             Credit 
                                         </label>
-                                        <div class="wdn-icon-info hang-right mh-tooltip">
+                                        <div class="wdn-icon-info hang-right mh-tooltip" id="credit-details">
                                             <div>
                                                 <p>
                                                     <em>Notable entity and the contribution to the creation of the media object.</em>
@@ -123,12 +123,12 @@ $controller->setReplacementData('head', $js);
                                         </div>
                                         <div class="element">
                                             <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[9][element]" type="hidden" value="credit"/>
-                                            <input id="mrss_credit" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[9][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'credit'); ?>"/>
+                                            <input id="mrss_credit" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[9][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'credit'); ?>" aria-describedby="credit-details" />
                                         </div>
                                     </li>
                                     <li>
                                         <label for="mrss_category" class="element">Category</label>
-                                        <div class="wdn-icon-info hang-right mh-tooltip">
+                                        <div class="wdn-icon-info hang-right mh-tooltip" id="category-details">
                                             <div>
                                                 <p>
                                                     <em>Allows a taxonomy to be set that gives an indication of the type of media content, and its particular contents. </em>
@@ -137,7 +137,7 @@ $controller->setReplacementData('head', $js);
                                         </div>
                                         <div class="element">
                                             <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[7][element]" type="hidden" value="category"/>
-                                            <input id="mrss_category" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[7][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'category'); ?>"/>
+                                            <input id="mrss_category" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[7][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'category'); ?>" aria-describedby="category-details"/>
                                         </div>
                                     </li>
                                 </ol>
@@ -148,26 +148,39 @@ $controller->setReplacementData('head', $js);
                             <li>
                                 <label for="description" class="element">
                                     Description<span class="required">*</span>
-                                    <span class="helper">Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.</span>
                                 </label>
-                                <div class="element" id="description_wrapper"><textarea id="description" name="description" class="required-entry" rows="5"><?php echo htmlentities(@$context->media->description); ?></textarea></div>
+                                <div class="mh-tooltip wdn-icon-info" id="description-details">
+                                    <div>
+                                        <p><em>Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.</em></p>
+                                    </div>
+                                </div>
+                                <div class="element" id="description_wrapper"><textarea id="description" name="description" class="required-entry" rows="5" aria-describedby="description-details"><?php echo htmlentities(@$context->media->description); ?></textarea></div>
                             </li>
     
                             <li>
                                 <label for="mrss_text" class="element">
                                     Transcript/Captioning
-                                    <span class="helper">Allows the inclusion of a text transcript, closed captioning, or lyrics of the media content.</span>
                                 </label>
+                                <div class="mh-tooltip wdn-icon-info" id="captioning-details">
+                                    <div>
+                                        <p><em>Allows the inclusion of a text transcript, closed captioning, or lyrics of the media content.</em></p>
+                                    </div>
+                                </div>
                                 <div class="element">
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[11][element]" type="hidden" value="text"/>
-                                    <textarea rows="3" id="mrss_text" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[11][value]"><?php echo getFieldValue($context, 'media', 'text'); ?></textarea>
+                                    <textarea rows="3" id="mrss_text" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[11][value]" aria-describedby="captioning-details"><?php echo getFieldValue($context, 'media', 'text'); ?></textarea>
                                 </div>
                             </li>
                             <li>
-                                <label for="itunes_keywords" class="element">Tags <span class="helper">A comma separated list of highly relevant keywords, MAX 10. Tags also serve as iTunes Keywords.</span></label>
+                                <label for="itunes_keywords" class="element">Tags</label>
+                                <div class="mh-tooltip wdn-icon-info" id="tag-details">
+                                    <div>
+                                        <p><em>A comma separated list of highly relevant keywords, MAX 10. Tags also serve as iTunes Keywords.</em></p>
+                                    </div>
+                                </div>
                                 <div class="element">
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[4][element]" type="hidden" value="keywords"/>
-                                    <input id="itunes_keywords" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[4][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'keywords'); ?>"/>
+                                    <input id="itunes_keywords" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[4][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'keywords'); ?>" aria-describedby="tag-details"/>
                                 </div>
                             </li>
                         </ol>
@@ -479,7 +492,7 @@ $controller->setReplacementData('head', $js);
                             </li>
                         </ol>
                     </fieldset>
-                    <input type="submit" name="submit" id="continue3" value="Save" />
+                    <input type="submit" name="submit" id="continue3" value="Save" class="wdn-pull-left" /><?php echo $savvy->render($context->media, 'Media/DeleteForm.tpl.php'); ?>
                 </div>
                 
                 <?php
@@ -509,16 +522,7 @@ $controller->setReplacementData('head', $js);
     </div>
 </form>
 
-<?php echo $savvy->render($context->media, 'Media/DeleteForm.tpl.php'); ?>
-
 <script type="text/javascript">
-
-require(['jquery', 'tooltip'], function($,tooltip) {
-
-
-
-});
-
 
     WDN.jQuery('#geo_location').click(function() {
         var map;

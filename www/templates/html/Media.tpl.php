@@ -70,7 +70,7 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
                 
             <?php if ($user && $context->userCanEdit($user)): ?>
                 <div>
-                    <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=addmedia&id=' . $context->id ?>" class="wdn-button wdn-button-brand"><span class="wdn-icon-rocket wdn-icon"></span>Edit Page</a>
+                    <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=addmedia&id=' . $context->id ?>" class="wdn-button wdn-button-brand"><span class="wdn-icon-wrench wdn-icon"></span>Edit Page</a>
                 </div>
             <?php endif; ?>
 
@@ -193,9 +193,9 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
             <div class="bp2-wdn-col-one-fourth mh-sidebar">
                 <div>
 
-                    <a class="wdn-button wdn-button-brand embed mh-hide-bp2"><span class="wdn-icon-rocket wdn-icon"></span>Embed</a>
+                    <a class="wdn-button wdn-button-brand embed mh-hide-bp2"><span class="wdn-icon-plus wdn-icon"></span>Embed</a>
                     <br>
-                    <a href="<?php echo htmlentities($context->url, ENT_QUOTES); ?>" target="_blank" class="wdn-button wdn-button-brand mh-hide-bp2"><span class="wdn-icon-rocket wdn-icon"></span>Download</a>
+                    <a href="<?php echo htmlentities($context->url, ENT_QUOTES); ?>" target="_blank" class="wdn-button wdn-button-brand mh-hide-bp2"><span class="wdn-icon-up-small mh-flip-180 wdn-icon"></span>Download</a>
 
                 </div>
 

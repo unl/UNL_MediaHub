@@ -38,10 +38,10 @@ if ($context->isVideo()) {
                         if ($inner = $(v).parents('.mejs-container')) {
                             // share urls
                             var sharelinks = {
-                                tw:     {title: 'Twitter', url:'http://twitter.com/share?text=' + media_type + ': ' + $title + '&url=' + share_url}, // twitter
-                                fb:     {title: 'Facebook', url:'https://www.facebook.com/sharer/sharer.php?u=' + share_url},	// facebook
-                                gp:     {title: 'Google Plus', url:'https://plus.google.com/share?url=' + share_url}, //google plus
-                                em:     {title: 'Email', url:'mailto:?body=Checkout this ' + media_type + ': ' + share_url + '&subject=' + media_type + ' : ' + $title}
+                                "wdn-icon-twitter":     {title: 'Twitter', url:'http://twitter.com/share?text=' + media_type + ': ' + $title + '&url=' + share_url}, // twitter
+                                "wdn-icon-facebook":     {title: 'Facebook', url:'https://www.facebook.com/sharer/sharer.php?u=' + share_url},	// facebook
+                                "wdn-icon-gplus":     {title: 'Google Plus', url:'https://plus.google.com/share?url=' + share_url}, //google plus
+                                "wdn-icon-mail":     {title: 'Email', url:'mailto:?body=Checkout this ' + media_type + ': ' + share_url + '&subject=' + media_type + ' : ' + $title}
                             }
 
                             //create share links
@@ -52,14 +52,14 @@ if ($context->isVideo()) {
 
                             var html = '<div class="media-content-head">';
                             html += '<div class="media-content-title">' + $title + '</div>';
-                            html += '<a href="#" rel="nofollow" class="share-video-link">' + 'Share' + '</a>';
+                            html += '<a href="#" rel="nofollow" class="share-video-link"></a>';
                             html += '<div class="share-video-form">';
                             html += '<em class="share-video-close">x</em>';
                             html += '<h4>' + 'share this video' + '</h4>';
                             html += '<label for="share-video-lnk-'+mediahub_id+'"><em>'+ 'link' +'</em></label>';
                             html += '<input type="text" id="share-video-lnk-'+mediahub_id+'" class="share-video-lnk share-data" value="' + share_url + '" />' ;
 
-                            html += '<div class="video-social-share">' + links + '</div>' ;
+                            html += '<div class="wdn-pull-right mh-share-video">' + links + '</div>' ;
                             html += '</div>';
                             html += '</div>';
                             $inner.prepend(html);
