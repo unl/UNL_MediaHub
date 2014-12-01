@@ -138,6 +138,10 @@ iframe * {margin:0px}
     margin: 0;
 }
 
+.mh-tooltip.italic *{
+    font-style: italic;
+}
+
 [class*=col-one-half] .mh-video-thumb.mh-featured-channel {
     padding: 0 0 70% 0;
 }

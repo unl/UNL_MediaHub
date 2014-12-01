@@ -33,7 +33,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
                                     <label for="author">
                                         Author
                                         <span class="required">*</span>
-                                        <div class="mh-tooltip wdn-icon-info" id="author-details">
+                                        <div class="mh-tooltip wdn-icon-info italic" id="author-details">
                                             <div>
                                                 Name of media creator
                                             </div>
@@ -46,7 +46,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
                                         Description
                                         <span class="required">*</span>
                                     </label>
-                                    <div class="mh-tooltip wdn-icon-info" id="description-details">
+                                    <div class="mh-tooltip wdn-icon-info italic" id="description-details">
                                         <div>
                                             Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.
                                         </div>

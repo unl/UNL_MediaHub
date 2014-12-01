@@ -19,7 +19,7 @@ Supporting styles for search box
     margin: auto;
 }
 
-.wdn-icon-search {
+.mh-list-header .wdn-icon-search {
 	border-bottom:1px solid #137cbd;
 }
 
