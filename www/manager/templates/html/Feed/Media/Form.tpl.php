@@ -58,7 +58,7 @@ $controller->setReplacementData('head', $js);
                         </li>
                         <li>
                             <label for="media_poster">URL of custom poster image</label>
-                            <div class="wdn-icon-info hang-left mh-tooltip" id="poster-details">
+                            <div class="wdn-icon-info hang-left mh-tooltip italic" id="poster-details">
                                 <div>
                                     <p>
                                         <?php
@@ -114,10 +114,10 @@ $controller->setReplacementData('head', $js);
                                         <label for="mrss_credit" class="element">
                                             Credit 
                                         </label>
-                                        <div class="wdn-icon-info hang-right mh-tooltip" id="credit-details">
+                                        <div class="wdn-icon-info hang-right mh-tooltip italic" id="credit-details">
                                             <div>
                                                 <p>
-                                                    <em>Notable entity and the contribution to the creation of the media object.</em>
+                                                    Notable entity and the contribution to the creation of the media object.
                                                 </p>
                                             </div>
                                         </div>
@@ -128,10 +128,10 @@ $controller->setReplacementData('head', $js);
                                     </li>
                                     <li>
                                         <label for="mrss_category" class="element">Category</label>
-                                        <div class="wdn-icon-info hang-right mh-tooltip" id="category-details">
+                                        <div class="wdn-icon-info hang-right mh-tooltip italic" id="category-details">
                                             <div>
                                                 <p>
-                                                    <em>Allows a taxonomy to be set that gives an indication of the type of media content, and its particular contents. </em>
+                                                    Allows a taxonomy to be set that gives an indication of the type of media content, and its particular contents.
                                                 </p>
                                             </div>
                                         </div>
@@ -149,9 +149,9 @@ $controller->setReplacementData('head', $js);
                                 <label for="description" class="element">
                                     Description<span class="required">*</span>
                                 </label>
-                                <div class="mh-tooltip wdn-icon-info" id="description-details">
+                                <div class="mh-tooltip wdn-icon-info italic" id="description-details">
                                     <div>
-                                        <p><em>Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.</em></p>
+                                        <p>Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.</p>
                                     </div>
                                 </div>
                                 <div class="element" id="description_wrapper"><textarea id="description" name="description" class="required-entry" rows="5" aria-describedby="description-details"><?php echo htmlentities(@$context->media->description); ?></textarea></div>
@@ -161,9 +161,9 @@ $controller->setReplacementData('head', $js);
                                 <label for="mrss_text" class="element">
                                     Transcript/Captioning
                                 </label>
-                                <div class="mh-tooltip wdn-icon-info" id="captioning-details">
+                                <div class="mh-tooltip wdn-icon-info italic" id="captioning-details">
                                     <div>
-                                        <p><em>Allows the inclusion of a text transcript, closed captioning, or lyrics of the media content.</em></p>
+                                        <p>Allows the inclusion of a text transcript, closed captioning, or lyrics of the media content.</p>
                                     </div>
                                 </div>
                                 <div class="element">
@@ -173,9 +173,9 @@ $controller->setReplacementData('head', $js);
                             </li>
                             <li>
                                 <label for="itunes_keywords" class="element">Tags</label>
-                                <div class="mh-tooltip wdn-icon-info" id="tag-details">
+                                <div class="mh-tooltip wdn-icon-info italic" id="tag-details">
                                     <div>
-                                        <p><em>A comma separated list of highly relevant keywords, MAX 10. Tags also serve as iTunes Keywords.</em></p>
+                                        <p>A comma separated list of highly relevant keywords, MAX 10. Tags also serve as iTunes Keywords.</p>
                                     </div>
                                 </div>
                                 <div class="element">
