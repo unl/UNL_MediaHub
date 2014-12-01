@@ -89,12 +89,20 @@
                             </li>
                             <li>
                                 <label for="image_title" class="element">Image Title</label>
-                                 <span class="mh-tooltip italic wdn-icon-info" id="image-title-details"><div><p>Give the image a title, used in RSS feeds.</p></div></span>
+                                 <div class="mh-tooltip italic wdn-icon-info" id="image-title-details">
+                                     <div>
+                                         <p>Give the image a title, used in RSS feeds.</p>
+                                     </div>
+                                 </div>
                                 <input id="image_title" name="image_title" type="text" aria-describedby="image-title-details" value="<?php echo (isset($context->feed))? htmlentities($context->feed->image_title, ENT_QUOTES):''; ?>" size="55" />
                             </li>
                             <li>
                                 <label for="image_description" class="element">Image Description</label>
-                                <div class="wdn-icon-info mh-tooltip italic" id="image-description-details"><div><p>Describe your image, used in RSS feeds.</p></div></div>
+                                <div class="wdn-icon-info mh-tooltip italic" id="image-description-details">
+                                    <div>
+                                        <p>Describe your image, used in RSS feeds.</p>
+                                    </div>
+                                </div>
                                 <textarea id="image_description" name="image_description" rows="5" cols="50" aria-describedby="image-description-details"><?php echo (isset($context->feed))?htmlentities($context->feed->image_description):''; ?></textarea>
                             </li>
                         </ol>
@@ -139,7 +147,11 @@
                         <ol>
                             <li>
                                 <label for='itunes_author' class='element'>Author</label>
-                                <div class="wdn-icon-info mh-tooltip italic hang-right" id="itunes-author-details"><div><p>Used in the Artist column of iTunes</p></div></div>
+                                <div class="wdn-icon-info mh-tooltip italic hang-right" id="itunes-author-details">
+                                    <div>
+                                        <p>Used in the Artist column of iTunes</p>
+                                    </div>
+                                </div>
                                 <div class='element'>
                                     <input name='UNL_MediaHub_Feed_NamespacedElements_itunes[0][element]' type='hidden' value='author' />
                                     <input id='itunes_author' name='UNL_MediaHub_Feed_NamespacedElements_itunes[0][value]' aria-describedby="itunes-author-details" type='text' value='<?php echo getFieldValue($context, 'itunes', 'author'); ?>' size='55' />
@@ -325,13 +337,21 @@
                             </li>
                             <li>
                                 <label for='itunes_subtitle' class='element'>Subtitle</label>
-                                <div class="italic wdn-icon-info mh-tooltip hang-right" id="itunes-subtitle-details"><div><p>The contents of this tag are shown in the Description column in iTunes. The subtitle displays best if it is only a few words long.</p></div></div>
+                                <div class="italic wdn-icon-info mh-tooltip hang-right" id="itunes-subtitle-details">
+                                    <div>
+                                        <p>The contents of this tag are shown in the Description column in iTunes. The subtitle displays best if it is only a few words long.</p>
+                                    </div>
+                                </div>
                                 <input name='UNL_MediaHub_Feed_NamespacedElements_itunes[8][element]' type='hidden' value='subtitle' />
                                 <input id='itunes_subtitle' name='UNL_MediaHub_Feed_NamespacedElements_itunes[8][value]' aria-describedby="itunes-subtitle-details" type='text' value='<?php echo getFieldValue($context, 'itunes', 'subtitle'); ?>' size='55' />
                             </li>
                             <li>
                                 <label for='itunes_summary' class='element'>Summary</label>
-                                <div class="italic mh-tooltip hang-right wdn-icon-info" id="itunes-summary-details"><div><p>The contents of this tag are shown in a separate window that appears when the "circled i" in the Description column is clicked. It also appears on the iTunes page for your podcast.</p></div></div>
+                                <div class="italic mh-tooltip hang-right wdn-icon-info" id="itunes-summary-details">
+                                    <div>
+                                        <p>The contents of this tag are shown in a separate window that appears when the "circled i" in the Description column is clicked. It also appears on the iTunes page for your podcast.</p>
+                                    </div>
+                                </div>
                                 <input name='UNL_MediaHub_Feed_NamespacedElements_itunes[9][element]' type='hidden' value='summary' />
                                 <textarea id="itunes_summary" name="UNL_MediaHub_Feed_NamespacedElements_itunes[9][value]" aria-describedby="itunes-summary-details" rows="5" cols="50"><?php echo getFieldValue($context, 'itunes', 'summary'); ?></textarea>
                             </li>
@@ -342,7 +362,11 @@
                         <ol>
                             <li>
                                 <label for='media_rating' class='element'>Rating</label>
-                                <div class="wdn-icon-info mh-tooltip hang-right italic" id="rating-details"><div><p>Appropriate audience: adult or nonadult. Leave blank if no restrictions.</p></div></div>
+                                <div class="wdn-icon-info mh-tooltip hang-right italic" id="rating-details">
+                                    <div>
+                                        <p>Appropriate audience: adult or nonadult. Leave blank if no restrictions.</p>
+                                    </div>
+                                </div>
                                 <div class='element'>
                                     <input name='UNL_MediaHub_Feed_NamespacedElements_media[0][element]' type='hidden' value='rating' />
                                     <input id='media_rating' name='UNL_MediaHub_Feed_NamespacedElements_media[0][value]' aria-describedby="rating-details" type='text' value='<?php echo getFieldValue($context, 'media', 'rating'); ?>' size='55' />
@@ -363,7 +387,11 @@
                             </li>
                             <li>
                                 <label for='media_keywords' class='element'>Keywords</label>
-                                <div class="italic wdn-icon-info mh-tooltip hang-right" id="keyword-details"><div><p>Comma seperated list of highly relevant keywords/tags describing the channel.</p></div></div>
+                                <div class="italic wdn-icon-info mh-tooltip hang-right" id="keyword-details">
+                                    <div>
+                                        <p>Comma seperated list of highly relevant keywords/tags describing the channel.</p>
+                                    </div>
+                                </div>
                                 <div class='element'>
                                     <input name='UNL_MediaHub_Feed_NamespacedElements_media[3][element]' type='hidden' value='keywords' />
                                     <input id='media_keywords' name='UNL_MediaHub_Feed_NamespacedElements_media[3][value]' type='text' aria-describedby="keyword-details" value='<?php echo getFieldValue($context, 'media', 'keywords'); ?>' size='55' />
@@ -371,7 +399,11 @@
                             </li>
                             <li>
                                 <label for='media_thumbnail' class='element'>Thumbnail</label>
-                                <div class="italic wdn-icon-info mh-tooltip hang-right" id="thumbnail-details"><div><p>Allows particular images to be used as representative images for the media object.</p></div></div>
+                                <div class="italic wdn-icon-info mh-tooltip hang-right" id="thumbnail-details">
+                                    <div>
+                                        <p>Allows particular images to be used as representative images for the media object.</p>
+                                    </div>
+                                </div>
                                 <div class='element'>
                                     <input name='UNL_MediaHub_Feed_NamespacedElements_media[4][element]' type='hidden' value='thumbnail' />
                                     <input id='media_thumbnail' name='UNL_MediaHub_Feed_NamespacedElements_media[4][value]' aria-describedby="thumbnail-details" type='text' value='<?php echo getFieldValue($context, 'media', 'thumbnail'); ?>' size='55' />
@@ -379,7 +411,11 @@
                             </li>
                             <li>
                                 <label for='media_category' class='element'>Category</label>
-                                <div class="wdn-icon-info mh-tooltip hang-right wdn-icon-info" id="category-details"><div><p>Allows a taxonomy to be set that gives an indication of the type of media content, and its particular contents</p></div></div>
+                                <div class="wdn-icon-info mh-tooltip hang-right wdn-icon-info" id="category-details">
+                                    <div>
+                                        <p>Allows a taxonomy to be set that gives an indication of the type of media content, and its particular contents</p>
+                                    </div>
+                                </div>
                                 <div class='element'>
                                     <input name='UNL_MediaHub_Feed_NamespacedElements_media[5][element]' type='hidden' value='category' />
                                     <input id='media_category' name='UNL_MediaHub_Feed_NamespacedElements_media[5][value]' aria-describedby="category-details" type='text' value='<?php echo getFieldValue($context, 'media', 'category'); ?>' size='55' />
@@ -387,7 +423,11 @@
                             </li>
                             <li>
                                 <label for='media_player' class='element'>Player</label>
-                                <div class="wdn-icon-info mh-tooltip hang-right italic" id="player-details"><div><p>Allows the media object to be accessed through a web browser media player console.</p></div></div>
+                                <div class="wdn-icon-info mh-tooltip hang-right italic" id="player-details">
+                                    <div>
+                                        <p>Allows the media object to be accessed through a web browser media player console.</p>
+                                    </div>
+                                </div>
                                 <div class='element'>
                                     <input name='UNL_MediaHub_Feed_NamespacedElements_media[6][element]' type='hidden' value='player' />
                                     <input id='media_player' name='UNL_MediaHub_Feed_NamespacedElements_media[6][value]' aria-describedby="player-details" type='text' value='<?php echo getFieldValue($context, 'media', 'player'); ?>' size='55' />
@@ -395,7 +435,11 @@
                             </li>
                             <li>
                                 <label for='media_credit' class='element'>Credit</label>
-                                <div class="wdn-icon-info mh-tooltip hang-right italic" id="credit-details"><div><p>Notable entity and the contribution to the creation of the media object.</p></div></div>
+                                <div class="wdn-icon-info mh-tooltip hang-right italic" id="credit-details">
+                                    <div>
+                                        <p>Notable entity and the contribution to the creation of the media object.</p>
+                                    </div>
+                                </div>
                                 <div class='element'>
                                     <input name='UNL_MediaHub_Feed_NamespacedElements_media[7][element]' type='hidden' value='credit' />
                                     <input id='media_credit' name='UNL_MediaHub_Feed_NamespacedElements_media[7][value]' aria-describedby="credit-details" type='text' value='<?php echo getFieldValue($context, 'media', 'credit'); ?>' size='55' />
@@ -403,7 +447,11 @@
                             </li>
                             <li>
                                 <label for='media_copyright' class='element'>Copyright</label>
-                                <div class="mh-tooltip hang-right italic wdn-icon-info" id="copyright-details"><div><p>Copyright information for media object.</p></div></div>
+                                <div class="mh-tooltip hang-right italic wdn-icon-info" id="copyright-details">
+                                    <div>
+                                        <p>Copyright information for media object.</p>
+                                    </div>
+                                </div>
                                 <div class='element'>
                                     <input name='UNL_MediaHub_Feed_NamespacedElements_media[8][element]' type='hidden' value='copyright' />
                                     <input id='media_copyright' name='UNL_MediaHub_Feed_NamespacedElements_media[8][value]' aria-describedby="copyright-details" type='text' value='<?php echo getFieldValue($context, 'media', 'copyright'); ?>' size='55' />
@@ -411,7 +459,11 @@
                             </li>
                             <li style="display:none;">
                                 <label for='media_text' class='element'>Text</label>
-                                <div class="mh-tooltip hang-right wdn-icon-info italic" id="text-details"><div><p>Allows the inclusion of a text transcript, closed captioning, or lyrics of the media content.</p></div></div>
+                                <div class="mh-tooltip hang-right wdn-icon-info italic" id="text-details">
+                                    <div>
+                                        <p>Allows the inclusion of a text transcript, closed captioning, or lyrics of the media content.</p>
+                                    </div>
+                                </div>
                                 <div class='element'>
                                     <input name='UNL_MediaHub_Feed_NamespacedElements_media[9][element]' type='hidden' value='text' />
                                     <input id='media_text' name='UNL_MediaHub_Feed_NamespacedElements_media[9][value]' aria-describedby="text-details" type='text' value='<?php echo getFieldValue($context, 'media', 'text'); ?>' size='55' />
@@ -419,7 +471,11 @@
                             </li>
                             <li>
                                 <label for='media_restriction' class='element'>Restriction</label>
-                                <div class="wdn-icon-info mh-tooltip hang-right italic" id="restriction-details"><div><p>Allows restrictions to be placed on the aggregator rendering the media in the feed.</p></div></div>
+                                <div class="wdn-icon-info mh-tooltip hang-right italic" id="restriction-details">
+                                    <div>
+                                        <p>Allows restrictions to be placed on the aggregator rendering the media in the feed.</p>
+                                    </div>
+                                </div>
                                 <div class='element'>
                                     <input name='UNL_MediaHub_Feed_NamespacedElements_media[10][element]' type='hidden' value='restriction' />
                                     <input id='media_restriction' name='UNL_MediaHub_Feed_NamespacedElements_media[10][value]' aria-describedby="restriction-details" type='text' value='<?php echo getFieldValue($context, 'media', 'restriction'); ?>' size='55' />
