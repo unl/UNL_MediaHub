@@ -29,12 +29,11 @@ $controller->setReplacementData('head', $js);
     
     <div class="wdn-band wdn-light-triad-band">
         <div class="wdn-inner-wrapper">
-            <div class="wdn-col">
+        <div class="wdn-grid-set" id="headline_main">
+            <div class="wdn-col-full">
                 <input type="submit" name="submit" value="Save" class="wdn-pull-right" />
-                <h1 class="clear-top">Edit Media Details for <?php echo $context->media->title ?></h1>
-            </div>
-            
-            <div class="wdn-grid-set" id="headline_main">
+                <h1 class="clear-top wdn-brand">Edit Media Details for <?php echo $context->media->title ?></h1>
+            </div>  
                 <?php
                 if (isset($context->media)) {
                     echo $savvy->render($context->media, 'Media/Preview.tpl.php');
