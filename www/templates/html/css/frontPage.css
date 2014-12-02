@@ -37,7 +37,7 @@ video.fillWidth {
 
 }
 
-.mh-featured-icon img {
+.mh-featured-icon img, .mh-featured-icon object {
 	width: 35%;
 	margin-top: 32%;
 }
