@@ -16,14 +16,14 @@ $feeds = $context->getRelatedFeeds(array('limit'=>6));
             <div class="wdn-grid-set">
                 <div class="bp2-wdn-col-three-fourths">
                     <?php if ($context->options['filter']->getType() == 'search'): ?>
-                        <h1>
+                        <h1 class="wdn-brand clear-top">
                             <span class="wdn-subhead">Search results for</span>
                             <?php echo htmlentities($context->options['filter']->getValue()) ?>
                         </h1>
                     <?php elseif ($context->options['filter']->getType() == 'feed'): ?>
-                        <h2 class="wdn-brand"><?php echo $label ?></h2>
+                        <h2 class="wdn-brand clear-top"><?php echo $label ?></h2>
                     <?php else: ?>
-                        <h1 class="wdn-brand"><?php echo $label ?></h1>
+                        <h1 class="wdn-brand clear-top"><?php echo $label ?></h1>
                     <?php endif; ?>
                     <?php if (count($context->items) && $context->pager->getLastPage() > 1): ?>
                         <p>Page <?php echo $context->pager->getPage() ?> of <?php echo $context->pager->getLastPage() ?></p>
