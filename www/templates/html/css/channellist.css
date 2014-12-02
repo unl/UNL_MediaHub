@@ -4,8 +4,8 @@ Supporting styles for listings of channels
 -------------------------------------------------
 */
 
-.mh-list-header {
-	border-bottom: 1px solid #5b5b5a;
+.mh-list-header, .mh-feed-list > li {
+    border-bottom: 1px solid #d0cec6;
 }
 
 .mh-list-header h1 {
@@ -28,10 +28,6 @@ Supporting styles for listings of channels
 .mh-feed-list {
 	padding: 0;
 	list-style: none;
-}
-
-.mh-feed-list > li {
-	border-bottom: 1px solid #5b5b5a;
 }
 
 .mh-feed-list h2 {
