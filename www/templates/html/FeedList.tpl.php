@@ -17,7 +17,7 @@ if (isset($context->label) && !empty($context->label)) {
         <div class="mh-list-header">
             <div class="wdn-grid-set">
                 <div class="bp2-wdn-col-three-fourths">
-                    <h1 class="wdn-brand"><?php echo $label; ?></h1>
+                    <h1 class="wdn-brand clear-top"><?php echo $label; ?></h1>
                     <?php if (count($context->items) && $context->pager->getLastPage() > 1): ?>
                         <p>Page <?php echo $context->pager->getPage() ?> of <?php echo $context->pager->getLastPage() ?></p>
                     <?php endif; ?>
