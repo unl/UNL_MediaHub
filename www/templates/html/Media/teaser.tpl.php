@@ -9,16 +9,13 @@
             <img src="<?php echo $context->getThumbnailURL() ?>" alt="">
         </div>
         <div class="mh-play-button"></div>
+        <?php if ($user && $context->userCanEdit($user)): ?>
+            <a href="<?php echo UNL_MediaHub_Manager::getURL() . '?view=addmedia&amp;id=' . $context->id ?>" class="edit-button wdn-button wdn-button-brand">Edit</a>
+        <?php endif; ?>
     </div>
 </a>
 <div class="mh-video-label wdn-center">
     <p>
-        <?php if ($user && $context->userCanEdit($user)): ?>
-            <span class="wdn-subhead edit-button">
-                <a href="<?php echo UNL_MediaHub_Manager::getURL() . '?view=addmedia&amp;id=' . $context->id ?>">Edit</a> | <a href="#">Delete</a>
-            </span>
-        <?php endif; ?>
-
         <span class="wdn-subhead">
             <?php echo date('F j, Y, g:i a', strtotime($context->datecreated)) ?>
         </span>
