@@ -40,7 +40,7 @@
                     </span>
                 <?php endif; ?>    
             </h1>
-            <input id="media_submit" name="submit" value="Save" class="wdn-button wdn-button-brand wdn-pull-right" type="submit" />
+            <input id="media_submit" name="submit" value="Save" class="wdn-button wdn-pull-right" type="submit" />
 
             <div class="clear">
             </div>
