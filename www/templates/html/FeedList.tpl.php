@@ -2,7 +2,7 @@
 /**
  * @var $context UNL_MediaHub_FeedList
  */
-
+$baseUrl = UNL_MediaHub_Controller::getURL();
 $label = 'All Channels';
 if (isset($context->label) && !empty($context->label)) {
     $controller->setReplacementData('title', 'UNL | MediaHub | '.$context->label);
@@ -61,7 +61,18 @@ if (isset($context->label) && !empty($context->label)) {
                             <?php echo $savvy->render($feed, 'Feed/Creator.tpl.php') ?>
                             <div class="wdn-grid-set">
                                 <div class="bp2-wdn-col-one-fourth wdn-pull-right">
-                                    <a href="<?php echo $url ?>"><img src="<?php echo $url ?>/image" alt="<?php echo htmlentities($feed->title, ENT_QUOTES) ?> image" class="mh-channel-thumb"/></a>
+                                    <a href="<?php echo $url ?>">
+                                    <div class="mh-channel-thumb wdn-center">
+                                        <?php $channelImage = file_get_contents($url."/image"); ?>
+                                        <?php if(!$channelImage): ?>
+                                            <div>
+                                                <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon.svg"><img src="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon-white.png"></object>
+                                            </div>
+                                        <?php else: ?>
+                                                <img src="<?php echo $url; ?>/image" alt="<?php echo htmlentities($feed->title, ENT_QUOTES); ?> Image" />
+                                        <?php endif; ?>
+                                    </div>
+                                    </a>
                                 </div>
                                 <div class="bp2-wdn-col-three-fourths">
                                     <p><?php echo htmlentities($feed->description) ?></p>
