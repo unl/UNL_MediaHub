@@ -101,6 +101,14 @@ p.mh-more-info a {
 	position: relative;
 }
 
+.mh-channel-thumb > div {
+	background-color: rgba(194, 190, 174, 0.59);
+}
+
+.mh-channel-thumb object {
+	margin: 1.425em 0;
+}
+
 .mh-channel-thumb img{
 	margin-bottom: -9px;
 }
