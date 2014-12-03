@@ -140,11 +140,11 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
                 <p><?php echo $summary; ?></p>
 
 
-                <?php if ($context->getTags() || $context->userCanEdit($user)): ?>
+                <?php if (($tags = $context->getTags()) || $context->userCanEdit($user)): ?>
                     <hr>
                     <ul id="mediaTags" class="wdn-sans-serif">
                         <li class="wdn-sans-serif mh-tag-label">Tags:</li>
-                        <?php foreach ($context->getTags() as $tag): ?>
+                        <?php foreach ($tags as $tag): ?>
                             <li><a href="<?php echo UNL_MediaHub_Controller::$url.'tags/'.urlencode(trim($tag)) ?>"><?php echo $tag ?></a></li>
                         <?php endforeach; ?>
                         <?php if ($user && $context->userCanEdit($user)): ?>
