@@ -47,16 +47,6 @@ Supporting styles for listings of channels
 	border: 0;
 }
 
-@media (max-width: 768px) {
-	.mh-media-samples li:nth-child(n+5) {
-		display: none;
-	}
-	
-	.mh-feed-stats {
-		display: none;
-	}
-}
-
 .mh-feeds .wdn_pagination {
 	text-align: center;
 	padding: 0;
@@ -109,6 +99,31 @@ p.mh-more-info a {
 	margin: 1.425em 0;
 }
 
+.mh-video-thumb.mh-channel-thumb object {
+	margin: 1.899em 0;
+}
+
 .mh-channel-thumb img{
 	margin-bottom: -9px;
+}
+
+@media (max-width: 960px) {
+	.mh-video-thumb.mh-channel-thumb object {
+	margin: 13% 0;
+	}
+}
+
+@media (max-width: 768px) {
+
+	.mh-media-samples li:nth-child(n+5) {
+		display: none;
+	}
+	
+	.mh-feed-stats {
+		display: none;
+	}
+	.mh-video-thumb.mh-channel-thumb object {
+	margin: 23% 0;
+	}
+
 }

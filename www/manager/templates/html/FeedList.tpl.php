@@ -1,3 +1,5 @@
+<?php $baseUrl = UNL_MediaHub_Controller::getURL(); ?>
+
 <div class="wdn-band mh-your-channels">
     <div class="wdn-inner-wrapper">
         <h2 class="wdn-brand">Your Channels</h2>
@@ -6,11 +8,16 @@
                 <?php $feed_url = htmlentities(UNL_MediaHub_Controller::getURL($feed), ENT_QUOTES); ?>
                 <div class="wdn-col">
                     <a href="<?php echo $feed_url ?>">
-                        <div class="mh-video-thumb mh-featured-channel wdn-center">
+                        <div class="mh-video-thumb mh-channel-thumb mh-featured-channel wdn-center">
                             <div class="mh-thumbnail-clip">
+                                <?php $channelImage = file_get_contents($feed_url."/image"); ?>
+                                <?php if(!$channelImage): ?>
+                                    <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon.svg"><img src="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon-white.png"></object>
+                                <?php else: ?>
                                 <img
                                     src="<?php echo $feed_url; ?>/image"
                                     alt="<?php echo htmlentities($feed->title, ENT_QUOTES); ?> Image">
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div class="mh-video-label wdn-center">
