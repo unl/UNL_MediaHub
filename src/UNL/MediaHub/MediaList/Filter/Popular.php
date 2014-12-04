@@ -27,8 +27,6 @@ class UNL_MediaHub_MediaList_Filter_Popular implements UNL_MediaHub_Filter
         if (empty($where)) {
             $where = 'm.id = 0';
         }
-        
-        $where .= ' AND m.privacy = "PUBLIC"';
 
         $query->where($where);
     }
