@@ -1,14 +1,22 @@
 <?php
 class UNL_MediaHub_MediaList_Filter_Privacy implements UNL_MediaHub_Filter
 {
+    /**
+     * @var UNL_MediaHub_User
+     */
+    protected $user = NULL;
+    
+    function __construct(UNL_MediaHub_User $user = NULL)
+    {
+        $this->user = $user;
+    }
+    
     function apply(Doctrine_Query &$query)
     {
         $where = 'm.privacy = "PUBLIC"';
         
-        $user = UNL_MediaHub_Controller::getUser();
-        
-        if ($user) {
-            $feeds = $user->getFeedIDs();
+        if ($this->user) {
+            $feeds = $this->user->getFeedIDs();
             
             if (!empty($feeds)) {
                 //There is a chance that a user will not have any feeds, so account for that.
