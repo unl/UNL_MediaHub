@@ -48,4 +48,22 @@ class UNL_MediaHub_User extends UNL_MediaHub_Models_BaseUser
         $options['filter'] = new UNL_MediaHub_FeedList_Filter_ByUser($this);
         return new UNL_MediaHub_User_FeedList($options);
     }
+
+    /**
+     * Get an array of feed IDs
+     * 
+     * @return mixed
+     * @throws Doctrine_Connection_Exception
+     */
+    public function getFeedIDs()
+    {
+        $db = Doctrine_Manager::getInstance()->getCurrentConnection();
+        $q = $db->prepare("SELECT DISTINCT f.id
+            FROM feeds f
+            INNER JOIN user_has_permission up ON up.user_uid = ? AND up.feed_id = f.id");
+
+        $q->execute(array($this->uid));
+        $result = $q->fetchAll(PDO::FETCH_COLUMN);
+        return $result;
+    }
 }
