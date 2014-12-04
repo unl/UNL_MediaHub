@@ -44,7 +44,7 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
             $this->options['filter'] = new UNL_MediaHub_MediaList_Filter_ShowRecent();
         }
 
-        $this->options['additional_filters'][] = new UNL_MediaHub_MediaList_Filter_Privacy();
+        $this->options['additional_filters'][] = new UNL_MediaHub_MediaList_Filter_Privacy(UNL_MediaHub_Controller::getUser());
 
         if (isset($this->options['f'])) {
             switch ($this->options['f']) {
