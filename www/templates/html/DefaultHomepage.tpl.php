@@ -46,7 +46,7 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
                     <h2 class="wdn-brand">Manage Media</h2>
                 </a>
                 <p>
-                    Channels are groups of related media. Any media can be part of any channel. Create your own.
+                    MediaHub is a reliable host for all your audio and video needs. Look professional with the University of Nebraska brand and go places YouTube can’t (like China and K-12 schools). 
                 </p>
             </div>
             <div class="wdn-col mh-featured">
@@ -57,7 +57,7 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
                     <h2 class="wdn-brand">Browse Media</h2>
                 </a>
                 <p>
-                    Channels are groups of related media. Any media can be part of any channel. Create your own.
+                    Browse MediaHub and find what’s happening at the University of Nebraska – Lincoln. You’ll find documentaries, symphonies, and everything in between. 
                 </p>
             </div>
             <div class="wdn-col mh-featured">
@@ -68,7 +68,7 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
                     <h2 class="wdn-brand">Explore Channels</h2>
                 </a>
                 <p>
-                    Channels are groups of related media. Any media can be part of any channel. Create your own.
+                    Channels are a great way to group your media. Make a channel to suite your needs be it a podcast or drafting class. Be sure to check out what other great channels have been collecting videos. 
                 </p>
             </div>
 
