@@ -2,10 +2,7 @@
 
 class UNL_MediaHub_MediaList_Filter_ShowRecent implements UNL_MediaHub_Filter
 {
-    function apply(Doctrine_Query &$query)
-    {
-        $query->where('m.datecreated <= NOW()');
-    }
+    function apply(Doctrine_Query &$query) {}
     
     function getLabel()
     {
