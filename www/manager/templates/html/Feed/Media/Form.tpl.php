@@ -491,7 +491,7 @@ $controller->setReplacementData('head', $js);
                             </li>
                         </ol>
                     </fieldset>
-                    <input type="submit" name="submit" id="continue3" value="Save" class="wdn-pull-left" /><?php echo $savvy->render($context->media, 'Media/DeleteForm.tpl.php'); ?>
+                    <input type="submit" name="submit" id="continue3" value="Save" class="wdn-pull-left" />
                 </div>
                 
                 <?php
@@ -520,6 +520,7 @@ $controller->setReplacementData('head', $js);
         </div>
     </div>
 </form>
+<?php echo $savvy->render($context->media, 'Media/DeleteForm.tpl.php'); ?>
 
 <script type="text/javascript">
 

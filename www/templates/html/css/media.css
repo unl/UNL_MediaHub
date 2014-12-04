@@ -239,6 +239,12 @@ body #cboxOverlay {background-color:#000;}
     margin-right: .75em;
 }
 
+.edit-button{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
 @media only screen and (max-width: 480px)  {
 
     .mh-hide-bp1 {
