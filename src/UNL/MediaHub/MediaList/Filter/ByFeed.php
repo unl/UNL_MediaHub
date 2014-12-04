@@ -15,7 +15,7 @@ class UNL_MediaHub_MediaList_Filter_ByFeed implements UNL_MediaHub_Filter
     
     function apply(Doctrine_Query &$query)
     {
-        $sql = 'UNL_MediaHub_Feed_Media.feed_id = ? AND UNL_MediaHub_Feed_Media.media_id = m.id';
+        $sql = 'm.UNL_MediaHub_Feed_Media.feed_id = ?';
         $params = array($this->feed->id);
         
         $query->where($sql, $params);
