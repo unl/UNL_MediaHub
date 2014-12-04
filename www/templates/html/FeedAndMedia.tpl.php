@@ -17,9 +17,11 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
         <div class="wdn-grid-set">
             <div class="bp2-wdn-col-one-fourth wdn-pull-right">
                 <div class="mh-channel-thumb wdn-center">
-                <?php $channelImage = file_get_contents($feed_url."/image"); ?>
-                <?php if($channelImage): ?>
-                    <img src="<?php echo $feed_url; ?>/image" alt="<?php echo htmlentities($context->feed->title, ENT_QUOTES); ?> Image" />
+                <?php $url = htmlentities(UNL_MediaHub_Controller::getURL($context->feed), ENT_QUOTES) ?>
+                <?php if($context->feed->hasImage()): ?>
+                    <img
+                    src="<?php echo $url; ?>/image"
+                    alt="<?php echo htmlentities($context->feed->title, ENT_QUOTES); ?> Image">
                 <?php else: ?>
                     <div>
                         <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon.svg"><img src="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon-white.png"></object>

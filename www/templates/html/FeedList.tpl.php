@@ -63,13 +63,14 @@ if (isset($context->label) && !empty($context->label)) {
                                 <div class="bp2-wdn-col-one-fourth wdn-pull-right">
                                     <a href="<?php echo $url ?>">
                                     <div class="mh-channel-thumb wdn-center">
-                                        <?php $channelImage = file_get_contents($url."/image"); ?>
-                                        <?php if(!$channelImage): ?>
+                                        <?php if($feed->hasImage()): ?>
+                                            <img
+                                            src="<?php echo $url; ?>/image"
+                                            alt="<?php echo htmlentities($feed->title, ENT_QUOTES); ?> Image">
+                                        <?php else: ?>
                                             <div>
                                                 <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon.svg"><img src="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon-white.png"></object>
                                             </div>
-                                        <?php else: ?>
-                                                <img src="<?php echo $url; ?>/image" alt="<?php echo htmlentities($feed->title, ENT_QUOTES); ?> Image" />
                                         <?php endif; ?>
                                     </div>
                                     </a>
