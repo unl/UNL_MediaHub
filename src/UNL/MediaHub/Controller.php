@@ -187,6 +187,11 @@ class UNL_MediaHub_Controller
     {
         return self::$user;
     }
+    
+    static function setUser(UNL_MediaHub_User $user = NULL)
+    {
+        self::$user = $user;
+    }
 
     /**
      * Get the cache key for the data prepared by the controller

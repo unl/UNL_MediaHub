@@ -7,7 +7,7 @@ $feed_url = htmlentities(UNL_MediaHub_Controller::getURL($context->feed), ENT_QU
 <div class="wdn-band wdn-light-neutral-band mh-feed-info">
     <div class="wdn-inner-wrapper">
         <h1 class="wdn-brand wdn-pull-left"><?php echo htmlentities($context->feed->title) ?></h1>
-        <?php if ($context->feed->userCanEdit($user)): ?>
+        <?php if ($user && $context->feed->userCanEdit($user)): ?>
             <a href="<?php echo UNL_MediaHub_Manager::getURL()?>?view=feedmetadata&amp;id=<?php echo $context->feed->id ?>" class="wdn-button wdn-button-brand wdn-pull-left mh-channel-edit-button">Edit</a>
         <?php endif ?>
         <div class="wdn-pull-right mh-rss"><a href="?format=xml" title="RSS feed for this channel"><span class="wdn-icon-rss-squared"></span></a></div>
