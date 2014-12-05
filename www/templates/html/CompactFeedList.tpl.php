@@ -13,7 +13,9 @@ if (count($context->items)) :
                         src="<?php echo $feed_url; ?>/image"
                         alt="<?php echo htmlentities($channel->title, ENT_QUOTES); ?> Image">
                     <?php else: ?>
-                        <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon.svg"><img src="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon-white.png"></object>
+                        <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon.svg">
+                            <img src="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon-white.png" alt="<?php echo htmlentities($channel->title, ENT_QUOTES); ?> Image">
+                        </object>
                     <?php endif; ?>
                 </div>
             </div>
