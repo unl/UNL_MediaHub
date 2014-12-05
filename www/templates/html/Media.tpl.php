@@ -148,7 +148,15 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
                             <li><a href="<?php echo UNL_MediaHub_Controller::$url.'tags/'.urlencode(trim($tag)) ?>"><?php echo $tag ?></a></li>
                         <?php endforeach; ?>
                         <?php if ($user && $context->userCanEdit($user)): ?>
-                            <li id="mediaTagsAdd"><a href="#" title="Add a tag"></a><form id="addTags" method="post"><input type="text" value="" name="tags" ><input type="submit" value="Add" ></form></li>
+                            <li id="mediaTagsAdd">
+                                <a href="#" title="Add a tag"></a>
+                                <form id="addTags" method="post">
+                                    <label for="new_tag">Please enter a tag name
+                                       <input type="text" value="" name="tags" id="new_tag" >
+                                    </label>
+                                    <input type="submit" value="Add" >
+                                </form>
+                            </li>
                         <?php endif; ?>
                     </ul>
                 <?php endif; ?>
