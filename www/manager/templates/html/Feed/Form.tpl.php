@@ -40,7 +40,7 @@
                     </span>
                 <?php endif; ?>    
             </h1>
-            <input id="media_submit" name="submit" value="Save" class="wdn-button wdn-pull-right" type="submit" />
+            <input name="submit" value="Save" class="wdn-button wdn-pull-right" type="submit" />
 
             <div class="clear">
             </div>
@@ -482,12 +482,8 @@
                                 </div>
                             </li>
                             <li>
-                                <label for="media_submit" class="element">&nbsp;</label>
                                 <div class="element">
-                                    <input id="media_submit" class="wdn-pull-left"name="submit" value="Save" class="wdn-button wdn-button-brand" type="submit" />
-                                    <?php if (isset($context->feed)): ?>
-                                        <?php echo $savvy->render($context->feed, 'Feed/DeleteForm.tpl.php'); ?>
-                                    <?php endif; ?>
+                                    <input type="submit"  name="submit" value="Save" class="wdn-button wdn-button-brand wdn-pull-left" />
                                 </div>
                             </li>
                         </ol>
@@ -495,6 +491,9 @@
                 </div>
             </div>
         </form>
+        <?php if (isset($context->feed)): ?>
+            <?php echo $savvy->render($context->feed, 'Feed/DeleteForm.tpl.php'); ?>
+        <?php endif; ?>
     </div>
 </div>
 
