@@ -52,7 +52,7 @@ if ($context->isVideo()) {
 
                             var html = '<div class="media-content-head">';
                             html += '<div class="media-content-title">' + $title + '</div>';
-                            html += '<a href="#" rel="nofollow" class="share-video-link"></a>';
+                            html += '<a href="#" rel="nofollow" class="share-video-link" title="Share this video"></a>';
                             html += '<div class="share-video-form">';
                             html += '<em class="share-video-close">x</em>';
                             html += '<h4>' + 'share this video' + '</h4>';
