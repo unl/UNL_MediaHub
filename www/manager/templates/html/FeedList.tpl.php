@@ -16,7 +16,7 @@
                                     alt="<?php echo htmlentities($feed->title, ENT_QUOTES); ?> Image">
                                 <?php else: ?>
                                     <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon.svg">
-                                        <img src="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon-white.png" alt="<?php echo htmlentities($channel->title, ENT_QUOTES); ?> Image">
+                                        <img src="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon-white.png" alt="<?php echo htmlentities($feed->title, ENT_QUOTES); ?> Image">
                                     </object>
                                 <?php endif; ?>
                             </div>
