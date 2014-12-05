@@ -83,13 +83,13 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
                 }
                 ?>
 
-                <p>
+                <div class="mh-authoring">
                     <?php if (!empty($context->author)): // @TODO present author with more info (standardize people records) ?>
                         <div class="wdn-sans-serif">Author: <?php echo $context->author; ?></div>
                     <?php endif; ?>
 
                     <div class="wdn-sans-serif">Added: <?php echo date('m/d/Y', strtotime($context->datecreated)); ?></div>
-                </p>
+                </div>
 
                 <div class="wdn-grid-set wdn-center">
 
