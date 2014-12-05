@@ -110,7 +110,7 @@
                 </div>
                 <div class="bp2-wdn-col-three-fifths">
                     <div style="display: none;">
-                        <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed" />
+                        <input type="hidden" name="__unlmy_posttarget" value="feed" />
                         <?php
                         if (isset($context->feed->id)) {
                             echo '<input type="hidden" id="id" name="id" value="'.$context->feed->id.'" />';
