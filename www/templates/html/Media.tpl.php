@@ -75,13 +75,12 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
                 <?php if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_itunes::mediaHasElement($context->id, 'subtitle')): ?>
                     <h3 class="itunes_subtitle"><?php echo $element->value ?></h3>
                 <?php endif; ?>
-                <?php $summary = $context->description;
-                
-                 $summary = strip_tags($summary, "<a><br><p><ul><ol><li><strong><em>");
-                
-                if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_itunes::mediaHasElement($context->id, 'summary')):
-                    $summary .= '<span class="itunes_summary">'.$element->value.'</span>';
-                endif;
+                <?php
+                $summary = strip_tags($context->description, "<a><br><p><ul><ol><li><strong><em>");
+            
+                if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_itunes::mediaHasElement($context->id, 'summary')) {
+                    $summary .= '<div class="itunes_summary">'.$element->value.'</div>';
+                }
                 ?>
 
                 <p>
@@ -132,7 +131,7 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
                     </div>  
                 </div>          
 
-                <p><?php echo $summary; ?></p>
+                <div class="mh-summary"><?php echo $summary; ?></div>
 
 
                 <?php if (($tags = $context->getTags()) || ($user && $context->userCanEdit($user))): ?>
