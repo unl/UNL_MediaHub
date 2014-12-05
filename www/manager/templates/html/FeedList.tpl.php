@@ -10,10 +10,10 @@
                     <a href="<?php echo $feed_url ?>">
                         <div class="mh-video-thumb mh-channel-thumb mh-featured-channel wdn-center">
                             <div class="mh-thumbnail-clip">
-                                <?php if($channel->hasImage()): ?>
+                                <?php if($feed->hasImage()): ?>
                                     <img
                                     src="<?php echo $feed_url; ?>/image"
-                                    alt="<?php echo htmlentities($channel->title, ENT_QUOTES); ?> Image">
+                                    alt="<?php echo htmlentities($feed->title, ENT_QUOTES); ?> Image">
                                 <?php else: ?>
                                     <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon.svg">
                                         <img src="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon-white.png" alt="<?php echo htmlentities($channel->title, ENT_QUOTES); ?> Image">
