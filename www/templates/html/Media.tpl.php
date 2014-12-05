@@ -15,16 +15,15 @@ $context->loadReference('UNL_MediaHub_Media_Comment');
 $controller->setReplacementData('title', htmlspecialchars($context->title) . ' | MediaHub | University of Nebraska-Lincoln');
 $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li>'.htmlspecialchars($context->title).'</li></ul>');
 $meta = '
-<meta name="title" content="'.htmlentities($context->title, ENT_QUOTES).'" />
-<meta name="description" content="'.htmlentities(strip_tags($context->description), ENT_QUOTES).'" />
-<link rel="image_src" href="'.$context->getThumbnailURL().'" />
+<meta property="og:title" content="'.htmlentities($context->title, ENT_QUOTES).'" />
+<meta property="og:description" content="'.htmlentities(strip_tags($context->description), ENT_QUOTES).'" />
+<meta property="og:image" content="'.$context->getThumbnailURL().'" />
+<meta property="og:type" content="'.$type.'">
 <script type="text/javascript">
     WDN.initializePlugin("modal", [function() {
         WDN.jQuery(\'span.embed\').colorbox({inline: true, href:\'#sharing\', width:\'600px\', height:\'310px\'});
     }]);
 </script>
-<meta name="medium" content="'.$type.'" />
-<meta property="og:type" content="'.$type.'">
 ';
 
 if ($context->privacy !== 'PUBLIC') {
@@ -33,12 +32,9 @@ if ($context->privacy !== 'PUBLIC') {
 
 if ($type == 'video') {
     $meta .= '
-    <link rel="video_src" href="'.$context->url.'" />
     <meta property="og:video" content="'.htmlentities($context->url, ENT_QUOTES).'" />
     <meta property="og:video:height" content="'.$height.'" />
     <meta property="og:video:width" content="'.$width.'" />
-    <meta property="og:video:type" content="'.$context->type.'" />
-    <meta property="og:image" content="'.$context->getThumbnailURL().'">
     <meta property="og:video" content="'.UNL_MediaHub_Controller::getURL($context).'" />
     <meta property="og:video:type" content="text/html" />
     ';
@@ -46,7 +42,6 @@ if ($type == 'video') {
 	$meta .= '
 	<meta property="og:audio" content="'.$context->url.'" />
 	<meta property="og:audio:title" content="'.htmlentities($context->title, ENT_QUOTES).'" />
-	<meta property="og:audio:type" content="'.$context->type.'" />
 	';
 }
 $controller->setReplacementData('head', $meta);
