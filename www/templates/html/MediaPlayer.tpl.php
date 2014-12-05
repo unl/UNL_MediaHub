@@ -47,7 +47,6 @@ if ($context->isVideo()) {
                             //create share links
                             var links = '';
                             for (var key in sharelinks) {
-                                //links += '<a href="" rel="nofollow" class="'+key+'" target="_blank" title="Share on '+sharelinks[key].title+'"></a>';
                                 links += '<a href="'+sharelinks[key].url+'" rel="nofollow" target="_blank" class="'+key+'" title="Share on '+sharelinks[key].title+'"></a>';
                             }
 
