@@ -4,7 +4,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
 
 <div class="wdn-band wdn-light-neutral-band mh-upload-band">
     <div class="wdn-inner-wrapper">
-        <h1 class="wdn-brand">Manage Media</h1>
+        <h1 class="wdn-brand clear-top">Manage Media</h1>
         <form action="?" method="post" id="add_media">
             <input type="hidden" name="__unlmy_posttarget" value="feed_media" />
             <input type="hidden" id="media_url" name="url" value="">
