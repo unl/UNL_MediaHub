@@ -79,7 +79,7 @@
                         <legend>Channel Image</legend>
                         <ol>
                             <li>
-                                <label class="element">Image File</label>
+                                <label class="element" for="image_file">Image File</label>
                                 <div class="mh-tooltip italic wdn-icon-info hang-right" id="image-file-details">
                                     <div>
                                         <p>Images should follow the standard UNL image standards. <a href="https://github.com/unl/UNL_MediaHub/raw/master/designFiles/feedTemplate.psd">(get the sample template)</a></p>
