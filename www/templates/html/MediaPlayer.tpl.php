@@ -47,7 +47,8 @@ if ($context->isVideo()) {
                             //create share links
                             var links = '';
                             for (var key in sharelinks) {
-                                links += '<a href="#" rel="nofollow" class="'+key+'" title="Share on '+sharelinks[key].title+'"></a>';
+                                //links += '<a href="" rel="nofollow" class="'+key+'" target="_blank" title="Share on '+sharelinks[key].title+'"></a>';
+                                links += '<a href="'+sharelinks[key].url+'" rel="nofollow" target="_blank" class="'+key+'" title="Share on '+sharelinks[key].title+'"></a>';
                             }
 
                             var html = '<div class="media-content-head">';
@@ -123,15 +124,6 @@ if ($context->isVideo()) {
                                 e.preventDefault();
                                 
                                 toggle_share_form($(this).parents('.mejs-container'));
-                            });
-
-                            // add share links listener
-                            $inner.find('.video-social-share a').click(function(e){
-                                e.preventDefault();
-                                key = $(this).attr('class');
-                                if(sharelinks[key]) {
-                                    window.open(sharelinks[key].url);
-                                }
                             });
                         }
                     }
