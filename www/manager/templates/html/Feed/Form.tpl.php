@@ -46,8 +46,8 @@
             </div>
             <div class="wdn-grid-set">
                 <div class="bp2-wdn-col-three-fifths">
-                    <legend>Basic Information</legend> 
                     <fieldset>
+                        <legend>Basic Information</legend>
                         <ol>
                             <li>
                                 <label for="title">Title<span class="required">*</span></label>
