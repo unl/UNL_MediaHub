@@ -240,7 +240,7 @@ class UNL_MediaHub_Feed extends UNL_MediaHub_Models_BaseFeed
      */
     public function hasImage()
     {
-        if (!empty($this->image_data)) {
+        if (!empty($this->image_data) && !empty($this->image_type)) {
             return true;
         }
         return false;

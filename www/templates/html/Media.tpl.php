@@ -15,16 +15,15 @@ $context->loadReference('UNL_MediaHub_Media_Comment');
 $controller->setReplacementData('title', htmlspecialchars($context->title) . ' | MediaHub | University of Nebraska-Lincoln');
 $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li>'.htmlspecialchars($context->title).'</li></ul>');
 $meta = '
-<meta name="title" content="'.htmlentities($context->title, ENT_QUOTES).'" />
-<meta name="description" content="'.htmlentities(strip_tags($context->description), ENT_QUOTES).'" />
-<link rel="image_src" href="'.$context->getThumbnailURL().'" />
+<meta property="og:title" content="'.htmlentities($context->title, ENT_QUOTES).'" />
+<meta property="og:description" content="'.htmlentities(strip_tags($context->description), ENT_QUOTES).'" />
+<meta property="og:image" content="'.$context->getThumbnailURL().'" />
+<meta property="og:type" content="'.$type.'">
 <script type="text/javascript">
     WDN.initializePlugin("modal", [function() {
         WDN.jQuery(\'span.embed\').colorbox({inline: true, href:\'#sharing\', width:\'600px\', height:\'310px\'});
     }]);
 </script>
-<meta name="medium" content="'.$type.'" />
-<meta property="og:type" content="'.$type.'">
 ';
 
 if ($context->privacy !== 'PUBLIC') {
@@ -33,12 +32,9 @@ if ($context->privacy !== 'PUBLIC') {
 
 if ($type == 'video') {
     $meta .= '
-    <link rel="video_src" href="'.$context->url.'" />
     <meta property="og:video" content="'.htmlentities($context->url, ENT_QUOTES).'" />
     <meta property="og:video:height" content="'.$height.'" />
     <meta property="og:video:width" content="'.$width.'" />
-    <meta property="og:video:type" content="'.$context->type.'" />
-    <meta property="og:image" content="'.$context->getThumbnailURL().'">
     <meta property="og:video" content="'.UNL_MediaHub_Controller::getURL($context).'" />
     <meta property="og:video:type" content="text/html" />
     ';
@@ -46,7 +42,6 @@ if ($type == 'video') {
 	$meta .= '
 	<meta property="og:audio" content="'.$context->url.'" />
 	<meta property="og:audio:title" content="'.htmlentities($context->title, ENT_QUOTES).'" />
-	<meta property="og:audio:type" content="'.$context->type.'" />
 	';
 }
 $controller->setReplacementData('head', $meta);
@@ -80,22 +75,23 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
                 <?php if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_itunes::mediaHasElement($context->id, 'subtitle')): ?>
                     <h3 class="itunes_subtitle"><?php echo $element->value ?></h3>
                 <?php endif; ?>
-                <?php $summary = $context->description;
-                
-                 $summary = strip_tags($summary, "<a><br><p><ul><ol><li><strong><em>");
-                
-                if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_itunes::mediaHasElement($context->id, 'summary')):
-                    $summary .= '<span class="itunes_summary">'.$element->value.'</span>';
-                endif;
+                <?php
+                $purifier = new HTMLPurifier();
+                $summary = strip_tags($context->description, "<a><br><p><ul><ol><li><strong><em>");
+                $summary = $purifier->purify($summary);
+            
+                if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_itunes::mediaHasElement($context->id, 'summary')) {
+                    $summary .= '<div class="itunes_summary">'.$element->value.'</div>';
+                }
                 ?>
 
-                <p>
+                <div class="mh-authoring">
                     <?php if (!empty($context->author)): // @TODO present author with more info (standardize people records) ?>
                         <div class="wdn-sans-serif">Author: <?php echo $context->author; ?></div>
                     <?php endif; ?>
 
                     <div class="wdn-sans-serif">Added: <?php echo date('m/d/Y', strtotime($context->datecreated)); ?></div>
-                </p>
+                </div>
 
                 <div class="wdn-grid-set wdn-center">
 
@@ -137,10 +133,10 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
                     </div>  
                 </div>          
 
-                <p><?php echo $summary; ?></p>
+                <div class="mh-summary"><?php echo $summary; ?></div>
 
 
-                <?php if (($tags = $context->getTags()) || $context->userCanEdit($user)): ?>
+                <?php if (($tags = $context->getTags()) || ($user && $context->userCanEdit($user))): ?>
                     <hr>
                     <ul id="mediaTags" class="wdn-sans-serif">
                         <li class="wdn-sans-serif mh-tag-label">Tags:</li>
@@ -148,7 +144,15 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
                             <li><a href="<?php echo UNL_MediaHub_Controller::$url.'tags/'.urlencode(trim($tag)) ?>"><?php echo $tag ?></a></li>
                         <?php endforeach; ?>
                         <?php if ($user && $context->userCanEdit($user)): ?>
-                            <li id="mediaTagsAdd"><a href="#"></a><form id="addTags" method="post"><input type="text" value="" name="tags" ><input type="submit" value="Add" ></form></li>
+                            <li id="mediaTagsAdd">
+                                <a href="#" title="Add a tag"></a>
+                                <form id="addTags" method="post">
+                                    <label for="new_tag">Please enter a tag name
+                                       <input type="text" value="" name="tags" id="new_tag" >
+                                    </label>
+                                    <input type="submit" value="Add" >
+                                </form>
+                            </li>
                         <?php endif; ?>
                     </ul>
                 <?php endif; ?>
@@ -212,10 +216,12 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
 
 <div id="sharing">
     <h3>Embed</h3>
-    <p>Copy the following code into your unl.edu page</p>
 
     <?php 
     $embed = $savvy->render(UNL_MediaHub_Media_Embed::getById($context->id, UNL_MediaHub_Controller::$current_embed_version));
     ?>
-    <textarea cols="25" rows="6" onclick="this.select(); return false;"><?php echo htmlentities($embed, ENT_COMPAT | ENT_HTML401, "UTF-8"); ?></textarea>
+    <label for="embed_code">
+        Copy the following code into your unl.edu page
+        <textarea cols="25" rows="6" id="embed_code" onclick="this.select(); return false;"><?php echo htmlentities($embed, ENT_COMPAT | ENT_HTML401, "UTF-8"); ?></textarea>
+    </label>
 </div> 

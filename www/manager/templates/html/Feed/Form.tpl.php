@@ -40,14 +40,14 @@
                     </span>
                 <?php endif; ?>    
             </h1>
-            <input id="media_submit" name="submit" value="Save" class="wdn-button wdn-button-brand wdn-pull-right" type="submit" />
+            <input name="submit" value="Save" class="wdn-button wdn-pull-right" type="submit" />
 
             <div class="clear">
             </div>
             <div class="wdn-grid-set">
                 <div class="bp2-wdn-col-three-fifths">
-                    <legend>Basic Information</legend> 
                     <fieldset>
+                        <legend>Basic Information</legend>
                         <ol>
                             <li>
                                 <label for="title">Title<span class="required">*</span></label>
@@ -79,7 +79,7 @@
                         <legend>Channel Image</legend>
                         <ol>
                             <li>
-                                <label class="element">Image File</label>
+                                <label class="element" for="image_file">Image File</label>
                                 <div class="mh-tooltip italic wdn-icon-info hang-right" id="image-file-details">
                                     <div>
                                         <p>Images should follow the standard UNL image standards. <a href="https://github.com/unl/UNL_MediaHub/raw/master/designFiles/feedTemplate.psd">(get the sample template)</a></p>
@@ -110,7 +110,7 @@
                 </div>
                 <div class="bp2-wdn-col-three-fifths">
                     <div style="display: none;">
-                        <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed" />
+                        <input type="hidden" name="__unlmy_posttarget" value="feed" />
                         <?php
                         if (isset($context->feed->id)) {
                             echo '<input type="hidden" id="id" name="id" value="'.$context->feed->id.'" />';
@@ -482,12 +482,8 @@
                                 </div>
                             </li>
                             <li>
-                                <label for="media_submit" class="element">&nbsp;</label>
                                 <div class="element">
-                                    <input id="media_submit" class="wdn-pull-left"name="submit" value="Save" class="wdn-button wdn-button-brand" type="submit" />
-                                    <?php if (isset($context->feed)): ?>
-                                        <?php echo $savvy->render($context->feed, 'Feed/DeleteForm.tpl.php'); ?>
-                                    <?php endif; ?>
+                                    <input type="submit"  name="submit" value="Save" class="wdn-button wdn-button-brand wdn-pull-left" />
                                 </div>
                             </li>
                         </ol>
@@ -495,6 +491,9 @@
                 </div>
             </div>
         </form>
+        <?php if (isset($context->feed)): ?>
+            <?php echo $savvy->render($context->feed, 'Feed/DeleteForm.tpl.php'); ?>
+        <?php endif; ?>
     </div>
 </div>
 

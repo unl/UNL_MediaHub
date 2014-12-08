@@ -41,7 +41,9 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
             <div class="wdn-col mh-featured">
                 <a href="<?php echo $baseUrl ?>manager/">
                     <div class="mh-featured-icon centered mh-red">
-                        <img src="<?php echo $baseUrl; ?>/templates/html/css/images/gear-icon-white.png">
+                        <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/gear-icon.svg">
+                            <img src="<?php echo $baseUrl; ?>/templates/html/css/images/gear-icon-white.png" alt="manage media">
+                        </object>
                     </div>
                     <h2 class="wdn-brand">Manage Media</h2>
                 </a>
@@ -52,7 +54,9 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
             <div class="wdn-col mh-featured">
                 <a href="<?php echo $baseUrl ?>search/">
                     <div class="mh-featured-icon centered mh-green">
-                        <img src="<?php echo $baseUrl; ?>/templates/html/css/images/play-icon-white.png">
+                        <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/play-icon.svg">
+                            <img src="<?php echo $baseUrl; ?>/templates/html/css/images/play-icon-white.png" alt="browse media">
+                        </object>
                     </div>
                     <h2 class="wdn-brand">Browse Media</h2>
                 </a>
@@ -63,7 +67,9 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
             <div class="wdn-col mh-featured">
                 <a href="<?php echo $baseUrl ?>channels/">
                     <div class="mh-featured-icon centered mh-blue">
-                        <img src="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon-white.png">
+                        <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon.svg">
+                            <img src="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon-white.png" alt="explore channels">
+                        </object>
                     </div>
                     <h2 class="wdn-brand">Explore Channels</h2>
                 </a>

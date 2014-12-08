@@ -4,8 +4,8 @@ Supporting styles for listings of channels
 -------------------------------------------------
 */
 
-.mh-list-header {
-	border-bottom: 1px solid #5b5b5a;
+.mh-list-header, .mh-feed-list > li {
+    border-bottom: 1px solid #d0cec6;
 }
 
 .mh-list-header h1 {
@@ -30,10 +30,6 @@ Supporting styles for listings of channels
 	list-style: none;
 }
 
-.mh-feed-list > li {
-	border-bottom: 1px solid #5b5b5a;
-}
-
 .mh-feed-list h2 {
 	margin-bottom: 0;
 }
@@ -49,16 +45,6 @@ Supporting styles for listings of channels
 
 .mh-feed-list li a {
 	border: 0;
-}
-
-@media (max-width: 768px) {
-	.mh-media-samples li:nth-child(n+5) {
-		display: none;
-	}
-	
-	.mh-feed-stats {
-		display: none;
-	}
 }
 
 .mh-feeds .wdn_pagination {
@@ -105,6 +91,39 @@ p.mh-more-info a {
 	position: relative;
 }
 
+.mh-channel-thumb > div {
+	background-color: rgba(194, 190, 174, 0.59);
+}
+
+.mh-channel-thumb object {
+	margin: 1.425em 0;
+}
+
+.mh-video-thumb.mh-channel-thumb object {
+	margin: 1.899em 0;
+}
+
 .mh-channel-thumb img{
 	margin-bottom: -9px;
+}
+
+@media (max-width: 960px) {
+	.mh-video-thumb.mh-channel-thumb object {
+	margin: 13% 0;
+	}
+}
+
+@media (max-width: 768px) {
+
+	.mh-media-samples li:nth-child(n+5) {
+		display: none;
+	}
+	
+	.mh-feed-stats {
+		display: none;
+	}
+	.mh-video-thumb.mh-channel-thumb object {
+	margin: 23% 0;
+	}
+
 }

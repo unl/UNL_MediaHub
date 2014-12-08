@@ -41,7 +41,7 @@ form .wdn-input-group .wdn-input-group-btn > button {
 }
 
 .mh-app-search {
-	margin: 4em 0 1em 0;
+	margin: 1em 0;
 }
 
 .mh-app-search > * {
@@ -64,7 +64,7 @@ ul.mh-channel-buttons {
 
 .mh-sort-filter .wdn-button{
 	border-radius: 15px;
-	padding: .75em 1em;
+	padding: 0.802em 1.333em;
 	margin-right: 1em;
 }
 

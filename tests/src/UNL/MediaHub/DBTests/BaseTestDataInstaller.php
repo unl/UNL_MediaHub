@@ -68,11 +68,55 @@ class UNL_MediaHub_DBTests_BaseTestDataInstaller implements UNL_MediaHub_DBTests
         $media_c->title       = 'Test Media C';
         $media_c->description = 'Test Media C Description';
         $media_c->save();
+
+        $media_d = new UNL_MediaHub_Media();
+        $media_d->url         = 'http://example.org/private.mov';
+        $media_d->uidcreated  = $user_a->uid;
+        $media_d->uidupdated  = $user_a->uid;
+        $media_d->type        = 'audio/mp3';
+        $media_d->title       = 'Test Media - Private in feed A';
+        $media_d->description = 'for testing';
+        $media_d->privacy     = 'PRIVATE';
+        $media_d->save();
+
+        $media_e = new UNL_MediaHub_Media();
+        $media_e->url         = 'http://example.org/unlisted.mov';
+        $media_e->uidcreated  = $user_a->uid;
+        $media_e->uidupdated  = $user_a->uid;
+        $media_e->type        = 'audio/mp3';
+        $media_e->title       = 'Test Media - Unlisted in feed A';
+        $media_e->description = 'for testing';
+        $media_e->privacy     = 'UNLISTED';
+        $media_e->save();
+
+        $media_f = new UNL_MediaHub_Media();
+        $media_f->url         = 'http://example.org/private.mov';
+        $media_f->uidcreated  = $user_b->uid;
+        $media_f->uidupdated  = $user_b->uid;
+        $media_f->type        = 'audio/mp3';
+        $media_f->title       = 'Test Media - Private in feed B';
+        $media_f->description = 'for testing';
+        $media_f->privacy     = 'PRIVATE';
+        $media_f->save();
+
+        $media_g = new UNL_MediaHub_Media();
+        $media_g->url         = 'http://example.org/unlisted.mov';
+        $media_g->uidcreated  = $user_b->uid;
+        $media_g->uidupdated  = $user_b->uid;
+        $media_g->type        = 'audio/mp3';
+        $media_g->title       = 'Test Media - Unlisted in feed B';
+        $media_g->description = 'for testing';
+        $media_g->privacy     = 'UNLISTED';
+        $media_g->save();
         
         //Add media to channels
         $feed_a->addMedia($media_a);
         $feed_b->addMedia($media_b);
         $feed_a->addMedia($media_c);
         $feed_b->addMedia($media_c);
+        $feed_a->addMedia($media_d);
+        $feed_a->addMedia($media_e);
+        $feed_b->addMedia($media_f);
+        $feed_b->addMedia($media_g);
     }
 }
