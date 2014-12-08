@@ -210,6 +210,14 @@ iframe * {margin:0px}
 }
 
 
+#deleteForm {
+    display: none;
+}
+
+input[value="Save"] {
+    margin-right: 1em;
+}
+
 form input[type="submit"].wdn-button-brand[disabled] {
     -webkit-box-shadow: none; 
     -moz-box-shadow: none;
