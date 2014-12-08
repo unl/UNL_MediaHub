@@ -32,7 +32,7 @@ $controller->setReplacementData('head', $js);
             <div class="wdn-grid-set" id="headline_main">
                 <div class="wdn-col-full">
                     <input type="submit" name="submit" value="Save" class="wdn-pull-right" />
-                    <h1 class="clear-top wdn-brand">Edit Media Details for <?php echo $context->media->title ?></h1>
+                    <h1 class="clear-top wdn-brand"><div class="wdn-subhead">Edit Media Details for</div> <?php echo $context->media->title ?></h1>
                 </div>  
                     <?php
                     if (isset($context->media)) {
@@ -492,6 +492,7 @@ $controller->setReplacementData('head', $js);
                         </ol>
                     </fieldset>
                     <input type="submit" name="submit" id="continue3" value="Save" class="wdn-pull-left" />
+                    <a href="javascript:WDN.jQuery('#deleteForm').submit();" class="wdn-button wdn-button-brand">Delete</a>
                 </div>
                 
                 <?php
