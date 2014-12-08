@@ -29,17 +29,16 @@ $controller->setReplacementData('head', $js);
     
     <div class="wdn-band wdn-light-triad-band">
         <div class="wdn-inner-wrapper">
-            <div class="wdn-col">
-                <input type="submit" name="submit" value="Save" class="wdn-pull-right" />
-                <h1 class="clear-top">Edit Media Details for <?php echo $context->media->title ?></h1>
-            </div>
-            
             <div class="wdn-grid-set" id="headline_main">
-                <?php
-                if (isset($context->media)) {
-                    echo $savvy->render($context->media, 'Media/Preview.tpl.php');
-                }
-                ?>
+                <div class="wdn-col-full">
+                    <input type="submit" name="submit" value="Save" class="wdn-pull-right" />
+                    <h1 class="clear-top wdn-brand">Edit Media Details for <?php echo $context->media->title ?></h1>
+                </div>  
+                    <?php
+                    if (isset($context->media)) {
+                        echo $savvy->render($context->media, 'Media/Preview.tpl.php');
+                    }
+                    ?>
             </div>
         </div>
     </div>
@@ -492,7 +491,7 @@ $controller->setReplacementData('head', $js);
                             </li>
                         </ol>
                     </fieldset>
-                    <input type="submit" name="submit" id="continue3" value="Save" class="wdn-pull-left" /><?php echo $savvy->render($context->media, 'Media/DeleteForm.tpl.php'); ?>
+                    <input type="submit" name="submit" id="continue3" value="Save" class="wdn-pull-left" />
                 </div>
                 
                 <?php
@@ -521,6 +520,7 @@ $controller->setReplacementData('head', $js);
         </div>
     </div>
 </form>
+<?php echo $savvy->render($context->media, 'Media/DeleteForm.tpl.php'); ?>
 
 <script type="text/javascript">
 
