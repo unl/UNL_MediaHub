@@ -53,6 +53,7 @@
         "simple-cas/simple-cas": "0.7.0",
         "saltybeagle/savvy": "0.8.1",
         "saltybeagle/savvy_turbo": "0.1.*",
-        "phpunit/phpunit": "~4.3"
+        "phpunit/phpunit": "~4.3",
+        "ezyang/htmlpurifier": "~4.6"
     }
 }
