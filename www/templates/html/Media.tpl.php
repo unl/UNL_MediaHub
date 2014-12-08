@@ -76,7 +76,9 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
                     <h3 class="itunes_subtitle"><?php echo $element->value ?></h3>
                 <?php endif; ?>
                 <?php
+                $purifier = new HTMLPurifier();
                 $summary = strip_tags($context->description, "<a><br><p><ul><ol><li><strong><em>");
+                $summary = $purifier->purify($summary);
             
                 if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_itunes::mediaHasElement($context->id, 'summary')) {
                     $summary .= '<div class="itunes_summary">'.$element->value.'</div>';
