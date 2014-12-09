@@ -77,6 +77,14 @@ class UNL_MediaHub_Controller
                        'UNL_MediaHub_Feed_Media_NamespacedElements_boxee',
                        'UNL_MediaHub_Feed_Media_NamespacedElements_geo',
                        'UNL_MediaHub_Feed_Media_NamespacedElements_mediahub');
+    
+    protected $auto_auth_models = array(
+        'UNL_MediaHub_MediaList',
+        'UNL_MediaHub_DefaultHomepage',
+        'UNL_MediaHub_FeedList',
+        'UNL_MediaHub_FeedAndMedia',
+        'media',
+    );
 
     /**
      * Construct a new controller.
@@ -101,7 +109,15 @@ class UNL_MediaHub_Controller
         }
 
         // Start authentication for comment system.
-        UNL_MediaHub_AuthService::getInstance();
+        $auth = UNL_MediaHub_AuthService::getInstance();
+        
+        //Auto login for select views (only if the unl_sso cookie exists).
+        if (array_key_exists('unl_sso', $_COOKIE)
+            && !$auth->isLoggedIn() 
+            && in_array($this->options['model'], $this->auto_auth_models)) {
+            
+            $auth->login();
+        }
 
         UNL_MediaHub_Feed_Media_NamespacedElements_mediahub::$uri = UNL_MediaHub_Controller::$url . "schema/mediahub.xsd";
     }
@@ -171,6 +187,7 @@ class UNL_MediaHub_Controller
             || $this->options['model'] == 'media_vtt') {
             UNL_MediaHub_OutputController::setOutputTemplate('UNL_MediaHub_Controller', 'ControllerPartial');
         }
+        
         // Send headers for CORS support so calendar bits can be pulled remotely
         header('Access-Control-Allow-Origin: *');
         header('Access-Control-Allow-Methods: GET, OPTIONS');
