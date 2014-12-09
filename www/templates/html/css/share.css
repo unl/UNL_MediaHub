@@ -159,6 +159,9 @@
     min-height: 75px;
 }
 
+.mejs-controls .mejs-time-rail .mejs-time-loaded {
+    background: #d00000 !important;
+}
 
 @media (max-width: 480px) {
     .share-video-form {
