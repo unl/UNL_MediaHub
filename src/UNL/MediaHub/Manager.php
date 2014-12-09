@@ -1,20 +1,6 @@
 <?php
 class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_MediaHub_PostRunReplacements
 {
-    /**
-     * The auth object.
-     *
-     * @var UNL_Auth
-     */
-    protected $auth;
-    
-    /**
-     * The user that's logged in.
-     *
-     * @var UNL_MediaHub_User
-     */
-    protected static $user;
-    
     public $output;
     
     public $options = array('view'=>'home', 'format'=>'html');
@@ -54,16 +40,10 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
     {
         self::$mediahub = new UNL_MediaHub();
         
-        $this->auth = UNL_Auth::factory('SimpleCAS');
-        $this->auth->login();
-        if (isset($_GET['logout'])) {
-            $this->auth->logout();
-            exit();
-        }
+        $auth = UNL_MediaHub_AuthService::getInstance();
+        $auth->login();
         
         $this->options = $options + $this->options;
-        
-        self::$user = UNL_MediaHub_User::getByUid($this->auth->getUser());
     }
     
     function getCacheKey()
@@ -148,26 +128,6 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
         } catch (Exception $e) {
             $this->output = $e;
         }
-    }
-    
-    /**
-     * Determines if the user is logged in.
-     *
-     * @return bool
-     */
-    function isLoggedIn()
-    {
-        return $this->auth->isLoggedIn();
-    }
-    
-    /**
-     * Get the user
-     *
-     * @return UNL_MediaHub_User
-     */
-    public static function getUser()
-    {
-        return self::$user;
     }
 
     /**
