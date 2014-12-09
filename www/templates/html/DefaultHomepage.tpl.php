@@ -10,9 +10,9 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
         <div class="mh-search-image">
             <div id="video-container">
                 <video id="video-player" preload="metadata" autoplay="autoplay" loop="" class="fillWidth">
-                    <source src="http://admissions.unl.edu/includes/videos/why-unl/why-unl.mp4" type="video/mp4">
-                    <source src="http://admissions.unl.edu/includes/videos/why-unl/why-unl.webm" type="video/webm">
-                    <source src="http://admissions.unl.edu/includes/videos/why-unl/why-unl.ogg" type="video/ogg">
+                    <source src="<?php echo $baseUrl ?>templates/html/featured-video/blurdarklights.m4v" type="video/mp4">
+                    <!-- <source src="http://admissions.unl.edu/includes/videos/why-unl/why-unl.webm" type="video/webm">
+                    <source src="http://admissions.unl.edu/includes/videos/why-unl/why-unl.ogg" type="video/ogg"> -->
                     Your browser does not support the video tag. I suggest you upgrade your browser.
                 </video>
             </div>
