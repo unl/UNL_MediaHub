@@ -4,7 +4,8 @@ ini_set('display_errors', true);
 error_reporting(E_ALL);
 
 set_include_path(
-    dirname(__FILE__).'/src'
+    get_include_path()
+    .PATH_SEPARATOR.dirname(__FILE__).'/src'
     .PATH_SEPARATOR.dirname(__FILE__).'/lib/php'
     .PATH_SEPARATOR.dirname(__FILE__).'/vendor/simple-cas/simple-cas/src'
     .PATH_SEPARATOR.dirname(__FILE__).'/vendor/UNL/unl_cache_lite'
