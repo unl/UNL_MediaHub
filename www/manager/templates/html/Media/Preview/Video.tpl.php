@@ -1,7 +1,7 @@
-<div id="videoData" class="bp2-wdn-col-two-sevenths wdn-pull-right">
-    <h5 class="clear-top">Set a Thumbnail</h5>
+<div id="videoData" class="wdn-col-two-sevenths wdn-pull-right">
+    <h5 class="clear-top wdn-sans-serif">Set a Thumbnail</h5>
     <ol>
-        <li>Pause the video at the left at the frame which you want as the image representation.</li>
+        <li>Pause the video to the left at the frame which you want as the image representation.</li>
         <li>Click the "Set Image" button to save this as your image representation.</li>
         <li>Continue with the form below.</li>
     </ol>
@@ -21,7 +21,7 @@
     </div>
 </div>
 
-<div id="videoDisplay" class="bp2-wdn-col-five-sevenths">
+<div id="videoDisplay" class="wdn-col-five-sevenths">
     <?php echo $savvy->render($context, 'MediaPlayer.tpl.php'); ?>
     <a class="wdn-button wdn-button-brand" id="setImage" href="#">Set Image</a>
 </div>

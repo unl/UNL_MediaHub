@@ -51,8 +51,8 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
 ?>
 
 
-<div class="wdn-band">
-    <div class="wdn-inner-wrapper wdn-inner-padding-no-bottom">
+<div class="wdn-band mh-video-band">
+    <div class="wdn-inner-wrapper">
     <?php echo $mediaplayer; ?>
     </div>
 
@@ -65,7 +65,7 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
                 
             <?php if ($user && $context->userCanEdit($user)): ?>
                 <div>
-                    <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=addmedia&id=' . $context->id ?>" class="wdn-button wdn-button-brand"><span class="wdn-icon-wrench wdn-icon"></span>Edit Page</a>
+                    <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=addmedia&id=' . $context->id ?>" class="wdn-button wdn-button-brand"><span class="wdn-icon-wrench wdn-icon"></span>Edit Media Details</a>
                 </div>
             <?php endif; ?>
 
