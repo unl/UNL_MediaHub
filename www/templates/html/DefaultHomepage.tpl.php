@@ -14,7 +14,8 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
                     <!-- <source src="http://admissions.unl.edu/includes/videos/why-unl/why-unl.webm" type="video/webm">
                     <source src="http://admissions.unl.edu/includes/videos/why-unl/why-unl.ogg" type="video/ogg"> -->
                     Your browser does not support the video tag. I suggest you upgrade your browser.
-                </video>>
+                </video>
+            </div>
         </div>
         <div class="mh-search">
             <div id="wdn_app_search">
