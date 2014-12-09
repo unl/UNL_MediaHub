@@ -24,17 +24,11 @@ class UNL_MediaHub_AuthService_UNL extends UNL_MediaHub_AuthService_Interface
      */
     public function isLoggedIn()
     {
-        if (!array_key_exists('unl_sso', $_COOKIE) && !$this->auth->isLoggedIn()) {
-            return false;
-        }
-
         if ($this->auth->isLoggedIn()) {
             return true;
         }
 
-        $this->auth->login();
-
-        return true;
+        return false;
     }
 
     public function login()
