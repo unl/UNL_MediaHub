@@ -245,10 +245,6 @@ body #cboxOverlay {background-color:#000;}
     right: 10px;
 }
 
-.mejs-controls .mejs-time-rail .mejs-time-loaded {
-    background: #d00000 !important;
-}
-
 .mh-video-band {
     background-color: #1e1e1e;
 }
