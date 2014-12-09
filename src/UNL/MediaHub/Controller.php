@@ -6,13 +6,6 @@ class UNL_MediaHub_Controller
     implements UNL_MediaHub_CacheableInterface, UNL_MediaHub_PostRunReplacements
 {
     /**
-     * Auth object for the client.
-     *
-     * @var UNL_Auth
-     */
-    protected static $auth;
-
-    /**
      * Array of options
      *
      * @var array
@@ -59,13 +52,6 @@ class UNL_MediaHub_Controller
      * @var int
      */
     public static $current_embed_version = 2;
-
-    /**
-     * currently logged in user, if any
-     *
-     * @var UNL_MediaHub_User
-     */
-    protected static $user;
 
     protected $view_map = array(
         'search'  => 'UNL_MediaHub_MediaList',
@@ -115,14 +101,10 @@ class UNL_MediaHub_Controller
         }
 
         // Start authentication for comment system.
-        include_once 'UNL/Auth.php';
-        self::$auth = UNL_Auth::factory('SimpleCAS');
+        $auth = UNL_MediaHub_AuthService::getInstance();
+        
         if (isset($_GET['logout'])) {
-            self::$auth->logout();
-        }
-
-        if (self::isLoggedIn()) {
-            self::$user = UNL_MediaHub_User::getByUid(self::$auth->getUser());
+            $auth->auth->logout();
         }
 
         UNL_MediaHub_Feed_Media_NamespacedElements_mediahub::$uri = UNL_MediaHub_Controller::$url . "schema/mediahub.xsd";
@@ -167,36 +149,6 @@ class UNL_MediaHub_Controller
         }
 
         return false;
-    }
-
-    /**
-     * Check if the user is logged in or not.
-     *
-     * @return bool
-     */
-    static function isLoggedIn()
-    {
-        if (!array_key_exists('unl_sso', $_COOKIE) && !self::$auth->isLoggedIn()) {
-            return false;
-        }
-        
-        if (self::$auth->isLoggedIn()) {
-            return true;
-        }
-        
-        self::$auth->login();
-
-        return true;
-    }
-
-    static function getUser()
-    {
-        return self::$user;
-    }
-    
-    static function setUser(UNL_MediaHub_User $user = NULL)
-    {
-        self::$user = $user;
     }
 
     /**
@@ -355,6 +307,8 @@ class UNL_MediaHub_Controller
      */
     protected function handlePost($post)
     {
+        $auth = UNL_MediaHub_AuthService::getInstance();
+        
         if (!$media = $this->findRequestedMedia($this->options)) {
             throw new Exception('Media ID must be passed.');
         }
@@ -372,7 +326,7 @@ class UNL_MediaHub_Controller
         }
 
         if (!empty($post['comment'])) {
-            if (!$user = self::getUser()) {
+            if (!$user = $auth->getUser()) {
                 throw new Exception('You must be logged in to make a comment.', 403);
             }
             
@@ -388,7 +342,7 @@ class UNL_MediaHub_Controller
         }
 
         if (!empty($post['tags'])) {
-            if (!$user = self::getUser()) {
+            if (!$user = $auth->getUser()) {
                 throw new Exception('You must be logged in to add a tag.', 403);
             }
             

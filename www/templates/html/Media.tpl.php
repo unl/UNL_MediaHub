@@ -184,7 +184,7 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
                     <?php endif; ?>
                 </div>
 
-                <?php if (UNL_MediaHub_Controller::isLoggedIn()): ?>
+                <?php if ($user): ?>
 
                     <?php $form = new UNL_MediaHub_Media_Comment_Form(); ?>
                     <?php echo $savvy->render($form); ?>

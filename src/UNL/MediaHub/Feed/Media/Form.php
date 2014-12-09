@@ -25,7 +25,7 @@ class UNL_MediaHub_Feed_Media_Form
                 throw new Exception('Media could not be found.', 404);
             }
 
-            if (!$this->media->userCanEdit(UNL_MediaHub_Manager::getUser())) {
+            if (!$this->media->userCanEdit(UNL_MediaHub_AuthService::getInstance()->getUser())) {
                 throw new Exception('You do not have permission to edit this media.', 403);
             }
 
@@ -34,6 +34,6 @@ class UNL_MediaHub_Feed_Media_Form
             }
         }
  
-        $this->feed_selection = new UNL_MediaHub_Feed_Media_FeedSelection(UNL_MediaHub_Manager::getUser(), $this->media);
+        $this->feed_selection = new UNL_MediaHub_Feed_Media_FeedSelection(UNL_MediaHub_AuthService::getInstance()->getUser(), $this->media);
     }
 }

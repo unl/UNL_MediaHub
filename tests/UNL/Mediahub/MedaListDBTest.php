@@ -22,7 +22,7 @@ class UNL_MediaHub_MediaListDBTest extends UNL_MediaHub_DBTests_DBTestCase
         }
 
         //Logged in (user A) - most recent
-        UNL_MediaHub_Controller::setUser($user_a);
+        UNL_MediaHub_AuthService::getInstance()->setUser($user_a);
         
         $list = new UNL_MediaHub_MediaList();
         $list->run();
@@ -32,7 +32,7 @@ class UNL_MediaHub_MediaListDBTest extends UNL_MediaHub_DBTests_DBTestCase
         $this->assertEquals($expected_ids, $found_ids, 'users with access to media should see private and unlisted media');
 
         //Logged in (user B) - most recent
-        UNL_MediaHub_Controller::setUser($user_b);
+        UNL_MediaHub_AuthService::getInstance()->setUser($user_b);
 
         $list = new UNL_MediaHub_MediaList();
         $list->run();

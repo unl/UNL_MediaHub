@@ -23,7 +23,7 @@ $controller = new UNL_MediaHub_Controller($router->route($_SERVER['REQUEST_URI']
 
 $outputcontroller = new UNL_MediaHub_OutputController();
 $outputcontroller->addGlobal('controller', $controller);
-$outputcontroller->addGlobal('user', UNL_MediaHub_Controller::getUser());
+$outputcontroller->addGlobal('user', UNL_MediaHub_AuthService::getInstance()->getUser());
 $outputcontroller->setTemplatePath(dirname(__FILE__).'/templates/html');
 
 if (isset($cache)) {
