@@ -299,7 +299,7 @@ class UNL_MediaHub_Manager_PostHandler
             $feed->save();
         } else {
             // Add a new feed for this user.
-            $feed = UNL_MediaHub_Feed::addFeed($this->post, UNL_MediaHub_Manager::getUser());
+            $feed = UNL_MediaHub_Feed::addFeed($this->post, UNL_MediaHub_AuthService::getInstance()->getUser());
         }
         $this->redirect('?view=feedmetadata&id='.$feed->id);
     }
@@ -358,7 +358,7 @@ class UNL_MediaHub_Manager_PostHandler
         $media->save();
 
         if (!empty($this->post['feed_id'])) {
-            $feed_selector = new UNL_MediaHub_Feed_Media_FeedSelection(UNL_MediaHub_Manager::getUser(), $media);
+            $feed_selector = new UNL_MediaHub_Feed_Media_FeedSelection(UNL_MediaHub_AuthService::getInstance()->getUser(), $media);
             $feed_selection_data = $feed_selector->getFeedSelectionData();
             
             if (is_array($this->post['feed_id'])) {
@@ -413,7 +413,7 @@ class UNL_MediaHub_Manager_PostHandler
         if (!empty($this->post['new_feed'])) {
             $data = array('title'       => $this->post['new_feed'],
                           'description' => $this->post['new_feed']);
-            $feed = UNL_MediaHub_Feed::addFeed($data, UNL_MediaHub_Manager::getUser());
+            $feed = UNL_MediaHub_Feed::addFeed($data, UNL_MediaHub_AuthService::getInstance()->getUser());
             $feed->addMedia($media);
         }
 
@@ -430,7 +430,7 @@ class UNL_MediaHub_Manager_PostHandler
     {
         $feed = UNL_MediaHub_Feed::getById($this->post['feed_id']);
         if (!$feed->userHasPermission(
-                UNL_MediaHub_Manager::getUser(),
+                UNL_MediaHub_AuthService::getInstance()->getUser(),
                 UNL_MediaHub_Permission::getByID(UNL_MediaHub_Permission::USER_CAN_ADD_USER)
                 )
             ) {
@@ -461,7 +461,7 @@ class UNL_MediaHub_Manager_PostHandler
         $feed = UNL_MediaHub_Feed::getById($this->post['feed_id']);
         
         if (!$feed->userHasPermission(
-                UNL_MediaHub_Manager::getUser(), 
+                UNL_MediaHub_AuthService::getInstance()->getUser(), 
                 UNL_MediaHub_Permission::getByID(UNL_MediaHub_Permission::USER_CAN_DELETE
             ))) {
             throw new Exception('You do not have permission to delete this.', 403);
@@ -482,7 +482,7 @@ class UNL_MediaHub_Manager_PostHandler
     {
         $media = UNL_MediaHub_Media::getById($this->post['media_id']);
 
-        if (!$media->userHasPermission(UNL_MediaHub_Manager::getUser(), UNL_MediaHub_Permission::USER_CAN_DELETE)) {
+        if (!$media->userHasPermission(UNL_MediaHub_AuthService::getInstance()->getUser(), UNL_MediaHub_Permission::USER_CAN_DELETE)) {
             throw new Exception('You do not have permission to delete this.', 403);
         }
 

@@ -4,7 +4,7 @@ require_once dirname(__FILE__).'/../../config.inc.php';
 
 $manager = new UNL_MediaHub_Manager($_GET);
 
-if (!$manager->isLoggedIn()) {
+if (!UNL_MediaHub_AuthService::getInstance()->getUser()) {
     throw new Exception('Not logged in!');
 }
 
