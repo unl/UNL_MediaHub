@@ -9,6 +9,6 @@ class UNL_MediaHub_Feed_Media_FileUpload
 
     function __construct()
     {
-        $this->feed_selection = new UNL_MediaHub_Feed_Media_FeedSelection(UNL_MediaHub_Manager::getUser());
+        $this->feed_selection = new UNL_MediaHub_Feed_Media_FeedSelection(UNL_MediaHub_AuthService::getInstance()->getUser());
     }
 }

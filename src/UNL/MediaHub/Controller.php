@@ -6,20 +6,13 @@ class UNL_MediaHub_Controller
     implements UNL_MediaHub_CacheableInterface, UNL_MediaHub_PostRunReplacements
 {
     /**
-     * Auth object for the client.
-     *
-     * @var UNL_Auth
-     */
-    protected static $auth;
-
-    /**
      * Array of options
      *
      * @var array
      */
-    public $options = array('model'  => false,
-                            'format' => 'html',
-                            'mobile' => false,
+    public $options = array(
+        'model'  => false,
+        'format' => 'html',
     );
 
     /**
@@ -60,13 +53,6 @@ class UNL_MediaHub_Controller
      */
     public static $current_embed_version = 2;
 
-    /**
-     * currently logged in user, if any
-     *
-     * @var UNL_MediaHub_User
-     */
-    protected static $user;
-
     protected $view_map = array(
         'search'  => 'UNL_MediaHub_MediaList',
         'tags'    => 'UNL_MediaHub_MediaList',
@@ -91,6 +77,14 @@ class UNL_MediaHub_Controller
                        'UNL_MediaHub_Feed_Media_NamespacedElements_boxee',
                        'UNL_MediaHub_Feed_Media_NamespacedElements_geo',
                        'UNL_MediaHub_Feed_Media_NamespacedElements_mediahub');
+    
+    protected $auto_auth_models = array(
+        'UNL_MediaHub_MediaList',
+        'UNL_MediaHub_DefaultHomepage',
+        'UNL_MediaHub_FeedList',
+        'UNL_MediaHub_FeedAndMedia',
+        'media',
+    );
 
     /**
      * Construct a new controller.
@@ -104,25 +98,20 @@ class UNL_MediaHub_Controller
 
         // Initialize default options
         $this->options = $options + $this->options;
-
-        if ($this->options['format'] == 'html'
-            && $this->options['mobile'] != 'no') {
-            $this->options['mobile'] = self::isMobileClient();
-        }
         
         if ($this->options['model'] == 'media_embed') {
             $this->options['format'] = 'js';
         }
 
         // Start authentication for comment system.
-        include_once 'UNL/Auth.php';
-        self::$auth = UNL_Auth::factory('SimpleCAS');
-        if (isset($_GET['logout'])) {
-            self::$auth->logout();
-        }
-
-        if (self::$auth->isLoggedIn()) {
-            self::$user = UNL_MediaHub_User::getByUid(self::$auth->getUser());
+        $auth = UNL_MediaHub_AuthService::getInstance();
+        
+        //Auto login for select views (only if the unl_sso cookie exists).
+        if (array_key_exists('unl_sso', $_COOKIE)
+            && !$auth->isLoggedIn() 
+            && in_array($this->options['model'], $this->auto_auth_models)) {
+            
+            $auth->login();
         }
 
         UNL_MediaHub_Feed_Media_NamespacedElements_mediahub::$uri = UNL_MediaHub_Controller::$url . "schema/mediahub.xsd";
@@ -137,60 +126,6 @@ class UNL_MediaHub_Controller
         }
 
         return $namespaces;
-    }
-
-    public static function isMobileClient($options = array())
-    {
-        if (!isset($_SERVER['HTTP_ACCEPT'], $_SERVER['HTTP_USER_AGENT'])) {
-            // We have no vars to check
-            return false;
-        }
-
-        if (isset($_COOKIE['wdn_mobile'])
-            && $_COOKIE['wdn_mobile'] == 'no') {
-            // The user has a cookie set, requesting no mobile views
-            return false;
-        }
-
-        if ( // Check the http_accept and user agent and see
-            preg_match('/text\/vnd\.wap\.wml|application\/vnd\.wap\.xhtml\+xml/i', $_SERVER['HTTP_ACCEPT'])
-                ||
-            (preg_match('/'.
-               'sony|symbian|nokia|samsung|mobile|windows ce|epoc|opera mini|' .
-               'nitro|j2me|midp-|cldc-|netfront|mot|up\.browser|up\.link|audiovox|' .
-               'blackberry|ericsson,|panasonic|philips|sanyo|sharp|sie-|' .
-               'portalmmm|blazer|avantgo|danger|palm|series60|palmsource|pocketpc|' .
-               'smartphone|rover|ipaq|au-mic|alcatel|ericy|vodafone\/|wap1\.|wap2\.|iPhone|Android' .
-               '/i', $_SERVER['HTTP_USER_AGENT'])
-           ) && !preg_match('/ipad/i', $_SERVER['HTTP_USER_AGENT'])) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Check if the user is logged in or not.
-     *
-     * @return bool
-     */
-    static function isLoggedIn()
-    {
-        if (self::$auth->isLoggedIn()) {
-            return true;
-        }
-
-        return false;
-    }
-
-    static function getUser()
-    {
-        return self::$user;
-    }
-    
-    static function setUser(UNL_MediaHub_User $user = NULL)
-    {
-        self::$user = $user;
     }
 
     /**
@@ -217,6 +152,7 @@ class UNL_MediaHub_Controller
             || $this->options['model'] == 'media_vtt') {
             UNL_MediaHub_OutputController::setOutputTemplate('UNL_MediaHub_Controller', 'ControllerPartial');
         }
+        
         // Send headers for CORS support so calendar bits can be pulled remotely
         header('Access-Control-Allow-Origin: *');
         header('Access-Control-Allow-Methods: GET, OPTIONS');
@@ -264,10 +200,6 @@ class UNL_MediaHub_Controller
      */
     function run()
     {
-        if (self::isLoggedIn()) {
-            // We're golden.
-        }
-
         try {
             if (!empty($_POST)) {
                 $this->handlePost($_POST);
@@ -353,6 +285,8 @@ class UNL_MediaHub_Controller
      */
     protected function handlePost($post)
     {
+        $auth = UNL_MediaHub_AuthService::getInstance();
+        
         if (!$media = $this->findRequestedMedia($this->options)) {
             throw new Exception('Media ID must be passed.');
         }
@@ -370,7 +304,7 @@ class UNL_MediaHub_Controller
         }
 
         if (!empty($post['comment'])) {
-            if (!$user = self::getUser()) {
+            if (!$user = $auth->getUser()) {
                 throw new Exception('You must be logged in to make a comment.', 403);
             }
             
@@ -386,7 +320,7 @@ class UNL_MediaHub_Controller
         }
 
         if (!empty($post['tags'])) {
-            if (!$user = self::getUser()) {
+            if (!$user = $auth->getUser()) {
                 throw new Exception('You must be logged in to add a tag.', 403);
             }
             

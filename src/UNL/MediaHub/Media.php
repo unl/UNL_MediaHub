@@ -318,15 +318,16 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
             return true;
         }
 
+        $user = UNL_MediaHub_AuthService::getInstance()->getUser();
         //At this point a user needs to be logged in.
-        if (!UNL_MediaHub_Controller::isLoggedIn()) {
+        if (!$user) {
             return false;
         }
         
         //Get a list of feeds for this user that contain this media.
         $feeds = new UNL_MediaHub_FeedList(array(
             'limit'=>null,
-            'filter'=>new UNL_MediaHub_FeedList_Filter_ByUserWithMediaId(UNL_MediaHub_Controller::getUser(), $this->id)
+            'filter'=>new UNL_MediaHub_FeedList_Filter_ByUserWithMediaId($user, $this->id)
         ));
 
         $feeds->run();
