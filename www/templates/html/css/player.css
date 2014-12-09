@@ -1,0 +1,171 @@
+/* Share media
+-------------------------------------------------------------- */
+#maincontent a.share-video-link {
+    background: #D00000;
+    color:#000;
+    position:absolute;
+    top:5px;
+    z-index:150;
+    right:5px;
+    padding:5px 6px;
+    text-decoration:none;
+    text-transform:uppercase;
+    font-family: "Gotham SSm A", "Gotham SSm B", Helvetica, "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 10px;
+    cursor:pointer;
+    border-radius: 3px;
+    border: none;
+}
+
+.mh-share-video a{
+    color: #fff;
+    margin-right: .75em;
+}
+
+#maincontent a.share-video-link:before{
+    font-family: wdn-icon;
+    font-style: normal;
+    font-weight: 400;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    color: #fff;
+    font-size: 1em;
+    content: '\e81c';
+    text-align: center;
+}
+
+#maincontent a .share-video-link:hover,
+#maincontent a.share-video-link:active,
+#maincontent a.share-video-link.video-active {
+    background:#3caac8;
+    color:#fff;
+}
+.share-overlay {
+    background:rgba( 0, 0, 0, .5)
+}
+.share-video-form {
+    display:none;
+    background-color: black;
+    background:rgba( 0, 0, 0, .85);
+    padding:4% 3%;
+    position:absolute;
+    max-height:300px;
+    width:50%;
+    margin:10% 23% 0;
+    z-index:100;
+    color:#fff;
+    box-shadow:0 0 10px #9ecaed;
+    border-color: #9ecaed;
+}
+.mobile .share-video-form{
+    margin-top:5%;
+}
+#maincontent .share-video-form h4 {
+    margin-top: -10px;
+    font-family: "Gotham SSm A", "Gotham SSm B", Helvetica, "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 13px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color:#3caac8;
+}
+.media-content-title {
+    color: #fff;
+    font: normal 12px/120% Halvetica, sans-serif;
+    padding: 1% 2%;
+    position: absolute;
+    width: 85%;
+    z-index: 150;
+}
+.share-video-form em {
+    margin-right: 3%;
+    float: left;
+    font-size:12px;
+    font-style:normal;
+    text-align: right;
+    text-transform:capitalize;
+    width: 13%;
+}
+.share-video-form .share-data {
+    float: left;
+    width: 80%;
+    height: 16px;
+    overflow: hidden;
+    margin:0 0 6px;
+    font-size: 11px;
+    color: #000;
+}
+.share-video-form em.share-video-close {
+    position:absolute;
+    top:11px;
+    right:3px;
+    display:block;
+    height:15px;
+    width:15px;
+    cursor:pointer;
+    z-index:150;
+    font: normal bold 13px/100% Arial, Helvetica, sans-serif
+}
+.share-video-form .share-video-embed {
+    width:80%;
+    height:75px;
+}
+.share-video-form .share-data span {
+    width:999em;
+}
+.video-social-share {
+    clear:both;
+    padding: 5px 2px 0 16%;
+    text-align: right;
+}
+.video-social-share a {
+    display: -moz-inline-stack;
+    display:inline-block;
+    width:17px;
+    height:17px;
+    margin: 0 5px;
+    background: url(images/share-icons.png) no-repeat 0 0;
+    border: none;
+}
+.video-social-share a.su {
+    background-position:0 -17px;
+}
+.video-social-share a.fb {
+    background-position:0 -34px;
+}
+.video-social-share a.gp{
+    background-position:0 -52px;
+}
+.video-social-share a.em{
+    background-position:0 -69px;
+}
+.media-content-head {
+    background-color: rgba(0,0,0,0.75);
+    height: 40px;
+    width: 100%;
+    position: absolute;
+    z-index: 100;
+}
+.mejs-audio {
+    min-height: 75px;
+}
+
+.mejs-controls .mejs-time-rail .mejs-time-loaded {
+    background: #d00000 !important;
+}
+
+@media (max-width: 480px) {
+    .share-video-form {
+        width: 70%;
+        margin:10% 15% 0;
+    }
+}

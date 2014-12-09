@@ -483,7 +483,8 @@
                             </li>
                             <li>
                                 <div class="element">
-                                    <input type="submit"  name="submit" value="Save" class="wdn-button wdn-button-brand wdn-pull-left" />
+                                    <input type="submit"  name="submit" value="Save" class="wdn-button wdn-pull-left" />
+                                    <a href="javascript:WDN.jQuery('#deleteForm').submit();" class="wdn-button wdn-button-brand">Delete</a>
                                 </div>
                             </li>
                         </ol>

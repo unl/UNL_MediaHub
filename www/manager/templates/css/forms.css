@@ -99,6 +99,7 @@ iframe * {margin:0px}
     border: 2px dashed RGB(213,213,210);
     background-color: RGBA(255,255,255,.75);
     display: block;
+    cursor: pointer;
 }
 .mh-upload-box h2 {
     font-size: 4.499rem;
@@ -188,6 +189,33 @@ iframe * {margin:0px}
 
 .wdn-button-brand {
     background-color: #d00000 !important;
+}
+
+.mh-channel-box label {
+    width: 85%;
+    float: right;
+}
+
+.mh-channel-box label[for="new_feed"] {
+    margin-top: 1em;
+    float: left;
+}
+
+.mh-channel-box li {
+    clear: both;
+}
+
+#videoData h5 {
+    font-size: 1.333em;
+}
+
+
+#deleteForm {
+    display: none;
+}
+
+input[value="Save"] {
+    margin-right: 1em;
 }
 
 form input[type="submit"].wdn-button-brand[disabled] {
