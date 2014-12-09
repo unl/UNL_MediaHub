@@ -121,7 +121,7 @@ class UNL_MediaHub_Controller
             self::$auth->logout();
         }
 
-        if (self::$auth->isLoggedIn()) {
+        if (self::isLoggedIn()) {
             self::$user = UNL_MediaHub_User::getByUid(self::$auth->getUser());
         }
 
@@ -176,11 +176,17 @@ class UNL_MediaHub_Controller
      */
     static function isLoggedIn()
     {
+        if (!array_key_exists('unl_sso', $_COOKIE) && !self::$auth->isLoggedIn()) {
+            return false;
+        }
+        
         if (self::$auth->isLoggedIn()) {
             return true;
         }
+        
+        self::$auth->login();
 
-        return false;
+        return true;
     }
 
     static function getUser()
@@ -264,10 +270,6 @@ class UNL_MediaHub_Controller
      */
     function run()
     {
-        if (self::isLoggedIn()) {
-            // We're golden.
-        }
-
         try {
             if (!empty($_POST)) {
                 $this->handlePost($_POST);
