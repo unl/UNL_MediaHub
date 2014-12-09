@@ -41,11 +41,7 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
         self::$mediahub = new UNL_MediaHub();
         
         $auth = UNL_MediaHub_AuthService::getInstance();
-        $auth->auth->login();
-        if (isset($_GET['logout'])) {
-            $auth->auth->logout();
-            exit();
-        }
+        $auth->login();
         
         $this->options = $options + $this->options;
     }

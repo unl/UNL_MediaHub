@@ -101,11 +101,7 @@ class UNL_MediaHub_Controller
         }
 
         // Start authentication for comment system.
-        $auth = UNL_MediaHub_AuthService::getInstance();
-        
-        if (isset($_GET['logout'])) {
-            $auth->auth->logout();
-        }
+        UNL_MediaHub_AuthService::getInstance();
 
         UNL_MediaHub_Feed_Media_NamespacedElements_mediahub::$uri = UNL_MediaHub_Controller::$url . "schema/mediahub.xsd";
     }
