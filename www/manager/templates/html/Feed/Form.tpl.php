@@ -172,9 +172,11 @@
                                     <input name='UNL_MediaHub_Feed_NamespacedElements_itunes[2][element]' type='hidden' value='category' />
                                     <?php
                                     $categories = array();
-                                    if ($value = UNL_MediaHub_Feed_NamespacedElements_itunes::feedHasElement($context->feed->id, 'category', 'itunes')) {
-                                        $categories = $value['attributes']['text'];
-                                    }
+                                    if(isset($context->feed->id)){
+                                        if ($value = UNL_MediaHub_Feed_NamespacedElements_itunes::feedHasElement($context->feed->id, 'category', 'itunes')) {
+                                            $categories = $value['attributes']['text'];
+                                        };
+                                    };
                                     ?>
                                     <select id='itunes_category' name='UNL_MediaHub_Feed_NamespacedElements_itunes[2][attributes][]' multiple="multiple">
                                         <option <?php if (in_array('Arts', $categories)) echo 'selected="selected"'; ?> value="Arts">Arts</option>
@@ -484,7 +486,9 @@
                             <li>
                                 <div class="element">
                                     <input type="submit"  name="submit" value="Save" class="wdn-button wdn-pull-left" />
-                                    <a href="javascript:WDN.jQuery('#deleteForm').submit();" class="wdn-button wdn-button-brand">Delete</a>
+                                    <?php if (isset($context->feed)): ?>
+                                        <a href="javascript:WDN.jQuery('#deleteForm').submit();" class="wdn-button wdn-button-brand">Delete</a>
+                                    <?php endif; ?>
                                 </div>
                             </li>
                         </ol>
