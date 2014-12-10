@@ -525,7 +525,7 @@ $controller->setReplacementData('head', $js);
 
 <script type="text/javascript">
 
-    WDN.jQuery('#geo_location').click(function() {
+    WDN.jQuery('#geo_location legend').click(function() {
         var map;
         var myOptions = {
             zoom: 6,
