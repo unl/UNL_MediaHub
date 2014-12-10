@@ -487,7 +487,7 @@
                                 <div class="element">
                                     <input type="submit"  name="submit" value="Save" class="wdn-button wdn-pull-left" />
                                     <?php if (isset($context->feed)): ?>
-                                    <a href="javascript:WDN.jQuery('#deleteForm').submit();" class="wdn-button wdn-button-brand">Delete</a>
+                                        <a href="javascript:WDN.jQuery('#deleteForm').submit();" class="wdn-button wdn-button-brand">Delete</a>
                                     <?php endif; ?>
                                 </div>
                             </li>
