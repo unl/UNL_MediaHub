@@ -525,20 +525,26 @@ $controller->setReplacementData('head', $js);
 
 <script type="text/javascript">
 
-    WDN.jQuery('#geo_location').click(function() {
+    WDN.jQuery('#geo_location legend').click(function() {
         var map;
+        var marker = false;
+        var lincoln = new google.maps.LatLng(41.5299085734404, -99.591595703125);
         var myOptions = {
             zoom: 6,
-            center: new google.maps.LatLng(41.5299085734404, -99.591595703125),
+            center: lincoln,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         map = new google.maps.Map(document.getElementById('map_canvas'), myOptions);
-        var marker = false;
+        
         google.maps.event.addListener(map, 'click', function(event) {
             if (marker != false) {
                 marker.setMap(null);
             }
-            marker = new google.maps.Marker({position: event.latLng, map: map});
+            marker = new google.maps.Marker({
+                map: map,
+                position: event.latLng,
+                animation: google.maps.Animation.DROP
+            });
             WDN.jQuery('#geo_lat').attr('value', event.latLng.lat());
             WDN.jQuery('#geo_long').attr('value', event.latLng.lng());
         });
