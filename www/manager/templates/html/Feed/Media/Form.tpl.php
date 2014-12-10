@@ -543,6 +543,7 @@ $controller->setReplacementData('head', $js);
             marker = new google.maps.Marker({
                 map: map,
                 position: event.latLng,
+                animation: google.maps.Animation.DROP
             });
             WDN.jQuery('#geo_lat').attr('value', event.latLng.lat());
             WDN.jQuery('#geo_long').attr('value', event.latLng.lng());
