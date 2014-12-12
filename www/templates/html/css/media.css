@@ -249,6 +249,24 @@ body #cboxOverlay {background-color:#000;}
     background-color: #1e1e1e;
 }
 
+.media-content-head .wdn-share-this-page {
+    right: 5px;
+    left: auto;
+    top: 5px;
+    margin-left: 0;
+    width: 31px;
+}
+
+.media-content-head .wdn-share-this-page a{
+    border: none;
+}
+
+.media-content-head .wdn-share-this-page .wdn-icon-share {
+    padding: 7px 5px;
+    width: 30px;
+    border-radius: 3px;
+}
+
 @media only screen and (max-width: 480px)  {
 
     .mh-hide-bp1 {
