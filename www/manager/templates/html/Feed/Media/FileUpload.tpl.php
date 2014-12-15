@@ -12,8 +12,11 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
                 <div id="mh_upload_media_container" class="bp2-wdn-col-three-sevenths">
                     <div id="mh_upload_media" class="mh-upload-box wdn-center">
                         <h2>+<span class="wdn-subhead">Add Media</span></h2>
-                        <p>.mp4, .mov, .mp3, .wav, .aac</p>
+                        <p>.mp4 or .mp3</p>
                     </div>
+                    <p>
+                        <a href="<?php echo UNL_MediaHub_Controller::getURL() ?>documents/handbrake_presets.zip">Download Handbreak Presets</a>
+                    </p>
                     <div id="filelist" class="mh-upload-box wdn-center">
                         Your browser doesn't have Flash, Silverlight or HTML5 support.
                     </div>
@@ -103,7 +106,7 @@ WDN.initializePlugin('form_validation', [function() {
         filters : {
             max_file_size : '900mb',
             mime_types: [
-                {title : "Video files", extensions : "mp4,mov,mp3"},
+                {title : "Video files", extensions : "mp4,3gp"},
                 {title : "Audio files", extensions : "mp3"}
             ]
         },
