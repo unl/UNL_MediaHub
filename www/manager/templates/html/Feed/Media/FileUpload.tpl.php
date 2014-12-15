@@ -15,7 +15,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
                         <p>.mp4 or .mp3</p>
                     </div>
                     <p>
-                        <a href="http://ucommxsrv2.unl.edu/video_support/handbrake_presets.zip">Download Handbreak Presets</a>
+                        <a href="<?php echo UNL_MediaHub_Controller::getURL() ?>documents/handbrake_presets.zip">Download Handbreak Presets</a>
                     </p>
                     <div id="filelist" class="mh-upload-box wdn-center">
                         Your browser doesn't have Flash, Silverlight or HTML5 support.
