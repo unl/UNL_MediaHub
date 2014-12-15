@@ -9,6 +9,9 @@ class UNL_MediaHub_AuthService_UNL extends UNL_MediaHub_AuthService_Interface
     public function __construct()
     {
         $this->auth = UNL_Auth::factory('SimpleCAS');
+        
+        $this->auth->handleSingleLogOut();
+        
         if (isset($_GET['logout'])) {
             $this->auth->logout();
             exit();
