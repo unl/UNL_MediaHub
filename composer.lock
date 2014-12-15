@@ -998,16 +998,16 @@
         },
         {
             "name": "simple-cas/simple-cas",
-            "version": "v0.8.0",
+            "version": "v0.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/saltybeagle/SimpleCAS.git",
-                "reference": "f49f3ee020869ff72ae05bb5bee155d66faf908d"
+                "reference": "ec291570cadcecadf080201e55369a1545df532d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/saltybeagle/SimpleCAS/zipball/f49f3ee020869ff72ae05bb5bee155d66faf908d",
-                "reference": "f49f3ee020869ff72ae05bb5bee155d66faf908d",
+                "url": "https://api.github.com/repos/saltybeagle/SimpleCAS/zipball/ec291570cadcecadf080201e55369a1545df532d",
+                "reference": "ec291570cadcecadf080201e55369a1545df532d",
                 "shasum": ""
             },
             "require": {
@@ -1021,10 +1021,10 @@
                 }
             },
             "support": {
-                "source": "https://github.com/saltybeagle/SimpleCAS/tree/v0.8.0",
+                "source": "https://github.com/saltybeagle/SimpleCAS/tree/v0.8.1",
                 "issues": "https://github.com/saltybeagle/SimpleCAS/issues"
             },
-            "time": "2014-12-15 16:01:24"
+            "time": "2014-12-15 18:49:31"
         },
         {
             "name": "symfony/yaml",
