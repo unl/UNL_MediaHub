@@ -41,8 +41,7 @@ if ($context->isVideo()) {
                                 "wdn-icon-mail":     {title: 'Email', url:'mailto:?body=Checkout this ' + media_type + ': ' + share_url + '&subject=' + media_type + ' : ' + $title},
                                 "wdn-icon-facebook":     {title: 'Facebook', url:'https://www.facebook.com/sharer/sharer.php?u=' + share_url},  // facebook
                                 "wdn-icon-twitter":     {title: 'Twitter', url:'http://twitter.com/share?text=' + media_type + ': ' + $title + '&url=' + share_url}, // twitter
-                                //"wdn-icon-gplus":     {title: 'Google Plus', url:'https://plus.google.com/share?url=' + share_url}, //google plus
-                                "wdn-icon-linkedin-squared":     {title: 'LinkedIn', url:'https://plus.google.com/share?url=' + share_url} //google plus
+                                "wdn-icon-linkedin-squared":     {title: 'LinkedIn', url:'http://www.linkedin.com/shareArticle?mini=true&url=' + share_url + '&title='+ $title +'&summary=Checkout this '+ media_type +'%20&source=University%20of%20Nebraska%20-%20Lincoln%20MediaHub'} //google plus
                             }
 
                             //create share links
