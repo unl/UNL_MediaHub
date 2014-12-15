@@ -252,6 +252,16 @@ class UNL_MediaHub_Manager_PostHandler
             if ($extension == '3gp') {
                 $extension = 'mp4';
             }
+            
+            //Make sure that the media has a valid extension
+            $allowed_extensions = array('mp4', 'mp3');
+            if (!in_array($extension, $allowed_extensions)) {
+                //Remove the file
+                unlink("{$filePath}.part");
+                
+                //throw the error
+                throw new UNL_MediaHub_Manager_PostHandler_UploadException('Invalid extension', 400);
+            }
 
             $finalName = md5(microtime() + rand()) . '.'. $extension;
             $finalPath = UNL_MediaHub_Manager::getUploadDirectory() . DIRECTORY_SEPARATOR . $finalName;
