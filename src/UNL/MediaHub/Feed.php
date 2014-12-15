@@ -197,7 +197,7 @@ class UNL_MediaHub_Feed extends UNL_MediaHub_Models_BaseFeed
      */
     public function userCanEdit(UNL_MediaHub_User $user)
     {
-        return $this->userHasPermission($user, UNL_MediaHub_permission::getByID(UNL_MediaHub_permission::USER_CAN_UPDATE));
+        return $this->userHasPermission($user, UNL_MediaHub_Permission::getByID(UNL_MediaHub_Permission::USER_CAN_UPDATE));
     }
     
     /**
