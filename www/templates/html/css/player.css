@@ -220,8 +220,8 @@ a:hover, a:visited {
 }
 @font-face {
     font-family: wdn-icon;
-    src: url(../fonts/fontello/wdn-icon.eot?27007058);
-    src: url(../fonts/fontello/wdn-icon.eot?27007058#iefix) format('embedded-opentype'), url(../fonts/fontello/wdn-icon.woff?27007058) format('woff'), url(../fonts/fontello/wdn-icon.ttf?27007058) format('truetype'), url(../fonts/fontello/wdn-icon.svg?27007058#wdn-icon) format('svg');
+    src: url(http://unlcms.unl.edu/wdn/templates_4.0/fonts/fontello/wdn-icon.eot?27007058);
+    src: url(http://unlcms.unl.edu/wdn/templates_4.0/fonts/fontello/wdn-icon.eot?27007058#iefix) format('embedded-opentype'), url(http://unlcms.unl.edu/wdn/templates_4.0/fonts/fontello/wdn-icon.woff?27007058) format('woff'), url(http://unlcms.unl.edu/wdn/templates_4.0/fonts/fontello/wdn-icon.ttf?27007058) format('truetype'), url(http://unlcms.unl.edu/wdn/templates_4.0/fonts/fontello/wdn-icon.svg?27007058#wdn-icon) format('svg');
     font-weight: 400;
     font-style: normal
 }
@@ -312,6 +312,13 @@ a:hover, a:visited {
         bottom: -62px
     }
 }
+
+.media-content-head .wdn-share-options {
+    margin: 0;
+    right: 0;
+}
+
+
 @media (min-width:768px) {
     .wdn-share-this-page {
         bottom: -69px
@@ -344,6 +351,9 @@ a:hover, a:visited {
 }
 .wdn-icon-share:before {
     padding-right: 1em
+}
+#mh_share_toggle {
+    display: none;
 }
 @media (max-width:699px) {
     .wdn-icon-share {
