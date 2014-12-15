@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9119e382e6d978ce20b834fa8abfee1c",
+    "hash": "c3f6e32535c328c598b836efccad8812",
     "packages": [
         {
             "name": "doctrine/instantiator",
@@ -998,20 +998,21 @@
         },
         {
             "name": "simple-cas/simple-cas",
-            "version": "v0.7.0",
+            "version": "v0.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/saltybeagle/SimpleCAS.git",
-                "reference": "690ea4be6e0c039c6f06ba12b92729f73061dbff"
+                "reference": "f49f3ee020869ff72ae05bb5bee155d66faf908d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/saltybeagle/SimpleCAS/zipball/690ea4be6e0c039c6f06ba12b92729f73061dbff",
-                "reference": "690ea4be6e0c039c6f06ba12b92729f73061dbff",
+                "url": "https://api.github.com/repos/saltybeagle/SimpleCAS/zipball/f49f3ee020869ff72ae05bb5bee155d66faf908d",
+                "reference": "f49f3ee020869ff72ae05bb5bee155d66faf908d",
                 "shasum": ""
             },
             "require": {
-                "pear-pear/http_request2": "*"
+                "pear-pear.php.net/http_request2": "*",
+                "tedivm/stash": "0.12.*"
             },
             "type": "library",
             "autoload": {
@@ -1020,10 +1021,10 @@
                 }
             },
             "support": {
-                "source": "https://github.com/saltybeagle/SimpleCAS/tree/master",
+                "source": "https://github.com/saltybeagle/SimpleCAS/tree/v0.8.0",
                 "issues": "https://github.com/saltybeagle/SimpleCAS/issues"
             },
-            "time": "2014-10-08 20:19:58"
+            "time": "2014-12-15 16:01:24"
         },
         {
             "name": "symfony/yaml",
@@ -1071,6 +1072,60 @@
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
             "time": "2014-09-22 09:14:18"
+        },
+        {
+            "name": "tedivm/stash",
+            "version": "v0.12.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tedious/Stash.git",
+                "reference": "52312039a5ee8049647332784e032f71adff4dea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tedious/Stash/zipball/52312039a5ee8049647332784e032f71adff4dea",
+                "reference": "52312039a5ee8049647332784e032f71adff4dea",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "1.1.*",
+                "phpunit/phpunit": "4.3.*",
+                "satooshi/php-coveralls": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Stash\\": "src/Stash/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Robert Hafner",
+                    "email": "tedivm@tedivm.com"
+                },
+                {
+                    "name": "Josh Hall-Bachner",
+                    "email": "charlequin@gmail.com"
+                }
+            ],
+            "description": "The place to keep your cache.",
+            "homepage": "http://github.com/tedious/Stash",
+            "keywords": [
+                "apc",
+                "cache",
+                "caching",
+                "memcached",
+                "redis",
+                "sessions"
+            ],
+            "time": "2014-12-08 06:02:20"
         },
         {
             "name": "unl/auth",
