@@ -77,15 +77,6 @@ class UNL_MediaHub_Controller
                        'UNL_MediaHub_Feed_Media_NamespacedElements_boxee',
                        'UNL_MediaHub_Feed_Media_NamespacedElements_geo',
                        'UNL_MediaHub_Feed_Media_NamespacedElements_mediahub');
-    
-    protected $auto_auth_models = array(
-        'UNL_MediaHub_MediaList',
-        'UNL_MediaHub_DefaultHomepage',
-        'UNL_MediaHub_FeedList',
-        'UNL_MediaHub_FeedAndMedia',
-        'media',
-    );
-
     /**
      * Construct a new controller.
      *
@@ -103,20 +94,12 @@ class UNL_MediaHub_Controller
             $this->options['format'] = 'js';
         }
 
-        // Start authentication for comment system.
-        $auth = UNL_MediaHub_AuthService::getInstance();
-        
-        //Auto login for select views (only if the unl_sso cookie exists).
-        if (array_key_exists('unl_sso', $_COOKIE)
-            && !$auth->isLoggedIn() 
-            && in_array($this->options['model'], $this->auto_auth_models)) {
-            
-            $auth->login();
-        }
+        UNL_MediaHub_AuthService::getInstance()->autoLogin($this->options['model']);
 
         UNL_MediaHub_Feed_Media_NamespacedElements_mediahub::$uri = UNL_MediaHub_Controller::$url . "schema/mediahub.xsd";
     }
-
+    
+    
     public static function getNamespaceDefinationString()
     {
         $namespaces = "";

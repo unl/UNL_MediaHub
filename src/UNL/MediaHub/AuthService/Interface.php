@@ -16,6 +16,8 @@ abstract class UNL_MediaHub_AuthService_Interface
     abstract public function login();
     
     abstract public function logout();
+    
+    abstract public function autoLogin($current_model = NULL);
 
     /**
      * @param UNL_MediaHub_User $user
