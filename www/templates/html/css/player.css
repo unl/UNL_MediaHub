@@ -303,6 +303,9 @@ a:hover, a:visited {
     left: 5%;
     z-index: 201
 }
+
+
+
 @media (min-width:700px) {
     .wdn-share-this-page {
         margin: 0;
@@ -351,9 +354,6 @@ a:hover, a:visited {
 }
 .wdn-icon-share:before {
     padding-right: 1em
-}
-#mh_share_toggle {
-    display: none;
 }
 @media (max-width:699px) {
     .wdn-icon-share {
@@ -506,9 +506,14 @@ a:hover, a:visited {
         visibility: visible
     }
 }
-#wdn_share_toggle:checked~.wdn-share-options, .wdn-share-this-page:hover .wdn-share-options {
+.mh-share-toggle:checked~.wdn-share-options, .wdn-share-this-page:hover .wdn-share-options {
     display: block
 }
+
+.mh-share-toggle {
+    display: none;
+}
+
 .media-content-head .wdn-share-this-page {
     right: 5px;
     left: auto;
