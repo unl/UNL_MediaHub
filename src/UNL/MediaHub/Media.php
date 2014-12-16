@@ -233,7 +233,40 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         } catch (Exception $e) {
             // Error, just skip this for now.
         }
-        return parent::delete($conn);
+        
+        $local_file = $this->getLocalFileName();
+        
+        if (!parent::delete($conn)) {
+            return false;
+        }
+        
+        if ($local_file && !is_dir($local_file)) {
+            //Delete the file, and make sure it isn't a directory for some unknown reason.
+            unlink($local_file);
+        }
+        
+        return true;
+    }
+
+    /**
+     * Get the local file name for this media.  It will be an absolute path if found.
+     * 
+     * @return bool|string
+     */
+    public function getLocalFileName()
+    {
+        $uploads_url = UNL_MediaHub_Controller::getURL() . 'uploads/';
+        if (strpos($this->url, $uploads_url) !== 0) {
+            return false;
+        }
+        
+        $file = UNL_MediaHub_Manager::getUploadDirectory() . '/' . str_replace($uploads_url, '', $this->url);
+        
+        if (!file_exists($file)) {
+            return false;
+        }
+        
+        return $file;
     }
 
     /**
