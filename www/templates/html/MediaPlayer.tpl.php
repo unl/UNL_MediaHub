@@ -38,30 +38,29 @@ if ($context->isVideo()) {
                         if ($inner = $(v).parents('.mejs-container')) {
                             // share urls
                             var sharelinks = {
+                                "wdn-icon-mail":     {title: 'Email', url:'mailto:?body=Checkout this ' + media_type + ': ' + share_url + '&subject=' + media_type + ' : ' + $title},
+                                "wdn-icon-facebook":     {title: 'Facebook', url:'https://www.facebook.com/sharer/sharer.php?u=' + share_url},  // facebook
                                 "wdn-icon-twitter":     {title: 'Twitter', url:'http://twitter.com/share?text=' + media_type + ': ' + $title + '&url=' + share_url}, // twitter
-                                "wdn-icon-facebook":     {title: 'Facebook', url:'https://www.facebook.com/sharer/sharer.php?u=' + share_url},	// facebook
-                                "wdn-icon-gplus":     {title: 'Google Plus', url:'https://plus.google.com/share?url=' + share_url}, //google plus
-                                "wdn-icon-mail":     {title: 'Email', url:'mailto:?body=Checkout this ' + media_type + ': ' + share_url + '&subject=' + media_type + ' : ' + $title}
+                                "wdn-icon-linkedin-squared":     {title: 'LinkedIn', url:'http://www.linkedin.com/shareArticle?mini=true&url=' + share_url + '&title='+ $title +'&summary=Checkout this '+ media_type +'%20&source=University%20of%20Nebraska%20-%20Lincoln%20MediaHub'} //google plus
                             }
 
                             //create share links
-                            var links = '';
+                            var links = '<li><a href="http://go.unl.edu/?url=referer" class="wdn-icon-link" rel="nofollow">Get a Go URL</a></li>';
                             for (var key in sharelinks) {
-                                links += '<a href="'+sharelinks[key].url+'" rel="nofollow" target="_blank" class="'+key+'" title="Share on '+sharelinks[key].title+'"></a>';
+                                links += '<li class="outpost"><a href="'+sharelinks[key].url+'" rel="nofollow" target="_blank" class="'+key+'" title="Share on '+sharelinks[key].title+'">Share on '+sharelinks[key].title+'</a></li>';
                             }
 
                             var html = '<div class="media-content-head">';
-                            html += '<div class="media-content-title">' + $title + '</div>';
-                            html += '<a href="#" rel="nofollow" class="share-video-link" title="Share this video"></a>';
-                            html += '<div class="share-video-form">';
-                            html += '<em class="share-video-close">x</em>';
-                            html += '<h4>' + 'share this video' + '</h4>';
-                            html += '<label for="share-video-lnk-'+mediahub_id+'"><em>'+ 'link' +'</em></label>';
-                            html += '<input type="text" id="share-video-lnk-'+mediahub_id+'" class="share-video-lnk share-data" value="' + share_url + '" />' ;
+                            html += '<div class="wdn-share-this-page">';
+                            html += '<input type="checkbox" id="mh-share-toggle" value="Show share options" class="wdn-input-driver mh-share-toggle">'
+                            html += '<label for="mh-share-toggle" class="wdn-icon-share">Share This Page</label>';
+                            html += '<ul class="wdn-share-options">';
+                            html += links;
+                            html += '</ul>';
+                            html += '</div>';
+                            html += '</div>';
 
-                            html += '<div class="wdn-pull-right mh-share-video">' + links + '</div>' ;
-                            html += '</div>';
-                            html += '</div>';
+
                             $inner.prepend(html);
 
                             // start listeners
