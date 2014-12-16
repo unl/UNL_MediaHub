@@ -14,6 +14,11 @@ class UNL_MediaHub_AuthService_Mock extends UNL_MediaHub_AuthService_Interface
         
         return false;
     }
+    
+    public function autoLogin($current_model = NULL)
+    {
+        return;
+    }
 
     public function login()
     {
