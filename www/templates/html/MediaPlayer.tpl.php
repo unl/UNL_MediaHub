@@ -45,15 +45,15 @@ if ($context->isVideo()) {
                             }
 
                             //create share links
-                            var links = '<li><a href="http://go.unl.edu/?url=referer" id="wdn_createGoURL" class="wdn-icon-link" rel="nofollow">Get a Go URL</a></li>';
+                            var links = '<li><a href="http://go.unl.edu/?url=referer" class="wdn-icon-link" rel="nofollow">Get a Go URL</a></li>';
                             for (var key in sharelinks) {
-                                links += '<li class="outpost" id="wdn_emailthis"><a href="'+sharelinks[key].url+'" rel="nofollow" target="_blank" class="'+key+'" title="Share on '+sharelinks[key].title+'">Share on '+sharelinks[key].title+'</a></li>';
+                                links += '<li class="outpost"><a href="'+sharelinks[key].url+'" rel="nofollow" target="_blank" class="'+key+'" title="Share on '+sharelinks[key].title+'">Share on '+sharelinks[key].title+'</a></li>';
                             }
 
                             var html = '<div class="media-content-head">';
                             html += '<div class="wdn-share-this-page">';
-                            html += '<input type="checkbox" id="mh_share_toggle" value="Show share options" class="wdn-input-driver">'
-                            html += '<label for="mh_share_toggle" class="wdn-icon-share">Share This Page</label>';
+                            html += '<input type="checkbox" id="mh-share-toggle" value="Show share options" class="wdn-input-driver mh-share-toggle">'
+                            html += '<label for="mh-share-toggle" class="wdn-icon-share">Share This Page</label>';
                             html += '<ul class="wdn-share-options">';
                             html += links;
                             html += '</ul>';
