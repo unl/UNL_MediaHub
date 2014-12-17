@@ -44,7 +44,7 @@ $feeds = $context->getRelatedFeeds(array('limit'=>6));
         <p class="mh-sort-filter">
             <span class="mh-btn-group">
                  <a href="<?php echo htmlentities($context->getURL(array('orderby' => 'datecreated', 'order' => 'DESC')), ENT_QUOTES) ?>" class="wdn-button wdn-button-brand <?php echo ($context->options['orderby'] == 'datecreated') ? ' active' : '' ?>">Recent</a>
-                 <a href="<?php echo htmlentities($context->getURL(array('orderby' => 'play_count', 'order' => 'DESC')), ENT_QUOTES) ?>" class="wdn-button wdn-button-brand <?php echo ($context->options['orderby'] == 'play_count') ? ' active' : '' ?>">Popular</a>
+                 <a href="<?php echo htmlentities($context->getURL(array('orderby' => 'popular_play_count', 'order' => 'DESC')), ENT_QUOTES) ?>" class="wdn-button wdn-button-brand <?php echo ($context->options['orderby'] == 'popular_play_count') ? ' active' : '' ?>">Popular</a>
             </span>
             <span class="mh-btn-group">
                 <a href="<?php echo htmlentities($context->getURL(array('f' => '')), ENT_QUOTES)  ?>" class="wdn-button<?php echo ($context->options['f'] == '') ? ' active' : '' ?>">All</a>

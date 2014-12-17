@@ -2,8 +2,6 @@
 class UNL_MediaHub_DefaultHomepage implements UNL_MediaHub_CacheableInterface
 {
     public $top_media;
-    public $latest_media;
-    public $featured_channels;
     
     public $options = array();
     
@@ -24,20 +22,12 @@ class UNL_MediaHub_DefaultHomepage implements UNL_MediaHub_CacheableInterface
 
     function run()
     {
-        $options = $this->options;
-
         if (empty($options['limit'])) {
             $options['limit']   = 3;
         }
-        $this->latest_media = new UNL_MediaHub_MediaList($options);
-        $this->latest_media->run();
-        
-        $options['filter'] = new UNL_MediaHub_MediaList_Filter_Popular();
+        $options['orderby'] = 'popular_play_count';
         $this->top_media = new UNL_MediaHub_MediaList($options);
-
-        $options['filter'] = new UNL_MediaHub_FeedList_Filter_Popular();
-        $options['limit']  = 3;
-        $this->featured_channels = new UNL_MediaHub_FeedList($options);
+        $this->top_media->run();
     }
     
 }
