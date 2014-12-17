@@ -2,11 +2,18 @@
 
 $track = false;
 
+$amara_headers = '';
+if (UNL_MediaHub_Media_VideoTextTrack::$amara_username && UNL_MediaHub_Media_VideoTextTrack::$amara_api_key) {
+    $amara_headers = "X-api-username: " . UNL_MediaHub_Media_VideoTextTrack::$amara_username . "\r\n" .
+        "X-apikey: " . UNL_MediaHub_Media_VideoTextTrack::$amara_api_key . "\r\n";
+}
+
 $ctx = stream_context_create(array(
     'http' => array(
         // How long to wait for Amara to respond
         'timeout' => 2,
-        )
+        ),
+    'header' => $amara_headers
     )
 ); 
 
