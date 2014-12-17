@@ -1,6 +1,6 @@
 <?php
 
-class UNL_MediaHub_MediaViews extends UNL_MediaHub_Models_BaseMediaViews
+class UNL_MediaHub_MediaView extends UNL_MediaHub_Models_BaseMediaView
 {
     
 }
