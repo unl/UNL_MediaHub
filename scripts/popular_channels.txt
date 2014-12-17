@@ -1,4 +1,0 @@
-
-      6 /mediahub/channels/UNL+News
-      5 /mediahub/channels/Frame+By+Frame
-      2 /mediahub/channels/Put+Yourself+on+the+Map
