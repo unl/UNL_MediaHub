@@ -76,23 +76,6 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
     </div>
 </div>
 
-<div class="wdn-band">
-    <div class="wdn-inner-wrapper">
-        <h2 class="wdn-brand clear-top">Preparing Your Video</h2>
-        <div class="wdn-grid-set">
-            <div class="bp2-wdn-col-one-third">
-                <h3>Test</h3>
-            </div>
-            <div class="bp2-wdn-col-one-third">
-                <h3>Test</h3>
-            </div>
-            <div class="bp2-wdn-col-one-third">
-                <h3>Test</h3>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script type="text/javascript">
 WDN.initializePlugin('form_validation', [function() {
     WDN.jQuery('#add_media').validation({
