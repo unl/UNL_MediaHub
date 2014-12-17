@@ -1,6 +1,9 @@
 <?php
 class UNL_MediaHub_Media_VideoTextTrack extends UNL_MediaHub_Media
 {
+    public static $amara_username = false;
+    public static $amara_api_key  = false;
+    
     /**
      * Get by ID
      *
