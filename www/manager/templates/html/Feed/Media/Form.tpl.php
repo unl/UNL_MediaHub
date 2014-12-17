@@ -155,21 +155,7 @@ $controller->setReplacementData('head', $js);
                                 </div>
                                 <div class="element" id="description_wrapper"><textarea id="description" name="description" class="required-entry" rows="5" aria-describedby="description-details"><?php echo htmlentities(@$context->media->description); ?></textarea></div>
                             </li>
-    
-                            <li>
-                                <label for="mrss_text" class="element">
-                                    Transcript/Captioning
-                                </label>
-                                <div class="mh-tooltip wdn-icon-info italic" id="captioning-details">
-                                    <div>
-                                        <p>Allows the inclusion of a text transcript, closed captioning, or lyrics of the media content.</p>
-                                    </div>
-                                </div>
-                                <div class="element">
-                                    <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[11][element]" type="hidden" value="text"/>
-                                    <textarea rows="3" id="mrss_text" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[11][value]" aria-describedby="captioning-details"><?php echo getFieldValue($context, 'media', 'text'); ?></textarea>
-                                </div>
-                            </li>
+
                             <li>
                                 <label for="itunes_keywords" class="element">Tags</label>
                                 <div class="mh-tooltip wdn-icon-info italic" id="tag-details">
@@ -182,6 +168,13 @@ $controller->setReplacementData('head', $js);
                                     <input id="itunes_keywords" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[4][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'keywords'); ?>" aria-describedby="tag-details"/>
                                 </div>
                             </li>
+
+                            <li>
+                                <p class="zenbox">
+                                    MediaHub uses <a href="http://amara.org/en/">Amara</a> for the captioning of video. Any videos without captions are in violation of the Twenty-First Century Communications and Video Accessibility Act of 2010 (CVAA) . To caption your video follow <a href="http://amara.org/en/videos/create/">this link</a> and paste your video URL (<?php echo $context->media->url; ?>) into the appropriate box. Your captions will be automatically pulled when your video is played. 
+                                </p>
+                            </li>
+
                         </ol>
                     </fieldset>
                     <fieldset id="geo_location" class="collapsible">
@@ -288,6 +281,20 @@ $controller->setReplacementData('head', $js);
                                 <label for="itunes_author" class="element">Author<span class="helper">Name of media creator.</span></label>
                                 <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[0][element]" type="hidden" value="author"/>
                                 <input id="itunes_author" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[0][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'author'); ?>"/>
+                            </li>
+                            <li>
+                                <label for="mrss_text" class="element">
+                                    Transcript/Captioning
+                                </label>
+                                <div class="mh-tooltip wdn-icon-info italic" id="captioning-details">
+                                    <div>
+                                        <p>Allows the inclusion of a text transcript, closed captioning, or lyrics of the media content.</p>
+                                    </div>
+                                </div>
+                                <div class="element">
+                                    <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[11][element]" type="hidden" value="text"/>
+                                    <textarea rows="3" id="mrss_text" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[11][value]" aria-describedby="captioning-details"><?php echo getFieldValue($context, 'media', 'text'); ?></textarea>
+                                </div>
                             </li>
                             <li>
                                 <label for="itunes_category" class="element">Category <span class="helper">Choose a category for use within iTunes U</span></label>
