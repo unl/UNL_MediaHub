@@ -43,6 +43,11 @@ Supporting styles for individual presentation of lists of media
 	background-color: #a70000;
 }
 
+.mh-sort-filter .mh-btn-group > .wdn-button.active:before {
+	content:"\2022";
+	margin-right:.75em;
+}
+
 .mh-media .wdn_pagination {
 	text-align: center;
 	padding: 0;
