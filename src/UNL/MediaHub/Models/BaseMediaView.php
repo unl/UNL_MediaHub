@@ -1,5 +1,5 @@
 <?php
-abstract class UNL_MediaHub_Models_BaseMediaViews extends Doctrine_Record
+abstract class UNL_MediaHub_Models_BaseMediaView extends Doctrine_Record
 {
 
     public function setTableDefinition()
