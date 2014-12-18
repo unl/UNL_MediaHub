@@ -22,10 +22,10 @@ class UNL_MediaHub_DefaultHomepage implements UNL_MediaHub_CacheableInterface
 
     function run()
     {
-        if (empty($options['limit'])) {
-            $options['limit']   = 3;
-        }
-        $options['orderby'] = 'popular_play_count';
+        $options = array(
+            'limit'   => 3,
+            'orderby' => 'popular_play_count'
+        );
         $this->top_media = new UNL_MediaHub_MediaList($options);
         $this->top_media->run();
     }
