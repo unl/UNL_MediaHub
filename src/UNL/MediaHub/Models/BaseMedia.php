@@ -19,6 +19,7 @@ abstract class UNL_MediaHub_Models_BaseMedia extends Doctrine_Record
         $this->hasColumn('author',        'string',    null, array('fixed' => false, 'primary' => false, 'notnull' => false, 'autoincrement' => false));
         $this->hasColumn('privacy',       'enum',      null, array('primary' => false, 'notnull' => true, 'autoincrement' => false, 'values' => array('PUBLIC', 'UNLISTED', 'PRIVATE'), 'default' => 'PUBLIC'));
         $this->hasColumn('play_count',    'integer',   null, array('unsigned' => 0, 'primary' => false, 'notnull' => true, 'autoincrement' => true));
+        $this->hasColumn('popular_play_count', 'integer',   null, array('unsigned' => 0, 'primary' => false, 'notnull' => true, 'autoincrement' => false));
         $this->hasColumn('datecreated',   'timestamp', null, array('primary' => false, 'notnull' => true, 'autoincrement' => false));
         $this->hasColumn('dateupdated',   'timestamp', null, array('primary' => false, 'notnull' => false, 'autoincrement' => false));
     }
@@ -30,6 +31,8 @@ abstract class UNL_MediaHub_Models_BaseMedia extends Doctrine_Record
         $this->hasMany('UNL_MediaHub_Feed',          array('local'    => 'media_id',
                                                            'foreign'  => 'feed_id',
                                                            'refClass' => 'UNL_MediaHub_Feed_Media'));
+        $this->hasMany('UNL_MediaHub_MediaView',    array('local'    => 'id',
+                                                           'foreign'  => 'media_id'));
         $this->hasMany('UNL_MediaHub_Feed_Media_NamespacedElements_itunesu',  array('local'   => 'id',
                                                                                     'foreign' => 'media_id'));
         $this->hasMany('UNL_MediaHub_Feed_Media_NamespacedElements_itunes',   array('local'   => 'id',
