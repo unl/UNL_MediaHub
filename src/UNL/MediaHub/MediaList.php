@@ -74,6 +74,7 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
             case 'eventdate':
             case 'headline':
             case 'play_count':
+            case 'popular_play_count':
                 break;
             default:
                 $this->options['orderby'] = 'datecreated';
