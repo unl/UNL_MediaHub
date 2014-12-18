@@ -304,6 +304,8 @@ class UNL_MediaHub_Controller
             $comment = new UNL_MediaHub_Media_Comment();
             $comment->fromArray($data);
             $comment->save();
+            
+            UNL_MediaHub::redirect(self::getURL($media));
         }
 
         if (!empty($post['tags'])) {
