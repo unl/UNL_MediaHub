@@ -21,6 +21,26 @@ var mediaType = "'.$mediaType.'";
 $controller->setReplacementData('head', $js);
 ?>
 
+<?php $has_captions = @file_get_contents($context->media->getVideoTextTrackURL()); ?>
+<?php if(!$has_captions): ?>
+<form method="post" class="wdn-band" action="https://www.amara.org/api2/partners/videos/" >
+    <div class="wdn-band wdn-light-neutral-band mh-caption-band">
+        <div class="wdn-inner-wrapper wdn-inner-padding-sm">
+            <h3 class="wdn-brand clear-top wdn-icon-attention">This Video is Missing Captions!</h3>
+            <p>
+                MediaHub uses <a href="http://amara.org/en/">Amara</a> for the captioning of video. Any videos without captions are in violation of the <strong>Twenty-First Century Communications and Video Accessibility Act of 2010 (CVAA)</strong>. To caption your video follow <a href="http://amara.org/en/videos/create/">this link</a> and paste your video URL into the appropriate box. Your captions will be automatically pulled when your video is played. 
+            </p>
+            <p>
+                Video URL:<input type="text" onclick="WDN.jQuery(this).select();" name="video_url" value="<?php echo $context->media->url; ?>">
+            </p>
+            <p>
+                <a class="wdn-button wdn-button-brand" href="http://amara.org/en/videos/create/">Caption Your Video</a>
+            </p>
+        </div>
+    </div>
+</form>
+<?php endif; ?>
+
 <form action="?" method="post" name="media_form" id="media_form" class="wdn-band" enctype="multipart/form-data">
 
     <input id="media_url" name="url" type="hidden" value="<?php echo htmlentities($context->media->url, ENT_QUOTES); ?>" />
@@ -42,7 +62,6 @@ $controller->setReplacementData('head', $js);
             </div>
         </div>
     </div>
-    <div class="clear"></div>
     
     <div class="wdn-band mh-edit-media">
         <div class="wdn-inner-wrapper">
@@ -167,12 +186,6 @@ $controller->setReplacementData('head', $js);
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[4][element]" type="hidden" value="keywords"/>
                                     <input id="itunes_keywords" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[4][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'keywords'); ?>" aria-describedby="tag-details"/>
                                 </div>
-                            </li>
-
-                            <li>
-                                <p class="zenbox">
-                                    MediaHub uses <a href="http://amara.org/en/">Amara</a> for the captioning of video. Any videos without captions are in violation of the Twenty-First Century Communications and Video Accessibility Act of 2010 (CVAA) . To caption your video follow <a href="http://amara.org/en/videos/create/">this link</a> and paste your video URL (<?php echo $context->media->url; ?>) into the appropriate box. Your captions will be automatically pulled when your video is played. 
-                                </p>
                             </li>
 
                         </ol>
@@ -556,4 +569,5 @@ $controller->setReplacementData('head', $js);
             WDN.jQuery('#geo_long').attr('value', event.latLng.lng());
         });
     });
+
 </script>
