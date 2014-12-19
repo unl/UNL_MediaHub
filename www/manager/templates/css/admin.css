@@ -239,3 +239,8 @@ dl.caption {
     font-size: 2.369em;
     display: block;
 }
+
+/*
+Google Maps override to display correctly in the framework
+*/
+#map_canvas img { max-width: none; }
