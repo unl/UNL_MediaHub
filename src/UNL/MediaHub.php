@@ -135,4 +135,12 @@ class UNL_MediaHub
         return false;
     }
 
+    /**
+     * @param string $url the url to reidrect to
+     */
+    public static function redirect($url)
+    {
+        header('Location: '.$url);
+        exit();
+    }
 }

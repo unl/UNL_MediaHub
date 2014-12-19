@@ -277,9 +277,13 @@ class UNL_MediaHub_Controller
         if (isset($post['action'])) {
             switch ($post['action']) {
                 case 'playcount':
-                    //Increase play count.
-                    $media->play_count++;
-                    $media->save();
+                    //Log the view.
+                    $ip_address = NULL;
+                    if (isset($_SERVER['REMOTE_ADDR'])) {
+                        $ip_address = $_SERVER['REMOTE_ADDR'];
+                    }
+                    
+                    $view = UNL_MediaHub_MediaView::logView($media, $ip_address);
                     //Don't need to send a response, so stop here.
                     exit();
                     break;
@@ -300,6 +304,8 @@ class UNL_MediaHub_Controller
             $comment = new UNL_MediaHub_Media_Comment();
             $comment->fromArray($data);
             $comment->save();
+            
+            UNL_MediaHub::redirect(self::getURL($media));
         }
 
         if (!empty($post['tags'])) {

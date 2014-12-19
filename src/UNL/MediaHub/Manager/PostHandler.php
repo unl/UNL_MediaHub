@@ -150,7 +150,7 @@ class UNL_MediaHub_Manager_PostHandler
     public function handleMediaFileUpload()
     {
         if ($url = $this->_handleMediaFileUpload()) {
-            $this->redirect(UNL_MediaHub_Manager::getURL().'?view=uploadcomplete&format=json&url='.urlencode($url));
+            UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL().'?view=uploadcomplete&format=json&url='.urlencode($url));
         }
     }
 
@@ -311,7 +311,7 @@ class UNL_MediaHub_Manager_PostHandler
             // Add a new feed for this user.
             $feed = UNL_MediaHub_Feed::addFeed($this->post, UNL_MediaHub_AuthService::getInstance()->getUser());
         }
-        $this->redirect('?view=feedmetadata&id='.$feed->id);
+        UNL_MediaHub::redirect('?view=feedmetadata&id='.$feed->id);
     }
 
     /**
@@ -428,7 +428,7 @@ class UNL_MediaHub_Manager_PostHandler
         }
 
         // @todo clean cache for this feed!
-        $this->redirect(UNL_MediaHub_Controller::getURL($media));
+        UNL_MediaHub::redirect(UNL_MediaHub_Controller::getURL($media));
     }
 
     /**
@@ -453,7 +453,7 @@ class UNL_MediaHub_Manager_PostHandler
                 $feed->addUser(UNL_MediaHub_User::getByUid($this->post['uid']));
             }
         }
-        $this->redirect('?view=permissions&feed_id='.$feed->id);
+        UNL_MediaHub::redirect('?view=permissions&feed_id='.$feed->id);
     }
 
     /**
@@ -478,8 +478,8 @@ class UNL_MediaHub_Manager_PostHandler
         }
 
         $feed->delete();
-        
-        $this->redirect(UNL_MediaHub_Manager::getURL());
+
+        UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL());
     }
 
     /**
@@ -498,7 +498,7 @@ class UNL_MediaHub_Manager_PostHandler
 
         $media->delete();
 
-        $this->redirect(UNL_MediaHub_Manager::getURL());
+        UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL());
     }
 
     /**
@@ -541,16 +541,5 @@ class UNL_MediaHub_Manager_PostHandler
         unset($this->post['__unlmy_posttarget']);
         unset($this->post['MAX_FILE_SIZE']);
         unset($this->post['submit_existing']);
-    }
-
-    /**
-     * Redirect to the location given.
-     *
-     * @param string $location URL to redirect to.
-     */
-    function redirect($location)
-    {
-        header('Location: '.$location);
-        exit();
     }
 }
