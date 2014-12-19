@@ -325,6 +325,10 @@ form legend {
     margin-left: -24px;
 }
 
+#headline_main .wdn-share-this-page {
+    display: none;
+}
+
 @media only screen and (max-width : 768px) {
 
     .mh-upload-band .mh-upload-box{
