@@ -11,22 +11,32 @@ class UNL_MediaHub_AmaraAPI
 
     /**
      * Get the stream context for the request
-     * 
+     *
+     * @param $method
      * @return resource
      */
-    protected function getStreamContext()
+    protected function getStreamContext($method, $content)
     {
         $options = array();
         
         $options['http'] = array(
             'timeout' => 2,
+            'method'  => $method,
         );
 
         if (self::$amara_username && self::$amara_api_key) {
-            $options['header'] = "X-api-username: " . self::$amara_username . "\r\n" .
+            $options['http']['header'] = "X-api-username: " . self::$amara_username . "\r\n" .
                 "X-apikey: " . self::$amara_api_key . "\r\n";
         }
         
+        if ($method == 'POST') {
+            if (!isset($options['http']['header'])) {
+                $options['http']['header'] = '';
+            }
+            $options['http']['header'] .= 'Content-type: application/x-www-form-urlencoded'."\r\n";
+            $options['http']['content'] = http_build_query($content);
+        }
+        print_r($options);
         return stream_context_create($options);
     }
 
@@ -34,9 +44,22 @@ class UNL_MediaHub_AmaraAPI
      * @param string $request_path the path and query string parameters after the base API endpoint
      * @return string
      */
-    public function request($request_path)
+    public function get($request_path)
     {
-        return @file_get_contents('http://www.amara.org/api2/partners/' . $request_path, false, $this->getStreamContext());
+        return $this->request($request_path, 'GET');
+    }
+    
+    public function post($request_path, $content)
+    {
+        return $this->request($request_path, 'POST', $content);
+    }
+    
+    protected function request($request_path, $method = 'GET', $content = array()) {
+        $url = 'https://www.amara.org/api2/partners/' . $request_path;
+        print_r($url);
+        $result = file_get_contents($url, false, $this->getStreamContext($method, $content));
+        var_dump($result);
+        return $result;
     }
 
     /**
@@ -45,11 +68,20 @@ class UNL_MediaHub_AmaraAPI
      */
     public function getMediaDetails($media_url)
     {
-        if (!$info_json = $this->request('videos/?video_url=' . $media_url . '&format=json')) {
+        if (!$info_json = $this->get('videos/?video_url=' . $media_url . '&format=json')) {
             return false;
         }
         
         return json_decode($info_json);
+    }
+    
+    public function createMedia($media_url)
+    {
+        return $this->post('videos/', array(
+            'video_url' => $media_url,
+            //'title' => 'test',
+            //'primary_audio_language_code' => 'en-US',
+        ));
     }
 
     /**
@@ -65,9 +97,13 @@ class UNL_MediaHub_AmaraAPI
         }
 
         if ($media_details->meta->total_count == 0) {
-            return false;
+            //create the media
+            $result = $this->createMedia($media_url);
+            
+            //update the details
+            $media_details = $this->getMediaDetails($media_url);
         }
-        
+        print_r($media_details);
         return 'http://amara.org/en/videos/' . $media_details->objects[0]->id . '/info';
     }
 
@@ -88,6 +124,6 @@ class UNL_MediaHub_AmaraAPI
             return false;
         }
 
-        return $this->request('videos/' . $media_details->objects[0]->id . '/languages/en/subtitles/?format='.$format);
+        return $this->get('videos/' . $media_details->objects[0]->id . '/languages/en/subtitles/?format='.$format);
     }
 }

@@ -21,6 +21,11 @@ var mediaType = "'.$mediaType.'";
 $controller->setReplacementData('head', $js);
 ?>
 
+<?php if ($edit_caption_url = $context->getEditCaptionsURL()): ?>
+<a href="<?php echo $edit_caption_url ?>">Edit Captions</a>
+<?php else: ?>
+NOOOOOOO
+<?php endif; ?>
 <form action="?" method="post" name="media_form" id="media_form" class="wdn-band" enctype="multipart/form-data">
 
     <input id="media_url" name="url" type="hidden" value="<?php echo htmlentities($context->media->url, ENT_QUOTES); ?>" />
