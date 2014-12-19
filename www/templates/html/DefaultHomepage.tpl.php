@@ -35,6 +35,21 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
     </div>
 </div>
 
+<div class="wdn-band wdn-light-neutral-band">
+    <div class="wdn-inner-wrapper">
+        <h2 class="wdn-brand wdn-center">
+            <span class="wdn-subhead">Latest Videos</span>
+        </h2>
+        <div class="bp2-wdn-grid-set-thirds">
+            <?php foreach ($context->latest_media->items as $media): ?>
+                <div class="wdn-col">
+                    <?php echo $savvy->render($media, 'Media/teaser.tpl.php'); ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>
+
 <div class="wdn-band">
     <div class="wdn-inner-wrapper">
         <div class="bp2-wdn-grid-set-thirds wdn-center">
@@ -82,20 +97,7 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
     </div>
 </div>
 
-<div class="wdn-band wdn-light-neutral-band">
-    <div class="wdn-inner-wrapper">
-        <h2 class="wdn-brand wdn-center">
-            <span class="wdn-subhead">Latest Videos</span>
-        </h2>
-        <div class="bp2-wdn-grid-set-thirds">
-            <?php foreach ($context->latest_media->items as $media): ?>
-                <div class="wdn-col">
-                    <?php echo $savvy->render($media, 'Media/teaser.tpl.php'); ?>
-                </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
-</div>
+
 
 <script type="text/javascript">
 
