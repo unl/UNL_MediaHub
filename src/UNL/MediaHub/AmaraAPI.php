@@ -3,10 +3,16 @@ class UNL_MediaHub_AmaraAPI
 {
     public static $amara_username = false;
     public static $amara_api_key  = false;
+
+    /**
+     * @var \GuzzleHttp\Client
+     */
+    protected $guzzle;
     
     public function __construct()
     {
         
+        $this->guzzle = new \GuzzleHttp\Client();
     }
 
     /**
@@ -33,7 +39,7 @@ class UNL_MediaHub_AmaraAPI
             if (!isset($options['http']['header'])) {
                 $options['http']['header'] = '';
             }
-            $options['http']['header'] .= 'Content-type: application/x-www-form-urlencoded'."\r\n";
+            $options['http']['header'] .= 'Content-type: multipart/form-data'."\r\n";
             $options['http']['content'] = http_build_query($content);
         }
         print_r($options);
@@ -46,20 +52,36 @@ class UNL_MediaHub_AmaraAPI
      */
     public function get($request_path)
     {
-        return $this->request($request_path, 'GET');
+        $response = $this->guzzle->get('https://www.amara.org/api2/partners/'.$request_path, array(
+            'headers' => array(
+                'X-api-username' => self::$amara_username,
+                'X-apikey'       => self::$amara_api_key,
+            ),
+        ));
+        return $response->getBody();
     }
     
     public function post($request_path, $content)
     {
-        return $this->request($request_path, 'POST', $content);
+        $response = $this->guzzle->post('https://www.amara.org/api2/partners/'.$request_path, array(
+            'headers' => array(
+                'X-api-username' => self::$amara_username,
+                'X-apikey'       => self::$amara_api_key,
+            ),
+            'body' => $content,
+        ));
+        print_r($response);
+        return $response->getBody();
     }
     
     protected function request($request_path, $method = 'GET', $content = array()) {
-        $url = 'https://www.amara.org/api2/partners/' . $request_path;
-        print_r($url);
-        $result = file_get_contents($url, false, $this->getStreamContext($method, $content));
-        var_dump($result);
-        return $result;
+        if ($method == 'GET') {
+            return $this->get($request_path);
+        }
+        
+        if ($method == 'POST') {
+            return $this->post($request_path, $content);
+        }
     }
 
     /**
