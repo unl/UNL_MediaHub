@@ -1,18 +1,37 @@
 <?php
-class UNL_MediaHub_Media_VideoTextTrack extends UNL_MediaHub_Media
+class UNL_MediaHub_Media_VideoTextTrack
 {
-    public static $amara_username = false;
-    public static $amara_api_key  = false;
-    
     /**
-     * Get by ID
-     *
-     * @param int $id The id of the feed to get
-     *
-     * @return UNL_MediaHub_Media
+     * @var UNL_MediaHub_Media
      */
-    static function getById($id)
+    public $media;
+
+    /**
+     * The format of the text track
+     * 
+     * @var
+     */
+    public $format;
+    
+    protected $track = false;
+    
+    public function __construct($media_id, $format = 'srt')
     {
-        return Doctrine::getTable(__CLASS__)->find($id);
+        if (!$this->media = UNL_MediaHub_Media::getById($media_id)) {
+            throw new Exception('Unknown media', 404);
+        }
+        
+        $this->format = $format;
+        
+        $api = new UNL_MediaHub_AmaraAPI();
+        
+        if (!$this->track = $api->getTextTrack($this->media->url, $format)) {
+            throw new Exception('No Text track found for this media', 404);
+        }
+    }
+    
+    public function getTextTrack()
+    {
+        return $this->track;
     }
 }
