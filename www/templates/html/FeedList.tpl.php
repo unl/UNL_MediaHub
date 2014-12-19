@@ -12,6 +12,20 @@ if (isset($context->label) && !empty($context->label)) {
 ?>
 
 
+<?php 
+
+if($context->options['orderby'] == 'datecreated'){
+
+    $label = 'Recent Channels';
+
+}elseif($context->options['orderby'] == 'plays'){
+
+    $label = 'Popular Channels';
+
+};
+
+?>
+
 <div class="wdn-band">
     <div class="wdn-inner-wrapper wdn-inner-padding-no-bottom">
         <div class="mh-list-header">
