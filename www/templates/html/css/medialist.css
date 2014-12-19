@@ -16,6 +16,7 @@ Supporting styles for individual presentation of lists of media
 
 .mh-sort-filter .mh-btn-group {
 	margin-right: 1em;
+	margin-bottom: .75em;
 }
 
 .mh-btn-group > .wdn-button {
