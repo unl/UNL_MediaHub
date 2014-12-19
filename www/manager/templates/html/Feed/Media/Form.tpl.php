@@ -28,7 +28,7 @@ $controller->setReplacementData('head', $js);
         <div class="wdn-inner-wrapper wdn-inner-padding-sm">
             <h3 class="wdn-brand clear-top wdn-icon-attention">This Video is Missing Captions!</h3>
             <p>
-                MediaHub uses <a href="http://amara.org/en/">Amara</a> for the captioning of video. Any videos without captions are in violation of the <strong>Twenty-First Century Communications and Video Accessibility Act of 2010 (CVAA)</strong>. To caption your video follow <a href="http://amara.org/en/videos/create/">this link</a> and paste your video URL into the appropriate box. Your captions will be automatically pulled when your video is played. 
+                MediaHub uses <a href="http://amara.org/en/">Amara</a> for the captioning of video. For accessibility reasons, captions are required for <strong>ALL</strong> videos. To caption your video follow <a href="http://amara.org/en/videos/create/">this link</a> and paste your video URL into the appropriate box. Your captions will be automatically pulled when your video is played. 
             </p>
             <p>
                 Video URL:<input type="text" onclick="WDN.jQuery(this).select();" name="video_url" value="<?php echo $context->media->url; ?>">
