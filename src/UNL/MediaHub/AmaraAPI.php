@@ -39,6 +39,21 @@ class UNL_MediaHub_AmaraAPI
         return json_decode($info_json);
     }
     
+    public function getCaptionEditURL($media_url)
+    {
+        $media_details = $this->getMediaDetails($media_url);
+
+        if (!$media_details) {
+            return false;
+        }
+
+        if ($media_details->meta->total_count == 0) {
+            return false;
+        }
+        
+        return 'http://amara.org/en/videos/' . $media_details->objects[0]->id . '/info';
+    }
+    
     public function getTextTrack($media_url, $format = 'srt')
     {
         $media_details = $this->getMediaDetails($media_url);
