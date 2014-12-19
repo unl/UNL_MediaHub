@@ -76,7 +76,7 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
                     <h2 class="wdn-brand">Explore Channels</h2>
                 </a>
                 <p>
-                    Channels are a great way to group your media. Make a channel to suite your needs be it a podcast or drafting class. Be sure to check out what other great channels have been collecting videos. 
+                    Channels contain grouped pieces of media. On MediaHub you’ll find channels for podcast, drafting classes, and everything in between. Be sure to check out all the great channels that have been collecting videos. 
                 </p>
             </div>
             <div class="wdn-col mh-featured">
