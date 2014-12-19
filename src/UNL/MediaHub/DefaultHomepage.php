@@ -27,7 +27,7 @@ class UNL_MediaHub_DefaultHomepage implements UNL_MediaHub_CacheableInterface
         $options = $this->options;
 
         if (empty($options['limit'])) {
-            $options['limit']   = 3;
+            $options['limit']   = 6;
         }
         $this->latest_media = new UNL_MediaHub_MediaList($options);
         $this->latest_media->run();
@@ -36,7 +36,7 @@ class UNL_MediaHub_DefaultHomepage implements UNL_MediaHub_CacheableInterface
         $this->top_media = new UNL_MediaHub_MediaList($options);
 
         $options['filter'] = new UNL_MediaHub_FeedList_Filter_Popular();
-        $options['limit']  = 3;
+        $options['limit']  = 6;
         $this->featured_channels = new UNL_MediaHub_FeedList($options);
     }
     
