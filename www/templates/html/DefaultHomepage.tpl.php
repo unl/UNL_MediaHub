@@ -54,19 +54,6 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
     <div class="wdn-inner-wrapper">
         <div class="bp2-wdn-grid-set-thirds wdn-center">
             <div class="wdn-col mh-featured">
-                <a href="<?php echo $baseUrl ?>manager/">
-                    <div class="mh-featured-icon centered mh-red">
-                        <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/gear-icon.svg">
-                            <img src="<?php echo $baseUrl; ?>/templates/html/css/images/gear-icon-white.png" alt="manage media">
-                        </object>
-                    </div>
-                    <h2 class="wdn-brand">Manage Media</h2>
-                </a>
-                <p>
-                    MediaHub is a reliable host for all your audio and video needs. Look professional with the University of Nebraska brand and go places YouTube can’t (like China and K-12 schools). 
-                </p>
-            </div>
-            <div class="wdn-col mh-featured">
                 <a href="<?php echo $baseUrl ?>search/">
                     <div class="mh-featured-icon centered mh-green">
                         <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/play-icon.svg">
@@ -89,10 +76,22 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
                     <h2 class="wdn-brand">Explore Channels</h2>
                 </a>
                 <p>
-                    Channels are a great way to group your media. Make a channel to suite your needs be it a podcast or drafting class. Be sure to check out what other great channels have been collecting videos. 
+                    Channels contain grouped pieces of media. On MediaHub you’ll find channels for podcast, drafting classes, and everything in between. Be sure to check out all the great channels that have been collecting videos. 
                 </p>
             </div>
-
+            <div class="wdn-col mh-featured">
+                <a href="<?php echo $baseUrl ?>manager/">
+                    <div class="mh-featured-icon centered mh-red">
+                        <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/gear-icon.svg">
+                            <img src="<?php echo $baseUrl; ?>/templates/html/css/images/gear-icon-white.png" alt="manage media">
+                        </object>
+                    </div>
+                    <h2 class="wdn-brand">Manage Media</h2>
+                </a>
+                <p>
+                    MediaHub is a reliable host for all your audio and video needs. Look professional with the University of Nebraska brand and go places YouTube can’t (like China and K-12 schools). 
+                </p>
+            </div>
         </div>
     </div>
 </div>
