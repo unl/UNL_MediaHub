@@ -63,7 +63,7 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
                     <h2 class="wdn-brand">Browse Media</h2>
                 </a>
                 <p>
-                    Browse MediaHub and find what’s happening at the University of Nebraska – Lincoln. You’ll find documentaries, symphonies, and everything in between. 
+                    Browse MediaHub and find what’s happening at the University of Nebraska–Lincoln. You’ll find documentaries, symphonies, and everything in between. 
                 </p>
             </div>
             <div class="wdn-col mh-featured">
