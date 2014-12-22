@@ -177,7 +177,7 @@ $controller->setReplacementData('head', $js);
 
                             <li>
                                 <label for="itunes_keywords" class="element">Tags</label>
-                                <div class="mh-tooltip wdn-icon-info italic" id="tag-details">
+                                <div class="mh-tooltip wdn-icon-info italic hang-right" id="tag-details">
                                     <div>
                                         <p>A comma separated list of highly relevant keywords, MAX 10. Tags also serve as iTunes Keywords.</p>
                                     </div>
