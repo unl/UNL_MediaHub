@@ -95,11 +95,3 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-
-    var vid = document.getElementById("video-player"); // run main video at half speed
-    vid.playbackRate = 0.4;
-
-
-</script>
