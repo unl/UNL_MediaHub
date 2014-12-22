@@ -36,7 +36,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
                                     <label for="author">
                                         Author
                                         <span class="required">*</span>
-                                        <div class="mh-tooltip wdn-icon-info italic" id="author-details">
+                                        <div class="mh-tooltip wdn-icon-info italic hang-right" id="author-details">
                                             <div>
                                                 Name of media creator
                                             </div>
