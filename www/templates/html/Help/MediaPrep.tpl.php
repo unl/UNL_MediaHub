@@ -1,6 +1,7 @@
 <div class="wdn-band">
     <div class="wdn-inner-wrapper">
         <h2 class="clear-top">Preparing Your Media</h2>
+        <a href="<?php echo UNL_MediaHub_Controller::getURL() ?>documents/handbrake_presets.zip">Download Handbreak Presets</a>
         <div class="wdn-grid-set">
             <div class="wdn-col-full">    
                 <h3 class="wdn-brand">File Types</h3>
@@ -15,7 +16,7 @@
             
                 <h3 class="wdn-brand">Media Formatting and Conversion</h3>
                 <h4 class="wdn-brand"><span class="wdn-subhead">Video</span></h4>
-                <p>To get your videos ready for MediaHub we recommend Handbrake. Handbrake is free and open source and can be downloaded here. To make things easier we’ve provided UNL's recommended Handbrake presets for download here.</p>
+                <p>To get your videos ready for MediaHub we recommend Handbrake. Handbrake is free and open source and can be downloaded <a href="https://handbrake.fr/">here</a>. To make things easier we’ve provided UNL's recommended Handbrake presets for download <a href="<?php echo UNL_MediaHub_Controller::getURL() ?>documents/handbrake_presets.zip">here</a>.</p>
                 <h4 class="wdn-brand"><span class="wdn-subhead">Audio</span></h4>
                 <p>A number of web applications are availible convert you audio files to .mp3 and manage bitrate. MediaHub recommends media.io. </p>
             </div>
