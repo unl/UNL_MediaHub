@@ -10,6 +10,8 @@ $routes['/^$/'] = 'UNL_MediaHub_DefaultHomepage';
 
 $routes['/^developers\/?$/'] = 'UNL_MediaHub_Developers';
 
+$routes['/^help\/media-prep\/?$/'] = 'UNL_MediaHub_Help_MediaPrep';
+
 $routes['/^search\/(?P<q>.*)$/'] = 'UNL_MediaHub_MediaList';
 
 $routes['/^tags\/(?P<t>.*)$/'] = 'UNL_MediaHub_MediaList';
