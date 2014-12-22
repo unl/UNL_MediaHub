@@ -196,9 +196,9 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
             <div class="bp2-wdn-col-one-fourth mh-sidebar">
                 <div>
 
-                    <a class="wdn-button wdn-button-brand embed mh-hide-bp2"><span class="wdn-icon-plus wdn-icon"></span>Embed</a>
+                    <a class="wdn-button embed mh-hide-bp2"><span class="wdn-icon-plus wdn-icon"></span>Embed</a>
                     <br>
-                    <a href="<?php echo htmlentities($context->url, ENT_QUOTES); ?>" target="_blank" class="wdn-button wdn-button-brand mh-hide-bp2"><span class="wdn-icon-up-small mh-flip-180 wdn-icon"></span>Download</a>
+                    <a href="<?php echo htmlentities($context->url, ENT_QUOTES); ?>" target="_blank" class="wdn-button mh-hide-bp2"><span class="wdn-icon-up-small mh-flip-180 wdn-icon"></span>Download</a>
 
                 </div>
 
