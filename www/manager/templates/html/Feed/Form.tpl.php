@@ -1,4 +1,5 @@
 <?php $feed_url = htmlentities(UNL_MediaHub_Controller::getURL($context), ENT_QUOTES); ?>
+<?php $url = htmlentities(UNL_MediaHub_Controller::getURL($context->feed), ENT_QUOTES); ?>
 <script type="text/javascript">
     WDN.jQuery(document).ready(function() {
         WDN.jQuery('#extensions input').change(function() {
@@ -78,6 +79,17 @@
                     <fieldset id="feed_header">
                         <legend>Channel Image</legend>
                         <ol>
+                            <?php if(isset($context->feed->id)): ?>
+                                <?php if($context->feed->hasImage()): ?>
+                                    <li>
+                                        <div class="mh-channel-thumb wdn-center">
+                                            <img
+                                            src="<?php echo $url; ?>/image"
+                                            alt="<?php echo htmlentities($context->feed->title, ENT_QUOTES); ?> Image">
+                                        </div>
+                                    </li>
+                                <?php endif; ?>
+                            <?php endif; ?>
                             <li>
                                 <label class="element" for="image_file">Image File</label>
                                 <div class="mh-tooltip italic wdn-icon-info hang-right" id="image-file-details">
