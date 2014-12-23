@@ -138,7 +138,7 @@ a.action.delete:active {background-image:url('images/iconDelete.png');}
     color: #a8a8a8;
     display:block;  
 }
-#maincontent #userList li img {display:block;margin-left:auto;margin-right:auto;}
+#maincontent #userList li img {border: solid rgba(174, 167, 141, 0.21) 10px;display:block;margin-left:auto;margin-right:auto;}
 #maincontent #userList li form {
     position:absolute;
     top:6px;
