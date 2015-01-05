@@ -11,38 +11,7 @@ class UNL_MediaHub_AmaraAPI
     
     public function __construct()
     {
-        
         $this->guzzle = new \GuzzleHttp\Client();
-    }
-
-    /**
-     * Get the stream context for the request
-     *
-     * @param $method
-     * @return resource
-     */
-    protected function getStreamContext($method, $content)
-    {
-        $options = array();
-        
-        $options['http'] = array(
-            'timeout' => 2,
-            'method'  => $method,
-        );
-
-        if (self::$amara_username && self::$amara_api_key) {
-            $options['http']['header'] = "X-api-username: " . self::$amara_username . "\r\n" .
-                "X-apikey: " . self::$amara_api_key . "\r\n";
-        }
-        
-        if ($method == 'POST') {
-            if (!isset($options['http']['header'])) {
-                $options['http']['header'] = '';
-            }
-            $options['http']['header'] .= 'Content-type: multipart/form-data'."\r\n";
-            $options['http']['content'] = http_build_query($content);
-        }
-        return stream_context_create($options);
     }
 
     /**
@@ -70,16 +39,6 @@ class UNL_MediaHub_AmaraAPI
             'body' => json_encode($content),
         ));
         return $response->getBody();
-    }
-    
-    protected function request($request_path, $method = 'GET', $content = array()) {
-        if ($method == 'GET') {
-            return $this->get($request_path);
-        }
-        
-        if ($method == 'POST') {
-            return $this->post($request_path, $content);
-        }
     }
 
     /**
