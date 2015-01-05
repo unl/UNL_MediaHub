@@ -32,6 +32,10 @@ Supporting styles for individual presentation of media pages
     padding:0px 0 2px 17px;	
 }
 
+.itunes_subtitle {
+    margin: 0;
+}
+
 /* 
 -------------------------------------------------
 Tags 
@@ -221,6 +225,10 @@ body #cboxOverlay {background-color:#000;}
 #maincontent ul#mediaTags li.mh-tag-label {
     background: transparent;
     box-shadow: none;
+}
+
+.mh-stat {
+    margin: 1em 0;
 }
 
 .mh-stat .mh-size, .mh-stat .mh-ratio {
