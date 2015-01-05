@@ -1,6 +1,8 @@
 <?php
 class UNL_MediaHub_AmaraAPI
 {
+    const BASE_API_URI = 'https://www.amara.org/api2/partners/';
+    
     public static $amara_username = false;
     public static $amara_api_key  = false;
 
@@ -20,7 +22,7 @@ class UNL_MediaHub_AmaraAPI
      */
     public function get($request_path)
     {
-        $response = $this->guzzle->get('https://www.amara.org/api2/partners/'.$request_path, array(
+        $response = $this->guzzle->get(self::BASE_API_URI.$request_path, array(
             'headers' => array(
                 'X-api-username' => self::$amara_username,
                 'X-apikey'       => self::$amara_api_key,
@@ -31,7 +33,7 @@ class UNL_MediaHub_AmaraAPI
     
     public function post($request_path, $content)
     {
-        $response = $this->guzzle->post('https://www.amara.org/api2/partners/'.$request_path, array(
+        $response = $this->guzzle->post(self::BASE_API_URI.$request_path, array(
             'headers' => array(
                 'X-api-username' => self::$amara_username,
                 'X-apikey'       => self::$amara_api_key,
