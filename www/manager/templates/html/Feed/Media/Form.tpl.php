@@ -21,11 +21,26 @@ var mediaType = "'.$mediaType.'";
 $controller->setReplacementData('head', $js);
 ?>
 
-<?php if ($edit_caption_url = $context->getEditCaptionsURL()): ?>
-<a href="<?php echo $edit_caption_url ?>">Edit Captions</a>
-<?php else: ?>
-NOOOOOOO
+<?php $has_captions = @file_get_contents($context->media->getVideoTextTrackURL()); ?>
+<?php if(!$has_captions): ?>
+<form method="post" class="wdn-band" action="https://www.amara.org/api2/partners/videos/" >
+    <div class="wdn-band wdn-light-neutral-band mh-caption-band">
+        <div class="wdn-inner-wrapper wdn-inner-padding-sm">
+            <h3 class="wdn-brand clear-top wdn-icon-attention">This Video is Missing Captions!</h3>
+            <p>
+                MediaHub uses <a href="http://amara.org/en/">Amara</a> for the captioning of video. For accessibility reasons, captions are required for <strong>ALL</strong> videos. To caption your video follow <a href="http://amara.org/en/videos/create/">this link</a> and paste your video URL into the appropriate box. Your captions will be automatically pulled when your video is played. 
+            </p>
+            <p>
+                Video URL:<input type="text" onclick="WDN.jQuery(this).select();" name="video_url" value="<?php echo $context->media->url; ?>">
+            </p>
+            <p>
+                <a class="wdn-button wdn-button-brand" href="http://amara.org/en/videos/create/">Caption Your Video</a>
+            </p>
+        </div>
+    </div>
+</form>
 <?php endif; ?>
+
 <form action="?" method="post" name="media_form" id="media_form" class="wdn-band" enctype="multipart/form-data">
 
     <input id="media_url" name="url" type="hidden" value="<?php echo htmlentities($context->media->url, ENT_QUOTES); ?>" />
@@ -47,7 +62,6 @@ NOOOOOOO
             </div>
         </div>
     </div>
-    <div class="clear"></div>
     
     <div class="wdn-band mh-edit-media">
         <div class="wdn-inner-wrapper">
@@ -160,24 +174,10 @@ NOOOOOOO
                                 </div>
                                 <div class="element" id="description_wrapper"><textarea id="description" name="description" class="required-entry" rows="5" aria-describedby="description-details"><?php echo htmlentities(@$context->media->description); ?></textarea></div>
                             </li>
-    
-                            <li>
-                                <label for="mrss_text" class="element">
-                                    Transcript/Captioning
-                                </label>
-                                <div class="mh-tooltip wdn-icon-info italic" id="captioning-details">
-                                    <div>
-                                        <p>Allows the inclusion of a text transcript, closed captioning, or lyrics of the media content.</p>
-                                    </div>
-                                </div>
-                                <div class="element">
-                                    <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[11][element]" type="hidden" value="text"/>
-                                    <textarea rows="3" id="mrss_text" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[11][value]" aria-describedby="captioning-details"><?php echo getFieldValue($context, 'media', 'text'); ?></textarea>
-                                </div>
-                            </li>
+
                             <li>
                                 <label for="itunes_keywords" class="element">Tags</label>
-                                <div class="mh-tooltip wdn-icon-info italic" id="tag-details">
+                                <div class="mh-tooltip wdn-icon-info italic hang-right" id="tag-details">
                                     <div>
                                         <p>A comma separated list of highly relevant keywords, MAX 10. Tags also serve as iTunes Keywords.</p>
                                     </div>
@@ -187,6 +187,7 @@ NOOOOOOO
                                     <input id="itunes_keywords" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[4][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'keywords'); ?>" aria-describedby="tag-details"/>
                                 </div>
                             </li>
+
                         </ol>
                     </fieldset>
                     <fieldset id="geo_location" class="collapsible">
@@ -293,6 +294,20 @@ NOOOOOOO
                                 <label for="itunes_author" class="element">Author<span class="helper">Name of media creator.</span></label>
                                 <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[0][element]" type="hidden" value="author"/>
                                 <input id="itunes_author" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[0][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'author'); ?>"/>
+                            </li>
+                            <li>
+                                <label for="mrss_text" class="element">
+                                    Transcript/Captioning
+                                </label>
+                                <div class="mh-tooltip wdn-icon-info italic" id="captioning-details">
+                                    <div>
+                                        <p>Allows the inclusion of a text transcript, closed captioning, or lyrics of the media content.</p>
+                                    </div>
+                                </div>
+                                <div class="element">
+                                    <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[11][element]" type="hidden" value="text"/>
+                                    <textarea rows="3" id="mrss_text" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[11][value]" aria-describedby="captioning-details"><?php echo getFieldValue($context, 'media', 'text'); ?></textarea>
+                                </div>
                             </li>
                             <li>
                                 <label for="itunes_category" class="element">Category <span class="helper">Choose a category for use within iTunes U</span></label>
@@ -554,4 +569,5 @@ NOOOOOOO
             WDN.jQuery('#geo_long').attr('value', event.latLng.lng());
         });
     });
+
 </script>

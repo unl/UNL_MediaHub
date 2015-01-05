@@ -10,6 +10,26 @@ if (isset($context->label) && !empty($context->label)) {
 $feeds = $context->getRelatedFeeds(array('limit'=>6));
 ?>
 
+<?php 
+
+if(!empty($context->options['orderby'])){
+
+    $label = ($context->options['orderby'] == 'datecreated') ? 'Recent' : 'Popular';
+
+};
+
+if(!empty($context->options['f'])){
+
+    $label .= ($context->options['f'] == 'audio') ? ' Audio' : ' Video';
+
+}else{
+
+    $label .= ' Media';
+
+};
+
+?>
+
 <div class="wdn-band">
     <div class="wdn-inner-wrapper wdn-inner-padding-no-bottom">
         <div class="mh-list-header">
