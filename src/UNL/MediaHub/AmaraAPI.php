@@ -7,6 +7,13 @@ class UNL_MediaHub_AmaraAPI
     public static $amara_api_key  = false;
 
     /**
+     * Number of seconds until timeout for requests.
+     * 
+     * @var int
+     */
+    protected $timeout = 2;
+
+    /**
      * @var \GuzzleHttp\Client
      */
     protected $guzzle;
@@ -28,6 +35,7 @@ class UNL_MediaHub_AmaraAPI
                     'X-api-username' => self::$amara_username,
                     'X-apikey' => self::$amara_api_key,
                 ),
+                'timeout' => $this->timeout
             ));
 
             return $response->getBody();
@@ -45,6 +53,7 @@ class UNL_MediaHub_AmaraAPI
                     'X-apikey'       => self::$amara_api_key,
                 ),
                 'body' => json_encode($content),
+                'timeout' => $this->timeout,
             ));
             return $response->getBody();
         } catch (GuzzleHttp\Exception\ClientException $e) {
