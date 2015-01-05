@@ -269,6 +269,25 @@ body #cboxOverlay {background-color:#000;}
         display: none !important;
     }
 
+    .mh-media-browse.page-1 > :first-child .mh-video-label {
+        padding: 0.75em;       
+        width: 100%;       
+        margin-top: -12px;     
+        margin-bottom: 1.5em;  
+
+    }
+
+    .mh-media-browse.page-1 > :first-child .mh-video-label p {
+        font-style: italic;
+        font-size: 13px;
+        line-height: 1.662;
+        font-family: "Mercury SSm A","Mercury SSm B",Georgia,Baskerville,"Baskerville Old Face","Hoefler Text",Garamond,"Times New Roman",serif;
+    }
+
+    .mh-media-browse.page-1 > :first-child .mh-video-label .wdn-subhead:not(.edit-button) {
+        margin: 0 0 1em 0;
+    }
+
 }
 
 @media only screen and (max-width: 960px)  {
