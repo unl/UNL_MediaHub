@@ -4,7 +4,10 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
 
 <div class="wdn-band wdn-light-neutral-band mh-upload-band">
     <div class="wdn-inner-wrapper">
-        <h1 class="wdn-brand clear-top">Manage Media</h1>
+        <h1 class="wdn-brand clear-top">
+            Manage Media
+            <span class="wdn-subhead wdn-pull-right"><a href="<?php echo UNL_MediaHub_Controller::getURL() ?>help/media-prep">Preparing Your Media</a></span>
+        </h1>
         <form action="?" method="post" id="add_media">
             <input type="hidden" name="__unlmy_posttarget" value="feed_media" />
             <input type="hidden" id="media_url" name="url" value="">
@@ -14,9 +17,6 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
                         <h2>+<span class="wdn-subhead">Add Media</span></h2>
                         <p>.mp4 or .mp3</p>
                     </div>
-                    <p>
-                        <a href="<?php echo UNL_MediaHub_Controller::getURL() ?>documents/handbrake_presets.zip">Download Handbreak Presets</a>
-                    </p>
                     <div id="filelist" class="mh-upload-box wdn-center">
                         Your browser doesn't have Flash, Silverlight or HTML5 support.
                     </div>
@@ -36,7 +36,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plu
                                     <label for="author">
                                         Author
                                         <span class="required">*</span>
-                                        <div class="mh-tooltip wdn-icon-info italic" id="author-details">
+                                        <div class="mh-tooltip wdn-icon-info italic hang-right" id="author-details">
                                             <div>
                                                 Name of media creator
                                             </div>
