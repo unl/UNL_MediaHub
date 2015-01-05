@@ -337,6 +337,10 @@ form legend {
     color: #5b5b5b;
 }
 
+.mh-unknown {
+    color: #d00000;
+}
+
 @media only screen and (max-width : 768px) {
 
     .mh-upload-band .mh-upload-box{

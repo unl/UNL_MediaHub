@@ -4,7 +4,12 @@
     <?php foreach ($context->items as $user):?>
         <li>
             <img class="profile_pic medium" src="http://planetred.unl.edu/pg/icon/unl_<?php echo str_replace('-', '_', $user->uid) ?>/medium/" />
-            <?php echo @UNL_Services_Peoplefinder::getFullName($user->uid); ?>
+            <?php $fullName = @UNL_Services_Peoplefinder::getFullName($user->uid); ?>
+            <?php if($fullName): ?>
+                <?php echo $fullName; ?>
+            <?php else: ?>
+                <span class="mh-unknown">Unknown User!</span>
+            <?php endif; ?>
             <span class="uid"><?php echo $user->uid ?></span>
             <?php echo $savvy->render($user, 'DeleteUserForm.tpl.php'); ?>
         </li>
