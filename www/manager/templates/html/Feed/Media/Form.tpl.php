@@ -23,7 +23,7 @@ $controller->setReplacementData('head', $js);
 
 <?php $has_captions = @file_get_contents($context->media->getVideoTextTrackURL()); ?>
 <?php if(!$has_captions): ?>
-<form method="post" class="wdn-band" action="https://www.amara.org/api2/partners/videos/" >
+<!-- <form method="post" class="wdn-band" action="https://www.amara.org/api2/partners/videos/" >
     <div class="wdn-band wdn-light-neutral-band mh-caption-band">
         <div class="wdn-inner-wrapper wdn-inner-padding-sm">
             <h3 class="wdn-brand clear-top wdn-icon-attention">This Video is Missing Captions!</h3>
@@ -38,7 +38,35 @@ $controller->setReplacementData('head', $js);
             </p>
         </div>
     </div>
-</form>
+</form> -->
+
+<div class="wdn_notice alert mh-caption-alert">
+    <div class="close">
+        <a href="#" title="Close this notice">Close this notice</a>
+    </div>
+    <div class="message">
+        <h4>This Video is Missing Captions!</h4>
+        <form method="post" class="wdn-band" action="https://www.amara.org/api2/partners/videos/" >
+            <div class="mh-caption-band">
+                <p>
+                    MediaHub uses <a href="http://amara.org/en/">Amara</a> for the captioning of video. For accessibility reasons, captions are required for <strong>ALL</strong> videos. To caption your video follow <a href="http://amara.org/en/videos/create/">this link</a> and paste your video URL into the appropriate box. Your captions will be automatically pulled when your video is played. 
+                </p>
+                <p>
+                    Video URL:<input type="text" onclick="WDN.jQuery(this).select();" name="video_url" value="<?php echo $context->media->url; ?>">
+                </p>
+                <p>
+                    <br>
+                    <a class="wdn-button" href="http://amara.org/en/videos/create/">Caption Your Video</a>
+                </p>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+WDN.initializePlugin('notice');
+</script>
+
 <?php endif; ?>
 
 <form action="?" method="post" name="media_form" id="media_form" class="wdn-band" enctype="multipart/form-data">
