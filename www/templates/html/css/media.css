@@ -237,6 +237,10 @@ body #cboxOverlay {background-color:#000;}
     white-space: nowrap;
 }
 
+.mh-summary {
+    margin: 0 0 1em 0;
+}
+
 .mh-flip-180 {
     -ms-transform: rotate(180deg); /* IE 9 */
     -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
