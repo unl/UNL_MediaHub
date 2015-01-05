@@ -10,6 +10,8 @@ if (isset($context->media)) {
     $formView .= 'edit';
 }
 
+$edit_caption_url = $context->getEditCaptionsURL();
+
 $js = '<script type="text/javascript">
 var formView = "'.$formView.'";
 var mediaType = "'.$mediaType.'";
@@ -22,7 +24,7 @@ $controller->setReplacementData('head', $js);
 ?>
 
 <?php $has_captions = @file_get_contents($context->media->getVideoTextTrackURL()); ?>
-<?php if(!$has_captions): ?>
+<?php if(!$has_captions && $edit_caption_url): ?>
 <form method="post" class="wdn-band" action="https://www.amara.org/api2/partners/videos/" >
     <div class="wdn-band wdn-light-neutral-band mh-caption-band">
         <div class="wdn-inner-wrapper wdn-inner-padding-sm">
@@ -34,7 +36,7 @@ $controller->setReplacementData('head', $js);
                 Video URL:<input type="text" onclick="WDN.jQuery(this).select();" name="video_url" value="<?php echo $context->media->url; ?>">
             </p>
             <p>
-                <a class="wdn-button wdn-button-brand" href="http://amara.org/en/videos/create/">Caption Your Video</a>
+                <a class="wdn-button wdn-button-brand" href="<?php echo $edit_caption_url ?>">Caption Your Video</a>
             </p>
         </div>
     </div>
@@ -90,6 +92,11 @@ $controller->setReplacementData('head', $js);
                                 </div>
                             </div>
                             <input id="media_poster" name="poster" type="text" class="validate-url" value="<?php echo htmlentities(@$context->media->poster, ENT_QUOTES); ?>" aria-describedby="poster-details" />
+                        </li>
+                        <li>
+                            <?php if ($edit_caption_url): ?>
+                                <a href="<?php echo $edit_caption_url ?>">Edit Captions</a>
+                            <?php endif; ?>
                         </li>
                     </ol>  
                 </div>
