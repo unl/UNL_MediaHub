@@ -32,6 +32,10 @@ Supporting styles for individual presentation of media pages
     padding:0px 0 2px 17px;	
 }
 
+.itunes_subtitle {
+    margin: 0;
+}
+
 /* 
 -------------------------------------------------
 Tags 
@@ -223,10 +227,18 @@ body #cboxOverlay {background-color:#000;}
     box-shadow: none;
 }
 
+.mh-stat {
+    margin: 1em 0;
+}
+
 .mh-stat .mh-size, .mh-stat .mh-ratio {
     font-size: 1.777em;
     display: block;
     white-space: nowrap;
+}
+
+.mh-summary {
+    margin: 0 0 1em 0;
 }
 
 .mh-flip-180 {
@@ -267,6 +279,25 @@ body #cboxOverlay {background-color:#000;}
 
     .mh-hide-bp2 {
         display: none !important;
+    }
+
+    .mh-media-browse.page-1 > :first-child .mh-video-label {
+        padding: 0.75em;       
+        width: 100%;       
+        margin-top: -12px;     
+        margin-bottom: 1.5em;  
+
+    }
+
+    .mh-media-browse.page-1 > :first-child .mh-video-label p {
+        font-style: italic;
+        font-size: 13px;
+        line-height: 1.662;
+        font-family: "Mercury SSm A","Mercury SSm B",Georgia,Baskerville,"Baskerville Old Face","Hoefler Text",Garamond,"Times New Roman",serif;
+    }
+
+    .mh-media-browse.page-1 > :first-child .mh-video-label .wdn-subhead:not(.edit-button) {
+        margin: 0 0 1em 0;
     }
 
 }

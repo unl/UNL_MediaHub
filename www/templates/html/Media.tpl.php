@@ -73,7 +73,7 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
             <div class="bp2-wdn-col-three-fourths">
                 <h1 class="wdn-brand clear-top"><?php echo $context->title; ?></h1>
                 <?php if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_itunes::mediaHasElement($context->id, 'subtitle')): ?>
-                    <h3 class="itunes_subtitle"><?php echo $element->value ?></h3>
+                    <p class="wdn-sans-serif itunes_subtitle"><?php echo $element->value ?></p>
                 <?php endif; ?>
                 <?php
                 $purifier = new HTMLPurifier();
