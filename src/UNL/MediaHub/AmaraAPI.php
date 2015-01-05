@@ -42,7 +42,6 @@ class UNL_MediaHub_AmaraAPI
             $options['http']['header'] .= 'Content-type: multipart/form-data'."\r\n";
             $options['http']['content'] = http_build_query($content);
         }
-        print_r($options);
         return stream_context_create($options);
     }
 
@@ -68,9 +67,8 @@ class UNL_MediaHub_AmaraAPI
                 'X-api-username' => self::$amara_username,
                 'X-apikey'       => self::$amara_api_key,
             ),
-            'body' => $content,
+            'body' => json_encode($content),
         ));
-        print_r($response);
         return $response->getBody();
     }
     
@@ -99,10 +97,8 @@ class UNL_MediaHub_AmaraAPI
     
     public function createMedia($media_url)
     {
-        return $this->post('videos/', array(
-            'video_url' => $media_url,
-            //'title' => 'test',
-            //'primary_audio_language_code' => 'en-US',
+        return $this->post('videos/?format=json', array(
+            'video_url' => $media_url
         ));
     }
 
@@ -125,7 +121,6 @@ class UNL_MediaHub_AmaraAPI
             //update the details
             $media_details = $this->getMediaDetails($media_url);
         }
-        print_r($media_details);
         return 'http://amara.org/en/videos/' . $media_details->objects[0]->id . '/info';
     }
 
