@@ -10,6 +10,8 @@ if (isset($context->media)) {
     $formView .= 'edit';
 }
 
+$edit_caption_url = $context->getEditCaptionsURL();
+
 $js = '<script type="text/javascript">
 var formView = "'.$formView.'";
 var mediaType = "'.$mediaType.'";
@@ -22,44 +24,21 @@ $controller->setReplacementData('head', $js);
 ?>
 
 <?php $has_captions = @file_get_contents($context->media->getVideoTextTrackURL()); ?>
-<?php if(!$has_captions): ?>
-<!-- <form method="post" class="wdn-band" action="https://www.amara.org/api2/partners/videos/" >
-    <div class="wdn-band wdn-light-neutral-band mh-caption-band">
-        <div class="wdn-inner-wrapper wdn-inner-padding-sm">
-            <h3 class="wdn-brand clear-top wdn-icon-attention">This Video is Missing Captions!</h3>
-            <p>
-                MediaHub uses <a href="http://amara.org/en/">Amara</a> for the captioning of video. For accessibility reasons, captions are required for <strong>ALL</strong> videos. To caption your video follow <a href="http://amara.org/en/videos/create/">this link</a> and paste your video URL into the appropriate box. Your captions will be automatically pulled when your video is played. 
-            </p>
-            <p>
-                Video URL:<input type="text" onclick="WDN.jQuery(this).select();" name="video_url" value="<?php echo $context->media->url; ?>">
-            </p>
-            <p>
-                <a class="wdn-button wdn-button-brand" href="http://amara.org/en/videos/create/">Caption Your Video</a>
-            </p>
-        </div>
-    </div>
-</form> -->
-
+<?php if(!$has_captions && $edit_caption_url): ?>
 <div class="wdn_notice alert mh-caption-alert">
     <div class="close">
         <a href="#" title="Close this notice">Close this notice</a>
     </div>
     <div class="message">
         <h4>This Video is Missing Captions!</h4>
-        <form method="post" class="wdn-band" action="https://www.amara.org/api2/partners/videos/" >
-            <div class="mh-caption-band">
-                <p>
-                    MediaHub uses <a href="http://amara.org/en/">Amara</a> for the captioning of video. For accessibility reasons, captions are required for <strong>ALL</strong> videos. To caption your video follow <a href="http://amara.org/en/videos/create/">this link</a> and paste your video URL into the appropriate box. Your captions will be automatically pulled when your video is played. 
-                </p>
-                <p>
-                    Video URL:<input type="text" onclick="WDN.jQuery(this).select();" name="video_url" value="<?php echo $context->media->url; ?>">
-                </p>
-                <p>
-                    <br>
-                    <a class="wdn-button" href="http://amara.org/en/videos/create/">Caption Your Video</a>
-                </p>
-            </div>
-        </form>
+        <div class="mh-caption-band">
+            <p>
+                MediaHub uses <a href="http://amara.org/en/">Amara</a> for the captioning of video. For accessibility reasons, captions are required for <strong>ALL</strong> videos.
+            </p>
+            <p>
+                <a class="wdn-button wdn-button-brand" href="<?php echo $edit_caption_url ?>">Caption Your Video</a>
+            </p>
+        </div>
     </div>
 </div>
 
@@ -118,6 +97,11 @@ WDN.initializePlugin('notice');
                                 </div>
                             </div>
                             <input id="media_poster" name="poster" type="text" class="validate-url" value="<?php echo htmlentities(@$context->media->poster, ENT_QUOTES); ?>" aria-describedby="poster-details" />
+                        </li>
+                        <li>
+                            <?php if ($edit_caption_url): ?>
+                                <a href="<?php echo $edit_caption_url ?>">Edit Captions</a>
+                            <?php endif; ?>
                         </li>
                     </ol>  
                 </div>
