@@ -95,7 +95,10 @@ class UNL_MediaHub_AmaraAPI
 
         if ($media_details->meta->total_count == 0) {
             //create the media
-            $result = $this->createMedia($media_url);
+            if (!$result = $this->createMedia($media_url)) {
+                //Media could not be created, can not continue.
+                return false;
+            }
             
             //update the details
             $media_details = $this->getMediaDetails($media_url);
