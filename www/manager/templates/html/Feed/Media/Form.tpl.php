@@ -36,7 +36,7 @@ $controller->setReplacementData('head', $js);
                 MediaHub uses <a href="http://amara.org/en/">Amara</a> for the captioning of video. For accessibility reasons, captions are required for <strong>ALL</strong> videos.
             </p>
             <p>
-                <a class="wdn-button wdn-button-brand" href="<?php echo $edit_caption_url ?>">Caption Your Video</a>
+                <a class="wdn-button" href="<?php echo $edit_caption_url ?>">Caption Your Video</a>
             </p>
         </div>
     </div>
@@ -100,7 +100,7 @@ WDN.initializePlugin('notice');
                         </li>
                         <li>
                             <?php if ($edit_caption_url): ?>
-                                <a href="<?php echo $edit_caption_url ?>">Edit Captions</a>
+                                <a class="wdn-button wdn-button-brand" href="<?php echo $edit_caption_url ?>">Edit Captions</a>
                             <?php endif; ?>
                         </li>
                     </ol>  
