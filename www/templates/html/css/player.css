@@ -296,15 +296,16 @@ a:hover, a:visited {
 .wdn-fouc-fix {
     visibility: hidden
 }
-.wdn-share-this-page {
+.nav-scrolling .media-content-head .wdn-share-this-page, .media-content-head .wdn-share-this-page {
     position: absolute;
-    margin-left: 2.308em;
-    top: 59px;
-    left: 5%;
-    z-index: 201
+    z-index: 201;
+    margin: 0;
+    right: 0;
+    right: 5px;
+    left: auto;
+    top: 5px;
+    width: 31px;
 }
-
-
 
 @media (min-width:700px) {
     .wdn-share-this-page {
@@ -316,10 +317,7 @@ a:hover, a:visited {
     }
 }
 
-.media-content-head .wdn-share-options {
-    margin: 0;
-    right: 0;
-}
+
 
 
 @media (min-width:768px) {
@@ -478,13 +476,7 @@ a:hover, a:visited {
         margin-top: 2px
     }
 }
-.nav-scrolling .wdn-share-this-page {
-    position: fixed;
-    z-index: 201;
-    top: 6px;
-    bottom: auto;
-    -webkit-font-smoothing: subpixel-antialiased
-}
+
 @media (max-width:699px) {
     .nav-scrolling .wdn-share-this-page {
         top: 3px;
@@ -514,13 +506,7 @@ a:hover, a:visited {
     display: none;
 }
 
-.media-content-head .wdn-share-this-page {
-    right: 5px;
-    left: auto;
-    top: 5px;
-    margin-left: 0;
-    width: 31px;
-}
+
 .media-content-head .wdn-share-this-page a {
     border: none;
 }
