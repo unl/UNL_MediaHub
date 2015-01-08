@@ -95,12 +95,12 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
 
                 <div class="wdn-grid-set wdn-center">
 
-                    <div class="wdn-col-one-seventh mh-stat">
+                    <div class="wdn-col-one-fifth mh-stat">
                         <span class="mh-count wdn-brand"><?php echo $context->play_count ?></span>
                         <span class="mh-context wdn-sans-serif">Plays</span>
                     </div> 
 
-                    <div class="wdn-col-one-seventh mh-stat">
+                    <div class="wdn-col-one-fifth mh-stat">
                         <span class="mh-count wdn-brand"><?php echo count($context->UNL_MediaHub_Media_Comment); ?></span>
                         <span class="mh-context wdn-sans-serif">Comments</span>
                     </div> 
