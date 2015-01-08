@@ -13,7 +13,8 @@ video.fillWidth {
 	height: 25.24em;
 	overflow: hidden;
 	position: relative;
-	background-color: #2e2e2d;
+	background-image: url(images/search-bg.png);
+	background-size: 100%;
 }
 .mh-search-container label {
 	color: #fff;
