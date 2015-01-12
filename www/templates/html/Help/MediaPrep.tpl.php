@@ -1,7 +1,7 @@
 <div class="wdn-band">
     <div class="wdn-inner-wrapper">
         <h2 class="clear-top">Preparing Your Media</h2>
-        <a href="<?php echo UNL_MediaHub_Controller::getURL() ?>documents/handbrake_presets.zip">Download Handbreak Presets</a>
+        <a href="<?php echo UNL_MediaHub_Controller::getURL() ?>documents/handbrake_presets.zip">Download Handbrake Presets</a>
         <div class="wdn-grid-set">
             <div class="wdn-col-full">    
                 <h3 class="wdn-brand">File Types</h3>
