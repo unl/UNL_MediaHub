@@ -25,6 +25,9 @@ class UNL_MediaHub_Manager_ManagerHome implements UNL_MediaHub_CacheableInterfac
 
     public function getFeeds($options = array())
     {
+        //Show all feeds
+        $options['limit'] = 99;
+        
         return new UNL_MediaHub_User_FeedList($options);
     }
     
