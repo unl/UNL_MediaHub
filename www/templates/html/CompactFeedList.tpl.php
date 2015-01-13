@@ -20,7 +20,7 @@ if (count($context->items)) :
                 </div>
             </div>
 		    <div class="mh-video-label wdn-center wdn-sans-serif">
-		                <span class="title"><?php echo $channel->title; ?></span>	       
+		                <span class="title"><?php echo htmlentities($channel->title, ENT_QUOTES); ?></span>	       
 		    </div>
 		</a>
     <?php endforeach; ?>
