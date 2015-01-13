@@ -162,7 +162,12 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
                         WDN.loadCSS('../templates/html/css/comments.css');
                     </script>
                     <h6 class="wdn-sans-serif">COMMENTS <span class="wdn-icon wdn-icon-comment"></span></h6>
-                    <span class="subhead"><?php echo count($context->UNL_MediaHub_Media_Comment); ?> Comments | <a href="#commentForm">Leave Yours</a></span>
+                    <span class="subhead">
+                        <?php echo count($context->UNL_MediaHub_Media_Comment); ?> Comments
+                        <?php if ($user): ?>
+                            | <a href="#commentForm">Leave Yours</a>
+                        <?php endif; ?>
+                    </span>
                     <?php if (count($context->UNL_MediaHub_Media_Comment)): ?>
                         <ul>
                             <?php foreach ($context->UNL_MediaHub_Media_Comment as $comment): ?>
