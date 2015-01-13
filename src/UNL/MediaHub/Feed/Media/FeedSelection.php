@@ -43,7 +43,7 @@ class UNL_MediaHub_Feed_Media_FeedSelection
         }
         
         //Add feeds that the user can select
-        $user_feeds = $this->user->getFeeds(array('limit'=>null));
+        $user_feeds = $this->user->getFeeds(array('limit'=>999));
         $user_feeds->run();
         foreach ($user_feeds->items as $feed) {
             if (isset($selection_data[$feed->id])) {
