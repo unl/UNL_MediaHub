@@ -82,11 +82,16 @@
 .media-content-title {
     color: #fff;
     font: normal 12px/120% Halvetica, sans-serif;
-    padding: 1% 2%;
+    padding: 12px;
     position: absolute;
     width: 85%;
     z-index: 150;
 }
+
+.media-content-title a, .media-content-title a:hover, .media-content-title a:visited{
+    color: #fff;
+}
+
 .share-video-form em {
     margin-right: 3%;
     float: left;
