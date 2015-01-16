@@ -51,6 +51,7 @@ if ($context->isVideo()) {
                             }
 
                             var html = '<div class="media-content-head">';
+                            html += '<div class="media-content-title"><a href="' + share_url + '">' + $title + '</a></div>';
                             html += '<div class="wdn-share-this-page">';
                             html += '<input type="checkbox" id="mh-share-toggle" value="Show share options" class="wdn-input-driver mh-share-toggle">'
                             html += '<label for="mh-share-toggle" class="wdn-icon-share">Share This Page</label>';
