@@ -1,4 +1,7 @@
 <?php
+$page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plupload/plupload.full.min.js');
+$page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/uploadScript.js');
+$baseUrl = UNL_MediaHub_Controller::getURL();
 $formView  = '';
 $mediaType = 'audio';
 
@@ -75,6 +78,21 @@ WDN.initializePlugin('notice');
             <div class="wdn-grid-set">
                 <div class="bp2-wdn-col-two-sevenths wdn-pull-right">
                     <ol>
+                        <li>                        
+                            <div id="mh_upload_media_container">
+                                <div id="mh_upload_media" class="mh-upload-box mh-upload-box-small wdn-center">
+                                    <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/swap-arrows.svg">
+                                        <img src="<?php echo $baseUrl; ?>/templates/html/css/images/swap-arrows.png" alt="browse media">
+                                    </object>
+                                    <h2><span class="wdn-subhead">Swap Media</span></h2>
+                                    <p>Upload a new .mp4 or .mp3 file and replace your old one. <strong class="wdn-icon-attention">(Caution: This deletes your old file.)</strong></p>
+                                    
+                                </div>
+                                <div id="filelist" class="mh-upload-box wdn-center">
+                                    Your browser doesn't have Flash, Silverlight or HTML5 support.
+                                </div>
+                            </div>
+                        </li>
                         <li>
                             <?php echo $savvy->render($context, 'Feed/Media/fields/privacy.tpl.php'); ?>
                         </li>
@@ -583,3 +601,4 @@ WDN.initializePlugin('notice');
     });
 
 </script>
+
