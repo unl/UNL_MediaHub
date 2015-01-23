@@ -9,6 +9,7 @@ $page->titlegraphic = 'UNL MediaHub';
 $page->pagetitle    = '';
 $page->addStyleSheet(UNL_MediaHub_Controller::getURL().'templates/html/css/all.css');
 $page->addStyleSheet(UNL_MediaHub_Manager::getURL().'templates/css/all_manager.css');
+$page->head .= '<script>var baseurl = "'.UNL_MediaHub_Manager::getURL().'";</script>';
 $page->addScript(UNL_MediaHub_Controller::getURL().'templates/html/scripts/manager.js');
 $page->leftRandomPromo = '';
 
