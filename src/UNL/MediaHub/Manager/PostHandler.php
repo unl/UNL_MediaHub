@@ -346,8 +346,6 @@ class UNL_MediaHub_Manager_PostHandler
             throw new Exception('You must select a feed for the media', 400);
         }
 
-
-
         // Add media to a feed/channel
         if (isset($this->post['id'])) {
             // Editing media details
