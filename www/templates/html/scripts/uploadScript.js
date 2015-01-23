@@ -73,8 +73,6 @@ var uploader = new plupload.Uploader({
                 //did not complete
                 return;
             }
-
-            console.log("DONE YO")
             
             WDN.jQuery('#media_url').attr('value', response.url);
             WDN.jQuery('#publish').removeAttr('disabled');
