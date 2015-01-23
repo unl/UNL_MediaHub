@@ -101,6 +101,13 @@ iframe * {margin:0px}
     display: block;
     cursor: pointer;
 }
+
+.mh-upload-box.mh-upload-box-small {
+
+    padding: 20% 20px 80% 20px;
+
+}
+
 .mh-upload-box h2 {
     font-size: 4.499rem;
     margin: 0;
