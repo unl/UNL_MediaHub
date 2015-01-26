@@ -350,6 +350,18 @@ class UNL_MediaHub_Manager_PostHandler
         if (isset($this->post['id'])) {
             // Editing media details
             $media = UNL_MediaHub_Media::getById($this->post['id']);
+
+            if($media->url != $this->post['url']){
+
+                $local_file = $media->getLocalFileName();
+                
+                if ($local_file && !is_dir($local_file)) {
+                    //Delete the file, and make sure it isn't a directory for some unknown reason.
+                    unlink($local_file);
+                }
+
+            };
+
         } else {
             // Insert a new piece of media
             $details = array(
