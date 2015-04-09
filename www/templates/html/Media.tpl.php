@@ -56,7 +56,45 @@ $mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
     <?php echo $mediaplayer; ?>
     </div>
 
+    <div class="mh-caption-search">
+        <input type="text" class="mh-parse-caption">
+    </div>
+
 </div>
+
+<?php 
+
+$captionTrack = file_get_contents($context->getVideoTextTrackURL()); 
+
+$captionTrack = htmlspecialchars($captionTrack, ENT_QUOTES);
+
+$captionTrack = str_replace( "\r\n", "','", $captionTrack ); 
+
+$captionTrack = "['".$captionTrack."']";
+
+?>
+
+<script type="text/javascript">
+
+    WDN.jQuery(document).ready(function(){
+
+        track = <?php echo $captionTrack; ?>;
+
+        trackJson = {}
+
+        for (var i = 0; i < track.length; i+=4) {
+            trackJson[track[i]] = {};
+            trackJson[track[i]].timing = track[i+1];
+            trackJson[track[i]].line = track[i+2];
+        };
+
+        WDN.jQuery(".mh-parse-caption").on("keyup", function(){
+            console.log(WDN.jQuery(this).val()) 
+        });
+
+    });
+
+</script>
 
 <div class="wdn-band">
     <div class="wdn-inner-wrapper"> 
