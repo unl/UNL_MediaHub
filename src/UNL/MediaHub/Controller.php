@@ -210,10 +210,10 @@ class UNL_MediaHub_Controller
                 }
                 break;
             case 'media_srt':
-                $this->output[] = new UNL_MediaHub_Media_VideoTextTrack($this->options['id'], 'srt');
+                $this->output[] = new UNL_MediaHub_Media_VideoTextTrack($this->options, 'srt');
                 break;
             case 'media_vtt':
-                $this->output[] = new UNL_MediaHub_Media_VideoTextTrack($this->options['id'], 'vtt');
+                $this->output[] = new UNL_MediaHub_Media_VideoTextTrack($this->options, 'vtt');
                 break;
             case 'media_image':
                 $this->output[] = UNL_MediaHub_Media_Image::getById($this->options['id']);
