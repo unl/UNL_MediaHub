@@ -1,6 +1,6 @@
 <?php
 $data = array();
-$data['markup'] = $savvy->render($context->media, 'MediaPlayer.tpl.php');
+$data['markup'] = $savvy->render($controller->getMediaPlayer($context->media));
 $data['id'] = $context->media->id;
 ?>
 

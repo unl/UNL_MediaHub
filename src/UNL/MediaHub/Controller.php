@@ -461,5 +461,16 @@ class UNL_MediaHub_Controller
         $url = str_replace('?&', '?', $url);
         return trim($url, '?;=');
     }
+
+    /**
+     * Get a cacheable version of the media player (we need to inject the controller options for this)
+     * 
+     * @param $media
+     * @return UNL_MediaHub_MediaPlayer
+     */
+    public function getMediaPlayer($media)
+    {
+        return new UNL_MediaHub_MediaPlayer($media, $this->options);
+    }
 }
 
