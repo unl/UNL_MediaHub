@@ -422,5 +422,11 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
 
         return false;
     }
+    
+    public function getTextTracks()
+    {
+        $api = new UNL_MediaHub_AmaraAPI();
+        return $api->getMediaHubTextTracks($this->id, $this->url);
+    }
 }
 
