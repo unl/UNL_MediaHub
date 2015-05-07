@@ -3,6 +3,7 @@
  * Controller for the public frontend to the MediaHub system.
  */
 class UNL_MediaHub_Controller
+    extends UNL_MediaHub_BaseController
     implements UNL_MediaHub_CacheableInterface, UNL_MediaHub_PostRunReplacements
 {
     /**
@@ -460,17 +461,6 @@ class UNL_MediaHub_Controller
         }
         $url = str_replace('?&', '?', $url);
         return trim($url, '?;=');
-    }
-
-    /**
-     * Get a cacheable version of the media player (we need to inject the controller options for this)
-     * 
-     * @param $media
-     * @return UNL_MediaHub_MediaPlayer
-     */
-    public function getMediaPlayer($media)
-    {
-        return new UNL_MediaHub_MediaPlayer($media, $this->options);
     }
 }
 
