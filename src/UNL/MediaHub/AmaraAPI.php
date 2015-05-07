@@ -41,6 +41,8 @@ class UNL_MediaHub_AmaraAPI
             return $response->getBody();
         } catch (GuzzleHttp\Exception\ClientException $e) {
             return false;
+        } catch (GuzzleHttp\Exception\ConnectException $e) {
+            return false;
         }
     }
     
@@ -57,6 +59,8 @@ class UNL_MediaHub_AmaraAPI
             ));
             return $response->getBody();
         } catch (GuzzleHttp\Exception\ClientException $e) {
+            return false;
+        } catch (GuzzleHttp\Exception\ConnectException $e) {
             return false;
         }
     }
