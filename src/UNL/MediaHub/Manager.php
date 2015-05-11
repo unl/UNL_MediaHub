@@ -1,5 +1,5 @@
 <?php
-class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_MediaHub_PostRunReplacements
+class UNL_MediaHub_Manager extends UNL_MediaHub_BaseController implements UNL_MediaHub_CacheableInterface, UNL_MediaHub_PostRunReplacements
 {
     public $output;
     

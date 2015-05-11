@@ -8,7 +8,7 @@ set_include_path(
     .PATH_SEPARATOR.dirname(__FILE__).'/src'
     .PATH_SEPARATOR.dirname(__FILE__).'/lib/php'
     .PATH_SEPARATOR.dirname(__FILE__).'/vendor/simple-cas/simple-cas/src'
-    .PATH_SEPARATOR.dirname(__FILE__).'/vendor/UNL/unl_cache_lite'
+    //.PATH_SEPARATOR.dirname(__FILE__).'/vendor/UNL/unl_cache_lite'
 );
 
 require_once 'UNL/MediaHub.php';
@@ -33,3 +33,13 @@ $itemElements = array(
 UNL_MediaHub_Feed_Media_NamespacedElements_mediahub::setCustomElements($itemElements);
 
 $cache = new UNL_MediaHub_CacheInterface_Mock();
+
+/*
+// Set a few caching options
+$options = array(
+    'cacheDir' => __dir__ . '/tmp/cache/',
+    'lifeTime' => 60*60*24*1 //cache for 1 days
+);
+// Create a Cache_Lite object
+$cache = new \Savvy_Turbo_CacheInterface_UNLCacheLite($options);
+*/

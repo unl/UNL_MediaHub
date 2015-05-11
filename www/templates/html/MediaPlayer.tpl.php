@@ -1,8 +1,8 @@
 <?php
-if ($context->isVideo()) {
-    echo $savvy->render($context, 'MediaPlayer/Video.tpl.php');
+if ($context->media->isVideo()) {
+    echo $savvy->render($context->media, 'MediaPlayer/Video.tpl.php');
 } else {
-    echo $savvy->render($context, 'MediaPlayer/Audio.tpl.php');
+    echo $savvy->render($context->media, 'MediaPlayer/Audio.tpl.php');
 }
 
 $jsonTrack = @file_get_contents($context->getVideoTextTrackURL("json")); 
@@ -143,14 +143,11 @@ $jsonTrack = @file_get_contents($context->getVideoTextTrackURL("json"));
 <script type="text/javascript">
     (function () {
         var e = function () {
-            <?php if (isset($context->id) && $context->id) { ?>
-           WDN.setPluginParam('mediaelement_wdn', 'options', {
-                success: function (m, v, t) {
+            <?php if (isset($context->media->id) && $context->media->id) { ?>
+            WDN.setPluginParam('mediaelement_wdn', 'options', {
+                success: function (m, v) {
                     //Playcount
-
-
-
-                    var w = false, u = '<?php echo $controller->getURL($context) ?>';
+                    var w = false, u = '<?php echo $controller->getURL($context->media) ?>';
                     m.addEventListener('play', function () {
                         if (!w) {
                             WDN.jQuery.post(u, {action: "playcount"});

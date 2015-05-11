@@ -47,7 +47,7 @@ if ($type == 'video') {
 $controller->setReplacementData('head', $meta);
 
 // Store the mediaplayer code in a variable, so we can re-use it for the embed
-$mediaplayer = $savvy->render($context, 'MediaPlayer.tpl.php');
+$mediaplayer = $savvy->render($controller->getMediaPlayer($context));
 ?>
 
 

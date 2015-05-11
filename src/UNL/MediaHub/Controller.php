@@ -3,6 +3,7 @@
  * Controller for the public frontend to the MediaHub system.
  */
 class UNL_MediaHub_Controller
+    extends UNL_MediaHub_BaseController
     implements UNL_MediaHub_CacheableInterface, UNL_MediaHub_PostRunReplacements
 {
     /**
@@ -210,10 +211,10 @@ class UNL_MediaHub_Controller
                 }
                 break;
             case 'media_srt':
-                $this->output[] = new UNL_MediaHub_Media_VideoTextTrack($this->options['id'], 'srt');
+                $this->output[] = new UNL_MediaHub_Media_VideoTextTrack($this->options, 'srt');
                 break;
             case 'media_vtt':
-                $this->output[] = new UNL_MediaHub_Media_VideoTextTrack($this->options['id'], 'vtt');
+                $this->output[] = new UNL_MediaHub_Media_VideoTextTrack($this->options, 'vtt');
                 break;
             case 'media_json':
                 $this->output[] = new UNL_MediaHub_Media_VideoTextTrack($this->options['id'], 'json');
