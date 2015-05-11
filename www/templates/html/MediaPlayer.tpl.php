@@ -12,7 +12,7 @@ $jsonTrack = @file_get_contents($context->getVideoTextTrackURL("json"));
 <?php if($jsonTrack): ?>
     <div class="wdn-grid-set">
         <div class="wdn-col-full mh-caption-search">
-            <h6 class="wdn-sans-serif caption-toggle wdn-icon-search">
+            <h6 class="wdn-sans-serif wdn-icon-search">
                 Searchable Transcript
                 <div class="wdn-icon-info mh-tooltip hang-right italic" id="privacy-details">
                     <div>
@@ -83,11 +83,6 @@ $jsonTrack = @file_get_contents($context->getVideoTextTrackURL("json"));
 
         });
 
-        WDN.jQuery(".caption-toggle").on("click", function(){
-
-            WDN.jQuery(".mh-caption-container").toggleClass("show");
-
-        });
 
         for (var i = 0; i < track.subtitles.length; i++) {
 
@@ -145,8 +140,21 @@ $jsonTrack = @file_get_contents($context->getVideoTextTrackURL("json"));
         var e = function () {
             <?php if (isset($context->media->id) && $context->media->id) { ?>
             WDN.setPluginParam('mediaelement_wdn', 'options', {
-                success: function (m, v) {
+                success: function (m, v, t) {
                     //Playcount
+
+                    <?php if($jsonTrack): ?>
+
+                        WDN.jQuery(".mejs-captions-button").before('<div class="mejs-button wide"><button type="button" class="wdn-icon-search caption-toggle" aria-controls="mep_0" title="Toggle Searchable Transcript" aria-label="Searchable Transcript"></button></div>')
+
+                        WDN.jQuery(".caption-toggle").on("click", function(){
+
+                            WDN.jQuery(".mh-caption-search").toggleClass("show");
+
+                        });
+
+                    <?php endif; ?>
+
                     var w = false, u = '<?php echo $controller->getURL($context->media) ?>';
                     m.addEventListener('play', function () {
                         if (!w) {
