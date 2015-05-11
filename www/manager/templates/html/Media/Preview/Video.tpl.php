@@ -22,6 +22,6 @@
 </div>
 
 <div id="videoDisplay" class="bp2-wdn-col-five-sevenths">
-    <?php echo $savvy->render($context, 'MediaPlayer.tpl.php'); ?>
+    <?php echo $savvy->render($controller->getMediaPlayer($context), 'MediaPlayer.tpl.php'); ?>
     <a class="wdn-button wdn-button-brand mh-hide-bp2" id="setImage" href="#">Set Image</a>
 </div>

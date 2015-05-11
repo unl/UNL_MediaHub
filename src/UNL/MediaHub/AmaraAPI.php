@@ -41,6 +41,8 @@ class UNL_MediaHub_AmaraAPI
             return $response->getBody();
         } catch (GuzzleHttp\Exception\ClientException $e) {
             return false;
+        } catch (GuzzleHttp\Exception\ConnectException $e) {
+            return false;
         }
     }
     
@@ -57,6 +59,8 @@ class UNL_MediaHub_AmaraAPI
             ));
             return $response->getBody();
         } catch (GuzzleHttp\Exception\ClientException $e) {
+            return false;
+        } catch (GuzzleHttp\Exception\ConnectException $e) {
             return false;
         }
     }
@@ -111,18 +115,55 @@ class UNL_MediaHub_AmaraAPI
      * @param string $format the format for the text track (srt or vtt)
      * @return bool|string
      */
-    public function getTextTrack($media_url, $format = 'srt')
+    public function getTextTrackByMediaURL($media_url, $format = 'srt')
     {
         $media_details = $this->getMediaDetails($media_url);
-        
+
         if (!$media_details) {
             return false;
         }
-        
+
         if ($media_details->meta->total_count == 0) {
             return false;
         }
 
         return $this->get('videos/' . $media_details->objects[0]->id . '/languages/en/subtitles/?format='.$format);
+    }
+
+    /**
+     * @param string $media_id the amara media id
+     * @param string $lang_code the lang code
+     * @param string $format the format for the text track (srt or vtt)
+     * @return bool|string
+     */
+    public function getTextTrackByMediaID($media_id, $lang_code, $format = 'srt')
+    {
+        return $this->get('videos/' . $media_id. '/languages/' . $lang_code . '/subtitles/?format='.$format);
+    }
+
+    /**
+     * @param $media_id
+     * @param string $media_url the full media URL
+     * @param string $format the format for the text track (srt or vtt)
+     * @return bool|string
+     */
+    public function getMediaHubTextTracks($media_id, $media_url, $format = 'srt')
+    {
+        $media_details = $this->getMediaDetails($media_url);
+        $tracks        = array();
+
+        if (!$media_details) {
+            return $tracks;
+        }
+
+        if ($media_details->meta->total_count == 0) {
+            return $tracks;
+        }
+        
+        foreach($media_details->objects[0]->languages as $track) {
+            $tracks[$track->code] = UNL_MediaHub_Controller::$url . 'media/'.$media_id.'/'.$format.'?amara_id='.$media_details->objects[0]->id.'&lang_code='.$track->code;
+        }
+
+        return $tracks;
     }
 }
