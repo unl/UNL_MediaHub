@@ -5,7 +5,7 @@ if ($context->media->isVideo()) {
     echo $savvy->render($context->media, 'MediaPlayer/Audio.tpl.php');
 }
 
-$jsonTrack = @file_get_contents($context->getVideoTextTrackURL("json")); 
+$jsonTrack = @file_get_contents($context->media->getVideoTextTrackURL("json")); 
 
 ?>
 
