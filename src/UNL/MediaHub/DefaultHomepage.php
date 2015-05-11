@@ -17,7 +17,7 @@ class UNL_MediaHub_DefaultHomepage implements UNL_MediaHub_CacheableInterface
 
     function getCacheKey()
     {
-        return 'homepage';
+        return 'homepage-' . $this->options['format'];
     }
 
     function run()
