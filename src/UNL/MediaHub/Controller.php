@@ -215,6 +215,9 @@ class UNL_MediaHub_Controller
             case 'media_vtt':
                 $this->output[] = new UNL_MediaHub_Media_VideoTextTrack($this->options['id'], 'vtt');
                 break;
+            case 'media_json':
+                $this->output[] = new UNL_MediaHub_Media_VideoTextTrack($this->options['id'], 'json');
+                break;
             case 'media_image':
                 $this->output[] = UNL_MediaHub_Media_Image::getById($this->options['id']);
                 break;
