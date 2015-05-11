@@ -4,15 +4,152 @@ if ($context->isVideo()) {
 } else {
     echo $savvy->render($context, 'MediaPlayer/Audio.tpl.php');
 }
+
+$jsonTrack = @file_get_contents($context->getVideoTextTrackURL("json")); 
+
 ?>
+
+<?php if($jsonTrack): ?>
+    <div class="wdn-grid-set">
+        <div class="wdn-col-full mh-caption-search">
+            <h6 class="wdn-sans-serif caption-toggle wdn-icon-search">
+                Searchable Transcript
+                <div class="wdn-icon-info mh-tooltip hang-right italic" id="privacy-details">
+                    <div>
+                        <ul>
+                            <li>Click header to toggle. </li>
+                            <li>Use the text input to search the transcript. </li>
+                            <li>Click any line to jump to that spot in the video. </li>
+                            <li>Use the icons to the right to toggle between list and paragraph view. </li>
+                        </ul>
+                    </div>
+                </div>
+            </h6>
+            <div class="mh-caption-container">   
+                <form>
+                    <label for="mh-parse-caption">Search:</label>
+                    <div class="mh-paragraph-icons">
+                        <div class="mh-bullets"></div>
+                        <div class="mh-paragraph"></div>
+                    </div>
+                    <br>
+                    <input id="mh-parse-caption" type="text" class="mh-parse-caption"><div class="mh-caption-close"></div>
+                    <div class="mh-transcript">
+                        <ul></ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript">
+
+    WDN.jQuery(document).ready(function(){
+
+        track = <?php echo $jsonTrack; ?>;
+
+        WDN.jQuery(".mh-caption-close").on("click", function(){
+
+            WDN.jQuery(".mh-parse-caption").val("");
+
+            WDN.jQuery(".mh-transcript ul li").addClass("highlight");
+
+        });
+
+        WDN.jQuery(".mh-parse-caption").on("keyup focus", function(){
+
+            var search = WDN.jQuery(this).val().toLowerCase();
+
+            for (var i = 0; i < track.subtitles.length; i++) {
+
+                var line = track.subtitles[i].text.toLowerCase();
+
+                if(line.search(search) > -1){
+
+                    WDN.jQuery(".mh-transcript ul li").eq(i).addClass("highlight");
+
+                }else{
+
+                    WDN.jQuery(".mh-transcript ul li").eq(i).removeClass("highlight");
+
+                }
+            };
+
+        });
+
+        WDN.jQuery(".mh-paragraph-icons").on("click", function(){
+
+            WDN.jQuery(".mh-caption-search").toggleClass("bulleted");
+
+        });
+
+        WDN.jQuery(".caption-toggle").on("click", function(){
+
+            WDN.jQuery(".mh-caption-container").toggleClass("show");
+
+        });
+
+        for (var i = 0; i < track.subtitles.length; i++) {
+
+            var subtitles = track.subtitles[i].text.replace(/<(?:.|\n)*?>/gm, '');
+
+            WDN.jQuery(".mh-transcript ul").append("<li class='highlight' onclick='jumpto("+track.subtitles[i].start*.001+")'><span>["+displaytime(track.subtitles[i].start)+"]</span>"+subtitles+"</li>");
+
+        };
+
+    });
+
+    function jumpto(time){
+        mejs.players.mep_0.setCurrentTime(time)
+        WDN.jQuery("html, body").animate({ scrollTop: 0 }, "fast");
+    }
+
+    function escapeHtml(text) {
+
+      var map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      };
+
+      return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+
+    }
+
+    function displaytime(millis){
+
+        var hours = Math.floor(millis / 36e5),
+            mins = Math.floor((millis % 36e5) / 6e4),
+            secs = Math.floor((millis % 6e4) / 1000);
+
+            if(secs < 10){
+                secs = "0"+secs;
+            }
+
+            if(hours > 0){
+                return hours+':'+mins+':'+secs;
+            }else{
+                return mins+':'+secs;
+            };
+
+    }
+
+</script>
+
+<?php endif; ?>
 
 <script type="text/javascript">
     (function () {
         var e = function () {
             <?php if (isset($context->id) && $context->id) { ?>
-            WDN.setPluginParam('mediaelement_wdn', 'options', {
-                success: function (m, v) {
+           WDN.setPluginParam('mediaelement_wdn', 'options', {
+                success: function (m, v, t) {
                     //Playcount
+
+
+
                     var w = false, u = '<?php echo $controller->getURL($context) ?>';
                     m.addEventListener('play', function () {
                         if (!w) {
