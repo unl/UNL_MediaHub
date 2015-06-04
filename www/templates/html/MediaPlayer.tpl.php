@@ -10,14 +10,14 @@ $jsonTrack = @file_get_contents($context->media->getVideoTextTrackURL("json"));
 ?>
 
 <?php if($jsonTrack): ?>
-    <div class="wdn-grid-set">
-        <div class="wdn-col-full mh-caption-search">
+<script type="html/template" id="mh_transcript_template">
+
+        <div class="mh-caption-search">
             <h6 class="wdn-sans-serif wdn-icon-search">
                 Searchable Transcript
                 <div class="wdn-icon-info mh-tooltip hang-right italic" id="privacy-details">
                     <div>
                         <ul>
-                            <li>Click header to toggle. </li>
                             <li>Use the text input to search the transcript. </li>
                             <li>Click any line to jump to that spot in the video. </li>
                             <li>Use the icons to the right to toggle between list and paragraph view. </li>
@@ -26,113 +26,18 @@ $jsonTrack = @file_get_contents($context->media->getVideoTextTrackURL("json"));
                 </div>
             </h6>
             <div class="mh-caption-container">   
-                <form>
-                    <label for="mh-parse-caption">Search:</label>
-                    <div class="mh-paragraph-icons">
-                        <div class="mh-bullets"></div>
-                        <div class="mh-paragraph"></div>
-                    </div>
-                    <br>
-                    <input id="mh-parse-caption" type="text" class="mh-parse-caption"><div class="mh-caption-close"></div>
-                    <div class="mh-transcript">
-                        <ul></ul>
-                    </div>
-                </form>
+                <label for="mh-parse-caption">Search:</label>
+                <div class="mh-paragraph-icons">
+                    <div class="mh-bullets"></div>
+                    <div class="mh-paragraph"></div>
+                </div>
+                <br>
+                <input id="mh-parse-caption" type="text" class="mh-parse-caption"><div class="mh-caption-close"></div>
+                <ul class="mh-transcript"></ul>
             </div>
         </div>
-    </div>
-
-<script type="text/javascript">
-
-    WDN.jQuery(document).ready(function(){
-
-        track = <?php echo $jsonTrack; ?>;
-
-        WDN.jQuery(".mh-caption-close").on("click", function(){
-
-            WDN.jQuery(".mh-parse-caption").val("");
-
-            WDN.jQuery(".mh-transcript ul li").addClass("highlight");
-
-        });
-
-        WDN.jQuery(".mh-parse-caption").on("keyup focus", function(){
-
-            var search = WDN.jQuery(this).val().toLowerCase();
-
-            for (var i = 0; i < track.subtitles.length; i++) {
-
-                var line = track.subtitles[i].text.toLowerCase();
-
-                if(line.search(search) > -1){
-
-                    WDN.jQuery(".mh-transcript ul li").eq(i).addClass("highlight");
-
-                }else{
-
-                    WDN.jQuery(".mh-transcript ul li").eq(i).removeClass("highlight");
-
-                }
-            };
-
-        });
-
-        WDN.jQuery(".mh-paragraph-icons").on("click", function(){
-
-            WDN.jQuery(".mh-caption-search").toggleClass("bulleted");
-
-        });
-
-
-        for (var i = 0; i < track.subtitles.length; i++) {
-
-            var subtitles = track.subtitles[i].text.replace(/<(?:.|\n)*?>/gm, '');
-
-            WDN.jQuery(".mh-transcript ul").append("<li class='highlight' onclick='jumpto("+track.subtitles[i].start*.001+")'><span>["+displaytime(track.subtitles[i].start)+"]</span>"+subtitles+"</li>");
-
-        };
-
-    });
-
-    function jumpto(time){
-        mejs.players.mep_0.setCurrentTime(time)
-        WDN.jQuery("html, body").animate({ scrollTop: 0 }, "fast");
-    }
-
-    function escapeHtml(text) {
-
-      var map = {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#039;'
-      };
-
-      return text.replace(/[&<>"']/g, function(m) { return map[m]; });
-
-    }
-
-    function displaytime(millis){
-
-        var hours = Math.floor(millis / 36e5),
-            mins = Math.floor((millis % 36e5) / 6e4),
-            secs = Math.floor((millis % 6e4) / 1000);
-
-            if(secs < 10){
-                secs = "0"+secs;
-            }
-
-            if(hours > 0){
-                return hours+':'+mins+':'+secs;
-            }else{
-                return mins+':'+secs;
-            };
-
-    }
 
 </script>
-
 <?php endif; ?>
 
 <script type="text/javascript">
@@ -141,20 +46,133 @@ $jsonTrack = @file_get_contents($context->media->getVideoTextTrackURL("json"));
             <?php if (isset($context->media->id) && $context->media->id) { ?>
             WDN.setPluginParam('mediaelement_wdn', 'options', {
                 success: function (m, v, t) {
-                    //Playcount
+                    var $ = WDN.jQuery;
+                    var $transcript;
+                    var $captionSearch;
 
                     <?php if($jsonTrack): ?>
 
-                        WDN.jQuery(".mejs-captions-button").before('<div class="mejs-button wide"><button type="button" class="wdn-icon-search caption-toggle" aria-controls="mep_0" title="Toggle Searchable Transcript" aria-label="Searchable Transcript"></button></div>')
+                        t.container.append(WDN.jQuery(mh_transcript_template).html());
 
-                        WDN.jQuery(".caption-toggle").on("click", function(){
+                        $transcript = t.container.find('.mh-transcript');
+                        $captionSearch = t.container.children(".mh-caption-search");
 
-                            WDN.jQuery(".mh-caption-search").toggleClass("show");
+                        var $myButton = $('<div>', {
+                            "class": "mejs-button wide"
+                            }).append($('<button>', {
+                                "class": "wdn-icon-search caption-toggle", 
+                                "type": "button",
+                                "aria-controls": t.id,
+                                "title": "Toggle Searchable Transcript",
+                                "aria-label": "Toggle Searchable Transcript"
+                            }));                       
 
+                        t.captionsButton.before($myButton)
+
+                        t.controls.on("click", ".caption-toggle", function(){
+                            $captionSearch.toggleClass("show");
                         });
+                        var displaytime = function(millis){
+
+                            var hours = Math.floor(millis / 36e5),
+                                mins = Math.floor((millis % 36e5) / 6e4),
+                                secs = Math.floor((millis % 6e4) / 1000);
+
+                                if(secs < 10){
+                                    secs = "0"+secs;
+                                }
+
+                                if(hours > 0){
+                                    return hours+':'+mins+':'+secs;
+                                }else{
+                                    return mins+':'+secs;
+                                };
+
+                        }
+
+                        var setTranscript = function(track){
+
+                            $captionSearch.find(".mh-caption-close").on("click", function(){
+
+                                $(this).siblings(".mh-parse-caption").val("");
+
+                                $transcript.find("li").addClass("highlight");
+
+                            });
+
+                            $captionSearch.find(".mh-parse-caption").on("keyup focus", function(e){
+
+                                e.stopPropagation();
+
+                                var search = $(this).val().toLowerCase();
+                                var subtitlesLength;
+                                var i;
+
+                                //$transcript.find("li").removeClass("highlight");
+                                if (!search) {
+                                    return;
+                                }
+
+                                subtitlesLength = track.entries.text.length;
+
+                                for (i = 0; i < subtitlesLength; i++) {
+
+                                    var line = track.entries.text[i].toLowerCase();
+
+                                    if (line.indexOf(search) > -1){
+
+                                        $transcript.find("li").eq(i).addClass("highlight");
+
+                                    }else{
+                                        $transcript.find("li").eq(i).removeClass("highlight");
+                                    }
+                                };
+
+                            });
+
+                            t.container.find(".mh-paragraph-icons").on("click", function(){
+
+                                t.container.find(".mh-caption-search").toggleClass("bulleted");
+
+                            });
+
+                            $transcript.on('click', 'li', function() {
+                                var time;
+                                time = $(this).data('timeOffset')
+
+                                if (!time) {
+                                    return;
+                                }
+
+                                t.setCurrentTime(time);
+                            });
+
+                            var listItems = [];
+
+                            for (var i = 0; i < track.entries.text.length; i++) {
+
+                                //var subtitles = track.entries.text[i].replace(/<(?:.|\n)*?>/gm, '');
+
+                                listItems.push($('<li>',  {"class": "highlight"})
+                                    .data('timeOffset', track.entries.times[i].start)
+                                    .text(track.entries.text[i])
+                                    .prepend($('<span>').text('[' + displaytime(track.entries.times[i].start*1000) + '] '))
+                                );
+                            };
+
+                            $transcript.append(listItems);
+
+                        };
+
+                        var origsSetTrack = t.enableTrackButton;
+                        t.enableTrackButton = function(e) {
+                            origsSetTrack.call(this, e);
+                            setTranscript(t.tracks[0]);
+                        }
 
                     <?php endif; ?>
 
+                    // Playcount
                     var w = false, u = '<?php echo $controller->getURL($context->media) ?>';
                     m.addEventListener('play', function () {
                         if (!w) {
