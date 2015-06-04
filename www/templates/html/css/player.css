@@ -188,32 +188,38 @@
 
 .mh-caption-search {
     display: none;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    z-index: 50;
 }
 
-.mh-caption-search.bulleted .mh-transcript ul li.highlight {
+.mh-caption-search.bulleted ul.mh-transcript li.highlight {
     display: block;
 }
 
-.mh-caption-search.bulleted .mh-transcript ul li {
+.mh-caption-search.bulleted ul.mh-transcript li {
     display: none;
 }
 
-.mh-transcript ul {
+ul.mh-transcript {
     line-height: 2.8em;
+    padding: 0 1em;
+    margin: 0;
 }
 
-.mh-transcript ul li {
+ul.mh-transcript li {
   cursor: pointer;
   margin: 0 .75em 0 0;
   opacity: .25;
   display: inline;
 }
 
-.mh-transcript ul li.highlight {
+ul.mh-transcript li.highlight {
     opacity: 1;
 }
 
-.mh-transcript ul li span {
+ul.mh-transcript li span {
     font-size: .75em;
     color: #d00000;
     margin-right: 10px;
