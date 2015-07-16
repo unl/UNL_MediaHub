@@ -24,9 +24,9 @@ class UNL_MediaHub_Media_VideoTextTrack
         $this->format = $format;
         $api = new UNL_MediaHub_AmaraAPI();
         
-        if (isset($options['amara_id'],$options['lan_code'])) {
+        if (isset($options['amara_id'],$options['lang_code'])) {
             //Skip database calls and get the track direct
-            if (!$this->track = $api->getTextTrackByMediaID($options['amara_id'], $options['lan_code'], $format)) {
+            if (!$this->track = $api->getTextTrackByMediaID($options['amara_id'], $options['lang_code'], $format)) {
                 throw new Exception('No Text track found for this media', 404);
             }
         } else {
