@@ -4,13 +4,10 @@ if ($context->media->isVideo()) {
 } else {
     echo $savvy->render($context->media, 'MediaPlayer/Audio.tpl.php');
 }
-
-$jsonTrack = @file_get_contents($context->media->getVideoTextTrackURL("json")); 
-
 ?>
 
-<?php if($jsonTrack): ?>
-<script type="html/template" id="mh_transcript_template">
+<?php if($context->media->getTextTracks()): ?>
+<script type="html/template" class="mh_transcript_template">
 
         <div class="mh-caption-search">
             <h6 class="wdn-sans-serif wdn-icon-search">
@@ -50,9 +47,9 @@ $jsonTrack = @file_get_contents($context->media->getVideoTextTrackURL("json"));
                     var $transcript;
                     var $captionSearch;
 
-                    <?php if($jsonTrack): ?>
+                    <?php if($context->media->getTextTracks()): ?>
 
-                        t.container.append(WDN.jQuery(mh_transcript_template).html());
+                        t.container.append(WDN.jQuery(".mh_transcript_template").html());
 
                         $transcript = t.container.find('.mh-transcript');
                         $captionSearch = t.container.children(".mh-caption-search");
@@ -130,6 +127,7 @@ $jsonTrack = @file_get_contents($context->media->getVideoTextTrackURL("json"));
 
                             });
 
+                            t.container.find(".mh-paragraph-icons").off();
                             t.container.find(".mh-paragraph-icons").on("click", function(){
 
                                 t.container.find(".mh-caption-search").toggleClass("bulleted");
@@ -159,16 +157,29 @@ $jsonTrack = @file_get_contents($context->media->getVideoTextTrackURL("json"));
                                     .prepend($('<span>').text('[' + displaytime(track.entries.times[i].start*1000) + '] '))
                                 );
                             };
-
+                            $transcript.children("li").remove();
                             $transcript.append(listItems);
 
                         };
 
-                        var origsSetTrack = t.enableTrackButton;
-                        t.enableTrackButton = function(e) {
-                            origsSetTrack.call(this, e);
+                        var origsEnableTrackButton = t.enableTrackButton;
+                        t.enableTrackButton = function(lang, label) {
+                            origsEnableTrackButton.call(this, lang, label);
+                            var t = this;
+                            console.log(lang);
+                            console.log(label);
                             setTranscript(t.tracks[0]);
-                        }
+                        };
+
+                        var origsSetTrack = t.setTrack;
+                        t.setTrack = function(lang) {
+                            origsSetTrack.call(this, lang);
+                            var t = this,
+                                i;
+                            if (lang != 'none') {
+                                setTranscript(t.selectedTrack);
+                            };
+                        };
 
                     <?php endif; ?>
 
