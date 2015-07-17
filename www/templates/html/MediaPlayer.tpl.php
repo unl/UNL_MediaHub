@@ -162,12 +162,15 @@ $getTracks = $context->media->getTextTracks();
                             w = true;
                         }
                     });
+                    
+                    //Fix for preload=none having an endless loading gif
+                    if ($video.attr('preload') == 'none') {
+                        $video.parents('.mejs-container').find('.mejs-overlay-loading').hide();
+                    }
 
                     //Social Sharing via https://xparkmedia.com/blog/mediaelements-add-a-share-button-to-video-elements-using-jquery/
                     var initSharing = function(m, v) {
-                        var $           = WDN.jQuery;
                         var $inner      = false;
-                        var $video      = $(v);
                         var $title      = $video.attr('title');
                         var share_url   = $video.attr('data-url');
                         var media_type  = v.tagName.charAt(0).toUpperCase() + v.tagName.slice(1).toLowerCase();
@@ -177,7 +180,7 @@ $getTracks = $context->media->getTextTracks();
                             return;
                         }
                         
-                        if ($inner = $(v).parents('.mejs-container')) {
+                        if ($inner = $video.parents('.mejs-container')) {
                             // share urls
                             var sharelinks = {
                                 "wdn-icon-mail":     {title: 'Email', url:'mailto:?body=Checkout this ' + media_type + ': ' + share_url + '&subject=' + media_type + ' : ' + $title},

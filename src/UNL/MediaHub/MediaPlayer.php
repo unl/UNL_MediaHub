@@ -13,7 +13,20 @@ class UNL_MediaHub_MediaPlayer implements \Savvy_Turbo_CacheableInterface
     
     public function getCacheKey()
     {
-        return 'media_' . $this->media->id . '_' . $this->media->dateupdated . $this->options['format'];
+        $preload = '';
+        if (isset($this->options['preload'])) {
+            $preload = $this->options['preload'];
+        }
+
+        $autoplay = '';
+        if (isset($this->options['autoplay'])) {
+            $autoplay = $this->options['autoplay'];
+        }
+        
+        return 'media_' . $this->media->id . '_' . $this->media->dateupdated 
+            . '--format-' . $this->options['format'] 
+            . '--autoplay-' . $autoplay 
+            . '--preload-'. $preload;
     }
     
     public function run()
