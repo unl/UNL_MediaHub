@@ -142,6 +142,7 @@ $getTracks = $context->media->getTextTracks();
                             origsEnableTrackButton.call(this, lang, label);
                             var t = this;
                             setTranscript(t.tracks[0]);
+                            t.enableTrackButton = origsEnableTrackButton;
                         };
 
                         var origsSetTrack = t.setTrack;
