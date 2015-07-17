@@ -71,87 +71,61 @@ $getTracks = $context->media->getTextTracks();
                             $captionSearch.toggleClass("show");
                         });
                         var displaytime = function(millis){
-
                             var hours = Math.floor(millis / 36e5),
                                 mins = Math.floor((millis % 36e5) / 6e4),
                                 secs = Math.floor((millis % 6e4) / 1000);
-
                                 if(secs < 10){
                                     secs = "0"+secs;
-                                }
-
+                                };
                                 if(hours > 0){
                                     return hours+':'+mins+':'+secs;
                                 }else{
                                     return mins+':'+secs;
                                 };
-
                         }
 
                         var setTranscript = function(track){
-
                             $captionSearch.find(".mh-caption-close").on("click", function(){
-
                                 $(this).siblings(".mh-parse-caption").val("");
-
                                 $transcript.find("li").addClass("highlight");
-
                             });
 
                             $captionSearch.find(".mh-parse-caption").on("keyup focus", function(e){
-
                                 e.stopPropagation();
-
                                 var search = $(this).val().toLowerCase();
                                 var subtitlesLength;
                                 var i;
-
-                                //$transcript.find("li").removeClass("highlight");
                                 if (!search) {
                                     return;
                                 }
 
                                 subtitlesLength = track.entries.text.length;
-
                                 for (i = 0; i < subtitlesLength; i++) {
-
                                     var line = track.entries.text[i].toLowerCase();
-
                                     if (line.indexOf(search) > -1){
-
                                         $transcript.find("li").eq(i).addClass("highlight");
-
                                     }else{
                                         $transcript.find("li").eq(i).removeClass("highlight");
                                     }
                                 };
-
                             });
 
                             t.container.find(".mh-paragraph-icons").off();
                             t.container.find(".mh-paragraph-icons").on("click", function(){
-
-                                t.container.find(".mh-caption-search").toggleClass("bulleted");
+                            t.container.find(".mh-caption-search").toggleClass("bulleted");
 
                             });
 
                             $transcript.on('click', 'li', function() {
                                 var time;
                                 time = $(this).data('timeOffset')
-
                                 if (!time) {
                                     return;
                                 }
-
                                 t.setCurrentTime(time);
                             });
-
                             var listItems = [];
-
                             for (var i = 0; i < track.entries.text.length; i++) {
-
-                                //var subtitles = track.entries.text[i].replace(/<(?:.|\n)*?>/gm, '');
-
                                 listItems.push($('<li>',  {"class": "highlight"})
                                     .data('timeOffset', track.entries.times[i].start)
                                     .text(track.entries.text[i])
@@ -160,15 +134,12 @@ $getTracks = $context->media->getTextTracks();
                             };
                             $transcript.children("li").remove();
                             $transcript.append(listItems);
-
                         };
 
                         var origsEnableTrackButton = t.enableTrackButton;
                         t.enableTrackButton = function(lang, label) {
                             origsEnableTrackButton.call(this, lang, label);
                             var t = this;
-                            console.log(lang);
-                            console.log(label);
                             setTranscript(t.tracks[0]);
                         };
 
@@ -181,14 +152,13 @@ $getTracks = $context->media->getTextTracks();
                                 setTranscript(t.selectedTrack);
                             };
                         };
-
                     <?php endif; ?>
 
                     // Playcount
                     var w = false, u = '<?php echo $controller->getURL($context->media) ?>';
                     m.addEventListener('play', function () {
                         if (!w) {
-                            WDN.jQuery.post(u, {action: "playcount"});
+                            $.post(u, {action: "playcount"});
                             w = true;
                         }
                     });
