@@ -49,6 +49,7 @@ $getTracks = $context->media->getTextTracks();
                     var $ = WDN.jQuery;
                     var $transcript;
                     var $captionSearch;
+                    var $video = $(v);
 
                     <?php if($getTracks): ?>
                         t.container.append($(".mh_transcript_template").html());
