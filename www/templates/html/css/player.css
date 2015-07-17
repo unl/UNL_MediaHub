@@ -214,6 +214,7 @@ ul.mh-transcript a {
   opacity: .25;
   display: inline;
   color: #454545;
+  border: none !important;
 }
 
 ul.mh-transcript a.highlight {
@@ -225,6 +226,11 @@ ul.mh-transcript a span {
     color: #d00000;
     margin-right: 10px;
 
+}
+
+ul.mh-transcript li {
+    list-style: none;  
+    display: inline;
 }
 
 .mh-caption-search div.mh-caption-container {

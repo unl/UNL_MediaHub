@@ -93,7 +93,7 @@ $getTracks = $context->media->getTextTracks();
                         var setTranscript = function(track){
                             $captionSearch.find(".mh-caption-close").on("click", function(){
                                 $(this).siblings(".mh-parse-caption").val("");
-                                $transcript.find("li").addClass("highlight");
+                                $transcript.find("a").addClass("highlight");
                             });
 
                             $captionSearch.find(".mh-parse-caption").on("keydown keyup focus blur", function(e){
@@ -132,7 +132,7 @@ $getTracks = $context->media->getTextTracks();
                             });
                             var listItems = [];
                             for (var i = 0; i < track.entries.text.length; i++) {
-                                listItems.push($('<a>',  {
+                                listItems.push($("<li>").append($('<a>',  {
                                     "class" : "highlight",
                                     "href" : "javascript:;"
                                     // "tabindex" : 0,
@@ -140,7 +140,7 @@ $getTracks = $context->media->getTextTracks();
                                     .data('timeOffset', track.entries.times[i].start)
                                     .text(track.entries.text[i])
                                     .prepend($('<span>').text('[' + displaytime(track.entries.times[i].start*1000) + '] '))
-                                );
+                                ));
                             };
                             $transcript.children("a").remove();
                             $transcript.append(listItems);
