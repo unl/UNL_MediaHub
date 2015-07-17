@@ -4,10 +4,13 @@ if ($context->media->isVideo()) {
 } else {
     echo $savvy->render($context->media, 'MediaPlayer/Audio.tpl.php');
 }
+
+$getTracks = $context->media->getTextTracks();
+
 ?>
 
-<?php if($context->media->getTextTracks()): ?>
-<script type="html/template" class="mh_transcript_template">
+<?php if($getTracks): ?>
+<script type="htmltemplate" class="mh_transcript_template">
 
         <div class="mh-caption-search">
             <h6 class="wdn-sans-serif wdn-icon-search">
@@ -47,10 +50,8 @@ if ($context->media->isVideo()) {
                     var $transcript;
                     var $captionSearch;
 
-                    <?php if($context->media->getTextTracks()): ?>
-
-                        t.container.append(WDN.jQuery(".mh_transcript_template").html());
-
+                    <?php if($getTracks): ?>
+                        t.container.append($(".mh_transcript_template").html());
                         $transcript = t.container.find('.mh-transcript');
                         $captionSearch = t.container.children(".mh-caption-search");
 
