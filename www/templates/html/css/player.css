@@ -194,11 +194,11 @@
     z-index: 50;
 }
 
-.mh-caption-search.bulleted ul.mh-transcript li.highlight {
+.mh-caption-search.bulleted ul.mh-transcript a.highlight {
     display: block;
 }
 
-.mh-caption-search.bulleted ul.mh-transcript li {
+.mh-caption-search.bulleted ul.mh-transcript a {
     display: none;
 }
 
@@ -208,18 +208,19 @@ ul.mh-transcript {
     margin: 0;
 }
 
-ul.mh-transcript li {
+ul.mh-transcript a {
   cursor: pointer;
   margin: 0 .75em 0 0;
   opacity: .25;
   display: inline;
+  color: #454545;
 }
 
-ul.mh-transcript li.highlight {
+ul.mh-transcript a.highlight {
     opacity: 1;
 }
 
-ul.mh-transcript li span {
+ul.mh-transcript a span {
     font-size: .75em;
     color: #d00000;
     margin-right: 10px;
@@ -409,7 +410,7 @@ ul.mh-transcript li span {
 .mh-tooltip ul li{
     margin-bottom: .75em;
 }
-
+    
 .mh-tooltip span.heading{
 
     font-family: "Tungsten A","Tungsten B",HelveticaNeueCondensed,HelveticaNeue-Condensed,"Helvetica Neue Condensed",HelveticaNeueRomanCondensed,HelveticaNeue-Roman-Condensed,"Helvetica Neue Roman Condensed","Arial Narrow",HelveticaNeue,"Helvetica Neue",HelveticaNeueRoman,HelveticaNeue-Roman,"Helvetica Neue Roman",Helvetica,Tahoma,Geneva,Arial,sans-serif;

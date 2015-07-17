@@ -27,10 +27,10 @@ $getTracks = $context->media->getTextTracks();
             </div>
             <div class="mh-caption-container">   
                 <label for="mh-parse-caption">Search:</label>
-                <div class="mh-paragraph-icons">
+                <a class="mh-paragraph-icons" href="javascript:;">
                     <div class="mh-bullets"></div>
                     <div class="mh-paragraph"></div>
-                </div>
+                </a>
                 <br>
                 <input id="mh-parse-caption" type="text" class="mh-parse-caption"><div class="mh-caption-close"></div>
                 <ul class="mh-transcript"></ul>
@@ -68,8 +68,13 @@ $getTracks = $context->media->getTextTracks();
 
                         t.captionsButton.before($myButton)
 
-                        t.controls.on("click", ".caption-toggle", function(){
+                        t.controls.on("click", ".caption-toggle", function(e){
                             $captionSearch.toggleClass("show");
+                        });
+                        t.controls.on("keyup", ".caption-toggle", function(e){
+                            if(e.keyCode != 13){
+                                $captionSearch.addClass("show");
+                            }
                         });
                         var displaytime = function(millis){
                             var hours = Math.floor(millis / 36e5),
@@ -91,7 +96,7 @@ $getTracks = $context->media->getTextTracks();
                                 $transcript.find("li").addClass("highlight");
                             });
 
-                            $captionSearch.find(".mh-parse-caption").on("keyup focus", function(e){
+                            $captionSearch.find(".mh-parse-caption").on("keydown keyup focus blur", function(e){
                                 e.stopPropagation();
                                 var search = $(this).val().toLowerCase();
                                 var subtitlesLength;
@@ -104,9 +109,9 @@ $getTracks = $context->media->getTextTracks();
                                 for (i = 0; i < subtitlesLength; i++) {
                                     var line = track.entries.text[i].toLowerCase();
                                     if (line.indexOf(search) > -1){
-                                        $transcript.find("li").eq(i).addClass("highlight");
+                                        $transcript.find("a").eq(i).addClass("highlight");
                                     }else{
-                                        $transcript.find("li").eq(i).removeClass("highlight");
+                                        $transcript.find("a").eq(i).removeClass("highlight");
                                     }
                                 };
                             });
@@ -117,7 +122,7 @@ $getTracks = $context->media->getTextTracks();
 
                             });
 
-                            $transcript.on('click', 'li', function() {
+                            $transcript.on('click', 'a', function() {
                                 var time;
                                 time = $(this).data('timeOffset')
                                 if (!time) {
@@ -127,13 +132,17 @@ $getTracks = $context->media->getTextTracks();
                             });
                             var listItems = [];
                             for (var i = 0; i < track.entries.text.length; i++) {
-                                listItems.push($('<li>',  {"class": "highlight"})
+                                listItems.push($('<a>',  {
+                                    "class" : "highlight",
+                                    "href" : "javascript:;"
+                                    // "tabindex" : 0,
+                                })
                                     .data('timeOffset', track.entries.times[i].start)
                                     .text(track.entries.text[i])
                                     .prepend($('<span>').text('[' + displaytime(track.entries.times[i].start*1000) + '] '))
                                 );
                             };
-                            $transcript.children("li").remove();
+                            $transcript.children("a").remove();
                             $transcript.append(listItems);
                         };
 
