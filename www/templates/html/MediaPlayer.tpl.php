@@ -13,7 +13,7 @@ $getTracks = $context->media->getTextTracks();
 <script type="htmltemplate" class="mh_transcript_template">
 
         <div class="mh-caption-search">
-            <h6 class="wdn-sans-serif wdn-icon-search">
+            <div class="title wdn-sans-serif wdn-icon-search">
                 Searchable Transcript
                 <div class="wdn-icon-info mh-tooltip hang-right italic" id="privacy-details">
                     <div>
@@ -24,7 +24,7 @@ $getTracks = $context->media->getTextTracks();
                         </ul>
                     </div>
                 </div>
-            </h6>
+            </div>
             <div class="mh-caption-container">   
                 <label for="mh-parse-caption">Search:</label>
                 <div class="mh-paragraph-icons">
