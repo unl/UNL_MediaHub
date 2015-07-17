@@ -374,6 +374,9 @@ class UNL_MediaHub_Manager_PostHandler
             $media = $this->mediahub->addMedia($details);
         }
         
+        //Update the dateupdated date for cache busting
+        $media->dateupdated = date('Y-m-d H:i:s');
+        
         // Save details
         $media->synchronizeWithArray($this->post);
         

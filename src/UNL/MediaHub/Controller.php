@@ -198,7 +198,7 @@ class UNL_MediaHub_Controller
                 $media = $this->findRequestedMedia($this->options);
 
                 if (!$media->canView()) {
-                    throw new Exception('You do not have permission to do this.', 403);
+                    throw new Exception('You do not have permission to view this.', 403);
                 }
                 
                 $this->output[] = $media;
@@ -231,7 +231,15 @@ class UNL_MediaHub_Controller
                 if (isset($this->options['version'])) {
                     $version = $this->options['version'];
                 }
-                $this->output[] = UNL_MediaHub_Media_Embed::getById($id, $version, $this->options);
+                
+                $media_embed = UNL_MediaHub_Media_Embed::getById($id, $version, $this->options);
+
+                if (!$media_embed->media->canView()) {
+                    throw new Exception('You do not have permission to view this.', 403);
+                }
+                
+                $this->output[] = $media_embed;
+                
                 break;
             case 'media_file':
                 $this->output[] = UNL_MediaHub_Media_File::getById($this->options['id']);

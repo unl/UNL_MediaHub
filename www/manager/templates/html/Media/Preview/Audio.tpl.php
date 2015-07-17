@@ -2,6 +2,6 @@
 <p class="wdn-sans-serif">Preview your Audio</p>
 
 <div id="audioDisplay" class="two_col right">
-    <?php echo $savvy->render($context, 'MediaPlayer.tpl.php'); ?>
-</div>	
+    <?php echo $savvy->render($controller->getMediaPlayer($context), 'MediaPlayer.tpl.php'); ?>
+</div>
 </div>
