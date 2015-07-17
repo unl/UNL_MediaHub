@@ -303,12 +303,14 @@ ul.mh-transcript li span {
     padding: 0.85em 0.45em 0.45em 0.45em;
 }
 
-.mh-caption-search h6 {
+.mh-caption-search div.title {
   margin: 0;
   background-color: #ECEAE2;
   padding: .75em;
   font-size: 1rem;
   cursor: pointer;
+  width: 100%;
+  display: block;
 }
 
 
