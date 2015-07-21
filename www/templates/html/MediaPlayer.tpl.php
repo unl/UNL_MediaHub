@@ -201,9 +201,9 @@ $getTracks = $context->media->getTextTracks();
                                 links += '<li class="outpost"><a href="'+sharelinks[key].url+'" rel="nofollow" target="_blank" class="'+key+'" title="Share on '+sharelinks[key].title+'">Share on '+sharelinks[key].title+'</a></li>';
                             }
 
-                            var html = '<div class="media-content-head">';
+                            var html = '<div class="media-content-head mejs-control">';
                             html += '<div class="media-content-title"><a href="' + share_url + '">' + $title + '</a></div>';
-                            html += '<div class="wdn-share-this-page">';
+                            html += '<div class="wdn-share-this-page mejs-control">';
                             html += '<input type="checkbox" id="mh-share-toggle" value="Show share options" class="wdn-input-driver mh-share-toggle">'
                             html += '<label for="mh-share-toggle" class="wdn-icon-share">Share This Page</label>';
                             html += '<ul class="wdn-share-options">';
@@ -221,6 +221,11 @@ $getTracks = $context->media->getTextTracks();
                             var $closelink  = $inner.find('.share-video-close');
                             var $videotitle = $inner.find('.media-content-title');
                             var $videohead  = $inner.find('.media-content-head');
+
+                            if(t.media.getAttribute('autoplay') != null){
+                                $videohead.hide();
+                                //hide title if autoplay is enabled
+                            };
 
                             // hide form when video is playing
                             m.addEventListener('play', function(e) {
