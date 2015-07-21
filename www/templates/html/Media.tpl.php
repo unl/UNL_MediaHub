@@ -53,10 +53,14 @@ $mediaplayer = $savvy->render($controller->getMediaPlayer($context));
 
 <div class="wdn-band mh-video-band">
     <div class="wdn-inner-wrapper">
-    <?php echo $mediaplayer; ?>
+        <?php echo $mediaplayer; ?>
+
+
+
     </div>
 
 </div>
+
 
 <div class="wdn-band">
     <div class="wdn-inner-wrapper"> 
