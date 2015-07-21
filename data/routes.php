@@ -18,6 +18,7 @@ $routes['/^tags\/(?P<t>.*)$/'] = 'UNL_MediaHub_MediaList';
 
 $routes['/^media\/(?P<id>[0-9]+)\/(?P<format>vtt)$/'] = 'media_vtt';
 $routes['/^media\/(?P<id>[0-9]+)\/(?P<format>srt)$/'] = 'media_srt';
+$routes['/^media\/(?P<id>[0-9]+)\/(?P<format>json)$/'] = 'media_json';
 
 $routes['/^media\/(?P<id>[0-9]+)\/image(\.[\w]+)?$/'] = 'media_image';
 
