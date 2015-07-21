@@ -222,7 +222,10 @@ $getTracks = $context->media->getTextTracks();
                             var $videotitle = $inner.find('.media-content-title');
                             var $videohead  = $inner.find('.media-content-head');
 
-                            $videohead.hide();
+                            if(t.media.getAttribute('autoplay') != null){
+                                $videohead.hide();
+                                //hide title if autoplay is enabled
+                            };
 
                             // hide form when video is playing
                             m.addEventListener('play', function(e) {
