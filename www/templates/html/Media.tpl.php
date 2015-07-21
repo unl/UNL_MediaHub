@@ -163,7 +163,7 @@ $mediaplayer = $savvy->render($controller->getMediaPlayer($context));
                 <hr>
                 <div id="comments">
                     <script type="text/javascript">
-                        WDN.loadCSS('../templates/html/css/comments.css');
+                        WDN.loadCSS('../templates/html/css/comments.css?v=<?php echo UNL_MediaHub_Controller::VERSION ?>');
                     </script>
                     <h6 class="wdn-sans-serif">COMMENTS <span class="wdn-icon wdn-icon-comment"></span></h6>
                     <span class="subhead">
