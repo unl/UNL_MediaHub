@@ -134,7 +134,7 @@ if ($context->media->isVideo()) {
                     }
 
                     //Load the CSS
-                    WDN.loadCSS('<?php echo UNL_MediaHub_Controller::$url; ?>templates/html/css/player.css', function() {
+                    WDN.loadCSS('<?php echo UNL_MediaHub_Controller::$url; ?>templates/html/css/player.css?v=<?php echo UNL_MediaHub_Controller::VERSION ?>', function() {
                         initSharing(m, v);
                     });
 
