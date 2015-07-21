@@ -71,11 +71,6 @@ $getTracks = $context->media->getTextTracks();
                         t.controls.on("click", ".caption-toggle", function(e){
                             $captionSearch.toggleClass("show");
                         });
-                        t.controls.on("keyup", ".caption-toggle", function(e){
-                            if(e.keyCode != 13){
-                                $captionSearch.addClass("show");
-                            }
-                        });
                         var displaytime = function(millis){
                             var hours = Math.floor(millis / 36e5),
                                 mins = Math.floor((millis % 36e5) / 6e4),
