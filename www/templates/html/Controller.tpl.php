@@ -14,10 +14,10 @@ if (isset($GLOBALS['UNLTEMPLATEDEPENDENTSPATH'])) {
 $page->doctitle     = '<title>MediaHub | University of Nebraska-Lincoln</title>';
 $page->titlegraphic = 'UNL MediaHub';
 $page->pagetitle    = '';
-$page->addStyleSheet($baseUrl . 'templates/html/css/all.css');
+$page->addStyleSheet($baseUrl . 'templates/html/css/all.css?v=' . UNL_MediaHub_Controller::VERSION);
 $page->breadcrumbs = '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li>MediaHub</li></ul>';
 $page->head .= '<script>WDN.setPluginParam("idm", "logout", "' . $baseUrl . '?logout");</script>';
-$page->addScript(UNL_MediaHub_Controller::getURL().'templates/html/scripts/mediatools.js');
+$page->addScript(UNL_MediaHub_Controller::getURL().'templates/html/scripts/mediatools.js?v=' . UNL_MediaHub_Controller::VERSION);
 if (!$context->output instanceof UNL_MediaHub_FeedAndMedia) {
     $page->head .= '<link rel="alternate" type="application/rss+xml" title="UNL MediaHub" href="?format=xml" />';
 }

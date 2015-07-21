@@ -45,6 +45,11 @@ class UNL_MediaHub_Controller
      */
     public static $thumbnail_generator;
 
+    /**
+     * Version used for cache busting
+     */
+    const VERSION = '1';
+
     static protected $replacements;
 
     /**
