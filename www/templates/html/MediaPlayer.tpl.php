@@ -15,7 +15,7 @@ $getTracks = $context->media->getTextTracks();
         <div class="mh-caption-search">
             <div class="title wdn-sans-serif wdn-icon-search">
                 Searchable Transcript
-                <div class="wdn-icon-info mh-tooltip hang-right italic" id="privacy-details">
+                <div class="wdn-icon-info mh-tooltip hang-right italic">
                     <div>
                         <ul>
                             <li>Use the text input to search the transcript. </li>
@@ -27,12 +27,13 @@ $getTracks = $context->media->getTextTracks();
             </div>
             <div class="mh-caption-container">   
                 <label for="mh-parse-caption">Search:</label>
-                <a class="mh-paragraph-icons" href="javascript:;">
+                <a class="mh-paragraph-icons" href="javascript:void(0);">
+                    <span class="wdn-text-hidden">Toggle between list and paragraph view.</span>
                     <div class="mh-bullets"></div>
                     <div class="mh-paragraph"></div>
                 </a>
                 <br>
-                <input id="mh-parse-caption" type="text" class="mh-parse-caption"><div class="mh-caption-close"></div>
+                <input type="text" class="mh-parse-caption"><div class="mh-caption-close"></div>
                 <ul class="mh-transcript"></ul>
             </div>
         </div>
@@ -50,11 +51,14 @@ $getTracks = $context->media->getTextTracks();
                     var $transcript;
                     var $captionSearch;
                     var $video = $(v);
+                    var mediahub_id = $video.attr('data-mediahub-id');
 
                     <?php if($getTracks): ?>
                         t.container.append($(".mh_transcript_template").html());
                         $transcript = t.container.find('.mh-transcript');
                         $captionSearch = t.container.children(".mh-caption-search");
+                        t.container.find(".mh-parse-caption").attr("id","mh-parse-caption"+mediahub_id);
+                        t.container.find(".mh-caption-container").find("label").attr("for","mh-parse-caption"+mediahub_id);
 
                         var $myButton = $('<div>', {
                             "class": "mejs-button wide"
@@ -129,7 +133,7 @@ $getTracks = $context->media->getTextTracks();
                             for (var i = 0; i < track.entries.text.length; i++) {
                                 listItems.push($("<li>").append($('<a>',  {
                                     "class" : "highlight",
-                                    "href" : "javascript:;"
+                                    "href" : "javascript:void(0);"
                                     // "tabindex" : 0,
                                 })
                                     .data('timeOffset', track.entries.times[i].start)
@@ -180,7 +184,7 @@ $getTracks = $context->media->getTextTracks();
                         var $title      = $video.attr('title');
                         var share_url   = $video.attr('data-url');
                         var media_type  = v.tagName.charAt(0).toUpperCase() + v.tagName.slice(1).toLowerCase();
-                        var mediahub_id = $video.attr('data-mediahub-id');
+                        
                         
                         if (!share_url) {
                             return;
@@ -204,8 +208,8 @@ $getTracks = $context->media->getTextTracks();
                             var html = '<div class="media-content-head mejs-control">';
                             html += '<div class="media-content-title"><a href="' + share_url + '">' + $title + '</a></div>';
                             html += '<div class="wdn-share-this-page mejs-control">';
-                            html += '<input type="checkbox" id="mh-share-toggle" value="Show share options" class="wdn-input-driver mh-share-toggle">'
-                            html += '<label for="mh-share-toggle" class="wdn-icon-share">Share This Page</label>';
+                            html += '<input type="checkbox" id="mh-share-toggle'+mediahub_id+'" value="Show share options" class="wdn-input-driver mh-share-toggle">'
+                            html += '<label for="mh-share-toggle'+mediahub_id+'" class="wdn-icon-share">Share This Page</label>';
                             html += '<ul class="wdn-share-options">';
                             html += links;
                             html += '</ul>';
