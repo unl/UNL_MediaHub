@@ -1,8 +1,6 @@
 <?php
 class UNL_MediaHub_DefaultHomepage implements UNL_MediaHub_CacheableInterface
 {
-    public $top_media;
-    
     public $options = array();
     
     function __construct($options = array())
