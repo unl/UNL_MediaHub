@@ -41,36 +41,7 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
             <span class="wdn-subhead">Popular Videos</span>
         </h2>
         <div class="bp2-wdn-grid-set-thirds wdn-grid-clear">
-            <?php 
-            $limit = 6;
-            $found_channels = array();
-            $i = 0;
-            foreach ($context->top_media->items as $media):
-                if ($i >= $limit) {
-                    //Break out of the loop once we have reached 6 videos
-                    break;
-                }
-                
-                //Get the media's feeds
-                $feeds = $media->getFeeds();
-                $feeds->run();
-                
-                $skip = false;
-                foreach ($feeds->items as $feed) {
-                    if (in_array($feed->id, $found_channels)) {
-                        //We already found a video in this feed, skip it.
-                        $skip = true;
-                    }
-                    
-                    $found_channels[] = $feed->id;
-                }
-                
-                if ($skip) {
-                    continue;
-                }
-                
-                $i++;
-            ?>
+            <?php foreach ($context->getTopMedia() as $media): ?>
                 <div class="wdn-col">
                     <?php echo $savvy->render($media, 'Media/teaser.tpl.php'); ?>
                 </div>
