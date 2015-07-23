@@ -41,7 +41,7 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
             <span class="wdn-subhead">Popular Videos</span>
         </h2>
         <div class="bp2-wdn-grid-set-thirds wdn-grid-clear">
-            <?php foreach ($context->top_media->items as $media): ?>
+            <?php foreach ($context->getTopMedia() as $media): ?>
                 <div class="wdn-col">
                     <?php echo $savvy->render($media, 'Media/teaser.tpl.php'); ?>
                 </div>
