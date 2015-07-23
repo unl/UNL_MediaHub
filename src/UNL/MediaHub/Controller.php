@@ -48,7 +48,7 @@ class UNL_MediaHub_Controller
     /**
      * Version used for cache busting
      */
-    const VERSION = '1';
+    const VERSION = '1.1';
 
     static protected $replacements;
 
