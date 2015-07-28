@@ -53,7 +53,7 @@ $getTracks = $context->media->getTextTracks();
                     var $video = $(v);
                     var mediahub_id = $video.attr('data-mediahub-id');
 
-                    <?php if($getTracks): ?>
+                    if(t.captionsButton){
                         t.container.append($(".mh_transcript_template").html());
                         $transcript = t.container.find('.mh-transcript');
                         $captionSearch = t.container.children(".mh-caption-search");
@@ -141,7 +141,7 @@ $getTracks = $context->media->getTextTracks();
                                     .prepend($('<span>').text('[' + displaytime(track.entries.times[i].start*1000) + '] '))
                                 ));
                             };
-                            $transcript.children("a").remove();
+                            $transcript.children("li").remove();
                             $transcript.append(listItems);
                         };
 
@@ -162,7 +162,7 @@ $getTracks = $context->media->getTextTracks();
                                 setTranscript(t.selectedTrack);
                             };
                         };
-                    <?php endif; ?>
+                    };
 
                     // Playcount
                     var w = false, u = '<?php echo $controller->getURL($context->media) ?>';
