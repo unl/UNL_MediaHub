@@ -25,6 +25,7 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
         $this->options = $options + $this->options;
         $this->filterInputOptions();
         $this->setUpFilter();
+        $this->run();
     }
 
     public function setUpFilter()
