@@ -53,6 +53,8 @@ abstract class UNL_MediaHub_List implements Countable
     {
         $this->options = $options + $this->options;
         $this->filterInputOptions();
+        
+        $this->run();
     }
     
     function run()

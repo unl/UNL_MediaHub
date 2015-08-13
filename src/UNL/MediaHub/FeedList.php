@@ -30,7 +30,6 @@ class UNL_MediaHub_FeedList extends UNL_MediaHub_List
     function __construct($options = array())
     {
         parent::__construct($options);
-        $this->run();
     }
     
     public function filterInputOptions()
