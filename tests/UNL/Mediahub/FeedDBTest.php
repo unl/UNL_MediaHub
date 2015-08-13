@@ -17,10 +17,12 @@ class UNL_MediaHub_FeedDBTest extends UNL_MediaHub_DBTests_DBTestCase
         $feed_a->delete();
 
         //Verify media was removed
+        $media_list->ran = false; //force a re-run
         $media_list->run();
         $this->assertEquals(0, count($media_list->items), 'feed media should be removed');
         
         //Verify users were removed
+        $user_list->ran = false; //force a re-run
         $user_list->run();
         $this->assertEquals(0, count($user_list->items), 'feed users should be removed');
 
