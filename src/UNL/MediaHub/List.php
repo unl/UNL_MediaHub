@@ -4,7 +4,7 @@
  * 
  * @author bbieber
  */
-abstract class UNL_MediaHub_List implements Countable, UNL_MediaHub_CacheableInterface
+abstract class UNL_MediaHub_List implements Countable
 {
     public $options = array(
         'page'               => 0,
@@ -40,6 +40,8 @@ abstract class UNL_MediaHub_List implements Countable, UNL_MediaHub_CacheableInt
      */
     public $tables = 'null';
     
+    public $ran = false;
+    
     /**
      * Construct a list of items.
      * 
@@ -53,18 +55,13 @@ abstract class UNL_MediaHub_List implements Countable, UNL_MediaHub_CacheableInt
         $this->filterInputOptions();
     }
     
-    function getCacheKey()
-    {
-        return serialize($this->options);
-    }
-    
-    function preRun($cached)
-    {
-        
-    }
-    
     function run()
     {
+        if ($this->ran) {
+            //Don't rerun
+            return false;
+        }
+        
         $query = new Doctrine_Query();
         $query->from($this->tables);
         
@@ -87,6 +84,8 @@ abstract class UNL_MediaHub_List implements Countable, UNL_MediaHub_CacheableInt
         $this->last  = $pager->getLastIndice();
 
         $this->pager = $pager;
+        
+        $this->ran = true;
     }
     
     abstract function setOrderBy(Doctrine_Query &$query);
