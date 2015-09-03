@@ -16,6 +16,7 @@ class UNL_MediaHub_Manager extends UNL_MediaHub_BaseController implements UNL_Me
         'upload'          => 'UNL_MediaHub_Feed_Media_FileUpload',
         'home'            => 'UNL_MediaHub_Manager_ManagerHome',
         'addmedia'        => 'UNL_MediaHub_Feed_Media_Form',
+        'editcaptions'    => 'UNL_MediaHub_Media_EditCaptions',
         );
     
     protected static $replacements = array();

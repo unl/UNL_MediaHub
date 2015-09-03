@@ -111,6 +111,9 @@ class UNL_MediaHub_Manager_PostHandler
         case 'delete_feed':
             $this->handleDeleteFeed();
             break;
+        case 'pull_amara':
+            $this->handleAmara();
+            break;
         }
     }
 
@@ -514,6 +517,45 @@ class UNL_MediaHub_Manager_PostHandler
         $media->delete();
 
         UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL());
+    }
+    
+    function handleAmara()
+    {
+        $media = UNL_MediaHub_Media::getById($this->post['media_id']);
+        
+        if (!$media) {
+            throw new Exception('Unable to find media', 404);
+        }
+
+        if (!$media->userHasPermission(UNL_MediaHub_AuthService::getInstance()->getUser(), UNL_MediaHub_Permission::USER_CAN_UPDATE)) {
+            throw new Exception('You do not have permission to edit this media.', 403);
+        }
+        
+        $tracks = $media->getAmaraTextTracks();
+        
+        if (empty($tracks)) {
+            //No tracks were found, fail early
+            return;
+        }
+        
+        $text_track = new UNL_MediaHub_MediaTextTrack();
+        $text_track->media_id = $media->id;
+        $text_track->source = 'amara';
+        $text_track->save();
+        
+        foreach ($tracks as $lang=>$track) {
+            $text_track_file = new UNL_MediaHub_MediaTextTrackFile();
+            $text_track_file->media_text_tracks_id = $text_track->id;
+            $text_track_file->kind = 'caption';
+            $text_track_file->format = 'srt';
+            $text_track_file->language = $lang;
+            $text_track_file->file_contents = $track;
+            $text_track_file->save();
+        }
+        
+        //TODO: update the media to point to the new text track
+
+        UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL() . '?view=editcaptions&id=' . $media->id);
     }
 
     /**

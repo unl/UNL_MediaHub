@@ -68,7 +68,7 @@ $getTracks = $context->media->getTextTracks();
                                 "aria-controls": t.id,
                                 "title": "Toggle Searchable Transcript",
                                 "aria-label": "Toggle Searchable Transcript"
-                            }));                       
+                            }));
 
                         t.captionsButton.before($myButton)
 
