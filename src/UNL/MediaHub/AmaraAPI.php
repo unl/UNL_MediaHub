@@ -107,7 +107,7 @@ class UNL_MediaHub_AmaraAPI
             //update the details
             $media_details = $this->getMediaDetails($media_url);
         }
-        return 'http://amara.org/en/videos/' . $media_details->objects[0]->id . '/info';
+        return 'https://www.amara.org/en/videos/' . $media_details->objects[0]->id . '/info';
     }
 
     /**
