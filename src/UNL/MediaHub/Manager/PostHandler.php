@@ -553,7 +553,9 @@ class UNL_MediaHub_Manager_PostHandler
             $text_track_file->save();
         }
         
-        //TODO: update the media to point to the new text track
+        //update the media to point to the new text track
+        $media->media_text_tracks_id = $text_track->id;
+        $media->save();
 
         UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL() . '?view=editcaptions&id=' . $media->id);
     }
