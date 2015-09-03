@@ -4,7 +4,7 @@ abstract class UNL_MediaHub_Models_BaseMediaTextTrackFile extends Doctrine_Recor
 
     public function setTableDefinition()
     {
-        $this->setTableName('media_text_tracks');
+        $this->setTableName('media_text_tracks_files');
         $this->hasColumn('id',              'integer',   4,    array('unsigned' => 0, 'primary' => true, 'notnull' => true, 'autoincrement' => true));
         $this->hasColumn('media_text_tracks_id', 'integer',   4,    array('unsigned' => 0, 'primary' => false, 'notnull' => true));
         $this->hasColumn('datecreated',     'timestamp', null, array('primary' => false, 'notnull' => true, 'autoincrement' => false));
@@ -12,7 +12,6 @@ abstract class UNL_MediaHub_Models_BaseMediaTextTrackFile extends Doctrine_Recor
         $this->hasColumn('format',          'string', null, array('primary' => false, 'notnull' => true, 'autoincrement' => false));
         $this->hasColumn('language',        'string', null, array('primary' => false, 'notnull' => true, 'autoincrement' => false));
         $this->hasColumn('file_contents',   'string', null, array('primary' => false, 'notnull' => false, 'autoincrement' => false));
-        $this->hasOne();
     }
 
     public function setUp()
