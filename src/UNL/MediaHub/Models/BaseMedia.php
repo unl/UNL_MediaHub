@@ -22,6 +22,8 @@ abstract class UNL_MediaHub_Models_BaseMedia extends Doctrine_Record
         $this->hasColumn('popular_play_count', 'integer',   null, array('unsigned' => 0, 'primary' => false, 'notnull' => true, 'autoincrement' => false));
         $this->hasColumn('datecreated',   'timestamp', null, array('primary' => false, 'notnull' => true, 'autoincrement' => false));
         $this->hasColumn('dateupdated',   'timestamp', null, array('primary' => false, 'notnull' => false, 'autoincrement' => false));
+        $this->hasColumn('media_text_tracks_id', 'integer', null, array('primary' => false, 'notnull' => false, 'autoincrement' => false));
+        
     }
     
     public function setUp()
