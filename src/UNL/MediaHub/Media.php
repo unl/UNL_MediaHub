@@ -428,5 +428,12 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         $api = new UNL_MediaHub_AmaraAPI();
         return $api->getMediaHubTextTracks($this->id, $this->url);
     }
+    
+    public function getAmaraTextTracks($format = 'srt')
+    {
+        $api = new UNL_MediaHub_AmaraAPI();
+
+        return $api->getTextTracks($this->url, $format);
+    }
 }
 

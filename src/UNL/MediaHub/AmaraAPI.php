@@ -159,9 +159,30 @@ class UNL_MediaHub_AmaraAPI
         if ($media_details->meta->total_count == 0) {
             return $tracks;
         }
-        
+
         foreach($media_details->objects[0]->languages as $track) {
             $tracks[$track->code] = UNL_MediaHub_Controller::$url . 'media/'.$media_id.'/'.$format.'?amara_id='.$media_details->objects[0]->id.'&lang_code='.$track->code;
+        }
+
+        return $tracks;
+    }
+
+
+    public function getTextTracks($media_url, $format = 'srt')
+    {
+        $media_details = $this->getMediaDetails($media_url);
+        $tracks        = array();
+
+        if (!$media_details) {
+            return $tracks;
+        }
+
+        if ($media_details->meta->total_count == 0) {
+            return $tracks;
+        }
+
+        foreach($media_details->objects[0]->languages as $track) {
+            $tracks[$track->code] = (string)$this->getTextTrackByMediaID($media_details->objects[0]->id, $track->code, $format);
         }
 
         return $tracks;
