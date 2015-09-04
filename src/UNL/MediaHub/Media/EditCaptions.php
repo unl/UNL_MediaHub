@@ -17,8 +17,8 @@ class UNL_MediaHub_Media_EditCaptions
         }
     }
     
-    public function handlePost()
+    public function getTrackHistory()
     {
-        
+        return new UNL_MediaHub_MediaTextTrackList(array('media_id'=>$this->media->id));
     }
 }
