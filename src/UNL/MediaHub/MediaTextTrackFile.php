@@ -8,7 +8,19 @@ class UNL_MediaHub_MediaTextTrackFile extends UNL_MediaHub_Models_BaseMediaTextT
     
     const FORMAT_SRT = 'srt';
     const FORMAT_VTT = 'vtt';
-    
+
+    /**
+     * Get a piece of media by PK.
+     *
+     * @param int $id ID of the media.
+     *
+     * @return UNL_MediaHub_MediaTextTrackFile
+     */
+    static function getById($id)
+    {
+        return Doctrine::getTable(__CLASS__)->find($id);
+    }
+
     /**
      * called before an item is inserted to the database
      *

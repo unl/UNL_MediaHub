@@ -5,7 +5,7 @@ if ($context->media->isVideo()) {
     echo $savvy->render($context->media, 'MediaPlayer/Audio.tpl.php');
 }
 
-$getTracks = $context->media->getTextTracks();
+$getTracks = $context->media->getTextTrackURLs();
 
 ?>
 

@@ -168,7 +168,7 @@ class UNL_MediaHub_AmaraAPI
     }
 
 
-    public function getTextTracks($media_url, $format = 'srt')
+    public function getTextTracks($media_url, $format = 'vtt')
     {
         $media_details = $this->getMediaDetails($media_url);
         $tracks        = array();

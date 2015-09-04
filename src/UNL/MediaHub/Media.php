@@ -423,13 +423,30 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         return false;
     }
     
-    public function getTextTracks()
+    public function getTextTrackURLs()
     {
-        $api = new UNL_MediaHub_AmaraAPI();
-        return $api->getMediaHubTextTracks($this->id, $this->url);
+        $track = UNL_MediaHub_MediaTextTrack::getById($this->media_text_tracks_id);
+        
+        if (!$track) {
+            return array();
+        }
+        
+        $files = $track->getFiles();
+        
+        if (empty($files->items)) {
+            return array();
+        }
+        
+        
+        $urls = array();
+        foreach ($files->items as $file) {
+            $urls[$file->language] = UNL_MediaHub_Controller::$url . 'media/'.$this->id.'/'.$file->format.'?text_file_id='.$file->id;
+        }
+        
+        return $urls;
     }
     
-    public function getAmaraTextTracks($format = 'srt')
+    public function getAmaraTextTracks($format = 'vtt')
     {
         $api = new UNL_MediaHub_AmaraAPI();
 
