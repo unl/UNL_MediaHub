@@ -75,7 +75,23 @@
             </tr>
             </thead>
             <tbody>
-
+            <?php $text_tracks = $context->getTrackHistory()->items; ?>
+                <?php foreach ($text_tracks as $track): ?>
+                    <tr>
+                        <td>
+                            <?php echo $track->datecreated ?>
+                        </td>
+                        <td>
+                            <?php echo $track->source ?>
+                        </td>
+                        <td>
+                            <?php echo $track->revision_comment ?>
+                        </td>
+                        <td>
+                            (delete) (make active)
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>
