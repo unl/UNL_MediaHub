@@ -540,14 +540,14 @@ class UNL_MediaHub_Manager_PostHandler
         
         $text_track = new UNL_MediaHub_MediaTextTrack();
         $text_track->media_id = $media->id;
-        $text_track->source = 'amara';
+        $text_track->source = UNL_MediaHub_MediaTextTrack::SOURCE_AMARA;
         $text_track->save();
         
         foreach ($tracks as $lang=>$track) {
             $text_track_file = new UNL_MediaHub_MediaTextTrackFile();
             $text_track_file->media_text_tracks_id = $text_track->id;
-            $text_track_file->kind = 'caption';
-            $text_track_file->format = 'srt';
+            $text_track_file->kind = UNL_MediaHub_MediaTextTrackFile::KIND_CAPTION;
+            $text_track_file->format = UNL_MediaHub_MediaTextTrackFile::FORMAT_SRT;
             $text_track_file->language = $lang;
             $text_track_file->file_contents = $track;
             $text_track_file->save();
