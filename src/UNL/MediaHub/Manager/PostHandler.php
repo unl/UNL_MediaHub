@@ -114,6 +114,9 @@ class UNL_MediaHub_Manager_PostHandler
         case 'pull_amara':
             $this->handleAmara();
             break;
+        case 'order_rev':
+            $this->handleRev();
+            break;
         }
     }
 
@@ -556,6 +559,54 @@ class UNL_MediaHub_Manager_PostHandler
         //update the media to point to the new text track
         $media->media_text_tracks_id = $text_track->id;
         $media->save();
+
+        UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL() . '?view=editcaptions&id=' . $media->id);
+    }
+    
+    function handleRev()
+    {
+        $media = UNL_MediaHub_Media::getById($this->post['media_id']);
+
+        if (!$media) {
+            throw new Exception('Unable to find media', 404);
+        }
+
+        $user = UNL_MediaHub_AuthService::getInstance()->getUser();
+        
+        if (!$media->userHasPermission($user, UNL_MediaHub_Permission::USER_CAN_UPDATE)) {
+            throw new Exception('You do not have permission to edit this media.', 403);
+        }
+        
+        if (!isset($this->post['cost_object']) || empty($this->post['cost_object'])) {
+            throw new Exception('A cost object number must be provided', 400);
+        }
+        
+        $rev = UNL_MediaHub_RevAPI::getRevClient();
+        
+        if (!$rev) {
+            throw new Exception('Unable to get the Rev client', 500);
+        }
+        
+        $order_record = new UNL_MediaHub_RevOrder();
+        $order_record->media_id = $media->id;
+        $order_record->costobjectnumber = $this->post['cost_object'];
+        $order_record->uid = $user->uid;
+        $order_record->status = 'order being created';
+        $order_record->save();
+        
+        $rev_input = $rev->uploadVideoUrl($media->url);
+        
+        $caption_order = new \RevAPI\CaptionOrderSubmission($rev);
+        $caption_order->addInput($rev_input);
+        
+        $caption_order->setClientRef($order_record->id);
+
+        $order_number = $caption_order->send();
+        
+        $order_record->refresh();
+        $order_record->rev_order_number = $order_number;
+        $order_record->status = 'order created';
+        $order_record->save();
 
         UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL() . '?view=editcaptions&id=' . $media->id);
     }
