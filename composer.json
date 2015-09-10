@@ -55,6 +55,7 @@
         "saltybeagle/savvy_turbo": "0.1.*",
         "phpunit/phpunit": "~4.3",
         "ezyang/htmlpurifier": "~4.6",
-        "guzzlehttp/guzzle": "~5.1"
+        "guzzlehttp/guzzle": "~5.1",
+        "unl/rev-api": "0.1-beta"
     }
 }

@@ -29,13 +29,17 @@ REFERENCES media_text_tracks(id);
 
 CREATE TABLE IF NOT EXISTS `rev_orders` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `media_text_tracks_id` int(10) unsigned NOT NULL,
+  `media_text_tracks_id` int(10) unsigned NULL,
+  `media_id` int(10) unsigned NOT NULL,
   `uid` varchar(50) NOT NULL,
   `datecreated` timestamp NOT NULL,
   `costobjectnumber` VARCHAR(10) NOT NULL,
+  `rev_order_number` varchar(256) NULL,
+  `status` VARCHAR(128) NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`media_text_tracks_id`) REFERENCES media_text_tracks(id),
   FOREIGN KEY (`uid`) REFERENCES users(uid),
+  FOREIGN KEY (`media_id`) REFERENCES media(id),
   INDEX `rev_orders_datecreated` (`datecreated`),
   INDEX `rev_orders_cost_object` (`costobjectnumber`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
