@@ -59,7 +59,20 @@
                 </tr>
             </thead>
             <tbody>
-                
+            <?php $orders = $context->getRevOrderHistory()->items; ?>
+            <?php foreach ($orders as $order): ?>
+                <tr>
+                    <td>
+                        <?php echo $order->datecreated ?>
+                    </td>
+                    <td>
+                        <?php echo $order->uid ?>
+                    </td>
+                    <td>
+                        <?php echo $order->status ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
             </tbody>
         </table>
         

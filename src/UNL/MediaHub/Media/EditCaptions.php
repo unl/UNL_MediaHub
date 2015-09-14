@@ -21,4 +21,9 @@ class UNL_MediaHub_Media_EditCaptions
     {
         return new UNL_MediaHub_MediaTextTrackList(array('media_id'=>$this->media->id));
     }
+    
+    public function getRevOrderHistory()
+    {
+        return new UNL_MediaHub_RevOrderList(array('media_id'=>$this->media->id));
+    }
 }
