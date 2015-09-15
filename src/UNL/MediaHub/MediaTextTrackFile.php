@@ -32,4 +32,19 @@ class UNL_MediaHub_MediaTextTrackFile extends UNL_MediaHub_Models_BaseMediaTextT
     {
         $this->datecreated = date('Y-m-d H:i:s');
     }
+    
+    public function getURL()
+    {
+        $text_track = $this->getTextTrack();
+        
+        return UNL_MediaHub_Controller::$url . 'media/'.$text_track->media_id.'/'.$this->format.'?text_file_id='.$this->id;
+    }
+
+    /**
+     * @return UNL_MediaHub_MediaTextTrack
+     */
+    public function getTextTrack()
+    {
+        return UNL_MediaHub_MediaTextTrack::getById($this->media_text_tracks_id);
+    }
 }
