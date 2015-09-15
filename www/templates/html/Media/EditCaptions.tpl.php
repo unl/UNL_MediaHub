@@ -8,6 +8,24 @@
                 <form method="post">
                     <div class="important-notice">
                         <strong>Important</strong>: captions cost $1 per video minute.  Example: A 3:15 minute video would cost $4.
+                        
+                        <?php if ($duration = $context->media->findDuration()): ?>
+                            Estimated cost:
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Media duration</th>
+                                        <th>Est. cost</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><?php echo $duration['string'] ?></td>
+                                        <td>$<?php echo ceil($duration['seconds']/60) ?></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        <?php endif; ?>
                     </div>
                     <ul>
                         <li>
@@ -84,6 +102,7 @@
                 <th>Date of caption track</th>
                 <th>Source</th>
                 <th>Comments</th>
+                <th>Files</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -101,7 +120,16 @@
                             <?php echo $track->revision_comment ?>
                         </td>
                         <td>
-                            (delete) (make active)
+                            <ul>
+                                <?php foreach ($track->getFiles()->items as $file): ?>
+                                    <li>
+                                        <a href="<?php echo $file->getURL() ?>" target="_blank"><?php echo $file->language ?>.<?php echo $file->format ?></a>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </td>
+                        <td>
+                            (make active)
                         </td>
                     </tr>
                 <?php endforeach; ?>
