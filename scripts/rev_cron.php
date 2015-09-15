@@ -62,6 +62,7 @@ foreach ($orders->items as $order) {
             //Now fetch from the api to get the status
             $rev_order = $rev->getOrder($order_number);
             $order->status = $rev_order->getStatus();
+            $order->dateupdated = date('Y-m-d H:i:s');
             $order->save();
             sleep(1); //be nice
             
@@ -114,6 +115,7 @@ foreach ($orders->items as $order) {
             }
             
             //Save the order status;
+            $order->dateupdated = date('Y-m-d H:i:s');
             $order->save();
     }
 }

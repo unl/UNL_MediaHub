@@ -586,6 +586,12 @@ class UNL_MediaHub_Manager_PostHandler
         $order_record->costobjectnumber = $this->post['cost_object'];
         $order_record->uid = $user->uid;
         $order_record->status = UNL_MediaHub_RevOrder::STATUS_MEDIAHUB_CREATED;
+        
+        if (isset($this->post['media_duration'])) {
+            $order_record->estimate = $this->post['estimate'];
+            $order_record->media_duration = $this->post['media_duration'];
+        }
+        
         $order_record->save();
         
         UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL() . '?view=editcaptions&id=' . $media->id);

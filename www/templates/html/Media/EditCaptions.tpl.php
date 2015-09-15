@@ -11,7 +11,9 @@
 
                         <h3>Estimated cost:</h3>
                         <?php if ($duration = $context->media->findDuration()): ?>
-                            
+                            <?php $estimate = ceil($duration['seconds']/60); ?>
+                            <input type="hidden" name="media_duration" value="<?php echo $duration['string'] ?>" />
+                            <input type="hidden" name="estimate" value="<?php echo $estimate ?>" />
                             <table>
                                 <thead>
                                     <tr>
@@ -22,7 +24,7 @@
                                 <tbody>
                                     <tr>
                                         <td><?php echo $duration['string'] ?></td>
-                                        <td>$<?php echo ceil($duration['seconds']/60) ?></td>
+                                        <td>$<?php echo $estimate ?></td>
                                     </tr>
                                 </tbody>
                             </table>
