@@ -440,7 +440,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         
         $urls = array();
         foreach ($files->items as $file) {
-            $urls[$file->language] = UNL_MediaHub_Controller::$url . 'media/'.$this->id.'/'.$file->format.'?text_file_id='.$file->id;
+            $urls[$file->language] = $file->getURL();
         }
         
         return $urls;

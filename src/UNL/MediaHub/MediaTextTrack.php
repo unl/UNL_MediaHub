@@ -36,4 +36,9 @@ class UNL_MediaHub_MediaTextTrack extends UNL_MediaHub_Models_BaseMediaTextTrack
     {
         return new UNL_MediaHub_MediaTextTrackFileList(array('text_track_id'=>$this->id));
     }
+    
+    public function getMedia()
+    {
+        return UNL_MediaHub_Media::getById($this->media_id);
+    }
 }
