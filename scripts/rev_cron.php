@@ -49,6 +49,7 @@ foreach ($orders->items as $order) {
             //create an order
             $caption_order = new \RevAPI\CaptionOrderSubmission($rev);
             $caption_order->addInput($rev_input);
+            $caption_order->setOutputFormats(array('WebVtt'));
             $caption_order->setClientRef($order->id);
 
             //send the order
@@ -104,7 +105,7 @@ foreach ($orders->items as $order) {
                         $media_text_track_file->kind = UNL_MediaHub_MediaTextTrackFile::KIND_CAPTION;
                         $media_text_track_file->format = UNL_MediaHub_MediaTextTrackFile::FORMAT_VTT;
                         $media_text_track_file->language = 'en';
-                        $media_text_track_file->file_contents = $attachment->getContent();
+                        $media_text_track_file->file_contents = $attachment->getContent('.vtt');
                         $media_text_track_file->save();
                     }
                     
