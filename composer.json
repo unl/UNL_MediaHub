@@ -56,6 +56,7 @@
         "phpunit/phpunit": "~4.3",
         "ezyang/htmlpurifier": "~4.6",
         "guzzlehttp/guzzle": "~5.1",
-        "unl/rev-api": "0.1-beta"
+        "unl/rev-api": "0.1-beta",
+        "phansys/getid3": " ~2.1@dev"
     }
 }

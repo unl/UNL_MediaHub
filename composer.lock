@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c36ebdb1d1ff854ab3118d115d07039d",
+    "hash": "081d445e5ec2d5d77d1d7cf6496ea40a",
     "packages": [
         {
             "name": "doctrine/instantiator",
@@ -567,6 +567,53 @@
                 "BSD License"
             ],
             "description": "Selection of methods that are often needed when working with XML documents.  Functionality includes creating of attribute lists from arrays, creation of tags, validation of XML names and more."
+        },
+        {
+            "name": "phansys/getid3",
+            "version": "2.1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phansys/GetId3.git",
+                "reference": "6d3f04b2781bb3d545fabfc4d1636c9bf5ac03f9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phansys/GetId3/zipball/6d3f04b2781bb3d545fabfc4d1636c9bf5ac03f9",
+                "reference": "6d3f04b2781bb3d545fabfc4d1636c9bf5ac03f9",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~5.3"
+            },
+            "suggest": {
+                "ext-exif": "EXIF extension is required for graphic modules.",
+                "ext-rar": "RAR extension is required for RAR archive module."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GetId3\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL"
+            ],
+            "authors": [
+                {
+                    "name": "James Heinrich",
+                    "email": "info@getid3.org",
+                    "homepage": "http://www.getid3.org"
+                }
+            ],
+            "description": "This fork of GetId3 library updates to PSR-2 / PSR-4 CS, adds namespaces and makes it installable by composer.",
+            "homepage": "http://www.getid3.org",
+            "keywords": [
+                "getid3",
+                "metadata",
+                "tags"
+            ],
+            "time": "2015-06-28 12:06:17"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
@@ -1891,7 +1938,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "unl/rev-api": 10
+        "unl/rev-api": 10,
+        "phansys/getid3": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
