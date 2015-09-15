@@ -8,9 +8,10 @@
                 <form method="post">
                     <div class="important-notice">
                         <strong>Important</strong>: captions cost $1 per video minute.  Example: A 3:15 minute video would cost $4.
-                        
+
+                        <h3>Estimated cost:</h3>
                         <?php if ($duration = $context->media->findDuration()): ?>
-                            Estimated cost:
+                            
                             <table>
                                 <thead>
                                     <tr>
@@ -25,6 +26,10 @@
                                     </tr>
                                 </tbody>
                             </table>
+                        <?php else: ?>
+                            <p>
+                                We were unable to find the duration of the video, and can not estimate the cost.
+                            </p>
                         <?php endif; ?>
                     </div>
                     <ul>
