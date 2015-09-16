@@ -13,7 +13,7 @@ if (isset($context->media)) {
     $formView .= 'edit';
 }
 
-$edit_caption_url = $context->getEditCaptionsURL();
+$edit_caption_url = UNL_MediaHub_Manager::getURL() . '?view=editcaptions&id=' . $context->media->id;
 
 $js = '<script type="text/javascript">
 var formView = "'.$formView.'";
@@ -26,8 +26,7 @@ var mediaType = "'.$mediaType.'";
 $controller->setReplacementData('head', $js);
 ?>
 
-<?php $has_captions = @file_get_contents($context->media->getVideoTextTrackURL()); ?>
-<?php if(!$has_captions && $edit_caption_url): ?>
+<?php if(empty($context->media->media_text_tracks_id)): ?>
 <div class="wdn_notice alert mh-caption-alert">
     <div class="close">
         <a href="#" title="Close this notice">Close this notice</a>
@@ -36,7 +35,7 @@ $controller->setReplacementData('head', $js);
         <h4>This Video is Missing Captions!</h4>
         <div class="mh-caption-band">
             <p>
-                MediaHub uses <a href="http://amara.org/en/">Amara</a> for the captioning of video. For accessibility reasons, captions are required for <strong>ALL</strong> videos.
+                For accessibility reasons, captions are required for <strong>ALL</strong> videos.
             </p>
             <p>
                 <a class="wdn-button" href="<?php echo $edit_caption_url ?>">Caption Your Video</a>
@@ -117,8 +116,8 @@ WDN.initializePlugin('notice');
                             <input id="media_poster" name="poster" type="text" class="validate-url" value="<?php echo htmlentities(@$context->media->poster, ENT_QUOTES); ?>" aria-describedby="poster-details" />
                         </li>
                         <li>
-                            <?php if ($edit_caption_url): ?>
-                                <a class="wdn-button wdn-button-brand" href="<?php echo $edit_caption_url ?>">Edit Captions</a>
+                            <?php if (isset($context->media)): ?>
+                            <a class="wdn-button wdn-button-brand" href="<?php echo $edit_caption_url ?>">Order/Edit Captions</a>
                             <?php endif; ?>
                         </li>
                     </ol>  

@@ -26,4 +26,11 @@ class UNL_MediaHub_Media_EditCaptions
     {
         return new UNL_MediaHub_RevOrderList(array('media_id'=>$this->media->id));
     }
+
+    public function getEditCaptionsURL()
+    {
+        $amara_api = new UNL_MediaHub_AmaraAPI();
+
+        return $amara_api->getCaptionEditURL($this->media->url);
+    }
 }
