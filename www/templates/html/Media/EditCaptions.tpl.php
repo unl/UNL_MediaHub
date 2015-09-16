@@ -136,7 +136,16 @@
                             </ul>
                         </td>
                         <td>
-                            (make active)
+                            <?php if ($context->media->media_text_tracks_id == $track->id): ?>
+                                (active)
+                            <?php else: ?>
+                                <form method="post">
+                                    <input type="hidden" name="__unlmy_posttarget" value="set_active_text_track" />
+                                    <input type="hidden" name="media_id" value="<?php echo $context->media->id ?>" />
+                                    <input type="hidden" name="text_track_id" value="<?php echo $track->id ?>" />
+                                    <input type="submit" value="Set Active">
+                                </form>
+                            <?php endif; ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
