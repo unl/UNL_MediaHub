@@ -4,11 +4,14 @@
         <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=addmedia&id=' . $context->media->id?>" class="wdn-button">Go back to editing the video</a>
         <div class="wdn-grid-set">
             <div class="wdn-col-one-half">
-                <h2>Order captions from rev.com</h2>
+                <h2>Order captions</h2>
                 <form method="post">
                     <div class="important-notice">
                         <strong>Important</strong>: captions cost $1 per video minute.  Example: A 3:15 minute video would cost $4.
 
+                        <p>
+                            We will manually caption this media for you. Orders are usually completed within 24 hours.  Note that orders can not be canceled.
+                        </p>
                         <h3>Estimated cost:</h3>
                         <?php if ($duration = $context->media->findDuration()): ?>
                             <?php $estimate = ceil($duration['seconds']/60); ?>
@@ -51,11 +54,16 @@
                     
                     <input type="hidden" name="__unlmy_posttarget" value="order_rev" />
                     <input type="hidden" name="media_id" value="<?php echo $context->media->id ?>" />
-                    <input type="submit" value="Order captions from rev.com">
+                    <input type="submit" value="Order captions">
                 </form>
             </div>
             <div class="wdn-col-one-half">
-                <h2>Pull cpations from amara</h2>
+                <h2>Pull captions from amara</h2>
+                <p>
+                    <a href="http://amara.org">amara.org</a> is a free service which helps you caption videos. To caption your video, simply click the link below, and follow the steps on amara.org.  Once you are done editig, come back here and click the button to 'pull captions from amara.org'.
+                    <br />
+                    <a class="wdn-button wdn-button-brand" href="<?php echo $context->getEditCaptionsURL(); ?>">Edit Captions on amara</a>
+                </p>
                 <form method="post">
                     <ul>
                         <li>
@@ -68,12 +76,12 @@
                     
                     <input type="hidden" name="__unlmy_posttarget" value="pull_amara" />
                     <input type="hidden" name="media_id" value="<?php echo $context->media->id ?>" />
-                    <input type="submit" value="Pull Captions from amara.com">
+                    <input type="submit" value="Pull Captions from amara.org">
                 </form>
             </div>
         </div>
         
-        <h2>Rev.com order history and status</h2>
+        <h2>Order history and status</h2>
         <p>View the current status of your orders</p>
         <table>
             <thead>
