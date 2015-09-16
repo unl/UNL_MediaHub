@@ -541,6 +541,14 @@ class UNL_MediaHub_Manager_PostHandler
         
         if (empty($tracks)) {
             //No tracks were found, fail early
+            $notice = new UNL_MediaHub_Manager_Notice(
+                'Error',
+                'No amara captions could be found for this media',
+                UNL_MediaHub_Manager_Notice::TYPE_ERROR
+            );
+            UNL_MediaHub_Manager::addNotice($notice);
+            UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL() . '?view=editcaptions&id=' . $media->id);
+            
             return;
         }
         
@@ -563,6 +571,13 @@ class UNL_MediaHub_Manager_PostHandler
         $media->media_text_tracks_id = $text_track->id;
         $media->dateupdated = date('Y-m-d H:i:s');
         $media->save();
+
+        $notice = new UNL_MediaHub_Manager_Notice(
+            'Success',
+            'The latest amara captions have been pulled.',
+            UNL_MediaHub_Manager_Notice::TYPE_SUCCESS
+        );
+        UNL_MediaHub_Manager::addNotice($notice);
 
         UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL() . '?view=editcaptions&id=' . $media->id);
     }
@@ -597,6 +612,13 @@ class UNL_MediaHub_Manager_PostHandler
         }
         
         $order_record->save();
+
+        $notice = new UNL_MediaHub_Manager_Notice(
+            'Success',
+            'A rev.com order has been placed, it should be completed within 24 hours.',
+            UNL_MediaHub_Manager_Notice::TYPE_SUCCESS
+        );
+        UNL_MediaHub_Manager::addNotice($notice);
         
         UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL() . '?view=editcaptions&id=' . $media->id);
     }
@@ -632,6 +654,9 @@ class UNL_MediaHub_Manager_PostHandler
         $media->media_text_tracks_id = $text_track->id;
         $media->dateupdated = date('Y-m-d H:i:s');
         $media->save();
+        
+        $notice = new UNL_MediaHub_Manager_Notice('Success', 'The active caption track has been updated', UNL_MediaHub_Manager_Notice::TYPE_SUCCESS);
+        UNL_MediaHub_Manager::addNotice($notice);
 
         UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL() . '?view=editcaptions&id=' . $media->id);
     }

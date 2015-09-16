@@ -190,4 +190,13 @@ class UNL_MediaHub_Manager extends UNL_MediaHub_BaseController implements UNL_Me
     function editFeedPublishers($feed)
     {
     }
+    
+    public static function addNotice(UNL_MediaHub_Manager_Notice $notice)
+    {
+        if (!isset($_SESSION['notices'])) {
+            $_SESSION['notices'] = array();
+        }
+        
+        $_SESSION['notices'][] = $notice;
+    }
 }
