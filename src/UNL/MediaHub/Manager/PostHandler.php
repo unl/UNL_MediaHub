@@ -117,6 +117,9 @@ class UNL_MediaHub_Manager_PostHandler
         case 'order_rev':
             $this->handleRev();
             break;
+        case 'set_active_text_track':
+            $this->setActiveTextTrack();
+            break;
         }
     }
 
@@ -558,6 +561,7 @@ class UNL_MediaHub_Manager_PostHandler
         
         //update the media to point to the new text track
         $media->media_text_tracks_id = $text_track->id;
+        $media->dateupdated = date('Y-m-d H:i:s');
         $media->save();
 
         UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL() . '?view=editcaptions&id=' . $media->id);
@@ -594,6 +598,41 @@ class UNL_MediaHub_Manager_PostHandler
         
         $order_record->save();
         
+        UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL() . '?view=editcaptions&id=' . $media->id);
+    }
+    
+    function setActiveTextTrack()
+    {
+        $media = UNL_MediaHub_Media::getById($this->post['media_id']);
+
+        if (!$media) {
+            throw new Exception('Unable to find media', 404);
+        }
+
+        $user = UNL_MediaHub_AuthService::getInstance()->getUser();
+
+        if (!$media->userHasPermission($user, UNL_MediaHub_Permission::USER_CAN_UPDATE)) {
+            throw new Exception('You do not have permission to edit this media.', 403);
+        }
+        
+        if (!isset($this->post['text_track_id'])) {
+            throw new Exception('Post data must include text_track_id.', 400);
+        }
+        
+        $text_track = UNL_MediaHub_MediaTextTrack::getById($this->post['text_track_id']);
+        
+        if (!$text_track) {
+            throw new Exception('Unable to find text track.', 400);
+        }
+        
+        if ($text_track->media_id != $media->id) {
+            throw new Exception('That text track does not belong to the this media', 400);
+        }
+        
+        $media->media_text_tracks_id = $text_track->id;
+        $media->dateupdated = date('Y-m-d H:i:s');
+        $media->save();
+
         UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL() . '?view=editcaptions&id=' . $media->id);
     }
 
