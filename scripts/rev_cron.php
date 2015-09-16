@@ -93,6 +93,7 @@ foreach ($orders->items as $order) {
 
                 //update the media to point to the new text track
                 $media->media_text_tracks_id = $media_text_track->id;
+                $media->dateupdated = date('Y-m-d H:i:s');
                 $media->save();
                 
                 foreach ($attachments as $attachment) {
