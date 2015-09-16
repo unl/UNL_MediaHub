@@ -29,6 +29,15 @@ class UNL_MediaHub_RevOrderList extends UNL_MediaHub_List
         if (isset($this->options['all_not_complete'])) {
             $this->options['filter'] = new UNL_MediaHub_RevOrderList_Filter_NotComplete();
         }
+
+        if (isset($this->options['for_billing'])) {
+            $after_date = null;
+            if (isset($this->options['after_date'])) {
+                $after_date = $this->options['after_date'];
+            }
+            
+            $this->options['filter'] = new UNL_MediaHub_RevOrderList_Filter_ReadyForBilling($after_date);
+        }
     }
 
     function setOrderBy(Doctrine_Query &$query)
