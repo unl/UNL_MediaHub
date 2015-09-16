@@ -50,7 +50,10 @@ foreach ($orders->items as $order) {
             $caption_order = new \RevAPI\CaptionOrderSubmission($rev);
             $caption_order->addInput($rev_input);
             $caption_order->setOutputFormats(array('WebVtt'));
-            $caption_order->setClientRef($order->id);
+            
+            //Generate a client ref
+            $client_ref = 'id:'.$order->id.', co:'.$order->costobjectnumber.', uid:'.$order->uid;
+            $caption_order->setClientRef($client_ref);
 
             //send the order
             $order_number = $caption_order->send();
