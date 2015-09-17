@@ -8,7 +8,7 @@ class UNL_MediaHub_RevOrderList_Filter_NotComplete implements UNL_MediaHub_Filte
 
     function apply(Doctrine_Query &$query)
     {
-        $query->where('(ro.status NOT IN ("' . UNL_MediaHub_RevOrder::STATUS_MEDIAHUB_COMPLETE . '"))');
+        $query->where('(ro.status NOT IN ("' . UNL_MediaHub_RevOrder::STATUS_MEDIAHUB_COMPLETE . '", "' . UNL_MediaHub_RevOrder::STATUS_ERROR . '"))');
     }
 
     function getLabel()
