@@ -123,6 +123,9 @@
                         <?php if (!empty($order->dateupdated)): ?>
                             (<?php echo $order->dateupdated ?>)
                         <?php endif; ?>
+                        <?php if (UNL_MediaHub_RevOrder::STATUS_ERROR == $order->status): ?>
+                            -- <?php echo $order->error_text ?>
+                        <?php endif; ?>
                     </td>
                     <td>
                         $<?php echo $order->estimate ?>
