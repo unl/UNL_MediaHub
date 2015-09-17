@@ -13,8 +13,9 @@ abstract class UNL_MediaHub_Models_BaseRevOrder extends Doctrine_Record
         $this->hasColumn('uid',              'string',    null, array('primary' => false,  'notnull' => true, 'autoincrement' => false));
         $this->hasColumn('rev_order_number', 'string',    null, array('primary' => false,  'notnull' => false,'autoincrement' => false));
         $this->hasColumn('status',           'string',    null, array('primary' => false,  'notnull' => true, 'autoincrement' => false));
-        $this->hasColumn('media_duration',   'string',    null, array('primary' => false,  'notnull' => true, 'autoincrement' => false));
-        $this->hasColumn('estimate',         'string',    null, array('primary' => false,  'notnull' => true, 'autoincrement' => false));
+        $this->hasColumn('media_duration',   'string',    null, array('primary' => false,  'notnull' => false, 'autoincrement' => false));
+        $this->hasColumn('estimate',         'string',    null, array('primary' => false,  'notnull' => false, 'autoincrement' => false));
+        $this->hasColumn('error_text',       'string',    null, array('primary' => false,  'notnull' => false, 'autoincrement' => false));
     }
 
     public function setUp()

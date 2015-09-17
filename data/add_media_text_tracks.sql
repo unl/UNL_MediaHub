@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS `rev_orders` (
   `media_duration` varchar(256) null,
   `estimate` varchar(256) null,
   `status` VARCHAR(128) NOT NULL,
+  `error_text` TEXT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`media_text_tracks_id`) REFERENCES media_text_tracks(id),
   FOREIGN KEY (`uid`) REFERENCES users(uid),
