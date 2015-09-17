@@ -12,13 +12,13 @@
                         </p>
                         <ul class="wdn-std">
                             <li>
-                                <strong>Important</strong>: captions cost $1 per video minute.  Example: A 3:15 minute video would cost $4.
+                                <strong>Important</strong>: captions cost $1 per video minute, rounded up.  Example: A 3:15 minute video would cost $4.
                             </li>
                             <li>
                                 Orders are usually completed within 24 hours.
                             </li>
                             <li>
-                                Note that orders can not be canceled.
+                                Orders can not be canceled.
                             </li>
                             <li>
                                 If you need to edit captions that you ordered, please upload them to amara and customize them there. Once the customized captions are published on amara.org, use this page to pull them down to mediahub.
@@ -57,12 +57,6 @@
                                 <input type="text" name="cost_object" required />
                             </label>
                         </li>
-                        <li>
-                            <label>
-                                Comments
-                                <textarea name="comments" cols="12"></textarea>
-                            </label>
-                        </li>
                     </ul>
                     
                     <input type="hidden" name="__unlmy_posttarget" value="order_rev" />
@@ -84,7 +78,7 @@
                     <ul>
                         <li>
                             <label>
-                                Comments
+                                Revision Notes
                                 <textarea name="comments" cols="12"></textarea>
                             </label>
                         </li>
