@@ -105,6 +105,7 @@
                     <th>Date of order</th>
                     <th>Requester</th>
                     <th>Status of order</th>
+                    <th>Estimate</th>
                 </tr>
             </thead>
             <tbody>
@@ -119,6 +120,12 @@
                     </td>
                     <td>
                         <?php echo $order->status ?>
+                        <?php if (!empty($order->dateupdated)): ?>
+                            (<?php echo $order->dateupdated ?>)
+                        <?php endif; ?>
+                    </td>
+                    <td>
+                        $<?php echo $order->estimate ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
