@@ -8,7 +8,7 @@ class UNL_MediaHub_Media_VideoTextTrack
     
     protected $track = false;
     
-    public function __construct($options, $format = 'srt')
+    public function __construct($options, $format = 'vtt')
     {
         if (!isset($options['id'])) {
             throw new Exception('Unknown media', 404);
@@ -22,6 +22,12 @@ class UNL_MediaHub_Media_VideoTextTrack
         if (!$file) {
             throw new Exception('The text track file was not found', 404);
         }
+        
+        if (isset($options['download'])) {
+            $file_name = $file->id . '-' .$file->language . '.'. $file->format;
+            header("Content-disposition: attachment; filename=\"$file_name\"");
+        }
+        
         $this->track = $file->file_contents;
     }
     

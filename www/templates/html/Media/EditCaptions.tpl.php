@@ -138,7 +138,7 @@
                             <ul>
                                 <?php foreach ($track->getFiles()->items as $file): ?>
                                     <li>
-                                        <a href="<?php echo $file->getURL() ?>" target="_blank"><?php echo $file->language ?>.<?php echo $file->format ?></a>
+                                        <a href="<?php echo $file->getURL() ?>&amp;download=1" target="_blank"><?php echo $file->language ?>.<?php echo $file->format ?></a>
                                     </li>
                                 <?php endforeach; ?>
                             </ul>
