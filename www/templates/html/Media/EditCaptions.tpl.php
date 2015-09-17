@@ -53,7 +53,7 @@
                     <ul>
                         <li>
                             <label>
-                                Cost Object Jumber
+                                Cost Object Number
                                 <input type="text" name="cost_object" required />
                             </label>
                         </li>
