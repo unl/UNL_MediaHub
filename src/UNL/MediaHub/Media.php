@@ -488,5 +488,42 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
             'seconds' => strtotime($playtime_string) - strtotime('TODAY')
         );
     }
+
+    /**
+     * Pull amara captions for all videos
+     * 
+     * @return bool
+     */
+    public function updateAmaraCaptions()
+    {
+        $tracks = $this->getAmaraTextTracks();
+
+        if (empty($tracks)) {
+            //No tracks were found, fail early
+            return false;
+        }
+
+        $text_track = new UNL_MediaHub_MediaTextTrack();
+        $text_track->media_id = $this->id;
+        $text_track->source = UNL_MediaHub_MediaTextTrack::SOURCE_AMARA;
+        $text_track->save();
+
+        foreach ($tracks as $lang=>$track) {
+            $text_track_file = new UNL_MediaHub_MediaTextTrackFile();
+            $text_track_file->media_text_tracks_id = $text_track->id;
+            $text_track_file->kind = UNL_MediaHub_MediaTextTrackFile::KIND_CAPTION;
+            $text_track_file->format = UNL_MediaHub_MediaTextTrackFile::FORMAT_VTT;
+            $text_track_file->language = $lang;
+            $text_track_file->file_contents = $track;
+            $text_track_file->save();
+        }
+
+        //update the media to point to the new text track
+        $this->media_text_tracks_id = $text_track->id;
+        $this->dateupdated = date('Y-m-d H:i:s');
+        $this->save();
+        
+        return true;
+    }
 }
 
