@@ -7,11 +7,24 @@
                 <h2>Order captions</h2>
                 <form method="post">
                     <div class="important-notice">
-                        <strong>Important</strong>: captions cost $1 per video minute.  Example: A 3:15 minute video would cost $4.
-
                         <p>
-                            We will manually caption this media for you. Orders are usually completed within 24 hours.  Note that orders can not be canceled.
+                            We will manually caption this media for you. Some things to keep in mind when ordering captions:
                         </p>
+                        <ul class="wdn-std">
+                            <li>
+                                <strong>Important</strong>: captions cost $1 per video minute.  Example: A 3:15 minute video would cost $4.
+                            </li>
+                            <li>
+                                Orders are usually completed within 24 hours.
+                            </li>
+                            <li>
+                                Note that orders can not be canceled.
+                            </li>
+                            <li>
+                                If you need to edit captions that you ordered, please upload them to amara and customize them there. Once the customized captions are published on amara.org, use this page to pull them down to mediahub.
+                            </li>
+                        </ul>
+                        
                         <h3>Estimated cost:</h3>
                         <?php if ($duration = $context->media->findDuration()): ?>
                             <?php $estimate = ceil($duration['seconds']/60); ?>
@@ -60,10 +73,13 @@
             <div class="wdn-col-one-half">
                 <h2>Pull captions from amara</h2>
                 <p>
-                    <a href="http://amara.org">amara.org</a> is a free service which helps you caption videos. To caption your video, simply click the link below, and follow the steps on amara.org.  Once you are done editig, come back here and click the button to 'pull captions from amara.org'.
-                    <br />
-                    <a class="wdn-button wdn-button-brand" href="<?php echo $context->getEditCaptionsURL(); ?>">Edit Captions on amara</a>
+                    <a href="http://amara.org">amara.org</a> is a free service which helps you caption videos. To caption your video you will need to do the following.
                 </p>
+                <ol>
+                    <li>Go to amara.org and create/edit captions for the video: <a class="wdn-button wdn-button-brand" href="<?php echo $context->getEditCaptionsURL(); ?>">Edit Captions on amara</a></li>
+                    <li>Follow the instructions on amara.org to publish the new captions</li>
+                    <li>Come back here, and click the button to 'pull captions from amara.org'</li>
+                </ol>
                 <form method="post">
                     <ul>
                         <li>
