@@ -595,7 +595,7 @@ class UNL_MediaHub_Manager_PostHandler
 
         $notice = new UNL_MediaHub_Manager_Notice(
             'Success',
-            'A rev.com order has been placed, it should be completed within 24 hours.',
+            'A caption order has been placed, it should be completed within 24 hours.',
             UNL_MediaHub_Manager_Notice::TYPE_SUCCESS
         );
         UNL_MediaHub_Manager::addNotice($notice);
