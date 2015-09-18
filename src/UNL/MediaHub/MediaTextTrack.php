@@ -3,7 +3,7 @@
 class UNL_MediaHub_MediaTextTrack extends UNL_MediaHub_Models_BaseMediaTextTrack
 {
     const SOURCE_AMARA = 'amara';
-    const SOURCE_REV = 'rev';
+    const SOURCE_REV = 'order';
 
     /**
      * Get a piece of media by PK.
