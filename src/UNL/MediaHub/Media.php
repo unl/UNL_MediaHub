@@ -255,8 +255,8 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
      */
     public function getLocalFileName()
     {
-        $agnostic_file_url = preg_replace('/https?:\/\//', '//', $this->url, 1);
-        $agnostic_uploads_url = preg_replace('/https?:\/\//', '//', UNL_MediaHub_Controller::getURL() . 'uploads/', 1);
+        $agnostic_file_url = preg_replace('/^https?:\/\//', '//', $this->url, 1);
+        $agnostic_uploads_url = preg_replace('/^https?:\/\//', '//', UNL_MediaHub_Controller::getURL() . 'uploads/', 1);
 
         if (strpos($agnostic_file_url, $agnostic_uploads_url) !== 0) {
             return false;
