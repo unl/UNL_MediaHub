@@ -272,6 +272,23 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     }
 
     /**
+     * Get the media
+     * 
+     * This will also correct broken URLs for local media (such as http -> https)
+     * 
+     * @return bool|string
+     */
+    public function getMediaURL()
+    {
+        if (!$local_file = $this->getLocalFileName()) {
+            return false;
+        }
+
+        return
+            UNL_MediaHub_Controller::getURL() . 'uploads/' . str_replace(UNL_MediaHub_Manager::getUploadDirectory().'/', '', $local_file);
+    }
+
+    /**
      * Get the tags associated with this media file
      * 
      * @return array()

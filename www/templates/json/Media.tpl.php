@@ -1,6 +1,6 @@
 <?php
 $details = array('id'          => $context->id,
-                 'url'         => $context->url,
+                 'url'         => $context->getMediaURL(),
                  'title'       => $context->title,
                  'description' => $context->description,
                  'length'      => $context->length,
