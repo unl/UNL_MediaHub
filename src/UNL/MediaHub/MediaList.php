@@ -46,7 +46,6 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
         }
 
         $this->options['additional_filters'][] = new UNL_MediaHub_MediaList_Filter_Privacy(UNL_MediaHub_AuthService::getInstance()->getUser());
-        $this->options['additional_filters'][] = new UNL_MediaHub_MediaList_Filter_TextTrackRequirement();
 
         if (isset($this->options['f'])) {
             switch ($this->options['f']) {
