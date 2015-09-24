@@ -13,14 +13,14 @@ class UNL_MediaHub_MediaList_Filter_Privacy implements UNL_MediaHub_Filter
     
     function apply(Doctrine_Query &$query)
     {
-        $where = 'm.privacy = "PUBLIC"';
+        $where = '(m.privacy = "PUBLIC" AND (m.media_text_tracks_id IS NOT NULL OR m.datecreated < "' . UNL_MediaHub_Controller::$caption_requirement_date . '"))';
         
         if ($this->user) {
             $feeds = $this->user->getFeedIDs();
             
             if (!empty($feeds)) {
                 //There is a chance that a user will not have any feeds, so account for that.
-                $where = 'm.privacy = "PUBLIC" OR m.UNL_MediaHub_Feed_Media.feed_id IN (' . implode(',', $feeds) .')';
+                $where .= ' OR m.UNL_MediaHub_Feed_Media.feed_id IN (' . implode(',', $feeds) .')';
             }
         }
         

@@ -3,7 +3,7 @@ vagrantfile-local:
     vm:
         box: puphpet/centos65-x64
         box_url: puphpet/centos65-x64
-        hostname: ''
+        hostname: 'dev-mediahub'
         memory: '512'
         cpus: '1'
         chosen_provider: virtualbox
@@ -114,7 +114,7 @@ nginx:
             ssl_key: ''
 php:
     install: '1'
-    version: '54'
+    version: '56'
     composer: '1'
     composer_home: ''
     modules:
