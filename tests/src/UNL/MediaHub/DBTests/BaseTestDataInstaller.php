@@ -49,7 +49,6 @@ class UNL_MediaHub_DBTests_BaseTestDataInstaller implements UNL_MediaHub_DBTests
         $media_a->type        = 'video/mp4';
         $media_a->title       = 'Test Media A';
         $media_a->description = 'Test Media A Description';
-        $media_a->datecreated = '2015-09-01 00:00:00';
         $media_a->save();
 
         $media_b = new UNL_MediaHub_Media();
@@ -59,9 +58,19 @@ class UNL_MediaHub_DBTests_BaseTestDataInstaller implements UNL_MediaHub_DBTests
         $media_b->type        = 'audio/mp3';
         $media_b->title       = 'Test Media B';
         $media_b->description = 'Test Media B Description';
-        $media_b->datecreated = '2015-09-01 00:00:00';
+        $media_b->save();
+        
+        //Add a caption file to media_b
+        $text_track = new UNL_MediaHub_MediaTextTrack();
+        $text_track->media_id = $media_b->id;
+        $text_track->source = UNL_MediaHub_MediaTextTrack::SOURCE_AMARA;
+        $text_track->save();
+        
+        //For brevity, we won't actually create a file for the text track.
+        $media_b->media_text_tracks_id = $text_track->id;
         $media_b->save();
 
+        //Continue editing other media
         $media_c = new UNL_MediaHub_Media();
         $media_c->url         = 'http://example.org/C.mov';
         $media_c->uidcreated  = $user_a->uid;
