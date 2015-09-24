@@ -5,6 +5,7 @@ WDN.jQuery(document).ready(function(){
 console.log(baseurl);
 
 var max_file_count = 1;
+var submit_text = 'Save';
 var uploader = new plupload.Uploader({
     runtimes : 'html5,flash,silverlight,html4',
     browse_button : 'mh_upload_media', // you can pass in id...
@@ -50,6 +51,7 @@ var uploader = new plupload.Uploader({
             });
             uploader.disableBrowse();
             WDN.jQuery('input[type=submit]').attr("disabled", true);
+            submit_text = WDN.jQuery('input[type=submit]').attr("value");
             WDN.jQuery('input[type=submit]').attr("value", "Upload in Progress...");
             WDN.jQuery('#mh_upload_media').hide();
             WDN.jQuery('#filelist').show();
@@ -77,7 +79,7 @@ var uploader = new plupload.Uploader({
             WDN.jQuery('#media_url').attr('value', response.url);
             WDN.jQuery('#publish').removeAttr('disabled');
             WDN.jQuery('input[type=submit]').removeAttr("disabled");
-            WDN.jQuery('input[type=submit]').attr("value", "Save");
+            WDN.jQuery('input[type=submit]').attr("value", submit_text);
             
         },
 

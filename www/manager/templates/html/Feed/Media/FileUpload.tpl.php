@@ -68,9 +68,12 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                                     <?php echo $savvy->render($context->feed_selection); ?>
                                 </li>
                             </ol>
-                        </div>                                                     
+                        </div>
                     </div>
-                    <input type="submit" id="publish" name="publish" value="Publish" class="wdn-button-brand" disabled="disabled"> 
+                    <p>
+                        Note: media will not be published until it is captioned. The next step will help you caption the media.
+                    </p>
+                    <input type="submit" id="publish" name="publish" value="Continue &amp; add captions" class="wdn-button-brand" disabled="disabled"> 
                 </div>
             </div>
         </form>

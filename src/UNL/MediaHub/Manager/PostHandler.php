@@ -354,6 +354,8 @@ class UNL_MediaHub_Manager_PostHandler
         if (!isset($this->post['feed_id']) && empty($this->post['new_feed'])) {
             throw new Exception('You must select a feed for the media', 400);
         }
+        
+        $success_url = false;
 
         // Add media to a feed/channel
         if (isset($this->post['id'])) {
@@ -371,6 +373,7 @@ class UNL_MediaHub_Manager_PostHandler
 
             };
 
+            $success_url = UNL_MediaHub_Controller::getURL($media);
         } else {
             // Insert a new piece of media
             $details = array(
@@ -381,6 +384,9 @@ class UNL_MediaHub_Manager_PostHandler
             );
                              
             $media = $this->mediahub->addMedia($details);
+            
+            //After upload, add captions
+            $success_url = UNL_MediaHub_Manager::getURL() . '?view=editcaptions&id=' . $media->id;
         }
         
         //Update the dateupdated date for cache busting
@@ -452,7 +458,7 @@ class UNL_MediaHub_Manager_PostHandler
         }
 
         // @todo clean cache for this feed!
-        UNL_MediaHub::redirect(UNL_MediaHub_Controller::getURL($media));
+        UNL_MediaHub::redirect($success_url);
     }
 
     /**
