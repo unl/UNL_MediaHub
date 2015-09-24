@@ -22,7 +22,18 @@ $page->breadcrumbs = '
 
 $page->navlinks = $savvy->render(null, 'Navigation.tpl.php');
 $savvy->addGlobal('page', $page);
-$page->maincontentarea =  $savvy->render($context->output);
+
+
+$page->maincontentarea = '';
+if (isset($_SESSION['notices'])) {
+    foreach ($_SESSION['notices'] as $key=>$notice) {
+        $page->maincontentarea .= $savvy->render($notice);
+        unset($_SESSION['notices'][$key]);
+    }
+    $page->maincontentarea .= '<script>WDN.initializePlugin("notice");</script>';
+}
+
+$page->maincontentarea .= $savvy->render($context->output);
 
 $page->contactinfo = '
 <p>University of Nebraska&ndash;Lincoln<br />

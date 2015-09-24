@@ -36,11 +36,4 @@ class UNL_MediaHub_Feed_Media_Form
         
         $this->feed_selection = new UNL_MediaHub_Feed_Media_FeedSelection(UNL_MediaHub_AuthService::getInstance()->getUser(), $this->media);
     }
-    
-    public function getEditCaptionsURL()
-    {
-        $amara_api = new UNL_MediaHub_AmaraAPI();
-        
-        return $amara_api->getCaptionEditURL($this->media->url);
-    }
 }

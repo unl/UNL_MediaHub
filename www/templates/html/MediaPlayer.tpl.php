@@ -5,7 +5,7 @@ if ($context->media->isVideo()) {
     echo $savvy->render($context->media, 'MediaPlayer/Audio.tpl.php');
 }
 
-$getTracks = $context->media->getTextTracks();
+$getTracks = $context->media->getTextTrackURLs();
 
 ?>
 
@@ -68,7 +68,7 @@ $getTracks = $context->media->getTextTracks();
                                 "aria-controls": t.id,
                                 "title": "Toggle Searchable Transcript",
                                 "aria-label": "Toggle Searchable Transcript"
-                            }));                       
+                            }));
 
                         t.captionsButton.before($myButton)
 
