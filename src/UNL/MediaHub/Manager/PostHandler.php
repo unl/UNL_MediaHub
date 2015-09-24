@@ -386,7 +386,7 @@ class UNL_MediaHub_Manager_PostHandler
             $media = $this->mediahub->addMedia($details);
             
             //After upload, add captions
-            $success_url = UNL_MediaHub_Manager::getURL() . '?view=editcaptions&id=' . $media->id;
+            $success_url = $media->getEditCaptionsURL();
         }
         
         //Update the dateupdated date for cache busting
@@ -547,25 +547,25 @@ class UNL_MediaHub_Manager_PostHandler
         
         if (!$result) {
             //No tracks were found, fail early
-            $notice = new UNL_MediaHub_Manager_Notice(
+            $notice = new UNL_MediaHub_Notice(
                 'Error',
                 'No amara captions could be found for this media',
-                UNL_MediaHub_Manager_Notice::TYPE_ERROR
+                UNL_MediaHub_Notice::TYPE_ERROR
             );
             UNL_MediaHub_Manager::addNotice($notice);
-            UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL() . '?view=editcaptions&id=' . $media->id);
+            UNL_MediaHub::redirect($media->getEditCaptionsURL());
 
             return;
         }
 
-        $notice = new UNL_MediaHub_Manager_Notice(
+        $notice = new UNL_MediaHub_Notice(
             'Success',
             'The latest amara captions have been pulled.',
-            UNL_MediaHub_Manager_Notice::TYPE_SUCCESS
+            UNL_MediaHub_Notice::TYPE_SUCCESS
         );
         UNL_MediaHub_Manager::addNotice($notice);
 
-        UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL() . '?view=editcaptions&id=' . $media->id);
+        UNL_MediaHub::redirect($media->getEditCaptionsURL());
     }
     
     function handleRev()
@@ -599,14 +599,14 @@ class UNL_MediaHub_Manager_PostHandler
         
         $order_record->save();
 
-        $notice = new UNL_MediaHub_Manager_Notice(
+        $notice = new UNL_MediaHub_Notice(
             'Success',
             'A caption order has been placed, it should be completed within 24 hours.',
-            UNL_MediaHub_Manager_Notice::TYPE_SUCCESS
+            UNL_MediaHub_Notice::TYPE_SUCCESS
         );
         UNL_MediaHub_Manager::addNotice($notice);
         
-        UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL() . '?view=editcaptions&id=' . $media->id);
+        UNL_MediaHub::redirect($media->getEditCaptionsURL());
     }
     
     function setActiveTextTrack()
@@ -641,10 +641,10 @@ class UNL_MediaHub_Manager_PostHandler
         $media->dateupdated = date('Y-m-d H:i:s');
         $media->save();
         
-        $notice = new UNL_MediaHub_Manager_Notice('Success', 'The active caption track has been updated', UNL_MediaHub_Manager_Notice::TYPE_SUCCESS);
+        $notice = new UNL_MediaHub_Notice('Success', 'The active caption track has been updated', UNL_MediaHub_Notice::TYPE_SUCCESS);
         UNL_MediaHub_Manager::addNotice($notice);
 
-        UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL() . '?view=editcaptions&id=' . $media->id);
+        UNL_MediaHub::redirect($media->getEditCaptionsURL());
     }
 
     /**

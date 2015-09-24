@@ -342,17 +342,29 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     }
 
     /**
+     * Determine if this meets the caption requirement
+     * 
+     * @return bool
+     */
+    public function meetsCaptionRequirement()
+    {
+        if (empty($this->text_tracks_id) 
+            && strtotime($this->datecreated) > strtotime(UNL_MediaHub_Controller::$caption_requirement_date)) {
+            return false;
+        }
+        
+        return true;
+    }
+
+    /**
      * @return bool
      */
     public function canView()
     {
         $requires_membership = false;
         
-        if (strtotime($this->datecreated) > strtotime(UNL_MediaHub_Controller::$caption_requirement_date)) {
-            //Check for the caption requirement
-            if (empty($this->text_tracks_id)) {
-                $requires_membership = true;
-            }
+        if (!$this->meetsCaptionRequirement()) {
+            $requires_membership = true;
         }
         
         //If its not private, anyone can view it.
@@ -539,6 +551,11 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         $this->save();
         
         return true;
+    }
+    
+    public function getEditCaptionsURL()
+    {
+        return UNL_MediaHub_Manager::getURL() . '?view=editcaptions&id=' . $this->id;
     }
 }
 

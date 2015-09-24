@@ -207,6 +207,16 @@ class UNL_MediaHub_Controller
                     throw new Exception('You do not have permission to view this.', 403);
                 }
                 
+                if (!$media->meetsCaptionRequirement()) {
+                    $notice = new UNL_MediaHub_Notice(
+                        'Notice',
+                        'This media will not be published until captions are provided.',
+                        UNL_MediaHub_Notice::TYPE_NOTICE
+                    );
+                    $notice->addLink($media->getEditCaptionsURL(), 'Add Captions Now');
+                    UNL_MediaHub_Manager::addNotice($notice);
+                }
+                
                 $this->output[] = $media;
                 break;
             case 'feed_image':
