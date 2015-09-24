@@ -346,10 +346,25 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
      */
     public function canView()
     {
+        $requires_membership = false;
+        
+        if (strtotime($this->datecreated) > strtotime(UNL_MediaHub_Controller::$caption_requirement_date)) {
+            //Check for the caption requirement
+            if (empty($this->text_tracks_id)) {
+                $requires_membership = true;
+            }
+        }
+        
         //If its not private, anyone can view it.
-        if ($this->privacy != 'PRIVATE') {
+        if ($this->privacy == 'PRIVATE') {
+            $requires_membership = true;
+        }
+        
+        //If it doesn't require membership, anyone can view it.
+        if (!$requires_membership) {
             return true;
         }
+        
 
         $user = UNL_MediaHub_AuthService::getInstance()->getUser();
         //At this point a user needs to be logged in.

@@ -48,7 +48,7 @@ class UNL_MediaHub_Controller
     /**
      * Version used for cache busting
      */
-    const VERSION = '1.1';
+    const VERSION = '1.2';
 
     static protected $replacements;
 
@@ -58,6 +58,8 @@ class UNL_MediaHub_Controller
      * @var int
      */
     public static $current_embed_version = 2;
+    
+    public static $caption_requirement_date = '2015-09-24';
 
     protected $view_map = array(
         'search'  => 'UNL_MediaHub_MediaList',
