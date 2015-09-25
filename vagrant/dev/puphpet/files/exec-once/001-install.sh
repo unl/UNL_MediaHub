@@ -8,6 +8,8 @@ cd $BASEDIR
 git submodule init
 git submodule update
 
+/usr/local/bin/composer install
+
 #copy .htaccess
 if [ ! -f ${BASEDIR}/www/.htaccess ]; then
     echo "Creating .htaccess"
