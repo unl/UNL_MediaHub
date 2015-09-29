@@ -57,6 +57,7 @@
         "ezyang/htmlpurifier": "~4.6",
         "guzzlehttp/guzzle": "^6.0",
         "unl/rev-api": "0.1.2-beta",
-        "phansys/getid3": " ~2.1@dev"
+        "phansys/getid3": " ~2.1@dev",
+        "swiftmailer/swiftmailer": "@stable"
     }
 }

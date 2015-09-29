@@ -117,11 +117,6 @@ foreach ($orders->items as $order) {
 
                 //Mark the order as complete
                 $order->status = UNL_MediaHub_RevOrder::STATUS_MEDIAHUB_COMPLETE;
-
-                //update the media to point to the new text track
-                $media->media_text_tracks_id = $media_text_track->id;
-                $media->dateupdated = date('Y-m-d H:i:s');
-                $media->save();
                 
                 foreach ($attachments as $attachment) {
                     if (!$attachment->isMedia()) {
@@ -140,6 +135,36 @@ foreach ($orders->items as $order) {
                     
                     sleep(1); //be nice
                 }
+
+                //update the media to point to the new text track
+                $media->media_text_tracks_id = $media_text_track->id;
+                $media->dateupdated = date('Y-m-d H:i:s');
+                $media->save();
+                
+                $message = Swift_Message::newInstance();
+
+                // Give the message a subject
+                $message->setSubject('MediaHub: Your caption order is complete for: ' . $media->title);
+
+                // Set the From address with an associative array
+                $message->setFrom(array('wdn@unl.edu' => 'UNL WDN'));
+
+                // Set the To addresses with an associative array
+                $message->setTo(array('receiver@domain.org', 'other@domain.org' => 'A name'));
+
+                // Give it a body
+                $message->setBody('Your caption order is complete for '.$media->title.'. View your video here: ' . $media->getURL());
+
+                // And optionally an alternative body
+                $message->addPart('<p>Your caption order is complete for <a href="'.$media->getURL().'">'.$media->title.'</a></p>', 'text/html');
+
+                // Create the Transport
+                $transport = Swift_MailTransport::newInstance();
+
+                // Create the Mailer using your created Transport
+                $mailer = Swift_Mailer::newInstance($transport);
+                
+                $mailer->send($message);
             }
             
             //Save the order status;
