@@ -557,5 +557,15 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     {
         return UNL_MediaHub_Manager::getURL() . '?view=editcaptions&id=' . $this->id;
     }
+
+    /**
+     * Get the public URL for this media
+     * 
+     * @return string
+     */
+    public function getURL()
+    {
+        return UNL_MediaHub_Controller::getURL($this);
+    }
 }
 
