@@ -32,7 +32,6 @@ if ($context->privacy !== 'PUBLIC') {
 
 if ($type == 'video') {
     $meta .= '
-    <meta property="og:video" content="'.htmlentities($context->url, ENT_QUOTES).'" />
     <meta property="og:video:height" content="'.$height.'" />
     <meta property="og:video:width" content="'.$width.'" />
     <meta property="og:video" content="'.UNL_MediaHub_Controller::getURL($context).'" />
@@ -207,7 +206,7 @@ $mediaplayer = $savvy->render($controller->getMediaPlayer($context));
 
                     <a class="wdn-button embed mh-hide-bp2"><span class="wdn-icon-plus wdn-icon"></span>Embed</a>
                     <br>
-                    <a href="<?php echo htmlentities($context->url, ENT_QUOTES); ?>" target="_blank" class="wdn-button mh-hide-bp2"><span class="wdn-icon-up-small mh-flip-180 wdn-icon"></span>Download</a>
+                    <a href="<?php echo htmlentities($context->getMediaURL(), ENT_QUOTES); ?>" target="_blank" class="wdn-button mh-hide-bp2"><span class="wdn-icon-up-small mh-flip-180 wdn-icon"></span>Download</a>
 
                 </div>
 
