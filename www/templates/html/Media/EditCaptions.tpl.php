@@ -179,5 +179,16 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
+        
+        <div>
+            <h2>Get Help</h2>
+            <p>
+                If you have questions or comments, please email one of the following:
+            </p>
+            <ul>
+                <li>Technical question or issues: Please use the 'Email Us' tab on this page</li>
+                <li>Billing: <a href="mailto:btessalee2@unl.edu">Brittany Tessalee</a></li>
+            </ul>
+        </div>
     </div>
 </div>
