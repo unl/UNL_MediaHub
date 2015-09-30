@@ -158,12 +158,13 @@ foreach ($orders->items as $order) {
                     $message->setFrom(array('wdn@unl.edu' => 'UNL WDN'));
 
                     // Give it a body
-                    $message->setBody('Your caption order is complete for '.$media->title.'. View your video here: ' . $media->getURL());
-
-                    $html = '';
+                    $html = '<p>Your caption order is complete for <a href="'.$media->getURL().'">'.$media->title.'</a>.</p>';
+                    $html = '<p>Now that your media is captioned, it is published with your chosen privacy settings.</p>';
+                    $html = '<p>You will receive a bill for the oder before ' . date('F j, Y', strtotime('+1 month 1 week')) . ' .</p>';
+                    $html = '<p>Thank you for using the service, and please let us know if you have any questions.</p>';
                     
                     // And optionally an alternative body
-                    $message->addPart('<p>Your caption order is complete for <a href="'.$media->getURL().'">'.$media->title.'</a></p>', 'text/html');
+                    $message->setBody($html, 'text/html');
 
                     // Create the Transport
                     $transport = Swift_MailTransport::newInstance();
