@@ -141,30 +141,38 @@ foreach ($orders->items as $order) {
                 $media->dateupdated = date('Y-m-d H:i:s');
                 $media->save();
                 
-                $message = Swift_Message::newInstance();
-
-                // Give the message a subject
-                $message->setSubject('MediaHub: Your caption order is complete for: ' . $media->title);
-
-                // Set the From address with an associative array
-                $message->setFrom(array('wdn@unl.edu' => 'UNL WDN'));
-
-                // Set the To addresses with an associative array
-                $message->setTo(array('receiver@domain.org', 'other@domain.org' => 'A name'));
-
-                // Give it a body
-                $message->setBody('Your caption order is complete for '.$media->title.'. View your video here: ' . $media->getURL());
-
-                // And optionally an alternative body
-                $message->addPart('<p>Your caption order is complete for <a href="'.$media->getURL().'">'.$media->title.'</a></p>', 'text/html');
-
-                // Create the Transport
-                $transport = Swift_MailTransport::newInstance();
-
-                // Create the Mailer using your created Transport
-                $mailer = Swift_Mailer::newInstance($transport);
+                //Get the email for the person who requested the order
+                $data = file_get_contents('http://directory.unl.edu/?uid='.$order->uid.'&format=json');
+                $data = json_decode($data, true);
                 
-                $mailer->send($message);
+                //Send them an email if we can...
+                if (is_array($data) && isset($data['mail'][0])) {
+                    $message = Swift_Message::newInstance();
+                    
+                    $message->setTo($data['mail'][0]);
+
+                    // Give the message a subject
+                    $message->setSubject('MediaHub: Your caption order is complete for: ' . $media->title);
+
+                    // Set the From address with an associative array
+                    $message->setFrom(array('wdn@unl.edu' => 'UNL WDN'));
+
+                    // Give it a body
+                    $message->setBody('Your caption order is complete for '.$media->title.'. View your video here: ' . $media->getURL());
+
+                    $html = '';
+                    
+                    // And optionally an alternative body
+                    $message->addPart('<p>Your caption order is complete for <a href="'.$media->getURL().'">'.$media->title.'</a></p>', 'text/html');
+
+                    // Create the Transport
+                    $transport = Swift_MailTransport::newInstance();
+
+                    // Create the Mailer using your created Transport
+                    $mailer = Swift_Mailer::newInstance($transport);
+
+                    $mailer->send($message);
+                }
             }
             
             //Save the order status;
