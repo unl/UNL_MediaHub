@@ -281,7 +281,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     public function getMediaURL()
     {
         if (!$local_file = $this->getLocalFileName()) {
-            return false;
+            return $this->url;
         }
 
         return
