@@ -1,6 +1,6 @@
 <div class="wdn_band">
     <div class="wdn_inner_wrapper">
-        <h1>Edit Captions</h1>
+        <h1>Edit Captions for: <?php echo $context->media->title ?></h1>
         <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=addmedia&id=' . $context->media->id?>" class="wdn-button">Go back to editing the video</a>
         <div class="wdn-grid-set">
             <div class="wdn-col-one-half">
