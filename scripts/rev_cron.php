@@ -160,7 +160,7 @@ foreach ($orders->items as $order) {
                     // Give it a body
                     $html = '<p>Your caption order is complete for <a href="'.$media->getURL().'">'.$media->title.'</a>.</p>';
                     $html .= '<p>Now that your media is captioned, it is published with your chosen privacy settings.</p>';
-                    $html .= '<p>You will receive a bill for the oder before ' . date('F j, Y', strtotime('+1 month 1 week')) . ' .</p>';
+                    $html .= '<p>You will receive a bill for the oder before ' . date('F j, Y', UNL_MediaHub_RevAPI::getEstimatedBillingDate()) . ' .</p>';
                     $html .= '<p>Thank you for using the service, and please let us know if you have any questions.</p>';
                     
                     // And optionally an alternative body
