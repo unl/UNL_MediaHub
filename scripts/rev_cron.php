@@ -28,6 +28,8 @@ if (!$rev) {
     throw new Exception('Unable to get the Rev client', 500);
 }
 
+$has_output = false;
+
 //Loop through them and check with Rev.com to see their status.
 foreach ($orders->items as $order) {
     echo $order->id . ': ' . $order->status . PHP_EOL;
@@ -92,6 +94,9 @@ foreach ($orders->items as $order) {
                 //Retry later.
                 echo "\tERROR: (". $e->getCode() .")" . $message . PHP_EOL;
             }
+
+            //We should report output
+            $has_output = true;
             
             break;
         
@@ -179,7 +184,12 @@ foreach ($orders->items as $order) {
             //Save the order status;
             $order->dateupdated = date('Y-m-d H:i:s');
             $order->save();
+
+            //We should report output
+            $has_output = true;
     }
 }
 
-echo "--FINISHED--" . PHP_EOL;
+if ($has_output) {
+    echo "--FINISHED--" . PHP_EOL;
+}
