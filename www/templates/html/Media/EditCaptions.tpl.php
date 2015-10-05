@@ -23,6 +23,9 @@
                             <li>
                                 If you need to edit captions that you ordered, please upload them to amara and customize them there. Once the customized captions are published on amara.org, use this page to pull them down to mediahub.
                             </li>
+                            <li>
+                                You will be billed the month after the order is completed. We estimate that to be <?php echo date('F j, Y', UNL_MediaHub_RevAPI::getEstimatedBillingDate()) ?>.
+                            </li>
                         </ul>
                         
                         <h3>Estimated cost:</h3>

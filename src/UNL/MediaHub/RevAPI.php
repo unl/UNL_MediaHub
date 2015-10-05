@@ -47,4 +47,18 @@ class UNL_MediaHub_RevAPI
         
         return $rev;
     }
+
+    /**
+     * Get the estimated billing date
+     * assuming that the order took place today
+     * 
+     * @return int
+     */
+    public static function getEstimatedBillingDate()
+    {
+        $date = strtotime('first day of next month');
+        $date += 86400 * 6; //+7 days (should result in the 7th day)
+        
+        return $date;
+    }
 }
