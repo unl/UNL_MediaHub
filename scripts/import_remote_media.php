@@ -26,14 +26,6 @@ if ($media->getLocalFileName()) {
 }
 
 
-$file = file_get_contents($media->url);
-
-if (!$file) {
-    echo 'Unable to get the remote media' . PHP_EOL;
-    exit();
-}
-
-
 $extension = strtolower(pathinfo($media->url, PATHINFO_EXTENSION));
 $file_name = md5(microtime() + rand()) . '.'. $extension;
 $file_path = UNL_MediaHub_Manager::getUploadDirectory() . DIRECTORY_SEPARATOR . $file_name;
@@ -43,7 +35,10 @@ if (file_exists($file_path)) {
     exit();
 }
 
-file_put_contents($file_path, $file);
+if (!file_put_contents($file_path, fopen($media->url, 'r'))) {
+    echo 'Unable to get the remote media' . PHP_EOL;
+    exit();
+}
 
 $url = UNL_MediaHub_Controller::$url.'uploads/'.$file_name;
 
