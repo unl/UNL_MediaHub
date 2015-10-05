@@ -586,6 +586,18 @@ class UNL_MediaHub_Manager_PostHandler
             throw new Exception('A cost object number must be provided', 400);
         }
         
+        $sanitized_co = str_replace(array('-', '.', '/'), '', $this->post['cost_object']);
+        echo $sanitized_co;
+        
+        if (!is_numeric($sanitized_co)) {
+            throw new Exception('The cost object number must be a number. It can not contain any other characters.', 400);
+        }
+        
+        $length = strlen($sanitized_co);
+        if ($length < 10 || $length > 13) {
+            throw new Exception('The cost object number must be between 10 and 13 digits', 400);
+        }
+        
         $order_record = new UNL_MediaHub_RevOrder();
         $order_record->media_id = $media->id;
         $order_record->costobjectnumber = $this->post['cost_object'];
