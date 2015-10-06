@@ -15,7 +15,14 @@ class UNL_MediaHub_DefaultHomepage implements UNL_MediaHub_CacheableInterface
 
     function getCacheKey()
     {
-        return 'homepage-' . $this->options['format'];
+        $user = UNL_MediaHub_AuthService::getInstance()->getUser();
+        $uid = 'anon';
+        if ($user) {
+            $uid = $user->uid;
+        }
+        
+        //We need to make the UID part of the key, otherwise edit buttons might be cached and visible to wrong/anon users
+        return 'homepage-'. $uid . '-' . $this->options['format'];
     }
 
     function run()

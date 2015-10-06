@@ -58,8 +58,13 @@ class UNL_MediaHub_Controller
      * @var int
      */
     public static $current_embed_version = 2;
-    
-    public static $caption_requirement_date = '2015-09-24';
+
+    /**
+     * The date on which captions are determined to be required.
+     * 
+     * @var false|string - date in mysql format
+     */
+    public static $caption_requirement_date = false;
 
     protected $view_map = array(
         'search'  => 'UNL_MediaHub_MediaList',

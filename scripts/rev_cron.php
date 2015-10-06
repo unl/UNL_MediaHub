@@ -28,6 +28,8 @@ if (!$rev) {
     throw new Exception('Unable to get the Rev client', 500);
 }
 
+$has_output = false;
+
 //Loop through them and check with Rev.com to see their status.
 foreach ($orders->items as $order) {
     echo $order->id . ': ' . $order->status . PHP_EOL;
@@ -92,6 +94,9 @@ foreach ($orders->items as $order) {
                 //Retry later.
                 echo "\tERROR: (". $e->getCode() .")" . $message . PHP_EOL;
             }
+
+            //We should report output
+            $has_output = true;
             
             break;
         
@@ -117,11 +122,6 @@ foreach ($orders->items as $order) {
 
                 //Mark the order as complete
                 $order->status = UNL_MediaHub_RevOrder::STATUS_MEDIAHUB_COMPLETE;
-
-                //update the media to point to the new text track
-                $media->media_text_tracks_id = $media_text_track->id;
-                $media->dateupdated = date('Y-m-d H:i:s');
-                $media->save();
                 
                 foreach ($attachments as $attachment) {
                     if (!$attachment->isMedia()) {
@@ -140,12 +140,58 @@ foreach ($orders->items as $order) {
                     
                     sleep(1); //be nice
                 }
+
+                //update the media to point to the new text track
+                $media->media_text_tracks_id = $media_text_track->id;
+                $media->dateupdated = date('Y-m-d H:i:s');
+                $media->save();
+                
+                //Get the email for the person who requested the order
+                $data = file_get_contents('http://directory.unl.edu/?uid='.$order->uid.'&format=json');
+                $data = json_decode($data, true);
+                
+                //Send them an email if we can...
+                if (is_array($data) && isset($data['mail'][0])) {
+                    $message = Swift_Message::newInstance();
+                    
+                    $message->setTo($data['mail'][0]);
+
+                    // Give the message a subject
+                    $message->setSubject('MediaHub: Your caption order is complete for: ' . $media->title);
+
+                    // Set the From address with an associative array
+                    $message->setFrom(array('wdn@unl.edu' => 'UNL WDN'));
+
+                    // Give it a body
+                    $html = '<p>Your caption order is complete for <a href="'.$media->getURL().'">'.$media->title.'</a>.</p>';
+                    if (UNL_MediaHub_Controller::$caption_requirement_date) {
+                        $html .= '<p>Now that your media is captioned, it is published with your chosen privacy settings.</p>';
+                    }
+                    $html .= '<p>You will receive a bill for the oder before ' . date('F j, Y', UNL_MediaHub_RevAPI::getEstimatedBillingDate()) . ' .</p>';
+                    $html .= '<p>Thank you for using the service, and please let us know if you have any questions.</p>';
+                    
+                    // And optionally an alternative body
+                    $message->setBody($html, 'text/html');
+
+                    // Create the Transport
+                    $transport = Swift_MailTransport::newInstance();
+
+                    // Create the Mailer using your created Transport
+                    $mailer = Swift_Mailer::newInstance($transport);
+
+                    $mailer->send($message);
+                }
             }
             
             //Save the order status;
             $order->dateupdated = date('Y-m-d H:i:s');
             $order->save();
+
+            //We should report output
+            $has_output = true;
     }
 }
 
-echo "--FINISHED--" . PHP_EOL;
+if ($has_output) {
+    echo "--FINISHED--" . PHP_EOL;
+}
