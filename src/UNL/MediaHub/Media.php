@@ -281,7 +281,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     public function getMediaURL()
     {
         if (!$local_file = $this->getLocalFileName()) {
-            return false;
+            return $this->url;
         }
 
         return
@@ -367,7 +367,11 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
      */
     public function meetsCaptionRequirement()
     {
-        if (empty($this->text_tracks_id) 
+        if (false == UNL_MediaHub_Controller::$caption_requirement_date) {
+            return true;
+        }
+        
+        if (empty($this->media_text_tracks_id) 
             && strtotime($this->datecreated) > strtotime(UNL_MediaHub_Controller::$caption_requirement_date)) {
             return false;
         }
@@ -575,6 +579,16 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     public function getEditCaptionsURL()
     {
         return UNL_MediaHub_Manager::getURL() . '?view=editcaptions&id=' . $this->id;
+    }
+
+    /**
+     * Get the public URL for this media
+     * 
+     * @return string
+     */
+    public function getURL()
+    {
+        return UNL_MediaHub_Controller::getURL($this);
     }
 }
 

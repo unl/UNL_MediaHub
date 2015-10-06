@@ -355,7 +355,7 @@ class UNL_MediaHub_Manager_PostHandler
             throw new Exception('You must select a feed for the media', 400);
         }
         
-        $success_url = false;
+        $is_new = false;
 
         // Add media to a feed/channel
         if (isset($this->post['id'])) {
@@ -372,8 +372,6 @@ class UNL_MediaHub_Manager_PostHandler
                 }
 
             };
-
-            $success_url = UNL_MediaHub_Controller::getURL($media);
         } else {
             // Insert a new piece of media
             $details = array(
@@ -385,8 +383,7 @@ class UNL_MediaHub_Manager_PostHandler
                              
             $media = $this->mediahub->addMedia($details);
             
-            //After upload, add captions
-            $success_url = $media->getEditCaptionsURL();
+            $is_new = true;
         }
         
         //Update the dateupdated date for cache busting
@@ -457,8 +454,31 @@ class UNL_MediaHub_Manager_PostHandler
             $feed->addMedia($media);
         }
 
-        // @todo clean cache for this feed!
-        UNL_MediaHub::redirect($success_url);
+        if ($is_new) {
+            //After upload, add captions
+            $success_string = 'Your media has been uploaded and is now published. Please make sure that the media is captioned.';
+            if (UNL_MediaHub_Controller::$caption_requirement_date) {
+                $success_string = 'Your media has been uploaded but will not be published until it is captioned.';
+            }
+
+            $notice = new UNL_MediaHub_Notice(
+                'Success',
+                $success_string,
+                UNL_MediaHub_Notice::TYPE_SUCCESS
+            );
+            UNL_MediaHub_Manager::addNotice($notice);
+            
+            UNL_MediaHub::redirect($media->getEditCaptionsURL());
+        } else {
+            $notice = new UNL_MediaHub_Notice(
+                'Success',
+                'The media has been updated',
+                UNL_MediaHub_Notice::TYPE_SUCCESS
+            );
+            UNL_MediaHub_Manager::addNotice($notice);
+            
+            UNL_MediaHub::redirect(UNL_MediaHub_Controller::getURL($media));
+        }
     }
 
     /**
@@ -584,6 +604,18 @@ class UNL_MediaHub_Manager_PostHandler
         
         if (!isset($this->post['cost_object']) || empty($this->post['cost_object'])) {
             throw new Exception('A cost object number must be provided', 400);
+        }
+        
+        $sanitized_co = str_replace(array('-', '.', '/'), '', $this->post['cost_object']);
+        echo $sanitized_co;
+        
+        if (!is_numeric($sanitized_co)) {
+            throw new Exception('The cost object number must be a number. It can not contain any other characters.', 400);
+        }
+        
+        $length = strlen($sanitized_co);
+        if ($length < 10 || $length > 13) {
+            throw new Exception('The cost object number must be between 10 and 13 digits', 400);
         }
         
         $order_record = new UNL_MediaHub_RevOrder();

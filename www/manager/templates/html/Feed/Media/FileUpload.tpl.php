@@ -71,7 +71,11 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                         </div>
                     </div>
                     <p>
-                        Note: media will not be published until it is captioned. The next step will help you caption the media.
+                        Note: 
+                        <?php if (UNL_MediaHub_Controller::$caption_requirement_date):?>
+                            Media will not be published until it is captioned.
+                        <?php endif; ?>
+                        The next step is to caption the media.
                     </p>
                     <input type="submit" id="publish" name="publish" value="Continue &amp; add captions" class="wdn-button-brand" disabled="disabled"> 
                 </div>

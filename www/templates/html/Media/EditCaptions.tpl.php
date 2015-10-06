@@ -1,7 +1,8 @@
 <div class="wdn_band">
     <div class="wdn_inner_wrapper">
-        <h1>Edit Captions</h1>
-        <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=addmedia&id=' . $context->media->id?>" class="wdn-button">Go back to editing the video</a>
+        <h1>Edit Captions for: <?php echo $context->media->title ?></h1>
+        <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=addmedia&id=' . $context->media->id?>" class="wdn-button">Go back to editing the media</a>
+        <a href="<?php echo $context->media->getURL()?>" class="wdn-button">View the media</a>
         <div class="wdn-grid-set">
             <div class="wdn-col-one-half">
                 <h2>Order captions</h2>
@@ -22,6 +23,9 @@
                             </li>
                             <li>
                                 If you need to edit captions that you ordered, please upload them to amara and customize them there. Once the customized captions are published on amara.org, use this page to pull them down to mediahub.
+                            </li>
+                            <li>
+                                You will be billed the month after the order is completed. We estimate that to be <?php echo date('F j, Y', UNL_MediaHub_RevAPI::getEstimatedBillingDate()) ?>.
                             </li>
                         </ul>
                         
@@ -179,5 +183,16 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
+        
+        <div>
+            <h2>Get Help</h2>
+            <p>
+                If you have questions or comments, please email one of the following:
+            </p>
+            <ul>
+                <li>Technical question or issues: Please use the 'Email Us' tab on this page</li>
+                <li>Billing: <a href="mailto:btessalee2@unl.edu">Brittany Tessalee</a></li>
+            </ul>
+        </div>
     </div>
 </div>
