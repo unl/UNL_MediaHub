@@ -13,6 +13,11 @@ class UNL_MediaHub_MediaList_Filter_Privacy implements UNL_MediaHub_Filter
     
     function apply(Doctrine_Query &$query)
     {
+        if (false == UNL_MediaHub_Controller::$caption_requirement_date) {
+            //Captions are not required; exit early.
+            return;
+        }
+        
         $where = '(m.privacy = "PUBLIC" AND (m.media_text_tracks_id IS NOT NULL OR m.datecreated < "' . UNL_MediaHub_Controller::$caption_requirement_date . '"))';
         
         if ($this->user) {

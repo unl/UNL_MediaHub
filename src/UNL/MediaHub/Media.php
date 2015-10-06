@@ -367,6 +367,10 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
      */
     public function meetsCaptionRequirement()
     {
+        if (false == UNL_MediaHub_Controller::$caption_requirement_date) {
+            return true;
+        }
+        
         if (empty($this->media_text_tracks_id) 
             && strtotime($this->datecreated) > strtotime(UNL_MediaHub_Controller::$caption_requirement_date)) {
             return false;
