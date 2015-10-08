@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS `media_text_tracks_files` (
   INDEX `media_text_tracks_datecreated` (`datecreated`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
+ALTER TABLE `media` ENGINE = INNODB;
 ALTER TABLE `media` ADD `media_text_tracks_id` INT NULL;
 ALTER TABLE `media`
 ADD FOREIGN KEY (media_text_tracks_id)
