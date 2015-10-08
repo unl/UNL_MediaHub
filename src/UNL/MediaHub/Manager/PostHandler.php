@@ -619,7 +619,7 @@ class UNL_MediaHub_Manager_PostHandler
         
         $order_record = new UNL_MediaHub_RevOrder();
         $order_record->media_id = $media->id;
-        $order_record->costobjectnumber = $this->post['cost_object'];
+        $order_record->costobjectnumber = $sanitized_co;
         $order_record->uid = $user->uid;
         $order_record->status = UNL_MediaHub_RevOrder::STATUS_MEDIAHUB_CREATED;
         
