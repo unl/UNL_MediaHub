@@ -167,7 +167,7 @@ foreach ($orders->items as $order) {
                     if (UNL_MediaHub_Controller::$caption_requirement_date) {
                         $html .= '<p>Now that your media is captioned, it is published with your chosen privacy settings.</p>';
                     }
-                    $html .= '<p>You will receive a bill for the oder before ' . date('F j, Y', UNL_MediaHub_RevAPI::getEstimatedBillingDate()) . ' .</p>';
+                    $html .= '<p>You will receive a bill for the order before ' . date('F j, Y', UNL_MediaHub_RevAPI::getEstimatedBillingDate()) . ' .</p>';
                     $html .= '<p>Thank you for using the service, and please let us know if you have any questions.</p>';
                     
                     // And optionally an alternative body
