@@ -161,14 +161,14 @@ foreach ($orders->items as $order) {
                     $message->setSubject('MediaHub: Your caption order is complete for: ' . $media->title);
 
                     // Set the From address with an associative array
-                    $message->setFrom(array('wdn@unl.edu' => 'UNL WDN'));
+                    $message->setFrom(array('wdn+mediahub@unl.edu' => 'UNL WDN'));
 
                     // Give it a body
                     $html = '<p>Your caption order is complete for <a href="'.$media->getURL().'">'.$media->title.'</a>.</p>';
                     if (UNL_MediaHub_Controller::$caption_requirement_date) {
                         $html .= '<p>Now that your media is captioned, it is published with your chosen privacy settings.</p>';
                     }
-                    $html .= '<p>You will receive a bill for the oder before ' . date('F j, Y', UNL_MediaHub_RevAPI::getEstimatedBillingDate()) . ' .</p>';
+                    $html .= '<p>You will receive a bill for the order before ' . date('F j, Y', UNL_MediaHub_RevAPI::getEstimatedBillingDate()) . ' .</p>';
                     $html .= '<p>Thank you for using the service, and please let us know if you have any questions.</p>';
                     
                     // And optionally an alternative body
