@@ -35,7 +35,7 @@ $controller->setReplacementData('head', $js);
         <h4>This Video is Missing Captions!</h4>
         <div class="mh-caption-band">
             <p>
-                For accessibility reasons, captions are required for <strong>ALL</strong> videos.
+                For accessibility reasons, captions are required for <strong>all</strong> videos.
             </p>
             <p>
                 <a class="wdn-button" href="<?php echo $edit_caption_url ?>">Caption Your Video</a>
