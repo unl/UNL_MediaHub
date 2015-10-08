@@ -606,8 +606,7 @@ class UNL_MediaHub_Manager_PostHandler
             throw new Exception('A cost object number must be provided', 400);
         }
         
-        $sanitized_co = str_replace(array('-', '.', '/'), '', $this->post['cost_object']);
-        echo $sanitized_co;
+        $sanitized_co = preg_replace('/[^\d]/', '', $this->post['cost_object']);
         
         if (!is_numeric($sanitized_co)) {
             throw new Exception('The cost object number must be a number. It can not contain any other characters.', 400);
