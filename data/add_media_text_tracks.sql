@@ -4,20 +4,22 @@ ALTER TABLE feed_has_media CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci
 ALTER TABLE feed_has_nselement CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 ALTER TABLE feeds CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 ALTER TABLE media CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-ALTER TABLE media_has_nselement CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE feed_has_subscription CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 ALTER TABLE subscriptions CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 ALTER TABLE user_has_permission CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 ALTER TABLE permissions CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE media_views CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 ALTER TABLE users ENGINE = INNODB;
 ALTER TABLE feed_has_media ENGINE = INNODB;
 ALTER TABLE feed_has_nselement ENGINE = INNODB;
 ALTER TABLE feeds ENGINE = INNODB;
 ALTER TABLE media ENGINE = INNODB;
-ALTER TABLE media_has_nselement ENGINE = INNODB;
+ALTER TABLE feed_has_subscription ENGINE = INNODB;
 ALTER TABLE subscriptions ENGINE = INNODB;
 ALTER TABLE user_has_permission ENGINE = INNODB;
 ALTER TABLE permissions ENGINE = INNODB;
+ALTER TABLE media_views ENGINE = INNODB;
 
 /** Add new tables/structure **/
 CREATE TABLE IF NOT EXISTS `media_text_tracks` (
