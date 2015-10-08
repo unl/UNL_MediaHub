@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `rev_orders` (
   `uid` varchar(50) NOT NULL,
   `datecreated` timestamp NOT NULL,
   `dateupdated` timestamp NULL,
-  `costobjectnumber` VARCHAR(10) NOT NULL,
+  `costobjectnumber` VARCHAR(20) NOT NULL,
   `rev_order_number` varchar(256) NULL,
   `media_duration` varchar(256) null,
   `estimate` varchar(256) null,
