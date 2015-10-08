@@ -29,8 +29,8 @@ class UNL_MediaHub_RevAPI
     public static function getRevClient()
     {
         if (self::$client_api_key == false
-        || self::$user_api_key == false
-        || self::$host == false
+            || self::$user_api_key == false
+            || self::$host == false
         ) {
             // it isn't gonna work.
             return false;
