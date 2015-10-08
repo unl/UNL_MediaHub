@@ -44,20 +44,21 @@
         }
     ],
     "require": {
-        "unl/php-dwt-parser": "0.9.*",
-        "unl/php-unl-templates": "1.4.*",
-        "unl/auth": "0.5.*",
-        "unl/unl_cache_lite": "0.1.*",
-        "unl/reg-exp-router": "0.1.*",
-        "pear-pear.php.net/HTTP_Request2": "2.2.*",
-        "simple-cas/simple-cas": "0.8.*",
-        "saltybeagle/savvy": "0.8.1",
-        "saltybeagle/savvy_turbo": "0.1.*",
-        "phpunit/phpunit": "~4.3",
-        "ezyang/htmlpurifier": "~4.6",
-        "guzzlehttp/guzzle": "^6.0",
-        "unl/rev-api": "0.1.2-beta",
-        "phansys/getid3": " ~2.1@dev",
-        "swiftmailer/swiftmailer": "@stable"
+      "unl/php-dwt-parser": "0.9.*",
+      "unl/php-unl-templates": "1.4.*",
+      "unl/auth": "0.5.*",
+      "unl/unl_cache_lite": "0.1.*",
+      "unl/reg-exp-router": "0.1.*",
+      "pear-pear.php.net/HTTP_Request2": "2.2.*",
+      "simple-cas/simple-cas": "0.8.*",
+      "saltybeagle/savvy": "0.8.1",
+      "saltybeagle/savvy_turbo": "0.1.*",
+      "phpunit/phpunit": "~4.3",
+      "ezyang/htmlpurifier": "~4.6",
+      "guzzlehttp/guzzle": "^6.0",
+      "unl/rev-api": "0.1.2-beta",
+      "phansys/getid3": " ~2.1@dev",
+      "swiftmailer/swiftmailer": "@stable",
+      "php": ">=5.5.0"
     }
 }
