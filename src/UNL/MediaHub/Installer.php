@@ -52,6 +52,9 @@ class UNL_MediaHub_Installer
         drop table if exists subscriptions;
         drop table if exists user_has_permission;
         drop table if exists permissions;
+        drop table if exists media_text_tracks;
+        drop table if exists media_text_tracks_files;
+        drop table if exists rev_orders;
         SET FOREIGN_KEY_CHECKS = 1;
         ';
         
