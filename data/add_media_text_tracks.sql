@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `media_text_tracks` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`media_id`) REFERENCES media(id),
   INDEX `media_text_tracks_datecreated` (`datecreated`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `media_text_tracks_files` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS `media_text_tracks_files` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`media_text_tracks_id`) REFERENCES media_text_tracks(id),
   INDEX `media_text_tracks_datecreated` (`datecreated`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 ALTER TABLE `media` ADD `media_text_tracks_id` INT NULL;
 ALTER TABLE `media`
@@ -46,6 +46,6 @@ CREATE TABLE IF NOT EXISTS `rev_orders` (
   FOREIGN KEY (`media_id`) REFERENCES media(id),
   INDEX `rev_orders_datecreated` (`datecreated`),
   INDEX `rev_orders_cost_object` (`costobjectnumber`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 
