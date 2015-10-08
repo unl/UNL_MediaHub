@@ -41,6 +41,7 @@ foreach ($orders->items as $order) {
         case UNL_MediaHub_RevOrder::STATUS_MEDIAHUB_COMPLETE:
         case UNL_MediaHub_RevOrder::STATUS_ERROR:
             //Nothing to do here (in fact, this code should never execute)
+            throw new \Exception('This code should never execute');
             break;
         case UNL_MediaHub_RevOrder::STATUS_MEDIAHUB_CREATED:
             //We need to create the order in rev.com
