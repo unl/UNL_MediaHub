@@ -1,4 +1,5 @@
 ALTER TABLE `media` ENGINE = INNODB;
+ALTER TABLE `users` ENGINE = INNODB;
 
 CREATE TABLE IF NOT EXISTS `media_text_tracks` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
