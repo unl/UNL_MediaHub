@@ -22,9 +22,9 @@ foreach ($media_list->items as $media) {
         if ($result) {
             echo "\t Captions Updated" . PHP_EOL;
         }
+
+        sleep(1);
     }
-    
-    sleep(1);
 }
 
 echo '--FINISHED--';
