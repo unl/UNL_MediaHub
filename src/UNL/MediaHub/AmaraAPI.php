@@ -150,7 +150,7 @@ class UNL_MediaHub_AmaraAPI
     public function getMediaHubTextTracks($media_id, $media_url, $format = 'srt')
     {
         $media_details = $this->getMediaDetails($media_url);
-        $tracks        = array();
+        $tracks = array();
 
         if (!$media_details) {
             return $tracks;
