@@ -244,3 +244,16 @@ dl.caption {
 Google Maps override to display correctly in the framework
 */
 #map_canvas img { max-width: none; }
+
+.mh-caption-sidebar {
+    padding: .75em 1em;
+    background-color: RGBA(255,255,255,.75);
+}
+
+@media only screen and (max-width: 767px)  {
+
+    table.wdn_responsive_table tbody tr td:first-child {
+        border-top: 3px solid #454545;
+    }
+
+}
