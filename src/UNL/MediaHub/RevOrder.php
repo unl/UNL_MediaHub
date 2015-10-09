@@ -5,6 +5,8 @@ class UNL_MediaHub_RevOrder extends UNL_MediaHub_Models_BaseRevOrder
     const STATUS_MEDIAHUB_CREATED  = 'mediahub_created';
     const STATUS_MEDIAHUB_COMPLETE = 'mediahub_complete';
     const STATUS_ERROR             = 'error';
+    const STATUS_CANCELED          = 'canceled';
+    
     /**
      * called before an item is inserted to the database
      *
@@ -14,7 +16,9 @@ class UNL_MediaHub_RevOrder extends UNL_MediaHub_Models_BaseRevOrder
      */
     public function preInsert($event)
     {
-        $this->datecreated = date('Y-m-d H:i:s');
+        if (empty($this->datecreated)) {
+            $this->datecreated = date('Y-m-d H:i:s');
+        }
     }
 
     /**
