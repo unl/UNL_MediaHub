@@ -34,6 +34,7 @@ class UNL_MediaHub_Installer
         $messages[] = $this->exec_sql(file_get_contents(dirname(__FILE__).'/../../../data/add_permissions.sql'), 'Adding permissions table', true);
         $messages[] = $this->exec_sql(file_get_contents(dirname(__FILE__).'/../../../data/add_media_views.sql'), 'Adding the media views table', true);
         $messages[] = $this->exec_sql(file_get_contents(dirname(__FILE__).'/../../../data/add_media_text_tracks.sql'), 'Adding media text tracks table', true);
+        $messages[] = $this->exec_sql(file_get_contents(dirname(__FILE__).'/../../../data/media_text_tracks_dates.sql'), 'Fixing date fields', true);
         
         return $messages;
     }
