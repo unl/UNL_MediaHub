@@ -22,7 +22,16 @@ if (!$context->output instanceof UNL_MediaHub_FeedAndMedia) {
     $page->head .= '<link rel="alternate" type="application/rss+xml" title="UNL MediaHub" href="?format=xml" />';
 }
 
-$page->maincontentarea = $savvy->render($context->output);
+$page->maincontentarea = '';
+if (isset($_SESSION['notices'])) {
+    foreach ($_SESSION['notices'] as $key=>$notice) {
+        $page->maincontentarea .= $savvy->render($notice);
+        unset($_SESSION['notices'][$key]);
+    }
+    $page->maincontentarea .= '<script>WDN.initializePlugin("notice");</script>';
+}
+
+$page->maincontentarea .= $savvy->render($context->output);
 
 $page->navlinks = $savvy->render(null, 'Navigation.tpl.php');
 

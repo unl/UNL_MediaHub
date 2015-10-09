@@ -23,6 +23,11 @@ UNL_MediaHub_Controller::$thumbnail_generator = 'http://itunes.unl.edu/thumbnail
 UNL_MediaHub_AmaraAPI::$amara_username = false;
 UNL_MediaHub_AmaraAPI::$amara_api_key  = false;
 
+UNL_MediaHub_RevAPI::$host = \RevAPI\Rev::SANDBOX_HOST;
+UNL_MediaHub_RevAPI::$client_api_key = '';
+UNL_MediaHub_RevAPI::$user_api_key = '';
+UNL_MediaHub_RevAPI::$http_config = array();
+
 // Set custom mediahub namespaced item elements
 $itemElements = array(
     'water_af'  => 'Volume of water in acre-feet (af)',

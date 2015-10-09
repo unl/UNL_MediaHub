@@ -48,7 +48,7 @@ class UNL_MediaHub_Controller
     /**
      * Version used for cache busting
      */
-    const VERSION = '1.1';
+    const VERSION = '1.2';
 
     static protected $replacements;
 
@@ -58,6 +58,13 @@ class UNL_MediaHub_Controller
      * @var int
      */
     public static $current_embed_version = 2;
+
+    /**
+     * The date on which captions are determined to be required.
+     * 
+     * @var false|string - date in mysql format
+     */
+    public static $caption_requirement_date = false;
 
     protected $view_map = array(
         'search'  => 'UNL_MediaHub_MediaList',
@@ -137,7 +144,6 @@ class UNL_MediaHub_Controller
         if ($this->options['model'] == 'feed_image'
             || $this->options['model'] == 'media_image'
             || $this->options['model'] == 'media_embed'
-            || $this->options['model'] == 'media_srt'
             || $this->options['model'] == 'media_vtt') {
             UNL_MediaHub_OutputController::setOutputTemplate('UNL_MediaHub_Controller', 'ControllerPartial');
         }
@@ -206,6 +212,16 @@ class UNL_MediaHub_Controller
                     throw new Exception('You do not have permission to view this.', 403);
                 }
                 
+                if (!$media->meetsCaptionRequirement()) {
+                    $notice = new UNL_MediaHub_Notice(
+                        'Notice',
+                        'This media will not be published until captions are provided.',
+                        UNL_MediaHub_Notice::TYPE_NOTICE
+                    );
+                    $notice->addLink($media->getEditCaptionsURL(), 'Add Captions Now');
+                    UNL_MediaHub_Manager::addNotice($notice);
+                }
+                
                 $this->output[] = $media;
                 break;
             case 'feed_image':
@@ -215,14 +231,8 @@ class UNL_MediaHub_Controller
                     $this->output[] = UNL_MediaHub_Feed_Image::getByTitle($this->options['title']);
                 }
                 break;
-            case 'media_srt':
-                $this->output[] = new UNL_MediaHub_Media_VideoTextTrack($this->options, 'srt');
-                break;
             case 'media_vtt':
                 $this->output[] = new UNL_MediaHub_Media_VideoTextTrack($this->options, 'vtt');
-                break;
-            case 'media_json':
-                $this->output[] = new UNL_MediaHub_Media_VideoTextTrack($this->options, 'json');
                 break;
             case 'media_image':
                 $this->output[] = UNL_MediaHub_Media_Image::getById($this->options['id']);

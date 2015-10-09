@@ -111,6 +111,15 @@ class UNL_MediaHub_Manager_PostHandler
         case 'delete_feed':
             $this->handleDeleteFeed();
             break;
+        case 'pull_amara':
+            $this->handleAmara();
+            break;
+        case 'order_rev':
+            $this->handleRev();
+            break;
+        case 'set_active_text_track':
+            $this->setActiveTextTrack();
+            break;
         }
     }
 
@@ -345,6 +354,8 @@ class UNL_MediaHub_Manager_PostHandler
         if (!isset($this->post['feed_id']) && empty($this->post['new_feed'])) {
             throw new Exception('You must select a feed for the media', 400);
         }
+        
+        $is_new = false;
 
         // Add media to a feed/channel
         if (isset($this->post['id'])) {
@@ -361,7 +372,6 @@ class UNL_MediaHub_Manager_PostHandler
                 }
 
             };
-
         } else {
             // Insert a new piece of media
             $details = array(
@@ -372,6 +382,8 @@ class UNL_MediaHub_Manager_PostHandler
             );
                              
             $media = $this->mediahub->addMedia($details);
+            
+            $is_new = true;
         }
         
         //Update the dateupdated date for cache busting
@@ -442,8 +454,31 @@ class UNL_MediaHub_Manager_PostHandler
             $feed->addMedia($media);
         }
 
-        // @todo clean cache for this feed!
-        UNL_MediaHub::redirect(UNL_MediaHub_Controller::getURL($media));
+        if ($is_new) {
+            //After upload, add captions
+            $success_string = 'Your media has been uploaded and is now published. Please make sure that the media is captioned.';
+            if (UNL_MediaHub_Controller::$caption_requirement_date) {
+                $success_string = 'Your media has been uploaded but will not be published until it is captioned.';
+            }
+
+            $notice = new UNL_MediaHub_Notice(
+                'Success',
+                $success_string,
+                UNL_MediaHub_Notice::TYPE_SUCCESS
+            );
+            UNL_MediaHub_Manager::addNotice($notice);
+            
+            UNL_MediaHub::redirect($media->getEditCaptionsURL());
+        } else {
+            $notice = new UNL_MediaHub_Notice(
+                'Success',
+                'The media has been updated',
+                UNL_MediaHub_Notice::TYPE_SUCCESS
+            );
+            UNL_MediaHub_Manager::addNotice($notice);
+            
+            UNL_MediaHub::redirect(UNL_MediaHub_Controller::getURL($media));
+        }
     }
 
     /**
@@ -514,6 +549,133 @@ class UNL_MediaHub_Manager_PostHandler
         $media->delete();
 
         UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL());
+    }
+    
+    function handleAmara()
+    {
+        $media = UNL_MediaHub_Media::getById($this->post['media_id']);
+        
+        if (!$media) {
+            throw new Exception('Unable to find media', 404);
+        }
+
+        if (!$media->userHasPermission(UNL_MediaHub_AuthService::getInstance()->getUser(), UNL_MediaHub_Permission::USER_CAN_UPDATE)) {
+            throw new Exception('You do not have permission to edit this media.', 403);
+        }
+        
+        $result = $media->updateAmaraCaptions();
+        
+        if (!$result) {
+            //No tracks were found, fail early
+            $notice = new UNL_MediaHub_Notice(
+                'Error',
+                'No amara captions could be found for this media',
+                UNL_MediaHub_Notice::TYPE_ERROR
+            );
+            UNL_MediaHub_Manager::addNotice($notice);
+            UNL_MediaHub::redirect($media->getEditCaptionsURL());
+
+            return;
+        }
+
+        $notice = new UNL_MediaHub_Notice(
+            'Success',
+            'The latest amara captions have been pulled.',
+            UNL_MediaHub_Notice::TYPE_SUCCESS
+        );
+        UNL_MediaHub_Manager::addNotice($notice);
+
+        UNL_MediaHub::redirect($media->getEditCaptionsURL());
+    }
+    
+    function handleRev()
+    {
+        $media = UNL_MediaHub_Media::getById($this->post['media_id']);
+
+        if (!$media) {
+            throw new Exception('Unable to find media', 404);
+        }
+
+        $user = UNL_MediaHub_AuthService::getInstance()->getUser();
+        
+        if (!$media->userHasPermission($user, UNL_MediaHub_Permission::USER_CAN_UPDATE)) {
+            throw new Exception('You do not have permission to edit this media.', 403);
+        }
+        
+        if (!isset($this->post['cost_object']) || empty($this->post['cost_object'])) {
+            throw new Exception('A cost object number must be provided', 400);
+        }
+        
+        $sanitized_co = preg_replace('/[^\d]/', '', $this->post['cost_object']);
+        
+        if (!is_numeric($sanitized_co)) {
+            throw new Exception('The cost object number must be a number. It can not contain any other characters.', 400);
+        }
+        
+        $length = strlen($sanitized_co);
+        if ($length < 10 || $length > 13) {
+            throw new Exception('The cost object number must be between 10 and 13 digits', 400);
+        }
+        
+        $order_record = new UNL_MediaHub_RevOrder();
+        $order_record->media_id = $media->id;
+        $order_record->costobjectnumber = $sanitized_co;
+        $order_record->uid = $user->uid;
+        $order_record->status = UNL_MediaHub_RevOrder::STATUS_MEDIAHUB_CREATED;
+        
+        if (isset($this->post['media_duration'])) {
+            $order_record->estimate = $this->post['estimate'];
+            $order_record->media_duration = $this->post['media_duration'];
+        }
+        
+        $order_record->save();
+
+        $notice = new UNL_MediaHub_Notice(
+            'Success',
+            'A caption order has been placed, it should be completed within 24 hours.',
+            UNL_MediaHub_Notice::TYPE_SUCCESS
+        );
+        UNL_MediaHub_Manager::addNotice($notice);
+        
+        UNL_MediaHub::redirect($media->getEditCaptionsURL());
+    }
+    
+    function setActiveTextTrack()
+    {
+        $media = UNL_MediaHub_Media::getById($this->post['media_id']);
+
+        if (!$media) {
+            throw new Exception('Unable to find media', 404);
+        }
+
+        $user = UNL_MediaHub_AuthService::getInstance()->getUser();
+
+        if (!$media->userHasPermission($user, UNL_MediaHub_Permission::USER_CAN_UPDATE)) {
+            throw new Exception('You do not have permission to edit this media.', 403);
+        }
+        
+        if (!isset($this->post['text_track_id'])) {
+            throw new Exception('Post data must include text_track_id.', 400);
+        }
+        
+        $text_track = UNL_MediaHub_MediaTextTrack::getById($this->post['text_track_id']);
+        
+        if (!$text_track) {
+            throw new Exception('Unable to find text track.', 400);
+        }
+        
+        if ($text_track->media_id != $media->id) {
+            throw new Exception('That text track does not belong to the this media', 400);
+        }
+        
+        $media->media_text_tracks_id = $text_track->id;
+        $media->dateupdated = date('Y-m-d H:i:s');
+        $media->save();
+        
+        $notice = new UNL_MediaHub_Notice('Success', 'The active caption track has been updated', UNL_MediaHub_Notice::TYPE_SUCCESS);
+        UNL_MediaHub_Manager::addNotice($notice);
+
+        UNL_MediaHub::redirect($media->getEditCaptionsURL());
     }
 
     /**

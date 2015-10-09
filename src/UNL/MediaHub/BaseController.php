@@ -13,4 +13,13 @@ class UNL_MediaHub_BaseController
     {
         return new UNL_MediaHub_MediaPlayer($media, $this->options);
     }
+
+    public static function addNotice(UNL_MediaHub_Notice $notice)
+    {
+        if (!isset($_SESSION['notices'])) {
+            $_SESSION['notices'] = array();
+        }
+
+        $_SESSION['notices'][] = $notice;
+    }
 }
