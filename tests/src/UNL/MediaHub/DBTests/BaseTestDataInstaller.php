@@ -59,7 +59,18 @@ class UNL_MediaHub_DBTests_BaseTestDataInstaller implements UNL_MediaHub_DBTests
         $media_b->title       = 'Test Media B';
         $media_b->description = 'Test Media B Description';
         $media_b->save();
+        
+        //Add a caption file to media_b
+        $text_track = new UNL_MediaHub_MediaTextTrack();
+        $text_track->media_id = $media_b->id;
+        $text_track->source = UNL_MediaHub_MediaTextTrack::SOURCE_AMARA;
+        $text_track->save();
+        
+        //For brevity, we won't actually create a file for the text track.
+        $media_b->media_text_tracks_id = $text_track->id;
+        $media_b->save();
 
+        //Continue editing other media
         $media_c = new UNL_MediaHub_Media();
         $media_c->url         = 'http://example.org/C.mov';
         $media_c->uidcreated  = $user_a->uid;
@@ -67,6 +78,7 @@ class UNL_MediaHub_DBTests_BaseTestDataInstaller implements UNL_MediaHub_DBTests
         $media_c->type        = 'audio/mp3';
         $media_c->title       = 'Test Media C';
         $media_c->description = 'Test Media C Description';
+        $media_c->datecreated = '2015-09-01 00:00:00';
         $media_c->save();
 
         $media_d = new UNL_MediaHub_Media();
@@ -77,6 +89,7 @@ class UNL_MediaHub_DBTests_BaseTestDataInstaller implements UNL_MediaHub_DBTests
         $media_d->title       = 'Test Media - Private in feed A';
         $media_d->description = 'for testing';
         $media_d->privacy     = 'PRIVATE';
+        $media_d->datecreated = '2015-09-01 00:00:00';
         $media_d->save();
 
         $media_e = new UNL_MediaHub_Media();
@@ -87,6 +100,7 @@ class UNL_MediaHub_DBTests_BaseTestDataInstaller implements UNL_MediaHub_DBTests
         $media_e->title       = 'Test Media - Unlisted in feed A';
         $media_e->description = 'for testing';
         $media_e->privacy     = 'UNLISTED';
+        $media_e->datecreated = '2015-09-01 00:00:00';
         $media_e->save();
 
         $media_f = new UNL_MediaHub_Media();
@@ -97,6 +111,7 @@ class UNL_MediaHub_DBTests_BaseTestDataInstaller implements UNL_MediaHub_DBTests
         $media_f->title       = 'Test Media - Private in feed B';
         $media_f->description = 'for testing';
         $media_f->privacy     = 'PRIVATE';
+        $media_f->datecreated = '2015-09-01 00:00:00';
         $media_f->save();
 
         $media_g = new UNL_MediaHub_Media();
@@ -107,6 +122,7 @@ class UNL_MediaHub_DBTests_BaseTestDataInstaller implements UNL_MediaHub_DBTests
         $media_g->title       = 'Test Media - Unlisted in feed B';
         $media_g->description = 'for testing';
         $media_g->privacy     = 'UNLISTED';
+        $media_g->datecreated = '2015-09-01 00:00:00';
         $media_g->save();
         
         //Add media to channels

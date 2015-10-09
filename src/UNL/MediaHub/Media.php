@@ -361,14 +361,45 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     }
 
     /**
+     * Determine if this meets the caption requirement
+     * 
+     * @return bool
+     */
+    public function meetsCaptionRequirement()
+    {
+        if (false == UNL_MediaHub_Controller::$caption_requirement_date) {
+            return true;
+        }
+        
+        if (empty($this->media_text_tracks_id) 
+            && strtotime($this->datecreated) > strtotime(UNL_MediaHub_Controller::$caption_requirement_date)) {
+            return false;
+        }
+        
+        return true;
+    }
+
+    /**
      * @return bool
      */
     public function canView()
     {
+        $requires_membership = false;
+        
+        if (!$this->meetsCaptionRequirement()) {
+            $requires_membership = true;
+        }
+        
         //If its not private, anyone can view it.
-        if ($this->privacy != 'PRIVATE') {
+        if ($this->privacy == 'PRIVATE') {
+            $requires_membership = true;
+        }
+        
+        //If it doesn't require membership, anyone can view it.
+        if (!$requires_membership) {
             return true;
         }
+        
 
         $user = UNL_MediaHub_AuthService::getInstance()->getUser();
         //At this point a user needs to be logged in.
@@ -442,10 +473,122 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         return false;
     }
     
-    public function getTextTracks()
+    public function getTextTrackURLs()
+    {
+        $track = UNL_MediaHub_MediaTextTrack::getById($this->media_text_tracks_id);
+        
+        if (!$track) {
+            return array();
+        }
+        
+        $files = $track->getFiles();
+        
+        if (empty($files->items)) {
+            return array();
+        }
+        
+        
+        $urls = array();
+        foreach ($files->items as $file) {
+            $urls[$file->language] = $file->getURL();
+        }
+        
+        return $urls;
+    }
+    
+    public function getAmaraTextTracks($format = 'vtt')
     {
         $api = new UNL_MediaHub_AmaraAPI();
-        return $api->getMediaHubTextTracks($this->id, $this->url);
+
+        return $api->getTextTracks($this->url, $format);
+    }
+    
+    public function findDuration()
+    {
+        if (!$this->getLocalFileName()) {
+            //We need the media to be local to find the duration
+            return false;
+        }
+        
+        $getId3 = new \GetId3\GetId3Core();
+        $details = $getId3->analyze($this->getLocalFileName());
+
+        if (!isset($details['playtime_string'])) {
+            return false;
+        }
+        
+        if (empty($details['playtime_string'])) {
+            return false;
+        }
+
+        //Convert to a standard string
+        switch (substr_count($details['playtime_string'], ':')) {
+            case 0:
+                $playtime_string = '00:00:' . str_pad($details['playtime_string'], 2, '0', STR_PAD_LEFT);
+                break;
+            case 1:
+                $playtime_string = '00:' . str_pad($details['playtime_string'], 5, '0', STR_PAD_LEFT);
+                break;
+            default:
+                $playtime_string = str_pad($details['playtime_string'], 8, '0', STR_PAD_LEFT);
+        }
+        
+        return array(
+            'string' => $playtime_string,
+            'seconds' => strtotime($playtime_string) - strtotime('TODAY')
+        );
+    }
+
+    /**
+     * Pull amara captions for all videos
+     * 
+     * @return bool
+     */
+    public function updateAmaraCaptions()
+    {
+        $tracks = $this->getAmaraTextTracks();
+
+        if (empty($tracks)) {
+            //No tracks were found, fail early
+            return false;
+        }
+
+        $text_track = new UNL_MediaHub_MediaTextTrack();
+        $text_track->media_id = $this->id;
+        $text_track->source = UNL_MediaHub_MediaTextTrack::SOURCE_AMARA;
+        $text_track->save();
+
+        foreach ($tracks as $lang=>$track) {
+            $text_track_file = new UNL_MediaHub_MediaTextTrackFile();
+            $text_track_file->media_text_tracks_id = $text_track->id;
+            $text_track_file->kind = UNL_MediaHub_MediaTextTrackFile::KIND_CAPTION;
+            $text_track_file->format = UNL_MediaHub_MediaTextTrackFile::FORMAT_VTT;
+            $text_track_file->language = $lang;
+            $text_track_file->file_contents = $track;
+            $text_track_file->save();
+        }
+
+        //update the media to point to the new text track
+        $this->media_text_tracks_id = $text_track->id;
+        $this->dateupdated = date('Y-m-d H:i:s');
+        $this->save();
+        
+        return true;
+    }
+    
+    public function getEditCaptionsURL()
+    {
+        return UNL_MediaHub_Manager::getURL() . '?view=editcaptions&id=' . $this->id;
+    }
+
+    /**
+     * Get the public URL for this media
+     * 
+     * @return string
+     */
+    public function getURL()
+    {
+        return UNL_MediaHub_Controller::getURL($this);
     }
 }
 

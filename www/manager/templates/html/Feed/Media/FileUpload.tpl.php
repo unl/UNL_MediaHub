@@ -68,9 +68,14 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                                     <?php echo $savvy->render($context->feed_selection); ?>
                                 </li>
                             </ol>
-                        </div>                                                     
+                        </div>
                     </div>
-                    <input type="submit" id="publish" name="publish" value="Publish" class="wdn-button-brand" disabled="disabled"> 
+                    <input type="submit" id="publish" name="publish" value="Next Step: Add Captions" class="wdn-button-brand" disabled="disabled"> 
+                    <?php if (UNL_MediaHub_Controller::$caption_requirement_date):?>
+                        <p class="wdn-icon wdn-icon-attention">
+                            Note: Media will not be published until it is captioned.
+                        </p>
+                    <?php endif; ?>
                 </div>
             </div>
         </form>
