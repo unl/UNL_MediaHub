@@ -12,8 +12,6 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
             <a href="<?php echo UNL_MediaHub_Manager::getURL()?>?view=feedmetadata&amp;id=<?php echo $context->feed->id ?>" class="wdn-button wdn-button-brand wdn-pull-left mh-channel-edit-button">Edit</a>
         <?php endif ?>
         <div class="wdn-pull-right mh-rss"><a href="?format=xml" title="RSS feed for this channel"><span class="wdn-icon-rss-squared"></span></a></div>
-        <div class="clear"></div>
-        <?php echo $savvy->render($context->feed, 'Feed/Creator.tpl.php') ?>
         <div class="wdn-grid-set">
             <div class="bp2-wdn-col-one-fourth wdn-pull-right">
                 <div class="mh-channel-thumb wdn-center">
@@ -44,3 +42,20 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
 </div>
 
 <?php echo $savvy->render($context->media_list); ?>
+
+<?php
+$maintainers = $context->feed->getUserList();
+
+$uids = array();
+foreach ($maintainers->items as $maintainer) {
+    $uid = htmlentities($maintainer->uid, ENT_QUOTES);
+    $uids[] = '<a href="http://directory.unl.edu/?uid='.$uid.'">'.$uid.'</a>';
+}
+
+?>
+
+<div class="wdn-band wdn-light-neutral-band mh-channel-maintainers-list">
+    <div class="wdn-inner-wrapper wdn-inner-padding-sm">
+        <em>This channel is maintained by: <?php echo implode(', ', $uids); ?></em>
+    </div>
+</div>

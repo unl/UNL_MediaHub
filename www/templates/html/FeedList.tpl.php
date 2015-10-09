@@ -72,7 +72,6 @@ if($context->options['orderby'] == 'datecreated'){
                         <li>
                             <?php $url = htmlentities(UNL_MediaHub_Controller::getURL($feed), ENT_QUOTES) ?>
                             <h2 class="wdn-brand"><a href="<?php echo $url ?>"><?php echo htmlentities($feed->title) ?></a></h2>
-                            <?php echo $savvy->render($feed, 'Feed/Creator.tpl.php') ?>
                             <div class="wdn-grid-set">
                                 <div class="bp2-wdn-col-one-fourth wdn-pull-right">
                                     <a href="<?php echo $url ?>">
