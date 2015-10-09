@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `media_text_tracks` (
   `source` ENUM('amara', 'rev') NULL,
   `revision_comment` MEDIUMTEXT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`media_id`) REFERENCES media(id),
+  FOREIGN KEY (`media_id`) REFERENCES media(id) ON DELETE CASCADE,
   INDEX `media_text_tracks_datecreated` (`datecreated`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE utf8_unicode_ci;
 
@@ -42,20 +42,20 @@ CREATE TABLE IF NOT EXISTS `media_text_tracks_files` (
   `language` varchar(128) NOT NULL,
   `file_contents` MEDIUMTEXT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`media_text_tracks_id`) REFERENCES media_text_tracks(id),
+  FOREIGN KEY (`media_text_tracks_id`) REFERENCES media_text_tracks(id) ON DELETE CASCADE,
   INDEX `media_text_tracks_datecreated` (`datecreated`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE utf8_unicode_ci;
 
 ALTER TABLE `media` ADD `media_text_tracks_id` int(10) unsigned NULL;
 ALTER TABLE `media`
 ADD FOREIGN KEY (media_text_tracks_id)
-REFERENCES media_text_tracks(id);
+REFERENCES media_text_tracks(id) ON DELETE SET NULL;
 
 CREATE TABLE IF NOT EXISTS `rev_orders` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `media_text_tracks_id` int(10) unsigned NULL,
-  `media_id` int(10) unsigned NOT NULL,
-  `uid` varchar(50) NOT NULL,
+  `media_id` int(10) unsigned NULL,
+  `uid` varchar(50) NULL,
   `datecreated` timestamp NOT NULL,
   `dateupdated` timestamp NULL,
   `costobjectnumber` VARCHAR(20) NOT NULL,
@@ -65,9 +65,9 @@ CREATE TABLE IF NOT EXISTS `rev_orders` (
   `status` VARCHAR(128) NOT NULL,
   `error_text` TEXT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`media_text_tracks_id`) REFERENCES media_text_tracks(id),
-  FOREIGN KEY (`uid`) REFERENCES users(uid),
-  FOREIGN KEY (`media_id`) REFERENCES media(id),
+  FOREIGN KEY (`media_text_tracks_id`) REFERENCES media_text_tracks(id) ON DELETE SET NULL,
+  FOREIGN KEY (`uid`) REFERENCES users(uid) ON DELETE SET NULL,
+  FOREIGN KEY (`media_id`) REFERENCES media(id) ON DELETE SET NULL,
   INDEX `rev_orders_datecreated` (`datecreated`),
   INDEX `rev_orders_cost_object` (`costobjectnumber`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE utf8_unicode_ci;
