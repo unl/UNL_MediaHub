@@ -137,7 +137,7 @@ $getTracks = $context->media->getTextTrackURLs();
                                     // "tabindex" : 0,
                                 })
                                     .data('timeOffset', track.entries.times[i].start)
-                                    .text(track.entries.text[i])
+                                    .text($($.parseHTML(track.entries.text[i])).text())
                                     .prepend($('<span>').text('[' + displaytime(track.entries.times[i].start*1000) + '] '))
                                 ));
                             };
