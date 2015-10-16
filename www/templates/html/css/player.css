@@ -204,8 +204,24 @@
 
 ul.mh-transcript {
     line-height: 2.8em;
-    padding: 0 1em;
+    padding: 0 1em 2em 1em;
     margin: 0;
+    max-height: 450px;
+    overflow: scroll;
+}
+
+ul.mh-transcript:after {
+    content: "";
+    width: 99.5%;
+    position: absolute;
+    height: 50px;
+    bottom: 1px;
+    left: 2px;
+    pointer-events: none;
+    background: -webkit-linear-gradient(rgba(254, 253, 250, 0), rgba(254, 253, 250, .8), rgba(254, 253, 250, 1)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(rgba(254, 253, 250, 0), rgba(254, 253, 250, .8), rgba(254, 253, 250, 1)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(rgba(254, 253, 250, 0), rgba(254, 253, 250, .8), rgba(254, 253, 250, 1)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(rgba(254, 253, 250, 0), rgba(254, 253, 250, .8), rgba(254, 253, 250, 1)); /* Standard syntax */
 }
 
 ul.mh-transcript a {
@@ -214,7 +230,7 @@ ul.mh-transcript a {
   opacity: .25;
   display: inline;
   color: #454545;
-  border: none !important;
+  border: none !important;  
 }
 
 ul.mh-transcript a.highlight {
@@ -235,12 +251,25 @@ ul.mh-transcript li {
 
 .mh-caption-search div.mh-caption-container {
     background-color: #fefdfa;
-    padding: .75em;
+    padding: .75em .75em 0 .75em;
     border: 1px solid rgb(208, 208, 199);
 }
 
 .mh-caption-search.show {
     display: block;
+}
+
+.mh-caption-search.full-screen {
+    width: 30%;
+    min-width: 300px;
+    max-height: 603px;
+    top: 4%;
+    left: 2%;
+    box-shadow: 0px 2px 7px RGBA(0,0,0,0.4);
+}
+
+.mh-caption-search.full-screen div.mh-caption-container {
+    border: none;
 }
 
 .mh-paragraph-icons {
