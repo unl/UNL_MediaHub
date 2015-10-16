@@ -145,6 +145,19 @@ $getTracks = $context->media->getTextTrackURLs();
                             $transcript.append(listItems);
                         };
 
+                            var origsenterFullScreen = t.enterFullScreen;
+                            t.enterFullScreen = function() {
+                                origsenterFullScreen.call(this);  
+                                t.container.find(".mh-caption-search").addClass("full-screen");
+                            };
+
+                            var origsexitFullScreen = t.exitFullScreen;
+                            t.exitFullScreen = function() {
+                                origsexitFullScreen.call(this);
+                                t.container.find(".mh-caption-search").removeClass("full-screen");
+                            };
+
+
                         var origsEnableTrackButton = t.enableTrackButton;
                         t.enableTrackButton = function(lang, label) {
                             origsEnableTrackButton.call(this, lang, label);
