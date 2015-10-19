@@ -475,7 +475,10 @@ ul.mh-transcript li {
    list-style: disc; 
 }
 
-
+.mh-caption-search-close {
+    float: right;
+    margin-right: .75em;
+}
 
 @media (max-width: 480px) {
     .share-video-form {
