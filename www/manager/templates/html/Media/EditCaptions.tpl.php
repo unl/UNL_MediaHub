@@ -99,20 +99,23 @@
         <table class="wdn_responsive_table flush-left">
             <thead>
                 <tr>
+                    <th>Order Number</th>
                     <th>Date of order</th>
                     <th>Requester</th>
                     <th>Status of order</th>
-                    <th>Estimate</th>
+                    <th>Cost</th>
                 </tr>
             </thead>
             <tbody>
             <?php $orders = $context->getRevOrderHistory()->items; ?>
             <?php foreach ($orders as $order): ?>
                 <tr>
+                    <td data-header="Order Number">
+                        <?php echo $order->id ?>
+                        <a href="<?php echo $order->getDetailsURL() ?>">view details</a>
+                    </td>
                     <td data-header="Date of order">
-                        <a href="<?php echo $order->getDetailsURL() ?>">
-                            <?php echo $order->datecreated ?>
-                        </a>
+                        <?php echo $order->datecreated ?>
                     </td>
                     <td data-header="Requester">
                         <?php echo $order->uid ?>
@@ -126,7 +129,7 @@
                             -- <?php echo $order->error_text ?>
                         <?php endif; ?>
                     </td>
-                    <td data-header="Estimate">
+                    <td data-header="Cost">
                         $<?php echo $order->estimate ?>
                     </td>
                 </tr>
