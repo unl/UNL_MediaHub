@@ -234,6 +234,8 @@ class UNL_MediaHub_Controller
             case 'media_vtt':
                 $this->output[] = new UNL_MediaHub_Media_VideoTextTrack($this->options, 'vtt');
                 break;
+            case 'media_srt':
+                UNL_MediaHub::redirect(UNL_MediaHub_Controller::$url . 'media/' . $this->options['id'] . '/vtt');
             case 'media_image':
                 $this->output[] = UNL_MediaHub_Media_Image::getById($this->options['id']);
                 break;

@@ -117,6 +117,9 @@ class UNL_MediaHub_Manager_PostHandler
         case 'order_rev':
             $this->handleRev();
             break;
+        case 'download_rev':
+            $this->downloadRev();
+            break;
         case 'set_active_text_track':
             $this->setActiveTextTrack();
             break;
@@ -638,6 +641,58 @@ class UNL_MediaHub_Manager_PostHandler
         UNL_MediaHub_Manager::addNotice($notice);
         
         UNL_MediaHub::redirect($media->getEditCaptionsURL());
+    }
+
+    protected function downloadRev()
+    {
+        $order = UNL_MediaHub_RevOrder::getById($this->post['order_id']);
+
+        if (!$order) {
+            throw new Exception('Unable to find order', 404);
+        }
+
+        $media = UNL_MediaHub_Media::getById($order->media_id);
+
+        $user = UNL_MediaHub_AuthService::getInstance()->getUser();
+
+        if (!$media->userHasPermission($user, UNL_MediaHub_Permission::USER_CAN_UPDATE)) {
+            throw new Exception('You do not have permission to edit this media.', 403);
+        }
+
+        if (!isset($this->post['format']) || empty($this->post['format'])) {
+            throw new Exception('A format must be provided', 400);
+        }
+
+        $rev = UNL_MediaHub_RevAPI::getRevClient();
+
+        if (!$rev) {
+            throw new Exception('Unable to get the Rev client', 500);
+        }
+        
+        $content = '';
+        
+        try {
+            $rev_order = $rev->getOrder($order->rev_order_number);
+
+            $attachments = $rev_order->getAttachments();
+
+            foreach ($attachments as $attachment) {
+                if ($attachment->isMedia()) {
+                    //Only save non-media attachments
+                    continue;
+                }
+
+                $content = $attachment->getContent('.' . $this->post['format']);
+                break;
+            }
+        } catch(\RevAPI\Exception\RequestException $e) {
+            throw new Exception('There was an error requesting captions');
+        }
+        
+        header('Content-Disposition: attachment; filename=' . $media->title . '.' . $this->post['format']);
+
+        echo $content;
+        exit();
     }
     
     function setActiveTextTrack()

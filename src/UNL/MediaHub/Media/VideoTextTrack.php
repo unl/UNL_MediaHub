@@ -15,12 +15,39 @@ class UNL_MediaHub_Media_VideoTextTrack
         }
         
         if (!isset($options['text_file_id'])) {
-            throw new Exception('A text_file_id must be specified.', 400);
-        }
+            //Default to the english version (this is more work on the database, and should be discouraged).
+            $media = UNL_MediaHub_Media::getById($options['id']);
+            
+            if (!$media) {
+                throw new Exception('Media record could not be found', 404);
+            }
+            
+            if (empty($media->media_text_tracks_id)) {
+                throw new Exception('This media has no text track', 404);
+            }
 
-        $file = UNL_MediaHub_MediaTextTrackFile::getById($options['text_file_id']);
-        if (!$file) {
-            throw new Exception('The text track file was not found', 404);
+            $track = UNL_MediaHub_MediaTextTrack::getById($media->media_text_tracks_id);
+
+            if (!$track) {
+                throw new Exception('A text track could not be found', 404);
+            }
+
+            $files = $track->getFiles();
+
+            foreach ($files->items as $track_file) {
+                if ('en' === $track_file->language) {
+                    $file = $track_file;
+                }
+            }
+            
+            if (empty($file)) {
+                throw new Exception('An english text track could not be found', 404);
+            }
+        } else {
+            $file = UNL_MediaHub_MediaTextTrackFile::getById($options['text_file_id']);
+            if (!$file) {
+                throw new Exception('The text track file was not found', 404);
+            }
         }
         
         if (isset($options['download'])) {
