@@ -15,6 +15,12 @@ class UNL_MediaHub_Media_EditCaptions
         if (!$this->media = UNL_MediaHub_Media::getById($options['id'])) {
             throw new \Exception('Could not find that media', 404);
         }
+
+        $user = UNL_MediaHub_AuthService::getInstance()->getUser();
+
+        if (!$this->media->userHasPermission($user, UNL_MediaHub_Permission::USER_CAN_UPDATE)) {
+            throw new Exception('You do not have permission to edit this media.', 403);
+        }
     }
     
     public function getTrackHistory()

@@ -118,7 +118,7 @@ foreach ($orders->items as $order) {
                 $media_text_track = new UNL_MediaHub_MediaTextTrack();
                 $media_text_track->media_id = $media->id;
                 $media_text_track->source = UNL_MediaHub_MediaTextTrack::SOURCE_REV;
-                $media_text_track->revision_comment = 'Order: ' . $rev_order->getOrderNumber();
+                $media_text_track->revision_comment = 'Order: ' . $order->id;
                 $media_text_track->save();
 
                 //Mark the order as complete
