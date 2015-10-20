@@ -110,7 +110,9 @@
             <?php foreach ($orders as $order): ?>
                 <tr>
                     <td data-header="Date of order">
-                        <?php echo $order->datecreated ?>
+                        <a href="<?php echo $order->getDetailsURL() ?>">
+                            <?php echo $order->datecreated ?>
+                        </a>
                     </td>
                     <td data-header="Requester">
                         <?php echo $order->uid ?>
