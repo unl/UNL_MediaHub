@@ -24,7 +24,7 @@ $getTracks = $context->media->getTextTrackURLs();
                         </ul>
                     </div>
                 </div>
-                <button class="mh-caption-search-close caption-toggle" tabindex="0" title="Close Searchable Transcript" aria-label="Close Searchable Transcript">x</button>
+                <button class="mh-caption-search-close caption-toggle" aria-label="Close Searchable Transcript">x</button>
             </div>
             <div class="mh-caption-container">   
                 <label for="mh-parse-caption">Search:</label>
