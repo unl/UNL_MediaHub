@@ -478,7 +478,11 @@ ul.mh-transcript li {
 .mh-caption-search-close {
     float: right;
     margin-right: .75em;
+    background: transparent;
+    border: none;
 }
+
+
 
 @media (max-width: 480px) {
     .share-video-form {
