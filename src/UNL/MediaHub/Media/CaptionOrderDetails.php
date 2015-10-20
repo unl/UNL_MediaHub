@@ -27,5 +27,11 @@ class UNL_MediaHub_Media_CaptionOrderDetails
         }
         
         $this->media = UNL_MediaHub_Media::getById($this->order->media_id);
+
+        $user = UNL_MediaHub_AuthService::getInstance()->getUser();
+
+        if (!$this->media->userHasPermission($user, UNL_MediaHub_Permission::USER_CAN_UPDATE)) {
+            throw new Exception('You do not have permission to edit this media.', 403);
+        }
     }
 }
