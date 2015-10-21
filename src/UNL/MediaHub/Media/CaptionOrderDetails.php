@@ -19,7 +19,7 @@ class UNL_MediaHub_Media_CaptionOrderDetails
         $this->options = $options;
 
         if (!isset($options['id'])) {
-            throw new \Exception('You must pass an order ID');
+            throw new \Exception('You must pass an order ID', 400);
         }
 
         if (!$this->order = UNL_MediaHub_RevOrder::getById($options['id'])) {

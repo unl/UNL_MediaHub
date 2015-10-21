@@ -666,7 +666,7 @@ class UNL_MediaHub_Manager_PostHandler
         $rev = UNL_MediaHub_RevAPI::getRevClient();
 
         if (!$rev) {
-            throw new Exception('Unable to get the Rev client', 500);
+            throw new Exception('Unable to get the Rev client', 503);
         }
         
         $content = '';
