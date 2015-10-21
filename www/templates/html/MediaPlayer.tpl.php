@@ -24,6 +24,7 @@ $getTracks = $context->media->getTextTrackURLs();
                         </ul>
                     </div>
                 </div>
+                <button class="mh-caption-search-close caption-toggle" aria-label="Close Searchable Transcript">x</button>
             </div>
             <div class="mh-caption-container">   
                 <label for="mh-parse-caption">Search:</label>
@@ -75,6 +76,11 @@ $getTracks = $context->media->getTextTrackURLs();
                         t.controls.on("click", ".caption-toggle", function(e){
                             $captionSearch.toggleClass("show");
                         });
+
+                        $captionSearch.on("click", ".caption-toggle", function(e){
+                            $captionSearch.toggleClass("show");
+                        });
+
                         var displaytime = function(millis){
                             var hours = Math.floor(millis / 36e5),
                                 mins = Math.floor((millis % 36e5) / 6e4),
