@@ -70,6 +70,7 @@ apache:
         sendfile: 0
     modules:
         - rewrite
+        - headers
     vhosts:
         jMxKH7FcAjzM:
             servername: localhost
