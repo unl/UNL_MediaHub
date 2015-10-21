@@ -226,6 +226,7 @@ a.action.delete:active {background-image:url('images/iconDelete.png');}
 dl.caption {
 	text-align:left;
 	}
+
 #maincontent dl.caption dd {
 	padding-left:0px;
 }
@@ -248,6 +249,40 @@ Google Maps override to display correctly in the framework
 .mh-caption-sidebar {
     padding: .75em 1em;
     background-color: RGBA(255,255,255,.75);
+}
+
+dl {
+    font-family: "Gotham SSm A","Gotham SSm B",Verdana,"Verdana Ref",Geneva,Tahoma,"Lucida Grande","Lucida Sans Unicode","Lucida Sans","DejaVu Sans","Bitstream Vera Sans","Liberation Sans",sans-serif;
+    margin: 0;
+}
+
+dl dt {
+    font-weight: bold;
+    font-size: .75em;
+}
+
+dl dd {
+    font-family: "Mercury SSm A","Mercury SSm B",Georgia,Baskerville,"Baskerville Old Face","Hoefler Text",Garamond,"Times New Roman",serif;
+    background-color: #eceae3;
+    margin-left: 0;
+    padding: .75em;
+    margin-bottom: 1em;
+}
+
+label[for=format] {
+    display: block;
+}
+
+select#format {
+    max-width: 220px;
+    clear: both;
+    display: block;
+    float: left;
+    margin-right: .75em;
+}
+
+#download_format {
+    margin-bottom: 2em;
 }
 
 @media only screen and (max-width: 767px)  {

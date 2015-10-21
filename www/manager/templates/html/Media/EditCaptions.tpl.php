@@ -99,16 +99,21 @@
         <table class="wdn_responsive_table flush-left">
             <thead>
                 <tr>
+                    <th>Order Number</th>
                     <th>Date of order</th>
                     <th>Requester</th>
                     <th>Status of order</th>
-                    <th>Estimate</th>
+                    <th>Cost</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
             <?php $orders = $context->getRevOrderHistory()->items; ?>
             <?php foreach ($orders as $order): ?>
                 <tr>
+                    <td data-header="Order Number">
+                        <?php echo $order->id ?>
+                    </td>
                     <td data-header="Date of order">
                         <?php echo $order->datecreated ?>
                     </td>
@@ -117,15 +122,15 @@
                     </td>
                     <td data-header="Status of order">
                         <?php echo $order->status ?>
-                        <?php if (!empty($order->dateupdated)): ?>
-                            (<?php echo $order->dateupdated ?>)
-                        <?php endif; ?>
                         <?php if (UNL_MediaHub_RevOrder::STATUS_ERROR == $order->status): ?>
                             -- <?php echo $order->error_text ?>
                         <?php endif; ?>
                     </td>
-                    <td data-header="Estimate">
+                    <td data-header="Cost">
                         $<?php echo $order->estimate ?>
+                    </td>
+                    <td data-header="Actions">
+                        <a href="<?php echo $order->getDetailsURL() ?>">view details</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
