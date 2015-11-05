@@ -382,7 +382,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     /**
      * @return bool
      */
-    public function canView()
+    public function canView($user)
     {
         $requires_membership = false;
         
@@ -400,8 +400,6 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
             return true;
         }
         
-
-        $user = UNL_MediaHub_AuthService::getInstance()->getUser();
         //At this point a user needs to be logged in.
         if (!$user) {
             return false;
@@ -413,10 +411,8 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
             'filter'=>new UNL_MediaHub_FeedList_Filter_ByUserWithMediaId($user, $this->id)
         ));
 
-        $feeds->run();
-
         //Can view only if they are a member of the at least one of the feeds (specific permissions don't matter).
-        if (empty($feeds->items)) {
+        if (0 === count($feeds->items)) {
             return false;
         }
         
