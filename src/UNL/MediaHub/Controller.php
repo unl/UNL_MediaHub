@@ -208,7 +208,7 @@ class UNL_MediaHub_Controller
             case 'media':
                 $media = $this->findRequestedMedia($this->options);
 
-                if (!$media->canView()) {
+                if (!$media->canView(UNL_MediaHub_AuthService::getInstance()->getUser())) {
                     throw new Exception('You do not have permission to view this.', 403);
                 }
                 
@@ -251,7 +251,7 @@ class UNL_MediaHub_Controller
                 
                 $media_embed = UNL_MediaHub_Media_Embed::getById($id, $version, $this->options);
 
-                if (!$media_embed->media->canView()) {
+                if (!$media_embed->media->canView(UNL_MediaHub_AuthService::getInstance()->getUser())) {
                     throw new Exception('You do not have permission to view this.', 403);
                 }
                 
