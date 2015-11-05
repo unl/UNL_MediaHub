@@ -20,6 +20,40 @@ class UNL_MediaHub_MediaDBTest extends UNL_MediaHub_DBTests_DBTestCase
     }
 
     /**
+     * Test the canView Logic
+     * 
+     * @test
+     */
+    public function canView()
+    {
+        $this->prepareTestDB();
+
+        //Private video
+        $media_d = UNL_MediaHub_Media::getById(4);
+        
+        //unlisted video
+        $media_e = UNL_MediaHub_Media::getById(3);
+        
+        //public video
+        $media_c = UNL_MediaHub_Media::getById(5);
+
+        $user_a = UNL_MediaHub_User::getByUid('test_a');
+        $user_b = UNL_MediaHub_User::getByUid('test_b');
+
+        //Test a video that is private
+        $this->assertTrue($media_d->canView($user_a));
+        $this->assertFalse($media_d->canView($user_b));
+
+        //Test a video that is unlisted
+        $this->assertTrue($media_e->canView($user_a));
+        $this->assertTrue($media_e->canView($user_b));
+
+        //Test a video that is public
+        $this->assertTrue($media_c->canView($user_a));
+        $this->assertTrue($media_c->canView($user_b));
+    }
+
+    /**
      * Test the delete logic is working and deleted all related entries
      * @test
      */
