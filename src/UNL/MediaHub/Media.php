@@ -412,7 +412,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         ));
 
         //Can view only if they are a member of the at least one of the feeds (specific permissions don't matter).
-        if (0 == count($feeds->items)) {
+        if (0 === count($feeds->items)) {
             return false;
         }
         
