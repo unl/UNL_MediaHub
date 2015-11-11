@@ -308,7 +308,9 @@ $getTracks = $context->media->getTextTrackURLs();
 
                     //Load the CSS
                     WDN.loadCSS('<?php echo UNL_MediaHub_Controller::$url; ?>templates/html/css/player.css?v=<?php echo UNL_MediaHub_Controller::VERSION ?>', function() {
-                        initSharing(m, v);
+                        <?php if($context->media->privacy === "PUBLIC"): ?>
+                            initSharing(m, v);
+                        <?php endif; ?>
                     });
 
                 }
