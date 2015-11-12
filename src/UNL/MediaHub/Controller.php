@@ -450,6 +450,11 @@ class UNL_MediaHub_Controller
 
         return self::addURLParams($url, $params);
     }
+    
+    public static function toAgnosticURL($url)
+    {
+        return str_replace('http://', '//', $url);
+    }
 
     /**
      * Add unique querystring parameters to a URL
