@@ -184,7 +184,7 @@ $getTracks = $context->media->getTextTrackURLs();
                     };
 
                     // Playcount
-                    var w = false, u = '<?php echo $controller->getURL($context->media) ?>';
+                    var w = false, u = '<?php echo UNL_MediaHub_Controller::toAgnosticURL($controller->getURL($context->media)) ?>';
                     m.addEventListener('play', function () {
                         if (!w) {
                             $.post(u, {action: "playcount"});
