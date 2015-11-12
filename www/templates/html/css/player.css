@@ -540,8 +540,8 @@ a:hover, a:visited {
 }
 @font-face {
     font-family: wdn-icon;
-    src: url(http://unlcms.unl.edu/wdn/templates_4.0/fonts/fontello/wdn-icon.eot?27007058);
-    src: url(http://unlcms.unl.edu/wdn/templates_4.0/fonts/fontello/wdn-icon.eot?27007058#iefix) format('embedded-opentype'), url(http://unlcms.unl.edu/wdn/templates_4.0/fonts/fontello/wdn-icon.woff?27007058) format('woff'), url(http://unlcms.unl.edu/wdn/templates_4.0/fonts/fontello/wdn-icon.ttf?27007058) format('truetype'), url(http://unlcms.unl.edu/wdn/templates_4.0/fonts/fontello/wdn-icon.svg?27007058#wdn-icon) format('svg');
+    src: url(https://unlcms.unl.edu/wdn/templates_4.0/fonts/fontello/wdn-icon.eot?27007058);
+    src: url(https://unlcms.unl.edu/wdn/templates_4.0/fonts/fontello/wdn-icon.eot?27007058#iefix) format('embedded-opentype'), url(https://unlcms.unl.edu/wdn/templates_4.0/fonts/fontello/wdn-icon.woff?27007058) format('woff'), url(https://unlcms.unl.edu/wdn/templates_4.0/fonts/fontello/wdn-icon.ttf?27007058) format('truetype'), url(https://unlcms.unl.edu/wdn/templates_4.0/fonts/fontello/wdn-icon.svg?27007058#wdn-icon) format('svg');
     font-weight: 400;
     font-style: normal
 }
