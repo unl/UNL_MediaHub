@@ -54,6 +54,9 @@ $getTracks = $context->media->getTextTrackURLs();
                     var $video = $(v);
                     var mediahub_id = $video.attr('data-mediahub-id');
 
+                    var Safari = false;
+                    if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {Safari = true;} // detect Safari for fullscreen caption support
+
                     if(t.captionsButton){
                         t.container.append($(".mh_transcript_template").html());
                         $transcript = t.container.find('.mh-transcript');
