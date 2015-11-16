@@ -175,7 +175,7 @@ $getTracks = $context->media->getTextTrackURLs();
                         t.enterFullScreen = function() {
                             origsenterFullScreen.call(this);  
                             t.container.find(".mh-caption-search").addClass("full-screen");
-                            if(Safari){ // remove searchable captions if entering full screen on safari
+                            if (Safari) { // remove searchable captions if entering full screen on safari
                                 $captionSearch.removeClass("show");
                             };
                         };
