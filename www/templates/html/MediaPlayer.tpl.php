@@ -54,6 +54,11 @@ $getTracks = $context->media->getTextTrackURLs();
                     var $video = $(v);
                     var mediahub_id = $video.attr('data-mediahub-id');
 
+                    var Safari = false;
+                    if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) { // detect Safari for fullscreen caption support
+                        Safari = true;
+                    } 
+
                     if(t.captionsButton){
                         t.container.append($(".mh_transcript_template").html());
                         $transcript = t.container.find('.mh-transcript');
@@ -73,13 +78,27 @@ $getTracks = $context->media->getTextTrackURLs();
 
                         t.captionsButton.before($myButton)
 
-                        t.controls.on("click", ".caption-toggle", function(e){
-                            $captionSearch.toggleClass("show");
-                        });
-
-                        $captionSearch.on("click", ".caption-toggle", function(e){
-                            $captionSearch.toggleClass("show");
-                        });
+                        if (!Safari) {
+                            t.controls.on("click", ".caption-toggle", function(e){
+                                $captionSearch.toggleClass("show");
+                            });
+                            $captionSearch.on("click", ".caption-toggle", function(e){
+                                $captionSearch.toggleClass("show");
+                            });
+                        } else { // exit fullscreen if searchable captions are opened in safari. 
+                            t.controls.on("click", ".caption-toggle", function(e){
+                                $captionSearch.toggleClass("show");
+                                if ($captionSearch.hasClass("full-screen") && $captionSearch.hasClass("show")) {
+                                    t.exitFullScreen();
+                                }
+                            });
+                            $captionSearch.on("click", ".caption-toggle", function(e){
+                                $captionSearch.toggleClass("show");
+                                if ($captionSearch.hasClass("full-screen") && $captionSearch.hasClass("show")) {
+                                    t.exitFullScreen();
+                                }
+                            });
+                        };
 
                         var displaytime = function(millis){
                             var hours = Math.floor(millis / 36e5),
@@ -151,18 +170,21 @@ $getTracks = $context->media->getTextTrackURLs();
                             $transcript.append(listItems);
                         };
 
-                            var origsenterFullScreen = t.enterFullScreen;
-                            t.enterFullScreen = function() {
-                                origsenterFullScreen.call(this);  
-                                t.container.find(".mh-caption-search").addClass("full-screen");
-                            };
 
-                            var origsexitFullScreen = t.exitFullScreen;
-                            t.exitFullScreen = function() {
-                                origsexitFullScreen.call(this);
-                                t.container.find(".mh-caption-search").removeClass("full-screen");
+                        var origsenterFullScreen = t.enterFullScreen;
+                        t.enterFullScreen = function() {
+                            origsenterFullScreen.call(this);  
+                            t.container.find(".mh-caption-search").addClass("full-screen");
+                            if (Safari) { // remove searchable captions if entering full screen on safari
+                                $captionSearch.removeClass("show");
                             };
+                        };
 
+                        var origsexitFullScreen = t.exitFullScreen;
+                        t.exitFullScreen = function() {
+                            origsexitFullScreen.call(this);
+                            t.container.find(".mh-caption-search").removeClass("full-screen");
+                        };
 
                         var origsEnableTrackButton = t.enableTrackButton;
                         t.enableTrackButton = function(lang, label) {
