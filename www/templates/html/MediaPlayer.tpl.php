@@ -55,7 +55,9 @@ $getTracks = $context->media->getTextTrackURLs();
                     var mediahub_id = $video.attr('data-mediahub-id');
 
                     var Safari = false;
-                    if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {Safari = true;} // detect Safari for fullscreen caption support
+                    if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) { // detect Safari for fullscreen caption support
+                        Safari = true;
+                    } 
 
                     if(t.captionsButton){
                         t.container.append($(".mh_transcript_template").html());
@@ -76,17 +78,14 @@ $getTracks = $context->media->getTextTrackURLs();
 
                         t.captionsButton.before($myButton)
 
-                        if(!Safari){
-
+                        if (!Safari) {
                             t.controls.on("click", ".caption-toggle", function(e){
                                 $captionSearch.toggleClass("show");
                             });
                             $captionSearch.on("click", ".caption-toggle", function(e){
                                 $captionSearch.toggleClass("show");
                             });
-
-                        }else{ // exit fullscreen if searchable captions are opened in safari. 
-
+                        } else { // exit fullscreen if searchable captions are opened in safari. 
                             t.controls.on("click", ".caption-toggle", function(e){
                                 $captionSearch.toggleClass("show");
                                 if($captionSearch.hasClass("full-screen") && $captionSearch.hasClass("show")){
@@ -99,7 +98,6 @@ $getTracks = $context->media->getTextTrackURLs();
                                     t.exitFullScreen();
                                 }
                             });
-
                         };
 
                         var displaytime = function(millis){
@@ -205,7 +203,6 @@ $getTracks = $context->media->getTextTrackURLs();
                                 setTranscript(t.selectedTrack);
                             };
                         };
-
                     };
 
                     // Playcount
