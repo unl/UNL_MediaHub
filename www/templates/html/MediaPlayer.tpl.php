@@ -88,13 +88,13 @@ $getTracks = $context->media->getTextTrackURLs();
                         } else { // exit fullscreen if searchable captions are opened in safari. 
                             t.controls.on("click", ".caption-toggle", function(e){
                                 $captionSearch.toggleClass("show");
-                                if($captionSearch.hasClass("full-screen") && $captionSearch.hasClass("show")){
+                                if ($captionSearch.hasClass("full-screen") && $captionSearch.hasClass("show")) {
                                     t.exitFullScreen();
                                 }
                             });
                             $captionSearch.on("click", ".caption-toggle", function(e){
                                 $captionSearch.toggleClass("show");
-                                if($captionSearch.hasClass("full-screen") && $captionSearch.hasClass("show")){
+                                if ($captionSearch.hasClass("full-screen") && $captionSearch.hasClass("show")) {
                                     t.exitFullScreen();
                                 }
                             });
