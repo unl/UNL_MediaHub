@@ -676,14 +676,19 @@ class UNL_MediaHub_Manager_PostHandler
 
             $attachments = $rev_order->getAttachments();
 
+            $newest_attachment = false;
             foreach ($attachments as $attachment) {
                 if ($attachment->isMedia()) {
                     //Only save non-media attachments
                     continue;
                 }
+                
+                //Get the last caption attachment (newest)
+                $newest_attachment = $attachment;
+            }
 
-                $content = $attachment->getContent('.' . $this->post['format']);
-                break;
+            if ($newest_attachment) {
+                $content = $newest_attachment->getContent('.' . $this->post['format']);
             }
         } catch(\RevAPI\Exception\RequestException $e) {
             throw new Exception('There was an error requesting captions');
