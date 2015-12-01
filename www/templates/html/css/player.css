@@ -4,8 +4,8 @@
 .mh-video-band {
   /* Share button CSS from WDN 4.0 template. Included here for embeded media players. */
 }
-.mediahub-embed #maincontent a.share-video-link,
-.mh-video-band #maincontent a.share-video-link {
+.mediahub-embed a.share-video-link,
+.mh-video-band a.share-video-link {
   background: #D00000;
   color: #000;
   position: absolute;
@@ -28,8 +28,8 @@
   color: #fff;
   margin-right: .75em;
 }
-.mediahub-embed #maincontent a.share-video-link:before,
-.mh-video-band #maincontent a.share-video-link:before {
+.mediahub-embed a.share-video-link:before,
+.mh-video-band a.share-video-link:before {
   font-family: wdn-icon;
   font-style: normal;
   font-weight: 400;
@@ -45,12 +45,12 @@
   content: '\e81c';
   text-align: center;
 }
-.mediahub-embed #maincontent a .share-video-link:hover,
-.mh-video-band #maincontent a .share-video-link:hover,
-.mediahub-embed #maincontent a.share-video-link:active,
-.mh-video-band #maincontent a.share-video-link:active,
-.mediahub-embed #maincontent a.share-video-link.video-active,
-.mh-video-band #maincontent a.share-video-link.video-active {
+.mediahub-embed a .share-video-link:hover,
+.mh-video-band a .share-video-link:hover,
+.mediahub-embed a.share-video-link:active,
+.mh-video-band a.share-video-link:active,
+.mediahub-embed a.share-video-link.video-active,
+.mh-video-band a.share-video-link.video-active {
   background: #3caac8;
   color: #fff;
 }
@@ -77,8 +77,8 @@
 .mh-video-band .mobile .share-video-form {
   margin-top: 5%;
 }
-.mediahub-embed #maincontent .share-video-form h4,
-.mh-video-band #maincontent .share-video-form h4 {
+.mediahub-embed .share-video-form h4,
+.mh-video-band .share-video-form h4 {
   margin-top: -10px;
   font-family: "Gotham SSm A", "Gotham SSm B", Helvetica, "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
   font-weight: 400;
