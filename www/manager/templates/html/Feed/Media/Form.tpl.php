@@ -56,7 +56,7 @@ WDN.initializePlugin('notice');
     <input type="hidden" name="__unlmy_posttarget" value="feed_media" />
     <input type="hidden" id="id" name="id" value="<?php echo $context->media->id ?>" />
     
-    <div class="wdn-band wdn-light-triad-band">
+    <div class="wdn-band wdn-light-triad-band mediahub-embed">
         <div class="wdn-inner-wrapper">
             <div class="wdn-grid-set" id="headline_main">
                 <div class="wdn-col-full">
