@@ -5,10 +5,13 @@ $data['id'] = $context->media->id;
 ?>
 
 (function () {
-    var j, l, t, i, r = function () {
+    var j, l, t, i, r = function (non_framework) {
         WDN.loadJQuery(function() {
             var data = <?php echo json_encode($data);?>;
             WDN.jQuery('#mediahub_embed_' + data.id).html(data.markup);
+            if (non_framework) {
+                WDN.jQuery('#mediahub_embed_' + data.id).addClass('non-framework');
+            }
         });
     };
     if (typeof(WDN) === 'undefined') {
@@ -17,7 +20,7 @@ $data['id'] = $context->media->id;
             l = function () {
             };
             WDN.template_path = t;
-            r();
+            r(true);
         };
         j = document.createElement('script');
         j.type = 'text/javascript';
