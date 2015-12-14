@@ -16,7 +16,10 @@ module.exports = function(grunt) {
             }
         },
         watch: {
-            files: ['./www/templates/html/less/*'],
+            files: [
+                './www/templates/html/less/*',
+                './www/templates/iframe/less/*'
+            ],
             tasks: ['less'],
             options: {
                 event: ['changed', 'added', 'deleted']

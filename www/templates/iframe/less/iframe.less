@@ -1,6 +1,6 @@
 /* Share media
 -------------------------------------------------------------- */
-.mediahub-embed, .mh-video-band {
+.mediahub-embed {
   a.share-video-link {
     background: #D00000;
     color: #000;
@@ -192,12 +192,19 @@
     position: absolute;
     top: 100%;
     z-index: 50;
+
+    width: 30%;
+    min-width: 300px;
+    max-height: 603px;
+    top: 4%;
+    left: 2%;
+    box-shadow: 0px 2px 7px RGBA(0, 0, 0, 0.4);
   }
 
   .mh-caption-search.bulleted ul.mh-transcript a.highlight {
     display: block;
   }
-
+  
   .mh-caption-search.bulleted ul.mh-transcript a {
     display: none;
   }
@@ -253,22 +260,14 @@
     background-color: #fefdfa;
     padding: .75em .75em 0 .75em;
     border: 1px solid rgb(208, 208, 199);
+    width: 100%;
   }
 
   .mh-caption-search.show {
     display: block;
   }
 
-  .mh-caption-search.full-screen {
-    width: 30%;
-    min-width: 300px;
-    max-height: 603px;
-    top: 4%;
-    left: 2%;
-    box-shadow: 0px 2px 7px RGBA(0, 0, 0, 0.4);
-  }
-
-  .mh-caption-search.full-screen div.mh-caption-container {
+  .mh-caption-search div.mh-caption-container {
     border: none;
   }
 
@@ -523,9 +522,8 @@
     width: 30px;
     border-radius: 3px;
   }
-}
 
-.non-framework.mediahub-embed {
+  //Share options
 
   a {
     background: 0 0
