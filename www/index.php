@@ -34,6 +34,7 @@ switch($controller->options['format']) {
     case 'rss':
     case 'xml':
     case 'js':
+    case 'iframe':
         $outputcontroller->addTemplatePath(dirname(__FILE__).'/templates/'.$controller->options['format']);
         break;
     case 'json':
