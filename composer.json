@@ -7,14 +7,6 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/unl/phpdwtparser.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/unl/phpunltemplates.git"
-        },
-        {
-            "type": "vcs",
             "url": "https://github.com/saltybeagle/SimpleCAS.git"
         },
         {
@@ -44,8 +36,7 @@
         }
     ],
     "require": {
-      "unl/php-dwt-parser": "0.9.*",
-      "unl/php-unl-templates": "1.4.*",
+      "unl/php-wdn-templates": "^4.1",
       "unl/auth": "0.5.*",
       "unl/unl_cache_lite": "0.1.*",
       "unl/reg-exp-router": "0.1.*",
