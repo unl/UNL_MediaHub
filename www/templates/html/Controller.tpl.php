@@ -9,6 +9,7 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
 $page->doctitle = '<title>MediaHub | University of Nebraska-Lincoln</title>';
 $page->titlegraphic = 'UNL MediaHub';
 $page->pagetitle = '';
+$page->affiliation = '';
 if ($title = $context->getReplacementData('pagetitle')) {
     $page->pagetitle = $title;
 }
