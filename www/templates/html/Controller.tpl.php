@@ -3,6 +3,11 @@ use UNL\Templates\Templates;
 
 $page = Templates::factory('Fixed', Templates::VERSION_4_1);
 
+$wdn_include_path = __DIR__ . '/../..';
+if (file_exists($wdn_include_path . '/wdn/templates_4.1')) {
+    $page->setLocalIncludePath($wdn_include_path);
+}
+
 $baseUrl = UNL_MediaHub_Controller::getURL();
 
 //Titles
