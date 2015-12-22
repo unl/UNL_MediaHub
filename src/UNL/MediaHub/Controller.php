@@ -361,8 +361,8 @@ class UNL_MediaHub_Controller
      */
     function postRun($me)
     {
-        $scanned = new UNL_Templates_Scanner($me);
-
+        $scanned = new \UNL\Templates\Scanner($me);
+        
         if (isset(self::$replacements['title'], $scanned->doctitle)) {
             $me = str_replace($scanned->doctitle,
                               '<title>'.self::$replacements['title'].'</title>',
