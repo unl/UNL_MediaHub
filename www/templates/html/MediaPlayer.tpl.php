@@ -251,7 +251,7 @@ $getTracks = $context->media->getTextTrackURLs();
                             html += '<div class="wdn-share-this-page mejs-control">';
                             html += '<input type="checkbox" id="mh-share-toggle'+mediahub_id+'" value="Show share options" class="wdn-input-driver mh-share-toggle">'
                             html += '<label for="mh-share-toggle'+mediahub_id+'" class="wdn-icon-share">Share This Page</label>';
-                            html += '<ul class="wdn-share-options">';
+                            html += '<ul class="mh-share-options">';
                             html += links;
                             html += '</ul>';
                             html += '</div>';

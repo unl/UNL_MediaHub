@@ -525,7 +525,8 @@
   }
 }
 
-.non-framework.mediahub-embed {
+//Share widget
+.mediahub-embed, .mh-video-band {
 
   a {
     background: 0 0
@@ -690,13 +691,13 @@
   }
 
   @media (min-width:768px) {
-    .wdn-share-options {
+    .mh-share-options {
       font-size: 12px;
       font-size: .75rem;
     }
   }
 
-  .media-content-head .wdn-share-options {
+  .mh-share-options {
     position: absolute;
     margin: 1px 0 0 -2.083em;
     z-index: 201;
@@ -712,11 +713,11 @@
     font-size: 12px;
     display: none;
   }
-  .media-content-head .wdn-share-options {
+  .media-content-head .mh-share-options {
     margin: 0;
     right: 0;
   }
-  .media-content-head .wdn-share-options:before {
+  .media-content-head .mh-share-options:before {
     content: '';
     position: absolute;
     top: -6px;
@@ -730,26 +731,26 @@
     right: 11px;
   }
 
-  .wdn-share-options li {
+  .mh-share-options li {
     list-style: none;
     padding: .602em 0;
   }
-  .wdn-share-options li [class^=wdn-icon-]:before {
+  .mh-share-options li [class^=wdn-icon-]:before {
     font-size: 16px;
     font-size: 1.2307692rem;
     margin-right: .602em;
   }
   @media (min-width:768px) {
-    .wdn-share-options li [class^=wdn-icon-]:before {
+    .mh-share-options li [class^=wdn-icon-]:before {
       font-size: 16px;
       font-size: 1rem;
     }
   }
-  .wdn-share-options li a {
+  .mh-share-options li a {
     padding: .602em 0;
     color: #c1c0be;
   }
-  .wdn-share-options li a:hover {
+  .mh-share-options li a:hover {
     color: #fefdfa;
   }
   .skipnav a {
@@ -819,7 +820,7 @@
       visibility: visible;
     }
   }
-  .mh-share-toggle:checked~.wdn-share-options, .wdn-share-this-page:hover .wdn-share-options {
+  .mh-share-toggle:checked~.mh-share-options, .wdn-share-this-page:hover .mh-share-options {
     display: block;
   }
 
@@ -833,7 +834,7 @@
   }
   .media-content-head .wdn-share-this-page .wdn-icon-share {
     padding: 7px 5px;
-    width: 20px;
+    width: 30px;
     border-radius: 3px;
   }
   .mejs-button.wide {
