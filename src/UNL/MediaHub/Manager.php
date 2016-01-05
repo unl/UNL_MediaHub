@@ -94,7 +94,7 @@ class UNL_MediaHub_Manager extends UNL_MediaHub_BaseController implements UNL_Me
      */
     function postRun($me)
     {
-        $scanned = new UNL_Templates_Scanner($me);
+        $scanned = new \UNL\Templates\Scanner($me);
         
         if (isset(self::$replacements['title'])) {
             $me = str_replace($scanned->doctitle,
