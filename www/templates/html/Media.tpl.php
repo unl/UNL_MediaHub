@@ -44,18 +44,11 @@ if ($type == 'video') {
 	';
 }
 $controller->setReplacementData('head', $meta);
-
-// Store the mediaplayer code in a variable, so we can re-use it for the embed
-$mediaplayer = $savvy->render($controller->getMediaPlayer($context));
 ?>
-
 
 <div class="wdn-band mh-video-band">
     <div class="wdn-inner-wrapper">
-        <?php echo $mediaplayer; ?>
-
-
-
+        <iframe height="667" width="100%" src="<?php echo $controller->getURL($context)?>?format=iframe" frameborder="0" allowfullscreen></iframe>
     </div>
 
 </div>
@@ -224,8 +217,7 @@ $mediaplayer = $savvy->render($controller->getMediaPlayer($context));
 
 <div id="sharing">
     <h3>Embed</h3>
-
-    <?php 
+    <?php
     $embed = $savvy->render(UNL_MediaHub_Media_Embed::getById($context->id, UNL_MediaHub_Controller::$current_embed_version));
     ?>
     <label for="embed_code">

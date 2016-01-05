@@ -57,7 +57,7 @@ class UNL_MediaHub_Controller
      * 
      * @var int
      */
-    public static $current_embed_version = 2;
+    public static $current_embed_version = 3;
 
     /**
      * The date on which captions are determined to be required.

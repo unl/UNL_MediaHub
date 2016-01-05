@@ -49,6 +49,7 @@
             <?php if (isset($context->media->id) && $context->media->id) { ?>
             var options = {
                 videoWidth: '100%',
+                //setDimensions: false,
                 videoHeight: '100%',
                 audioWidth: '100%',
                 toggleCaptionsButtonWhenOnlyOne: true,
