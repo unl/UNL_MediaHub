@@ -1,3 +1,7 @@
+<?php
+$controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'manager/">Manage Media</a></li> <li><a href="' . $context->media->getURL() .'">'.htmlspecialchars($context->media->title).'</a></li> <li>Edit Captions</li></ul>');
+?>
+
 <div class="wdn-band">
     <div class="wdn-inner-wrapper wdn-inner-padding-no-top">
         <h1>Manage Captions for: <?php echo $context->media->title ?></h1>

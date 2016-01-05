@@ -25,7 +25,7 @@ $page->breadcrumbs = '
 <ul>
     <li><a href="http://www.unl.edu/">UNL</a></li>
     <li><a href="' . UNL_MediaHub_Controller::getURL() .'">MediaHub</a></li>
-    <li>Manage Media</li>
+    <li><a href="' . UNL_MediaHub_Controller::getURL() .'manager/">Manage Media</a></li>
 </ul>';
 
 $page->navlinks = $savvy->render(null, 'Navigation.tpl.php');
