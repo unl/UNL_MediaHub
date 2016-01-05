@@ -12,6 +12,7 @@ if (file_exists($wdn_include_path . '/wdn/templates_4.1')) {
 $page->doctitle     = '<title>Manager | UNL MediaHub | University of Nebraska-Lincoln</title>';
 $page->titlegraphic = 'UNL MediaHub';
 $page->pagetitle    = '';
+$page->affiliation = '';
 
 //header
 $page->addStyleSheet(UNL_MediaHub_Controller::getURL().'templates/html/css/all.css');
