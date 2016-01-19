@@ -10,12 +10,16 @@ module.exports = function(grunt) {
                     compress: true
                 },
                 files: {
-                    './www/templates/html/css/player.css': './www/templates/html/less/player.less'
+                    './www/templates/html/css/player.css': './www/templates/html/less/player.less',
+                    './www/templates/iframe/css/iframe.css': './www/templates/iframe/less/iframe.less'
                 }
             }
         },
         watch: {
-            files: ['./www/templates/html/less/*'],
+            files: [
+                './www/templates/html/less/*',
+                './www/templates/iframe/less/*'
+            ],
             tasks: ['less'],
             options: {
                 event: ['changed', 'added', 'deleted']
