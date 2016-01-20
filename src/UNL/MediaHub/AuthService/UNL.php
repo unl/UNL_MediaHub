@@ -1,11 +1,6 @@
 <?php
 class UNL_MediaHub_AuthService_UNL extends UNL_MediaHub_AuthService_Interface
 {
-    /**
-     * @var UNL_Auth_SimpleCAS
-     */
-    protected $auth;
-
     protected $auto_auth_models = array(
         'UNL_MediaHub_MediaList',
         'UNL_MediaHub_DefaultHomepage',
@@ -13,20 +8,27 @@ class UNL_MediaHub_AuthService_UNL extends UNL_MediaHub_AuthService_Interface
         'UNL_MediaHub_FeedAndMedia',
         'media',
     );
+    
+    public static $cert_path = '/etc/pki/tls/cert.pem';
 
     public function __construct()
     {
-        $this->auth = UNL_Auth::factory('SimpleCAS');
+        if (!\phpCAS::isInitialized()) {
+            session_name('mediahub');
+            
+            \phpCAS::client(CAS_VERSION_2_0, 'login.unl.edu', 443, 'cas');
+            \phpCAS::setCasServerCACert(self::$cert_path);
+        }
         
-        $this->auth->handleSingleLogOut();
+        \phpCAS::handleLogoutRequests(false);
         
         if (isset($_GET['logout'])) {
-            $this->auth->logout();
+            $this->logout();
             exit();
         }
 
         if ($this->isLoggedIn()) {
-            $this->user = UNL_MediaHub_User::getByUid($this->auth->getUser());
+            $this->setUser(UNL_MediaHub_User::getByUid(\phpCAS::getUser()));
         }
     }
 
@@ -51,7 +53,9 @@ class UNL_MediaHub_AuthService_UNL extends UNL_MediaHub_AuthService_Interface
         }
         
         //Everything looks good.  Log in!
-        $this->auth->gatewayAuthentication();
+        if (\phpCAS::checkAuthentication()) {
+            $this->setUser(UNL_MediaHub_User::getByUid(\phpCAS::getUser()));
+        }
     }
 
     /**
@@ -59,7 +63,7 @@ class UNL_MediaHub_AuthService_UNL extends UNL_MediaHub_AuthService_Interface
      */
     public function isLoggedIn()
     {
-        if ($this->auth->isLoggedIn()) {
+        if (\phpCAS::isAuthenticated()) {
             return true;
         }
 
@@ -68,11 +72,18 @@ class UNL_MediaHub_AuthService_UNL extends UNL_MediaHub_AuthService_Interface
 
     public function login()
     {
-        $this->auth->login();
+        \phpCAS::forceAuthentication();
+
+
+        if (!\phpCAS::getUser()) {
+            throw new RuntimeException('Unable to authenticate', 403);
+        }
+
+        $this->setUser(UNL_MediaHub_User::getByUid(\phpCAS::getUser()));
     }
 
     public function logout()
     {
-        $this->auth->logout();
+        \phpCAS::logoutWithRedirectService(UNL_MediaHub_Controller::$url);
     }
 }
