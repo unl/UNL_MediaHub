@@ -29,7 +29,7 @@ if (isset($controller->options['autoplay']) && !$controller->options['autoplay']
 }
 
 ?>
-<video class="wdn_player" style="width:100%;height:100%" <?php echo $autoplay; ?> <?php echo $preload ?> src="<?php echo UNL_MediaHub_Controller::toAgnosticURL($context->getMediaURL()); ?>" controls data-mediahub-id="<?php echo $context->id ?>" data-url="<?php echo $controller->getURL($context); ?>" poster="<?php echo UNL_MediaHub_Controller::toAgnosticURL($context->getThumbnailURL()); ?>" title="<?php echo $context->title; ?>" crossorigin="anonymous">
+<video class="wdn_player" height="100" width="100" style="width:100%;height:100%" <?php echo $autoplay; ?> <?php echo $preload ?> src="<?php echo UNL_MediaHub_Controller::toAgnosticURL($context->getMediaURL()); ?>" controls data-mediahub-id="<?php echo $context->id ?>" data-url="<?php echo $controller->getURL($context); ?>" poster="<?php echo UNL_MediaHub_Controller::toAgnosticURL($context->getThumbnailURL()); ?>" title="<?php echo $context->title; ?>" crossorigin="anonymous">
     <?php foreach ($context->getTextTrackURLs() as $lang=>$track):?>
         <track src="<?php echo htmlentities(UNL_MediaHub_Controller::toAgnosticURL($track)) ?>" kind="subtitles" srclang="<?php echo $lang ?>" />
     <?php endforeach ?>

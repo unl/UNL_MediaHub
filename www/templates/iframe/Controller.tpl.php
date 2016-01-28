@@ -10,8 +10,15 @@
     <link rel="stylesheet" href="<?php echo UNL_MediaHub_Controller::toAgnosticURL(UNL_MediaHub_Controller::$url); ?>templates/iframe/css/iframe.css?v=<?php echo UNL_MediaHub_Controller::VERSION ?>" />
     
     <style>
-        body {
+        html, body {
             margin: 0px;
+            height: 100%;
+            background-color: #000;
+        }
+        .mejs-video {
+            position: static !important;
+            width: 100% !important;
+            height: 100% !important;
         }
     </style>
 </head>
