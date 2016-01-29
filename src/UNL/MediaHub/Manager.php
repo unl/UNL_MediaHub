@@ -76,13 +76,7 @@ class UNL_MediaHub_Manager extends UNL_MediaHub_BaseController implements UNL_Me
      */
     function setReplacementData($field, $data)
     {
-        switch ($field) {
-        case 'title':
-        case 'head':
-        case 'breadcrumbs':
-            self::$replacements[$field] = $data;
-            break;
-        }
+        self::$replacements[$field] = $data;
     }
     
     /**
@@ -94,7 +88,7 @@ class UNL_MediaHub_Manager extends UNL_MediaHub_BaseController implements UNL_Me
      */
     function postRun($me)
     {
-        $scanned = new UNL_Templates_Scanner($me);
+        $scanned = new \UNL\Templates\Scanner($me);
         
         if (isset(self::$replacements['title'])) {
             $me = str_replace($scanned->doctitle,
@@ -105,11 +99,12 @@ class UNL_MediaHub_Manager extends UNL_MediaHub_BaseController implements UNL_Me
         if (isset(self::$replacements['head'])) {
             $me = str_replace('</head>', self::$replacements['head'].'</head>', $me);
         }
-
-        if (isset(self::$replacements['breadcrumbs'])) {
+        
+        if (isset(self::$replacements['breadcrumbs'], $scanned->breadcrumbs)) {
             $me = str_replace($scanned->breadcrumbs,
-                              self::$replacements['breadcrumbs'],
-                              $me);
+                self::$replacements['breadcrumbs'],
+                $me);
+            unset(self::$replacements['breadcrumbs']);
         }
         
         return $me;

@@ -13,7 +13,7 @@ if ($context->isVideo()) {
 
 $context->loadReference('UNL_MediaHub_Media_Comment');
 $controller->setReplacementData('title', htmlspecialchars($context->title) . ' | MediaHub | University of Nebraska-Lincoln');
-$controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li>'.htmlspecialchars($context->title).'</li></ul>');
+$controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'search/">All Media</a></li> <li>'.htmlspecialchars($context->title).'</li></ul>');
 $meta = '
 <meta property="og:title" content="'.htmlentities($context->title, ENT_QUOTES).'" />
 <meta property="og:description" content="'.htmlentities(strip_tags($context->description), ENT_QUOTES).'" />
