@@ -54,6 +54,11 @@ $getTracks = $context->media->getTextTrackURLs();
                     var $video = $(v);
                     var mediahub_id = $video.attr('data-mediahub-id');
 
+                    var Safari = false;
+                    if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) { // detect Safari for fullscreen caption support
+                        Safari = true;
+                    } 
+
                     if(t.captionsButton){
                         t.container.append($(".mh_transcript_template").html());
                         $transcript = t.container.find('.mh-transcript');
@@ -73,13 +78,27 @@ $getTracks = $context->media->getTextTrackURLs();
 
                         t.captionsButton.before($myButton)
 
-                        t.controls.on("click", ".caption-toggle", function(e){
-                            $captionSearch.toggleClass("show");
-                        });
-
-                        $captionSearch.on("click", ".caption-toggle", function(e){
-                            $captionSearch.toggleClass("show");
-                        });
+                        if (!Safari) {
+                            t.controls.on("click", ".caption-toggle", function(e){
+                                $captionSearch.toggleClass("show");
+                            });
+                            $captionSearch.on("click", ".caption-toggle", function(e){
+                                $captionSearch.toggleClass("show");
+                            });
+                        } else { // exit fullscreen if searchable captions are opened in safari. 
+                            t.controls.on("click", ".caption-toggle", function(e){
+                                $captionSearch.toggleClass("show");
+                                if ($captionSearch.hasClass("full-screen") && $captionSearch.hasClass("show")) {
+                                    t.exitFullScreen();
+                                }
+                            });
+                            $captionSearch.on("click", ".caption-toggle", function(e){
+                                $captionSearch.toggleClass("show");
+                                if ($captionSearch.hasClass("full-screen") && $captionSearch.hasClass("show")) {
+                                    t.exitFullScreen();
+                                }
+                            });
+                        };
 
                         var displaytime = function(millis){
                             var hours = Math.floor(millis / 36e5),
@@ -151,18 +170,21 @@ $getTracks = $context->media->getTextTrackURLs();
                             $transcript.append(listItems);
                         };
 
-                            var origsenterFullScreen = t.enterFullScreen;
-                            t.enterFullScreen = function() {
-                                origsenterFullScreen.call(this);  
-                                t.container.find(".mh-caption-search").addClass("full-screen");
-                            };
 
-                            var origsexitFullScreen = t.exitFullScreen;
-                            t.exitFullScreen = function() {
-                                origsexitFullScreen.call(this);
-                                t.container.find(".mh-caption-search").removeClass("full-screen");
+                        var origsenterFullScreen = t.enterFullScreen;
+                        t.enterFullScreen = function() {
+                            origsenterFullScreen.call(this);  
+                            t.container.find(".mh-caption-search").addClass("full-screen");
+                            if (Safari) { // remove searchable captions if entering full screen on safari
+                                $captionSearch.removeClass("show");
                             };
+                        };
 
+                        var origsexitFullScreen = t.exitFullScreen;
+                        t.exitFullScreen = function() {
+                            origsexitFullScreen.call(this);
+                            t.container.find(".mh-caption-search").removeClass("full-screen");
+                        };
 
                         var origsEnableTrackButton = t.enableTrackButton;
                         t.enableTrackButton = function(lang, label) {
@@ -184,7 +206,7 @@ $getTracks = $context->media->getTextTrackURLs();
                     };
 
                     // Playcount
-                    var w = false, u = '<?php echo $controller->getURL($context->media) ?>';
+                    var w = false, u = '<?php echo UNL_MediaHub_Controller::toAgnosticURL($controller->getURL($context->media)) ?>';
                     m.addEventListener('play', function () {
                         if (!w) {
                             $.post(u, {action: "playcount"});
@@ -214,12 +236,12 @@ $getTracks = $context->media->getTextTrackURLs();
                             var sharelinks = {
                                 "wdn-icon-mail":     {title: 'Email', url:'mailto:?body=Checkout this ' + media_type + ': ' + share_url + '&subject=' + media_type + ' : ' + $title},
                                 "wdn-icon-facebook":     {title: 'Facebook', url:'https://www.facebook.com/sharer/sharer.php?u=' + share_url},  // facebook
-                                "wdn-icon-twitter":     {title: 'Twitter', url:'http://twitter.com/share?text=' + media_type + ': ' + $title + '&url=' + share_url}, // twitter
-                                "wdn-icon-linkedin-squared":     {title: 'LinkedIn', url:'http://www.linkedin.com/shareArticle?mini=true&url=' + share_url + '&title='+ $title +'&summary=Checkout this '+ media_type +'%20&source=University%20of%20Nebraska%20-%20Lincoln%20MediaHub'} //google plus
+                                "wdn-icon-twitter":     {title: 'Twitter', url:'https://twitter.com/share?text=' + media_type + ': ' + $title + '&url=' + share_url}, // twitter
+                                "wdn-icon-linkedin-squared":     {title: 'LinkedIn', url:'https://www.linkedin.com/shareArticle?mini=true&url=' + share_url + '&title='+ $title +'&summary=Checkout this '+ media_type +'%20&source=University%20of%20Nebraska%20-%20Lincoln%20MediaHub'} //google plus
                             }
 
                             //create share links
-                            var links = '<li><a href="http://go.unl.edu/?url=referer" class="wdn-icon-link" rel="nofollow">Get a Go URL</a></li>';
+                            var links = '<li><a href="https://go.unl.edu/?url=referer" class="wdn-icon-link" rel="nofollow">Get a Go URL</a></li>';
                             for (var key in sharelinks) {
                                 links += '<li class="outpost"><a href="'+sharelinks[key].url+'" rel="nofollow" target="_blank" class="'+key+'" title="Share on '+sharelinks[key].title+'">Share on '+sharelinks[key].title+'</a></li>';
                             }
@@ -229,7 +251,7 @@ $getTracks = $context->media->getTextTrackURLs();
                             html += '<div class="wdn-share-this-page mejs-control">';
                             html += '<input type="checkbox" id="mh-share-toggle'+mediahub_id+'" value="Show share options" class="wdn-input-driver mh-share-toggle">'
                             html += '<label for="mh-share-toggle'+mediahub_id+'" class="wdn-icon-share">Share This Page</label>';
-                            html += '<ul class="wdn-share-options">';
+                            html += '<ul class="mh-share-options">';
                             html += links;
                             html += '</ul>';
                             html += '</div>';
@@ -307,8 +329,10 @@ $getTracks = $context->media->getTextTrackURLs();
                     }
 
                     //Load the CSS
-                    WDN.loadCSS('<?php echo UNL_MediaHub_Controller::$url; ?>templates/html/css/player.css?v=<?php echo UNL_MediaHub_Controller::VERSION ?>', function() {
-                        initSharing(m, v);
+                    WDN.loadCSS('<?php echo UNL_MediaHub_Controller::toAgnosticURL(UNL_MediaHub_Controller::$url); ?>templates/html/css/player.css?v=<?php echo UNL_MediaHub_Controller::VERSION ?>', function() {
+                        <?php if($context->media->privacy === "PUBLIC"): ?>
+                            initSharing(m, v);
+                        <?php endif; ?>
                     });
 
                 }

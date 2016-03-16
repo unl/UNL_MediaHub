@@ -5,7 +5,7 @@ class UNL_MediaHub_RevOrderList extends UNL_MediaHub_List
         'orderby' => 'datecreated',
         'order'   => 'DESC',
         'page'    => 0,
-        'limit'   => 0,
+        'limit'   => 500,
         'additional_filters' => array(),
     );
 

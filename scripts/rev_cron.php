@@ -64,7 +64,7 @@ foreach ($orders->items as $order) {
             $caption_order->setOutputFormats(array('WebVtt'));
             
             //Generate a client ref
-            $client_ref = 'id:'.$order->id.', co:'.$order->costobjectnumber.', uid:'.$order->uid;
+            $client_ref = 'order:'.$order->id.', co:'.$order->costobjectnumber.', uid:'.$order->uid . ', mid: ' . $media->id . ', name: ' . $media->title;
             $caption_order->setClientRef($client_ref);
 
             //send the order

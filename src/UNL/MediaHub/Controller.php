@@ -48,7 +48,7 @@ class UNL_MediaHub_Controller
     /**
      * Version used for cache busting
      */
-    const VERSION = '1.2';
+    const VERSION = '1.3';
 
     static protected $replacements;
 
@@ -208,7 +208,7 @@ class UNL_MediaHub_Controller
             case 'media':
                 $media = $this->findRequestedMedia($this->options);
 
-                if (!$media->canView()) {
+                if (!$media->canView(UNL_MediaHub_AuthService::getInstance()->getUser())) {
                     throw new Exception('You do not have permission to view this.', 403);
                 }
                 
@@ -251,7 +251,7 @@ class UNL_MediaHub_Controller
                 
                 $media_embed = UNL_MediaHub_Media_Embed::getById($id, $version, $this->options);
 
-                if (!$media_embed->media->canView()) {
+                if (!$media_embed->media->canView(UNL_MediaHub_AuthService::getInstance()->getUser())) {
                     throw new Exception('You do not have permission to view this.', 403);
                 }
                 
@@ -361,8 +361,8 @@ class UNL_MediaHub_Controller
      */
     function postRun($me)
     {
-        $scanned = new UNL_Templates_Scanner($me);
-
+        $scanned = new \UNL\Templates\Scanner($me);
+        
         if (isset(self::$replacements['title'], $scanned->doctitle)) {
             $me = str_replace($scanned->doctitle,
                               '<title>'.self::$replacements['title'].'</title>',
@@ -449,6 +449,11 @@ class UNL_MediaHub_Controller
         $params = array_merge($params, $additional_params);
 
         return self::addURLParams($url, $params);
+    }
+    
+    public static function toAgnosticURL($url)
+    {
+        return str_replace('http://', '//', $url);
     }
 
     /**

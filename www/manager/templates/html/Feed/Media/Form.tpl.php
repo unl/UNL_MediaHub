@@ -11,6 +11,10 @@ if (isset($context->media)) {
         $mediaType = 'video';
     }
     $formView .= 'edit';
+
+    $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'manager/">Manage Media</a></li> <li><a href="' . $context->media->getURL() .'">'.htmlspecialchars($context->media->title).'</a></li>');
+} else {
+    $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'manager/">Manage Media</a></li> <li>Add Media</li></ul>');
 }
 
 $edit_caption_url = UNL_MediaHub_Manager::getURL() . '?view=editcaptions&id=' . $context->media->id;
@@ -56,7 +60,7 @@ WDN.initializePlugin('notice');
     <input type="hidden" name="__unlmy_posttarget" value="feed_media" />
     <input type="hidden" id="id" name="id" value="<?php echo $context->media->id ?>" />
     
-    <div class="wdn-band wdn-light-triad-band">
+    <div class="wdn-band wdn-light-triad-band mediahub-embed">
         <div class="wdn-inner-wrapper">
             <div class="wdn-grid-set" id="headline_main">
                 <div class="wdn-col-full">
