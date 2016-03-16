@@ -143,4 +143,9 @@ class UNL_MediaHub
         header('Location: '.$url);
         exit();
     }
+    
+    public static function getRootDir()
+    {
+        return dirname(dirname(__DIR__));
+    }
 }

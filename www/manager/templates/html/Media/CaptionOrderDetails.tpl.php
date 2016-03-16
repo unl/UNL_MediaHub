@@ -20,9 +20,11 @@
                         <option value="ttml">.ttml</option>
                         <option value="dfxp">.dfxp</option>
                         <option value="qt.txt">.qt.txt</option>
+                        <option value="txt">.txt</option>
                         <option value="vtt">.vtt</option>
                         <option value="mcc">.mcc</option>
                         <option value="cap">.cap</option>
+                        <option value="stl">.stl</option>
                     </select>
                     <input type="hidden" name="__unlmy_posttarget" value="download_rev" />
                     <input type="hidden" name="order_id" value="<?php echo $context->order->id ?>" />
