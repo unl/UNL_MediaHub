@@ -41,6 +41,8 @@
       "phansys/getid3": " ~2.1@dev",
       "swiftmailer/swiftmailer": "@stable",
       "jasig/phpcas": "~1.3",
-      "php": ">=5.5.0"
+      "captioning/captioning": "2.*",
+      "php": ">=5.5.0",
+        "leodido/langcode-conv": "^0.2.0"
     }
 }
