@@ -88,7 +88,7 @@ class UNL_MediaHub_Muxer
         $command .= ' -c:v copy'; //copy videon
         $command .= ' -c:a copy'; //copy audio
         if (empty($subtitles)) {
-            $command .= '-sn'; //Remove any existing subtitles
+            $command .= ' -sn'; //Remove any existing subtitles
         } else {
             $command .= ' -c:s mov_text'; //Create a move_text subtitle
         }
