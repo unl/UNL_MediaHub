@@ -591,5 +591,20 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     {
         return UNL_MediaHub_Controller::getURL($this);
     }
+
+    /**
+     * @param UNL_MediaHub_MediaTextTrack $track
+     * @return bool
+     */
+    public function setTextTrack(UNL_MediaHub_MediaTextTrack $track)
+    {
+        $this->media_text_tracks_id = $track->id;
+        $this->dateupdated = date('Y-m-d H:i:s');
+        $this->save();
+        
+        //now MUX!
+        $muxer = new UNL_MediaHub_Muxer($this);
+        return $muxer->mux();
+    }
 }
 

@@ -34,6 +34,10 @@ $has_output = false;
 foreach ($orders->items as $order) {
     echo $order->id . ': ' . $order->status . PHP_EOL;
     echo "\tstatus: " . $order->status . PHP_EOL;
+
+    /**
+     * @var $order UNL_MediaHub_RevOrder
+     */
     
     $media = $order->getMedia();
     
@@ -143,9 +147,7 @@ foreach ($orders->items as $order) {
                 }
 
                 //update the media to point to the new text track
-                $media->media_text_tracks_id = $media_text_track->id;
-                $media->dateupdated = date('Y-m-d H:i:s');
-                $media->save();
+                $media->setTextTrack($media_text_track);
                 
                 //Get the email for the person who requested the order
                 $data = file_get_contents('http://directory.unl.edu/?uid='.$order->uid.'&format=json');
