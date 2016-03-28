@@ -55,7 +55,8 @@ vagrantfile-local:
         host: detect
 server:
     install: '1'
-    packages: {  }
+    packages:
+      - mediainfo
 firewall:
     install: '1'
     rules: null
