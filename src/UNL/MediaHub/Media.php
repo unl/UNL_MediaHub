@@ -603,8 +603,12 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         $this->save();
         
         //now MUX!
-        $muxer = new UNL_MediaHub_Muxer($this);
-        return $muxer->mux();
+        if (UNL_MediaHub_Controller::$auto_mux) {
+            $muxer = new UNL_MediaHub_Muxer($this);
+            return $muxer->mux();
+        }
+        
+        return true;
     }
 }
 
