@@ -123,7 +123,8 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_media::mediaHasElement($this->id, 'content')) {
             return array(0=>$element->attributes['width'], 1=>$element->attributes['height']);
         }
-        return getimagesize($this->getThumbnailURL());
+        
+        return @getimagesize($this->getThumbnailURL());
     }
 
     /**
@@ -145,7 +146,11 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
                             'type'     => $this->type,
                             'lang'     => 'en');
         if ($this->isVideo()) {
-            list($width, $height) = $this->getVideoDimensions();
+            $result = $this->getVideoDimensions();
+            if (!$result) {
+                $result = array(0=>null, 1=>null);
+            }
+            list($width, $height) = $result;
             $attributes['width']  = $width;
             $attributes['height'] = $height;
         }
