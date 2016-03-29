@@ -20,14 +20,14 @@ class UNL_MediaHub_Muxer
 
         if (!$track) {
             //No track found, remove any subtitles from the video
-            return $this->ffmpeg_mux_video($this->media->getLocalFileName(), array());
+            return $this->ffmpegMuxVideo($this->media->getLocalFileName(), array());
         }
 
         $files = $track->getFiles();
 
         if (empty($files->items)) {
             //Track track actually has no files... remove any existing ones.
-            return $this->ffmpeg_mux_video($this->media->getLocalFileName(), array());
+            return $this->ffmpegMuxVideo($this->media->getLocalFileName(), array());
         }
 
         $srt_files = array();
@@ -67,12 +67,12 @@ class UNL_MediaHub_Muxer
             }
         }
 
-        $result = $this->ffmpeg_mux_video($this->media->getLocalFileName(), $srt_files);
+        $result = $this->ffmpegMuxVideo($this->media->getLocalFileName(), $srt_files);
         
         return $result;
     }
 
-    protected function ffmpeg_mux_video($video_file, array $subtitles) {
+    protected function ffmpegMuxVideo($video_file, array $subtitles) {
         $local_file_name = $this->media->getLocalFileName();
         $local_file_name_extension = pathinfo($local_file_name, PATHINFO_EXTENSION);
         $tmp_media_file = UNL_MediaHub::getRootDir() . '/tmp/' . $this->media->id . '.' . $local_file_name_extension;
