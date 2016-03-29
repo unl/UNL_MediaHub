@@ -3,7 +3,7 @@
 class UNL_MediaHub_MuxerDBTest extends UNL_MediaHub_DBTests_DBTestCase
 {
     /**
-     * Test the logic that determines if a user can edit media is working
+     * Test muxing videos, including muxing multiple languages and un-muxing video
      * @test
      */
     public function mux()
