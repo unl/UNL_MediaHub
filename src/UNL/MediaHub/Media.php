@@ -541,7 +541,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     }
 
     /**
-     * Pull amara captions for all videos
+     * Pull amara captions for this video
      * 
      * @return bool
      */
@@ -570,9 +570,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         }
 
         //update the media to point to the new text track
-        $this->media_text_tracks_id = $text_track->id;
-        $this->dateupdated = date('Y-m-d H:i:s');
-        $this->save();
+        $this->setTextTrack($text_track);
         
         return true;
     }
