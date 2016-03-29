@@ -16,6 +16,11 @@ class UNL_MediaHub_Muxer
             return false;
         }
 
+        if (!$this->media->isVideo()) {
+            //Can't mux non-videos
+            return false;
+        }
+
         $track = UNL_MediaHub_MediaTextTrack::getById($this->media->media_text_tracks_id);
 
         if (!$track) {
