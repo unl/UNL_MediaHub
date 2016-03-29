@@ -124,6 +124,8 @@ class UNL_MediaHub_Muxer
             $log_file = UNL_MediaHub::getRootDir() . '/tmp/mux_error_log.log';
             file_put_contents($log_file, $error, FILE_APPEND);
             
+            unlink($tmp_media_file);
+            
             return false;
         }
         
