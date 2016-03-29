@@ -42,34 +42,33 @@ class UNL_MediaHub_Muxer
              * @var $file UNL_MediaHub_MediaTextTrackFile
              */
 
-            //TODO: only get webVTT tracks
+            if (UNL_MediaHub_MediaTextTrackFile::FORMAT_VTT != $file->format) {
+                //Only use VTT (as that is what is currently created by default).
+                //There is currently no case where an srt will be created. This is just a failsafe.
+                continue;
+            }
+            
             $tmp_srt_file = UNL_MediaHub::getRootDir() . '/tmp/' . $this->media->id . '_' . $file->language . '.srt';
 
-            try
-            {
-                $vtt = new Captioning\Format\WebvttFile();
-                $vtt->loadFromString($file->file_contents);
-                $srt = $vtt->convertTo('subrip');
+            //Convert the webvtt format to srt (ffmpeg require srt)
+            $vtt = new Captioning\Format\WebvttFile();
+            $vtt->loadFromString($file->file_contents);
+            $srt = $vtt->convertTo('subrip');
 
-                $srt->save($tmp_srt_file);
+            $srt->save($tmp_srt_file);
 
-                //The language is stored in the database as iso639-1
-                //ffmpeg requires iso639-2, so we need to convert it.
-                $adapter = new \Conversio\Adapter\LanguageCode();
-                $options = new \Conversio\Adapter\Options\LanguageCodeOptions();
-                $options->setOutput('iso639-2/b');
-                $converter = new \Conversio\Conversion($adapter);
-                $converter->setAdapterOptions($options);
+            //The language is stored in the database as iso639-1
+            //ffmpeg requires iso639-2, so we need to convert it.
+            $adapter = new \Conversio\Adapter\LanguageCode();
+            $options = new \Conversio\Adapter\Options\LanguageCodeOptions();
+            $options->setOutput('iso639-2/b');
+            $converter = new \Conversio\Conversion($adapter);
+            $converter->setAdapterOptions($options);
 
-                $srt_files[] = array(
-                    'language' => $converter->filter($file->language),
-                    'file' => $tmp_srt_file,
-                );
-            }
-            catch(Exception $e)
-            {
-                echo "Error: ".$e->getMessage()."\n"; exit();
-            }
+            $srt_files[] = array(
+                'language' => $converter->filter($file->language),
+                'file' => $tmp_srt_file,
+            );
         }
 
         $result = $this->ffmpegMuxVideo($this->media->getLocalFileName(), $srt_files);
