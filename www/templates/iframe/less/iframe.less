@@ -339,9 +339,9 @@
     padding: .75em;
     font-size: 1rem;
     cursor: pointer;
+    width: 100%;
     display: block;
   }
-
 
   .mh-tooltip {
     background-color: #1B9AE8;
@@ -987,4 +987,14 @@
   }
 
 
+
+  .mejs-controls div.mejs-time-rail {
+    /* Reduce by 1 px to prevent overfilling the .mejs-controls container, thus causing a slight scroll in iframe */
+    padding-top: 4px;
+  }
+  
+  .mejs-mediaelement video {
+    /* This was inline, and was causing extra space below it, thus causing the iframe to scroll */
+    display: block;
+  }
 }
