@@ -4,4 +4,3 @@ if (count($context->items)) {
         echo $savvy->render($media);
     }
 }
-?>
