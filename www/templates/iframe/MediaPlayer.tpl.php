@@ -16,7 +16,7 @@
         <div class="mh-caption-search">
             <div class="title wdn-sans-serif wdn-icon-search">
                 Searchable Transcript
-                <div class="wdn-icon-info mh-tooltip hang-right italic">
+                <div class="wdn-icon-info mh-tooltip italic">
                     <div>
                         <ul>
                             <li>Use the text input to search the transcript. </li>
@@ -141,9 +141,6 @@
                                 var search = $(this).val().toLowerCase();
                                 var subtitlesLength;
                                 var i;
-                                if (!search) {
-                                    return;
-                                }
 
                                 subtitlesLength = track.entries.text.length;
                                 for (i = 0; i < subtitlesLength; i++) {
@@ -154,6 +151,7 @@
                                         $transcript.find("a").eq(i).removeClass("highlight");
                                     }
                                 };
+                                $transcript.scrollTo(".highlight", 100);
                             });
 
                             t.container.find(".mh-paragraph-icons").off();
@@ -358,6 +356,14 @@
                 });
             });
         };
-        e();
+        e();       
     })();
+
+    jQuery.fn.scrollTo = function(elem, speed) { 
+        $(this).animate({
+            scrollTop:  $(this).scrollTop() - $(this).offset().top + $(elem).offset().top - 13
+        }, speed == undefined ? 1000 : speed); 
+        return this; 
+    };
+
 </script>

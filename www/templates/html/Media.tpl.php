@@ -47,7 +47,7 @@ $controller->setReplacementData('head', $meta);
 ?>
 
 <div class="wdn-band mh-video-band">
-    <div class="wdn-inner-wrapper">
+    <div class="wdn-inner-wrapper mh-iframe-wrapper">
         <iframe height="667" width="100%" src="<?php echo $controller->getURL($context)?>?format=iframe" frameborder="0" allowfullscreen></iframe>
     </div>
 
