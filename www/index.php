@@ -37,11 +37,10 @@ switch($controller->options['format']) {
     case 'js':
         $format = $controller->options['format'];
         if ('rss' == $format) {
+            //rss should be the same as xml
             $format = 'xml';
         }
-        //Remove the old template path, as these should not fall back to html
-        $outputcontroller->setTemplatePath();
-        //Now add the right format path
+        
         $outputcontroller->addTemplatePath(dirname(__FILE__).'/templates/'.$format);
         break;
     case 'json':
