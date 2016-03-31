@@ -1,2 +1,2 @@
 <?php
-echo $savvy->render($context->top_media);
+echo $savvy->render($context->getTopMedia());
