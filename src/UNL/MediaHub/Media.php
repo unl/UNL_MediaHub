@@ -123,7 +123,8 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_media::mediaHasElement($this->id, 'content')) {
             return array(0=>$element->attributes['width'], 1=>$element->attributes['height']);
         }
-        return getimagesize($this->getThumbnailURL());
+        
+        return @getimagesize($this->getThumbnailURL());
     }
 
     /**
@@ -145,7 +146,11 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
                             'type'     => $this->type,
                             'lang'     => 'en');
         if ($this->isVideo()) {
-            list($width, $height) = $this->getVideoDimensions();
+            $result = $this->getVideoDimensions();
+            if (!$result) {
+                $result = array(0=>null, 1=>null);
+            }
+            list($width, $height) = $result;
             $attributes['width']  = $width;
             $attributes['height'] = $height;
         }
@@ -536,7 +541,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     }
 
     /**
-     * Pull amara captions for all videos
+     * Pull amara captions for this video
      * 
      * @return bool
      */
@@ -565,9 +570,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         }
 
         //update the media to point to the new text track
-        $this->media_text_tracks_id = $text_track->id;
-        $this->dateupdated = date('Y-m-d H:i:s');
-        $this->save();
+        $this->setTextTrack($text_track);
         
         return true;
     }
@@ -585,6 +588,25 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     public function getURL()
     {
         return UNL_MediaHub_Controller::getURL($this);
+    }
+
+    /**
+     * @param UNL_MediaHub_MediaTextTrack $track
+     * @return bool
+     */
+    public function setTextTrack(UNL_MediaHub_MediaTextTrack $track)
+    {
+        $this->media_text_tracks_id = $track->id;
+        $this->dateupdated = date('Y-m-d H:i:s');
+        $this->save();
+        
+        //now MUX!
+        if (UNL_MediaHub_Controller::$auto_mux) {
+            $muxer = new UNL_MediaHub_Muxer($this);
+            return $muxer->mux();
+        }
+        
+        return true;
     }
 }
 
