@@ -147,7 +147,12 @@ foreach ($orders->items as $order) {
                 }
 
                 //update the media to point to the new text track
-                $media->setTextTrack($media_text_track);
+                try {
+                    $media->setTextTrack($media_text_track);
+                } catch (UNL_MediaHub_MuxerException $e) {
+                    echo "\tERROR: unable to mux video with caption track" . PHP_EOL;
+                }
+                
                 
                 //Get the email for the person who requested the order
                 $data = file_get_contents('http://directory.unl.edu/?uid='.$order->uid.'&format=json');
