@@ -168,6 +168,7 @@ class UNL_MediaHub_Controller
         
         switch ($this->options['format']) {
         case 'xml':
+        case 'mosaic-xml':
         case 'rss':
             // Send XML content-type headers, and assign XML output template.
             header('Content-type: text/xml');
