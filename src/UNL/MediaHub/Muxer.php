@@ -125,7 +125,7 @@ class UNL_MediaHub_Muxer
             
             unlink($tmp_media_file);
             
-            return false;
+            throw new UNL_MediaHub_MuxerException('Unable to mux video');
         }
         
         //Move the new muxed file into place because it was a success
