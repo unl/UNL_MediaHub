@@ -19,7 +19,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
         $editor = 'unlwdn@gmail.com';
     } ?>
     <managingEditor><?php echo $editor; ?></managingEditor>
-    <webMaster>brett.bieber@gmail.com (Brett Bieber)</webMaster>
+    <webMaster>wdn@unl.edu</webMaster>
     <ttl>5</ttl>
     <?php if ($context->feed->hasImage()) :
     switch ($context->feed->image_type) {

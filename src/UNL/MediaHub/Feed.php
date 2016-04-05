@@ -248,13 +248,12 @@ class UNL_MediaHub_Feed extends UNL_MediaHub_Models_BaseFeed
 
     public function getEditorEmail()
     {
-        if ($user = @file_get_contents('http://peoplefinder.unl.edu/service.php?uid='.urlencode($this->uidcreated).'&format=json')) {
-            $user = json_decode($user);
-            if (isset($user->mail)) {
-                if (is_object($user->mail)) {
-                    return current($user->mail);
-                }
-                return (string)$user->mail;
+        if ($user = @file_get_contents('http://directory.unl.edu/people/'.urlencode($this->uidcreated).'.json')) {
+            if (!$user = json_decode($user)) {
+                return false;
+            }
+            if (isset($user->mail[0])) {
+                return (string)$user->mail[0];
             }
         }
         return false;
