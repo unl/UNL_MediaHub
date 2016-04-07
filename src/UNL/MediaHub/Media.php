@@ -146,10 +146,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
                             'type'     => $this->type,
                             'lang'     => 'en');
         if ($this->isVideo()) {
-            $result = $this->getVideoDimensions();
-            if (!$result) {
-                $result = array(0=>null, 1=>null);
-            }
+            $result = $this->getVideoDimensions()?:[null, null];
             list($width, $height) = $result;
             $attributes['width']  = $width;
             $attributes['height'] = $height;
