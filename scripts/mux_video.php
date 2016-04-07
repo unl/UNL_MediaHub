@@ -21,6 +21,5 @@ if (!$media) {
 $muxer = new UNL_MediaHub_Muxer($media);
 
 $result = $muxer->mux();
-var_dump($result);
 
-//TODO integrate, add tests and plan deployment.
+echo 'DONE' . PHP_EOL;
