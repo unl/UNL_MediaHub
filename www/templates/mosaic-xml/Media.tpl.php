@@ -1,9 +1,9 @@
 <video>
     <title><?php echo htmlspecialchars($context->title); ?></title>
     <id><?php echo $context->id ?></id>
-    <description>
+    <description><![CDATA[
         <?php echo strip_tags($context->description); ?>
-    </description>
+    ]]></description>
     <?php 
     //Generate the correct date format, they want UTC
     $datetime = new DateTime($context->datecreated);
