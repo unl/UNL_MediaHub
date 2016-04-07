@@ -90,6 +90,14 @@ class UNL_MediaHub_Controller
                        'UNL_MediaHub_Feed_Media_NamespacedElements_boxee',
                        'UNL_MediaHub_Feed_Media_NamespacedElements_geo',
                        'UNL_MediaHub_Feed_Media_NamespacedElements_mediahub');
+
+    /**
+     * Whether or not videos should be auto-muxed
+     * 
+     * @var bool
+     */
+    public static $auto_mux = true;
+    
     /**
      * Construct a new controller.
      *
