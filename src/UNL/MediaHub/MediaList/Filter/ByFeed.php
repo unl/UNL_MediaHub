@@ -1,6 +1,6 @@
 <?php
 
-class UNL_MediaHub_MediaList_Filter_ByFeed implements UNL_MediaHub_Filter
+class UNL_MediaHub_MediaList_Filter_ByFeed implements UNL_MediaHub_NativeSqlFilter
 {
     protected $feed;
     protected $privacy = 'PUBLIC';
@@ -13,7 +13,7 @@ class UNL_MediaHub_MediaList_Filter_ByFeed implements UNL_MediaHub_Filter
         $this->feed = $feed;
     }
     
-    function apply(Doctrine_Query &$query)
+    function apply(Doctrine_RawSql &$query)
     {
         $sql = 'm.UNL_MediaHub_Feed_Media.feed_id = ?';
         $params = array($this->feed->id);

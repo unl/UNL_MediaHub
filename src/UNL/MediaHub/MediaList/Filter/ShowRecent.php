@@ -1,8 +1,8 @@
 <?php
 
-class UNL_MediaHub_MediaList_Filter_ShowRecent implements UNL_MediaHub_Filter
+class UNL_MediaHub_MediaList_Filter_ShowRecent implements UNL_MediaHub_NativeSqlFilter
 {
-    function apply(Doctrine_Query &$query) {}
+    function apply(Doctrine_RawSql &$query) {}
     
     function getLabel()
     {

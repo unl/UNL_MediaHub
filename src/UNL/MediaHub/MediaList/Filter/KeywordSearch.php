@@ -1,5 +1,5 @@
 <?php 
-class UNL_MediaHub_MediaList_Filter_KeywordSearch implements UNL_MediaHub_Filter
+class UNL_MediaHub_MediaList_Filter_KeywordSearch implements UNL_MediaHub_NativeSqlFilter
 {
     protected $query;
     
@@ -8,9 +8,10 @@ class UNL_MediaHub_MediaList_Filter_KeywordSearch implements UNL_MediaHub_Filter
         $this->query = $query;
     }
     
-    function apply(Doctrine_Query &$query)
+    function apply(Doctrine_RawSql &$query)
     {
-        $query->where('m.UNL_MediaHub_Feed_Media_NamespacedElements_itunes.element = "keywords" AND m.UNL_MediaHub_Feed_Media_NamespacedElements_itunes.value LIKE ?', array('%'.$this->query.'%'));
+        $query->addFrom('LEFT JOIN media_has_nselement mns ON (mns.media_id = m.id)');
+        $query->where('mns.element = "keywords" AND mns.value LIKE ?', array('%'.$this->query.'%'));
     }
     
     function getLabel()
