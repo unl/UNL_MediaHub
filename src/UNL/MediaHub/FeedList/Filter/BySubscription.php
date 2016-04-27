@@ -8,7 +8,7 @@ class UNL_MediaHub_FeedList_Filter_BySubscription implements UNL_MediaHub_Filter
         $this->subscription = $subscription;
     }
     
-    function apply(Doctrine_Query &$query)
+    function apply(Doctrine_Query_Abstract &$query)
     {
         $query->where('UNL_MediaHub_Subscription.id = ? AND UNL_MediaHub_Feed_Subscription.feed_id = f.id', $this->subscription->id);
         $query->distinct();

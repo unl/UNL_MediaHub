@@ -1,5 +1,5 @@
 <?php
-class UNL_MediaHub_MediaList_Filter_TextSearch implements UNL_MediaHub_NativeSqlFilter
+class UNL_MediaHub_MediaList_Filter_TextSearch implements UNL_MediaHub_Filter
 {
     protected $query;
     
@@ -8,7 +8,7 @@ class UNL_MediaHub_MediaList_Filter_TextSearch implements UNL_MediaHub_NativeSql
         $this->query = $query;
     }
     
-    function apply(Doctrine_RawSql &$query)
+    function apply(Doctrine_Query_Abstract &$query)
     {
         $query->where('(m.title LIKE ? OR m.description LIKE ?)', array('%'.$this->query.'%', '%'.$this->query.'%'));
     }

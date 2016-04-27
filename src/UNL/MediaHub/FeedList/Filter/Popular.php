@@ -2,7 +2,7 @@
 class UNL_MediaHub_FeedList_Filter_Popular implements UNL_MediaHub_Filter
 {
     
-    function apply(Doctrine_Query &$query)
+    function apply(Doctrine_Query_Abstract &$query)
     {
         $file = dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))).'/scripts/popular_channels.txt';
         if (file_exists($file)) {

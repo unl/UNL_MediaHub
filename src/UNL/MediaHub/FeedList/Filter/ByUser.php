@@ -8,7 +8,7 @@ class UNL_MediaHub_FeedList_Filter_ByUser implements UNL_MediaHub_Filter
         $this->user = $user;
     }
     
-    function apply(Doctrine_Query &$query)
+    function apply(Doctrine_Query_Abstract &$query)
     {
         $query->where('UNL_MediaHub_User_Permission.user_uid = ? AND UNL_MediaHub_User_Permission.feed_id = f.id', $this->user->uid);
         $query->distinct();

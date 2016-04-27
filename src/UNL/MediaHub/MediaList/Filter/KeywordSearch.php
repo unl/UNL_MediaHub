@@ -1,5 +1,5 @@
 <?php 
-class UNL_MediaHub_MediaList_Filter_KeywordSearch implements UNL_MediaHub_NativeSqlFilter
+class UNL_MediaHub_MediaList_Filter_KeywordSearch implements UNL_MediaHub_Filter
 {
     protected $query;
     
@@ -8,7 +8,7 @@ class UNL_MediaHub_MediaList_Filter_KeywordSearch implements UNL_MediaHub_Native
         $this->query = $query;
     }
     
-    function apply(Doctrine_RawSql &$query)
+    function apply(Doctrine_Query_Abstract &$query)
     {
         $query->addFrom('LEFT JOIN media_has_nselement mns ON (mns.media_id = m.id)');
         $query->where('mns.element = "keywords" AND mns.value LIKE ?', array('%'.$this->query.'%'));

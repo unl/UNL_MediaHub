@@ -1,12 +1,12 @@
 <?php
-class UNL_MediaHub_MediaList_Filter_WithPoster implements UNL_MediaHub_NativeSqlFilter
+class UNL_MediaHub_MediaList_Filter_WithPoster implements UNL_MediaHub_Filter
 {
     function __construct()
     {
         
     }
 
-    function apply(Doctrine_RawSql &$query)
+    function apply(Doctrine_Query_Abstract &$query)
     {
         $query->where('m.poster IS NOT NULL AND m.poster != ""');
     }

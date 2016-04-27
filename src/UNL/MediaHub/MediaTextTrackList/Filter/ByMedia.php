@@ -8,7 +8,7 @@ class UNL_MediaHub_MediaTextTrackList_Filter_ByMedia implements UNL_MediaHub_Fil
         $this->query = $query;
     }
 
-    function apply(Doctrine_Query &$query)
+    function apply(Doctrine_Query_Abstract &$query)
     {
         $query->where('(tt.media_id = ?)', array($this->query));
     }

@@ -9,7 +9,7 @@ class UNL_MediaHub_UserList_Filter_ByFeed implements UNL_MediaHub_Filter
         $this->feed = $feed;
     }
     
-    function apply(Doctrine_Query &$query)
+    function apply(Doctrine_Query_Abstract &$query)
     {
         $query->select('DISTINCT u.*');
         $query->from('UNL_MediaHub_User u, UNL_MediaHub_User_Permission up');

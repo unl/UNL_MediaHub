@@ -8,7 +8,7 @@ class UNL_MediaHub_SubscriptionList_Filter_ByUser implements UNL_MediaHub_Filter
         $this->user = $user;
     }
     
-    function apply(Doctrine_Query &$query)
+    function apply(Doctrine_Query_Abstract &$query)
     {
         $query->where('s.uidcreated = ?', $this->user->uid);
         $query->distinct();

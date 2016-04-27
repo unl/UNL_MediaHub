@@ -8,12 +8,11 @@ interface UNL_MediaHub_Filter
 {
     /**
      * Applies the filter to the query
-     * 
-     * @param Doctrine_Query $query The query to be filtered.
-     * 
-     * @return void
+     *
+     * @param Doctrine_Query_Abstract $query The query to be filtered.
+     *
      */
-    function apply(Doctrine_Query &$query);
+    function apply(Doctrine_Query_Abstract &$query);
     
     /**
      * A string label for this filter, mostly used in views

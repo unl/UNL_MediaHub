@@ -8,7 +8,7 @@ class UNL_MediaHub_RevOrderList_Filter_ReadyForBilling implements UNL_MediaHub_F
         $this->query = $after_date;
     }
 
-    function apply(Doctrine_Query &$query)
+    function apply(Doctrine_Query_Abstract &$query)
     {
         $query->where('(ro.status IN ("' . UNL_MediaHub_RevOrder::STATUS_MEDIAHUB_COMPLETE . '"))');
 

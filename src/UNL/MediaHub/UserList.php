@@ -11,8 +11,16 @@ class UNL_MediaHub_UserList extends UNL_MediaHub_List
         'additional_filters' => array(),
     );
     
-    function setOrderBy(Doctrine_Query &$query)
+    function setOrderBy(Doctrine_Query_Abstract &$query)
     {
         $query->orderby('u.'.$this->options['orderby'].' '.$this->options['order']);
+    }
+
+    /**
+     * @return Doctrine_Query_Abstract
+     */
+    protected function createQuery()
+    {
+        return new Doctrine_Query();
     }
 }

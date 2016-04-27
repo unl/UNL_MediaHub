@@ -1,7 +1,7 @@
 <?php
-class UNL_MediaHub_MediaList_Filter_Video implements UNL_MediaHub_NativeSqlFilter
+class UNL_MediaHub_MediaList_Filter_Video implements UNL_MediaHub_Filter
 {
-    function apply(Doctrine_RawSql &$query)
+    function apply(Doctrine_Query_Abstract &$query)
     {
         $query->andWhere('m.type LIKE "video/%"');
     }

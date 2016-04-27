@@ -2,7 +2,7 @@
 class UNL_MediaHub_FeedList_Filter_WithTitle implements UNL_MediaHub_Filter
 {
     
-    function apply(Doctrine_Query &$query)
+    function apply(Doctrine_Query_Abstract &$query)
     {
         $query->where('f.title IS NOT NULL AND f.title != ""');
     }

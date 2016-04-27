@@ -1,5 +1,5 @@
 <?php
-class UNL_MediaHub_MediaList_Filter_Privacy implements UNL_MediaHub_NativeSqlFilter
+class UNL_MediaHub_MediaList_Filter_Privacy implements UNL_MediaHub_Filter
 {
     /**
      * @var UNL_MediaHub_User
@@ -32,7 +32,7 @@ class UNL_MediaHub_MediaList_Filter_Privacy implements UNL_MediaHub_NativeSqlFil
      * 
      * @param Doctrine_RawSql $query
      */
-    function apply(Doctrine_RawSql &$query)
+    function apply(Doctrine_Query_Abstract &$query)
     {
         $where = '(';
         

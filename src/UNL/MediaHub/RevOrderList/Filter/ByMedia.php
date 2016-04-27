@@ -8,7 +8,7 @@ class UNL_MediaHub_RevOrderList_Filter_ByMedia implements UNL_MediaHub_Filter
         $this->query = $query;
     }
 
-    function apply(Doctrine_Query &$query)
+    function apply(Doctrine_Query_Abstract &$query)
     {
         $query->where('(ro.media_id = ?)', array($this->query));
     }
