@@ -15,10 +15,11 @@ class UNL_MediaHub_MediaList_Filter_ByFeed implements UNL_MediaHub_NativeSqlFilt
     
     function apply(Doctrine_RawSql &$query)
     {
-        $sql = 'm.UNL_MediaHub_Feed_Media.feed_id = ?';
+        $query->addFrom('LEFT JOIN feed_has_media fm2 ON (fm2.media_id = m.id)');
+        $sql = 'fm2.feed_id = ?';
         $params = array($this->feed->id);
         
-        $query->where($sql, $params);
+        $query->andWhere($sql, $params);
     }
     
     function getLabel()
