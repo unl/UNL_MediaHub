@@ -52,5 +52,8 @@
       "post-install-cmd": [
         "if [ -d ffmpeg ]; then echo 'ffmpeg is already installed'; else mkdir ffmpeg && wget -q -O ffmpeg-download.tar.xz http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz && tar xf ffmpeg-download.tar.xz --directory ffmpeg --strip-components=1 && rm -f ffmpeg-download.tar.xz && chmod -R og+x ffmpeg; fi"
       ]
+    },
+    "config": {
+        "secure-http": false
     }
 }
