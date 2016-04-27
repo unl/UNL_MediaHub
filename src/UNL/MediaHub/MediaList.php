@@ -1,6 +1,6 @@
 <?php
 
-class UNL_MediaHub_MediaList extends UNL_MediaHub_List
+class UNL_MediaHub_MediaList extends UNL_MediaHub_NativeSqlList
 {
     
     public $options = array(
@@ -13,7 +13,13 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
         'f'                  => '',
     );
    
-    public $tables = 'UNL_MediaHub_Media m';
+    public $tables = 'media m';
+    protected $select = '{m.id}';
+
+    protected function setComponent(Doctrine_RawSql &$query)
+    {
+        $query->addComponent('m', 'UNL_MediaHub_Media m');
+    }
 
     public function __construct($options = array())
     {
@@ -86,7 +92,7 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
         $this->options['page'] = (int)$this->options['page'];
     }
     
-    public function setOrderBy(Doctrine_Query &$query)
+    public function setOrderBy(Doctrine_RawSql &$query)
     {
         $query->orderby('m.'.$this->options['orderby'].' '.$this->options['order']);
     }
