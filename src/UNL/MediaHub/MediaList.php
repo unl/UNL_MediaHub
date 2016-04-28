@@ -13,7 +13,8 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
         'f'                  => '',
     );
    
-    public $tables = 'UNL_MediaHub_Media m';
+    public $tables = 'media m';
+    protected $select = '{m.id}';
 
     public function __construct($options = array())
     {
@@ -86,7 +87,7 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
         $this->options['page'] = (int)$this->options['page'];
     }
     
-    public function setOrderBy(Doctrine_Query &$query)
+    public function setOrderBy(Doctrine_Query_Abstract $query)
     {
         $query->orderby('m.'.$this->options['orderby'].' '.$this->options['order']);
     }
@@ -139,5 +140,16 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
         $feeds = new UNL_MediaHub_FeedList($options);
         $feeds->run();
         return $feeds;
+    }
+
+    /**
+     * @return Doctrine_Query_Abstract
+     */
+    protected function createQuery()
+    {
+        $query = new Doctrine_RawSql();
+        $query->addComponent('m', 'UNL_MediaHub_Media m');
+        
+        return $query;
     }
 }

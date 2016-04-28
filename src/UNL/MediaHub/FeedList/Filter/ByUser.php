@@ -3,33 +3,33 @@ class UNL_MediaHub_FeedList_Filter_ByUser implements UNL_MediaHub_Filter
 {
     protected $user;
     
-    function __construct(UNL_MediaHub_User $user)
+    public function __construct(UNL_MediaHub_User $user)
     {
         $this->user = $user;
     }
     
-    function apply(Doctrine_Query &$query)
+    public function apply(Doctrine_Query_Abstract $query)
     {
         $query->where('UNL_MediaHub_User_Permission.user_uid = ? AND UNL_MediaHub_User_Permission.feed_id = f.id', $this->user->uid);
         $query->distinct();
     }
     
-    function getLabel()
+    public function getLabel()
     {
         return '';
     }
     
-    function getType()
+    public function getType()
     {
         return '';
     }
     
-    function getValue()
+    public function getValue()
     {
         return '';
     }
     
-    function __toString()
+    public function __toString()
     {
         return '';
     }
