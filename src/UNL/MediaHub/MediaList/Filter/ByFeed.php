@@ -8,12 +8,12 @@ class UNL_MediaHub_MediaList_Filter_ByFeed implements UNL_MediaHub_Filter
     /**
      * @param UNL_MediaHub_Feed $feed
      */
-    function __construct(UNL_MediaHub_Feed $feed)
+    public function __construct(UNL_MediaHub_Feed $feed)
     {
         $this->feed = $feed;
     }
     
-    function apply(Doctrine_Query_Abstract &$query)
+    public function apply(Doctrine_Query_Abstract $query)
     {
         $query->addFrom('LEFT JOIN feed_has_media fm2 ON (fm2.media_id = m.id)');
         $sql = 'fm2.feed_id = ?';
@@ -22,22 +22,22 @@ class UNL_MediaHub_MediaList_Filter_ByFeed implements UNL_MediaHub_Filter
         $query->andWhere($sql, $params);
     }
     
-    function getLabel()
+    public function getLabel()
     {
         return '';
     }
     
-    function getType()
+    public function getType()
     {
         return 'feed';
     }
     
-    function getValue()
+    public function getValue()
     {
         return $this->feed;
     }
     
-    function __toString()
+    public function __toString()
     {
         return '';
     }

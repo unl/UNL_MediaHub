@@ -3,12 +3,12 @@ class UNL_MediaHub_RevOrderList_Filter_ReadyForBilling implements UNL_MediaHub_F
 {
     protected $after_date;
 
-    function __construct($after_date = null)
+    public function __construct($after_date = null)
     {
         $this->query = $after_date;
     }
 
-    function apply(Doctrine_Query_Abstract &$query)
+    public function apply(Doctrine_Query_Abstract $query)
     {
         $query->where('(ro.status IN ("' . UNL_MediaHub_RevOrder::STATUS_MEDIAHUB_COMPLETE . '"))');
 
@@ -17,22 +17,22 @@ class UNL_MediaHub_RevOrderList_Filter_ReadyForBilling implements UNL_MediaHub_F
         }
     }
 
-    function getLabel()
+    public function getLabel()
     {
         return '';
     }
 
-    function getType()
+    public function getType()
     {
         return '';
     }
 
-    function getValue()
+    public function getValue()
     {
         return '';
     }
 
-    function __toString()
+    public function __toString()
     {
         return '';
     }

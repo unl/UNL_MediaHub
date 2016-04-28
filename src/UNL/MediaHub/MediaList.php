@@ -87,7 +87,7 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
         $this->options['page'] = (int)$this->options['page'];
     }
     
-    public function setOrderBy(Doctrine_Query_Abstract &$query)
+    public function setOrderBy(Doctrine_Query_Abstract $query)
     {
         $query->orderby('m.'.$this->options['orderby'].' '.$this->options['order']);
     }

@@ -3,32 +3,32 @@ class UNL_MediaHub_MediaTextTrackFileList_Filter_ByTextTrack implements UNL_Medi
 {
     protected $query;
 
-    function __construct($query)
+    public function __construct($query)
     {
         $this->query = $query;
     }
 
-    function apply(Doctrine_Query_Abstract &$query)
+    public function apply(Doctrine_Query_Abstract $query)
     {
         $query->where('(ttf.media_text_tracks_id = ?)', array($this->query));
     }
 
-    function getLabel()
+    public function getLabel()
     {
         return '';
     }
 
-    function getType()
+    public function getType()
     {
         return '';
     }
 
-    function getValue()
+    public function getValue()
     {
         return '';
     }
 
-    function __toString()
+    public function __toString()
     {
         return '';
     }

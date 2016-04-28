@@ -1,27 +1,27 @@
 <?php
 class UNL_MediaHub_MediaList_Filter_Audio implements UNL_MediaHub_Filter
 {
-    function apply(Doctrine_Query_Abstract &$query)
+    public function apply(Doctrine_Query_Abstract $query)
     {
         $query->andWhere('m.type LIKE "audio/%"');
     }
 
-    function getLabel()
+    public function getLabel()
     {
         return 'Audio';
     }
 
-    function getType()
+    public function getType()
     {
         return '';
     }
 
-    function getValue()
+    public function getValue()
     {
         return '';
     }
 
-    function __toString()
+    public function __toString()
     {
         return '';
     }

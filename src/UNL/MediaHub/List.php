@@ -98,7 +98,7 @@ abstract class UNL_MediaHub_List implements Countable
         $this->ran = true;
     }
     
-    abstract function setOrderBy(Doctrine_Query_Abstract &$query);
+    abstract public function setOrderBy(Doctrine_Query_Abstract $query);
 
     /**
      * @return Doctrine_Query_Abstract

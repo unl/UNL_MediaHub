@@ -8,7 +8,7 @@ class UNL_MediaHub_FeedList_Filter_WithTerm implements UNL_MediaHub_Filter
         $this->term = $term;
     }
 
-    public function apply(Doctrine_Query_Abstract &$query)
+    public function apply(Doctrine_Query_Abstract $query)
     {
         $query->where('(f.title LIKE ? OR f.description LIKE ?) AND f.UNL_MediaHub_Media.id IS NOT NULL', array('%'.$this->term.'%', '%'.$this->term.'%'));
     }

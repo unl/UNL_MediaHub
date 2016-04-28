@@ -27,7 +27,7 @@ class UNL_MediaHub_MediaTextTrackList extends UNL_MediaHub_List
         }
     }
     
-    function setOrderBy(Doctrine_Query_Abstract &$query)
+    public function setOrderBy(Doctrine_Query_Abstract $query)
     {
         $query->orderby('tt.'.$this->options['orderby'].' '.$this->options['order']);
     }

@@ -8,7 +8,7 @@ class UNL_MediaHub_SubscriptionList extends UNL_MediaHub_List
    
     public $tables = 'UNL_MediaHub_Subscription s';
 
-    function setOrderBy(Doctrine_Query_Abstract &$query)
+    public function setOrderBy(Doctrine_Query_Abstract $query)
     {
         $query->orderby('s.'.$this->options['orderby'].' '.$this->options['order']);
     }

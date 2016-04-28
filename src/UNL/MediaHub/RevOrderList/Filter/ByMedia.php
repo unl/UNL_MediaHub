@@ -3,32 +3,32 @@ class UNL_MediaHub_RevOrderList_Filter_ByMedia implements UNL_MediaHub_Filter
 {
     protected $query;
 
-    function __construct($query)
+    public function __construct($query)
     {
         $this->query = $query;
     }
 
-    function apply(Doctrine_Query_Abstract &$query)
+    public function apply(Doctrine_Query_Abstract $query)
     {
         $query->where('(ro.media_id = ?)', array($this->query));
     }
 
-    function getLabel()
+    public function getLabel()
     {
         return '';
     }
 
-    function getType()
+    public function getType()
     {
         return '';
     }
 
-    function getValue()
+    public function getValue()
     {
         return '';
     }
 
-    function __toString()
+    public function __toString()
     {
         return '';
     }

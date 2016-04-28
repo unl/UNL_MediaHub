@@ -6,7 +6,7 @@ class UNL_MediaHub_MediaList_Filter_Privacy implements UNL_MediaHub_Filter
      */
     protected $user = NULL;
     
-    function __construct(UNL_MediaHub_User $user = NULL)
+    public function __construct(UNL_MediaHub_User $user = NULL)
     {
         $this->user = $user;
     }
@@ -32,7 +32,7 @@ class UNL_MediaHub_MediaList_Filter_Privacy implements UNL_MediaHub_Filter
      * 
      * @param Doctrine_RawSql $query
      */
-    function apply(Doctrine_Query_Abstract &$query)
+    public function apply(Doctrine_Query_Abstract $query)
     {
         $where = '(';
         
@@ -68,22 +68,22 @@ class UNL_MediaHub_MediaList_Filter_Privacy implements UNL_MediaHub_Filter
         $query->andWhere($where);
     }
 
-    function getLabel()
+    public function getLabel()
     {
         return 'Privacy';
     }
 
-    function getType()
+    public function getType()
     {
         return '';
     }
 
-    function getValue()
+    public function getValue()
     {
         return '';
     }
 
-    function __toString()
+    public function __toString()
     {
         return '';
     }
