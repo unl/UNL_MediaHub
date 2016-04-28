@@ -39,4 +39,20 @@ class UNL_MediaHub_Media_EditCaptions
 
         return $amara_api->getCaptionEditURL($this->media->url);
     }
+
+    /**
+     * Determine if any orders are currently pending
+     * 
+     * @return bool
+     */
+    public function hasPendingOrder()
+    {
+        foreach ($this->getRevOrderHistory()->items as $order) {
+            if ($order->isPending()) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
 }
