@@ -52,7 +52,7 @@ ul.mh-btn-group > li:not(:last-of-type) {
 	margin-right: 1em;
 }
 
-.mh-sort-filter .mh-btn-group  .wdn-button.active:before {
+.mh-sort-filter-active:before {
 	content:"\2022";
 	margin-right:.75em;
 }

@@ -47,20 +47,26 @@ if($context->options['orderby'] == 'datecreated'){
 
 <div class="wdn-band">
     <div class="wdn-inner-wrapper wdn-inner-padding-none">
-        <nav class="mh-sort-filter" aria-labelledby="order-by-title">
-            <span id="order-by-title" class="sort-filter-title">Order By:</span>
-            <ul class="mh-btn-group">
-                <li>
-                    <a href="/channels/" class="wdn-button wdn-button-brand <?php echo (($context->options['orderby'] != 'datecreated') && ($context->options['orderby'] != 'plays')) ? ' active' : '' ?>">Alphabetical</a>
-                </li>
-                <li>
-                    <a href="?orderby=datecreated&amp;order=DESC" class="wdn-button wdn-button-brand <?php echo ($context->options['orderby'] == 'datecreated') ? ' active' : '' ?>">Recent</a>
-                </li>
-                <li>
-                    <a href="?orderby=plays&amp;order=DESC" class="wdn-button wdn-button-brand <?php echo ($context->options['orderby'] == 'plays') ? ' active' : '' ?>">Popular</a>
-                </li>
-            </ul>
-        </nav>
+        <?php
+        $buttons = new stdClass();
+        $buttons->selected_key = $context->options['orderby'];
+        $buttons->group_id = 'order';
+        $buttons->buttons = [
+            'title' => [
+                'label' => 'Alphabetical',
+                'url' => '/channels/'
+            ],
+            'datecreated' => [
+                'label' => 'Recent',
+                'url' => '?orderby=datecreated&order=DESC'
+            ],
+            'plays' => [
+                'label' => 'Popular',
+                'url' => '?orderby=plays&order=DESC'
+            ]
+        ];
+        echo $savvy->render($buttons, 'mh-sort-filter.tpl.php');
+        ?>
     </div>
 </div>
 

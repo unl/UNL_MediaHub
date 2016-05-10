@@ -61,37 +61,52 @@ if(!empty($context->options['f'])){
 
 <div class="wdn-band">
     <div class="wdn-inner-wrapper wdn-inner-padding-no-top wdn-inner-padding-sm">
-        <nav class="mh-sort-filter" aria-labelledby="order-by-title">
-            <span id="order-by-title" class="sort-filter-title">Order By:</span>
-            <ul class="mh-btn-group">
-                <li>
-                    <a href="<?php echo htmlentities($context->getURL(array('orderby' => 'datecreated', 'order' => 'DESC')), ENT_QUOTES) ?>" class="wdn-button wdn-button-brand <?php echo ($context->options['orderby'] == 'datecreated') ? ' active' : '' ?>">Recent</a>
-                </li>
-                <li>
-                    <a href="<?php echo htmlentities($context->getURL(array('orderby' => 'title_a_z', 'order' => 'ASC')), ENT_QUOTES) ?>" class="wdn-button wdn-button-brand <?php echo ($context->options['orderby'] == 'title_a_z') ? ' active' : '' ?>">A-Z</a>
-                </li>
-                <li>
-                    <a href="<?php echo htmlentities($context->getURL(array('orderby' => 'title_z_a', 'order' => 'DESC')), ENT_QUOTES) ?>" class="wdn-button wdn-button-brand <?php echo ($context->options['orderby'] == 'title_z_a') ? ' active' : '' ?>">Z-A</a>
-                </li>
-                <li>
-                    <a href="<?php echo htmlentities($context->getURL(array('orderby' => 'popular_play_count', 'order' => 'DESC')), ENT_QUOTES) ?>" class="wdn-button wdn-button-brand <?php echo ($context->options['orderby'] == 'popular_play_count') ? ' active' : '' ?>">Popular</a>
-                </li>
-            </ul>
-        </nav>
-        <nav class="mh-sort-filter" aria-labelledby="filter-by-title">
-            <span id="filter-by-title" class="sort-filter-title">Filter By:</span>
-            <ul class="mh-btn-group">
-                <li>
-                    <a href="<?php echo htmlentities($context->getURL(array('f' => '')), ENT_QUOTES)  ?>" class="wdn-button<?php echo ($context->options['f'] == '') ? ' active' : '' ?> wdn-button-brand">All</a>
-                </li>
-                <li>
-                    <a href="<?php echo htmlentities($context->getURL(array('f' => 'audio')), ENT_QUOTES) ?>" class="wdn-button<?php echo ($context->options['f'] == 'audio') ? ' active' : '' ?> wdn-button-brand">Audio</a>
-                </li>
-                <li>
-                    <a href="<?php echo htmlentities($context->getURL(array('f' => 'video')), ENT_QUOTES) ?>" class="wdn-button<?php echo ($context->options['f'] == 'video') ? ' active' : '' ?> wdn-button-brand">Video</a>
-                </li>
-            </ul>
-        </nav>
+
+        <?php
+        $buttons = new stdClass();
+        $buttons->selected_key = $context->options['orderby'];
+        $buttons->group_id = 'orderby';
+        $buttons->buttons = [
+            'datecreated' => [
+                'label' => 'Recent',
+                'url' => $context->getURL(array('orderby' => 'datecreated', 'order' => 'DESC'))
+            ],
+            'title_a_z' => [
+                'label' => 'A-Z',
+                'url' => $context->getURL(array('orderby' => 'title_a_z', 'order' => 'ASC'))
+            ],
+            'title_z_a' => [
+                'label' => 'Z-A',
+                'url' => $context->getURL(array('orderby' => 'title_z_a', 'order' => 'DESC'))
+            ],
+            'popular_play_count' => [
+                'label' => 'Popular',
+                'url' => $context->getURL(array('orderby' => 'popular_play_count', 'order' => 'DESC'))
+            ],
+        ];
+        echo $savvy->render($buttons, 'mh-sort-filter.tpl.php');
+        ?>
+
+        <?php
+        $buttons = new stdClass();
+        $buttons->selected_key = $context->options['f'];
+        $buttons->group_id = 'filter';
+        $buttons->buttons = [
+            '' => [
+                'label' => 'All',
+                'url' => $context->getURL(array('f' => ''))
+            ],
+            'audio' => [
+                'label' => 'Audio',
+                'url' => $context->getURL(array('f' => 'audio'))
+            ],
+            'video' => [
+                'label' => 'Video',
+                'url' => $context->getURL(array('f' => 'video'))
+            ]
+        ];
+        echo $savvy->render($buttons, 'mh-sort-filter.tpl.php');
+        ?>
     </div>
 </div>
 
