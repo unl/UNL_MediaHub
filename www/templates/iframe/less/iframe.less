@@ -1,6 +1,6 @@
 /* Share media
 -------------------------------------------------------------- */
-.mediahub-embed {
+.mediahub-embed, .mediahub-onpage-captions {
   a.share-video-link {
     background: #D00000;
     color: #000;
@@ -195,6 +195,13 @@
     top: 30%;
     left: 2%;
     box-shadow: 0 2px 7px rgba(0,0,0,0.4);
+
+    h6 {
+      display: inline-block;
+      vertical-align: middle; 
+      margin: 0;
+    }
+
   }
 
   .mh-caption-search.bulleted ul.mh-transcript a.highlight {
@@ -996,4 +1003,69 @@
     /* This was inline, and was causing extra space below it, thus causing the iframe to scroll */
     display: block;
   }
+
+.mh-too-small-message {
+      background-color: #fefdfa;
+      padding: .75em;
+      h3 {
+        margin-top: 0;
+      }
+}
+
+.mh-show-bp1 {
+    display: none !important;
+}
+.mh-show-bp2 {
+    display: none !important;
+}
+.mh-show-bp3 {
+    display: none !important;
+}
+.mh-show-bp4 {
+    display: none !important;
+}
+
+@media only screen and (max-width: 480px)  {
+    .mh-hide-bp1 {
+        display: none !important;
+    }
+    .mh-show-bp1 {
+        display: block !important;
+    }
+}
+
+@media only screen and (max-width: 768px)  {
+    .mh-hide-bp2 {
+        display: none !important;
+    }
+    .mh-show-bp2 {
+        display: block !important;
+    }
+} 
+
+@media only screen and (max-width: 960px)  {
+    .mh-hide-bp3 {
+        display: none !important;
+    }
+    .mh-show-bp3 {
+        display: block !important;
+    }
+}
+
+@media only screen and (max-width: 1044px)  {
+
+    .mh-hide-bp4 {
+        display: none !important;
+    }
+    .mh-show-bp4 {
+        display: block !important;
+    }
+
+
+}
+
+
+
+
+
 }

@@ -1,6 +1,6 @@
 /* Share media
 -------------------------------------------------------------- */
-.mediahub-embed, .mh-video-band {
+.mediahub-embed, .mh-video-band, .mediahub-onpage-captions {
 
   a.share-video-link {
     background: #D00000;
@@ -840,5 +840,37 @@
   }
   .mejs-button.wide {
     width: 30px !important;
+  }
+}
+
+.mediahub-onpage-captions {
+  .mh-caption-search {
+    display: block;
+    position: relative;
+    div.title{
+      .mh-caption-search-close {
+        display: none;
+      }
+    }
+    ul.mh-transcript {
+      max-height: none;
+      &:after {
+        display: none;
+      }
+    }
+    div.mh-caption-container {
+      border: none;
+    }
+  }
+  .mh-too-small-message {
+    display: none;
+  }
+  h6 {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+  }
+  #mh-language-select {
+    float: right;
   }
 }
