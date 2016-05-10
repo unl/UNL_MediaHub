@@ -47,13 +47,20 @@ if($context->options['orderby'] == 'datecreated'){
 
 <div class="wdn-band">
     <div class="wdn-inner-wrapper wdn-inner-padding-none">
-        <p class="mh-sort-filter">
-            <span class="mh-btn-group">
-                <a href="/channels/" class="wdn-button wdn-button-brand <?php echo (($context->options['orderby'] != 'datecreated') && ($context->options['orderby'] != 'plays')) ? ' active' : '' ?>">Alphabetical</a>
-                <a href="?orderby=datecreated&amp;order=DESC" class="wdn-button wdn-button-brand <?php echo ($context->options['orderby'] == 'datecreated') ? ' active' : '' ?>">Recent</a>
-                <a href="?orderby=plays&amp;order=DESC" class="wdn-button wdn-button-brand <?php echo ($context->options['orderby'] == 'plays') ? ' active' : '' ?>">Popular</a>
-            </span>
-        </p>
+        <nav class="mh-sort-filter" aria-labelledby="order-by-title">
+            <span id="order-by-title" class="sort-filter-title">Order By:</span>
+            <ul class="mh-btn-group">
+                <li>
+                    <a href="/channels/" class="wdn-button wdn-button-brand <?php echo (($context->options['orderby'] != 'datecreated') && ($context->options['orderby'] != 'plays')) ? ' active' : '' ?>">Alphabetical</a>
+                </li>
+                <li>
+                    <a href="?orderby=datecreated&amp;order=DESC" class="wdn-button wdn-button-brand <?php echo ($context->options['orderby'] == 'datecreated') ? ' active' : '' ?>">Recent</a>
+                </li>
+                <li>
+                    <a href="?orderby=plays&amp;order=DESC" class="wdn-button wdn-button-brand <?php echo ($context->options['orderby'] == 'plays') ? ' active' : '' ?>">Popular</a>
+                </li>
+            </ul>
+        </nav>
     </div>
 </div>
 
