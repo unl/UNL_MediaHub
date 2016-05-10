@@ -64,6 +64,8 @@ if(!empty($context->options['f'])){
         <p class="mh-sort-filter">
             <span class="mh-btn-group">
                  <a href="<?php echo htmlentities($context->getURL(array('orderby' => 'datecreated', 'order' => 'DESC')), ENT_QUOTES) ?>" class="wdn-button wdn-button-brand <?php echo ($context->options['orderby'] == 'datecreated') ? ' active' : '' ?>">Recent</a>
+                 <a href="<?php echo htmlentities($context->getURL(array('orderby' => 'title_a_z', 'order' => 'ASC')), ENT_QUOTES) ?>" class="wdn-button wdn-button-brand <?php echo ($context->options['orderby'] == 'title_a_z') ? ' active' : '' ?>">A-Z</a>
+                 <a href="<?php echo htmlentities($context->getURL(array('orderby' => 'title_z_a', 'order' => 'DESC')), ENT_QUOTES) ?>" class="wdn-button wdn-button-brand <?php echo ($context->options['orderby'] == 'title_z_a') ? ' active' : '' ?>">Z-A</a>
                  <a href="<?php echo htmlentities($context->getURL(array('orderby' => 'popular_play_count', 'order' => 'DESC')), ENT_QUOTES) ?>" class="wdn-button wdn-button-brand <?php echo ($context->options['orderby'] == 'popular_play_count') ? ' active' : '' ?>">Popular</a>
             </span>
             <span class="mh-btn-group">
