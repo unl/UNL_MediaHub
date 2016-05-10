@@ -42,6 +42,7 @@ switch($controller->options['format']) {
         }
         
         $outputcontroller->addTemplatePath(dirname(__FILE__).'/templates/'.$format);
+        break;
     case 'iframe':
         $outputcontroller->addTemplatePath(dirname(__FILE__).'/templates/'.$controller->options['format']);
         break;
