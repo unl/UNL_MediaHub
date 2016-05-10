@@ -10,42 +10,29 @@
     
     ?>
 </div>
-<?php if($getTracks): ?>
-    <script type="htmltemplate" class="mh_transcript_template">
 
-        <div class="mh-caption-search">
-            <div class="title wdn-sans-serif wdn-icon-search">
-                Searchable Transcript
-                <div class="wdn-icon-info mh-tooltip italic">
-                    <div>
-                        <ul>
-                            <li>Use the text input to search the transcript. </li>
-                            <li>Click any line to jump to that spot in the video. </li>
-                            <li>Use the icons to the right to toggle between list and paragraph view. </li>
-                        </ul>
-                    </div>
-                </div>
-                <button class="mh-caption-search-close caption-toggle" aria-label="Close Searchable Transcript">x</button>
-            </div>
-            <div class="mh-caption-container">
-                <label for="mh-parse-caption">Search:</label>
-                <a class="mh-paragraph-icons" href="javascript:void(0);">
-                    <span class="wdn-text-hidden">Toggle between list and paragraph view.</span>
-                    <div class="mh-bullets"></div>
-                    <div class="mh-paragraph"></div>
-                </a>
-                <br>
-                <input type="text" class="mh-parse-caption"><div class="mh-caption-close"></div>
-                <ul class="mh-transcript"></ul>
-            </div>
-        </div>
+<?php if($getTracks){
+    echo '<script type="htmltemplate" class="mh_transcript_template">';
+        echo $savvy->render($context->media, 'MediaPlayer/Transcript.tpl.php');
+    echo '</script>';
+    }
+?>
 
-    </script>
-<?php endif; ?>
 
 <script type="text/javascript">
     (function () {
         var e = function () {
+
+            function canAccessParent() {
+                var html = true;
+                try { 
+                  window.parent.document;
+                } catch(err){
+                  html = false;
+                }
+                return html;
+            }
+
             <?php if (isset($context->media->id) && $context->media->id) { ?>
             var options = {
                 videoWidth: '100%',
@@ -69,6 +56,7 @@
                     var $captionSearch;
                     var $video = $(v);
                     var mediahub_id = $video.attr('data-mediahub-id');
+                    var $mhLanguageSelect;
 
                     var Safari = false;
                     if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) { // detect Safari for fullscreen caption support
@@ -76,12 +64,8 @@
                     }
 
                     if(t.captionsButton){
-                        t.container.append($(".mh_transcript_template").html());
-                        $transcript = t.container.find('.mh-transcript');
-                        $captionSearch = t.container.children(".mh-caption-search");
-                        t.container.find(".mh-parse-caption").attr("id","mh-parse-caption"+mediahub_id);
-                        t.container.find(".mh-caption-container").find("label").attr("for","mh-parse-caption"+mediahub_id);
 
+                        var $container;
                         var $myButton = $('<div>', {
                             "class": "mejs-button wide"
                         }).append($('<button>', {
@@ -92,7 +76,20 @@
                             "aria-label": "Toggle Searchable Transcript"
                         }));
 
-                        t.captionsButton.before($myButton)
+                        if(!canAccessParent()){
+                            $container = t.container;
+                            $container.append($(".mh_transcript_template").html());
+                            t.captionsButton.before($myButton)
+                        }else{
+                            $container = $(window.parent.document).find(".mediahub-onpage-captions");
+                            $container.html($(".mh_transcript_template").html());
+                        }
+
+                        $transcript = $container.find('.mh-transcript');
+                        $captionSearch = $container.children(".mh-caption-search");
+                        $container.find(".mh-parse-caption").attr("id","mh-parse-caption"+mediahub_id);
+                        $container.find(".mh-caption-container").find("label").attr("for","mh-parse-caption"+mediahub_id);
+                        $mhLanguageSelect = $container.find("#mh-language-select");
 
                         if (!Safari) {
                             t.controls.on("click", ".caption-toggle", function(e){
@@ -154,9 +151,9 @@
                                 $transcript.scrollTo(".highlight", 100);
                             });
 
-                            t.container.find(".mh-paragraph-icons").off();
-                            t.container.find(".mh-paragraph-icons").on("click", function(){
-                                t.container.find(".mh-caption-search").toggleClass("bulleted");
+                            $container.find(".mh-paragraph-icons").off();
+                            $container.find(".mh-paragraph-icons").on("click", function(){
+                                $container.find(".mh-caption-search").toggleClass("bulleted");
 
                             });
 
@@ -188,7 +185,7 @@
                         var origsenterFullScreen = t.enterFullScreen;
                         t.enterFullScreen = function() {
                             origsenterFullScreen.call(this);
-                            t.container.find(".mh-caption-search").addClass("full-screen");
+                            $container.find(".mh-caption-search").addClass("full-screen");
                             if (Safari) { // remove searchable captions if entering full screen on safari
                                 $captionSearch.removeClass("show");
                             };
@@ -197,7 +194,7 @@
                         var origsexitFullScreen = t.exitFullScreen;
                         t.exitFullScreen = function() {
                             origsexitFullScreen.call(this);
-                            t.container.find(".mh-caption-search").removeClass("full-screen");
+                            $container.find(".mh-caption-search").removeClass("full-screen");
                         };
 
                         var origsEnableTrackButton = t.enableTrackButton;
@@ -217,6 +214,11 @@
                                 setTranscript(t.selectedTrack);
                             };
                         };
+
+                        $mhLanguageSelect.on("change", function(){
+                            setTranscript($(this).find(":selected").val());
+                        });
+
                     };
 
                     // Playcount
