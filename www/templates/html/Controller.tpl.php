@@ -44,6 +44,6 @@ if (isset($_SESSION['notices'])) {
 $page->maincontentarea .= $savvy->render($context->output);
 
 //Footer
-$page->leftcollinks = $savvy->render($context, 'localfooter.tpl.php');
+$page->leftcollinks = $savvy->render(null, 'localfooter.tpl.php');
 
 echo $page;
