@@ -24,13 +24,16 @@
         var e = function () {
 
             function canAccessParent() {
-                var html = true;
-                try { 
-                  window.parent.document;
-                } catch(err){
-                  html = false;
+                var sameOrigin;
+                try
+                {
+                    sameOrigin = window.parent.location.host == window.location.host;
                 }
-                return html;
+                catch (e)
+                {
+                    sameOrigin = false;
+                }
+                return sameOrigin;
             }
 
             var isEmbed = !canAccessParent();

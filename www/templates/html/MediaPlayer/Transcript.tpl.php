@@ -68,7 +68,7 @@
     </div>
     <div class="mh-transcript-show-bp2 mh-too-small-message">
         <h3>The screen size you are trying to search captions on it too small!</h3>
-        <p>you can always <a href="<?php echo $context->getURL(); ?>">Jump over to MediaHub</a> and check it out there.</p>
+        <p>you can always <a href="<?php echo $context->getURL(); ?>" target="_blank">Jump over to MediaHub</a> and check it out there.</p>
     </div>
 </div>
 
