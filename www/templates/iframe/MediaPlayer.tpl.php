@@ -33,6 +33,11 @@
                 return html;
             }
 
+            var isEmbed = !canAccessParent();
+            if(!isEmbed){
+                $parentDocument = $(window.parent.document);
+            }
+
             <?php if (isset($context->media->id) && $context->media->id) { ?>
             var options = {
                 videoWidth: '100%',
@@ -76,7 +81,7 @@
                             "aria-label": "Toggle Searchable Transcript"
                         }));
 
-                        if(!canAccessParent()){
+                        if(isEmbed){
                             $container = t.container;
                             $container.append($(".mh_transcript_template").html());
                             t.captionsButton.before($myButton)
@@ -148,7 +153,9 @@
                                         $transcript.find("a").eq(i).removeClass("highlight");
                                     }
                                 };
-                                $transcript.scrollTo(".highlight", 100);
+                                if(isEmbed){
+                                    $transcript.scrollTo(".highlight", 100);
+                                }
                             });
 
                             $container.find(".mh-paragraph-icons").off();
@@ -162,6 +169,9 @@
                                 time = $(this).data('timeOffset')
                                 if (!time) {
                                     return;
+                                }
+                                if(!isEmbed){
+                                    $parentDocument.find("html, body").animate({scrollTop: $parentDocument.find(".mh-video-band").offset().top-50}, 100);
                                 }
                                 t.setCurrentTime(time);
                             });
@@ -216,7 +226,8 @@
                         };
 
                         $mhLanguageSelect.on("change", function(){
-                            setTranscript($(this).find(":selected").val());
+                            var value = $(this).find(":selected").val();
+                            t.setTrack(value);
                         });
 
                     };

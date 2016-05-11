@@ -1,13 +1,18 @@
 <?php 
-    include 'languages.php';
+    
     $file = false;
     try {
         $vtt = new Captioning\Format\WebvttFile();
         $tracks = $context->getTextTracks();
-        var_dump($tracks);
         $file = $vtt->loadFromString(reset($tracks));
     }catch(Exception $err){
     }
+
+    $adapter = new \Conversio\Adapter\LanguageCode();
+    $options = new \Conversio\Adapter\Options\LanguageCodeOptions();
+    $options->setOutput('native');
+    $converter = new \Conversio\Conversion($adapter);
+    $converter->setAdapterOptions($options);
 ?>
 
 <?php 
@@ -15,7 +20,7 @@
 ?>
 
 <div class="mh-caption-search">
-    <div class="mh-hide-bp2">
+    <div class="mh-transcript-hide-bp2">
         <div class="title wdn-sans-serif wdn-icon-search">
             <h6 class="wdn-sans-serif">Searchable Transcript</h6>
             <div class="wdn-icon-info mh-tooltip italic">
@@ -27,19 +32,17 @@
                     </ul>
                 </div>
             </div>
-            <?php 
-                $languageTracks = array_keys($tracks);
-            ?>
-            <select id="mh-language-select">
+            <button class="mh-caption-search-close caption-toggle" aria-label="Close Searchable Transcript">x</button>
+            <select id="mh-language-select" aria-label="select language for searchable transcript">
                 <?php 
                     $languageTracks = array_keys($tracks);
-
+                    $i = 0;
                     foreach ($languageTracks as $languageTrack) {
-                       echo "<option value='".$languageTrack."'>".$languages[$languageTrack]."</option>";
+                       echo "<option value='".$languageTrack."'>".$converter->filter($languageTrack)."</option>";
+                       $i++;
                     }
                 ?>
             </select>
-            <button class="mh-caption-search-close caption-toggle" aria-label="Close Searchable Transcript">x</button>
         </div>
         <div class="mh-caption-container">
             <label for="mh-parse-caption">Search:</label>
@@ -63,7 +66,7 @@
             </ul>
         </div>
     </div>
-    <div class="mh-show-bp2 mh-too-small-message">
+    <div class="mh-transcript-show-bp2 mh-too-small-message">
         <h3>The screen size you are trying to search captions on it too small!</h3>
         <p>you can always <a href="<?php echo $context->getURL(); ?>">Jump over to MediaHub</a> and check it out there.</p>
     </div>
