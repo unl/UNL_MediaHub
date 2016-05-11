@@ -171,7 +171,9 @@
                                     return;
                                 }
                                 if(!isEmbed){
-                                    $parentDocument.find("html, body").animate({scrollTop: $parentDocument.find(".mh-video-band").offset().top-50}, 100);
+                                    $parentDocument.find("html, body").animate({scrollTop: $parentDocument.find(".mh-video-band").offset().top-50}, 100, function(){
+                                        t.play();
+                                    });
                                 }
                                 t.setCurrentTime(time);
                             });
@@ -190,7 +192,6 @@
                             $transcript.children("li").remove();
                             $transcript.append(listItems);
                         };
-
 
                         var origsenterFullScreen = t.enterFullScreen;
                         t.enterFullScreen = function() {
