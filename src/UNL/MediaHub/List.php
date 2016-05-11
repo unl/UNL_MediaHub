@@ -39,6 +39,13 @@ abstract class UNL_MediaHub_List implements Countable
      * @var string
      */
     public $tables = 'null';
+
+    /**
+     * Select these fields
+     * 
+     * @var string
+     */
+    protected $select = null;
     
     public $ran = false;
     
@@ -64,8 +71,9 @@ abstract class UNL_MediaHub_List implements Countable
             return false;
         }
         
-        $query = new Doctrine_Query();
+        $query = $this->createQuery();
         $query->from($this->tables);
+        $query->select($this->select);
         
         $this->setOrderBy($query);
         if (!empty($this->options['filter'])) {
@@ -90,7 +98,12 @@ abstract class UNL_MediaHub_List implements Countable
         $this->ran = true;
     }
     
-    abstract function setOrderBy(Doctrine_Query &$query);
+    abstract public function setOrderBy(Doctrine_Query_Abstract $query);
+
+    /**
+     * @return Doctrine_Query_Abstract
+     */
+    abstract protected function createQuery();
     
     /**
      * Function to allow filtering input options
@@ -112,4 +125,3 @@ abstract class UNL_MediaHub_List implements Countable
         return $this->total;
     }
 }
-?>

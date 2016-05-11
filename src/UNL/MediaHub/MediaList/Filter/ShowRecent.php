@@ -2,24 +2,24 @@
 
 class UNL_MediaHub_MediaList_Filter_ShowRecent implements UNL_MediaHub_Filter
 {
-    function apply(Doctrine_Query &$query) {}
+    public function apply(Doctrine_Query_Abstract $query) {}
     
-    function getLabel()
+    public function getLabel()
     {
         return 'All Media';
     }
     
-    function getType()
+    public function getType()
     {
         return 'browse';
     }
     
-    function getValue()
+    public function getValue()
     {
         return '';
     }
     
-    function __toString()
+    public function __toString()
     {
         return '';
     }

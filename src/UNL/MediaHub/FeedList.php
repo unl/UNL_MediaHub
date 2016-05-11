@@ -27,7 +27,7 @@ class UNL_MediaHub_FeedList extends UNL_MediaHub_List
         'additional_filters' => array(),
     );
 
-    function __construct($options = array())
+    public function __construct($options = array())
     {
         parent::__construct($options);
     }
@@ -51,7 +51,7 @@ class UNL_MediaHub_FeedList extends UNL_MediaHub_List
      * 
      * @see UNL/MediaHub/UNL_MediaHub_List#setOrderBy()
      */
-    function setOrderBy(Doctrine_Query &$query)
+    public function setOrderBy(Doctrine_Query_Abstract $query)
     {
         if ($this->options['orderby'] == 'plays') {
             $query->orderBy('SUM(f.UNL_MediaHub_Media.play_count) '.$this->options['order']);
@@ -59,5 +59,13 @@ class UNL_MediaHub_FeedList extends UNL_MediaHub_List
         } else {
             $query->orderby('f.'.$this->options['orderby'].' '.$this->options['order']);
         }
+    }
+
+    /**
+     * @return Doctrine_Query_Abstract
+     */
+    protected function createQuery()
+    {
+        return new Doctrine_Query();
     }
 }

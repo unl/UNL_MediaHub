@@ -44,10 +44,12 @@ if ($type == 'video') {
 	';
 }
 $controller->setReplacementData('head', $meta);
+$getTracks = $context->getTextTrackURLs();
+
 ?>
 
 <div class="wdn-band mh-video-band">
-    <div class="wdn-inner-wrapper">
+    <div class="wdn-inner-wrapper mh-iframe-wrapper">
         <iframe height="667" width="100%" src="<?php echo $controller->getURL($context)?>?format=iframe" frameborder="0" allowfullscreen></iframe>
     </div>
 
@@ -128,7 +130,17 @@ $controller->setReplacementData('head', $meta);
                         
                     </div>  
                 </div>          
-
+                <hr>
+                
+                <?php if($getTracks){
+                    echo '<div class="mediahub-onpage-captions">';
+                    echo $savvy->render($context, 'MediaPlayer/Transcript.tpl.php');
+                    echo '</div>';
+                    }
+                ?>
+               
+                <hr>
+                <h6 class="wdn-sans-serif">Description</h6>
                 <div class="mh-summary"><?php echo $summary; ?></div>
 
 
@@ -157,7 +169,7 @@ $controller->setReplacementData('head', $meta);
                     <script type="text/javascript">
                         WDN.loadCSS('../templates/html/css/comments.css?v=<?php echo UNL_MediaHub_Controller::VERSION ?>');
                     </script>
-                    <h6 class="wdn-sans-serif">COMMENTS <span class="wdn-icon wdn-icon-comment"></span></h6>
+                    <h6 class="wdn-sans-serif">Comments <span class="wdn-icon wdn-icon-comment"></span></h6>
                     <span class="subhead">
                         <?php echo count($context->UNL_MediaHub_Media_Comment); ?> Comments
                         <?php if ($user): ?>
