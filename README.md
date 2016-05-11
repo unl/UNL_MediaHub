@@ -53,6 +53,17 @@ Once installed, run this command from the project root:
 php vendor/bin/phpunit --bootstrap tests/init.php tests
 ```
 
+##Cache-busting
+Versioning is handled with git, so the application MUST be checkout out with git for this to work
+
+To update the version cache (which is used for cachebusting) run `php scripts/update_version.php`
+
+To automate this, git hooks can be used.
+symlink the sample file `update-version.sh` 
+`ln -s update-version.sh .git/hooks/post-checkout`
+You may even want to have it triggered after post-merge (git pull)
+`ln -s update-version.sh .git/hooks/post-merge`
+
 ###Sources:
 
 * Audio and video player from http://mediaelementjs.com/
