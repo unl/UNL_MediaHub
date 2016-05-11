@@ -51,6 +51,7 @@ if($context->options['orderby'] == 'datecreated'){
         $buttons = new stdClass();
         $buttons->selected_key = $context->options['orderby'];
         $buttons->group_id = 'order';
+        $buttons->label = 'Order by:';
         $buttons->buttons = [
             'title' => [
                 'label' => 'Alphabetical',

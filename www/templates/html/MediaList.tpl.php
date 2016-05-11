@@ -66,6 +66,7 @@ if(!empty($context->options['f'])){
         $buttons = new stdClass();
         $buttons->selected_key = $context->options['orderby'];
         $buttons->group_id = 'orderby';
+        $buttons->label = 'Order by:';
         $buttons->buttons = [
             'datecreated' => [
                 'label' => 'Recent',
@@ -91,6 +92,7 @@ if(!empty($context->options['f'])){
         $buttons = new stdClass();
         $buttons->selected_key = $context->options['f'];
         $buttons->group_id = 'filter';
+        $buttons->label = 'Filter by:';
         $buttons->buttons = [
             '' => [
                 'label' => 'All',

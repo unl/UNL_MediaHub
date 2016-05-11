@@ -1,5 +1,5 @@
 <nav class="mh-sort-filter" aria-labelledby="mh-sort-filter-<?php echo $context->group_id; ?>">
-    <span id="mh-sort-filter-<?php echo $context->group_id; ?>" class="sort-filter-title">Order By:</span>
+    <span id="mh-sort-filter-<?php echo $context->group_id; ?>" class="sort-filter-title"><?php echo $context->label; ?></span>
     <ul class="mh-btn-group">
 
         <?php foreach ($context->buttons as $key=>$details):?>
