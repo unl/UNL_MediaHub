@@ -59,10 +59,11 @@ Versioning is handled with git, so the application MUST be checkout out with git
 To update the version cache (which is used for cachebusting) run `php scripts/update_version.php`
 
 To automate this, git hooks can be used.
-symlink the sample file `update-version.sh` 
-`ln -s update-version.sh .git/hooks/post-checkout`
+symlink the sample file `update-version.sh`
+From the directory `.git/hooks` run the following
+`ln -s ../../update-version.sh post-checkout`
 You may even want to have it triggered after post-merge (git pull)
-`ln -s update-version.sh .git/hooks/post-merge`
+`ln -s ../../update-version.sh post-merge`
 
 ###Sources:
 
