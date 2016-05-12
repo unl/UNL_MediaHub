@@ -90,6 +90,14 @@ class UNL_MediaHub_Controller
                        'UNL_MediaHub_Feed_Media_NamespacedElements_boxee',
                        'UNL_MediaHub_Feed_Media_NamespacedElements_geo',
                        'UNL_MediaHub_Feed_Media_NamespacedElements_mediahub');
+
+    /**
+     * Whether or not videos should be auto-muxed
+     * 
+     * @var bool
+     */
+    public static $auto_mux = true;
+    
     /**
      * Construct a new controller.
      *
@@ -160,6 +168,7 @@ class UNL_MediaHub_Controller
         
         switch ($this->options['format']) {
         case 'xml':
+        case 'mosaic-xml':
         case 'rss':
             // Send XML content-type headers, and assign XML output template.
             header('Content-type: text/xml');

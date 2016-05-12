@@ -17,6 +17,7 @@
             <span role="heading" class="wdn-footer-heading">Related Links</span>
             <ul class="wdn-related-links-v1">
                 <li><a href="<?php echo UNL_MediaHub_Controller::getURL() ?>developers">Developer Documentation</a></li>
+                <li><a href="<?php echo UNL_MediaHub_Controller::getURL() ?>help/media-prep">Preparing Your Media</a></li>
                 <li><a href="http://itunes.unl.edu/">UNL On iTunes U</a></li>
                 <li><a href="http://iim.unl.edu/">Internet and Interactive Media</a></li>
             </ul>

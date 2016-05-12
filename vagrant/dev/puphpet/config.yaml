@@ -55,7 +55,8 @@ vagrantfile-local:
         host: detect
 server:
     install: '1'
-    packages: {  }
+    packages:
+      - mediainfo
 firewall:
     install: '1'
     rules: null
@@ -123,9 +124,9 @@ php:
             - cli
             - intl
             - mcrypt
+            - mbstring
         pear: {  }
-        pecl:
-            - pecl_http
+        pecl: {  }
     ini:
         display_errors: On
         error_reporting: '-1'

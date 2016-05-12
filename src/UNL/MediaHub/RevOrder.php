@@ -59,4 +59,31 @@ class UNL_MediaHub_RevOrder extends UNL_MediaHub_Models_BaseRevOrder
         
         return false;
     }
+
+    /**
+     * Determine if this order is finished (success, cancel or error)
+     */
+    public function isFinished()
+    {
+        $completed_statuses = array(
+            self::STATUS_CANCELLED,
+            self::STATUS_ERROR,
+            self::STATUS_MEDIAHUB_COMPLETE
+        );
+        
+        if (in_array($this->status, $completed_statuses)) {
+            return true;
+        }
+    }
+
+
+    /**
+     * Determine if this media is still pending completion
+     * 
+     * @return bool
+     */
+    public function isPending()
+    {
+        return !$this->isFinished();
+    }
 }

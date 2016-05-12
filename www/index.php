@@ -31,9 +31,18 @@ if (isset($cache)) {
 }
 
 switch($controller->options['format']) {
-    case 'rss':
     case 'xml':
+    case 'mosaic-xml':
+    case 'rss':
     case 'js':
+        $format = $controller->options['format'];
+        if ('rss' == $format) {
+            //rss should be the same as xml
+            $format = 'xml';
+        }
+        
+        $outputcontroller->addTemplatePath(dirname(__FILE__).'/templates/'.$format);
+        break;
     case 'iframe':
         $outputcontroller->addTemplatePath(dirname(__FILE__).'/templates/'.$controller->options['format']);
         break;

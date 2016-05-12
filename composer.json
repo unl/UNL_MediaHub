@@ -41,6 +41,19 @@
       "phansys/getid3": " ~2.1@dev",
       "swiftmailer/swiftmailer": "@stable",
       "jasig/phpcas": "~1.3",
-      "php": ">=5.5.0"
+      "captioning/captioning": "2.*",
+      "php": ">=5.5.0",
+        "leodido/langcode-conv": "^0.2.0"
+    },
+    "require-dev": {
+      "mhor/php-mediainfo": "^1.6"
+    },
+    "scripts": {
+      "post-install-cmd": [
+        "if [ -d ffmpeg ]; then echo 'ffmpeg is already installed'; else mkdir ffmpeg && wget -q -O ffmpeg-download.tar.xz http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz && tar xf ffmpeg-download.tar.xz --directory ffmpeg --strip-components=1 && rm -f ffmpeg-download.tar.xz && chmod -R og+x ffmpeg; fi"
+      ]
+    },
+    "config": {
+        "secure-http": false
     }
 }

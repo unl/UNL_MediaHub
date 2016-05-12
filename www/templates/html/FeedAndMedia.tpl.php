@@ -49,7 +49,7 @@ $maintainers = $context->feed->getUserList();
 $uids = array();
 foreach ($maintainers->items as $maintainer) {
     $uid = htmlentities($maintainer->uid, ENT_QUOTES);
-    $uids[] = '<a href="http://directory.unl.edu/?uid='.$uid.'">'.$uid.'</a>';
+    $uids[] = '<a href="http://directory.unl.edu/people/'.$uid.'">'.$uid.'</a>';
 }
 
 ?>
