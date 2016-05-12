@@ -3,7 +3,7 @@ use UNL\Templates\Templates;
 
 $page = Templates::factory('Fixed', Templates::VERSION_4_1);
 
-$wdn_include_path = __DIR__ . '/../..';
+$wdn_include_path = UNL_MediaHub::getRootDir() . '/www';
 if (file_exists($wdn_include_path . '/wdn/templates_4.1')) {
     $page->setLocalIncludePath($wdn_include_path);
 }

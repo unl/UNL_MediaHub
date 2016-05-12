@@ -23,5 +23,9 @@
   },
   "engines": {
     "node": "node >= 0.10.0"
+  },
+  "dependencies": {
+    "grunt-contrib-less": "^1.1.0",
+    "grunt-contrib-watch": "^0.6.1"
   }
 }

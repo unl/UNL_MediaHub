@@ -19,7 +19,7 @@ class UNL_MediaHub_Media_Embed
     /**
      * @var array
      */
-    protected $allowed_versions = array(1, 2);
+    protected $allowed_versions = array(1, 2, 3);
 
     function __construct(UNL_MediaHub_Media $media = null, $version = 1, $options = array())
     {

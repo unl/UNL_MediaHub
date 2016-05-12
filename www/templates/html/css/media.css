@@ -261,6 +261,20 @@ body #cboxOverlay {background-color:#000;}
     background-color: #1e1e1e;
 }
 
+#maincontent .wdn-band .mh-iframe-wrapper {
+    padding: 0 0 60% 0;
+    position: relative;
+  }
+
+#maincontent .wdn-band .mh-iframe-wrapper iframe {
+    position: absolute;
+    height: 94%;
+    width: 100%;
+    top: 2%;
+    left: 0;
+    max-height: 700px;
+}
+
 
 .mh-tooltip {
     background-color: #1B9AE8;
@@ -423,6 +437,11 @@ body #cboxOverlay {background-color:#000;}
     .mh-media-browse.page-1 > :first-child .mh-video-label .wdn-subhead:not(.edit-button) {
         margin: 0 0 1em 0;
     }
+    .mh-iframe-wrapper.wdn-inner-wrapper {
+      margin: 0 !important;
+      width: 100% !important;
+    }
+
 
 }
 
@@ -441,3 +460,20 @@ body #cboxOverlay {background-color:#000;}
     }
 
 }
+
+
+@media only screen and (min-width: 1044px)  {
+
+#maincontent .wdn-band .mh-iframe-wrapper {
+    padding: 2% 0;
+    position: static;
+  }
+
+  #maincontent .wdn-band .mh-iframe-wrapper iframe {
+    position: static;
+    height:667px;
+  }
+
+
+}
+

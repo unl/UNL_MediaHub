@@ -44,18 +44,13 @@ if ($type == 'video') {
 	';
 }
 $controller->setReplacementData('head', $meta);
+$getTracks = $context->getTextTrackURLs();
 
-// Store the mediaplayer code in a variable, so we can re-use it for the embed
-$mediaplayer = $savvy->render($controller->getMediaPlayer($context));
 ?>
 
-
 <div class="wdn-band mh-video-band">
-    <div class="wdn-inner-wrapper">
-        <?php echo $mediaplayer; ?>
-
-
-
+    <div class="wdn-inner-wrapper mh-iframe-wrapper">
+        <iframe height="667" width="100%" src="<?php echo $controller->getURL($context)?>?format=iframe" frameborder="0" allowfullscreen></iframe>
     </div>
 
 </div>
@@ -135,7 +130,17 @@ $mediaplayer = $savvy->render($controller->getMediaPlayer($context));
                         
                     </div>  
                 </div>          
-
+                <hr>
+                
+                <?php if($getTracks){
+                    echo '<div class="mediahub-onpage-captions">';
+                    echo $savvy->render($context, 'MediaPlayer/Transcript.tpl.php');
+                    echo '</div>';
+                    }
+                ?>
+               
+                <hr>
+                <h6 class="wdn-sans-serif">Description</h6>
                 <div class="mh-summary"><?php echo $summary; ?></div>
 
 
@@ -164,7 +169,7 @@ $mediaplayer = $savvy->render($controller->getMediaPlayer($context));
                     <script type="text/javascript">
                         WDN.loadCSS('../templates/html/css/comments.css?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>');
                     </script>
-                    <h6 class="wdn-sans-serif">COMMENTS <span class="wdn-icon wdn-icon-comment"></span></h6>
+                    <h6 class="wdn-sans-serif">Comments <span class="wdn-icon wdn-icon-comment"></span></h6>
                     <span class="subhead">
                         <?php echo count($context->UNL_MediaHub_Media_Comment); ?> Comments
                         <?php if ($user): ?>
@@ -224,8 +229,7 @@ $mediaplayer = $savvy->render($controller->getMediaPlayer($context));
 
 <div id="sharing">
     <h3>Embed</h3>
-
-    <?php 
+    <?php
     $embed = $savvy->render(UNL_MediaHub_Media_Embed::getById($context->id, UNL_MediaHub_Controller::$current_embed_version));
     ?>
     <label for="embed_code">
