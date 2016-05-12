@@ -14,4 +14,5 @@ www/uploads
 /data/mediahub_dump.sql
 /UNL_MediaHub.sublime-workspace
 /UNL_MediaHub.sublime-project
-
+/ffmpeg
+version.txt

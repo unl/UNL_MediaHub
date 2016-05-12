@@ -40,8 +40,16 @@ class UNL_MediaHub_RevOrderList extends UNL_MediaHub_List
         }
     }
 
-    function setOrderBy(Doctrine_Query &$query)
+    public function setOrderBy(Doctrine_Query_Abstract $query)
     {
         $query->orderby('ro.'.$this->options['orderby'].' '.$this->options['order']);
+    }
+
+    /**
+     * @return Doctrine_Query_Abstract
+     */
+    protected function createQuery()
+    {
+        return new Doctrine_Query();
     }
 }

@@ -38,7 +38,8 @@ $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl
                 </div>
             </div>
             <div class="bp2-wdn-col-one-third">
-                <div class="mh-caption-sidebar">                
+                <div class="mh-caption-sidebar">
+                    <?php if (!$context->hasPendingOrder()): ?>
                     <form method="post">
                         <?php if ($duration = $context->media->findDuration()): ?>
                             <?php $estimate = ceil($duration['seconds']/60); ?>
@@ -63,6 +64,9 @@ $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl
                         <input type="submit" value="Order captions">
                         <p class="wdn-icon wdn-icon-attention wdn-sans-serif">Orders can not be canceled.</p>
                     </form>
+                    <?php else: ?>
+                    <p>Great news! There is an order already in the works.</p>
+                    <?php endif; ?>
                 </div>  
 
             </div>

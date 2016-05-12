@@ -20,9 +20,9 @@ if ($title = $context->getReplacementData('pagetitle')) {
 }
 
 //Header
-$page->addStyleSheet($baseUrl . 'templates/html/css/all.css?v=' . UNL_MediaHub_Controller::VERSION);
+$page->addStyleSheet($baseUrl . 'templates/html/css/all.css?v=' . UNL_MediaHub_Controller::getVersion());
 $page->head .= '<script>WDN.setPluginParam("idm", "logout", "' . $baseUrl . '?logout");</script>';
-$page->addScript(UNL_MediaHub_Controller::getURL().'templates/html/scripts/mediatools.js?v=' . UNL_MediaHub_Controller::VERSION);
+$page->addScript(UNL_MediaHub_Controller::getURL().'templates/html/scripts/mediatools.js?v=' . UNL_MediaHub_Controller::getVersion());
 if (!$context->output instanceof UNL_MediaHub_FeedAndMedia) {
     $page->head .= '<link rel="alternate" type="application/rss+xml" title="UNL MediaHub" href="?format=xml" />';
 }
@@ -44,6 +44,6 @@ if (isset($_SESSION['notices'])) {
 $page->maincontentarea .= $savvy->render($context->output);
 
 //Footer
-$page->leftcollinks = $savvy->render($context, 'localfooter.tpl.php');
+$page->leftcollinks = $savvy->render(null, 'localfooter.tpl.php');
 
 echo $page;

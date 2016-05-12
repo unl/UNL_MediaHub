@@ -2,27 +2,27 @@
 class UNL_MediaHub_FeedList_Filter_WithTitle implements UNL_MediaHub_Filter
 {
     
-    function apply(Doctrine_Query &$query)
+    public function apply(Doctrine_Query_Abstract $query)
     {
         $query->where('f.title IS NOT NULL AND f.title != ""');
     }
     
-    function getLabel()
+    public function getLabel()
     {
         return 'Available Channels';
     }
     
-    function getType()
+    public function getType()
     {
         return '';
     }
     
-    function getValue()
+    public function getValue()
     {
         return '';
     }
     
-    function __toString()
+    public function __toString()
     {
         return '';
     }

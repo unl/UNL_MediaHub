@@ -2,7 +2,7 @@
 class UNL_MediaHub_FeedList_Filter_Popular implements UNL_MediaHub_Filter
 {
     
-    function apply(Doctrine_Query &$query)
+    public function apply(Doctrine_Query_Abstract $query)
     {
         $file = dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))).'/scripts/popular_channels.txt';
         if (file_exists($file)) {
@@ -25,22 +25,22 @@ class UNL_MediaHub_FeedList_Filter_Popular implements UNL_MediaHub_Filter
         $query->where($where, $params);
     }
     
-    function getLabel()
+    public function getLabel()
     {
         return 'Featured Channels';
     }
     
-    function getType()
+    public function getType()
     {
         return '';
     }
     
-    function getValue()
+    public function getValue()
     {
         return '';
     }
     
-    function __toString()
+    public function __toString()
     {
         return '';
     }

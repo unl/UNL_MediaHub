@@ -728,9 +728,7 @@ class UNL_MediaHub_Manager_PostHandler
             throw new Exception('That text track does not belong to the this media', 400);
         }
         
-        $media->media_text_tracks_id = $text_track->id;
-        $media->dateupdated = date('Y-m-d H:i:s');
-        $media->save();
+        $media->setTextTrack($text_track);
         
         $notice = new UNL_MediaHub_Notice('Success', 'The active caption track has been updated', UNL_MediaHub_Notice::TYPE_SUCCESS);
         UNL_MediaHub_Manager::addNotice($notice);

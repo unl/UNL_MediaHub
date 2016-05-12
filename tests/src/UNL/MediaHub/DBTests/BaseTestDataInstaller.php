@@ -43,7 +43,7 @@ class UNL_MediaHub_DBTests_BaseTestDataInstaller implements UNL_MediaHub_DBTests
         
         //add some media
         $media_a = new UNL_MediaHub_Media();
-        $media_a->url         = 'http://example.org/a.mov';
+        $media_a->url         = UNL_MediaHub_Controller::getURL().'uploads/a.mp4';
         $media_a->uidcreated  = $user_a->uid;
         $media_a->uidupdated  = $user_a->uid;
         $media_a->type        = 'video/mp4';
@@ -52,7 +52,7 @@ class UNL_MediaHub_DBTests_BaseTestDataInstaller implements UNL_MediaHub_DBTests
         $media_a->save();
 
         $media_b = new UNL_MediaHub_Media();
-        $media_b->url         = 'http://example.org/B.mov';
+        $media_b->url         = UNL_MediaHub_Controller::getURL().'uploads/b.mp4';
         $media_b->uidcreated  = $user_a->uid;
         $media_b->uidupdated  = $user_a->uid;
         $media_b->type        = 'audio/mp3';

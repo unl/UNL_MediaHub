@@ -45,11 +45,6 @@ class UNL_MediaHub_Controller
      */
     public static $thumbnail_generator;
 
-    /**
-     * Version used for cache busting
-     */
-    const VERSION = '1.3';
-
     static protected $replacements;
 
     /**
@@ -90,6 +85,14 @@ class UNL_MediaHub_Controller
                        'UNL_MediaHub_Feed_Media_NamespacedElements_boxee',
                        'UNL_MediaHub_Feed_Media_NamespacedElements_geo',
                        'UNL_MediaHub_Feed_Media_NamespacedElements_mediahub');
+
+    /**
+     * Whether or not videos should be auto-muxed
+     * 
+     * @var bool
+     */
+    public static $auto_mux = true;
+    
     /**
      * Construct a new controller.
      *
@@ -160,6 +163,7 @@ class UNL_MediaHub_Controller
         
         switch ($this->options['format']) {
         case 'xml':
+        case 'mosaic-xml':
         case 'rss':
             // Send XML content-type headers, and assign XML output template.
             header('Content-type: text/xml');
@@ -494,6 +498,36 @@ class UNL_MediaHub_Controller
         }
         $url = str_replace('?&', '?', $url);
         return trim($url, '?;=');
+    }
+
+    /**
+     * @param string $version
+     */
+    public static function setVersion($version)
+    {
+        $file = UNL_MediaHub::getRootDir() . '/version.txt';
+        file_put_contents($file, $version);
+    }
+
+    /**
+     * @return string the current version
+     */
+    public static function getVersion()
+    {
+        static $version;
+
+        if ($version) {
+            //skip expensive work if we already got it
+            return $version;
+        }
+
+        $file = UNL_MediaHub::getRootDir() . '/version.txt';
+        $version = @file_get_contents($file);
+
+        //Sanitize it so that it can be used in URLs
+        $version = htmlentities($version);
+
+        return $version;
     }
 }
 
