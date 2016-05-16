@@ -136,14 +136,19 @@ class UNL_MediaHub
     }
 
     /**
-     * @param string $url the url to reidrect to
+     * @param string $url the url to redirect to
      */
     public static function redirect($url)
     {
         header('Location: '.$url);
         exit();
     }
-    
+
+    /**
+     * Get the absolute path for the root directory of the project
+     * 
+     * @return string
+     */
     public static function getRootDir()
     {
         return dirname(dirname(__DIR__));
