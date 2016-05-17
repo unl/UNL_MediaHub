@@ -44,7 +44,7 @@
                 <div class="mh-paragraph"></div>
             </a>
             <br>
-            <input type="text" class="mh-parse-caption"><div class="mh-caption-close"></div>
+            <input type="text" id="mh-parse-caption"><div class="mh-caption-close"></div>
             <ul class="mh-transcript">
                 <?php foreach ($file->getCues() as $line) : ?>
                     <li><a class="highlight" href="javascript:void(0);"><span>[<?php echo ($line->getstart()); ?>]</span><?php echo $line->getText(); ?></a></li>

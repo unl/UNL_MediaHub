@@ -34,7 +34,7 @@ $getTracks = $context->media->getTextTrackURLs();
                     <div class="mh-paragraph"></div>
                 </a>
                 <br>
-                <input type="text" class="mh-parse-caption"><div class="mh-caption-close"></div>
+                <input type="text" id="mh-parse-caption"><div class="mh-caption-close"></div>
                 <ul class="mh-transcript"></ul>
             </div>
         </div>
