@@ -188,17 +188,21 @@
 
   .mh-caption-search {
     display: none;
-    width: 100%;
     position: absolute;
-    top: 100%;
     z-index: 50;
-
-    width: 30%;
+    width: 96%;
     min-width: 300px;
-    max-height: 603px;
-    top: 4%;
+    top: 30%;
     left: 2%;
-    box-shadow: 0px 2px 7px RGBA(0, 0, 0, 0.4);
+    box-shadow: 0 2px 7px rgba(0,0,0,0.4);
+
+    h2 {
+      display: inline-block;
+      vertical-align: middle; 
+      margin: 0;
+      font-size: 1.4375rem;
+    }
+
   }
 
   .mh-caption-search.bulleted ul.mh-transcript a.highlight {
@@ -210,11 +214,12 @@
   }
 
   ul.mh-transcript {
-    line-height: 2.8em;
-    padding: 0 1em 2em 1em;
-    margin: 0;
-    max-height: 450px;
-    overflow: scroll;
+  line-height: 2.8em;
+  padding: 0 0.25em 2em 0.25em;
+  margin: 0;
+  height: 42vh;
+  height:16em\9; /* IE6, IE7, IE8, IE9 */
+  overflow: scroll
   }
 
   ul.mh-transcript:after {
@@ -260,7 +265,6 @@
     background-color: #fefdfa;
     padding: .75em .75em 0 .75em;
     border: 1px solid rgb(208, 208, 199);
-    width: 100%;
   }
 
   .mh-caption-search.show {
@@ -344,7 +348,6 @@
     padding: .75em;
     font-size: 1rem;
     cursor: pointer;
-    width: 100%;
     display: block;
   }
 
@@ -685,6 +688,9 @@
     .wdn-icon-share {
       padding: 8px 0 10px 10px;
     }
+    .ul.mh-transcript {
+      max-height: 390px;
+    }
   }
 
   @media (min-width:768px) {
@@ -816,6 +822,10 @@
     .js .nav_ready .wdn-share-this-page {
       visibility: visible;
     }
+    .mh-caption-search {
+      width: 60%;
+      top: 25%;
+    }
   }
   .mh-share-toggle:checked~.wdn-share-options, .wdn-share-this-page:hover .wdn-share-options {
     display: block;
@@ -838,6 +848,158 @@
     width: 30px !important;
   }
 
+.wdn-icon-search:before {
+    content: '\e802';
+}
+
+.wdn-icon-info:before {
+    content: '\e807';
+}
+
+[class^=wdn-icon-]:before,.mh-video-band [class^=wdn-icon-]:before, [class*=" wdn-icon-"]:before, .mh-video-band [class*=" wdn-icon-"]:before {
+    font-family: wdn-icon;
+    font-style: normal;
+    font-weight: 400;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none
+}
+
+  .mh-tooltip {
+    background-color: #1B9AE8;
+    border-radius: 2em;
+    height: 1.5em;
+    width: 1.1em;
+    padding: 0 0.2em;
+    color: #fff;
+    display: inline-block;
+    text-align: center;
+    font-size: 0.85em;
+    line-height: 1.6em;
+    position: relative;
+    font-size: .8125rem;
+  }
+
+  .mh-tooltip > div {
+    position: absolute;
+    display: none;
+    background-color: #fff;
+    color: #000;
+    box-shadow: 0px 1px 4px RGBA(0, 0, 0, 0.2);
+    padding: .75em;
+    bottom: 160%;
+    left: -91px;
+    width: 200px;
+    text-align: left;
+    z-index: 250;
+  }
+
+  .mh-tooltip.hang-right > div {
+
+    left: -27px;
+
+  }
+
+  .mh-tooltip.hang-left > div {
+
+    left: -157px;
+
+  }
+
+  .mh-tooltip > div:before {
+    background-color: white;
+    content: "";
+    display: block;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    margin-left: -7px;
+    transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    box-shadow: 0px 0px 4px RGBA(0, 0, 0, 0.25);
+  }
+
+  .mh-tooltip > div:after {
+    content: "";
+    height: 12px;
+    width: 40px;
+    background-color: #fff;
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    margin-left: -24px;
+  }
+
+  .mh-tooltip.hang-right > div:before {
+    left: 34px;
+    margin-left: -7px;
+  }
+
+  .mh-tooltip.hang-right > div:after {
+    left: 34px;
+    margin-left: -24px;
+  }
+
+  .mh-tooltip.hang-left > div:before {
+    left: 166px;
+    margin-left: -7px;
+  }
+
+  .mh-tooltip.hang-left > div:after {
+    left: 166px;
+    margin-left: -24px;
+  }
+
+  .mh-tooltip ul li {
+    margin-bottom: .75em;
+  }
+
+  .mh-tooltip span.heading {
+
+    font-family: "Tungsten A", "Tungsten B", HelveticaNeueCondensed, HelveticaNeue-Condensed, "Helvetica Neue Condensed", HelveticaNeueRomanCondensed, HelveticaNeue-Roman-Condensed, "Helvetica Neue Roman Condensed", "Arial Narrow", HelveticaNeue, "Helvetica Neue", HelveticaNeueRoman, HelveticaNeue-Roman, "Helvetica Neue Roman", Helvetica, Tahoma, Geneva, Arial, sans-serif;
+    font-size: 1.777em;
+  }
+
+  .mh-tooltip:hover > div {
+    display: block;
+  }
+
+  .mh-tooltip p {
+    margin: 0;
+  }
+
+  .mh-tooltip.italic * {
+    font-style: italic;
+  }
+
+  .mh-tooltip ul li {
+    margin: 0;
+    margin-bottom: .75em;
+  }
+
+  .mh-tooltip ul {
+    padding-left: 1.25em;
+    margin: 0;
+    list-style: disc;
+  }
+
+
+  #mh-language-select {
+    float: right;
+  }
+
+
   .mejs-controls div.mejs-time-rail {
     /* Reduce by 1 px to prevent overfilling the .mejs-controls container, thus causing a slight scroll in iframe */
     padding-top: 4px;
@@ -847,4 +1009,36 @@
     /* This was inline, and was causing extra space below it, thus causing the iframe to scroll */
     display: block;
   }
+
+.mh-too-small-message {
+      background-color: #fefdfa;
+      padding: .75em;
+      h3 {
+        margin-top: 0;
+      }
+}
+
+  label {
+    font-family: "gotham";
+  }
+
+
+&.non-framework {
+
+  .mh-transcript-show-bp2 {
+      display: none;
+  }
+
+  @media only screen and (max-width: 768px)  {
+      .mh-transcript-hide-bp2 {
+          display: none;
+      }
+      .mh-transcript-show-bp2 {
+          display: block;
+      }
+  } 
+
+
+}
+
 }

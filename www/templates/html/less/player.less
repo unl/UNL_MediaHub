@@ -1,6 +1,7 @@
 /* Share media
 -------------------------------------------------------------- */
-.mediahub-embed, .mh-video-band {
+.mediahub-embed, .mh-video-band, .mediahub-onpage-captions {
+
   a.share-video-link {
     background: #D00000;
     color: #000;
@@ -523,6 +524,11 @@
     width: 30px;
     border-radius: 3px;
   }
+
+  label {
+    font-family: "Gotham SSm A", "Gotham SSm B", Verdana, "Verdana Ref", Geneva, Tahoma, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", sans-serif;
+  }
+      
 }
 
 //Share widget
@@ -839,5 +845,42 @@
   }
   .mejs-button.wide {
     width: 30px !important;
+  }
+
+}
+.mediahub-onpage-captions {
+  .mh-caption-search {
+    display: block;
+    position: relative;
+    div.title{
+      background-color: transparent;
+      padding: 1em 0;
+      .mh-caption-search-close {
+        display: none;
+      }
+    }
+    ul.mh-transcript {
+      max-height: none;
+      padding: 1em 0;
+      &:after {
+        display: none;
+      }
+    }
+    div.mh-caption-container {
+      border: none;
+      padding: .75em 0;
+    }
+  }
+  .mh-too-small-message {
+    display: none;
+  }
+  h2 {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    font-size: 1.4375rem;
+  }
+  #mh-language-select {
+    float: right;
   }
 }

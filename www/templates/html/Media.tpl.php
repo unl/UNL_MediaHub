@@ -44,10 +44,12 @@ if ($type == 'video') {
 	';
 }
 $controller->setReplacementData('head', $meta);
+$getTracks = $context->getTextTrackURLs();
+
 ?>
 
 <div class="wdn-band mh-video-band">
-    <div class="wdn-inner-wrapper">
+    <div class="wdn-inner-wrapper mh-iframe-wrapper">
         <iframe height="667" width="100%" src="<?php echo $controller->getURL($context)?>?format=iframe" frameborder="0" allowfullscreen></iframe>
     </div>
 
@@ -55,7 +57,7 @@ $controller->setReplacementData('head', $meta);
 
 
 <div class="wdn-band">
-    <div class="wdn-inner-wrapper"> 
+    <div class="wdn-inner-wrapper mh-media-page"> 
         <div class="wdn-grid-set">
             <div class="bp2-wdn-col-one-fourth mh-sidebar wdn-pull-right">
                 
@@ -128,7 +130,16 @@ $controller->setReplacementData('head', $meta);
                         
                     </div>  
                 </div>          
-
+                <hr>
+                
+                <?php if($getTracks): ?>
+                    <div class="mediahub-onpage-captions">
+                        <?php echo $savvy->render($context, 'MediaPlayer/Transcript.tpl.php'); ?>
+                    </div>
+                    <hr>
+                <?php endif; ?>
+               
+                <h2 class="wdn-sans-serif">Description</h2>
                 <div class="mh-summary"><?php echo $summary; ?></div>
 
 
@@ -157,7 +168,7 @@ $controller->setReplacementData('head', $meta);
                     <script type="text/javascript">
                         WDN.loadCSS('../templates/html/css/comments.css?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>');
                     </script>
-                    <h6 class="wdn-sans-serif">COMMENTS <span class="wdn-icon wdn-icon-comment"></span></h6>
+                    <h2 class="wdn-sans-serif">Comments <span class="wdn-icon wdn-icon-comment"></span></h2>
                     <span class="subhead">
                         <?php echo count($context->UNL_MediaHub_Media_Comment); ?> Comments
                         <?php if ($user): ?>
