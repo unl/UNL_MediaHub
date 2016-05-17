@@ -57,7 +57,7 @@ $getTracks = $context->getTextTrackURLs();
 
 
 <div class="wdn-band">
-    <div class="wdn-inner-wrapper"> 
+    <div class="wdn-inner-wrapper mh-media-page"> 
         <div class="wdn-grid-set">
             <div class="bp2-wdn-col-one-fourth mh-sidebar wdn-pull-right">
                 
@@ -140,7 +140,7 @@ $getTracks = $context->getTextTrackURLs();
                 ?>
                
                 <hr>
-                <h6 class="wdn-sans-serif">Description</h6>
+                <h2 class="wdn-sans-serif">Description</h2>
                 <div class="mh-summary"><?php echo $summary; ?></div>
 
 
@@ -169,7 +169,7 @@ $getTracks = $context->getTextTrackURLs();
                     <script type="text/javascript">
                         WDN.loadCSS('../templates/html/css/comments.css?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>');
                     </script>
-                    <h6 class="wdn-sans-serif">Comments <span class="wdn-icon wdn-icon-comment"></span></h6>
+                    <h2 class="wdn-sans-serif">Comments <span class="wdn-icon wdn-icon-comment"></span></h2>
                     <span class="subhead">
                         <?php echo count($context->UNL_MediaHub_Media_Comment); ?> Comments
                         <?php if ($user): ?>

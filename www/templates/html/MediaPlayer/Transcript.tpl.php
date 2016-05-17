@@ -1,5 +1,4 @@
 <?php 
-    
     $file = false;
     try {
         $vtt = new Captioning\Format\WebvttFile();
@@ -15,14 +14,11 @@
     $converter->setAdapterOptions($options);
 ?>
 
-<?php 
-    if($file){
-?>
-
+<?php  if($file): ?>
 <div class="mh-caption-search">
     <div class="mh-transcript-hide-bp2">
         <div class="title wdn-sans-serif wdn-icon-search">
-            <h6 class="wdn-sans-serif">Searchable Transcript</h6>
+            <h2 class="wdn-sans-serif">Searchable Transcript</h2>
             <div class="wdn-icon-info mh-tooltip italic">
                 <div>
                     <ul>
@@ -34,14 +30,10 @@
             </div>
             <button class="mh-caption-search-close caption-toggle" aria-label="Close Searchable Transcript">x</button>
             <select id="mh-language-select" aria-label="select language for searchable transcript">
-                <?php 
-                    $languageTracks = array_keys($tracks);
-                    $i = 0;
-                    foreach ($languageTracks as $languageTrack) {
-                       echo "<option value='".$languageTrack."'>".$converter->filter($languageTrack)."</option>";
-                       $i++;
-                    }
-                ?>
+                <?php $languageTracks = array_keys($tracks); ?>
+                <?php foreach ($languageTracks as $languageTrack): ?>
+                        <option value='<?php echo $languageTrack; ?>'> <?php echo $converter->filter($languageTrack); ?></option>
+                <?php endforeach; ?>
             </select>
         </div>
         <div class="mh-caption-container">
@@ -54,26 +46,17 @@
             <br>
             <input type="text" class="mh-parse-caption"><div class="mh-caption-close"></div>
             <ul class="mh-transcript">
-                <?php 
-                    foreach ($file->getCues() as $line) {
-                        echo '<li><a class="highlight" href="javascript:void(0);"><span>[';
-                        echo ($line->getstart());
-                        echo ']</span> ';
-                        echo ($line->getText());
-                        echo '</a></li>';
-                    }
-                ?>
+                <?php foreach ($file->getCues() as $line) : ?>
+                    <li><a class="highlight" href="javascript:void(0);"><span>[<?php echo ($line->getstart()); ?>]</span><?php echo $line->getText(); ?></a></li>
+                <?php endforeach; ?>
             </ul>
         </div>
     </div>
     <div class="mh-transcript-show-bp2 mh-too-small-message">
-        <h3>The screen size you are trying to search captions on it too small!</h3>
+        <span>The screen size you are trying to search captions on it too small!</span>
         <p>you can always <a href="<?php echo $context->getURL(); ?>" target="_blank">Jump over to MediaHub</a> and check it out there.</p>
     </div>
 </div>
-
-<?php 
-    }
-?>
+<?php endif; ?>
 
 

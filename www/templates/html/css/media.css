@@ -445,6 +445,11 @@ body #cboxOverlay {background-color:#000;}
 
 }
 
+.mh-media-page h2 {
+    font-size: 1.4375rem;
+}
+
+
 @media only screen and (max-width: 960px)  {
 
     .mh-hide-bp3 {
