@@ -278,7 +278,7 @@
                             }
 
                             var html = '<div class="media-content-head mejs-control">';
-                            html += '<div class="media-content-title"><a href="' + share_url + '">' + $title + '</a></div>';
+                            html += '<div class="media-content-title"><a href="' + share_url + '" target="_parent">' + $title + '</a></div>';
                             html += '<div class="wdn-share-this-page mejs-control">';
                             html += '<input type="checkbox" id="mh-share-toggle'+mediahub_id+'" value="Show share options" class="wdn-input-driver mh-share-toggle">'
                             html += '<label for="mh-share-toggle'+mediahub_id+'" class="wdn-icon-share">Share This Page</label>';
