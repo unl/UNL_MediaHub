@@ -132,14 +132,13 @@ $getTracks = $context->getTextTrackURLs();
                 </div>          
                 <hr>
                 
-                <?php if($getTracks){
-                    echo '<div class="mediahub-onpage-captions">';
-                    echo $savvy->render($context, 'MediaPlayer/Transcript.tpl.php');
-                    echo '</div>';
-                    }
-                ?>
+                <?php if($getTracks): ?>
+                    <div class="mediahub-onpage-captions">
+                        <?php echo $savvy->render($context, 'MediaPlayer/Transcript.tpl.php'); ?>
+                    </div>
+                    <hr>
+                <?php endif; ?>
                
-                <hr>
                 <h2 class="wdn-sans-serif">Description</h2>
                 <div class="mh-summary"><?php echo $summary; ?></div>
 
