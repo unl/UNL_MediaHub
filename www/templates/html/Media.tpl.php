@@ -228,11 +228,15 @@ $getTracks = $context->getTextTrackURLs();
 
 <div id="sharing">
     <h3>Embed</h3>
-    <?php
-    $embed = $savvy->render(UNL_MediaHub_Media_Embed::getById($context->id, UNL_MediaHub_Controller::$current_embed_version));
-    ?>
+    <?php $embed = $savvy->render(UNL_MediaHub_Media_Embed::getById($context->id, UNL_MediaHub_Controller::$current_embed_version)); ?>
     <label for="embed_code">
-        Copy the following code into your unl.edu page
+        <strong>iframe embed code</strong> Copy the following code into your page
         <textarea cols="25" rows="6" id="embed_code" onclick="this.select(); return false;"><?php echo htmlentities($embed, ENT_COMPAT | ENT_HTML401, "UTF-8"); ?></textarea>
     </label>
+    <?php if (3 == UNL_MediaHub_Controller::$current_embed_version): ?>
+        <!--
+        Old embed code for testing purposes
+        <?php echo $savvy->render(UNL_MediaHub_Media_Embed::getById($context->id, 2)); ?>
+        -->
+    <?php endif; ?>
 </div> 
