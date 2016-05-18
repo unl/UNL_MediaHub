@@ -1,1 +1,3 @@
-<iframe width="560" height="315" src="<?php echo $controller->getURL($context->media)?>?format=iframe&autoplay=0" style="border: 0;" allowfullscreen></iframe>
+<div class="wdn-responsive-embed wdn-aspect16x9">
+    <iframe src="<?php echo $controller->getURL($context->media)?>?format=iframe&autoplay=0" title="<?php echo htmlentities($context->media->title) ?>" allowfullscreen></iframe>
+</div>
