@@ -49,10 +49,11 @@ $getTracks = $context->getTextTrackURLs();
 ?>
 
 <div class="wdn-band mh-video-band">
-    <div class="wdn-inner-wrapper mh-iframe-wrapper">
-        <iframe height="667" src="<?php echo $controller->getURL($context)?>?format=iframe" style="border:0; width:100%" frameborder="0" allowfullscreen></iframe>
+    <div class="wdn-inner-wrapper">
+        <div class="mh-iframe-wrapper">
+            <iframe height="667" src="<?php echo $controller->getURL($context)?>?format=iframe" allowfullscreen></iframe>
+        </div>
     </div>
-
 </div>
 
 
