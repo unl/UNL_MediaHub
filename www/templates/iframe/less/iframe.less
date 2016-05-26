@@ -1,6 +1,8 @@
 /* Share media
 -------------------------------------------------------------- */
 .mediahub-embed {
+  height: 100%;
+  
   a.share-video-link {
     background: #D00000;
     color: #000;
@@ -162,7 +164,13 @@
     z-index: 100;
   }
   .mejs-audio {
-    min-height: 75px;
+    height: 100% !important;
+    
+    .mejs-mediaelement {
+      background-image: url('../../html/css/images/waveform.png');
+      background-position: center;
+      background-repeat: no-repeat;
+    }
   }
 
   .mejs-controls .mejs-time-rail .mejs-time-loaded {
