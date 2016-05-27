@@ -63,7 +63,7 @@ if(!empty($context->options['f'])){
     <div class="wdn-inner-wrapper wdn-inner-padding-no-top wdn-inner-padding-sm">
 
         <?php
-        $buttons = new stdClass();
+        $buttons = (object)[];
         $buttons->selected_key = $context->options['orderby'];
         $buttons->group_id = 'orderby';
         $buttons->label = 'Order by:';
@@ -89,7 +89,7 @@ if(!empty($context->options['f'])){
         ?>
 
         <?php
-        $buttons = new stdClass();
+        $buttons = (object)[];
         $buttons->selected_key = $context->options['f'];
         $buttons->group_id = 'filter';
         $buttons->label = 'Filter by:';

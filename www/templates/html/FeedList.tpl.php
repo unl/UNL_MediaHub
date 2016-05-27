@@ -48,7 +48,7 @@ if($context->options['orderby'] == 'datecreated'){
 <div class="wdn-band">
     <div class="wdn-inner-wrapper wdn-inner-padding-none">
         <?php
-        $buttons = new stdClass();
+        $buttons = (object)[];
         $buttons->selected_key = $context->options['orderby'];
         $buttons->group_id = 'order';
         $buttons->label = 'Order by:';
