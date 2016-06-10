@@ -95,8 +95,6 @@
 
                         $transcript = $container.find('.mh-transcript');
                         $captionSearch = $container.children(".mh-caption-search");
-                        $container.find(".mh-parse-caption").attr("id","mh-parse-caption"+mediahub_id);
-                        $container.find(".mh-caption-container").find("label").attr("for","mh-parse-caption"+mediahub_id);
                         $mhLanguageSelect = $container.find("#mh-language-select");
 
                         if (!Safari) {
@@ -137,11 +135,11 @@
 
                         var setTranscript = function(track){
                             $captionSearch.find(".mh-caption-close").on("click", function(){
-                                $(this).siblings(".mh-parse-caption").val("");
+                                $(this).siblings("#mh-parse-caption").val("");
                                 $transcript.find("a").addClass("highlight");
                             });
 
-                            $captionSearch.find(".mh-parse-caption").on("keydown keyup focus blur", function(e){
+                            $captionSearch.find("#mh-parse-caption").on("keydown keyup focus blur", function(e){
                                 e.stopPropagation();
                                 var search = $(this).val().toLowerCase();
                                 var subtitlesLength;
