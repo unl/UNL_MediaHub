@@ -77,6 +77,8 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
             case 'headline':
             case 'play_count':
             case 'popular_play_count':
+            case 'title_a_z':
+            case 'title_z_a':
                 break;
             default:
                 $this->options['orderby'] = 'datecreated';
@@ -89,7 +91,12 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
     
     public function setOrderBy(Doctrine_Query_Abstract $query)
     {
-        $query->orderby('m.'.$this->options['orderby'].' '.$this->options['order']);
+        $order_by = $this->options['orderby'];
+        if (in_array($order_by, array('title_a_z', 'title_z_a'))) {
+            $order_by = 'title';
+        }
+        
+        $query->orderby('m.'.$order_by.' '.$this->options['order']);
     }
     
     public function getURL($params = array())
