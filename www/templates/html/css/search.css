@@ -62,16 +62,6 @@ ul.mh-channel-buttons {
 	padding-left: 0;
 }
 
-.mh-sort-filter .wdn-button{
-	border-radius: 15px;
-	padding: 0.802em 1.333em;
-	margin-right: 1em;
-}
-
-.mh-sort-filter .mh-btn-group .wdn-button{
-	border-radius: 0;
-}
-
 @media (max-width: 768px) {
 
 	.mh-app-search {
