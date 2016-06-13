@@ -27,14 +27,14 @@ $getTracks = $context->media->getTextTrackURLs();
                 <button class="mh-caption-search-close caption-toggle" aria-label="Close Searchable Transcript">x</button>
             </div>
             <div class="mh-caption-container">   
-                <label for="mh-parse-caption">Search:</label>
+                <label id="mh-parse-caption">Search:</label>
                 <a class="mh-paragraph-icons" href="javascript:void(0);">
                     <span class="wdn-text-hidden">Toggle between list and paragraph view.</span>
                     <div class="mh-bullets"></div>
                     <div class="mh-paragraph"></div>
                 </a>
                 <br>
-                <input type="text" id="mh-parse-caption"><div class="mh-caption-close"></div>
+                <input type="text" id="mh-parse-caption" class="mh-parse-caption"><div class="mh-caption-close"></div>
                 <ul class="mh-transcript"></ul>
             </div>
         </div>
@@ -76,7 +76,7 @@ $getTracks = $context->media->getTextTrackURLs();
                                 "aria-label": "Toggle Searchable Transcript"
                             }));
 
-                        t.captionsButton.before($myButton)
+                        t.captionsButton.before($myButton);
 
                         if (!Safari) {
                             t.controls.on("click", ".caption-toggle", function(e){
@@ -98,7 +98,7 @@ $getTracks = $context->media->getTextTrackURLs();
                                     t.exitFullScreen();
                                 }
                             });
-                        };
+                        }
 
                         var displaytime = function(millis){
                             var hours = Math.floor(millis / 36e5),
@@ -106,13 +106,13 @@ $getTracks = $context->media->getTextTrackURLs();
                                 secs = Math.floor((millis % 6e4) / 1000);
                                 if(secs < 10){
                                     secs = "0"+secs;
-                                };
+                                }
                                 if(hours > 0){
                                     return hours+':'+mins+':'+secs;
                                 }else{
                                     return mins+':'+secs;
-                                };
-                        }
+                                }
+                        };
 
                         var setTranscript = function(track){
                             $captionSearch.find(".mh-caption-close").on("click", function(){
@@ -120,7 +120,7 @@ $getTracks = $context->media->getTextTrackURLs();
                                 $transcript.find("a").addClass("highlight");
                             });
 
-                            $captionSearch.find(".mh-parse-caption").on("keydown keyup focus blur", function(e){
+                            $captionSearch.find(".mh-parse-caption").on("keydown keyup focus blur", function(e){console.log('test');
                                 e.stopPropagation();
                                 var search = $(this).val().toLowerCase();
                                 var subtitlesLength;
@@ -137,7 +137,7 @@ $getTracks = $context->media->getTextTrackURLs();
                                     }else{
                                         $transcript.find("a").eq(i).removeClass("highlight");
                                     }
-                                };
+                                }
                             });
 
                             t.container.find(".mh-paragraph-icons").off();
