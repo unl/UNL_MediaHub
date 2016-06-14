@@ -10,6 +10,7 @@ module.exports = function(grunt) {
                     compress: true
                 },
                 files: {
+                    './www/templates/html/css/all.css': './www/templates/html/less/all.less',
                     './www/templates/html/css/player.css': './www/templates/html/less/player.less',
                     './www/templates/iframe/css/iframe.css': './www/templates/iframe/less/iframe.less'
                 }
