@@ -367,6 +367,13 @@
 
             $(function() {
                 $('video, audio').each(function() {
+                    var $media = $(this);
+                    var startLanguage = $media.attr('data-start-language');
+                    
+                    if ("undefined" !== typeof startLanguage) {
+                        options.startLanguage = startLanguage;
+                    }
+                    
                     $(this).mediaelementplayer(options);
                 });
             });

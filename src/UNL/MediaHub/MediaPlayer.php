@@ -23,10 +23,16 @@ class UNL_MediaHub_MediaPlayer implements \Savvy_Turbo_CacheableInterface
             $autoplay = $this->options['autoplay'];
         }
         
+        $captions = '';
+        if (isset($this->options['captions'])) {
+            $captions = $this->options['captions'];
+        }
+        
         return 'media_' . $this->media->id . '_' . $this->media->dateupdated 
             . '--format-' . $this->options['format'] 
             . '--autoplay-' . $autoplay 
-            . '--preload-'. $preload;
+            . '--preload-'. $preload
+            . '--captions-'.$captions;
     }
     
     public function run()
