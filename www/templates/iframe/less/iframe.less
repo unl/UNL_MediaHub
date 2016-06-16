@@ -1018,35 +1018,43 @@
     display: block;
   }
 
-.mh-too-small-message {
-      background-color: #fefdfa;
-      padding: .75em;
-      h3 {
-        margin-top: 0;
-      }
-}
+  .mh-too-small-message {
+        background-color: #fefdfa;
+        padding: .75em;
+        h3 {
+          margin-top: 0;
+        }
+  }
 
   label {
     font-family: "gotham";
   }
 
 
-&.non-framework {
-
-  .mh-transcript-show-bp2 {
-      display: none;
+  &.non-framework {
+  
+    .mh-transcript-show-bp2 {
+        display: none;
+    }
+  
+    @media only screen and (max-width: 768px)  {
+        .mh-transcript-hide-bp2 {
+            display: none;
+        }
+        .mh-transcript-show-bp2 {
+            display: block;
+        }
+    }
   }
+  
+  .mejs-captions-text {
+    display: inline-block;
+    font-size: 1.65em;
+    line-height: 1em;
 
-  @media only screen and (max-width: 768px)  {
-      .mh-transcript-hide-bp2 {
-          display: none;
-      }
-      .mh-transcript-show-bp2 {
-          display: block;
-      }
-  } 
-
-
-}
+    @media only screen and (max-width: 768px)  {
+      font-size: 1em;
+    }
+  }
 
 }
