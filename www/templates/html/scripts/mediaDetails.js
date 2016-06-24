@@ -2,14 +2,14 @@ var jQuery = WDN.jQuery;
 var mediaDetails = function() {
 	var video;
 	return {
-		imageBaseURL: 'http://itunes.unl.edu/thumbnails.php?url=',
+		imageBaseURL: '/thumbnail.php?media_id=',
 		
 		setVideoType : function(){
 		
 		},
 		
 		getImageURL: function() {
-		    return mediaDetails.imageBaseURL + mejs.players.mep_0.media.src;
+		    return mediaDetails.imageBaseURL + WDN.jQuery(mejs.players.mep_0.media).attr('data-mediahub-id');
 		},
 		
 		updateDuration : function() {
@@ -25,8 +25,6 @@ var mediaDetails = function() {
 			
 			var src = mediaDetails.getImageURL() + '&time='+mediaDetails.formatTime(currentTime)+'&rebuild';
 			
-			WDN.log(src);
-			
 			WDN.jQuery.ajax(src).always(function() {
 	    		WDN.jQuery('#thumbnail').attr('src', src.replace('&rebuild', ''));
 	    		WDN.jQuery('#imageOverlay').hide();
@@ -41,9 +39,11 @@ var mediaDetails = function() {
 		    WDN.log(totalSec);
 			hours = parseInt( totalSec / 3600 ) % 24;
 			minutes = parseInt( totalSec / 60 ) % 60;
-			seconds = Math.round(((totalSec % 60)*100)/100);
+			seconds = ((totalSec % 60)*100)/100;
+            fraction = Math.round((seconds - Math.floor(seconds)) * 100);
+            seconds = Math.floor(seconds);
 
-			return ((hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds  < 10 ? "0" + seconds : seconds));
+			return ((hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds  < 10 ? "0" + seconds : seconds) + "." + fraction);
 		},
 
 		/**
@@ -59,18 +59,6 @@ var mediaDetails = function() {
 	            return false;
 	        }
 	        return true;
-		},
-
-		// Grab the preview markup for the URL requested
-		getPreview : function(url) {
-			WDN.jQuery('#headline_main').html('Generating a thumbnail and setting up the media player. <img src="/wdn/templates_3.0/scripts/plugins/tinymce/themes/advanced/skins/unl/img/progress.gif" alt="progress animated gif" />');
-			WDN.get('?view=mediapreview&format=partial&url='+url, function(data, textStatus){
-				// Place the preview markup into the preview div
-				WDN.jQuery('#headline_main').html(data).ready(function(){
-		    		mediaDetails.scalePlayer();
-                    WDN.jQuery('#poster_picker_disabled').hide();
-				});
-			});
 		},
 
 		scalePlayer: function() {
@@ -133,20 +121,8 @@ WDN.jQuery(document).ready(function() {
     });
 
     WDN.jQuery("#mediaSubmit").click(function (event) { //called when a user adds video
-        var isUpload = false;
-        
-        if (document.getElementById("file_upload").value == '') {
-            if (!mediaDetails.validURL(document.getElementById("url").value)) {
-                return false;
-            }
-            mediaDetails.getPreview(WDN.jQuery("#url").val());
-            event.preventDefault();
-
-        } else {
-            isUpload = true;
-            // Hide the url field, user is uploading a file
-            WDN.jQuery('#media_url').closest('li').hide();
-        }
+        // Hide the url field, user is uploading a file
+        WDN.jQuery('#media_url').closest('li').hide();
 
         WDN.jQuery('#fileUpload').hide();
 
@@ -154,11 +130,6 @@ WDN.jQuery(document).ready(function() {
             WDN.jQuery("#headline_main").slideDown(400, function () {
                 WDN.jQuery("#media_form").show().css({"width": "930px"}).parent("#formDetails").removeClass("two_col right");
                 WDN.jQuery("#existing_media, #enhanced_header, #feedSelect, #maincontent form.zenform #continue3").slideDown(400);
-                
-                //set the url if this is not an upload.
-                if (!isUpload) {
-                    WDN.jQuery("#media_url").attr("value", WDN.jQuery("#url").val());
-                }
                 
                 WDN.jQuery(this).css('display', 'inline-block');
             });
@@ -169,9 +140,8 @@ WDN.jQuery(document).ready(function() {
     WDN.jQuery('a#setImage').on('click', function(){
     	var currentTime;
 
-        currentTime = mejs.players.mep_0.getCurrentTime() + .01;
+        currentTime = mejs.players.mep_0.getCurrentTime();
 
-    	
     	mediaDetails.updateThumbnail(currentTime);
     
     	return false;
