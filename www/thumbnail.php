@@ -84,7 +84,7 @@ if (isset($_GET['rebuild']) || !file_exists($file)) {
 
         file_put_contents($file, $data);
     } else {
-        $data = file_get_contents('http://www.unl.edu/ucomm/ucomm/av/video/640x480introstill.jpg');
+        $data = file_get_contents(UNL_MediaHub::getRootDir() . '/data/video-placeholder.jpg');
     }
 } else {
     //just a quick retrieval
