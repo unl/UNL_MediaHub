@@ -8,4 +8,3 @@ if ($context->isVideo()) {
 }
 
 echo $savvy->render($context, $template);
-?>
