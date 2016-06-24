@@ -66,6 +66,12 @@ if (isset($_GET['rebuild']) || !file_exists($file)) {
     $url = $media->url;
     $return = array();
     $status = 1;
+    
+    if ($media->getLocalFileName()) {
+        $url = $media->getLocalFileName();
+    }
+    
+    $url = escapeshellarg($url);
 
     exec(UNL_MediaHub::getRootDir() . "/ffmpeg/ffmpeg -i $url -ss $time -vcodec mjpeg -vframes 1 -f image2 /tmp/posterframe.jpg -y", $return, $status);
 
