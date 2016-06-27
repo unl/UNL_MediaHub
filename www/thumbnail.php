@@ -79,18 +79,15 @@ if ($media->getLocalFileName()) {
 
 $url = escapeshellarg($url);
 
-exec(UNL_MediaHub::getRootDir() . "/ffmpeg/ffmpeg -i $url -ss $time -vcodec mjpeg -vframes 1 -f image2 /tmp/posterframe.jpg -y", $return, $status);
-
 if (!file_exists($directory)) {
     mkdir($directory, 0777, true);
 }
 
-if ($status == 0) {
-    $data = file_get_contents('/tmp/posterframe.jpg');
+exec(UNL_MediaHub::getRootDir() . "/ffmpeg/ffmpeg -i $url -ss $time -vcodec mjpeg -vframes 1 -f image2 $file -y", $return, $status);
 
-    file_put_contents($file, $data);
-} else {
-    $data = file_get_contents(UNL_MediaHub::getRootDir() . '/data/video-placeholder.jpg');
+if ($status == 0 && $data = file_get_contents($file)) {
+    echo $data; exit();
 }
 
-echo($data);
+//Fall back to the default poster image
+echo file_get_contents(UNL_MediaHub::getRootDir() . '/data/video-placeholder.jpg');
