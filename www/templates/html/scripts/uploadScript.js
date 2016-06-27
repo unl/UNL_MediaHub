@@ -2,8 +2,6 @@
 
 WDN.jQuery(document).ready(function(){
 
-console.log(baseurl);
-
 var max_file_count = 1;
 var submit_text = 'Save';
 var uploader = new plupload.Uploader({

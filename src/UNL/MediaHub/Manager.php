@@ -11,7 +11,6 @@ class UNL_MediaHub_Manager extends UNL_MediaHub_BaseController implements UNL_Me
         'feeds'           => 'UNL_MediaHub_User_FeedList',
         'subscriptions'   => 'UNL_MediaHub_User_Subscriptions',
         'addsubscription' => 'UNL_MediaHub_Subscription_Form',
-        'mediapreview'    => 'UNL_MediaHub_Media_Preview',
         'uploadcomplete'  => 'UNL_MediaHub_Feed_Media_FileUpload_Complete',
         'upload'          => 'UNL_MediaHub_Feed_Media_FileUpload',
         'home'            => 'UNL_MediaHub_Manager_ManagerHome',
