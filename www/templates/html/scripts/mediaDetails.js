@@ -2,14 +2,12 @@ var jQuery = WDN.jQuery;
 var mediaDetails = function() {
 	var video;
 	return {
-		imageBaseURL: '/thumbnail.php?media_id=',
-		
 		setVideoType : function(){
 		
 		},
 		
 		getImageURL: function() {
-		    return mediaDetails.imageBaseURL + WDN.jQuery(mejs.players.mep_0.media).attr('data-mediahub-id');
+		    return front_end_baseurl + 'media/' + WDN.jQuery(mejs.players.mep_0.media).attr('data-mediahub-id') + '/image';
 		},
 		
 		updateDuration : function() {
@@ -23,7 +21,7 @@ var mediaDetails = function() {
 		updateThumbnail : function(currentTime) {
 			WDN.jQuery('#imageOverlay').show();
 			
-			var src = mediaDetails.getImageURL() + '&time='+mediaDetails.formatTime(currentTime)+'&rebuild';
+			var src = mediaDetails.getImageURL() + '?time='+mediaDetails.formatTime(currentTime)+'&rebuild';
 			
 			WDN.jQuery.ajax(src).always(function() {
 	    		WDN.jQuery('#thumbnail').attr('src', src.replace('&rebuild', ''));
@@ -64,7 +62,7 @@ var mediaDetails = function() {
 		scalePlayer: function() {
 			// Now scale down the player
 			var thumbnail = new Image();
-			thumbnail.src = WDN.jQuery('#thumbnail').attr('src')+'&time='+mediaDetails.formatTime(0);
+			thumbnail.src = WDN.jQuery('#thumbnail').attr('src')+'?time='+mediaDetails.formatTime(0);
 			thumbnail.onload = function(){
 				var calcHeight = (this.height * 460)/this.width;
 				WDN.jQuery('#videoDisplay object').attr('style', 'width:460px;height:'+calcHeight);

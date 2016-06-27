@@ -339,7 +339,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
             return UNL_MediaHub_Controller::getURL().'templates/html/css/images/waveform.png';
         }
         
-        return UNL_MediaHub_Controller::getURL().'thumbnail.php?media_id='.$this->id;
+        return $this->getURL() . '/image';
     }
 
     function getStreamingURL()

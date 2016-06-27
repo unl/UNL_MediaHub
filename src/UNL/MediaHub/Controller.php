@@ -145,7 +145,6 @@ class UNL_MediaHub_Controller
     function preRun($cached)
     {
         if ($this->options['model'] == 'feed_image'
-            || $this->options['model'] == 'media_image'
             || $this->options['model'] == 'media_embed'
             || $this->options['model'] == 'media_vtt') {
             UNL_MediaHub_OutputController::setOutputTemplate('UNL_MediaHub_Controller', 'ControllerPartial');
@@ -241,8 +240,11 @@ class UNL_MediaHub_Controller
             case 'media_srt':
                 UNL_MediaHub::redirect(UNL_MediaHub_Controller::$url . 'media/' . $this->options['id'] . '/vtt');
             case 'media_image':
-                $this->output[] = UNL_MediaHub_Media_Image::getById($this->options['id']);
-                break;
+                $image = new UNL_MediaHub_Media_Image($this->options);
+                $file = $image->getThumbnail();
+                header('Content-Type: image/jpeg');
+                echo $file;
+                exit();
             case 'media_embed':
                 $id = null;
                 if (isset($this->options['id'])) {

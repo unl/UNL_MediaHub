@@ -17,7 +17,10 @@ $page->affiliation = '';
 //header
 $page->addStyleSheet(UNL_MediaHub_Controller::getURL().'templates/html/css/all.css?v='.UNL_MediaHub_Controller::getVersion());
 $page->addStyleSheet(UNL_MediaHub_Manager::getURL().'templates/css/all_manager.css?v='.UNL_MediaHub_Controller::getVersion());
-$page->head .= '<script>var baseurl = "'.UNL_MediaHub_Manager::getURL().'";</script>';
+$page->head .= '<script>
+    var baseurl = "'.UNL_MediaHub_Manager::getURL().'";
+    var front_end_baseurl = "'.UNL_MediaHub_Controller::getURL().'";
+</script>';
 $page->addScript(UNL_MediaHub_Controller::getURL().'templates/html/scripts/manager.js?v='.UNL_MediaHub_Controller::getVersion());
 
 
