@@ -59,7 +59,7 @@ if (isset($_GET['rebuild']) || !file_exists($file)) {
         && isset($_GET['time'])
         && preg_match('/^[\d]+\:[\d]{2}\:[\d]{2}(\.[\d]{2})?$/', $_GET['time'])) {
         //Allow customizing the time if the user has permission
-        $time = $_GET['time'];
+        $time = escapeshellarg($_GET['time']);
     }
     
     //We need to cache data
