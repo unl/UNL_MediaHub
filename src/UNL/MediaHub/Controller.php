@@ -243,7 +243,7 @@ class UNL_MediaHub_Controller
                 $image = new UNL_MediaHub_Media_Image($this->options);
                 $file = $image->getThumbnail();
                 header('Content-Type: image/jpeg');
-                echo $file;
+                readfile($file);
                 exit();
             case 'media_embed':
                 $id = null;

@@ -29,7 +29,7 @@ class UNL_MediaHub_Media_Image
 
         if (!isset($this->options['rebuild']) && file_exists($file)) {
             //just a quick retrieval
-            return file_get_contents($file);
+            return $file;
         }
 
         if (!$media = UNL_MediaHub_Media::getById($media_id)) {
@@ -75,11 +75,11 @@ class UNL_MediaHub_Media_Image
 
         exec(UNL_MediaHub::getRootDir() . "/ffmpeg/ffmpeg -i $url -ss $time -vcodec mjpeg -vframes 1 -f image2 $file -y", $return, $status);
 
-        if ($status == 0 && $data = file_get_contents($file)) {
-            return $data;
+        if ($status == 0 && file_exists($file)) {
+            return $file;
         }
 
         //Fall back to the default poster image
-        return file_get_contents(UNL_MediaHub::getRootDir() . '/data/video-placeholder.jpg');
+        return UNL_MediaHub::getRootDir() . '/data/video-placeholder.jpg';
     }
 }
