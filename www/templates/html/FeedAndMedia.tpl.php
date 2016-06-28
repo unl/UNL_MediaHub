@@ -4,6 +4,7 @@ $controller->setReplacementData('title', 'UNL | MediaHub | '.htmlspecialchars($c
 $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li><li><a href="'.UNL_MediaHub_Controller::getURL().'channels/">All Channels</a></li><li>'.htmlspecialchars($context->feed->title).'</li></ul>');
 $feed_url = htmlentities(UNL_MediaHub_Controller::getURL($context->feed), ENT_QUOTES);
 $baseUrl = UNL_MediaHub_Controller::getURL();
+$user = UNL_MediaHub_AuthService::getInstance()->getUser();
 ?>
 <div class="wdn-band wdn-light-neutral-band mh-feed-info">
     <div class="wdn-inner-wrapper">

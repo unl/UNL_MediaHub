@@ -2,6 +2,8 @@
 /**
  * @var $context UNL_MediaHub_Media
  */
+
+$user = UNL_MediaHub_AuthService::getInstance()->getUser();
 ?>
 <div class="mh-video-thumb wdn-center">
     <a href="<?php echo UNL_MediaHub_Controller::getURL($context) ?>">
