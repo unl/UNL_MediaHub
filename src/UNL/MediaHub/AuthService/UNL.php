@@ -26,10 +26,6 @@ class UNL_MediaHub_AuthService_UNL extends UNL_MediaHub_AuthService_Interface
             $this->logout();
             exit();
         }
-
-        if ($this->isLoggedIn()) {
-            $this->setUser(UNL_MediaHub_User::getByUid(\phpCAS::getUser()));
-        }
     }
 
     /**
@@ -85,5 +81,14 @@ class UNL_MediaHub_AuthService_UNL extends UNL_MediaHub_AuthService_Interface
     public function logout()
     {
         \phpCAS::logoutWithRedirectService(UNL_MediaHub_Controller::$url);
+    }
+    
+    public function getUser()
+    {
+        if (!$this->user && $this->isLoggedIn()) {
+            $this->setUser(UNL_MediaHub_User::getByUid(\phpCAS::getUser()));
+        }
+        
+        return parent::getUser();
     }
 }
