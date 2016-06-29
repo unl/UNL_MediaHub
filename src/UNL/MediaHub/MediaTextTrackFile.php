@@ -40,6 +40,14 @@ class UNL_MediaHub_MediaTextTrackFile extends UNL_MediaHub_Models_BaseMediaTextT
         return UNL_MediaHub_Controller::$url . 'media/'.$text_track->media_id.'/'.$this->format.'?text_file_id='.$this->id;
     }
 
+    public function getSrtURL()
+    {
+        $text_track = $this->getTextTrack();
+
+        //This endpoint should convert VTT to SRT on the fly
+        return UNL_MediaHub_Controller::$url . 'media/'.$text_track->media_id.'/'.self::FORMAT_SRT.'?text_file_id='.$this->id;
+    }
+
     /**
      * @return UNL_MediaHub_MediaTextTrack
      */

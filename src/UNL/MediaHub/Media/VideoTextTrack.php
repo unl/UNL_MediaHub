@@ -51,11 +51,23 @@ class UNL_MediaHub_Media_VideoTextTrack
         }
         
         if (isset($options['download'])) {
-            $file_name = $file->id . '-' .$file->language . '.'. $file->format;
+            $file_name = $file->id . '-' .$file->language . '.'. $format;
             header("Content-disposition: attachment; filename=\"$file_name\"");
         }
         
         $this->track = $file->file_contents;
+        
+        //Convert VTT to SRT if we need to
+        if ($file->format == UNL_MediaHub_MediaTextTrackFile::FORMAT_VTT 
+            && $format === UNL_MediaHub_MediaTextTrackFile::FORMAT_SRT) {
+            //Convert the webvtt format to srt (ffmpeg require srt)
+            $vtt = new Captioning\Format\WebvttFile();
+            $vtt->loadFromString($file->file_contents);
+            $srt = $vtt->convertTo('subrip');
+            $srt->build();
+
+            $this->track = strip_tags($srt->getFileContent());
+        }
     }
     
     public function getTextTrack()

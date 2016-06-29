@@ -174,7 +174,8 @@ $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl
                             <ul>
                                 <?php foreach ($track->getFiles()->items as $file): ?>
                                     <li>
-                                        <a href="<?php echo $file->getURL() ?>&amp;download=1" target="_blank"><?php echo $file->language ?>.<?php echo $file->format ?></a>
+                                        <a href="<?php echo $file->getURL() ?>&amp;download=1" target="_blank"><?php echo $file->language ?>.<?php echo $file->format ?></a>,
+                                        <a href="<?php echo $file->getSrtURL() ?>&amp;download=1" target="_blank"><?php echo $file->language ?>.srt</a>
                                     </li>
                                 <?php endforeach; ?>
                             </ul>

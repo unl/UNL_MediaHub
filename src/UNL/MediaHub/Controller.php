@@ -146,7 +146,8 @@ class UNL_MediaHub_Controller
     {
         if ($this->options['model'] == 'feed_image'
             || $this->options['model'] == 'media_embed'
-            || $this->options['model'] == 'media_vtt') {
+            || $this->options['model'] == 'media_vtt'
+            || $this->options['model'] == 'media_srt') {
             UNL_MediaHub_OutputController::setOutputTemplate('UNL_MediaHub_Controller', 'ControllerPartial');
         }
         
@@ -235,10 +236,11 @@ class UNL_MediaHub_Controller
                 }
                 break;
             case 'media_vtt':
-                $this->output[] = new UNL_MediaHub_Media_VideoTextTrack($this->options, 'vtt');
+                $this->output[] = new UNL_MediaHub_Media_VideoTextTrack($this->options, UNL_MediaHub_MediaTextTrackFile::FORMAT_VTT);
                 break;
             case 'media_srt':
-                UNL_MediaHub::redirect(UNL_MediaHub_Controller::$url . 'media/' . $this->options['id'] . '/vtt');
+                $this->output[] = new UNL_MediaHub_Media_VideoTextTrack($this->options, UNL_MediaHub_MediaTextTrackFile::FORMAT_SRT);
+                break;
             case 'media_image':
                 $image = new UNL_MediaHub_Media_Image($this->options);
                 $file = $image->getThumbnail();
