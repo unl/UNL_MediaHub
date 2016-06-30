@@ -12,7 +12,7 @@ $getTracks = $context->media->getTextTrackURLs();
 <?php if($getTracks): ?>
 <script type="htmltemplate" class="mh_transcript_template">
 
-        <div class="mh-caption-search">
+        <div class="mh-caption-search" style="display: none">
             <div class="title wdn-sans-serif wdn-icon-search">
                 Searchable Transcript
                 <div class="wdn-icon-info mh-tooltip hang-right italic">
@@ -330,6 +330,8 @@ $getTracks = $context->media->getTextTrackURLs();
 
                     //Load the CSS
                     WDN.loadCSS('<?php echo UNL_MediaHub_Controller::toAgnosticURL(UNL_MediaHub_Controller::$url); ?>templates/html/css/player.css?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>', function() {
+                        //prevent flash of content
+                        $('.mh-caption-search').removeAttr('style');
                         <?php if($context->media->privacy === "PUBLIC"): ?>
                             initSharing(m, v);
                         <?php endif; ?>
