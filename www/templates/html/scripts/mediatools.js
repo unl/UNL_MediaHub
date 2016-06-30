@@ -1,7 +1,4 @@
-function playerReady(thePlayer) {
-	//start the player and JS API
-	WDN.videoPlayer.createFallback.addJWListeners(document.getElementById(thePlayer.id));
-}
+
 WDN.loadJQuery(function(){
 	WDN.initializePlugin('modal', [function() {
 		WDN.jQuery('.embed').colorbox({inline: true, href:'#sharing', width:'75%', height:'75%'});
