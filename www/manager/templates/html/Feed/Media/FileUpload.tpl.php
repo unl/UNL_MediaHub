@@ -83,8 +83,8 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
 </div>
 
 <script type="text/javascript">
-WDN.initializePlugin('form_validation', [function() {
-    WDN.jQuery('#add_media').validation({
+WDN.initializePlugin('form_validation', [function($) {
+    $('#add_media').validation({
         containerClassName: 'validation-container',
         immediate: true
     });
