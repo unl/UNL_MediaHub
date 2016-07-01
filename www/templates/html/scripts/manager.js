@@ -7,5 +7,10 @@ require(['jquery'], function($){
 
             return false;
         });
+        
+        $('#delete-media').click(function(){
+            $('#deleteForm').submit();
+            return false; //prevent default action
+        });
     });
 });

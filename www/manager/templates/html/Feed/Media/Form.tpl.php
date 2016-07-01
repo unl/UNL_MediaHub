@@ -545,7 +545,7 @@ WDN.initializePlugin('notice');
                         </ol>
                     </fieldset>
                     <input type="submit" name="submit" id="continue3" value="Save" class="wdn-pull-left" />
-                    <a href="javascript:WDN.jQuery('#deleteForm').submit();" class="wdn-button wdn-button-brand">Delete</a>
+                    <button id="delete-media" class="wdn-button wdn-button-brand">Delete</button>
                 </div>
                 
                 <?php
