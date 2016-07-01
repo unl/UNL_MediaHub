@@ -1,6 +1,6 @@
 <?php
-$page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plupload/plupload.full.min.js');
-$page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/uploadScript.js');
+$page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plupload/plupload.full.min.js?v='.UNL_MediaHub_Controller::getVersion());
+$page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/uploadScript.js?v='.UNL_MediaHub_Controller::getVersion());
 $baseUrl = UNL_MediaHub_Controller::getURL();
 $formView  = '';
 $mediaType = 'audio';
@@ -23,7 +23,7 @@ $js = '<script type="text/javascript">
 var formView = "'.$formView.'";
 var mediaType = "'.$mediaType.'";
 </script>
-<script type="text/javascript" src="'.UNL_MediaHub_Controller::getURL().'templates/html/scripts/mediaDetails.js"></script>
+<script type="text/javascript" src="'.UNL_MediaHub_Controller::getURL().'templates/html/scripts/mediaDetails.js?v='.UNL_MediaHub_Controller::getVersion().'"></script>
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 ';
 

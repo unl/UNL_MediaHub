@@ -1,6 +1,6 @@
 <?php
-$page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plupload/plupload.full.min.js');
-$page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/uploadScript.js');
+$page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plupload/plupload.full.min.js?v='.UNL_MediaHub_Controller::getVersion());
+$page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/uploadScript.js?v='.UNL_MediaHub_Controller::getVersion());
 ?>
 
 <div class="wdn-band wdn-light-neutral-band mh-upload-band">
