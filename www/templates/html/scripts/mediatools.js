@@ -1,13 +1,12 @@
-
-WDN.loadJQuery(function(){
+require(['jquery'], function($){
 	WDN.initializePlugin('modal', [function() {
-		WDN.jQuery('.embed').colorbox({inline: true, href:'#sharing', width:'75%', height:'75%'});
+		$('.embed').colorbox({inline: true, href:'#sharing', width:'75%', height:'75%'});
 	}]);
-	WDN.jQuery('form#addTags').hide();
-	WDN.jQuery('#mediaTagsAdd a[href="#"]').click(function(){
-		WDN.jQuery(this).hide();
-		WDN.jQuery(this).siblings('form').show(function(){
-			WDN.jQuery('#new_tag').focus();
+	$('form#addTags').hide();
+	$('#mediaTagsAdd a[href="#"]').click(function(){
+		$(this).hide();
+		$(this).siblings('form').show(function(){
+			$('#new_tag').focus();
 		});
 		return false;
 	});
