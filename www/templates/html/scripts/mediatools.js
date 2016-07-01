@@ -7,7 +7,7 @@ WDN.loadJQuery(function(){
 	WDN.jQuery('#mediaTagsAdd a[href="#"]').click(function(){
 		WDN.jQuery(this).hide();
 		WDN.jQuery(this).siblings('form').show(function(){
-			WDN.jQuery(this).children('input[type="text"]').focus();
+			WDN.jQuery('#new_tag').focus();
 		});
 		return false;
 	});
