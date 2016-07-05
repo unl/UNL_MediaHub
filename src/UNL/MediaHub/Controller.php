@@ -93,6 +93,8 @@ class UNL_MediaHub_Controller
      */
     public static $auto_mux = true;
     
+    public static $max_upload_mb = '1024';
+    
     /**
      * Construct a new controller.
      *

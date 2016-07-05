@@ -19,7 +19,7 @@ require(['jquery'], function($){
                 __unlmy_posttarget: 'upload_media'
             },
             filters : {
-                max_file_size : '900mb',
+                max_file_size : MAX_UPLOAD+'mb',
                 mime_types: [
                     {title : "Video files", extensions : "mp4,3gp"},
                     {title : "Audio files", extensions : "mp3"}
