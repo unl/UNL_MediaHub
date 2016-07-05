@@ -8,6 +8,8 @@ if (file_exists($wdn_include_path . '/wdn/templates_4.1')) {
     $page->setLocalIncludePath($wdn_include_path);
 }
 
+$savvy->addGlobal('page', $page);
+
 $baseUrl = UNL_MediaHub_Controller::getURL();
 
 //Titles
