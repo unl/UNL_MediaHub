@@ -149,6 +149,31 @@ require(['jquery'], function($){
                     }
                 });
 
+                $('#geo_location legend').click(function() {
+                    var map;
+                    var marker = false;
+                    var lincoln = new google.maps.LatLng(41.5299085734404, -99.591595703125);
+                    var myOptions = {
+                        zoom: 6,
+                        center: lincoln,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+                    map = new google.maps.Map(document.getElementById('map_canvas'), myOptions);
+
+                    google.maps.event.addListener(map, 'click', function(event) {
+                        if (marker != false) {
+                            marker.setMap(null);
+                        }
+                        marker = new google.maps.Marker({
+                            map: map,
+                            position: event.latLng,
+                            animation: google.maps.Animation.DROP
+                        });
+                        $('#geo_lat').attr('value', event.latLng.lat());
+                        $('#geo_long').attr('value', event.latLng.lng());
+                    });
+                });
+
                 //Update duration
                 $('.find-duration').click(function() {
                     mediaDetails.updateDuration();
