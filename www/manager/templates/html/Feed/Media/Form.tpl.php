@@ -144,14 +144,14 @@ WDN.initializePlugin('notice');
                                 <ol>
                                     <li>
                                         <label for="author" class="element">
-                                            Author<span class="required">*</span><span class="helper"> Name of media creator.</span>
+                                            Author<span class="required">*</span> <span class="helper">Name of media creator.</span>
                                         </label>
                                         <div class="element">
                                             <input id="author" name="author" class="required-entry" type="text" value="<?php echo htmlentities(@$context->media->author, ENT_QUOTES); ?>" />
                                         </div>
                                     </li>
                                     <li>
-                                        <label for="mrss_copyright" class="element">Copyright<span class="helper"> Copyright information for media object.</span></label>
+                                        <label for="mrss_copyright" class="element">Copyright <span class="helper">Copyright information for media object.</span></label>
                                         <div class="element">
                                             <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[10][element]" type="hidden" value="copyright"/>
                                             <input id="mrss_copyright" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[10][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'copyright'); ?>"/>
@@ -302,7 +302,7 @@ WDN.initializePlugin('notice');
                             </li>
 
                             <li style="display:none;">
-                                <label for="mrss_player" class="element">Player<span class="helper">Allows the media object to be accessed through a web browser media player console.</span></label>
+                                <label for="mrss_player" class="element">Player <span class="helper">Allows the media object to be accessed through a web browser media player console.</span></label>
                                 <div class="element">
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[8][element]" type="hidden" value="player"/>
                                     <input id="mrss_player" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[8][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'player'); ?>"/>
@@ -311,7 +311,7 @@ WDN.initializePlugin('notice');
 
 
                             <li style="display:none;">
-                                <label for="mrss_restriction" class="element">Restriction<span class="helper">Allows restrictions to be placed on the aggregator rendering the media in the feed.</span></label>
+                                <label for="mrss_restriction" class="element">Restriction <span class="helper">Allows restrictions to be placed on the aggregator rendering the media in the feed.</span></label>
                                 <div class="element">
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[12][element]" type="hidden" value="restriction"/>
                                     <input id="mrss_restriction" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[12][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'restriction'); ?>"/>
@@ -324,7 +324,7 @@ WDN.initializePlugin('notice');
                         <legend>iTunes Information</legend>
                         <ol>
                             <li style="display:none;">
-                                <label for="itunes_author" class="element">Author<span class="helper">Name of media creator.</span></label>
+                                <label for="itunes_author" class="element">Author <span class="helper">Name of media creator.</span></label>
                                 <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[0][element]" type="hidden" value="author"/>
                                 <input id="itunes_author" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[0][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'author'); ?>"/>
                             </li>
@@ -530,14 +530,14 @@ WDN.initializePlugin('notice');
                             </li>
 
                             <li>
-                                <label for="itunes_subtitle" class="element">Subtitle<span class="helper">The contents of this tag are shown in the Description column in iTunes. The subtitle displays best if it is only a few words long.</span></label>
+                                <label for="itunes_subtitle" class="element">Subtitle <span class="helper">The contents of this tag are shown in the Description column in iTunes. The subtitle displays best if it is only a few words long.</span></label>
                                 <div class="element">
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[5][element]" type="hidden" value="subtitle"/>
                                     <input id="itunes_subtitle" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[5][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'subtitle'); ?>"/>
                                 </div>
                             </li>
                             <li>
-                                <label for="itunes_summary" class="element">Summary<span class="helper">The contents of this tag are shown in a separate window that appears when the "circled i" in the Description column is clicked.</span></label>
+                                <label for="itunes_summary" class="element">Summary <span class="helper">The contents of this tag are shown in a separate window that appears when the "circled i" in the Description column is clicked.</span></label>
                                 <div class="element">
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[6][element]" type="hidden" value="summary"/>
                                     <input id="itunes_summary" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[6][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'summary'); ?>"/>
