@@ -514,11 +514,12 @@ WDN.initializePlugin('notice');
                                 </div>
                             </li>
                             <li>
-                                <label for="itunes_duration" class="element">Duration (HH:MM:SS)<span class="helper"><a href="#" onclick="mediaDetails.updateDuration();return false;">Find this</a></span></label>
+                                <label for="itunes_duration" class="element">Duration (HH:MM:SS)</label>
                                 <div class="element">
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[2][element]" type="hidden" value="duration"/>
                                     <input id="itunes_duration" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[2][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'duration'); ?>"/>
                                 </div>
+                                <button class="find-duration">Find The duration</button>
                             </li>
                             <li style="display:none;">
                                 <label for="itunes_explicit" class="element">Explicit</label>

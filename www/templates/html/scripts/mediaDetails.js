@@ -8,7 +8,7 @@ require(['jquery'], function($){
             },
 
             updateDuration : function() {
-                $('#itunes_duration').attr('value', mediaDetails.findDuration(mejs.players.mep_0.media.duration));
+                $('#itunes_duration').val(mediaDetails.findDuration(mejs.players.mep_0.media.duration));
             },
 
             findDuration : function(duration) {
@@ -26,10 +26,6 @@ require(['jquery'], function($){
                 });
             },
 
-            currentPostion : function(video) {
-                return mediaDetails.formatTime(video.currentTime);
-            },
-
             formatTime : function(totalSec) { //time is coming in milliseconds
                 WDN.log(totalSec);
                 hours = parseInt( totalSec / 3600 ) % 24;
@@ -39,21 +35,6 @@ require(['jquery'], function($){
                 seconds = Math.floor(seconds);
 
                 return ((hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds  < 10 ? "0" + seconds : seconds) + "." + fraction);
-            },
-
-            /**
-             * Check if the given URL meets requirements
-             *
-             * @return bool
-             */
-            validURL : function(url) {
-                unl_check = /^http:\/\/([^\/]+)\.unl\.edu\/(.*)/;
-                var r = unl_check.exec(url);
-                if (r == null) {
-                    alert('Sorry, you must use a .unl.edu URL, or upload a valid file.');
-                    return false;
-                }
-                return true;
             },
 
             scalePlayer: function() {
@@ -76,23 +57,18 @@ require(['jquery'], function($){
             showPosterPicker: function() {
                 $('#poster_picker').show();
                 $('#poster_picker_disabled').hide();
-                mediaDetails.updateThumbnail();
             }
         };
     }();
 
     $(document).ready(function() {
-        if (formView == 'edit'){ //we're editting, so hide the introduction and go straight to the form
 
-            $("#feedlist").hide();
-            $("#formDetails, #formDetails form, #formDetails fieldset, #continue3").not("#addMedia").css({"display" : "block"});
-            //$(".headline_main").css({"display" : "inline-block"});
-            $(".share-video-link").css("display","none");
-            $("#formDetails").removeClass("two_col right").addClass('four_col left');
-            if (mediaType == 'video') {
-                mediaDetails.scalePlayer();
-            }
-            $("#fileUpload").hide();
+        $('#feedlist').hide();
+        $('#formDetails, #formDetails form, #formDetails fieldset, #continue3').not('#addMedia').css({'display' : 'block'});
+        $('.share-video-link').css('display', 'none');
+        
+        if (mediaType == 'video') {
+            mediaDetails.scalePlayer();
         }
 
         if ($('#media_poster').val() !== '') {
@@ -182,6 +158,13 @@ require(['jquery'], function($){
                 $(this).next('ol').show(200);
                 $(this).find('.toggle').html('-');
             }
+        });
+        
+        //Update duration
+        $('.find-duration').click(function() {
+            mediaDetails.updateDuration();
+            //Prevent default action
+            return false;
         });
     });
 });
