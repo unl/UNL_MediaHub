@@ -1,8 +1,8 @@
-require(['jquery'], function($){
-	WDN.initializePlugin('modal', [function() {
-		$('.embed').colorbox({inline: true, href:'#sharing', width:'75%', height:'75%'});
-	}]);
+require(['jquery', 'modal'], function($){
+	$('.embed').colorbox({inline: true, href:'#sharing', width:'75%', height:'75%'});
+	
 	$('form#addTags').hide();
+	
 	$('#mediaTagsAdd a[href="#"]').click(function(){
 		$(this).hide();
 		$(this).siblings('form').show(function(){
