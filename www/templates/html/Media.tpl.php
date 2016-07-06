@@ -21,11 +21,6 @@ $meta = '
 <meta property="og:description" content="'.htmlentities(strip_tags($context->description), ENT_QUOTES).'" />
 <meta property="og:image" content="'.$context->getThumbnailURL().'" />
 <meta property="og:type" content="'.$type.'">
-<script type="text/javascript">
-    WDN.initializePlugin("modal", [function() {
-        WDN.jQuery(\'span.embed\').colorbox({inline: true, href:\'#sharing\', width:\'600px\', height:\'310px\'});
-    }]);
-</script>
 ';
 
 if ($context->privacy !== 'PUBLIC') {
