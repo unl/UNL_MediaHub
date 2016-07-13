@@ -16,7 +16,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                 <div id="mh_upload_media_container" class="bp2-wdn-col-three-sevenths">
                     <div id="mh_upload_media" class="mh-upload-box wdn-center">
                         <h2>+<span class="wdn-subhead">Add Media</span></h2>
-                        <p>.mp4 or .mp3<br>(Maximum file size: 900mb)</p>
+                        <p>.mp4 or .mp3<br>(Maximum file size: <?php echo UNL_MediaHub_Controller::$max_upload_mb; ?>mb)</p>
                     </div>
                     <div id="filelist" class="mh-upload-box wdn-center">
                         Your browser doesn't have Flash, Silverlight or HTML5 support.
@@ -83,8 +83,8 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
 </div>
 
 <script type="text/javascript">
-WDN.initializePlugin('form_validation', [function() {
-    WDN.jQuery('#add_media').validation({
+WDN.initializePlugin('form_validation', [function($) {
+    $('#add_media').validation({
         containerClassName: 'validation-container',
         immediate: true
     });

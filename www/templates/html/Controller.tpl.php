@@ -8,6 +8,8 @@ if (file_exists($wdn_include_path . '/wdn/templates_4.1')) {
     $page->setLocalIncludePath($wdn_include_path);
 }
 
+$savvy->addGlobal('page', $page);
+
 $baseUrl = UNL_MediaHub_Controller::getURL();
 
 //Titles
@@ -22,7 +24,7 @@ if ($title = $context->getReplacementData('pagetitle')) {
 //Header
 $page->addStyleSheet($baseUrl . 'templates/html/css/all.css?v=' . UNL_MediaHub_Controller::getVersion());
 $page->head .= '<script>WDN.setPluginParam("idm", "logout", "' . $baseUrl . '?logout");</script>';
-$page->addScript(UNL_MediaHub_Controller::getURL().'templates/html/scripts/mediatools.js?v=' . UNL_MediaHub_Controller::getVersion());
+$page->addScript(UNL_MediaHub_Controller::getURL().'templates/html/scripts/frontend.js?v=' . UNL_MediaHub_Controller::getVersion());
 if (!$context->output instanceof UNL_MediaHub_FeedAndMedia) {
     $page->head .= '<link rel="alternate" type="application/rss+xml" title="UNL MediaHub" href="?format=xml" />';
 }

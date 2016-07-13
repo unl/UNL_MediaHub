@@ -23,7 +23,7 @@ $js = '<script type="text/javascript">
 var formView = "'.$formView.'";
 var mediaType = "'.$mediaType.'";
 </script>
-<script type="text/javascript" src="'.UNL_MediaHub_Controller::getURL().'templates/html/scripts/mediaDetails.js?v='.UNL_MediaHub_Controller::getVersion().'"></script>
+<script type="text/javascript" src="'.UNL_MediaHub_Controller::getURL().'templates/html/scripts/editMedia.js?v='.UNL_MediaHub_Controller::getVersion().'"></script>
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 ';
 
@@ -144,14 +144,14 @@ WDN.initializePlugin('notice');
                                 <ol>
                                     <li>
                                         <label for="author" class="element">
-                                            Author<span class="required">*</span><span class="helper"> Name of media creator.</span>
+                                            Author<span class="required">*</span> <span class="helper">Name of media creator.</span>
                                         </label>
                                         <div class="element">
                                             <input id="author" name="author" class="required-entry" type="text" value="<?php echo htmlentities(@$context->media->author, ENT_QUOTES); ?>" />
                                         </div>
                                     </li>
                                     <li>
-                                        <label for="mrss_copyright" class="element">Copyright<span class="helper"> Copyright information for media object.</span></label>
+                                        <label for="mrss_copyright" class="element">Copyright <span class="helper">Copyright information for media object.</span></label>
                                         <div class="element">
                                             <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[10][element]" type="hidden" value="copyright"/>
                                             <input id="mrss_copyright" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[10][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'copyright'); ?>"/>
@@ -302,7 +302,7 @@ WDN.initializePlugin('notice');
                             </li>
 
                             <li style="display:none;">
-                                <label for="mrss_player" class="element">Player<span class="helper">Allows the media object to be accessed through a web browser media player console.</span></label>
+                                <label for="mrss_player" class="element">Player <span class="helper">Allows the media object to be accessed through a web browser media player console.</span></label>
                                 <div class="element">
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[8][element]" type="hidden" value="player"/>
                                     <input id="mrss_player" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[8][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'player'); ?>"/>
@@ -311,7 +311,7 @@ WDN.initializePlugin('notice');
 
 
                             <li style="display:none;">
-                                <label for="mrss_restriction" class="element">Restriction<span class="helper">Allows restrictions to be placed on the aggregator rendering the media in the feed.</span></label>
+                                <label for="mrss_restriction" class="element">Restriction <span class="helper">Allows restrictions to be placed on the aggregator rendering the media in the feed.</span></label>
                                 <div class="element">
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[12][element]" type="hidden" value="restriction"/>
                                     <input id="mrss_restriction" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[12][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'restriction'); ?>"/>
@@ -324,7 +324,7 @@ WDN.initializePlugin('notice');
                         <legend>iTunes Information</legend>
                         <ol>
                             <li style="display:none;">
-                                <label for="itunes_author" class="element">Author<span class="helper">Name of media creator.</span></label>
+                                <label for="itunes_author" class="element">Author <span class="helper">Name of media creator.</span></label>
                                 <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[0][element]" type="hidden" value="author"/>
                                 <input id="itunes_author" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[0][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'author'); ?>"/>
                             </li>
@@ -514,11 +514,12 @@ WDN.initializePlugin('notice');
                                 </div>
                             </li>
                             <li>
-                                <label for="itunes_duration" class="element">Duration (HH:MM:SS)<span class="helper"><a href="#" onclick="mediaDetails.updateDuration();return false;">Find this</a></span></label>
+                                <label for="itunes_duration" class="element">Duration (HH:MM:SS)</label>
                                 <div class="element">
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[2][element]" type="hidden" value="duration"/>
                                     <input id="itunes_duration" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[2][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'duration'); ?>"/>
                                 </div>
+                                <button class="find-duration">Find The duration</button>
                             </li>
                             <li style="display:none;">
                                 <label for="itunes_explicit" class="element">Explicit</label>
@@ -529,14 +530,14 @@ WDN.initializePlugin('notice');
                             </li>
 
                             <li>
-                                <label for="itunes_subtitle" class="element">Subtitle<span class="helper">The contents of this tag are shown in the Description column in iTunes. The subtitle displays best if it is only a few words long.</span></label>
+                                <label for="itunes_subtitle" class="element">Subtitle <span class="helper">The contents of this tag are shown in the Description column in iTunes. The subtitle displays best if it is only a few words long.</span></label>
                                 <div class="element">
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[5][element]" type="hidden" value="subtitle"/>
                                     <input id="itunes_subtitle" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[5][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'subtitle'); ?>"/>
                                 </div>
                             </li>
                             <li>
-                                <label for="itunes_summary" class="element">Summary<span class="helper">The contents of this tag are shown in a separate window that appears when the "circled i" in the Description column is clicked.</span></label>
+                                <label for="itunes_summary" class="element">Summary <span class="helper">The contents of this tag are shown in a separate window that appears when the "circled i" in the Description column is clicked.</span></label>
                                 <div class="element">
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[6][element]" type="hidden" value="summary"/>
                                     <input id="itunes_summary" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[6][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'summary'); ?>"/>
@@ -545,7 +546,7 @@ WDN.initializePlugin('notice');
                         </ol>
                     </fieldset>
                     <input type="submit" name="submit" id="continue3" value="Save" class="wdn-pull-left" />
-                    <a href="javascript:WDN.jQuery('#deleteForm').submit();" class="wdn-button wdn-button-brand">Delete</a>
+                    <button id="delete-media" class="wdn-button wdn-button-brand">Delete</button>
                 </div>
                 
                 <?php
@@ -575,33 +576,3 @@ WDN.initializePlugin('notice');
     </div>
 </form>
 <?php echo $savvy->render($context->media, 'Media/DeleteForm.tpl.php'); ?>
-
-<script type="text/javascript">
-
-    WDN.jQuery('#geo_location legend').click(function() {
-        var map;
-        var marker = false;
-        var lincoln = new google.maps.LatLng(41.5299085734404, -99.591595703125);
-        var myOptions = {
-            zoom: 6,
-            center: lincoln,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        map = new google.maps.Map(document.getElementById('map_canvas'), myOptions);
-        
-        google.maps.event.addListener(map, 'click', function(event) {
-            if (marker != false) {
-                marker.setMap(null);
-            }
-            marker = new google.maps.Marker({
-                map: map,
-                position: event.latLng,
-                animation: google.maps.Animation.DROP
-            });
-            WDN.jQuery('#geo_lat').attr('value', event.latLng.lat());
-            WDN.jQuery('#geo_long').attr('value', event.latLng.lng());
-        });
-    });
-
-</script>
-
