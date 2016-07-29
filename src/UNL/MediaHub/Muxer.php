@@ -89,14 +89,16 @@ class UNL_MediaHub_Muxer
             $command .= ' -f srt'; //Caption format is .srt
             $command .= ' -i ' . $subtitle['file']; //Second input is the caption file
         }
-        $command .= ' -c:v copy'; //copy videon
+        $command .= ' -c:v copy'; //copy video
         $command .= ' -c:a copy'; //copy audio
         if (empty($subtitles)) {
             $command .= ' -sn'; //Remove any existing subtitles
         } else {
             $command .= ' -c:s mov_text'; //Create a move_text subtitle
         }
-        $command .= ' -map 0'; //Map the video to the output
+        $command .= ' -map 0:v'; //Map the video to the output
+        $command .= ' -map 0:a'; //Map the audio to the output
+        $command .= ' -map_metadata:c -1'; //strip chapter information
         foreach ($subtitles as $index=>$subtitle) {
             //Figure out s:s:0 syntax
             $command .= ' -metadata:s:s:' . $index . ' language=' . $subtitle['language']; //set subtitle language to eng

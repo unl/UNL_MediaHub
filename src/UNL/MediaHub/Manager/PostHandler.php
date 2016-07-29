@@ -360,10 +360,18 @@ class UNL_MediaHub_Manager_PostHandler
         
         $is_new = false;
 
+        $user = UNL_MediaHub_AuthService::getInstance()->getUser();
+
         // Add media to a feed/channel
         if (isset($this->post['id'])) {
             // Editing media details
             $media = UNL_MediaHub_Media::getById($this->post['id']);
+            
+            if (!$media->userCanEdit($user)) {
+                throw new Exception('You do not have permission to edit this media', 400);
+            }
+            
+            $media->uidupdated = $user->uid;
 
             if($media->url != $this->post['url']){
 
@@ -382,6 +390,7 @@ class UNL_MediaHub_Manager_PostHandler
                 'title'      => $this->post['title'],
                 'description'=> $this->post['description'],
                 'author'     => $this->post['author'],
+                'uidcreated' => $user->uid,
             );
                              
             $media = $this->mediahub->addMedia($details);
