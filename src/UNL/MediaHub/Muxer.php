@@ -98,6 +98,7 @@ class UNL_MediaHub_Muxer
         }
         $command .= ' -map 0:v'; //Map the video to the output
         $command .= ' -map 0:a'; //Map the audio to the output
+        $command .= ' -map_metadata:c -1'; //strip chapter information
         foreach ($subtitles as $index=>$subtitle) {
             //Figure out s:s:0 syntax
             $command .= ' -metadata:s:s:' . $index . ' language=' . $subtitle['language']; //set subtitle language to eng
