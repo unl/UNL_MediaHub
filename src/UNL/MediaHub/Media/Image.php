@@ -76,6 +76,8 @@ class UNL_MediaHub_Media_Image
         exec(UNL_MediaHub::getRootDir() . "/ffmpeg/ffmpeg -i $url -ss $time -vcodec mjpeg -vframes 1 -f image2 $file -y", $return, $status);
 
         if ($status == 0 && file_exists($file)) {
+            $media->dateupdated = date('Y-m-d H:i:s');
+            $media->save();
             return $file;
         }
 

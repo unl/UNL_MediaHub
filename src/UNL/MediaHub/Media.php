@@ -341,8 +341,10 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         
         $file = UNL_MediaHub::getRootDir() . '/www/uploads/thumbnails/' . $this->id . '/original.jpg';
         if (file_exists($file)) {
+            $cache_bust = strtotime($this->dateupdated);
+            
             //Skip the generator script if we already have an image
-            return UNL_MediaHub_Controller::$url . 'uploads/thumbnails/' . $this->id .'/original.jpg';
+            return UNL_MediaHub_Controller::$url . 'uploads/thumbnails/' . $this->id .'/original.jpg?'.$cache_bust;
         }
         
         return $this->getURL() . '/image';
