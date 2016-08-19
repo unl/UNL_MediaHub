@@ -166,7 +166,7 @@ $getTracks = $context->getTextTrackURLs();
                     <script type="text/javascript">
                         WDN.loadCSS('../templates/html/css/comments.css?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>');
                     </script>
-                    <h2 class="wdn-sans-serif">Comments <span class="wdn-icon wdn-icon-comment"></span></h2>
+                    <h2 class="wdn-sans-serif">Comments <span class="wdn-icon wdn-icon-comment" aria-hidden="true"></span></h2>
                     <span class="subhead">
                         <?php echo count($context->UNL_MediaHub_Media_Comment); ?> Comments
                         <?php if ($user): ?>
@@ -206,9 +206,9 @@ $getTracks = $context->getTextTrackURLs();
             <div class="bp2-wdn-col-one-fourth mh-sidebar">
                 <div>
 
-                    <a class="wdn-button embed mh-hide-bp2"><span class="wdn-icon-plus wdn-icon"></span>Embed</a>
+                    <a class="wdn-button embed mh-hide-bp2"><span class="wdn-icon-plus wdn-icon" aria-hidden="true"></span>Embed</a>
                     <br>
-                    <a href="<?php echo htmlentities($context->getMediaURL(), ENT_QUOTES); ?>" target="_blank" class="wdn-button mh-hide-bp2"><span class="wdn-icon-up-small mh-flip-180 wdn-icon"></span>Download</a>
+                    <a href="<?php echo htmlentities($context->getMediaURL(), ENT_QUOTES); ?>" target="_blank" class="wdn-button mh-hide-bp2"><span class="wdn-icon-up-small mh-flip-180 wdn-icon" aria-hidden="true"></span>Download</a>
 
                 </div>
 

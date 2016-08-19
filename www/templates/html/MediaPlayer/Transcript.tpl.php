@@ -17,9 +17,11 @@
 <?php  if($file): ?>
 <div class="mh-caption-search">
     <div class="mh-transcript-hide-bp2">
-        <div class="title wdn-sans-serif wdn-icon-search">
+        <div class="title wdn-sans-serif">
+            <span class="wdn-icon-search" aria-hidden="true"></span>
             <h2 class="wdn-sans-serif">Searchable Transcript</h2>
-            <div class="wdn-icon-info mh-tooltip italic">
+            <div class="mh-tooltip italic">
+                <span class="wdn-icon-info" aria-hidden="true"></span><span class="wdn-text-hidden">more info</span>
                 <div>
                     <ul>
                         <li>Use the text input to search the transcript. </li>
