@@ -77,7 +77,7 @@
                         var $myButton = $('<div>', {
                             "class": "mejs-button wide"
                         }).append($('<button>', {
-                            "class": "wdn-icon-search caption-toggle",
+                            "class": "caption-toggle",
                             "type": "button",
                             "aria-controls": t.id,
                             "title": "Toggle Searchable Transcript",
@@ -270,16 +270,16 @@
                             }
 
                             //create share links
-                            var links = '<li><a href="https://go.unl.edu/?url=referer" class="wdn-icon-link" rel="nofollow">Get a Go URL</a></li>';
+                            var links = '<li><a href="https://go.unl.edu/?url=referer" rel="nofollow"><span class="wdn-icon-link" aria-hidden="true"></span>Get a Go URL</a></li>';
                             for (var key in sharelinks) {
-                                links += '<li class="outpost"><a href="'+sharelinks[key].url+'" rel="nofollow" target="_blank" class="'+key+'" title="Share on '+sharelinks[key].title+'">Share on '+sharelinks[key].title+'</a></li>';
+                                links += '<li class="outpost"><a href="'+sharelinks[key].url+'" rel="nofollow" target="_blank"><span class="'+key+'" aria-hidden="true"></span> Share on '+sharelinks[key].title+'</a></li>';
                             }
 
                             var html = '<div class="media-content-head mejs-control">';
                             html += '<div class="media-content-title"><a href="' + share_url + '" target="_parent">' + $title + '</a></div>';
                             html += '<div class="wdn-share-this-page mejs-control">';
                             html += '<input type="checkbox" id="mh-share-toggle'+mediahub_id+'" value="Show share options" class="wdn-input-driver mh-share-toggle">'
-                            html += '<label for="mh-share-toggle'+mediahub_id+'" class="wdn-icon-share">Share This Page</label>';
+                            html += '<label for="mh-share-toggle'+mediahub_id+'"><span  class="wdn-icon-share" aria-hidden="true"></span><span class="wdn-text-hidden">Share This Page</span></label>';
                             html += '<ul class="wdn-share-options">';
                             html += links;
                             html += '</ul>';
