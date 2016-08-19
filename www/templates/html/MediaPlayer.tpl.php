@@ -13,9 +13,10 @@ $getTracks = $context->media->getTextTrackURLs();
 <script type="htmltemplate" class="mh_transcript_template">
 
         <div class="mh-caption-search" style="display: none">
-            <div class="title wdn-sans-serif wdn-icon-search">
-                Searchable Transcript
-                <div class="wdn-icon-info mh-tooltip hang-right italic">
+            <div class="title wdn-sans-serif">
+                <span class="wdn-icon-search" aria-hidden="true"></span>Searchable Transcript
+                <div class="mh-tooltip hang-right italic">
+                    <span class="wdn-icon-info" aria-hidden="true"></span><span class="wdn-text-hidden">more info</span>
                     <div>
                         <ul>
                             <li>Use the text input to search the transcript. </li>

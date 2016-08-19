@@ -10,7 +10,7 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
     <div class="wdn-input-group">
         <input id="q_app" name="q" type="text" required<?php if ($context->getValue()): ?> value="<?php echo htmlentities($context->getValue(), ENT_HTML5|ENT_QUOTES) ?>"<?php endif ?> />
         <span class="wdn-input-group-btn ">
-            <button type="submit" class="wdn-icon-search" title="Search"></button>
+            <button type="submit"><span class="wdn-icon-search" aria-hidden="true"></span><span class="wdn-text-hidden">Search</span></button>
         </span>
     </div>
 </form>

@@ -139,11 +139,11 @@ if(!empty($context->options['f'])){
                 </h2>
                 <ul class="mh-channel-buttons">
                     <?php foreach ($feeds->items as $feed): ?>
-                        <li><a class="wdn-button wdn-button-complement" href="<?php echo UNL_MediaHub_Controller::getURL($feed); ?>"><span class="wdn-icon wdn-icon-rocket"></span><?php echo $feed->title ?></a></li>
+                        <li><a class="wdn-button wdn-button-complement" href="<?php echo UNL_MediaHub_Controller::getURL($feed); ?>"><span class="wdn-icon wdn-icon-rocket" aria-hidden="true"></span><?php echo $feed->title ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
-        </div>       
+        </div>
 
     <?php endif ?>
 
