@@ -11,7 +11,7 @@ class UNL_MediaHub_MuxerDBTest extends UNL_MediaHub_DBTests_DBTestCase
         $this->prepareTestDB();
 
         $data_dir = dirname(dirname(__DIR__)) . '/data';
-        $mediainfo = new \Mhor\MediaInfo\MediaInfo();
+        $mediainfo = UNL_MediaHub::getMediaInfo();
         
         $media = UNL_MediaHub_Media::getById(1);
         //Add some captions to the video
@@ -101,7 +101,7 @@ class UNL_MediaHub_MuxerDBTest extends UNL_MediaHub_DBTests_DBTestCase
         $this->prepareTestDB();
 
         $data_dir = dirname(dirname(__DIR__)) . '/data';
-        $mediainfo = new \Mhor\MediaInfo\MediaInfo();
+        $mediainfo = UNL_MediaHub::getMediaInfo();
 
         $media = UNL_MediaHub_Media::getById(1);
         //Add some captions to the video

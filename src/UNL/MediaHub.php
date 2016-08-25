@@ -5,6 +5,8 @@ class UNL_MediaHub
     
     public static $ffmpeg_path;
     
+    public static $mediainfo_path;
+    
     function __construct()
     {
         Doctrine_Manager::getInstance()->setAttribute('model_loading', 'conservative');
@@ -168,5 +170,19 @@ class UNL_MediaHub
         }
         
         return $ffmpeg;
+    }
+
+    /**
+     * @return \Mhor\MediaInfo\MediaInfo
+     */
+    public static function getMediaInfo()
+    {
+        $mediaInfo = new \Mhor\MediaInfo\MediaInfo();
+        
+        if (self::$mediainfo_path) {
+            $mediaInfo->setConfig('command', self::$mediainfo_path);
+        }
+        
+        return $mediaInfo;
     }
 }

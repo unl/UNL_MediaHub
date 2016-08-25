@@ -544,7 +544,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
             return false;
         }
         
-        $mediainfo = new \Mhor\MediaInfo\MediaInfo();
+        $mediainfo = UNL_MediaHub::getMediaInfo();
         $details = $mediainfo->getInfo($this->getLocalFileName());
         $general = $details->getGeneral();
 
