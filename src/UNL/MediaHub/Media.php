@@ -114,6 +114,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
                             //width="75" height="50" time="12:05:01.123"
                             );
         $element->attributes = $attributes;
+        $element->value = '';
         $element->save();
         return true;
     }
@@ -156,6 +157,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
             $attributes = array_merge($element->attributes, $attributes);
         }
         $element->attributes = $attributes;
+        $element->value = '';
         $element->save();
         return true;
     }
