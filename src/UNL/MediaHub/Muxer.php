@@ -4,6 +4,8 @@ class UNL_MediaHub_Muxer
 {
     protected $media;
     
+    public static $ffmpeg_path = false;
+    
     function __construct(UNL_MediaHub_Media $media)
     {
         $this->media = $media;
@@ -82,7 +84,7 @@ class UNL_MediaHub_Muxer
         $tmp_media_file = UNL_MediaHub::getRootDir() . '/tmp/' . $this->media->id . '.' . $local_file_name_extension;
         
         //This should copy the video and audio tracks while replacing the subtitle tracks. Thus, old subtitles will be removed.
-        $command = UNL_MediaHub::getRootDir() . '/ffmpeg/ffmpeg';
+        $command = UNL_MediaHub::getFfmpegPath();
         $command .= ' -y'; //overwrite output files
         $command .= ' -i ' . $video_file; //Video input is test.mp4
         foreach ($subtitles as $subtitle) {

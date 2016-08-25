@@ -3,6 +3,8 @@ class UNL_MediaHub
 {
     public static $dsn;
     
+    public static $ffmpeg_path;
+    
     function __construct()
     {
         Doctrine_Manager::getInstance()->setAttribute('model_loading', 'conservative');
@@ -152,5 +154,19 @@ class UNL_MediaHub
     public static function getRootDir()
     {
         return dirname(dirname(__DIR__));
+    }
+
+    /**
+     * Get the path (as confugired) to the ffmpeg executable
+     * 
+     * @return string
+     */
+    public static function getFfmpegPath() {
+        $ffmpeg = UNL_MediaHub::getRootDir() . '/ffmpeg/ffmpeg';
+        if (self::$ffmpeg_path) {
+            $ffmpeg = self::$ffmpeg_path;
+        }
+        
+        return $ffmpeg;
     }
 }
