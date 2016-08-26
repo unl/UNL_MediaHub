@@ -55,7 +55,7 @@ if($context->options['orderby'] == 'datecreated'){
         $buttons->buttons = [
             'title' => [
                 'label' => 'Alphabetical',
-                'url' => '/channels/'
+                'url' => $baseUrl.'channels/'
             ],
             'datecreated' => [
                 'label' => 'Recent',
