@@ -31,8 +31,10 @@ if ($type == 'video') {
     $meta .= '
     <meta property="og:video:height" content="'.$height.'" />
     <meta property="og:video:width" content="'.$width.'" />
-    <meta property="og:video" content="'.UNL_MediaHub_Controller::getURL($context).'" />
-    <meta property="og:video:type" content="text/html" />
+    <meta property="og:video:url" content="'.$context->url.'" />
+    <meta property="og:video:secure_url" content="'.$context->url.'" />
+    <meta property="og:video" content="'.$context->url.'" />
+    <meta property="og:video:type" content="video/mp4" />
     ';
 } else {
 	$meta .= '
