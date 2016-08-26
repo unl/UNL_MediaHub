@@ -57,7 +57,8 @@ class UNL_MediaHub_FeedList extends UNL_MediaHub_List
             $query->orderBy('SUM(f.UNL_MediaHub_Media.play_count) '.$this->options['order']);
             $query->groupBy('f.id');
         } else {
-            $query->orderby('f.'.$this->options['orderby'].' '.$this->options['order']);
+            $query->orderBy('f.'.$this->options['orderby'].' '.$this->options['order']);
+            $query->groupBy('f.id');
         }
     }
 

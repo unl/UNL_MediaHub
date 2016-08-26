@@ -56,7 +56,7 @@ foreach ($orders->items as $order) {
             $duration = $media->findDuration();
             $seconds = null;
             if ($duration) {
-                $seconds = $duration['seconds'];
+                $seconds = $duration->getTotalSeconds();
             }
             
             $rev_input = $rev->uploadVideoUrl($media->url, null, $seconds);

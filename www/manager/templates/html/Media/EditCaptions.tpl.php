@@ -42,8 +42,8 @@ $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl
                     <?php if (!$context->hasPendingOrder()): ?>
                     <form method="post">
                         <?php if ($duration = $context->media->findDuration()): ?>
-                            <?php $estimate = ceil($duration['seconds']/60); ?>
-                            <input type="hidden" name="media_duration" value="<?php echo $duration['string'] ?>" />
+                            <?php $estimate = ceil($duration->getTotalSeconds()/60); ?>
+                            <input type="hidden" name="media_duration" value="<?php echo $duration->getString(); ?>" />
                             <input type="hidden" name="estimate" value="<?php echo $estimate ?>" />
                             <h3 class="clear-top">Caption your video for <strong>$<?php echo $estimate ?>.</strong></h3>  
                         <?php else: ?>

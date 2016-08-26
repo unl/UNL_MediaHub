@@ -114,6 +114,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
                             //width="75" height="50" time="12:05:01.123"
                             );
         $element->attributes = $attributes;
+        $element->value = '';
         $element->save();
         return true;
     }
@@ -156,6 +157,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
             $attributes = array_merge($element->attributes, $attributes);
         }
         $element->attributes = $attributes;
+        $element->value = '';
         $element->save();
         return true;
     }
@@ -531,7 +533,10 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
 
         return $api->getTextTracks($this->url, $format);
     }
-    
+
+    /**
+     * @return bool|UNL_MediaHub_DurationHelper
+     */
     public function findDuration()
     {
         if (!$this->getLocalFileName()) {
@@ -539,33 +544,11 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
             return false;
         }
         
-        $getId3 = new \GetId3\GetId3Core();
-        $details = $getId3->analyze($this->getLocalFileName());
+        $mediainfo = UNL_MediaHub::getMediaInfo();
+        $details = $mediainfo->getInfo($this->getLocalFileName());
+        $general = $details->getGeneral();
 
-        if (!isset($details['playtime_string'])) {
-            return false;
-        }
-        
-        if (empty($details['playtime_string'])) {
-            return false;
-        }
-
-        //Convert to a standard string
-        switch (substr_count($details['playtime_string'], ':')) {
-            case 0:
-                $playtime_string = '00:00:' . str_pad($details['playtime_string'], 2, '0', STR_PAD_LEFT);
-                break;
-            case 1:
-                $playtime_string = '00:' . str_pad($details['playtime_string'], 5, '0', STR_PAD_LEFT);
-                break;
-            default:
-                $playtime_string = str_pad($details['playtime_string'], 8, '0', STR_PAD_LEFT);
-        }
-        
-        return array(
-            'string' => $playtime_string,
-            'seconds' => strtotime($playtime_string) - strtotime('TODAY')
-        );
+        return new UNL_MediaHub_DurationHelper((int)$general->get('duration')->getMilliseconds());
     }
 
     /**
