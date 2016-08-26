@@ -17,10 +17,11 @@ $context->loadReference('UNL_MediaHub_Media_Comment');
 $controller->setReplacementData('title', htmlspecialchars($context->title) . ' | MediaHub | University of Nebraska-Lincoln');
 $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'search/">All Media</a></li> <li>'.htmlspecialchars($context->title).'</li></ul>');
 $meta = '
+<meta property="og:type" content="'.$type.'">
 <meta property="og:title" content="'.htmlentities($context->title, ENT_QUOTES).'" />
 <meta property="og:description" content="'.htmlentities(strip_tags($context->description), ENT_QUOTES).'" />
 <meta property="og:image" content="'.$context->getThumbnailURL().'" />
-<meta property="og:type" content="'.$type.'">
+<meta property="og:url" content="'.$context->getURL().'">
 ';
 
 if ($context->privacy !== 'PUBLIC') {
@@ -31,16 +32,15 @@ if ($type == 'video') {
     $meta .= '
     <meta property="og:video:height" content="'.$height.'" />
     <meta property="og:video:width" content="'.$width.'" />
-    <meta property="og:video:url" content="'.$context->url.'" />
-    <meta property="og:video:secure_url" content="'.$context->url.'" />
-    <meta property="og:video" content="'.$context->url.'" />
+    <meta property="og:video:url" content="'.$context->getMediaURL().'" />
+    <meta property="og:video:secure_url" content="'.$context->getMediaURL().'" />
     <meta property="og:video:type" content="video/mp4" />
     ';
 } else {
-	$meta .= '
-	<meta property="og:audio" content="'.$context->url.'" />
-	<meta property="og:audio:title" content="'.htmlentities($context->title, ENT_QUOTES).'" />
-	';
+    $meta .= '
+    <meta property="og:audio" content="'.$context->url.'" />
+    <meta property="og:audio:title" content="'.htmlentities($context->title, ENT_QUOTES).'" />
+    ';
 }
 $controller->setReplacementData('head', $meta);
 $getTracks = $context->getTextTrackURLs();
