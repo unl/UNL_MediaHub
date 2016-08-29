@@ -54,7 +54,7 @@ class UNL_MediaHub_Muxer
 
             //Convert the webvtt format to srt (ffmpeg require srt)
             $vtt = new Captioning\Format\WebvttFile();
-            $vtt->loadFromString($file->file_contents);
+            $vtt->loadFromString(trim($file->file_contents));
             $srt = $vtt->convertTo('subrip');
 
             $srt->save($tmp_srt_file);
