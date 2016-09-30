@@ -29,9 +29,12 @@ cp www/sample.htaccess www/.htaccess
 * set `UNL_MediaHub::$dsn` to the proper DSN for the database. Format: mysql://username:password@localhost/database
 
 ### 3. In `.htaccess` be sure to:
-* change `RewriteBase /` to the correct path. If mediahub is accessed from example.com, the path would be `/`. If it is accessed from `example.com/mediahub/www/` the path would be `/mediahub/www/`.
+Change `RewriteBase /` to the correct path. If mediahub is accessed from example.com, the path would be `/`. If it is accessed from `example.com/mediahub/www/` the path would be `/mediahub/www/`.
 
-### 4. Run the update script
+### 4. Run composer install
+From commandline, run the following command: `composer install` to download and install packages used by mediahub
+
+### 5. Run the update script
 From commandline, run `php upgrade.php` to initialize the database. Run this command whenever the application is updated.
 
 ###Requirements:
