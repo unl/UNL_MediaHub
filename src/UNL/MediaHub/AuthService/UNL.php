@@ -17,6 +17,11 @@ class UNL_MediaHub_AuthService_UNL extends UNL_MediaHub_AuthService_Interface
             session_name('mediahub');
             
             \phpCAS::client(CAS_VERSION_2_0, 'login.unl.edu', 443, 'cas');
+            
+            if (!file_exists(self::$cert_path)) {
+                self::$cert_path = GuzzleHttp\default_ca_bundle();
+            }
+            
             \phpCAS::setCasServerCACert(self::$cert_path);
         }
         

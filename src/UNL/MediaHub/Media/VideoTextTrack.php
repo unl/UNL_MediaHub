@@ -62,7 +62,7 @@ class UNL_MediaHub_Media_VideoTextTrack
             && $format === UNL_MediaHub_MediaTextTrackFile::FORMAT_SRT) {
             //Convert the webvtt format to srt (ffmpeg require srt)
             $vtt = new Captioning\Format\WebvttFile();
-            $vtt->loadFromString($file->file_contents);
+            $vtt->loadFromString(trim($file->file_contents));
             $srt = $vtt->convertTo('subrip');
             $srt->build();
 
