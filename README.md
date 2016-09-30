@@ -18,34 +18,27 @@ MediaHub is a video/audio aggregator for educational institutions, and is curren
 
 ##Installation
 
+### 1. Set up the initial configuration:
 ```bash
 cp config.sample.php config.inc.php
-cp sample.htaccess .htaccess
+cp www/sample.htaccess www/.htaccess
 ```
 
-Database:
-Create a database for mediahub
-```bash
-mysql -u root
-```
+### 2. In `config.inc.php` be sure to:
+* Set `UNL_MediaHub_Controller::$url` to base absolute URL of the application, with a trailing slash
+* set `UNL_MediaHub::$dsn` to the proper DSN for the database. Format: mysql://username:password@localhost/database
 
-```sql
-CREATE DATABASE mediahub;
-GRANT ALL ON mediahub.* TO mediahub@localhost IDENTIFIED BY 'mediahub';
-```
+### 3. In `.htaccess` be sure to:
+* change `RewriteBase /` to the correct path. If mediahub is accessed from example.com, the path would be `/`. If it is accessed from `example.com/mediahub/www/` the path would be `/mediahub/www/`.
 
-```bash
-mysql -u mediahub -p mediahub < UNL_MediaHub/data/mediahub.sql
-```
-
-username: mediahub
-password: mediahub
-Create the database using the `data/mediahub.sql`
+### 4. Run the update script
+From commandline, run `php upgrade.php` to initialize the database. Run this command whenever the application is updated.
 
 ###Requirements:
 
-* PHP 5
+* PHP 5, 7
 * PDO Mysql
+* mediainfo system package. This can be installed with `brew install mediainfo` or a similar command
 
 ###Testing:
 Once installed, run this command from the project root:
