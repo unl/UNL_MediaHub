@@ -37,6 +37,16 @@ From commandline, run the following command: `composer install` to download and 
 ### 5. Run the update script
 From commandline, run `php upgrade.php` to initialize the database. Run this command whenever the application is updated.
 
+### 6. Initialize upload directories
+Create the `www/uploads/tmp` directory if it does not already exist.
+
+Assign proper permissions to allow the web server to write to those directories. For development, the following commands should be fine.
+
+```
+chmod 777 www/uploads
+chmod 777 www/uploads/tmp
+```
+
 ###Requirements:
 
 * PHP 5, 7
