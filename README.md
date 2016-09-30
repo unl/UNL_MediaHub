@@ -47,6 +47,10 @@ chmod 777 www/uploads
 chmod 777 www/uploads/tmp
 ```
 
+### 7. Install the WDN framework
+Install the `wdn` directory to `www/wdn` for the latest include files.
+This can be done with a symlink like `ln -s /abolute-path-to-wdn-dir www/wdn`
+
 ###Requirements:
 
 * PHP 5, 7
