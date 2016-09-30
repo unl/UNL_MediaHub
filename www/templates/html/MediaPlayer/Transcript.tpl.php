@@ -3,7 +3,7 @@
     try {
         $vtt = new Captioning\Format\WebvttFile();
         $tracks = $context->getTextTracks();
-        $file = $vtt->loadFromString(reset($tracks));
+        $file = $vtt->loadFromString(trim(reset($tracks)));
     }catch(Exception $err){
     }
 
