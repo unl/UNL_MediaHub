@@ -1,6 +1,6 @@
 <item>
   <title><?php echo htmlspecialchars($context->title); ?></title>
-  <link><?php echo htmlspecialchars($context->getMediaURL()); ?></link>
+  <link><?php echo htmlspecialchars($context->getURL()); ?></link>
   <description><![CDATA[
   <?php echo $context->description; ?>
   ]]></description>
