@@ -71,6 +71,41 @@
                         Safari = true;
                     }
 
+                    //Hide tracks not provided by mediahub
+                    m.addEventListener('loadedmetadata', function() {
+                        for (var i = 0; i < v.textTracks.length; i++) {
+                            var track = v.textTracks[i];
+                            if (track.id.lastIndexOf('mediahub', 0) !== 0) {
+                                //Prevent non-mediahub tracks from showing up
+                                v.textTracks[i].kind = "metadata";
+                            }
+                        }
+                    });
+
+                    var preventedDoubleCaptions = false;
+                    if (Safari) {
+                        //A track has not yet been selected by mediaelement
+                        //So this is probably safari forcing captions.
+                        //Disable this to prevent double captions
+                        //This will also result in captions not being played by default in iOS
+                        m.addEventListener('loadedmetadata', function() {
+                            v.textTracks.onchange = function(e) {
+                                if (false == preventedDoubleCaptions && v.textTracks.length) {
+                                    for (var i = 0; i < v.textTracks.length; i++) {
+                                        v.textTracks[i].mode = "disabled";
+                                    }
+
+                                    //Support the default selected track as set by mediahub
+                                    if (t.selectedTrack) {
+                                        t.setTrack(t.selectedTrack);
+                                    }
+
+                                    preventedDoubleCaptions = true;
+                                }
+                            };
+                        });
+                    }
+
                     if(t.captionsButton){
 
                         var $container;
@@ -378,7 +413,7 @@
                 });
             });
         };
-        e();       
+        e();
     })();
 
     jQuery.fn.scrollTo = function(elem, speed) { 
