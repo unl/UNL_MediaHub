@@ -267,7 +267,18 @@
                             t.setTrack(value);
                         });
 
+
+
                     };
+
+                    function fixTheControls(){
+                        if (t.media.duration != NaN) {
+                            t.setControlsSize();
+                            m.removeEventListener('timeupdate', fixTheControls);
+                        }
+                        
+                    };
+                    m.addEventListener('timeupdate', fixTheControls);
 
                     // Playcount
                     var w = false, u = '<?php echo UNL_MediaHub_Controller::toAgnosticURL($controller->getURL($context->media)) ?>';
