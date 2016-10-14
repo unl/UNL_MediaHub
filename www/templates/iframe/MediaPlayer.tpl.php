@@ -271,7 +271,7 @@
 
                     };
 
-                    $(".mejs-duration").bind("DOMSubtreeModified",function(){
+                    $(".mejs-duration").on("DOMSubtreeModified",function(){
                       t.setControlsSize();
                     });
 
