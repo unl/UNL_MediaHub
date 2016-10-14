@@ -266,9 +266,6 @@
                             var value = $(this).find(":selected").val();
                             t.setTrack(value);
                         });
-
-
-
                     };
 
                     if ('MutationObserver' in window) {
