@@ -203,12 +203,8 @@ $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl
         <div>
             <h2 class="wdn-brand">Get Help</h2>
             <p>
-                If you have questions or comments, please email one of the following:
+                If you have questions or comments, please use the 'Email Us' tab on this page or email <a href="mailto:mysupport@unl.edu">MySupport</a>.
             </p>
-            <ul>
-                <li>Technical question or issues: Please use the 'Email Us' tab on this page</li>
-                <li>Billing: <a href="mailto:btessalee2@unl.edu">Brittany Tessalee</a></li>
-            </ul>
         </div>
     </div>
 </div>
