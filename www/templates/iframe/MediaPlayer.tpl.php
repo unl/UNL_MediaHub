@@ -266,12 +266,17 @@
                             var value = $(this).find(":selected").val();
                             t.setTrack(value);
                         });
+
+
+
                     };
 
                     if ('MutationObserver' in window) {
+                        console.log('mutation supported');
                         // Create an observer instance
                         var observer = new MutationObserver(function( mutations ) {
                             t.setControlsSize();
+                            console.log('mutated');
                         });
                         // Configuration of the observer:
                         var config = {
@@ -279,6 +284,7 @@
                             subtree: true
                         };
                         // Pass in the target node, as well as the observer options
+
                         observer.observe($('.mejs-duration')[0], config);
                     } else {
                         //Fallback to support older versions of IE: 9,10
@@ -286,12 +292,6 @@
                             t.setControlsSize();
                         });
                     }
-                     
-                    // configuration of the observer:
-                    var config = { attributes: true, childList: true, characterData: true };
-                     
-                    // pass in the target node, as well as the observer options
-                    observer.observe($(".mejs-duration")[0], config);
 
                     // Playcount
                     var w = false, u = '<?php echo UNL_MediaHub_Controller::toAgnosticURL($controller->getURL($context->media)) ?>';
