@@ -272,11 +272,9 @@
                     };
 
                     if ('MutationObserver' in window) {
-                        console.log('mutation supported');
                         // Create an observer instance
                         var observer = new MutationObserver(function( mutations ) {
                             t.setControlsSize();
-                            console.log('mutated');
                         });
                         // Configuration of the observer:
                         var config = {
