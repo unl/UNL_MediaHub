@@ -329,7 +329,7 @@
                             }
 
                             //create share links
-                            var links = '<li><a href="https://go.unl.edu/?url=referer" rel="nofollow"><span class="wdn-icon-link" aria-hidden="true"></span>Get a Go URL</a></li>';
+                            var links = '<li><a href="https://go.unl.edu/?url=referer"  target="_parent" rel="nofollow"><span class="wdn-icon-link" aria-hidden="true"></span>Get a Go URL</a></li>';
                             for (var key in sharelinks) {
                                 links += '<li class="outpost"><a href="'+sharelinks[key].url+'" rel="nofollow" target="_blank"><span class="'+key+'" aria-hidden="true"></span> Share on '+sharelinks[key].title+'</a></li>';
                             }
