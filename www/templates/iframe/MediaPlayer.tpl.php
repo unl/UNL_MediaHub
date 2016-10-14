@@ -268,14 +268,9 @@
                         });
                     };
 
-                    function fixTheControls(){
-                        if (t.media.duration != NaN) {
-                            t.setControlsSize();
-                            m.removeEventListener('timeupdate', fixTheControls);
-                        }
-                        
-                    };
-                    m.addEventListener('timeupdate', fixTheControls);
+                    $(".mejs-duration").bind("DOMSubtreeModified",function(){
+                      t.setControlsSize();
+                    });
 
                     // Playcount
                     var w = false, u = '<?php echo UNL_MediaHub_Controller::toAgnosticURL($controller->getURL($context->media)) ?>';
