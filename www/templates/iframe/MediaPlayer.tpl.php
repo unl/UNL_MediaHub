@@ -413,6 +413,42 @@
                             });
                         }
                     };
+
+                    m.addEventListener('play', function() {
+                        var message = {
+                            'message_type': 'ga_event',
+                            'event' : 'play',
+                            'media_id' : mediahub_id,
+                            'media_title': $video.attr('title'),
+                            'url': u,
+                            'type' : v.tagName.toString().toLowerCase()
+                        };
+                        window.parent.postMessage(message, "*");
+                    }, false);
+
+                    m.addEventListener('pause', function() {
+                        var message = {
+                            'message_type': 'ga_event',
+                            'event' : 'pause',
+                            'media_id' : mediahub_id,
+                            'media_title': $video.attr('title'),
+                            'url': u,
+                            'type' : v.tagName.toString().toLowerCase()
+                        };
+                        window.parent.postMessage(message, "*");
+                    }, false);
+
+                    m.addEventListener('ended', function() {
+                        var message = {
+                            'message_type': 'ga_event',
+                            'event' : 'ended',
+                            'media_id' : mediahub_id,
+                            'media_title': $video.attr('title'),
+                            'url': u,
+                            'type' : v.tagName.toString().toLowerCase()
+                        };
+                        window.parent.postMessage(message, "*");
+                    }, false);
                     
                     <?php if($context->media->privacy === "PUBLIC"): ?>
                     initSharing(m, v);
