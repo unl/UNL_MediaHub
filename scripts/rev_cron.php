@@ -55,11 +55,17 @@ foreach ($orders->items as $order) {
             //First, we need to do our best to find the duration. Rev.com can't always do this.
             $duration = $media->findDuration();
             $seconds = null;
+            $content_type = null;
             if ($duration) {
                 $seconds = $duration->getTotalSeconds();
             }
             
-            $rev_input = $rev->uploadVideoUrl($media->url, null, $seconds);
+            if (!$media->isVideo()) {
+                //This must be an mp3. Rev supports captioning mp3s, but requires the content type to be set manually
+                $content_type = 'audio/mpeg3 ';
+            }
+            
+            $rev_input = $rev->uploadVideoUrl($media->url, $content_type, $seconds);
             sleep(1); //be nice
             
             //create an order
