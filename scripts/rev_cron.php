@@ -62,7 +62,7 @@ foreach ($orders->items as $order) {
             
             if (!$media->isVideo()) {
                 //This must be an mp3. Rev supports captioning mp3s, but requires the content type to be set manually
-                $content_type = 'audio/mpeg3 ';
+                $content_type = 'audio/mpeg';
             }
             
             $rev_input = $rev->uploadVideoUrl($media->url, $content_type, $seconds);
