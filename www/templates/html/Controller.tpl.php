@@ -30,7 +30,7 @@ if (!$context->output instanceof UNL_MediaHub_FeedAndMedia) {
 }
 
 //Navigation
-$page->breadcrumbs = '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="' . $baseUrl . '">MediaHub</a></li></ul>';
+$page->breadcrumbs = '<ul> <li><a href="http://www.unl.edu/">Nebraska</a></li> <li><a href="' . $baseUrl . '">MediaHub</a></li></ul>';
 $page->navlinks = $savvy->render(null, 'Navigation.tpl.php');
 
 //Main content

@@ -28,7 +28,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL().'templates/html/scripts/manag
 //Navigation
 $page->breadcrumbs = '
 <ul>
-    <li><a href="http://www.unl.edu/">UNL</a></li>
+    <li><a href="http://www.unl.edu/">Nebraska</a></li>
     <li><a href="' . UNL_MediaHub_Controller::getURL() .'">MediaHub</a></li>
     <li><a href="' . UNL_MediaHub_Controller::getURL() .'manager/">Manage Media</a></li>
 </ul>';
