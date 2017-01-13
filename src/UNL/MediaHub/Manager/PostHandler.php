@@ -404,6 +404,11 @@ class UNL_MediaHub_Manager_PostHandler
         // Save details
         $media->synchronizeWithArray($this->post);
         
+        if ($duration = $media->findDuration()) {
+            //Save the duration
+            $media->duration = $duration->getTotalMilliseconds();
+        }
+        
         $media->save();
 
         if (!empty($this->post['feed_id'])) {
