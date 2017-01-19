@@ -13,6 +13,7 @@ abstract class UNL_MediaHub_Models_BaseMedia extends Doctrine_Record
         $this->hasColumn('uidupdated',    'string',    null, array('fixed' => false, 'primary' => false, 'notnull' => false, 'autoincrement' => false));
         $this->hasColumn('poster',        'string',    null, array('fixed' => false, 'primary' => false, 'notnull' => false, 'autoincrement' => false));
         $this->hasColumn('length',        'integer',   4,    array('unsigned' => 0, 'primary' => false, 'notnull' => false, 'autoincrement' => false));
+        $this->hasColumn('duration',      'integer',   null, array('unsigned' => 0, 'primary' => false, 'notnull' => true, 'autoincrement' => false, 'default' => 0));
         $this->hasColumn('type',          'string',    null, array('fixed' => false, 'primary' => false, 'notnull' => true, 'autoincrement' => false));
         $this->hasColumn('title',         'string',    null, array('fixed' => false, 'primary' => false, 'notnull' => true, 'autoincrement' => false));
         $this->hasColumn('description',   'string',    null, array('fixed' => false, 'primary' => false, 'notnull' => true, 'autoincrement' => false));
