@@ -553,8 +553,14 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
                 //getGeneral() can return null and not throw an exception
                 return false;
             }
+            
+            $duration = $general->get('duration');
+            
+            if (null === $duration) {
+                return false;
+            }
 
-            return new UNL_MediaHub_DurationHelper((int)$general->get('duration')->getMilliseconds());
+            return new UNL_MediaHub_DurationHelper((int)$duration->getMilliseconds());
         } catch (\Exception $e) {
             return false;
         }
