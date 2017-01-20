@@ -3,25 +3,20 @@ require_once dirname(__FILE__).'/../config.inc.php';
 
 $mediahub = new UNL_MediaHub();
 
-$list = new UNL_MediaHub_MediaList(['limit'=>99999]);
+$db = $mediahub->getDB()->getDbh();
+$collection = $db->query('select id from media where duration = 0');
 
-$list->run();
-
-if (!count($list->items)) {
-    echo 'no records found' . PHP_EOL;
-    exit();
-}
-
-foreach ($list->items as $media) {
+foreach ($collection as $row) {
     /**
      * @var \UNL_MediaHub_Media $media
      */
-    
+    $media = UNL_MediaHub_Media::getById($row['id']);
+
     if (!$media->getLocalFileName()) {
         //Skip non-local media
         continue;
     }
-    
+
     if (!empty($media->duration)) {
         //We already have the duration... skip
         continue;
@@ -31,10 +26,10 @@ foreach ($list->items as $media) {
         //unable to find duration... skip
         continue;
     }
-    
+
     //Update and save
     $media->duration = $duration->getTotalMilliseconds();
     $media->save();
-    
+
     echo $media->id . ' updated ' . PHP_EOL;
 }
