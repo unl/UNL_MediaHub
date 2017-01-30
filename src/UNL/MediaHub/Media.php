@@ -569,6 +569,49 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     }
 
     /**
+     * Get the aspect ratio as a string (4:3 or 16:9)
+     * 
+     * This returns false if we were unable to find the ratio
+     * 
+     * @return bool|string 
+     */
+    public function getAspectRatio()
+    {
+        if (!$this->isVideo()) {
+            return false;
+        }
+
+        try {
+            $mediainfo = UNL_MediaHub::getMediaInfo();
+            $details = $mediainfo->getInfo($this->getLocalFileName());
+            
+            if (!$videos = $details->getVideos()) {
+                return false;
+            }
+            
+            if (!isset($videos[0])) {
+                return false;
+            }
+            
+            $ratio = $videos[0]->get('display_aspect_ratio');
+            
+            if (empty($ratio)) {
+                return false;
+            }
+
+            /**
+             * @var \Mhor\MediaInfo\Attribute\Rate $ratio
+             */
+            return $ratio->getTextValue();
+            
+        } catch (\Exception $e) {
+            //Fail silently
+        }
+        
+        return false;
+    }
+
+    /**
      * Pull amara captions for this video
      * 
      * @return bool

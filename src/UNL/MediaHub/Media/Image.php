@@ -73,7 +73,15 @@ class UNL_MediaHub_Media_Image
             mkdir($directory, 0777, true);
         }
         
-        exec(UNL_MediaHub::getFfmpegPath() . " -i $url -ss $time -vcodec mjpeg -vframes 1 -f image2 $file -y", $return, $status);
+        //Default to 16:9
+        $scale = '960:540';
+        
+        if ('4:3' == $media->getAspectRatio()) {
+            //if we can find the aspect ratio and it is 4:3, use a 4:3 image ratio
+            $scale = '800:600';
+        }
+        
+        exec(UNL_MediaHub::getFfmpegPath() . " -i $url -ss $time -vcodec mjpeg -vf \"scale=$scale,setsar=1:1\" -vframes 1 -f image2 $file -y", $return, $status);
 
         if ($status == 0 && file_exists($file)) {
             $media->dateupdated = date('Y-m-d H:i:s');
