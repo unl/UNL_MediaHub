@@ -52,7 +52,7 @@ class UNL_MediaHub_DefaultHomepage implements UNL_MediaHub_CacheableInterface
             }
 
             if (strtotime($media->datecreated) < $after_date) {
-                //We only want media that was added in the last 4 months
+                //We only want media that was added recently
                 continue;
             }
 
