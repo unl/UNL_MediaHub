@@ -33,11 +33,13 @@ class UNL_MediaHub_DefaultHomepage implements UNL_MediaHub_CacheableInterface
     function getTopMedia()
     {
         $options = array(
-            'limit'   => null,
+            'limit'   => 10000000,
             'orderby' => 'popular_play_count'
         );
         $top_media = new UNL_MediaHub_MediaList($options);
         $top_media->run();
+
+        $after_date = strtotime('6 months ago');
         
         //return $top_media->items;
         $limit = 6;
@@ -47,6 +49,11 @@ class UNL_MediaHub_DefaultHomepage implements UNL_MediaHub_CacheableInterface
             if (count($media_list) >= $limit) {
                 //Break out of the loop once we have reached 6 videos
                 break;
+            }
+
+            if (strtotime($media->datecreated) < $after_date) {
+                //We only want media that was added recently
+                continue;
             }
 
             //Get the media's feeds
