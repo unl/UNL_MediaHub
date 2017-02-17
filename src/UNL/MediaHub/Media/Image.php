@@ -35,6 +35,12 @@ class UNL_MediaHub_Media_Image
         if (!$media = UNL_MediaHub_Media::getById($media_id)) {
             throw new \Exception('media not found', 404);
         }
+        
+        if (!empty($media->poster)) {
+            //handle custom posters
+            UNL_MediaHub::redirect($media->poster);
+            exit();
+        }
 
         //Does the current user have permission?
         $user = UNL_MediaHub_AuthService::getInstance()->getUser();
