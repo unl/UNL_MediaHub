@@ -410,6 +410,12 @@ class UNL_MediaHub_Manager_PostHandler
         }
         
         $media->save();
+        
+        $poster_file = UNL_MediaHub::getRootDir() . '/www/uploads/thumbnails/'.$media->id.'/original.jpg';
+        if (!empty($media->poster) && file_exists($poster_file)) {
+            //We are referencing a custom poster, so delete the existing one if it exists
+            unlink($poster_file);
+        }
 
         if (!empty($this->post['feed_id'])) {
             $feed_selector = new UNL_MediaHub_Feed_Media_FeedSelection(UNL_MediaHub_AuthService::getInstance()->getUser(), $media);
