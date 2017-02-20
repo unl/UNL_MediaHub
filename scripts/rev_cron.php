@@ -145,7 +145,11 @@ foreach ($orders->items as $order) {
                         $media_text_track_file->kind = UNL_MediaHub_MediaTextTrackFile::KIND_CAPTION;
                         $media_text_track_file->format = UNL_MediaHub_MediaTextTrackFile::FORMAT_VTT;
                         $media_text_track_file->language = 'en';
-                        $media_text_track_file->file_contents = $attachment->getContent('.vtt');
+                        $file_contents = $attachment->getContent('.vtt');
+                        //Remove the UTF-8 BOM string if present
+                        $file_contents = str_replace("\xEF\xBB\xBF",'',$file_contents);
+                        $media_text_track_file->file_contents = $file_contents;
+                        //Save
                         $media_text_track_file->save();
                     }
                     
