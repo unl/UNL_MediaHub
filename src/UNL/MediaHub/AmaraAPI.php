@@ -11,7 +11,7 @@ class UNL_MediaHub_AmaraAPI
      * 
      * @var int
      */
-    protected $timeout = 2;
+    protected $timeout = 5;
 
     /**
      * @var \GuzzleHttp\Client
@@ -63,8 +63,10 @@ class UNL_MediaHub_AmaraAPI
             ));
             return $response->getBody();
         } catch (GuzzleHttp\Exception\ClientException $e) {
+            print_r($e);
             return false;
         } catch (GuzzleHttp\Exception\ConnectException $e) {
+            print_r($e);
             return false;
         }
     }
@@ -97,11 +99,7 @@ class UNL_MediaHub_AmaraAPI
     {
         $media_details = $this->getMediaDetails($media_url);
 
-        if (!$media_details) {
-            return false;
-        }
-
-        if ($media_details->meta->total_count == 0) {
+        if (!$media_details || $media_details->meta->total_count == 0) {
             //create the media
             if (!$result = $this->createMedia($media_url)) {
                 //Media could not be created, can not continue.
