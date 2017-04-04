@@ -63,10 +63,8 @@ class UNL_MediaHub_AmaraAPI
             ));
             return $response->getBody();
         } catch (GuzzleHttp\Exception\ClientException $e) {
-            print_r($e);
             return false;
         } catch (GuzzleHttp\Exception\ConnectException $e) {
-            print_r($e);
             return false;
         }
     }
