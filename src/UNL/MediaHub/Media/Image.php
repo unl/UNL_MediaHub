@@ -26,10 +26,20 @@ class UNL_MediaHub_Media_Image
          */
         $directory = UNL_MediaHub::getRootDir() . '/www/uploads/thumbnails/'.$media_id;
         $file = $directory.'/original.jpg';
+        
+        /*
+         * @var $file_use_default - this file is a placeholder which indicates that ffmpeg couldn't render an image. If this file exists, the default placeholder file should be used instead.
+         */
+        $file_use_default = $directory.'/use-default';
 
         if (!isset($this->options['rebuild']) && file_exists($file)) {
             //just a quick retrieval
             return $file;
+        }
+
+        if (!isset($this->options['rebuild']) && file_exists($file_use_default)) {
+            //just a quick retrieval of the default placeholder
+            return UNL_MediaHub::getRootDir() . '/data/video-placeholder.jpg';
         }
 
         if (!$media = UNL_MediaHub_Media::getById($media_id)) {
@@ -86,6 +96,9 @@ class UNL_MediaHub_Media_Image
             $media->save();
             return $file;
         }
+        
+        //Indicate that we should use the default placeholder file instead for future requests
+        touch($file_use_default);
 
         //Fall back to the default poster image
         return UNL_MediaHub::getRootDir() . '/data/video-placeholder.jpg';
