@@ -376,9 +376,15 @@ class UNL_MediaHub_Manager_PostHandler
             if($media->url != $this->post['url']){
 
                 $local_file = $media->getLocalFileName();
+                $new_local_file = UNL_MediaHub_Media::getLocalFileNameByURL($this->post['url']);
                 
-                if ($local_file && !is_dir($local_file)) {
-                    //Delete the file, and make sure it isn't a directory for some unknown reason.
+                if ($local_file && !is_dir($local_file) && $new_local_file) {
+                    //Both files are local.
+                    rename($new_local_file, $local_file); //Replace the old one (keeping its name).
+                    $this->post['url'] = $media->url; //Don't update the URL of the file
+                    
+                } else if ($local_file && !is_dir($local_file)) {
+                    //New file is not local, but old one is. Delete the old one.
                     unlink($local_file);
                 }
 
