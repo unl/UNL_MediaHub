@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "88031015efe3d5ad5a242dc227d24b59",
-    "content-hash": "96972aa811bfce0dab727debc7f11b57",
+    "content-hash": "58ccd6b23b1cc47807f85eab456512e5",
     "packages": [
         {
             "name": "captioning/captioning",
@@ -56,7 +55,7 @@
                 "vtt",
                 "webvtt"
             ],
-            "time": "2016-07-20 21:02:04"
+            "time": "2016-07-20T21:02:04+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -110,7 +109,7 @@
                 "constructor",
                 "instantiate"
             ],
-            "time": "2015-06-14 21:17:01"
+            "time": "2015-06-14T21:17:01+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -154,7 +153,7 @@
             "keywords": [
                 "html"
             ],
-            "time": "2016-07-16 12:58:58"
+            "time": "2016-07-16T12:58:58+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -216,7 +215,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2016-07-15 17:22:37"
+            "time": "2016-07-15T17:22:37+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -267,7 +266,7 @@
             "keywords": [
                 "promise"
             ],
-            "time": "2016-05-18 16:56:05"
+            "time": "2016-05-18T16:56:05+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -325,7 +324,7 @@
                 "stream",
                 "uri"
             ],
-            "time": "2016-06-24 23:00:38"
+            "time": "2016-06-24T23:00:38+00:00"
         },
         {
             "name": "jasig/phpcas",
@@ -379,7 +378,7 @@
                 "cas",
                 "jasig"
             ],
-            "time": "2015-11-16 20:44:36"
+            "time": "2015-11-16T20:44:36+00:00"
         },
         {
             "name": "leodido/conversio",
@@ -430,7 +429,7 @@
                 "converters",
                 "library"
             ],
-            "time": "2015-01-08 11:35:23"
+            "time": "2015-01-08T11:35:23+00:00"
         },
         {
             "name": "leodido/langcode-conv",
@@ -485,36 +484,34 @@
                 "name",
                 "native"
             ],
-            "time": "2015-01-09 18:20:29"
+            "time": "2015-01-09T18:20:29+00:00"
         },
         {
             "name": "mhor/php-mediainfo",
-            "version": "1.6.0",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mhor/php-mediainfo.git",
-                "reference": "7edba90ffd500ab3744a48ace6e0e517151182e6"
+                "reference": "a16bad2b884dc17d40fcea432115ec0c3ec0e739"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mhor/php-mediainfo/zipball/7edba90ffd500ab3744a48ace6e0e517151182e6",
-                "reference": "7edba90ffd500ab3744a48ace6e0e517151182e6",
+                "url": "https://api.github.com/repos/mhor/php-mediainfo/zipball/a16bad2b884dc17d40fcea432115ec0c3ec0e739",
+                "reference": "a16bad2b884dc17d40fcea432115ec0c3ec0e739",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3",
+                "php": ">=5.4.0",
                 "symfony/filesystem": "~2.3|~3.0",
                 "symfony/process": "~2.3|~3.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0",
-                "satooshi/php-coveralls": "0.7.*@dev",
-                "squizlabs/php_codesniffer": "~2.0"
+                "phpunit/phpunit": "~4.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "4.0.x-dev"
                 }
             },
             "autoload": {
@@ -533,7 +530,7 @@
                 }
             ],
             "description": "PHP wrapper around the mediainfo command",
-            "time": "2016-01-24 13:22:25"
+            "time": "2017-01-17T22:45:20+00:00"
         },
         {
             "name": "pear-pear.php.net/Archive_Tar",
@@ -803,7 +800,7 @@
                 "reflection",
                 "static analysis"
             ],
-            "time": "2015-12-27 11:43:31"
+            "time": "2015-12-27T11:43:31+00:00"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
@@ -848,7 +845,7 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2016-06-10 09:48:41"
+            "time": "2016-06-10T09:48:41+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -895,7 +892,7 @@
                     "email": "me@mikevanriel.com"
                 }
             ],
-            "time": "2016-06-10 07:14:17"
+            "time": "2016-06-10T07:14:17+00:00"
         },
         {
             "name": "phpspec/prophecy",
@@ -957,7 +954,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2016-06-07 08:13:47"
+            "time": "2016-06-07T08:13:47+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -1019,7 +1016,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-10-06 15:47:00"
+            "time": "2015-10-06T15:47:00+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -1066,7 +1063,7 @@
                 "filesystem",
                 "iterator"
             ],
-            "time": "2015-06-21 13:08:43"
+            "time": "2015-06-21T13:08:43+00:00"
         },
         {
             "name": "phpunit/php-text-template",
@@ -1107,7 +1104,7 @@
             "keywords": [
                 "template"
             ],
-            "time": "2015-06-21 13:50:34"
+            "time": "2015-06-21T13:50:34+00:00"
         },
         {
             "name": "phpunit/php-timer",
@@ -1151,7 +1148,7 @@
             "keywords": [
                 "timer"
             ],
-            "time": "2016-05-12 18:03:57"
+            "time": "2016-05-12T18:03:57+00:00"
         },
         {
             "name": "phpunit/php-token-stream",
@@ -1200,7 +1197,7 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2015-09-15 10:49:45"
+            "time": "2015-09-15T10:49:45+00:00"
         },
         {
             "name": "phpunit/phpunit",
@@ -1272,7 +1269,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-07-21 06:48:14"
+            "time": "2016-07-21T06:48:14+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -1328,7 +1325,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2015-10-02 06:51:40"
+            "time": "2015-10-02T06:51:40+00:00"
         },
         {
             "name": "psr/http-message",
@@ -1378,7 +1375,7 @@
                 "request",
                 "response"
             ],
-            "time": "2016-08-06 14:39:51"
+            "time": "2016-08-06T14:39:51+00:00"
         },
         {
             "name": "saltybeagle/savvy",
@@ -1405,7 +1402,7 @@
                 "source": "https://github.com/saltybeagle/Savvy/tree/v0.8.1",
                 "issues": "https://github.com/saltybeagle/Savvy/issues"
             },
-            "time": "2014-10-08 16:24:53"
+            "time": "2014-10-08T16:24:53+00:00"
         },
         {
             "name": "saltybeagle/savvy_turbo",
@@ -1432,7 +1429,7 @@
                 "source": "https://github.com/saltybeagle/Savvy_Turbo/tree/v0.1.1",
                 "issues": "https://github.com/saltybeagle/Savvy_Turbo/issues"
             },
-            "time": "2014-04-30 21:38:24"
+            "time": "2014-04-30T21:38:24+00:00"
         },
         {
             "name": "sebastian/comparator",
@@ -1496,7 +1493,7 @@
                 "compare",
                 "equality"
             ],
-            "time": "2015-07-26 15:48:44"
+            "time": "2015-07-26T15:48:44+00:00"
         },
         {
             "name": "sebastian/diff",
@@ -1548,7 +1545,7 @@
             "keywords": [
                 "diff"
             ],
-            "time": "2015-12-08 07:14:41"
+            "time": "2015-12-08T07:14:41+00:00"
         },
         {
             "name": "sebastian/environment",
@@ -1598,7 +1595,7 @@
                 "environment",
                 "hhvm"
             ],
-            "time": "2016-08-18 05:49:44"
+            "time": "2016-08-18T05:49:44+00:00"
         },
         {
             "name": "sebastian/exporter",
@@ -1665,7 +1662,7 @@
                 "export",
                 "exporter"
             ],
-            "time": "2016-06-17 09:04:28"
+            "time": "2016-06-17T09:04:28+00:00"
         },
         {
             "name": "sebastian/global-state",
@@ -1716,7 +1713,7 @@
             "keywords": [
                 "global state"
             ],
-            "time": "2015-10-12 03:26:01"
+            "time": "2015-10-12T03:26:01+00:00"
         },
         {
             "name": "sebastian/recursion-context",
@@ -1769,7 +1766,7 @@
             ],
             "description": "Provides functionality to recursively process PHP variables",
             "homepage": "http://www.github.com/sebastianbergmann/recursion-context",
-            "time": "2015-11-11 19:50:13"
+            "time": "2015-11-11T19:50:13+00:00"
         },
         {
             "name": "sebastian/version",
@@ -1804,7 +1801,7 @@
             ],
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
             "homepage": "https://github.com/sebastianbergmann/version",
-            "time": "2015-06-21 13:59:46"
+            "time": "2015-06-21T13:59:46+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -1857,7 +1854,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2016-07-08 11:51:25"
+            "time": "2016-07-08T11:51:25+00:00"
         },
         {
             "name": "symfony/filesystem",
@@ -1906,7 +1903,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2016-07-20 05:44:26"
+            "time": "2016-07-20T05:44:26+00:00"
         },
         {
             "name": "symfony/process",
@@ -1955,7 +1952,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2016-07-28 11:13:48"
+            "time": "2016-07-28T11:13:48+00:00"
         },
         {
             "name": "symfony/yaml",
@@ -2004,7 +2001,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-07-17 14:02:08"
+            "time": "2016-07-17T14:02:08+00:00"
         },
         {
             "name": "unl/php-dwt-parser",
@@ -2055,7 +2052,7 @@
             ],
             "description": "A PHP library for parsing DWT files and turning them into PHP classes",
             "homepage": "http://wdn.unl.edu/",
-            "time": "2016-01-05 21:35:46"
+            "time": "2016-01-05T21:35:46+00:00"
         },
         {
             "name": "unl/php-wdn-templates",
@@ -2108,7 +2105,7 @@
             ],
             "description": "A PHP library for rendering the UNL templates",
             "homepage": "http://wdn.unl.edu/",
-            "time": "2015-12-15 00:14:04"
+            "time": "2015-12-15T00:14:04+00:00"
         },
         {
             "name": "unl/reg-exp-router",
@@ -2134,7 +2131,7 @@
                 "source": "https://github.com/unl/RegExpRouter/tree/v0.1.2",
                 "issues": "https://github.com/unl/RegExpRouter/issues"
             },
-            "time": "2014-12-16 20:47:31"
+            "time": "2014-12-16T20:47:31+00:00"
         },
         {
             "name": "unl/rev-api",
@@ -2176,7 +2173,7 @@
                 }
             ],
             "description": "PHP library for the rev.com api",
-            "time": "2015-09-15 19:49:37"
+            "time": "2015-09-15T19:49:37+00:00"
         },
         {
             "name": "unl/unl_cache_lite",
@@ -2203,7 +2200,7 @@
                 "source": "https://github.com/unlpear/UNL_Cache_Lite/tree/v0.1.1",
                 "issues": "https://github.com/unlpear/UNL_Cache_Lite/issues"
             },
-            "time": "2014-08-25 20:13:04"
+            "time": "2014-08-25T20:13:04+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -2253,7 +2250,7 @@
                 "check",
                 "validate"
             ],
-            "time": "2016-08-09 15:02:57"
+            "time": "2016-08-09T15:02:57+00:00"
         },
         {
             "name": "zaininnari/html-minifier",
@@ -2304,7 +2301,7 @@
                 "HTML minify",
                 "php"
             ],
-            "time": "2015-08-18 14:10:55"
+            "time": "2015-08-18T14:10:55+00:00"
         },
         {
             "name": "zendframework/zend-code",
@@ -2356,7 +2353,7 @@
                 "code",
                 "zf2"
             ],
-            "time": "2016-04-20 17:26:42"
+            "time": "2016-04-20T17:26:42+00:00"
         },
         {
             "name": "zendframework/zend-eventmanager",
@@ -2410,7 +2407,7 @@
                 "events",
                 "zf2"
             ],
-            "time": "2016-02-18 20:53:00"
+            "time": "2016-02-18T20:53:00+00:00"
         },
         {
             "name": "zendframework/zend-filter",
@@ -2470,7 +2467,7 @@
                 "filter",
                 "zf2"
             ],
-            "time": "2016-04-18 18:32:43"
+            "time": "2016-04-18T18:32:43+00:00"
         },
         {
             "name": "zendframework/zend-stdlib",
@@ -2515,7 +2512,7 @@
                 "stdlib",
                 "zf2"
             ],
-            "time": "2016-04-12 21:19:36"
+            "time": "2016-04-12T21:19:36+00:00"
         }
     ],
     "packages-dev": [],
