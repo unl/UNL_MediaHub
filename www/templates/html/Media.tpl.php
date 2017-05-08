@@ -5,9 +5,9 @@ if ($context->isVideo()) {
     $height = 529;
     $width = 940;
     $dimensions = $context->getVideoDimensions();
-    if (isset($dimensions[0])) {
+    if (isset($dimensions['width'])) {
         // Scale everything down to 450 wide
-        $height = round(($width/$dimensions[0])*$dimensions[1]);
+        $height = round(($width/$dimensions['width'])*$dimensions['height']);
     }
 }
 
@@ -105,7 +105,10 @@ $getTracks = $context->getTextTrackURLs();
 
                     <div class="wdn-col-one-third mh-stat">
                         <?php if($type == "video"): ?>
-                            <span class="mh-ratio wdn-brand"><?php echo $dimensions[0] . 'x' .$dimensions[1];?></span>
+                            <?php if ($dimensions['width'] > 0 && $dimensions['height'] > 0): ?>
+                                <span class="mh-ratio wdn-brand"><?php echo $dimensions['width'] . 'x' .$dimensions['height'];?></span>
+                            <?php endif; ?>
+                            
                             <span class="mh-size wdn-brand">
                                 <?php 
                                 if(!empty($context->length)) {

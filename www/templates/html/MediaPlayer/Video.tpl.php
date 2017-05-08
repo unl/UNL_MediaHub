@@ -4,9 +4,9 @@ $height = 540;
 $width  = 960;
 
 $dimensions = $context->getVideoDimensions();
-if (isset($dimensions[0])) {
+if (isset($dimensions['width'])) {
     // Scale everything down to 450 wide
-    $height = round(($width/$dimensions[0])*$dimensions[1]);
+    $height = round(($width/$dimensions['width'])*$dimensions['height']);
 }
 
 $autoplay = 'autoplay';

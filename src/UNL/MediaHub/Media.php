@@ -119,13 +119,49 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         return true;
     }
 
-    function getVideoDimensions()
+    function getVideoDimensions($force = false)
     {
-        if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_media::mediaHasElement($this->id, 'content')) {
-            return array(0=>$element->attributes['width'], 1=>$element->attributes['height']);
+        if (!$force && $element = UNL_MediaHub_Feed_Media_NamespacedElements_media::mediaHasElement($this->id, 'content')) {
+            return array('width'=>$element->attributes['width'], 'height'=>$element->attributes['height']);
         }
         
-        return @getimagesize($this->getThumbnailURL());
+        //TODO: shit man, we are referencing the thumbnail URL, not the freaking VIDEO!
+        
+        return $this->findVideoDimensions();
+    }
+    
+    function findVideoDimensions()
+    {
+        if (!$this->getLocalFileName()) {
+            //We need the media to be local to find the dimensions
+            return false;
+        }
+        
+        try {
+            $mediainfo = UNL_MediaHub::getMediaInfo();
+            $details = $mediainfo->getInfo($this->getLocalFileName());
+            $videos = $details->getVideos();
+
+            if (!isset($videos[0])) {
+                //video track might be missing
+                return false;
+            }
+
+            $width = $videos[0]->get('width')->getAbsoluteValue();
+            $height = $width = $videos[0]->get('height')->getAbsoluteValue();
+            
+            if (!$width || !$height) {
+                return false;
+            }
+            
+            return [
+                'width' => $width,
+                'height' => $height,
+            ];
+            
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 
     /**
@@ -147,10 +183,10 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
                             'type'     => $this->type,
                             'lang'     => 'en');
         if ($this->isVideo()) {
-            $result = $this->getVideoDimensions()?:[null, null];
-            list($width, $height) = $result;
-            $attributes['width']  = $width;
-            $attributes['height'] = $height;
+            $result = $this->getVideoDimensions(true)?:['width'=>null, 'height'=>null];
+            
+            $attributes['width']  = $result['width'];
+            $attributes['height'] = $result['height'];
         }
 
         if (isset($element->attributes) && is_array($element->attributes)) {
