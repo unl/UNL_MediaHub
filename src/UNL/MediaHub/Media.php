@@ -3,6 +3,8 @@
 
 class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_MediaHub_MediaInterface
 {
+    const CODEC_REMOTE_VIDEO = 'remote-video-is-unknown';
+    
     /**
      * Get a piece of media by PK.
      *
@@ -681,5 +683,48 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         
         return true;
     }
-}
 
+    /**
+     * Get the codec used in this video
+     *
+     * @return bool
+     */
+    function getCodec()
+    {
+        if (!$this->getLocalFileName()) {
+            //We need the media to be local to find the dimensions
+            return self::CODEC_REMOTE_VIDEO;
+        }
+
+        try {
+            $mediainfo = UNL_MediaHub::getMediaInfo();
+            $details = $mediainfo->getInfo($this->getLocalFileName());
+            $videos = $details->getVideos();
+
+            if (!isset($videos[0])) {
+                //video track might be missing
+                return false;
+            }
+
+            return $videos[0]->get('format')->getShortName();
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
+    /**
+     * Determine weather or not the codec of this video is safe for the web
+     * 
+     * @return bool
+     */
+    function isWebSafe()
+    {
+        $unsafe = ['MPEG-4 Visual'];
+        
+        if (in_array($this->getCodec(), $unsafe)) {
+            return false;
+        }
+        
+        return true;
+    }
+}

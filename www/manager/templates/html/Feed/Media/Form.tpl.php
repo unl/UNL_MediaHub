@@ -31,27 +31,43 @@ $controller->setReplacementData('head', $js);
 ?>
 
 <?php if(empty($context->media->media_text_tracks_id)): ?>
-<div class="wdn_notice alert mh-caption-alert">
-    <div class="close">
-        <a href="#" title="Close this notice">Close this notice</a>
-    </div>
-    <div class="message">
-        <h4>This Video is Missing Captions!</h4>
-        <div class="mh-caption-band">
-            <p>
-                For accessibility reasons, captions are required for <strong>all</strong> videos.
-            </p>
-            <p>
-                <a class="wdn-button" href="<?php echo $edit_caption_url ?>">Caption Your Video</a>
-            </p>
+    <div class="wdn_notice alert mh-caption-alert">
+        <div class="message">
+            <h4>This Video is Missing Captions!</h4>
+            <div class="mh-caption-band">
+                <p>
+                    For accessibility reasons, captions are required for <strong>all</strong> videos.
+                </p>
+                <p>
+                    <a class="wdn-button" href="<?php echo $edit_caption_url ?>">Caption Your Video</a>
+                </p>
+            </div>
         </div>
     </div>
-</div>
+    
+    <script type="text/javascript">
+    WDN.initializePlugin('notice');
+    </script>
+<?php endif; ?>
 
-<script type="text/javascript">
-WDN.initializePlugin('notice');
-</script>
+<?php if (!$context->media->isWebSafe()): ?>
+    <div class="wdn_notice alert mh-caption-alert">
+        <div class="message">
+            <h4>This video might not work on the web!</h4>
+            <div class="mh-caption-band">
+                <p>
+                    This video was encoded with '<?php echo $context->media->getCodec() ?>', which is not safe for the web, and might not work on every device/browser. Please run the video through HandBrake and swap the video out.
+                </p>
+                <p>
+                    <a class="wdn-button" href="http://wdn.unl.edu/documentation/unl-mediahub/using-handbrake">How to use HandBrake</a>
+                </p>
+            </div>
+        </div>
+    </div>
 
+    <script type="text/javascript">
+        WDN.initializePlugin('notice');
+    </script>
 <?php endif; ?>
 
 <form action="?" method="post" name="media_form" id="media_form" class="wdn-band" enctype="multipart/form-data">
