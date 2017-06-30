@@ -101,4 +101,24 @@ class UNL_MediaHub_MediaDBTest extends UNL_MediaHub_DBTests_DBTestCase
         //Make sure an accurate duration was detected
         $this->assertEquals(new UNL_MediaHub_DurationHelper(295222), $duration, 'an accurate duration should have been detected');
     }
+
+    /**
+     * @test
+     */
+    public function getCodec()
+    {
+        $this->prepareTestDB();
+        $data_dir = dirname(dirname(__DIR__)) . '/data';
+
+        $media_a = UNL_MediaHub_Media::getById(1);
+
+        //Copy over a working file to test
+        copy($data_dir.'/muxed.mp4', UNL_MediaHub::getRootDir() . '/www/uploads/a.mp4');
+        $this->assertEquals('AVC', $media_a->getCodec());
+
+        //Now make sure the bad codec was detected
+        copy($data_dir.'/bad-codec.mp4', UNL_MediaHub::getRootDir() . '/www/uploads/a.mp4');
+
+        $this->assertEquals('MPEG-4 Visual', $media_a->getCodec());
+    }
 }
