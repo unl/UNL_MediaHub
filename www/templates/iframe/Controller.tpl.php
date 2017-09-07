@@ -5,8 +5,15 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Test</title>
     <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/jquery.js?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>"></script>
-    <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/mediaelement/mediaelement-and-player.js?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>"></script>
-    <link rel="stylesheet" href="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/mediaelement/css/mediaelementplayer.min.css?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>" />
+    <!-- <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/mediaelement/build/mediaelement-and-player.js?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r76/three.js"></script>
+    <link href="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/video-js.css" rel="stylesheet">
+    <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/video.js"></script>
+    <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/videojs-panorama.v5.js"></script>
+    <link href="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/videojs-panorama.min.css" rel="stylesheet">
+      
+    <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/videojs-mediahub.js"></script>
+    <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/videojs-captions-toggle.js"></script>
     <link rel="stylesheet" href="<?php echo UNL_MediaHub_Controller::toAgnosticURL(UNL_MediaHub_Controller::$url); ?>templates/iframe/css/iframe.css?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>" />
     
     <style>
@@ -14,11 +21,6 @@
             margin: 0px;
             height: 100%;
             background-color: #000;
-        }
-        .mejs-video {
-            position: static !important;
-            width: 100% !important;
-            height: 100% !important;
         }
     </style>
 </head>

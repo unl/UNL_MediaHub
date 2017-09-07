@@ -87,6 +87,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     {
         if ($this->isVideo()) {
             $this->setMRSSThumbnail();
+            // $this->setProjection();
         }
         $this->setMRSSContent();
     }
@@ -198,6 +199,40 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         $element->value = '';
         $element->save();
         return true;
+    }
+
+
+    /**
+     * Set the Media RSS, projection element
+     * 
+     * @return true
+     */
+    function setProjection($projection = false)
+    {
+        if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_mediahub::mediaHasElement($this->id, 'projection')) {
+            // all good
+        } else {
+            $element = new UNL_MediaHub_Feed_Media_NamespacedElements_mediahub();
+            $element->media_id = $this->id;
+            $element->element = 'projection';
+        }
+        $element->attributes = array();
+        $element->value = $projection;
+        $element->save();
+        return true;
+    }
+
+    /**
+     * Get the Media RSS, projection element
+     * 
+     * @return true
+     */
+    function getProjection()
+    {
+        if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_mediahub::mediaHasElement($this->id, 'projection')) {
+            return $element->value;
+        }
+        return false;
     }
     
     /**

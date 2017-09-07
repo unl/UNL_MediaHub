@@ -119,6 +119,15 @@ $controller->setReplacementData('head', $js);
                             <?php echo $savvy->render($context->feed_selection); ?>
                         </li>
                         <li>
+                            <?php //if(isset($context->)) ?>
+                            <?php if($context->media->getProjection() == "equirectangular") { ?>
+                            <input type="checkbox" id="projection" name="projection" checked="checked" value="equirectangular">
+                            <?php } else { ?>
+                            <input type="checkbox" id="projection" name="projection" value="equirectangular">
+                            <?php } ?>
+                            <label for="projection">360 Video (equirectangular)</label>
+                        </li>
+                        <li>
                             <label for="media_poster">URL of custom poster image</label>
                             <div class="wdn-icon-info hang-left mh-tooltip italic" id="poster-details">
                                 <div>

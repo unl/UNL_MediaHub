@@ -4,6 +4,8 @@ class UNL_MediaHub
     public static $dsn;
     
     public static $ffmpeg_path;
+
+    public static $ffprobe_path;
     
     public static $mediainfo_path;
     
@@ -173,6 +175,20 @@ class UNL_MediaHub
     }
 
     /**
+     * Get the path (as confugired) to the ffprobe executable
+     * 
+     * @return string
+     */
+    public static function getFfprobePath() {
+        $ffprobe = UNL_MediaHub::getRootDir() . '/ffmpeg/ffprobe';
+        if (self::$ffprobe_path) {
+            $ffprobe = self::$ffprobe_path;
+        }
+        
+        return $ffprobe;
+    }
+
+    /**
      * @return \Mhor\MediaInfo\MediaInfo
      */
     public static function getMediaInfo()
@@ -185,4 +201,57 @@ class UNL_MediaHub
         
         return $mediaInfo;
     }
+
+
+        /**
+     * Set the Media RSS, projection element
+     * 
+     * @return true
+     */
+    public static function checkMetadataProjection($url)
+    {
+
+        if(!isset($url)){
+            return;
+        }
+
+        $return = array();
+        $status = 1;
+
+        $url = escapeshellarg($url);
+
+        exec(UNL_MediaHub::getFfprobePath() . " -v quiet -print_format json -show_format -show_streams $url", $return, $status);
+
+        $json = "";
+
+        $length = sizeof($return);
+        for ($i=0; $i < $length; $i++) { 
+            $json.=$return[$i];
+        }
+
+        $metadata = json_decode($json);
+
+        // var_dump($this);
+
+        $projection = false;
+        $length = sizeof($metadata);
+        for ($i=0; $i < $length; $i++) { 
+            if(isset($metadata->streams[$i]->side_data_list)){
+                $side_data_list_length = sizeof($metadata->streams[$i]->side_data_list);
+                for ($a=0; $a < $side_data_list_length; $a++) { 
+                    if(isset($metadata->streams[$i]->side_data_list[$a]->side_data_type)){
+                        if($metadata->streams[$i]->side_data_list[$a]->side_data_type == 'Spherical Mapping'){
+                            $projection = $metadata->streams[$i]->side_data_list[$a]->projection;
+                        }
+                    }
+                }
+
+                
+            }
+        }
+
+        return $projection;
+
+    }
+
 }
