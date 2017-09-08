@@ -123,12 +123,13 @@ function MediahubPlayer(options) {
 
                 var setTranscript = function(track) {
 
-                    if (track.cues.length == 0) { // If the track has no cues wait a quarter second and try again. this seems like a dumb way to do this. 🙄
+                    if ((track.cues == null) || (track.cues == undefined) || (track.cues.length == 0)) { // If the track has no cues wait a quarter second and try again. this seems like a dumb way to do this. 🙄
                         setTimeout(function() {
+                            console.log("yeah?")
                             setTranscript(track);
                         }, 250)
                         return;
-                    }
+                    } 
 
                     $captionSearch.find(".mh-caption-close").on("click", function() {
                         $(this).siblings("#mh-parse-caption").val("");
@@ -286,7 +287,7 @@ function MediahubPlayer(options) {
 
                 $inner.prepend(html);
 
-                if (window.location.search.indexOf("hide-content-header=true") > -1) { // add ability to hide video titles. 
+                if (window.location.search.indexOf("hide-content-header=1") > -1) { // add ability to hide video titles. 
                     $inner.find(".media-content-head").addClass("vjs-hidden")
                 }
 

@@ -137,10 +137,32 @@ iframe * {margin:0px}
     font-size: 1.777em;
 }
 
-.mh-tooltip:hover > div {
+.mh-tooltip:hover > div, .mh-tooltip.open > div {
     display: block;
 }
 
+.mh-tooltip.invisible {
+    background-color: transparent;
+    height: 0;
+    width: 0;
+    padding: 0;
+    display: inline-block;
+}
+.mh-tooltip#autodetect-360 > div {
+    top: 1.8em;
+    left: -.75em;
+    bottom: auto;
+}
+.mh-tooltip#autodetect-360 > div:before {
+    top: -8px;
+    left: 21px;
+}
+.mh-tooltip#autodetect-360 > div:after {
+    left: 0;
+    top: 0;
+    bottom: auto;
+    margin-left: 0;
+}
 .mh-tooltip p {
     margin: 0;
 }
@@ -169,7 +191,7 @@ iframe * {margin:0px}
 
 #setImage {
     position: absolute;
-    top: 15px;
+    top: 46px;
     right: 25px;
     z-index: 100;
 }

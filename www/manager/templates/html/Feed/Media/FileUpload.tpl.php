@@ -68,6 +68,8 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                                     <?php echo $savvy->render($context->feed_selection); ?>
                                 </li>
                                 <li>
+                                    <div class="mh-tooltip invisible" id="autodetect-360">
+                                    </div>
                                     <input type="checkbox" id="projection" name="projection" value="equirectangular">
                                     <label for="projection">360 Video (equirectangular)</label>
                                 </li>

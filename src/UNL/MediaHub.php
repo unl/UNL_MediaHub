@@ -8,6 +8,8 @@ class UNL_MediaHub
     public static $ffprobe_path;
     
     public static $mediainfo_path;
+
+    public static $rude_shell;
     
     function __construct()
     {
@@ -170,6 +172,9 @@ class UNL_MediaHub
         if (self::$ffmpeg_path) {
             $ffmpeg = self::$ffmpeg_path;
         }
+        if(!self::$rude_shell){
+          $ffmpeg = "nice ".$ffmpeg;
+        }
         
         return $ffmpeg;
     }
@@ -183,6 +188,9 @@ class UNL_MediaHub
         $ffprobe = UNL_MediaHub::getRootDir() . '/ffmpeg/ffprobe';
         if (self::$ffprobe_path) {
             $ffprobe = self::$ffprobe_path;
+        }
+        if(!self::$rude_shell){
+          $ffprobe = "nice ".$ffprobe;
         }
         
         return $ffprobe;
@@ -230,8 +238,6 @@ class UNL_MediaHub
         }
 
         $metadata = json_decode($json);
-
-        // var_dump($this);
 
         $projection = false;
         $length = sizeof($metadata);
