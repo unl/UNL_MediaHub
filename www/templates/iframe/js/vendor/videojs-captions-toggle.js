@@ -58,4 +58,4 @@ function CheckCaptionsShowing(textTrack, button){
   }
 }
 
-videojs.plugin('toggleSingleCaptionTrack', toggleSingleCaptionTrack);
+videojs.registerPlugin('toggleSingleCaptionTrack', toggleSingleCaptionTrack);

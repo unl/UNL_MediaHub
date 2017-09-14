@@ -1,4 +1,4 @@
-videojs.plugin('MediahubPlayer', MediahubPlayer);
+videojs.registerPlugin('MediahubPlayer', MediahubPlayer);
 
 
 function MediahubPlayer(options) {
@@ -249,7 +249,6 @@ function MediahubPlayer(options) {
 
         //Social Sharing via https://xparkmedia.com/blog/mediaelements-add-a-share-button-to-video-elements-using-jquery/
         var initSharing = function(t, v) {
-            var $inner = false;
             var $title = $video.attr('title');
             var share_url = $video.attr('data-url');
             var media_type = v.tagName.charAt(0).toUpperCase() + v.tagName.slice(1).toLowerCase();
@@ -258,41 +257,37 @@ function MediahubPlayer(options) {
             if (!share_url) {
                 return;
             }
-
-            if ($inner = $video) {
-                // share urls
-                var sharelinks = {
-                    "wdn-icon-mail": { title: 'Email', url: 'mailto:?body=Checkout this ' + media_type + ': ' + share_url + '&subject=' + media_type + ' : ' + $title },
-                    "wdn-icon-facebook": { title: 'Facebook', url: 'https://www.facebook.com/sharer/sharer.php?u=' + share_url }, // facebook
-                    "wdn-icon-twitter": { title: 'Twitter', url: 'https://twitter.com/share?text=' + media_type + ': ' + $title + '&url=' + share_url }, // twitter
-                    "wdn-icon-linkedin-squared": { title: 'LinkedIn', url: 'https://www.linkedin.com/shareArticle?mini=true&url=' + share_url + '&title=' + $title + '&summary=Checkout this ' + media_type + '%20&source=University%20of%20Nebraska%20-%20Lincoln%20MediaHub' } //google plus
-                }
-
-                //create share links
-                var links = '<li><a href="https://go.unl.edu/?url=referer"  target="_parent" rel="nofollow"><span class="wdn-icon-link" aria-hidden="true"></span>Get a Go URL</a></li>';
-                for (var key in sharelinks) {
-                    links += '<li class="outpost"><a href="' + sharelinks[key].url + '" rel="nofollow" target="_blank"><span class="' + key + '" aria-hidden="true"></span> Share on ' + sharelinks[key].title + '</a></li>';
-                }
-
-                var html = '<div class="media-content-head mejs-control">';
-                html += '<div class="media-content-title"><a href="' + share_url + '" target="_parent">' + $title + '</a></div>';
-                html += '<div class="wdn-share-this-page mejs-control">';
-                html += '<input type="checkbox" id="mh-share-toggle' + mediahub_id + '" value="Show share options" class="wdn-input-driver mh-share-toggle">'
-                html += '<label for="mh-share-toggle' + mediahub_id + '"><span  class="wdn-icon-share" aria-hidden="true"></span><span class="wdn-text-hidden">Share This Page</span></label>';
-                html += '<ul class="wdn-share-options">';
-                html += links;
-                html += '</ul>';
-                html += '</div>';
-                html += '</div>';
-
-                $inner.prepend(html);
-
-                if (window.location.search.indexOf("hide-content-header=1") > -1) { // add ability to hide video titles. 
-                    $inner.find(".media-content-head").addClass("vjs-hidden")
-                }
-
+            
+            // share urls
+            var sharelinks = {
+                "wdn-icon-mail": { title: 'Email', url: 'mailto:?body=Checkout this ' + media_type + ': ' + share_url + '&subject=' + media_type + ' : ' + $title },
+                "wdn-icon-facebook": { title: 'Facebook', url: 'https://www.facebook.com/sharer/sharer.php?u=' + share_url }, // facebook
+                "wdn-icon-twitter": { title: 'Twitter', url: 'https://twitter.com/share?text=' + media_type + ': ' + $title + '&url=' + share_url }, // twitter
+                "wdn-icon-linkedin-squared": { title: 'LinkedIn', url: 'https://www.linkedin.com/shareArticle?mini=true&url=' + share_url + '&title=' + $title + '&summary=Checkout this ' + media_type + '%20&source=University%20of%20Nebraska%20-%20Lincoln%20MediaHub' } //google plus
             }
 
+            //create share links
+            var links = '<li><a href="https://go.unl.edu/?url=referer"  target="_parent" rel="nofollow"><span class="wdn-icon-link" aria-hidden="true"></span>Get a Go URL</a></li>';
+            for (var key in sharelinks) {
+                links += '<li class="outpost"><a href="' + sharelinks[key].url + '" rel="nofollow" target="_blank"><span class="' + key + '" aria-hidden="true"></span> Share on ' + sharelinks[key].title + '</a></li>';
+            }
+
+            var html = '<div class="media-content-head mejs-control">';
+            html += '<div class="media-content-title"><a href="' + share_url + '" target="_parent">' + $title + '</a></div>';
+            html += '<div class="wdn-share-this-page mejs-control">';
+            html += '<input type="checkbox" id="mh-share-toggle' + mediahub_id + '" value="Show share options" class="wdn-input-driver mh-share-toggle">'
+            html += '<label for="mh-share-toggle' + mediahub_id + '"><span  class="wdn-icon-share" aria-hidden="true"></span><span class="wdn-text-hidden">Share This Page</span></label>';
+            html += '<ul class="wdn-share-options">';
+            html += links;
+            html += '</ul>';
+            html += '</div>';
+            html += '</div>';
+
+            $video.prepend(html);
+
+            if (window.location.search.indexOf("hide-content-header=1") > -1) { // add ability to hide video titles. 
+                $video.find(".media-content-head").addClass("vjs-hidden")
+            }
         };
 
         t.on('play', function() {
@@ -305,7 +300,7 @@ function MediahubPlayer(options) {
                 'type': v.tagName.toString().toLowerCase()
             };
             window.parent.postMessage(message, "*");
-        }, false);
+        });
 
         t.on('pause', function() {
             var message = {
@@ -317,7 +312,7 @@ function MediahubPlayer(options) {
                 'type': v.tagName.toString().toLowerCase()
             };
             window.parent.postMessage(message, "*");
-        }, false);
+        });
 
         t.on('ended', function() {
             var message = {
@@ -329,7 +324,7 @@ function MediahubPlayer(options) {
                 'type': v.tagName.toString().toLowerCase()
             };
             window.parent.postMessage(message, "*");
-        }, false);
+        });
 
         if (options.privacy === "PUBLIC") {
             initSharing(t, v);
