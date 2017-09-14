@@ -23,109 +23,106 @@
 
 <script type="text/javascript">
     (function () {
-        var e = function () {
-
-            <?php if (isset($context->media->id) && $context->media->id) { ?>
-            var options = {
-                videoWidth: '100%',
-                videoHeight: '100%',
-                audioWidth: '100%',
-                html5: {
-                    nativeTextTracks: false
-                  }
-            };
-            
-            <?php } ?>
-
-            $(function() {
-                $('video, audio').each(function() {
-                    var autoplay = false;
-                    if (window.location.search.indexOf("autoplay=1") > -1) { // add ability to hide video titles. 
-                        autoplay = true;
-                    }
-                    var $media = $(this);
-                    var id = $media.attr("id")
-                    var startLanguage = $media.attr('data-start-language');
-
-                    <?php if(isset($projection)){ ?>
-                        var projection = '<?php echo $projection; ?>';
-                    <?php }else{ ?>
-                        var projection = false;
-                    <?php }; ?>
-                    
-                    if ("undefined" !== typeof startLanguage) {
-                        options.startLanguage = startLanguage;
-                    }
-
-                  (function(window, videojs) {
-
-                    var player = window.player = videojs(id, options, function () {
-                      window.addEventListener("resize", function () {
-                        var canvas = player.getChild('Canvas');
-                        if(canvas){
-                          canvas.handleResize();
-                          canvas.el().style.transform = "matrix(1, 0, 0, 1, "+window.innerWidth*-.5+", 0)"; // chrome resize bug shim
-                        } 
-                      });
-                    }).ready(function () {
-                        if(!isMobile() && autoplay == true){
-                          player.play();  
-                        } 
-                    });
-
-                    player.toggleSingleCaptionTrack({activeColor: "#ccc"});
-                    player.MediahubPlayer({
-                        privacy: "<?php echo $context->media->privacy; ?>",
-                        url:'<?php echo UNL_MediaHub_Controller::toAgnosticURL($controller->getURL($context->media)); ?>',
-                    });
-
-                    <?php 
-
-                    $user = UNL_MediaHub_AuthService::getInstance()->getUser();
-                    $user_can_edit = false;
-
-                    if ($user) {
-                        $user_can_edit = $context->media->userCanEdit(UNL_MediaHub_AuthService::getInstance()->getUser());
-                    }
-
-                    if($user_can_edit){ ?>
-
-                            var pingTime = false;
-                            try {
-                                if (window.parent.location.href.indexOf("manager/?view=addmedia") > -1){
-                                    pingTime = true;
-                                }
-                            } catch (e) {
-                                pingTime = false;
-                            }
-                        player.on("timeupdate", function(){
-                            window.parent.postMessage({currentTime: player.currentTime()}, "*");
-                        })
-
-                    <?php } ?>
-
-                    
-
-                    var videoElement = document.getElementById(id);
-                    var width = videoElement.offsetWidth;
-                    var height = videoElement.offsetHeight;
-                    player.width(width), player.height(height);
-                    if(projection == "equirectangular"){
-                        player.panorama({
-                          clickToToggle: (!isMobile()),
-                          clickAndDrag: true,
-                          autoMobileOrientation: true,
-                          initFov: 100,
-                          Notice: { Message: (isMobile())? "please move your phone" : "please use your mouse drag and drop the video"}
-                        });
-                    }
-
-                  }(window, window.videojs));
-
-                });
-            });
+        <?php if (isset($context->media->id) && $context->media->id) { ?>
+        var options = {
+            videoWidth: '100%',
+            videoHeight: '100%',
+            audioWidth: '100%',
+            html5: {
+                nativeTextTracks: false
+              }
         };
-        e();
+        
+        <?php } ?>
+
+        $(function() {
+            $('video, audio').each(function() {
+                var autoplay = false;
+                if (window.location.search.indexOf("autoplay=1") > -1) { // add ability to hide video titles. 
+                    autoplay = true;
+                }
+                var $media = $(this);
+                var videoElement = $media.get(0);
+                var id = $media.attr("id")
+                var startLanguage = $media.attr('data-start-language');
+
+                <?php if(isset($projection)){ ?>
+                    var projection = '<?php echo $projection; ?>';
+                <?php }else{ ?>
+                    var projection = false;
+                <?php }; ?>
+                
+                if ("undefined" !== typeof startLanguage) {
+                    options.startLanguage = startLanguage;
+                }
+
+              (function(window, videojs) {
+
+                var player = window.player = videojs($media.get(0), options, function () {
+                  window.addEventListener("resize", function () {
+                    var canvas = player.getChild('Canvas');
+                    if(canvas){
+                      canvas.handleResize();
+                      canvas.el().style.transform = "matrix(1, 0, 0, 1, "+window.innerWidth*-.5+", 0)"; // chrome resize bug shim
+                    } 
+                  });
+                });
+                
+                player.ready(function () {
+                    if(!isMobile() && autoplay == true){
+                      player.play();  
+                    } 
+                });
+                
+                //var player = videojs($media.get(0));
+                player.toggleSingleCaptionTrack({activeColor: "#ccc"});
+                player.MediahubPlayer({
+                    privacy: "<?php echo $context->media->privacy; ?>",
+                    url:'<?php echo UNL_MediaHub_Controller::toAgnosticURL($controller->getURL($context->media)); ?>',
+                });
+
+                <?php 
+
+                $user = UNL_MediaHub_AuthService::getInstance()->getUser();
+                $user_can_edit = false;
+
+                if ($user) {
+                    $user_can_edit = $context->media->userCanEdit(UNL_MediaHub_AuthService::getInstance()->getUser());
+                }
+
+                if($user_can_edit){ ?>
+
+                        var pingTime = false;
+                        try {
+                            if (window.parent.location.href.indexOf("manager/?view=addmedia") > -1){
+                                pingTime = true;
+                            }
+                        } catch (e) {
+                            pingTime = false;
+                        }
+                    player.on("timeupdate", function(){
+                        window.parent.postMessage({currentTime: player.currentTime()}, "*");
+                    })
+
+                <?php } ?>
+                  
+                var width = videoElement.offsetWidth;
+                var height = videoElement.offsetHeight;
+                player.width(width), player.height(height);
+                if(projection == "equirectangular"){
+                    player.panorama({
+                      clickToToggle: (!isMobile()),
+                      clickAndDrag: true,
+                      autoMobileOrientation: true,
+                      initFov: 100,
+                      Notice: { Message: (isMobile())? "please move your phone" : "please use your mouse drag and drop the video"}
+                    });
+                }
+
+              }(window, window.videojs));
+
+            });
+        });
     })();
 
     function isMobile() {
