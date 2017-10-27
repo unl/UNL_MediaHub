@@ -281,6 +281,7 @@ class UNL_MediaHub_Controller
                 header('Content-Type: application/octet-stream');
                 header('Content-Disposition: attachment; filename="'.$media->title.'.'.$path_info['extension'].'"');
                 header('Content-Length: ' . filesize($file));
+                ob_end_flush();
                 readfile($file);
                 exit;
             default:
