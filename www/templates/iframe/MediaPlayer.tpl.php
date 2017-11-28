@@ -27,10 +27,12 @@
         var options = {
             videoWidth: '100%',
             videoHeight: '100%',
-            audioWidth: '100%',
+            controls: true,
+            fluid: true,
+ 
             html5: {
                 nativeTextTracks: false
-              }
+            }
         };
         
         <?php } ?>
@@ -43,7 +45,7 @@
                 }
                 var $media = $(this);
                 var videoElement = $media.get(0);
-                var id = $media.attr("id")
+                var id = $media.attr("id");
                 var startLanguage = $media.attr('data-start-language');
 
                 <?php if(isset($projection)){ ?>
@@ -56,6 +58,19 @@
                     options.startLanguage = startLanguage;
                 }
 
+                if (videoElement.tagName === 'AUDIO') {
+                    options.plugins = {};
+                    options.plugins.wavesurfer = {
+                        src: $media.attr('data-src'),
+                        msDisplayMax: 10,
+                        debug: true,
+                        waveColor: '#D00000',
+                        progressColor: '#FEFDFA',
+                        cursorColor: '#FEFDFA',
+                        //hideScrollbar: true
+                    };
+                }
+                
               (function(window, videojs) {
 
                 var player = window.player = videojs($media.get(0), options, function () {
@@ -75,7 +90,7 @@
                 });
                 
                 //var player = videojs($media.get(0));
-                player.toggleSingleCaptionTrack({activeColor: "#ccc"});
+                //player.toggleSingleCaptionTrack({activeColor: "#ccc"});
                 player.MediahubPlayer({
                     privacy: "<?php echo $context->media->privacy; ?>",
                     url:'<?php echo UNL_MediaHub_Controller::toAgnosticURL($controller->getURL($context->media)); ?>',

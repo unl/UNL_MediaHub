@@ -60,6 +60,32 @@ function MediahubPlayer(options) {
             });
         }
 
+        if (t.isAudio()) {
+            //We are using wavesurfer. Add some accessible forward and back buttons.
+            //Todo: address font-icon a11y issues
+            var $skipForward = $('<button>', {
+                "class": "vjs-control vjs-button fa fa-fast-forward",
+                "type": "button",
+                "aria-controls": t.id,
+                "aria-label": "skip forward"
+            });
+            $skipForward.on('click', function() {
+                t.wavesurfer().surfer.skipForward(10);
+            });
+            $(t.controlBar.durationDisplay.el()).after($skipForward);
+
+            var $skipBackward = $('<button>', {
+                "class": "vjs-control vjs-button fa fa-fast-backward",
+                "type": "button",
+                "aria-controls": t.id,
+                "aria-label": "skip backward"
+            });
+            $skipBackward.on('click', function() {
+                t.wavesurfer().surfer.skipBackward(10);
+            });
+            $(t.controlBar.durationDisplay.el()).after($skipBackward);
+        }
+
         t.on("loadedmetadata", function() {
             if (t.textTracks().length != 0) {
 
@@ -68,14 +94,13 @@ function MediahubPlayer(options) {
                     "class": "vjs-control vjs-button search-caption caption-toggle",
                     "type": "button",
                     "aria-controls": t.id,
-                    "title": "Toggle Searchable Transcript",
                     "aria-label": "Toggle Searchable Transcript"
                 });
 
                 if (isEmbed) {
                     $container = $(t.el());
                     $container.append($(".mh_transcript_template").html());
-                    $(t.controlBar.captionsButton.el()).before($myButton)
+                    $(t.controlBar.captionsButton.el()).before($myButton);
                 } else {
                     $container = $(window.parent.document).find(".mediahub-onpage-captions");
                     $container.html($(".mh_transcript_template").html());
