@@ -138,13 +138,13 @@ function MediahubPlayer(options) {
                         secs = Math.floor((millis % 6e4) / 1000);
                     if (secs < 10) {
                         secs = "0" + secs;
-                    };
+                    }
                     if (hours > 0) {
                         return hours + ':' + mins + ':' + secs;
                     } else {
                         return mins + ':' + secs;
-                    };
-                }
+                    }
+                };
 
                 var setTranscript = function(track) {
 
@@ -250,12 +250,8 @@ function MediahubPlayer(options) {
                     var value = $(this).find(":selected").val();
                     t.setTrack(value);
                 });
-
-
-
-            };
-
-        })
+            }
+        });
 
 
         // Playcount
@@ -289,7 +285,7 @@ function MediahubPlayer(options) {
                 "wdn-icon-facebook": { title: 'Facebook', url: 'https://www.facebook.com/sharer/sharer.php?u=' + share_url }, // facebook
                 "wdn-icon-twitter": { title: 'Twitter', url: 'https://twitter.com/share?text=' + media_type + ': ' + $title + '&url=' + share_url }, // twitter
                 "wdn-icon-linkedin-squared": { title: 'LinkedIn', url: 'https://www.linkedin.com/shareArticle?mini=true&url=' + share_url + '&title=' + $title + '&summary=Checkout this ' + media_type + '%20&source=University%20of%20Nebraska%20-%20Lincoln%20MediaHub' } //google plus
-            }
+            };
 
             //create share links
             var links = '<li><a href="https://go.unl.edu/?url=referer"  target="_parent" rel="nofollow"><span class="wdn-icon-link" aria-hidden="true"></span>Get a Go URL</a></li>';
@@ -300,18 +296,26 @@ function MediahubPlayer(options) {
             var html = '<div class="media-content-head mejs-control">';
             html += '<div class="media-content-title"><a href="' + share_url + '" target="_parent">' + $title + '</a></div>';
             html += '<div class="wdn-share-this-page mejs-control">';
-            html += '<input type="checkbox" id="mh-share-toggle' + mediahub_id + '" value="Show share options" class="wdn-input-driver mh-share-toggle">'
-            html += '<label for="mh-share-toggle' + mediahub_id + '"><span  class="wdn-icon-share" aria-hidden="true"></span><span class="wdn-text-hidden">Share This Page</span></label>';
-            html += '<ul class="wdn-share-options">';
+            html += '<button class="share-this-media"><span  class="wdn-icon-share" aria-hidden="true"></span><span class="wdn-text-hidden">Share This</span></button>';
+            html += '<ul class="wdn-share-options vjs-hidden">';
             html += links;
             html += '</ul>';
             html += '</div>';
             html += '</div>';
 
             $video.prepend(html);
+            
+            $('button.share-this-media', $video).click(function() {
+                var $container = $('.wdn-share-options', $video).first();
+                $container.toggleClass('vjs-hidden');
+                if (!$container.hasClass('vjs-hidden')) {
+                    //We showed it, so send focus to the container
+                    $('a', $container).first().focus();
+                }
+            });
 
             if (window.location.search.indexOf("hide-content-header=1") > -1) { // add ability to hide video titles. 
-                $video.find(".media-content-head").addClass("vjs-hidden")
+                $video.find(".media-content-head").addClass("vjs-hidden");
             }
         };
 

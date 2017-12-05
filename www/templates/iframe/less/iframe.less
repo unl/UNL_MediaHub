@@ -524,6 +524,9 @@
         font-size: 17px;
         font-size: 1.069rem
     }
+    .share-this-media {
+      padding: 0;
+    }
     .wdn-icon-share:before {
         padding-right: 1em;
         font-size:.75em;
@@ -652,7 +655,6 @@
         font-weight: 400;
         font-style: normal;
         font-size: 12px;
-        display: none;
         margin: 0;
         right: 0;
         @media (max-width:600px) {
@@ -745,15 +747,6 @@
             top: 27%;
         }
     }
-    .mh-share-toggle:checked~.wdn-share-options,
-    .wdn-share-this-page:hover .wdn-share-options {
-        display: block;
-    }
-
-    .mh-share-toggle {
-        display: none;
-    }
-
 
     .media-content-head .wdn-share-this-page a {
         border: none;
@@ -933,11 +926,6 @@
             margin-top: 0;
         }
     }
-
-    label {
-        font-family: "gotham";
-    }
-
 
     &.non-framework {
 
