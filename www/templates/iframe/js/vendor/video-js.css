@@ -679,6 +679,9 @@ body.vjs-full-window {
   align-items: center;
   min-width: 4em; }
 
+.video-js .vjs-progress-control.disabled {
+  cursor: default; }
+
 .vjs-live .vjs-progress-control {
   display: none; }
 
@@ -703,6 +706,9 @@ body.vjs-full-window {
 
 .video-js .vjs-progress-control:hover .vjs-progress-holder {
   font-size: 1.666666666666666666em; }
+
+.video-js .vjs-progress-control:hover .vjs-progress-holder.disabled {
+  font-size: 1em; }
 
 .video-js .vjs-progress-holder .vjs-play-progress,
 .video-js .vjs-progress-holder .vjs-load-progress,
@@ -759,6 +765,9 @@ body.vjs-full-window {
   font-size: 0.6em;
   visibility: visible; }
 
+.video-js .vjs-progress-control.disabled:hover .vjs-time-tooltip {
+  font-size: 1em; }
+
 .video-js .vjs-progress-control .vjs-mouse-display {
   display: none;
   position: absolute;
@@ -795,12 +804,23 @@ body.vjs-full-window {
   cursor: pointer;
   padding: 0;
   margin: 0 0.45em 0 0.45em;
+  /* iOS Safari */
+  -webkit-touch-callout: none;
+  /* Safari */
   -webkit-user-select: none;
+  /* Konqueror HTML */
+  -khtml-user-select: none;
+  /* Firefox */
   -moz-user-select: none;
+  /* Internet Explorer/Edge */
   -ms-user-select: none;
+  /* Non-prefixed version, currently supported by Chrome and Opera */
   user-select: none;
   background-color: #73859f;
   background-color: rgba(115, 133, 159, 0.5); }
+
+.video-js .vjs-slider.disabled {
+  cursor: default; }
 
 .video-js .vjs-slider:focus {
   text-shadow: 0em 0em 1em white;

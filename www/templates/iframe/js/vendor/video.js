@@ -1,6 +1,6 @@
 /**
  * @license
- * Video.js 6.2.8 <http://videojs.com/>
+ * Video.js 6.4.0 <http://videojs.com/>
  * Copyright Brightcove, Inc. <https://www.brightcove.com/>
  * Available under Apache License Version 2.0
  * <https://github.com/videojs/video.js/blob/master/LICENSE>
@@ -16,7 +16,7 @@
 	(global.videojs = factory());
 }(this, (function () {
 
-var version = "6.2.8";
+var version = "6.4.0";
 
 var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -758,6 +758,23 @@ function isEl(value) {
 }
 
 /**
+ * Determines if the current DOM is embedded in an iframe.
+ *
+ * @return {boolean}
+ *
+ */
+function isInFrame() {
+
+  // We need a try/catch here because Safari will throw errors when attempting
+  // to get either `parent` or `self`
+  try {
+    return window_1.parent !== window_1.self;
+  } catch (x) {
+    return true;
+  }
+}
+
+/**
  * Creates functions to query the DOM using a given method.
  *
  * @param {string} method
@@ -1310,7 +1327,7 @@ function isTextNode(value) {
  * @return {Element}
  *         The element with no children
  */
-function emptyEl(el) {
+function emptyEl(el) {console.log('emptyEl', el);
   while (el.firstChild) {
     el.removeChild(el.firstChild);
   }
@@ -1448,6 +1465,7 @@ var $$ = createQuerier('querySelectorAll');
 var Dom = (Object.freeze || Object)({
 	isReal: isReal,
 	isEl: isEl,
+	isInFrame: isInFrame,
 	createEl: createEl,
 	textContent: textContent,
 	prependTo: prependTo,
@@ -1925,9 +1943,11 @@ function off(elem, type, fn) {
   };
 
   // Are we removing all bound events?
-  if (!type) {
+  if (type === undefined) {
     for (var t in data.handlers) {
-      removeType(t);
+      if (Object.prototype.hasOwnProperty.call(data.handlers || {}, t)) {
+        removeType(t);
+      }
     }
     return;
   }
@@ -3666,18 +3686,21 @@ var Component = function () {
   Component.prototype.ready = function ready(fn) {
     var sync = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
-    if (fn) {
-      if (this.isReady_) {
-        if (sync) {
-          fn.call(this);
-        } else {
-          // Call the function asynchronously by default for consistency
-          this.setTimeout(fn, 1);
-        }
-      } else {
-        this.readyQueue_ = this.readyQueue_ || [];
-        this.readyQueue_.push(fn);
-      }
+    if (!fn) {
+      return;
+    }
+
+    if (!this.isReady_) {
+      this.readyQueue_ = this.readyQueue_ || [];
+      this.readyQueue_.push(fn);
+      return;
+    }
+
+    if (sync) {
+      fn.call(this);
+    } else {
+      // Call the function asynchronously by default for consistency
+      this.setTimeout(fn, 1);
     }
   };
 
@@ -4357,11 +4380,13 @@ var Component = function () {
 
 
   Component.prototype.setTimeout = function setTimeout(fn, timeout) {
+    var _this2 = this;
+
     fn = bind(this, fn);
 
     var timeoutId = window_1.setTimeout(fn, timeout);
     var disposeFn = function disposeFn() {
-      this.clearTimeout(timeoutId);
+      return _this2.clearTimeout(timeoutId);
     };
 
     disposeFn.guid = 'vjs-timeout-' + timeoutId;
@@ -4423,12 +4448,14 @@ var Component = function () {
 
 
   Component.prototype.setInterval = function setInterval(fn, interval) {
+    var _this3 = this;
+
     fn = bind(this, fn);
 
     var intervalId = window_1.setInterval(fn, interval);
 
     var disposeFn = function disposeFn() {
-      this.clearInterval(intervalId);
+      return _this3.clearInterval(intervalId);
     };
 
     disposeFn.guid = 'vjs-interval-' + intervalId;
@@ -4495,14 +4522,14 @@ var Component = function () {
 
 
   Component.prototype.requestAnimationFrame = function requestAnimationFrame(fn) {
-    var _this2 = this;
+    var _this4 = this;
 
     if (this.supportsRaf_) {
       fn = bind(this, fn);
 
       var id = window_1.requestAnimationFrame(fn);
       var disposeFn = function disposeFn() {
-        return _this2.cancelAnimationFrame(id);
+        return _this4.cancelAnimationFrame(id);
       };
 
       disposeFn.guid = 'vjs-raf-' + id;
@@ -5312,7 +5339,10 @@ var ModalDialog = function (_Component) {
         this.on(this.el_.ownerDocument, 'keydown', bind(this, this.handleKeyPress));
       }
 
+      // Hide controls and note if they were enabled.
+      this.hadControls_ = player.controls();
       player.controls(false);
+
       this.show();
       this.conditionalFocus_();
       this.el().setAttribute('aria-hidden', 'false');
@@ -5378,7 +5408,10 @@ var ModalDialog = function (_Component) {
       this.off(this.el_.ownerDocument, 'keydown', bind(this, this.handleKeyPress));
     }
 
-    player.controls(true);
+    if (this.hadControls_) {
+      player.controls(true);
+    }
+
     this.hide();
     this.el().setAttribute('aria-hidden', 'true');
 
@@ -6736,6 +6769,10 @@ var parseUrl = function parseUrl(url) {
     details.host = details.host.replace(/:443$/, '');
   }
 
+  if (!details.protocol) {
+    details.protocol = window_1.location.protocol;
+  }
+
   if (addToBody) {
     document_1.body.removeChild(div);
   }
@@ -6822,7 +6859,7 @@ var Url = (Object.freeze || Object)({
 	isCrossOrigin: isCrossOrigin
 });
 
-var isFunction_1 = isFunction;
+var index$1 = isFunction;
 
 var toString$1 = Object.prototype.toString;
 
@@ -6838,7 +6875,7 @@ function isFunction (fn) {
       fn === window.prompt))
 }
 
-var trim_1 = createCommonjsModule(function (module, exports) {
+var index$3 = createCommonjsModule(function (module, exports) {
 exports = module.exports = trim;
 
 function trim(str){
@@ -6854,13 +6891,13 @@ exports.right = function(str){
 };
 });
 
-var forEach_1 = forEach;
+var index$5 = forEach;
 
 var toString$2 = Object.prototype.toString;
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 
 function forEach(list, iterator, context) {
-    if (!isFunction_1(iterator)) {
+    if (!index$1(iterator)) {
         throw new TypeError('iterator must be a function')
     }
 
@@ -6909,12 +6946,12 @@ var parseHeaders = function (headers) {
 
   var result = {};
 
-  forEach_1(
-      trim_1(headers).split('\n')
+  index$5(
+      index$3(headers).split('\n')
     , function (row) {
         var index = row.indexOf(':')
-          , key = trim_1(row.slice(0, index)).toLowerCase()
-          , value = trim_1(row.slice(index + 1));
+          , key = index$3(row.slice(0, index)).toLowerCase()
+          , value = index$3(row.slice(index + 1));
 
         if (typeof(result[key]) === 'undefined') {
           result[key] = value;
@@ -6949,7 +6986,7 @@ function extend() {
     return target
 }
 
-var xhr = createXHR;
+var index = createXHR;
 createXHR.XMLHttpRequest = window_1.XMLHttpRequest || noop;
 createXHR.XDomainRequest = "withCredentials" in (new createXHR.XMLHttpRequest()) ? createXHR.XMLHttpRequest : window_1.XDomainRequest;
 
@@ -6977,7 +7014,7 @@ function isEmpty(obj){
 function initParams(uri, options, callback) {
     var params = uri;
 
-    if (isFunction_1(options)) {
+    if (index$1(options)) {
         callback = options;
         if (typeof uri === "string") {
             params = {uri:uri};
@@ -7255,7 +7292,7 @@ var loadTrack = function loadTrack(src, track) {
     opts.cors = crossOrigin;
   }
 
-  xhr(opts, bind(this, function (err, response, responseBody) {
+  index(opts, bind(this, function (err, response, responseBody) {
     if (err) {
       return log$1.error(err, response);
     }
@@ -7465,7 +7502,7 @@ var TextTrack = function (_Track) {
      * @instance
      */
     Object.defineProperty(tt, 'activeCues', {
-      get: function get$$1() {
+      get: function get$$1() {//console.log('activeCues called');
         if (!this.loaded_) {
           return null;
         }
@@ -7476,6 +7513,7 @@ var TextTrack = function (_Track) {
         }
 
         var ct = this.tech_.currentTime();
+          //console.log('current time', ct);
         var active = [];
 
         for (var i = 0, l = this.cues.length; i < l; i++) {
@@ -12035,8 +12073,9 @@ var TextTrackDisplay = function (_Component) {
    */
 
 
-  TextTrackDisplay.prototype.updateForTrack = function updateForTrack(track) {
+  TextTrackDisplay.prototype.updateForTrack = function updateForTrack(track) {console.log('updateForTrack called');
     if (typeof window_1.WebVTT !== 'function' || !track.activeCues) {
+        //console.log('updateForTrack: no active cues');
       return;
     }
 
@@ -12046,7 +12085,7 @@ var TextTrackDisplay = function (_Component) {
     for (var _i = 0; _i < track.activeCues.length; _i++) {
       cues.push(track.activeCues[_i]);
     }
-
+//console.log('cues', cues);
     window_1.WebVTT.processCues(window_1, cues, this.el_);
 
     var i = cues.length;
@@ -12534,6 +12573,27 @@ var PlayToggle = function (_Button) {
   };
 
   /**
+   * This gets called once after the video has ended and the user seeks so that
+   * we can change the replay button back to a play button.
+   *
+   * @param {EventTarget~Event} [event]
+   *        The event that caused this function to run.
+   *
+   * @listens Player#seeked
+   */
+
+
+  PlayToggle.prototype.handleSeeked = function handleSeeked(event) {
+    this.removeClass('vjs-ended');
+
+    if (this.player_.paused()) {
+      this.handlePause(event);
+    } else {
+      this.handlePlay(event);
+    }
+  };
+
+  /**
    * Add the vjs-playing class to the element so it can change appearance.
    *
    * @param {EventTarget~Event} [event]
@@ -12571,6 +12631,10 @@ var PlayToggle = function (_Button) {
   /**
    * Add the vjs-ended class to the element so it can change appearance
    *
+   * @param {EventTarget~Event} [event]
+   *        The event that caused this function to run.
+   *
+   * @listens Player#ended
    */
 
 
@@ -12579,6 +12643,9 @@ var PlayToggle = function (_Button) {
     this.addClass('vjs-ended');
     // change the button text to "Replay"
     this.controlText('Replay');
+
+    // on the next seek remove the replay button
+    this.one(this.player_, 'seeked', this.handleSeeked);
   };
 
   return PlayToggle;
@@ -12645,16 +12712,16 @@ function formatTime(seconds) {
 }
 
 /**
- * @file current-time-display.js
+ * @file time-display.js
  */
 /**
- * Displays the current time
+ * Displays the time left in the video
  *
  * @extends Component
  */
 
-var CurrentTimeDisplay = function (_Component) {
-  inherits(CurrentTimeDisplay, _Component);
+var TimeDisplay = function (_Component) {
+  inherits(TimeDisplay, _Component);
 
   /**
    * Creates an instance of this class.
@@ -12665,8 +12732,8 @@ var CurrentTimeDisplay = function (_Component) {
    * @param {Object} [options]
    *        The key/value store of player options.
    */
-  function CurrentTimeDisplay(player, options) {
-    classCallCheck(this, CurrentTimeDisplay);
+  function TimeDisplay(player, options) {
+    classCallCheck(this, TimeDisplay);
 
     var _this = possibleConstructorReturn(this, _Component.call(this, player, options));
 
@@ -12683,19 +12750,20 @@ var CurrentTimeDisplay = function (_Component) {
    */
 
 
-  CurrentTimeDisplay.prototype.createEl = function createEl$$1() {
+  TimeDisplay.prototype.createEl = function createEl$$1(plainName) {
+    var className = this.buildCSSClass();
     var el = _Component.prototype.createEl.call(this, 'div', {
-      className: 'vjs-current-time vjs-time-control vjs-control'
+      className: className + ' vjs-time-control vjs-control'
     });
 
     this.contentEl_ = createEl('div', {
-      className: 'vjs-current-time-display'
+      className: className + '-display'
     }, {
       // tell screen readers not to automatically read the time as it changes
       'aria-live': 'off'
     }, createEl('span', {
       className: 'vjs-control-text',
-      textContent: this.localize('Current Time')
+      textContent: this.localize(this.controlText_)
     }));
 
     this.updateTextNode_();
@@ -12704,19 +12772,133 @@ var CurrentTimeDisplay = function (_Component) {
   };
 
   /**
-   * Updates the "current time" text node with new content using the
+   * Updates the "remaining time" text node with new content using the
    * contents of the `formattedTime_` property.
    *
    * @private
    */
 
 
-  CurrentTimeDisplay.prototype.updateTextNode_ = function updateTextNode_() {
-    if (this.textNode_) {
-      this.contentEl_.removeChild(this.textNode_);
+  TimeDisplay.prototype.updateTextNode_ = function updateTextNode_() {
+    if (!this.contentEl_) {
+      return;
     }
-    this.textNode_ = document_1.createTextNode(' ' + (this.formattedTime_ || '0:00'));
+
+    while (this.contentEl_.firstChild) {
+      this.contentEl_.removeChild(this.contentEl_.firstChild);
+    }
+
+    this.textNode_ = document_1.createTextNode(this.formattedTime_ || '0:00');
     this.contentEl_.appendChild(this.textNode_);
+  };
+
+  /**
+   * Generates a formatted time for this component to use in display.
+   *
+   * @param  {number} time
+   *         A numeric time, in seconds.
+   *
+   * @return {string}
+   *         A formatted time
+   *
+   * @private
+   */
+
+
+  TimeDisplay.prototype.formatTime_ = function formatTime_(time) {
+    return formatTime(time);
+  };
+
+  /**
+   * Updates the time display text node if it has what was passed in changed
+   * the formatted time.
+   *
+   * @param {number} time
+   *        The time to update to
+   *
+   * @private
+   */
+
+
+  TimeDisplay.prototype.updateFormattedTime_ = function updateFormattedTime_(time) {
+    var formattedTime = this.formatTime_(time);
+
+    if (formattedTime === this.formattedTime_) {
+      return;
+    }
+
+    this.formattedTime_ = formattedTime;
+    this.requestAnimationFrame(this.updateTextNode_);
+  };
+
+  /**
+   * To be filled out in the child class, should update the displayed time
+   * in accordance with the fact that the current time has changed.
+   *
+   * @param {EventTarget~Event} [event]
+   *        The `timeupdate`  event that caused this to run.
+   *
+   * @listens Player#timeupdate
+   */
+
+
+  TimeDisplay.prototype.updateContent = function updateContent(event) {};
+
+  return TimeDisplay;
+}(Component);
+
+/**
+ * The text that should display over the `TimeDisplay`s controls. Added to for localization.
+ *
+ * @type {string}
+ * @private
+ */
+
+
+TimeDisplay.prototype.controlText_ = 'Time';
+
+Component.registerComponent('TimeDisplay', TimeDisplay);
+
+/**
+ * @file current-time-display.js
+ */
+/**
+ * Displays the current time
+ *
+ * @extends Component
+ */
+
+var CurrentTimeDisplay = function (_TimeDisplay) {
+  inherits(CurrentTimeDisplay, _TimeDisplay);
+
+  /**
+   * Creates an instance of this class.
+   *
+   * @param {Player} player
+   *        The `Player` that this class should be attached to.
+   *
+   * @param {Object} [options]
+   *        The key/value store of player options.
+   */
+  function CurrentTimeDisplay(player, options) {
+    classCallCheck(this, CurrentTimeDisplay);
+
+    var _this = possibleConstructorReturn(this, _TimeDisplay.call(this, player, options));
+
+    _this.on(player, 'ended', _this.handleEnded);
+    return _this;
+  }
+
+  /**
+   * Builds the default DOM `className`.
+   *
+   * @return {string}
+   *         The DOM `className` for this object.
+   */
+
+
+  CurrentTimeDisplay.prototype.buildCSSClass = function buildCSSClass() {
+    return 'vjs-current-time';
   };
 
   /**
@@ -12732,16 +12914,41 @@ var CurrentTimeDisplay = function (_Component) {
   CurrentTimeDisplay.prototype.updateContent = function updateContent(event) {
     // Allows for smooth scrubbing, when player can't keep up.
     var time = this.player_.scrubbing() ? this.player_.getCache().currentTime : this.player_.currentTime();
-    var formattedTime = formatTime(time, this.player_.duration());
 
-    if (formattedTime !== this.formattedTime_) {
-      this.formattedTime_ = formattedTime;
-      this.requestAnimationFrame(this.updateTextNode_);
+    this.updateFormattedTime_(time);
+  };
+
+  /**
+   * When the player fires ended there should be no time left. Sadly
+   * this is not always the case, lets make it seem like that is the case
+   * for users.
+   *
+   * @param {EventTarget~Event} [event]
+   *        The `ended` event that caused this to run.
+   *
+   * @listens Player#ended
+   */
+
+
+  CurrentTimeDisplay.prototype.handleEnded = function handleEnded(event) {
+    if (!this.player_.duration()) {
+      return;
     }
+    this.updateFormattedTime_(this.player_.duration());
   };
 
   return CurrentTimeDisplay;
-}(Component);
+}(TimeDisplay);
+
+/**
+ * The text that should display over the `CurrentTimeDisplay`s controls. Added to for localization.
+ *
+ * @type {string}
+ * @private
+ */
+
+
+CurrentTimeDisplay.prototype.controlText_ = 'Current Time';
 
 Component.registerComponent('CurrentTimeDisplay', CurrentTimeDisplay);
 
@@ -12754,8 +12961,8 @@ Component.registerComponent('CurrentTimeDisplay', CurrentTimeDisplay);
  * @extends Component
  */
 
-var DurationDisplay = function (_Component) {
-  inherits(DurationDisplay, _Component);
+var DurationDisplay = function (_TimeDisplay) {
+  inherits(DurationDisplay, _TimeDisplay);
 
   /**
    * Creates an instance of this class.
@@ -12769,61 +12976,30 @@ var DurationDisplay = function (_Component) {
   function DurationDisplay(player, options) {
     classCallCheck(this, DurationDisplay);
 
-    var _this = possibleConstructorReturn(this, _Component.call(this, player, options));
+    // we do not want to/need to throttle duration changes,
+    // as they should always display the changed duration as
+    // it has changed
+    var _this = possibleConstructorReturn(this, _TimeDisplay.call(this, player, options));
 
-    _this.throttledUpdateContent = throttle(bind(_this, _this.updateContent), 25);
+    _this.on(player, 'durationchange', _this.updateContent);
 
-    _this.on(player, ['durationchange',
-
-    // Also listen for timeupdate and loadedmetadata because removing those
+    // Also listen for timeupdate (in the parent) and loadedmetadata because removing those
     // listeners could have broken dependent applications/libraries. These
     // can likely be removed for 7.0.
-    'loadedmetadata', 'timeupdate'], _this.throttledUpdateContent);
+    _this.on(player, 'loadedmetadata', _this.throttledUpdateContent);
     return _this;
   }
 
   /**
-   * Create the `Component`'s DOM element
+   * Builds the default DOM `className`.
    *
-   * @return {Element}
-   *         The element that was created.
+   * @return {string}
+   *         The DOM `className` for this object.
    */
 
 
-  DurationDisplay.prototype.createEl = function createEl$$1() {
-    var el = _Component.prototype.createEl.call(this, 'div', {
-      className: 'vjs-duration vjs-time-control vjs-control'
-    });
-
-    this.contentEl_ = createEl('div', {
-      className: 'vjs-duration-display'
-    }, {
-      // tell screen readers not to automatically read the time as it changes
-      'aria-live': 'off'
-    }, createEl('span', {
-      className: 'vjs-control-text',
-      textContent: this.localize('Duration Time')
-    }));
-
-    this.updateTextNode_();
-    el.appendChild(this.contentEl_);
-    return el;
-  };
-
-  /**
-   * Updates the "current time" text node with new content using the
-   * contents of the `formattedTime_` property.
-   *
-   * @private
-   */
-
-
-  DurationDisplay.prototype.updateTextNode_ = function updateTextNode_() {
-    if (this.textNode_) {
-      this.contentEl_.removeChild(this.textNode_);
-    }
-    this.textNode_ = document_1.createTextNode(' ' + (this.formattedTime_ || '0:00'));
-    this.contentEl_.appendChild(this.textNode_);
+  DurationDisplay.prototype.buildCSSClass = function buildCSSClass() {
+    return 'vjs-duration';
   };
 
   /**
@@ -12844,13 +13020,22 @@ var DurationDisplay = function (_Component) {
 
     if (duration && this.duration_ !== duration) {
       this.duration_ = duration;
-      this.formattedTime_ = formatTime(duration);
-      this.requestAnimationFrame(this.updateTextNode_);
+      this.updateFormattedTime_(duration);
     }
   };
 
   return DurationDisplay;
-}(Component);
+}(TimeDisplay);
+
+/**
+ * The text that should display over the `DurationDisplay`s controls. Added to for localization.
+ *
+ * @type {string}
+ * @private
+ */
+
+
+DurationDisplay.prototype.controlText_ = 'Duration Time';
 
 Component.registerComponent('DurationDisplay', DurationDisplay);
 
@@ -12899,8 +13084,8 @@ Component.registerComponent('TimeDivider', TimeDivider);
  * @extends Component
  */
 
-var RemainingTimeDisplay = function (_Component) {
-  inherits(RemainingTimeDisplay, _Component);
+var RemainingTimeDisplay = function (_TimeDisplay) {
+  inherits(RemainingTimeDisplay, _TimeDisplay);
 
   /**
    * Creates an instance of this class.
@@ -12914,55 +13099,40 @@ var RemainingTimeDisplay = function (_Component) {
   function RemainingTimeDisplay(player, options) {
     classCallCheck(this, RemainingTimeDisplay);
 
-    var _this = possibleConstructorReturn(this, _Component.call(this, player, options));
+    var _this = possibleConstructorReturn(this, _TimeDisplay.call(this, player, options));
 
-    _this.throttledUpdateContent = throttle(bind(_this, _this.updateContent), 25);
-    _this.on(player, ['timeupdate', 'durationchange'], _this.throttledUpdateContent);
+    _this.on(player, 'durationchange', _this.throttledUpdateContent);
+    _this.on(player, 'ended', _this.handleEnded);
     return _this;
   }
 
   /**
-   * Create the `Component`'s DOM element
+   * Builds the default DOM `className`.
    *
-   * @return {Element}
-   *         The element that was created.
+   * @return {string}
+   *         The DOM `className` for this object.
    */
 
 
-  RemainingTimeDisplay.prototype.createEl = function createEl$$1() {
-    var el = _Component.prototype.createEl.call(this, 'div', {
-      className: 'vjs-remaining-time vjs-time-control vjs-control'
-    });
-
-    this.contentEl_ = createEl('div', {
-      className: 'vjs-remaining-time-display'
-    }, {
-      // tell screen readers not to automatically read the time as it changes
-      'aria-live': 'off'
-    }, createEl('span', {
-      className: 'vjs-control-text',
-      textContent: this.localize('Remaining Time')
-    }));
-
-    this.updateTextNode_();
-    el.appendChild(this.contentEl_);
-    return el;
+  RemainingTimeDisplay.prototype.buildCSSClass = function buildCSSClass() {
+    return 'vjs-remaining-time';
   };
 
   /**
-   * Updates the "remaining time" text node with new content using the
-   * contents of the `formattedTime_` property.
+   * The remaining time display prefixes numbers with a "minus" character.
+   *
+   * @param  {number} time
+   *         A numeric time, in seconds.
+   *
+   * @return {string}
+   *         A formatted time
    *
    * @private
    */
 
 
-  RemainingTimeDisplay.prototype.updateTextNode_ = function updateTextNode_() {
-    if (this.textNode_) {
-      this.contentEl_.removeChild(this.textNode_);
-    }
-    this.textNode_ = document_1.createTextNode(' -' + (this.formattedTime_ || '0:00'));
-    this.contentEl_.appendChild(this.textNode_);
+  RemainingTimeDisplay.prototype.formatTime_ = function formatTime_(time) {
+    return '-' + _TimeDisplay.prototype.formatTime_.call(this, time);
   };
 
   /**
@@ -12977,18 +13147,50 @@ var RemainingTimeDisplay = function (_Component) {
 
 
   RemainingTimeDisplay.prototype.updateContent = function updateContent(event) {
-    if (this.player_.duration()) {
-      var formattedTime = formatTime(this.player_.remainingTime());
+    if (!this.player_.duration()) {
+      return;
+    }
 
-      if (formattedTime !== this.formattedTime_) {
-        this.formattedTime_ = formattedTime;
-        this.requestAnimationFrame(this.updateTextNode_);
-      }
+    // @deprecated We should only use remainingTimeDisplay
+    // as of video.js 7
+    if (this.player_.remainingTimeDisplay) {
+      this.updateFormattedTime_(this.player_.remainingTimeDisplay());
+    } else {
+      this.updateFormattedTime_(this.player_.remainingTime());
     }
   };
 
+  /**
+   * When the player fires ended there should be no time left. Sadly
+   * this is not always the case, lets make it seem like that is the case
+   * for users.
+   *
+   * @param {EventTarget~Event} [event]
+   *        The `ended` event that caused this to run.
+   *
+   * @listens Player#ended
+   */
+
+
+  RemainingTimeDisplay.prototype.handleEnded = function handleEnded(event) {
+    if (!this.player_.duration()) {
+      return;
+    }
+    this.updateFormattedTime_(0);
+  };
+
   return RemainingTimeDisplay;
-}(Component);
+}(TimeDisplay);
+
+/**
+ * The text that should display over the `RemainingTimeDisplay`s controls. Added to for localization.
+ *
+ * @type {string}
+ * @private
+ */
+
+
+RemainingTimeDisplay.prototype.controlText_ = 'Remaining Time';
 
 Component.registerComponent('RemainingTimeDisplay', RemainingTimeDisplay);
 
@@ -13106,19 +13308,80 @@ var Slider = function (_Component) {
     // Set a horizontal or vertical class on the slider depending on the slider type
     _this.vertical(!!_this.options_.vertical);
 
-    _this.on('mousedown', _this.handleMouseDown);
-    _this.on('touchstart', _this.handleMouseDown);
-    _this.on('focus', _this.handleFocus);
-    _this.on('blur', _this.handleBlur);
-    _this.on('click', _this.handleClick);
-
-    _this.on(player, 'controlsvisible', _this.update);
-
-    if (_this.playerEvent) {
-      _this.on(player, _this.playerEvent, _this.update);
-    }
+    _this.enable();
     return _this;
   }
+
+  /**
+   * Are controls are currently enabled for this slider or not.
+   *
+   * @return {boolean}
+   *         true if controls are enabled, false otherwise
+   */
+
+
+  Slider.prototype.enabled = function enabled() {
+    return this.enabled_;
+  };
+
+  /**
+   * Enable controls for this slider if they are disabled
+   */
+
+
+  Slider.prototype.enable = function enable() {
+    if (this.enabled()) {
+      return;
+    }
+
+    this.on('mousedown', this.handleMouseDown);
+    this.on('touchstart', this.handleMouseDown);
+    this.on('focus', this.handleFocus);
+    this.on('blur', this.handleBlur);
+    this.on('click', this.handleClick);
+
+    this.on(this.player_, 'controlsvisible', this.update);
+
+    if (this.playerEvent) {
+      this.on(this.player_, this.playerEvent, this.update);
+    }
+
+    this.removeClass('disabled');
+    this.setAttribute('tabindex', 0);
+
+    this.enabled_ = true;
+  };
+
+  /**
+   * Disable controls for this slider if they are enabled
+   */
+
+
+  Slider.prototype.disable = function disable() {
+    if (!this.enabled()) {
+      return;
+    }
+    var doc = this.bar.el_.ownerDocument;
+
+    this.off('mousedown', this.handleMouseDown);
+    this.off('touchstart', this.handleMouseDown);
+    this.off('focus', this.handleFocus);
+    this.off('blur', this.handleBlur);
+    this.off('click', this.handleClick);
+    this.off(this.player_, 'controlsvisible', this.update);
+    this.off(doc, 'mousemove', this.handleMouseMove);
+    this.off(doc, 'mouseup', this.handleMouseUp);
+    this.off(doc, 'touchmove', this.handleMouseMove);
+    this.off(doc, 'touchend', this.handleMouseUp);
+    this.removeAttribute('tabindex');
+
+    this.addClass('disabled');
+
+    if (this.playerEvent) {
+      this.off(this.player_, this.playerEvent, this.update);
+    }
+    this.enabled_ = false;
+  };
 
   /**
    * Create the `Button`s DOM element.
@@ -13819,7 +14082,9 @@ var SeekBar = function (_Slider) {
     var _this = possibleConstructorReturn(this, _Slider.call(this, player, options));
 
     _this.update = throttle(bind(_this, _this.update), 50);
-    _this.on(player, ['timeupdate', 'ended'], _this.update);
+    _this.on(player, 'timeupdate', _this.update);
+    _this.on(player, 'ended', _this.handleEnded);
+
     return _this;
   }
 
@@ -13840,33 +14105,80 @@ var SeekBar = function (_Slider) {
   };
 
   /**
+   * This function updates the play progress bar and accessiblity
+   * attributes to whatever is passed in.
+   *
+   * @param {number} currentTime
+   *        The currentTime value that should be used for accessiblity
+   *
+   * @param {number} percent
+   *        The percentage as a decimal that the bar should be filled from 0-1.
+   *
+   * @private
+   */
+
+
+  SeekBar.prototype.update_ = function update_(currentTime, percent) {
+    var duration = this.player_.duration();
+
+    // machine readable value of progress bar (percentage complete)
+    this.el_.setAttribute('aria-valuenow', (percent * 100).toFixed(2));
+
+    // human readable value of progress bar (time complete)
+    this.el_.setAttribute('aria-valuetext', this.localize('progress bar timing: currentTime={1} duration={2}', [formatTime(currentTime, duration), formatTime(duration, duration)], '{1} of {2}'));
+
+    // Update the `PlayProgressBar`.
+    this.bar.update(getBoundingClientRect(this.el_), percent);
+  };
+
+  /**
    * Update the seek bar's UI.
    *
    * @param {EventTarget~Event} [event]
    *        The `timeupdate` or `ended` event that caused this to run.
    *
    * @listens Player#timeupdate
+   *
+   * @returns {number}
+   *          The current percent at a number from 0-1
+   */
+
+
+  SeekBar.prototype.update = function update(event) {
+    var percent = _Slider.prototype.update.call(this);
+
+    this.update_(this.getCurrentTime_(), percent);
+    return percent;
+  };
+
+  /**
+   * Get the value of current time but allows for smooth scrubbing,
+   * when player can't keep up.
+   *
+   * @return {number}
+   *         The current time value to display
+   *
+   * @private
+   */
+
+
+  SeekBar.prototype.getCurrentTime_ = function getCurrentTime_() {
+    return this.player_.scrubbing() ? this.player_.getCache().currentTime : this.player_.currentTime();
+  };
+
+  /**
+   * We want the seek bar to be full on ended
+   * no matter what the actual internal values are. so we force it.
+   *
+   * @param {EventTarget~Event} [event]
+   *        The `timeupdate` or `ended` event that caused this to run.
+   *
    * @listens Player#ended
    */
 
 
-  SeekBar.prototype.update = function update() {
-    var percent = _Slider.prototype.update.call(this);
-    var duration = this.player_.duration();
-
-    // Allows for smooth scrubbing, when player can't keep up.
-    var time = this.player_.scrubbing() ? this.player_.getCache().currentTime : this.player_.currentTime();
-
-    // machine readable value of progress bar (percentage complete)
-    this.el_.setAttribute('aria-valuenow', (percent * 100).toFixed(2));
-
-    // human readable value of progress bar (time complete)
-    this.el_.setAttribute('aria-valuetext', this.localize('progress bar timing: currentTime={1} duration={2}', [formatTime(time, duration), formatTime(duration, duration)], '{1} of {2}'));
-
-    // Update the `PlayProgressBar`.
-    this.bar.update(getBoundingClientRect(this.el_), percent);
-
-    return percent;
+  SeekBar.prototype.handleEnded = function handleEnded(event) {
+    this.update_(this.player_.duration(), 1);
   };
 
   /**
@@ -13878,11 +14190,7 @@ var SeekBar = function (_Slider) {
 
 
   SeekBar.prototype.getPercent = function getPercent() {
-
-    // Allows for smooth scrubbing, when player can't keep up.
-    var time = this.player_.scrubbing() ? this.player_.getCache().currentTime : this.player_.currentTime();
-
-    var percent = time / this.player_.duration();
+    var percent = this.getCurrentTime_() / this.player_.duration();
 
     return percent >= 1 ? 1 : percent;
   };
@@ -13926,6 +14234,28 @@ var SeekBar = function (_Slider) {
 
     // Set new time (tell player to seek to new time)
     this.player_.currentTime(newTime);
+  };
+
+  SeekBar.prototype.enable = function enable() {
+    _Slider.prototype.enable.call(this);
+    var mouseTimeDisplay = this.getChild('mouseTimeDisplay');
+
+    if (!mouseTimeDisplay) {
+      return;
+    }
+
+    mouseTimeDisplay.show();
+  };
+
+  SeekBar.prototype.disable = function disable() {
+    _Slider.prototype.disable.call(this);
+    var mouseTimeDisplay = this.getChild('mouseTimeDisplay');
+
+    if (!mouseTimeDisplay) {
+      return;
+    }
+
+    mouseTimeDisplay.hide();
   };
 
   /**
@@ -14065,10 +14395,9 @@ var ProgressControl = function (_Component) {
     var _this = possibleConstructorReturn(this, _Component.call(this, player, options));
 
     _this.handleMouseMove = throttle(bind(_this, _this.handleMouseMove), 25);
-    _this.on(_this.el_, 'mousemove', _this.handleMouseMove);
-
     _this.throttledHandleMouseSeek = throttle(bind(_this, _this.handleMouseSeek), 25);
-    _this.on(['mousedown', 'touchstart'], _this.handleMouseDown);
+
+    _this.enable();
     return _this;
   }
 
@@ -14144,6 +14473,62 @@ var ProgressControl = function (_Component) {
     var seekBar = this.getChild('seekBar');
 
     seekBar.handleMouseMove(event);
+  };
+
+  /**
+   * Are controls are currently enabled for this progress control.
+   *
+   * @return {boolean}
+   *         true if controls are enabled, false otherwise
+   */
+
+
+  ProgressControl.prototype.enabled = function enabled() {
+    return this.enabled_;
+  };
+
+  /**
+   * Disable all controls on the progress control and its children
+   */
+
+
+  ProgressControl.prototype.disable = function disable() {
+    this.children().forEach(function (child) {
+      return child.disable && child.disable();
+    });
+
+    if (!this.enabled()) {
+      return;
+    }
+
+    this.off(['mousedown', 'touchstart'], this.handleMouseDown);
+    this.off(this.el_, 'mousemove', this.handleMouseMove);
+    this.handleMouseUp();
+
+    this.addClass('disabled');
+
+    this.enabled_ = false;
+  };
+
+  /**
+   * Enable all controls on the progress control and its children
+   */
+
+
+  ProgressControl.prototype.enable = function enable() {
+    this.children().forEach(function (child) {
+      return child.enable && child.enable();
+    });
+
+    if (this.enabled()) {
+      return;
+    }
+
+    this.on(['mousedown', 'touchstart'], this.handleMouseDown);
+    this.on(this.el_, 'mousemove', this.handleMouseMove);
+    this.removeClass('disabled');
+
+    this.enabled_ = true;
   };
 
   /**
@@ -15527,8 +15912,12 @@ var MenuButton = function (_Component) {
       this.buttonPressed_ = true;
       this.menu.lockShowing();
       this.menuButton_.el_.setAttribute('aria-expanded', 'true');
-      // set the focus into the submenu
-      this.menu.focus();
+
+      // set the focus into the submenu, except on iOS where it is resulting in
+      // undesired scrolling behavior when the player is in an iframe
+      if (!IS_IOS && !isInFrame()) {
+        this.menu.focus();
+      }
     }
   };
 
@@ -17816,10 +18205,10 @@ var TextTrackSettings = function (_ModalDialog) {
     var config = selectConfigs[key];
     var id = config.id.replace('%s', this.id_);
 
-    return ['<' + type + ' id="' + id + '" class="' + (type === 'label' ? 'vjs-label' : '') + '">', this.localize(config.label), '</' + type + '>', '<select aria-labelledby="' + legendId + ' ' + id + '">'].concat(config.options.map(function (o) {
+    return ['<' + type + ' id="' + id + '" class="' + (type === 'label' ? 'vjs-label' : '') + '">', this.localize(config.label), '</' + type + '>', '<select aria-labelledby="' + (legendId !== '' ? legendId + ' ' : '') + id + '">'].concat(config.options.map(function (o) {
       var optionId = id + '-' + o[1];
 
-      return ['<option id="' + optionId + '" value="' + o[0] + '" ', 'aria-labelledby="' + legendId + ' ' + id + ' ' + optionId + '">', _this2.localize(o[1]), '</option>'].join('');
+      return ['<option id="' + optionId + '" value="' + o[0] + '" ', 'aria-labelledby="' + (legendId !== '' ? legendId + ' ' : '') + id + ' ' + optionId + '">', _this2.localize(o[1]), '</option>'].join('');
     })).concat('</select>').join('');
   };
 
@@ -18106,7 +18495,7 @@ var Html5 = function (_Tech) {
 
     var source = options.source;
     var crossoriginTracks = false;
-
+console.log('source', source);
     // Set the source if one is provided
     // 1) Check if the source is new (if not, we want to keep the original so playback isn't interrupted)
     // 2) Check to see if the network state of the tag was failed at init, and if so, reset the source
@@ -18116,7 +18505,7 @@ var Html5 = function (_Tech) {
     } else {
       _this.handleLateInit_(_this.el_);
     }
-
+console.log(_this.el_);
     if (_this.el_.hasChildNodes()) {
 
       var nodes = _this.el_.childNodes;
@@ -18133,6 +18522,7 @@ var Html5 = function (_Tech) {
             // This may not be fast enough to stop HTML5 browsers from reading the tags
             // so we'll need to turn off any default tracks if we're manually doing
             // captions and subtitles. videoElement.textTracks
+              console.log('remove track', node);
             removeNodes.push(node);
           } else {
             // store HTMLTrackElement and TextTrack to remote list
@@ -18339,7 +18729,8 @@ var Html5 = function (_Tech) {
 
   Html5.prototype.createEl = function createEl$$1() {
     var el = this.options_.tag;
-
+    //TODO: the audio element is being removed before this for some reason...
+      console.log('createEl', el);
     // Check if this browser supports moving the element into the box.
     // On the iPhone video will break if you move the element,
     // So we have to create a brand new element.
@@ -18356,6 +18747,7 @@ var Html5 = function (_Tech) {
         Html5.disposeMediaElement(el);
         el = clone;
       } else {
+        
         el = document_1.createElement('video');
 
         // determine if native controls should be used
@@ -18416,7 +18808,7 @@ var Html5 = function (_Tech) {
    */
 
 
-  Html5.prototype.handleLateInit_ = function handleLateInit_(el) {
+  Html5.prototype.handleLateInit_ = function handleLateInit_(el) {console.log('handleLateInit');
     if (el.networkState === 0 || el.networkState === 3) {
       // The video element hasn't started loading the source yet
       // or didn't find a source
@@ -19189,7 +19581,7 @@ Html5.disposeMediaElement = function (el) {
   }
 };
 
-Html5.resetMediaElement = function (el) {
+Html5.resetMediaElement = function (el) {console.log('resetMediaElement', el);
   if (!el) {
     return;
   }
@@ -20157,6 +20549,9 @@ var Player = function (_Component) {
 
     _this.isReady_ = false;
 
+    // Init state hasStarted_
+    _this.hasStarted_ = false;
+
     // if the global option object was accidentally blown away by
     // someone, bail early with an informative error
     if (!_this.options_ || !_this.options_.techOrder || !_this.options_.techOrder.length) {
@@ -20309,7 +20704,7 @@ var Player = function (_Component) {
    */
 
 
-  Player.prototype.dispose = function dispose() {
+  Player.prototype.dispose = function dispose() {console.log('dispose called');
     /**
      * Called when the player is being disposed of.
      *
@@ -20505,17 +20900,18 @@ var Player = function (_Component) {
     if (value === '') {
       // If an empty string is given, reset the dimension to be automatic
       this[privDimension] = undefined;
-    } else {
-      var parsedVal = parseFloat(value);
-
-      if (isNaN(parsedVal)) {
-        log$1.error('Improper value "' + value + '" supplied for for ' + _dimension);
-        return;
-      }
-
-      this[privDimension] = parsedVal;
+      this.updateStyleEl_();
+      return;
     }
 
+    var parsedVal = parseFloat(value);
+
+    if (isNaN(parsedVal)) {
+      log$1.error('Improper value "' + value + '" supplied for for ' + _dimension);
+      return;
+    }
+
+    this[privDimension] = parsedVal;
     this.updateStyleEl_();
   };
 
@@ -20984,31 +21380,33 @@ var Player = function (_Component) {
    *
    * @fires Player#firstplay
    *
-   * @param {boolean} hasStarted
+   * @param {boolean} request
    *        - true: adds the class
    *        - false: remove the class
    *
    * @return {boolean}
-   *         the boolean value of hasStarted
+   *         the boolean value of hasStarted_
    */
 
 
-  Player.prototype.hasStarted = function hasStarted(_hasStarted) {
-    if (_hasStarted !== undefined) {
-      // only update if this is a new value
-      if (this.hasStarted_ !== _hasStarted) {
-        this.hasStarted_ = _hasStarted;
-        if (_hasStarted) {
-          this.addClass('vjs-has-started');
-          // trigger the firstplay event if this newly has played
-          this.trigger('firstplay');
-        } else {
-          this.removeClass('vjs-has-started');
-        }
-      }
+  Player.prototype.hasStarted = function hasStarted(request) {
+    if (request === undefined) {
+      // act as getter, if we have no request to change
+      return this.hasStarted_;
+    }
+
+    if (request === this.hasStarted_) {
       return;
     }
-    return !!this.hasStarted_;
+
+    this.hasStarted_ = request;
+
+    if (this.hasStarted_) {
+      this.addClass('vjs-has-started');
+      this.trigger('firstplay');
+    } else {
+      this.removeClass('vjs-has-started');
+    }
   };
 
   /**
@@ -21496,34 +21894,38 @@ var Player = function (_Component) {
 
 
   Player.prototype.techGet_ = function techGet_(method) {
-    if (this.tech_ && this.tech_.isReady_) {
-
-      if (method in allowedGetters) {
-        return get$1(this.middleware_, this.tech_, method);
-      }
-
-      // Flash likes to die and reload when you hide or reposition it.
-      // In these cases the object methods go away and we get errors.
-      // When that happens we'll catch the errors and inform tech that it's not ready any more.
-      try {
-        return this.tech_[method]();
-      } catch (e) {
-        // When building additional tech libs, an expected method may not be defined yet
-        if (this.tech_[method] === undefined) {
-          log$1('Video.js: ' + method + ' method not defined for ' + this.techName_ + ' playback technology.', e);
-
-          // When a method isn't available on the object it throws a TypeError
-        } else if (e.name === 'TypeError') {
-          log$1('Video.js: ' + method + ' unavailable on ' + this.techName_ + ' playback technology element.', e);
-          this.tech_.isReady_ = false;
-        } else {
-          log$1(e);
-        }
-        throw e;
-      }
+    if (!this.tech_ || !this.tech_.isReady_) {
+      return;
     }
 
-    return;
+    if (method in allowedGetters) {
+      return get$1(this.middleware_, this.tech_, method);
+    }
+
+    // Flash likes to die and reload when you hide or reposition it.
+    // In these cases the object methods go away and we get errors.
+    // When that happens we'll catch the errors and inform tech that it's not ready any more.
+    try {
+      return this.tech_[method]();
+    } catch (e) {
+
+      // When building additional tech libs, an expected method may not be defined yet
+      if (this.tech_[method] === undefined) {
+        log$1('Video.js: ' + method + ' method not defined for ' + this.techName_ + ' playback technology.', e);
+        throw e;
+      }
+
+      // When a method isn't available on the object it throws a TypeError
+      if (e.name === 'TypeError') {
+        log$1('Video.js: ' + method + ' unavailable on ' + this.techName_ + ' playback technology element.', e);
+        this.tech_.isReady_ = false;
+        throw e;
+      }
+
+      // If error unknown, just log and throw
+      log$1(e);
+      throw e;
+    }
   };
 
   /**
@@ -21715,6 +22117,19 @@ var Player = function (_Component) {
 
   Player.prototype.remainingTime = function remainingTime() {
     return this.duration() - this.currentTime();
+  };
+
+  /**
+   * A remaining time function that is intented to be used when
+   * the time is to be displayed directly to the user.
+   *
+   * @return {number}
+   *         The rounded time remaining in seconds
+   */
+
+
+  Player.prototype.remainingTimeDisplay = function remainingTimeDisplay() {
+    return Math.floor(this.duration()) - Math.floor(this.currentTime());
   };
 
   //
@@ -22239,7 +22654,7 @@ var Player = function (_Component) {
 
     // getter usage
     if (typeof source === 'undefined') {
-      return this.cache_.src;
+      return this.cache_.src || '';
     }
     // filter out invalid sources and turn our source into
     // an array of source objects
@@ -24225,6 +24640,11 @@ function videojs(id, options, ready) {
     throw new TypeError('The element or ID supplied is not valid. (videojs)');
   }
 
+  // Check if element is included in the DOM
+  if (isEl(tag) && !document_1.body.contains(tag)) {
+    log$1.warn('The element supplied is not included in the DOM');
+  }
+
   // Element may have a player attr referring to an already created player instance.
   // If so return that otherwise set up a new player below
   if (tag.player || Player.players[tag.playerId]) {
@@ -24268,8 +24688,8 @@ videojs.hooks_ = {};
  * @param {string} type
  *        the lifecyle to get hooks from
  *
- * @param {Function} [fn]
- *        Optionally add a hook to the lifecycle that your are getting.
+ * @param {Function|Function[]} [fn]
+ *        Optionally add a hook (or hooks) to the lifecycle that your are getting.
  *
  * @return {Array}
  *         an array of hooks, or an empty array if there are none.
@@ -24296,6 +24716,26 @@ videojs.hook = function (type, fn) {
 };
 
 /**
+ * Add a function hook that will only run once to a specific videojs lifecycle.
+ *
+ * @param {string} type
+ *        the lifecycle to hook the function to.
+ *
+ * @param {Function|Function[]}
+ *        The function or array of functions to attach.
+ */
+videojs.hookOnce = function (type, fn) {
+  videojs.hooks(type, [].concat(fn).map(function (original) {
+    var wrapper = function wrapper() {
+      videojs.removeHook(type, wrapper);
+      original.apply(undefined, arguments);
+    };
+
+    return wrapper;
+  }));
+};
+
+/**
  * Remove a hook from a specific videojs lifecycle.
  *
  * @param {string} type
@@ -24308,14 +24748,14 @@ videojs.hook = function (type, fn) {
  *         The function that was removed or undef
  */
 videojs.removeHook = function (type, fn) {
-  var index = videojs.hooks(type).indexOf(fn);
+  var index$$1 = videojs.hooks(type).indexOf(fn);
 
-  if (index <= -1) {
+  if (index$$1 <= -1) {
     return false;
   }
 
   videojs.hooks_[type] = videojs.hooks_[type].slice();
-  videojs.hooks_[type].splice(index, 1);
+  videojs.hooks_[type].splice(index$$1, 1);
 
   return true;
 };
@@ -24652,7 +25092,7 @@ videojs.trigger = trigger;
  *
  * @see https://github.com/Raynos/xhr
  */
-videojs.xhr = xhr;
+videojs.xhr = index;
 
 /**
  * TextTrack class
