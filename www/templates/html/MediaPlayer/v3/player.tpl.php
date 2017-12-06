@@ -1,23 +1,23 @@
 <div class="mediahub-embed non-framework">
     <?php
     if ($context->media->isVideo()) {
-        echo $savvy->render($context->media, 'MediaPlayer/Video.tpl.php');
+        echo $savvy->render($context->media, 'MediaPlayer/v3/Video.tpl.php');
     } else {
-        echo $savvy->render($context->media, 'MediaPlayer/Audio.tpl.php');
+        echo $savvy->render($context->media, 'MediaPlayer/v3/Audio.tpl.php');
     }
 
     $getTracks = $context->media->getTextTrackURLs();
     $projection = $context->media->getProjection();
-    
+
     ?>
 
 </div>
 
 <?php if($getTracks){
     echo '<script type="htmltemplate" class="mh_transcript_template">';
-        echo $savvy->render($context->media, 'MediaPlayer/Transcript.tpl.php');
+    echo $savvy->render($context->media, 'MediaPlayer/Transcript.tpl.php');
     echo '</script>';
-    }
+}
 ?>
 
 
@@ -29,12 +29,12 @@
             videoHeight: '100%',
             controls: true,
             fluid: true,
- 
+
             html5: {
                 nativeTextTracks: false
             }
         };
-        
+
         <?php } ?>
 
         $(function() {
@@ -49,11 +49,11 @@
                 var startLanguage = $media.attr('data-start-language');
 
                 <?php if(isset($projection)){ ?>
-                    var projection = '<?php echo $projection; ?>';
+                var projection = '<?php echo $projection; ?>';
                 <?php }else{ ?>
-                    var projection = false;
+                var projection = false;
                 <?php }; ?>
-                
+
                 if ("undefined" !== typeof startLanguage) {
                     options.startLanguage = startLanguage;
                 }
@@ -61,7 +61,7 @@
                 if (videoElement.tagName === 'AUDIO') {
                     options.plugins = {};
                     options.plugins.wavesurfer = {
-                        src: $media.attr('data-src'),
+                        src: $media.attr('src'),
                         msDisplayMax: 10,
                         debug: true,
                         waveColor: '#D00000',
@@ -70,71 +70,79 @@
                         //hideScrollbar: true
                     };
                 }
-                
-              (function(window, videojs) {
 
-                var player = window.player = videojs($media.get(0), options, function () {
-                  window.addEventListener("resize", function () {
-                    var canvas = player.getChild('Canvas');
-                    if(canvas){
-                      canvas.handleResize();
-                      canvas.el().style.transform = "matrix(1, 0, 0, 1, "+window.innerWidth*-.5+", 0)"; // chrome resize bug shim
-                    } 
-                  });
-                });
-                
-                player.ready(function () {
-                    if(!isMobile() && autoplay == true){
-                      player.play();  
-                    } 
-                });
-                
-                //var player = videojs($media.get(0));
-                //player.toggleSingleCaptionTrack({activeColor: "#ccc"});
-                player.MediahubPlayer({
-                    privacy: "<?php echo $context->media->privacy; ?>",
-                    url:'<?php echo UNL_MediaHub_Controller::toAgnosticURL($controller->getURL($context->media)); ?>',
-                });
+                (function(window, videojs) {
 
-                <?php 
-
-                $user = UNL_MediaHub_AuthService::getInstance()->getUser();
-                $user_can_edit = false;
-
-                if ($user) {
-                    $user_can_edit = $context->media->userCanEdit(UNL_MediaHub_AuthService::getInstance()->getUser());
-                }
-
-                if($user_can_edit){ ?>
-
-                        var pingTime = false;
-                        try {
-                            if (window.parent.location.href.indexOf("manager/?view=addmedia") > -1){
-                                pingTime = true;
+                    var player = window.player = videojs($media.get(0), options, function () {
+                        window.addEventListener("resize", function () {
+                            var canvas = player.getChild('Canvas');
+                            if(canvas){
+                                canvas.handleResize();
+                                canvas.el().style.transform = "matrix(1, 0, 0, 1, "+window.innerWidth*-.5+", 0)"; // chrome resize bug shim
                             }
-                        } catch (e) {
-                            pingTime = false;
+                        });
+                    });
+
+                    if (videoElement.tagName === 'AUDIO') {
+                        //Show loading indicator while loading the audio file
+                        player.addClass('vjs-waiting');
+                        player.on('waveReady', function(event) {
+                            player.removeClass('vjs-waiting');
+                        });
+                    }
+
+                    player.ready(function () {
+                        if(!isMobile() && autoplay == true){
+                            player.play();
                         }
+                    });
+
+                    //var player = videojs($media.get(0));
+                    //player.toggleSingleCaptionTrack({activeColor: "#ccc"});
+                    player.MediahubPlayer({
+                        privacy: "<?php echo $context->media->privacy; ?>",
+                        url:'<?php echo UNL_MediaHub_Controller::toAgnosticURL($controller->getURL($context->media)); ?>',
+                    });
+
+                    <?php
+
+                    $user = UNL_MediaHub_AuthService::getInstance()->getUser();
+                    $user_can_edit = false;
+
+                    if ($user) {
+                        $user_can_edit = $context->media->userCanEdit(UNL_MediaHub_AuthService::getInstance()->getUser());
+                    }
+
+                    if($user_can_edit){ ?>
+
+                    var pingTime = false;
+                    try {
+                        if (window.parent.location.href.indexOf("manager/?view=addmedia") > -1){
+                            pingTime = true;
+                        }
+                    } catch (e) {
+                        pingTime = false;
+                    }
                     player.on("timeupdate", function(){
                         window.parent.postMessage({currentTime: player.currentTime()}, "*");
                     })
 
-                <?php } ?>
-                  
-                var width = videoElement.offsetWidth;
-                var height = videoElement.offsetHeight;
-                player.width(width), player.height(height);
-                if(projection == "equirectangular"){
-                    player.panorama({
-                      clickToToggle: (!isMobile()),
-                      clickAndDrag: true,
-                      autoMobileOrientation: true,
-                      initFov: 100,
-                      Notice: { Message: (isMobile())? "please move your phone" : "please use your mouse drag and drop the video"}
-                    });
-                }
+                    <?php } ?>
 
-              }(window, window.videojs));
+                    var width = videoElement.offsetWidth;
+                    var height = videoElement.offsetHeight;
+                    player.width(width), player.height(height);
+                    if(projection == "equirectangular"){
+                        player.panorama({
+                            clickToToggle: (!isMobile()),
+                            clickAndDrag: true,
+                            autoMobileOrientation: true,
+                            initFov: 100,
+                            Notice: { Message: (isMobile())? "please move your phone" : "please use your mouse drag and drop the video"}
+                        });
+                    }
+
+                }(window, window.videojs));
 
             });
         });
