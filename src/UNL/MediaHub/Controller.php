@@ -271,6 +271,19 @@ class UNL_MediaHub_Controller
             case 'media_file':
                 $this->output[] = UNL_MediaHub_Media_File::getById($this->options['id']);
                 break;
+            case 'media_file_download':
+                if (!$media = UNL_MediaHub_Media::getById($this->options['id'])) {
+                    throw new \Exception('media not found', 404);
+                }
+                $file = $media->getLocalFileName();
+                $path_info = pathinfo($file);
+                header('Content-Description: Media File Download');
+                header('Content-Type: application/octet-stream');
+                header('Content-Disposition: attachment; filename="'.$media->title.'.'.$path_info['extension'].'"');
+                header('Content-Length: ' . filesize($file));
+                ob_end_flush();
+                readfile($file);
+                exit;
             default:
                 $this->output[] = new $this->options['model']($this->options);
             }
