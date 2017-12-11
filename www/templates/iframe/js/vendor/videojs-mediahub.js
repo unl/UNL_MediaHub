@@ -7,6 +7,12 @@ function MediahubPlayer(options) {
     this.on("ready", function() {
 
         var isEmbed = !canAccessParent();
+        
+        if (!isEmbed && window.parent.document === window.document) {
+            //Parent document is the same as this document, so... this is an embed.
+            isEmbed = true;
+        }
+        
         if (!isEmbed) {
             $parentDocument = $(window.parent.document);
         }
@@ -87,6 +93,7 @@ function MediahubPlayer(options) {
         }
 
         t.on("loadedmetadata", function() {
+            console.log('loadedmetadata');
             if (t.textTracks().length != 0) {
 
                 var $container;
@@ -96,11 +103,11 @@ function MediahubPlayer(options) {
                     "aria-controls": t.id,
                     "aria-label": "Toggle Searchable Transcript"
                 });
-
+console.log('isEmbed', isEmbed);
                 if (isEmbed) {
                     $container = $(t.el());
                     $container.append($(".mh_transcript_template").html());
-                    $(t.controlBar.captionsButton.el()).before($myButton);
+                    $(t.controlBar.subsCapsButton.el()).before($myButton);
                 } else {
                     $container = $(window.parent.document).find(".mediahub-onpage-captions");
                     $container.html($(".mh_transcript_template").html());
@@ -150,7 +157,6 @@ function MediahubPlayer(options) {
 
                     if ((track.cues == null) || (track.cues == undefined) || (track.cues.length == 0)) { // If the track has no cues wait a quarter second and try again. this seems like a dumb way to do this. 🙄
                         setTimeout(function() {
-                            console.log("yeah?")
                             setTranscript(track);
                         }, 250)
                         return;
