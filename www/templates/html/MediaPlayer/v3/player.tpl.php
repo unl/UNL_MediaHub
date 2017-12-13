@@ -121,14 +121,14 @@
                     }
                     player.on("timeupdate", function(){
                         window.parent.postMessage({currentTime: player.currentTime()}, "*");
-                    })
+                    });
 
                     <?php } ?>
 
                     var width = videoElement.offsetWidth;
                     var height = videoElement.offsetHeight;
                     player.width(width), player.height(height);
-                    if(projection == "equirectangular"){
+                    if(projection === "equirectangular"){
                         player.panorama({
                             clickToToggle: (!isMobile()),
                             clickAndDrag: true,
