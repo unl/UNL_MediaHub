@@ -1,6 +1,5 @@
 videojs.registerPlugin('MediahubPlayer', MediahubPlayer);
 
-
 function MediahubPlayer(options) {
     options = (typeof options !== 'undefined') ? options : {};
 
@@ -14,7 +13,7 @@ function MediahubPlayer(options) {
         }
         
         if (!isEmbed) {
-            $parentDocument = $(window.parent.document);
+            var $parentDocument = $(window.parent.document);
         }
 
         var t = this;
@@ -27,7 +26,7 @@ function MediahubPlayer(options) {
         var $mhLanguageSelect;
 
         var Safari = false;
-        if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) { // detect Safari for fullscreen caption support
+        if (navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1) { // detect Safari for fullscreen caption support
             Safari = true;
         }
 
@@ -44,7 +43,7 @@ function MediahubPlayer(options) {
 
         if (t.isAudio()) {
             //We are using wavesurfer. Add some accessible forward and back buttons.
-            //Todo: address font-icon a11y issues
+
             var $skipForward = $('<button>', {
                 "class": "vjs-control vjs-button fa fa-fast-forward",
                 "type": "button",
@@ -69,9 +68,7 @@ function MediahubPlayer(options) {
         }
 
         t.on("loadedmetadata", function() {
-            console.log('loadedmetadata');
-            if (t.textTracks().length != 0) {
-
+            if (t.textTracks().length !== 0) {
                 var $container;
                 var $myButton = $('<button>', {
                     "class": "vjs-control vjs-button search-caption caption-toggle",
@@ -79,12 +76,14 @@ function MediahubPlayer(options) {
                     "aria-controls": t.id,
                     "aria-label": "Toggle Searchable Transcript"
                 });
-console.log('isEmbed', isEmbed);
+                
                 if (isEmbed) {
+                    //Try to show the transcript in the embed
                     $container = $(t.el());
                     $container.append($(".mh_transcript_template").html());
                     $(t.controlBar.subsCapsButton.el()).before($myButton);
                 } else {
+                    //Use the transcript that is already on the mediahub page
                     $container = $(window.parent.document).find(".mediahub-onpage-captions");
                     $container.html($(".mh_transcript_template").html());
                 }
@@ -113,9 +112,9 @@ console.log('isEmbed', isEmbed);
                             t.exitFullScreen();
                         }
                     });
-                };
+                }
 
-                var displaytime = function(millis) {
+                var displayTime = function(millis) {
                     var hours = Math.floor(millis / 36e5),
                         mins = Math.floor((millis % 36e5) / 6e4),
                         secs = Math.floor((millis % 6e4) / 1000);
@@ -131,10 +130,10 @@ console.log('isEmbed', isEmbed);
 
                 var setTranscript = function(track) {
 
-                    if ((track.cues == null) || (track.cues == undefined) || (track.cues.length == 0)) { // If the track has no cues wait a quarter second and try again. this seems like a dumb way to do this. 🙄
+                    if ((track.cues === null) || (track.cues === undefined) || (track.cues.length === 0)) { // If the track has no cues wait a quarter second and try again. this seems like a dumb way to do this. 🙄
                         setTimeout(function() {
                             setTranscript(track);
-                        }, 250)
+                        }, 250);
                         return;
                     } 
 
@@ -157,7 +156,7 @@ console.log('isEmbed', isEmbed);
                             } else {
                                 $transcript.find("a").eq(i).removeClass("highlight");
                             }
-                        };
+                        }
                         if (isEmbed) {
                             $transcript.scrollTo(".highlight", 100);
                         }
@@ -192,9 +191,9 @@ console.log('isEmbed', isEmbed);
                             })
                             .data('timeOffset', track.cues[i].startTime)
                             .text($($.parseHTML(track.cues[i].text)).text())
-                            .prepend($('<span>').text('[' + displaytime(track.cues[i].startTime * 1000) + '] '))
+                            .prepend($('<span>').text('[' + displayTime(track.cues[i].startTime * 1000) + '] '))
                         ));
-                    };
+                    }
                     $transcript.children("li").remove();
                     $transcript.append(listItems);
                 };
@@ -206,27 +205,27 @@ console.log('isEmbed', isEmbed);
                         $container.find(".mh-caption-search").addClass("full-screen");
                         if (Safari) { // remove searchable captions if entering full screen on safari
                             $captionSearch.removeClass("show");
-                        };
+                        }
                     }
-                })
+                });
                 var textTracks = t.textTracks()
                 var defaultCaptions = 0;
                 for (var i = 0; i < textTracks.length; i++) {
-                    if (textTracks[i].language == "en") {
+                    if (textTracks[i].language === "en") {
                         defaultCaptions = i;
                     }
                 }
                 if (textTracks.length > 0) {
                     textTracks.on("change", function(e) {
                         for (var i = 0; i < textTracks.length; i++) {
-                            if (textTracks[i].mode == "showing") {
+                            if (textTracks[i].mode === "showing") {
                                 setTranscript(textTracks[i])
                             }
                         }
                     });
                 }
                 // textTracks[defaultCaptions].mode = "showing";
-                setTranscript(textTracks[defaultCaptions])
+                setTranscript(textTracks[defaultCaptions]);
 
                 $mhLanguageSelect.on("change", function() {
                     var value = $(this).find(":selected").val();
@@ -234,8 +233,7 @@ console.log('isEmbed', isEmbed);
                 });
             }
         });
-
-
+        
         // Playcount
         var w = false;
         t.on('play', function() {
@@ -246,7 +244,7 @@ console.log('isEmbed', isEmbed);
         });
 
         //Fix for preload=none having an endless loading gif
-        if ($video.attr('preload') == 'none') {
+        if ($video.attr('preload') === 'none') {
             $video.parents('.mejs-container').find('.mejs-overlay-loading').hide();
         }
 
@@ -255,8 +253,7 @@ console.log('isEmbed', isEmbed);
             var $title = $video.attr('title');
             var share_url = $video.attr('data-url');
             var media_type = v.tagName.charAt(0).toUpperCase() + v.tagName.slice(1).toLowerCase();
-
-
+            
             if (!share_url) {
                 return;
             }
@@ -340,16 +337,13 @@ console.log('isEmbed', isEmbed);
         if (options.privacy === "PUBLIC") {
             initSharing(t, v);
         }
-
-    })
-
+    });
 }
-
 
 function canAccessParent() {
     var sameOrigin;
     try {
-        sameOrigin = window.parent.location.host == window.location.host;
+        sameOrigin = window.parent.location.host === window.location.host;
     } catch (e) {
         sameOrigin = false;
     }
@@ -359,6 +353,6 @@ function canAccessParent() {
 jQuery.fn.scrollTo = function(elem, speed) { 
     $(this).animate({
         scrollTop:  $(this).scrollTop() - $(this).offset().top + $(elem).offset().top - 13
-    }, speed == undefined ? 1000 : speed); 
+    }, speed === undefined ? 1000 : speed); 
     return this; 
 };
