@@ -31,13 +31,13 @@ function MediahubPlayer(options) {
             Safari = true;
         }
 
-        //Hide tracks not provided by mediahub
-        t.on('loadedmetadata', function() {
+        //Hide tracks not provided by mediahub (safari will list tracks that are muxed into the mp4 file itself).
+        t.on('loadeddata', function() {
             for (var i = 0; i < t.textTracks().length; i++) {
                 var track = t.textTracks()[i];
                 if (track.id.lastIndexOf('mediahub', 0) !== 0) {
                     //Prevent non-mediahub tracks from showing up
-                    t.textTracks()[i].kind = "metadata";
+                    t.textTracks().removeTrack(t.textTracks()[i]);
                 }
             }
         });
