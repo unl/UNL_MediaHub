@@ -28,11 +28,7 @@
             videoWidth: '100%',
             videoHeight: '100%',
             controls: true,
-            fluid: true,
-
-            html5: {
-                nativeTextTracks: false
-            }
+            fluid: true
         };
 
         <?php } ?>
