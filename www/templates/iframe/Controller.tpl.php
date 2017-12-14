@@ -11,7 +11,7 @@ if (isset($context->output[0]) && $context->output[0] instanceof UNL_MediaHub_Me
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Test</title>
     <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/jquery.js?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r76/three.js?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>"></script>
+    <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/three.min.js?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>"></script>
     <link href="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/video-js.css?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>" rel="stylesheet">
     <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/video.js?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>"></script>
     <?php if ($is_audio): ?>
