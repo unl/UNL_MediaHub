@@ -3,44 +3,254 @@ videojs.registerPlugin('MediahubPlayer', MediahubPlayer);
 function MediahubPlayer(options) {
     options = (typeof options !== 'undefined') ? options : {};
 
-    this.on("ready", function() {
+    var isEmbed = !canAccessParent();
 
-        var isEmbed = !canAccessParent();
-        
-        if (!isEmbed && window.parent.document === window.document) {
-            //Parent document is the same as this document, so... this is an embed.
-            isEmbed = true;
+    if (!isEmbed && window.parent.document === window.document) {
+        //Parent document is the same as this document, so... this is an embed.
+        isEmbed = true;
+    }
+
+    if (!isEmbed) {
+        var $parentDocument = $(window.parent.document);
+    }
+
+    var t = this;
+    var v = this.el();
+
+    var $transcript;
+    var $captionSearch;
+    var $video = $(v);
+    var mediahub_id = $video.attr('data-mediahub-id');
+    var $mhLanguageSelect;
+
+    var Safari = false;
+    if (navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1) { // detect Safari for fullscreen caption support
+        Safari = true;
+    }
+
+    //Hide tracks not provided by mediahub (safari will list tracks that are muxed into the mp4 file itself).
+    t.on('loadeddata', function() {
+        for (var i = 0; i < t.textTracks().length; i++) {
+            var track = t.textTracks()[i];
+            if (track.id.lastIndexOf('mediahub', 0) !== 0) {
+                //Prevent non-mediahub tracks from showing up
+                t.textTracks().removeTrack(t.textTracks()[i]);
+            }
         }
-        
-        if (!isEmbed) {
-            var $parentDocument = $(window.parent.document);
-        }
+    });
 
-        var t = this;
-        var v = this.el();
+    t.textTracks().on("addtrack", function() {
+        if (t.textTracks().length !== 0) {
+            var $container;
+            var $myButton = $('<button>', {
+                "class": "vjs-control vjs-button search-caption caption-toggle",
+                "type": "button",
+                "aria-controls": t.id,
+                "aria-label": "Toggle Searchable Transcript"
+            });
 
-        var $transcript;
-        var $captionSearch;
-        var $video = $(v);
-        var mediahub_id = $video.attr('data-mediahub-id');
-        var $mhLanguageSelect;
+            if (isEmbed) {
+                //Try to show the transcript in the embed
+                $container = $(t.el());
+                $container.append($(".mh_transcript_template").html());
+                $(t.controlBar.subsCapsButton.el()).before($myButton);
+            } else {
+                //Use the transcript that is already on the mediahub page
+                $container = $(window.parent.document).find(".mediahub-onpage-captions");
+                $container.html($(".mh_transcript_template").html());
+            }
 
-        var Safari = false;
-        if (navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1) { // detect Safari for fullscreen caption support
-            Safari = true;
-        }
+            $transcript = $container.find('.mh-transcript');
+            $captionSearch = $container.children(".mh-caption-search");
+            $mhLanguageSelect = $container.find("#mh-language-select");
 
-        //Hide tracks not provided by mediahub (safari will list tracks that are muxed into the mp4 file itself).
-        t.on('loadeddata', function() {
-            for (var i = 0; i < t.textTracks().length; i++) {
-                var track = t.textTracks()[i];
-                if (track.id.lastIndexOf('mediahub', 0) !== 0) {
-                    //Prevent non-mediahub tracks from showing up
-                    t.textTracks().removeTrack(t.textTracks()[i]);
+            if (!Safari) {
+                $(t.controlBar.el()).on("click", ".caption-toggle", function(e) {
+                    $captionSearch.toggleClass("show");
+                });
+                $captionSearch.on("click", ".caption-toggle", function(e) {
+                    $captionSearch.toggleClass("show");
+                });
+            } else { // exit fullscreen if searchable captions are opened in safari. 
+                $(t.controlBar.el()).on("click", ".caption-toggle", function(e) {
+                    $captionSearch.toggleClass("show");
+                    if ($captionSearch.hasClass("full-screen") && $captionSearch.hasClass("show")) {
+                        t.exitFullScreen();
+                    }
+                });
+                $captionSearch.on("click", ".caption-toggle", function(e) {
+                    $captionSearch.toggleClass("show");
+                    if ($captionSearch.hasClass("full-screen") && $captionSearch.hasClass("show")) {
+                        t.exitFullScreen();
+                    }
+                });
+            }
+
+            var displayTime = function(millis) {
+                var hours = Math.floor(millis / 36e5),
+                    mins = Math.floor((millis % 36e5) / 6e4),
+                    secs = Math.floor((millis % 6e4) / 1000);
+                if (secs < 10) {
+                    secs = "0" + secs;
+                }
+                if (hours > 0) {
+                    return hours + ':' + mins + ':' + secs;
+                } else {
+                    return mins + ':' + secs;
+                }
+            };
+
+            var setTranscript = function(track) {
+                if ((track.cues === null) || (track.cues === undefined) || (track.cues.length === 0)) { // If the track has no cues wait a quarter second and try again. this seems like a dumb way to do this. 🙄
+                    setTimeout(function() {
+                        setTranscript(track);
+                    }, 250);
+                    return;
+                }
+
+                $captionSearch.find(".mh-caption-close").on("click", function() {
+                    $(this).siblings("#mh-parse-caption").val("");
+                    $transcript.find("a").addClass("highlight");
+                });
+
+                $captionSearch.find("#mh-parse-caption").on("keydown keyup focus blur", function(e) {
+                    e.stopPropagation();
+                    var search = $(this).val().toLowerCase();
+                    var subtitlesLength;
+                    var i;
+
+                    subtitlesLength = track.cues.length;
+                    for (i = 0; i < subtitlesLength; i++) {
+                        var line = track.cues[i].text.toLowerCase();
+                        if (line.indexOf(search) > -1) {
+                            $transcript.find("a").eq(i).addClass("highlight");
+                        } else {
+                            $transcript.find("a").eq(i).removeClass("highlight");
+                        }
+                    }
+                    if (isEmbed) {
+                        $transcript.scrollTo(".highlight", 100);
+                    }
+                });
+
+                $container.find(".mh-paragraph-icons").off();
+                $container.find(".mh-paragraph-icons").on("click", function() {
+                    $container.find(".mh-caption-search").toggleClass("bulleted");
+
+                });
+
+                $transcript.on('click', 'a', function() {
+                    var time;
+                    time = $(this).data('timeOffset')
+                    if (!time) {
+                        return;
+                    }
+                    if (!isEmbed) {
+                        $parentDocument.find("html, body").animate({ scrollTop: $parentDocument.find(".mh-video-band").offset().top - 50 }, 100, function() {
+                            t.play();
+                        });
+                    }
+                    t.currentTime(time);
+                });
+                var listItems = [];
+                for (var i = 0; i < track.cues.length; i++) {
+
+                    listItems.push($("<li>").append($('<a>', {
+                            "class": "highlight",
+                            "href": "javascript:void(0);"
+                            // "tabindex" : 0,
+                        })
+                            .data('timeOffset', track.cues[i].startTime)
+                            .text($($.parseHTML(track.cues[i].text)).text())
+                            .prepend($('<span>').text('[' + displayTime(track.cues[i].startTime * 1000) + '] '))
+                    ));
+                }
+                $transcript.children("li").remove();
+                $transcript.append(listItems);
+            };
+
+            t.on("fullscreenchange", function() {
+                if (!t.isFullscreen()) {
+                    $container.find(".mh-caption-search").removeClass("full-screen");
+                } else {
+                    $container.find(".mh-caption-search").addClass("full-screen");
+                    if (Safari) { // remove searchable captions if entering full screen on safari
+                        $captionSearch.removeClass("show");
+                    }
+                }
+            });
+            var textTracks = t.textTracks()
+            var defaultCaptions = 0;
+            for (var i = 0; i < textTracks.length; i++) {
+                if (textTracks[i].language === "en") {
+                    defaultCaptions = i;
                 }
             }
-        });
+            if (textTracks.length > 0) {
+                textTracks.on("change", function(e) {
+                    for (var i = 0; i < textTracks.length; i++) {
+                        if (textTracks[i].mode === "showing") {
+                            setTranscript(textTracks[i])
+                        }
+                    }
+                });
+            }
+            // textTracks[defaultCaptions].mode = "showing";
+            setTranscript(textTracks[defaultCaptions]);
 
+            $mhLanguageSelect.on("change", function() {
+                var value = $(this).find(":selected").val();
+                t.setTrack(value);
+            });
+        }
+    });
+
+    // Playcount
+    var w = false;
+    t.on('play', function() {
+        if (!w) {
+            $.post(options.url, { action: "playcount" });
+            w = true;
+        }
+    });
+
+    t.on('play', function() {
+        var message = {
+            'message_type': 'ga_event',
+            'event': 'play',
+            'media_id': mediahub_id,
+            'media_title': $video.attr('title'),
+            'url': options.url,
+            'type': v.tagName.toString().toLowerCase()
+        };
+        window.parent.postMessage(message, "*");
+    });
+
+    t.on('pause', function() {
+        var message = {
+            'message_type': 'ga_event',
+            'event': 'pause',
+            'media_id': mediahub_id,
+            'media_title': $video.attr('title'),
+            'url': options.url,
+            'type': v.tagName.toString().toLowerCase()
+        };
+        window.parent.postMessage(message, "*");
+    });
+
+    t.on('ended', function() {
+        var message = {
+            'message_type': 'ga_event',
+            'event': 'ended',
+            'media_id': mediahub_id,
+            'media_title': $video.attr('title'),
+            'url': options.url,
+            'type': v.tagName.toString().toLowerCase()
+        };
+        window.parent.postMessage(message, "*");
+    });
+
+    t.on("ready", function() {
         if (t.isAudio()) {
             //We are using wavesurfer. Add some accessible forward and back buttons.
 
@@ -66,183 +276,7 @@ function MediahubPlayer(options) {
             });
             $(t.controlBar.durationDisplay.el()).after($skipBackward);
         }
-
-        t.on("loadedmetadata", function() {
-            if (t.textTracks().length !== 0) {
-                var $container;
-                var $myButton = $('<button>', {
-                    "class": "vjs-control vjs-button search-caption caption-toggle",
-                    "type": "button",
-                    "aria-controls": t.id,
-                    "aria-label": "Toggle Searchable Transcript"
-                });
-                
-                if (isEmbed) {
-                    //Try to show the transcript in the embed
-                    $container = $(t.el());
-                    $container.append($(".mh_transcript_template").html());
-                    $(t.controlBar.subsCapsButton.el()).before($myButton);
-                } else {
-                    //Use the transcript that is already on the mediahub page
-                    $container = $(window.parent.document).find(".mediahub-onpage-captions");
-                    $container.html($(".mh_transcript_template").html());
-                }
-
-                $transcript = $container.find('.mh-transcript');
-                $captionSearch = $container.children(".mh-caption-search");
-                $mhLanguageSelect = $container.find("#mh-language-select");
-
-                if (!Safari) {
-                    $(t.controlBar.el()).on("click", ".caption-toggle", function(e) {
-                        $captionSearch.toggleClass("show");
-                    });
-                    $captionSearch.on("click", ".caption-toggle", function(e) {
-                        $captionSearch.toggleClass("show");
-                    });
-                } else { // exit fullscreen if searchable captions are opened in safari. 
-                    $(t.controlBar.el()).on("click", ".caption-toggle", function(e) {
-                        $captionSearch.toggleClass("show");
-                        if ($captionSearch.hasClass("full-screen") && $captionSearch.hasClass("show")) {
-                            t.exitFullScreen();
-                        }
-                    });
-                    $captionSearch.on("click", ".caption-toggle", function(e) {
-                        $captionSearch.toggleClass("show");
-                        if ($captionSearch.hasClass("full-screen") && $captionSearch.hasClass("show")) {
-                            t.exitFullScreen();
-                        }
-                    });
-                }
-
-                var displayTime = function(millis) {
-                    var hours = Math.floor(millis / 36e5),
-                        mins = Math.floor((millis % 36e5) / 6e4),
-                        secs = Math.floor((millis % 6e4) / 1000);
-                    if (secs < 10) {
-                        secs = "0" + secs;
-                    }
-                    if (hours > 0) {
-                        return hours + ':' + mins + ':' + secs;
-                    } else {
-                        return mins + ':' + secs;
-                    }
-                };
-
-                var setTranscript = function(track) {
-
-                    if ((track.cues === null) || (track.cues === undefined) || (track.cues.length === 0)) { // If the track has no cues wait a quarter second and try again. this seems like a dumb way to do this. 🙄
-                        setTimeout(function() {
-                            setTranscript(track);
-                        }, 250);
-                        return;
-                    } 
-
-                    $captionSearch.find(".mh-caption-close").on("click", function() {
-                        $(this).siblings("#mh-parse-caption").val("");
-                        $transcript.find("a").addClass("highlight");
-                    });
-
-                    $captionSearch.find("#mh-parse-caption").on("keydown keyup focus blur", function(e) {
-                        e.stopPropagation();
-                        var search = $(this).val().toLowerCase();
-                        var subtitlesLength;
-                        var i;
-
-                        subtitlesLength = track.cues.length;
-                        for (i = 0; i < subtitlesLength; i++) {
-                            var line = track.cues[i].text.toLowerCase();
-                            if (line.indexOf(search) > -1) {
-                                $transcript.find("a").eq(i).addClass("highlight");
-                            } else {
-                                $transcript.find("a").eq(i).removeClass("highlight");
-                            }
-                        }
-                        if (isEmbed) {
-                            $transcript.scrollTo(".highlight", 100);
-                        }
-                    });
-
-                    $container.find(".mh-paragraph-icons").off();
-                    $container.find(".mh-paragraph-icons").on("click", function() {
-                        $container.find(".mh-caption-search").toggleClass("bulleted");
-
-                    });
-
-                    $transcript.on('click', 'a', function() {
-                        var time;
-                        time = $(this).data('timeOffset')
-                        if (!time) {
-                            return;
-                        }
-                        if (!isEmbed) {
-                            $parentDocument.find("html, body").animate({ scrollTop: $parentDocument.find(".mh-video-band").offset().top - 50 }, 100, function() {
-                                t.play();
-                            });
-                        }
-                        t.currentTime(time);
-                    });
-                    var listItems = [];
-                    for (var i = 0; i < track.cues.length; i++) {
-
-                        listItems.push($("<li>").append($('<a>', {
-                                "class": "highlight",
-                                "href": "javascript:void(0);"
-                                // "tabindex" : 0,
-                            })
-                            .data('timeOffset', track.cues[i].startTime)
-                            .text($($.parseHTML(track.cues[i].text)).text())
-                            .prepend($('<span>').text('[' + displayTime(track.cues[i].startTime * 1000) + '] '))
-                        ));
-                    }
-                    $transcript.children("li").remove();
-                    $transcript.append(listItems);
-                };
-
-                t.on("fullscreenchange", function() {
-                    if (!t.isFullscreen()) {
-                        $container.find(".mh-caption-search").removeClass("full-screen");
-                    } else {
-                        $container.find(".mh-caption-search").addClass("full-screen");
-                        if (Safari) { // remove searchable captions if entering full screen on safari
-                            $captionSearch.removeClass("show");
-                        }
-                    }
-                });
-                var textTracks = t.textTracks()
-                var defaultCaptions = 0;
-                for (var i = 0; i < textTracks.length; i++) {
-                    if (textTracks[i].language === "en") {
-                        defaultCaptions = i;
-                    }
-                }
-                if (textTracks.length > 0) {
-                    textTracks.on("change", function(e) {
-                        for (var i = 0; i < textTracks.length; i++) {
-                            if (textTracks[i].mode === "showing") {
-                                setTranscript(textTracks[i])
-                            }
-                        }
-                    });
-                }
-                // textTracks[defaultCaptions].mode = "showing";
-                setTranscript(textTracks[defaultCaptions]);
-
-                $mhLanguageSelect.on("change", function() {
-                    var value = $(this).find(":selected").val();
-                    t.setTrack(value);
-                });
-            }
-        });
         
-        // Playcount
-        var w = false;
-        t.on('play', function() {
-            if (!w) {
-                $.post(options.url, { action: "playcount" });
-                w = true;
-            }
-        });
-
         //Fix for preload=none having an endless loading gif
         if ($video.attr('preload') === 'none') {
             $video.parents('.mejs-container').find('.mejs-overlay-loading').hide();
@@ -297,42 +331,6 @@ function MediahubPlayer(options) {
                 $video.find(".media-content-head").addClass("vjs-hidden");
             }
         };
-
-        t.on('play', function() {
-            var message = {
-                'message_type': 'ga_event',
-                'event': 'play',
-                'media_id': mediahub_id,
-                'media_title': $video.attr('title'),
-                'url': options.url,
-                'type': v.tagName.toString().toLowerCase()
-            };
-            window.parent.postMessage(message, "*");
-        });
-
-        t.on('pause', function() {
-            var message = {
-                'message_type': 'ga_event',
-                'event': 'pause',
-                'media_id': mediahub_id,
-                'media_title': $video.attr('title'),
-                'url': options.url,
-                'type': v.tagName.toString().toLowerCase()
-            };
-            window.parent.postMessage(message, "*");
-        });
-
-        t.on('ended', function() {
-            var message = {
-                'message_type': 'ga_event',
-                'event': 'ended',
-                'media_id': mediahub_id,
-                'media_title': $video.attr('title'),
-                'url': options.url,
-                'type': v.tagName.toString().toLowerCase()
-            };
-            window.parent.postMessage(message, "*");
-        });
 
         if (options.privacy === "PUBLIC") {
             initSharing(t, v);
