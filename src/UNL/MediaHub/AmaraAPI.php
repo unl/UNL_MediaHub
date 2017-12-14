@@ -1,7 +1,7 @@
 <?php
 class UNL_MediaHub_AmaraAPI
 {
-    const BASE_API_URI = 'https://www.amara.org/api2/partners/';
+    const BASE_API_URI = 'https://amara.org/api2/partners/';
     
     public static $amara_username = false;
     public static $amara_api_key  = false;
@@ -78,7 +78,7 @@ class UNL_MediaHub_AmaraAPI
         if (!$info_json = $this->get('videos/?video_url=' . $media_url . '&format=json')) {
             return false;
         }
-        
+
         return json_decode($info_json);
     }
     
