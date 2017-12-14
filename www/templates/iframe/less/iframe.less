@@ -4,7 +4,7 @@
 .mediahub-embed {
     height: 100%;
 
-    a.share-video-link {
+    .share-this-media {
         background: #D00000;
         color: #000;
         position: absolute;
@@ -28,30 +28,6 @@
         margin-right: .75em;
     }
 
-    a.share-video-link:before {
-        font-family: wdn-icon;
-        font-style: normal;
-        font-weight: 400;
-        speak: none;
-        display: inline-block;
-        text-decoration: inherit;
-        width: 1em;
-        margin-right: .2em;
-        text-align: center;
-        font-variant: normal;
-        text-transform: none;
-        color: #fff;
-        font-size: 1em;
-        content: '\e81c';
-        text-align: center;
-    }
-
-    a .share-video-link:hover,
-    a.share-video-link:active,
-    a.share-video-link.video-active {
-        background: #3caac8;
-        color: #fff;
-    }
     .share-overlay {
         background: rgba(0, 0, 0, .5)
     }
@@ -521,13 +497,10 @@
         line-height: 1;
         cursor: pointer;
         color: #fff;
-        padding: 7px 0;
-        width: 1.777em;
+        padding: 2px 0;
+        width: 1.3em;
         font-size: 17px;
         font-size: 1.069rem
-    }
-    .share-this-media {
-      padding: 0;
     }
     .wdn-icon-share:before {
         padding-right: 1em;
@@ -536,9 +509,6 @@
     .media-content-head .wdn-share-this-page a {
         border: none;
     }
-    .media-content-head .wdn-share-this-page .wdn-icon-share {
-        padding: 6px 6px 7px 6px;
-    } //Share options
     a {
         background: 0 0
     }
@@ -656,13 +626,14 @@
         font-family: "Gotham SSm A", "Gotham SSm B", Verdana, "Verdana Ref", Geneva, Tahoma, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", sans-serif;
         font-weight: 400;
         font-style: normal;
-        font-size: 12px;
+        font-size: .8em;
         margin: 0;
         right: 0;
+        top: 3.75em;
         @media (max-width:600px) {
-          font-size: 10px;
+          font-size: .75em;
+            top: 4em;
         }
-
     }
     .wdn-share-options li {
         list-style: none;
@@ -673,10 +644,7 @@
     }
     .wdn-share-options li a {
         padding: .602em 0;
-        color: #c1c0be;
-    }
-    .wdn-share-options li a:hover {
-        color: #fefdfa;
+        color: #fff;
     }
     .skipnav a {
         position: absolute;
@@ -1011,6 +979,7 @@
     
     .media-content-head {
         top: 0;
+        font-size: 1.35em;
     }
 
     .video-js .vjs-load-progress {
