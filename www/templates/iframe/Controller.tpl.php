@@ -31,6 +31,7 @@ if (isset($context->output[0]) && $context->output[0] instanceof UNL_MediaHub_Me
             margin: 0px;
             height: 100%;
             background-color: #000;
+            overflow: hidden;
         }
     </style>
 </head>
