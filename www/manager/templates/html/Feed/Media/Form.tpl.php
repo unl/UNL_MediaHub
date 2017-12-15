@@ -147,8 +147,7 @@ $controller->setReplacementData('head', $js);
                         <li>
                             <?php echo $savvy->render($context->feed_selection); ?>
                         </li>
-                        <li>
-                            <?php //if(isset($context->)) ?>
+                        <li style="display:none">
                             <?php if($context->media->getProjection() == "equirectangular") { ?>
                             <input type="checkbox" id="projection" name="projection" checked="checked" value="equirectangular">
                             <?php } else { ?>
