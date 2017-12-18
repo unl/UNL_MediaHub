@@ -57,8 +57,10 @@
                         debug: true,
                         waveColor: '#D00000',
                         progressColor: '#FEFDFA',
-                        cursorColor: '#FEFDFA'
+                        cursorColor: '#FEFDFA',
+                        backend: 'MediaElement'
                     };
+                    //$media.removeAttr('src');
                 }
 
                 (function(window, videojs) {
