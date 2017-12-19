@@ -19,7 +19,7 @@ function MediahubPlayer(options) {
 
     var $transcript;
     var $captionSearch;
-    var $video = $(v);
+    var $video = $(v);console.log($video);
     var mediahub_id = $video.attr('data-mediahub-id');
     var $mhLanguageSelect;
 
@@ -286,7 +286,10 @@ function MediahubPlayer(options) {
         var initSharing = function(t, v) {
             var $title = $video.attr('title');
             var share_url = $video.attr('data-url');
-            var media_type = v.tagName.charAt(0).toUpperCase() + v.tagName.slice(1).toLowerCase();
+            var media_type = 'video';
+            if (t.isAudio()) {
+                media_type = 'audio';
+            }
             
             if (!share_url) {
                 return;
@@ -294,7 +297,7 @@ function MediahubPlayer(options) {
             
             // share urls
             var sharelinks = {
-                "wdn-icon-mail": { title: 'Email', url: 'mailto:?body=Checkout this ' + media_type + ': ' + share_url + '&subject=' + media_type + ' : ' + $title },
+                "wdn-icon-mail": { title: 'Email', url: 'mailto:?body=Checkout this ' + media_type + ': ' + share_url + '&subject=' + media_type + ': ' + $title },
                 "wdn-icon-facebook": { title: 'Facebook', url: 'https://www.facebook.com/sharer/sharer.php?u=' + share_url }, // facebook
                 "wdn-icon-twitter": { title: 'Twitter', url: 'https://twitter.com/share?text=' + media_type + ': ' + $title + '&url=' + share_url }, // twitter
                 "wdn-icon-linkedin-squared": { title: 'LinkedIn', url: 'https://www.linkedin.com/shareArticle?mini=true&url=' + share_url + '&title=' + $title + '&summary=Checkout this ' + media_type + '%20&source=University%20of%20Nebraska%20-%20Lincoln%20MediaHub' } //google plus
