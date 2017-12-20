@@ -89,6 +89,7 @@
                         }
                     });
                     
+                    player.toggleSingleCaptionTrack({activeColor: "#D00000"});
                     player.MediahubPlayer({
                         privacy: "<?php echo $context->media->privacy; ?>",
                         url:'<?php echo UNL_MediaHub_Controller::toAgnosticURL($controller->getURL($context->media)); ?>'

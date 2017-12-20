@@ -19,7 +19,7 @@ function MediahubPlayer(options) {
 
     var $transcript;
     var $captionSearch;
-    var $video = $(v);console.log($video);
+    var $video = $(v);
     var mediahub_id = $video.attr('data-mediahub-id');
     var $mhLanguageSelect;
 
@@ -38,9 +38,15 @@ function MediahubPlayer(options) {
             }
         }
     });
-
+    var captionsFound = false;
     t.textTracks().on("addtrack", function() {
+        if (captionsFound) {
+            //Already added a button, no need to add it again.
+            return;
+        }
+        
         if (t.textTracks().length !== 0) {
+            captionsFound = true;
             var $container;
             var $myButton = $('<button>', {
                 "class": "vjs-control vjs-button search-caption caption-toggle",
