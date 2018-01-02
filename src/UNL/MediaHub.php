@@ -4,8 +4,12 @@ class UNL_MediaHub
     public static $dsn;
     
     public static $ffmpeg_path;
+
+    public static $ffprobe_path;
     
     public static $mediainfo_path;
+
+    public static $rude_shell;
     
     function __construct()
     {
@@ -168,8 +172,28 @@ class UNL_MediaHub
         if (self::$ffmpeg_path) {
             $ffmpeg = self::$ffmpeg_path;
         }
+        if(!self::$rude_shell){
+          $ffmpeg = "nice ".$ffmpeg;
+        }
         
         return $ffmpeg;
+    }
+
+    /**
+     * Get the path (as confugired) to the ffprobe executable
+     * 
+     * @return string
+     */
+    public static function getFfprobePath() {
+        $ffprobe = UNL_MediaHub::getRootDir() . '/ffmpeg/ffprobe';
+        if (self::$ffprobe_path) {
+            $ffprobe = self::$ffprobe_path;
+        }
+        if(!self::$rude_shell){
+          $ffprobe = "nice ".$ffprobe;
+        }
+        
+        return $ffprobe;
     }
 
     /**
@@ -185,4 +209,55 @@ class UNL_MediaHub
         
         return $mediaInfo;
     }
+
+
+        /**
+     * Set the Media RSS, projection element
+     * 
+     * @return true
+     */
+    public static function checkMetadataProjection($url)
+    {
+
+        if(!isset($url)){
+            return;
+        }
+
+        $return = array();
+        $status = 1;
+
+        $url = escapeshellarg($url);
+
+        exec(UNL_MediaHub::getFfprobePath() . " -v quiet -print_format json -show_format -show_streams $url", $return, $status);
+
+        $json = "";
+
+        $length = sizeof($return);
+        for ($i=0; $i < $length; $i++) { 
+            $json.=$return[$i];
+        }
+
+        $metadata = json_decode($json);
+
+        $projection = false;
+        $length = sizeof($metadata);
+        for ($i=0; $i < $length; $i++) { 
+            if(isset($metadata->streams[$i]->side_data_list)){
+                $side_data_list_length = sizeof($metadata->streams[$i]->side_data_list);
+                for ($a=0; $a < $side_data_list_length; $a++) { 
+                    if(isset($metadata->streams[$i]->side_data_list[$a]->side_data_type)){
+                        if($metadata->streams[$i]->side_data_list[$a]->side_data_type == 'Spherical Mapping'){
+                            $projection = $metadata->streams[$i]->side_data_list[$a]->projection;
+                        }
+                    }
+                }
+
+                
+            }
+        }
+
+        return $projection;
+
+    }
+
 }

@@ -28,11 +28,25 @@ class UNL_MediaHub_MediaPlayer implements \Savvy_Turbo_CacheableInterface
             $captions = $this->options['captions'];
         }
         
-        return 'media_' . $this->media->id . '_' . $this->media->dateupdated 
-            . '--format-' . $this->options['format'] 
-            . '--autoplay-' . $autoplay 
+        return 'media_' . $this->media->id . '_' . $this->media->dateupdated
+            . '--format-' . $this->options['format']
+            . '--autoplay-' . $autoplay
             . '--preload-'. $preload
-            . '--captions-'.$captions;
+            . '--captions-'.$captions
+            . '--version-'.$this->getPlayerVersion();
+    }
+    
+    public function getPlayerVersion()
+    {
+        if ($this->options['format'] === 'iframe') {
+            return 3;
+        }
+        
+        if (!isset($this->options['version'])) {
+            return 1;
+        }
+        
+        return $this->options['version'];
     }
     
     public function run()

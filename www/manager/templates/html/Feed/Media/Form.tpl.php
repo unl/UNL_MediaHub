@@ -83,11 +83,40 @@ $controller->setReplacementData('head', $js);
                     <input type="submit" name="submit" value="Save" class="wdn-pull-right" />
                     <h1 class="clear-top wdn-brand"><div class="wdn-subhead">Edit Media Details for</div> <?php echo $context->media->title ?></h1>
                 </div>  
-                    <?php
-                    if (isset($context->media)) {
-                        echo $savvy->render($context->media, 'Media/Preview.tpl.php');
-                    }
-                    ?>
+            </div>
+            <div class="wdn-grid-set">
+                <div id="videoData" class="wdn-col-two-sevenths mh-hide-bp2 wdn-pull-right">
+                    <h5 class="clear-top wdn-sans-serif">Set a Thumbnail</h5>
+                    <ol>
+                        <li>Pause the video to the left at the frame which you want as the image representation.</li>
+                        <li>Click the "Set Image" button to save this as your image representation.</li>
+                        <li>Continue with the form below.</li>
+                    </ol>
+
+                    <div id="imageOverlay">
+                        <p>We're updating your image, this may take a few minutes depending on video length. <strong>Now is a good time to make sure the information below is up to snuff!</strong></p>
+                    </div>
+                    <img src="<?php echo $context->media->getThumbnailURL(); ?>" id="thumbnail" alt="Thumbnail preview" />
+                    <!-- <div id="poster_picker">
+                        <a class="action" id="setImage" href="#">Set Image</a>
+
+                    </div> -->
+                    <div id="poster_picker_disabled">
+                        <p>
+                            The poster picker has been disabled.  Enable it by <a id="enable_poster_picker" href="#">removing the custom post image url</a>.
+                        </p>
+                    </div>
+                </div>
+                <div id="videoDisplay" class="bp2-wdn-col-five-sevenths">
+                    <div class="mh-iframe-wrapper">
+                        <?php
+                        if (isset($context->media)) {
+                            echo '<iframe id="mediahub-iframe-embed" height="667" src="'.$context->media->getURL().'?format=iframe&autoplay=0" allowfullscreen title="watch media" data-mediahub-id='.$context->media->id.'></iframe>';
+                        }
+                        ?>
+                    </div>
+                    <a class="wdn-button wdn-button-brand mh-hide-bp2" id="setImage" href="#">Set Image</a>
+                </div>
             </div>
         </div>
     </div>
@@ -117,6 +146,14 @@ $controller->setReplacementData('head', $js);
                         </li>
                         <li>
                             <?php echo $savvy->render($context->feed_selection); ?>
+                        </li>
+                        <li style="display:none">
+                            <?php if($context->media->getProjection() == "equirectangular") { ?>
+                            <input type="checkbox" id="projection" name="projection" checked="checked" value="equirectangular">
+                            <?php } else { ?>
+                            <input type="checkbox" id="projection" name="projection" value="equirectangular">
+                            <?php } ?>
+                            <label for="projection">360 Video (equirectangular)</label>
                         </li>
                         <li>
                             <label for="media_poster">URL of custom poster image</label>

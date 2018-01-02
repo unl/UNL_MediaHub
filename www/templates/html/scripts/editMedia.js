@@ -1,33 +1,37 @@
 
 require(['jquery'], function($){
     var mediaDetails = function() {
-        var $posterPicker = $('#poster_picker');
-        var $posterPickerDisabled = $('#poster_picker_disabled');
-        var $mediaPoster = $('#media_poster');
-        var $mediaForm = $('#media_form');
-        var $itunesHeader = $('#itunes_header');
-        var $mrssHeader = $('#mrss_header');
-        var $imageOverlay = $('#imageOverlay');
-        var $thumbnail = $('#thumbnail');
-        var $feedList = $('#feedlist');
+        var $posterPicker;
+        var $posterPickerDisabled;
+        var $mediaPoster;
+        var $mediaForm;
+        var $itunesHeader;
+        var $mrssHeader;
+        var $imageOverlay;
+        var $thumbnail;
+        var $feedList;
+
+        var currentTime = 0;
         
         return {
             getImageURL: function() {
-                return front_end_baseurl + 'media/' + $(mejs.players.mep_0.media).attr('data-mediahub-id') + '/image';
+                return front_end_baseurl + 'media/' + $("#mediahub-iframe-embed").data('mediahub-id') + '/image';
             },
 
-            updateDuration : function() {
-                $('#itunes_duration').val(mediaDetails.findDuration(mejs.players.mep_0.media.duration));
-            },
+            // updateDuration : function() {
+            //     $('#itunes_duration').val(mediaDetails.findDuration(mejs.players.mep_0.media.duration));
+            // },
 
             findDuration : function(duration) {
                 return mediaDetails.formatTime(duration);
             },
 
-            updateThumbnail : function(currentTime) {
+            updateThumbnail : function() {
                 $imageOverlay.show();
 
                 var src = mediaDetails.getImageURL() + '?time='+mediaDetails.formatTime(currentTime)+'&rebuild';
+
+                console.log(src)
 
                 $.ajax(src).always(function() {
                     $thumbnail.attr('src', src.replace('&rebuild', ''));
@@ -35,8 +39,7 @@ require(['jquery'], function($){
                 });
             },
 
-            formatTime : function(totalSec) { //time is coming in milliseconds
-                WDN.log(totalSec);
+            formatTime : function(totalSec) { //time is coming in seconds
                 hours = parseInt( totalSec / 3600 ) % 24;
                 minutes = parseInt( totalSec / 60 ) % 60;
                 seconds = ((totalSec % 60)*100)/100;
@@ -69,6 +72,16 @@ require(['jquery'], function($){
             },
             
             initialize: function() {
+                $posterPicker = $('#poster_picker');
+                $posterPickerDisabled = $('#poster_picker_disabled');
+                $mediaPoster = $('#media_poster');
+                $mediaForm = $('#media_form');
+                $itunesHeader = $('#itunes_header');
+                $mrssHeader = $('#mrss_header');
+                $imageOverlay = $('#imageOverlay');
+                $thumbnail = $('#thumbnail');
+                $feedList = $('#feedlist');
+
                 $feedList.hide();
                 $('#formDetails, #formDetails form, #formDetails fieldset, #continue3').not('#addMedia').css({'display' : 'block'});
                 $('.share-video-link').css('display', 'none');
@@ -98,12 +111,7 @@ require(['jquery'], function($){
                 });
 
                 $('#setImage').on('click', function(){
-                    var currentTime;
-
-                    currentTime = mejs.players.mep_0.getCurrentTime();
-
-                    mediaDetails.updateThumbnail(currentTime);
-
+                    mediaDetails.updateThumbnail();
                     return false;
                 });
 
@@ -176,10 +184,20 @@ require(['jquery'], function($){
 
                 //Update duration
                 $('.find-duration').click(function() {
-                    mediaDetails.updateDuration();
+                    // mediaDetails.updateDuration();
                     //Prevent default action
                     return false;
                 });
+            
+                window.addEventListener("message", function(event){
+                    if(event.data.currentTime != undefined){                        
+                        currentTime = event.data.currentTime;   
+                        console.log(currentTime)
+                    }
+                }, false);
+
+
+
             }
         };
     }();

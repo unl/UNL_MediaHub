@@ -1,3 +1,9 @@
+<?php
+$is_audio = false;
+if (isset($context->output[0]) && $context->output[0] instanceof UNL_MediaHub_Media) {
+    $is_audio = !$context->output[0]->isVideo();
+}
+?>
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
@@ -5,8 +11,19 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Test</title>
     <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/jquery.js?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>"></script>
-    <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/mediaelement/mediaelement-and-player.js?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>"></script>
-    <link rel="stylesheet" href="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/mediaelement/css/mediaelementplayer.min.css?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>" />
+    <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/three.min.js?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>"></script>
+    <link href="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/video-js.css?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>" rel="stylesheet">
+    <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/video.js?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>"></script>
+    <?php if ($is_audio): ?>
+        <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/wavesurfer.min.js?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>"></script>
+        <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/videojs.wavesurfer.min.js?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>"></script>
+        <link href="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/videojs.wavesurfer.min.css?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>" rel="stylesheet">
+        <link href="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/css/font-awesome.min.css?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>" rel="stylesheet">
+    <?php endif; ?>
+    <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/videojs-panorama.v5.js?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>"></script>
+    <link href="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/videojs-panorama.min.css?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>" rel="stylesheet">
+    <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/videojs-mediahub.js?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>"></script>
+    <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/videojs-captions-toggle.js"></script>
     <link rel="stylesheet" href="<?php echo UNL_MediaHub_Controller::toAgnosticURL(UNL_MediaHub_Controller::$url); ?>templates/iframe/css/iframe.css?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>" />
     
     <style>
@@ -14,11 +31,7 @@
             margin: 0px;
             height: 100%;
             background-color: #000;
-        }
-        .mejs-video {
-            position: static !important;
-            width: 100% !important;
-            height: 100% !important;
+            overflow: hidden;
         }
     </style>
 </head>

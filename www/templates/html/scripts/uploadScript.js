@@ -74,6 +74,13 @@ require(['jquery'], function($){
                         return;
                     }
 
+                    if(response.projection == "equirectangular"){
+                        $('input[name=projection]').prop('checked', true);
+                        $("#autodetect-360").addClass("open").append($("<div>").text("We noticed you uploaded a 360 video. If the video you uploaded isn't intended to be viewed with our 360 player please uncheck the box marked '360 Video'"))
+                        
+                        // alert("We noticed you uploaded a 360 video. If the video you uploaded isn't intended to be viewed with our 360 player please uncheck the box marked '360 Video'");
+                    }
+
                     $('#media_url').attr('value', response.url);
                     $('#publish').removeAttr('disabled');
                     $('input[type=submit]').removeAttr("disabled");

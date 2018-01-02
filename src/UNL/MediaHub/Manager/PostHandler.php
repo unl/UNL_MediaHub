@@ -402,20 +402,22 @@ class UNL_MediaHub_Manager_PostHandler
             $media = $this->mediahub->addMedia($details);
             
             $is_new = true;
-        }
-        
+        }  
+
         //Update the dateupdated date for cache busting
         $media->dateupdated = date('Y-m-d H:i:s');
         
         // Save details
         $media->synchronizeWithArray($this->post);
-        
+
         if ($duration = $media->findDuration()) {
             //Save the duration
             $media->duration = $duration->getTotalMilliseconds();
         }
         
         $media->save();
+
+        $media->setProjection($this->post['projection']);  
         
         $poster_file = UNL_MediaHub::getRootDir() . '/www/uploads/thumbnails/'.$media->id.'/original.jpg';
         if (!empty($media->poster) && file_exists($poster_file)) {
@@ -484,6 +486,7 @@ class UNL_MediaHub_Manager_PostHandler
         }
 
         if ($is_new) {
+
             //After upload, add captions
             $success_string = 'Your media has been uploaded and is now published. Please make sure that the media is captioned.';
             if (UNL_MediaHub_Controller::$caption_requirement_date) {
@@ -508,6 +511,10 @@ class UNL_MediaHub_Manager_PostHandler
             
             UNL_MediaHub::redirect(UNL_MediaHub_Controller::getURL($media));
         }
+
+
+
+
     }
 
     /**
@@ -803,4 +810,5 @@ class UNL_MediaHub_Manager_PostHandler
         unset($this->post['MAX_FILE_SIZE']);
         unset($this->post['submit_existing']);
     }
+
 }
