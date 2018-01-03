@@ -60,7 +60,7 @@
                         cursorColor: '#FEFDFA',
                         backend: 'MediaElement'
                     };
-                    //$media.removeAttr('src');
+                    options.fluid = true;
                 }
 
                 (function(window, videojs) {
