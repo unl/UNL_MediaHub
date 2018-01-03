@@ -25,7 +25,7 @@
             videoWidth: '100%',
             videoHeight: '100%',
             controls: true,
-            fluid: true
+            fluid: false
         };
         <?php endif; ?>
 
