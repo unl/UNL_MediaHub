@@ -80,6 +80,10 @@ function toggleSingleCaptionTrack(options) {
 };
 
 function CheckCaptionsShowing(textTrack, button){
+  if (!textTrack) {
+      return;
+  }
+  
   if(textTrack.mode === "showing"){
     button.addClass("active");
   }else{
