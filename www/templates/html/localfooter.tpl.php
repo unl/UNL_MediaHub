@@ -3,7 +3,7 @@
     <div class="bp960-wdn-col-two-thirds">
         <div class="wdn-footer-module">
             <span role="heading" class="wdn-footer-heading">About UNL MediaHub</span>
-            <p>This application is developed and maintained by <a href="http://iim.unl.edu/">Internet and Interactive Media</a> (IIM), which is a partnership with University Communication and Information Technology Services.</p>
+            <p>This application is a product of the <a href="https://iim.unl.edu/">Internet and Interactive Media group at Nebraska</a>. IIM is a partnership of <a href="https://ucomm.unl.edu/">University Communication</a> and <a href="https://its.unl.edu/">Information Technology Services</a>.</p>
         </div>
     </div>
     <div class="bp960-wdn-col-one-third">
