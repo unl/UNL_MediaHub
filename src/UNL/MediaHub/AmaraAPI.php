@@ -20,11 +20,7 @@ class UNL_MediaHub_AmaraAPI
     
     public function __construct()
     {
-        
-        $this->guzzle = new \GuzzleHttp\Client(array(
-            'verify' => __DIR__ . '/../../../data/amara-chain.pem'
-        ));
-        
+        $this->guzzle = new \GuzzleHttp\Client();
     }
 
     /**
