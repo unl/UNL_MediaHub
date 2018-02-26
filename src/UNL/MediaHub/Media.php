@@ -766,4 +766,31 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         
         return true;
     }
+
+    /**
+     * @param $job_type
+     * @return UNL_MediaHub_TranscodingJob
+     * @throws Doctrine_Connection_Exception
+     * @throws Doctrine_Record_Exception
+     * @throws Exception
+     */
+    function transcode($job_type, $uid = null)
+    {
+        $job = new UNL_MediaHub_TranscodingJob();
+        
+        $job->media_id = $this->id;
+        $job->job_type = $job_type;
+        
+        if ($uid) {
+            $job->uid = $uid;
+        } else {
+            $uid = $this->uidcreated;
+        }
+        
+        $job->uid = $uid;
+        
+        $job->save();
+        
+        return $job;
+    }
 }

@@ -11,6 +11,8 @@ class UNL_MediaHub
 
     public static $rude_shell;
     
+    public static $auto_transcode_hls_users = array();
+    
     function __construct()
     {
         Doctrine_Manager::getInstance()->setAttribute('model_loading', 'conservative');

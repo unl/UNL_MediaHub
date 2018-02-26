@@ -13,7 +13,7 @@ require(['jquery'], function($){
             flash_swf_url : baseurl+'templates/html/scripts/plupload/Moxie.swf',
             silverlight_xap_url : baseurl+'templates/html/scripts/plupload/Moxie.xap',
             drop_element: "mh_upload_media",
-            chunk_size: '1mb',
+            chunk_size: '5mb',
             multi_selection:false,
             multipart_params: {
                 __unlmy_posttarget: 'upload_media'
@@ -21,7 +21,7 @@ require(['jquery'], function($){
             filters : {
                 max_file_size : MAX_UPLOAD+'mb',
                 mime_types: [
-                    {title : "Video files", extensions : "mp4,3gp"},
+                    {title : "Video files", extensions : VALID_VIDEO_EXTNESIONS},
                     {title : "Audio files", extensions : "mp3"}
                 ]
             },

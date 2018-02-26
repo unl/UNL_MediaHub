@@ -235,7 +235,7 @@ class UNL_MediaHub_Manager_PostHandler
 
         if (!empty($this->files)) {
             if ($this->files["file"]["error"] || !is_uploaded_file($this->files["file"]["tmp_name"])) {
-                throw new UNL_MediaHub_Manager_PostHandler_UploadException('Failed to move uploaded file.', 500);
+                throw new UNL_MediaHub_Manager_PostHandler_UploadException('Failed to move uploaded file. Max upload or post size is likely too small.', 500);
             }
 
             // Read binary input stream and append it to temp file
@@ -266,7 +266,7 @@ class UNL_MediaHub_Manager_PostHandler
             }
             
             //Make sure that the media has a valid extension
-            $allowed_extensions = array('mp4', 'mp3');
+            $allowed_extensions = array('mp4', 'mp3', 'mov');
             if (!in_array($extension, $allowed_extensions)) {
                 //Remove the file
                 unlink("{$filePath}.part");
@@ -417,7 +417,9 @@ class UNL_MediaHub_Manager_PostHandler
         
         $media->save();
 
-        $media->setProjection($this->post['projection']);  
+        if (isset($this->post['projection'])) {
+            $media->setProjection($this->post['projection']);
+        }
         
         $poster_file = UNL_MediaHub::getRootDir() . '/www/uploads/thumbnails/'.$media->id.'/original.jpg';
         if (!empty($media->poster) && file_exists($poster_file)) {
@@ -486,6 +488,10 @@ class UNL_MediaHub_Manager_PostHandler
         }
 
         if ($is_new) {
+            //if it is is and the user is set to auto-transcode... do it
+            if ($user && $user->canTranscode()) {
+                $media->transcode(UNL_MediaHub_TranscodingJob::JOB_TYPE_HLS);
+            }
 
             //After upload, add captions
             $success_string = 'Your media has been uploaded and is now published. Please make sure that the media is captioned.';

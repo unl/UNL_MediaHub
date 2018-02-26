@@ -1,11 +1,14 @@
 <?php
 
-class UNL_MediaHub_TranscodingJob extends UNL_MediaHub_Models_BaseRevOrder
+class UNL_MediaHub_TranscodingJob extends UNL_MediaHub_Models_BaseTranscodingJob
 {
     const STATUS_SUBMITTED  = 'SUBMITTED'; //job created in mediahub
     const STATUS_WORKING = 'WORKING'; //job submitted to transcoding server
     const STATUS_ERROR = 'ERROR'; //error while transcoding
     const STATUS_FINISHED = 'FINISHED'; //job finished
+    
+    const JOB_TYPE_MP4 = 'mp4';
+    const JOB_TYPE_HLS = 'hls';
 
     /**
      * Get a piece of media by PK.
@@ -28,6 +31,8 @@ class UNL_MediaHub_TranscodingJob extends UNL_MediaHub_Models_BaseRevOrder
      */
     public function preInsert($event)
     {
+        $this->status = self::STATUS_SUBMITTED;
+        
         if (empty($this->datecreated)) {
             $this->datecreated = date('Y-m-d H:i:s');
         }
