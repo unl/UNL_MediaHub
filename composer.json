@@ -43,7 +43,8 @@
       "captioning/captioning": "2.*",
       "php": ">=5.5.0", 
       "leodido/langcode-conv": "^0.2.0",
-      "mhor/php-mediainfo": "^3.0"
+      "mhor/php-mediainfo": "^3.0",
+        "ramsey/uuid": "^3.7"
     },
     "scripts": {
       "post-install-cmd": [

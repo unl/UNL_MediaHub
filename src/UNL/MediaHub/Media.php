@@ -1,6 +1,8 @@
 <?php
 
 
+use Ramsey\Uuid\Uuid;
+
 class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_MediaHub_MediaInterface
 {
     const CODEC_REMOTE_VIDEO = 'remote-video-is-unknown';
@@ -61,6 +63,8 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
      */
     public function preInsert($event)
     {
+        $uuid = Uuid::uuid1();
+        $this->UUID = $uuid->toString();
         $this->setContentType();
     }
 
