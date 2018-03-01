@@ -103,7 +103,7 @@ foreach ($media_hub_jobs->items as $media_hub_job) {
                 echo "Job completed: " . $media_hub_job->id . PHP_EOL;
                 //it completed!
                 //Copy it over
-                downloadOutput($output_bucket, $media->UUID, $source);
+                downloadOutput($output_bucket, $media->UUID, $media);
                 
                 //Delete input and output files
                 deleteInputFile($input_bucket, $input_key);
@@ -131,7 +131,7 @@ if ($has_output) {
     echo "--FINISHED--" . PHP_EOL;
 }
 
-function downloadOutput($output_bucket, $key, $original_file)
+function downloadOutput($output_bucket, $key, UNL_MediaHub_Media $media)
 {
     $s3 = new Aws\S3\S3Client([
         'version' => '2006-03-01',
@@ -147,8 +147,12 @@ function downloadOutput($output_bucket, $key, $original_file)
     
     $s3->downloadBucket($download_dir, $output_bucket, '/'.$key);
 
-    //Replace the original file with the new 720mp4 to simplify logic and save space
-    rename($download_dir.'/media720.mp4', $original_file);
+    //Delete the original upload to save space
+    unlink($media->getLocalFileName());
+    
+    //Update the URL of the media to the media720.mp4 file
+    $media->url = UNL_MediaHub_Controller::getURL() . 'uploads/'.$media->UUID.'/media720.mp4';
+    $media->save();
 }
 
 function deleteInputFile($input_bucket, $key)
