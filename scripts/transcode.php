@@ -203,6 +203,9 @@ function upload($source, $input_bucket, $key)
     //Try 5 times...
     $tries = 0;
     do {
+        if ($tries > 5) {
+            throw new \Exception("Error while uploading, tried 5 times.");
+        }
         try {
             $result = $uploader->upload();
         } catch (MultipartUploadException $e) {
@@ -213,7 +216,7 @@ function upload($source, $input_bucket, $key)
             ]);
         }
         $tries++;
-    } while (!isset($result) && $tries < 5);
+    } while (!isset($result));
 }
 
 function createHlsJob($endpoint, $role, $input, $output, $aspect_ratio)
