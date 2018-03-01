@@ -6,6 +6,8 @@ use Ramsey\Uuid\Uuid;
 class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_MediaHub_MediaInterface
 {
     const CODEC_REMOTE_VIDEO = 'remote-video-is-unknown';
+    const ASPECT_16x9 = '16:9';
+    const ASPECT_4x3 = '4:3';
     
     /**
      * Get a piece of media by PK.
@@ -132,8 +134,6 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
             return array('width'=>$element->attributes['width'], 'height'=>$element->attributes['height']);
         }
         
-        //TODO: shit man, we are referencing the thumbnail URL, not the freaking VIDEO!
-        
         return $this->findVideoDimensions();
     }
     
@@ -169,6 +169,26 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         } catch (\Exception $e) {
             return false;
         }
+    }
+
+    /**
+     * Get the aspect ratio of the video. Only supports 4x3 or 16x9
+     * 
+     * @return bool|string
+     */
+    function getAspectRatio()
+    {
+        if (!$dimensions = $this->findVideoDimensions()) {
+            return false;
+        }
+        
+        $ratio = round($dimensions['width']/$dimensions['height'], 2);
+        
+        if ($ratio <= 1.33) {
+            return self::ASPECT_4x3;
+        }
+        
+        return self::ASPECT_16x9;
     }
 
     /**

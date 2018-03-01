@@ -3,7 +3,7 @@ class UNL_MediaHub_TranscodingJobList_Filter_NotComplete implements UNL_MediaHub
 {
     public function apply(Doctrine_Query_Abstract $query)
     {
-        $query->where('(jobs.status IN ("'.UNL_MediaHub_TranscodingJob::STATUS_SUBMITTED.'", "'.UNL_MediaHub_TranscodingJob::STATUS_WORKING.'"") )');
+        $query->where('(jobs.status IN ("'.UNL_MediaHub_TranscodingJob::STATUS_SUBMITTED.'", "'.UNL_MediaHub_TranscodingJob::STATUS_WORKING.'") )');
     }
 
     public function getLabel()

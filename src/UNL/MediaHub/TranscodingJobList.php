@@ -9,7 +9,7 @@ class UNL_MediaHub_TranscodingJobList extends UNL_MediaHub_List
         'additional_filters' => array(),
     );
 
-    public $tables = 'UNL_MediaHub_TranscodingJobs jobs';
+    public $tables = 'UNL_MediaHub_TranscodingJob jobs';
 
     public function __construct($options = array())
     {
@@ -23,11 +23,11 @@ class UNL_MediaHub_TranscodingJobList extends UNL_MediaHub_List
     {
         if (isset($this->options['media_id'])
             && !empty($this->options['media_id'])) {
-            $this->options['filter'] = new UNL_MediaHub_RevOrderList_Filter_ByMedia($this->options['media_id']);
+            $this->options['filter'] = new UNL_MediaHub_TranscodingJobList_Filter_ByMedia($this->options['media_id']);
         }
 
         if (isset($this->options['all_not_complete'])) {
-            $this->options['filter'] = new UNL_MediaHub_RevOrderList_Filter_NotComplete();
+            $this->options['filter'] = new UNL_MediaHub_TranscodingJobList_Filter_NotComplete();
         }
     }
 

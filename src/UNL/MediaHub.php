@@ -13,6 +13,12 @@ class UNL_MediaHub
     
     public static $auto_transcode_hls_users = array();
     
+    //The bucket name (not full ARN)
+    public static $transcode_input_bucket = '';
+    public static $transcode_output_bucket = '';
+    public static $transcode_mediaconvert_api_endpoint = '';
+    public static $transcode_mediaconvert_role = '';
+    
     function __construct()
     {
         Doctrine_Manager::getInstance()->setAttribute('model_loading', 'conservative');
