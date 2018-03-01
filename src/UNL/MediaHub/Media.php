@@ -155,8 +155,8 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
             }
 
             $width = $videos[0]->get('width')->getAbsoluteValue();
-            $height = $width = $videos[0]->get('height')->getAbsoluteValue();
-            
+            $height = $videos[0]->get('height')->getAbsoluteValue();
+
             if (!$width || !$height) {
                 return false;
             }
@@ -183,7 +183,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         }
         
         $ratio = round($dimensions['width']/$dimensions['height'], 2);
-        
+
         if ($ratio <= 1.33) {
             return self::ASPECT_4x3;
         }
