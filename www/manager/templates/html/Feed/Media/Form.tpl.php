@@ -40,63 +40,96 @@ var mediaType = "'.$mediaType.'";
 $controller->setReplacementData('head', $js);
 ?>
 
-<?php if(empty($context->media->media_text_tracks_id)): ?>
-    <div class="wdn_notice alert mh-caption-alert">
-        <div class="message">
-            <h4>This Video is Missing Captions!</h4>
-            <div class="mh-caption-band">
-                <p>
-                    For accessibility reasons, captions are required for <strong>all</strong> videos.
-                </p>
-                <p>
-                    <a class="wdn-button" href="<?php echo $edit_caption_url ?>">Caption Your Video</a>
-                </p>
-            </div>
-        </div>
-    </div>
-    
-    <script type="text/javascript">
-    WDN.initializePlugin('notice');
-    </script>
-<?php endif; ?>
-
-<?php if (!$context->media->isWebSafe()): ?>
-    <div class="wdn_notice alert mh-caption-alert">
-        <div class="message">
-            <h4>This video might not work on the web!</h4>
-            <div class="mh-caption-band">
-                <p>
-                    This video was encoded with '<?php echo $context->media->getCodec() ?>', which is not safe for the web, and might not work on every device/browser. Please run the video through HandBrake and swap the video out.
-                </p>
-                <p>
-                    <a class="wdn-button" href="http://wdn.unl.edu/documentation/unl-mediahub/using-handbrake">How to use HandBrake</a>
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <script type="text/javascript">
-        WDN.initializePlugin('notice');
-    </script>
-<?php endif; ?>
-
 <form action="?" method="post" name="media_form" id="media_form" class="wdn-band" enctype="multipart/form-data">
 
     <input id="media_url" name="url" type="hidden" value="" />
     <input type="hidden" name="__unlmy_posttarget" value="feed_media" />
     <input type="hidden" id="id" name="id" value="<?php echo $context->media->id ?>" />
     
-    <div class="wdn-band wdn-light-triad-band mediahub-embed">
+    <div class="wdn-band wdn-light-triad-band">
         <div class="wdn-inner-wrapper">
             <div class="wdn-grid-set" id="headline_main">
                 <div class="wdn-col-full">
                     <input type="submit" name="submit" value="Save" class="wdn-pull-right" />
                     <h1 class="clear-top wdn-brand"><div class="wdn-subhead">Edit Media Details for</div> <?php echo $context->media->title ?></h1>
-                </div>  
+                </div>
             </div>
+
+            <?php $transcoding_job = $context->media->getMostRecentTranscodingJob(); ?>
+
+            <?php if ($transcoding_job->isError()): ?>
+                <div class="wdn_notice alert mh-caption-alert">
+                    <div class="message">
+                        <h2>Transcoding Error!</h2>
+                        <div>
+                            <p>There was an error transcoding your upload. Please ensure the file is not corrupt and in .mp4 or .mov format and try again.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+                    WDN.initializePlugin('notice');
+                </script>
+            <?php endif; ?>
+
+            <?php if ($transcoding_job->isPending()): ?>
+                <div class="wdn_notice">
+                    <div class="message">
+                        <h2>We are preparing your video</h2>
+                        <div>
+                            <p>We are optimizing your video for the web. This may take some time, so please fill out the media details or submit a caption order while you wait.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+                    WDN.initializePlugin('notice');
+                </script>
+            <?php endif; ?>
+
+            <?php if(empty($context->media->media_text_tracks_id)): ?>
+                <div class="wdn_notice alert mh-caption-alert">
+                    <div class="message">
+                        <h2>This Video is Missing Captions!</h2>
+                        <div class="mh-caption-band">
+                            <p>
+                                For accessibility reasons, captions are required for <strong>all</strong> videos.
+                            </p>
+                            <p>
+                                <a class="wdn-button" href="<?php echo $edit_caption_url ?>">Caption Your Video</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+                    WDN.initializePlugin('notice');
+                </script>
+            <?php endif; ?>
+
+            <?php if (!$context->media->isWebSafe()): ?>
+                <div class="wdn_notice alert mh-caption-alert">
+                    <div class="message">
+                        <h2>This video might not work on the web!</h2>
+                        <div class="mh-caption-band">
+                            <p>
+                                This video was encoded with '<?php echo $context->media->getCodec() ?>', which is not safe for the web, and might not work on every device/browser. Please run the video through HandBrake and swap the video out.
+                            </p>
+                            <p>
+                                <a class="wdn-button" href="http://wdn.unl.edu/documentation/unl-mediahub/using-handbrake">How to use HandBrake</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+                    WDN.initializePlugin('notice');
+                </script>
+            <?php endif; ?>
+            
             <div class="wdn-grid-set">
                 <div id="videoData" class="wdn-col-two-sevenths mh-hide-bp2 wdn-pull-right">
-                    <h5 class="clear-top wdn-sans-serif">Set a Thumbnail</h5>
+                    <h2 class="clear-top wdn-sans-serif">Set a Thumbnail</h2>
                     <ol>
                         <li>Pause the video to the left at the frame which you want as the image representation.</li>
                         <li>Click the "Set Image" button to save this as your image representation.</li>
