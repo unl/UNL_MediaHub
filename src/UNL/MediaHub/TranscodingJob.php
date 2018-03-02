@@ -53,11 +53,12 @@ class UNL_MediaHub_TranscodingJob extends UNL_MediaHub_Models_BaseTranscodingJob
      */
     public function isSuccess()
     {
-        if (self::STATUS_FINISHED == $this->status) {
-            return true;
-        }
-
-        return false;
+        return self::STATUS_FINISHED == $this->status;
+    }
+    
+    public function isError()
+    {
+        return self::STATUS_ERROR == $this->status;
     }
 
     /**
@@ -70,9 +71,7 @@ class UNL_MediaHub_TranscodingJob extends UNL_MediaHub_Models_BaseTranscodingJob
             self::STATUS_ERROR,
         );
 
-        if (in_array($this->status, $completed_statuses)) {
-            return true;
-        }
+        return in_array($this->status, $completed_statuses);
     }
 
 
@@ -83,6 +82,11 @@ class UNL_MediaHub_TranscodingJob extends UNL_MediaHub_Models_BaseTranscodingJob
      */
     public function isPending()
     {
-        return !$this->isFinished();
+        $pending_statuses = array(
+            self::STATUS_SUBMITTED,
+            self::STATUS_WORKING,
+        );
+
+        return in_array($this->status, $pending_statuses);
     }
 }
