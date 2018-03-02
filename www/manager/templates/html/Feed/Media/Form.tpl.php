@@ -60,7 +60,7 @@ $controller->setReplacementData('head', $js);
             <?php if ($transcoding_job->isError()): ?>
                 <div class="wdn_notice alert mh-caption-alert">
                     <div class="message">
-                        <h2>Transcoding Error!</h2>
+                        <h2 class="title">Transcoding Error!</h2>
                         <div>
                             <p>There was an error transcoding your upload. Please ensure the file is not corrupt and in .mp4 or .mov format and try again.</p>
                         </div>
@@ -75,22 +75,40 @@ $controller->setReplacementData('head', $js);
             <?php if ($transcoding_job->isPending()): ?>
                 <div class="wdn_notice">
                     <div class="message">
-                        <h2>We are preparing your video</h2>
-                        <div>
-                            <p>We are optimizing your video for the web. This may take some time, so please fill out the media details or submit a caption order while you wait.</p>
+                        <h2 class="title">We are preparing your video</h2>
+                        <div id="transcoding-progress" aria-live="polite">
+                            <p>
+                                <progress>loading</progress><br/>
+                                We are optimizing your video for the web. This may take some time, so please fill out the media details or submit a caption order while you wait. </p>
                         </div>
                     </div>
                 </div>
 
                 <script type="text/javascript">
                     WDN.initializePlugin('notice');
+                    require(['jquery'], function($) {
+                        var checkStatus = function() {
+                            $.get(window.location+'&format=json', function(data) {
+                                if (data.transcoding_is_complete) {
+                                    var $message = $('#transcoding-progress');
+                                    $message.html('<p>We have finished preparing your video. <a href="'+window.location+'">Reload this page</a></p>');
+                                    $message.closest('.wdn_notice').addClass('affirm');
+                                } else {
+                                    //Try again in 10 seconds
+                                    setTimeout(checkStatus, 10000);
+                                }
+                            });
+                        };
+                        
+                        checkStatus();
+                    })
                 </script>
             <?php endif; ?>
 
             <?php if(empty($context->media->media_text_tracks_id)): ?>
                 <div class="wdn_notice alert mh-caption-alert">
                     <div class="message">
-                        <h2>This Video is Missing Captions!</h2>
+                        <h2 class="title">This Video is Missing Captions!</h2>
                         <div class="mh-caption-band">
                             <p>
                                 For accessibility reasons, captions are required for <strong>all</strong> videos.

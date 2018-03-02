@@ -270,6 +270,26 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     {
         return UNL_MediaHub::isVideo($this->type);
     }
+
+    /**
+     * @return UNL_MediaHub_TranscodingJob|false
+     */
+    public function getMostRecentTranscodingJob()
+    {
+        $jobs = new UNL_MediaHub_TranscodingJobList(array(
+            'media_id' => $this->id,
+            'orderby' => 'id',
+            'order' => 'desc',
+            'limit' => 1
+        ));
+
+        if (!isset($jobs->items[0])) {
+            return false;
+        }
+
+        //Return the first item
+        return $jobs->items[0];
+    }
     
     /**
      * Sets the content type for the media being added.
