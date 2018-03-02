@@ -334,14 +334,7 @@ class UNL_MediaHub_Manager_PostHandler
     function handleFeedMedia()
     {
         // Check for required fields
-        if (empty($this->post['url'])) {
-            throw new Exception('Please provide a URL for this media.', 400);
-        }
         
-        if (!filter_var($this->post['url'], FILTER_VALIDATE_URL)) {
-            throw new Exception('The provided value for field "url" is invalid.  It must be a valid absolute URL.', 400);
-        }
-
         if (empty($this->post['title'])) {
             throw new Exception('Please provide a title for this media.', 400);
         }
@@ -373,24 +366,34 @@ class UNL_MediaHub_Manager_PostHandler
             
             $media->uidupdated = $user->uid;
 
-            if($media->url != $this->post['url']){
-
+            //Check if new media was uploaded (the url changed)
+            if(!empty($this->post['url']) && $media->url != $this->post['url']) {
                 $local_file = $media->getLocalFileName();
                 $new_local_file = UNL_MediaHub_Media::getLocalFileNameByURL($this->post['url']);
-                
+
                 if ($local_file && !is_dir($local_file) && $new_local_file) {
                     //Both files are local.
                     rename($new_local_file, $local_file); //Replace the old one (keeping its name).
                     $this->post['url'] = $media->url; //Don't update the URL of the file
-                    
+
                 } else if ($local_file && !is_dir($local_file)) {
                     //New file is not local, but old one is. Delete the old one.
                     unlink($local_file);
                 }
-
-            };
+            }
+            
         } else {
             // Insert a new piece of media
+            // The url is required here
+            if (empty($this->post['url'])) {
+                throw new Exception('Please provide a URL for this media.', 400);
+            }
+
+            if (!filter_var($this->post['url'], FILTER_VALIDATE_URL)) {
+                throw new Exception('The provided value for field "url" is invalid.  It must be a valid absolute URL.', 400);
+            }
+            
+            
             $details = array(
                 'url'        => $this->post['url'],
                 'title'      => $this->post['title'],
@@ -398,7 +401,7 @@ class UNL_MediaHub_Manager_PostHandler
                 'author'     => $this->post['author'],
                 'uidcreated' => $user->uid,
             );
-                             
+
             $media = $this->mediahub->addMedia($details);
             
             $is_new = true;
@@ -406,6 +409,11 @@ class UNL_MediaHub_Manager_PostHandler
 
         //Update the dateupdated date for cache busting
         $media->dateupdated = date('Y-m-d H:i:s');
+        
+        if (empty($this->post['url'])) {
+            //Remove the url from the post array so that `synchronizeWithArray` doesn't save a null value to the db.
+            unset($this->post['url']);
+        }
         
         // Save details
         $media->synchronizeWithArray($this->post);
@@ -517,10 +525,7 @@ class UNL_MediaHub_Manager_PostHandler
             
             UNL_MediaHub::redirect(UNL_MediaHub_Controller::getURL($media));
         }
-
-
-
-
+        
     }
 
     /**

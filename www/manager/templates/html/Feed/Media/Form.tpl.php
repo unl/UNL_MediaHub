@@ -82,7 +82,7 @@ $controller->setReplacementData('head', $js);
 
 <form action="?" method="post" name="media_form" id="media_form" class="wdn-band" enctype="multipart/form-data">
 
-    <input id="media_url" name="url" type="hidden" value="<?php echo htmlentities($context->media->url, ENT_QUOTES); ?>" />
+    <input id="media_url" name="url" type="hidden" value="" />
     <input type="hidden" name="__unlmy_posttarget" value="feed_media" />
     <input type="hidden" id="id" name="id" value="<?php echo $context->media->id ?>" />
     
