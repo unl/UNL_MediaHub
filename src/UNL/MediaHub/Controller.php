@@ -213,6 +213,12 @@ class UNL_MediaHub_Controller
             switch ($this->options['model']) {
             case 'media':
                 $media = $this->findRequestedMedia($this->options);
+                
+                $transcoding_job = $media->getMostRecentTranscodingJob();
+                
+                if ($media && $transcoding_job->isPending()) {
+                    throw new Exception('This media is being optimized. Please try back later.', 403);
+                }
 
                 if (!$media->canView(UNL_MediaHub_AuthService::getInstance()->getUser())) {
                     throw new Exception('You do not have permission to view this.', 403);
