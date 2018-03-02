@@ -57,7 +57,7 @@ $controller->setReplacementData('head', $js);
 
             <?php $transcoding_job = $context->media->getMostRecentTranscodingJob(); ?>
 
-            <?php if ($transcoding_job->isError()): ?>
+            <?php if ($transcoding_job && $transcoding_job->isError()): ?>
                 <div class="wdn_notice alert mh-caption-alert">
                     <div class="message">
                         <h2 class="title">Transcoding Error!</h2>
@@ -72,7 +72,7 @@ $controller->setReplacementData('head', $js);
                 </script>
             <?php endif; ?>
 
-            <?php if ($transcoding_job->isPending()): ?>
+            <?php if ($transcoding_job && $transcoding_job->isPending()): ?>
                 <?php echo $savvy->render($context, 'Feed/Media/transcoding_notice.tpl.php'); ?>
             <?php endif; ?>
 
@@ -96,7 +96,7 @@ $controller->setReplacementData('head', $js);
                 </script>
             <?php endif; ?>
 
-            <?php if (!$context->media->isWebSafe()): ?>
+            <?php if (!$transcoding_job && !$context->media->isWebSafe()): ?>
                 <div class="wdn_notice alert mh-caption-alert">
                     <div class="message">
                         <h2>This video might not work on the web!</h2>

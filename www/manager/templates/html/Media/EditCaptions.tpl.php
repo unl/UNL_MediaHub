@@ -11,7 +11,7 @@ $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl
 </div>
 
 <?php $transcoding_job = $context->media->getMostRecentTranscodingJob(); ?>
-<?php if ($transcoding_job->isPending()): ?>
+<?php if ($transcoding_job && $transcoding_job->isPending()): ?>
     <?php echo $savvy->render($context, 'Feed/Media/transcoding_notice.tpl.php'); ?>
 <?php endif; ?>
 
