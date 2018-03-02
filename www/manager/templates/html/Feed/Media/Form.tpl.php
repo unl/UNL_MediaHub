@@ -115,41 +115,43 @@ $controller->setReplacementData('head', $js);
                     WDN.initializePlugin('notice');
                 </script>
             <?php endif; ?>
-            
-            <div class="wdn-grid-set">
-                <div id="videoData" class="wdn-col-two-sevenths mh-hide-bp2 wdn-pull-right">
-                    <h2 class="clear-top wdn-sans-serif">Set a Thumbnail</h2>
-                    <ol>
-                        <li>Pause the video to the left at the frame which you want as the image representation.</li>
-                        <li>Click the "Set Image" button to save this as your image representation.</li>
-                        <li>Continue with the form below.</li>
-                    </ol>
 
-                    <div id="imageOverlay">
-                        <p>We're updating your image, this may take a few minutes depending on video length. <strong>Now is a good time to make sure the information below is up to snuff!</strong></p>
+            <?php if (!$transcoding_job ||  $transcoding_job->isSuccess()): ?>
+                <div class="wdn-grid-set">
+                    <div id="videoData" class="wdn-col-two-sevenths mh-hide-bp2 wdn-pull-right">
+                        <h2 class="clear-top wdn-sans-serif">Set a Thumbnail</h2>
+                        <ol>
+                            <li>Pause the video to the left at the frame which you want as the image representation.</li>
+                            <li>Click the "Set Image" button to save this as your image representation.</li>
+                            <li>Continue with the form below.</li>
+                        </ol>
+    
+                        <div id="imageOverlay">
+                            <p>We're updating your image, this may take a few minutes depending on video length. <strong>Now is a good time to make sure the information below is up to snuff!</strong></p>
+                        </div>
+                        <img src="<?php echo $context->media->getThumbnailURL(); ?>" id="thumbnail" alt="Thumbnail preview" />
+                        <!-- <div id="poster_picker">
+                            <a class="action" id="setImage" href="#">Set Image</a>
+    
+                        </div> -->
+                        <div id="poster_picker_disabled">
+                            <p>
+                                The poster picker has been disabled.  Enable it by <a id="enable_poster_picker" href="#">removing the custom post image url</a>.
+                            </p>
+                        </div>
                     </div>
-                    <img src="<?php echo $context->media->getThumbnailURL(); ?>" id="thumbnail" alt="Thumbnail preview" />
-                    <!-- <div id="poster_picker">
-                        <a class="action" id="setImage" href="#">Set Image</a>
-
-                    </div> -->
-                    <div id="poster_picker_disabled">
-                        <p>
-                            The poster picker has been disabled.  Enable it by <a id="enable_poster_picker" href="#">removing the custom post image url</a>.
-                        </p>
+                    <div id="videoDisplay" class="bp2-wdn-col-five-sevenths">
+                        <div class="mh-iframe-wrapper">
+                            <?php
+                            if (isset($context->media)) {
+                                echo '<iframe id="mediahub-iframe-embed" height="667" src="'.$context->media->getURL().'?format=iframe&autoplay=0" allowfullscreen title="watch media" data-mediahub-id='.$context->media->id.'></iframe>';
+                            }
+                            ?>
+                        </div>
+                        <a class="wdn-button wdn-button-brand mh-hide-bp2" id="setImage" href="#">Set Image</a>
                     </div>
                 </div>
-                <div id="videoDisplay" class="bp2-wdn-col-five-sevenths">
-                    <div class="mh-iframe-wrapper">
-                        <?php
-                        if (isset($context->media)) {
-                            echo '<iframe id="mediahub-iframe-embed" height="667" src="'.$context->media->getURL().'?format=iframe&autoplay=0" allowfullscreen title="watch media" data-mediahub-id='.$context->media->id.'></iframe>';
-                        }
-                        ?>
-                    </div>
-                    <a class="wdn-button wdn-button-brand mh-hide-bp2" id="setImage" href="#">Set Image</a>
-                </div>
-            </div>
+            <?php endif; ?>
         </div>
     </div>
     
@@ -158,21 +160,23 @@ $controller->setReplacementData('head', $js);
             <div class="wdn-grid-set">
                 <div class="bp2-wdn-col-two-sevenths wdn-pull-right">
                     <ol>
-                        <li>                        
-                            <div id="mh_upload_media_container">
-                                <div id="mh_upload_media" class="mh-upload-box mh-upload-box-small wdn-center">
-                                    <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/swap-arrows.svg">
-                                        <img src="<?php echo $baseUrl; ?>/templates/html/css/images/swap-arrows.png" alt="browse media">
-                                    </object>
-                                    <h2><span class="wdn-subhead">Swap Media</span></h2>
-                                    <p>Upload a new .mp4 or .mp3 file and replace your old one. <strong class="wdn-icon-attention">(Caution: This deletes your old file.)</strong></p>
-                                    
+                        <?php if (!$transcoding_job ||  $transcoding_job->isSuccess()): ?>
+                            <li>
+                                <div id="mh_upload_media_container">
+                                    <div id="mh_upload_media" class="mh-upload-box mh-upload-box-small wdn-center">
+                                        <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/swap-arrows.svg">
+                                            <img src="<?php echo $baseUrl; ?>/templates/html/css/images/swap-arrows.png" alt="browse media">
+                                        </object>
+                                        <h2><span class="wdn-subhead">Swap Media</span></h2>
+                                        <p>Upload a new .mp4 or .mp3 file and replace your old one. <strong class="wdn-icon-attention">(Caution: This deletes your old file.)</strong></p>
+                                        
+                                    </div>
+                                    <div id="filelist" class="mh-upload-box wdn-center">
+                                        Your browser doesn't have Flash, Silverlight or HTML5 support.
+                                    </div>
                                 </div>
-                                <div id="filelist" class="mh-upload-box wdn-center">
-                                    Your browser doesn't have Flash, Silverlight or HTML5 support.
-                                </div>
-                            </div>
-                        </li>
+                            </li>
+                        <?php endif; ?>
                         <li>
                             <?php echo $savvy->render($context, 'Feed/Media/fields/privacy.tpl.php'); ?>
                         </li>
