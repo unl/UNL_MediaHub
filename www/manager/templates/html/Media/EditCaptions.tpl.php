@@ -9,6 +9,12 @@ $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl
         <a href="<?php echo $context->media->getURL()?>" class="wdn-button">View Media</a>
     </div>
 </div>
+
+<?php $transcoding_job = $context->media->getMostRecentTranscodingJob(); ?>
+<?php if ($transcoding_job->isPending()): ?>
+    <?php echo $savvy->render($context, 'Feed/Media/transcoding_notice.tpl.php'); ?>
+<?php endif; ?>
+
 <div class="wdn-band wdn-light-neutral-band">
     <div class="wdn-inner-wrapper">
         <h2 class="clear-top wdn-brand">Order Captions With Your Cost Object Number</h2>

@@ -73,36 +73,7 @@ $controller->setReplacementData('head', $js);
             <?php endif; ?>
 
             <?php if ($transcoding_job->isPending()): ?>
-                <div class="wdn_notice">
-                    <div class="message">
-                        <h2 class="title">We are preparing your video</h2>
-                        <div id="transcoding-progress" aria-live="polite">
-                            <p>
-                                <progress>loading</progress><br/>
-                                We are optimizing your video for the web. This may take some time, so please fill out the media details or submit a caption order while you wait. </p>
-                        </div>
-                    </div>
-                </div>
-
-                <script type="text/javascript">
-                    WDN.initializePlugin('notice');
-                    require(['jquery'], function($) {
-                        var checkStatus = function() {
-                            $.get(window.location+'&format=json', function(data) {
-                                if (data.transcoding_is_complete) {
-                                    var $message = $('#transcoding-progress');
-                                    $message.html('<p>We have finished preparing your video. <a href="'+window.location+'">Reload this page</a></p>');
-                                    $message.closest('.wdn_notice').addClass('affirm');
-                                } else {
-                                    //Try again in 10 seconds
-                                    setTimeout(checkStatus, 10000);
-                                }
-                            });
-                        };
-                        
-                        checkStatus();
-                    })
-                </script>
+                <?php echo $savvy->render($context, 'Feed/Media/transcoding_notice.tpl.php'); ?>
             <?php endif; ?>
 
             <?php if(empty($context->media->media_text_tracks_id)): ?>
