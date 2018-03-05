@@ -27,7 +27,7 @@
           },
           {
             "Preset": "HLS 480p 16x9 single pass",
-            "NameModifier": "360p"
+            "NameModifier": "480p"
           },
           {
             "Preset": "HLS 1080p 16x9 single pass",
