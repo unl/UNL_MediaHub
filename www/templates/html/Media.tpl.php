@@ -83,56 +83,22 @@ $getTracks = $context->getTextTrackURLs();
                 }
                 ?>
 
-                <div class="mh-authoring">
+                <div class="mh-authoring wdn-grid-set wdn-center">
                     <?php if (!empty($context->author)): // @TODO present author with more info (standardize people records) ?>
-                        <div class="wdn-sans-serif">Author: <?php echo $context->author; ?></div>
+                        <div class="wdn-col-one-third mh-stat">
+                            <span class="mh-count wdn-brand"><?php echo $context->author; ?></span>
+                            <span class="mh-context wdn-sans-serif">Author</span>
+                        </div>
                     <?php endif; ?>
-
-                    <div class="wdn-sans-serif">Added: <?php echo date('m/d/Y', strtotime($context->datecreated)); ?></div>
-                </div>
-
-                <div class="wdn-grid-set wdn-center">
-
-                    <div class="wdn-col-one-fifth mh-stat">
+                    <div class="wdn-col-one-third mh-stat">
+                        <span class="mh-count wdn-brand"><?php echo date('m/d/Y', strtotime($context->datecreated)); ?></span>
+                        <span class="mh-context wdn-sans-serif">Added</span>
+                    </div>
+                    <div class="wdn-col-one-third mh-stat">
                         <span class="mh-count wdn-brand"><?php echo $context->play_count ?></span>
                         <span class="mh-context wdn-sans-serif">Plays</span>
-                    </div> 
-
-                    <div class="wdn-col-one-fifth mh-stat">
-                        <span class="mh-count wdn-brand"><?php echo count($context->UNL_MediaHub_Media_Comment); ?></span>
-                        <span class="mh-context wdn-sans-serif">Comments</span>
-                    </div> 
-
-                    <div class="wdn-col-one-third mh-stat">
-                        <?php if($type == "video"): ?>
-                            <?php if ($dimensions['width'] > 0 && $dimensions['height'] > 0): ?>
-                                <span class="mh-ratio wdn-brand"><?php echo $dimensions['width'] . 'x' .$dimensions['height'];?></span>
-                            <?php endif; ?>
-                            
-                            <span class="mh-size wdn-brand">
-                                <?php 
-                                if(!empty($context->length)) {
-                                    $s = array('bytes', 'kb', 'MB', 'GB');
-                                    $e = floor(log($context->length)/log(1024));
-                                    echo sprintf('%.2f '.$s[$e], ($context->length/pow(1024, floor($e))));
-                                }
-                                ?>
-                            </span>
-                        <?php else: ?>
-                            <span class="mh-size wdn-brand">
-                                <?php 
-                                if(!empty($context->length)) {
-                                    $s = array('bytes', 'kb', 'MB', 'GB');
-                                    $e = floor(log($context->length)/log(1024));
-                                    echo sprintf('%.2f '.$s[$e], ($context->length/pow(1024, floor($e))));
-                                }
-                                ?>
-                            </span>
-                            <span class="mh-ratio wdn-brand"></span>
-                        <?php endif; ?>
-                        
-                    </div>  
-                </div>          
+                    </div>
+                </div>
                 <hr>
                 
                 <?php if($getTracks): ?>
