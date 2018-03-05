@@ -187,7 +187,7 @@ function deleteOutputDirectory($output_bucket, $key)
         'region'  => 'us-east-1'
     ]);
 
-    $s3->deleteMatchingObjects($output_bucket, '/'.$key);
+    $s3->deleteMatchingObjects($output_bucket, $key);
 }
 
 
