@@ -216,7 +216,7 @@ class UNL_MediaHub_Controller
                 
                 $transcoding_job = $media->getMostRecentTranscodingJob();
                 
-                if ($media && $transcoding_job->isPending()) {
+                if ($transcoding_job && $transcoding_job->isPending()) {
                     throw new Exception('This media is being optimized. Please try back later.', 403);
                 }
 
