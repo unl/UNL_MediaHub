@@ -107,7 +107,7 @@ foreach ($media_hub_jobs->items as $media_hub_job) {
                 
                 //Delete input and output files
                 deleteInputFile($input_bucket, $input_key);
-                deleteOutputDirectory($input_bucket, $media->UUID);
+                deleteOutputDirectory($output_bucket, $media->UUID);
                 
                 //Update the job
                 $media_hub_job->status = UNL_MediaHub_TranscodingJob::STATUS_FINISHED;
