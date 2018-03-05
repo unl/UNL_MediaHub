@@ -10,121 +10,121 @@ use Aws\Exception\MultipartUploadException;
 
 //Establish mediahub connection
 $media_hub = new UNL_MediaHub();
+$db = Doctrine_Manager::getInstance()->getCurrentConnection();
 
-//TODO: what about re-establishing a connection?
+while (true) {
+    if (!$db->isConnected()) {
+        $db->connect();
+    }
+    
+    //Get all orders that have not been completed.
+    $media_hub_jobs = new UNL_MediaHub_TranscodingJobList(array('all_not_complete' => true));
 
-//TODO: do we need this?
-//$db = Doctrine_Manager::getInstance()->getCurrentConnection();
-
-//Get all orders that have not been completed.
-$media_hub_jobs = new UNL_MediaHub_TranscodingJobList(array('all_not_complete'=>true));
-
-/**
- * Order status life cycle:
- * 1. STATUS_SUBMITTED (order was created by mediahub, not yet created in aws)
- *      - upload video to s3, create job in mediaConvert
- * 2. STATUS_WORKING (order has been sent to aws, aws job ID has been saved)
- * ... poll AWS job for status
- * 3. STATUS_FINISHED (finished in aws, copied and deleted from s3)
- */
-
-$rev = UNL_MediaHub_RevAPI::getRevClient();
-
-if (!$rev) {
-    throw new Exception('Unable to get the Rev client', 500);
-}
-
-$has_output = false;
-
-//Loop through them and check with Rev.com to see their status.
-foreach ($media_hub_jobs->items as $media_hub_job) {
     /**
-     * @var $media_hub_job UNL_MediaHub_TranscodingJob
+     * Order status life cycle:
+     * 1. STATUS_SUBMITTED (order was created by mediahub, not yet created in aws)
+     *      - upload video to s3, create job in mediaConvert
+     * 2. STATUS_WORKING (order has been sent to aws, aws job ID has been saved)
+     * ... poll AWS job for status
+     * 3. STATUS_FINISHED (finished in aws, copied and deleted from s3)
      */
 
-    $media = $media_hub_job->getMedia();
+    $has_output = false;
 
-    $input_bucket = UNL_MediaHub::$transcode_input_bucket;
-    $output_bucket = UNL_MediaHub::$transcode_output_bucket;
-    $source = $media->getLocalFileName();
-    $input_extension = pathinfo($source, PATHINFO_EXTENSION);
-    $input_key = $media->UUID.'.'.$input_extension;
-    $input_arn = 's3://'.$input_bucket . '/' . $input_key;
-    $output_arn = 's3://'.$output_bucket . '/'.$media->UUID . '/media';
+    //Loop through them and check with Rev.com to see their status.
+    foreach ($media_hub_jobs->items as $media_hub_job) {
+        /**
+         * @var $media_hub_job UNL_MediaHub_TranscodingJob
+         */
 
-    switch ($media_hub_job->status) {
-        case UNL_MediaHub_TranscodingJob::STATUS_SUBMITTED:
-            echo "Creating job for " . $media_hub_job->id . PHP_EOL;
-            
-            //1. upload to s3
-            upload($source, $input_bucket, $input_key);
-            
-            $aspect_ratio = $media->getAspectRatio();
-            
-            //2. create job
-            $jobId = createHlsJob(
-                UNL_MediaHub::$transcode_mediaconvert_api_endpoint,
-                UNL_MediaHub::$transcode_mediaconvert_role,
-                $input_arn,
-                $output_arn,
-                $aspect_ratio
-            );
-            
-            $media_hub_job->job_id = $jobId;
-            $media_hub_job->status = UNL_MediaHub_TranscodingJob::STATUS_WORKING;
-            echo "\tJob Created". PHP_EOL;
-            break;
-        case UNL_MediaHub_TranscodingJob::STATUS_WORKING:
-            $mediaConvert = new \Aws\MediaConvert\MediaConvertClient([
-                'version' => '2017-08-29',
-                'region'  => 'us-east-1',
-                'endpoint' => UNL_MediaHub::$transcode_mediaconvert_api_endpoint,
-            ]);
-            
-            $job = $mediaConvert->getJob(array('Id'=>$media_hub_job->job_id));
-            $jobData = $job->get('Job');
-            //Status will be one of SUBMITTED|PROGRESSING|COMPLETE|CANCELED|ERROR
-            $jobData['Status'];
-            
-            if (in_array($jobData['Status'], array('SUBMITTED', 'PROGRESSING'))) {
-                //Still working... nothing to do... just update the dateupdated field
+        $media = $media_hub_job->getMedia();
+
+        $input_bucket = UNL_MediaHub::$transcode_input_bucket;
+        $output_bucket = UNL_MediaHub::$transcode_output_bucket;
+        $source = $media->getLocalFileName();
+        $input_extension = pathinfo($source, PATHINFO_EXTENSION);
+        $input_key = $media->UUID . '.' . $input_extension;
+        $input_arn = 's3://' . $input_bucket . '/' . $input_key;
+        $output_arn = 's3://' . $output_bucket . '/' . $media->UUID . '/media';
+
+        switch ($media_hub_job->status) {
+            case UNL_MediaHub_TranscodingJob::STATUS_SUBMITTED:
+                echo "Creating job for " . $media_hub_job->id . PHP_EOL;
+
+                //1. upload to s3
+                upload($source, $input_bucket, $input_key);
+
+                $aspect_ratio = $media->getAspectRatio();
+
+                //2. create job
+                $jobId = createHlsJob(
+                    UNL_MediaHub::$transcode_mediaconvert_api_endpoint,
+                    UNL_MediaHub::$transcode_mediaconvert_role,
+                    $input_arn,
+                    $output_arn,
+                    $aspect_ratio
+                );
+
+                $media_hub_job->job_id = $jobId;
+                $media_hub_job->status = UNL_MediaHub_TranscodingJob::STATUS_WORKING;
+                echo "\tJob Created" . PHP_EOL;
                 break;
-            } else if (in_array($jobData['Status'], array('CANCELED', 'ERROR'))) {
-                echo "Error for job " . $media_hub_job->id . PHP_EOL;
-                //Log error message
-                $media_hub_job->status = UNL_MediaHub_TranscodingJob::STATUS_ERROR;
-                $media_hub_job->error = $jobData['ErrorCode'] . ' : ' . $jobData['ErrorMessage'];
-                
-                //delete input file from S3
-                deleteInputFile($input_bucket, $input_key);
-                
-                echo "\tERROR: " . $media_hub_job->error;
-            } else {
-                echo "Job completed: " . $media_hub_job->id . PHP_EOL;
-                //it completed!
-                //Copy it over
-                downloadOutput($output_bucket, $media->UUID, $media);
-                
-                //Delete input and output files
-                deleteInputFile($input_bucket, $input_key);
-                deleteOutputDirectory($output_bucket, $media->UUID);
-                
-                //Update the job
-                $media_hub_job->status = UNL_MediaHub_TranscodingJob::STATUS_FINISHED;
-                
-                //Do some cache-busting on the media object
-                $media->dateupdated = date('Y-m-d H:i:s');
-                
-                echo "\trecord updated and s3 objected cleaned up " . $media_hub_job->id . PHP_EOL;
-            }
-            
-            break;
-        default:
-            throw new \Exception('This code should never execute');
+            case UNL_MediaHub_TranscodingJob::STATUS_WORKING:
+                $mediaConvert = new \Aws\MediaConvert\MediaConvertClient([
+                    'version' => '2017-08-29',
+                    'region' => 'us-east-1',
+                    'endpoint' => UNL_MediaHub::$transcode_mediaconvert_api_endpoint,
+                ]);
+
+                $job = $mediaConvert->getJob(array('Id' => $media_hub_job->job_id));
+                $jobData = $job->get('Job');
+                //Status will be one of SUBMITTED|PROGRESSING|COMPLETE|CANCELED|ERROR
+                $jobData['Status'];
+
+                if (in_array($jobData['Status'], array('SUBMITTED', 'PROGRESSING'))) {
+                    //Still working... nothing to do... just update the dateupdated field
+                    break;
+                } else if (in_array($jobData['Status'], array('CANCELED', 'ERROR'))) {
+                    echo "Error for job " . $media_hub_job->id . PHP_EOL;
+                    //Log error message
+                    $media_hub_job->status = UNL_MediaHub_TranscodingJob::STATUS_ERROR;
+                    $media_hub_job->error = $jobData['ErrorCode'] . ' : ' . $jobData['ErrorMessage'];
+
+                    //delete input file from S3
+                    deleteInputFile($input_bucket, $input_key);
+
+                    echo "\tERROR: " . $media_hub_job->error;
+                } else {
+                    echo "Job completed: " . $media_hub_job->id . PHP_EOL;
+                    //it completed!
+                    //Copy it over
+                    downloadOutput($output_bucket, $media->UUID, $media);
+
+                    //Delete input and output files
+                    deleteInputFile($input_bucket, $input_key);
+                    deleteOutputDirectory($output_bucket, $media->UUID);
+
+                    //Update the job
+                    $media_hub_job->status = UNL_MediaHub_TranscodingJob::STATUS_FINISHED;
+
+                    //Do some cache-busting on the media object
+                    $media->dateupdated = date('Y-m-d H:i:s');
+
+                    echo "\trecord updated and s3 objected cleaned up " . $media_hub_job->id . PHP_EOL;
+                    exit(12); //Restart the daemon after every completed job to help keep things fresh
+                }
+
+                break;
+            default:
+                throw new \Exception('This code should never execute');
+        }
+
+        $media_hub_job->dateupdated = date('Y-m-d H:i:s');
+        $media_hub_job->save();
     }
 
-    $media_hub_job->dateupdated = date('Y-m-d H:i:s');
-    $media_hub_job->save();
+    //Always wait a little bit between iterations
+    sleep(10);
 }
 
 if ($has_output) {
