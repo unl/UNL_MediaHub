@@ -286,6 +286,31 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     }
 
     /**
+     * Get the HLS master playlist path
+     * 
+     * @return string
+     */
+    public function getHLSPlaylistPath()
+    {
+        return UNL_MediaHub_Manager::getUploadDirectory() . '/'. $this->UUID . '/media.m3u8';
+    }
+    
+    public function getHLSPlaylistUrl()
+    {
+        return UNL_MediaHub_Controller::$url . 'uploads/' . $this->UUID . '/media.m3u8';
+    }
+
+    /**
+     * Determine if this video supports HLS
+     * 
+     * @return bool
+     */
+    public function hasHls()
+    {
+        return file_exists($this->getHLSPlaylistPath());
+    }
+
+    /**
      * @return UNL_MediaHub_TranscodingJob|false
      */
     public function getMostRecentTranscodingJob()

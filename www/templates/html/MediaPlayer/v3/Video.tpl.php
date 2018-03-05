@@ -35,6 +35,9 @@ if (isset($controller->options['captions'])) {
 
 ?>
 <video  class="wdn_player video-js" height="100" width="100" style="width:100%;height:100%" <?php echo $preload ?> src="<?php echo UNL_MediaHub_Controller::toAgnosticURL($context->getMediaURL()); ?>" controls data-mediahub-id="<?php echo $context->id ?>" data-url="<?php echo $controller->getURL($context); ?>" poster="<?php echo UNL_MediaHub_Controller::toAgnosticURL($context->getThumbnailURL()); ?>" title="<?php echo $context->title; ?>" crossorigin="anonymous" <?php echo $start_language ?>>
+    <?php if ($context->hasHLS()): ?>
+        <source src="<?php echo $context->getHLSPlaylistUrl() ?>" type="application/x-mpegURL">
+    <?php endif; ?>
     <source src="<?php echo $context->getMediaURL(); ?>" type='video/mp4'>
     <?php foreach ($context->getTextTrackURLs() as $lang=>$track):?>
         <track id="mediahub-track-<?php echo $lang ?>" src="<?php echo htmlentities(UNL_MediaHub_Controller::toAgnosticURL($track)) ?>" kind="captions" srclang="<?php echo $lang ?>" />

@@ -21,12 +21,21 @@
 <script type="text/javascript">
     (function () {
         <?php if (isset($context->media->id) && $context->media->id): ?>
-        var options = {
-            videoWidth: '100%',
-            videoHeight: '100%',
-            controls: true,
-            fluid: false
-        };
+            var options = {
+                videoWidth: '100%',
+                videoHeight: '100%',
+                controls: true,
+                fluid: false
+            };
+            
+            <?php if($context->media->hasHLS()): ?>
+                options.html5 = {
+                    hls: {
+                        //default to a reasonable bandwidth so that we load 720p by default (instead of 320p)
+                        bandwidth: 5000000
+                    }
+                };
+            <?php endif; ?>
         <?php endif; ?>
 
         $(function() {
