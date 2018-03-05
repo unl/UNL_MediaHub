@@ -88,12 +88,12 @@ while (true) {
                     echo "Error for job " . $media_hub_job->id . PHP_EOL;
                     //Log error message
                     $media_hub_job->status = UNL_MediaHub_TranscodingJob::STATUS_ERROR;
-                    $media_hub_job->error = $jobData['ErrorCode'] . ' : ' . $jobData['ErrorMessage'];
+                    $media_hub_job->error_text = $jobData['ErrorCode'] . ' : ' . $jobData['ErrorMessage'];
 
                     //delete input file from S3
                     deleteInputFile($input_bucket, $input_key);
 
-                    echo "\tERROR: " . $media_hub_job->error;
+                    echo "\tERROR: " . $media_hub_job->error_text;
                 } else {
                     echo "Job completed: " . $media_hub_job->id . PHP_EOL;
                     //it completed!
