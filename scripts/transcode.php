@@ -111,7 +111,6 @@ while (true) {
                     $media->dateupdated = date('Y-m-d H:i:s');
 
                     echo "\trecord updated and s3 objected cleaned up " . $media_hub_job->id . PHP_EOL;
-                    exit(12); //Restart the daemon after every completed job to help keep things fresh
                 }
 
                 break;
@@ -121,6 +120,10 @@ while (true) {
 
         $media_hub_job->dateupdated = date('Y-m-d H:i:s');
         $media_hub_job->save();
+        
+        if ($media_hub_job->isFinished()) {
+            exit(12); //Restart the daemon after every completed job to help keep things fresh
+        }
     }
 
     //Always wait a little bit between iterations
