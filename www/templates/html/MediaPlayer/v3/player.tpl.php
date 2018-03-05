@@ -7,7 +7,7 @@
     }
 
     $getTracks = $context->media->getTextTrackURLs();
-    $projection = $context->media->getProjection();
+    $is360 = $context->media->is360();
     ?>
 </div>
 
@@ -39,11 +39,7 @@
                 var videoElement = $media.get(0);
                 var id = $media.attr("id");
                 var startLanguage = $media.attr('data-start-language');
-                var projection = false;
-
-                <?php if(isset($projection)): ?>
-                projection = '<?php echo $projection; ?>';
-                <?php endif; ?>
+                var is360 = <?php echo json_encode($is360) ?>;
 
                 if ("undefined" !== typeof startLanguage) {
                     options.startLanguage = startLanguage;
@@ -112,7 +108,7 @@
                     var width = videoElement.offsetWidth;
                     var height = videoElement.offsetHeight;
                     player.width(width), player.height(height);
-                    if(projection === "equirectangular"){
+                    if(is360){
                         player.panorama({
                             clickToToggle: (!isMobile()),
                             clickAndDrag: true,

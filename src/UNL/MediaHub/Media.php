@@ -258,6 +258,20 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         }
         return false;
     }
+
+    /**
+     * Determine if this is a 360 video
+     * 
+     * @return bool
+     */
+    public function is360()
+    {
+        if (!$projection = $this->getProjection()) {
+            return false;
+        }
+
+        return $projection === 'equirectangular';
+    }
     
     /**
      * Check if this media is a video file.
