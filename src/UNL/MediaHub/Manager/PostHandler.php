@@ -503,6 +503,9 @@ class UNL_MediaHub_Manager_PostHandler
 
             //After upload, add captions
             $success_string = 'Your media has been uploaded and is now published. Please make sure that the media is captioned.';
+            if ($media->getMostRecentTranscodingJob()) {
+                $success_string = 'Your media has been uploaded and is being optimized.';
+            }
             if (UNL_MediaHub_Controller::$caption_requirement_date) {
                 $success_string = 'Your media has been uploaded but will not be published until it is captioned.';
             }
