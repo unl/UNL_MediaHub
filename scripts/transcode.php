@@ -29,8 +29,6 @@ while (true) {
      * 3. STATUS_FINISHED (finished in aws, copied and deleted from s3)
      */
 
-    $has_output = false;
-
     //Loop through them and check with Rev.com to see their status.
     foreach ($media_hub_jobs->items as $media_hub_job) {
         /**
@@ -49,7 +47,7 @@ while (true) {
 
         switch ($media_hub_job->status) {
             case UNL_MediaHub_TranscodingJob::STATUS_SUBMITTED:
-                echo "Creating job for " . $media_hub_job->id . PHP_EOL;
+                echo date("Y-m-d H:i:s") . ": Creating job for " . $media_hub_job->id . PHP_EOL;
 
                 //1. upload to s3
                 upload($source, $input_bucket, $input_key);
@@ -85,7 +83,7 @@ while (true) {
                     //Still working... nothing to do... just update the dateupdated field
                     break;
                 } else if (in_array($jobData['Status'], array('CANCELED', 'ERROR'))) {
-                    echo "Error for job " . $media_hub_job->id . PHP_EOL;
+                    echo date("Y-m-d H:i:s") . ": Error for job " . $media_hub_job->id . PHP_EOL;
                     //Log error message
                     $media_hub_job->status = UNL_MediaHub_TranscodingJob::STATUS_ERROR;
                     $media_hub_job->error_text = $jobData['ErrorCode'] . ' : ' . $jobData['ErrorMessage'];
@@ -95,7 +93,7 @@ while (true) {
 
                     echo "\tERROR: " . $media_hub_job->error_text;
                 } else {
-                    echo "Job completed: " . $media_hub_job->id . PHP_EOL;
+                    echo date("Y-m-d H:i:s") . ": Job completed: " . $media_hub_job->id . PHP_EOL;
                     //it completed!
                     //Copy it over
                     downloadOutput($output_bucket, $media->UUID, $media);
@@ -110,7 +108,7 @@ while (true) {
                     //Do some cache-busting on the media object
                     $media->dateupdated = date('Y-m-d H:i:s');
 
-                    echo "\trecord updated and s3 objected cleaned up " . $media_hub_job->id . PHP_EOL;
+                    echo "\trecord updated and s3 objects cleaned up " . $media_hub_job->id . PHP_EOL;
                 }
 
                 break;
@@ -128,10 +126,6 @@ while (true) {
 
     //Always wait a little bit between iterations
     sleep(10);
-}
-
-if ($has_output) {
-    echo "--FINISHED--" . PHP_EOL;
 }
 
 function downloadOutput($output_bucket, $key, UNL_MediaHub_Media $media)
