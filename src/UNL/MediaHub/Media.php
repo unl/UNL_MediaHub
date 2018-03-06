@@ -178,16 +178,32 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
      */
     function getAspectRatio()
     {
-        if (!$dimensions = $this->findVideoDimensions()) {
+        if (!$this->getLocalFileName()) {
+            //We need the media to be local to find the dimensions
+            return false;
+        }
+
+        try {
+            $mediainfo = UNL_MediaHub::getMediaInfo();
+            $details = $mediainfo->getInfo($this->getLocalFileName());
+            $videos = $details->getVideos();
+
+            if (!isset($videos[0])) {
+                //video track might be missing
+                return false;
+            }
+
+            $ratio = $videos[0]->get('display_aspect_ratio')->getTextvalue();
+
+        } catch (\Exception $e) {
             return false;
         }
         
-        $ratio = round($dimensions['width']/$dimensions['height'], 2);
-
-        if ($ratio <= 1.33) {
+        if ($ratio == '4:3') {
             return self::ASPECT_4x3;
         }
         
+        //Otherwise assume 16x9
         return self::ASPECT_16x9;
     }
 
