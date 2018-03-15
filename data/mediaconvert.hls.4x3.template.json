@@ -6,8 +6,7 @@
         "Outputs": [
           {
             "Preset": "mp4 4x3 720p",
-            "Extension": "mp4",
-            "NameModifier": ""
+            "Extension": "mp4"
           }
         ],
         "OutputGroupSettings": {
