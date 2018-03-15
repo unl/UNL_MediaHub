@@ -147,8 +147,8 @@ function downloadOutput($output_bucket, $key, UNL_MediaHub_Media $media)
     //Delete the original upload to save space
     unlink($media->getLocalFileName());
     
-    //Update the URL of the media to the media720.mp4 file
-    $media->url = UNL_MediaHub_Controller::getURL() . 'uploads/'.$media->UUID.'/media720.mp4';
+    //Update the URL of the media to the media.mp4 file
+    $media->url = UNL_MediaHub_Controller::getURL() . 'uploads/'.$media->UUID.'/media.mp4';
     $media->save();
 
     $poster_file = UNL_MediaHub::getRootDir() . '/www/uploads/thumbnails/'.$media->id.'/original.jpg';

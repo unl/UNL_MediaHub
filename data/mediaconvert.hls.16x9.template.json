@@ -5,9 +5,9 @@
         "Name": "File Group",
         "Outputs": [
           {
-            "Preset": "mp4 16x9 720p",
+            "Preset": "mp4 16x9 540p",
             "Extension": "mp4",
-            "NameModifier": "720"
+            "NameModifier": ""
           }
         ],
         "OutputGroupSettings": {
@@ -22,12 +22,16 @@
         "Name": "Apple HLS",
         "Outputs": [
           {
-            "Preset": "HLS 720p 16x9 single pass",
-            "NameModifier": "720p"
+            "Preset": "HLS 540p 16x9 single pass",
+            "NameModifier": "540p"
           },
           {
             "Preset": "HLS 480p 16x9 single pass",
             "NameModifier": "480p"
+          },
+          {
+            "Preset": "HLS 720p 16x9 single pass",
+            "NameModifier": "720p"
           },
           {
             "Preset": "HLS 1080p 16x9 single pass",

@@ -31,8 +31,8 @@
             <?php if($context->media->hasHLS()): ?>
                 options.html5 = {
                     hls: {
-                        //default to a reasonable bandwidth so that we load 720p by default (instead of 320p)
-                        bandwidth: 5000000
+                        //default to a reasonable bandwidth so that we load 540p by default and then go up or down if we need to
+                        bandwidth: 3200000
                     }
                 };
             <?php endif; ?>

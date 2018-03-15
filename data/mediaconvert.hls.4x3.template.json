@@ -7,7 +7,7 @@
           {
             "Preset": "mp4 4x3 720p",
             "Extension": "mp4",
-            "NameModifier": "720"
+            "NameModifier": ""
           }
         ],
         "OutputGroupSettings": {
@@ -22,12 +22,12 @@
         "Name": "Apple HLS",
         "Outputs": [
           {
-            "Preset": "HLS 720p 4x3 single pass",
-            "NameModifier": "720p"
-          },
-          {
             "Preset": "HLS 480p 4x3 single pass",
             "NameModifier": "480p"
+          },
+          {
+            "Preset": "HLS 720p 4x3 single pass",
+            "NameModifier": "720p"
           },
           {
             "Preset": "HLS 1080p 4x3 single pass",
