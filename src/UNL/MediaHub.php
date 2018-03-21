@@ -260,4 +260,14 @@ class UNL_MediaHub
 
     }
 
+    /**
+     * Escape an HTML string
+     * 
+     * @param $html
+     * @return string
+     */
+    public static function escape($html)
+    {
+        return htmlspecialchars($html, ENT_QUOTES, 'UTF-8', false);
+    }
 }

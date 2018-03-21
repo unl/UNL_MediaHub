@@ -291,6 +291,8 @@ function MediahubPlayer(options) {
         //Social Sharing via https://xparkmedia.com/blog/mediaelements-add-a-share-button-to-video-elements-using-jquery/
         var initSharing = function(t, v) {
             var $title = $video.attr('title');
+            $title = $("<div>").text($title).html(); //escape it
+            
             var share_url = $video.attr('data-url');
             var media_type = 'video';
             if (t.isAudio()) {

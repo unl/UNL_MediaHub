@@ -69,7 +69,7 @@ $getTracks = $context->getTextTrackURLs();
 
             </div>
             <div class="bp2-wdn-col-three-fourths">
-                <h1 class="wdn-brand clear-top"><?php echo $context->title; ?></h1>
+                <h1 class="wdn-brand clear-top"><?php echo UNL_MediaHub::escape($context->title); ?></h1>
                 <?php if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_itunes::mediaHasElement($context->id, 'subtitle')): ?>
                     <p class="wdn-sans-serif itunes_subtitle"><?php echo $element->value ?></p>
                 <?php endif; ?>
