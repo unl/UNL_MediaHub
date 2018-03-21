@@ -34,7 +34,7 @@
             <select id="mh-language-select" aria-label="select language for searchable transcript">
                 <?php $languageTracks = array_keys($tracks); ?>
                 <?php foreach ($languageTracks as $languageTrack): ?>
-                        <option value='<?php echo $languageTrack; ?>'> <?php echo $converter->filter($languageTrack); ?></option>
+                        <option value='<?php echo UNL_MediaHub::escape($languageTrack); ?>'> <?php echo UNL_MediaHub::escape($converter->filter($languageTrack)); ?></option>
                 <?php endforeach; ?>
             </select>
         </div>

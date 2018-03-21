@@ -31,7 +31,7 @@ if($context->options['orderby'] == 'datecreated'){
         <div class="mh-list-header">
             <div class="wdn-grid-set">
                 <div class="bp2-wdn-col-three-fourths">
-                    <h1 class="wdn-brand clear-top"><?php echo $label; ?></h1>
+                    <h1 class="wdn-brand clear-top"><?php echo UNL_MediaHub::escape($label); ?></h1>
                     <?php if (count($context->items) && $context->pager->getLastPage() > 1): ?>
                         <p>Page <?php echo $context->pager->getPage() ?> of <?php echo $context->pager->getLastPage() ?></p>
                     <?php endif; ?>
@@ -84,7 +84,7 @@ if($context->options['orderby'] == 'datecreated'){
                 <ul class="mh-feed-list">
                     <?php foreach ($context->items as $feed): ?>
                         <li>
-                            <?php $url = htmlentities(UNL_MediaHub_Controller::getURL($feed), ENT_QUOTES) ?>
+                            <?php $url = UNL_MediaHub::escape(UNL_MediaHub_Controller::getURL($feed)) ?>
                             <h2 class="wdn-brand"><a href="<?php echo $url ?>"><?php echo htmlentities($feed->title) ?></a></h2>
                             <div class="wdn-grid-set">
                                 <div class="bp2-wdn-col-one-fourth wdn-pull-right">
@@ -93,11 +93,11 @@ if($context->options['orderby'] == 'datecreated'){
                                         <?php if($feed->hasImage()): ?>
                                             <img
                                             src="<?php echo $url; ?>/image"
-                                            alt="<?php echo htmlentities($feed->title, ENT_QUOTES); ?> Image">
+                                            alt="<?php echo UNL_MediaHub::escape($feed->title); ?> Image">
                                         <?php else: ?>
                                             <div>
                                                 <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon.svg">
-                                                    <img src="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon-white.png" alt="<?php echo htmlentities($feed->title, ENT_QUOTES); ?> Image">
+                                                    <img src="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon-white.png" alt="<?php echo UNL_MediaHub::escape($feed->title); ?> Image">
                                                 </object>
                                             </div>
                                         <?php endif; ?>
@@ -105,7 +105,7 @@ if($context->options['orderby'] == 'datecreated'){
                                     </a>
                                 </div>
                                 <div class="bp2-wdn-col-three-fourths">
-                                    <p><?php echo htmlentities($feed->description) ?></p>
+                                    <p><?php echo UNL_MediaHub::escape($feed->description) ?></p>
                                     <div class="wdn-grid-set">
                                         <div class="bp2-wdn-col-two-thirds mh-media-samples">
                                             <?php echo $savvy->render($feed->getMediaList(), 'CompactMediaList.tpl.php') ?>

@@ -5,5 +5,5 @@
         $prefix = 'Audio Player: ';
     }
     ?>
-    <iframe src="<?php echo $controller->getURL($context->media)?>?format=iframe&autoplay=0" title="<?php echo $prefix ?> <?php echo htmlentities($context->media->title) ?>" allowfullscreen></iframe>
+    <iframe src="<?php echo $controller->getURL($context->media)?>?format=iframe&autoplay=0" title="<?php echo $prefix ?> <?php echo UNL_MediaHub::escape($context->media->title) ?>" allowfullscreen></iframe>
 </div>

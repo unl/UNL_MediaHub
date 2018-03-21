@@ -59,7 +59,7 @@
                                         </p>
                                     </div>
                                 </div>
-                                <input id="title" name="title" type="text" aria-describedby="title-details" value="<?php echo (isset($context->feed))? htmlentities($context->feed->title, ENT_QUOTES):''; ?>" size="55" />
+                                <input id="title" name="title" type="text" aria-describedby="title-details" value="<?php echo (isset($context->feed))? UNL_MediaHub::escape($context->feed->title):''; ?>" size="55" />
                             </li>
                             <li>
                                 <label for="description">Description<span class="required">*</span></label>
@@ -136,7 +136,7 @@
                         if (isset($context->feed)) {
                             $class = 'UNL_MediaHub_Feed_NamespacedElements_'.$xmlns;
                             if ($element = call_user_func($class .'::feedHasElement', $context->feed->id, $element, $xmlns)) {
-                                return htmlentities($element->value, ENT_QUOTES);
+                                return UNL_MediaHub::escape($element->value);
                             }
                         }
                         return '';
@@ -146,7 +146,7 @@
                         if (isset($context->feed)) {
                             $class = 'UNL_MediaHub_Feed_NamespacedElements_'.$xmlns;
                             if ($element = call_user_func($class .'::feedHasElement', $context->feed->id, $element, $xmlns)) {
-                                return htmlentities(serialize($element->attributes), ENT_QUOTES);
+                                return UNL_MediaHub::escape(serialize($element->attributes));
                             }
                         }
                         return '';

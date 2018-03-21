@@ -1,4 +1,4 @@
-<h1 class="wdn-brand"><?php if (isset($context->options['feed'])) { echo $context->options['feed']->title; } ?> Channel - User Manager</h1>
+<h1 class="wdn-brand"><?php if (isset($context->options['feed'])) { echo UNL_MediaHub::escape($context->options['feed']->title); } ?> Channel - User Manager</h1>
 
 <ul id="userList">
     <?php foreach ($context->items as $user):?>
@@ -6,11 +6,11 @@
             <img class="profile_pic medium" src="http://planetred.unl.edu/pg/icon/unl_<?php echo str_replace('-', '_', $user->uid) ?>/medium/" />
             <?php $fullName = @UNL_Services_Peoplefinder::getFullName($user->uid); ?>
             <?php if($fullName): ?>
-                <?php echo $fullName; ?>
+                <?php echo UNL_MediaHub::escape($fullName); ?>
             <?php else: ?>
                 <span class="mh-unknown">Unknown User!</span>
             <?php endif; ?>
-            <span class="uid"><?php echo $user->uid ?></span>
+            <span class="uid"><?php echo UNL_MediaHub::escape($user->uid) ?></span>
             <?php echo $savvy->render($user, 'DeleteUserForm.tpl.php'); ?>
         </li>
     <?php endforeach ?>

@@ -13,17 +13,17 @@
                                 <?php if($feed->hasImage()): ?>
                                     <img
                                     src="<?php echo $feed_url; ?>/image"
-                                    alt="<?php echo htmlentities($feed->title, ENT_QUOTES); ?> Image">
+                                    alt="<?php echo UNL_MediaHub::escape($feed->title); ?> Image">
                                 <?php else: ?>
                                     <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon.svg">
-                                        <img src="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon-white.png" alt="<?php echo htmlentities($feed->title, ENT_QUOTES); ?> Image">
+                                        <img src="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon-white.png" alt="<?php echo UNL_MediaHub::escape($feed->title); ?> Image">
                                     </object>
                                 <?php endif; ?>
                             </div>
                         </div>
                         <div class="mh-video-label wdn-center">
                             <p>
-                                <?php echo $feed->title; ?>
+                                <?php echo UNL_MediaHub::escape($feed->title); ?>
                             </p>
                         </div>
                     </a>

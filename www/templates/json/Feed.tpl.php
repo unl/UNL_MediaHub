@@ -1,8 +1,8 @@
 <?php
 echo '{
         "id":'.$context->id.',
-        "title":"'.$context->title.'",
-        "description":"'.$context->description.'",
+        "title":"'.UNL_MediaHub::escape($context->title).'",
+        "description":"'.UNL_MediaHub::escape($context->description).'",
         "image":"'.UNL_MediaHub_Controller::getURL($context).'/image",
         "link":"'.UNL_MediaHub_Controller::getURL($context).'",
         "pubDate":"'.$context->datecreated.'",
