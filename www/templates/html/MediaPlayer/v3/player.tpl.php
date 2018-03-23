@@ -96,7 +96,7 @@
                     
                     player.toggleSingleCaptionTrack({activeColor: "#D00000"});
                     player.MediahubPlayer({
-                        privacy: "<?php echo $context->media->privacy; ?>",
+                        privacy: "<?php echo UNL_MediaHub::escape($context->media->privacy); ?>",
                         url:'<?php echo UNL_MediaHub_Controller::toAgnosticURL($controller->getURL($context->media)); ?>'
                     });
 

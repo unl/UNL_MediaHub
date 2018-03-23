@@ -38,12 +38,12 @@ if(!empty($context->options['f'])){
                     <?php if ($context->options['filter']->getType() == 'search'): ?>
                         <h1 class="wdn-brand clear-top">
                             <span class="wdn-subhead">Search results for</span>
-                            <?php echo htmlentities($context->options['filter']->getValue()) ?>
+                            <?php echo UNL_MediaHub::escape($context->options['filter']->getValue()) ?>
                         </h1>
                     <?php elseif ($context->options['filter']->getType() == 'feed'): ?>
-                        <h2 class="wdn-brand clear-top"><?php echo $label ?></h2>
+                        <h2 class="wdn-brand clear-top"><?php echo UNL_MediaHub::escape($label) ?></h2>
                     <?php else: ?>
-                        <h1 class="wdn-brand clear-top"><?php echo $label ?></h1>
+                        <h1 class="wdn-brand clear-top"><?php echo UNL_MediaHub::escape($label) ?></h1>
                     <?php endif; ?>
                     <?php if (count($context->items) && $context->pager->getLastPage() > 1): ?>
                         <p>Page <?php echo $context->pager->getPage() ?> of <?php echo $context->pager->getLastPage() ?></p>
@@ -139,7 +139,7 @@ if(!empty($context->options['f'])){
                 </h2>
                 <ul class="mh-channel-buttons">
                     <?php foreach ($feeds->items as $feed): ?>
-                        <li><a class="wdn-button wdn-button-complement" href="<?php echo UNL_MediaHub_Controller::getURL($feed); ?>"><span class="wdn-icon wdn-icon-rocket" aria-hidden="true"></span><?php echo $feed->title ?></a></li>
+                        <li><a class="wdn-button wdn-button-complement" href="<?php echo UNL_MediaHub_Controller::getURL($feed); ?>"><span class="wdn-icon wdn-icon-rocket" aria-hidden="true"></span><?php echo UNL_MediaHub::escape($feed->title) ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>

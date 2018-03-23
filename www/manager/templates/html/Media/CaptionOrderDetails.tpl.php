@@ -27,7 +27,7 @@
                         <option value="stl">.stl</option>
                     </select>
                     <input type="hidden" name="__unlmy_posttarget" value="download_rev" />
-                    <input type="hidden" name="order_id" value="<?php echo $context->order->id ?>" />
+                    <input type="hidden" name="order_id" value="<?php echo (int)$context->order->id ?>" />
                     <input type="submit" value="Download">
                 </form>
             </div>
@@ -35,19 +35,19 @@
             <div class="bp2-wdn-col-one-third">
                 <dl>
                     <dt>Order Number</dt>
-                    <dd><?php echo $context->order->id ?></dd>
+                    <dd><?php echo (int)$context->order->id ?></dd>
                     <dt>Date created</dt>
-                    <dd><?php echo $context->order->datecreated ?></dd>
+                    <dd><?php echo UNL_MediaHub::escape($context->order->datecreated) ?></dd>
                     <dt>Last Updated</dt>
-                    <dd><?php echo $context->order->dateupdated ?></dd>
+                    <dd><?php echo UNL_MediaHub::escape($context->order->dateupdated) ?></dd>
                     <dt>Cost Object Number</dt>
-                    <dd><?php echo $context->order->costobjectnumber ?></dd>
+                    <dd><?php echo UNL_MediaHub::escape($context->order->costobjectnumber) ?></dd>
                     <dt>Created By</dt>
-                    <dd><?php echo $context->order->uid ?></dd>
+                    <dd><?php echo UNL_MediaHub::escape($context->order->uid) ?></dd>
                     <dt>Status of order</dt>
-                    <dd><?php echo $context->order->status ?></dd>
+                    <dd><?php echo UNL_MediaHub::escape($context->order->status) ?></dd>
                     <dt>Cost</dt>
-                    <dd><?php echo $context->order->estimate ?></dd>
+                    <dd><?php echo UNL_MediaHub::escape($context->order->estimate) ?></dd>
                 </dl>
             </div>
         </div>

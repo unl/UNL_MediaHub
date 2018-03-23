@@ -1,11 +1,11 @@
 <?php
-$controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'manager/">Manage Media</a></li> <li><a href="' . $context->media->getURL() .'">'.htmlspecialchars($context->media->title).'</a></li> <li>Edit Captions</li></ul>');
+$controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'manager/">Manage Media</a></li> <li><a href="' . $context->media->getURL() .'">'.UNL_MediaHub::escape($context->media->title).'</a></li> <li>Edit Captions</li></ul>');
 ?>
 
 <div class="wdn-band">
     <div class="wdn-inner-wrapper wdn-inner-padding-no-top">
-        <h1>Manage Captions for: <?php echo $context->media->title ?></h1>
-        <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=addmedia&id=' . $context->media->id?>" class="wdn-button">Edit Media</a>
+        <h1>Manage Captions for: <?php echo UNL_MediaHub::escape($context->media->title) ?></h1>
+        <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=addmedia&id=' . (int)$context->media->id?>" class="wdn-button">Edit Media</a>
         <a href="<?php echo $context->media->getURL()?>" class="wdn-button">View Media</a>
     </div>
 </div>
@@ -49,9 +49,9 @@ $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl
                     <form method="post">
                         <?php if ($duration = $context->media->findDuration()): ?>
                             <?php $estimate = ceil($duration->getTotalSeconds()/60); ?>
-                            <input type="hidden" name="media_duration" value="<?php echo $duration->getString(); ?>" />
-                            <input type="hidden" name="estimate" value="<?php echo $estimate ?>" />
-                            <h3 class="clear-top">Caption your video for <strong>$<?php echo $estimate ?>.</strong></h3>  
+                            <input type="hidden" name="media_duration" value="<?php echo UNL_MediaHub::escape($duration->getString()); ?>" />
+                            <input type="hidden" name="estimate" value="<?php echo UNL_MediaHub::escape($estimate) ?>" />
+                            <h3 class="clear-top">Caption your video for <strong>$<?php echo UNL_MediaHub::escape($estimate) ?>.</strong></h3>  
                         <?php else: ?>
                             <p>
                                 We were unable to find the duration of the video, and can not estimate the cost.
@@ -66,7 +66,7 @@ $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl
                             </li>
                         </ul>
                         <input type="hidden" name="__unlmy_posttarget" value="order_rev" />
-                        <input type="hidden" name="media_id" value="<?php echo $context->media->id ?>" />
+                        <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
                         <input type="submit" value="Order captions">
                         <p class="wdn-icon wdn-icon-attention wdn-sans-serif">Orders can not be canceled.</p>
                     </form>
@@ -98,7 +98,7 @@ $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl
                 <a class="wdn-button wdn-button-brand" href="<?php echo $context->getEditCaptionsURL(); ?>">Edit Captions on amara</a><br><br>
                 <form method="post">
                     <input type="hidden" name="__unlmy_posttarget" value="pull_amara" />
-                    <input type="hidden" name="media_id" value="<?php echo $context->media->id ?>" />
+                    <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
                     <input type="submit" value="Pull Captions from amara.org">
                 </form>
             </div>
@@ -126,22 +126,22 @@ $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl
             <?php foreach ($orders as $order): ?>
                 <tr>
                     <td data-header="Order Number">
-                        <?php echo $order->id ?>
+                        <?php echo (int)$order->id ?>
                     </td>
                     <td data-header="Date of order">
-                        <?php echo $order->datecreated ?>
+                        <?php echo UNL_MediaHub::escape($order->datecreated) ?>
                     </td>
                     <td data-header="Requester">
-                        <?php echo $order->uid ?>
+                        <?php echo UNL_MediaHub::escape($order->uid) ?>
                     </td>
                     <td data-header="Status of order">
                         <?php echo $order->status ?>
                         <?php if (UNL_MediaHub_RevOrder::STATUS_ERROR == $order->status): ?>
-                            -- <?php echo $order->error_text ?>
+                            -- <?php echo UNL_MediaHub::escape($order->error_text) ?>
                         <?php endif; ?>
                     </td>
                     <td data-header="Cost">
-                        $<?php echo $order->estimate ?>
+                        $<?php echo UNL_MediaHub::escape($order->estimate) ?>
                     </td>
                     <td data-header="Actions">
                         <a href="<?php echo $order->getDetailsURL() ?>">view details</a>
@@ -168,20 +168,20 @@ $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl
                 <?php foreach ($text_tracks as $track): ?>
                     <tr>
                         <td data-header="Date of caption track">
-                            <?php echo $track->datecreated ?>
+                            <?php echo UNL_MediaHub::escape($track->datecreated) ?>
                         </td>
                         <td data-header="Source">
-                            <?php echo $track->source ?>
+                            <?php echo UNL_MediaHub::escape($track->source) ?>
                         </td>
                         <td data-header="Comments">
-                            <?php echo $track->revision_comment ?>
+                            <?php echo UNL_MediaHub::escape($track->revision_comment) ?>
                         </td>
                         <td data-header="Files">
                             <ul>
                                 <?php foreach ($track->getFiles()->items as $file): ?>
                                     <li>
-                                        <a href="<?php echo $file->getURL() ?>&amp;download=1" target="_blank"><?php echo $file->language ?>.<?php echo $file->format ?></a>,
-                                        <a href="<?php echo $file->getSrtURL() ?>&amp;download=1" target="_blank"><?php echo $file->language ?>.srt</a>
+                                        <a href="<?php echo $file->getURL() ?>&amp;download=1" target="_blank"><?php echo UNL_MediaHub::escape($file->language) ?>.<?php echo $file->format ?></a>,
+                                        <a href="<?php echo $file->getSrtURL() ?>&amp;download=1" target="_blank"><?php echo UNL_MediaHub::escape($file->language) ?>.srt</a>
                                     </li>
                                 <?php endforeach; ?>
                             </ul>
@@ -192,8 +192,8 @@ $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl
                             <?php else: ?>
                                 <form method="post">
                                     <input type="hidden" name="__unlmy_posttarget" value="set_active_text_track" />
-                                    <input type="hidden" name="media_id" value="<?php echo $context->media->id ?>" />
-                                    <input type="hidden" name="text_track_id" value="<?php echo $track->id ?>" />
+                                    <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
+                                    <input type="hidden" name="text_track_id" value="<?php echo (int)$track->id ?>" />
                                     <input type="submit" value="Set Active">
                                 </form>
                             <?php endif; ?>

@@ -69,9 +69,9 @@ $getTracks = $context->getTextTrackURLs();
 
             </div>
             <div class="bp2-wdn-col-three-fourths">
-                <h1 class="wdn-brand clear-top"><?php echo $context->title; ?></h1>
+                <h1 class="wdn-brand clear-top"><?php echo UNL_MediaHub::escape($context->title); ?></h1>
                 <?php if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_itunes::mediaHasElement($context->id, 'subtitle')): ?>
-                    <p class="wdn-sans-serif itunes_subtitle"><?php echo $element->value ?></p>
+                    <p class="wdn-sans-serif itunes_subtitle"><?php echo UNL_MediaHub::escape($element->value) ?></p>
                 <?php endif; ?>
                 <?php
                 $purifier = new HTMLPurifier();
@@ -86,7 +86,7 @@ $getTracks = $context->getTextTrackURLs();
                 <div class="mh-authoring wdn-grid-set wdn-center">
                     <?php if (!empty($context->author)): // @TODO present author with more info (standardize people records) ?>
                         <div class="wdn-col-one-third mh-stat">
-                            <span class="mh-count wdn-brand"><?php echo $context->author; ?></span>
+                            <span class="mh-count wdn-brand"><?php echo UNL_MediaHub::escape($context->author); ?></span>
                             <span class="mh-context wdn-sans-serif">Author</span>
                         </div>
                     <?php endif; ?>
@@ -95,7 +95,7 @@ $getTracks = $context->getTextTrackURLs();
                         <span class="mh-context wdn-sans-serif">Added</span>
                     </div>
                     <div class="wdn-col-one-third mh-stat">
-                        <span class="mh-count wdn-brand"><?php echo $context->play_count ?></span>
+                        <span class="mh-count wdn-brand"><?php echo UNL_MediaHub::escape($context->play_count) ?></span>
                         <span class="mh-context wdn-sans-serif">Plays</span>
                     </div>
                 </div>
@@ -117,7 +117,7 @@ $getTracks = $context->getTextTrackURLs();
                     <ul id="mediaTags" class="wdn-sans-serif">
                         <li class="wdn-sans-serif mh-tag-label">Tags:</li>
                         <?php foreach ($tags as $tag): ?>
-                            <li><a href="<?php echo UNL_MediaHub_Controller::$url.'tags/'.urlencode(trim($tag)) ?>"><?php echo $tag ?></a></li>
+                            <li><a href="<?php echo UNL_MediaHub_Controller::$url.'tags/'.urlencode(trim($tag)) ?>"><?php echo UNL_MediaHub::escape($tag) ?></a></li>
                         <?php endforeach; ?>
                         <?php if ($user && $context->userCanEdit($user)): ?>
                             <li id="mediaTagsAdd">
@@ -151,9 +151,9 @@ $getTracks = $context->getTextTrackURLs();
                                     <?php if ($name = UNL_Services_Peoplefinder::getFullName($comment['uid'])): ?>
                                     <?php endif; ?>
 
-                                    <blockquote><?php echo htmlentities(strip_tags($comment['comment']), ENT_QUOTES); ?></blockquote>
+                                    <blockquote><?php echo UNL_MediaHub::escape(strip_tags($comment['comment'])); ?></blockquote>
                                     <div class="mh-user">
-                                        <img alt="Your Profile Pic" src="http://planetred.unl.edu/pg/icon/unl_<?php echo $comment['uid']; ?>/small/" class="profile_pic small"> 
+                                        <img alt="Your Profile Pic" src="http://planetred.unl.edu/pg/icon/unl_<?php echo UNL_MediaHub::escape($comment['uid']); ?>/small/" class="profile_pic small"> 
                                         <div class="commenter wdn-sans-serif sec_header clear-top"><?php echo $name; ?></div>
                                         <em><?php echo date('m/d/y g:i a', strtotime($comment['datecreated'])); ?></em>
                                     </div>

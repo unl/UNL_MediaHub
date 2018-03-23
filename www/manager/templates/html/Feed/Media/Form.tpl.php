@@ -22,7 +22,7 @@ if (isset($context->media)) {
     }
     $formView .= 'edit';
 
-    $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'manager/">Manage Media</a></li> <li><a href="' . $context->media->getURL() .'">'.htmlspecialchars($context->media->title).'</a></li>');
+    $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'manager/">Manage Media</a></li> <li><a href="' . $context->media->getURL() .'">'.UNL_MediaHub::escape($context->media->title).'</a></li>');
 } else {
     $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'manager/">Manage Media</a></li> <li>Add Media</li></ul>');
 }
@@ -99,10 +99,10 @@ $controller->setReplacementData('head', $js);
             <?php if (!$transcoding_job && !$context->media->isWebSafe()): ?>
                 <div class="wdn_notice alert mh-caption-alert">
                     <div class="message">
-                        <h2>This video might not work on the web!</h2>
+                        <h4>This video might not work on the web!</h4>
                         <div class="mh-caption-band">
                             <p>
-                                This video was encoded with '<?php echo $context->media->getCodec() ?>', which is not safe for the web, and might not work on every device/browser. Please run the video through HandBrake and swap the video out.
+                                This video was encoded with '<?php echo UNL_MediaHub::escape($context->media->getCodec()) ?>', which is not safe for the web, and might not work on every device/browser. Please run the video through HandBrake and swap the video out.
                             </p>
                             <p>
                                 <a class="wdn-button" href="http://wdn.unl.edu/documentation/unl-mediahub/using-handbrake">How to use HandBrake</a>
@@ -110,7 +110,7 @@ $controller->setReplacementData('head', $js);
                         </div>
                     </div>
                 </div>
-
+            
                 <script type="text/javascript">
                     WDN.initializePlugin('notice');
                 </script>
@@ -125,7 +125,7 @@ $controller->setReplacementData('head', $js);
                             <li>Click the "Set Image" button to save this as your image representation.</li>
                             <li>Continue with the form below.</li>
                         </ol>
-    
+
                         <div id="imageOverlay">
                             <p>We're updating your image, this may take a few minutes depending on video length. <strong>Now is a good time to make sure the information below is up to snuff!</strong></p>
                         </div>
@@ -225,7 +225,7 @@ $controller->setReplacementData('head', $js);
                             <label for="title" class="element">
                                 Title<span class="required">*</span>
                             </label>
-                            <input id="title" name="title" type="text" class="required-entry" value="<?php echo htmlentities(@$context->media->title, ENT_QUOTES); ?>" />
+                            <input id="title" name="title" type="text" class="required-entry" value="<?php echo UNL_MediaHub::escape(@$context->media->title); ?>" />
                         </div>
                         
                         <div class="wdn-grid-set">
@@ -236,7 +236,7 @@ $controller->setReplacementData('head', $js);
                                             Author<span class="required">*</span> <span class="helper">Name of media creator.</span>
                                         </label>
                                         <div class="element">
-                                            <input id="author" name="author" class="required-entry" type="text" value="<?php echo htmlentities(@$context->media->author, ENT_QUOTES); ?>" />
+                                            <input id="author" name="author" class="required-entry" type="text" value="<?php echo UNL_MediaHub::escape(@$context->media->author); ?>" />
                                         </div>
                                     </li>
                                     <li>
@@ -294,7 +294,7 @@ $controller->setReplacementData('head', $js);
                                         <p>Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.</p>
                                     </div>
                                 </div>
-                                <div class="element" id="description_wrapper"><textarea id="description" name="description" class="required-entry" rows="5" aria-describedby="description-details"><?php echo htmlentities(@$context->media->description); ?></textarea></div>
+                                <div class="element" id="description_wrapper"><textarea id="description" name="description" class="required-entry" rows="5" aria-describedby="description-details"><?php echo UNL_MediaHub::escape(@$context->media->description); ?></textarea></div>
                             </li>
 
                             <li>
@@ -644,7 +644,7 @@ $controller->setReplacementData('head', $js);
                     if (isset($savant->media)) {
                         $class = 'UNL_MediaHub_Feed_Media_NamespacedElements_'.$xmlns;
                         if ($element = call_user_func($class .'::mediaHasElement', $savant->media->id, $element, $xmlns)) {
-                            return htmlentities($element->value, ENT_QUOTES);
+                            return UNL_MediaHub::escape($element->value);
                         }
                     }
                     return '';
@@ -654,7 +654,7 @@ $controller->setReplacementData('head', $js);
                     if (isset($savant->media)) {
                         $class = 'UNL_MediaHub_Feed_Media_NamespacedElements_'.$xmlns;
                         if ($element = call_user_func($class .'::mediaHasElement', $savant->media->id, $element, $xmlns)) {
-                            return htmlentities(serialize($element->attributes), ENT_QUOTES);
+                            return UNL_MediaHub::escape(serialize($element->attributes));
                         }
                     }
                     return '';

@@ -1,12 +1,12 @@
 <?php
-$details = array('id'          => $context->id,
+$details = array('id'          => (int)$context->id,
                  'url'         => $context->getMediaURL(),
-                 'title'       => $context->title,
-                 'description' => $context->description,
-                 'length'      => $context->length,
+                 'title'       => UNL_MediaHub::escape($context->title),
+                 'description' => UNL_MediaHub::escape($context->description),
+                 'length'      => (int)$context->length,
                  'image'       => UNL_MediaHub_Controller::getURL($context).'/image',
-                 'type'        => $context->type,
-                 'author'      => $context->author,
+                 'type'        => UNL_MediaHub::escape($context->type),
+                 'author'      => UNL_MediaHub::escape($context->author),
                  'link'        => UNL_MediaHub_Controller::getURL($context),
                  'pubDate'     => $context->datecreated,
                  'dateupdated' => $context->dateupdated);
