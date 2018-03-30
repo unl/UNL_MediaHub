@@ -35,8 +35,13 @@ class UNL_MediaHub_Media_EditCaptions
 
     public function getEditCaptionsURL()
     {
+        $job = $this->media->getMostRecentTranscodingJob();
+        if ($job && !$job->isFinished()) {
+            //Can't edit captions until job is done
+            return false;
+        }
+        
         $amara_api = new UNL_MediaHub_AmaraAPI();
-
         return $amara_api->getCaptionEditURL($this->media->url);
     }
 

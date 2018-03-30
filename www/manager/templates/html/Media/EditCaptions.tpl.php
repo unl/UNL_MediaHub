@@ -95,12 +95,17 @@ $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl
                 </ol>
             </div>
             <div class="bp2-wdn-col-one-third">
-                <a class="wdn-button wdn-button-brand" href="<?php echo $context->getEditCaptionsURL(); ?>">Edit Captions on amara</a><br><br>
-                <form method="post">
-                    <input type="hidden" name="__unlmy_posttarget" value="pull_amara" />
-                    <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
-                    <input type="submit" value="Pull Captions from amara.org">
-                </form>
+                <?php $edit_captions_url = $context->getEditCaptionsURL(); ?>
+                <?php if (!$edit_captions_url): ?>
+                    <p>Please wait for your video to be optimized before captioning on Amara</p>
+                <?php else: ?>
+                    <a class="wdn-button wdn-button-brand" href="<?php echo $context->getEditCaptionsURL(); ?>">Edit Captions on amara</a><br><br>
+                    <form method="post">
+                        <input type="hidden" name="__unlmy_posttarget" value="pull_amara" />
+                        <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
+                        <input type="submit" value="Pull Captions from amara.org">
+                    </form>
+                <?php endif ?>
             </div>
         </div>
     </div>
