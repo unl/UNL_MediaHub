@@ -1,9 +1,13 @@
 <?php
 
 
+use Ramsey\Uuid\Uuid;
+
 class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_MediaHub_MediaInterface
 {
     const CODEC_REMOTE_VIDEO = 'remote-video-is-unknown';
+    const ASPECT_16x9 = '16:9';
+    const ASPECT_4x3 = '4:3';
     
     /**
      * Get a piece of media by PK.
@@ -61,6 +65,8 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
      */
     public function preInsert($event)
     {
+        $uuid = Uuid::uuid1();
+        $this->UUID = $uuid->toString();
         $this->setContentType();
     }
 
@@ -128,8 +134,6 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
             return array('width'=>$element->attributes['width'], 'height'=>$element->attributes['height']);
         }
         
-        //TODO: shit man, we are referencing the thumbnail URL, not the freaking VIDEO!
-        
         return $this->findVideoDimensions();
     }
     
@@ -151,8 +155,8 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
             }
 
             $width = $videos[0]->get('width')->getAbsoluteValue();
-            $height = $width = $videos[0]->get('height')->getAbsoluteValue();
-            
+            $height = $videos[0]->get('height')->getAbsoluteValue();
+
             if (!$width || !$height) {
                 return false;
             }
@@ -165,6 +169,42 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         } catch (\Exception $e) {
             return false;
         }
+    }
+
+    /**
+     * Get the aspect ratio of the video. Only supports 4x3 or 16x9
+     * 
+     * @return bool|string
+     */
+    function getAspectRatio()
+    {
+        if (!$this->getLocalFileName()) {
+            //We need the media to be local to find the dimensions
+            return false;
+        }
+
+        try {
+            $mediainfo = UNL_MediaHub::getMediaInfo();
+            $details = $mediainfo->getInfo($this->getLocalFileName());
+            $videos = $details->getVideos();
+
+            if (!isset($videos[0])) {
+                //video track might be missing
+                return false;
+            }
+
+            $ratio = $videos[0]->get('display_aspect_ratio')->getTextvalue();
+
+        } catch (\Exception $e) {
+            return false;
+        }
+        
+        if ($ratio == '4:3') {
+            return self::ASPECT_4x3;
+        }
+        
+        //Otherwise assume 16x9
+        return self::ASPECT_16x9;
     }
 
     /**
@@ -234,6 +274,20 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         }
         return false;
     }
+
+    /**
+     * Determine if this is a 360 video
+     * 
+     * @return bool
+     */
+    public function is360()
+    {
+        if (!$projection = $this->getProjection()) {
+            return false;
+        }
+
+        return $projection === 'equirectangular';
+    }
     
     /**
      * Check if this media is a video file.
@@ -245,6 +299,51 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     public function isVideo()
     {
         return UNL_MediaHub::isVideo($this->type);
+    }
+
+    /**
+     * Get the HLS master playlist path
+     * 
+     * @return string
+     */
+    public function getHLSPlaylistPath()
+    {
+        return UNL_MediaHub_Manager::getUploadDirectory() . '/'. $this->UUID . '/media.m3u8';
+    }
+    
+    public function getHLSPlaylistUrl()
+    {
+        return UNL_MediaHub_Controller::$url . 'uploads/' . $this->UUID . '/media.m3u8';
+    }
+
+    /**
+     * Determine if this video supports HLS
+     * 
+     * @return bool
+     */
+    public function hasHls()
+    {
+        return file_exists($this->getHLSPlaylistPath());
+    }
+
+    /**
+     * @return UNL_MediaHub_TranscodingJob|false
+     */
+    public function getMostRecentTranscodingJob()
+    {
+        $jobs = new UNL_MediaHub_TranscodingJobList(array(
+            'media_id' => $this->id,
+            'orderby' => 'id',
+            'order' => 'desc',
+            'limit' => 1
+        ));
+
+        if (!isset($jobs->items[0])) {
+            return false;
+        }
+
+        //Return the first item
+        return $jobs->items[0];
     }
     
     /**
@@ -761,5 +860,37 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         }
         
         return true;
+    }
+
+    /**
+     * @param $job_type
+     * @return bool|UNL_MediaHub_TranscodingJob
+     * @throws Doctrine_Connection_Exception
+     * @throws Doctrine_Record_Exception
+     * @throws Exception
+     */
+    function transcode($job_type, $uid = null)
+    {
+        if (!$this->isVideo()) {
+            //Don't transcode audio
+            return false;
+        }
+        
+        $job = new UNL_MediaHub_TranscodingJob();
+        
+        $job->media_id = $this->id;
+        $job->job_type = $job_type;
+        
+        if ($uid) {
+            $job->uid = $uid;
+        } else {
+            $uid = $this->uidcreated;
+        }
+        
+        $job->uid = $uid;
+        
+        $job->save();
+        
+        return $job;
     }
 }

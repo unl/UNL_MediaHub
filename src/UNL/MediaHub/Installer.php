@@ -36,6 +36,7 @@ class UNL_MediaHub_Installer
         $messages[] = $this->exec_sql(file_get_contents(dirname(__FILE__).'/../../../data/add_media_text_tracks.sql'), 'Adding media text tracks table', true);
         $messages[] = $this->exec_sql(file_get_contents(dirname(__FILE__).'/../../../data/media_text_tracks_dates.sql'), 'Fixing date fields', true);
         $messages[] = $this->exec_sql(file_get_contents(dirname(__FILE__).'/../../../data/add_media_duration.sql'), 'Add media duration column', true);
+        $messages[] = $this->exec_sql(file_get_contents(dirname(__FILE__).'/../../../data/transcoding_jobs.sql'), 'Add transcoding job table', true);
         
         return $messages;
     }
@@ -57,6 +58,7 @@ class UNL_MediaHub_Installer
         drop table if exists media_text_tracks;
         drop table if exists media_text_tracks_files;
         drop table if exists rev_orders;
+        drop table if exists transcoding_jobs;
         SET FOREIGN_KEY_CHECKS = 1;
         ';
         

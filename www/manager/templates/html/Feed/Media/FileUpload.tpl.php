@@ -1,3 +1,13 @@
+<script>
+    <?php if ($user->canTranscode()): ?>
+        const MAX_UPLOAD = "<?php echo UNL_MediaHub_Controller::$max_upload_mb*10 ?>";
+        const VALID_VIDEO_EXTNESIONS = "mp4,mov";
+    <?php else: ?>
+        const MAX_UPLOAD = "<?php echo UNL_MediaHub_Controller::$max_upload_mb ?>";
+        const VALID_VIDEO_EXTNESIONS = "mp4";
+    <?php endif ?>
+</script>
+
 <?php
 $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plupload/plupload.full.min.js?v='.UNL_MediaHub_Controller::getVersion());
 $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/uploadScript.js?v='.UNL_MediaHub_Controller::getVersion());

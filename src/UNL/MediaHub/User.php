@@ -66,4 +66,13 @@ class UNL_MediaHub_User extends UNL_MediaHub_Models_BaseUser
         $result = $q->fetchAll(PDO::FETCH_COLUMN);
         return $result;
     }
+    
+    public function canTranscode()
+    {
+        if (in_array($this->uid, UNL_MediaHub::$auto_transcode_hls_users)) {
+            return true;
+        }
+        
+        return false;
+    }
 }

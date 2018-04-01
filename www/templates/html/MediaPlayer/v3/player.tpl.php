@@ -7,7 +7,7 @@
     }
 
     $getTracks = $context->media->getTextTrackURLs();
-    $projection = $context->media->getProjection();
+    $is360 = $context->media->is360();
     ?>
 </div>
 
@@ -21,12 +21,21 @@
 <script type="text/javascript">
     (function () {
         <?php if (isset($context->media->id) && $context->media->id): ?>
-        var options = {
-            videoWidth: '100%',
-            videoHeight: '100%',
-            controls: true,
-            fluid: false
-        };
+            var options = {
+                videoWidth: '100%',
+                videoHeight: '100%',
+                controls: true,
+                fluid: false
+            };
+            
+            <?php if($context->media->hasHLS()): ?>
+                options.html5 = {
+                    hls: {
+                        //default to a reasonable bandwidth so that we load 540p by default and then go up or down if we need to
+                        bandwidth: 3200000
+                    }
+                };
+            <?php endif; ?>
         <?php endif; ?>
 
         $(function() {
@@ -39,11 +48,7 @@
                 var videoElement = $media.get(0);
                 var id = $media.attr("id");
                 var startLanguage = $media.attr('data-start-language');
-                var projection = false;
-
-                <?php if(isset($projection)): ?>
-                projection = '<?php echo UNL_MediaHub::escape($projection); ?>';
-                <?php endif; ?>
+                var is360 = <?php echo json_encode($is360) ?>;
 
                 if ("undefined" !== typeof startLanguage) {
                     options.startLanguage = startLanguage;
@@ -112,7 +117,7 @@
                     var width = videoElement.offsetWidth;
                     var height = videoElement.offsetHeight;
                     player.width(width), player.height(height);
-                    if(projection === "equirectangular"){
+                    if(is360){
                         player.panorama({
                             clickToToggle: (!isMobile()),
                             clickAndDrag: true,

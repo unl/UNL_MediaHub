@@ -49,6 +49,7 @@ class UNL_MediaHub_Manager extends UNL_MediaHub_BaseController implements UNL_Me
     
     function getCacheKey()
     {
+        //do not cache
         return false;
     }
     

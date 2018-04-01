@@ -292,3 +292,7 @@ select#format {
     }
 
 }
+#transcoding-progress progress {
+    display: block;
+    width: 100%;
+}

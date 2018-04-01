@@ -1,3 +1,13 @@
+<script>
+    <?php if ($user->canTranscode()): ?>
+    const MAX_UPLOAD = "<?php echo UNL_MediaHub_Controller::$max_upload_mb*10 ?>";
+    const VALID_VIDEO_EXTNESIONS = "mp4,mov";
+    <?php else: ?>
+    const MAX_UPLOAD = "<?php echo UNL_MediaHub_Controller::$max_upload_mb ?>";
+    const VALID_VIDEO_EXTNESIONS = "mp4";
+    <?php endif ?>
+</script>
+
 <?php
 $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plupload/plupload.full.min.js?v='.UNL_MediaHub_Controller::getVersion());
 $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/uploadScript.js?v='.UNL_MediaHub_Controller::getVersion());
@@ -30,94 +40,118 @@ var mediaType = "'.$mediaType.'";
 $controller->setReplacementData('head', $js);
 ?>
 
-<?php if(empty($context->media->media_text_tracks_id)): ?>
-    <div class="wdn_notice alert mh-caption-alert">
-        <div class="message">
-            <h4>This Video is Missing Captions!</h4>
-            <div class="mh-caption-band">
-                <p>
-                    For accessibility reasons, captions are required for <strong>all</strong> videos.
-                </p>
-                <p>
-                    <a class="wdn-button" href="<?php echo $edit_caption_url ?>">Caption Your Video</a>
-                </p>
-            </div>
-        </div>
-    </div>
-    
-    <script type="text/javascript">
-    WDN.initializePlugin('notice');
-    </script>
-<?php endif; ?>
-
-<?php if (!$context->media->isWebSafe()): ?>
-    <div class="wdn_notice alert mh-caption-alert">
-        <div class="message">
-            <h4>This video might not work on the web!</h4>
-            <div class="mh-caption-band">
-                <p>
-                    This video was encoded with '<?php echo UNL_MediaHub::escape($context->media->getCodec()) ?>', which is not safe for the web, and might not work on every device/browser. Please run the video through HandBrake and swap the video out.
-                </p>
-                <p>
-                    <a class="wdn-button" href="http://wdn.unl.edu/documentation/unl-mediahub/using-handbrake">How to use HandBrake</a>
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <script type="text/javascript">
-        WDN.initializePlugin('notice');
-    </script>
-<?php endif; ?>
-
 <form action="?" method="post" name="media_form" id="media_form" class="wdn-band" enctype="multipart/form-data">
 
-    <input id="media_url" name="url" type="hidden" value="<?php echo htmlentities($context->media->url, ENT_QUOTES); ?>" />
+    <input id="media_url" name="url" type="hidden" value="" />
     <input type="hidden" name="__unlmy_posttarget" value="feed_media" />
     <input type="hidden" id="id" name="id" value="<?php echo $context->media->id ?>" />
     
-    <div class="wdn-band wdn-light-triad-band mediahub-embed">
+    <div class="wdn-band wdn-light-triad-band">
         <div class="wdn-inner-wrapper">
             <div class="wdn-grid-set" id="headline_main">
                 <div class="wdn-col-full">
                     <input type="submit" name="submit" value="Save" class="wdn-pull-right" />
-                    <h1 class="clear-top wdn-brand"><div class="wdn-subhead">Edit Media Details for</div> <?php echo UNL_MediaHub::escape($context->media->title) ?></h1>
-                </div>  
-            </div>
-            <div class="wdn-grid-set">
-                <div id="videoData" class="wdn-col-two-sevenths mh-hide-bp2 wdn-pull-right">
-                    <h5 class="clear-top wdn-sans-serif">Set a Thumbnail</h5>
-                    <ol>
-                        <li>Pause the video to the left at the frame which you want as the image representation.</li>
-                        <li>Click the "Set Image" button to save this as your image representation.</li>
-                        <li>Continue with the form below.</li>
-                    </ol>
-
-                    <div id="imageOverlay">
-                        <p>We're updating your image, this may take a few minutes depending on video length. <strong>Now is a good time to make sure the information below is up to snuff!</strong></p>
-                    </div>
-                    <img src="<?php echo $context->media->getThumbnailURL(); ?>" id="thumbnail" alt="Thumbnail preview" />
-                    <!-- <div id="poster_picker">
-                        <a class="action" id="setImage" href="#">Set Image</a>
-
-                    </div> -->
-                    <div id="poster_picker_disabled">
-                        <p>
-                            The poster picker has been disabled.  Enable it by <a id="enable_poster_picker" href="#">removing the custom post image url</a>.
-                        </p>
-                    </div>
-                </div>
-                <div id="videoDisplay" class="bp2-wdn-col-five-sevenths">
-                    <div class="mh-iframe-wrapper">
-                        <?php
-                        if (isset($context->media)) {
-                            echo '<iframe id="mediahub-iframe-embed" height="667" src="'.$context->media->getURL().'?format=iframe&autoplay=0" allowfullscreen title="watch media" data-mediahub-id='.$context->media->id.'></iframe>';
-                        }
-                        ?>
-                    </div>
-                    <a class="wdn-button wdn-button-brand mh-hide-bp2" id="setImage" href="#">Set Image</a>
+                    <h1 class="clear-top wdn-brand"><div class="wdn-subhead">Edit Media Details for</div> <?php echo $context->media->title ?></h1>
                 </div>
             </div>
+
+            <?php $transcoding_job = $context->media->getMostRecentTranscodingJob(); ?>
+
+            <?php if ($transcoding_job && $transcoding_job->isError()): ?>
+                <div class="wdn_notice alert mh-caption-alert">
+                    <div class="message">
+                        <h2 class="title">Transcoding Error!</h2>
+                        <div>
+                            <p>There was an error transcoding your upload. Please ensure the file is not corrupt and in .mp4 or .mov format and try again.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+                    WDN.initializePlugin('notice');
+                </script>
+            <?php endif; ?>
+
+            <?php if ($transcoding_job && $transcoding_job->isPending()): ?>
+                <?php echo $savvy->render($context, 'Feed/Media/transcoding_notice.tpl.php'); ?>
+            <?php endif; ?>
+
+            <?php if(empty($context->media->media_text_tracks_id)): ?>
+                <div class="wdn_notice alert mh-caption-alert">
+                    <div class="message">
+                        <h2 class="title">This Video is Missing Captions!</h2>
+                        <div class="mh-caption-band">
+                            <p>
+                                For accessibility reasons, captions are required for <strong>all</strong> videos.
+                            </p>
+                            <p>
+                                <a class="wdn-button" href="<?php echo $edit_caption_url ?>">Caption Your Video</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+                    WDN.initializePlugin('notice');
+                </script>
+            <?php endif; ?>
+
+            <?php if (!$transcoding_job && !$context->media->isWebSafe()): ?>
+                <div class="wdn_notice alert mh-caption-alert">
+                    <div class="message">
+                        <h4>This video might not work on the web!</h4>
+                        <div class="mh-caption-band">
+                            <p>
+                                This video was encoded with '<?php echo UNL_MediaHub::escape($context->media->getCodec()) ?>', which is not safe for the web, and might not work on every device/browser. Please run the video through HandBrake and swap the video out.
+                            </p>
+                            <p>
+                                <a class="wdn-button" href="http://wdn.unl.edu/documentation/unl-mediahub/using-handbrake">How to use HandBrake</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            
+                <script type="text/javascript">
+                    WDN.initializePlugin('notice');
+                </script>
+            <?php endif; ?>
+
+            <?php if (!$transcoding_job ||  $transcoding_job->isSuccess()): ?>
+                <div class="wdn-grid-set">
+                    <div id="videoData" class="wdn-col-two-sevenths mh-hide-bp2 wdn-pull-right">
+                        <h2 class="clear-top wdn-sans-serif">Set a Thumbnail</h2>
+                        <ol>
+                            <li>Pause the video to the left at the frame which you want as the image representation.</li>
+                            <li>Click the "Set Image" button to save this as your image representation.</li>
+                            <li>Continue with the form below.</li>
+                        </ol>
+
+                        <div id="imageOverlay">
+                            <p>We're updating your image, this may take a few minutes depending on video length. <strong>Now is a good time to make sure the information below is up to snuff!</strong></p>
+                        </div>
+                        <img src="<?php echo $context->media->getThumbnailURL(); ?>" id="thumbnail" alt="Thumbnail preview" />
+                        <!-- <div id="poster_picker">
+                            <a class="action" id="setImage" href="#">Set Image</a>
+    
+                        </div> -->
+                        <div id="poster_picker_disabled">
+                            <p>
+                                The poster picker has been disabled.  Enable it by <a id="enable_poster_picker" href="#">removing the custom post image url</a>.
+                            </p>
+                        </div>
+                    </div>
+                    <div id="videoDisplay" class="bp2-wdn-col-five-sevenths">
+                        <div class="mh-iframe-wrapper">
+                            <?php
+                            if (isset($context->media)) {
+                                echo '<iframe id="mediahub-iframe-embed" height="667" src="'.$context->media->getURL().'?format=iframe&autoplay=0" allowfullscreen title="watch media" data-mediahub-id='.$context->media->id.'></iframe>';
+                            }
+                            ?>
+                        </div>
+                        <a class="wdn-button wdn-button-brand mh-hide-bp2" id="setImage" href="#">Set Image</a>
+                    </div>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
     
@@ -126,21 +160,23 @@ $controller->setReplacementData('head', $js);
             <div class="wdn-grid-set">
                 <div class="bp2-wdn-col-two-sevenths wdn-pull-right">
                     <ol>
-                        <li>                        
-                            <div id="mh_upload_media_container">
-                                <div id="mh_upload_media" class="mh-upload-box mh-upload-box-small wdn-center">
-                                    <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/swap-arrows.svg">
-                                        <img src="<?php echo $baseUrl; ?>/templates/html/css/images/swap-arrows.png" alt="browse media">
-                                    </object>
-                                    <h2><span class="wdn-subhead">Swap Media</span></h2>
-                                    <p>Upload a new .mp4 or .mp3 file and replace your old one. <strong class="wdn-icon-attention">(Caution: This deletes your old file.)</strong></p>
-                                    
+                        <?php if (!$transcoding_job ||  $transcoding_job->isSuccess()): ?>
+                            <li>
+                                <div id="mh_upload_media_container">
+                                    <div id="mh_upload_media" class="mh-upload-box mh-upload-box-small wdn-center">
+                                        <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/swap-arrows.svg">
+                                            <img src="<?php echo $baseUrl; ?>/templates/html/css/images/swap-arrows.png" alt="browse media">
+                                        </object>
+                                        <h2><span class="wdn-subhead">Swap Media</span></h2>
+                                        <p>Upload a new .mp4 or .mp3 file and replace your old one. <strong class="wdn-icon-attention">(Caution: This deletes your old file.)</strong></p>
+                                        
+                                    </div>
+                                    <div id="filelist" class="mh-upload-box wdn-center">
+                                        Your browser doesn't have Flash, Silverlight or HTML5 support.
+                                    </div>
                                 </div>
-                                <div id="filelist" class="mh-upload-box wdn-center">
-                                    Your browser doesn't have Flash, Silverlight or HTML5 support.
-                                </div>
-                            </div>
-                        </li>
+                            </li>
+                        <?php endif; ?>
                         <li>
                             <?php echo $savvy->render($context, 'Feed/Media/fields/privacy.tpl.php'); ?>
                         </li>

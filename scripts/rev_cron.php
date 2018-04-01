@@ -49,6 +49,22 @@ foreach ($orders->items as $order) {
             break;
         case UNL_MediaHub_RevOrder::STATUS_MEDIAHUB_CREATED:
             //We need to create the order in rev.com
+            
+            $transcoding_job = $media->getMostRecentTranscodingJob();
+
+            if ($transcoding_job && $transcoding_job->isError()) {
+                //Wait until transcoding is finished
+                echo "\t There was a transcoding error. Cancelling this order." . PHP_EOL;
+                $order->status = UNL_MediaHub_RevOrder::STATUS_CANCELLED;
+                $order->save();
+                break;
+            }
+            
+            if ($transcoding_job && $transcoding_job->isPending()) {
+                //Wait until transcoding is finished
+                echo "\t Waiting to submit order until transcoding is finished" . PHP_EOL;
+                break;
+            }
 
             echo "\t creating a new rev.com order" . PHP_EOL;
             
