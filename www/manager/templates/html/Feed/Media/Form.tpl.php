@@ -160,7 +160,7 @@ $controller->setReplacementData('head', $js);
             <div class="wdn-grid-set">
                 <div class="bp2-wdn-col-two-sevenths wdn-pull-right">
                     <ol>
-                        <?php if (!$transcoding_job ||  $transcoding_job->isSuccess()): ?>
+                        <?php if (!$transcoding_job): ?>
                             <li>
                                 <div id="mh_upload_media_container">
                                     <div id="mh_upload_media" class="mh-upload-box mh-upload-box-small wdn-center">
@@ -176,6 +176,8 @@ $controller->setReplacementData('head', $js);
                                     </div>
                                 </div>
                             </li>
+                        <?php else: ?>
+                            <li>Optimized media can not be replaced with a new upload. This would cause a momentary outage and break shares on Social Media.</li>
                         <?php endif; ?>
                         <li>
                             <?php echo $savvy->render($context, 'Feed/Media/fields/privacy.tpl.php'); ?>
