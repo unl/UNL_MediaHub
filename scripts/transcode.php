@@ -55,13 +55,24 @@ while (true) {
                 $aspect_ratio = $media->getAspectRatio();
 
                 //2. create job
-                $jobId = createHlsJob(
-                    UNL_MediaHub::$transcode_mediaconvert_api_endpoint,
-                    UNL_MediaHub::$transcode_mediaconvert_role,
-                    $input_arn,
-                    $output_arn,
-                    $aspect_ratio
-                );
+                if ('hls' === $media_hub_job->job_type) {
+                    $jobId = createHlsJob(
+                        UNL_MediaHub::$transcode_mediaconvert_api_endpoint,
+                        UNL_MediaHub::$transcode_mediaconvert_role,
+                        $input_arn,
+                        $output_arn,
+                        $aspect_ratio
+                    );
+                } else {
+                    //default to an mp4 job
+                    $jobId = createMp4Job(
+                        UNL_MediaHub::$transcode_mediaconvert_api_endpoint,
+                        UNL_MediaHub::$transcode_mediaconvert_role,
+                        $input_arn,
+                        $output_arn,
+                        $aspect_ratio
+                    );
+                }
 
                 $media_hub_job->job_id = $jobId;
                 $media_hub_job->status = UNL_MediaHub_TranscodingJob::STATUS_WORKING;
@@ -214,6 +225,36 @@ function upload($source, $input_bucket, $key)
         }
         $tries++;
     } while (!isset($result));
+}
+
+function createMp4Job($endpoint, $role, $input, $output, $aspect_ratio)
+{
+    $mediaConvert = new \Aws\MediaConvert\MediaConvertClient([
+        'version' => '2017-08-29',
+        'region'  => 'us-east-1',
+        'endpoint' => $endpoint,
+    ]);
+
+    //Default to 16:9
+    $job_settings = file_get_contents(__DIR__.'/../data/mediaconvert.mp4.16x9.template.json');
+
+    //Use 4:3 if we need to
+    if (UNL_MediaHub_Media::ASPECT_4x3 == $aspect_ratio) {
+        $job_settings = file_get_contents(__DIR__.'/../data/mediaconvert.mp4.4x3.template.json');
+    }
+
+    $job_settings = json_decode($job_settings, true);
+
+    //We are not using a job template hosted in aws because we need to customize the destination
+    $job_settings['Settings']['OutputGroups'][0]['OutputGroupSettings']['FileGroupSettings']['Destination'] = $output;
+    $job_settings['Settings']['Inputs'][0]['FileInput'] = $input;
+    $job_settings['Role'] = $role;
+
+    $job = $mediaConvert->createJob($job_settings);
+
+    // get the job data as array
+    $jobData = $job->get('Job');
+    return $jobData['Id'];
 }
 
 function createHlsJob($endpoint, $role, $input, $output, $aspect_ratio)

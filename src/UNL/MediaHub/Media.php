@@ -871,6 +871,13 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
      */
     function transcode($job_type, $uid = null)
     {
+        $valid_job_types = array('hls', 'mp4');
+        
+        if (!in_array($job_type, $valid_job_types)) {
+            //Invalid job type
+            return false;
+        }
+        
         if (!$this->isVideo()) {
             //Don't transcode audio
             return false;

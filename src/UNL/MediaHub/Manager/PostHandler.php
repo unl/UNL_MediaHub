@@ -497,8 +497,8 @@ class UNL_MediaHub_Manager_PostHandler
 
         if ($is_new) {
             //if it is is and the user is set to auto-transcode... do it
-            if ($user && $user->canTranscode()) {
-                $media->transcode(UNL_MediaHub_TranscodingJob::JOB_TYPE_HLS);
+            if ($user && isset($this->post['optimization']) && $user->canTranscode()) {
+                $media->transcode($this->post['optimization']);
             }
 
             //After upload, add captions

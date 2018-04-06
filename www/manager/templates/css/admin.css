@@ -296,3 +296,15 @@ select#format {
     display: block;
     width: 100%;
 }
+
+fieldset.optimization-settings {
+    margin-top: 0;
+}
+
+.optimization-settings legend {
+    font-size: 1em;
+}
+
+.optimization-settings li {
+    margin: 0;
+}
