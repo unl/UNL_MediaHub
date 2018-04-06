@@ -58,21 +58,6 @@ $controller->setReplacementData('head', $js);
             <?php $transcoding_job = $context->media->getMostRecentTranscodingJob(); ?>
 
             <?php if ($transcoding_job && $transcoding_job->isError()): ?>
-                <div class="wdn_notice alert mh-caption-alert">
-                    <div class="message">
-                        <h2 class="title">Transcoding Error!</h2>
-                        <div>
-                            <p>There was an error transcoding your upload. Please ensure the file is not corrupt and in .mp4 or .mov format and try again.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <script type="text/javascript">
-                    WDN.initializePlugin('notice');
-                </script>
-            <?php endif; ?>
-
-            <?php if ($transcoding_job && $transcoding_job->isError()): ?>
                 <div class="wdn_notice negate">
                     <div class="message">
                         <h2 class="title">Optimization Error</h2>
@@ -81,6 +66,10 @@ $controller->setReplacementData('head', $js);
                         </div>
                     </div>
                 </div>
+
+                <script type="text/javascript">
+                    WDN.initializePlugin('notice');
+                </script>
             <?php endif; ?>
 
             <?php if ($transcoding_job && $transcoding_job->isPending()): ?>
