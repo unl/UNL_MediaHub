@@ -220,6 +220,10 @@ class UNL_MediaHub_Controller
                     throw new Exception('This media is being optimized. Please try back later.', 403);
                 }
 
+                if ($transcoding_job && $transcoding_job->isError()) {
+                    throw new Exception('There was an error optimizing this media.', 500);
+                }
+
                 if (!$media->canView(UNL_MediaHub_AuthService::getInstance()->getUser())) {
                     throw new Exception('You do not have permission to view this.', 403);
                 }

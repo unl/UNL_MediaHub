@@ -72,6 +72,17 @@ $controller->setReplacementData('head', $js);
                 </script>
             <?php endif; ?>
 
+            <?php if ($transcoding_job && $transcoding_job->isError()): ?>
+                <div class="wdn_notice negate">
+                    <div class="message">
+                        <h2 class="title">Optimization Error</h2>
+                        <div id="transcoding-progress">
+                            <p>There was an error optimizing your media. Please delete this media record and try uploading it again.</p>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+
             <?php if ($transcoding_job && $transcoding_job->isPending()): ?>
                 <?php echo $savvy->render($context, 'Feed/Media/transcoding_notice.tpl.php'); ?>
             <?php endif; ?>
