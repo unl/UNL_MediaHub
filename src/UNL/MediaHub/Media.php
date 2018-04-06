@@ -421,7 +421,37 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
             unlink($local_file);
         }
         
+        //Media can have its own upload directory associated with it. Delete it if it exists
+        $this->deleteUploadDirectory();
+        
         return true;
+    }
+    
+    protected function deleteUploadDirectory()
+    {
+        if (empty($this->UUID)) {
+            //This media isn't new enough to have a uuid directory... don't even try
+            return false;
+        }
+        
+        $upload_directory = UNL_MediaHub_Manager::getUploadDirectory() . '/'. $this->UUID;
+
+        if (!file_exists($upload_directory) || !is_dir($upload_directory)) {
+            return false;
+        }
+        
+        $it = new RecursiveDirectoryIterator($upload_directory, RecursiveDirectoryIterator::SKIP_DOTS);
+        $files = new RecursiveIteratorIterator($it,
+            RecursiveIteratorIterator::CHILD_FIRST);
+        foreach($files as $file) {
+            if ($file->isDir()){
+                rmdir($file->getRealPath());
+            } else {
+                unlink($file->getRealPath());
+            }
+        }
+        
+        rmdir($upload_directory);
     }
 
     /**
