@@ -1,11 +1,6 @@
 <script>
-    <?php if ($user->canTranscode()): ?>
-    const MAX_UPLOAD = "<?php echo UNL_MediaHub_Controller::$max_upload_mb*10 ?>";
-    const VALID_VIDEO_EXTNESIONS = "mp4,mov";
-    <?php else: ?>
     const MAX_UPLOAD = "<?php echo UNL_MediaHub_Controller::$max_upload_mb ?>";
     const VALID_VIDEO_EXTNESIONS = "mp4";
-    <?php endif ?>
 </script>
 
 <?php
@@ -162,6 +157,9 @@ $controller->setReplacementData('head', $js);
                     <ol>
                         <?php if (!$transcoding_job): ?>
                             <li>
+                                <?php if ($user->canTranscode()): ?>
+                                    <p><span class="wdn-icon-attention" aria-hidden="true"></span><span class="wdn-text-hidden">Notice:</span> New uploads will NOT be automatically optimized. You MUST use HandBrake.</p>
+                                <?php endif; ?>
                                 <div id="mh_upload_media_container">
                                     <div id="mh_upload_media" class="mh-upload-box mh-upload-box-small wdn-center">
                                         <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/swap-arrows.svg">
@@ -169,7 +167,6 @@ $controller->setReplacementData('head', $js);
                                         </object>
                                         <h2><span class="wdn-subhead">Swap Media</span></h2>
                                         <p>Upload a new .mp4 or .mp3 file and replace your old one. <strong class="wdn-icon-attention">(Caution: This deletes your old file.)</strong></p>
-                                        
                                     </div>
                                     <div id="filelist" class="mh-upload-box wdn-center">
                                         Your browser doesn't have Flash, Silverlight or HTML5 support.
@@ -177,7 +174,7 @@ $controller->setReplacementData('head', $js);
                                 </div>
                             </li>
                         <?php else: ?>
-                            <li>Optimized media can not be replaced with a new upload. This would cause a momentary outage and break shares on Social Media.</li>
+                            <li>Optimized media can not be replaced with a new upload.</li>
                         <?php endif; ?>
                         <li>
                             <?php echo $savvy->render($context, 'Feed/Media/fields/privacy.tpl.php'); ?>
