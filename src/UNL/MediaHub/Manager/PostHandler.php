@@ -123,6 +123,9 @@ class UNL_MediaHub_Manager_PostHandler
         case 'set_active_text_track':
             $this->setActiveTextTrack();
             break;
+        case 'retry_transcoding_job':
+            $this->retryTranscodingJob();
+            break;
         }
     }
 
@@ -781,6 +784,36 @@ class UNL_MediaHub_Manager_PostHandler
         UNL_MediaHub_Manager::addNotice($notice);
 
         UNL_MediaHub::redirect($media->getEditCaptionsURL());
+    }
+    
+    function retryTranscodingJob()
+    {
+        $media = UNL_MediaHub_Media::getById($this->post['media_id']);
+
+        if (!$media) {
+            throw new Exception('Unable to find media', 404);
+        }
+
+        $user = UNL_MediaHub_AuthService::getInstance()->getUser();
+
+        if (!$media->userHasPermission($user, UNL_MediaHub_Permission::USER_CAN_UPDATE)) {
+            throw new Exception('You do not have permission to edit this media.', 403);
+        }
+        
+        $last_job = $media->getMostRecentTranscodingJob();
+        
+        if (!$last_job) {
+            throw new Exception('There is no transcoding job to retry.', 400);
+        }
+        
+        if (!$last_job->isError()) {
+            throw new Exception('The last job was not an error, so it can not be retried.', 400);
+        }
+        
+        //Start a new transcoding job
+        $media->transcode($last_job->job_type);
+
+        UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL() . '?view=addmedia&id='.$media->id);
     }
 
     /**

@@ -35,6 +35,16 @@ var mediaType = "'.$mediaType.'";
 $controller->setReplacementData('head', $js);
 ?>
 
+<?php $transcoding_job = $context->media->getMostRecentTranscodingJob(); ?>
+
+<?php if ($transcoding_job && $transcoding_job->isError()): ?>
+<form id="retry_transcoding_job" method="post">
+    <input type="hidden" name="media_id" value="<?php echo $context->media->id ?>">
+    <input type="hidden" name="__unlmy_posttarget" value="retry_transcoding_job" />
+</form>
+<?php endif; ?>
+
+
 <form action="?" method="post" name="media_form" id="media_form" class="wdn-band" enctype="multipart/form-data">
 
     <input id="media_url" name="url" type="hidden" value="" />
@@ -50,7 +60,7 @@ $controller->setReplacementData('head', $js);
                 </div>
             </div>
 
-            <?php $transcoding_job = $context->media->getMostRecentTranscodingJob(); ?>
+            
 
             <?php if ($transcoding_job && $transcoding_job->isError()): ?>
                 <div class="wdn_notice negate">
@@ -58,6 +68,7 @@ $controller->setReplacementData('head', $js);
                         <h2 class="title">Optimization Error</h2>
                         <div id="transcoding-progress">
                             <p>There was an error optimizing your media. Please delete this media record and try uploading it again.</p>
+                            <button form="retry_transcoding_job" class="wdn-button">Retry</button>
                         </div>
                     </div>
                 </div>
