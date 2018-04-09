@@ -93,7 +93,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                                 <p>Only videos will be optimized. If you are uploading an audio file, these settings will have no effect.</p>
                                 <ol>
                                     <li>
-                                        <label><input type="radio" name="optimization" value="none" /> None (video is already optimized with HandBrake presets</label>
+                                        <label><input type="radio" name="optimization" value="none" /> None (video is already optimized with HandBrake presets)</label>
                                     </li>
                                     <li>
                                         <label><input type="radio" name="optimization" value="mp4" /> Single MP4 (Good quality)</label>
