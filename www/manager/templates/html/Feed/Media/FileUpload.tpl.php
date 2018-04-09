@@ -93,13 +93,13 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                                 <p>Only videos will be optimized. If you are uploading an audio file, these settings will have no effect.</p>
                                 <ol>
                                     <li>
-                                        <label><input type="radio" name="optimization" value="none" /> None (video is already optimized with HandBrake presets)</label>
+                                        <label><input type="radio" name="optimization" value="none" />None (video is already optimized with HandBrake presets)</label>
                                     </li>
                                     <li>
-                                        <label><input type="radio" name="optimization" value="mp4" /> Single MP4 (Good quality)</label>
+                                        <label><input type="radio" name="optimization" value="mp4" />Single file at quarter HD (540p, use this to reduce cost)</label>
                                     </li>
                                     <li>
-                                        <label><input type="radio" name="optimization" value="hls" checked="checked" /> HLS Adaptive Bitrate (Best quality)</label>
+                                        <label><input type="radio" name="optimization" value="hls" checked="checked" />Multiple files to optimize video quality (480p, 540p, 720p, and 1080p)</label>
                                     </li>
                                 </ol>
                             </fieldset>
