@@ -85,16 +85,16 @@ $getTracks = $context->getTextTrackURLs();
 
                 <div class="mh-authoring wdn-grid-set wdn-center">
                     <?php if (!empty($context->author)): // @TODO present author with more info (standardize people records) ?>
-                        <div class="wdn-col-one-third mh-stat">
+                        <div class="bp768-wdn-col-one-third mh-stat">
                             <span class="mh-count wdn-brand"><?php echo UNL_MediaHub::escape($context->author); ?></span>
                             <span class="mh-context wdn-sans-serif">Author</span>
                         </div>
                     <?php endif; ?>
-                    <div class="wdn-col-one-third mh-stat">
+                    <div class="bp768-wdn-col-one-third mh-stat">
                         <span class="mh-count wdn-brand"><?php echo date('m/d/Y', strtotime($context->datecreated)); ?></span>
                         <span class="mh-context wdn-sans-serif">Added</span>
                     </div>
-                    <div class="wdn-col-one-third mh-stat">
+                    <div class="bp768-wdn-col-one-third mh-stat">
                         <span class="mh-count wdn-brand"><?php echo UNL_MediaHub::escape($context->play_count) ?></span>
                         <span class="mh-context wdn-sans-serif">Plays</span>
                     </div>
