@@ -39,7 +39,12 @@ function MediahubPlayer(options) {
         }
     });
     var captionsFound = false;
-    t.textTracks().on("addtrack", function() {
+    t.textTracks().on("addtrack", function(e) {
+        if (e.track.kind === 'metadata') {
+            //Ignore metadata tracks
+            return;
+        }
+        
         if (captionsFound) {
             //Already added a button, no need to add it again.
             return;
@@ -185,7 +190,7 @@ function MediahubPlayer(options) {
                     }
                 }
             });
-            var textTracks = t.textTracks()
+            var textTracks = t.textTracks();
             var defaultCaptions = 0;
             for (var i = 0; i < textTracks.length; i++) {
                 if (textTracks[i].language === "en") {
