@@ -378,16 +378,15 @@ class UNL_MediaHub_Manager_PostHandler
                     //Both files are local.
                     rename($new_local_file, $local_file); //Replace the old one (keeping its name).
                     $this->post['url'] = $media->url; //Don't update the URL of the file
-
-                    $transcoding_job = $media->getMostRecentTranscodingJob();
-                    if ($transcoding_job) {
-                        //re-transcode this version if the previous job was also transcoded
-                        $media->transcode($transcoding_job->job_type);
-                    }
-
                 } else if ($local_file && !is_dir($local_file)) {
                     //New file is not local, but old one is. Delete the old one.
                     unlink($local_file);
+                }
+
+                $transcoding_job = $media->getMostRecentTranscodingJob();
+                if ($transcoding_job) {
+                    //re-transcode this version if the previous job was also transcoded
+                    $media->transcode($transcoding_job->job_type);
                 }
             }
             
