@@ -185,6 +185,11 @@ class UNL_MediaHub_Controller
         case 'js':
             header('Content-type: text/javascript');
             break;
+        case 'iframe':
+            if ('media' === $this->options['model']) {
+                header_remove('X-Frame-Options');
+            }
+            break;
         default:
             break;
         }

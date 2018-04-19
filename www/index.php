@@ -29,6 +29,8 @@ if (isset($cache)) {
     $outputcontroller->setCacheInterface($cache);
 }
 
+header('X-Frame-Options: SAMEORIGIN');
+
 switch($controller->options['format']) {
     case 'xml':
     case 'mosaic-xml':
