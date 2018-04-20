@@ -378,10 +378,15 @@ class UNL_MediaHub_Manager_PostHandler
                     //Both files are local.
                     rename($new_local_file, $local_file); //Replace the old one (keeping its name).
                     $this->post['url'] = $media->url; //Don't update the URL of the file
-
                 } else if ($local_file && !is_dir($local_file)) {
                     //New file is not local, but old one is. Delete the old one.
                     unlink($local_file);
+                }
+
+                $transcoding_job = $media->getMostRecentTranscodingJob();
+                if ($transcoding_job) {
+                    //re-transcode this version if the previous job was also transcoded
+                    $media->transcode($transcoding_job->job_type);
                 }
             }
             
@@ -529,7 +534,13 @@ class UNL_MediaHub_Manager_PostHandler
             );
             UNL_MediaHub_Manager::addNotice($notice);
             
-            UNL_MediaHub::redirect(UNL_MediaHub_Controller::getURL($media));
+            $last_job = $media->getMostRecentTranscodingJob();
+            
+            if (!$last_job->isFinished()) {
+                UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL() . '?view=addmedia&id='.$media->id);
+            } else {
+                UNL_MediaHub::redirect(UNL_MediaHub_Controller::getURL($media));
+            }
         }
         
     }

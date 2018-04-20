@@ -9,7 +9,7 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
     <div class="mh-search-container">
         <div class="mh-search-image">
             <div id="video-container">
-                <video id="video-player" preload="metadata" autoplay="autoplay" loop="" class="fillWidth">
+                <video id="video-player" preload="metadata" autoplay="autoplay"  loop="" muted class="fillWidth">
                     <source src="<?php echo $baseUrl ?>templates/html/featured-video/blurdarklights.mp4" type="video/mp4">
                     <source src="<?php echo $baseUrl ?>templates/html/featured-video/blurdarklights.webm" type="video/webm">
                     <source src="<?php echo $baseUrl ?>templates/html/featured-video/blurdarklights.ogv" type="video/ogg">

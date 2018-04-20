@@ -1,6 +1,11 @@
 <script>
+    <?php if ($user->canTranscode()): ?>
+    const MAX_UPLOAD = "<?php echo UNL_MediaHub_Controller::$max_upload_mb*10 ?>";
+    const VALID_VIDEO_EXTNESIONS = "mp4,mov";
+    <?php else: ?>
     const MAX_UPLOAD = "<?php echo UNL_MediaHub_Controller::$max_upload_mb ?>";
     const VALID_VIDEO_EXTNESIONS = "mp4";
+    <?php endif ?>
 </script>
 
 <?php
@@ -166,10 +171,15 @@ $controller->setReplacementData('head', $js);
             <div class="wdn-grid-set">
                 <div class="bp2-wdn-col-two-sevenths wdn-pull-right">
                     <ol>
-                        <?php if (!$transcoding_job): ?>
-                            <li>
-                                <?php if ($user->canTranscode()): ?>
-                                    <p><span class="wdn-icon-attention" aria-hidden="true"></span><span class="wdn-text-hidden">Notice:</span> New uploads will NOT be automatically optimized. You MUST use HandBrake.</p>
+                        <li>
+                            <?php if ($transcoding_job && !$transcoding_job->isFinished()): ?>
+                                <p>Swapping media is disabled while a video is being optimized.</p>
+                            <?php else: ?>
+                                <?php if ($transcoding_job): ?>
+                                    <p><span class="wdn-icon-attention" aria-hidden="true"></span><span class="wdn-text-hidden">Notice:</span> Swapping media will cause the media to be unavailable while the upload is optimized. This upload will be optimized with the same settings as the current version.</p>
+                                <?php endif; ?>
+                                <?php if (!$transcoding_job): ?>
+                                    <p><span class="wdn-icon-attention" aria-hidden="true"></span><span class="wdn-text-hidden">Notice:</span> You MUST use HandBrake to optimize the new video.</p>
                                 <?php endif; ?>
                                 <div id="mh_upload_media_container">
                                     <div id="mh_upload_media" class="mh-upload-box mh-upload-box-small wdn-center">
@@ -183,10 +193,8 @@ $controller->setReplacementData('head', $js);
                                         Your browser doesn't have Flash, Silverlight or HTML5 support.
                                     </div>
                                 </div>
-                            </li>
-                        <?php else: ?>
-                            <li>Optimized media can not be replaced with a new upload.</li>
-                        <?php endif; ?>
+                            <?php endif; ?>
+                        </li>
                         <li>
                             <?php echo $savvy->render($context, 'Feed/Media/fields/privacy.tpl.php'); ?>
                         </li>
