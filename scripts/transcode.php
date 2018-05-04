@@ -154,13 +154,19 @@ function downloadOutput($output_bucket, $key, UNL_MediaHub_Media $media)
     }
     
     $s3->downloadBucket($download_dir, $output_bucket, '/'.$key);
-
-    //Delete the original upload to save space
-    unlink($media->getLocalFileName());
     
-    //Update the URL of the media to the media.mp4 file
-    $media->url = UNL_MediaHub_Controller::getURL() . 'uploads/'.$media->UUID.'/media.mp4';
-    $media->save();
+    $url = UNL_MediaHub_Controller::getURL() . 'uploads/'.$media->UUID.'/media.mp4';
+    
+    // For new media, we should delete the original upload and change the URL for the mp4 file
+    // For swaps, the URL should be the same and the newly uploaded file will be replaced by the version from aws
+    // because it should have the same name (media.mp4)
+    if ($url !== $media->url) {
+        //Delete the original upload to save space
+        unlink($media->getLocalFileName());
+        //Update the URL of the media to the media.mp4 file
+        $media->url = $url;
+        $media->save();
+    }
 
     $poster_file = UNL_MediaHub::getRootDir() . '/www/uploads/thumbnails/'.$media->id.'/original.jpg';
     if (file_exists($poster_file)) {
