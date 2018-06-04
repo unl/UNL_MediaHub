@@ -536,7 +536,7 @@ class UNL_MediaHub_Manager_PostHandler
             
             $last_job = $media->getMostRecentTranscodingJob();
             
-            if (!$last_job->isFinished()) {
+            if ($last_job && !$last_job->isFinished()) {
                 UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL() . '?view=addmedia&id='.$media->id);
             } else {
                 UNL_MediaHub::redirect(UNL_MediaHub_Controller::getURL($media));
