@@ -681,6 +681,14 @@ class UNL_MediaHub_Manager_PostHandler
             throw new Exception('The cost object number must be between 10 and 13 digits', 400);
         }
         
+        $existing_orders = new UNL_MediaHub_RevOrderList(array(
+            'media_id_not_complete' => $media->id
+        ));
+        
+        if ($existing_orders->count()) {
+            throw new Exception('A pending order already exists for this media. Please wait for the existing order to finish.', 400);
+        }
+        
         $order_record = new UNL_MediaHub_RevOrder();
         $order_record->media_id = $media->id;
         $order_record->costobjectnumber = $sanitized_co;

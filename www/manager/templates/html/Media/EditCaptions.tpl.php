@@ -46,7 +46,7 @@ $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl
             <div class="bp2-wdn-col-one-third">
                 <div class="mh-caption-sidebar">
                     <?php if (!$context->hasPendingOrder()): ?>
-                    <form method="post">
+                    <form id="caption_order" method="post">
                         <?php if ($duration = $context->media->findDuration()): ?>
                             <?php $estimate = ceil($duration->getTotalSeconds()/60); ?>
                             <input type="hidden" name="media_duration" value="<?php echo UNL_MediaHub::escape($duration->getString()); ?>" />
@@ -67,7 +67,7 @@ $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl
                         </ul>
                         <input type="hidden" name="__unlmy_posttarget" value="order_rev" />
                         <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
-                        <input type="submit" value="Order captions">
+                        <input type="submit" id="caption_submit_button" value="Order captions">
                         <p class="wdn-icon wdn-icon-attention wdn-sans-serif">Orders can not be canceled.</p>
                     </form>
                     <?php else: ?>

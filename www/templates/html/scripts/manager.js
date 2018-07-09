@@ -12,5 +12,18 @@ require(['jquery'], function($){
             $('#deleteForm').submit();
             return false; //prevent default action
         });
+        
+        var caption_order_submit = 0;
+        $('#caption_order').submit(function() {
+            if (caption_order_submit > 0) {
+                //prevent double submission
+                return false;
+            }
+            
+            caption_order_submit++;
+            var $button = $('#caption_submit_button');
+            $button.attr("disabled", true);
+            $button.val("Please wait...");
+        });
     });
 });

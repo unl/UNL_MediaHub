@@ -26,6 +26,11 @@ class UNL_MediaHub_RevOrderList extends UNL_MediaHub_List
             $this->options['filter'] = new UNL_MediaHub_RevOrderList_Filter_ByMedia($this->options['media_id']);
         }
 
+        if (isset($this->options['media_id_not_complete'])
+            && !empty($this->options['media_id_not_complete'])) {
+            $this->options['filter'] = new UNL_MediaHub_RevOrderList_Filter_ByMediaNotComplete($this->options['media_id_not_complete']);
+        }
+
         if (isset($this->options['all_not_complete'])) {
             $this->options['filter'] = new UNL_MediaHub_RevOrderList_Filter_NotComplete();
         }
