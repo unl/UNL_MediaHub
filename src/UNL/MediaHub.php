@@ -19,6 +19,8 @@ class UNL_MediaHub
     public static $transcode_mediaconvert_api_endpoint = '';
     public static $transcode_mediaconvert_role = '';
     
+    public static $verbose_errors = false;
+    
     function __construct()
     {
         Doctrine_Manager::getInstance()->setAttribute('model_loading', 'conservative');
