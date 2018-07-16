@@ -43,7 +43,7 @@
       "captioning/captioning": "2.*",
       "php": ">=5.5.0", 
       "leodido/langcode-conv": "^0.2.0",
-      "mhor/php-mediainfo": "^3.0",
+      "mhor/php-mediainfo": "^4.1",
         "ramsey/uuid": "^3.7",
         "aws/aws-sdk-php": "^3.52",
         "moontoast/math": "^1.1"

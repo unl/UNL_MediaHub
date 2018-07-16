@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2f01f209feddf25a9c2bfc7e7b7112d7",
+    "content-hash": "4bc4b8195adcc6cd839ed90ae6c40b80",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -88,16 +88,16 @@
         },
         {
             "name": "captioning/captioning",
-            "version": "2.3.1",
+            "version": "2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/captioning/captioning.git",
-                "reference": "b56b2506e32e7e2d109cbce6c006ecd93fe04a2b"
+                "reference": "d830685b5a942b944d06d97a86eddc8de032e2c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/captioning/captioning/zipball/b56b2506e32e7e2d109cbce6c006ecd93fe04a2b",
-                "reference": "b56b2506e32e7e2d109cbce6c006ecd93fe04a2b",
+                "url": "https://api.github.com/repos/captioning/captioning/zipball/d830685b5a942b944d06d97a86eddc8de032e2c1",
+                "reference": "d830685b5a942b944d06d97a86eddc8de032e2c1",
                 "shasum": ""
             },
             "require": {
@@ -130,12 +130,12 @@
                 "srt",
                 "ssa",
                 "subrip",
-                "subtation",
+                "substation",
                 "subtitle",
                 "vtt",
                 "webvtt"
             ],
-            "time": "2016-07-20T21:02:04+00:00"
+            "time": "2018-01-26T11:25:24+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -575,30 +575,30 @@
         },
         {
             "name": "mhor/php-mediainfo",
-            "version": "3.0.0",
+            "version": "4.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mhor/php-mediainfo.git",
-                "reference": "a16bad2b884dc17d40fcea432115ec0c3ec0e739"
+                "reference": "ebcf39d68d3b2c70a34798ea4132fe8b457ee295"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mhor/php-mediainfo/zipball/a16bad2b884dc17d40fcea432115ec0c3ec0e739",
-                "reference": "a16bad2b884dc17d40fcea432115ec0c3ec0e739",
+                "url": "https://api.github.com/repos/mhor/php-mediainfo/zipball/ebcf39d68d3b2c70a34798ea4132fe8b457ee295",
+                "reference": "ebcf39d68d3b2c70a34798ea4132fe8b457ee295",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4.0",
-                "symfony/filesystem": "~2.3|~3.0",
-                "symfony/process": "~2.3|~3.0"
+                "php": ">=5.6.0",
+                "symfony/filesystem": "~2.3|~3.0|~4.0",
+                "symfony/process": "~2.3|~3.0|~4.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0"
+                "phpunit/phpunit": "~5.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.0.x-dev"
+                    "dev-master": "5.0.x-dev"
                 }
             },
             "autoload": {
@@ -617,7 +617,7 @@
                 }
             ],
             "description": "PHP wrapper around the mediainfo command",
-            "time": "2017-01-17T22:45:20+00:00"
+            "time": "2018-07-03T21:29:10+00:00"
         },
         {
             "name": "moontoast/math",
