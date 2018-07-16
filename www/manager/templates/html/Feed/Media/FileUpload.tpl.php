@@ -86,7 +86,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                             </ol>
                         </div>
                     </div>
-                    <?php if ($user->canTranscode()): ?>
+                    <?php if ($user->canTranscodePro()): ?>
                         <div>
                             <fieldset class="optimization-settings">
                                 <legend>Optimization settings</legend>
@@ -104,7 +104,23 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                                 </ol>
                             </fieldset>
                         </div>
+                    <?php elseif ($user->canTranscode()): ?>
+                        <div>
+                            <fieldset class="optimization-settings">
+                                <legend>Optimization settings</legend>
+                                <p>Only videos will be optimized. If you are uploading an audio file, these settings will have no effect.</p>
+                                <ol>
+                                    <li>
+                                        <label><input type="radio" name="optimization" value="none" />None (video is already optimized with HandBrake presets)</label>
+                                    </li>
+                                    <li>
+                                        <label><input type="radio" name="optimization" value="mp4" checked="checked" />Single file at quarter HD (540p, use this to reduce cost)</label>
+                                    </li>
+                                </ol>
+                            </fieldset>
+                        </div>
                     <?php endif; ?>
+                    
                     <input type="submit" id="publish" name="publish" value="Next Step: Add Captions" class="wdn-button-brand" disabled="disabled"> 
                     <?php if (UNL_MediaHub_Controller::$caption_requirement_date):?>
                         <p class="wdn-icon wdn-icon-attention">

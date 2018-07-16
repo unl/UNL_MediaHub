@@ -69,10 +69,15 @@ class UNL_MediaHub_User extends UNL_MediaHub_Models_BaseUser
     
     public function canTranscode()
     {
+        return UNL_MediaHub::$auto_transcode_hls_all_users;
+    }
+
+    public function canTranscodePro()
+    {
         if (in_array($this->uid, UNL_MediaHub::$auto_transcode_hls_users)) {
             return true;
         }
-        
+
         return false;
     }
 }

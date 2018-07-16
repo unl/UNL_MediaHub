@@ -1,5 +1,5 @@
 <script>
-    <?php if ($user->canTranscode()): ?>
+    <?php if ($user->canTranscodePro()): ?>
     const MAX_UPLOAD = "<?php echo UNL_MediaHub_Controller::$max_upload_mb*10 ?>";
     const VALID_VIDEO_EXTNESIONS = "mp4,mov";
     <?php else: ?>

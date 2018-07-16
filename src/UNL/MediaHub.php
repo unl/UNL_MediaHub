@@ -12,6 +12,7 @@ class UNL_MediaHub
     public static $rude_shell;
     
     public static $auto_transcode_hls_users = array();
+    public static $auto_transcode_hls_all_users = true;
     
     //The bucket name (not full ARN)
     public static $transcode_input_bucket = '';
