@@ -249,9 +249,13 @@ class UNL_MediaHub
         }
 
         $metadata = json_decode($json);
+        
+        if (!$metadata) {
+            return false;
+        }
 
         $projection = false;
-        $length = sizeof($metadata);
+        $length = count($metadata);
         for ($i=0; $i < $length; $i++) { 
             if(isset($metadata->streams[$i]->side_data_list)){
                 $side_data_list_length = sizeof($metadata->streams[$i]->side_data_list);
