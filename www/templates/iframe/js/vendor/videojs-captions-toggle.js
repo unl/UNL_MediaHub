@@ -6,7 +6,7 @@ function toggleSingleCaptionTrack(options) {
         var mq = window.matchMedia( "(min-width: 1024px)" );
         var Button = videojs.getComponent("subsCapsButton");
         var activeTextTrackCount = 0;
-        var activeTextTractIndex = 0;
+        var activeTextTrack;
         
         var ToggleCaptionsButton = videojs.extend(Button, {
           constructor: function(player, options) {
@@ -29,14 +29,14 @@ function toggleSingleCaptionTrack(options) {
                   Button.prototype.pressButton.call(this);
               } else {
                   //We are on mobile (or at least at a mobile width)
-                  if (activeTextTrackCount === 1) {
+                  if (activeTextTrackCount === 1 && activeTextTrack) {
                       //Only one caption track was found. Just toggle it
-                      if(textTracks[activeTextTractIndex].mode === "showing"){
-                          textTracks[activeTextTractIndex].mode = "disabled";
-                      }else{
-                          textTracks[activeTextTractIndex].mode = "showing";
+                      if(activeTextTrack.mode === "showing") {
+                          activeTextTrack.mode = "disabled";
+                      } else {
+                          activeTextTrack.mode = "showing";
                       }
-                      CheckCaptionsShowing(textTracks[activeTextTractIndex], MyToggleCaptionsButton);
+                      CheckCaptionsShowing(activeTextTrack, MyToggleCaptionsButton);
                   } else {
                       //More than one caption track was found, so we need to display a list
                       //Disable the caption settings menu item because it doesn't work on mobile
@@ -61,7 +61,7 @@ function toggleSingleCaptionTrack(options) {
             for(var i = 0; i < textTracks.length; ++i){
                 if(textTracks[i].kind === 'captions') {
                     activeTextTrackCount++;
-                    activeTextTractIndex = i;
+                    activeTextTrack = textTracks[i];
                 }
             }
             if (activeTextTrackCount === 1 && !mq.matches) {
@@ -71,7 +71,7 @@ function toggleSingleCaptionTrack(options) {
                 MyToggleCaptionsButton.removeClass('toggle');
             }
 
-            CheckCaptionsShowing(textTracks[activeTextTractIndex], MyToggleCaptionsButton);
+            CheckCaptionsShowing(activeTextTrack, MyToggleCaptionsButton);
         }
         
         //Initialize text track change
