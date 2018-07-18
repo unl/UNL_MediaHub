@@ -191,10 +191,16 @@ function MediahubPlayer(options) {
                 }
             });
             var textTracks = t.textTracks();
-            var defaultCaptions = 0;
+            var defaultCaptions;
             for (var i = 0; i < textTracks.length; i++) {
-                if (textTracks[i].language === "en") {
-                    defaultCaptions = i;
+                if (textTracks[i].language === "en" && textTracks[i].type !== 'metadata') {
+                    defaultCaptions = textTracks[i];
+                    
+                    if (defaultCaptions.mode === "disabled" && !defaultCaptions.cues) {
+                        // Try to load the cues but don't force them to show.
+                        // Some browsers (Safari) won't load the cues if the track is 'disabled'
+                        defaultCaptions.mode = "hidden";
+                    }
                 }
             }
             if (textTracks.length > 0) {
@@ -207,7 +213,7 @@ function MediahubPlayer(options) {
                 });
             }
             // textTracks[defaultCaptions].mode = "showing";
-            setTranscript(textTracks[defaultCaptions]);
+            setTranscript(defaultCaptions);
 
             $mhLanguageSelect.on("change", function() {
                 var value = $(this).find(":selected").val();
