@@ -108,13 +108,13 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                         <div>
                             <fieldset class="optimization-settings">
                                 <legend>Optimization settings</legend>
-                                <p>Only videos will be optimized. If you are uploading an audio file, these settings will have no effect.</p>
+                                <p>Only videos will be optimized. If you are uploading an audio file, these settings will have no effect. <a href="https://wdn.unl.edu/mediahub-video-optimization-inquiry">If you need more options, please contact us</a>.</p>
                                 <ol>
                                     <li>
                                         <label><input type="radio" name="optimization" value="none" />None (video is already optimized with HandBrake presets)</label>
                                     </li>
                                     <li>
-                                        <label><input type="radio" name="optimization" value="mp4" checked="checked" />Single file at quarter HD (540p, use this to reduce cost)</label>
+                                        <label><input type="radio" name="optimization" value="mp4" checked="checked" />Single file at quarter HD</label>
                                     </li>
                                 </ol>
                             </fieldset>
