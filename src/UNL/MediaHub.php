@@ -12,6 +12,7 @@ class UNL_MediaHub
     public static $rude_shell;
     
     public static $auto_transcode_hls_users = array();
+    public static $auto_transcode_hls_all_users = true;
     
     //The bucket name (not full ARN)
     public static $transcode_input_bucket = '';
@@ -248,9 +249,13 @@ class UNL_MediaHub
         }
 
         $metadata = json_decode($json);
+        
+        if (!$metadata) {
+            return false;
+        }
 
         $projection = false;
-        $length = sizeof($metadata);
+        $length = count($metadata);
         for ($i=0; $i < $length; $i++) { 
             if(isset($metadata->streams[$i]->side_data_list)){
                 $side_data_list_length = sizeof($metadata->streams[$i]->side_data_list);
