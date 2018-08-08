@@ -362,7 +362,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
                 'user_agent' => 'UNL MediaHub/mediahub.unl.edu'
                 )));
 
-        $result = @file_get_contents($this->url, null, $context, -1, 8);
+        $result = @file_get_contents($this->url, null, $context, 0, 8);
         if (false === $result) {
             // Could not retrieve the info about this piece of media
             return false;
