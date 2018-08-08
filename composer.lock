@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2fe0143f8b3343cc94f7de507b3450f5",
+    "content-hash": "2c776e4dc34aac386c3f325c8ea854f1",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -418,21 +418,21 @@
         },
         {
             "name": "jasig/phpcas",
-            "version": "1.3.4",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/apereo/phpCAS.git",
-                "reference": "8c74d21630f74278270830fdbdb0c1317bce3f0a"
+                "reference": "7a949dee79aaadc16161d7d4863b5c0871546222"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/apereo/phpCAS/zipball/8c74d21630f74278270830fdbdb0c1317bce3f0a",
-                "reference": "8c74d21630f74278270830fdbdb0c1317bce3f0a",
+                "url": "https://api.github.com/repos/apereo/phpCAS/zipball/7a949dee79aaadc16161d7d4863b5c0871546222",
+                "reference": "7a949dee79aaadc16161d7d4863b5c0871546222",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
-                "php": ">=5.0.0"
+                "php": ">=5.4.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "~3.7.10"
@@ -465,10 +465,11 @@
             "description": "Provides a simple API for authenticating users against a CAS server",
             "homepage": "https://wiki.jasig.org/display/CASC/phpCAS",
             "keywords": [
+                "apereo",
                 "cas",
                 "jasig"
             ],
-            "time": "2015-11-16T20:44:36+00:00"
+            "time": "2018-03-15T13:17:25+00:00"
         },
         {
             "name": "leodido/conversio",
@@ -2892,7 +2893,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "unl/rev-api": 10,
-        "swiftmailer/swiftmailer": 0
+        "swiftmailer/swiftmailer": 0,
+        "jasig/phpcas": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
