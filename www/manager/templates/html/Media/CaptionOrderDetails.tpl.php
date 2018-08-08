@@ -28,6 +28,8 @@
                     </select>
                     <input type="hidden" name="__unlmy_posttarget" value="download_rev" />
                     <input type="hidden" name="order_id" value="<?php echo (int)$context->order->id ?>" />
+                    <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
+                    <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
                     <input type="submit" value="Download">
                 </form>
             </div>

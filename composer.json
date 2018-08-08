@@ -46,7 +46,8 @@
       "mhor/php-mediainfo": "^4.1",
         "ramsey/uuid": "^3.7",
         "aws/aws-sdk-php": "^3.52",
-        "moontoast/math": "^1.1"
+        "moontoast/math": "^1.1",
+        "slim/csrf": "^0.8.2"
     },
     "scripts": {
       "post-install-cmd": [

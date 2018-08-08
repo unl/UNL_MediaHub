@@ -16,7 +16,9 @@ require(['jquery'], function($){
             chunk_size: '5mb',
             multi_selection:false,
             multipart_params: {
-                __unlmy_posttarget: 'upload_media'
+                __unlmy_posttarget: 'upload_media',
+                csrf_name: document.querySelector('input[name="csrf_name"]').value,
+                csrf_value: document.querySelector('input[name="csrf_value"]').value
             },
             filters : {
                 max_file_size : MAX_UPLOAD+'mb',

@@ -22,6 +22,8 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
         <form action="?" method="post" id="add_media">
             <input type="hidden" name="__unlmy_posttarget" value="feed_media" />
             <input type="hidden" id="media_url" name="url" value="">
+            <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
+            <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
             <div class="wdn-grid-set">
                 <div id="mh_upload_media_container" class="bp2-wdn-col-three-sevenths">
                     <div id="mh_upload_media" class="mh-upload-box wdn-center">

@@ -18,6 +18,8 @@
 <form action="?view=newsroom" method="post" id="addUser" class="addData">
     <input type="hidden" id="feed_id" name="feed_id" value="<?php echo (int)$_GET['feed_id']; ?>" />
     <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_users" />
+    <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
+    <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
     <label for="uid">My.UNL Username</label><br>
     <input id="uid" name="uid" type="text" />
     <input type="submit" value="Add User" />

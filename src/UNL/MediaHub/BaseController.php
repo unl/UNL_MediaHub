@@ -22,4 +22,47 @@ class UNL_MediaHub_BaseController
 
         $_SESSION['notices'][] = $notice;
     }
+
+    /**
+     * Wrapper function to help with CSRF tokens
+     *
+     * @return \Slim\Csrf\Guard
+     */
+    public function getCSRFHelper()
+    {
+        static $csrf;
+
+        if (!$csrf) {
+            $null = null;
+            // Use persistent tokens due to AJAX functionality
+            $csrf = new \Slim\Csrf\Guard('csrf', $null, null, 200, 16, true);
+            $csrf->validateStorage();
+            $csrf->generateToken();
+        }
+
+        return $csrf;
+    }
+
+    /**
+     * Validate a POST request for CSRF
+     *
+     * @return bool
+     */
+    public function validateCSRF()
+    {
+        $csrf = $this->getCSRFHelper();
+
+        if (!isset($_POST[$csrf->getTokenNameKey()])) {
+            return false;
+        }
+
+        if (!isset($_POST[$csrf->getTokenValueKey()])) {
+            return false;
+        }
+
+        $name = $_POST[$csrf->getTokenNameKey()];
+        $value = $_POST[$csrf->getTokenValueKey()];
+
+        return $csrf->validateToken($name, $value);
+    }
 }

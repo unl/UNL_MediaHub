@@ -41,6 +41,8 @@
                     </span>
                 <?php endif; ?>    
             </h1>
+            <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
+            <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
             <input name="submit" value="Save" class="wdn-button wdn-pull-right" type="submit" />
 
             <div class="clear">

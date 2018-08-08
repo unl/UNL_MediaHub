@@ -46,6 +46,8 @@ $controller->setReplacementData('head', $js);
 <form id="retry_transcoding_job" method="post">
     <input type="hidden" name="media_id" value="<?php echo $context->media->id ?>">
     <input type="hidden" name="__unlmy_posttarget" value="retry_transcoding_job" />
+    <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
+    <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
 </form>
 <?php endif; ?>
 
@@ -55,6 +57,8 @@ $controller->setReplacementData('head', $js);
     <input id="media_url" name="url" type="hidden" value="" />
     <input type="hidden" name="__unlmy_posttarget" value="feed_media" />
     <input type="hidden" id="id" name="id" value="<?php echo $context->media->id ?>" />
+    <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
+    <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
     
     <div class="wdn-band wdn-light-triad-band">
         <div class="wdn-inner-wrapper">

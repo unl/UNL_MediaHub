@@ -178,7 +178,7 @@ class UNL_MediaHub_Manager extends UNL_MediaHub_BaseController implements UNL_Me
      */
     function handlePost()
     {
-        $handler = new UNL_MediaHub_Manager_PostHandler($this->options, $_POST, $_FILES);
+        $handler = new UNL_MediaHub_Manager_PostHandler($this, $this->options, $_POST, $_FILES);
         $handler->setMediaHub(self::$mediahub);
         return $handler->handle();
     }

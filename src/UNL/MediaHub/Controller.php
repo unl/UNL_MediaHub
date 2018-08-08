@@ -362,6 +362,10 @@ class UNL_MediaHub_Controller
                 throw new Exception('You must be logged in to make a comment.', 403);
             }
             
+            if (!$this->validateCSRF()) {
+                throw new \Exception('Invalid security token provided. If you think this was an error, please retry the request.', 403);
+            }
+            
             $data = array(
                 'uid'      => $user->uid,
                 'media_id' => $media->id,
@@ -378,6 +382,10 @@ class UNL_MediaHub_Controller
         if (!empty($post['tags'])) {
             if (!$user = $auth->getUser()) {
                 throw new Exception('You must be logged in to add a tag.', 403);
+            }
+
+            if (!$this->validateCSRF()) {
+                throw new \Exception('Invalid security token provided. If you think this was an error, please retry the request.', 403);
             }
             
             if (!$media->userCanEdit($user)) {

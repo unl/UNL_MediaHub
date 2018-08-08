@@ -67,6 +67,8 @@ $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl
                         </ul>
                         <input type="hidden" name="__unlmy_posttarget" value="order_rev" />
                         <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
+                        <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
+                        <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
                         <input type="submit" id="caption_submit_button" value="Order captions">
                         <p class="wdn-icon wdn-icon-attention wdn-sans-serif">Orders can not be canceled.</p>
                     </form>
@@ -103,6 +105,8 @@ $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl
                     <form method="post">
                         <input type="hidden" name="__unlmy_posttarget" value="pull_amara" />
                         <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
+                        <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
+                        <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
                         <input type="submit" value="Pull Captions from amara.org">
                     </form>
                 <?php endif ?>
@@ -199,6 +203,8 @@ $controller->setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl
                                     <input type="hidden" name="__unlmy_posttarget" value="set_active_text_track" />
                                     <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
                                     <input type="hidden" name="text_track_id" value="<?php echo (int)$track->id ?>" />
+                                    <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
+                                    <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
                                     <input type="submit" value="Set Active">
                                 </form>
                             <?php endif; ?>

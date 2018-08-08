@@ -8,15 +8,18 @@ class UNL_MediaHub_Manager_PostHandler
     public $options = array();
     public $post    = array();
     public $files   = array();
+    protected $controller;
     public $mediahub;
 
-    function __construct($options = array(),
+    function __construct(\UNL_MediaHub_BaseController $controller,
+                         $options = array(),
                          $post    = array(),
                          $files   = array())
     {
         $this->options = $options;
         $this->post    = $post;
         $this->files   = $files;
+        $this->controller = $controller;
 
         /**
          * Sort the feed elements so that their elements are ALWAYS
@@ -89,6 +92,11 @@ class UNL_MediaHub_Manager_PostHandler
         $this->verifyPost();
 
         $postTarget = $this->determinePostTarget();
+
+        $verify_csrf = true;
+        if ($verify_csrf && !$this->controller->validateCSRF()) {
+            throw new \Exception('Invalid security token provided. If you think this was an error, please retry the request.', 403);
+        }
 
         $this->filterPostData();
 
