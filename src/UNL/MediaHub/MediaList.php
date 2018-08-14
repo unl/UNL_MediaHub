@@ -19,7 +19,7 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
     public function __construct($options = array())
     {
         //Dont paginate if we are not viewing html.
-        if (isset($options['format']) && $options['format'] !== 'html') {
+        if (isset($options['format']) && $options['format'] !== 'html' && !isset($options['limit'])) {
             $options['limit'] = 0;
         }
         
