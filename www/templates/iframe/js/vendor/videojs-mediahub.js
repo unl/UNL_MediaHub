@@ -222,16 +222,13 @@ function MediahubPlayer(options) {
         }
     });
 
-    // Playcount
     var w = false;
-    t.on('play', function() {
+    var playEvent = function() {
         if (!w) {
             $.post(options.url, { action: "playcount" });
             w = true;
         }
-    });
 
-    t.on('play', function() {
         var message = {
             'message_type': 'ga_event',
             'event': 'play',
@@ -241,9 +238,9 @@ function MediahubPlayer(options) {
             'type': v.tagName.toString().toLowerCase()
         };
         window.parent.postMessage(message, "*");
-    });
-
-    t.on('pause', function() {
+    };
+    
+    var pauseEvent = function() {
         var message = {
             'message_type': 'ga_event',
             'event': 'pause',
@@ -253,8 +250,21 @@ function MediahubPlayer(options) {
             'type': v.tagName.toString().toLowerCase()
         };
         window.parent.postMessage(message, "*");
+    };
+
+    // Wave surfer doesn't do a good job of emitting standard events
+    // So we have to do some hackery to get it to work right
+    t.on('ready', function() {
+        if (t.wavesurfer) {
+            t.wavesurfer().surfer.on('play', playEvent);
+            t.wavesurfer().surfer.on('pause', pauseEvent);
+        } else {
+            t.on('play', playEvent);
+            t.on('pause', pauseEvent);
+        }
     });
 
+    // This works fine for both audio and video
     t.on('ended', function() {
         var message = {
             'message_type': 'ga_event',
