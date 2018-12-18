@@ -1,4 +1,4 @@
-<h1 class="wdn-brand"><?php if (isset($context->options['feed'])) { echo UNL_MediaHub::escape($context->options['feed']->title); } ?> Channel - User Manager</h1>
+<h1><?php if (isset($context->options['feed'])) { echo UNL_MediaHub::escape($context->options['feed']->title); } ?> Channel - User Manager</h1>
 
 <ul id="userList">
     <?php foreach ($context->items as $user):?>

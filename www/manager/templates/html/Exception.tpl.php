@@ -5,11 +5,9 @@ if (false == headers_sent()
     header('HTTP/1.1 '.$code.' '.$context->getMessage());
     header('Status: '.$code.' '.$context->getMessage());
 }
+$page->addScriptDeclaration("WDN.initializePlugin('notice')");
 ?>
 
-<script type="text/javascript">
-WDN.initializePlugin('notice');
-</script>
 <div class="wdn_notice alert">
     <div class="close">
         <a href="#" title="Close this notice">Close this notice</a>

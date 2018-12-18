@@ -1,10 +1,10 @@
-<script type="text/javascript">
+<?php
+$page->addScriptDeclaration("
     WDN.initializePlugin('jqueryui', [function () {
         var $ = require('jquery');
         $('#media_creation_date').datepicker({ dateFormat: 'yy-mm-dd' });
-    }]);
-</script>
-
+    }]);");
+?>
 
 <label for="media_creation_date" class="element">Media Creation Date <span class="helper">The date that the media was created.</span></label>
 <div class="element">

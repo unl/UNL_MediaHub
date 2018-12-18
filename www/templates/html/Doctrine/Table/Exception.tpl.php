@@ -4,11 +4,9 @@ if (false == headers_sent()
     header('HTTP/1.1 '.$code);
     header('Status: '.$code);
 }
+$page->addScriptDeclaration("WDN.initializePlugin('notice')")
 ?>
 
-<script type="text/javascript">
-WDN.initializePlugin('notice');
-</script>
 <div class="wdn_notice alert">
     <div class="message">
         <h4>Whoops! Sorry, there was a database error.</h4>

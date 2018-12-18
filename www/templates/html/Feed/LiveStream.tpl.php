@@ -8,24 +8,26 @@ if (!$context->feed->hasLiveStream()) {
 $feed_url = htmlentities(UNL_MediaHub_Controller::getURL($context->feed), ENT_QUOTES);
 $controller->setReplacementData('title', 'UNL | MediaHub | '.htmlspecialchars($context->feed->title). ' | Live');
 $controller->setReplacementData('breadcrumbs', '
-<ul>
+<ol>
     <li><a href="http://www.unl.edu/">UNL</a></li>
     <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li>
     <li><a href="'.$feed_url.'">'.htmlspecialchars($context->feed->title).'</a></li>
     <li>Live</li>
-</ul>');
+</ol>');
 ?>
 <h2><?php echo htmlspecialchars($context->feed->title); ?> Live Streaming</h2>
 <div class="grid4 first">
 	<div id="wdn_calendarDisplay"></div>
 	<a class="archive" href="<?php echo $feed_url;?>">Archived Events</a>
 </div>
-<script type="text/javascript">WDN.initializePlugin('events', function(){
+<?php
+$page->addScriptDeclaration("WDN.initializePlugin('events', function(){
     WDN.events.calURL = 'http://events.unl.edu/livenews/';
 	WDN.events.limit  = 5;
 	WDN.events.initialize();
-	});
-</script>
+	});");
+?>
+
 <div class="grid8">
 	<div id="wdn_live_stream_wrapper">
 		<span class="liveIndicator">Live</span>
