@@ -1,10 +1,10 @@
 <?php
 $limit = 3;
 ?>
-<ul class="dcf-grid">
+<ul class="dcf-grid-full dcf-grid-thirds@sm dcf-col-gap-vw dcf-list-bare">
 	<?php $i = 0; ?>
 	<?php foreach ($context->items as $media): ?>
-	<li class="dcf-col-100% dcf-col-33%@sm">
+	<li>
 		<a href="<?php echo $controller::getURL($media) ?>">
 			<img src="<?php echo $media->getThumbnailURL() ?>" alt="<?php echo UNL_MediaHub::escape($media->title) ?>" />
 		</a>
