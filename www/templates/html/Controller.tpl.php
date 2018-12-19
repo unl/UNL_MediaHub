@@ -1,7 +1,7 @@
 <?php
 use UNL\Templates\Templates;
 
-$page = Templates::factory('Fixed', Templates::VERSION_5);
+$page = Templates::factory('App', Templates::VERSION_5);
 
 $wdn_include_path = UNL_MediaHub::getRootDir() . '/www';
 if (file_exists($wdn_include_path . '/wdn/templates_5.0')) {
@@ -15,8 +15,6 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
 //Titles
 $page->doctitle = '<title>MediaHub | University of Nebraska-Lincoln</title>';
 $page->titlegraphic = 'UNL MediaHub';
-$page->pagetitle = '';
-$page->affiliation = '';
 if ($title = $context->getReplacementData('pagetitle')) {
     $page->pagetitle = $title;
 }
@@ -30,8 +28,7 @@ if (!$context->output instanceof UNL_MediaHub_FeedAndMedia) {
 }
 
 //Navigation
-$page->breadcrumbs = '<ol> <li><a href="http://www.unl.edu/">Nebraska</a></li> <li><a href="' . $baseUrl . '">MediaHub</a></li></ol>';
-$page->navlinks = $savvy->render(null, 'Navigation.tpl.php');
+$page->appcontrols = $savvy->render(null, 'Navigation.tpl.php');
 
 //Main content
 if (isset($_SESSION['notices'])) {

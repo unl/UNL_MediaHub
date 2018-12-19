@@ -6,7 +6,8 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
 $label = 'All Channels';
 if (isset($context->label) && !empty($context->label)) {
     $controller->setReplacementData('title', 'UNL | MediaHub | '.$context->label);
-    $controller->setReplacementData('breadcrumbs', '<ol> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li>'.$context->label.'</li></ol>');
+    // TODO: disable breadcrumbs since currently not supported in 5.0 App templates
+    //$controller->setReplacementData('breadcrumbs', '<ol> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li>'.$context->label.'</li></ol>');
     $label = $context->label;
 }
 ?>
@@ -26,17 +27,17 @@ if($context->options['orderby'] == 'datecreated'){
 
 ?>
 
-<div class="wdn-band">
-    <div class="wdn-inner-wrapper wdn-inner-padding-no-bottom">
+<div class="dcf-bleed dcf-pt-6">
+    <div class="dcf-wrapper dcf-pb-0">
         <div class="mh-list-header">
-            <div class="wdn-grid-set">
-                <div class="bp2-wdn-col-three-fourths">
-                    <h1 class="wdn-brand clear-top"><?php echo UNL_MediaHub::escape($label); ?></h1>
+            <div class="dcf-grid">
+                <div class="dcf-col-100% dcf-col-75%-start@sm">
+                    <h2><?php echo UNL_MediaHub::escape($label); ?></h2>
                     <?php if (count($context->items) && $context->pager->getLastPage() > 1): ?>
                         <p>Page <?php echo $context->pager->getPage() ?> of <?php echo $context->pager->getLastPage() ?></p>
                     <?php endif; ?>
                 </div>
-                <div class="bp2-wdn-col-one-fourth">
+                <div class="dcf-col-100% dcf-col-25%-end@sm">
                     <?php echo $savvy->render($context->options['filter'], 'SearchBox.tpl.php'); ?>
                 </div>
             </div>
@@ -45,8 +46,8 @@ if($context->options['orderby'] == 'datecreated'){
 </div>
 
 
-<div class="wdn-band">
-    <div class="wdn-inner-wrapper wdn-inner-padding-none">
+<div class="dcf-bleed">
+    <div class="dcf-wrapper dcf-pb-0">
         <?php
         $buttons = (object)[];
         $buttons->selected_key = $context->options['orderby'];
@@ -71,8 +72,8 @@ if($context->options['orderby'] == 'datecreated'){
     </div>
 </div>
 
-<div class="wdn-band">
-    <div class="wdn-inner-wrapper wdn-inner-padding-sm">
+<div class="dcf-bleed">
+    <div class="dcf-wrapper dcf-pt-8 dcf-pb-8">
         <div class="mh-feeds">
             <?php if (count($context->items)): ?>
                 <?php 
@@ -85,11 +86,11 @@ if($context->options['orderby'] == 'datecreated'){
                     <?php foreach ($context->items as $feed): ?>
                         <li>
                             <?php $url = UNL_MediaHub::escape(UNL_MediaHub_Controller::getURL($feed)) ?>
-                            <h2 class="wdn-brand"><a href="<?php echo $url ?>"><?php echo htmlentities($feed->title) ?></a></h2>
-                            <div class="wdn-grid-set">
-                                <div class="bp2-wdn-col-one-fourth wdn-pull-right">
+                            <h2><a href="<?php echo $url ?>"><?php echo htmlentities($feed->title) ?></a></h2>
+                            <div class="dcf-grid dcf-col-gap-6 ">
+                                <div class="dcf-col-100% dcf-col-25%-start@sm">
                                     <a href="<?php echo $url ?>">
-                                    <div class="mh-channel-thumb wdn-center">
+                                    <div class="mh-channel-thumb dcf-txt-center">
                                         <?php if($feed->hasImage()): ?>
                                             <img
                                             src="<?php echo $url; ?>/image"
@@ -104,19 +105,19 @@ if($context->options['orderby'] == 'datecreated'){
                                     </div>
                                     </a>
                                 </div>
-                                <div class="bp2-wdn-col-three-fourths">
+                                <div class="dcf-col-100% dcf-col-75%-end@sm">
                                     <p><?php echo UNL_MediaHub::escape($feed->description) ?></p>
-                                    <div class="wdn-grid-set">
-                                        <div class="bp2-wdn-col-two-thirds mh-media-samples">
+                                    <div class="dcf-griddcf-col-gap-4">
+                                        <div class="dcf-col-100% dcf-col-67%-start@sm mh-media-samples">
                                             <?php echo $savvy->render($feed->getMediaList(), 'CompactMediaList.tpl.php') ?>
                                         </div>
-                                        <div class="bp2-wdn-col-one-third mh-feed-stats">
+                                        <div class="dcf-col-100% dcf-col-33%-end@sm mh-feed-stats">
                                             <?php echo $savvy->render($feed, 'Feed/Stats.tpl.php') ?>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <p class="mh-more-info wdn-sans-serif"><a href="<?php echo $url ?>">See channel…</a></p>
+                            <p class="mh-more-info unl-font-sans"><a href="<?php echo $url ?>">See channel…</a></p>
                         </li>
                     <?php endforeach; ?>
                 </ul>

@@ -99,14 +99,16 @@ class UNL_MediaHub_Manager extends UNL_MediaHub_BaseController implements UNL_Me
         if (isset(self::$replacements['head'])) {
             $me = str_replace('</head>', self::$replacements['head'].'</head>', $me);
         }
-        
-        if (isset(self::$replacements['breadcrumbs'], $scanned->breadcrumbs)) {
+
+        // TODO: disable breadcrumbs since currently not supported in 5.0 App templates
+        /*
+         if (isset(self::$replacements['breadcrumbs'], $scanned->breadcrumbs)) {
             $me = str_replace($scanned->breadcrumbs,
                 self::$replacements['breadcrumbs'],
                 $me);
             unset(self::$replacements['breadcrumbs']);
         }
-        
+        */
         return $me;
     }
     

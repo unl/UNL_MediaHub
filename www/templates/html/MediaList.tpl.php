@@ -1,7 +1,8 @@
 <?php
 if (isset($context->label) && !empty($context->label)) {
     $controller->setReplacementData('title', 'UNL | Media | '.$context->label);
-    $controller->setReplacementData('breadcrumbs', '<ol> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li>'.$context->label.'</li></ol>');
+    // TODO: disable breadcrumbs since currently not supported in 5.0 App templates
+    //$controller->setReplacementData('breadcrumbs', '<ol> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li>'.$context->label.'</li></ol>');
     $label = $context->label;
 } else {
     $label = 'All Media';
@@ -30,26 +31,26 @@ if(!empty($context->options['f'])){
 
 ?>
 
-<div class="dcf-bleed">
+<div class="dcf-bleed dcf-pt-6">
     <div class="dcf-wrapper dcf-pb-0">
         <div class="mh-list-header">
             <div class="dcf-grid">
                 <div class="dcf-col-100% dcf-col-75%-start@sm">
                     <?php if ($context->options['filter']->getType() == 'search'): ?>
-                        <h1>
+                        <h2>
                             <span class="dcf-subhead">Search results for</span>
                             <?php echo UNL_MediaHub::escape($context->options['filter']->getValue()) ?>
-                        </h1>
+                        </h2>
                     <?php elseif ($context->options['filter']->getType() == 'feed'): ?>
                         <h2><?php echo UNL_MediaHub::escape($label) ?></h2>
                     <?php else: ?>
-                        <h1><?php echo UNL_MediaHub::escape($label) ?></h1>
+                        <h2><?php echo UNL_MediaHub::escape($label) ?></h2>
                     <?php endif; ?>
                     <?php if (count($context->items) && $context->pager->getLastPage() > 1): ?>
                         <p>Page <?php echo $context->pager->getPage() ?> of <?php echo $context->pager->getLastPage() ?></p>
                     <?php endif; ?>
                 </div>
-                <div class="dcf-col-100% dcf-col-25%-start@sm">
+                <div class="dcf-col-100% dcf-col-25%-end@sm">
                     <?php if (in_array($context->options['filter']->getType(), array('search', 'browse'))): ?>
                         <?php echo $savvy->render($context->options['filter'], 'SearchBox.tpl.php'); ?>
                     <?php endif; ?>

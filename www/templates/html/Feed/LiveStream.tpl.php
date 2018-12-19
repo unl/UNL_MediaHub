@@ -7,13 +7,14 @@ if (!$context->feed->hasLiveStream()) {
 
 $feed_url = htmlentities(UNL_MediaHub_Controller::getURL($context->feed), ENT_QUOTES);
 $controller->setReplacementData('title', 'UNL | MediaHub | '.htmlspecialchars($context->feed->title). ' | Live');
-$controller->setReplacementData('breadcrumbs', '
-<ol>
-    <li><a href="http://www.unl.edu/">UNL</a></li>
-    <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li>
-    <li><a href="'.$feed_url.'">'.htmlspecialchars($context->feed->title).'</a></li>
-    <li>Live</li>
-</ol>');
+// TODO: disable breadcrumbs since currently not supported in 5.0 App templates
+//$controller->setReplacementData('breadcrumbs', '
+//<ol>
+//   <li><a href="http://www.unl.edu/">UNL</a></li>
+//   <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li>
+//   <li><a href="'.$feed_url.'">'.htmlspecialchars($context->feed->title).'</a></li>
+//   <li>Live</li>
+//</ol>');
 ?>
 <h2><?php echo htmlspecialchars($context->feed->title); ?> Live Streaming</h2>
 <div class="grid4 first">

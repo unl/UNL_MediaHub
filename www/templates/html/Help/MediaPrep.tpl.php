@@ -1,4 +1,4 @@
-<div class="dcf-bleed">
+<div class="dcf-bleed dcf-pt-6">
     <div class="dcf-wrapper">
         <h2 class="clear-top">Preparing Your Media</h2>
         <a href="<?php echo UNL_MediaHub_Controller::getURL() ?>documents/handbrake_presets.zip">Download Handbrake Presets</a>

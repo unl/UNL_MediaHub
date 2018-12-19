@@ -1,12 +1,13 @@
 <?php
-$controller->setReplacementData('breadcrumbs', '<ol> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'manager/">Manage Media</a></li> <li><a href="' . $context->media->getURL() .'">'.UNL_MediaHub::escape($context->media->title).'</a></li> <li>Edit Captions</li></ol>');
+// TODO: disable breadcrumbs since currently not supported in 5.0 App templates
+//$controller->setReplacementData('breadcrumbs', '<ol> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'manager/">Manage Media</a></li> <li><a href="' . $context->media->getURL() .'">'.UNL_MediaHub::escape($context->media->title).'</a></li> <li>Edit Captions</li></ol>');
 ?>
 
-<div class="wdn-band">
-    <div class="wdn-inner-wrapper wdn-inner-padding-no-top">
+<div class="dcf-bleed dcf-pt-6 dcf-pb-6">
+    <div class="dcf-wrapper">
         <h1>Manage Captions for: <?php echo UNL_MediaHub::escape($context->media->title) ?></h1>
-        <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=addmedia&id=' . (int)$context->media->id?>" class="wdn-button">Edit Media</a>
-        <a href="<?php echo $context->media->getURL()?>" class="wdn-button">View Media</a>
+        <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=addmedia&id=' . (int)$context->media->id?>" class="dcf-btn dcf-btn-primary">Edit Media</a>
+        <a href="<?php echo $context->media->getURL()?>" class="dcf-btn dcf-btn-primary">View Media</a>
     </div>
 </div>
 
@@ -15,16 +16,16 @@ $controller->setReplacementData('breadcrumbs', '<ol> <li><a href="http://www.unl
     <?php echo $savvy->render($context, 'Feed/Media/transcoding_notice.tpl.php'); ?>
 <?php endif; ?>
 
-<div class="wdn-band wdn-light-neutral-band">
-    <div class="wdn-inner-wrapper">
-        <h2 class="clear-top wdn-brand">Order Captions With Your Cost Object Number</h2>
-        <div class="wdn-grid-set">
-            <div class="bp2-wdn-col-two-thirds">
+<div class="dcf-bleed unl-bg-lightest-gray dcf-pt-6 dcf-pb-6">
+    <div class="dcf-wrapper">
+        <h2>Order Captions With Your Cost Object Number</h2>
+        <div class="dcf-grid dcf-col-gap-vw">
+            <div class="dcf-col-100% dcf-col-67%-start@sm">
                 <div class="important-notice">
                     <p>
                         We will manually caption this media for you. Some things to keep in mind when ordering captions:
                     </p>
-                    <ul class="wdn-std">
+                    <ul>
                         <li>
                             <strong>Important</strong>: captions cost $1 per video minute, rounded up.  Example: A 3:15 minute video would cost $4.
                         </li>
@@ -43,7 +44,7 @@ $controller->setReplacementData('breadcrumbs', '<ol> <li><a href="http://www.unl
                     </ul>
                 </div>
             </div>
-            <div class="bp2-wdn-col-one-third">
+            <div class="dcf-col-100% dcf-col-33%-end@sm">
                 <div class="mh-caption-sidebar">
                     <?php if (!$context->hasPendingOrder()): ?>
                     <form id="caption_order" method="post">
@@ -57,11 +58,11 @@ $controller->setReplacementData('breadcrumbs', '<ol> <li><a href="http://www.unl
                                 We were unable to find the duration of the video, and can not estimate the cost.
                             </p>
                         <?php endif; ?>
-                        <ul>
+                        <ul class="dcf-list-bare">
                             <li>
-                                <label>
+                                <label class="dcf-label">
                                     Cost Object Number
-                                    <input type="text" name="cost_object" required />
+                                    <input class="dcf-input-text" type="text" name="cost_object" required />
                                 </label>
                             </li>
                         </ul>
@@ -70,7 +71,7 @@ $controller->setReplacementData('breadcrumbs', '<ol> <li><a href="http://www.unl
                         <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
                         <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
                         <input type="submit" id="caption_submit_button" value="Order captions">
-                        <p class="wdn-icon wdn-icon-attention wdn-sans-serif">Orders can not be canceled.</p>
+                        <p class="wdn-icon wdn-icon-attention unl-font-sans">Orders can not be canceled.</p>
                     </form>
                     <?php else: ?>
                     <p>Great news! There is an order already in the works.</p>
@@ -82,11 +83,11 @@ $controller->setReplacementData('breadcrumbs', '<ol> <li><a href="http://www.unl
     </div>
 </div>
 
-<div class="wdn-band">
-    <div class="wdn-inner-wrapper">
-    <h2 class="clear-top wdn-brand">Self-Manage Captions With Amara</h2>
-        <div class="wdn-grid-set">
-            <div class="bp2-wdn-col-two-thirds">
+<div class="dcf-bleed dcf-pt-6 dcf-pb-6">
+    <div class="dcf-wrapper">
+    <h2>Self-Manage Captions With Amara</h2>
+        <div class="dcf-grid dcf-col-gap-vw">
+            <div class="dcf-col-100% dcf-col-67%-start@sm">
                 <p>
                     <a href="http://amara.org">amara.org</a> is a free service which helps you caption videos. To caption your video you will need to do the following.
                 </p>
@@ -96,12 +97,12 @@ $controller->setReplacementData('breadcrumbs', '<ol> <li><a href="http://www.unl
                     <li>Come back here, and click the button to 'pull captions from amara.org'</li>
                 </ol>
             </div>
-            <div class="bp2-wdn-col-one-third">
+            <div class="dcf-col-100% dcf-col-33%-end@sm">
                 <?php $edit_captions_url = $context->getEditCaptionsURL(); ?>
                 <?php if (!$edit_captions_url): ?>
                     <p>Please wait for your video to be optimized before captioning on Amara</p>
                 <?php else: ?>
-                    <a class="wdn-button wdn-button-brand" href="<?php echo $context->getEditCaptionsURL(); ?>">Edit Captions on amara</a><br><br>
+                    <a class="dcf-btn dcf-btn-primary" href="<?php echo $context->getEditCaptionsURL(); ?>">Edit Captions on amara</a><br><br>
                     <form method="post">
                         <input type="hidden" name="__unlmy_posttarget" value="pull_amara" />
                         <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
@@ -115,9 +116,9 @@ $controller->setReplacementData('breadcrumbs', '<ol> <li><a href="http://www.unl
     </div>
 </div> 
 
-<div class="wdn-band wdn-light-neutral-band">
-    <div class="wdn-inner-wrapper">
-        <h2 class="wdn-brand clear-top">Order history and status</h2>
+<div class="dcf-bleed unl-bg-lightest-gray dcf-pt-6 dcf-pb-6">
+    <div class="dcf-wrapper">
+        <h2>Order history and status</h2>
         <p>View the current status of your orders</p>
         <table class="wdn_responsive_table flush-left">
             <thead>
@@ -160,7 +161,7 @@ $controller->setReplacementData('breadcrumbs', '<ol> <li><a href="http://www.unl
             </tbody>
         </table>
 
-        <h2 class="wdn-brand">Caption track history</h2>
+        <h2 class="dcf-pt-4">Caption track history</h2>
         <p>You can manage old captions.</p>
         <table class="wdn_responsive_table flush-left">
             <thead>
@@ -215,10 +216,10 @@ $controller->setReplacementData('breadcrumbs', '<ol> <li><a href="http://www.unl
         </table>
     </div>
 </div>
-<div class="wdn-band">
-    <div class="wdn-inner-wrapper">
+<div class="dcf-bleed dcf-pt-6 dcf-pb-6">
+    <div class="dcf-wrapper">
         <div>
-            <h2 class="wdn-brand">Get Help</h2>
+            <h2>Get Help</h2>
             <p>
                 If you have questions or comments, please use the 'Email Us' tab on this page or email <a href="mailto:mysupport@unl.edu">MySupport</a>.
             </p>

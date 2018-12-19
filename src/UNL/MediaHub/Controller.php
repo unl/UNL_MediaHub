@@ -420,12 +420,15 @@ class UNL_MediaHub_Controller
             $me = str_replace('</head>', self::$replacements['head'].'</head>', $me);
         }
 
+        // TODO: disable breadcrumbs since currently not supported in 5.0 App templates
+        /*
         if (isset(self::$replacements['breadcrumbs'], $scanned->breadcrumbs)) {
             $me = str_replace($scanned->breadcrumbs,
                               self::$replacements['breadcrumbs'],
                               $me);
             unset(self::$replacements['breadcrumbs']);
         }
+        */
 
         return $me;
     }

@@ -8,7 +8,7 @@
             $active_class = $is_current_option ? 'active' : '';
             ?>
             <li>
-                <a href="<?php echo UNL_MediaHub::escape($details['url']) ?>" class="dcf-btn dcf-btn-primary <?php echo $active_class ?>">
+                <a href="<?php echo UNL_MediaHub::escape($details['url']) ?>" class="dcf-btn dcf-btn-primary dcf-txt-3xs <?php echo $active_class ?>">
                     <?php if ($is_current_option): ?>
                         <span aria-hidden="true" class="mh-sort-filter-active"></span>
                     <?php endif; ?>

@@ -21,10 +21,11 @@ if (isset($context->media)) {
         $mediaType = 'video';
     }
     $formView .= 'edit';
-
-    $controller->setReplacementData('breadcrumbs', '<ol> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'manager/">Manage Media</a></li> <li><a href="' . $context->media->getURL() .'">'.UNL_MediaHub::escape($context->media->title).'</a></li>');
+    // TODO: disable breadcrumbs since currently not supported in 5.0 App templates
+    //$controller->setReplacementData('breadcrumbs', '<ol> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'manager/">Manage Media</a></li> <li><a href="' . $context->media->getURL() .'">'.UNL_MediaHub::escape($context->media->title).'</a></li>');
 } else {
-    $controller->setReplacementData('breadcrumbs', '<ol> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'manager/">Manage Media</a></li> <li>Add Media</li></ol>');
+    // TODO: disable breadcrumbs since currently not supported in 5.0 App templates
+    //$$controller->setReplacementData('breadcrumbs', '<ol> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'manager/">Manage Media</a></li> <li>Add Media</li></ol>');
 }
 
 $edit_caption_url = UNL_MediaHub_Manager::getURL() . '?view=editcaptions&id=' . $context->media->id;
@@ -162,7 +163,7 @@ $page->jsbody .= $js;
         </div>
     </div>
     
-    <div class="dcf-bleed mh-edit-media">
+    <div class="dcf-bleed dcf-pt-6 mh-edit-media">
         <div class="dcf-wrapper">
             <div class="dcf-grid dcf-col-gap-6">
                 <div class="dcf-col-100% dcf-col-25%-start@sm dcf-pb-6">

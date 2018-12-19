@@ -511,6 +511,7 @@ ul.mh-btn-group li:last-of-type a {
 ul.mh-btn-group li {
 	display: inline-block;
 	float: left;
+  margin: 0;
 }
 
 ul.mh-btn-group > li:not(:last-of-type) {

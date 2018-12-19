@@ -1,7 +1,7 @@
 <?php
 use UNL\Templates\Templates;
 
-$page = Templates::factory('Fixed', Templates::VERSION_5);
+$page = Templates::factory('App', Templates::VERSION_5);
 
 $wdn_include_path = __DIR__ . '/../../..';
 if (file_exists($wdn_include_path . '/wdn/templates_5.0')) {
@@ -11,8 +11,6 @@ if (file_exists($wdn_include_path . '/wdn/templates_5.0')) {
 //titles
 $page->doctitle     = '<title>Manager | UNL MediaHub | University of Nebraska-Lincoln</title>';
 $page->titlegraphic = 'UNL MediaHub';
-$page->pagetitle    = '';
-$page->affiliation = '';
 
 //header
 $page->addStyleSheet(UNL_MediaHub_Controller::getURL().'templates/html/css/all.css?v='.UNL_MediaHub_Controller::getVersion());
@@ -24,14 +22,7 @@ $page->addScriptDeclaration($scriptBody);
 $page->addScript(UNL_MediaHub_Controller::getURL().'templates/html/scripts/manager.js?v='.UNL_MediaHub_Controller::getVersion());
 
 //Navigation
-$page->breadcrumbs = '
-<ol>
-    <li><a href="http://www.unl.edu/">Nebraska</a></li>
-    <li><a href="' . UNL_MediaHub_Controller::getURL() .'">MediaHub</a></li>
-    <li><a href="' . UNL_MediaHub_Controller::getURL() .'manager/">Manage Media</a></li>
-</ol>';
-
-$page->navlinks = $savvy->render(null, 'Navigation.tpl.php');
+$page->appcontrols = $savvy->render(null, 'Navigation.tpl.php');
 
 //Main content
 $savvy->addGlobal('page', $page);

@@ -28,10 +28,10 @@
   ");
 ?>
 
-<div class="dcf-bleed mh-channel-edit dcf-pb-6">
+<div class="dcf-bleed mh-channel-edit dcf-pt-6 dcf-pb-6">
     <div class="dcf-wrapper">
         <form action="<?php echo $context->action; ?>" method="post" name="feed" id="feed" enctype="multipart/form-data" class="">
-            <h1 class="dcf-float-left">
+            <h2 class="dcf-float-left dcf-txt-h1">
                 <?php echo (isset($context->feed))?'Edit':'Create'; ?> a Channel
                 <?php if(isset($context->feed->id)): ?>
                     <span class="dcf-subhead">
@@ -42,7 +42,7 @@
                         </a>
                     </span>
                 <?php endif; ?>    
-            </h1>
+            </h2>
             <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
             <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
             <input name="submit" value="Save" class="dcf-btn dcf-float-right" type="submit" />
@@ -382,7 +382,7 @@
                         </ol>
                     </fieldset>
                     <fieldset id="media_header">
-                        <legend>Media RSS Options</legend>
+                        <legend class="dcf-legend">Media RSS Options</legend>
                         <ol>
                             <li>
                                 <label for='media_rating' class='dcf-label element'>Rating</label>

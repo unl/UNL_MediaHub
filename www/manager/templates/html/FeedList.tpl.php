@@ -1,6 +1,6 @@
 <?php $baseUrl = UNL_MediaHub_Controller::getURL(); ?>
 
-<div class="dcf-bleed mh-your-channels">
+<div class="dcf-bleed mh-your-channels dcf-pt-6">
     <div class="dcf-wrapper">
         <h2>Your Channels</h2>
         <div class="dcf-grid-fourths">
