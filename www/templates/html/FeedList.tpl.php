@@ -85,8 +85,8 @@ if($context->options['orderby'] == 'datecreated'){
                 <ul class="mh-feed-list">
                     <?php foreach ($context->items as $feed): ?>
                         <?php $url = UNL_MediaHub::escape(UNL_MediaHub_Controller::getURL($feed)) ?>
-                        <li>
-                            <div class="dcf-grid dcf-col-gap-6 ">
+                        <li class="dcf-mb-8">
+                            <div class="dcf-grid dcf-col-gap-vw">
                                 <div class="dcf-col-100% dcf-col-25%-start@sm">
                                     <a href="<?php echo $url ?>">
                                     <div class="mh-channel-thumb dcf-txt-center">
@@ -107,11 +107,11 @@ if($context->options['orderby'] == 'datecreated'){
                                 <div class="dcf-col-100% dcf-col-75%-end@sm">
                                     <h2><a href="<?php echo $url ?>"><?php echo htmlentities($feed->title) ?></a></h2>
                                     <p><?php echo UNL_MediaHub::escape($feed->description) ?></p>
-                                    <div class="dcf-grid dcf-col-gap-4">
-                                        <div class="dcf-col-100% dcf-col-67%-start@sm mh-media-samples">
+                                    <div class="dcf-grid dcf-col-gap-vw">
+                                        <div class="dcf-col-100% dcf-col-75%-start@sm mh-media-samples">
                                             <?php echo $savvy->render($feed->getMediaList(), 'CompactMediaList.tpl.php') ?>
                                         </div>
-                                        <div class="dcf-col-100% dcf-col-33%-end@sm mh-feed-stats">
+                                        <div class="dcf-col-100% dcf-col-25%-end@sm mh-feed-stats">
                                             <?php echo $savvy->render($feed, 'Feed/Stats.tpl.php') ?>
                                         </div>
                                     </div>

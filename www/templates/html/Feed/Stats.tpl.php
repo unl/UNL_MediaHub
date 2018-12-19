@@ -1,7 +1,7 @@
 <?php $counts = $context->getStats(); ?>
-<div class="dcf-grid-thirds dcf-col-gap-4">
+<div class="dcf-grid-thirds dcf-col-gap-vw">
 <?php if ($counts['video']): ?>
-    <div class="wmh-stat">
+    <div class="mh-stat">
         <span class="mh-count"><?php echo UNL_MediaHub::escape(UNL_MediaHub_Media::formatNumber($counts['video'])) ?></span>
         <span class="mh-context unl-font-sans">Videos</span>
     </div>
