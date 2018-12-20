@@ -78,7 +78,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
                     echo '
     <itunes:owner>
         <itunes:name>'.htmlspecialchars($namespaced_element['value']).'</itunes:name>
-        <itunes:email>unlwdn@gmail.com</itunes:email>
+        <itunes:email>'.$editor.'</itunes:email>
     </itunes:owner>
                     ';
                     break;
