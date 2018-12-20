@@ -154,7 +154,7 @@ $getTracks = $context->getTextTrackURLs();
                 <hr>
                 <div id="comments">
                     <?php
-                        $page->addScriptDeclaration("WDN.loadCSS('../templates/html/css/comments.css?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>');");
+                        $page->addScriptDeclaration("WDN.loadCSS('../templates/html/css/comments.css?v=" . UNL_MediaHub_Controller::getVersion() . "');");
                     ?>
                     <h2 class="unl-font-sans">Comments <span class="wdn-icon wdn-icon-comment" aria-hidden="true"></span></h2>
                     <span class="subhead">
