@@ -4,11 +4,11 @@ Supporting styles for the manager forms (add media, channel)
 -------------------------------------------------
 */
 
-/*#enhanced_header, #existing_media, #feedSelect, #maincontent form.zenform #continue3 {display: none;}*/
+/*#enhanced_header, #existing_media, #feedSelect, #dcf-main form.zenform #continue3 {display: none;}*/
 
 
 
-#maincontent form.zenform {max-width:930px;margin-top:5px;background-color:#E6E9DC;
+#dcf-main form.zenform {max-width:930px;margin-top:5px;background-color:#E6E9DC;
     background-image:-webkit-gradient(
                         linear,
                         left bottom,
@@ -39,7 +39,7 @@ Supporting styles for the manager forms (add media, channel)
     z-index: 105;
 }
 
-#maincontent form fieldset li #description_wrapper li {
+#dcf-main form fieldset li #description_wrapper li {
     list-style: inline;
     margin: 0;
     clear: none;
@@ -47,11 +47,11 @@ Supporting styles for the manager forms (add media, channel)
     float: left;
     width: auto;
 }
-#maincontent form fieldset li #description_wrapper iframe {
+#dcf-main form fieldset li #description_wrapper iframe {
 	clear:both;
 }
 
-#maincontent #description_wrapper fieldset {
+#dcf-main #description_wrapper fieldset {
 	margin:0px !important;
 	padding:0px;
 	border:none;
@@ -59,7 +59,7 @@ Supporting styles for the manager forms (add media, channel)
 	float:none;
 }
 
-#maincontent #description_wrapper .yui-toolbar-titlebar {
+#dcf-main #description_wrapper .yui-toolbar-titlebar {
 	padding:2px;
 }
 
@@ -74,20 +74,20 @@ Supporting styles for the manager forms (add media, channel)
 }
 iframe * {margin:0px}
 
-#maincontent .collapsible legend {
+#dcf-main .collapsible legend {
     width: 99%;
     cursor: pointer;
 }
 
-#maincontent .collapsible ol {
+#dcf-main .collapsible ol {
     border: none;
 }
 
-#maincontent #media_form > fieldset > legend + ol > li:first-child {
+#dcf-main #media_form > fieldset > legend + ol > li:first-child {
     border-bottom: 1px solid #ffff;
 }
 
-#maincontent .collapsible .toggle {
+#dcf-main .collapsible .toggle {
     width: .75em;
     display: inline-block;
 }

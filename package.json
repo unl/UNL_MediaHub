@@ -1,6 +1,6 @@
 {
-  "name": "UNL Mediahub",
-  "version": "0.1",
+  "name": "UNL_Mediahub",
+  "version": "1.0.0",
   "description": "Media hosting platform.",
   "repository": {
     "type": "git",
