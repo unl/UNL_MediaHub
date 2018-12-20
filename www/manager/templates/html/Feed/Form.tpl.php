@@ -307,11 +307,11 @@
                                       <select id="itunes_explicit" name="UNL_MediaHub_Feed_NamespacedElements_itunes[4][value]" aria-describedby="itune-explicit-details">
                                           <?php
                                           if (getFieldValue($context, 'itunes', 'explicit') == "yes") {
-                                              echo '<option value="">No</option>
-                                              <option value="yes" selected="selected">Yes</option>';
+                                              echo '<option value="no">No</option>
+                                            <option value="yes" selected="selected">Yes</option>';
                                           } else {
-                                              echo '<option value="">No</option>
-                                              <option value="yes">Yes</option>';
+                                              echo '<option value="no">No</option>
+                                            <option value="yes">Yes</option>';
                                           }
                                           ?>
                                       </select>
