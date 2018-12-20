@@ -15,6 +15,10 @@ $page->titlegraphic = 'UNL MediaHub';
 //header
 $page->addStyleSheet(UNL_MediaHub_Controller::getURL().'templates/html/css/all.css?v='.UNL_MediaHub_Controller::getVersion());
 $page->addStyleSheet(UNL_MediaHub_Manager::getURL().'templates/css/all_manager.css?v='.UNL_MediaHub_Controller::getVersion());
+
+// no menu items, so hide mobile menu
+$page->addStyleDeclaration("#dcf-mobile-toggle-menu {display: none!important}");
+
 $scriptBody = '
     var baseurl = "'.UNL_MediaHub_Manager::getURL().'";
     var front_end_baseurl = "'.UNL_MediaHub_Controller::getURL().'";';

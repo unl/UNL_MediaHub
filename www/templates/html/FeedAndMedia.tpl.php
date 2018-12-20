@@ -17,7 +17,7 @@ $user = UNL_MediaHub_AuthService::getInstance()->getUser();
         <?php endif ?>
       </h2>
 
-      <div class="dcf-grid dcf-col-gap-6 dcf-pt-6">
+      <div class="dcf-grid dcf-col-gap-vw dcf-pt-6">
         <div class="dcf-col-100% dcf-col-25%-start@sm">
           <div class="mh-channel-thumb dcf-txt-center">
               <?php $url = htmlentities(UNL_MediaHub_Controller::getURL($context->feed), ENT_QUOTES) ?>

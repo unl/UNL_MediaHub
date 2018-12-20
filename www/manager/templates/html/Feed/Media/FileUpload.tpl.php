@@ -24,7 +24,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
             <input type="hidden" id="media_url" name="url" value="">
             <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
             <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
-            <div class="dcf-grid-halves@sm dcf-col-gap-6">
+            <div class="dcf-grid-halves@sm dcf-col-gap-vw">
                 <div id="mh_upload_media_container">
                     <div id="mh_upload_media" class="mh-upload-box dcf-txt-center">
                         <h3 class="dcf-txtd-h2">+<span class="dcf-subhead">Add Media</span></h3>
@@ -35,7 +35,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                     </div>
                 </div>
                 <div>
-                    <div class="dcf-grid-halves@sm dcf-col-gap-4">
+                    <div class="dcf-grid-halves@sm dcf-col-gap-vw">
                         <div>
                             <ol>
                                 <li class="clear-top">

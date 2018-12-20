@@ -33,31 +33,32 @@ $page->addScriptDeclaration("WDN.initializePlugin('events', function(){
 	<div id="wdn_live_stream_wrapper">
 		<span class="liveIndicator">Live</span>
 		<div id="wdn_live_stream"></div>
-		<script type='text/javascript'>
-		WDN.loadJS('wdn/templates_3.0/scripts/plugins/swfobject/jquery.swfobject.1-1-1.min.js', function(){
-			//Fallback for flash
-			WDN.jQuery('#wdn_live_stream').prepend('<p>To view this video you should download <a href="http://get.adobe.com/flashplayer/">Adobe Flash Player</a> or use a browser that supports H264/WebM video.</p>');
-			
-			WDN.jQuery('#wdn_live_stream').flash(
-				{     
-					swf: WDN.template_path + 'wdn/templates_3.0/includes/swf/player5.4.swf',   
-					allowfullscreen: 'true',
-					allowscriptaccess: 'always',
-					flashvars: {   
-						'file': 'live_3.sdp',   
-						'autostart': 'true',
-						'streamer': 'rtmp://real.unl.edu/live_3/'
-						//'image': '<?php echo UNL_MediaHub_Controller::getURL();?>templates/html/css/images/innovation_campus.jpg'
-					},
-					height: '358',
-					width: '600',
-					id: 'jwPlayer',
-					name: 'jwPlayer'
-				}
-			);
-			
-		});
-		</script>
+		<?php
+    $page->addScriptDeclaration("
+      WDN.loadJS('wdn/templates_3.0/scripts/plugins/swfobject/jquery.swfobject.1-1-1.min.js', function(){
+        //Fallback for flash
+        WDN.jQuery('#wdn_live_stream').prepend('<p>To view this video you should download <a href=\"http://get.adobe.com/flashplayer/\">Adobe Flash Player</a> or use a browser that supports H264/WebM video.</p>');
+
+        WDN.jQuery('#wdn_live_stream').flash(
+          {
+            swf: WDN.template_path + 'wdn/templates_3.0/includes/swf/player5.4.swf',
+            allowfullscreen: 'true',
+            allowscriptaccess: 'always',
+            flashvars: {
+              'file': 'live_3.sdp',
+              'autostart': 'true',
+              'streamer': 'rtmp://real.unl.edu/live_3/'
+              //'image': '<?php echo UNL_MediaHub_Controller::getURL();?>templates/html/css/images/innovation_campus.jpg'
+            },
+            height: '358',
+            width: '600',
+            id: 'jwPlayer',
+            name: 'jwPlayer'
+          }
+        );
+
+      });");
+    ?>
 <!--
 		<h4>Major Innovation Campus Announcement</h4>
 		<p>University officials will make a major announcement about Nebraska Innovation Campus at 10 a.m., today in the State Capitol Rotunda.</p>

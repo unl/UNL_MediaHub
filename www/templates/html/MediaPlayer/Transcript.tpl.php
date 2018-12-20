@@ -17,11 +17,11 @@
 <?php  if($file): ?>
 <div class="mh-caption-search">
     <div class="mh-transcript-hide-bp2">
-        <div class="title wdn-sans-serif">
+        <div class="title unl-font-sans">
             <span class="wdn-icon-search" aria-hidden="true"></span>
-            <h2 class="wdn-sans-serif">Searchable Transcript</h2>
+            <h2 class="unl-font-sans">Searchable Transcript</h2>
             <div class="mh-tooltip italic">
-                <span class="wdn-icon-info" aria-hidden="true"></span><span class="wdn-text-hidden">more info</span>
+                <span class="wdn-icon-info" aria-hidden="true"></span><span class="dcf-sr-only">more info</span>
                 <div>
                     <ul>
                         <li>Use the text input to search the transcript. </li>
@@ -41,7 +41,7 @@
         <div class="mh-caption-container">
             <label for="mh-parse-caption">Search:</label>
             <a class="mh-paragraph-icons" href="javascript:void(0);">
-                <span class="wdn-text-hidden">Toggle between list and paragraph view.</span>
+                <span class="dcf-sr-only">Toggle between list and paragraph view.</span>
                 <div class="mh-bullets"></div>
                 <div class="mh-paragraph"></div>
             </a>

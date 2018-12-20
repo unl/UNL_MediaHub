@@ -151,7 +151,7 @@ if(!empty($context->options['f'])){
 
     <div class="dcf-bleed mh-media">
         <div class="dcf-wrapper dcf-pt-8 dcf-pb-8">
-            <ul class="dcf-list-bare dcf-grid-thirds@sm dcf-col-gap-4 mh-media-list<?php echo $mediaListClass ?>">
+            <ul class="dcf-list-bare dcf-grid-thirds@sm dcf-col-gap-vw mh-media-list<?php echo $mediaListClass ?>">
                 <?php foreach ($context->items as $media): ?>
                     <li>
                         <?php echo $savvy->render($media, 'Media/teaser.tpl.php'); ?>

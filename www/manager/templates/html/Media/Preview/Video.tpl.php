@@ -1,4 +1,4 @@
-<div class="dcf-grid dcf-col-gap-4">
+<div class="dcf-grid dcf-col-gap-vw">
   <div id="videoData" class="dcf-col-100% dcf-col-25%-start@sm mh-hide-bp2">
       <h5 class="unl-font-sans">Set a Thumbnail</h5>
       <ol>

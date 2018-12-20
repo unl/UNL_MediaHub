@@ -13,10 +13,10 @@ $getTracks = $context->media->getTextTrackURLs();
     <script type="htmltemplate" class="mh_transcript_template">
 
         <div class="mh-caption-search" style="display: none">
-            <div class="title wdn-sans-serif">
+            <div class="title unl-font-sans">
                 <span class="wdn-icon-search" aria-hidden="true"></span>Searchable Transcript
                 <div class="mh-tooltip hang-right italic">
-                    <span class="wdn-icon-info" aria-hidden="true"></span><span class="wdn-text-hidden">more info</span>
+                    <span class="wdn-icon-info" aria-hidden="true"></span><span class="dcf-sr-only">more info</span>
                     <div>
                         <ul>
                             <li>Use the text input to search the transcript. </li>
@@ -30,7 +30,7 @@ $getTracks = $context->media->getTextTrackURLs();
             <div class="mh-caption-container">
                 <label id="mh-parse-caption">Search:</label>
                 <a class="mh-paragraph-icons" href="javascript:void(0);">
-                    <span class="wdn-text-hidden">Toggle between list and paragraph view.</span>
+                    <span class="dcf-sr-only">Toggle between list and paragraph view.</span>
                     <div class="mh-bullets"></div>
                     <div class="mh-paragraph"></div>
                 </a>
@@ -43,10 +43,10 @@ $getTracks = $context->media->getTextTrackURLs();
     </script>
 <?php endif; ?>
 
-<script type="text/javascript">
-    (function () {
-        var e = function () {
-            <?php if (isset($context->media->id) && $context->media->id) { ?>
+<?php
+$jsCode = '';
+if (isset($context->media->id) && $context->media->id) {
+  $jsCode = <<< JSCodString
             WDN.setPluginParam('mediaelement_wdn', 'options', {
                 success: function (m, v, t) {
                     var $ = WDN.jQuery;
@@ -340,9 +340,14 @@ $getTracks = $context->media->getTextTrackURLs();
 
                 }
             });
-            <?php } ?>
+JSCodString;
+
+}
+    $page->addScriptDeclaration("(function () {
+        var e = function () {
+            " . $jsCode . "\"
             WDN.initializePlugin('mediaelement_wdn');
         };
         e();
-    })();
-</script>
+    })();");
+?>

@@ -49,7 +49,7 @@
 
             <div class="clear">
             </div>
-            <div class="dcf-grid dcf-col-gap-6">
+            <div class="dcf-grid dcf-col-gap-vw">
                 <div class="dcf-col-100% dcf-col-67%-start@md">
                     <fieldset>
                         <legend class="dcf-legend">Basic Information</legend>

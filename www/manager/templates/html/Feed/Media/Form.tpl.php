@@ -125,7 +125,7 @@ $page->jsbody .= $js;
             <?php endif; ?>
 
             <?php if (!$transcoding_job ||  $transcoding_job->isSuccess()): ?>
-                <div class="dcf-grid dcf-col-gap-6">
+                <div class="dcf-grid dcf-col-gap-vw">
                     <div id="videoData" class="dcf-col-100% dcf-col-25%-start@sm">
                         <h2 class="unl-font-sans">Set a Thumbnail</h2>
                         <ol>
@@ -165,7 +165,7 @@ $page->jsbody .= $js;
     
     <div class="dcf-bleed dcf-pt-6 mh-edit-media">
         <div class="dcf-wrapper">
-            <div class="dcf-grid dcf-col-gap-6">
+            <div class="dcf-grid dcf-col-gap-vw">
                 <div class="dcf-col-100% dcf-col-25%-start@sm dcf-pb-6">
                     <ol>
                         <li>
@@ -243,7 +243,7 @@ $page->jsbody .= $js;
                             <input id="title" name="title" type="text" class="dcf-input-text required-entry" value="<?php echo UNL_MediaHub::escape(@$context->media->title); ?>" />
                         </div>
                         
-                        <div class="dcf-grid-halves@sm dcf-col-gap-4">
+                        <div class="dcf-grid-halves@sm dcf-col-gap-vw">
                             <div>
                                 <ol>
                                     <li>

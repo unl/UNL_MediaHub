@@ -8,7 +8,7 @@
 </div>
 <div class="dcf-bleed">
     <div class="dcf-wrapper dcf-pt-0">
-        <div class="dcf-grid dcf-col-gap-6">
+        <div class="dcf-grid dcf-col-gap-vw">
 <?php if ($context->order->isSuccess()): ?>
             <div class="dcf-col-100% dcf-col-67%-start@sm">
                 <form method="post" id="download_format">

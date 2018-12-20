@@ -52,7 +52,7 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
 
 <div class="dcf-bleed dcf-pt-6 dcf-pb-6">
     <div class="dcf-wrapper">
-        <div class="dcf-grid-thirds@sm dcf-col-gap-6 dcf-txt-center">
+        <div class="dcf-grid-thirds@sm dcf-col-gap-vw dcf-txt-center">
             <div class="mh-featured">
                 <a class="dcf-txt-decor-none" href="<?php echo $baseUrl ?>search/">
                     <div class="mh-featured-icon centered mh-green">
