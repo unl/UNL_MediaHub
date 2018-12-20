@@ -134,13 +134,12 @@ if(!empty($context->options['f'])){
 
         <div class="dcf-bleed unl-bg-lighter-gray">
             <div class="dcf-wrapper dcf-pt-8 dcf-pb-8">
-
                 <h2>
                     <span class="dcf-subhead">Channel Search</span>
                 </h2>
-                <ul class="mh-channel-buttons dcf-grid-full dcf-grid-halves@sm dcf-grid-thirds@md">
+                <ul class="mh-channel-buttons dcf-grid-full dcf-grid-halves@sm dcf-grid-thirds@md dcf-col-gap-vw">
                     <?php foreach ($feeds->items as $feed): ?>
-                        <li><a class="dcf-btn dcf-btn-secondary" href="<?php echo UNL_MediaHub_Controller::getURL($feed); ?>"><span class="wdn-icon wdn-icon-rocket" aria-hidden="true"></span><?php echo UNL_MediaHub::escape($feed->title) ?></a></li>
+                        <li><a class="dcf-btn dcf-btn-secondary dcf-w-100%" href="<?php echo UNL_MediaHub_Controller::getURL($feed); ?>"><span class="wdn-icon wdn-icon-rocket" aria-hidden="true"></span><?php echo UNL_MediaHub::escape($feed->title) ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
