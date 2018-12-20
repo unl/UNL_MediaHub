@@ -132,15 +132,15 @@ if(!empty($context->options['f'])){
 
     <?php if ($feeds && count($feeds->items) && $context->pager->getPage() < 2): ?>
 
-        <div class="dcf-bleed wunl-bg-lighter-gray">
+        <div class="dcf-bleed unl-bg-lighter-gray">
             <div class="dcf-wrapper dcf-pt-8 dcf-pb-8">
 
                 <h2>
                     <span class="dcf-subhead">Channel Search</span>
                 </h2>
-                <ul class="mh-channel-buttons">
+                <ul class="mh-channel-buttons dcf-grid-full dcf-grid-halves@sm dcf-grid-thirds@md">
                     <?php foreach ($feeds->items as $feed): ?>
-                        <li><a class="dcf-btn" href="<?php echo UNL_MediaHub_Controller::getURL($feed); ?>"><span class="wdn-icon wdn-icon-rocket" aria-hidden="true"></span><?php echo UNL_MediaHub::escape($feed->title) ?></a></li>
+                        <li><a class="dcf-btn dcf-btn-secondary" href="<?php echo UNL_MediaHub_Controller::getURL($feed); ?>"><span class="wdn-icon wdn-icon-rocket" aria-hidden="true"></span><?php echo UNL_MediaHub::escape($feed->title) ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
