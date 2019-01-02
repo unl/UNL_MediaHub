@@ -1,9 +1,9 @@
 <?php $baseUrl = UNL_MediaHub_Controller::getURL(); ?>
 
-<div class="dcf-bleed mh-your-channels dcf-pt-6">
+<div class="dcf-bleed mh-your-channels dcf-pt-6 dcf-pb-8">
     <div class="dcf-wrapper">
         <h2>Your Channels</h2>
-        <div class="dcf-grid-fourths">
+        <div class="dcf-grid-halves dcf-grid-fourths@sm dcf-col-gap-vw dcf-row-gap-4">
             <?php foreach ($context->items as $index=>$feed): ?>
                 <?php $feed_url = htmlentities(UNL_MediaHub_Controller::getURL($feed), ENT_QUOTES); ?>
                 <div>

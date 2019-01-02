@@ -59,33 +59,13 @@ $getTracks = $context->getTextTrackURLs();
 
 <div class="dcf-bleed dcf-pt-8 dcf-pb-8">
     <div class="dcf-wrapper mh-media-page">
+        <?php if ($user && $context->userCanEdit($user)): ?>
+          <div class="dcf-pb-4">
+            <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=addmedia&id=' . $context->id ?>" class="dcf-btn dcf-btn-primary"><span class="wdn-icon-wrench wdn-icon"></span>Edit Media Details</a>
+          </div>
+        <?php endif; ?>
         <div class="dcf-grid dcf-col-gap-vw dcf-row-gap-4">
-            <div class="dcf-col-100% dcf-col-25%-start@sm mh-sidebar">
-                
-            <?php if ($user && $context->userCanEdit($user)): ?>
-                <div>
-                    <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=addmedia&id=' . $context->id ?>" class="dcf-btn dcf-btn-primary"><span class="wdn-icon-wrench wdn-icon"></span>Edit Media Details</a>
-                </div>
-            <?php endif; ?>
-
-              <div class="dcf-pt-4">
-                <div>
-
-                  <a class="dcf-btn embed mh-hide-bp2"><span class="wdn-icon-plus wdn-icon" aria-hidden="true"></span>Embed</a>
-                  <br><br>
-                  <a href="<?php echo htmlentities($controller->getURL($context).'/download', ENT_QUOTES); ?>" target="_blank" class="dcf-btn mh-hide-bp2"><span class="wdn-icon-up-small mh-flip-180 wdn-icon" aria-hidden="true"></span>Download</a>
-
-                </div>
-
-                  <?php
-                  $channels = $context->getFeeds();
-                  echo $savvy->render($channels, 'CompactFeedList.tpl.php');
-                  ?>
-
-              </div>
-
-            </div>
-            <div class="dcf-col-100% dcf-col-75%-end@sm">
+            <div class="dcf-col-100% dcf-col-75%-start@sm">
                 <h1><?php echo UNL_MediaHub::escape($context->title); ?></h1>
                 <?php if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_itunes::mediaHasElement($context->id, 'subtitle')): ?>
                     <p class="unl-font-sans itunes_subtitle"><?php echo UNL_MediaHub::escape($element->value) ?></p>
@@ -191,6 +171,26 @@ $getTracks = $context->getTextTrackURLs();
                 <?php else: ?>
                     <a href="https://login.unl.edu/cas/login?service=<?php echo urlencode(UNL_MediaHub_Controller::getURL($context)) ?>">Log in to post comments</a>
                 <?php endif; ?>
+
+            </div>
+
+            <div class="dcf-col-100% dcf-col-25%-end@sm mh-sidebar">
+
+              <div class="dcf-pt-4">
+                <div>
+
+                  <a class="dcf-btn embed mh-hide-bp2"><span class="wdn-icon-plus wdn-icon" aria-hidden="true"></span>Embed</a>
+                  <br><br>
+                  <a href="<?php echo htmlentities($controller->getURL($context).'/download', ENT_QUOTES); ?>" target="_blank" class="dcf-btn mh-hide-bp2"><span class="wdn-icon-up-small mh-flip-180 wdn-icon" aria-hidden="true"></span>Download</a>
+
+                </div>
+
+                  <?php
+                  $channels = $context->getFeeds();
+                  echo $savvy->render($channels, 'CompactFeedList.tpl.php');
+                  ?>
+
+              </div>
 
             </div>
         </div>

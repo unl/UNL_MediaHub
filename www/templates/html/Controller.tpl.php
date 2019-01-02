@@ -14,7 +14,7 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
 
 //Titles
 $page->doctitle = '<title>MediaHub | University of Nebraska-Lincoln</title>';
-$page->titlegraphic = 'UNL MediaHub';
+$page->titlegraphic = '<a class="dcf-txt-h5" href="/">UNL MediaHub</a>';
 if ($title = $context->getReplacementData('pagetitle')) {
     $page->pagetitle = $title;
 }

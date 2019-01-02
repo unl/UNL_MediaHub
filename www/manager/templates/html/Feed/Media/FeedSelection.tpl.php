@@ -8,7 +8,7 @@
         Channels<span class="dcf-required">*</span>
     </legend>
     <div class="mh-channel-box">
-        <ul class="validation-container">
+        <ul class="dcf-list-bare validation-container">
             <?php foreach ($context->getFeedSelectionData() as $feed_data): ?>
                 <li class="dcf-input-checkbox">
                     <?php if ($feed_data['readonly']): ?>

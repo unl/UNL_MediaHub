@@ -68,8 +68,10 @@ ul.mh-btn-group > li:not(:last-of-type) {
 	float: none;
 }
 
+/* don't use for now
 @media (min-width: 768px) {
 	.mh-media-browse.page-1 > :first-child {
 		width: 66.6666%;
 	}
 }
+*/
