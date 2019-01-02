@@ -1,14 +1,14 @@
 <?php $baseUrl = UNL_MediaHub_Controller::getURL(); ?>
 
-<div class="wdn-band mh-your-channels">
-    <div class="wdn-inner-wrapper">
-        <h2 class="wdn-brand">Your Channels</h2>
-        <div class="bp2-wdn-grid-set-fourths wdn-grid-clear">
+<div class="dcf-bleed mh-your-channels dcf-pt-6 dcf-pb-8">
+    <div class="dcf-wrapper">
+        <h2>Your Channels</h2>
+        <div class="dcf-grid-halves dcf-grid-fourths@sm dcf-col-gap-vw dcf-row-gap-4">
             <?php foreach ($context->items as $index=>$feed): ?>
                 <?php $feed_url = htmlentities(UNL_MediaHub_Controller::getURL($feed), ENT_QUOTES); ?>
-                <div class="wdn-col">
+                <div>
                     <a href="<?php echo $feed_url ?>">
-                        <div class="mh-video-thumb mh-channel-thumb mh-featured-channel wdn-center">
+                        <div class="mh-video-thumb mh-channel-thumb mh-featured-channel dcf-txt-center">
                             <div class="mh-thumbnail-clip">
                                 <?php if($feed->hasImage()): ?>
                                     <img
@@ -21,7 +21,7 @@
                                 <?php endif; ?>
                             </div>
                         </div>
-                        <div class="mh-video-label wdn-center">
+                        <div class="mh-video-label dcf-txt-center">
                             <p>
                                 <?php echo UNL_MediaHub::escape($feed->title); ?>
                             </p>
@@ -29,10 +29,10 @@
                     </a>
                 </div>
             <?php endforeach; ?>
-            <div class="wdn-col">
-                <a href="<?php echo UNL_MediaHub_Manager::getURL() ?>?view=feedmetadata">
-                    <div class="mh-upload-box wdn-center">
-                        <h2>+<span class="wdn-subhead">New Channel</span></h2>
+            <div>
+                <a class="dcf-txt-decor-none" href="<?php echo UNL_MediaHub_Manager::getURL() ?>?view=feedmetadata">
+                    <div class="mh-upload-box dcf-txt-center">
+                        <h2>+<span class="dcf-subhead">New Channel</span></h2>
                     </div>
                 </a>
             </div>

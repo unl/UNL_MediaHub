@@ -118,74 +118,74 @@ a.action.delete:active {background-image:url('images/iconDelete.png');}
 	margin:50px;
 }
 
-#maincontent #userList, #maincontent #outpostExtension ul {
+#dcf-main #userList, #dcf-main #outpostExtension ul {
 	list-style:none;
 	padding:0;
 }
-#maincontent #userList {
+#dcf-main #userList {
     list-style:none;
     padding:0;
     padding:10px;
 }
-#maincontent #userList li {
+#dcf-main #userList li {
     display:inline-block;
     text-align:center;
     padding: 0 10px 10px 0;
     position:relative;
 }
-#maincontent #userList li .uid {
+#dcf-main #userList li .uid {
     font-size:0.6em;
     color: #a8a8a8;
     display:block;  
 }
-#maincontent #userList li img {border: solid rgba(174, 167, 141, 0.21) 10px;display:block;margin-left:auto;margin-right:auto;}
-#maincontent #userList li form {
+#dcf-main #userList li img {border: solid rgba(174, 167, 141, 0.21) 10px;display:block;margin-left:auto;margin-right:auto;}
+#dcf-main #userList li form {
     position:absolute;
     top:6px;
     right:7px;
     display:none;
 }
-#maincontent #userList li:hover form {display:block;}
+#dcf-main #userList li:hover form {display:block;}
 
-#maincontent #userList li form input[type='submit'] {
+#dcf-main #userList li form input[type='submit'] {
     -webkit-box-shadow: -1px 1px 3px #1a1a1a;
     -moz-box-shadow: -1px 1px 3px #1a1a1a;
     box-shadow: -1px 1px 3px #1a1a1a; 
 }
 
-#maincontent .addData {
+#dcf-main .addData {
     padding:10px;
     border-top:2px solid #d5d5d5;
 
 }
-#maincontent .addData input[type='text']{
+#dcf-main .addData input[type='text']{
     border:1px solid #d5d5d5;
     padding:3px;
     width:50%;
     font-size:1.06em;
     padding:5px 5px 5px 25px;
 }
-#maincontent #emailList + form input[type='text']{
+#dcf-main #emailList + form input[type='text']{
     display:block;
     width:84%;
     padding-left:25px;
     background: #fff url('images/iconEmail.png') no-repeat 5px 50%;
 }
-#maincontent .addData input[type='submit']{
+#dcf-main .addData input[type='submit']{
     background: #616161;
 }
-#maincontent #outpostExtension h3 {
+#dcf-main #outpostExtension h3 {
 	background:url('images/iconVideo.png') no-repeat left top;
 	padding-left:30px;
 }
-#maincontent #outpostExtension h3 span {
+#dcf-main #outpostExtension h3 span {
 	font-size:0.7em;
 	color:#385E9B;
 	text-transform:uppercase;
 	font-weight:bold;
 }
 
-#maincontent #outpostExtension li a {
+#dcf-main #outpostExtension li a {
 	background:#E6E9DC;
     background-image:url('images/iconBoxee.png');
     background-image: url('images/iconBoxee.png'), -moz-linear-gradient(center bottom,rgb(206,209,197) 11%,rgb(230,233,220) 30%);
@@ -204,13 +204,13 @@ a.action.delete:active {background-image:url('images/iconDelete.png');}
     font-weight:bold;
     display:block;
 }
-#maincontent #outpostExtension li a:focus {color:#4b4c47 !important;}
-#maincontent #outpostExtension li.itunes a {
+#dcf-main #outpostExtension li a:focus {color:#4b4c47 !important;}
+#dcf-main #outpostExtension li.itunes a {
 	background-image:url('images/iconItunes.png');
     background-image: url('images/iconItunes.png'), -moz-linear-gradient(center bottom,rgb(206,209,197) 11%,rgb(230,233,220) 30%);
     background-image: url('images/iconItunes.png'), -webkit-gradient(linear,left bottom,left top,color-stop(0.11, rgb(206,209,197)),color-stop(0.3, rgb(230,233,220)));
 }
-#maincontent #outpostExtension li.youtube a {
+#dcf-main #outpostExtension li.youtube a {
     background-image:url('images/iconYouTube.png');
     background-image: url('images/iconYouTube.png'), -moz-linear-gradient(center bottom,rgb(206,209,197) 11%,rgb(230,233,220) 30%);
     background-image: url('images/iconYouTube.png'), -webkit-gradient(linear,left bottom,left top,color-stop(0.11, rgb(206,209,197)),color-stop(0.3, rgb(230,233,220)));
@@ -227,7 +227,7 @@ dl.caption {
 	text-align:left;
 	}
 
-#maincontent dl.caption dd {
+#dcf-main dl.caption dd {
 	padding-left:0px;
 }
 

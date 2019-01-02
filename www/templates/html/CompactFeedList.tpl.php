@@ -6,7 +6,7 @@ if (count($context->items)) :
     <?php foreach ($context->items as $channel): ?>
     	<?php $feed_url = UNL_MediaHub_Controller::getURL($channel); ?>
 		<a href="<?php echo $feed_url ?>" title="<?php echo UNL_MediaHub::escape($channel->description); ?>">
-		    <div class="mh-channel-thumb mh-featured-channel wdn-center">
+		    <div class="mh-channel-thumb mh-featured-channel dcf-txt-center">
                 <div>
                     <?php if($channel->hasImage()): ?>
                         <img
@@ -19,7 +19,7 @@ if (count($context->items)) :
                     <?php endif; ?>
                 </div>
             </div>
-		    <div class="mh-video-label wdn-center wdn-sans-serif">
+		    <div class="mh-video-label dcf-txt-center unl-font-sans">
 		                <span class="title"><?php echo UNL_MediaHub::escape($channel->title); ?></span>
 		    </div>
 		</a>

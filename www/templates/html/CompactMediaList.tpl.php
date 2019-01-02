@@ -1,10 +1,10 @@
 <?php
 $limit = 3;
 ?>
-<ul class="wdn-grid-set-thirds ">
+<ul class="dcf-grid-full dcf-grid-thirds@md dcf-col-gap-vw dcf-list-bare">
 	<?php $i = 0; ?>
 	<?php foreach ($context->items as $media): ?>
-	<li class="wdn-col">
+	<li>
 		<a href="<?php echo $controller::getURL($media) ?>">
 			<img src="<?php echo $media->getThumbnailURL() ?>" alt="<?php echo UNL_MediaHub::escape($media->title) ?>" />
 		</a>

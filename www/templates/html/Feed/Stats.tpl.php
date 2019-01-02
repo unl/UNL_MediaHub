@@ -1,21 +1,21 @@
 <?php $counts = $context->getStats(); ?>
-<div class="wdn-grid-set-thirds">
+<div class="dcf-grid-full dcf-grid-thirds@md dcf-col-gap-vw">
 <?php if ($counts['video']): ?>
-    <div class="wdn-col mh-stat">
-        <span class="mh-count wdn-brand"><?php echo UNL_MediaHub::escape(UNL_MediaHub_Media::formatNumber($counts['video'])) ?></span>
-        <span class="mh-context wdn-sans-serif">Videos</span>
+    <div class="mh-stat">
+        <span class="mh-count"><?php echo UNL_MediaHub::escape(UNL_MediaHub_Media::formatNumber($counts['video'])) ?></span>
+        <span class="mh-context unl-font-sans">Videos</span>
     </div>
 <?php endif; ?>
 <?php if ($counts['audio']): ?>
-    <div class="wdn-col mh-stat">
-        <span class="mh-count wdn-brand"><?php echo UNL_MediaHub::escape(UNL_MediaHub_Media::formatNumber($counts['audio'])) ?></span>
-        <span class="mh-context wdn-sans-serif">Audios</span>
+    <div class="mh-stat">
+        <span class="mh-count"><?php echo UNL_MediaHub::escape(UNL_MediaHub_Media::formatNumber($counts['audio'])) ?></span>
+        <span class="mh-context unl-font-sans">Audios</span>
     </div>
 <?php endif; ?>
 <?php if ($counts['plays']): ?>
-    <div class="wdn-col mh-stat">
-        <span class="mh-count wdn-brand"><?php echo UNL_MediaHub::escape(UNL_MediaHub_Media::formatNumber($counts['plays'], 1)) ?></span>
-        <span class="mh-context wdn-sans-serif">Plays</span>
+    <div class="mh-stat">
+        <span class="mh-count"><?php echo UNL_MediaHub::escape(UNL_MediaHub_Media::formatNumber($counts['plays'], 1)) ?></span>
+        <span class="mh-context unl-font-sans">Plays</span>
     </div>
 <?php endif; ?>
 </div>

@@ -1,4 +1,4 @@
-<label for="privacy" class="element">Privacy</label>
+<label for="privacy" class="dcf-label element">Privacy</label>
 <div class="wdn-icon-info mh-tooltip hang-right" id="privacy-details">
     <div>
         <ul>
@@ -14,15 +14,17 @@
         </ul>
     </div>
 </div>
-<select id="privacy" name="privacy" aria-describedby="privacy-details">
-    <?php
-    foreach (UNL_MediaHub_Media::getPossiblePrivacyValues() as $value) {
-        $selected = '';
-        if ($value == @$context->media->privacy) {
-            $selected = 'selected="selected"';
-        }
+<div class="dcf-input-select">
+  <select id="privacy" name="privacy" aria-describedby="privacy-details">
+        <?php
+        foreach (UNL_MediaHub_Media::getPossiblePrivacyValues() as $value) {
+            $selected = '';
+            if ($value == @$context->media->privacy) {
+                $selected = 'selected="selected"';
+            }
 
-        echo "<option value='$value' " . $selected . ">" . ucfirst(strtolower($value)) . "</option>";
-    }
-    ?>
-</select>
+            echo "<option value='$value' " . $selected . ">" . ucfirst(strtolower($value)) . "</option>";
+        }
+        ?>
+  </select>
+</div>
