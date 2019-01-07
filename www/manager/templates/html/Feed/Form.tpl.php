@@ -196,8 +196,7 @@
                                         };
                                     };
                                     ?>
-                                    <div class="dcf-input-select">
-                                      <select id='itunes_category' name='UNL_MediaHub_Feed_NamespacedElements_itunes[2][attributes][]' multiple="multiple">
+                                   <select class="dcf-input-select" id='itunes_category' name='UNL_MediaHub_Feed_NamespacedElements_itunes[2][attributes][]' multiple="multiple">
                                           <option <?php if (in_array('Arts', $categories)) echo 'selected="selected"'; ?> value="Arts">Arts</option>
                                           <optgroup label="">
                                               <option <?php if (in_array('Arts:Design', $categories)) echo 'selected="selected"'; ?> value="Arts:Design">Design</option>
@@ -287,8 +286,7 @@
                                               <option <?php if (in_array('Technology:Tech News', $categories)) echo 'selected="selected"'; ?> value="Technology:Tech News">Tech News</option>
                                           </optgroup>
                                           <option <?php if (in_array('TV & Film', $categories)) echo 'selected="selected"'; ?> value="TV &amp; Film">TV &amp; Film</option>
-                                      </select>
-                                    </div>
+                                   </select>
                                 </div>
                             </li>
 
@@ -303,9 +301,8 @@
                                 
                                 <div class='element'>
                                     <input name="UNL_MediaHub_Feed_NamespacedElements_itunes[4][element]" type="hidden" value="explicit"/>
-                                    <div class="dcf-input-select">
-                                      <select id="itunes_explicit" name="UNL_MediaHub_Feed_NamespacedElements_itunes[4][value]" aria-describedby="itune-explicit-details">
-                                          <?php
+                                    <select class="dcf-input-select" id="itunes_explicit" name="UNL_MediaHub_Feed_NamespacedElements_itunes[4][value]" aria-describedby="itune-explicit-details">
+                                        <?php
                                           if (getFieldValue($context, 'itunes', 'explicit') == "yes") {
                                               echo '<option value="no">No</option>
                                             <option value="yes" selected="selected">Yes</option>';
@@ -314,8 +311,7 @@
                                             <option value="yes">Yes</option>';
                                           }
                                           ?>
-                                      </select>
-                                    </div>
+                                    </select>
                                 </div>
                             </li>
 

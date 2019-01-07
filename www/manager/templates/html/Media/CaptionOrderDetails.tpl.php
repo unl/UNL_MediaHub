@@ -14,20 +14,18 @@
                 <form method="post" id="download_format">
                     <h2 class="clear-top">Download captions</h2>
                     <label class="dcf-label" for="format">Select caption format</label>
-                    <div class="dcf-input-select">
-                      <select id="format" name="format">
-                          <option value="srt">.srt</option>
-                          <option value="scc">.scc</option>
-                          <option value="ttml">.ttml</option>
-                          <option value="dfxp">.dfxp</option>
-                          <option value="qt.txt">.qt.txt</option>
-                          <option value="txt">.txt</option>
-                          <option value="vtt">.vtt</option>
-                          <option value="mcc">.mcc</option>
-                          <option value="cap">.cap</option>
-                          <option value="stl">.stl</option>
-                      </select>
-                    </div>
+                    <select class="dcf-input-select" id="format" name="format">
+                      <option value="srt">.srt</option>
+                      <option value="scc">.scc</option>
+                      <option value="ttml">.ttml</option>
+                      <option value="dfxp">.dfxp</option>
+                      <option value="qt.txt">.qt.txt</option>
+                      <option value="txt">.txt</option>
+                      <option value="vtt">.vtt</option>
+                      <option value="mcc">.mcc</option>
+                      <option value="cap">.cap</option>
+                      <option value="stl">.stl</option>
+                    </select>
                     <input type="hidden" name="__unlmy_posttarget" value="download_rev" />
                     <input type="hidden" name="order_id" value="<?php echo (int)$context->order->id ?>" />
                     <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />

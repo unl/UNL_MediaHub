@@ -455,8 +455,7 @@ $page->jsbody .= $js;
                                     }
                                     ?>
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunesu[0][element]" type="hidden" value="category" />
-                                    <div class="dcf-input-select">
-                                      <select id="itunes_category" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunesu[0][attributes]">
+                                    <select class="dcf-input-select" id="itunes_category" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunesu[0][attributes]">
                                           <option value="">None</option>
                                           <optgroup label="Business">
                                               <option <?php if ($category == '100') echo 'selected="selected"'; ?> value="100">Business</option>
@@ -599,16 +598,14 @@ $page->jsbody .= $js;
                                               <option <?php if ($category == '112104') echo 'selected="selected"'; ?> value="112104">Psychology &amp; Research</option>
                                               <option <?php if ($category == '112105') echo 'selected="selected"'; ?> value="112105">Special Education</option>
                                           </optgroup>
-                                      </select>
-                                    </div>
+                                    </select>
                                 </div>
                             </li>
                             <li>
                                 <label for="itunes_block" class="dcf-label element">Block from iTunes <span class="helper">Set to 'yes' if you would like to block this element from iTunes</span></label>
                                 <div class="element">
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[1][element]" type="hidden" value="block"/>
-                                    <div class="dcf-input-select">
-                                      <select id="itunes_block" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[1][value]">
+                                    <select class="dcf-input-select" id="itunes_block" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[1][value]">
                                           <?php
                                           if (getFieldValue($context, 'itunes', 'block') == "yes") {
                                               echo '<option value="">No</option><option value="yes" selected="selected">Yes</option>';
@@ -616,8 +613,7 @@ $page->jsbody .= $js;
                                               echo '<option value="">No</option><option value="yes">Yes</option>';
                                           }
                                           ?>
-                                      </select>
-                                    </div>
+                                    </select>
                                 </div>
                             </li>
                             <li>
