@@ -22,9 +22,6 @@ if ($title = $context->getReplacementData('pagetitle')) {
 //Header
 $page->addStyleSheet($baseUrl . 'templates/html/css/all.css?v=' . UNL_MediaHub_Controller::getVersion());
 
-// no menu items, so hide mobile menu
-$page->addStyleDeclaration("#dcf-mobile-toggle-menu {display: none!important}");
-
 $page->addScriptDeclaration('WDN.setPluginParam("idm", "logout", "' . $baseUrl . '?logout");');
 $page->addScript(UNL_MediaHub_Controller::getURL().'templates/html/scripts/frontend.js?v=' . UNL_MediaHub_Controller::getVersion());
 if (!$context->output instanceof UNL_MediaHub_FeedAndMedia) {
