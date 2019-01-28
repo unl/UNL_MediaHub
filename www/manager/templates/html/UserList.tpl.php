@@ -13,6 +13,7 @@
                     <span class="mh-unknown">Unknown User!</span>
                 <?php endif; ?>
                 <span class="uid dcf-d-block dcf-txt-xs"><?php echo UNL_MediaHub::escape($user->uid) ?></span>
+                <span class="dcf-d-block dcf-txt-xs unl-font-serif unl-scarlet"><?php echo $context->options['feed']->userViewOnly($user) ? 'View Only' : 'Admin'; ?></span>
                 <?php echo $savvy->render($user, 'DeleteUserForm.tpl.php'); ?>
               </div>
 
@@ -28,6 +29,10 @@
       <div class="dcf-input-group">
         <input class="dcf-input-text" id="uid" name="uid" type="text" />
         <input type="submit" value="Add User" />
+      </div>
+      <div class="dcf-form-group">
+        <input class="dcf-input-control" id="admin-user" name="admin-user" type="checkbox" value="1">
+        <label class="dcf-label" for="admin-user">Admin User</label>
       </div>
   </form>
 </div>

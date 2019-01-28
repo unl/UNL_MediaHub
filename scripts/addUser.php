@@ -13,7 +13,7 @@ if (!isset($_SERVER['argv'],$_SERVER['argv'][1])
 
     $feed = UNL_MediaHub_Feed::getById($_SERVER['argv'][1]);
     $user = UNL_MediaHub_User::getByUid($_SERVER['argv'][2]);
-    $feed->addUser($user);
+    $feed->addUser($user, TRUE);
 
     echo "{$_SERVER['argv'][2]} has been added to {$feed->title}.\n";
 }

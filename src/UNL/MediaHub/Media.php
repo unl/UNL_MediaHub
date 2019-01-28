@@ -608,13 +608,13 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     public function canView($user)
     {
         $requires_membership = false;
-        
+
         if (!$this->meetsCaptionRequirement()) {
             $requires_membership = true;
         }
         
-        //If its not private, anyone can view it.
-        if ($this->privacy == 'PRIVATE') {
+        //If its not private or protected, anyone can view it.
+        if ($this->privacy == 'PRIVATE' || $this->privacy == 'PROTECTED') {
             $requires_membership = true;
         }
         
@@ -627,6 +627,11 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         if (!$user) {
             return false;
         }
+
+        // all logged in users may view protected media
+        if ($user && $this->privacy == 'PROTECTED') {
+            return true;
+        }
         
         //Get a list of feeds for this user that contain this media.
         $feeds = new UNL_MediaHub_FeedList(array(
@@ -638,7 +643,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         if (0 === count($feeds->items)) {
             return false;
         }
-        
+
         return true;
     }
 

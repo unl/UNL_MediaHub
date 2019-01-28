@@ -9,6 +9,9 @@
                 <span class="heading">Unlisted</span> - Media will not be included in public MediaHub listings.
             </li>
             <li>
+              <span class="heading">Protected</span> - Only logged in users can access the media.
+            </li>
+            <li>
                 <span class="heading">Private</span> - Only members of channels that the media is included in can access it.
             </li>
         </ul>

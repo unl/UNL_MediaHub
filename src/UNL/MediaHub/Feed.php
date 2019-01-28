@@ -145,7 +145,7 @@ class UNL_MediaHub_Feed extends UNL_MediaHub_Models_BaseFeed
         $feed = new self();
         $feed->fromArray($data);
         $feed->save();
-        $feed->addUser($user);
+        $feed->addUser($user, TRUE);
         return $feed;
     }
     
@@ -156,14 +156,31 @@ class UNL_MediaHub_Feed extends UNL_MediaHub_Models_BaseFeed
      * 
      * @return void
      */
-    function addUser(UNL_MediaHub_User $user)
+    function addUser(UNL_MediaHub_User $user, $adminUser)
     {
+        // Remove user from feed to clean up any existing feed permissions;
+        $this->removeUser($user);
+
+        // Add feed user with correct permissions
+        if ($adminUser === TRUE) {
+            $this->addAdminUser($user);
+        } else {
+            $this->addViewOnlyUser($user);
+        }
+    }
+
+    private function addAdminUser(UNL_MediaHub_User $user) {
+        // Add new feed permissions
         $permissions = new ReflectionClass('UNL_MediaHub_Permission');
         foreach($permissions->getConstants() as $key=>$permission) {
-            if (substr($key, 0, 9) == 'USER_CAN_') {
+            if (substr($key, 0, 9) == 'USER_CAN_' && $permission !== UNL_MediaHub_Permission::USER_CAN_VIEW_ONLY) {
                 $this->grantUserPermission($user, UNL_MediaHub_Permission::getByID($permission));
             }
         }
+    }
+
+    private function addViewOnlyUser(UNL_MediaHub_User $user) {
+        $this->grantUserPermission($user, UNL_MediaHub_Permission::getByID(UNL_MediaHub_Permission::USER_CAN_VIEW_ONLY));
     }
 
     function removeUser(UNL_MediaHub_User $user)
@@ -198,6 +215,17 @@ class UNL_MediaHub_Feed extends UNL_MediaHub_Models_BaseFeed
     public function userCanEdit(UNL_MediaHub_User $user)
     {
         return $this->userHasPermission($user, UNL_MediaHub_Permission::getByID(UNL_MediaHub_Permission::USER_CAN_UPDATE));
+    }
+
+    /**
+     * Determine if a user has view only permission
+     *
+     * @param UNL_MediaHub_User $user
+     * @return bool
+     */
+    public function userViewOnly(UNL_MediaHub_User $user)
+    {
+        return $this->userHasPermission($user, UNL_MediaHub_Permission::getByID(UNL_MediaHub_Permission::USER_CAN_VIEW_ONLY));
     }
     
     /**

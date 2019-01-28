@@ -576,7 +576,7 @@ class UNL_MediaHub_Manager_PostHandler
             if (!empty($this->post['delete'])) {
                 $feed->removeUser(UNL_MediaHub_User::getByUid($this->post['uid']));
             } else {
-                $feed->addUser(UNL_MediaHub_User::getByUid($this->post['uid']));
+                $feed->addUser(UNL_MediaHub_User::getByUid($this->post['uid']), !empty($this->post['admin-user']));
             }
         }
         UNL_MediaHub::redirect('?view=permissions&feed_id='.$feed->id);

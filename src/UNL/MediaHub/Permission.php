@@ -5,10 +5,9 @@ class UNL_MediaHub_Permission extends UNL_MediaHub_Models_BasePermission
     const USER_CAN_INSERT = 1;
     const USER_CAN_UPDATE = 2;
     const USER_CAN_DELETE = 3;
-    
     const USER_CAN_UPLOAD = 10;
-    
     const USER_CAN_ADD_USER = 20;
+    const USER_CAN_VIEW_ONLY = 30;
     
     public static function userHasPermission(UNL_MediaHub_User $user, UNL_MediaHub_Permission $permission, UNL_MediaHub_Feed $feed)
     {
@@ -44,6 +43,9 @@ class UNL_MediaHub_Permission extends UNL_MediaHub_Models_BasePermission
                 break;
             case self::USER_CAN_ADD_USER:
                 $data['title'] = 'User Can Add User';
+                break;
+            case self::USER_CAN_VIEW_ONLY:
+                $data['title'] = 'User Can View Only';
                 break;
             default:
                 return $permission;
