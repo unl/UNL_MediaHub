@@ -50,6 +50,10 @@ $maintainers = $context->feed->getUserList();
 
 $uids = array();
 foreach ($maintainers->items as $maintainer) {
+    // only display admin users
+    if ($context->feed->userViewOnly($maintainer)) {
+      continue; // skip view only users
+    }
     $uid = htmlentities($maintainer->uid, ENT_QUOTES);
     $uids[] = '<a href="http://directory.unl.edu/people/'.$uid.'">'.$uid.'</a>';
 }
