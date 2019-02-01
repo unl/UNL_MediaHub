@@ -613,8 +613,8 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
             $requires_membership = true;
         }
         
-        //If its not private, anyone can view it.
-        if ($this->privacy == 'PRIVATE') {
+        //If its not private or protected, anyone can view it.
+        if ($this->privacy == 'PRIVATE' || $this->privacy == 'PROTECTED') {
             $requires_membership = true;
         }
         
@@ -626,6 +626,11 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         //At this point a user needs to be logged in.
         if (!$user) {
             return false;
+        }
+
+        // all logged in users may view protected media
+        if ($user && $this->privacy == 'PROTECTED') {
+            return true;
         }
         
         //Get a list of feeds for this user that contain this media.

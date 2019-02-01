@@ -18,7 +18,7 @@ abstract class UNL_MediaHub_Models_BaseMedia extends Doctrine_Record
         $this->hasColumn('title',         'string',    null, array('fixed' => false, 'primary' => false, 'notnull' => true, 'autoincrement' => false));
         $this->hasColumn('description',   'string',    null, array('fixed' => false, 'primary' => false, 'notnull' => true, 'autoincrement' => false));
         $this->hasColumn('author',        'string',    null, array('fixed' => false, 'primary' => false, 'notnull' => false, 'autoincrement' => false));
-        $this->hasColumn('privacy',       'enum',      null, array('primary' => false, 'notnull' => true, 'autoincrement' => false, 'values' => array('PUBLIC', 'UNLISTED', 'PRIVATE'), 'default' => 'PUBLIC'));
+        $this->hasColumn('privacy',       'enum',      null, array('primary' => false, 'notnull' => true, 'autoincrement' => false, 'values' => array('PUBLIC', 'UNLISTED', 'PROTECTED', 'PRIVATE'), 'default' => 'PUBLIC'));
         $this->hasColumn('play_count',    'integer',   null, array('unsigned' => 0, 'primary' => false, 'notnull' => true, 'autoincrement' => true));
         $this->hasColumn('popular_play_count', 'integer',   null, array('unsigned' => 0, 'primary' => false, 'notnull' => true, 'autoincrement' => false));
         $this->hasColumn('datecreated',   'timestamp', null, array('primary' => false, 'notnull' => true, 'autoincrement' => false));
