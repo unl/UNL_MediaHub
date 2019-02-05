@@ -13,7 +13,7 @@
     "repositories": [
         {
             "type": "pear",
-            "url": "http://pear.php.net"
+            "url": "https://pear.php.net"
         },
         {
             "type": "vcs",
@@ -37,7 +37,7 @@
       "unl/php-wdn-templates": "^5.0",
       "unl/unl_cache_lite": "0.1.*",
       "unl/reg-exp-router": "0.1.*",
-      "pear-pear.php.net/HTTP_Request2": "2.2.*",
+      "pear-pear.php.net/http_request2": "2.2.*",
       "saltybeagle/savvy": "0.8.1",
       "saltybeagle/savvy_turbo": "0.1.*",
       "phpunit/phpunit": "~4.3",

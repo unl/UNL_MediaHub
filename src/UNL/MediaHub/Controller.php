@@ -229,8 +229,19 @@ class UNL_MediaHub_Controller
                     throw new Exception('There was an error optimizing this media.', 500);
                 }
 
-                if (!$media->canView(UNL_MediaHub_AuthService::getInstance()->getUser())) {
-                    throw new Exception('You do not have permission to view this.', 403);
+                $user = UNL_MediaHub_AuthService::getInstance()->getUser();
+                if (!$media->canView($user)) {
+                    $message = 'You do not have permission to view this.';
+                    if (empty($user)) {
+                        if ($media->privacy == 'PROTECTED') {
+                            $message = "This media is 'PROTECTED' and may only be viewed by logged in users.  If you have an account, please log in to view.";
+                        } elseif ($media->privacy == 'PRIVATE') {
+                            $message = "This media is 'PRIVATE' and may only be viewed by logged in users with proper channel access.  If you have an account and access, please log in to view.";
+                        } elseif (!$media->meetsCaptionRequirement()) {
+                            $message = "This media is not published and may only be viewed by logged in users with proper channel access.  If you have an account and access, please log in to view.";
+                        }
+                    }
+                    throw new Exception($message, 403);
                 }
                 
                 if (!$media->meetsCaptionRequirement()) {
@@ -276,8 +287,19 @@ class UNL_MediaHub_Controller
                 
                 $media_embed = UNL_MediaHub_Media_Embed::getById($id, $version, $this->options);
 
-                if (!$media_embed->media->canView(UNL_MediaHub_AuthService::getInstance()->getUser())) {
-                    throw new Exception('You do not have permission to view this.', 403);
+                $user = UNL_MediaHub_AuthService::getInstance()->getUser();
+                if (!$media_embed->canView($user)) {
+                    $message = 'You do not have permission to view this.';
+                    if (empty($user)) {
+                        if ($media_embed->privacy == 'PROTECTED') {
+                            $message = "This media is 'PROTECTED' and may only be viewed by logged in users.  If you have an account, please log in to view.";
+                        } elseif ($media_embed->privacy == 'PRIVATE') {
+                            $message = "This media is 'PRIVATE' and may only be viewed by logged in users with proper channel access.  If you have an account and access, please log in to view.";
+                        } elseif (!$media_embed->meetsCaptionRequirement()) {
+                            $message = "This media is not published and may only be viewed by logged in users with proper channel access.  If you have an account and access, please log in to view.";
+                        }
+                    }
+                    throw new Exception($message, 403);
                 }
                 
                 $this->output[] = $media_embed;
@@ -326,7 +348,7 @@ class UNL_MediaHub_Controller
             return $media;
         }
 
-        throw new Exception('Cannot determine the media to display.');
+        throw new Exception('The requested media does not exist.', 404);
     }
 
     /**
