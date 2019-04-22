@@ -1,4 +1,4 @@
-/* 
+/*
 -------------------------------------------------
 Supporting styles for listings of channels
 -------------------------------------------------
@@ -68,7 +68,6 @@ Supporting styles for listings of channels
 .mh-stat .mh-count {
 	font-size: 1.5em;
 	display: block;
-	white-space: nowrap;
 }
 
 .mh-stat .mh-context {
@@ -114,7 +113,7 @@ p.mh-more-info a {
 	.mh-media-samples li:nth-child(n+5) {
 		display: none;
 	}
-	
+
 	.mh-feed-stats {
 		display: none;
 	}
