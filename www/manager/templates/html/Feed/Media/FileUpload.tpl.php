@@ -40,17 +40,15 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                             <ol>
                                 <li class="clear-top">
                                     <label class="dcf-label" for="title">
-                                        Title
-                                        <span class="dcf-required">*</span>
+                                        Title<span class="dcf-required">*</span>
                                     </label>
                                     <input class="dcf-input-text" type="text" id="title" name="title" class="required-entry">
                                 </li>
                                 <li>
                                     <label class="dcf-label" for="author">
-                                        Author
-                                        <span class="dcf-required">*</span>
+                                        Author<span class="dcf-required">*</span>
                                     </label>
-                                    <div class="mh-tooltip wdn-icon-info italic hang-right" id="author-details">
+                                    <div class="mh-tooltip wdn-icon-info hang-right" id="author-details">
                                         <div>
                                             Name of media creator
                                         </div>
@@ -59,10 +57,9 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                                 </li>
                                 <li>
                                     <label class="dcf-label" for="description">
-                                        Description
-                                        <span class="dcf-required">*</span>
+                                        Description<span class="dcf-required">*</span>
                                     </label>
-                                    <div class="mh-tooltip wdn-icon-info italic" id="description-details">
+                                    <div class="mh-tooltip wdn-icon-info" id="description-details">
                                         <div>
                                             Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.
                                         </div>
@@ -123,7 +120,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                         </div>
                     <?php endif; ?>
                     
-                    <input type="submit" id="publish" name="publish" value="Next Step: Add Captions" class="dcf-btn dcf-btn-primary" disabled="disabled">
+                    <input type="submit" id="publish" name="publish" value="Next Step: Add Captions" class="dcf-btn dcf-btn-primary dcf-mt-3" disabled="disabled">
                     <?php if (UNL_MediaHub_Controller::$caption_requirement_date):?>
                         <p class="wdn-icon wdn-icon-attention">
                             Note: Media will not be published until it is captioned.
