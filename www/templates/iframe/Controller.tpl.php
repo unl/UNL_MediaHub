@@ -16,10 +16,10 @@ if (isset($context->output[0]) && $context->output[0] instanceof UNL_MediaHub_Me
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>MediaHub Media</title>
-    <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/jquery.js?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>"></script>
+    <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/jquery.min.js?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>"></script>
     <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/three.min.js?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>"></script>
-    <link href="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/video-js.css?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>" rel="stylesheet">
-    <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/video.js?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>"></script>
+    <link href="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/video-js.min.css?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>" rel="stylesheet">
+    <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/video.min.js?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>"></script>
     <?php if ($is_audio): ?>
         <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/wavesurfer.min.js?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>"></script>
         <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/videojs.wavesurfer.min.js?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>"></script>
@@ -27,7 +27,7 @@ if (isset($context->output[0]) && $context->output[0] instanceof UNL_MediaHub_Me
         <link href="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/css/font-awesome.min.css?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>" rel="stylesheet">
     <?php endif; ?>
     <?php if ($is_360): ?>
-        <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/videojs-panorama.v5.js?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>"></script>
+        <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/videojs-panorama.v5.min.js?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>"></script>
         <link href="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/videojs-panorama.min.css?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>" rel="stylesheet">
     <?php endif; ?>
     <?php if ($has_hls): ?>
