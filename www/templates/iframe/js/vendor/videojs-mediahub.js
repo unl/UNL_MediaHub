@@ -168,7 +168,7 @@ function MediahubPlayer(options) {
 
                     listItems.push($("<li>").append($('<a>', {
                             "class": "highlight",
-                            "href": "javascript:void(0);"
+                            "href": "#"
                             // "tabindex" : 0,
                         })
                             .data('timeOffset', track.cues[i].startTime)
