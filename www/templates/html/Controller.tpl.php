@@ -1,9 +1,11 @@
 <?php
 use UNL\Templates\Templates;
+use DCF\Theme;
 
-$page = Templates::factory('App', Templates::VERSION_5);
+//$page = Theme\DCF_Theme::factory('App', Templates::VERSION_5);
+$page = Theme\DCF_Theme::factory('Custom', 1);
 
-$wdn_include_path = UNL_MediaHub::getRootDir() . '/www';
+$wdn_include_path = $_SERVER['DOCUMENT_ROOT']; //UNL_MediaHub::getRootDir() . '/www';
 if (file_exists($wdn_include_path . '/wdn/templates_5.0')) {
     $page->setLocalIncludePath($wdn_include_path);
 }
@@ -15,14 +17,10 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
 //Titles
 $page->doctitle = '<title>MediaHub | University of Nebraska-Lincoln</title>';
 $page->titlegraphic = '<a class="dcf-txt-h5" href="' . UNL_MediaHub_Controller::$url . '">MediaHub</a>';
-if ($title = $context->getReplacementData('pagetitle')) {
-    $page->pagetitle = $title;
-}
 
 //Header
 $page->addStyleSheet($baseUrl . 'templates/html/css/all.css?v=' . UNL_MediaHub_Controller::getVersion());
 
-$page->addScriptDeclaration('WDN.setPluginParam("idm", "logout", "' . $baseUrl . '?logout");');
 $page->addScript(UNL_MediaHub_Controller::getURL().'templates/html/scripts/frontend.js?v=' . UNL_MediaHub_Controller::getVersion());
 if (!$context->output instanceof UNL_MediaHub_FeedAndMedia) {
     $page->head .= '<link rel="alternate" type="application/rss+xml" title="UNL MediaHub" href="?format=xml" />';
