@@ -22,7 +22,7 @@ function append_media_details(&$details, $context, $savvy) {
 
         case 'img':
             $details['type'] = 'photo';
-            $details['url'] = 'photo';
+            $details['url'] = $context->getMediaURL();
             break;
 
         case 'audio':
