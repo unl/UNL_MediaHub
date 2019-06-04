@@ -35,8 +35,15 @@ class UNL_MediaHub_Media_Oembed extends UNL_MediaHub_Media
             case 'video':
                 $details['type'] = 'video';
                 $details['html'] = $savvy->render(UNL_MediaHub_Media_Embed::getById($context->media->id, UNL_MediaHub_Controller::$current_embed_version));
-                $details['width'] = 600;
-                $details['height'] = 500;
+                $height = 529;
+                $width = 940;
+                $dimensions = $context->media->getVideoDimensions(TRUE);
+                if (is_array($dimensions)) {
+                    $width = $dimensions['width'];
+                    $height = $dimensions['height'];
+                }
+                $details['width'] = $width;
+                $details['height'] = $height;
                 break;
 
             case 'img':
