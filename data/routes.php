@@ -40,6 +40,8 @@ $routes['/^channels\/(?P<title>.+)$/'] = 'UNL_MediaHub_FeedAndMedia';
 
 $routes['/^channels\/$/'] = 'UNL_MediaHub_FeedList';
 
+$routes['/^oembed\/?$/'] = 'media_oembed';
+
 // Now all the ?view= routes
 $routes += array(
     'search'  => 'UNL_MediaHub_MediaList',
