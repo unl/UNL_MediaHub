@@ -34,7 +34,7 @@ class UNL_MediaHub_Media_Oembed extends UNL_MediaHub_Media
         switch($typeParts[0]) {
             case 'video':
                 $details['type'] = 'video';
-                $details['html'] = $savvy->render(UNL_MediaHub_Media_Embed::getById($context->media->id, UNL_MediaHub_Controller::$current_embed_version));
+                $details['html'] = $this->getEmbedHTML($context);
                 $height = 529;
                 $width = 940;
                 $dimensions = $context->media->getVideoDimensions(TRUE);
@@ -55,7 +55,7 @@ class UNL_MediaHub_Media_Oembed extends UNL_MediaHub_Media
 
             case 'audio':
                 $details['type'] = 'rich';
-                $details['html'] = $savvy->render(UNL_MediaHub_Media_Embed::getById($context->media->id, UNL_MediaHub_Controller::$current_embed_version));
+                $details['html'] = $this->getEmbedHTML($context);
                 $details['width'] = 600;
                 $details['height'] = 500;
                 break;
@@ -68,12 +68,34 @@ class UNL_MediaHub_Media_Oembed extends UNL_MediaHub_Media
 
     }
 
+    function getEmbedHTML($context) {
+        $prefix = 'Video Player: ';
+        if (!$context->media->isVideo()) {
+            $prefix = 'Audio Player: ';
+        }
+        return '<iframe src="' . UNL_MediaHub_Controller::getURL($context) . '?format=iframe&autoplay=0" title="' . $prefix . ' ' . UNL_MediaHub::escape($context->media->title). '" allowfullscreen frameborder="0"></iframe>';
+    }
+
     function append_thumbnail_details(&$details, $context) {
-        $imageSizes = @getimagesize(UNL_MediaHub_Controller::getURL($context).'/image');
+        $imagePath = UNL_MediaHub_Controller::getURL($context).'/image';
+        $imageSizes = @getimagesize($imagePath);
         if (is_array($imageSizes)) {
-            $details['thumbnail_url'] = UNL_MediaHub_Controller::getURL($context).'/image';
+            $details['thumbnail_url'] = $imagePath . $this->getImageExtension($imagePath);
             $details['thumbnail_width'] =  $imageSizes[0];
             $details['thumbnail_height'] =  $imageSizes[1];
+        }
+    }
+
+    function getImageExtension($image) {
+        switch (@exif_imagetype($image)) {
+            case IMAGETYPE_GIF:
+                return '.gif';
+            case IMAGETYPE_JPEG:
+                return '.jpg';
+            case IMAGETYPE_PNG:
+                return '.png';
+            default:
+                return '';
         }
     }
 

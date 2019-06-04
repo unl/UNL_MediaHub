@@ -213,7 +213,9 @@ class UNL_MediaHub
     public static function getMediaInfo()
     {
         $mediaInfo = new \Mhor\MediaInfo\MediaInfo();
-        $mediaInfo->setConfig('use_oldxml_mediainfo_output_format', true);
+        if (version_compare(phpversion(), '7.0', '>')) {
+            $mediaInfo->setConfig('use_oldxml_mediainfo_output_format', true);
+        }
 
         if (self::$mediainfo_path) {
             $mediaInfo->setConfig('command', self::$mediainfo_path);
