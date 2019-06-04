@@ -35,16 +35,22 @@ class UNL_MediaHub_Media_Oembed extends UNL_MediaHub_Media
             case 'video':
                 $details['type'] = 'video';
                 $details['html'] = $savvy->render(UNL_MediaHub_Media_Embed::getById($context->media->id, UNL_MediaHub_Controller::$current_embed_version));
+                $details['width'] = 600;
+                $details['height'] = 500;
                 break;
 
             case 'img':
                 $details['type'] = 'photo';
                 $details['url'] = $context->getMediaURL();
+                $details['width'] = 600;
+                $details['height'] = 500;
                 break;
 
             case 'audio':
                 $details['type'] = 'rich';
                 $details['html'] = $savvy->render(UNL_MediaHub_Media_Embed::getById($context->media->id, UNL_MediaHub_Controller::$current_embed_version));
+                $details['width'] = 600;
+                $details['height'] = 500;
                 break;
 
             case 'text':
@@ -56,7 +62,7 @@ class UNL_MediaHub_Media_Oembed extends UNL_MediaHub_Media
     }
 
     function append_thumbnail_details(&$details, $context) {
-        $imageSizes = getimagesize(UNL_MediaHub_Controller::getURL($context).'/image');
+        $imageSizes = @getimagesize(UNL_MediaHub_Controller::getURL($context).'/image');
         if (is_array($imageSizes)) {
             $details['thumbnail_url'] = UNL_MediaHub_Controller::getURL($context).'/image';
             $details['thumbnail_width'] =  $imageSizes[0];
