@@ -57,7 +57,7 @@ class UNL_MediaHub_Media_Oembed extends UNL_MediaHub_Media
                 $details['type'] = 'rich';
                 $details['html'] = $this->getEmbedHTML($context);
                 $details['width'] = 600;
-                $details['height'] = 500;
+                $details['height'] = 337;
                 break;
 
             case 'text':
@@ -70,10 +70,12 @@ class UNL_MediaHub_Media_Oembed extends UNL_MediaHub_Media
 
     function getEmbedHTML($context) {
         $prefix = 'Video Player: ';
+        $size = '';
         if (!$context->media->isVideo()) {
             $prefix = 'Audio Player: ';
+            $size = 'width="600" height="337"';
         }
-        return '<iframe src="' . UNL_MediaHub_Controller::getURL($context) . '?format=iframe&autoplay=0" title="' . $prefix . ' ' . UNL_MediaHub::escape($context->media->title). '" allowfullscreen frameborder="0"></iframe>';
+        return '<iframe src="' . UNL_MediaHub_Controller::getURL($context) . '?format=iframe&autoplay=0" title="' . $prefix . ' ' . UNL_MediaHub::escape($context->media->title) . '" ' . $size . ' allowfullscreen frameborder="0"></iframe>';
     }
 
     function append_thumbnail_details(&$details, $context) {
