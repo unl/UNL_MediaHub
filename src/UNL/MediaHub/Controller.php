@@ -112,6 +112,10 @@ class UNL_MediaHub_Controller
             $this->options['format'] = 'js';
         }
 
+        if ($this->options['model'] == 'media_oembed' && $this->options['format'] == 'html') {
+            $this->options['format'] = 'json';
+        }
+
         UNL_MediaHub_AuthService::getInstance()->autoLogin($this->options['model']);
 
         UNL_MediaHub_Feed_Media_NamespacedElements_mediahub::$uri = UNL_MediaHub_Controller::$url . "schema/mediahub.xsd";
@@ -148,6 +152,7 @@ class UNL_MediaHub_Controller
     {
         if ($this->options['model'] == 'feed_image'
             || $this->options['model'] == 'media_embed'
+            || $this->options['model'] == 'media_oembed'
             || $this->options['model'] == 'media_vtt'
             || $this->options['model'] == 'media_srt') {
             UNL_MediaHub_OutputController::setOutputTemplate('UNL_MediaHub_Controller', 'ControllerPartial');
@@ -215,6 +220,7 @@ class UNL_MediaHub_Controller
                 || false === $this->options['model']) {
                 throw new Exception('Un-registered view', 404);
             }
+
             switch ($this->options['model']) {
             case 'media':
                 $media = $this->findRequestedMedia($this->options);
@@ -307,6 +313,18 @@ class UNL_MediaHub_Controller
                 break;
             case 'media_file':
                 $this->output[] = UNL_MediaHub_Media_File::getById($this->options['id']);
+                break;
+            case 'media_oembed':
+                $oembed = null;
+                if (isset($this->options['url'])) {
+                    $oembed = UNL_MediaHub_Media_Oembed::getByURL($this->options['url'], $this->options);
+                }
+
+                if ($oembed instanceof UNL_MediaHub_Media_Oembed) {
+                    $this->output[] = $oembed;
+                } else {
+                    http_response_code(404);
+                }
                 break;
             case 'media_file_download':
                 if (!$media = UNL_MediaHub_Media::getById($this->options['id'])) {
@@ -502,6 +520,9 @@ class UNL_MediaHub_Controller
             switch (get_class($mixed)) {
             case 'UNL_MediaHub_Media':
                 $url .= 'media/'.$mixed->id;
+                break;
+            case 'UNL_MediaHub_Media_Oembed':
+                $url .= 'media/'.$mixed->media->id;
                 break;
             case 'UNL_MediaHub_MediaList':
                 $url = $mixed->getURL();

@@ -46,7 +46,6 @@ switch($controller->options['format']) {
         $outputcontroller->addTemplatePath(dirname(__FILE__).'/templates/'.$format);
         break;
     case 'json':
-        header('Content-type:application/json');
         $outputcontroller->addTemplatePath(dirname(__FILE__).'/templates/'.$controller->options['format']);
         break;
     default:
