@@ -46,7 +46,17 @@ class UNL_MediaHub_Media_Embed
         
         return true;
     }
+    
+    public function meetsCaptionRequirement()
+    {
+        return $this->media->meetsCaptionRequirement();
+    }
 
+    public function canView($user)
+    {
+        return $this->media->canView($user);
+    }
+    
     /**
      * Get by ID
      *
