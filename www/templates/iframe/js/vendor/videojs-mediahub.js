@@ -158,7 +158,17 @@ function MediahubPlayer(options) {
                     }
                     if (!isEmbed) {
                         $parentDocument.find("html, body").animate({ scrollTop: $parentDocument.find(".mh-video-band").offset().top - 50 }, 100, function() {
-                            t.play();
+                            var promise = t.play();
+
+                            if (promise !== undefined) {
+                                promise.catch(error => {
+                                    // Not able to play video, so mute it and then play
+                                    t.muted(true);
+                                    t.play();
+                                }).then(() => {
+                                    // Auto-play started
+                                });
+                            }
                         });
                     }
                     t.currentTime(time);
