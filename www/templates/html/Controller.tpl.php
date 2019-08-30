@@ -1,21 +1,26 @@
 <?php
 use UNL\Templates\Templates;
-use DCF\Theme;
+use Themes\Theme;
 
-//$page = Theme\DCF_Theme::factory('App', Templates::VERSION_5);
-$page = Theme\DCF_Theme::factory('Custom', 1);
+$theme = new Theme($savvy, 'DCF');
+//$theme = new Theme($savvy, 'UNL', Theme::TYPE_APP, Templates::VERSION_5);
 
-$wdn_include_path = $_SERVER['DOCUMENT_ROOT']; //UNL_MediaHub::getRootDir() . '/www';
-if (file_exists($wdn_include_path . '/wdn/templates_5.0')) {
-    $page->setLocalIncludePath($wdn_include_path);
+
+$page = $theme->getPage();
+
+if (file_exists($theme->getWDNIncludePath() . '/wdn/templates_5.0')) {
+    $page->setLocalIncludePath($theme->getWDNIncludePath());
 }
 
 $savvy->addGlobal('page', $page);
 
 $baseUrl = UNL_MediaHub_Controller::getURL();
 
-//Titles
-$page->doctitle = '<title>MediaHub | University of Nebraska-Lincoln</title>';
+if ($theme->getName() == 'UNL') {
+    //Titles
+    $page->doctitle = '<title>MediaHub | University of Nebraska-Lincoln</title>';
+}
+
 $page->titlegraphic = '<a class="dcf-txt-h5" href="' . UNL_MediaHub_Controller::$url . '">MediaHub</a>';
 
 //Header
@@ -23,7 +28,7 @@ $page->addStyleSheet($baseUrl . 'templates/html/css/all.css?v=' . UNL_MediaHub_C
 
 $page->addScript(UNL_MediaHub_Controller::getURL().'templates/html/scripts/frontend.js?v=' . UNL_MediaHub_Controller::getVersion());
 if (!$context->output instanceof UNL_MediaHub_FeedAndMedia) {
-    $page->head .= '<link rel="alternate" type="application/rss+xml" title="UNL MediaHub" href="?format=xml" />';
+    $page->head .= '<link rel="alternate" type="application/rss+xml" title="MediaHub" href="?format=xml" />';
 }
 
 //Navigation
@@ -41,6 +46,6 @@ if (isset($_SESSION['notices'])) {
 $page->maincontentarea = $savvy->render($context->output);
 
 //Footer
-$page->contactinfo = $savvy->render(null, 'localfooter.tpl.php');
+$page->contactinfo = $theme->renderThemeTemplate('localfooter.tpl.php');
 
 echo $page;

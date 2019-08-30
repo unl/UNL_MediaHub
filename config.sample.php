@@ -39,7 +39,7 @@ UNL_MediaHub_Feed_Media_NamespacedElements_mediahub::setCustomElements($itemElem
 
 $cache = new UNL_MediaHub_CacheInterface_Mock();
 
-require_once 'DCF/Theme.php';
+require_once 'Themes/DCF/Theme.php';
 
 /*
 // Set a few caching options
