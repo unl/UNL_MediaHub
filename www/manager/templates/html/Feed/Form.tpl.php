@@ -201,7 +201,7 @@
                                           <optgroup label="">
                                               <option <?php if (in_array('Arts:Books', $categories)) echo 'selected="selected"'; ?> value="Arts:Books">Books</option>
                                               <option <?php if (in_array('Arts:Design', $categories)) echo 'selected="selected"'; ?> value="Arts:Design">Design</option>
-                                              <option <?php if (in_array('Arts:Fashion &amp; Beauty', $categories)) echo 'selected="selected"'; ?> value="Arts:Fashion &amp; Beauty">Fashion &amp; Beauty</option>
+                                              <option <?php if (in_array('Arts:Fashion & Beauty', $categories)) echo 'selected="selected"'; ?> value="Arts:Fashion &amp; Beauty">Fashion &amp; Beauty</option>
                                               <option <?php if (in_array('Arts:Food', $categories)) echo 'selected="selected"'; ?> value="Arts:Food">Food</option>
                                               <option <?php if (in_array('Arts:Performing Arts', $categories)) echo 'selected="selected"'; ?> value="Arts:Performing Arts">Performing Arts</option>
                                               <option <?php if (in_array('Arts:Visual Arts', $categories)) echo 'selected="selected"'; ?> value="Arts:Visual Arts">Visual Arts</option>
@@ -239,11 +239,11 @@
                                               <option <?php if (in_array('Health & Fitness:Nutrition', $categories)) echo 'selected="selected"'; ?> value="Health &amp; Fitness:Nutrition">Nutrition</option>
                                               <option <?php if (in_array('Health & Fitness:Sexuality', $categories)) echo 'selected="selected"'; ?> value="Health &amp; Fitness:Sexuality">Sexuality</option>
                                           </optgroup>
-                                          <option <?php if (in_array('Kids &amp; Family', $categories)) echo 'selected="selected"'; ?> value="Kids &amp; Family">Kids &amp; Family</option>
+                                          <option <?php if (in_array('Kids & Family', $categories)) echo 'selected="selected"'; ?> value="Kids &amp; Family">Kids &amp; Family</option>
                                           <optgroup label="">
                                               <option <?php if (in_array('Kids & Family:Education for Kids', $categories)) echo 'selected="selected"'; ?> value="Kids &amp; Family:Education for Kids">Education for Kids</option>
                                               <option <?php if (in_array('Kids & Family:Parenting', $categories)) echo 'selected="selected"'; ?> value="Kids &amp; Family:Parenting">Parenting</option>
-                                              <option <?php if (in_array('Kids & Family:Pets &amp; Animals', $categories)) echo 'selected="selected"'; ?> value="Kids &amp; Family:Pets &amp; Animals">Pets & Animals</option>
+                                              <option <?php if (in_array('Kids & Family:Pets & Animals', $categories)) echo 'selected="selected"'; ?> value="Kids &amp; Family:Pets &amp; Animals">Pets & Animals</option>
                                               <option <?php if (in_array('Kids & Family:Stories for Kids', $categories)) echo 'selected="selected"'; ?> value="Kids &amp; Family:Stories for Kids">Stories for Kids</option>
                                           </optgroup>
                                           <option <?php if (in_array('Music', $categories)) echo 'selected="selected"'; ?> value="Music">Music</option>
@@ -289,7 +289,7 @@
                                               <option <?php if (in_array('Society & Culture:Documentary', $categories)) echo 'selected="selected"'; ?> value="Society &amp; Culture:Documentary">Documentary</option>
                                               <option <?php if (in_array('Society & Culture:Personal Journals', $categories)) echo 'selected="selected"'; ?> value="Society &amp; Culture:Personal Journals">Personal Journals</option>
                                               <option <?php if (in_array('Society & Culture:Philosophy', $categories)) echo 'selected="selected"'; ?> value="Society &amp; Culture:Philosophy">Philosophy</option>
-                                              <option <?php if (in_array('Society & Culture:Places &amp; Travel', $categories)) echo 'selected="selected"'; ?> value="Society &amp; Culture:Places &amp; Travel">Places &amp; Travel</option>
+                                              <option <?php if (in_array('Society & Culture:Places & Travel', $categories)) echo 'selected="selected"'; ?> value="Society &amp; Culture:Places &amp; Travel">Places &amp; Travel</option>
                                               <option <?php if (in_array('Society & Culture:Relationships', $categories)) echo 'selected="selected"'; ?> value="Society &amp; Culture:Relationships">Relationships</option>
                                           </optgroup>
                                           <option <?php if (in_array('Sports', $categories)) echo 'selected="selected"'; ?> value="Sports">Sports</option>
