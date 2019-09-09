@@ -422,7 +422,7 @@
                             </li>
                         </ol>
                     </fieldset>
-                    <fieldset id="media_header">
+                    <fieldset id="media_header" class="dcf-mt-6">
                         <legend class="dcf-legend">Media RSS Options</legend>
                         <ol>
                             <li>
