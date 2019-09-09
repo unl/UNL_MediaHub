@@ -53,8 +53,12 @@ class Theme {
         return $this->WDNIncludePath;
     }
 
-    public function renderThemeTemplate($template){
-        return $this->templateSavvy->render(null, $template);
+    public function renderThemeTemplate($context, $template){
+        return $this->templateSavvy->render($context, $template);
+    }
+
+    public function addGlobal($name, $value){
+        return $this->templateSavvy->addGlobal($name, $value);
     }
 
     private function setCustomThemePage() {

@@ -2,17 +2,15 @@
 use UNL\Templates\Templates;
 use Themes\Theme;
 
-$theme = new Theme($savvy, 'DCF');
-//$theme = new Theme($savvy, 'UNL', Theme::TYPE_APP, Templates::VERSION_5);
-
+$theme = new Theme($savvy, UNL_MediaHub_Controller::$theme, UNL_MediaHub_Controller::$template, UNL_MediaHub_Controller::$templateVersion);
 
 $page = $theme->getPage();
+$savvy->addGlobal('page', $page);
+$theme->addGlobal('page', $page);
 
 if (file_exists($theme->getWDNIncludePath() . '/wdn/templates_5.0')) {
     $page->setLocalIncludePath($theme->getWDNIncludePath());
 }
-
-$savvy->addGlobal('page', $page);
 
 $baseUrl = UNL_MediaHub_Controller::getURL();
 
@@ -46,6 +44,6 @@ if (isset($_SESSION['notices'])) {
 $page->maincontentarea = $savvy->render($context->output);
 
 //Footer
-$page->contactinfo = $theme->renderThemeTemplate('localfooter.tpl.php');
+$page->contactinfo = $theme->renderThemeTemplate(null, 'localfooter.tpl.php');
 
 echo $page;

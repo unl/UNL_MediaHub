@@ -17,11 +17,25 @@ class UNL_MediaHub_Controller
     );
 
     /**
+     * Mediahub theme to use.
+     *
+     * @var string
+     */
+    public static $theme = 'DCF';
+
+    /**
      * UNL template style to use.
      *
      * @var string
      */
-    public $template = 'Fixed';
+    public static $template;
+
+    /**
+     * UNL template version to use.
+     *
+     * @var string
+     */
+    public static $templateVersion;
 
     /**
      * Any output prepared by this controller will go here. This could be

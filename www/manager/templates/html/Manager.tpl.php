@@ -1,7 +1,12 @@
 <?php
 use UNL\Templates\Templates;
+use Themes\Theme;
 
-$page = Templates::factory('App', Templates::VERSION_5);
+$theme = new Theme($savvy, UNL_MediaHub_Controller::$theme, UNL_MediaHub_Controller::$template, UNL_MediaHub_Controller::$templateVersion);
+
+$page = $theme->getPage();
+$savvy->addGlobal('page', $page);
+$theme->addGlobal('page', $page);
 
 $wdn_include_path = __DIR__ . '/../../..';
 if (file_exists($wdn_include_path . '/wdn/templates_5.0')) {
@@ -29,7 +34,6 @@ $page->addScript(UNL_MediaHub_Controller::getURL().'templates/html/scripts/manag
 $page->appcontrols = $savvy->render(null, 'Navigation.tpl.php');
 
 //Main content
-$savvy->addGlobal('page', $page);
 
 if (isset($_SESSION['notices'])) {
     foreach ($_SESSION['notices'] as $key=>$notice) {
@@ -42,6 +46,6 @@ if (isset($_SESSION['notices'])) {
 $page->maincontentarea = $savvy->render($context->output);
 
 //Footer
-$page->contactinfo = $savvy->render($context, 'localfooter.tpl.php');
+$page->contactinfo = $theme->renderThemeTemplate($context, 'localfooter.tpl.php');
 
 echo $page;

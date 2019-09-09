@@ -20,6 +20,15 @@ UNL_MediaHub::$dsn = 'mysql://mediahub:mediahub@localhost/mediahub';
 UNL_MediaHub_Controller::$url = 'http://localhost:8007/';
 UNL_MediaHub_Controller::$thumbnail_generator = 'https://itunes.unl.edu/thumbnails.php?url=';
 
+require_once 'Themes/Theme.php';
+UNL_MediaHub_Controller::$theme = 'DCF';
+UNL_MediaHub_Controller::$template = \Themes\Theme::TYPE_CUSTOM;
+UNL_MediaHub_Controller::$templateVersion = \Themes\Theme::CUSTOM_VERSION;
+
+//UNL_MediaHub_Controller::$theme = 'UNL';
+//UNL_MediaHub_Controller::$template = \Themes\Theme::TYPE_APP;
+//UNL_MediaHub_Controller::$templateVersion = UNL\Templates\Templates::VERSION_5;
+
 UNL_MediaHub_AmaraAPI::$amara_username = false;
 UNL_MediaHub_AmaraAPI::$amara_api_key  = false;
 
@@ -38,8 +47,6 @@ $itemElements = array(
 UNL_MediaHub_Feed_Media_NamespacedElements_mediahub::setCustomElements($itemElements);
 
 $cache = new UNL_MediaHub_CacheInterface_Mock();
-
-require_once 'Themes/DCF/Theme.php';
 
 /*
 // Set a few caching options
