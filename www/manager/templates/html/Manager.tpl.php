@@ -2,7 +2,7 @@
 use UNL\Templates\Templates;
 use Themes\Theme;
 
-$theme = new Theme($savvy, UNL_MediaHub_Controller::$theme, UNL_MediaHub_Controller::$template, UNL_MediaHub_Controller::$templateVersion);
+$theme = new Theme($savvy, UNL_MediaHub_Controller::$theme, UNL_MediaHub_Controller::$template, UNL_MediaHub_Controller::$templateVersion, UNL_MediaHub_Controller::$customThemeTemplate);
 
 $page = $theme->getPage();
 $savvy->addGlobal('page', $page);
@@ -12,10 +12,21 @@ $wdn_include_path = __DIR__ . '/../../..';
 if (file_exists($wdn_include_path . '/wdn/templates_5.0')) {
     $page->setLocalIncludePath($wdn_include_path);
 }
+// Theme Based Items
+if ($theme->getName() == 'UNL') {
+    $page->contactinfo = $theme->renderThemeTemplate(null, 'localfooter.tpl.php');
+} else {
+    $page->optionalfooter = '<div class="dcf-bleed dcf-wrapper">
+    <h3 class="dcf-txt-md dcf-bold dcf-uppercase dcf-lh-3">About MediaHub</h3>
+    <p>This application is a product of the <a href="https://dxg.unl.edu/">Digital Experience Group at Nebraska</a>. DXG is a partnership of <a href="https://ucomm.unl.edu/">University Communication</a> and <a href="https://its.unl.edu/">Information Technology Services</a> at the University of Nebraska.</p>
+</div>';
+}
+
+// Shared Items
 
 //titles
-$page->doctitle     = '<title>Manager | UNL MediaHub | University of Nebraska-Lincoln</title>';
-$page->titlegraphic = '<a class="dcf-txt-h5" href="' . UNL_MediaHub_Controller::$url . '">MediaHub</a>';
+$page->doctitle     = $theme->renderThemeTemplate(null, 'doctitle.tpl.php');
+$page->titlegraphic = $theme->renderThemeTemplate(null, 'titlegraphic.tpl.php');
 
 //header
 $page->addStyleSheet(UNL_MediaHub_Controller::getURL().'templates/html/css/all.css?v='.UNL_MediaHub_Controller::getVersion());
@@ -45,7 +56,5 @@ if (isset($_SESSION['notices'])) {
 
 $page->maincontentarea = $savvy->render($context->output);
 
-//Footer
-$page->contactinfo = $theme->renderThemeTemplate($context, 'localfooter.tpl.php');
 
 echo $page;

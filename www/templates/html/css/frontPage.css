@@ -18,6 +18,9 @@
 .mh-blue {
 	background-color: #1B9AE8;
 }
+.mh-red {
+	background-color: #D00000;
+}
 @media only screen and (max-width:768px) {
 	.mh-search-bg-video {
 		display: none;

@@ -21,7 +21,14 @@ class UNL_MediaHub_Controller
      *
      * @var string
      */
-    public static $theme = 'DCF';
+    public static $theme;
+
+    /**
+     * Mediahub custom theme template to use.
+     *
+     * @var string
+     */
+    public static $customThemeTemplate;
 
     /**
      * UNL template style to use.

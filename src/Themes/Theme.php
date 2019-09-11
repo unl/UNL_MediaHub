@@ -7,7 +7,6 @@ use UNL\Templates\Templates as UNL_Templates;
 
 class Theme {
 
-    const TYPE_CUSTOM = 'Custom';
     const TYPE_APP = 'App';
     const TYPE_FIXED = 'Fixed';
 
@@ -16,11 +15,12 @@ class Theme {
     private $name;
     private $type;
     private $version;
+    private $template;
     private $templateSavvy;
     private $WDNIncludePath;
     private $page;
 
-    public function __construct($savvy, $name, $type = NULL, $version = NULL) {
+    public function __construct($savvy, $name, $type = NULL, $version = NULL, $template = NULL) {
         $this->name = $name;
         $this->templateSavvy = clone $savvy;
         $this->templateSavvy->setTemplatePath(PATH_SEPARATOR.dirname(__FILE__) . '/' . $this->name . '/');
@@ -31,8 +31,9 @@ class Theme {
             $this->WDNIncludePath = \UNL_MediaHub::getRootDir() . '/www';
             $this->page = UNL_Templates::factory($this->type, $this->version);
         } else {
-            $this->type = self::TYPE_CUSTOM;
+            $this->type = $type;
             $this->version = self::CUSTOM_VERSION;
+            $this->template  = $template;
             $this->page = $this->setCustomThemePage();
         }
     }
@@ -65,8 +66,9 @@ class Theme {
 
         $class = 'UNL\\Templates\\Custom' . $this->version . '\\' . $this->type;
 
+
         if (!class_exists($class)) {
-            throw new Exception\UnexpectedValueException('Requested template does not exist');
+            throw new Exception\UnexpectedValueException('Requested custom theme does not exist');
         }
 
         $instance = new $class;
@@ -74,6 +76,13 @@ class Theme {
         if (!$instance instanceof UNL_Templates) {
             throw new Exception\UnexpectedValueException('Template version must be an instance of Templates class');
         }
+
+        $themeTemplate = dirname(__FILE__) . '/' . $this->name . '/' . $this->template;
+        if (!file_exists($themeTemplate)) {
+            throw new Exception\UnexpectedValueException('Requested custom theme template does not exist');
+        }
+
+        $instance->setTemplatePath($themeTemplate);
 
         return $instance;
     }
