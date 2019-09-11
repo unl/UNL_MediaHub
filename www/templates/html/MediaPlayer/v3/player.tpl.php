@@ -45,7 +45,7 @@
                     autoplay = true;
                 }
                 var captions = false;
-                if (window.location.search.indexOf("captions=en") > -1) { // add ability to hide video titles.
+                if (window.location.search.indexOf("captions=en") > -1) {
                   captions = true;
                 }
                 var $media = $(this);
