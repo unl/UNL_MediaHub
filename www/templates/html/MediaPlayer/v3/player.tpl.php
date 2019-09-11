@@ -44,6 +44,10 @@
                 if (window.location.search.indexOf("autoplay=1") > -1) { // add ability to hide video titles. 
                     autoplay = true;
                 }
+                var captions = false;
+                if (window.location.search.indexOf("captions=en") > -1) { // add ability to hide video titles.
+                  captions = true;
+                }
                 var $media = $(this);
                 var videoElement = $media.get(0);
                 var id = $media.attr("id");
@@ -97,7 +101,8 @@
                     player.toggleSingleCaptionTrack({activeColor: "#D00000"});
                     player.MediahubPlayer({
                         privacy: "<?php echo UNL_MediaHub::escape($context->media->privacy); ?>",
-                        url:'<?php echo UNL_MediaHub_Controller::toAgnosticURL($controller->getURL($context->media)); ?>'
+                        url:'<?php echo UNL_MediaHub_Controller::toAgnosticURL($controller->getURL($context->media)); ?>',
+                        captions: captions
                     });
 
                     <?php
