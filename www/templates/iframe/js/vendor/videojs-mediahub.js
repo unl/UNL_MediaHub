@@ -3,6 +3,9 @@ videojs.registerPlugin('MediahubPlayer', MediahubPlayer);
 function MediahubPlayer(options) {
     options = (typeof options !== 'undefined') ? options : {};
 
+    // show captions by default by boolean options.captions
+    var captions = (typeof options.captions !== 'undefined') ? options.captions : false;
+
     var isEmbed = !canAccessParent();
 
     if (!isEmbed && window.parent.document === window.document) {
@@ -222,7 +225,11 @@ function MediahubPlayer(options) {
                     }
                 });
             }
-            // textTracks[defaultCaptions].mode = "showing";
+
+            // whether to display captions by default
+            if (textTracks.length > 0 && captions) {
+              defaultCaptions.mode = "showing";
+            }
             setTranscript(defaultCaptions);
 
             $mhLanguageSelect.on("change", function() {
