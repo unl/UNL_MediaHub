@@ -218,20 +218,11 @@
         </div>
     </nav>
 
-    <nav class="dcf-nav-menu dcf-modal-parent dcf-d-none@print" id="dcf-navigation" role="navigation" aria-label="local navigation">
-        <div class="dcf-nav-menu-child dcf-app-controls dcf-w-100%">
-            <!-- InstanceBeginEditable name="appcontrols" -->
-            sdfsdf
-            <!-- InstanceEndEditable -->
-        </div>
+    <nav class="dcf-wrapper dcf-pt-5 dcf-nav-local dcf-d-none@print" id="dcf-local-navigation" role="navigation" aria-label="local navigation">
+        <!-- InstanceBeginEditable name="navlinks" -->
+        <!-- app add nav links here -->
+        <!-- InstanceEndEditable -->
     </nav>
-
-    <div class="dcf-bleed">
-        <div class="dcf-absolute dcf-d-flex dcf-ai-center dcf-h-100% dcf-w-100% dcf-overflow-hidden">
-            <!-- InstanceBeginEditable name="appsearch" -->
-            <!-- InstanceEndEditable -->
-        </div>
-    </div>
 
 </header>
 <main class="dcf-wrapper" id="dcf-main" role="main" tabindex="-1">

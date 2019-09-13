@@ -31,7 +31,6 @@ $page->titlegraphic = $theme->renderThemeTemplate(null, 'titlegraphic.tpl.php');
 
 //Header
 $page->addStyleSheet($baseUrl . 'templates/html/css/all.css?v=' . UNL_MediaHub_Controller::getVersion());
-
 $page->addScript(UNL_MediaHub_Controller::getURL().'templates/html/scripts/frontend.js?v=' . UNL_MediaHub_Controller::getVersion());
 if (!$context->output instanceof UNL_MediaHub_FeedAndMedia) {
     $page->head .= '<link rel="alternate" type="application/rss+xml" title="MediaHub" href="?format=xml" />';
@@ -50,7 +49,5 @@ if (isset($_SESSION['notices'])) {
 }
 
 $page->maincontentarea = $savvy->render($context->output);
-
-
 
 echo $page;
