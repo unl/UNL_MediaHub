@@ -9,7 +9,7 @@ if (isset($dimensions['width'])) {
     $height = round(($width/$dimensions['width'])*$dimensions['height']);
 }
 
-$autoplay = 'autoplay';
+$autoplay = 'autoplay muted';
 if ($parent->context instanceof UNL_MediaHub_Media_Preview) {
     $autoplay = '';
 }
