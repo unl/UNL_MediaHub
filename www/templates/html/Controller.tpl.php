@@ -29,6 +29,9 @@ if ($theme->getName() == 'UNL') {
 $page->doctitle = $theme->renderThemeTemplate(null, 'doctitle.tpl.php');
 $page->titlegraphic = $theme->renderThemeTemplate(null, 'titlegraphic.tpl.php');
 
+// Add WDN Deprecated Styles
+$page->head .= '<link rel="preload" href="https://unlcms.unl.edu/wdn/templates_5.0/css/deprecated.css" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"> <noscript><link rel="stylesheet" href="https://unlcms.unl.edu/wdn/templates_5.0/css/deprecated.css"></noscript>';
+
 //Header
 $page->addStyleSheet($baseUrl . 'templates/html/css/all.css?v=' . UNL_MediaHub_Controller::getVersion());
 $page->addScript(UNL_MediaHub_Controller::getURL().'templates/html/scripts/frontend.js?v=' . UNL_MediaHub_Controller::getVersion());
