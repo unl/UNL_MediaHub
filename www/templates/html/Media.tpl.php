@@ -50,8 +50,8 @@ $getTracks = $context->getTextTrackURLs();
 
 <div class="dcf-bleed mh-video-band">
     <div class="dcf-wrapper">
-        <div class="wdn-responsive-embed wdn-aspect16x9">
-            <iframe height="667" src="<?php echo $controller->getURL($context)?>?format=iframe&autoplay=0&preload=auto" allowfullscreen title="watch media"></iframe>
+        <div class="dcf-ratio dcf-ratio-16x9">
+            <iframe class="dcf-ratio-child dcf-w-100% dcf-b-0" height="667" src="<?php echo $controller->getURL($context)?>?format=iframe&autoplay=0&preload=auto" allowfullscreen title="watch media"></iframe>
         </div>
     </div>
 </div>
@@ -97,6 +97,10 @@ $getTracks = $context->getTextTrackURLs();
                     </div>
                 </div>
                 <hr>
+
+                <h2 class="unl-font-sans">Description</h2>
+                <div class="mh-summary"><?php echo $summary; ?></div>
+                <hr>
                 
                 <?php if($getTracks): ?>
                     <div class="mediahub-onpage-captions">
@@ -104,13 +108,8 @@ $getTracks = $context->getTextTrackURLs();
                     </div>
                     <hr>
                 <?php endif; ?>
-               
-                <h2 class="unl-font-sans">Description</h2>
-                <div class="mh-summary"><?php echo $summary; ?></div>
-
 
                 <?php if (($tags = $context->getTags()) || ($user && $context->userCanEdit($user))): ?>
-                    <hr>
                     <ul id="mediaTags" class="unl-font-sans">
                         <li class="unl-font-sans mh-tag-label">Tags:</li>
                         <?php foreach ($tags as $tag): ?>
@@ -130,8 +129,9 @@ $getTracks = $context->getTextTrackURLs();
                             </li>
                         <?php endif; ?>
                     </ul>
+                    <hr>
                 <?php endif; ?>
-                <hr>
+
                 <div id="comments">
                     <?php
                         $page->addScriptDeclaration("WDN.loadCSS('../templates/html/css/comments.css?v=" . UNL_MediaHub_Controller::getVersion() . "');");
