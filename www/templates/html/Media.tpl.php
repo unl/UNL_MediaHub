@@ -50,8 +50,8 @@ $getTracks = $context->getTextTrackURLs();
 
 <div class="dcf-bleed mh-video-band">
     <div class="dcf-wrapper">
-        <div class="wdn-responsive-embed wdn-aspect16x9">
-            <iframe height="667" src="<?php echo $controller->getURL($context)?>?format=iframe&autoplay=0&preload=auto" allowfullscreen title="watch media"></iframe>
+        <div class="dcf-ratio dcf-ratio-16x9">
+            <iframe class="dcf-ratio-child dcf-w-100% dcf-b-0" height="667" src="<?php echo $controller->getURL($context)?>?format=iframe&autoplay=0&preload=auto" allowfullscreen title="watch media"></iframe>
         </div>
     </div>
 </div>
