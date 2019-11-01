@@ -1,4 +1,4 @@
-require(['jquery', 'modal'], function($){
+require(['jquery'], function($){
 	$('.embed').colorbox({inline: true, href:'#sharing', width:'75%', height:'75%'});
 	
 	$('form#addTags').hide();
