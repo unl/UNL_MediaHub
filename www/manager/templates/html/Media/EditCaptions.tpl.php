@@ -4,7 +4,7 @@
 ?>
 <?php
     $revOrders = $context->getRevOrderHistory()->items;
-    $hasRevOrders = count($revOrders) > 1;
+    $hasRevOrders = count($revOrders) > 0;
 ?>
 
 <div class="dcf-bleed dcf-pt-6 dcf-pb-6">
