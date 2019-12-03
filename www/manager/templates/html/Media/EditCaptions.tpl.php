@@ -2,6 +2,10 @@
 // TODO: disable breadcrumbs since currently not supported in 5.0 App templates
 //$controller->setReplacementData('breadcrumbs', '<ol> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'manager/">Manage Media</a></li> <li><a href="' . $context->media->getURL() .'">'.UNL_MediaHub::escape($context->media->title).'</a></li> <li>Edit Captions</li></ol>');
 ?>
+<?php
+    $revOrders = $context->getRevOrderHistory()->items;
+    $hasRevOrders = count($revOrders) > 0;
+?>
 
 <div class="dcf-bleed dcf-pt-6 dcf-pb-6">
     <div class="dcf-wrapper">
@@ -70,7 +74,17 @@
                         <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
                         <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
                         <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
-                        <input type="submit" id="caption_submit_button" value="Order captions">
+                        <?php
+                            if ($hasRevOrders === TRUE) {
+                                $confirmMessage = 'Captions have already been ordered for this video. Are you sure you want to submit another caption order?';
+                            } else {
+                                $confirmMessage = 'Orders can not be canceled. Are you sure you want to order captions?';
+                            }
+                        ?>
+                        <input class="dcf-mb-4" type="submit" id="caption_submit_button" value="Order captions" onclick="return confirm('<?php echo $confirmMessage; ?>');">
+                        <?php if ($hasRevOrders === TRUE): ?>
+                        <p class="wdn-icon wdn-icon-attention unl-font-sans">Captions have already been ordered for this video.</p>
+                        <?php endif; ?>
                         <p class="wdn-icon wdn-icon-attention unl-font-sans">Orders can not be canceled.</p>
                     </form>
                     <?php else: ?>
@@ -132,8 +146,7 @@
                 </tr>
             </thead>
             <tbody>
-            <?php $orders = $context->getRevOrderHistory()->items; ?>
-            <?php foreach ($orders as $order): ?>
+            <?php foreach ($revOrders as $order): ?>
                 <tr>
                     <td data-header="Order Number">
                         <?php echo (int)$order->id ?>
