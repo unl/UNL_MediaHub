@@ -181,7 +181,7 @@ $getTracks = $context->getTextTrackURLs();
 
                   <a class="dcf-btn embed mh-hide-bp2"><span class="wdn-icon-plus wdn-icon" aria-hidden="true"></span>Embed</a>
                   <br><br>
-                  <a href="<?php echo htmlentities($controller->getURL($context).'/download', ENT_QUOTES); ?>" target="_blank" class="dcf-btn mh-hide-bp2"><span class="wdn-icon-up-small mh-flip-180 wdn-icon" aria-hidden="true"></span>Download</a>
+                  <a href="<?php echo htmlentities($controller->getURL($context).'/download', ENT_QUOTES); ?>" target="_blank" class="dcf-btn dcf-btn-secondary mh-hide-bp2"><span class="dcf-mr-1" aria-hidden="true">&darr;</span>Download</a>
 
                 </div>
 
