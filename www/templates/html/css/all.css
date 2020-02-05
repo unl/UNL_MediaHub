@@ -169,13 +169,6 @@ body #cboxOverlay {
   max-width: 100%;
 }
 
-.mh-video-label {
-  margin-bottom: 1.5em;
-  margin-top: -12px;
-  padding: .75em;
-  width: 100%;
-}
-
 .mh-video-label p {
   font-style: italic;
 }
