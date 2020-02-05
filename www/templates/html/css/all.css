@@ -180,17 +180,6 @@ body #cboxOverlay {
   font-style: italic;
 }
 
-.mh-media-browse.page-1 > :first-child .mh-video-label p {
-  font-family: "Tungsten A","Tungsten B",HelveticaNeueCondensed,HelveticaNeue-Condensed,"Helvetica Neue Condensed",HelveticaNeueRomanCondensed,HelveticaNeue-Roman-Condensed,"Helvetica Neue Roman Condensed","Arial Narrow",HelveticaNeue,"Helvetica Neue",HelveticaNeueRoman,HelveticaNeue-Roman,"Helvetica Neue Roman",Helvetica,Tahoma,Geneva,Arial,sans-serif;
-  font-size: 3.16em;
-  font-style: normal;
-}
-
-.mh-media-browse.page-1 > :first-child .mh-video-label .wdn-subhead:not(.edit-button) {
-  margin: 0;
-}
-
-
 .mh-video-label .wdn-subhead {
   font-size: 10px;
   margin: 0 0 1em 0;
@@ -439,24 +428,6 @@ body #cboxOverlay {
 
   .mh-hide-bp2 {
     display: none !important;
-  }
-
-  .mh-media-browse.page-1 > :first-child .mh-video-label {
-    margin-bottom: 1.5em;
-    margin-top: -12px;
-    padding: .75em;
-    width: 100%;
-  }
-
-  .mh-media-browse.page-1 > :first-child .mh-video-label p {
-    font-family: "Mercury SSm A", "Mercury SSm B", Georgia, Baskerville, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif;
-    font-size: 13px;
-    font-style: italic;
-    line-height: 1.66;
-  }
-
-  .mh-media-browse.page-1 > :first-child .mh-video-label .wdn-subhead:not(.edit-button) {
-    margin: 0 0 1em 0;
   }
 
 }
