@@ -11,7 +11,7 @@ if (isset($context->label) && !empty($context->label)) {
 $feeds = $context->getRelatedFeeds(array('limit'=>6));
 ?>
 
-<?php 
+<?php
 
 if(!empty($context->options['orderby'])){
 
@@ -123,7 +123,7 @@ if(!empty($context->options['f'])){
         new Doctrine_Pager_Range_Sliding(array('chunk'=>5)),
         htmlentities($url));
     $pager_links = $pager_layout->display(null, true);
-    
+
     $mediaListClass = '';
     if ($context->options['filter']->getType() == 'browse') {
         $mediaListClass = ' mh-media-browse page-' . $context->pager->getPage();
@@ -137,7 +137,7 @@ if(!empty($context->options['f'])){
                 <h2>
                     <span class="dcf-subhead">Channel Search</span>
                 </h2>
-                <ul class="mh-channel-buttons dcf-grid-full dcf-grid-halves@sm dcf-grid-thirds@md dcf-col-gap-vw">
+                <ul class="mh-channel-buttons dcf-grid-full dcf-grid-halves@sm dcf-grid-thirds@md dcf-col-gap-vw dcf-row-gap-7">
                     <?php foreach ($feeds->items as $feed): ?>
                         <li><a class="dcf-btn dcf-btn-secondary dcf-w-100% dcf-h-100%" href="<?php echo UNL_MediaHub_Controller::getURL($feed); ?>"><span class="wdn-icon wdn-icon-rocket" aria-hidden="true"></span><?php echo UNL_MediaHub::escape($feed->title) ?></a></li>
                     <?php endforeach; ?>
@@ -150,7 +150,7 @@ if(!empty($context->options['f'])){
 
     <div class="dcf-bleed mh-media">
         <div class="dcf-wrapper dcf-pt-8 dcf-pb-8">
-            <ul class="dcf-list-bare dcf-grid-thirds@sm dcf-col-gap-vw mh-media-list<?php echo $mediaListClass ?>">
+            <ul class="dcf-list-bare dcf-grid-halves@sm dcf-grid-thirds@md dcf-grid-fourths@xl dcf-col-gap-vw dcf-row-gap-7 mh-media-list<?php echo $mediaListClass ?>">
                 <?php foreach ($context->items as $media): ?>
                     <li>
                         <?php echo $savvy->render($media, 'Media/teaser.tpl.php'); ?>
@@ -161,7 +161,7 @@ if(!empty($context->options['f'])){
             <?php echo $pager_links; ?>
 
         </div>
-    </div>          
+    </div>
 <?php else: ?>
     <div class="dcf-bleed mh-media">
         <div class="dcf-wrapper dcf-pt-8 dcf-pb-8">
