@@ -4,121 +4,127 @@ Supporting styles for listings of channels
 -------------------------------------------------
 */
 
-.mh-list-header, .mh-feed-list > li {
-    border-bottom: 1px solid #d0cec6;
+.mh-list-header,
+.mh-feed-list > li {
+  border-bottom: 1px solid #d0cec6;
 }
 
 .mh-list-header h1 {
-	margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .mh-list-header .wdn-subhead {
-	margin: 0;
+  margin: 0;
 }
 
-.mh-list-header h1 .wdn-subhead{
-	font-size:.23em;
+.mh-list-header h1 .wdn-subhead {
+  font-size:.23em;
 }
 
 .mh-list-header p {
-	margin-top: 0;
-	font-style: italic;
+  font-style: italic;
+  margin-top: 0;
 }
 
 .mh-feed-list {
-	padding: 0;
-	list-style: none;
+  list-style: none;
+  padding: 0;
 }
 
 .mh-feed-list h2 {
-	margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .mh-feed-author {
-	margin: 0;
-	font-style: italic;
+  font-style: italic;
+  margin: 0;
 }
 
 .mh-feed-list img {
-	width: 100%;
+  width: 100%;
 }
 
 .mh-feed-list li a {
-	border: 0;
+  border: 0;
 }
 
 .mh-feeds .wdn_pagination {
-	text-align: center;
-	padding: 0;
+  padding: 0;
+  text-align: center;
 }
 
 .mh-feeds .wdn_pagination li {
-	display: inline-block;
-	float: none;
+  display: inline-block;
+  float: none;
 }
 
 .mh-feed-stats {
-	text-align: center;
+  text-align: center;
 }
 
 .mh-stat {
-	line-height: 1;
+  line-height: 1;
 }
 
 .mh-stat .mh-count {
-	font-size: 1.5em;
-	display: block;
+  display: block;
+  font-size: 1.5em;
 }
 
 .mh-stat .mh-context {
-	font-size: 10px;
-	text-transform: uppercase;
+  font-size: 10px;
+  text-transform: uppercase;
 }
 
 .mh-more-info {
-	text-align: right;
+  text-align: right;
 }
 
 p.mh-more-info a {
-	border: 0;
+  border: 0;
 }
 
 .mh-channel-thumb {
-	border: solid rgba(174, 167, 141, 0.21) 10px;
-	overflow: hidden;
-	margin-bottom: .75em;
-	position: relative;
+  border: solid rgba(174, 167, 141, .21) 10px;
+  margin-bottom: .75em;
+  overflow: hidden;
+  position: relative;
 }
 
 .mh-channel-thumb > div {
-	background-color: rgba(194, 190, 174, 0.59);
+  background-color: rgba(194, 190, 174, .59);
 }
 
 .mh-channel-thumb object {
-	margin: 20% 0;
+  margin: 20% 0;
 }
 
 .mh-channel-thumb img{
-	margin-bottom: -9px;
+  margin-bottom: -9px;
 }
 
+
 @media (max-width: 960px) {
-	.mh-video-thumb.mh-channel-thumb object {
-	margin: 13% 0;
-	}
+
+  .mh-video-thumb.mh-channel-thumb object {
+    margin: 13% 0;
+  }
+
 }
+
 
 @media (max-width: 768px) {
 
-	.mh-media-samples li:nth-child(n+5) {
-		display: none;
-	}
+  .mh-media-samples li:nth-child(n+5) {
+    display: none;
+  }
 
-	.mh-feed-stats {
-		display: none;
-	}
-	.mh-video-thumb.mh-channel-thumb object {
-	margin: 23% 0;
-	}
+  .mh-feed-stats {
+    display: none;
+  }
+
+  .mh-video-thumb.mh-channel-thumb object {
+    margin: 23% 0;
+  }
 
 }

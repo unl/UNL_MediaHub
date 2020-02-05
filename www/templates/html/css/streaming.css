@@ -3,58 +3,63 @@
 Live Streaming
 -------------------------------------------------
 */
-.wdn_notice.live {
-    display:block;
-    background:#f1f1f1 url('images/onAir.png') no-repeat 15px center;
-    min-height:90px;
-    padding:5px 5px 5px 135px;
-    border-radius:5px;
-    -moz-border-radius:5px;
-    -webkit-border-radius:5px;
-    margin-bottom:20px;
-    border:2px solid #c5c2c2;
-}
-#dcf-main.wdn_notice.live h2 {
-    font-weight:bold;
-    margin-top:10px;
-}
-#wdn_live_stream_wrapper {
-    background:#f1f1f1;
-    padding:10px;
-    border-radius:5px;
-    -webkit-border-radius:5px;
-    -moz-border-radius:5px;
-    margin-bottom:1.4em;
-}
-#wdn_live_stream_wrapper .liveIndicator {
-    color:#fff;
-    text-transform:uppercase;
-    background:#ac0302;
-    padding:2px 5px;
-    width:50px;
-    float:left;
-    font-weight:bold;
-    position:relative;
-    left:-12px;
-    -webkit-box-shadow: 0px 0px 2px #707070;
-    -moz-box-shadow: 0px 0px 2px #707070;
-    box-shadow: 0px 0px 2px #707070;
-}
-#wdn_live_stream_wrapper #wdn_live_stream {
-    text-align:center;
-}
-#wdn_live_stream_wrapper #wdn_live_stream object {
-    -webkit-box-shadow: 0px 0px 2px #707070;
-    -moz-box-shadow: 0px 0px 2px #707070;
-    box-shadow: 0px 0px 2px #707070;
-}
-#wdn_live_stream_wrapper h4 {
-    margin-top:10px;
-    margin-left:68px;
-}
-#wdn_live_stream_wrapper p {
-    margin-left:68px;
-}
-a.archive {
 
+.wdn_notice.live {
+  background: #f1f1f1 url('images/onAir.png') no-repeat 15px center;
+  border: 2px solid #c5c2c2;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  display: block;
+  margin-bottom: 20px;
+  min-height: 90px;
+  padding: 5px 5px 5px 135px;
+}
+
+#dcf-main.wdn_notice.live h2 {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+#wdn_live_stream_wrapper {
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  margin-bottom: 1.4em;
+  padding: 10px;
+}
+
+#wdn_live_stream_wrapper .liveIndicator {
+  background-color: #ac0302;
+  -webkit-box-shadow: 0 0 2px #707070;
+  -moz-box-shadow: 0 0 2px #707070;
+  box-shadow: 0 0 2px #707070;
+  color: #fff;
+  float: left;
+  font-weight: bold;
+  left: -12px;
+  padding: 2px 5px;
+  position: relative;
+  text-transform: uppercase;
+  width: 50px;
+}
+
+#wdn_live_stream_wrapper #wdn_live_stream {
+  text-align: center;
+}
+
+#wdn_live_stream_wrapper #wdn_live_stream object {
+  -webkit-box-shadow: 0 0 2px #707070;
+  -moz-box-shadow: 0 0 2px #707070;
+  box-shadow: 0 0 2px #707070;
+}
+
+#wdn_live_stream_wrapper h4 {
+  margin-left: 68px;
+  margin-top: 10px;
+}
+
+#wdn_live_stream_wrapper p {
+  margin-left: 68px;
 }

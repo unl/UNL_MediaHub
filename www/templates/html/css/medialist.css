@@ -5,73 +5,73 @@ Supporting styles for individual presentation of lists of media
 */
 
 .mh-media h1 {
-	margin-top: 0;
+  margin-top: 0;
 }
 
 nav.mh-sort-filter {
-	display: inline-block;
-	margin-top: 1rem;
+  display: inline-block;
+  margin-top: 1rem;
 }
 
 ul.mh-btn-group {
-	background-color: #d00000;
-	border-radius: 15px;
-	display: inline-block;
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	position: relative;
-	vertical-align: middle;
+  background-color: #d00000;
+  border-radius: 15px;
+  display: inline-block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  vertical-align: middle;
 }
 
 ul.mh-btn-group a {
-	padding: .75em;
-	background-color: #d00000;
+  background-color: #d00000;
+  padding: .75em;
 }
 
 ul.mh-btn-group li:first-of-type a {
-	border-bottom-left-radius: 15px;
-	border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-top-left-radius: 15px;
 }
 
 ul.mh-btn-group li:last-of-type a {
-	border-bottom-right-radius: 15px;
-	border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border-top-right-radius: 15px;
 }
 
 ul.mh-btn-group li {
-	display: inline-block;
-	float: left;
-	margin: 0;
+  display: inline-block;
+  float: left;
+  margin: 0;
 }
 
 ul.mh-btn-group > li:not(:last-of-type) {
-	border-right: 1px solid rgba(0,0,0,.1);
+  border-right: 1px solid rgba(0, 0, 0, .1);
 }
 
 .mh-sort-filter .mh-btn-group {
-	margin-right: 1em;
+  margin-right: 1em;
 }
 
 .mh-sort-filter-active:before {
-	content:"\2022";
-	margin-right:.75em;
+  content: '\2022';
+  margin-right: .75em;
 }
 
 .mh-media .wdn_pagination {
-	text-align: center;
-	padding: 0;
+  padding: 0;
+  text-align: center;
 }
 
 .mh-media .wdn_pagination li {
-	display: inline-block;
-	float: none;
+  display: inline-block;
+  float: none;
 }
 
 /* don't use for now
 @media (min-width: 768px) {
-	.mh-media-browse.page-1 > :first-child {
-		width: 66.6666%;
-	}
+  .mh-media-browse.page-1 > :first-child {
+    width: 66.6666%;
+  }
 }
 */
