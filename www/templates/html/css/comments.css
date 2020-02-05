@@ -38,8 +38,8 @@ h3 a {
     background-color: white;
     content: "";
     display: block;
-    width: 20px; 
-    height: 20px; 
+    width: 20px;
+    height: 20px;
     position:absolute;
     bottom: -10px;
     left: 7%;
@@ -65,24 +65,24 @@ h3 a {
 }
 
 .profile_pic{
-    float:left;	
+    float:left;
     margin: 10px;
 }
 #dcf-main h5.commenter {
     font-weight:bold;
-    padding-left:53px;	
+    padding-left:53px;
     margin-bottom:0;
 }
 
 .mh-user {
-    padding: 10px;  
+    padding: 10px;
 }
 
 
 @media only screen and (max-width: 768px)  {
 
     .profile_pic{
-        float:left; 
+        float:left;
         margin: 0 10px 0 0;
     }
 

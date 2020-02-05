@@ -1,4 +1,4 @@
-/* 
+/*
 -------------------------------------------------
 Supporting styles for individual presentation of media pages
 -------------------------------------------------
@@ -6,10 +6,10 @@ Supporting styles for individual presentation of media pages
 .supportingContent {margin-top:20px;}
 #properties h5 {
     font-weight:bold;
-    font-size:1.1em;	
+    font-size:1.1em;
 }
 #properties h5 + p {
-    font-size:0.8em;	
+    font-size:0.8em;
 }
 
 .size {
@@ -29,16 +29,16 @@ Supporting styles for individual presentation of media pages
 
 .duration {
     background:url('images/iconClock.png') no-repeat 0 3px;
-    padding:0px 0 2px 17px;	
+    padding:0px 0 2px 17px;
 }
 
 .itunes_subtitle {
     margin: 0;
 }
 
-/* 
+/*
 -------------------------------------------------
-Tags 
+Tags
 -------------------------------------------------
 */
 
@@ -93,7 +93,7 @@ Tags
     top: -2px;
 }
 
-/* 
+/*
 -------------------------------------------------
 Embed
 -------------------------------------------------
@@ -112,7 +112,7 @@ Embed
 #sharing {
     padding: 1em;
 }
-#sharing textarea {width:96%;}  
+#sharing textarea {width:96%;}
 body #cboxLoadedContent {background-color:#fff;}
 body #cboxOverlay {background-color:#000;}
 
@@ -140,32 +140,32 @@ body #cboxOverlay {background-color:#000;}
     max-height: 100%;
 
 }
-.mh-video-label {       
-    padding: 0.75em;       
-    width: 100%;       
-    margin-top: -12px;     
-    margin-bottom: 1.5em;      
+.mh-video-label {
+    padding: 0.75em;
+    width: 100%;
+    margin-top: -12px;
+    margin-bottom: 1.5em;
 }
 
 .mh-video-label p {
     font-style: italic;
 }
 
-.mh-media-browse.page-1 > :first-child .mh-video-label p {      
+.mh-media-browse.page-1 > :first-child .mh-video-label p {
     font-style: normal;
     font-size: 3.157em;
     font-family: "Tungsten A","Tungsten B",HelveticaNeueCondensed,HelveticaNeue-Condensed,"Helvetica Neue Condensed",HelveticaNeueRomanCondensed,HelveticaNeue-Roman-Condensed,"Helvetica Neue Roman Condensed","Arial Narrow",HelveticaNeue,"Helvetica Neue",HelveticaNeueRoman,HelveticaNeue-Roman,"Helvetica Neue Roman",Helvetica,Tahoma,Geneva,Arial,sans-serif;
  }
 
  .mh-media-browse.page-1 > :first-child .mh-video-label .wdn-subhead:not(.edit-button) {
-    margin: 0 0 0 0;   
+    margin: 0 0 0 0;
  }
 
 
- .mh-video-label .wdn-subhead {     
-    font-size: 10px;       
-    margin: 0 0 1em 0;     
-} 
+ .mh-video-label .wdn-subhead {
+    font-size: 10px;
+    margin: 0 0 1em 0;
+}
 
 .mh-video-label *, .mh-video-label a:visited {
     margin: 0;
@@ -322,8 +322,8 @@ body #cboxOverlay {background-color:#000;}
     background-color: white;
     content: "";
     display: block;
-    width: 15px; 
-    height: 15px; 
+    width: 15px;
+    height: 15px;
     position:absolute;
     bottom: -8px;
     left: 50%;
@@ -409,10 +409,10 @@ body #cboxOverlay {background-color:#000;}
     }
 
     .mh-media-browse.page-1 > :first-child .mh-video-label {
-        padding: 0.75em;       
-        width: 100%;       
-        margin-top: -12px;     
-        margin-bottom: 1.5em;  
+        padding: 0.75em;
+        width: 100%;
+        margin-top: -12px;
+        margin-bottom: 1.5em;
 
     }
 
@@ -426,7 +426,7 @@ body #cboxOverlay {background-color:#000;}
     .mh-media-browse.page-1 > :first-child .mh-video-label .wdn-subhead:not(.edit-button) {
         margin: 0 0 1em 0;
     }
-    
+
 
 
 }

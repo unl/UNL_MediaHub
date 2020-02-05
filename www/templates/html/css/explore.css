@@ -1,4 +1,4 @@
-/* 
+/*
 -------------------------------------------------
 Supporting styles for specifics presentations on the homepage
 -------------------------------------------------
@@ -60,13 +60,13 @@ Heading view switcher
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3b679e), color-stop(50%,#2b88d9), color-stop(51%,#207cca), color-stop(100%,#7db9e8));
 }
 #dcf-main .group .switcher li a:focus {
-    color:#4f4f4f !important;  
+    color:#4f4f4f !important;
 }
 #dcf-main .group .switcher li a.selected:focus {
-    color:#fff !important;  
+    color:#fff !important;
 }
 #dcf-main .group .switcher li a.selected:focus {
-    color:#fff !important;  
+    color:#fff !important;
 }
 /*
 -------------------------------------------------
@@ -84,7 +84,7 @@ Add Media Button
     padding-bottom:3px;
 }
 .box_display {
-    width:100%; 
+    width:100%;
     padding-top:15px;
 }
 .box_display div {
@@ -100,7 +100,7 @@ Add Media Button
     min-height:90px;
 }
 #dcf-main #exploreMedia div p {
-    width:60%;  
+    width:60%;
 }
 #dcf-main #exploreMedia .exp_channels {
     background:url('images/bwIconTV.png') no-repeat 90% 0%;
