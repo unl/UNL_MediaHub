@@ -1,75 +1,78 @@
-/* 
+/*
 -------------------------------------------------
 Supporting styles for search box
 -------------------------------------------------
 */
+
 #wdn_app_search {
-    padding:10px;
-    padding-right:0;
+  padding: 10px 0 10px 10px;
 }
 
 #wdn_app_search .wdn-input-group-btn {
-	position: relative;
+  position: relative;
 }
 
 #wdn_app_search form {
-    position: relative;
-    font-size: 1em;
-    margin: auto;
+  font-size: 1em;
+  margin: auto;
+  position: relative;
 }
 
 .mh-list-header .wdn-icon-search {
-	border-bottom:1px solid #137cbd;
-}
-
-@media (min-width: 768px) {
-	#wdn_app_search form {
-	    width: 33.3333%
-	}
-	
-	#wdn_app_search label {
-		color: #fff;
-	}
-
+  border-bottom: 1px solid #137cbd;
 }
 
 form .wdn-input-group .wdn-input-group-btn > input[type="submit"],
 form .wdn-input-group .wdn-input-group-btn > input[type="button"],
 form .wdn-input-group .wdn-input-group-btn > button {
-	font-size: 0.75em;
+  font-size: .75em;
 }
-form .wdn-input-group .wdn-input-group-btn>* {
-	padding: 1.65em 1.33em;
-	border-bottom-right-radius: 4px;
-	border-top-right-radius: 4px;
+
+form .wdn-input-group .wdn-input-group-btn > * {
+  border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px;
+  padding: 1.65em 1.33em;
 }
 
 .mh-app-search {
-	margin: 1em 0;
+  margin: 1em 0;
 }
 
 .mh-app-search > * {
-	font-size: 0.75em;
+  font-size: .75em;
 }
 
 .mh-channel-buttons li {
-	float: left;
-	list-style: none;
-	margin:0 .75em .75em 0;
+  float: left;
+  list-style: none;
+  margin: 0 .75em .75em 0;
 }
 
-.mh-channel-buttons li .wdn-icon{
-	padding: 0 1em 0 0;
+.mh-channel-buttons li .wdn-icon {
+  padding: 0 1em 0 0;
 }
 
 ul.mh-channel-buttons {
-	padding-left: 0;
+  padding-left: 0;
 }
+
 
 @media (max-width: 768px) {
 
-	.mh-app-search {
-		margin: 1em 0 1em 0;
-	}
+  .mh-app-search {
+    margin: 1em 0;
+  }
+
+}
+
+@media (min-width: 768px) {
+
+  #wdn_app_search form {
+    width: 33.33%;
+  }
+
+  #wdn_app_search label {
+    color: #fff;
+  }
 
 }

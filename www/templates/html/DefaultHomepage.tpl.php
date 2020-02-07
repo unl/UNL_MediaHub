@@ -24,9 +24,9 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
     </form>
   </div>
 </div>
-<div class="dcf-bleed dcf-wrapper dcf-pt-7 dcf-pb-6 unl-bg-lightest-gray">
+<div class="dcf-bleed dcf-wrapper dcf-pt-7 dcf-pb-8 unl-bg-lightest-gray">
   <h2 class="dcf-txt-center dcf-subhead dcf-mb-6">Popular Videos</h2>
-  <div class="dcf-grid-halves@sm dcf-grid-thirds@md dcf-col-gap-vw dcf-row-gap-6">
+  <div class="dcf-grid-halves@sm dcf-grid-thirds@md dcf-col-gap-vw dcf-row-gap-7">
     <?php foreach ($context->getTopMedia() as $media): ?>
       <div>
         <?php echo $savvy->render($media, 'Media/teaser.tpl.php'); ?>

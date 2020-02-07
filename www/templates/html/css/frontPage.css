@@ -1,25 +1,34 @@
 .mh-search-container {
-	height: 10em;
-	background-image: url(images/search-bg.png);
+  background-image: url(images/search-bg.png);
+  height: 10em;
 }
+
 .mh-search-bg-video {
-	transform: translateY(-33%);
+  transform: translateY(-33%);
 }
+
 .mh-featured-icon img,
 .mh-featured-icon object {
-	width: 43%;
+  width: 43%;
 }
+
 .mh-featured h2 {
-	color: inherit;
+  color: inherit;
 }
+
 .mh-green {
-	background-color: #00BD3C;
+  background-color: #00BD3C;
 }
+
 .mh-blue {
-	background-color: #1B9AE8;
+  background-color: #1B9AE8;
 }
-@media only screen and (max-width:768px) {
-	.mh-search-bg-video {
-		display: none;
-	}
+
+
+@media only screen and (max-width: 768px) {
+
+  .mh-search-bg-video {
+    display: none;
+  }
+
 }
