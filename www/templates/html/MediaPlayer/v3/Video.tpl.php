@@ -10,6 +10,15 @@ if (isset($dimensions['width'])) {
 }
 
 $autoplay = 'autoplay muted';
+if (isset($controller->options['muted'])) {
+    switch (strtolower($controller->options['muted'])) {
+        // Treat these strings as false and remove muted attribute from $autoplay
+        case '0':
+        case 'false':
+            $autoplay = 'autoplay';
+    }
+}
+
 if ($parent->context instanceof UNL_MediaHub_Media_Preview) {
     $autoplay = '';
 }
