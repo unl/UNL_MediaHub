@@ -23,7 +23,7 @@ class UNL_MediaHub_MediaPlayer implements \Savvy_Turbo_CacheableInterface
             $autoplay = $this->options['autoplay'];
         }
         
-        $muted = '';
+        $muted = 'blank';
         if (isset($this->options['muted'])) {
             $muted = $this->options['muted'];
         }
