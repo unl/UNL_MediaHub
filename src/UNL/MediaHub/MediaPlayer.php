@@ -23,6 +23,11 @@ class UNL_MediaHub_MediaPlayer implements \Savvy_Turbo_CacheableInterface
             $autoplay = $this->options['autoplay'];
         }
         
+        $muted = '';
+        if (isset($this->options['muted'])) {
+            $muted = $this->options['muted'];
+        }
+
         $captions = '';
         if (isset($this->options['captions'])) {
             $captions = $this->options['captions'];
@@ -31,6 +36,7 @@ class UNL_MediaHub_MediaPlayer implements \Savvy_Turbo_CacheableInterface
         return 'media_' . $this->media->id . '_' . $this->media->dateupdated
             . '--format-' . $this->options['format']
             . '--autoplay-' . $autoplay
+            . '--muted-' . $muted
             . '--preload-'. $preload
             . '--captions-'.$captions
             . '--version-'.$this->getPlayerVersion();
