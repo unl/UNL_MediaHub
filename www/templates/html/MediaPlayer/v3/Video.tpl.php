@@ -15,7 +15,6 @@ if (isset($controller->options['muted'])) {
         // Treat these strings as false and remove muted attribute from $autoplay
         case '0':
         case 'false':
-        case '':
             $autoplay = 'autoplay';
     }
 }
