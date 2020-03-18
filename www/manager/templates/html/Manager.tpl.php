@@ -1,10 +1,11 @@
 <?php
 use UNL\Templates\Templates;
 
-$page = Templates::factory('App', Templates::VERSION_5);
+$page = Templates::factory('AppLocal', Templates::VERSION_5_1);
 
-$wdn_include_path = __DIR__ . '/../../..';
-if (file_exists($wdn_include_path . '/wdn/templates_5.0')) {
+$wdn_include_path = UNL_MediaHub::getRootDir() . '/www';
+die;
+if (file_exists($wdn_include_path . '/wdn/templates_5.1')) {
     $page->setLocalIncludePath($wdn_include_path);
 }
 
@@ -13,7 +14,7 @@ $page->doctitle     = '<title>Manager | UNL MediaHub | University of Nebraska-Li
 $page->titlegraphic = '<a class="dcf-txt-h5" href="' . UNL_MediaHub_Controller::$url . '">MediaHub</a>';
 
 // Add WDN Deprecated Styles
-$page->head .= '<link rel="preload" href="https://unlcms.unl.edu/wdn/templates_5.0/css/deprecated.css" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"> <noscript><link rel="stylesheet" href="https://unlcms.unl.edu/wdn/templates_5.0/css/deprecated.css"></noscript>';
+$page->head .= '<link rel="preload" href="/wdn/templates_5.0/css/deprecated.css" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"> <noscript><link rel="stylesheet" href="/wdn/templates_5.0/css/deprecated.css"></noscript>';
 
 //header
 $page->addStyleSheet(UNL_MediaHub_Controller::getURL().'templates/html/css/all.css?v='.UNL_MediaHub_Controller::getVersion());
