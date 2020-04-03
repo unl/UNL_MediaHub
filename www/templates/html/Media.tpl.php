@@ -51,7 +51,7 @@ $getTracks = $context->getTextTrackURLs();
 <div class="dcf-bleed mh-video-band">
     <div class="dcf-wrapper">
         <div class="dcf-ratio dcf-ratio-16x9">
-            <iframe class="dcf-ratio-child dcf-w-100% dcf-b-0" height="667" src="<?php echo $controller->getURL($context)?>?format=iframe&autoplay=0&preload=auto" allowfullscreen title="watch media"></iframe>
+            <iframe class="dcf-ratio-child dcf-obj-fit-contain dcf-b-0" height="667" src="<?php echo $controller->getURL($context)?>?format=iframe&autoplay=0&preload=auto" allowfullscreen title="watch media"></iframe>
         </div>
     </div>
 </div>
@@ -74,7 +74,7 @@ $getTracks = $context->getTextTrackURLs();
                 $purifier = new HTMLPurifier();
                 $summary = strip_tags($context->description, "<a><br><p><ul><ol><li><strong><em>");
                 $summary = $purifier->purify($summary);
-            
+
                 if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_itunes::mediaHasElement($context->id, 'summary')) {
                     $summary .= '<div class="itunes_summary">'.$element->value.'</div>';
                 }
@@ -101,7 +101,7 @@ $getTracks = $context->getTextTrackURLs();
                 <h2 class="unl-font-sans">Description</h2>
                 <div class="mh-summary"><?php echo $summary; ?></div>
                 <hr>
-                
+
                 <?php if($getTracks): ?>
                     <div class="mediahub-onpage-captions">
                         <?php echo $savvy->render($context, 'MediaPlayer/Transcript.tpl.php'); ?>
@@ -152,7 +152,7 @@ $getTracks = $context->getTextTrackURLs();
 
                                     <blockquote><?php echo UNL_MediaHub::escape(strip_tags($comment['comment'])); ?></blockquote>
                                     <div class="mh-user">
-                                        <img alt="Your Profile Pic" src="http://planetred.unl.edu/pg/icon/unl_<?php echo UNL_MediaHub::escape($comment['uid']); ?>/small/" class="profile_pic small"> 
+                                        <img alt="Your Profile Pic" src="http://planetred.unl.edu/pg/icon/unl_<?php echo UNL_MediaHub::escape($comment['uid']); ?>/small/" class="profile_pic small">
                                         <div class="commenter unl-font-sans sec_header clear-top"><?php echo $name; ?></div>
                                         <em><?php echo date('m/d/y g:i a', strtotime($comment['datecreated'])); ?></em>
                                     </div>
@@ -210,4 +210,4 @@ $getTracks = $context->getTextTrackURLs();
         <?php echo $savvy->render(UNL_MediaHub_Media_Embed::getById($context->id, 2)); ?>
         -->
     <?php endif; ?>
-</div> 
+</div>
