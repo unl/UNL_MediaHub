@@ -1,10 +1,10 @@
 <?php
 use UNL\Templates\Templates;
 
-$page = Templates::factory('AppLocal', Templates::VERSION_5);
+$page = Templates::factory('AppLocal', Templates::VERSION_5_1);
 
 $wdn_include_path = UNL_MediaHub::getRootDir() . '/www';
-if (file_exists($wdn_include_path . '/wdn/templates_5.0')) {
+if (file_exists($wdn_include_path . '/wdn/templates_5.1')) {
     $page->setLocalIncludePath($wdn_include_path);
 }
 
