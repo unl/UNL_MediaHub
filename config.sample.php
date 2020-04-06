@@ -1,5 +1,5 @@
 <?php
-
+ini_set('pcre.jit', '0');
 ini_set('display_errors', true);
 error_reporting(E_ALL);
 
