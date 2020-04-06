@@ -1,7 +1,7 @@
 <?php
 use UNL\Templates\Templates;
 
-$page = Templates::factory('App', Templates::VERSION_5);
+$page = Templates::factory('AppLocal', Templates::VERSION_5);
 
 $wdn_include_path = UNL_MediaHub::getRootDir() . '/www';
 if (file_exists($wdn_include_path . '/wdn/templates_5.0')) {
@@ -20,13 +20,13 @@ if ($title = $context->getReplacementData('pagetitle')) {
 }
 
 // Add WDN Deprecated Styles
-$page->head .= '<link rel="preload" href="https://unlcms.unl.edu/wdn/templates_5.0/css/deprecated.css" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"> <noscript><link rel="stylesheet" href="https://unlcms.unl.edu/wdn/templates_5.0/css/deprecated.css"></noscript>';
+$page->head .= '<link rel="preload" href="/wdn/templates_5.1/css/deprecated.css" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"> <noscript><link rel="stylesheet" href="/wdn/templates_5.1/css/deprecated.css"></noscript>';
 
 //Header
 $page->addStyleSheet($baseUrl . 'templates/html/css/all.css?v=' . UNL_MediaHub_Controller::getVersion());
 
 $page->addScriptDeclaration('WDN.setPluginParam("idm", "logout", "' . $baseUrl . '?logout");');
-$page->addScript(UNL_MediaHub_Controller::getURL().'templates/html/scripts/frontend.js?v=' . UNL_MediaHub_Controller::getVersion());
+$page->addScript($baseUrl . 'templates/html/scripts/frontend.js?v=' . UNL_MediaHub_Controller::getVersion());
 if (!$context->output instanceof UNL_MediaHub_FeedAndMedia) {
     $page->head .= '<link rel="alternate" type="application/rss+xml" title="UNL MediaHub" href="?format=xml" />';
 }
