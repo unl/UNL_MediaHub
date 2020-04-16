@@ -4,7 +4,13 @@ if (false == headers_sent()
     header('HTTP/1.1 '.$code);
     header('Status: '.$code);
 }
-$page->addScriptDeclaration("WDN.initializePlugin('notice')");
+<script>
+    window.addEventListener('inlineJSReady', function(e) {
+        require(['wdn'], function(wdn) {
+            wdn.initializePlugin('notice');
+        });
+    });
+</script>
 
 switch ($code) {
     case 200:
