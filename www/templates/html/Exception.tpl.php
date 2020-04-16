@@ -4,13 +4,6 @@ if (false == headers_sent()
     header('HTTP/1.1 '.$code);
     header('Status: '.$code);
 }
-<script>
-    window.addEventListener('inlineJSReady', function(e) {
-        require(['wdn'], function(wdn) {
-            wdn.initializePlugin('notice');
-        });
-    });
-</script>
 
 switch ($code) {
     case 200:
@@ -31,6 +24,13 @@ switch ($code) {
 }
 ?>
 
+<script>
+    window.addEventListener('inlineJSReady', function(e) {
+        require(['wdn'], function(wdn) {
+            wdn.initializePlugin('notice');
+        });
+    });
+</script>
 <div class="dcf-mt-8 dcf-mb-8 wdn_notice alert">
     <div class="message">
         <h1 class="title"><?php echo $title; ?></h1>
