@@ -32,7 +32,7 @@ switch ($code) {
     });
 </script>
 <div class="dcf-mt-8 dcf-mb-8 wdn_notice alert">
-    <div class="message">
+    <div class="message" style="color: #fff;">
         <h1 class="title"><?php echo $title; ?></h1>
         <p><?php echo UNL_MediaHub::escape($context->getMessage()); ?></p>
     </div>
