@@ -91,16 +91,16 @@
         },
         {
             "name": "captioning/captioning",
-            "version": "2.6.0",
+            "version": "2.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/captioning/captioning.git",
-                "reference": "d830685b5a942b944d06d97a86eddc8de032e2c1"
+                "reference": "084acba2de8e9692ac8f198e5f170d56eea55de1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/captioning/captioning/zipball/d830685b5a942b944d06d97a86eddc8de032e2c1",
-                "reference": "d830685b5a942b944d06d97a86eddc8de032e2c1",
+                "url": "https://api.github.com/repos/captioning/captioning/zipball/084acba2de8e9692ac8f198e5f170d56eea55de1",
+                "reference": "084acba2de8e9692ac8f198e5f170d56eea55de1",
                 "shasum": ""
             },
             "require": {
@@ -138,7 +138,7 @@
                 "vtt",
                 "webvtt"
             ],
-            "time": "2018-01-26T11:25:24+00:00"
+            "time": "2019-09-02T21:09:29+00:00"
         },
         {
             "name": "doctrine/instantiator",
