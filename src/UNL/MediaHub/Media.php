@@ -605,7 +605,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     /**
      * @return bool
      */
-    public function canView($user)
+    public function canView(UNL_MediaHub_User $user = NULL)
     {
         $requires_membership = false;
         
@@ -622,9 +622,14 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         if (!$requires_membership) {
             return true;
         }
+
+        // get user if not passed in
+        if (empty($user)) {
+            $user = UNL_MediaHub_AuthService::getInstance()->getUser();
+        }
         
         //At this point a user needs to be logged in.
-        if (!$user) {
+        if (!($user instanceof UNL_MediaHub_User)) {
             return false;
         }
 

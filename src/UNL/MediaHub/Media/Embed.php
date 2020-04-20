@@ -52,7 +52,7 @@ class UNL_MediaHub_Media_Embed
         return $this->media->meetsCaptionRequirement();
     }
 
-    public function canView($user)
+    public function canView(UNL_MediaHub_User $user = NULL)
     {
         return $this->media->canView($user);
     }
