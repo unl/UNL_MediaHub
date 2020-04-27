@@ -1,0 +1,34 @@
+.mh-search-container {
+  background-image: url(images/search-bg.png);
+  height: 10em;
+}
+
+.mh-search-bg-video {
+  transform: translateY(-33%);
+}
+
+.mh-featured-icon img,
+.mh-featured-icon object {
+  width: 43%;
+}
+
+.mh-featured h2 {
+  color: inherit;
+}
+
+.mh-green {
+  background-color: #00BD3C;
+}
+
+.mh-blue {
+  background-color: #1B9AE8;
+}
+
+
+@media only screen and (max-width: 768px) {
+
+  .mh-search-bg-video {
+    display: none;
+  }
+
+}

@@ -1,16 +1,14 @@
-<h6><?php echo count($context->items);?> total items</h6>
-<h5 class="subhead">Latest Media</h5>
-<ul>
-	<?php 
-		$i = 0;
-		foreach ($context->items as $media){
-		echo '<li>
-				<a href="'.UNL_MediaHub_Controller::getURL($media).'">
-					<img src="'.$media->getThumbnailURL().'" alt="'. htmlentities($media->title, ENT_QUOTES) .'" />
-			 		<span>'. $media->title .'</span>
-				</a>
-			</li>';
-		if (++$i == 2) break; 
-	}
-	?>
+<?php
+$limit = 3;
+?>
+<ul class="dcf-grid-full dcf-grid-thirds@md dcf-col-gap-vw dcf-list-bare">
+	<?php $i = 0; ?>
+	<?php foreach ($context->items as $media): ?>
+	<li>
+		<a href="<?php echo $controller::getURL($media) ?>">
+			<img src="<?php echo $media->getThumbnailURL() ?>" alt="<?php echo UNL_MediaHub::escape($media->title) ?>" />
+		</a>
+	</li>
+	<?php if (++$i == $limit) break; ?> 
+	<?php endforeach; ?>
 </ul>

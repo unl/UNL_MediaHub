@@ -1,174 +1,123 @@
-<style type="text/css">
-    blockquote {
-         background: none repeat scroll 0pt 0pt rgb(240, 240, 240);
-         margin: 15px 0pt;
-         padding: 10px;
-         width: auto;
-    }
-    
-    blockquote > p {
-         clear: none;
-         margin: 0pt;
-         padding: 0pt;
-    }
-    
-    div.resource {
-         border-bottom: #F0F0F0 5px solid;
-         margin-bottom: 20px;
-    }
-    
-    #maincontent div.resource > ul {
-        padding-left:0;
-    }
 
-    div.resource > ul > li {
-        list-style:none;
-    }
+<?php
+$page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized-dark.min.css', 'stylesheet');
+?>
 
-    a.resources 
-    {
-        float:right;
-        font-size:12px
-    }
-</style>
-
-<script type="text/javascript">jQuery = $ = WDN.jQuery;</script>
-
-<script type="text/javascript" src="templates/html/scripts/jquery.beautyOfCode.js"></script>
-
-<script type="text/javascript">
-    $.beautyOfCode.init({
-        theme: "RDark",
-        brushes: ['Xml', 'JScript', 'CSharp', 'Plain', 'Php'],
-        defaults: {'wrap-lines':false},
-        ready: function() {
-            $.beautyOfCode.beautifyAll();
-
-        }
-    });
-</script>
-
-<div class="grid8 first">
-    
-    <?php
+<div class="developer-docs dcf-grid dcf-col-gap-vw dcf-pt-8 dcf-pb-8">
+    <div class="dcf-col-100% dcf-col-75%-start@sm">
+        <?php
         $resource = "UNL_MediaHub_Developers_" . $context->resource;
         $resource = new $resource;
         ?>
         <div class="resource">
-        <h1 id="instance" class="sec_main"><?php echo $resource->title; ?> Resource</h1>
-        <h3>Details</h3>
-        <ul>
-            <li>
-                <h4 id="instance-uri"><a href="#instance-uri">Resource URI</a></h4>
-                <blockquote>
-                    <p><?php echo $resource->uri; ?></p>
-                </blockquote>
-            </li>
+            <h1><?php echo $resource->title; ?> Resource</h1>
+            
+            <h2>Resource URI</h2>
+            <code><?php echo $resource->uri; ?></code>
+                
             <?php if (isset($resource->note)):?>
-            <li>
-                <h4 id="instance-uri"><a href="#instance-uri">Note</a></h4>
-                <blockquote>
-                    <p><?php echo $resource->note; ?></p>
-                </blockquote>
-            </li>
+                <h2>Note</h2>
+                <p>
+                    <?php echo $resource->note; ?>
+                </p>
             <?php endif;?>
-            <li>
-                <h4 id="instance-properties"><a href="#instance-properties">Resource Properties</a></h4> 
-                <table class="zentable neutral">
-                <thead><tr><th>Property</th><th>Description</th><th>JSON</th><th>XML</th></tr></thead>
-                  <tbody>
-                  <?php 
-                    foreach ($resource->properties as $property) {
-                      echo "<tr>
-                                <td>$property[0]</td>
-                                <td>$property[1]</td>
-                                <td>$property[2]</td>
-                                <td>$property[3]</td>
-                            </tr>";
-                    }
-                  ?>
-                  </tbody>
-                </table>
-            </li>
-            <li>
-                <h4 id="instance-get"><a href="#instance-get">HTTP GET</a></h4>
-                <p>Returns a representation of the resource, including the properties above.</p>
-            </li>
-            <li>
-                <h4 id="instance-get-example-1"><a href="#instance-get-example-1">Example</a></h4>
-                <ul class="wdn_tabs">
-                <?php 
-                 foreach ($resource->formats as $format) {
-                     echo "<li><a href='#$format'>$format</a></li>";
-                 }
+            
+            <h2>Resource Properties</h2>
+      
+            <table class="zentable neutral">
+                <thead>
+                    <tr>
+                        <th>Property</th>
+                        <th>Description</th>
+                        <th>JSON</th>
+                        <th>XML</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($resource->properties as $property): ?>
+                        <tr>
+                            <td><?php echo $property[0] ?></td>
+                            <td><?php echo $property[1] ?></td>
+                            <td><?php echo $property[2] ?></td>
+                            <td><?php echo $property[3] ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            
+            <h2>Examples</h2>
+            <ul class="wdn_tabs">
+                <?php
+                foreach ($resource->formats as $format) {
+                    echo "<li><a href='#$format'>$format</a></li>";
+                }
                 ?>
-                </ul>
-                <div class="wdn_tabs_content">
-                     <?php 
-                     foreach ($resource->formats as $format) {
-                         ?>
-                         <div id="<?php echo $format; ?>">
-                            <ul>
-                                <li>
-                                    Calling this:
-                                    <blockquote>
-                                        <p>GET <?php echo $resource->exampleURI; ?>?format=<?php echo $format; ?></p>
-                                    </blockquote>
-                                </li>
-                                <li>
-                                    Provides this:
-                                    <?php 
-                                    //Get the output.
-                                    if (!$result = file_get_contents($resource->exampleURI."?format=$format")) {
-                                        $result = "Error getting file contents.";
-                                    }
-                                    
-                                    switch($format) {
-                                        case "json":
-                                            $code = 'javascript';
-                                            break;
-                                        case "xml":
-                                            $code = "xml";
-                                            break;
-                                        default:
-                                            $code = "html";
-                                    }
-                                    ?>
-                                    <pre class="code">
-                                        <code class="<?php echo $code; ?>"><?php echo htmlentities($result); ?></code>
-                                    </pre>
-                                </li>
-                            </ul>
-                        </div>
-                         <?php
-                     }
-                     ?>
-                    
-                </div>
-            </li>
-        </ul>
+            </ul>
+            <div class="wdn_tabs_content">
+                <?php foreach ($resource->formats as $format): ?>
+                    <div id="<?php echo $format; ?>">
+                        <h3>Request</h3>
+                        
+                        <code>GET <?php echo $resource->exampleURI; ?>?format=<?php echo $format; ?></code>
+                           
+                        <h3>Response</h3>
+                        <?php
+                        //Get the output.
+                        if (!$result = file_get_contents($resource->exampleURI."?format=$format")) {
+                            $result = "Error getting file contents.";
+                        }
+
+                        switch($format) {
+                            case "json":
+                                $code = 'javascript';
+                                //Pretty print
+                                $result = json_decode($result);
+                                $result = json_encode($result, JSON_PRETTY_PRINT);
+                                break;
+                            case "xml":
+                                $code = "xml";
+                                break;
+                            default:
+                                $code = "html";
+                        }
+                        ?>
+                        <pre class="code">
+                            <code class="<?php echo $code; ?>"><?php echo htmlentities($result); ?></code>
+                        </pre>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
     </div>
-    
-</div>
-<div class="grid4">
-    <div id='resources' class="zenbox primary" style="width:200px">
-        <h3>MediaHub API</h3>
-        <p>The following is a list of resources for MediaHub.</p>
-        <ul>
-            <?php 
-            foreach ($context->resources as $resource) {
-                echo "<li><a href='?resource=$resource'>$resource</a></li>";
-            }
-            ?>
-        </ul>
-    </div>
-    <div class="zenbox neutral" style="width:200px">
-        <h3>Format Information</h3>
-        <p>The following is a list of formats used in MediaHub.</p>
-        <ul>
-            <li><a href='http://www.json.org/'>JSON (JavaScript Object Notation)</a></li>
-            <li><a href='http://en.wikipedia.org/wiki/XML'>XML (Extensible Markup Language)</a></li>
-            <li>Partial - The un-themed main content area of the page.</li>
-        </ul>
+    <div class="dcf-col-100% dcf-col-25%-end@sm">
+        <nav id='resources'>
+            <h2>MediaHub API</h2>
+            <p>The following is a list of resources for MediaHub.</p>
+            <ul>
+                <?php
+                foreach ($context->resources as $resource) {
+                    echo "<li><a href='?resource=$resource'>$resource</a></li>";
+                }
+                ?>
+            </ul>
+        </nav>
+        <div class="zenbox neutral">
+            <h2>Format Information</h2>
+            <p>The following is a list of formats used in MediaHub.</p>
+            <ul>
+                <li><a href='http://www.json.org/'>JSON (JavaScript Object Notation)</a></li>
+                <li><a href='http://en.wikipedia.org/wiki/XML'>XML (Extensible Markup Language)</a></li>
+                <li>Partial - The un-themed main content area of the page.</li>
+            </ul>
+        </div>
     </div>
 </div>
+
+<?php
+$page->addScriptDeclaration("
+    require(['jquery', 'https://cdn.jsdelivr.net/highlight.js/9.2.0/highlight.min.js'], function ($, hljs) {
+        $('.resource pre.code code').each(function () {
+            hljs.highlightBlock(this);
+        })
+    })");
+?>

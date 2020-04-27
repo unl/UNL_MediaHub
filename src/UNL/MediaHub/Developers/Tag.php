@@ -5,7 +5,7 @@ class UNL_MediaHub_Developers_Tag
     
     public $uri         = "tags/{query}";
     
-    public $exampleURI  = "tags/idk";
+    public $exampleURI  = "tags/unl";
     
     public $properties  = array(
                                 array("{results}", "A list of the <a href='?resource=Media'> media instances </a> that were found for the query tag. ", true, true),

@@ -1,92 +1,173 @@
 <?php
 if (isset($context->label) && !empty($context->label)) {
-    UNL_MediaHub_Controller::setReplacementData('title', 'UNL | Media | '.$context->label);
-    UNL_MediaHub_Controller::setReplacementData('breadcrumbs', '<ul> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li>'.$context->label.'</li></ul>');
-    echo '<h3>'.$context->label.'</h3>';
+    $controller->setReplacementData('title', 'UNL | Media | '.$context->label);
+    // TODO: disable breadcrumbs since currently not supported in 5.0 App templates
+    //$controller->setReplacementData('breadcrumbs', '<ol> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li>'.$context->label.'</li></ol>');
+    $label = $context->label;
+} else {
+    $label = 'All Media';
 }
 
-if (count($context->items)) {
+$feeds = $context->getRelatedFeeds(array('limit'=>6));
+?>
 
-    if ($parent->context instanceof UNL_MediaHub_FeedAndMedia) {
-        // Use the feed url as the base for pagination links
-        $url = UNL_MediaHub_Controller::getURL(
-                    $parent->context->feed,
-                        array_intersect_key(array_merge($context->options, array('page'=>'{%page_number}')), array('page'=>0, 'limit'=>0, 'order'=>0, 'orderby'=>0))
-                );
-    } elseif ($parent->context->options['model'] == 'UNL_MediaHub_MediaList') {
-        //blah
-        $url = UNL_MediaHub_Controller::addURLParams($context->getURL(), array('page'=>'{%page_number}'));
-    } else {
-        $url = UNL_MediaHub_Controller::getURL(null, array_merge($context->options, array('page'=>'{%page_number}')));
-    }
+<?php
+
+if(!empty($context->options['orderby'])){
+
+    $label = ($context->options['orderby'] == 'datecreated') ? 'Recent' : 'Popular';
+
+};
+
+if(!empty($context->options['f'])){
+
+    $label .= ($context->options['f'] == 'audio') ? ' Audio' : ' Video';
+
+}else{
+
+    $label .= ' Media';
+
+};
+
+?>
+
+<div class="dcf-bleed dcf-pt-6">
+    <div class="dcf-wrapper dcf-pb-0">
+        <div class="mh-list-header">
+            <div class="dcf-grid">
+                <div class="dcf-col-100% dcf-col-75%-start@sm">
+                    <?php if ($context->options['filter']->getType() == 'search'): ?>
+                        <h2>
+                            <span class="dcf-subhead">Search results for</span>
+                            <?php echo UNL_MediaHub::escape($context->options['filter']->getValue()) ?>
+                        </h2>
+                    <?php elseif ($context->options['filter']->getType() == 'feed'): ?>
+                        <h2><?php echo UNL_MediaHub::escape($label) ?></h2>
+                    <?php else: ?>
+                        <h2><?php echo UNL_MediaHub::escape($label) ?></h2>
+                    <?php endif; ?>
+                    <?php if (count($context->items) && $context->pager->getLastPage() > 1): ?>
+                        <p>Page <?php echo $context->pager->getPage() ?> of <?php echo $context->pager->getLastPage() ?></p>
+                    <?php endif; ?>
+                </div>
+                <div class="dcf-col-100% dcf-col-25%-end@sm">
+                    <?php if (in_array($context->options['filter']->getType(), array('search', 'browse'))): ?>
+                        <?php echo $savvy->render($context->options['filter'], 'SearchBox.tpl.php'); ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="dcf-bleed">
+    <div class="dcf-wrapper dcf-pt-0 dcf-pb-8">
+
+        <?php
+        $buttons = (object)[];
+        $buttons->selected_key = $context->options['orderby'];
+        $buttons->group_id = 'orderby';
+        $buttons->label = 'Order by:';
+        $buttons->buttons = [
+            'datecreated' => [
+                'label' => 'Recent',
+                'url' => $context->getURL(array('orderby' => 'datecreated', 'order' => 'DESC'))
+            ],
+            'title_a_z' => [
+                'label' => 'A-Z',
+                'url' => $context->getURL(array('orderby' => 'title_a_z', 'order' => 'ASC'))
+            ],
+            'title_z_a' => [
+                'label' => 'Z-A',
+                'url' => $context->getURL(array('orderby' => 'title_z_a', 'order' => 'DESC'))
+            ],
+            'popular_play_count' => [
+                'label' => 'Popular',
+                'url' => $context->getURL(array('orderby' => 'popular_play_count', 'order' => 'DESC'))
+            ],
+        ];
+        echo $savvy->render($buttons, 'mh-sort-filter.tpl.php');
+        ?>
+
+        <?php
+        $buttons = (object)[];
+        $buttons->selected_key = $context->options['f'];
+        $buttons->group_id = 'filter';
+        $buttons->label = 'Filter by:';
+        $buttons->buttons = [
+            '' => [
+                'label' => 'All',
+                'url' => $context->getURL(array('f' => ''))
+            ],
+            'audio' => [
+                'label' => 'Audio',
+                'url' => $context->getURL(array('f' => 'audio'))
+            ],
+            'video' => [
+                'label' => 'Video',
+                'url' => $context->getURL(array('f' => 'video'))
+            ]
+        ];
+        echo $savvy->render($buttons, 'mh-sort-filter.tpl.php');
+        ?>
+    </div>
+</div>
+
+
+
+<?php if (count($context->items)): ?>
+    <?php
+    $url = $context->getURL(array('page'=>'{%page_number}'));
 
     $pager_layout = new UNL_MediaHub_List_PagerLayout($context->pager,
         new Doctrine_Pager_Range_Sliding(array('chunk'=>5)),
         htmlentities($url));
     $pager_links = $pager_layout->display(null, true);
-    
-	$addMediaURL = UNL_MediaHub_Manager::getURL().'?view=addmedia';
-	if (isset($_GET['id'])) {
-	    $addMediaURL .= '&amp;feed_id='.$_GET['id'];
-	}
-	$userCanEdit = false;
-	if (UNL_MediaHub_Controller::isLoggedIn()
-        && $parent->context instanceof UNL_MediaHub_FeedAndMedia
-        && $parent->context->feed->userHasPermission(UNL_MediaHub_Controller::getUser(),
-            UNL_MediaHub_Permission::getByID(UNL_MediaHub_Permission::USER_CAN_INSERT))) {
-        $userCanEdit = true;
+
+    $mediaListClass = '';
+    if ($context->options['filter']->getType() == 'browse') {
+        $mediaListClass = ' mh-media-browse page-' . $context->pager->getPage();
     }
-?>
-    <div class="group" style="margin-top:20px;">
-    	<h3>All Media</h3>
-    	<?php
-    	if ($parent->context instanceof UNL_MediaHub_FeedAndMedia) {
-		    $addMediaURL = UNL_MediaHub_Manager::getURL().'?view=addmedia&amp;feed_id='.$parent->context->feed->id;
-		    if (UNL_MediaHub_Controller::isLoggedIn()
-		        && $parent->context->feed->userHasPermission(UNL_MediaHub_Controller::getUser(),
-		            UNL_MediaHub_Permission::getByID(UNL_MediaHub_Permission::USER_CAN_INSERT))) {
-		        echo '<a href="'.$addMediaURL.'" title="Add media to this feed" class="add_media" >Add media</a>';
-		    }
-    	}
-	    ?>
+    ?>
+
+    <?php if ($feeds && count($feeds->items) && $context->pager->getPage() < 2): ?>
+
+        <div class="dcf-bleed unl-bg-lighter-gray">
+            <div class="dcf-wrapper dcf-pt-8 dcf-pb-6">
+                <h2>
+                    <span class="dcf-subhead">Channel Search</span>
+                </h2>
+                <ul class="mh-channel-buttons dcf-grid-full dcf-grid-halves@sm dcf-grid-thirds@md dcf-col-gap-vw dcf-row-gap-7">
+                    <?php foreach ($feeds->items as $feed): ?>
+                        <li><a class="dcf-btn dcf-btn-secondary dcf-w-100% dcf-h-100%" href="<?php echo UNL_MediaHub_Controller::getURL($feed); ?>"><span class="wdn-icon wdn-icon-rocket" aria-hidden="true"></span><?php echo UNL_MediaHub::escape($feed->title) ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+
+    <?php endif ?>
+
+
+    <div class="dcf-bleed mh-media">
+        <div class="dcf-wrapper dcf-pt-8 dcf-pb-8">
+            <ul class="dcf-list-bare dcf-grid-halves@sm dcf-grid-thirds@md dcf-grid-fourths@xl dcf-col-gap-vw dcf-row-gap-7 mh-media-list<?php echo $mediaListClass ?>">
+                <?php foreach ($context->items as $media): ?>
+                    <li>
+                        <?php echo $savvy->render($media, 'Media/teaser.tpl.php'); ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+
+            <?php echo $pager_links; ?>
+
+        </div>
     </div>
-        <ul class="medialist">
-    
-        <?php
-        foreach ($context->items as $media) { ?>
-            <li>
-                <a href="<?php echo UNL_MediaHub_Controller::getURL($media); ?>"><img class="thumbnail" src="<?php echo $media->getThumbnailURL(); ?>" alt="Thumbnail preview for <?php echo htmlspecialchars($media->title, ENT_QUOTES); ?>" /></a>
-                <?php if ($userCanEdit) { ?>
-	            <div class="actions">
-		            <a href="<?php echo $addMediaURL; ?>&amp;id=<?php echo $media->id; ?>">Edit</a>
-		            <?php
-		            echo $savvy->render($media, 'manager/templates/Media/DeleteForm.tpl.php');
-		            ?>
-	            </div>
-	            <?php }?>
-                <div class="metaInfo">
-                <h4><a href="<?php echo UNL_MediaHub_Controller::getURL($media); ?>"><?php echo htmlspecialchars($media->title); ?></a></h4>
-                <?php
-                $element = $media->datecreated;
-                    echo '<h6 class="subhead">Added on '.date("F j, Y, g:i a", strtotime($element)).'</h6>';
-                
-                $summary = $media->description;
-                if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_itunes::mediaHasElement($media->id, 'summary')) {
-                    $summary .= '<span class="itunes_summary">'.$element->value.'</span>';
-                }
-                $summary = strip_tags($summary, '<a><img>');
-                $summary = str_replace('Related Links', '', $summary);
-                ?>
-                <p><?php echo $summary; ?></p>
-                </div>
-            </li>
-        <?php  
-        } ?>
-        </ul>
-        <em>Displaying <?php echo $context->first; ?> through <?php echo $context->last; ?> out of <?php echo $context->total; ?></em>
-        <?php echo $pager_links; ?>
-<?php
-} else {
-    echo "<div style='width:940px'><p>Sorry, no media could be found</p></div>";
-}
-?>
+<?php else: ?>
+    <div class="dcf-bleed mh-media">
+        <div class="dcf-wrapper dcf-pt-8 dcf-pb-8">
+            <p>Sorry, no media could be found</p>
+        </div>
+    </div>
+<?php endif; ?>
+
+

@@ -32,8 +32,8 @@ class UNL_MediaHub_User extends UNL_MediaHub_Models_BaseUser
         $user->fromArray($data);
         $user->save();
         // Create the defaul feed for the user
-        UNL_MediaHub_Feed::addFeed(array('title'       =>'Your Channel ('.$user->uid.')',
-                                         'description' =>'This is your default channel'),
+        UNL_MediaHub_Feed::addFeed(array('title'       => $user->uid.'\'s channel',
+                                         'description' =>'This is ' .$user->uid . '\'s default channel'),
                                    $user);
         return $user;
     }
@@ -47,5 +47,37 @@ class UNL_MediaHub_User extends UNL_MediaHub_Models_BaseUser
     {
         $options['filter'] = new UNL_MediaHub_FeedList_Filter_ByUser($this);
         return new UNL_MediaHub_User_FeedList($options);
+    }
+
+    /**
+     * Get an array of feed IDs
+     * 
+     * @return mixed
+     * @throws Doctrine_Connection_Exception
+     */
+    public function getFeedIDs()
+    {
+        $db = Doctrine_Manager::getInstance()->getCurrentConnection();
+        $q = $db->prepare("SELECT DISTINCT f.id
+            FROM feeds f
+            INNER JOIN user_has_permission up ON up.user_uid = ? AND up.feed_id = f.id");
+
+        $q->execute(array($this->uid));
+        $result = $q->fetchAll(PDO::FETCH_COLUMN);
+        return $result;
+    }
+    
+    public function canTranscode()
+    {
+        return UNL_MediaHub::$auto_transcode_hls_all_users;
+    }
+
+    public function canTranscodePro()
+    {
+        if (in_array($this->uid, UNL_MediaHub::$auto_transcode_hls_users)) {
+            return true;
+        }
+
+        return false;
     }
 }

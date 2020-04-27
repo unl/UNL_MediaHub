@@ -16,8 +16,8 @@ if ($context->output instanceof UNL_MediaHub_MediaList
     <lastBuildDate><?php echo date('r'); ?></lastBuildDate>
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>UNL_MediaHub 0.1.0</generator>
-    <managingEditor>brett.bieber@gmail.com (Brett Bieber)</managingEditor>
-    <webMaster>brett.bieber@gmail.com (Brett Bieber)</webMaster>
+    <managingEditor>wdn@unl.edu</managingEditor>
+    <webMaster>wdn@unl.edu</webMaster>
     <ttl>5</ttl>
     <?php 
     echo $savvy->render($context->output);

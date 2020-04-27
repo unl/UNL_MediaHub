@@ -8,15 +8,18 @@ class UNL_MediaHub_Manager_PostHandler
     public $options = array();
     public $post    = array();
     public $files   = array();
+    protected $controller;
     public $mediahub;
 
-    function __construct($options = array(),
+    function __construct(\UNL_MediaHub_BaseController $controller,
+                         $options = array(),
                          $post    = array(),
                          $files   = array())
     {
         $this->options = $options;
         $this->post    = $post;
         $this->files   = $files;
+        $this->controller = $controller;
 
         /**
          * Sort the feed elements so that their elements are ALWAYS
@@ -90,6 +93,11 @@ class UNL_MediaHub_Manager_PostHandler
 
         $postTarget = $this->determinePostTarget();
 
+        $verify_csrf = true;
+        if ($verify_csrf && !$this->controller->validateCSRF()) {
+            throw new \Exception('Invalid security token provided. If you think this was an error, please retry the request.', 403);
+        }
+
         $this->filterPostData();
 
         switch ($postTarget) {
@@ -107,6 +115,24 @@ class UNL_MediaHub_Manager_PostHandler
             break;
         case 'delete_media':
             $this->handleDeleteMedia();
+            break;
+        case 'delete_feed':
+            $this->handleDeleteFeed();
+            break;
+        case 'pull_amara':
+            $this->handleAmara();
+            break;
+        case 'order_rev':
+            $this->handleRev();
+            break;
+        case 'download_rev':
+            $this->downloadRev();
+            break;
+        case 'set_active_text_track':
+            $this->setActiveTextTrack();
+            break;
+        case 'retry_transcoding_job':
+            $this->retryTranscodingJob();
             break;
         }
     }
@@ -146,10 +172,9 @@ class UNL_MediaHub_Manager_PostHandler
      */
     public function handleMediaFileUpload()
     {
-
-        $url = $this->_handleMediaFileUpload();
-        $this->redirect(UNL_MediaHub_Manager::getURL().'?view=uploadcomplete&format=barebones&url='.urlencode($url));
-
+        if ($url = $this->_handleMediaFileUpload()) {
+            UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL().'?view=uploadcomplete&format=json&url='.urlencode($url));
+        }
     }
 
     /**
@@ -165,40 +190,111 @@ class UNL_MediaHub_Manager_PostHandler
      */
     protected function _handleMediaFileUpload()
     {
-
-        if (empty($this->files)
-            || !isset($this->files['file_upload'])) {
-            // nothing to do
-            return false;
+        // Settings
+        $targetDir = UNL_MediaHub_Manager::getTmpUploadDirectory();
+        //$targetDir = 'uploads';
+        $cleanupTargetDir = true; // Remove old files
+        $maxFileAge = 5 * 3600; // Temp file age in seconds (5 hours)
+        
+        // Create target dir
+        if (!file_exists($targetDir)) {
+            @mkdir($targetDir);
         }
 
-        if ($this->files['file_upload']['error'] != UPLOAD_ERR_OK) {
-            throw new UNL_MediaHub_Manager_PostHandler_UploadException($this->files['file_upload']['error'], 500);
-        }
-
-        // Verify extension
-        if (!self::validMediaFileName($this->files['file_upload']['name'])) {
-            throw new UNL_MediaHub_Manager_PostHandler_UploadException('Invalid file extension uploaded '.$this->files['file_upload']['name'], 500);
-        }
-
-        $extension = strtolower(pathinfo($this->files['file_upload']['name'], PATHINFO_EXTENSION));
-
-        //3gp doesnt work with mediaelement. Right now call it an mp4 (won't always work because 3gps are not always h264.)
-        //TODO: Handle this better.  perhaps check the file encoding or convert it instead of just renaming it.
-        if ($extension == '3gp') {
-            $extension = 'mp4';
+        // Get a file name
+        if (isset($this->post['name'])) {
+            $fileName = $this->post['name'];
+        } elseif (!empty($this->files)) {
+            $fileName = $this->files['file']['name'];
+        } else {
+            $fileName = uniqid('file_');
         }
         
-        $filename = md5(microtime() + rand()) . '.'. $extension;
+        $filePath = $targetDir . DIRECTORY_SEPARATOR . $fileName;
 
-        // Copy file to uploads diretory
-        if (false == copy($this->files['file_upload']['tmp_name'],
-                          UNL_MediaHub_Manager::getUploadDirectory()
-                          . DIRECTORY_SEPARATOR .$filename)) {
-            throw new UNL_MediaHub_Manager_PostHandler_UploadException('Error copying file from temp location to permanent location', 500);
+        // Chunking might be enabled
+        $chunk = isset($this->post["chunk"]) ? intval($this->post["chunk"]) : 0;
+        $chunks = isset($this->post["chunks"]) ? intval($this->post["chunks"]) : 0;
+        
+        // Remove old temp files
+        if ($cleanupTargetDir) {
+            if (!is_dir($targetDir) || !$dir = opendir($targetDir)) {
+                throw new UNL_MediaHub_Manager_PostHandler_UploadException('Failed to open temp directory.', 500);
+            }
+
+            while (($file = readdir($dir)) !== false) {
+                $tmpfilePath = $targetDir . DIRECTORY_SEPARATOR . $file;
+
+                // If temp file is current file proceed to the next
+                if ($tmpfilePath == "{$filePath}.part") {
+                    continue;
+                }
+
+                // Remove temp file if it is older than the max age and is not the current file
+                if (preg_match('/\.part$/', $file) && (filemtime($tmpfilePath) < time() - $maxFileAge)) {
+                    @unlink($tmpfilePath);
+                }
+            }
+            closedir($dir);
         }
 
-        return UNL_MediaHub_Controller::$url.'uploads/'.$filename;
+
+        // Open temp file
+        if (!$out = @fopen("{$filePath}.part", $chunks ? "ab" : "wb")) {
+            throw new UNL_MediaHub_Manager_PostHandler_UploadException('Failed to open output stream.', 500);
+        }
+
+        if (!empty($this->files)) {
+            if ($this->files["file"]["error"] || !is_uploaded_file($this->files["file"]["tmp_name"])) {
+                throw new UNL_MediaHub_Manager_PostHandler_UploadException('Failed to move uploaded file. Max upload or post size is likely too small.', 500);
+            }
+
+            // Read binary input stream and append it to temp file
+            if (!$in = @fopen($this->files["file"]["tmp_name"], "rb")) {
+                throw new UNL_MediaHub_Manager_PostHandler_UploadException('Failed to open input stream.', 500);
+            }
+        } else {
+            if (!$in = @fopen("php://input", "rb")) {
+                throw new UNL_MediaHub_Manager_PostHandler_UploadException('Failed to open input stream.', 500);
+            }
+        }
+
+        while ($buff = fread($in, 4096)) {
+            fwrite($out, $buff);
+        }
+
+        @fclose($out);
+        @fclose($in);
+
+        // Check if file has been uploaded
+        if (!$chunks || $chunk == $chunks - 1) {
+            $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+            //3gp doesnt work with mediaelement. Right now call it an mp4 (won't always work because 3gps are not always h264.)
+            //TODO: Handle this better.  perhaps check the file encoding or convert it instead of just renaming it.
+            if ($extension == '3gp') {
+                $extension = 'mp4';
+            }
+            
+            //Make sure that the media has a valid extension
+            $allowed_extensions = array('mp4', 'mp3', 'mov');
+            if (!in_array($extension, $allowed_extensions)) {
+                //Remove the file
+                unlink("{$filePath}.part");
+                
+                //throw the error
+                throw new UNL_MediaHub_Manager_PostHandler_UploadException('Invalid extension', 400);
+            }
+
+            $finalName = md5((string) microtime() + rand()) . '.'. $extension;
+            $finalPath = UNL_MediaHub_Manager::getUploadDirectory() . DIRECTORY_SEPARATOR . $finalName;
+            
+            // Strip the temp .part suffix off 
+            rename("{$filePath}.part", $finalPath);
+            return UNL_MediaHub_Controller::$url.'uploads/'.$finalName;
+        }
+
+        return false;
     }
 
     /**
@@ -236,9 +332,9 @@ class UNL_MediaHub_Manager_PostHandler
             $feed->save();
         } else {
             // Add a new feed for this user.
-            $feed = UNL_MediaHub_Feed::addFeed($this->post, UNL_MediaHub_Manager::getUser());
+            $feed = UNL_MediaHub_Feed::addFeed($this->post, UNL_MediaHub_AuthService::getInstance()->getUser());
         }
-        $this->redirect('?view=feed&id='.$feed->id);
+        UNL_MediaHub::redirect('?view=feedmetadata&id='.$feed->id);
     }
 
     /**
@@ -248,68 +344,217 @@ class UNL_MediaHub_Manager_PostHandler
      */
     function handleFeedMedia()
     {
-        // Check if a file was uploaded
-        if (empty($this->post['url'])
-            && !empty($this->files)) {
-            $this->post['url'] = $this->_handleMediaFileUpload();
+        // Check for required fields
+        
+        if (empty($this->post['title'])) {
+            throw new Exception('Please provide a title for this media.', 400);
         }
 
-        if (empty($this->post['url'])) {
-            throw new Exception('Either no URL was submitted, or your file upload failed', 400);
+        if (empty($this->post['author'])) {
+            throw new Exception('Please provide an author for this media.', 400);
+        }
+
+        if (empty($this->post['description'])) {
+            throw new Exception('Please provide a description for this media.', 400);
         }
         
         if (!isset($this->post['feed_id']) && empty($this->post['new_feed'])) {
             throw new Exception('You must select a feed for the media', 400);
         }
+        
+        $is_new = false;
+
+        $user = UNL_MediaHub_AuthService::getInstance()->getUser();
 
         // Add media to a feed/channel
         if (isset($this->post['id'])) {
             // Editing media details
             $media = UNL_MediaHub_Media::getById($this->post['id']);
+            
+            if (!$media->userCanEdit($user)) {
+                throw new Exception('You do not have permission to edit this media', 400);
+            }
+            
+            $media->uidupdated = $user->uid;
+
+            //Check if new media was uploaded (the url changed)
+            if(!empty($this->post['url']) && $media->url != $this->post['url']) {
+                $local_file = $media->getLocalFileName();
+                $new_local_file = UNL_MediaHub_Media::getLocalFileNameByURL($this->post['url']);
+
+                if ($local_file && !is_dir($local_file) && $new_local_file) {
+                    //Both files are local.
+                    rename($new_local_file, $local_file); //Replace the old one (keeping its name).
+                    $this->post['url'] = $media->url; //Don't update the URL of the file
+                } else if ($local_file && !is_dir($local_file)) {
+                    //New file is not local, but old one is. Delete the old one.
+                    unlink($local_file);
+                }
+
+                $transcoding_job = $media->getMostRecentTranscodingJob();
+                if ($transcoding_job) {
+                    //re-transcode this version if the previous job was also transcoded
+                    $media->transcode($transcoding_job->job_type);
+                }
+            }
+            
         } else {
             // Insert a new piece of media
-            $details = array('url'        => $this->post['url'],
-                             'title'      => $this->post['title'],
-                             'description'=> $this->post['description']);
+            // The url is required here
+            if (empty($this->post['url'])) {
+                throw new Exception('Please provide a URL for this media.', 400);
+            }
+
+            if (!filter_var($this->post['url'], FILTER_VALIDATE_URL)) {
+                throw new Exception('The provided value for field "url" is invalid.  It must be a valid absolute URL.', 400);
+            }
+            
+            
+            $details = array(
+                'url'        => $this->post['url'],
+                'title'      => $this->post['title'],
+                'description'=> $this->post['description'],
+                'author'     => $this->post['author'],
+                'uidcreated' => $user->uid,
+            );
+
             $media = $this->mediahub->addMedia($details);
+            
+            $is_new = true;
+        }  
+
+        //Update the dateupdated date for cache busting
+        $media->dateupdated = date('Y-m-d H:i:s');
+        
+        if (empty($this->post['url'])) {
+            //Remove the url from the post array so that `synchronizeWithArray` doesn't save a null value to the db.
+            unset($this->post['url']);
         }
         
         // Save details
         $media->synchronizeWithArray($this->post);
+
+        if ($duration = $media->findDuration()) {
+            //Save the duration
+            $media->duration = $duration->getTotalMilliseconds();
+        }
         
         $media->save();
 
+        if (isset($this->post['projection'])) {
+            $media->setProjection($this->post['projection']);
+        }
+        
+        $poster_file = UNL_MediaHub::getRootDir() . '/www/uploads/thumbnails/'.$media->id.'/original.jpg';
+        if (!empty($media->poster) && file_exists($poster_file)) {
+            //We are referencing a custom poster, so delete the existing one if it exists
+            unlink($poster_file);
+        }
+
         if (!empty($this->post['feed_id'])) {
+            $feed_selector = new UNL_MediaHub_Feed_Media_FeedSelection(UNL_MediaHub_AuthService::getInstance()->getUser(), $media);
+            $feed_selection_data = $feed_selector->getFeedSelectionData();
+            
             if (is_array($this->post['feed_id'])) {
-                $feed_ids = array_keys($this->post['feed_id']);
+                $feed_ids = $this->post['feed_id'];
             } else {
                 $feed_ids = array($this->post['feed_id']);
             }
+            
+            //Add feeds
             foreach ($feed_ids as $feed_id) {
                 $feed = UNL_MediaHub_Feed::getById($feed_id);
-                if (!$feed->userHasPermission(
-                        UNL_MediaHub_Manager::getUser(),
-                        UNL_MediaHub_Permission::getByID(UNL_MediaHub_Permission::USER_CAN_INSERT)
-                        )
-                    ) {
-                    throw new Exception('You do not have permission to do this.', 403);
+                
+                //Make sure it is in the list of current/available feeds
+                if (!isset($feed_selection_data[$feed_id])) {
+                    throw new Exception('Feed ' .$feed->title . ' can not be selected by you.', 403);
                 }
+
+                //Check if it was already added
+                if ($feed_selection_data[$feed_id]['selected']) {
+                    continue;
+                }
+
+                //Make sure that they can add the feed
+                if ($feed_selection_data[$feed_id]['readonly']) {
+                    throw new Exception('Feed ' .$feed->title . ' can not be selected by you.', 403);
+                }
+                
                 $feed->addMedia($media);
+            }
+            
+            //Remove Feeds
+            foreach ($feed_selection_data as $feed_id => $data) {
+                //Check if it needs to be removed
+                if (in_array($feed_id, $feed_ids)) {
+                    continue;
+                }
+
+                //If it was not already selected, there is no need to remove it
+                if (!$data['selected']) {
+                    continue;
+                }
+                
+                //Make sure that they can remove the feed
+                if ($data['readonly']) {
+                    throw new Exception('Feed ' .$data['feed']->title . ' can not be removed by you.', 403);
+                }
+                
+                $data['feed']->removeMedia($media);
             }
         }
 
         if (!empty($this->post['new_feed'])) {
             $data = array('title'       => $this->post['new_feed'],
                           'description' => $this->post['new_feed']);
-            $feed = UNL_MediaHub_Feed::addFeed($data, UNL_MediaHub_Manager::getUser());
+            $feed = UNL_MediaHub_Feed::addFeed($data, UNL_MediaHub_AuthService::getInstance()->getUser());
             $feed->addMedia($media);
         }
 
-        if (isset($feed, $feed->id)) {
-            $this->redirect('?view=feed&id='.$feed->id);
+        if ($is_new) {
+            //if it is is and the user is set to auto-transcode... do it
+            if ($user && isset($this->post['optimization']) && $this->post['optimization'] !== 'none' && $user->canTranscode()) {
+                if (!$user->canTranscodePro() && $this->post['optimization'] !== 'mp4') {
+                    throw new Exception('Unauthorized transcoding level selected.', 403);
+                }
+                
+                $media->transcode($this->post['optimization']);
+            }
+
+            //After upload, add captions
+            $success_string = 'Your media has been uploaded and is now published. Please make sure that the media is captioned.';
+            if ($media->getMostRecentTranscodingJob()) {
+                $success_string = 'Your media has been uploaded and is being optimized.';
+            }
+            if (UNL_MediaHub_Controller::$caption_requirement_date) {
+                $success_string = 'Your media has been uploaded but will not be published until it is captioned.';
+            }
+
+            $notice = new UNL_MediaHub_Notice(
+                'Success',
+                $success_string,
+                UNL_MediaHub_Notice::TYPE_SUCCESS
+            );
+            UNL_MediaHub_Manager::addNotice($notice);
+            
+            UNL_MediaHub::redirect($media->getEditCaptionsURL());
+        } else {
+            $notice = new UNL_MediaHub_Notice(
+                'Success',
+                'The media has been updated',
+                UNL_MediaHub_Notice::TYPE_SUCCESS
+            );
+            UNL_MediaHub_Manager::addNotice($notice);
+            
+            $last_job = $media->getMostRecentTranscodingJob();
+            
+            if ($last_job && !$last_job->isFinished()) {
+                UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL() . '?view=addmedia&id='.$media->id);
+            } else {
+                UNL_MediaHub::redirect(UNL_MediaHub_Controller::getURL($media));
+            }
         }
-        // @todo clean cache for this feed!
-        $this->redirect(UNL_MediaHub_Manager::getURL());
+        
     }
 
     /**
@@ -321,7 +566,7 @@ class UNL_MediaHub_Manager_PostHandler
     {
         $feed = UNL_MediaHub_Feed::getById($this->post['feed_id']);
         if (!$feed->userHasPermission(
-                UNL_MediaHub_Manager::getUser(),
+                UNL_MediaHub_AuthService::getInstance()->getUser(),
                 UNL_MediaHub_Permission::getByID(UNL_MediaHub_Permission::USER_CAN_ADD_USER)
                 )
             ) {
@@ -334,27 +579,272 @@ class UNL_MediaHub_Manager_PostHandler
                 $feed->addUser(UNL_MediaHub_User::getByUid($this->post['uid']));
             }
         }
-        $this->redirect('?view=feed&id='.$feed->id);
+        UNL_MediaHub::redirect('?view=permissions&feed_id='.$feed->id);
     }
 
     /**
      * Delete specific media
      *
+     * @throws Exception
+     * @return void
+     */
+    function handleDeleteFeed()
+    {
+        if (empty($this->post['feed_id'])) {
+            throw new Exception('Please provide a feed id to delete.', 400);
+        }
+        
+        $feed = UNL_MediaHub_Feed::getById($this->post['feed_id']);
+        
+        if (!$feed->userHasPermission(
+                UNL_MediaHub_AuthService::getInstance()->getUser(), 
+                UNL_MediaHub_Permission::getByID(UNL_MediaHub_Permission::USER_CAN_DELETE
+            ))) {
+            throw new Exception('You do not have permission to delete this.', 403);
+        }
+
+        $feed->delete();
+
+        UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL());
+    }
+
+    /**
+     * Delete specific media
+     *
+     * @throws Exception
      * @return void
      */
     function handleDeleteMedia()
     {
-        $feed = UNL_MediaHub_Feed::getById($this->post['feed_id']);
         $media = UNL_MediaHub_Media::getById($this->post['media_id']);
-        if ($feed->hasMedia($media)
-            && $feed->userHasPermission(
-                    UNL_MediaHub_Manager::getUser(),
-                    UNL_MediaHub_Permission::getByID(UNL_MediaHub_Permission::USER_CAN_DELETE)
-                )
-            ) {
-            $media->delete();
+
+        if (!$media->userHasPermission(UNL_MediaHub_AuthService::getInstance()->getUser(), UNL_MediaHub_Permission::USER_CAN_DELETE)) {
+            throw new Exception('You do not have permission to delete this.', 403);
         }
-        $this->redirect('?view=feed&id='.$feed->id);
+
+        $media->delete();
+
+        UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL());
+    }
+    
+    function handleAmara()
+    {
+        $media = UNL_MediaHub_Media::getById($this->post['media_id']);
+        
+        if (!$media) {
+            throw new Exception('Unable to find media', 404);
+        }
+
+        if (!$media->userHasPermission(UNL_MediaHub_AuthService::getInstance()->getUser(), UNL_MediaHub_Permission::USER_CAN_UPDATE)) {
+            throw new Exception('You do not have permission to edit this media.', 403);
+        }
+        
+        $result = $media->updateAmaraCaptions();
+        
+        if (!$result) {
+            //No tracks were found, fail early
+            $notice = new UNL_MediaHub_Notice(
+                'Error',
+                'No amara captions could be found for this media',
+                UNL_MediaHub_Notice::TYPE_ERROR
+            );
+            UNL_MediaHub_Manager::addNotice($notice);
+            UNL_MediaHub::redirect($media->getEditCaptionsURL());
+
+            return;
+        }
+
+        $notice = new UNL_MediaHub_Notice(
+            'Success',
+            'The latest amara captions have been pulled.',
+            UNL_MediaHub_Notice::TYPE_SUCCESS
+        );
+        UNL_MediaHub_Manager::addNotice($notice);
+
+        UNL_MediaHub::redirect($media->getEditCaptionsURL());
+    }
+    
+    function handleRev()
+    {
+        $media = UNL_MediaHub_Media::getById($this->post['media_id']);
+
+        if (!$media) {
+            throw new Exception('Unable to find media', 404);
+        }
+
+        $user = UNL_MediaHub_AuthService::getInstance()->getUser();
+        
+        if (!$media->userHasPermission($user, UNL_MediaHub_Permission::USER_CAN_UPDATE)) {
+            throw new Exception('You do not have permission to edit this media.', 403);
+        }
+        
+        if (!isset($this->post['cost_object']) || empty($this->post['cost_object'])) {
+            throw new Exception('A cost object number must be provided', 400);
+        }
+        
+        $sanitized_co = preg_replace('/[^\d]/', '', $this->post['cost_object']);
+        
+        if (!is_numeric($sanitized_co)) {
+            throw new Exception('The cost object number must be a number. It can not contain any other characters.', 400);
+        }
+        
+        $length = strlen($sanitized_co);
+        if ($length < 10 || $length > 13) {
+            throw new Exception('The cost object number must be between 10 and 13 digits', 400);
+        }
+        
+        $existing_orders = new UNL_MediaHub_RevOrderList(array(
+            'media_id_not_complete' => $media->id
+        ));
+        
+        if ($existing_orders->count()) {
+            throw new Exception('A pending order already exists for this media. Please wait for the existing order to finish.', 400);
+        }
+        
+        $order_record = new UNL_MediaHub_RevOrder();
+        $order_record->media_id = $media->id;
+        $order_record->costobjectnumber = $sanitized_co;
+        $order_record->uid = $user->uid;
+        $order_record->status = UNL_MediaHub_RevOrder::STATUS_MEDIAHUB_CREATED;
+        
+        if (isset($this->post['media_duration'])) {
+            $order_record->estimate = $this->post['estimate'];
+            $order_record->media_duration = $this->post['media_duration'];
+        }
+        
+        $order_record->save();
+
+        $notice = new UNL_MediaHub_Notice(
+            'Success',
+            'A caption order has been placed, it should be completed within 24 hours.',
+            UNL_MediaHub_Notice::TYPE_SUCCESS
+        );
+        UNL_MediaHub_Manager::addNotice($notice);
+        
+        UNL_MediaHub::redirect($media->getEditCaptionsURL());
+    }
+
+    protected function downloadRev()
+    {
+        $order = UNL_MediaHub_RevOrder::getById($this->post['order_id']);
+
+        if (!$order) {
+            throw new Exception('Unable to find order', 404);
+        }
+
+        $media = UNL_MediaHub_Media::getById($order->media_id);
+
+        $user = UNL_MediaHub_AuthService::getInstance()->getUser();
+
+        if (!$media->userHasPermission($user, UNL_MediaHub_Permission::USER_CAN_UPDATE)) {
+            throw new Exception('You do not have permission to edit this media.', 403);
+        }
+
+        if (!isset($this->post['format']) || empty($this->post['format'])) {
+            throw new Exception('A format must be provided', 400);
+        }
+
+        $rev = UNL_MediaHub_RevAPI::getRevClient();
+
+        if (!$rev) {
+            throw new Exception('Unable to get the Rev client', 503);
+        }
+        
+        $content = '';
+        
+        try {
+            $rev_order = $rev->getOrder($order->rev_order_number);
+
+            $attachments = $rev_order->getAttachments();
+
+            $newest_attachment = false;
+            foreach ($attachments as $attachment) {
+                if ($attachment->isMedia()) {
+                    //Only save non-media attachments
+                    continue;
+                }
+                
+                //Get the last caption attachment (newest)
+                $newest_attachment = $attachment;
+            }
+
+            if ($newest_attachment) {
+                $content = $newest_attachment->getContent('.' . $this->post['format']);
+            }
+        } catch(\RevAPI\Exception\RequestException $e) {
+            throw new Exception('There was an error requesting captions');
+        }
+        
+        header('Content-Disposition: attachment; filename=' . $media->title . '.' . $this->post['format']);
+
+        echo $content;
+        exit();
+    }
+    
+    function setActiveTextTrack()
+    {
+        $media = UNL_MediaHub_Media::getById($this->post['media_id']);
+
+        if (!$media) {
+            throw new Exception('Unable to find media', 404);
+        }
+
+        $user = UNL_MediaHub_AuthService::getInstance()->getUser();
+
+        if (!$media->userHasPermission($user, UNL_MediaHub_Permission::USER_CAN_UPDATE)) {
+            throw new Exception('You do not have permission to edit this media.', 403);
+        }
+        
+        if (!isset($this->post['text_track_id'])) {
+            throw new Exception('Post data must include text_track_id.', 400);
+        }
+        
+        $text_track = UNL_MediaHub_MediaTextTrack::getById($this->post['text_track_id']);
+        
+        if (!$text_track) {
+            throw new Exception('Unable to find text track.', 400);
+        }
+        
+        if ($text_track->media_id != $media->id) {
+            throw new Exception('That text track does not belong to the this media', 400);
+        }
+        
+        $media->setTextTrack($text_track);
+        
+        $notice = new UNL_MediaHub_Notice('Success', 'The active caption track has been updated', UNL_MediaHub_Notice::TYPE_SUCCESS);
+        UNL_MediaHub_Manager::addNotice($notice);
+
+        UNL_MediaHub::redirect($media->getEditCaptionsURL());
+    }
+    
+    function retryTranscodingJob()
+    {
+        $media = UNL_MediaHub_Media::getById($this->post['media_id']);
+
+        if (!$media) {
+            throw new Exception('Unable to find media', 404);
+        }
+
+        $user = UNL_MediaHub_AuthService::getInstance()->getUser();
+
+        if (!$media->userHasPermission($user, UNL_MediaHub_Permission::USER_CAN_UPDATE)) {
+            throw new Exception('You do not have permission to edit this media.', 403);
+        }
+        
+        $last_job = $media->getMostRecentTranscodingJob();
+        
+        if (!$last_job) {
+            throw new Exception('There is no transcoding job to retry.', 400);
+        }
+        
+        if (!$last_job->isError()) {
+            throw new Exception('The last job was not an error, so it can not be retried.', 400);
+        }
+        
+        //Start a new transcoding job
+        $media->transcode($last_job->job_type);
+
+        UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL() . '?view=addmedia&id='.$media->id);
     }
 
     /**
@@ -399,14 +889,4 @@ class UNL_MediaHub_Manager_PostHandler
         unset($this->post['submit_existing']);
     }
 
-    /**
-     * Redirect to the location given.
-     *
-     * @param string $location URL to redirect to.
-     */
-    function redirect($location)
-    {
-        header('Location: '.$location);
-        exit();
-    }
 }

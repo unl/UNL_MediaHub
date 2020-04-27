@@ -1,10 +1,10 @@
 <item>
   <title><?php echo htmlspecialchars($context->title); ?></title>
-  <link><?php echo htmlspecialchars($context->url); ?></link>
+  <link><?php echo htmlspecialchars($context->getURL()); ?></link>
   <description><![CDATA[
   <?php echo $context->description; ?>
   ]]></description>
-  <guid><?php echo htmlspecialchars($context->url); ?></guid>
+  <guid><?php echo htmlspecialchars($context->getMediaURL()); ?></guid>
   <pubDate><?php echo date('r', strtotime($context->datecreated)); ?></pubDate>
   <?php
     try {
@@ -24,5 +24,5 @@
         // Error, just skip this for now.
     }
   ?>
-  <enclosure url="<?php echo $context->url; ?>" length="<?php echo $context->length; ?>" type="<?php echo $context->type; ?>" />
+  <enclosure url="<?php echo $context->getMediaURL(); ?>" length="<?php echo $context->length; ?>" type="<?php echo $context->type; ?>" />
 </item>

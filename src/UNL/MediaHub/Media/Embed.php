@@ -19,7 +19,7 @@ class UNL_MediaHub_Media_Embed
     /**
      * @var array
      */
-    protected $allowed_versions = array(1, 2);
+    protected $allowed_versions = array(1, 2, 3);
 
     function __construct(UNL_MediaHub_Media $media = null, $version = 1, $options = array())
     {
@@ -46,7 +46,17 @@ class UNL_MediaHub_Media_Embed
         
         return true;
     }
+    
+    public function meetsCaptionRequirement()
+    {
+        return $this->media->meetsCaptionRequirement();
+    }
 
+    public function canView(UNL_MediaHub_User $user = NULL)
+    {
+        return $this->media->canView($user);
+    }
+    
     /**
      * Get by ID
      *
@@ -62,6 +72,6 @@ class UNL_MediaHub_Media_Embed
             return new self();
         }
         
-        return new self(Doctrine::getTable('UNL_Mediahub_Media')->find($id), $version, $options);
+        return new self(Doctrine::getTable('UNL_MediaHub_Media')->find($id), $version, $options);
     }
 }

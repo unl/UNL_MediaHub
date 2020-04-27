@@ -4,9 +4,14 @@
  * 
  * @author bbieber
  */
-abstract class UNL_MediaHub_List implements Countable, UNL_MediaHub_CacheableInterface
+abstract class UNL_MediaHub_List implements Countable
 {
-    public $options = array('page'=>0, 'limit'=>10);
+    public $options = array(
+        'page'               => 0,
+        'limit'              => 10,
+        'filter'             => null,
+        'additional_filters' => array(),
+    );
     
     /**
      * total number of items
@@ -34,6 +39,15 @@ abstract class UNL_MediaHub_List implements Countable, UNL_MediaHub_CacheableInt
      * @var string
      */
     public $tables = 'null';
+
+    /**
+     * Select these fields
+     * 
+     * @var string
+     */
+    protected $select = null;
+    
+    public $ran = false;
     
     /**
      * Construct a list of items.
@@ -46,27 +60,29 @@ abstract class UNL_MediaHub_List implements Countable, UNL_MediaHub_CacheableInt
     {
         $this->options = $options + $this->options;
         $this->filterInputOptions();
-    }
-    
-    function getCacheKey()
-    {
-        return serialize($this->options);
-    }
-    
-    function preRun($cached)
-    {
         
+        $this->run();
     }
     
     function run()
     {
-        $query = new Doctrine_Query();
+        if ($this->ran) {
+            //Don't rerun
+            return false;
+        }
+        
+        $query = $this->createQuery();
         $query->from($this->tables);
+        $query->select($this->select);
         
         $this->setOrderBy($query);
         if (!empty($this->options['filter'])) {
             $this->options['filter']->apply($query);
             $this->label = $this->options['filter']->getLabel();
+        }
+        
+        foreach ($this->options['additional_filters'] as $filter) {
+            $filter->apply($query);
         }
 
         $pager = new Doctrine_Pager($query, $this->options['page'], $this->options['limit']);
@@ -79,10 +95,15 @@ abstract class UNL_MediaHub_List implements Countable, UNL_MediaHub_CacheableInt
 
         $this->pager = $pager;
         
-        $this->getURL();
+        $this->ran = true;
     }
     
-    abstract function setOrderBy(Doctrine_Query &$query);
+    abstract public function setOrderBy(Doctrine_Query_Abstract $query);
+
+    /**
+     * @return Doctrine_Query_Abstract
+     */
+    abstract protected function createQuery();
     
     /**
      * Function to allow filtering input options
@@ -103,21 +124,4 @@ abstract class UNL_MediaHub_List implements Countable, UNL_MediaHub_CacheableInt
     {
         return $this->total;
     }
-    
-    /**
-     * Returns a url to describe this specific list.
-     * 
-     * @return string
-     */
-    function getURL()
-    {
-        $this->url = self::$url;
-        
-        $this->url .= '&amp;orderby=' . $this->options['orderby'];
-        
-        $this->url .= '&amp;order=' . $this->options['order'];
-        
-        return $this->url;
-    }
 }
-?>

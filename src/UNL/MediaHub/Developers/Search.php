@@ -5,7 +5,7 @@ class UNL_MediaHub_Developers_Search
     
     public $uri         = "search/{query}";
     
-    public $exampleURI  = "search/idk";
+    public $exampleURI  = "search/unl";
     
     public $properties  = array(
                                 array("{results}", "A list of the <a href='?resource=Media'> media instances </a> that were found for the query tag. ", true, true),

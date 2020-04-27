@@ -3,36 +3,99 @@
 Supporting styles for  the display of the COMMENTS used on media pages.
 
 */
+
+#comments ul {
+  padding: 0;
+}
+
 #comments ul li {
-    list-style:none;
-    margin-left:-28px;
-    padding:10px;
-    margin-bottom:20px;
-    border-bottom:1px dotted #bbb;
+  list-style: none;
+  margin-bottom: 20px;
 }
+
 #comments ul li em {
-    font-size:.8em;
-    color:#666666;
-    margin-left:5px;
+  color: #666;
+  font-size: .8em;
+  margin-left: 5px;
 }
+
 h3 a {
-    font-size:.7em;
+  font-size:.7em;
 }
-#maincontent form fieldset {
-    width:460px;
+
+#comments .subhead {
+  font-style: italic;
 }
-#maincontent form textarea {
-    width:270px;
+
+#comments blockquote {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .25);
+  clear: both;
+  margin: 0;
+  padding: 20px;
+  position: relative;
 }
-blockquote {
-    padding: 5px 5px 5px 48px;
-    clear:both;
+
+#comments blockquote::before {
+  background-color: #fff;
+  bottom: -10px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, .25);
+  content: '';
+  display: block;
+  height: 20px;
+  left: 7%;
+  margin-left: -18px;
+  position:absolute;
+  transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  width: 20px;
 }
+
+#comments blockquote::after {
+  background-color: #fff;
+  bottom: 0;
+  content: '';
+  display: block;
+  height: 20px;
+  left: 7%;
+  margin-left: -28px;
+  position: absolute;
+  width: 40px;
+}
+
 .profile_pic{
-    float:left;	
+  float: left;
+  margin: 10px;
 }
-#maincontent h5.commenter {
-    font-weight:bold;
-    padding-left:53px;	
-    margin-bottom:0;
+
+#dcf-main h5.commenter {
+  font-weight: bold;
+  margin-bottom: 0;
+  padding-left: 53px;
+}
+
+.mh-user {
+  padding: 10px;
+}
+
+
+@media only screen and (max-width: 768px)  {
+
+  .profile_pic {
+    float: left;
+    margin: 0 10px 0 0;
+  }
+
+  #comments blockquote::before,
+  #comments blockquote::after {
+    left: 10%;
+  }
+
+  .mh-user {
+    padding: 20px 10px 10px 10px;
+  }
+
 }

@@ -19,16 +19,31 @@ class UNL_MediaHub_FeedList extends UNL_MediaHub_List
      * 
      * @var array
      */
-    public $options = array('orderby' => 'title',
-                            'order'   => 'ASC',
-                            'page'    => 0,
-                            'limit'   => 10);
+    public $options = array(
+        'orderby'            => 'title',
+        'order'              => 'ASC',
+        'page'               => 0,
+        'limit'              => 10,
+        'additional_filters' => array(),
+    );
 
-    function __construct($options = array())
+    public function __construct($options = array())
     {
         parent::__construct($options);
-        if (empty($this->options['filter'])) {
+    }
+    
+    public function filterInputOptions()
+    {
+        if (empty($this->options['filter']) || !($this->options['filter'] instanceof UNL_MediaHub_Filter)) {
             $this->options['filter'] = new UNL_MediaHub_FeedList_Filter_WithRelatedMedia();
+        }
+        
+        if (!in_array($this->options['order'], array('ASC', 'DESC'))) {
+            $this->options['order'] = 'ASC';
+        }
+        
+        if (!in_array($this->options['orderby'], array('title', 'datecreated', 'plays'))) {
+            $this->options['orderby'] = 'title';
         }
     }
     /**
@@ -36,8 +51,22 @@ class UNL_MediaHub_FeedList extends UNL_MediaHub_List
      * 
      * @see UNL/MediaHub/UNL_MediaHub_List#setOrderBy()
      */
-    function setOrderBy(Doctrine_Query &$query)
+    public function setOrderBy(Doctrine_Query_Abstract $query)
     {
-        $query->orderby('f.'.$this->options['orderby'].' '.$this->options['order']);
+        if ($this->options['orderby'] == 'plays') {
+            $query->orderBy('SUM(f.UNL_MediaHub_Media.play_count) '.$this->options['order']);
+            $query->groupBy('f.id');
+        } else {
+            $query->orderBy('f.'.$this->options['orderby'].' '.$this->options['order']);
+            $query->groupBy('f.id');
+        }
+    }
+
+    /**
+     * @return Doctrine_Query_Abstract
+     */
+    protected function createQuery()
+    {
+        return new Doctrine_Query();
     }
 }

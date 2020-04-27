@@ -1,0 +1,32 @@
+{
+  "name": "UNL_Mediahub",
+  "version": "1.0.0",
+  "description": "Media hosting platform.",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com:unl/UNL_MediaHub.git"
+  },
+  "author": {
+    "name": "University of Nebraska-Lincoln",
+    "url": "http://wdn.unl.edu/"
+  },
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/unl/unl_mediahub/issues"
+  },
+  "homepage": "https://github.com/unl/UNL_MediaHub",
+  "devDependencies": {
+    "grunt": "^1.0.4",
+    "grunt-contrib-less": "^2.0.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "less": "^3.10.3",
+    "less-plugin-clean-css": "^1.5.1"
+  },
+  "engines": {
+    "node": "node >= 0.10.0"
+  },
+  "dependencies": {
+    "grunt-contrib-less": "^2.0.0",
+    "grunt-contrib-watch": "^1.1.0"
+  }
+}

@@ -1,23 +1,9 @@
 <?php
-class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_MediaHub_PostRunReplacements
+class UNL_MediaHub_Manager extends UNL_MediaHub_BaseController implements UNL_MediaHub_CacheableInterface, UNL_MediaHub_PostRunReplacements
 {
-    /**
-     * The auth object.
-     *
-     * @var UNL_Auth
-     */
-    protected $auth;
-    
-    /**
-     * The user that's logged in.
-     *
-     * @var UNL_MediaHub_User
-     */
-    protected static $user;
-    
     public $output;
     
-    public $options = array('view'=>'addmedia', 'format'=>'html');
+    public $options = array('view'=>'home', 'format'=>'html');
 
     protected $view_map = array(
         'feedmetadata'    => 'UNL_MediaHub_Feed_Form',
@@ -25,9 +11,12 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
         'feeds'           => 'UNL_MediaHub_User_FeedList',
         'subscriptions'   => 'UNL_MediaHub_User_Subscriptions',
         'addsubscription' => 'UNL_MediaHub_Subscription_Form',
-        'uploadprogress'  => 'UNL_MediaHub_Feed_Media_FileUpload_Progress',
-        'mediapreview'    => 'UNL_MediaHub_Media_Preview',
         'uploadcomplete'  => 'UNL_MediaHub_Feed_Media_FileUpload_Complete',
+        'upload'          => 'UNL_MediaHub_Feed_Media_FileUpload',
+        'home'            => 'UNL_MediaHub_Manager_ManagerHome',
+        'addmedia'        => 'UNL_MediaHub_Feed_Media_Form',
+        'editcaptions'    => 'UNL_MediaHub_Media_EditCaptions',
+        'captionorderdetails' => 'UNL_MediaHub_Media_CaptionOrderDetails',
         );
     
     protected static $replacements = array();
@@ -48,24 +37,19 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
      */
     protected static $uploadDirectory;
 
-    function __construct($options = array(), $dsn)
+    function __construct($options = array())
     {
-        $this->mediahub = new UNL_MediaHub($dsn);
+        self::$mediahub = new UNL_MediaHub();
         
-        $this->auth = UNL_Auth::factory('SimpleCAS');
-        $this->auth->login();
-        if (isset($_GET['logout'])) {
-            $this->auth->logout();
-            exit();
-        }
+        $auth = UNL_MediaHub_AuthService::getInstance();
+        $auth->login();
         
         $this->options = $options + $this->options;
-        
-        self::$user = UNL_MediaHub_User::getByUid($this->auth->getUser());
     }
     
     function getCacheKey()
     {
+        //do not cache
         return false;
     }
     
@@ -92,13 +76,7 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
      */
     function setReplacementData($field, $data)
     {
-        switch ($field) {
-        case 'title':
-        case 'head':
-        case 'breadcrumbs':
-            self::$replacements[$field] = $data;
-            break;
-        }
+        self::$replacements[$field] = $data;
     }
     
     /**
@@ -110,7 +88,7 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
      */
     function postRun($me)
     {
-        $scanned = new UNL_Templates_Scanner($me);
+        $scanned = new \UNL\Templates\Scanner($me);
         
         if (isset(self::$replacements['title'])) {
             $me = str_replace($scanned->doctitle,
@@ -122,12 +100,15 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
             $me = str_replace('</head>', self::$replacements['head'].'</head>', $me);
         }
 
-        if (isset(self::$replacements['breadcrumbs'])) {
+        // TODO: disable breadcrumbs since currently not supported in 5.0 App templates
+        /*
+         if (isset(self::$replacements['breadcrumbs'], $scanned->breadcrumbs)) {
             $me = str_replace($scanned->breadcrumbs,
-                              self::$replacements['breadcrumbs'],
-                              $me);
+                self::$replacements['breadcrumbs'],
+                $me);
+            unset(self::$replacements['breadcrumbs']);
         }
-        
+        */
         return $me;
     }
     
@@ -143,50 +124,9 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
                 $this->output[] = new $class($this->options);
                 return;
             }
-
-            switch($this->options['view']) {
-                case 'feed':
-                    $this->showFeed();
-                    break;
-                case 'addmedia':
-                    $this->addMedia();
-                    // intentional no break
-                default:
-                    $class = $this->view_map['feeds'];
-                    $this->output[] = new $class($this->options);
-                    break;
-            }
         } catch (Exception $e) {
             $this->output = $e;
         }
-    }
-    
-    /**
-     * Determines if the user is logged in.
-     *
-     * @return bool
-     */
-    function isLoggedIn()
-    {
-        return $this->auth->isLoggedIn();
-    }
-    
-    /**
-     * Get the user
-     *
-     * @return UNL_MediaHub_User
-     */
-    public static function getUser()
-    {
-        return self::$user;
-    }
-    
-    function showMedia(UNL_MediaHub_Filter $filter = null)
-    {
-        $options           = $this->options;
-        $options['filter'] = $filter;
-
-        $this->output[] = new UNL_MediaHub_MediaList($options + $this->options);
     }
 
     /**
@@ -205,6 +145,16 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
     }
 
     /**
+     * Get the path to the directory where temp (uncompleted) uploads are stored
+     *
+     * @return string
+     */
+    public static function getTmpUploadDirectory()
+    {
+        return self::getUploadDirectory() . '/tmp';
+    }
+
+    /**
      * Setter for the upload directory where media will be save
      *
      * @param string $uploadDirectory Directory on the filesystem
@@ -219,40 +169,9 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
         self::$uploadDirectory = $uploadDirectory;
     }
 
-    public static function getURL($mixed = null, $additional_params = array())
+    public static function getURL()
     {
-        $params = array();
-
-        if (is_object($mixed)) {
-            switch(get_class($mixed)) {
-                case 'UNL_MediaHub_Feed':
-                    $params['view'] = 'feed';
-                    $params['id']   = $mixed->id;
-            }
-        }
-
-        $params = array_merge($params, $additional_params);
-
-        return UNL_MediaHub_Controller::addURLParams(UNL_MediaHub_Controller::$url.'manager/', $params);
-    }
-    
-    function showFeed()
-    {
-        if (empty($this->options['id'])) {
-            throw new Exception('No feed selected to show.');
-        }
-
-        $feed = UNL_MediaHub_Feed::getById($this->options['id']);
-        if (!($feed && $feed->userHasPermission(self::$user, UNL_MediaHub_Permission::getByID(
-                                                    UNL_MediaHub_Permission::USER_CAN_INSERT)))) {
-            throw new Exception('You do not have permission for this feed.');
-        }
-
-        $this->output[] = $feed;
-
-        $filter = new UNL_MediaHub_MediaList_Filter_ByFeed($feed, 'ALL');
-        $this->showMedia($filter);
-
+        return UNL_MediaHub_Controller::$url.'manager/';
     }
     
     /**
@@ -261,27 +180,12 @@ class UNL_MediaHub_Manager implements UNL_MediaHub_CacheableInterface, UNL_Media
      */
     function handlePost()
     {
-        $handler = new UNL_MediaHub_Manager_PostHandler($this->options, $_POST, $_FILES);
-        $handler->setMediaHub($this->mediahub);
+        $handler = new UNL_MediaHub_Manager_PostHandler($this, $this->options, $_POST, $_FILES);
+        $handler->setMediaHub(self::$mediahub);
         return $handler->handle();
     }
     
     function editFeedPublishers($feed)
     {
-    }
-    
-    /**
-     * Show the form to add media to a feed.
-     *
-     * @return void
-     */
-    function addMedia()
-    {
-        if (isset($_GET['id'])) {
-            $this->output[] = new UNL_MediaHub_Feed_Media_Form(UNL_MediaHub_Media::getById($_GET['id']));
-            return;
-        }
-        
-        $this->output[] = new UNL_MediaHub_Feed_Media_Form();
     }
 }

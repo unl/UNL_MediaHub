@@ -19,7 +19,7 @@ if (isset($_GET['model'])) {
     unset($_GET['model']);
 }
 
-$controller = new UNL_MediaHub_Controller($router->route($_SERVER['REQUEST_URI'], $_GET), $dsn);
+$controller = new UNL_MediaHub_Controller($router->route($_SERVER['REQUEST_URI'], $_GET));
 
 $outputcontroller = new UNL_MediaHub_OutputController();
 $outputcontroller->addGlobal('controller', $controller);
@@ -29,11 +29,23 @@ if (isset($cache)) {
     $outputcontroller->setCacheInterface($cache);
 }
 
+header('X-Frame-Options: SAMEORIGIN');
+
 switch($controller->options['format']) {
-    case 'rss':
     case 'xml':
-    case 'json':
+    case 'mosaic-xml':
+    case 'rss':
     case 'js':
+    case 'iframe':
+        $format = $controller->options['format'];
+        if ('rss' == $format) {
+            //rss should be the same as xml
+            $format = 'xml';
+        }
+        
+        $outputcontroller->addTemplatePath(dirname(__FILE__).'/templates/'.$format);
+        break;
+    case 'json':
         $outputcontroller->addTemplatePath(dirname(__FILE__).'/templates/'.$controller->options['format']);
         break;
     default:

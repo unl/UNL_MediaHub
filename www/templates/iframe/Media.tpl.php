@@ -1,0 +1,1 @@
+<?php echo $savvy->render($controller->getMediaPlayer($context)); ?>

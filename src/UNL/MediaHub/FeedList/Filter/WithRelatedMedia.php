@@ -2,28 +2,28 @@
 class UNL_MediaHub_FeedList_Filter_WithRelatedMedia implements UNL_MediaHub_Filter
 {
     
-function apply(Doctrine_Query &$query)
+    public function apply(Doctrine_Query_Abstract $query)
     {
-        $query->where('UNL_MediaHub_Feed_Media.media_id IS NOT NULL AND UNL_MediaHub_Feed_Media.feed_id = f.id');
-        $query->distinct();
+        $query->select('f.*');
+        $query->innerJoin('f.UNL_MediaHub_Media');
     }
     
-    function getLabel()
+    public function getLabel()
     {
-        return 'Available Channels';
+        return 'All Channels';
     }
     
-    function getType()
-    {
-        return '';
-    }
-    
-    function getValue()
+    public function getType()
     {
         return '';
     }
     
-    function __toString()
+    public function getValue()
+    {
+        return '';
+    }
+    
+    public function __toString()
     {
         return '';
     }

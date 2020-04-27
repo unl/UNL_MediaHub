@@ -1,4 +1,5 @@
 /config.inc.php
+/tests/config.inc.php
 /www/.htaccess
 /www/wdn
 /.settings
@@ -8,8 +9,10 @@
 www/uploads
 /scripts/popular.sh
 /scripts/popular.txt
-
-
+/vagrant/dev/.vagrant
+/vendor
 /data/mediahub_dump.sql
 /UNL_MediaHub.sublime-workspace
 /UNL_MediaHub.sublime-project
+/ffmpeg
+version.txt

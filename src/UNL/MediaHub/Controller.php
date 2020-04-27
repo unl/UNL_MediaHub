@@ -3,23 +3,17 @@
  * Controller for the public frontend to the MediaHub system.
  */
 class UNL_MediaHub_Controller
+    extends UNL_MediaHub_BaseController
     implements UNL_MediaHub_CacheableInterface, UNL_MediaHub_PostRunReplacements
 {
-    /**
-     * Auth object for the client.
-     *
-     * @var UNL_Auth
-     */
-    protected static $auth;
-
     /**
      * Array of options
      *
      * @var array
      */
-    public $options = array('model'  => false,
-                            'format' => 'html',
-                            'mobile' => false,
+    public $options = array(
+        'model'  => false,
+        'format' => 'html',
     );
 
     /**
@@ -58,14 +52,14 @@ class UNL_MediaHub_Controller
      * 
      * @var int
      */
-    public static $current_embed_version = 2;
+    public static $current_embed_version = 3;
 
     /**
-     * currently logged in user, if any
-     *
-     * @var UNL_MediaHub_User
+     * The date on which captions are determined to be required.
+     * 
+     * @var false|string - date in mysql format
      */
-    protected static $user;
+    public static $caption_requirement_date = false;
 
     protected $view_map = array(
         'search'  => 'UNL_MediaHub_MediaList',
@@ -93,41 +87,41 @@ class UNL_MediaHub_Controller
                        'UNL_MediaHub_Feed_Media_NamespacedElements_mediahub');
 
     /**
+     * Whether or not videos should be auto-muxed
+     * 
+     * @var bool
+     */
+    public static $auto_mux = true;
+    
+    public static $max_upload_mb = '1024';
+    
+    /**
      * Construct a new controller.
      *
      * @param string $dsn Database connection string
      */
-    function __construct($options, $dsn)
+    function __construct($options)
     {
         // Set up database
-        $this->mediahub = new UNL_MediaHub($dsn);
+        $this->mediahub = new UNL_MediaHub();
 
         // Initialize default options
         $this->options = $options + $this->options;
-
-        if ($this->options['format'] == 'html'
-            && $this->options['mobile'] != 'no') {
-            $this->options['mobile'] = self::isMobileClient();
-        }
         
         if ($this->options['model'] == 'media_embed') {
             $this->options['format'] = 'js';
         }
 
-        // Start authentication for comment system.
-        include_once 'UNL/Auth.php';
-        self::$auth = UNL_Auth::factory('SimpleCAS');
-        if (isset($_GET['logout'])) {
-            self::$auth->logout();
+        if ($this->options['model'] == 'media_oembed' && $this->options['format'] == 'html') {
+            $this->options['format'] = 'json';
         }
 
-        if (self::$auth->isLoggedIn()) {
-            self::$user = UNL_MediaHub_User::getByUid(self::$auth->getUser());
-        }
+        UNL_MediaHub_AuthService::getInstance()->autoLogin($this->options['model']);
 
         UNL_MediaHub_Feed_Media_NamespacedElements_mediahub::$uri = UNL_MediaHub_Controller::$url . "schema/mediahub.xsd";
     }
-
+    
+    
     public static function getNamespaceDefinationString()
     {
         $namespaces = "";
@@ -137,55 +131,6 @@ class UNL_MediaHub_Controller
         }
 
         return $namespaces;
-    }
-
-    public static function isMobileClient($options = array())
-    {
-        if (!isset($_SERVER['HTTP_ACCEPT'], $_SERVER['HTTP_USER_AGENT'])) {
-            // We have no vars to check
-            return false;
-        }
-
-        if (isset($_COOKIE['wdn_mobile'])
-            && $_COOKIE['wdn_mobile'] == 'no') {
-            // The user has a cookie set, requesting no mobile views
-            return false;
-        }
-
-        if ( // Check the http_accept and user agent and see
-            preg_match('/text\/vnd\.wap\.wml|application\/vnd\.wap\.xhtml\+xml/i', $_SERVER['HTTP_ACCEPT'])
-                ||
-            (preg_match('/'.
-               'sony|symbian|nokia|samsung|mobile|windows ce|epoc|opera mini|' .
-               'nitro|j2me|midp-|cldc-|netfront|mot|up\.browser|up\.link|audiovox|' .
-               'blackberry|ericsson,|panasonic|philips|sanyo|sharp|sie-|' .
-               'portalmmm|blazer|avantgo|danger|palm|series60|palmsource|pocketpc|' .
-               'smartphone|rover|ipaq|au-mic|alcatel|ericy|vodafone\/|wap1\.|wap2\.|iPhone|Android' .
-               '/i', $_SERVER['HTTP_USER_AGENT'])
-           ) && !preg_match('/ipad/i', $_SERVER['HTTP_USER_AGENT'])) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Check if the user is logged in or not.
-     *
-     * @return bool
-     */
-    static function isLoggedIn()
-    {
-        if (self::$auth->isLoggedIn()) {
-            return true;
-        }
-
-        return false;
-    }
-
-    static function getUser()
-    {
-        return self::$user;
     }
 
     /**
@@ -206,12 +151,13 @@ class UNL_MediaHub_Controller
     function preRun($cached)
     {
         if ($this->options['model'] == 'feed_image'
-            || $this->options['model'] == 'media_image'
             || $this->options['model'] == 'media_embed'
-            || $this->options['model'] == 'media_srt'
-            || $this->options['model'] == 'media_vtt') {
+            || $this->options['model'] == 'media_oembed'
+            || $this->options['model'] == 'media_vtt'
+            || $this->options['model'] == 'media_srt') {
             UNL_MediaHub_OutputController::setOutputTemplate('UNL_MediaHub_Controller', 'ControllerPartial');
         }
+        
         // Send headers for CORS support so calendar bits can be pulled remotely
         header('Access-Control-Allow-Origin: *');
         header('Access-Control-Allow-Methods: GET, OPTIONS');
@@ -224,6 +170,7 @@ class UNL_MediaHub_Controller
         
         switch ($this->options['format']) {
         case 'xml':
+        case 'mosaic-xml':
         case 'rss':
             // Send XML content-type headers, and assign XML output template.
             header('Content-type: text/xml');
@@ -243,6 +190,11 @@ class UNL_MediaHub_Controller
         case 'js':
             header('Content-type: text/javascript');
             break;
+        case 'iframe':
+            if ('media' === $this->options['model']) {
+                header_remove('X-Frame-Options');
+            }
+            break;
         default:
             break;
         }
@@ -259,21 +211,40 @@ class UNL_MediaHub_Controller
      */
     function run()
     {
-        if (self::isLoggedIn()) {
-            // We're golden.
-        }
-
         try {
+            if (!empty($_POST)) {
+                $this->handlePost($_POST);
+            }
+            
             if (!isset($this->options['model'])
                 || false === $this->options['model']) {
                 throw new Exception('Un-registered view', 404);
             }
+
             switch ($this->options['model']) {
             case 'media':
                 $media = $this->findRequestedMedia($this->options);
+                
+                $transcoding_job = $media->getMostRecentTranscodingJob();
+                
+                if ($transcoding_job && $transcoding_job->isPending()) {
+                    throw new Exception('This media is being optimized. Please try back later.', 200);
+                }
 
-                if (!$media->canView()) {
-                    throw new Exception('You do not have permission to do this.', 403);
+                if ($transcoding_job && $transcoding_job->isError()) {
+                    throw new Exception('There was an error optimizing this media.', 500);
+                }
+
+                $this->canView($media);
+                
+                if (!$media->meetsCaptionRequirement()) {
+                    $notice = new UNL_MediaHub_Notice(
+                        'Notice',
+                        'This media will not be published until captions are provided.',
+                        UNL_MediaHub_Notice::TYPE_NOTICE
+                    );
+                    $notice->addLink($media->getEditCaptionsURL(), 'Add Captions Now');
+                    UNL_MediaHub_Manager::addNotice($notice);
                 }
                 
                 $this->output[] = $media;
@@ -285,15 +256,18 @@ class UNL_MediaHub_Controller
                     $this->output[] = UNL_MediaHub_Feed_Image::getByTitle($this->options['title']);
                 }
                 break;
-            case 'media_srt':
-                $this->output[] = UNL_MediaHub_Media_VideoTextTrack::getById($this->options['id']);
-                break;
             case 'media_vtt':
-                $this->output[] = UNL_MediaHub_Media_VideoTextTrack::getById($this->options['id']);
+                $this->output[] = new UNL_MediaHub_Media_VideoTextTrack($this->options, UNL_MediaHub_MediaTextTrackFile::FORMAT_VTT);
+                break;
+            case 'media_srt':
+                $this->output[] = new UNL_MediaHub_Media_VideoTextTrack($this->options, UNL_MediaHub_MediaTextTrackFile::FORMAT_SRT);
                 break;
             case 'media_image':
-                $this->output[] = UNL_MediaHub_Media_Image::getById($this->options['id']);
-                break;
+                $image = new UNL_MediaHub_Media_Image($this->options);
+                $file = $image->getThumbnail();
+                header('Content-Type: image/jpeg');
+                readfile($file);
+                exit();
             case 'media_embed':
                 $id = null;
                 if (isset($this->options['id'])) {
@@ -303,11 +277,42 @@ class UNL_MediaHub_Controller
                 if (isset($this->options['version'])) {
                     $version = $this->options['version'];
                 }
-                $this->output[] = UNL_MediaHub_Media_Embed::getById($id, $version, $this->options);
+                
+                $media_embed = UNL_MediaHub_Media_Embed::getById($id, $version, $this->options);
+
+                $this->canView($media_embed);
+                
+                $this->output[] = $media_embed;
+                
                 break;
             case 'media_file':
                 $this->output[] = UNL_MediaHub_Media_File::getById($this->options['id']);
                 break;
+            case 'media_oembed':
+                $oembed = null;
+                if (isset($this->options['url'])) {
+                    $oembed = UNL_MediaHub_Media_Oembed::getByURL($this->options['url'], $this->options);
+                }
+
+                if ($oembed instanceof UNL_MediaHub_Media_Oembed) {
+                    $this->output[] = $oembed;
+                } else {
+                    http_response_code(404);
+                }
+                break;
+            case 'media_file_download':
+                if (!$media = UNL_MediaHub_Media::getById($this->options['id'])) {
+                    throw new \Exception('media not found', 404);
+                }
+                $file = $media->getLocalFileName();
+                $path_info = pathinfo($file);
+                header('Content-Description: Media File Download');
+                header('Content-Type: application/octet-stream');
+                header('Content-Disposition: attachment; filename="'.$media->title.'.'.$path_info['extension'].'"');
+                header('Content-Length: ' . filesize($file));
+                ob_end_flush();
+                readfile($file);
+                exit;
             default:
                 $this->output[] = new $this->options['model']($this->options);
             }
@@ -316,11 +321,26 @@ class UNL_MediaHub_Controller
         }
     }
 
+    function canView($media) {
+      if (!$media->canView()) {
+        $message = 'You do not have permission to view this.';
+        if ($media->privacy == 'PROTECTED') {
+          $message = "This media is 'PROTECTED' and may only be viewed by logged in users.  If you have an account, please log in to view.";
+        } elseif ($media->privacy == 'PRIVATE') {
+          $message = "This media is 'PRIVATE' and may only be viewed by logged in users with proper channel access.  If you have an account and access, please log in to view.";
+        } elseif (!$media->meetsCaptionRequirement()) {
+          $message = "This media is not published and may only be viewed by logged in users with proper channel access.  If you have an account and access, please log in to view.";
+        }
+        throw new Exception($message, 403);
+      }
+    }
+
     /**
      * Find a specific piece of media.
      *
      * @param array $options Associative array of options $options['id']
      *
+     * @throws Exception
      * @return UNL_MediaHub_Media
      */
     function findRequestedMedia($options)
@@ -330,44 +350,80 @@ class UNL_MediaHub_Controller
             $media = Doctrine::getTable('UNL_MediaHub_Media')->find($options['id']);
         }
         
-        if (!empty($_POST) && isset($_POST['action'])) {
-            switch ($_POST['action']) {
-              case 'playcount':
-                //Increase play count.
-                $media->play_count++;
-                $media->save();
-                //Don't need to send a response, so stop here.
-                exit();
-                break;
-            }
-        }
-        
-        if (!empty($_POST)
-            && self::isLoggedIn()) {
-            $user = self::$auth->getUser();
-            if (!empty($_POST['comment'])) {
-                $data = array('uid'      => $user,
-                              'media_id' => $media->id,
-                              'comment'  => $_POST['comment']);
-
-                $comment = new UNL_MediaHub_Media_Comment();
-                $comment->fromArray($data);
-                $comment->save();
-            }
-
-            if (!empty($_POST['tags'])) {
-                foreach (explode(',', $_POST['tags']) as $tag) {
-                    $media->addTag(trim($tag));
-                }
-            }
-        }
-
-
         if ($media) {
             return $media;
         }
 
-        throw new Exception('Cannot determine the media to display.');
+        throw new Exception('The requested media does not exist.', 404);
+    }
+
+    /**
+     * @param $post
+     * @throws Exception
+     */
+    protected function handlePost($post)
+    {
+        $auth = UNL_MediaHub_AuthService::getInstance();
+        
+        if (!$media = $this->findRequestedMedia($this->options)) {
+            throw new Exception('Media ID must be passed.');
+        }
+        
+        if (isset($post['action'])) {
+            switch ($post['action']) {
+                case 'playcount':
+                    //Log the view.
+                    $ip_address = NULL;
+                    if (isset($_SERVER['REMOTE_ADDR'])) {
+                        $ip_address = $_SERVER['REMOTE_ADDR'];
+                    }
+                    
+                    $view = UNL_MediaHub_MediaView::logView($media, $ip_address);
+                    //Don't need to send a response, so stop here.
+                    exit();
+                    break;
+            }
+        }
+
+        if (!empty($post['comment'])) {
+            if (!$user = $auth->getUser()) {
+                throw new Exception('You must be logged in to make a comment.', 403);
+            }
+            
+            if (!$this->validateCSRF()) {
+                throw new \Exception('Invalid security token provided. If you think this was an error, please retry the request.', 403);
+            }
+            
+            $data = array(
+                'uid'      => $user->uid,
+                'media_id' => $media->id,
+                'comment'  => $post['comment']
+            );
+
+            $comment = new UNL_MediaHub_Media_Comment();
+            $comment->fromArray($data);
+            $comment->save();
+            
+            UNL_MediaHub::redirect(self::getURL($media));
+        }
+
+        if (!empty($post['tags'])) {
+            if (!$user = $auth->getUser()) {
+                throw new Exception('You must be logged in to add a tag.', 403);
+            }
+
+            if (!$this->validateCSRF()) {
+                throw new \Exception('Invalid security token provided. If you think this was an error, please retry the request.', 403);
+            }
+            
+            if (!$media->userCanEdit($user)) {
+                throw new Exception('You do not have permission to add a tag.', 403);
+            }
+            
+            foreach (explode(',', $post['tags']) as $tag) {
+                $media->addTag(trim($tag));
+            }
+        }
     }
 
     /**
@@ -379,8 +435,8 @@ class UNL_MediaHub_Controller
      */
     function postRun($me)
     {
-        $scanned = new UNL_Templates_Scanner($me);
-
+        $scanned = new \UNL\Templates\Scanner($me);
+        
         if (isset(self::$replacements['title'], $scanned->doctitle)) {
             $me = str_replace($scanned->doctitle,
                               '<title>'.self::$replacements['title'].'</title>',
@@ -392,12 +448,15 @@ class UNL_MediaHub_Controller
             $me = str_replace('</head>', self::$replacements['head'].'</head>', $me);
         }
 
+        // TODO: disable breadcrumbs since currently not supported in 5.0 App templates
+        /*
         if (isset(self::$replacements['breadcrumbs'], $scanned->breadcrumbs)) {
             $me = str_replace($scanned->breadcrumbs,
                               self::$replacements['breadcrumbs'],
                               $me);
             unset(self::$replacements['breadcrumbs']);
         }
+        */
 
         return $me;
     }
@@ -410,7 +469,7 @@ class UNL_MediaHub_Controller
      *
      * @return void
      */
-    function setReplacementData($field, $data)
+    public function setReplacementData($field, $data)
     {
         self::$replacements[$field] = $data;
     }
@@ -439,7 +498,7 @@ class UNL_MediaHub_Controller
      *
      * @return string
      */
-    function getURL($mixed = null, $additional_params = array())
+    public static function getURL($mixed = null, $additional_params = array())
     {
         $params = array();
 
@@ -449,6 +508,9 @@ class UNL_MediaHub_Controller
             switch (get_class($mixed)) {
             case 'UNL_MediaHub_Media':
                 $url .= 'media/'.$mixed->id;
+                break;
+            case 'UNL_MediaHub_Media_Oembed':
+                $url .= 'media/'.$mixed->media->id;
                 break;
             case 'UNL_MediaHub_MediaList':
                 $url = $mixed->getURL();
@@ -467,6 +529,11 @@ class UNL_MediaHub_Controller
         $params = array_merge($params, $additional_params);
 
         return self::addURLParams($url, $params);
+    }
+    
+    public static function toAgnosticURL($url)
+    {
+        return str_replace('http://', '//', $url);
     }
 
     /**
@@ -494,7 +561,7 @@ class UNL_MediaHub_Controller
         $url .= '?';
 
         foreach ($params as $option=>$value) {
-            if ($option == 'driver') {
+            if (in_array($option, array('driver', 'model', 'filter'))) {
                 continue;
             }
             if ($option == 'format'
@@ -507,6 +574,36 @@ class UNL_MediaHub_Controller
         }
         $url = str_replace('?&', '?', $url);
         return trim($url, '?;=');
+    }
+
+    /**
+     * @param string $version
+     */
+    public static function setVersion($version)
+    {
+        $file = UNL_MediaHub::getRootDir() . '/version.txt';
+        file_put_contents($file, $version);
+    }
+
+    /**
+     * @return string the current version
+     */
+    public static function getVersion()
+    {
+        static $version;
+
+        if ($version) {
+            //skip expensive work if we already got it
+            return $version;
+        }
+
+        $file = UNL_MediaHub::getRootDir() . '/version.txt';
+        $version = @file_get_contents($file);
+
+        //Sanitize it so that it can be used in URLs
+        $version = htmlentities($version);
+
+        return $version;
     }
 }
 

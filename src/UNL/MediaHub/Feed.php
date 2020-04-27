@@ -56,10 +56,78 @@ class UNL_MediaHub_Feed extends UNL_MediaHub_Models_BaseFeed
 
         return $q->execute();
     }
+
+    /**
+     * @param Doctrine_Connection $conn
+     * @return bool|void
+     */
+    public function delete(Doctrine_Connection $conn = null)
+    {
+        //Delete feed_has_media records
+        $media_list = $this->getMediaList();
+        $media_list->run();
+
+        if (count($media_list->items)) {
+            foreach ($media_list->items as $media) {
+                $this->removeMedia($media);
+            }
+        }
+        
+        //delete user records
+        $user_list = $this->getUserList();
+        $user_list->run();
+
+        if (count($user_list->items)) {
+            foreach ($user_list->items as $user) {
+                $this->removeUser($user);
+            }
+        }
+        
+        //Delete NamespacedElements
+        try {
+            foreach (array(
+                         'UNL_MediaHub_Feed_NamespacedElements_itunes',
+                         'UNL_MediaHub_Feed_NamespacedElements_boxee',
+                         'UNL_MediaHub_Feed_NamespacedElements_media',
+                     ) 
+                     as $ns_class) {
+                foreach ($this->$ns_class as $namespaced_element) {
+                    $namespaced_element->delete();
+                }
+            }
+        } catch (Exception $e) {
+            // Error, just skip this for now.
+        }
+        parent::delete($conn);
+    }
     
-    function getMediaList($options = array())
+    public function getMediaList($options = array())
     {
          return new UNL_MediaHub_MediaList(array('filter'=>new UNL_MediaHub_MediaList_Filter_ByFeed($this))+$options); 
+    }
+
+    /**
+     * @param array $options
+     * @return UNL_MediaHub_Feed_UserList
+     */
+    public function getUserList($options = array())
+    {
+        return new UNL_MediaHub_Feed_UserList(array('feed_id'=>$this->id)+$options);
+    }
+    
+    public function getStats()
+    {
+        $db = Doctrine_Manager::getInstance()->getCurrentConnection();
+        $q = $db->prepare("SELECT 
+            COUNT(IF(type LIKE 'video%', 1, NULL)) AS video, 
+            COUNT(IF(type LIKE 'video%', NULL, 1)) AS audio, 
+            SUM(play_count) AS plays 
+            FROM media m
+            INNER JOIN feed_has_media fm ON fm.feed_id = ? AND m.id = fm.media_id;");
+        
+        $q->execute(array($this->id));
+        $result = $q->fetchAll();
+        return current($result);
     }
 
     /**
@@ -120,6 +188,17 @@ class UNL_MediaHub_Feed extends UNL_MediaHub_Models_BaseFeed
     {
         return UNL_MediaHub_Permission::userHasPermission($user, $permission, $this);
     }
+
+    /**
+     * Determine if a user has edit permission
+     * 
+     * @param UNL_MediaHub_User $user
+     * @return bool
+     */
+    public function userCanEdit(UNL_MediaHub_User $user)
+    {
+        return $this->userHasPermission($user, UNL_MediaHub_Permission::getByID(UNL_MediaHub_Permission::USER_CAN_UPDATE));
+    }
     
     /**
      * Grant a user permission over the feed.
@@ -161,7 +240,7 @@ class UNL_MediaHub_Feed extends UNL_MediaHub_Models_BaseFeed
      */
     public function hasImage()
     {
-        if (!empty($this->image_data)) {
+        if (!empty($this->image_data) && !empty($this->image_type)) {
             return true;
         }
         return false;
@@ -169,13 +248,12 @@ class UNL_MediaHub_Feed extends UNL_MediaHub_Models_BaseFeed
 
     public function getEditorEmail()
     {
-        if ($user = @file_get_contents('http://peoplefinder.unl.edu/service.php?uid='.urlencode($this->uidcreated).'&format=json')) {
-            $user = json_decode($user);
-            if (isset($user->mail)) {
-                if (is_object($user->mail)) {
-                    return current($user->mail);
-                }
-                return (string)$user->mail;
+        if ($user = @file_get_contents('http://directory.unl.edu/people/'.urlencode($this->uidcreated).'.json')) {
+            if (!$user = json_decode($user)) {
+                return false;
+            }
+            if (isset($user->mail[0])) {
+                return (string)$user->mail[0];
             }
         }
         return false;

@@ -1,15 +1,32 @@
 <?php
 class UNL_MediaHub
 {
-    public $dsn;
+    public static $dsn;
     
-    function __construct($dsn)
-    {
+    public static $ffmpeg_path;
 
+    public static $ffprobe_path;
+    
+    public static $mediainfo_path;
+
+    public static $rude_shell;
+    
+    public static $auto_transcode_hls_users = array();
+    public static $auto_transcode_hls_all_users = true;
+    
+    //The bucket name (not full ARN)
+    public static $transcode_input_bucket = '';
+    public static $transcode_output_bucket = '';
+    public static $transcode_mediaconvert_api_endpoint = '';
+    public static $transcode_mediaconvert_role = '';
+    
+    public static $verbose_errors = false;
+    
+    function __construct()
+    {
         Doctrine_Manager::getInstance()->setAttribute('model_loading', 'conservative');
         Doctrine::loadModels(dirname(dirname(__FILE__)).'/UNL/MediaHub/Media');
-        Doctrine_Manager::connection($dsn);
-
+        Doctrine_Manager::connection(self::$dsn);
     }
 
     /**
@@ -24,17 +41,8 @@ class UNL_MediaHub
     public static function registerAutoloaders()
     {
         include_once 'Doctrine.php';
-
+        require_once __DIR__ . '/../../vendor/autoload.php';
         spl_autoload_register(array('Doctrine', 'autoload'));
-        spl_autoload_register(array(__CLASS__, 'loader'));
-    }
-
-    public static function loader($class)
-    {
-
-        $class = str_replace(array('_', '\\'), '/', $class);
-        include $class . '.php';
-
     }
     
     /**
@@ -146,4 +154,138 @@ class UNL_MediaHub
         return false;
     }
 
+    /**
+     * @param string $url the url to redirect to
+     */
+    public static function redirect($url)
+    {
+        header('Location: '.$url);
+        exit();
+    }
+
+    /**
+     * Get the absolute path for the root directory of the project
+     * 
+     * @return string
+     */
+    public static function getRootDir()
+    {
+        return dirname(dirname(__DIR__));
+    }
+
+    /**
+     * Get the path (as confugired) to the ffmpeg executable
+     * 
+     * @return string
+     */
+    public static function getFfmpegPath() {
+        $ffmpeg = UNL_MediaHub::getRootDir() . '/ffmpeg/ffmpeg';
+        if (self::$ffmpeg_path) {
+            $ffmpeg = self::$ffmpeg_path;
+        }
+        if(!self::$rude_shell){
+          $ffmpeg = "nice ".$ffmpeg;
+        }
+        
+        return $ffmpeg;
+    }
+
+    /**
+     * Get the path (as confugired) to the ffprobe executable
+     * 
+     * @return string
+     */
+    public static function getFfprobePath() {
+        $ffprobe = UNL_MediaHub::getRootDir() . '/ffmpeg/ffprobe';
+        if (self::$ffprobe_path) {
+            $ffprobe = self::$ffprobe_path;
+        }
+        if(!self::$rude_shell){
+          $ffprobe = "nice ".$ffprobe;
+        }
+        
+        return $ffprobe;
+    }
+
+    /**
+     * @return \Mhor\MediaInfo\MediaInfo
+     */
+    public static function getMediaInfo()
+    {
+        $mediaInfo = new \Mhor\MediaInfo\MediaInfo();
+        if (version_compare(phpversion(), '7.0', '>')) {
+            $mediaInfo->setConfig('use_oldxml_mediainfo_output_format', true);
+        }
+
+        if (self::$mediainfo_path) {
+            $mediaInfo->setConfig('command', self::$mediainfo_path);
+        }
+        
+        return $mediaInfo;
+    }
+
+
+        /**
+     * Set the Media RSS, projection element
+     * 
+     * @return true
+     */
+    public static function checkMetadataProjection($url)
+    {
+
+        if(!isset($url)){
+            return;
+        }
+
+        $return = array();
+        $status = 1;
+
+        $url = escapeshellarg($url);
+
+        exec(UNL_MediaHub::getFfprobePath() . " -v quiet -print_format json -show_format -show_streams $url", $return, $status);
+
+        $json = "";
+
+        $length = sizeof($return);
+        for ($i=0; $i < $length; $i++) { 
+            $json.=$return[$i];
+        }
+
+        $metadata = json_decode($json);
+        
+        if (!$metadata) {
+            return false;
+        }
+
+        $projection = false;
+        $length = count($metadata);
+        for ($i=0; $i < $length; $i++) { 
+            if(isset($metadata->streams[$i]->side_data_list)){
+                $side_data_list_length = sizeof($metadata->streams[$i]->side_data_list);
+                for ($a=0; $a < $side_data_list_length; $a++) { 
+                    if(isset($metadata->streams[$i]->side_data_list[$a]->side_data_type)){
+                        if($metadata->streams[$i]->side_data_list[$a]->side_data_type == 'Spherical Mapping'){
+                            $projection = $metadata->streams[$i]->side_data_list[$a]->projection;
+                        }
+                    }
+                }
+
+                
+            }
+        }
+
+        return $projection;
+
+    }
+
+    /**
+     * Escape an HTML string
+     * 
+     * @param $html
+     * @return string
+     */
+    public static function escape($html)
+    {
+        return htmlspecialchars($html, ENT_QUOTES, 'UTF-8', false);
+    }
 }

@@ -1,120 +1,77 @@
-/* 
+/*
 -------------------------------------------------
 Supporting styles for individual presentation of lists of media
 -------------------------------------------------
 */
-#maincontent .medialist {
-    list-style:none;
-    padding:0;
-    float:left;
-    width:100%;
-}
-#maincontent .medialist > li {
-    list-style:none;
-    display:inline-block;
-    text-align:left;
-    width:460px;
-    overflow:hidden;
-    height:105px;
-    float:left;
-}
-#maincontent .medialist > li:nth-child(odd){
-	
-}
-#maincontent .medialist > li:nth-child(even){
-    float:right;
-}
-ul.medialist li {
-    list-style:none;
-    padding:20px 0;
-    border-bottom:1px dotted #3b679e;
-}
-ul.medialist li:hover {
-	background:#f5f7f9;    
-}
-.medialist .metaInfo {
-	float:left;
-	width:324px;
-	margin-left:20px;
-}
-#maincontent .medialist h4 {
-	font-size:15px;
-	font-weight:bold;
-	text-shadow: rgba(218, 218, 218, 0.4) -1px -1px 0;
-	line-height:1;
-	margin-bottom:2px;
-}
-#maincontent .medialist h6.subhead {
-	margin-bottom:8px;
-    font-size:0.75em;
-    color: #919191;
-}
-#maincontent .medialist p {
-	line-height:1.25em;
-	overflow:hidden;
-	text-overflow:ellipsis;
-	height:3.8em;
-}
-#maincontent .medialist li a.imagelink {float:left;}
-#maincontent .medialist li img {
-	width:100px;
-}
-#maincontent .medialist div.actions{
-	position:absolute;
-	margin-top:87px;
-	margin-left:5px;
-	font-size:0.8em;
-	float:left;
-}
-#maincontent .medialist div.actions form {
-	display:inline;
-	margin-left:5px;
-	border-left:1px solid #c4c2c2;
-	padding-left:8px;
-}
-.medialist + em {
-	font-size:0.8em;
-}
-.pager_links {
-    font-weight:bold;
-    margin:15px 0 15px 0;
-}
-.pager_links a {
-    border: 1px solid #4194bd;
-    padding:5px;
-    color:#4194bd;
-    background:none;
-}
-.pager_links a:hover {
-    border:1px solid #bd4141;
-    color:#bd4141;
-}
-#maincontent a.add_media {
-    background: url('images/iconPlus.png') no-repeat 0 0;
-    position:relative;
-    float:left;
-    text-indent:-99999px;
-    display:inline-block;
-    width:16px;
-    height:16px;
-    left:12px;
-    top:5px;
+
+.mh-media h1 {
+  margin-top: 0;
 }
 
-/* 
--------------------------------------------------
-Homepage overrides
--------------------------------------------------
+nav.mh-sort-filter {
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+ul.mh-btn-group {
+  background-color: #d00000;
+  border-radius: 15px;
+  display: inline-block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  vertical-align: middle;
+}
+
+ul.mh-btn-group a {
+  background-color: #d00000;
+  padding: .75em;
+}
+
+ul.mh-btn-group li:first-of-type a {
+  border-bottom-left-radius: 15px;
+  border-top-left-radius: 15px;
+}
+
+ul.mh-btn-group li:last-of-type a {
+  border-bottom-right-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+ul.mh-btn-group li {
+  display: inline-block;
+  float: left;
+  margin: 0;
+}
+
+ul.mh-btn-group > li:not(:last-of-type) {
+  border-right: 1px solid rgba(0, 0, 0, .1);
+}
+
+.mh-sort-filter .mh-btn-group {
+  margin-right: 1em;
+}
+
+.mh-sort-filter-active:before {
+  content: '\2022';
+  margin-right: .75em;
+}
+
+.mh-media .wdn_pagination {
+  padding: 0;
+  text-align: center;
+}
+
+.mh-media .wdn_pagination li {
+  display: inline-block;
+  float: none;
+}
+
+/* don't use for now
+@media (min-width: 768px) {
+  .mh-media-browse.page-1 > :first-child {
+    width: 66.6666%;
+  }
+}
 */
-#maincontent .feature .medialist > li {
-    width:100%;
-}
-#maincontent .feature .medialist li img {
-    width:150px;
-}
-#maincontent .feature .medialist .metaInfo {
-    width:530px;
-}
-#maincontent .feature .wdn_tabs_content em, #maincontent .feature .wdn_tabs_content .wdn_pagination, #maincontent .feature .wdn_tabs_content h3, #maincontent .feature .wdn_tabs_content .group {
-    display:none;
-}
