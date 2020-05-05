@@ -1,5 +1,4 @@
 <?php
-$controller->setReplacementData('head', '<link rel="alternate" type="application/rss+xml" title="'.htmlentities($context->feed->title, ENT_QUOTES).'" href="?format=xml" />');
 $controller->setReplacementData('title', 'UNL | MediaHub | '.htmlspecialchars($context->feed->title));
 // TODO: disable breadcrumbs since currently not supported in 5.0 App templates
 //$controller->setReplacementData('breadcrumbs', '<ol> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li><li><a href="'.UNL_MediaHub_Controller::getURL().'channels/">All Channels</a></li><li>'.htmlspecialchars($context->feed->title).'</li></ol>');

@@ -27,9 +27,12 @@ $page->addStyleSheet($baseUrl . 'templates/html/css/all.css?v=' . UNL_MediaHub_C
 
 $page->addScriptDeclaration('WDN.setPluginParam("idm", "logout", "' . $baseUrl . '?logout");');
 $page->addScript($baseUrl . 'templates/html/scripts/frontend.js?v=' . UNL_MediaHub_Controller::getVersion());
-if (!$context->output instanceof UNL_MediaHub_FeedAndMedia) {
-    $page->head .= '<link rel="alternate" type="application/rss+xml" title="UNL MediaHub" href="?format=xml" />';
+if (is_array($context->output) && $context->output[0] instanceof UNL_MediaHub_FeedAndMedia) {
+	$alternateLinkTitle = trim(htmlentities($context->output[0]->feed->title, ENT_QUOTES));
+} else {
+	$alternateLinkTitle = 'UNL MediaHub';
 }
+$page->head .= '<link rel="alternate" type="application/rss+xml" title="'. $alternateLinkTitle .'" href="?format=xml" />';
 
 //Navigation
 $page->appcontrols = $savvy->render(null, 'Navigation.tpl.php');
