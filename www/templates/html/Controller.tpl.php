@@ -32,7 +32,8 @@ if (is_array($context->output) && $context->output[0] instanceof UNL_MediaHub_Fe
 } else {
 	$alternateLinkTitle = 'UNL MediaHub';
 }
-$page->head .= '<link rel="alternate" type="application/rss+xml" title="'. $alternateLinkTitle .'" href="?format=xml" />';
+$xmlHref = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]?format=xml";
+$page->head .= '<link rel="alternate" type="application/rss+xml" title="'. $alternateLinkTitle .'" href="' . $xmlHref .'" />';
 
 //Navigation
 $page->appcontrols = $savvy->render(null, 'Navigation.tpl.php');
