@@ -27,8 +27,8 @@ $page->addStyleSheet($baseUrl . 'templates/html/css/all.css?v=' . UNL_MediaHub_C
 
 $page->addScriptDeclaration('WDN.setPluginParam("idm", "logout", "' . $baseUrl . '?logout");');
 $page->addScript($baseUrl . 'templates/html/scripts/frontend.js?v=' . UNL_MediaHub_Controller::getVersion());
-if (property_exists($context, 'feed') && property_exists($context->feed, 'title')) {
-	$alternateLinkTitle = trim(htmlentities($context->feed->title, ENT_QUOTES));
+if (is_array($context->output) && $context->output[0] instanceof UNL_MediaHub_FeedAndMedia) {
+	$alternateLinkTitle = trim(htmlentities($context->output[0]->feed->title, ENT_QUOTES));
 } else {
 	$alternateLinkTitle = 'UNL MediaHub';
 }
