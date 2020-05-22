@@ -1,5 +1,5 @@
 requirejs.config({
-    baseUrl: 'templates/html/scripts'
+    baseUrl: '/templates/html/scripts'
 });
 
 require(['jquery'], function($) {

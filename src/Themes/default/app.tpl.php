@@ -134,7 +134,7 @@
     // JavaScript Support Example
     DCFUtility.flagSupportsJavaScript();
 </script>
-<script data-main="templates/html/scripts/app.js" src="templates/html/scripts/require.js"></script>
+<script data-main="/templates/html/scripts/app.js" src="/templates/html/scripts/require.js"></script>
 
 <!-- InstanceBeginEditable name="jsbody" -->
 <!-- put your custom javascript here -->
