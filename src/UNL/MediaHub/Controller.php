@@ -17,11 +17,39 @@ class UNL_MediaHub_Controller
     );
 
     /**
+     * Mediahub app name to use.
+     *
+     * @var string
+     */
+    public static $appName;
+
+    /**
+     * Mediahub theme to use.
+     *
+     * @var string
+     */
+    public static $theme;
+
+    /**
+     * Mediahub custom theme template to use.
+     *
+     * @var string
+     */
+    public static $customThemeTemplate;
+
+    /**
      * UNL template style to use.
      *
      * @var string
      */
-    public $template = 'Fixed';
+    public static $template;
+
+    /**
+     * UNL template version to use.
+     *
+     * @var string
+     */
+    public static $templateVersion;
 
     /**
      * Any output prepared by this controller will go here. This could be

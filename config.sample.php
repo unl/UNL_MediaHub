@@ -20,6 +20,19 @@ UNL_MediaHub::$dsn = 'mysql://mediahub:mediahub@localhost/mediahub';
 UNL_MediaHub_Controller::$url = 'http://localhost:8007/';
 UNL_MediaHub_Controller::$thumbnail_generator = 'https://itunes.unl.edu/thumbnails.php?url=';
 
+require_once 'Themes/Theme.php';
+UNL_MediaHub_Controller::$appName = 'UNL MediaHub';
+
+// default theme
+//UNL_MediaHub_Controller::$theme = 'default';
+//UNL_MediaHub_Controller::$template = \Themes\Theme::TYPE_APP;
+//UNL_MediaHub_Controller::$templateVersion = \Themes\Theme::CUSTOM_VERSION;
+
+// UNL theme
+UNL_MediaHub_Controller::$theme = 'UNL';
+UNL_MediaHub_Controller::$template = \Themes\Theme::TYPE_APP;
+UNL_MediaHub_Controller::$templateVersion = UNL\Templates\Templates::VERSION_5_1;
+
 UNL_MediaHub_AmaraAPI::$amara_username = false;
 UNL_MediaHub_AmaraAPI::$amara_api_key  = false;
 
