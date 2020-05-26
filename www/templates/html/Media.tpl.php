@@ -179,7 +179,7 @@ $getTracks = $context->getTextTrackURLs();
               <div class="dcf-pt-4">
                 <div>
 
-                  <a class="dcf-btn embed mh-hide-bp2"><span class="wdn-icon-plus wdn-icon" aria-hidden="true"></span>Embed</a>
+                  <a class="dcf-btn embed mh-hide-bp2 dcf-btn-toggle-modal" data-toggles-modal="embed-modal"><span class="wdn-icon-plus wdn-icon" aria-hidden="true"></span>Embed</a>
                   <br><br>
                   <a href="<?php echo htmlentities($controller->getURL($context).'/download', ENT_QUOTES); ?>" target="_blank" class="dcf-btn dcf-btn-secondary mh-hide-bp2"><span class="dcf-mr-1" aria-hidden="true">&darr;</span>Download</a>
 
@@ -197,17 +197,24 @@ $getTracks = $context->getTextTrackURLs();
     </div>
 </div>
 
-<div id="sharing" class="dcf-pb-8">
-    <h3>Embed</h3>
-    <?php $embed = $savvy->render(UNL_MediaHub_Media_Embed::getById($context->id, UNL_MediaHub_Controller::$current_embed_version)); ?>
-    <label for="embed_code">
-        <strong>iframe embed code</strong> Copy the following code into your page
-        <textarea cols="25" rows="6" id="embed_code" onclick="this.select(); return false;"><?php echo htmlentities($embed, ENT_COMPAT | ENT_HTML401, "UTF-8"); ?></textarea>
-    </label>
-    <?php if (3 == UNL_MediaHub_Controller::$current_embed_version): ?>
-        <!--
-        Old embed code for testing purposes
-        <?php echo $savvy->render(UNL_MediaHub_Media_Embed::getById($context->id, 2)); ?>
-        -->
-    <?php endif; ?>
+<div class="dcf-modal dcf-bg-overlay-dark dcf-fixed dcf-pin-top dcf-pin-left dcf-h-100% dcf-w-100% dcf-d-flex dcf-ai-center dcf-jc-center dcf-opacity-100 dcf-pointer-events-auto" id="embed-modal" aria-labelledby="embed-modal" aria-hidden="false" role="dialog" tabindex="-1">
+    <div class="dcf-modal-wrapper dcf-relative dcf-h-auto dcf-overflow-y-auto" style="background-color: #fff" role="document">
+        <header class="dcf-modal-header dcf-wrapper dcf-pt-8 dcf-sticky dcf-pin-top">
+            <h2 id="embed-modal-heading">Embed</h2>
+            <button class="dcf-btn-close-modal dcf-btn dcf-btn-tertiary dcf-absolute dcf-pin-top dcf-pin-right dcf-z-1" type="button" aria-label="Close">Close</button>
+        </header>
+        <div class="dcf-modal-content dcf-wrapper dcf-pb-8">
+            <?php $embed = $savvy->render(UNL_MediaHub_Media_Embed::getById($context->id, UNL_MediaHub_Controller::$current_embed_version)); ?>
+            <label for="embed_code">
+                <p><strong>iframe embed code:</strong> Copy the following code into your page</p>
+                <textarea cols="25" rows="6" id="embed_code" onclick="this.select(); return false;"><?php echo htmlentities($embed, ENT_COMPAT | ENT_HTML401, "UTF-8"); ?></textarea>
+            </label>
+            <?php if (3 == UNL_MediaHub_Controller::$current_embed_version): ?>
+                <!--
+                Old embed code for testing purposes
+                <?php echo $savvy->render(UNL_MediaHub_Media_Embed::getById($context->id, 2)); ?>
+                -->
+            <?php endif; ?>
+        </div>
+    </div>
 </div>

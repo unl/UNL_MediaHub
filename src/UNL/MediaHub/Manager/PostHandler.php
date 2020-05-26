@@ -286,7 +286,7 @@ class UNL_MediaHub_Manager_PostHandler
                 throw new UNL_MediaHub_Manager_PostHandler_UploadException('Invalid extension', 400);
             }
 
-            $finalName = md5((string) microtime() + rand()) . '.'. $extension;
+            $finalName = md5(uniqid()) . '.'. $extension;
             $finalPath = UNL_MediaHub_Manager::getUploadDirectory() . DIRECTORY_SEPARATOR . $finalName;
             
             // Strip the temp .part suffix off 
