@@ -195,7 +195,7 @@ class UNL_MediaHub_Manager_PostHandler
         //$targetDir = 'uploads';
         $cleanupTargetDir = true; // Remove old files
         $maxFileAge = 5 * 3600; // Temp file age in seconds (5 hours)
-        
+
         // Create target dir
         if (!file_exists($targetDir)) {
             @mkdir($targetDir);
@@ -286,7 +286,7 @@ class UNL_MediaHub_Manager_PostHandler
                 throw new UNL_MediaHub_Manager_PostHandler_UploadException('Invalid extension', 400);
             }
 
-            $finalName = md5((string) microtime() + rand()) . '.'. $extension;
+            $finalName = md5(uniqid()) . '.'. $extension;
             $finalPath = UNL_MediaHub_Manager::getUploadDirectory() . DIRECTORY_SEPARATOR . $finalName;
             
             // Strip the temp .part suffix off 
