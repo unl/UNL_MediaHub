@@ -25,7 +25,10 @@ class Theme {
     public function __construct($savvy, $name, $type = NULL, $version = NULL, $template = NULL) {
         $this->name = $name;
         $this->templateSavvy = clone $savvy;
+        // Path to theme templates
         $this->templateSavvy->setTemplatePath(PATH_SEPARATOR.dirname(__FILE__) . '/' . $this->name . '/');
+        // Path to frontend templates
+        $this->templateSavvy->addTemplatePath(PATH_SEPARATOR.dirname(__FILE__) . '/../../www/templates/html/');
 
         if ($this->name == self::THEME_UNL) {
             $this->type = (!empty($type)) ? $type : UNL_Templates::VERSION_DEFAULT;
