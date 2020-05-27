@@ -116,7 +116,10 @@ class UNL_MediaHub_Controller
             $this->options['format'] = 'json';
         }
 
-        UNL_MediaHub_AuthService::getInstance()->autoLogin($this->options['model']);
+        // Do not auto login for iframe requests
+        if ($this->options['format'] != 'iframe') {
+            UNL_MediaHub_AuthService::getInstance()->autoLogin($this->options['model']);
+        }
 
         UNL_MediaHub_Feed_Media_NamespacedElements_mediahub::$uri = UNL_MediaHub_Controller::$url . "schema/mediahub.xsd";
     }
