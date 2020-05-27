@@ -327,7 +327,7 @@ $page->jsbody .= $js;
 
                         </ol>
                     </fieldset>
-                    <fieldset id="geo_location" class="collapsible">
+                    <fieldset id="geo_location" class="dcf-mt-3 collapsible">
                         <legend class="dcf-legend">Geo Location</legend>
                         <ol>
                             <li>
@@ -351,7 +351,7 @@ $page->jsbody .= $js;
                     </fieldset>
 
                     <?php $customFields = UNL_MediaHub_Feed_Media_NamespacedElements_mediahub::getCustomElements(); ?>
-                    <fieldset class='collapsible' id="other_header">
+                    <fieldset class="dcf-mt-3 collapsible" id="other_header">
                         <legend class="dcf-legend">Other Information</legend>
                         <ol>
                             <?php foreach ($customFields as $customField=>$description): ?>
@@ -423,7 +423,7 @@ $page->jsbody .= $js;
                         </ol>
                     </fieldset>
 
-                    <fieldset class='collapsible'>
+                    <fieldset class='dcf-mt-3 collapsible'>
                         <legend class="dcf-legend">iTunes Information</legend>
                         <ol>
                             <li style="display:none;">
@@ -650,8 +650,10 @@ $page->jsbody .= $js;
                             </li>
                         </ol>
                     </fieldset>
-                    <input type="submit" name="submit" id="continue3" value="Save" class="dcf-float-left" />
-                    <button id="delete-media" class="dcf-btn dcf-btn-primary">Delete</button>
+                    <div class="dcf-mt-4">
+                        <input type="submit" name="submit" id="continue3" value="Save" class="dcf-float-left" />
+                        <button id="delete-media" class="dcf-btn dcf-btn-primary">Delete</button>
+                    </div>
                 </div>
                 
                 <?php
