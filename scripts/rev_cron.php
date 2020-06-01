@@ -181,7 +181,7 @@ foreach ($orders->items as $order) {
                 
                 
                 //Get the email for the person who requested the order
-                $data = file_get_contents('http://directory.unl.edu/?uid='.$order->uid.'&format=json');
+                $data = file_get_contents('https://directory.unl.edu/?uid='.$order->uid.'&format=json');
                 $data = json_decode($data, true);
                 
                 //Send them an email if we can...
