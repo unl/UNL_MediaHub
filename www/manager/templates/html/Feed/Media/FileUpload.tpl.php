@@ -19,6 +19,12 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
             Manage Media
             <span class="dcf-subhead dcf-float-right"><a href="<?php echo UNL_MediaHub_Controller::getURL() ?>help/media-prep">Preparing Your Media</a></span>
         </h2>
+        <div class="wdn_notice alert" id="media-errors" style="display:none">
+            <div class="message">
+                <h4 class="title">Media Errors</h4>
+                <ul id="media-errors-list"></ul>
+            </div>
+        </div>
         <form action="?" method="post" id="add_media">
             <input type="hidden" name="__unlmy_posttarget" value="feed_media" />
             <input type="hidden" id="media_url" name="url" value="">
@@ -133,10 +139,74 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
 </div>
 
 <?php
-$page->addScriptDeclaration("WDN.initializePlugin('form_validation', [function($) {
-    $('#add_media').validation({
-        containerClassName: 'validation-container',
-        immediate: true
+$page->addScriptDeclaration("WDN.initializePlugin('notice')");
+$page->addScriptDeclaration("
+    document.getElementById('add_media').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var submitBtn = document.getElementById('publish');
+        console.log('submitBtn', submitBtn);
+        submitBtn.setAttribute('disabled', 'disabled');
+        var errors = [];
+
+        // Validate Title
+        var title = document.getElementById('title').value.trim();
+        if (!title) {
+            errors.push('Title is required.');
+        }
+
+        // Validate Author
+        var author = document.getElementById('author').value.trim();
+        if (!author) {
+            errors.push('Author is required.');
+        }
+
+        // Validate Description
+        var description = document.getElementById('description').value.trim();
+        if (!description) {
+            errors.push('Description is required.');
+        }
+
+        // Validate Privacy
+        var privacy = document.getElementById('privacy').value.trim();
+        if (!privacy) {
+            errors.push('Privacy is required.');
+        }
+
+        // Validate Feed
+        var feedChecked = false;
+        var newFeed = document.getElementById('new_feed').value.trim();
+        var feeds = document.getElementsByName('feed_id[]');
+        for (var i=0; i<feeds.length; i++) {
+            if (feeds[i].checked === true) {
+                feedChecked = true;
+                break;
+             }
+        }
+        if (!feedChecked && !newFeed) {
+            errors.push('Media must have at least one Channel.');
+        }
+
+        // Validate Optimization
+        var optimization = document.getElementsByName('optimization');
+        if (!optimization) {
+            errors.push('Optimization is required.');
+        }
+
+        // Submit form or display errors
+        if (errors.length == 0) {
+            this.submit();
+        } else {
+            var mediaErrorsContainer = document.getElementById('media-errors');
+            var mediaErrorsList = document.getElementById('media-errors-list');
+            mediaErrorsList.innerHTML = '';
+            for (var i=0; i<errors.length; i++) {
+                var errorItem = document.createElement('li');
+                errorItem.innerHTML = errors[i];
+                mediaErrorsList.appendChild(errorItem);
+            }
+            submitBtn.removeAttribute('disabled');
+            mediaErrorsContainer.style.display = 'block';
+        }
     });
-}]);");
+");
 ?>
