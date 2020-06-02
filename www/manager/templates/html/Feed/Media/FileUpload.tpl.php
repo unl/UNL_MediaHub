@@ -144,7 +144,6 @@ $page->addScriptDeclaration("
     document.getElementById('add_media').addEventListener('submit', function(e) {
         e.preventDefault();
         var submitBtn = document.getElementById('publish');
-        console.log('submitBtn', submitBtn);
         submitBtn.setAttribute('disabled', 'disabled');
         var errors = [];
 

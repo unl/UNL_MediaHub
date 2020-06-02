@@ -165,6 +165,12 @@ $page->jsbody .= $js;
     
     <div class="dcf-bleed dcf-pt-6 mh-edit-media">
         <div class="dcf-wrapper">
+            <div class="wdn_notice alert" id="media-errors" style="display:none">
+                <div class="message">
+                    <h4 class="title">Media Errors</h4>
+                    <ul id="media-errors-list"></ul>
+                </div>
+            </div>
             <div class="dcf-grid dcf-col-gap-vw">
                 <div class="dcf-col-100% dcf-col-25%-start@sm dcf-pb-6">
                     <ol>

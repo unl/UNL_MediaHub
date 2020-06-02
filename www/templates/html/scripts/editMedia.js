@@ -128,21 +128,84 @@ require(['jquery'], function($){
                     return false;
                 });
 
-                WDN.initializePlugin('form_validation', [function() {
-                    $.validation.addMethod('geo_long', 'This must be a valid longitude.', {min:-180, max:180});
-                    $.validation.addMethod('geo_lat', 'This must be a valid latitude.', {min:-90, max:90});
-                    $mediaForm.validation({
-                        containerClassName: 'validation-container',
-                        immediate: true
-                    });
+                document.getElementById('media_form').addEventListener('submit', function(e) {
+                    var submitBtn = document.getElementById('continue3');
+                    submitBtn.setAttribute('disabled', 'disabled');
 
-                    $mediaForm.bind('validate-form', function(event, result) {
-                        if (result) {
-                            //prevent duplicate submissions
-                            $('#continue3').attr('disabled', 'disabled');
+                    var deleteBtn = document.getElementById('delete-media');
+                    deleteBtn.setAttribute('disabled', 'disabled');
+
+                    var errors = [];
+
+                    // Validate Title
+                    var title = document.getElementById('title').value.trim();
+                    if (!title) {
+                        errors.push('Title is required.');
+                    }
+
+                    // Validate Author
+                    var author = document.getElementById('author').value.trim();
+                    if (!author) {
+                        errors.push('Author is required.');
+                    }
+
+                    // Validate Description
+                    var description = document.getElementById('description').value.trim();
+                    if (!description) {
+                        errors.push('Description is required.');
+                    }
+
+                    // Validate Privacy
+                    var privacy = document.getElementById('privacy').value.trim();
+                    if (!privacy) {
+                        errors.push('Privacy is required.');
+                    }
+
+                    // Validate Feed
+                    var feedChecked = false;
+                    var newFeed = document.getElementById('new_feed').value.trim();
+                    var feeds = document.getElementsByName('feed_id[]');
+                    for (var i=0; i<feeds.length; i++) {
+                        if (feeds[i].checked === true) {
+                            feedChecked = true;
+                            break;
                         }
-                    });
-                }]);
+                    }
+                    if (!feedChecked && !newFeed) {
+                        errors.push('Media must have at least one Channel.');
+                    }
+
+                    // Validate Geo Lat/Long
+                    var geoLat = document.getElementById('geo_lat').value.trim();
+                    if (geoLat && (isNaN(geoLat) || Math.abs(geoLat) > 90)) {
+                       errors.push('Invalid Geo Location Latitude value. Must be between -90 and 90');
+                    }
+                    var geoLong = document.getElementById('geo_long').value.trim();
+                    if (geoLong && (isNaN(geoLong) || Math.abs(geoLong) > 180)) {
+                        errors.push('Invalid Geo Location Longitude value. Must be between -180 and 180');
+                    }
+
+                    if ((geoLat && !geoLong) || (!geoLat && geoLong)) {
+                        errors.push('Must provide both a Geo Location Latitude and Longitude.');
+                    }
+
+                    // Submit form or display errors
+                    if (errors.length > 0) {
+                        e.preventDefault();
+                        var mediaErrorsContainer = document.getElementById('media-errors');
+                        var mediaErrorsList = document.getElementById('media-errors-list');
+                        mediaErrorsList.innerHTML = '';
+                        for (var i=0; i<errors.length; i++) {
+                            var errorItem = document.createElement('li');
+                            errorItem.innerHTML = errors[i];
+                            mediaErrorsList.appendChild(errorItem);
+                        }
+                        submitBtn.removeAttribute('disabled');
+                        deleteBtn.removeAttribute('disabled');
+                        mediaErrorsContainer.style.display = 'block';
+                        mediaErrorsContainer.scrollIntoView();
+                    }
+                });
 
                 //Collapisible forms.
                 $('.collapsible > legend').prepend("<span class='toggle'>+</span>");
