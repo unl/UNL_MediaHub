@@ -19,12 +19,11 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
             Manage Media
             <span class="dcf-subhead dcf-float-right"><a href="<?php echo UNL_MediaHub_Controller::getURL() ?>help/media-prep">Preparing Your Media</a></span>
         </h2>
-        <div class="wdn_notice alert" id="media-errors" style="display:none">
-            <div class="message">
-                <h4 class="title">Media Errors</h4>
-                <ul id="media-errors-list"></ul>
-            </div>
-        </div>
+        <?php
+            $errorNotice = new StdClass();
+            $errorNotice->title = 'Media Errors';
+            echo $savvy->render($errorNotice, 'ErrorListNotice.tpl.php');
+        ?>
         <form action="?" method="post" id="add_media">
             <input type="hidden" name="__unlmy_posttarget" value="feed_media" />
             <input type="hidden" id="media_url" name="url" value="">
