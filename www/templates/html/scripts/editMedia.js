@@ -31,8 +31,6 @@ require(['jquery'], function($){
 
                 var src = mediaDetails.getImageURL() + '?time='+mediaDetails.formatTime(currentTime)+'&rebuild';
 
-                console.log(src)
-
                 $.ajax(src).always(function() {
                     $thumbnail.attr('src', src.replace('&rebuild', ''));
                     $imageOverlay.hide();
@@ -47,6 +45,21 @@ require(['jquery'], function($){
                 seconds = Math.floor(seconds);
 
                 return ((hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds  < 10 ? "0" + seconds : seconds) + "." + fraction);
+            },
+
+            formatDateForDB : function(date) {
+                var d = new Date(date + ' 00:00:00');
+                if (d == 'Invalid Date') {
+                    return '';
+                }
+
+                var month = '' + (d.getMonth() + 1),
+                    day = '' + d.getDate(),
+                    year = d.getFullYear();
+                if (month.length < 2) month = '0' + month;
+                if (day.length < 2) day = '0' + day;
+
+                return [year, month, day].join('-');
             },
 
             scalePlayer: function() {
@@ -189,6 +202,16 @@ require(['jquery'], function($){
                         errors.push('Must provide both a Geo Location Latitude and Longitude.');
                     }
 
+                    var mediaCreationDate = document.getElementById('media_creation_date');
+                    if (mediaCreationDate.value.trim()) {
+                        var formattedDate = mediaDetails.formatDateForDB(mediaCreationDate.value.trim());
+                        if (!formattedDate) {
+                            errors.push('Invalid Media Creation Date.');
+                        } else {
+                            mediaCreationDate.value = formattedDate;
+                        }
+                    }
+
                     // Submit form or display errors
                     if (errors.length > 0) {
                         e.preventDefault();
@@ -254,12 +277,9 @@ require(['jquery'], function($){
             
                 window.addEventListener("message", function(event){
                     if(event.data.currentTime != undefined){                        
-                        currentTime = event.data.currentTime;   
-                        console.log(currentTime)
+                        currentTime = event.data.currentTime;
                     }
                 }, false);
-
-
 
             }
         };
