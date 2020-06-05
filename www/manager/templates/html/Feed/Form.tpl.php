@@ -38,8 +38,7 @@ $page->addScriptDeclaration("
                 <?php if(isset($context->feed->id)): ?>
                     <span class="dcf-subhead">
                         <a class="users" href="<?php echo UNL_MediaHub_Manager::getURL(); ?>?view=permissions&amp;feed_id=<?php echo $context->feed->id; ?>">
-                            <span class="wdn-icon wdn-icon-user">
-                            </span>
+                            <?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_PERSON_CIRCLE, '{"width": 20, "height": 20}'); ?>
                             Edit Channel Users
                         </a>
                     </span>
@@ -57,7 +56,8 @@ $page->addScriptDeclaration("
                         <ol>
                             <li>
                                 <label class="dcf-label" for="title">Title<span class="dcf-required">*</span></label>
-                                <div class="mh-tooltip italic wdn-icon-info hang-right" id="title-details">
+                                <div class="mh-tooltip" id="title-details">
+                                    <?php echo $savvy->render('channel title tooltip', 'InfoIcon.tpl.php'); ?>
                                     <div>
                                         <p>
                                             Channel name displayed everywhere.
@@ -68,7 +68,8 @@ $page->addScriptDeclaration("
                             </li>
                             <li>
                                 <label class="dcf-label" for="description">Description<span class="dcf-required">*</span></label>
-                                <div class="mh-tooltip italic wdn-icon-info" id="description-details">
+                                <div class="mh-tooltip" id="description-details">
+                                    <?php echo $savvy->render('channel description tooltip', 'InfoIcon.tpl.php'); ?>
                                     <div>
                                         <p>
                                             Explain what this channel is all about. Use a few sentences, but keep it to 1 paragraph.
@@ -97,7 +98,8 @@ $page->addScriptDeclaration("
                             <?php endif; ?>
                             <li>
                                 <label class="element dcf-label" for="image_file">Image File</label>
-                                <div class="mh-tooltip italic wdn-icon-info hang-right" id="image-file-details">
+                                <div class="mh-tooltip" id="image-file-details">
+                                    <?php echo $savvy->render('channel image tooltip', 'InfoIcon.tpl.php'); ?>
                                     <div>
                                         <p>Images should follow the standard UNL image standards. <a href="https://github.com/unl/UNL_MediaHub/raw/master/designFiles/feedTemplate.psd">(get the sample template)</a></p>
                                     </div>
@@ -106,7 +108,8 @@ $page->addScriptDeclaration("
                             </li>
                             <li>
                                 <label for="image_title" class="element dcf-label">Image Title</label>
-                                <div class="mh-tooltip italic wdn-icon-info" id="image-title-details">
+                                <div class="mh-tooltip" id="image-title-details">
+                                    <?php echo $savvy->render('channel image title tooltip', 'InfoIcon.tpl.php'); ?>
                                     <div>
                                         <p>Give the image a title, used in RSS feeds.</p>
                                     </div>
@@ -115,7 +118,8 @@ $page->addScriptDeclaration("
                             </li>
                             <li>
                                 <label for="image_description" class="element dcf-label">Image Description</label>
-                                <div class="wdn-icon-info mh-tooltip italic" id="image-description-details">
+                                <div class="mh-tooltip" id="image-description-details">
+                                    <?php echo $savvy->render('channel image description tooltip', 'InfoIcon.tpl.php'); ?>
                                     <div>
                                         <p>Describe your image, used in RSS feeds.</p>
                                     </div>
@@ -166,7 +170,8 @@ $page->addScriptDeclaration("
                         <ol>
                             <li>
                                 <label for='itunes_author' class='element dcf-label'>Author</label>
-                                <div class="wdn-icon-info mh-tooltip italic hang-right" id="itunes-author-details">
+                                <div class="mh-tooltip" id="itunes-author-details">
+                                    <?php echo $savvy->render('channel itunes author tooltip', 'InfoIcon.tpl.php'); ?>
                                     <div>
                                         <p>Used in the Artist column of iTunes</p>
                                     </div>
@@ -337,7 +342,8 @@ $page->addScriptDeclaration("
                             </li>
                             <li>
                                 <label for='itunes_explicit' class='dcf-label element'>Explicit</label>
-                                <div class="mh-tooltip hang-right italic wdn-icon-info" id="itune-explicit-details">
+                                <div class="mh-tooltip" id="itune-explicit-details">
+                                    <?php echo $savvy->render('channel itunes explicit tooltip', 'InfoIcon.tpl.php'); ?>
                                     <div>
                                         <p>Set to 'yes' if this feed contains explicit content</p>
                                     </div>
@@ -360,7 +366,8 @@ $page->addScriptDeclaration("
                             </li>
                             <li>
                                 <label for='itunes_keywords' class='dcf-label element'>Keywords</label>
-                                <div class="wdn-icon-info mh-tooltip hang-right italic" id="itune-keyword-details">
+                                <div class="mh-tooltip" id="itune-keyword-details">
+                                    <?php echo $savvy->render('channel itunes keywords tooltip', 'InfoIcon.tpl.php'); ?>
                                     <div>
                                         <p>This tag allows users to search on a maximum of 12 text keywords. Use commas to separate keywords.</p>
                                     </div>
@@ -373,7 +380,8 @@ $page->addScriptDeclaration("
                             </li>
                             <li>
                                 <label for='itunes_new-feed-url' class='dcf-label element'>New-feed-url</label>
-                                <div class="mh-tooltip hang-right wdn-icon-info italic" id="itune-new-feed-url-details">
+                                <div class="mh-tooltip " id="itune-new-feed-url-details">
+                                    <?php echo $savvy->render('channel itunes new feed url tooltip', 'InfoIcon.tpl.php'); ?>
                                     <div>
                                         <p>This tag allows you to change the URL where the podcast feed is located.</p>
                                     </div>
@@ -386,7 +394,8 @@ $page->addScriptDeclaration("
                             </li>
                             <li>
                                 <label for='itunes_owner' class='dcf-label element'>Owner</label>
-                                <div class="wdn-icon-info mh-tooltip hang-right italic" id="itunes-owner-details">
+                                <div class="mh-tooltip" id="itunes-owner-details">
+                                    <?php echo $savvy->render('channel itunes owner tooltip', 'InfoIcon.tpl.php'); ?>
                                     <div>
                                         <p>Information that will be used to contact the owner of the podcast. Not publicly displayed.</p>
                                     </div>
@@ -400,7 +409,8 @@ $page->addScriptDeclaration("
                             </li>
                             <li>
                                 <label for='itunes_subtitle' class='dcf-label element'>Subtitle</label>
-                                <div class="italic wdn-icon-info mh-tooltip hang-right" id="itunes-subtitle-details">
+                                <div class="mh-tooltip" id="itunes-subtitle-details">
+                                    <?php echo $savvy->render('channel itunes subtitle tooltip', 'InfoIcon.tpl.php'); ?>
                                     <div>
                                         <p>The contents of this tag are shown in the Description column in iTunes. The subtitle displays best if it is only a few words long.</p>
                                     </div>
@@ -410,7 +420,8 @@ $page->addScriptDeclaration("
                             </li>
                             <li>
                                 <label for='itunes_summary' class='dcf-label element'>Summary</label>
-                                <div class="italic mh-tooltip hang-right wdn-icon-info" id="itunes-summary-details">
+                                <div class="mh-tooltip" id="itunes-summary-details">
+                                    <?php echo $savvy->render('channel itunes summary tooltip', 'InfoIcon.tpl.php'); ?>
                                     <div>
                                         <p>The contents of this tag are shown in a separate window that appears when the "circled i" in the Description column is clicked. It also appears on the iTunes page for your podcast.</p>
                                     </div>
@@ -425,7 +436,8 @@ $page->addScriptDeclaration("
                         <ol>
                             <li>
                                 <label for='media_rating' class='dcf-label element'>Rating</label>
-                                <div class="wdn-icon-info mh-tooltip hang-right italic" id="rating-details">
+                                <div class="mh-tooltip" id="rating-details">
+                                    <?php echo $savvy->render('channel rss rating tooltip', 'InfoIcon.tpl.php'); ?>
                                     <div>
                                         <p>Appropriate audience: adult or nonadult. Leave blank if no restrictions.</p>
                                     </div>
@@ -450,7 +462,8 @@ $page->addScriptDeclaration("
                             </li>
                             <li>
                                 <label for='media_keywords' class='dcf-label element'>Keywords</label>
-                                <div class="italic wdn-icon-info mh-tooltip hang-right" id="keyword-details">
+                                <div class="mh-tooltip" id="keyword-details">
+                                    <?php echo $savvy->render('channel rss keyword tooltip', 'InfoIcon.tpl.php'); ?>
                                     <div>
                                         <p>Comma seperated list of highly relevant keywords/tags describing the channel.</p>
                                     </div>
@@ -462,7 +475,8 @@ $page->addScriptDeclaration("
                             </li>
                             <li>
                                 <label for='media_thumbnail' class='dcf-label element'>Thumbnail</label>
-                                <div class="italic wdn-icon-info mh-tooltip hang-right" id="thumbnail-details">
+                                <div class="mh-tooltip" id="thumbnail-details">
+                                    <?php echo $savvy->render('channel rss thumbnail tooltip', 'InfoIcon.tpl.php'); ?>
                                     <div>
                                         <p>Allows particular images to be used as representative images for the media object.</p>
                                     </div>
@@ -474,7 +488,8 @@ $page->addScriptDeclaration("
                             </li>
                             <li>
                                 <label for='media_category' class='dcf-label element'>Category</label>
-                                <div class="wdn-icon-info mh-tooltip hang-right wdn-icon-info" id="category-details">
+                                <div class="mh-tooltip" id="category-details">
+                                    <?php echo $savvy->render('channel rss category tooltip', 'InfoIcon.tpl.php'); ?>
                                     <div>
                                         <p>Allows a taxonomy to be set that gives an indication of the type of media content, and its particular contents</p>
                                     </div>
@@ -486,7 +501,8 @@ $page->addScriptDeclaration("
                             </li>
                             <li>
                                 <label for='media_player' class='dcf-label element'>Player</label>
-                                <div class="wdn-icon-info mh-tooltip hang-right italic" id="player-details">
+                                <div class="mh-tooltip" id="player-details">
+                                    <?php echo $savvy->render('channel rss player tooltip', 'InfoIcon.tpl.php'); ?>
                                     <div>
                                         <p>Allows the media object to be accessed through a web browser media player console.</p>
                                     </div>
@@ -498,7 +514,8 @@ $page->addScriptDeclaration("
                             </li>
                             <li>
                                 <label for='media_credit' class='dcf-label element'>Credit</label>
-                                <div class="wdn-icon-info mh-tooltip hang-right italic" id="credit-details">
+                                <div class="mh-tooltip" id="credit-details">
+                                    <?php echo $savvy->render('channel rss rating tooltip', 'InfoIcon.tpl.php'); ?>
                                     <div>
                                         <p>Notable entity and the contribution to the creation of the media object.</p>
                                     </div>
@@ -510,7 +527,8 @@ $page->addScriptDeclaration("
                             </li>
                             <li>
                                 <label for='media_copyright' class='dcf-label element'>Copyright</label>
-                                <div class="mh-tooltip hang-right italic wdn-icon-info" id="copyright-details">
+                                <div class="mh-tooltip" id="copyright-details">
+                                    <?php echo $savvy->render('channel rss copyright tooltip', 'InfoIcon.tpl.php'); ?>
                                     <div>
                                         <p>Copyright information for media object.</p>
                                     </div>
@@ -522,7 +540,8 @@ $page->addScriptDeclaration("
                             </li>
                             <li style="display:none;">
                                 <label for='media_text' class='dcf-label element'>Text</label>
-                                <div class="mh-tooltip hang-right wdn-icon-info italic" id="text-details">
+                                <div class="mh-tooltip" id="text-details">
+                                    <?php echo $savvy->render('channel rss text tooltip', 'InfoIcon.tpl.php'); ?>
                                     <div>
                                         <p>Allows the inclusion of a text transcript, closed captioning, or lyrics of the media content.</p>
                                     </div>
@@ -534,7 +553,8 @@ $page->addScriptDeclaration("
                             </li>
                             <li>
                                 <label for='media_restriction' class='dcf-label element'>Restriction</label>
-                                <div class="wdn-icon-info mh-tooltip hang-right italic" id="restriction-details">
+                                <div class="mh-tooltip " id="restriction-details">
+                                    <?php echo $savvy->render('channel rss restrictions tooltip', 'InfoIcon.tpl.php'); ?>
                                     <div>
                                         <p>Allows restrictions to be placed on the aggregator rendering the media in the feed.</p>
                                     </div>
