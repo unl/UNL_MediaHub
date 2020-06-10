@@ -10,11 +10,3 @@ require(['jquery'], function($) {
 		return false;
 	});
 });
-
-function loadCSS(file) {
-	var fileref = document.createElement('link');
-	fileref.rel = 'stylesheet';
-	fileref.type = 'text/css';
-	fileref.href = file;
-	document.getElementsByTagName('head')[0].appendChild(fileref);
-}
