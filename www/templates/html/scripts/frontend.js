@@ -10,3 +10,8 @@ require(['jquery'], function($) {
 		return false;
 	});
 });
+
+// Load WDN notice javascript when available
+window.addEventListener('inlineJSReady', function() {
+	require(['notice']);
+}, false);

@@ -27,3 +27,8 @@ require(['jquery'], function($){
         });
     });
 });
+
+// Load WDN notice javascript when available
+window.addEventListener('inlineJSReady', function() {
+    require(['notice']);
+}, false);

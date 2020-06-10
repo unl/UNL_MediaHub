@@ -138,7 +138,6 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
 </div>
 
 <?php
-$page->addScriptDeclaration("WDN.initializePlugin('notice')");
 $page->addScriptDeclaration("
     document.getElementById('add_media').addEventListener('submit', function(e) {
         e.preventDefault();

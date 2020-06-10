@@ -11,7 +11,6 @@
 
 <?php
 $page->addScriptDeclaration("
-    WDN.initializePlugin('notice');
     require(['jquery'], function($) {
         var checkStatus = function() {
             \$.get('" . UNL_MediaHub_Manager::getURL() . "?view=addmedia&id=" . $context->media->id . "&format=json', function(data) {

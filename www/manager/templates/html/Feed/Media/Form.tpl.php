@@ -80,8 +80,6 @@ $page->jsbody .= $js;
                         </div>
                     </div>
                 </div>
-
-                <?php $page->addScriptDeclaration("WDN.initializePlugin('notice')"); ?>
             <?php endif; ?>
 
             <?php if ($transcoding_job && $transcoding_job->isPending()): ?>
@@ -102,8 +100,6 @@ $page->jsbody .= $js;
                         </div>
                     </div>
                 </div>
-
-                <?php $page->addScriptDeclaration("WDN.initializePlugin('notice')"); ?>
             <?php endif; ?>
 
             <?php if (!$transcoding_job && !$context->media->isWebSafe()): ?>
@@ -120,8 +116,6 @@ $page->jsbody .= $js;
                         </div>
                     </div>
                 </div>
-
-                <?php $page->addScriptDeclaration("WDN.initializePlugin('notice')"); ?>
             <?php endif; ?>
 
             <?php if (!$transcoding_job ||  $transcoding_job->isSuccess()): ?>

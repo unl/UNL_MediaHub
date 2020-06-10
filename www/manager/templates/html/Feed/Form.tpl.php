@@ -46,9 +46,14 @@ $page->addScriptDeclaration("
             </h2>
             <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
             <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
-            <input name="submit" value="Save" class="dcf-btn dcf-float-right" type="submit" />
+            <input name="submit" value="Save" id="save-channel-1" class="dcf-btn dcf-float-right" type="submit" />
 
             <div class="dcf-clear-both"></div>
+            <?php
+            $errorNotice = new StdClass();
+            $errorNotice->title = 'Channel Errors';
+            echo $savvy->render($errorNotice, 'ErrorListNotice.tpl.php');
+            ?>
             <div class="dcf-mt-6 dcf-grid dcf-col-gap-vw dcf-row-gap-6">
                 <div class="dcf-col-100% dcf-col-67%-start@md">
                     <fieldset>
@@ -566,7 +571,7 @@ $page->addScriptDeclaration("
                             </li>
                             <li>
                                 <div class="element">
-                                    <input type="submit"  name="submit" value="Save" class="dcf-btn dcf-float-left" />
+                                    <input type="submit" name="submit" id="save-channel-2" value="Save" class="dcf-btn dcf-float-left" />
                                     <?php if (isset($context->feed)): ?>
                                         <a href="#" class="dcf-btn dcf-btn-primary" id="deleteFormBtn">Delete</a>
                                     <?php endif; ?>
@@ -577,6 +582,51 @@ $page->addScriptDeclaration("
                 </div>
             </div>
         </form>
+        <script>
+          document.getElementById('feed').addEventListener('submit', function(e) {
+            console.log('jasdkjsadf');
+            var submitBtn1 = document.getElementById('save-channel-1');
+            submitBtn1.setAttribute('disabled', 'disabled');
+
+            var submitBtn2 = document.getElementById('save-channel-2');
+            submitBtn2.setAttribute('disabled', 'disabled');
+
+            var deleteBtn = document.getElementById('deleteFormBtn');
+            deleteBtn.setAttribute('disabled', 'disabled');
+
+            var errors = [];
+
+            // Validate Title
+            var title = document.getElementById('title').value.trim();
+            if (!title) {
+              errors.push('Title is required.');
+            }
+
+            // Validate Description
+            var description = document.getElementById('description').value.trim();
+            if (!description) {
+              errors.push('Description is required.');
+            }
+
+            // Submit form or display errors
+            if (errors.length > 0) {
+              e.preventDefault();
+              var errorsContainer = document.getElementById('media-errors');
+              var errorsList = document.getElementById('media-errors-list');
+              errorsList.innerHTML = '';
+              for (var i=0; i<errors.length; i++) {
+                var errorItem = document.createElement('li');
+                errorItem.innerHTML = errors[i];
+                errorsList.appendChild(errorItem);
+              }
+              submitBtn1.removeAttribute('disabled');
+              submitBtn2.removeAttribute('disabled');
+              deleteBtn.removeAttribute('disabled');
+              errorsContainer.style.display = 'block';
+              errorsContainer.scrollIntoView();
+            }
+          });
+        </script>
         <?php if (isset($context->feed)): ?>
             <?php echo $savvy->render($context->feed, 'Feed/DeleteForm.tpl.php'); ?>
             <script>
