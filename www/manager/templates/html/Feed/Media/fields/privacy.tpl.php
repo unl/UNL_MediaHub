@@ -1,5 +1,6 @@
 <label for="privacy" class="dcf-label element">Privacy</label>
-<div class="wdn-icon-info mh-tooltip hang-right" id="privacy-details">
+<div class="mh-tooltip hang-right" id="privacy-details">
+    <?php echo $savvy->render('privacy tooltip', 'InfoIcon.tpl.php'); ?>
     <div>
         <ul>
             <li>

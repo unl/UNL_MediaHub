@@ -83,9 +83,9 @@
                         ?>
                         <input class="dcf-mb-4" type="submit" id="caption_submit_button" value="Order captions" onclick="return confirm('<?php echo $confirmMessage; ?>');">
                         <?php if ($hasRevOrders === TRUE): ?>
-                        <p class="wdn-icon wdn-icon-attention unl-font-sans">Captions have already been ordered for this video.</p>
+                        <p class="unl-font-sans"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ALERT, '{"size": 4}'); ?> Captions have already been ordered for this video.</p>
                         <?php endif; ?>
-                        <p class="wdn-icon wdn-icon-attention unl-font-sans">Orders can not be canceled.</p>
+                        <p class="unl-font-sans"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ALERT, '{"size": 4}'); ?> Orders can not be canceled.</p>
                     </form>
                     <?php else: ?>
                     <p>Great news! There is an order already in the works.</p>

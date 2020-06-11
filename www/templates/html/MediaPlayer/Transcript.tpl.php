@@ -18,10 +18,10 @@
 <div class="mh-caption-search">
     <div class="mh-transcript-hide-bp2">
         <div class="title unl-font-sans">
-            <span class="wdn-icon-search" aria-hidden="true"></span>
+            <span aria-hidden="true"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_SEARCH, '{"size": 5}'); ?></span>
             <h2 class="unl-font-sans">Searchable Transcript</h2>
-            <div class="mh-tooltip italic">
-                <span class="wdn-icon-info" aria-hidden="true"></span><span class="dcf-sr-only">more info</span>
+            <div class="mh-tooltip">
+                <span aria-hidden="true"><?php echo $savvy->render('searchable transcript tooltip', 'InfoIcon.tpl.php'); ?></span><span class="dcf-sr-only">more info</span>
                 <div>
                     <ul>
                         <li>Use the text input to search the transcript. </li>

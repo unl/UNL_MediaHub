@@ -18,10 +18,6 @@ Supporting styles for search box
   position: relative;
 }
 
-.mh-list-header .wdn-icon-search {
-  border-bottom: 1px solid #137cbd;
-}
-
 form .wdn-input-group .wdn-input-group-btn > input[type="submit"],
 form .wdn-input-group .wdn-input-group-btn > input[type="button"],
 form .wdn-input-group .wdn-input-group-btn > button {

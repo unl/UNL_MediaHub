@@ -9,7 +9,7 @@ $user = UNL_MediaHub_AuthService::getInstance()->getUser();
 <div class="dcf-bleed dcf-pt-6 dcf-pb-6 unl-bg-lightest-gray mh-feed-info">
     <div class="dcf-wrapper">
 
-      <div class="dcf-float-right mh-rss"><a href="?format=xml" title="RSS feed for this channel"><span class="wdn-icon-rss-squared" aria-hidden="true"></span></a></div>
+      <div class="dcf-float-right mh-rss"><a href="?format=xml" title="RSS feed for this channel"><span aria-hidden="true"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_RSS_BOX, '{"size": 4}'); ?></span></a></div>
       <h2><?php echo UNL_MediaHub::escape($context->feed->title) ?>
         <?php if ($user && $context->feed->userCanEdit($user)): ?>
           <span class="dcf-txt-base"><a href="<?php echo UNL_MediaHub_Manager::getURL()?>?view=feedmetadata&amp;id=<?php echo (int)$context->feed->id ?>" class="dcf-btn dcf-btn-primary mh-channel-edit-button">Edit</a></span>

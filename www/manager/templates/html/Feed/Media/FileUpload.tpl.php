@@ -53,7 +53,8 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                                     <label class="dcf-label" for="author">
                                         Author<span class="dcf-required">*</span>
                                     </label>
-                                    <div class="mh-tooltip wdn-icon-info hang-right" id="author-details">
+                                    <div class="mh-tooltip hang-right" id="author-details">
+                                        <?php echo $savvy->render('author tooltip', 'InfoIcon.tpl.php'); ?>
                                         <div>
                                             Name of media creator
                                         </div>
@@ -64,7 +65,8 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                                     <label class="dcf-label" for="description">
                                         Description<span class="dcf-required">*</span>
                                     </label>
-                                    <div class="mh-tooltip wdn-icon-info" id="description-details">
+                                    <div class="mh-tooltip" id="description-details">
+                                        <?php echo $savvy->render('description tooltip', 'InfoIcon.tpl.php'); ?>
                                         <div>
                                             Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.
                                         </div>
@@ -127,7 +129,8 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                     
                     <input type="submit" id="publish" name="publish" value="Next Step: Add Captions" class="dcf-btn dcf-btn-primary dcf-mt-3" disabled="disabled">
                     <?php if (UNL_MediaHub_Controller::$caption_requirement_date):?>
-                        <p class="wdn-icon wdn-icon-attention">
+                        <p>
+                            <?php echo $savvy->render('publish tooltip', 'InfoIcon.tpl.php'); ?>
                             Note: Media will not be published until it is captioned.
                         </p>
                     <?php endif; ?>

@@ -172,10 +172,10 @@ $page->jsbody .= $js;
                                 <p>Swapping media is disabled while a video is being optimized.</p>
                             <?php else: ?>
                                 <?php if ($transcoding_job): ?>
-                                    <p><span class="wdn-icon-attention" aria-hidden="true"></span><span class="dcf-sr-only">Notice:</span> Swapping media will cause the media to be unavailable while the upload is optimized. This upload will be optimized with the same settings as the current version.</p>
+                                    <p><span aria-hidden="true"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ALERT, '{"size": 4}');?></span><span class="dcf-sr-only">Notice:</span> Swapping media will cause the media to be unavailable while the upload is optimized. This upload will be optimized with the same settings as the current version.</p>
                                 <?php endif; ?>
                                 <?php if (!$transcoding_job): ?>
-                                    <p><span class="wdn-icon-attention" aria-hidden="true"></span><span class="dcf-sr-only">Notice:</span> You MUST use HandBrake to optimize the new video.</p>
+                                    <p><span aria-hidden="true"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ALERT, '{"size": 4}');?></span><span class="dcf-sr-only">Notice:</span> You MUST use HandBrake to optimize the new video.</p>
                                 <?php endif; ?>
                                 <div id="mh_upload_media_container">
                                     <div id="mh_upload_media" class="mh-upload-box mh-upload-box-small dcf-txt-center">
@@ -183,7 +183,7 @@ $page->jsbody .= $js;
                                             <img src="<?php echo $baseUrl; ?>/templates/html/css/images/swap-arrows.png" alt="browse media">
                                         </object>
                                         <h2><span class="dcf-subhead">Swap Media</span></h2>
-                                        <p>Upload a new .mp4 or .mp3 file and replace your old one. <strong class="wdn-icon-attention">(Caution: This deletes your old file.)</strong></p>
+                                        <p>Upload a new .mp4 or .mp3 file and replace your old one. <strong><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ALERT, '{"size": 4}');?>(Caution: This deletes your old file.)</strong></p>
                                     </div>
                                     <div id="filelist" class="mh-upload-box dcf-txt-center">
                                         Your browser doesn't have Flash, Silverlight or HTML5 support.
@@ -206,7 +206,8 @@ $page->jsbody .= $js;
                             <label for="projection">360 Video (equirectangular)</label>
                         </li>
                         <li>
-                            <div class="wdn-icon-info mh-tooltip hang-left" id="poster-details">
+                            <div class="mh-tooltip hang-right" id="poster-details">
+                                <?php echo $savvy->render('custom poster tooltip', 'InfoIcon.tpl.php'); ?>
                               <div>
                                 <p>
                                     <?php
@@ -268,7 +269,8 @@ $page->jsbody .= $js;
                                         <label for="mrss_credit" class="dcf-label element">
                                             Credit 
                                         </label>
-                                        <div class="wdn-icon-info hang-right mh-tooltip italic" id="credit-details">
+                                        <div class="hang-right mh-tooltip" id="credit-details">
+                                            <?php echo $savvy->render('credit tooltip', 'InfoIcon.tpl.php'); ?>
                                             <div>
                                                 <p>
                                                     Notable entity and the contribution to the creation of the media object.
@@ -282,7 +284,8 @@ $page->jsbody .= $js;
                                     </li>
                                     <li>
                                         <label for="mrss_category" class="dcf-label element">Category</label>
-                                        <div class="wdn-icon-info hang-right mh-tooltip italic" id="category-details">
+                                        <div class="hang-right mh-tooltip" id="category-details">
+                                            <?php echo $savvy->render('category tooltip', 'InfoIcon.tpl.php'); ?>
                                             <div>
                                                 <p>
                                                     Allows a taxonomy to be set that gives an indication of the type of media content, and its particular contents.
@@ -303,7 +306,8 @@ $page->jsbody .= $js;
                                 <label for="description" class="dcf-label element">
                                     Description<span class="required">*</span>
                                 </label>
-                                <div class="mh-tooltip wdn-icon-info italic" id="description-details">
+                                <div class="mh-tooltip" id="description-details">
+                                    <?php echo $savvy->render('description tooltip', 'InfoIcon.tpl.php'); ?>
                                     <div>
                                         <p>Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.</p>
                                     </div>
@@ -313,7 +317,8 @@ $page->jsbody .= $js;
 
                             <li>
                                 <label for="itunes_keywords" class="dcf-label element">Tags</label>
-                                <div class="mh-tooltip wdn-icon-info italic hang-right" id="tag-details">
+                                <div class="mh-tooltip hang-right" id="tag-details">
+                                    <?php echo $savvy->render('tag tooltip', 'InfoIcon.tpl.php'); ?>
                                     <div>
                                         <p>A comma separated list of highly relevant keywords, MAX 10. Tags also serve as iTunes Keywords.</p>
                                     </div>
@@ -434,7 +439,8 @@ $page->jsbody .= $js;
                                 <label for="mrss_text" class="dcf-label element">
                                     Transcript/Captioning
                                 </label>
-                                <div class="mh-tooltip wdn-icon-info italic" id="captioning-details">
+                                <div class="mh-tooltip" id="captioning-details">
+                                    <?php echo $savvy->render('captioning tooltip', 'InfoIcon.tpl.php'); ?>
                                     <div>
                                         <p>Allows the inclusion of a text transcript, closed captioning, or lyrics of the media content.</p>
                                     </div>

@@ -38,7 +38,7 @@ $page->addScriptDeclaration("
                 <?php if(isset($context->feed->id)): ?>
                     <span class="dcf-subhead">
                         <a class="users" href="<?php echo UNL_MediaHub_Manager::getURL(); ?>?view=permissions&amp;feed_id=<?php echo $context->feed->id; ?>">
-                            <?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_PERSON_CIRCLE, '{"width": 20, "height": 20}'); ?>
+                            <span class="icon-black"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_PERSON_CIRCLE); ?></span>
                             Edit Channel Users
                         </a>
                     </span>

@@ -95,12 +95,10 @@ iframe * {margin:0px}
 .mh-upload-box {
     width: 100%;
     padding: 37% 0 63% 0;
-    height: 0;
     border: 2px dashed RGB(213,213,210);
     background-color: RGBA(255,255,255,.75);
     display: block;
     cursor: pointer;
-    word-break: break-all;
 }
 
 .mh-upload-box.mh-upload-box-small {
@@ -259,7 +257,7 @@ form legend {
     height: 1.5em;
     width: 1.5em;
     padding: 0 0.2em;
-    color: #fff;
+    color: #4682B4;
     display: inline-block;
     text-align: center;
     font-size: 0.66em;

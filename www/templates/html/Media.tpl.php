@@ -61,7 +61,7 @@ $getTracks = $context->getTextTrackURLs();
     <div class="dcf-wrapper mh-media-page">
         <?php if ($user && $context->userCanEdit($user)): ?>
           <div class="dcf-pb-4">
-            <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=addmedia&id=' . $context->id ?>" class="dcf-btn dcf-btn-primary"><span class="wdn-icon-wrench wdn-icon"></span>Edit Media Details</a>
+            <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=addmedia&id=' . $context->id ?>" class="dcf-btn dcf-btn-primary"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_WRENCH, '{size": 5}');?> Edit Media Details</a>
           </div>
         <?php endif; ?>
         <div class="dcf-grid dcf-col-gap-vw dcf-row-gap-4">
@@ -136,7 +136,7 @@ $getTracks = $context->getTextTrackURLs();
                     <?php
                         $page->head .= '<link rel="stylesheet" type="text/css" href="../templates/html/css/comments.css?v=' . trim(UNL_MediaHub_Controller::getVersion()) .'" />';
                     ?>
-                    <h2 class="unl-font-sans">Comments <span class="wdn-icon wdn-icon-comment" aria-hidden="true"></span></h2>
+                    <h2 class="unl-font-sans">Comments <span aria-hidden="true"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_COMMENT, '{"size": 4}');?></span></h2>
                     <span class="subhead">
                         <?php echo count($context->UNL_MediaHub_Media_Comment); ?> Comments
                         <?php if ($user): ?>
@@ -179,9 +179,9 @@ $getTracks = $context->getTextTrackURLs();
               <div class="dcf-pt-4">
                 <div>
 
-                  <a class="dcf-btn embed mh-hide-bp2 dcf-btn-toggle-modal" data-toggles-modal="embed-modal"><span class="wdn-icon-plus wdn-icon" aria-hidden="true"></span>Embed</a>
+                  <a class="dcf-btn embed mh-hide-bp2 dcf-btn-toggle-modal" data-toggles-modal="embed-modal"><span aria-hidden="true"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_PLUS, '{"size": 5}');?></span>Embed</a>
                   <br><br>
-                  <a href="<?php echo htmlentities($controller->getURL($context).'/download', ENT_QUOTES); ?>" target="_blank" class="dcf-btn dcf-btn-secondary mh-hide-bp2"><span class="dcf-mr-1" aria-hidden="true">&darr;</span>Download</a>
+                  <a href="<?php echo htmlentities($controller->getURL($context).'/download', ENT_QUOTES); ?>" target="_blank" class="dcf-btn dcf-btn-secondary mh-hide-bp2"><span class="dcf-mr-1" aria-hidden="true"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ARROW_DOWN, '{"size": 5}');?></span>Download</a>
 
                 </div>
 
