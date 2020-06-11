@@ -34,7 +34,7 @@ require(['jquery'], function($){
                     var input = $('#mh_upload_media_container').find('input').each(function() {
                         var label = $('<label/>', {
                             'for': this.id,
-                            'class': 'wdn-text-hidden',
+                            'class': 'dcf-sr-only',
                             'text': 'Browse for media'
                         });
                         $(this).before(label);

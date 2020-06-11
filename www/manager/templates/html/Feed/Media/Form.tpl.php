@@ -65,7 +65,7 @@ $page->jsbody .= $js;
         <div class="dcf-wrapper">
             <div class="dcf-grid" id="headline_main">
                 <div class="dcf-col-100%">
-                    <input type="submit" name="submit" value="Save" class="dcf-float-right" />
+                    <input type="submit" name="submit" value="Save" class="dcf-btn dcf-btn-primary dcf-float-right" />
                     <h2><div class="dcf-subhead">Edit Media Details for</div> <?php echo $context->media->title ?></h2>
                 </div>
             </div>
@@ -221,7 +221,7 @@ $page->jsbody .= $js;
                               </div>
                             </div>
                             <label class="dcf-label" for="media_poster">URL of custom poster image</label>
-                            <input id="media_poster" name="poster" type="text" class="dcf-input-text validate-url" value="<?php echo htmlentities(@$context->media->poster, ENT_QUOTES); ?>" aria-describedby="poster-details" />
+                            <input id="media_poster" name="poster" type="text" class="dcf-input-text dcf-w-100% validate-url" value="<?php echo htmlentities(@$context->media->poster, ENT_QUOTES); ?>" aria-describedby="poster-details" />
                         </li>
                         <li>
                             <?php if (isset($context->media)): ?>
@@ -656,7 +656,7 @@ $page->jsbody .= $js;
                         </ol>
                     </fieldset>
                     <div class="dcf-mt-4">
-                        <input type="submit" name="submit" id="continue3" value="Save" class="dcf-float-left" />
+                        <input type="submit" name="submit" id="continue3" value="Save" class="dcf-btn dcf-btn-primary dcf-float-left" />
                         <button id="delete-media" class="dcf-btn dcf-btn-primary">Delete</button>
                     </div>
                 </div>

@@ -19,7 +19,7 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
       <label class="dcf-inverse" for="q_app">Search MediaHub</label>
       <div class="dcf-input-group">
         <input class="dcf-bg-transparent dcf-inverse" id="q_app" name="q" type="text" required />
-        <input class="dcf-btn dcf-btn-inverse-primary" type="submit" value="Go" />
+        <input class="dcf-btn dcf-btn-primary" type="submit" value="Go" />
       </div>
     </form>
   </div>

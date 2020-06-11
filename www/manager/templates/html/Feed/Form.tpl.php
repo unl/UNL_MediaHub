@@ -46,7 +46,7 @@ $page->addScriptDeclaration("
             </h2>
             <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
             <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
-            <input name="submit" value="Save" id="save-channel-1" class="dcf-btn dcf-float-right" type="submit" />
+            <input name="submit" value="Save" id="save-channel-1" class="dcf-btn dcf-btn-primary dcf-float-right" type="submit" />
 
             <div class="dcf-clear-both"></div>
             <?php
@@ -571,7 +571,7 @@ $page->addScriptDeclaration("
                             </li>
                             <li>
                                 <div class="element">
-                                    <input type="submit" name="submit" id="save-channel-2" value="Save" class="dcf-btn dcf-float-left" />
+                                    <input type="submit" name="submit" id="save-channel-2" value="Save" class="dcf-btn dcf-btn-primary dcf-float-left" />
                                     <?php if (isset($context->feed)): ?>
                                         <a href="#" class="dcf-btn dcf-btn-primary" id="deleteFormBtn">Delete</a>
                                     <?php endif; ?>
@@ -584,7 +584,6 @@ $page->addScriptDeclaration("
         </form>
         <script>
           document.getElementById('feed').addEventListener('submit', function(e) {
-            console.log('jasdkjsadf');
             var submitBtn1 = document.getElementById('save-channel-1');
             submitBtn1.setAttribute('disabled', 'disabled');
 

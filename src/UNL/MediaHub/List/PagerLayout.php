@@ -12,7 +12,7 @@ class UNL_MediaHub_List_PagerLayout extends Doctrine_Pager_Layout
         $this->setTemplate('<li><a href="{%url}" title="Go to page {%page}">{%page}</a></li>');
         $this->setSelectedTemplate('<li class="selected">{%page}</li>');
 
-        $str = '<ul class="wdn_pagination">';
+        $str = '<ul class="mh_pagination">';
 
         if ($pager->getPage() !== 1) {
             // Previous page
