@@ -1,14 +1,6 @@
 <?php
 class UNL_MediaHub_AuthService_UNL extends UNL_MediaHub_AuthService_Interface
 {
-    protected $auto_auth_models = array(
-        'UNL_MediaHub_MediaList',
-        'UNL_MediaHub_DefaultHomepage',
-        'UNL_MediaHub_FeedList',
-        'UNL_MediaHub_FeedAndMedia',
-        'media',
-    );
-    
     public static $cert_path = '/etc/pki/tls/cert.pem';
 
     public function __construct()

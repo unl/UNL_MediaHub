@@ -8,7 +8,7 @@ set_include_path(
     .PATH_SEPARATOR.dirname(__FILE__).'/src'
     .PATH_SEPARATOR.dirname(__FILE__).'/lib/php'
     .PATH_SEPARATOR.dirname(__FILE__).'/vendor/simple-cas/simple-cas/src'
-    //.PATH_SEPARATOR.dirname(__FILE__).'/vendor/UNL/unl_cache_lite'
+    .PATH_SEPARATOR.dirname(__FILE__).'/vendor/UNL/unl_cache_lite'
 );
 
 require_once 'UNL/MediaHub.php';
@@ -17,6 +17,10 @@ UNL_MediaHub::registerAutoloaders();
 // DSN for the mediyak database
 UNL_MediaHub::$dsn = 'mysql://mediahub:mediahub@localhost/mediahub';
 
+// Auth Provider (defaults to UNL_MediaHub_AuthService_Shib)
+UNL_MediaHub_AuthService::$provider = new UNL_MediaHub_AuthService_Shib();
+
+// Controller Settings
 UNL_MediaHub_Controller::$url = 'http://localhost:8007/';
 UNL_MediaHub_Controller::$thumbnail_generator = 'https://itunes.unl.edu/thumbnails.php?url=';
 

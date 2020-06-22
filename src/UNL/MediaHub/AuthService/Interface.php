@@ -1,6 +1,14 @@
 <?php
 abstract class UNL_MediaHub_AuthService_Interface
 {
+    protected $auto_auth_models = array(
+        'UNL_MediaHub_MediaList',
+        'UNL_MediaHub_DefaultHomepage',
+        'UNL_MediaHub_FeedList',
+        'UNL_MediaHub_FeedAndMedia',
+        'media',
+    );
+
     /**
      * @var UNL_MediaHub_User|NULL
      */
