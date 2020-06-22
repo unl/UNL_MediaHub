@@ -178,11 +178,9 @@ $getTracks = $context->getTextTrackURLs();
 
               <div class="dcf-pt-4">
                 <div>
-
-                  <a class="dcf-btn embed mh-hide-bp2 dcf-btn-toggle-modal" data-toggles-modal="embed-modal"><span aria-hidden="true"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_PLUS, '{"size": 5}');?></span>Embed</a>
+                  <button class="dcf-btn dcf-btn-secondary embed mh-hide-bp2 dcf-btn-toggle-modal" type="button" data-toggles-modal="embed-modal"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_PLUS, '{"title": "Show Media Embed Code", "size": 5}');?>Embed</button>
                   <br><br>
-                  <a href="<?php echo htmlentities($controller->getURL($context).'/download', ENT_QUOTES); ?>" target="_blank" class="dcf-btn dcf-btn-secondary mh-hide-bp2"><span class="dcf-mr-1" aria-hidden="true"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ARROW_DOWN, '{"size": 5}');?></span>Download</a>
-
+                  <a href="<?php echo htmlentities($controller->getURL($context).'/download', ENT_QUOTES); ?>" target="_blank" class="dcf-btn dcf-btn-secondary mh-hide-bp2"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ARROW_DOWN, '{"title": "Download Media", "size": 5}');?>Download</a>
                 </div>
 
                   <?php
