@@ -19,7 +19,7 @@
                             type="checkbox"
                             <?php echo ($feed_data['selected'])?'checked="checked"':''?>
                             value="<?php echo (int)$feed_data['feed']->id ?>" />
-                            <label class="dcf-label" for="feed_id_<?php echo (int)$feed_data['feed']->id ?>">
+                            <label for="feed_id_<?php echo (int)$feed_data['feed']->id ?>">
                                 <?php echo UNL_MediaHub::escape($feed_data['feed']->title) ?>
                             </label>
                 </div>
@@ -27,6 +27,6 @@
             </li>
         <?php endforeach;?>
             
-        <li><label for="new_feed" class="dcf-label element">New Channel</label><div class="element"><input class="dcf-input-text dcf-w-100%" id="new_feed" name="new_feed" type="text" class="validate-one-required"/></div></li>
+        <li><label for="new_feed">New Channel</label><div class="element"><input class="dcf-w-100%" id="new_feed" name="new_feed" type="text" class="validate-one-required"/></div></li>
     </ul>
 </fieldset>

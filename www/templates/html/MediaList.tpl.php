@@ -28,7 +28,6 @@ if(!empty($context->options['f'])){
     $label .= ' Media';
 
 };
-
 ?>
 
 <div class="dcf-bleed dcf-pt-6">
@@ -113,8 +112,6 @@ if(!empty($context->options['f'])){
     </div>
 </div>
 
-
-
 <?php if (count($context->items)): ?>
     <?php
     $url = $context->getURL(array('page'=>'{%page_number}'));
@@ -147,7 +144,6 @@ if(!empty($context->options['f'])){
 
     <?php endif ?>
 
-
     <div class="dcf-bleed mh-media">
         <div class="dcf-wrapper dcf-pt-8 dcf-pb-8">
             <ul class="dcf-list-bare dcf-grid-halves@sm dcf-grid-thirds@md dcf-grid-fourths@xl dcf-col-gap-vw dcf-row-gap-7 mh-media-list<?php echo $mediaListClass ?>">
@@ -169,5 +165,3 @@ if(!empty($context->options['f'])){
         </div>
     </div>
 <?php endif; ?>
-
-

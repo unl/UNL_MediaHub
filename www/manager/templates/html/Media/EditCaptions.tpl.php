@@ -51,7 +51,7 @@
             <div class="dcf-col-100% dcf-col-33%-end@sm">
                 <div class="mh-caption-sidebar">
                     <?php if (!$context->hasPendingOrder()): ?>
-                    <form id="caption_order" method="post">
+                    <form id="caption_order" method="post" class="dcf-form">
                         <?php if ($duration = $context->media->findDuration()): ?>
                             <?php $estimate = ceil($duration->getTotalSeconds()/60); ?>
                             <input type="hidden" name="media_duration" value="<?php echo UNL_MediaHub::escape($duration->getString()); ?>" />
@@ -64,9 +64,9 @@
                         <?php endif; ?>
                         <ul class="dcf-list-bare">
                             <li>
-                                <label class="dcf-label">
+                                <label>
                                     Cost Object Number
-                                    <input class="dcf-input-text" type="text" name="cost_object" required />
+                                    <input type="text" name="cost_object" required />
                                 </label>
                             </li>
                         </ul>

@@ -11,9 +11,9 @@
         <div class="dcf-grid dcf-col-gap-vw">
 <?php if ($context->order->isSuccess()): ?>
             <div class="dcf-col-100% dcf-col-67%-start@sm">
-                <form method="post" id="download_format">
+                <form method="post" id="download_format" class="dcf-form">
                     <h2 class="clear-top">Download captions</h2>
-                    <label class="dcf-label" for="format">Select caption format</label>
+                    <label for="format">Select caption format</label>
                     <select class="dcf-input-select" id="format" name="format">
                       <option value="srt">.srt</option>
                       <option value="scc">.scc</option>

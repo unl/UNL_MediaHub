@@ -53,7 +53,7 @@ $page->jsbody .= $js;
 <?php endif; ?>
 
 <div class="dcf-pb-1">
-<form action="?" method="post" name="media_form" id="media_form" enctype="multipart/form-data">
+<form class="dcf-form" action="?" method="post" name="media_form" id="media_form" enctype="multipart/form-data">
 
     <input id="media_url" name="url" type="hidden" value="" />
     <input type="hidden" name="__unlmy_posttarget" value="feed_media" />
@@ -220,8 +220,8 @@ $page->jsbody .= $js;
                                 </p>
                               </div>
                             </div>
-                            <label class="dcf-label" for="media_poster">URL of custom poster image</label>
-                            <input id="media_poster" name="poster" type="text" class="dcf-input-text dcf-w-100% validate-url" value="<?php echo htmlentities(@$context->media->poster, ENT_QUOTES); ?>" aria-describedby="poster-details" />
+                            <label for="media_poster">URL of custom poster image</label>
+                            <input id="media_poster" name="poster" type="text" class="dcf-w-100% validate-url" value="<?php echo htmlentities(@$context->media->poster, ENT_QUOTES); ?>" aria-describedby="poster-details" />
                         </li>
                         <li>
                             <?php if (isset($context->media)): ?>
@@ -236,116 +236,107 @@ $page->jsbody .= $js;
                     <fieldset id="existing_media">
                         <legend class="dcf-legend">Basic Information</legend>
 
-                        <div class="validation-container">
-                            <label for="title" class="dcf-label element">
+                        <div class="dcf-form-group validation-container">
+                            <label for="title">
                                 Title<span class="required">*</span>
                             </label>
-                            <input id="title" name="title" type="text" class="dcf-input-text required-entry" value="<?php echo UNL_MediaHub::escape(@$context->media->title); ?>" />
+                            <input id="title" name="title" type="text" class="required-entry" value="<?php echo UNL_MediaHub::escape(@$context->media->title); ?>" />
                         </div>
                         
                         <div class="dcf-grid-halves@sm dcf-col-gap-vw">
                             <div>
-                                <ol>
-                                    <li>
-                                        <label for="author" class="dcf-label element">
-                                            Author<span class="required">*</span> <span class="helper">Name of media creator.</span>
-                                        </label>
-                                        <div class="element">
-                                            <input id="author" name="author" class="dcf-input-text required-entry" type="text" value="<?php echo UNL_MediaHub::escape(@$context->media->author); ?>" />
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <label for="mrss_copyright" class="dcf-label element">Copyright <span class="helper">&copy; info for media object.</span></label>
-                                        <div class="element">
-                                            <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[10][element]" type="hidden" value="copyright"/>
-                                            <input class="dcf-input-text" id="mrss_copyright" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[10][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'copyright'); ?>"/>
-                                        </div>
-                                    </li>
-                                </ol>
+                                <div class="dcf-form-group">
+                                    <label for="author">
+                                        Author<span class="required">*</span> <span class="helper">Name of media creator.</span>
+                                    </label>
+                                    <div>
+                                        <input id="author" name="author" class="required-entry" type="text" value="<?php echo UNL_MediaHub::escape(@$context->media->author); ?>" />
+                                    </div>
+                                </div>
+                                <div class="dcf-form-group">
+                                    <label for="mrss_copyright">Copyright <span class="helper">&copy; info for media object.</span></label>
+                                    <div>
+                                        <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[10][element]" type="hidden" value="copyright"/>
+                                        <input id="mrss_copyright" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[10][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'copyright'); ?>"/>
+                                    </div>
+                                </div>
                             </div>           
                             <div>
-                                <ol>
-                                    <li>
-                                        <label for="mrss_credit" class="dcf-label element">
-                                            Credit 
-                                        </label>
-                                        <div class="hang-right mh-tooltip" id="credit-details">
-                                            <?php echo $savvy->render('credit tooltip', 'InfoIcon.tpl.php'); ?>
-                                            <div>
-                                                <p>
-                                                    Notable entity and the contribution to the creation of the media object.
-                                                </p>
-                                            </div>
+                                <div class="dcf-form-group">
+                                    <label for="mrss_credit">
+                                        Credit
+                                    </label>
+                                    <div class="hang-right mh-tooltip" id="credit-details">
+                                        <?php echo $savvy->render('credit tooltip', 'InfoIcon.tpl.php'); ?>
+                                        <div>
+                                            <p>
+                                                Notable entity and the contribution to the creation of the media object.
+                                            </p>
                                         </div>
-                                        <div class="element">
-                                            <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[9][element]" type="hidden" value="credit"/>
-                                            <input class="dcf-input-text" id="mrss_credit" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[9][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'credit'); ?>" aria-describedby="credit-details" />
+                                    </div>
+                                    <div>
+                                        <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[9][element]" type="hidden" value="credit"/>
+                                        <input id="mrss_credit" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[9][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'credit'); ?>" aria-describedby="credit-details" />
+                                    </div>
+                                </div>
+                                <div class="dcf-form-group">
+                                    <label for="mrss_category">Category</label>
+                                    <div class="hang-right mh-tooltip" id="category-details">
+                                        <?php echo $savvy->render('category tooltip', 'InfoIcon.tpl.php'); ?>
+                                        <div>
+                                            <p>
+                                                Allows a taxonomy to be set that gives an indication of the type of media content, and its particular contents.
+                                            </p>
                                         </div>
-                                    </li>
-                                    <li>
-                                        <label for="mrss_category" class="dcf-label element">Category</label>
-                                        <div class="hang-right mh-tooltip" id="category-details">
-                                            <?php echo $savvy->render('category tooltip', 'InfoIcon.tpl.php'); ?>
-                                            <div>
-                                                <p>
-                                                    Allows a taxonomy to be set that gives an indication of the type of media content, and its particular contents.
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="element">
-                                            <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[7][element]" type="hidden" value="category"/>
-                                            <input class="dcf-input-text" id="mrss_category" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[7][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'category'); ?>" aria-describedby="category-details"/>
-                                        </div>
-                                    </li>
-                                </ol>
+                                    </div>
+                                    <div>
+                                        <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[7][element]" type="hidden" value="category"/>
+                                        <input id="mrss_category" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[7][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'category'); ?>" aria-describedby="category-details"/>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        <ol>
-                            <li>
-                                <label for="description" class="dcf-label element">
-                                    Description<span class="required">*</span>
-                                </label>
-                                <div class="mh-tooltip" id="description-details">
-                                    <?php echo $savvy->render('description tooltip', 'InfoIcon.tpl.php'); ?>
-                                    <div>
-                                        <p>Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.</p>
-                                    </div>
+                        <div class="dcf-form-group">
+                            <label for="description">
+                                Description<span class="required">*</span>
+                            </label>
+                            <div class="mh-tooltip" id="description-details">
+                                <?php echo $savvy->render('description tooltip', 'InfoIcon.tpl.php'); ?>
+                                <div>
+                                    <p>Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.</p>
                                 </div>
-                                <div class="element" id="description_wrapper"><textarea id="description" name="description" class="dcf-input-text required-entry" rows="5" aria-describedby="description-details"><?php echo UNL_MediaHub::escape(@$context->media->description); ?></textarea></div>
-                            </li>
-
-                            <li>
-                                <label for="itunes_keywords" class="dcf-label element">Tags</label>
-                                <div class="mh-tooltip hang-right" id="tag-details">
-                                    <?php echo $savvy->render('tag tooltip', 'InfoIcon.tpl.php'); ?>
-                                    <div>
-                                        <p>A comma separated list of highly relevant keywords, MAX 10. Tags also serve as iTunes Keywords.</p>
-                                    </div>
+                            </div>
+                            <div id="description_wrapper"><textarea id="description" name="description" class="required-entry" rows="5" aria-describedby="description-details"><?php echo UNL_MediaHub::escape(@$context->media->description); ?></textarea></div>
+                        </div>
+                        <div class="dcf-form-group">
+                            <label for="itunes_keywords">Tags</label>
+                            <div class="mh-tooltip hang-right" id="tag-details">
+                                <?php echo $savvy->render('tag tooltip', 'InfoIcon.tpl.php'); ?>
+                                <div>
+                                    <p>A comma separated list of highly relevant keywords, MAX 10. Tags also serve as iTunes Keywords.</p>
                                 </div>
-                                <div class="element">
-                                    <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[4][element]" type="hidden" value="keywords"/>
-                                    <input class="dcf-input-text" id="itunes_keywords" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[4][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'keywords'); ?>" aria-describedby="tag-details"/>
-                                </div>
-                            </li>
-
-                        </ol>
+                            </div>
+                            <div>
+                                <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[4][element]" type="hidden" value="keywords"/>
+                                <input id="itunes_keywords" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[4][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'keywords'); ?>" aria-describedby="tag-details"/>
+                            </div>
+                        </div>
                     </fieldset>
                     <fieldset id="geo_location" class="dcf-mt-3 collapsible">
                         <legend class="dcf-legend">Geo Location</legend>
                         <ol>
                             <li>
-                                <label for="geo_lat" class="dcf-label element">Latitude</label>
-                                <div class="element">
+                                <label for="geo_lat">Latitude</label>
+                                <div>
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[0][element]" type="hidden" value="lat"/>
-                                    <input id="geo_lat" name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[0][value]" class='dcf-input-text geo_lat' type="text" value="<?php echo getFieldValue($context, 'geo', 'lat'); ?>"/>
+                                    <input id="geo_lat" name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[0][value]" class='geo_lat' type="text" value="<?php echo getFieldValue($context, 'geo', 'lat'); ?>"/>
                                 </div>
                             </li>
                             <li>
-                                <label for="geo_long" class="dcf-label element">Longitude</label>
-                                <div class="element">
+                                <label for="geo_long">Longitude</label>
+                                <div>
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[1][element]" type="hidden" value="long"/>
-                                    <input id="geo_long" name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[1][value]" class='dcf-input-text geo_long' type="text" value="<?php echo getFieldValue($context, 'geo', 'long'); ?>"/>
+                                    <input id="geo_long" name="UNL_MediaHub_Feed_Media_NamespacedElements_geo[1][value]" class='geo_long' type="text" value="<?php echo getFieldValue($context, 'geo', 'long'); ?>"/>
                                 </div>
                             </li>
                             <li>
@@ -362,10 +353,10 @@ $page->jsbody .= $js;
                                 <li><?php echo $savvy->render($context, 'Feed/Media/NamespacedElements/mediahub/'.$customField.'.tpl.php'); ?></li>
                             <?php endforeach; ?>
                             <li style="display:none;">
-                                <label for="mrss_group" class="dcf-label element">Group</label>
-                                <div class="element">
+                                <label for="mrss_group">Group</label>
+                                <div>
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[0][element]" type="hidden" value="group"/>
-                                    <input class="dcf-input-text" id="mrss_group" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[0][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'group'); ?>"/>
+                                    <input id="mrss_group" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[0][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'group'); ?>"/>
                                 </div>
                             </li>
                             <li style="display:none">
@@ -375,31 +366,31 @@ $page->jsbody .= $js;
                                 <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[1][attributes]" type="hidden" value="<?php echo getFieldAttributes($context, 'media', 'content'); ?>" />
                             </li>
                             <li style="display:none;">
-                                <label for="mrss_rating" class="dcf-label element">Rating</label>
-                                <div class="element">
+                                <label for="mrss_rating">Rating</label>
+                                <div>
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[2][element]" type="hidden" value="rating"/>
-                                    <input class="dcf-input-text" id="mrss_rating" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[2][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'rating'); ?>"/>
+                                    <input id="mrss_rating" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[2][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'rating'); ?>"/>
                                 </div>
                             </li>
                             <li style="display:none;">
-                                <label for="mrss_title" class="dcf-label element">Title</label>
-                                <div class="element">
+                                <label for="mrss_title">Title</label>
+                                <div>
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[3][element]" type="hidden" value="title"/>
-                                    <input class="dcf-input-text" id="mrss_title" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[3][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'title'); ?>"/>
+                                    <input id="mrss_title" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[3][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'title'); ?>"/>
                                 </div>
                             </li>
                             <li style="display:none;">
-                                <label for="mrss_description" class="dcf-label element">Description</label>
-                                <div class="element">
+                                <label for="mrss_description">Description</label>
+                                <div>
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[4][element]" type="hidden" value="description"/>
-                                    <input class="dcf-input-text" id="mrss_description" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[4][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'description'); ?>"/>
+                                    <input id="mrss_description" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[4][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'description'); ?>"/>
                                 </div>
                             </li>
                             <li style="display:none;">
-                                <label for="mrss_keywords" class="dcf-label element">Keywords</label>
-                                <div class="element">
+                                <label for="mrss_keywords">Keywords</label>
+                                <div>
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[5][element]" type="hidden" value="keywords"/>
-                                    <input class="dcf-input-text" id="mrss_keywords" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[5][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'keywords'); ?>"/>
+                                    <input id="mrss_keywords" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[5][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'keywords'); ?>"/>
                                 </div>
                             </li>
                             <li style="display:none;">
@@ -410,18 +401,18 @@ $page->jsbody .= $js;
                             </li>
 
                             <li style="display:none;">
-                                <label for="mrss_player" class="dcf-label element">Player <span class="helper">Allows the media object to be accessed through a web browser media player console.</span></label>
-                                <div class="element">
+                                <label for="mrss_player">Player <span class="helper">Allows the media object to be accessed through a web browser media player console.</span></label>
+                                <div>
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[8][element]" type="hidden" value="player"/>
-                                    <input class="dcf-input-text" id="mrss_player" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[8][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'player'); ?>"/>
+                                    <input id="mrss_player" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[8][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'player'); ?>"/>
                                 </div>
                             </li>
 
                             <li style="display:none;">
-                                <label for="mrss_restriction" class="dcf-label element">Restriction <span class="helper">Allows restrictions to be placed on the aggregator rendering the media in the feed.</span></label>
-                                <div class="element">
+                                <label for="mrss_restriction">Restriction <span class="helper">Allows restrictions to be placed on the aggregator rendering the media in the feed.</span></label>
+                                <div>
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[12][element]" type="hidden" value="restriction"/>
-                                    <input class="dcf-input-text" id="mrss_restriction" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[12][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'restriction'); ?>"/>
+                                    <input id="mrss_restriction" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[12][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'restriction'); ?>"/>
                                 </div>
                             </li>
                         </ol>
@@ -431,12 +422,12 @@ $page->jsbody .= $js;
                         <legend class="dcf-legend">iTunes Information</legend>
                         <ol>
                             <li style="display:none;">
-                                <label for="itunes_author" class="dcf-label element">Author <span class="helper">Name of media creator.</span></label>
+                                <label for="itunes_author">Author <span class="helper">Name of media creator.</span></label>
                                 <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[0][element]" type="hidden" value="author"/>
-                                <input class="dcf-input-text" id="itunes_author" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[0][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'author'); ?>"/>
+                                <input id="itunes_author" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[0][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'author'); ?>"/>
                             </li>
                             <li>
-                                <label for="mrss_text" class="dcf-label element">
+                                <label for="mrss_text">
                                     Transcript/Captioning
                                 </label>
                                 <div class="mh-tooltip" id="captioning-details">
@@ -445,14 +436,14 @@ $page->jsbody .= $js;
                                         <p>Allows the inclusion of a text transcript, closed captioning, or lyrics of the media content.</p>
                                     </div>
                                 </div>
-                                <div class="element">
+                                <div>
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[11][element]" type="hidden" value="text"/>
-                                    <textarea class="dcf-input-text" rows="3" id="mrss_text" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[11][value]" aria-describedby="captioning-details"><?php echo getFieldValue($context, 'media', 'text'); ?></textarea>
+                                    <textarea rows="3" id="mrss_text" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[11][value]" aria-describedby="captioning-details"><?php echo getFieldValue($context, 'media', 'text'); ?></textarea>
                                 </div>
                             </li>
                             <li>
-                                <label for="itunes_category" class="dcf-label element">Category <span class="helper">Choose a category for use within iTunes U</span></label>
-                                <div class="element">
+                                <label for="itunes_category">Category <span class="helper">Choose a category for use within iTunes U</span></label>
+                                <div>
                                     <?php
                                     $category = '';
                                     if (isset($context->media) && $value = UNL_MediaHub_Feed_Media_NamespacedElements_itunesu::mediaHasElement($context->media->id, 'category', 'itunesu')) {
@@ -607,8 +598,8 @@ $page->jsbody .= $js;
                                 </div>
                             </li>
                             <li>
-                                <label for="itunes_block" class="dcf-label element">Block from iTunes <span class="helper">Set to 'yes' if you would like to block this element from iTunes</span></label>
-                                <div class="element">
+                                <label for="itunes_block">Block from iTunes <span class="helper">Set to 'yes' if you would like to block this element from iTunes</span></label>
+                                <div>
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[1][element]" type="hidden" value="block"/>
                                     <select class="dcf-input-select" id="itunes_block" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[1][value]">
                                           <?php
@@ -622,35 +613,35 @@ $page->jsbody .= $js;
                                 </div>
                             </li>
                             <li>
-                                <label for="itunes_duration" class="dcf-label element">Duration (HH:MM:SS)</label>
-                                <div class="element">
+                                <label for="itunes_duration">Duration (HH:MM:SS)</label>
+                                <div>
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[2][element]" type="hidden" value="duration"/>
-                                    <input class="dcf-input-text" id="itunes_duration" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[2][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'duration'); ?>"/>
+                                    <input id="itunes_duration" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[2][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'duration'); ?>"/>
                                 </div>
                                 <div class="dcf-pt-2">
                                   <button class="dcf-btn find-duration">Find The duration</button>
                                 </div>
                             </li>
                             <li style="display:none;">
-                                <label for="itunes_explicit" class="dcf-label element">Explicit</label>
-                                <div class="element">
+                                <label for="itunes_explicit">Explicit</label>
+                                <div>
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[3][element]" type="hidden" value="explicit"/>
                                     <input id="itunes_explicit" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[3][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'explicit'); ?>"/>
                                 </div>
                             </li>
 
                             <li>
-                                <label for="itunes_subtitle" class="dcf-label element">Subtitle <span class="helper">The contents of this tag are shown in the Description column in iTunes. The subtitle displays best if it is only a few words long.</span></label>
-                                <div class="element">
+                                <label for="itunes_subtitle">Subtitle <span class="helper">The contents of this tag are shown in the Description column in iTunes. The subtitle displays best if it is only a few words long.</span></label>
+                                <div>
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[5][element]" type="hidden" value="subtitle"/>
-                                    <input class="dcf-input-text" id="itunes_subtitle" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[5][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'subtitle'); ?>"/>
+                                    <input id="itunes_subtitle" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[5][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'subtitle'); ?>"/>
                                 </div>
                             </li>
                             <li>
-                                <label for="itunes_summary" class="dcf-label element">Summary <span class="helper">The contents of this tag are shown in a separate window that appears when the "circled i" in the Description column is clicked.</span></label>
-                                <div class="element">
+                                <label for="itunes_summary">Summary <span class="helper">The contents of this tag are shown in a separate window that appears when the "circled i" in the Description column is clicked.</span></label>
+                                <div>
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[6][element]" type="hidden" value="summary"/>
-                                    <input class="dcf-input-text" id="itunes_summary" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[6][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'summary'); ?>"/>
+                                    <input id="itunes_summary" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[6][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'summary'); ?>"/>
                                 </div>
                             </li>
                         </ol>

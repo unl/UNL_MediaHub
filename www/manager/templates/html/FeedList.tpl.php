@@ -32,7 +32,7 @@
             <div>
                 <a class="dcf-txt-decor-none" href="<?php echo UNL_MediaHub_Manager::getURL() ?>?view=feedmetadata">
                     <div class="mh-upload-box dcf-txt-center">
-                        <h2>+<span class="dcf-subhead">New Channel</span></h2>
+                        <h2><span class="dcf-subhead">+ New Channel</span></h2>
                     </div>
                 </a>
             </div>
