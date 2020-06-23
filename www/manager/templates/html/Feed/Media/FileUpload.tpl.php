@@ -32,7 +32,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
             <div class="dcf-grid-halves@sm dcf-col-gap-vw">
                 <div id="mh_upload_media_container">
                     <div id="mh_upload_media" class="mh-upload-box dcf-txt-center">
-                        <h3 class="dcf-txtd-h2">+<span class="dcf-subhead">Add Media</span></h3>
+                        <span class="dcf-subhead">+ Add Media</span>
                         <p>.mp4 or .mp3<br>(Maximum file size: <?php echo UNL_MediaHub_Controller::$max_upload_mb; ?>mb)</p>
                     </div>
                     <div id="filelist" class="mh-upload-box dcf-txt-center">
