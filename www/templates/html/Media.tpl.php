@@ -136,7 +136,7 @@ $getTracks = $context->getTextTrackURLs();
                     <?php
                         $page->head .= '<link rel="stylesheet" type="text/css" href="../templates/html/css/comments.css?v=' . trim(UNL_MediaHub_Controller::getVersion()) .'" />';
                     ?>
-                    <h2 class="unl-font-sans">Comments <span aria-hidden="true"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_COMMENT, '{"size": 4}');?></span></h2>
+                    <h2 class="unl-font-sans">Comments <?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_COMMENT, '{"size": 4}');?></h2>
                     <span class="subhead">
                         <?php echo count($context->UNL_MediaHub_Media_Comment); ?> Comments
                         <?php if ($user): ?>

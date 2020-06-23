@@ -139,7 +139,7 @@ if(!empty($context->options['f'])){
                 </h2>
                 <ul class="mh-channel-buttons dcf-grid-full dcf-grid-halves@sm dcf-grid-thirds@md dcf-col-gap-vw dcf-row-gap-7">
                     <?php foreach ($feeds->items as $feed): ?>
-                        <li><a class="dcf-btn dcf-btn-secondary dcf-w-100% dcf-h-100%" href="<?php echo UNL_MediaHub_Controller::getURL($feed); ?>"><span aria-hidden="true"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ROCKET, '{"size": 4}'); ?> </span><?php echo UNL_MediaHub::escape($feed->title) ?></a></li>
+                        <li><a class="dcf-btn dcf-btn-secondary dcf-w-100% dcf-h-100%" href="<?php echo UNL_MediaHub_Controller::getURL($feed); ?>"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ROCKET, '{"size": 4}'); ?> <?php echo UNL_MediaHub::escape($feed->title) ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>

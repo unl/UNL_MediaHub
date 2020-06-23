@@ -172,10 +172,10 @@ $page->jsbody .= $js;
                                 <p>Swapping media is disabled while a video is being optimized.</p>
                             <?php else: ?>
                                 <?php if ($transcoding_job): ?>
-                                    <p><span aria-hidden="true"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ALERT, '{"size": 4}');?></span><span class="dcf-sr-only">Notice:</span> Swapping media will cause the media to be unavailable while the upload is optimized. This upload will be optimized with the same settings as the current version.</p>
+                                    <p><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ALERT, '{"size": 4}');?><span class="dcf-sr-only">Notice:</span> Swapping media will cause the media to be unavailable while the upload is optimized. This upload will be optimized with the same settings as the current version.</p>
                                 <?php endif; ?>
                                 <?php if (!$transcoding_job): ?>
-                                    <p><span aria-hidden="true"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ALERT, '{"size": 4}');?></span><span class="dcf-sr-only">Notice:</span> You MUST use HandBrake to optimize the new video.</p>
+                                    <p><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ALERT, '{"size": 4}');?><span class="dcf-sr-only">Notice:</span> You MUST use HandBrake to optimize the new video.</p>
                                 <?php endif; ?>
                                 <div id="mh_upload_media_container">
                                     <div id="mh_upload_media" class="mh-upload-box mh-upload-box-small dcf-txt-center">
