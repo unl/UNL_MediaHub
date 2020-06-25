@@ -31,7 +31,7 @@
                     </p>
                     <ul>
                         <li>
-                            <strong>Important</strong>: captions cost $1 per video minute, rounded up.  Example: A 3:15 minute video would cost $4.
+                            <strong>Important</strong>: captions cost $1.25 per video minute, rounded up.  Example: A 3:31 minute video would cost $4.40.
                         </li>
                         <li>
                             Orders are usually completed within 24 hours.
