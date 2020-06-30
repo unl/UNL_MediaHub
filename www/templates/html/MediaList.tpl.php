@@ -28,7 +28,6 @@ if(!empty($context->options['f'])){
     $label .= ' Media';
 
 };
-
 ?>
 
 <div class="dcf-bleed dcf-pt-6">
@@ -113,8 +112,6 @@ if(!empty($context->options['f'])){
     </div>
 </div>
 
-
-
 <?php if (count($context->items)): ?>
     <?php
     $url = $context->getURL(array('page'=>'{%page_number}'));
@@ -139,14 +136,13 @@ if(!empty($context->options['f'])){
                 </h2>
                 <ul class="mh-channel-buttons dcf-grid-full dcf-grid-halves@sm dcf-grid-thirds@md dcf-col-gap-vw dcf-row-gap-7">
                     <?php foreach ($feeds->items as $feed): ?>
-                        <li><a class="dcf-btn dcf-btn-secondary dcf-w-100% dcf-h-100%" href="<?php echo UNL_MediaHub_Controller::getURL($feed); ?>"><span class="wdn-icon wdn-icon-rocket" aria-hidden="true"></span><?php echo UNL_MediaHub::escape($feed->title) ?></a></li>
+                        <li><a class="dcf-btn dcf-btn-secondary dcf-w-100% dcf-h-100%" href="<?php echo UNL_MediaHub_Controller::getURL($feed); ?>"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ROCKET, '{"size": 4}'); ?> <?php echo UNL_MediaHub::escape($feed->title) ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
         </div>
 
     <?php endif ?>
-
 
     <div class="dcf-bleed mh-media">
         <div class="dcf-wrapper dcf-pt-8 dcf-pb-8">
@@ -169,5 +165,3 @@ if(!empty($context->options['f'])){
         </div>
     </div>
 <?php endif; ?>
-
-

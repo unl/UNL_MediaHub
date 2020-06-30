@@ -95,12 +95,10 @@ iframe * {margin:0px}
 .mh-upload-box {
     width: 100%;
     padding: 37% 0 63% 0;
-    height: 0;
     border: 2px dashed RGB(213,213,210);
     background-color: RGBA(255,255,255,.75);
     display: block;
     cursor: pointer;
-    word-break: break-all;
 }
 
 .mh-upload-box.mh-upload-box-small {
@@ -116,14 +114,6 @@ iframe * {margin:0px}
 .mh-upload-box p {
     font-size: .75em;
     font-style: italic;
-}
-
-.mh-channel-box {
-    padding: .75em;
-    border: 1px solid #d5d5d2;
-    background-color: #fff;
-    overflow: scroll;
-    max-height: 13.35em;
 }
 
 .mh-tooltip span.heading{
@@ -204,32 +194,9 @@ iframe * {margin:0px}
     margin: 0;
 }
 
-.mh-channel-edit .wdn-subhead a.users {
-    font-size: .75em;
-}
-
-.wdn-button-brand {
-    background-color: #d00000 !important;
-}
-
-.mh-channel-box label {
-    width: 85%;
-    float: right;
-}
-
-.mh-channel-box label[for="new_feed"] {
-    margin-top: 1em;
-    float: left;
-}
-
-.mh-channel-box li {
-    clear: both;
-}
-
 #videoData h5 {
     font-size: 1.333em;
 }
-
 
 #deleteForm {
     display: none;
@@ -237,13 +204,6 @@ iframe * {margin:0px}
 
 input[value="Save"] {
     margin-right: 1em;
-}
-
-form input[type="submit"].wdn-button-brand[disabled] {
-    -webkit-box-shadow: none; 
-    -moz-box-shadow: none;
-    box-shadow: none; 
-    background-color: #963838 !important;
 }
 
 form legend {
@@ -255,12 +215,11 @@ form legend {
 }
 
 .mh-tooltip {
-    background-color: #1B9AE8;
     border-radius: 2em;
     height: 1.5em;
     width: 1.5em;
     padding: 0 0.2em;
-    color: #fff;
+    color: #4682B4;
     display: inline-block;
     text-align: center;
     font-size: 0.66em;
@@ -342,7 +301,7 @@ form legend {
     margin-left: -24px;
 }
 
-#headline_main .wdn-share-this-page {
+#headline_main .mh-share-this-page {
     display: none;
 }
 

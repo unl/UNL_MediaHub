@@ -58,12 +58,12 @@ ul.mh-btn-group > li:not(:last-of-type) {
   margin-right: .75em;
 }
 
-.mh-media .wdn_pagination {
+.mh-media .mh_pagination {
   padding: 0;
   text-align: center;
 }
 
-.mh-media .wdn_pagination li {
+.mh-media .mh_pagination li {
   display: inline-block;
   float: none;
 }

@@ -61,7 +61,7 @@ $getTracks = $context->getTextTrackURLs();
     <div class="dcf-wrapper mh-media-page">
         <?php if ($user && $context->userCanEdit($user)): ?>
           <div class="dcf-pb-4">
-            <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=addmedia&id=' . $context->id ?>" class="dcf-btn dcf-btn-primary"><span class="wdn-icon-wrench wdn-icon"></span>Edit Media Details</a>
+            <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=addmedia&id=' . $context->id ?>" class="dcf-btn dcf-btn-primary"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_WRENCH, '{size": 5}');?> Edit Media Details</a>
           </div>
         <?php endif; ?>
         <div class="dcf-grid dcf-col-gap-vw dcf-row-gap-4">
@@ -134,9 +134,9 @@ $getTracks = $context->getTextTrackURLs();
 
                 <div id="comments">
                     <?php
-                        $page->addScriptDeclaration("WDN.loadCSS('../templates/html/css/comments.css?v=" . UNL_MediaHub_Controller::getVersion() . "');");
+                        $page->head .= '<link rel="stylesheet" type="text/css" href="../templates/html/css/comments.css?v=' . trim(UNL_MediaHub_Controller::getVersion()) .'" />';
                     ?>
-                    <h2 class="unl-font-sans">Comments <span class="wdn-icon wdn-icon-comment" aria-hidden="true"></span></h2>
+                    <h2 class="unl-font-sans">Comments <?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_COMMENT, '{"size": 4}');?></h2>
                     <span class="subhead">
                         <?php echo count($context->UNL_MediaHub_Media_Comment); ?> Comments
                         <?php if ($user): ?>
@@ -178,11 +178,9 @@ $getTracks = $context->getTextTrackURLs();
 
               <div class="dcf-pt-4">
                 <div>
-
-                  <a class="dcf-btn embed mh-hide-bp2 dcf-btn-toggle-modal" data-toggles-modal="embed-modal"><span class="wdn-icon-plus wdn-icon" aria-hidden="true"></span>Embed</a>
+                  <button class="dcf-btn dcf-btn-secondary mh-hide-bp2 dcf-btn-toggle-modal" type="button" data-toggles-modal="embed-modal" aria-label="Show Media Embed Code"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_PLUS, '{"size": 5}');?>Embed</button>
                   <br><br>
-                  <a href="<?php echo htmlentities($controller->getURL($context).'/download', ENT_QUOTES); ?>" target="_blank" class="dcf-btn dcf-btn-secondary mh-hide-bp2"><span class="dcf-mr-1" aria-hidden="true">&darr;</span>Download</a>
-
+                  <a href="<?php echo htmlentities($controller->getURL($context).'/download', ENT_QUOTES); ?>" target="_blank" class="dcf-btn dcf-btn-secondary mh-hide-bp2" aria-label="Download Media"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ARROW_DOWN, '{"size": 5}');?>Download</a>
                 </div>
 
                   <?php
@@ -198,7 +196,7 @@ $getTracks = $context->getTextTrackURLs();
 </div>
 
 <div class="dcf-modal dcf-bg-overlay-dark dcf-fixed dcf-pin-top dcf-pin-left dcf-h-100% dcf-w-100% dcf-d-flex dcf-ai-center dcf-jc-center dcf-opacity-100 dcf-pointer-events-auto" id="embed-modal" aria-labelledby="embed-modal" aria-hidden="false" role="dialog" tabindex="-1">
-    <div class="dcf-modal-wrapper dcf-relative dcf-h-auto dcf-overflow-y-auto" style="background-color: #fff" role="document">
+    <div class="dcf-modal-wrapper dcf-relative dcf-h-auto dcf-overflow-y-auto" role="document">
         <header class="dcf-modal-header dcf-wrapper dcf-pt-8 dcf-sticky dcf-pin-top">
             <h2 id="embed-modal-heading">Embed</h2>
             <button class="dcf-btn-close-modal dcf-btn dcf-btn-tertiary dcf-absolute dcf-pin-top dcf-pin-right dcf-z-1" type="button" aria-label="Close">Close</button>
