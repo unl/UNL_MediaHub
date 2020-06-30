@@ -44,7 +44,6 @@ if (isset($_SESSION['notices'])) {
         $page->maincontentarea .= $savvy->render($notice);
         unset($_SESSION['notices'][$key]);
     }
-    $page->addScriptDeclaration("WDN.initializePlugin('notice')");
 }
 
 $page->maincontentarea = $savvy->render($context->output);

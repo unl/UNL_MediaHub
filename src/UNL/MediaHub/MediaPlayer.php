@@ -49,7 +49,7 @@ class UNL_MediaHub_MediaPlayer implements \Savvy_Turbo_CacheableInterface
         }
         
         if (!isset($this->options['version'])) {
-            return 1;
+            return 3;
         }
         
         return $this->options['version'];

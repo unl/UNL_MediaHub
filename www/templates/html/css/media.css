@@ -113,10 +113,6 @@ Embed
 -------------------------------------------------
 */
 
-.embed {
-  cursor: pointer;
-}
-
 #dcf-main #sharing {
   display: none;
 }
@@ -173,11 +169,6 @@ body #cboxOverlay {
   font-style: italic;
 }
 
-.mh-video-label .wdn-subhead {
-  font-size: 10px;
-  margin: 0 0 1em 0;
-}
-
 .mh-video-label *,
 .mh-video-label a:visited {
   margin: 0;
@@ -197,7 +188,7 @@ body #cboxOverlay {
   color: #fff;
   content: '';
   display: none;
-  font-family: wdn-icon;
+  font-family: mh-icon;
   font-size: 200%;
   font-style: normal;
   font-weight: 400;
@@ -219,14 +210,6 @@ body #cboxOverlay {
 
 .mh-sidebar {
   margin-bottom: 3.38em;
-}
-
-.mh-sidebar .wdn-button span.wdn-icon {
-  float: left;
-}
-
-.mh-sidebar .wdn-button {
-  display: block;
 }
 
 #media_submit {
@@ -291,10 +274,9 @@ body #cboxOverlay {
 }
 
 .mh-tooltip {
-  background-color: #1B9AE8;
   border-radius: 2em;
   display: inline-block;
-  color: #fff;
+  color: #4682B4;
   font-family: 'Gotham SSm A', 'Gotham SSm B', Verdana, sans-serif;
   font-size: .66em;
   height: 1.5em;

@@ -4,7 +4,6 @@ if (false == headers_sent()
     header('HTTP/1.1 '.$code);
     header('Status: '.$code);
 }
-$page->addScriptDeclaration("WDN.initializePlugin('notice')")
 ?>
 
 <div class="wdn_notice alert">

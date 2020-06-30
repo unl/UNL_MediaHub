@@ -31,8 +31,6 @@ require(['jquery'], function($){
 
                 var src = mediaDetails.getImageURL() + '?time='+mediaDetails.formatTime(currentTime)+'&rebuild';
 
-                console.log(src)
-
                 $.ajax(src).always(function() {
                     $thumbnail.attr('src', src.replace('&rebuild', ''));
                     $imageOverlay.hide();
@@ -47,6 +45,21 @@ require(['jquery'], function($){
                 seconds = Math.floor(seconds);
 
                 return ((hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds  < 10 ? "0" + seconds : seconds) + "." + fraction);
+            },
+
+            formatDateForDB : function(date) {
+                var d = new Date(date + ' 00:00:00');
+                if (d == 'Invalid Date') {
+                    return '';
+                }
+
+                var month = '' + (d.getMonth() + 1),
+                    day = '' + d.getDate(),
+                    year = d.getFullYear();
+                if (month.length < 2) month = '0' + month;
+                if (day.length < 2) day = '0' + day;
+
+                return [year, month, day].join('-');
             },
 
             scalePlayer: function() {
@@ -128,21 +141,94 @@ require(['jquery'], function($){
                     return false;
                 });
 
-                WDN.initializePlugin('form_validation', [function() {
-                    $.validation.addMethod('geo_long', 'This must be a valid longitude.', {min:-180, max:180});
-                    $.validation.addMethod('geo_lat', 'This must be a valid latitude.', {min:-90, max:90});
-                    $mediaForm.validation({
-                        containerClassName: 'validation-container',
-                        immediate: true
-                    });
+                document.getElementById('media_form').addEventListener('submit', function(e) {
+                    var submitBtn = document.getElementById('continue3');
+                    submitBtn.setAttribute('disabled', 'disabled');
 
-                    $mediaForm.bind('validate-form', function(event, result) {
-                        if (result) {
-                            //prevent duplicate submissions
-                            $('#continue3').attr('disabled', 'disabled');
+                    var deleteBtn = document.getElementById('delete-media');
+                    deleteBtn.setAttribute('disabled', 'disabled');
+
+                    var errors = [];
+
+                    // Validate Title
+                    var title = document.getElementById('title').value.trim();
+                    if (!title) {
+                        errors.push('Title is required.');
+                    }
+
+                    // Validate Author
+                    var author = document.getElementById('author').value.trim();
+                    if (!author) {
+                        errors.push('Author is required.');
+                    }
+
+                    // Validate Description
+                    var description = document.getElementById('description').value.trim();
+                    if (!description) {
+                        errors.push('Description is required.');
+                    }
+
+                    // Validate Privacy
+                    var privacy = document.getElementById('privacy').value.trim();
+                    if (!privacy) {
+                        errors.push('Privacy is required.');
+                    }
+
+                    // Validate Feed
+                    var feedChecked = false;
+                    var newFeed = document.getElementById('new_feed').value.trim();
+                    var feeds = document.getElementsByName('feed_id[]');
+                    for (var i=0; i<feeds.length; i++) {
+                        if (feeds[i].checked === true) {
+                            feedChecked = true;
+                            break;
                         }
-                    });
-                }]);
+                    }
+                    if (!feedChecked && !newFeed) {
+                        errors.push('Media must have at least one Channel.');
+                    }
+
+                    // Validate Geo Lat/Long
+                    var geoLat = document.getElementById('geo_lat').value.trim();
+                    if (geoLat && (isNaN(geoLat) || Math.abs(geoLat) > 90)) {
+                       errors.push('Invalid Geo Location Latitude value. Must be between -90 and 90');
+                    }
+                    var geoLong = document.getElementById('geo_long').value.trim();
+                    if (geoLong && (isNaN(geoLong) || Math.abs(geoLong) > 180)) {
+                        errors.push('Invalid Geo Location Longitude value. Must be between -180 and 180');
+                    }
+
+                    if ((geoLat && !geoLong) || (!geoLat && geoLong)) {
+                        errors.push('Must provide both a Geo Location Latitude and Longitude.');
+                    }
+
+                    var mediaCreationDate = document.getElementById('media_creation_date');
+                    if (mediaCreationDate.value.trim()) {
+                        var formattedDate = mediaDetails.formatDateForDB(mediaCreationDate.value.trim());
+                        if (!formattedDate) {
+                            errors.push('Invalid Media Creation Date.');
+                        } else {
+                            mediaCreationDate.value = formattedDate;
+                        }
+                    }
+
+                    // Submit form or display errors
+                    if (errors.length > 0) {
+                        e.preventDefault();
+                        var mediaErrorsContainer = document.getElementById('media-errors');
+                        var mediaErrorsList = document.getElementById('media-errors-list');
+                        mediaErrorsList.innerHTML = '';
+                        for (var i=0; i<errors.length; i++) {
+                            var errorItem = document.createElement('li');
+                            errorItem.innerHTML = errors[i];
+                            mediaErrorsList.appendChild(errorItem);
+                        }
+                        submitBtn.removeAttribute('disabled');
+                        deleteBtn.removeAttribute('disabled');
+                        mediaErrorsContainer.style.display = 'block';
+                        mediaErrorsContainer.scrollIntoView();
+                    }
+                });
 
                 //Collapisible forms.
                 $('.collapsible > legend').prepend("<span class='toggle'>+</span>");
@@ -191,12 +277,9 @@ require(['jquery'], function($){
             
                 window.addEventListener("message", function(event){
                     if(event.data.currentTime != undefined){                        
-                        currentTime = event.data.currentTime;   
-                        console.log(currentTime)
+                        currentTime = event.data.currentTime;
                     }
                 }, false);
-
-
 
             }
         };

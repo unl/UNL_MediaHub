@@ -117,7 +117,7 @@ if($context->options['orderby'] == 'datecreated'){
                                     </div>
                                 </div>
                             </div>
-                            <p class="mh-more-info unl-font-sans"><a href="<?php echo $url ?>">See channel…</a></p>
+                            <p class="mh-more-info unl-font-sans"><a href="<?php echo $url ?>">See channel<span class="dcf-sr-only">: <?php echo $feed->title; ?></span>…</a></p>
                         </li>
                     <?php endforeach; ?>
                 </ul>

@@ -30,10 +30,8 @@
                 </div>
             <?php endforeach; ?>
             <div>
-                <a class="dcf-txt-decor-none" href="<?php echo UNL_MediaHub_Manager::getURL() ?>?view=feedmetadata">
-                    <div class="mh-upload-box dcf-txt-center">
-                        <h2>+<span class="dcf-subhead">New Channel</span></h2>
-                    </div>
+                <a class="dcf-txt-decor-none mh-upload-box dcf-txt-center" href="<?php echo UNL_MediaHub_Manager::getURL() ?>?view=feedmetadata">
+                    <span class="dcf-subhead unl-darker-gray">+ New Channel</span>
                 </a>
             </div>
         </div>

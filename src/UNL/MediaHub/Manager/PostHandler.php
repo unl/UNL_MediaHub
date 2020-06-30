@@ -195,7 +195,7 @@ class UNL_MediaHub_Manager_PostHandler
         //$targetDir = 'uploads';
         $cleanupTargetDir = true; // Remove old files
         $maxFileAge = 5 * 3600; // Temp file age in seconds (5 hours)
-        
+
         // Create target dir
         if (!file_exists($targetDir)) {
             @mkdir($targetDir);
