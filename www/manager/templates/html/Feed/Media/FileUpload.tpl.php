@@ -19,7 +19,12 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
             Manage Media
             <span class="dcf-subhead dcf-float-right"><a href="<?php echo UNL_MediaHub_Controller::getURL() ?>help/media-prep">Preparing Your Media</a></span>
         </h2>
-        <form action="?" method="post" id="add_media">
+        <?php
+            $errorNotice = new StdClass();
+            $errorNotice->title = 'Media Errors';
+            echo $savvy->render($errorNotice, 'ErrorListNotice.tpl.php');
+        ?>
+        <form class="dcf-form" action="?" method="post" id="add_media">
             <input type="hidden" name="__unlmy_posttarget" value="feed_media" />
             <input type="hidden" id="media_url" name="url" value="">
             <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
@@ -27,7 +32,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
             <div class="dcf-grid-halves@sm dcf-col-gap-vw">
                 <div id="mh_upload_media_container">
                     <div id="mh_upload_media" class="mh-upload-box dcf-txt-center">
-                        <h3 class="dcf-txtd-h2">+<span class="dcf-subhead">Add Media</span></h3>
+                        <span class="dcf-subhead">+ Add Media</span>
                         <p>.mp4 or .mp3<br>(Maximum file size: <?php echo UNL_MediaHub_Controller::$max_upload_mb; ?>mb)</p>
                     </div>
                     <div id="filelist" class="mh-upload-box dcf-txt-center">
@@ -37,92 +42,84 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                 <div>
                     <div class="dcf-grid-halves@sm dcf-col-gap-vw">
                         <div>
-                            <ol>
-                                <li class="clear-top">
-                                    <label class="dcf-label" for="title">
-                                        Title<span class="dcf-required">*</span>
-                                    </label>
-                                    <input class="dcf-input-text" type="text" id="title" name="title" class="required-entry">
-                                </li>
-                                <li>
-                                    <label class="dcf-label" for="author">
-                                        Author<span class="dcf-required">*</span>
-                                    </label>
-                                    <div class="mh-tooltip wdn-icon-info hang-right" id="author-details">
-                                        <div>
-                                            Name of media creator
-                                        </div>
+                            <div class="dcf-form-group">
+                                <label for="title">Title<span class="dcf-required">*</span></label>
+                                <input type="text" id="title" name="title" class="required-entry">
+                            </div>
+                            <div class="dcf-form-group">
+                                <label for="author">Author<span class="dcf-required">*</span></label>
+                                <div class="mh-tooltip hang-right" id="author-details">
+                                    <?php echo $savvy->render('author tooltip', 'InfoIcon.tpl.php'); ?>
+                                    <div>
+                                        Name of media creator
                                     </div>
-                                    <input class="dcf-input-text" type="text" id="author" name="author" class="required-entry" aria-describedby="author-details">
-                                </li>
-                                <li>
-                                    <label class="dcf-label" for="description">
-                                        Description<span class="dcf-required">*</span>
-                                    </label>
-                                    <div class="mh-tooltip wdn-icon-info" id="description-details">
-                                        <div>
-                                            Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.
-                                        </div>
+                                </div>
+                                <input type="text" id="author" name="author" class="required-entry" aria-describedby="author-details">
+                            </div>
+                            <div class="dcf-form-group">
+                                <label for="description">Description<span class="dcf-required">*</span></label>
+                                <div class="mh-tooltip" id="description-details">
+                                    <?php echo $savvy->render('description tooltip', 'InfoIcon.tpl.php'); ?>
+                                    <div>
+                                        Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.
                                     </div>
-                                    <textarea class="dcf-input-text" rows="4" type="text" id="description" name="description" class="required-entry" aria-describedby="description-details"></textarea>
-                                </li>
-                            </ol>
+                                </div>
+                                <textarea rows="4" type="text" id="description" name="description" class="required-entry" aria-describedby="description-details"></textarea>
+                            </div>
                         </div>
                         <div>
-                            <ol>
-                                <li class="clear-top">
-                                    <?php echo $savvy->render($context, 'Feed/Media/fields/privacy.tpl.php'); ?>
-                                </li>
-                                <li>
-                                    <?php echo $savvy->render($context->feed_selection); ?>
-                                </li>
-                                <li style="display:none">
-                                    <div class="mh-tooltip invisible" id="autodetect-360">
-                                    </div>
-                                    <input class="dcf-input-control" type="checkbox" id="projection" name="projection" value="equirectangular">
-                                    <label class="dcf-label" for="projection">360 Video (equirectangular)</label>
-                                </li>
-                            </ol>
+                            <div class="dcf-form-group">
+                                <?php echo $savvy->render($context, 'Feed/Media/fields/privacy.tpl.php'); ?>
+                            </div>
+                            <div class="dcf-form-group">
+                                <?php echo $savvy->render($context->feed_selection); ?>
+                            </div>
+                            <div class="dcf-form-group" style="display:none">
+                                <div class="mh-tooltip invisible" id="autodetect-360"></div>
+                                <input class="dcf-input-checkbox" type="checkbox" id="projection" name="projection" value="equirectangular">
+                                <label for="projection">360 Video (equirectangular)</label>
+                            </div>
                         </div>
                     </div>
                     <?php if ($user->canTranscodePro()): ?>
                         <div>
-                            <fieldset class="optimization-settings">
-                                <legend class="dcf-legend">Optimization settings</legend>
-                                <p>Only videos will be optimized. If you are uploading an audio file, these settings will have no effect.</p>
-                                <ol>
-                                    <li>
-                                        <label class="dcf-label"><input type="radio" name="optimization" value="none" />None (video is already optimized with HandBrake presets)</label>
-                                    </li>
-                                    <li>
-                                        <label class="dcf-label"><input type="radio" name="optimization" value="mp4" />Single file at quarter HD (540p, use this to reduce cost)</label>
-                                    </li>
-                                    <li>
-                                        <label class="dcf-label"><input type="radio" name="optimization" value="hls" checked="checked" />Multiple files to optimize video quality (480p, 540p, 720p, and 1080p)</label>
-                                    </li>
-                                </ol>
+                            <fieldset>
+                                <legend class="dcf-legend">Optimization Settings</legend>
+                                <p class="dcf-txt-sm">Only videos will be optimized. If you are uploading an audio file, these settings will have no effect.</p>
+                                <div>
+                                    <div class="dcf-input-radio">
+                                        <input id="optimization-1" type="radio" name="optimization" value="none" /><label for="optimization-1">None (video is already optimized with HandBrake presets)</label>
+                                    </div>
+                                    <div class="dcf-input-radio">
+                                        <input id="optimization-2" type="radio" name="optimization" value="mp4" /><label for="optimization-2">Single file at quarter HD (540p, use this to reduce cost)</label>
+                                    </div>
+                                    <div class="dcf-input-radio">
+                                        <input id="optimization-3" type="radio" name="optimization" value="hls" checked="checked" /><label for="optimization-3">Multiple files to optimize video quality (480p, 540p, 720p, and 1080p)</label>
+                                    </div>
+                                </div>
                             </fieldset>
                         </div>
                     <?php elseif ($user->canTranscode()): ?>
                         <div>
-                            <fieldset class="optimization-settings">
-                                <legend class="dcf-legend">Optimization settings</legend>
-                                <p>Only videos will be optimized. If you are uploading an audio file, these settings will have no effect. <a href="https://wdn.unl.edu/mediahub-video-optimization-inquiry">If you need more options, please contact us</a>.</p>
-                                <ol class="dcf-form-group">
-                                    <li>
-                                        <label class="dcf-label"><input class="dcf-input-control" type="radio" name="optimization" value="none" />None (video is already optimized with HandBrake presets)</label>
-                                    </li>
-                                    <li>
-                                        <label class="dcf-label"><input class="dcf-input-control" type="radio" name="optimization" value="mp4" checked="checked" />Single file at quarter HD</label>
-                                    </li>
-                                </ol>
+                            <fieldset>
+                                <legend class="dcf-legend">Optimization Settings</legend>
+                                <p class="dcf-txt-sm">Only videos will be optimized. If you are uploading an audio file, these settings will have no effect. <a href="https://wdn.unl.edu/mediahub-video-optimization-inquiry">If you need more options, please contact us</a>.</p>
+                                <div>
+                                    <div class="dcf-input-radio">
+                                        <input id="optimization-1" class="dcf-input-control" type="radio" name="optimization" value="none" /><label for="optimization-1">None (video is already optimized with HandBrake presets)</label>
+                                    </div>
+                                        <div class="dcf-input-radio">
+                                        <input id="optimization-2" class="dcf-input-control" type="radio" name="optimization" value="mp4" checked="checked" /><label for="optimization-2">Single file at quarter HD</label>
+                                    </div>
+                                </div>
                             </fieldset>
                         </div>
                     <?php endif; ?>
                     
                     <input type="submit" id="publish" name="publish" value="Next Step: Add Captions" class="dcf-btn dcf-btn-primary dcf-mt-3" disabled="disabled">
                     <?php if (UNL_MediaHub_Controller::$caption_requirement_date):?>
-                        <p class="wdn-icon wdn-icon-attention">
+                        <p>
+                            <?php echo $savvy->render('publish tooltip', 'InfoIcon.tpl.php'); ?>
                             Note: Media will not be published until it is captioned.
                         </p>
                     <?php endif; ?>
@@ -133,10 +130,72 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
 </div>
 
 <?php
-$page->addScriptDeclaration("WDN.initializePlugin('form_validation', [function($) {
-    $('#add_media').validation({
-        containerClassName: 'validation-container',
-        immediate: true
+$page->addScriptDeclaration("
+    document.getElementById('add_media').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var submitBtn = document.getElementById('publish');
+        submitBtn.setAttribute('disabled', 'disabled');
+        var errors = [];
+
+        // Validate Title
+        var title = document.getElementById('title').value.trim();
+        if (!title) {
+            errors.push('Title is required.');
+        }
+
+        // Validate Author
+        var author = document.getElementById('author').value.trim();
+        if (!author) {
+            errors.push('Author is required.');
+        }
+
+        // Validate Description
+        var description = document.getElementById('description').value.trim();
+        if (!description) {
+            errors.push('Description is required.');
+        }
+
+        // Validate Privacy
+        var privacy = document.getElementById('privacy').value.trim();
+        if (!privacy) {
+            errors.push('Privacy is required.');
+        }
+
+        // Validate Feed
+        var feedChecked = false;
+        var newFeed = document.getElementById('new_feed').value.trim();
+        var feeds = document.getElementsByName('feed_id[]');
+        for (var i=0; i<feeds.length; i++) {
+            if (feeds[i].checked === true) {
+                feedChecked = true;
+                break;
+             }
+        }
+        if (!feedChecked && !newFeed) {
+            errors.push('Media must have at least one Channel.');
+        }
+
+        // Validate Optimization
+        var optimization = document.getElementsByName('optimization');
+        if (!optimization) {
+            errors.push('Optimization is required.');
+        }
+
+        // Submit form or display errors
+        if (errors.length == 0) {
+            this.submit();
+        } else {
+            var mediaErrorsContainer = document.getElementById('media-errors');
+            var mediaErrorsList = document.getElementById('media-errors-list');
+            mediaErrorsList.innerHTML = '';
+            for (var i=0; i<errors.length; i++) {
+                var errorItem = document.createElement('li');
+                errorItem.innerHTML = errors[i];
+                mediaErrorsList.appendChild(errorItem);
+            }
+            submitBtn.removeAttribute('disabled');
+            mediaErrorsContainer.style.display = 'block';
+        }
     });
-}]);");
+");
 ?>

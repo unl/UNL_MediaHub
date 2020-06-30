@@ -51,7 +51,7 @@
             <div class="dcf-col-100% dcf-col-33%-end@sm">
                 <div class="mh-caption-sidebar">
                     <?php if (!$context->hasPendingOrder()): ?>
-                    <form id="caption_order" method="post">
+                    <form id="caption_order" method="post" class="dcf-form">
                         <?php if ($duration = $context->media->findDuration()): ?>
                             <?php $estimate = ceil($duration->getTotalSeconds()/60 * 1.25); ?>
                             <input type="hidden" name="media_duration" value="<?php echo UNL_MediaHub::escape($duration->getString()); ?>" />
@@ -64,9 +64,9 @@
                         <?php endif; ?>
                         <ul class="dcf-list-bare">
                             <li>
-                                <label class="dcf-label">
+                                <label>
                                     Cost Object Number
-                                    <input class="dcf-input-text" type="text" name="cost_object" required />
+                                    <input type="text" name="cost_object" required />
                                 </label>
                             </li>
                         </ul>
@@ -83,9 +83,9 @@
                         ?>
                         <input class="dcf-mb-4" type="submit" id="caption_submit_button" value="Order captions" onclick="return confirm('<?php echo $confirmMessage; ?>');">
                         <?php if ($hasRevOrders === TRUE): ?>
-                        <p class="wdn-icon wdn-icon-attention unl-font-sans">Captions have already been ordered for this video.</p>
+                        <p class="unl-font-sans"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ALERT, '{"size": 4}'); ?> Captions have already been ordered for this video.</p>
                         <?php endif; ?>
-                        <p class="wdn-icon wdn-icon-attention unl-font-sans">Orders can not be canceled.</p>
+                        <p class="unl-font-sans"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ALERT, '{"size": 4}'); ?> Orders can not be canceled.</p>
                     </form>
                     <?php else: ?>
                     <p>Great news! There is an order already in the works.</p>

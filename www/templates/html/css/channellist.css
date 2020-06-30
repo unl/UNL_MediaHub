@@ -13,11 +13,11 @@ Supporting styles for listings of channels
   margin-bottom: 0;
 }
 
-.mh-list-header .wdn-subhead {
+.mh-list-header .dcf-subhead {
   margin: 0;
 }
 
-.mh-list-header h1 .wdn-subhead {
+.mh-list-header h1 .dcf-subhead {
   font-size:.23em;
 }
 
@@ -48,12 +48,12 @@ Supporting styles for listings of channels
   border: 0;
 }
 
-.mh-feeds .wdn_pagination {
+.mh-feeds .mh_pagination {
   padding: 0;
   text-align: center;
 }
 
-.mh-feeds .wdn_pagination li {
+.mh-feeds .mh_pagination li {
   display: inline-block;
   float: none;
 }

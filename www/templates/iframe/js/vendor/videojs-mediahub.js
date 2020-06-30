@@ -343,23 +343,23 @@ function MediahubPlayer(options) {
             
             // share urls
             var sharelinks = {
-                "wdn-icon-mail": { title: 'Email', url: 'mailto:?body=Checkout this ' + media_type + ': ' + share_url + '&subject=' + media_type + ': ' + $title },
-                "wdn-icon-facebook": { title: 'Facebook', url: 'https://www.facebook.com/sharer/sharer.php?u=' + share_url }, // facebook
-                "wdn-icon-twitter": { title: 'Twitter', url: 'https://twitter.com/share?text=' + media_type + ': ' + $title + '&url=' + share_url }, // twitter
-                "wdn-icon-linkedin-squared": { title: 'LinkedIn', url: 'https://www.linkedin.com/shareArticle?mini=true&url=' + share_url + '&title=' + $title + '&summary=Checkout this ' + media_type + '%20&source=University%20of%20Nebraska%20-%20Lincoln%20MediaHub' } //google plus
+                "mh-icon-mail": { title: 'Email', url: 'mailto:?body=Checkout this ' + media_type + ': ' + share_url + '&subject=' + media_type + ': ' + $title },
+                "mh-icon-facebook": { title: 'Facebook', url: 'https://www.facebook.com/sharer/sharer.php?u=' + share_url }, // facebook
+                "mh-icon-twitter": { title: 'Twitter', url: 'https://twitter.com/share?text=' + media_type + ': ' + $title + '&url=' + share_url }, // twitter
+                "mh-icon-linkedin-squared": { title: 'LinkedIn', url: 'https://www.linkedin.com/shareArticle?mini=true&url=' + share_url + '&title=' + $title + '&summary=Checkout this ' + media_type + '%20&source=University%20of%20Nebraska%20-%20Lincoln%20MediaHub' } //google plus
             };
 
             //create share links
-            var links = '<li><a href="https://go.unl.edu/?url=referer"  target="_parent" rel="nofollow"><span class="wdn-icon-link" aria-hidden="true"></span>Get a Go URL</a></li>';
+            var links = '<li><a href="https://go.unl.edu/?url=referer"  target="_parent" rel="nofollow"><span class="mh-icon-link" aria-hidden="true"></span>Get a Go URL</a></li>';
             for (var key in sharelinks) {
                 links += '<li class="outpost"><a href="' + sharelinks[key].url + '" rel="nofollow" target="_blank"><span class="' + key + '" aria-hidden="true"></span> Share on ' + sharelinks[key].title + '</a></li>';
             }
 
             var html = '<div class="media-content-head mejs-control">';
             html += '<div class="media-content-title"><a href="' + share_url + '" target="_parent">' + $title + '</a></div>';
-            html += '<div class="wdn-share-this-page mejs-control">';
-            html += '<button class="share-this-media"><span  class="wdn-icon-share" aria-hidden="true"></span><span class="wdn-text-hidden">Share This</span></button>';
-            html += '<ul class="wdn-share-options vjs-hidden">';
+            html += '<div class="mh-share-this-page mejs-control">';
+            html += '<button class="share-this-media"><span  class="mh-icon-share" aria-hidden="true"></span><span class="mh-text-hidden">Share This</span></button>';
+            html += '<ul class="mh-share-options vjs-hidden">';
             html += links;
             html += '</ul>';
             html += '</div>';
@@ -368,7 +368,7 @@ function MediahubPlayer(options) {
             $video.prepend(html);
             
             $('button.share-this-media', $video).click(function() {
-                var $container = $('.wdn-share-options', $video).first();
+                var $container = $('.mh-share-options', $video).first();
                 $container.toggleClass('vjs-hidden');
                 if (!$container.hasClass('vjs-hidden')) {
                     //We showed it, so send focus to the container

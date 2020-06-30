@@ -19,14 +19,14 @@
           </li>
       <?php endforeach ?>
   </ul>
-  <form action="?view=newsroom" method="post" id="addUser" class="addData">
+  <form action="?view=newsroom" method="post" id="addUser" class="dcf-form addData">
       <input type="hidden" id="feed_id" name="feed_id" value="<?php echo (int)$_GET['feed_id']; ?>" />
       <input type="hidden" id="__unlmy_posttarget" name="__unlmy_posttarget" value="feed_users" />
       <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
       <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
-      <label class="dcf-label" for="uid">My.UNL Username</label>
+      <label for="uid">My.UNL Username</label>
       <div class="dcf-input-group">
-        <input class="dcf-input-text" id="uid" name="uid" type="text" />
+        <input id="uid" name="uid" type="text" />
         <input type="submit" value="Add User" />
       </div>
   </form>
