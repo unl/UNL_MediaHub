@@ -246,6 +246,11 @@ function MediahubPlayer(options) {
             w = true;
         }
 
+        // if audio with poster, clear poster on play
+        if (t.isAudio() && t.poster()) {
+            t.poster('');
+        }
+
         var message = {
             'message_type': 'ga_event',
             'event': 'play',
