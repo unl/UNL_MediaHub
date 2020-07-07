@@ -207,12 +207,6 @@ $getTracks = $context->getTextTrackURLs();
                 <p><strong>iframe embed code:</strong> Copy the following code into your page</p>
                 <textarea cols="25" rows="6" id="embed_code" onclick="this.select(); return false;"><?php echo htmlentities($embed, ENT_COMPAT | ENT_HTML401, "UTF-8"); ?></textarea>
             </label>
-            <?php if (3 == UNL_MediaHub_Controller::$current_embed_version): ?>
-                <!--
-                Old embed code for testing purposes
-                <?php echo $savvy->render(UNL_MediaHub_Media_Embed::getById($context->id, 2)); ?>
-                -->
-            <?php endif; ?>
         </div>
     </div>
 </div>

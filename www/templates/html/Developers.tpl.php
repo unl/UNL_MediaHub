@@ -3,8 +3,8 @@
 $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized-dark.min.css', 'stylesheet');
 ?>
 
-<div class="developer-docs dcf-grid dcf-col-gap-vw dcf-pt-8 dcf-pb-8">
-    <div class="dcf-col-100% dcf-col-75%-start@sm">
+<div class="developer-docs dcf-grid dcf-col-gap-vw dcf-row-gap-6 dcf-pt-8 dcf-pb-8">
+    <div class="dcf-col-100% dcf-col-75%-start@md">
         <?php
         $resource = "UNL_MediaHub_Developers_" . $context->resource;
         $resource = new $resource;
@@ -44,22 +44,24 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
                     <?php endforeach; ?>
                 </tbody>
             </table>
-            
-            <h2>Examples</h2>
-            <ul class="wdn_tabs">
-                <?php
-                foreach ($resource->formats as $format) {
-                    echo "<li><a href='#$format'>$format</a></li>";
-                }
-                ?>
-            </ul>
-            <div class="wdn_tabs_content">
+
+            <!-- Hack to make dcf-tabs autoload, TODO: fix -->
+            <ul class="wdn_tabs"></ul>
+            <div class="dcf-tabs dcf-tabs-responsive dcf-mt-6">
+                <h2>Examples</h2>
+                <ul>
+                    <?php
+                    foreach ($resource->formats as $format) {
+                        echo "<li><a href='#$format'>$format</a></li>";
+                    }
+                    ?>
+                </ul>
                 <?php foreach ($resource->formats as $format): ?>
                     <div id="<?php echo $format; ?>">
                         <h3>Request</h3>
-                        
+
                         <code>GET <?php echo $resource->exampleURI; ?>?format=<?php echo $format; ?></code>
-                           
+
                         <h3>Response</h3>
                         <?php
                         //Get the output.
@@ -89,7 +91,7 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
             </div>
         </div>
     </div>
-    <div class="dcf-col-100% dcf-col-25%-end@sm">
+    <div class="dcf-col-100% dcf-col-25%-end@md">
         <nav id='resources'>
             <h2>MediaHub API</h2>
             <p>The following is a list of resources for MediaHub.</p>
