@@ -12,8 +12,8 @@ class SimpleXMLExtended extends SimpleXMLElement
 
 $details = array(
     'version' => '1.0',
-    'title' => addslashes($context->media->title),
-    'author_name' => addslashes($context->media->author),
+    'title' => strip_tags($context->media->title),
+    'author_name' => strip_tags($context->media->author),
     'provider_name' => 'UNL Mediahub',
     'provider_url' => UNL_MediaHub_Controller::$url
 );
