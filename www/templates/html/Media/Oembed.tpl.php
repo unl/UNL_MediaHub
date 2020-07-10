@@ -14,7 +14,7 @@ $details = array(
     'version' => '1.0',
     'title' => UNL_MediaHub::escape($context->media->title),
     'author_name' => UNL_MediaHub::escape($context->media->author),
-    'provider' => 'UNL Mediahub',
+    'provider_name' => 'UNL Mediahub',
     'provider_url' => UNL_MediaHub_Controller::$url
 );
 
