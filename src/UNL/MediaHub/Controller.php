@@ -24,11 +24,11 @@ class UNL_MediaHub_Controller
     public static $appName;
 
     /**
-     * Mediahub theme to use.
+     * Mediahub themePath to use.
      *
      * @var string
      */
-    public static $theme;
+    public static $themePath;
 
     /**
      * Mediahub custom theme template to use.

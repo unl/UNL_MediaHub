@@ -2,7 +2,7 @@
 use UNL\Templates\Templates;
 use Themes\Theme;
 
-$theme = new Theme($savvy, UNL_MediaHub_Controller::$theme, UNL_MediaHub_Controller::$template, UNL_MediaHub_Controller::$templateVersion, UNL_MediaHub_Controller::$customThemeTemplate);
+$theme = new \UNL\Templates\Theme($savvy, UNL_MediaHub_Controller::$themePath, UNL_MediaHub_Controller::$template, UNL_MediaHub_Controller::$templateVersion, UNL_MediaHub_Controller::$customThemeTemplate);
 
 $page = $theme->getPage();
 $savvy->addGlobal('theme', $theme);
@@ -12,8 +12,9 @@ $theme->addGlobal('page', $page);
 $baseUrl = UNL_MediaHub_Controller::getURL();
 
 // Theme Based Items
-if ($theme->getName() == \Themes\Theme::THEME_UNL) {
+if (!$theme->isCustomTheme()) {
     // UNL Theme
+    $theme->setWDNIncludePath(__DIR__ . '/../..');
     if (file_exists($theme->getWDNIncludePath() . '/wdn/templates_5.1')) {
         $page->setLocalIncludePath($theme->getWDNIncludePath());
     }
