@@ -2544,16 +2544,16 @@
         },
         {
             "name": "unl/php-wdn-templates",
-            "version": "v5.1.4",
+            "version": "v5.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unl/phpunltemplates.git",
-                "reference": "8826bcb55a7448dba18bbe8e1f051ab64abbbf6c"
+                "reference": "15bec117d79562dc29afdbe31ed60843540968fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unl/phpunltemplates/zipball/8826bcb55a7448dba18bbe8e1f051ab64abbbf6c",
-                "reference": "8826bcb55a7448dba18bbe8e1f051ab64abbbf6c",
+                "url": "https://api.github.com/repos/unl/phpunltemplates/zipball/15bec117d79562dc29afdbe31ed60843540968fd",
+                "reference": "15bec117d79562dc29afdbe31ed60843540968fd",
                 "shasum": ""
             },
             "require": {
@@ -2597,7 +2597,7 @@
             ],
             "description": "A PHP library for rendering the UNL templates",
             "homepage": "http://wdn.unl.edu/",
-            "time": "2020-07-09T18:07:03+00:00"
+            "time": "2020-07-10T20:21:03+00:00"
         },
         {
             "name": "unl/reg-exp-router",
