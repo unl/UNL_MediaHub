@@ -258,7 +258,7 @@ class UNL_MediaHub
         }
 
         $projection = false;
-        $length = count($metadata);
+        $length = count($metadata->streams);
         for ($i=0; $i < $length; $i++) { 
             if(isset($metadata->streams[$i]->side_data_list)){
                 $side_data_list_length = sizeof($metadata->streams[$i]->side_data_list);
