@@ -53,7 +53,7 @@
                     <?php if (!$context->hasPendingOrder()): ?>
                     <form id="caption_order" method="post" class="dcf-form">
                         <?php if ($duration = $context->media->findDuration()): ?>
-                            <?php $estimate = ceil($duration->getTotalSeconds()/60 * 1.25); ?>
+                            <?php $estimate = sprintf("%01.2f", round($duration->getTotalSeconds()/60 * 1.25, 2)); ?>
                             <input type="hidden" name="media_duration" value="<?php echo UNL_MediaHub::escape($duration->getString()); ?>" />
                             <input type="hidden" name="estimate" value="<?php echo UNL_MediaHub::escape($estimate) ?>" />
                             <h3 class="clear-top">Caption your video for <strong>$<?php echo UNL_MediaHub::escape($estimate) ?>.</strong></h3>  

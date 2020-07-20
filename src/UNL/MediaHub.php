@@ -253,12 +253,12 @@ class UNL_MediaHub
 
         $metadata = json_decode($json);
         
-        if (!$metadata) {
+        if (!$metadata || !isset($metadata->streams) || !is_countable($metadata->streams)) {
             return false;
         }
 
         $projection = false;
-        $length = count($metadata);
+        $length = count($metadata->streams);
         for ($i=0; $i < $length; $i++) { 
             if(isset($metadata->streams[$i]->side_data_list)){
                 $side_data_list_length = sizeof($metadata->streams[$i]->side_data_list);
