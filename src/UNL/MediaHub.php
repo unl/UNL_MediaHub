@@ -253,7 +253,7 @@ class UNL_MediaHub
 
         $metadata = json_decode($json);
         
-        if (!$metadata) {
+        if (!$metadata || !isset($metadata->streams) || !is_countable($metadata->streams)) {
             return false;
         }
 
