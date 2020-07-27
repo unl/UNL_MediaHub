@@ -7,7 +7,7 @@ class UNL_MediaHub_UserList extends UNL_MediaHub_List
         'orderby'            => 'uid',
         'order'              => 'ASC',
         'page'               => 0,
-        'limit'              => null,
+        'limit'              => 250,
         'additional_filters' => array(),
     );
     
