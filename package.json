@@ -16,18 +16,15 @@
   },
   "homepage": "https://github.com/unl/UNL_MediaHub",
   "devDependencies": {
-    "grunt": "^1.0.4",
+    "grunt": "^1.2.1",
     "grunt-contrib-less": "^2.0.0",
     "grunt-contrib-watch": "^1.1.0",
-    "less": "^3.10.3",
+    "less": "^3.12.2",
     "less-plugin-clean-css": "^1.5.1",
+    "lodash": ">=4.17.19",
     "websocket-extensions": ">=0.1.4"
   },
   "engines": {
     "node": "node >= 0.10.0"
-  },
-  "dependencies": {
-    "grunt-contrib-less": "^2.0.0",
-    "grunt-contrib-watch": "^1.1.0"
   }
 }
