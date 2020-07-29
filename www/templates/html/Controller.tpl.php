@@ -56,6 +56,7 @@ $page->head .= '<link rel="alternate" type="application/rss+xml" title="'. $alte
 $page->appcontrols = $savvy->render(null, 'Navigation.tpl.php');
 
 //Main content
+$page->maincontentarea = '';
 if (!empty($_SESSION['notices']) && is_array($_SESSION['notices'])) {
     foreach ($_SESSION['notices'] as $key=>$notice) {
         $page->maincontentarea .= $savvy->render($notice);
@@ -63,6 +64,6 @@ if (!empty($_SESSION['notices']) && is_array($_SESSION['notices'])) {
     }
 }
 
-$page->maincontentarea = $savvy->render($context->output);
+$page->maincontentarea .= $savvy->render($context->output);
 
 echo $page;
