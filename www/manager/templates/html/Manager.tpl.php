@@ -34,6 +34,7 @@ $page->appcontrols = $savvy->render(null, 'Navigation.tpl.php');
 //Main content
 $savvy->addGlobal('page', $page);
 
+$page->maincontentarea = '';
 if (isset($_SESSION['notices'])) {
     foreach ($_SESSION['notices'] as $key=>$notice) {
         $page->maincontentarea .= $savvy->render($notice);
@@ -41,7 +42,7 @@ if (isset($_SESSION['notices'])) {
     }
 }
 
-$page->maincontentarea = $savvy->render($context->output);
+$page->maincontentarea .= $savvy->render($context->output);
 
 //Footer
 $page->contactinfo = $savvy->render($context, 'localfooter.tpl.php');
