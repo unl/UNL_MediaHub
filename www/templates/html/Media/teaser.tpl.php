@@ -23,4 +23,8 @@ $user = UNL_MediaHub_AuthService::getInstance()->getUser();
         </span>
         <a class="dcf-txt-decor-none" href="<?php echo UNL_MediaHub_Controller::getURL($context) ?>"><?php echo UNL_MediaHub::escape($context->title); ?></a>
     </p>
+
+    <?php if ($user && $context->userCanEdit($user)): ?>
+    <p class="dcf-txt-xs"><?php echo ucfirst(strtolower($context->privacy)); ?></p>
+    <?php endif; ?>
 </div>
