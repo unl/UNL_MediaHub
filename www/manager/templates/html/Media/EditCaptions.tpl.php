@@ -81,7 +81,7 @@
                                 $confirmMessage = 'Orders can not be canceled. Are you sure you want to order captions?';
                             }
                         ?>
-                        <input class="dcf-mb-4" type="submit" id="caption_submit_button" value="Order captions" onclick="return confirm('<?php echo $confirmMessage; ?>');">
+                        <input class="dcf-mb-4 dcf-btn dcf-btn-primary" type="submit" id="caption_submit_button" value="Order captions" onclick="return confirm('<?php echo $confirmMessage; ?>');">
                         <?php if ($hasRevOrders === TRUE): ?>
                         <p class="unl-font-sans"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ALERT, '{"size": 4}'); ?> Captions have already been ordered for this video.</p>
                         <?php endif; ?>
@@ -122,7 +122,7 @@
                         <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
                         <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
                         <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
-                        <input type="submit" value="Pull Captions from amara.org">
+                        <input class="dcf-btn dcf-btn-primary" type="submit" value="Pull Captions from amara.org">
                     </form>
                 <?php endif ?>
             </div>
@@ -210,6 +210,7 @@
                             </ul>
                         </td>
                         <td data-header="Actions">
+                            <a href="<?php echo UNL_MediaHub_Manager::getURL() . '?view=editcaptiontrack&media_id=' . (int)$context->media->id . '&track_id=' . (int)$track->id; ?>" class="dcf-btn dcf-btn-secondary">Edit</a>
                             <?php if ($context->media->media_text_tracks_id == $track->id): ?>
                                 (active)
                             <?php else: ?>
@@ -219,7 +220,7 @@
                                     <input type="hidden" name="text_track_id" value="<?php echo (int)$track->id ?>" />
                                     <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
                                     <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
-                                    <input type="submit" value="Set Active">
+                                    <input class="dcf-btn dcf-btn-primary" type="submit" value="Set Active">
                                 </form>
                             <?php endif; ?>
                         </td>

@@ -119,6 +119,9 @@ class UNL_MediaHub_Manager_PostHandler
         case 'delete_feed':
             $this->handleDeleteFeed();
             break;
+        case 'update_text_track_file';
+            $this->handleUpdateTextTrackFile();
+            break;
         case 'pull_amara':
             $this->handleAmara();
             break;
@@ -625,6 +628,50 @@ class UNL_MediaHub_Manager_PostHandler
         $media->delete();
 
         UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL());
+    }
+
+    function handleUpdateTextTrackFile() {
+        $mediaId = !empty($this->post['media_id']) ? $this->post['media_id'] : 0;
+        if (!$media = UNL_MediaHub_Media::getById($mediaId)) {
+            throw new Exception('Unable to find media', 404);
+        }
+
+        if (!$media->userHasPermission(UNL_MediaHub_AuthService::getInstance()->getUser(), UNL_MediaHub_Permission::USER_CAN_UPDATE)) {
+            throw new Exception('You do not have permission to edit this media.', 403);
+        }
+
+        $trackId = !empty($this->post['track_id']) ? $this->post['track_id'] : 0;
+        if (!$track = UNL_MediaHub_MediaTextTrack::getById($trackId)) {
+            throw new \Exception('Could not find that track', 404);
+        }
+
+        if ($media->id != $track->media_id) {
+            throw new \Exception('Track Media Invalid', 404);
+        }
+
+        $trackFileId = !empty($this->post['track_file_id']) ? $this->post['track_file_id'] : 0;
+        if (!$trackFile = UNL_MediaHub_MediaTextTrackFile::getById($trackFileId)) {
+            throw new \Exception('Could not find that track file', 404);
+        }
+
+        if ($track->id != $trackFile->media_text_tracks_id) {
+            throw new \Exception('Track File Invalid', 404);
+        }
+
+        $updatedTrackFileContents = !empty($this->post['file_contents']) ? $this->post['file_contents'] : 0;
+
+        //$trackFile->id = NULL;
+        $trackFile->file_contents = trim($updatedTrackFileContents);
+        $trackFile->save();
+
+        $notice = new UNL_MediaHub_Notice(
+            'Success',
+            'The caption track has been updated.',
+            UNL_MediaHub_Notice::TYPE_SUCCESS
+        );
+        UNL_MediaHub_Manager::addNotice($notice);
+
+        UNL_MediaHub::redirect($media->getEditCaptionsURL());
     }
     
     function handleAmara()
