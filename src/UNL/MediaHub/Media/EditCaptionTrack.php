@@ -31,6 +31,10 @@ class UNL_MediaHub_Media_EditCaptionTrack
             throw new \Exception('Could not find that track', 404);
         }
 
+        if (empty($this->track->media_text_tracks_source_id)) {
+            throw new \Exception('Track must be a copy to edit', 404);
+        }
+
         $this->trackFiles = $this->track->getFiles()->items;
         $this->trackFile = isset($this->trackFiles[0]) ? $this->trackFiles[0] : NULL;
         if (empty($this->trackFile)) {
