@@ -10,7 +10,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/par
 <div class="dcf-bleed unl-bg-lightest-gray dcf-mt-2 dcf-mb-6">
     <div class="dcf-wrapper">
         <p class="dcf-mb-6">
-            The intent of this form is to allow simple edits of captions provided from Rev or Armara.
+            The intent of this form is to allow simple edits of captions provided from Rev or Amara.
             Only make updates to times if you know what you are doing. All changes will be validated and only
             valid ones will be allowed to be saved.
         </p>
