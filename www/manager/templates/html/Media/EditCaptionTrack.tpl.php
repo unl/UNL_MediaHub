@@ -1,15 +1,19 @@
 <?php
 $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/parser.js?v=' . UNL_MediaHub_Controller::getVersion(), NULL, TRUE);
 ?>
-<div class="dcf-bleed dcf-pt-6 dcf-pb-6">
+<div class="dcf-bleed dcf-mt-6">
     <div class="dcf-wrapper">
         <h2 class="dct-txt-h4">Edit Caption Track for: <?php echo UNL_MediaHub::escape($context->media->title) ?></h2>
-        <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=editcaptions&id=' . (int)$context->media->id?>" class="dcf-btn dcf-btn-primary">Back To Media Captions</a>
     </div>
 </div>
 
-<div class="dcf-bleed unl-bg-lightest-gray dcf-pt-6 dcf-pb-6">
+<div class="dcf-bleed unl-bg-lightest-gray dcf-mt-2 dcf-mb-6">
     <div class="dcf-wrapper">
+        <p class="dcf-mb-6">
+            The intent of this form is to allow simple edits of captions provided from Rev or Armara.
+            Only make updates to times if you know what you are doing. All changes will be validated and only
+            valid ones will be allowed to be saved.
+        </p>
         <div class="dcf-grid dcf-col-gap-vw dcf-row-gap-6">
             <dl class="dcf-col-100% dcf-col-25%-start@sm">
                 <dt>Created</dt>
@@ -30,12 +34,16 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/par
 
                     <div class="dcf-form-group">
                         <label for="track-contents">Track Contents</label>
-                        <textarea id="track-contents" name="file_contents" cols="60" rows="5" oninput="test()"><?php echo trim($context->trackFile->file_contents);?></textarea>
+                        <textarea class="dcf-txt-sm" id="track-contents" name="file_contents" cols="60" rows="10" oninput="test()"><?php echo trim($context->trackFile->file_contents);?></textarea>
                     </div>
                     <p id="status"></p>
                     <ol></ol>
                     <pre></pre>
-                    <input class="dcf-btn dcf-btn-primary" name="submit" type="submit" value="Save Captions">
+                    <div class="dcf-mt-4" role="group" aria-label="Edit Caption Actions">
+                        <input class="dcf-btn dcf-btn-primary" name="submit" type="submit" id="save-captions-btn" value="Save">
+                        <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=editcaptions&id=' . (int)$context->media->id?>" class="dcf-btn dcf-btn-secondary" onclick="return confirm('Are you sure you want to cancel?');">Cancel</a>
+                    </div>
+
                 </form>
             </div>
         </div>
@@ -47,19 +55,16 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/par
     var pa = new WebVTTParser();
     var r = pa.parse(document.getElementById('track-contents').value, 'subtitles/captions/descriptions');
 
+    var submitBtn = document.getElementById('save-captions-btn');
     var ol = document.getElementsByTagName('ol')[0];
+    ol.style = 'color: red';
     var p = document.getElementById('status');
     var pre = document.getElementsByTagName('pre')[0];
     ol.textContent = '';
 
     if(r.errors.length > 0) {
-      if(r.errors.length == 1) {
-        p.textContent = 'Almost there!';
-      } else if(r.errors.length < 5) {
-        p.textContent = 'Not bad, keep at it!';
-      } else {
-        p.textContent = 'You are hopeless, RTFS.';
-      }
+      submitBtn.setAttribute('disabled', '');
+      p.textContent = 'Your captions have the following errors:';
       p.style = 'color: red';
 
       for(var i = 0; i < r.errors.length; i++) {
@@ -74,10 +79,10 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/par
         ol.appendChild(li);
       }
     } else {
-      p.textContent = "Awesome, your WebVTT is valid!";
+      submitBtn.removeAttribute('disabled');
+      p.textContent = "Your captions are valid!";
       p.style = 'color: green';
     }
-    p.textContent += " (" + r.time + "ms)";
     var s = new WebVTTSerializer();
     pre.textContent = s.serialize(r.cues);
   }
