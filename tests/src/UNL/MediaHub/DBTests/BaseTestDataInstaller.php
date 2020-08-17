@@ -64,7 +64,6 @@ class UNL_MediaHub_DBTests_BaseTestDataInstaller implements UNL_MediaHub_DBTests
         $text_track = new UNL_MediaHub_MediaTextTrack();
         $text_track->media_id = $media_b->id;
         $text_track->source = UNL_MediaHub_MediaTextTrack::SOURCE_AMARA;
-        $text_track->media_text_tracks_source_id = 0;
         $text_track->save();
         
         //For brevity, we won't actually create a file for the text track.
