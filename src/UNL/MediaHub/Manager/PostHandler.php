@@ -776,11 +776,31 @@ class UNL_MediaHub_Manager_PostHandler
             throw new \Exception('Track File must be a copy to edit', 404);
         }
 
-        $updatedTrackFileContents = !empty($this->post['file_contents']) ? $this->post['file_contents'] : 0;
+        try {
+            $vtt = new Captioning\Format\WebvttFile();
+            $vtt->loadFromString(trim($trackFile->file_contents));
+            $cues = $vtt->getCues();
+            foreach ($cues as $index => $cue) {
+                $cueName = 'cue' . $index;
+                if (!isset($this->post[$cueName])) {
+                    throw new \Exception('Missing expected track cue at ' . $cue->getStart() . ' - ' . $cue->getStop(), 404);
+                }
 
-        //$trackFile->id = NULL;
-        $trackFile->file_contents = trim($updatedTrackFileContents);
-        $trackFile->save();
+                // update cue with new text
+                $cue->setText($this->post[$cueName]);
+
+                // remove old cue;
+                $vtt->removeCue($index);
+
+                // add updated cue;
+                $vtt->addCue($cue);
+            }
+            $vtt->build();
+            $trackFile->file_contents = trim($vtt->getFileContent());
+            $trackFile->save();
+        } catch(Exception $e) {
+            throw new \Exception('Error saving track file.', 404);
+        }
 
         $notice = new UNL_MediaHub_Notice(
             'Success',
