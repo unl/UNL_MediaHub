@@ -787,7 +787,7 @@ class UNL_MediaHub_Manager_PostHandler
                 }
 
                 // update cue with new text
-                $cue->setText($this->post[$cueName]);
+                $cue->setText(trim($this->post[$cueName]));
 
                 // remove old cue;
                 $vtt->removeCue($index);
@@ -796,7 +796,7 @@ class UNL_MediaHub_Manager_PostHandler
                 $vtt->addCue($cue);
             }
             $vtt->build();
-            $trackFile->file_contents = trim($vtt->getFileContent());
+            $trackFile->file_contents = preg_replace("/(\r?\n){2,}/", "\n\n", trim($vtt->getFileContent()));
             $trackFile->save();
         } catch(Exception $e) {
             throw new \Exception('Error saving track file.', 404);

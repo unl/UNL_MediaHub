@@ -19,11 +19,18 @@
                 <dd><?php echo UNL_MediaHub::escape($context->track->revision_comment) ?></dd>
             </dl>
             <?php
-            $vtt = new Captioning\Format\WebvttFile();
-            $vtt->loadFromString(trim($context->trackFile->file_contents));
-            $cues = $vtt->getCues();
+            $validTrack = TRUE;
+            try {
+                $vtt = new Captioning\Format\WebvttFile();
+                $vtt->loadFromString(trim($context->trackFile->file_contents));
+                $cues = $vtt->getCues();
+            }  catch(Exception $e) {
+                $validTrack = FALSE;
+                $invalidTrackMessage = 'Unable to edit caption track due to invalid format. ' . $e->getMessage();
+            }
             ?>
             <div class="dcf-col-100% dcf-col-75%-end@sm">
+                <?php if ($validTrack === TRUE) : ?>
                 <form class="dcf-form" method="POST">
                     <input type="hidden" name="__unlmy_posttarget" value="update_text_track_file" />
                     <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
@@ -49,8 +56,18 @@
                         <input class="dcf-btn dcf-btn-primary" name="submit" type="submit" id="save-captions-btn" value="Save">
                         <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=editcaptions&id=' . (int)$context->media->id?>" class="dcf-btn dcf-btn-secondary" onclick="return confirm('Are you sure you want to cancel?');">Cancel</a>
                     </div>
-
                 </form>
+                <?php else: ?>
+                    <?php
+                        $errorNotice = new StdClass();
+                        $errorNotice->type = 'alert';
+                        $errorNotice->title = 'Invalid Caption Format';
+                        $errorNotice->body = $invalidTrackMessage;
+                        echo $savvy->render($errorNotice, 'Notice.tpl.php');
+                    ?>
+                    <div class="dcf-b-solid dcf-b-1 dcf-p-2"><pre><?php echo trim($context->trackFile->file_contents); ?></pre></div>
+                    <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=editcaptions&id=' . (int)$context->media->id?>" class="dcf-mt-4 dcf-btn dcf-btn-secondary">Back to captions</a>
+                <?php endif; ?>
             </div>
         </div>
     </div>
