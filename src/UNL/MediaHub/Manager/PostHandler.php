@@ -798,6 +798,13 @@ class UNL_MediaHub_Manager_PostHandler
             $vtt->build();
             $trackFile->file_contents = preg_replace("/(\r?\n){2,}/", "\n\n", trim($vtt->getFileContent()));
             $trackFile->save();
+
+            // Mux Media with updated track if active track
+            if ($media->media_text_tracks_id == $track->id) {
+                $muxer = new UNL_MediaHub_Muxer($media);
+                $muxer->mux();
+            }
+
         } catch(Exception $e) {
             throw new \Exception('Error saving track file.', 404);
         }
