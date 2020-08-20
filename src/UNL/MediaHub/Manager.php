@@ -16,6 +16,7 @@ class UNL_MediaHub_Manager extends UNL_MediaHub_BaseController implements UNL_Me
         'home'            => 'UNL_MediaHub_Manager_ManagerHome',
         'addmedia'        => 'UNL_MediaHub_Feed_Media_Form',
         'editcaptions'    => 'UNL_MediaHub_Media_EditCaptions',
+        'editcaptiontrack' => 'UNL_MediaHub_Media_EditCaptionTrack',
         'captionorderdetails' => 'UNL_MediaHub_Media_CaptionOrderDetails',
         );
     
