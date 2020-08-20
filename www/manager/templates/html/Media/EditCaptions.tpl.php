@@ -81,7 +81,7 @@
                                 $confirmMessage = 'Orders can not be canceled. Are you sure you want to order captions?';
                             }
                         ?>
-                        <input class="dcf-mb-4" type="submit" id="caption_submit_button" value="Order captions" onclick="return confirm('<?php echo $confirmMessage; ?>');">
+                        <input class="dcf-mb-4 dcf-btn dcf-btn-primary" type="submit" id="caption_submit_button" value="Order captions" onclick="return confirm('<?php echo $confirmMessage; ?>');">
                         <?php if ($hasRevOrders === TRUE): ?>
                         <p class="unl-font-sans"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ALERT, '{"size": 4}'); ?> Captions have already been ordered for this video.</p>
                         <?php endif; ?>
@@ -122,7 +122,7 @@
                         <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
                         <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
                         <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
-                        <input type="submit" value="Pull Captions from amara.org">
+                        <input class="dcf-btn dcf-btn-primary" type="submit" value="Pull Captions from amara.org">
                     </form>
                 <?php endif ?>
             </div>
@@ -175,10 +175,11 @@
         </table>
 
         <h2 class="dcf-pt-4">Caption track history</h2>
-        <p>You can manage old captions.</p>
+        <p>You can manage old captions. You may copy any track, edit copied tracks and delete non-active copied tracks.</p>
         <table class="wdn_responsive_table flush-left">
             <thead>
             <tr>
+                <th>ID</th>
                 <th>Date of caption track</th>
                 <th>Source</th>
                 <th>Comments</th>
@@ -190,6 +191,9 @@
             <?php $text_tracks = $context->getTrackHistory()->items; ?>
                 <?php foreach ($text_tracks as $track): ?>
                     <tr>
+                        <td data-header="ID of caption track">
+                            <?php echo UNL_MediaHub::escape($track->id) ?>
+                        </td>
                         <td data-header="Date of caption track">
                             <?php echo UNL_MediaHub::escape($track->datecreated) ?>
                         </td>
@@ -209,17 +213,38 @@
                                 <?php endforeach; ?>
                             </ul>
                         </td>
-                        <td data-header="Actions">
+                        <td data-header="Actions" class="dcf-txt-sm">
+                            <?php if (!empty($track->media_text_tracks_source_id)): ?>
+                            <a href="<?php echo UNL_MediaHub_Manager::getURL() . '?view=editcaptiontrack&media_id=' . (int)$context->media->id . '&track_id=' . (int)$track->id; ?>" class="dcf-btn dcf-btn-secondary dcf-mt-1">Edit</a>
+                                <?php if ($context->media->media_text_tracks_id != $track->id): ?>
+                                <form class="dcf-form dcf-d-inline" method="post">
+                                    <input type="hidden" name="__unlmy_posttarget" value="delete_text_track_file" />
+                                    <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
+                                    <input type="hidden" name="text_track_id" value="<?php echo (int)$track->id ?>" />
+                                    <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
+                                    <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
+                                    <input class="dcf-btn dcf-btn-primary dcf-mt-1" type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this track?');">
+                                </form>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                            <form class="dcf-form dcf-d-inline" method="post">
+                                <input type="hidden" name="__unlmy_posttarget" value="copy_text_track_file" />
+                                <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
+                                <input type="hidden" name="text_track_id" value="<?php echo (int)$track->id ?>" />
+                                <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
+                                <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
+                                <input class="dcf-btn dcf-btn-primary dcf-mt-1" type="submit" value="Copy">
+                            </form>
                             <?php if ($context->media->media_text_tracks_id == $track->id): ?>
                                 (active)
                             <?php else: ?>
-                                <form method="post">
+                                <form class="dcf-form dcf-d-inline" method="post">
                                     <input type="hidden" name="__unlmy_posttarget" value="set_active_text_track" />
                                     <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
                                     <input type="hidden" name="text_track_id" value="<?php echo (int)$track->id ?>" />
                                     <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
                                     <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
-                                    <input type="submit" value="Set Active">
+                                    <input class="dcf-btn dcf-btn-primary dcf-mt-1" type="submit" value="Set Active">
                                 </form>
                             <?php endif; ?>
                         </td>

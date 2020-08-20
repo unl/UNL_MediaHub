@@ -4,7 +4,7 @@
     </div>
     <div class="message">
         <p class="title"><?php echo $context->title ?></p>
-        <p>
+        <p class="dcf-mt-4">
             <?php echo $context->body; ?>
         </p>
         <?php if (!empty($context->links)): ?>
