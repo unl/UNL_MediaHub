@@ -156,7 +156,6 @@ foreach ($orders->items as $order) {
                         
                         echo "\t creating a new text track file" . PHP_EOL;
                         $media_text_track_file = new UNL_MediaHub_MediaTextTrackFile();
-                        $media_text_track_file = new UNL_MediaHub_MediaTextTrackFile();
                         $media_text_track_file->media_text_tracks_id = $media_text_track->id;
                         $media_text_track_file->kind = UNL_MediaHub_MediaTextTrackFile::KIND_CAPTION;
                         $media_text_track_file->format = UNL_MediaHub_MediaTextTrackFile::FORMAT_VTT;

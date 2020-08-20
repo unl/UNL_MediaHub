@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS `media_text_tracks` (
   `datecreated` timestamp NOT NULL,
   `source` ENUM('amara', 'order') NULL,
   `revision_comment` MEDIUMTEXT NULL,
+  `media_text_tracks_source_id` int(10) unsigned NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`media_id`) REFERENCES media(id) ON DELETE CASCADE,
   INDEX `media_text_tracks_datecreated` (`datecreated`)

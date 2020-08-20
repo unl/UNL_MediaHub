@@ -119,6 +119,15 @@ class UNL_MediaHub_Manager_PostHandler
         case 'delete_feed':
             $this->handleDeleteFeed();
             break;
+        case 'copy_text_track_file':
+           $this->handleCopyTextTrackFile();
+           break;
+        case 'update_text_track_file';
+            $this->handleUpdateTextTrackFile();
+            break;
+        case 'delete_text_track_file';
+            $this->handleDeleteTextTrackFile();
+            break;
         case 'pull_amara':
             $this->handleAmara();
             break;
@@ -625,6 +634,189 @@ class UNL_MediaHub_Manager_PostHandler
         $media->delete();
 
         UNL_MediaHub::redirect(UNL_MediaHub_Manager::getURL());
+    }
+
+    function handleDeleteTextTrackFile() {
+        $mediaId = !empty($this->post['media_id']) ? $this->post['media_id'] : 0;
+        if (!$media = UNL_MediaHub_Media::getById($mediaId)) {
+            throw new Exception('Unable to find media', 404);
+        }
+
+        if (!$media->userHasPermission(UNL_MediaHub_AuthService::getInstance()->getUser(), UNL_MediaHub_Permission::USER_CAN_UPDATE)) {
+            throw new Exception('You do not have permission to edit this media.', 403);
+        }
+
+        $trackId = !empty($this->post['text_track_id']) ? $this->post['text_track_id'] : 0;
+        if (!$track = UNL_MediaHub_MediaTextTrack::getById($trackId)) {
+            throw new \Exception('Could not find that track', 404);
+        }
+
+        if ($media->id != $track->media_id) {
+            throw new \Exception('Track Media Invalid', 404);
+        }
+
+        if ($media->media_text_tracks_id == $track->id) {
+            throw new \Exception('Active track cannot be deleted', 404);
+        }
+
+        // Attempt to copy track and track file
+        try {
+            // delete track
+            $track->delete();
+        } catch(Exception $e) {
+            if (!empty($newTrack->id)) {
+                $newTrack->delete();
+            }
+            throw new \Exception('Error deleting caption track', 404);
+        }
+
+        $notice = new UNL_MediaHub_Notice(
+            'Success',
+            'The caption track has been deleted.',
+            UNL_MediaHub_Notice::TYPE_SUCCESS
+        );
+        UNL_MediaHub_Manager::addNotice($notice);
+
+        UNL_MediaHub::redirect($media->getEditCaptionsURL());
+    }
+
+    function handleCopyTextTrackFile() {
+        $mediaId = !empty($this->post['media_id']) ? $this->post['media_id'] : 0;
+        if (!$media = UNL_MediaHub_Media::getById($mediaId)) {
+            throw new Exception('Unable to find media', 404);
+        }
+
+        if (!$media->userHasPermission(UNL_MediaHub_AuthService::getInstance()->getUser(), UNL_MediaHub_Permission::USER_CAN_UPDATE)) {
+            throw new Exception('You do not have permission to edit this media.', 403);
+        }
+
+        $trackId = !empty($this->post['text_track_id']) ? $this->post['text_track_id'] : 0;
+        if (!$track = UNL_MediaHub_MediaTextTrack::getById($trackId)) {
+            throw new \Exception('Could not find that track', 404);
+        }
+
+        if ($media->id != $track->media_id) {
+            throw new \Exception('Track Media Invalid', 404);
+        }
+
+        $trackFiles = $track->getFiles()->items;
+        $trackFile = isset($trackFiles[0]) ? $trackFiles[0] : NULL;
+        if (empty($trackFile)) {
+            throw new \Exception('Track missing track file');
+        }
+
+        if ($track->id != $trackFile->media_text_tracks_id) {
+            throw new \Exception('Track File Invalid', 404);
+        }
+
+        // Attempt to copy track and track file
+        try {
+            // copy track
+            $newTrack = new UNL_MediaHub_MediaTextTrack();
+            $newTrack->media_id = $track->media_id;
+            $newTrack->source = $track->source;
+            $newTrack->revision_comment = 'Copied from track id ' . $track->id;
+            $newTrack->media_text_tracks_source_id = $track->id;
+            $newTrack->save();
+
+            // copy track file
+            $newTrackFile = new UNL_MediaHub_MediaTextTrackFile();
+            $newTrackFile->media_text_tracks_id = $newTrack->id;
+            $newTrackFile->kind = $trackFile->kind;
+            $newTrackFile->format = $trackFile->format;
+            $newTrackFile->language = $trackFile->language;
+            $newTrackFile->file_contents = $trackFile->file_contents;
+            $newTrackFile->save();
+        } catch(Exception $e) {
+            if (!empty($newTrack->id)) {
+                $newTrack->delete();
+            }
+            throw new \Exception('Error copying caption track', 404);
+        }
+
+        $notice = new UNL_MediaHub_Notice(
+            'Success',
+            'The caption track has been copied.',
+            UNL_MediaHub_Notice::TYPE_SUCCESS
+        );
+        UNL_MediaHub_Manager::addNotice($notice);
+
+        UNL_MediaHub::redirect($media->getEditCaptionsURL());
+    }
+
+    function handleUpdateTextTrackFile() {
+        $mediaId = !empty($this->post['media_id']) ? $this->post['media_id'] : 0;
+        if (!$media = UNL_MediaHub_Media::getById($mediaId)) {
+            throw new Exception('Unable to find media', 404);
+        }
+
+        if (!$media->userHasPermission(UNL_MediaHub_AuthService::getInstance()->getUser(), UNL_MediaHub_Permission::USER_CAN_UPDATE)) {
+            throw new Exception('You do not have permission to edit this media.', 403);
+        }
+
+        $trackId = !empty($this->post['track_id']) ? $this->post['track_id'] : 0;
+        if (!$track = UNL_MediaHub_MediaTextTrack::getById($trackId)) {
+            throw new \Exception('Could not find that track', 404);
+        }
+
+        if ($media->id != $track->media_id) {
+            throw new \Exception('Track Media Invalid', 404);
+        }
+
+        $trackFileId = !empty($this->post['track_file_id']) ? $this->post['track_file_id'] : 0;
+        if (!$trackFile = UNL_MediaHub_MediaTextTrackFile::getById($trackFileId)) {
+            throw new \Exception('Could not find that track file', 404);
+        }
+
+        if ($track->id != $trackFile->media_text_tracks_id) {
+            throw new \Exception('Track File Invalid', 404);
+        }
+
+        if (empty($track->media_text_tracks_source_id)) {
+            throw new \Exception('Track File must be a copy to edit', 404);
+        }
+
+        try {
+            $vtt = new Captioning\Format\WebvttFile();
+            $vtt->loadFromString(trim($trackFile->file_contents));
+            $cues = $vtt->getCues();
+            foreach ($cues as $index => $cue) {
+                $cueName = 'cue' . $index;
+                if (!isset($this->post[$cueName])) {
+                    throw new \Exception('Missing expected track cue at ' . $cue->getStart() . ' - ' . $cue->getStop(), 404);
+                }
+
+                // update cue with new text
+                $cue->setText(trim($this->post[$cueName]));
+
+                // remove old cue;
+                $vtt->removeCue($index);
+
+                // add updated cue;
+                $vtt->addCue($cue);
+            }
+            $vtt->build();
+            $trackFile->file_contents = preg_replace("/(\r?\n){2,}/", "\n\n", trim($vtt->getFileContent()));
+            $trackFile->save();
+
+            // Mux Media with updated track if active track
+            if ($media->media_text_tracks_id == $track->id) {
+                $muxer = new UNL_MediaHub_Muxer($media);
+                $muxer->mux();
+            }
+
+        } catch(Exception $e) {
+            throw new \Exception('Error saving track file.', 404);
+        }
+
+        $notice = new UNL_MediaHub_Notice(
+            'Success',
+            'The caption track has been updated.',
+            UNL_MediaHub_Notice::TYPE_SUCCESS
+        );
+        UNL_MediaHub_Manager::addNotice($notice);
+
+        UNL_MediaHub::redirect($media->getEditCaptionsURL());
     }
     
     function handleAmara()
