@@ -1,8 +1,8 @@
-#MediaHub
+# MediaHub
 
 MediaHub is a video/audio aggregator for educational institutions, and is currently running at http://mediahub.unl.edu/
 
-##Reasons why MediaHub might be a good idea for your institution:
+## Reasons why MediaHub might be a good idea for your institution:
 
 * RSS Feeds for syndication to other sites (iTunes U)
  * iTunes and iTunes U Attributes included in RSS Feeds
@@ -16,7 +16,7 @@ MediaHub is a video/audio aggregator for educational institutions, and is curren
 * Web Services and APIs, including XML, JSON, partial HTML views
 * Sample scripts for importing from existing RSS Feeds
 
-##Installation
+## Installation
 
 ### 1. Set up the initial configuration:
 ```bash
@@ -42,7 +42,7 @@ Create the `www/uploads/tmp` directory if it does not already exist.
 
 Assign proper permissions to allow the web server to write to those directories. For development, the following commands should be fine.
 
-```
+```bash
 chmod 777 www/uploads
 chmod 777 www/uploads/tmp
 ```
@@ -51,19 +51,19 @@ chmod 777 www/uploads/tmp
 Install the `wdn` directory to `www/wdn` for the latest include files.
 This can be done with a symlink like `ln -s /abolute-path-to-wdn-dir www/wdn`
 
-###Requirements:
+### Requirements:
 
 * PHP 5, 7
 * PDO Mysql
 * mediainfo system package. This can be installed with `brew install mediainfo` or a similar command
 
-###Testing:
+### Testing:
 Once installed, run this command from the project root:
-```
+```bash
 php vendor/bin/phpunit --bootstrap tests/init.php tests
 ```
 
-##Cache-busting
+## Cache-busting
 Versioning is handled with git, so the application MUST be checkout out with git for this to work
 
 To update the version cache (which is used for cachebusting) run `php scripts/update_version.php`
@@ -75,7 +75,7 @@ From the directory `.git/hooks` run the following
 You may even want to have it triggered after post-merge (git pull)
 `ln -s ../../update-version.sh post-merge`
 
-###Sources:
+### Sources:
 
 * Audio and video player from http://mediaelementjs.com/
 * jQuery from http://jquery.com/
