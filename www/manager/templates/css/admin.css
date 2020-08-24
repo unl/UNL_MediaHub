@@ -285,13 +285,6 @@ select#format {
     margin-bottom: 2em;
 }
 
-@media only screen and (max-width: 767px)  {
-
-    table.wdn_responsive_table tbody tr td:first-child {
-        border-top: 3px solid #454545;
-    }
-
-}
 #transcoding-progress progress {
     display: block;
     width: 100%;
