@@ -21,7 +21,7 @@ class UNL_MediaHub_Media_Embed
      */
     protected $allowed_versions = array(3);
 
-    function __construct(UNL_MediaHub_Media $media = null, $version = 1, $options = array())
+    function __construct(UNL_MediaHub_Media $media = null, $version = 3, $options = array())
     {
         //Validate the version
         if (!$this->versionIsAllowed($version)) {
