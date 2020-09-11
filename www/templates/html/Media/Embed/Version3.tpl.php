@@ -1,11 +1,11 @@
 <?php
 $prefix = 'Video Player: ';
-$ratioPercentage = '56.25%';
+$divStyle = 'padding-top: 56.25%';
 if (!$context->media->isVideo()) {
     $prefix = 'Audio Player: ';
-    $ratioPercentage = '25%';
+    $divStyle = 'height: 5.62em;';
 }
 ?>
-<div style="padding-top: <?php echo $ratioPercentage ?>; overflow: hidden; position:relative;">
+<div style="<?php echo $divStyle ?>; overflow: hidden; position:relative;">
     <iframe style="bottom: 0; left: 0; position: absolute; right: 0; top: 0; border: 0; height: 100%; width: 100%;" src="<?php echo $controller->getURL($context->media)?>?format=iframe&autoplay=0" title="<?php echo $prefix ?> <?php echo UNL_MediaHub::escape($context->media->title) ?>" allowfullscreen></iframe>
 </div>

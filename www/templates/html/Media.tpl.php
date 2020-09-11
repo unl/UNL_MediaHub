@@ -46,19 +46,19 @@ if ($type == 'video') {
 $controller->setReplacementData('head', $meta);
 $getTracks = $context->getTextTrackURLs();
 
-$ratioClass = 'class="dcf-ratio dcf-ratio-16x9"';
-$ratioStyle = '';
+$divClass = 'dcf-ratio dcf-ratio-16x9';
+$iframeClass = 'dcf-ratio-child';
 if ($type === 'audio') {
-    $ratioClass = '';
-    $ratioStyle = 'style="padding-top: 25%; overflow: hidden; position:relative;"';
+    $divClass = 'dcf-h-10 dcf-overflow-hidden dcf-relative';
+    $iframeClass = '';
 }
 
 ?>
 
 <div class="dcf-bleed mh-video-band">
     <div class="dcf-wrapper">
-        <div <?php echo $ratioClass; ?><?php echo $ratioStyle;?>>
-            <iframe class="dcf-ratio-child dcf-obj-fit-contain dcf-obj-top dcf-b-0" height="667" src="<?php echo $controller->getURL($context)?>?format=iframe&autoplay=0&preload=auto" allowfullscreen title="watch media"></iframe>
+        <div class="<?php echo $divClass; ?>">
+            <iframe class="<?php echo $iframeClass; ?> dcf-obj-fit-contain dcf-obj-top dcf-b-0" height="667" src="<?php echo $controller->getURL($context)?>?format=iframe&autoplay=0&preload=auto" allowfullscreen title="play media"></iframe>
         </div>
     </div>
 </div>
