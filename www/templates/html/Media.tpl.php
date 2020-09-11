@@ -50,7 +50,7 @@ $divClass = 'dcf-ratio dcf-ratio-16x9 dcf-flex-grow-1';
 $iframeClass = 'dcf-ratio-child';
 if ($type === 'audio') {
     $divClass = 'dcf-h-10 dcf-w-max-xl dcf-flex-grow-1 dcf-overflow-hidden dcf-relative';
-    $iframeClass = 'dcf-obj-fit-contain dcf-obj-top dcf-b-0';
+    $iframeClass = '';
 }
 
 ?>
