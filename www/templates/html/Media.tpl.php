@@ -47,10 +47,10 @@ $controller->setReplacementData('head', $meta);
 $getTracks = $context->getTextTrackURLs();
 
 $divClass = 'dcf-ratio dcf-ratio-16x9 dcf-flex-grow-1';
-$iframeClass = 'dcf-ratio-child ';
+$iframeClass = 'dcf-ratio-child dcf-obj-fit-contain dcf-obj-top dcf-b-0';
 if ($type === 'audio') {
-    $divClass = 'dcf-h-10 dcf-w-max-xl dcf-flex-grow-1 dcf-overflow-hidden dcf-relative';
-    $iframeClass = '';
+    $divClass = 'dcf-w-max-xl dcf-flex-grow-1 dcf-overflow-hidden dcf-relative';
+    $iframeClass = 'dcf-w-100% dcf-h-auto dcf-b-0';
 }
 
 ?>
@@ -58,7 +58,7 @@ if ($type === 'audio') {
 <div class="dcf-bleed mh-video-band">
     <div class="dcf-wrapper dcf-pt-4 dcf-pb-4 dcf-d-flex dcf-jc-center">
         <div class="<?php echo $divClass; ?>">
-            <iframe class="<?php echo $iframeClass; ?>dcf-obj-fit-contain dcf-obj-top dcf-b-0" height="667" src="<?php echo $controller->getURL($context)?>?format=iframe&autoplay=0&preload=auto" allowfullscreen title="play media"></iframe>
+            <iframe class="<?php echo $iframeClass; ?>" height="667" src="<?php echo $controller->getURL($context)?>?format=iframe&autoplay=0&preload=auto" allowfullscreen title="play media"></iframe>
         </div>
     </div>
 </div>
