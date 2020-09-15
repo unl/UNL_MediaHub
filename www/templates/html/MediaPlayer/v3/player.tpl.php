@@ -69,7 +69,8 @@
                         cursorColor: '#FEFDFA',
                         backend: 'MediaElement'
                     };
-                    options.fluid = true;
+                    options.fluid = false;
+                    options.fill = true;
                 }
 
                 (function(window, videojs) {
