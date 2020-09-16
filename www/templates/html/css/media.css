@@ -141,6 +141,11 @@ body #cboxOverlay {
   background-color: #000;
 }
 
+.mh-video-thumb {
+  border: 1px solid rgba(174, 167, 141, .21);
+  margin-bottom: .75em;
+}
+
 .mh-video-label p {
   font-style: italic;
 }
