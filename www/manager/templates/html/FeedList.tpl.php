@@ -12,7 +12,7 @@
                             <div class="dcf-ratio dcf-ratio-16x9 mh-thumbnail-clip">
                                 <?php if($feed->hasImage()): ?>
                                     <img
-                                    class="dcf-ratio-child dcf-obj-cover"
+                                    class="dcf-ratio-child dcf-obj-fit-cover"
                                     src="<?php echo $feed_url; ?>/image"
                                     alt="<?php echo UNL_MediaHub::escape($feed->title); ?> Image">
                                 <?php else: ?>
