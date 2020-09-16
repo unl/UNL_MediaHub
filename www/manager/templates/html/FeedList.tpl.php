@@ -9,15 +9,18 @@
                 <div>
                     <a href="<?php echo $feed_url ?>">
                         <div class="mh-video-thumb mh-channel-thumb mh-featured-channel dcf-txt-center">
-                            <div class="mh-thumbnail-clip">
+                            <div class="dcf-ratio dcf-ratio-16x9 mh-thumbnail-clip">
                                 <?php if($feed->hasImage()): ?>
                                     <img
+                                    class="dcf-ratio-child dcf-obj-cover"
                                     src="<?php echo $feed_url; ?>/image"
                                     alt="<?php echo UNL_MediaHub::escape($feed->title); ?> Image">
                                 <?php else: ?>
-                                    <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon.svg">
-                                        <img src="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon-white.png" alt="<?php echo UNL_MediaHub::escape($feed->title); ?> Image">
-                                    </object>
+                                    <div class="dcf-ratio-child dcf-d-flex dcf-ai-center dcf-jc-center">
+                                        <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon.svg">
+                                            <img src="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon-white.png" alt="<?php echo UNL_MediaHub::escape($feed->title); ?> Image">
+                                        </object>
+                                    </div>
                                 <?php endif; ?>
                             </div>
                         </div>

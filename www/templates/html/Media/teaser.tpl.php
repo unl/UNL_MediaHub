@@ -5,15 +5,15 @@
 
 $user = UNL_MediaHub_AuthService::getInstance()->getUser();
 ?>
-<div class="mh-video-thumb dcf-txt-center">
+<div class="dcf-relative mh-video-thumb dcf-txt-center">
     <a href="<?php echo UNL_MediaHub_Controller::getURL($context) ?>">
-        <div class="mh-thumbnail-clip">
-            <img src="<?php echo $context->getThumbnailURL() ?>" alt="<?php echo UNL_MediaHub::escape($context->title) ?>">
+        <div class="dcf-ratio dcf-ratio-16x9 mh-thumbnail-clip">
+            <img class="dcf-ratio-child dcf-obj-cover" src="<?php echo $context->getThumbnailURL() ?>" alt="<?php echo UNL_MediaHub::escape($context->title) ?>">
         </div>
         <div class="mh-play-button"></div>
     </a>
     <?php if ($user && $context->userCanEdit($user)): ?>
-        <a href="<?php echo UNL_MediaHub_Manager::getURL() . '?view=addmedia&amp;id=' . $context->id ?>" class="edit-button dcf-btn dcf-btn-primary">Edit</a>
+        <a href="<?php echo UNL_MediaHub_Manager::getURL() . '?view=addmedia&amp;id=' . $context->id ?>" class="edit-button dcf-btn dcf-btn-secondary dcf-absolute dcf-pin-bottom dcf-pin-right dcf-mb-1 dcf-mr-1">Edit</a>
     <?php endif; ?>
 </div>
 <div class="mh-video-label dcf-txt-center">
