@@ -142,27 +142,8 @@ body #cboxOverlay {
 }
 
 .mh-video-thumb {
-  border: solid rgba(174, 167, 141, .21) 10px;
-  height: 0;
+  border: 1px solid rgba(174, 167, 141, .21);
   margin-bottom: .75em;
-  overflow: hidden;
-  padding: 0 0 52% 0;
-  position: relative;
-}
-
-.mh-video-thumb img {
-  left: 0;
-}
-
-.mh-thumbnail-clip {
-  margin-bottom: .75em;
-  overflow: hidden;
-  position: relative;
-}
-
-.mh-video-thumb img {
-  max-height: 100%;
-  max-width: 100%;
 }
 
 .mh-video-label p {
@@ -244,12 +225,6 @@ body #cboxOverlay {
 
 #continue3 {
   margin-right: .75em;
-}
-
-.edit-button {
-  bottom: 10px;
-  position: absolute;
-  right: 10px;
 }
 
 .mh-video-band {
@@ -616,32 +591,8 @@ p.mh-more-info a {
   border: 0;
 }
 
-.mh-channel-thumb {
-  border: solid rgba(174, 167, 141, .21) 10px;
-  margin-bottom: .75em;
-  overflow: hidden;
-  position: relative;
-}
-
 .mh-channel-thumb > div {
   background-color: rgba(194, 190, 174, .59);
-}
-
-.mh-channel-thumb object {
-  margin: 20% 0;
-}
-
-.mh-channel-thumb img{
-  margin-bottom: -9px;
-}
-
-
-@media (max-width: 960px) {
-
-  .mh-video-thumb.mh-channel-thumb object {
-    margin: 13% 0;
-  }
-
 }
 
 
@@ -653,10 +604,6 @@ p.mh-more-info a {
 
   .mh-feed-stats {
     display: none;
-  }
-
-  .mh-video-thumb.mh-channel-thumb object {
-    margin: 23% 0;
   }
 
 }
