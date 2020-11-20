@@ -89,7 +89,15 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
             </div>
             <script>
               window.addEventListener('inlineJSReady', function() {
-                WDN.initializePlugin('tabs');
+                if (typeof WDN === 'undefined') {
+                  require(['dcf-utility', 'dcf-tabs'], function() {
+                    let tabs = document.querySelectorAll('.dcf-tabs')
+                    let unlTabs = new DCFTabs(tabs);
+                    unlTabs.initialize();
+                  });
+                } else {
+                  WDN.initializePlugin('tabs');
+                }
               }, false);
             </script>
         </div>
