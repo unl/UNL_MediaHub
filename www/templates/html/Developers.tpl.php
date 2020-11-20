@@ -45,8 +45,6 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
                 </tbody>
             </table>
 
-            <!-- Hack to make dcf-tabs autoload, TODO: fix -->
-            <ul class="wdn_tabs"></ul>
             <div class="dcf-tabs dcf-tabs-responsive dcf-mt-6">
                 <h2>Examples</h2>
                 <ul>
@@ -62,7 +60,7 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
 
                         <code>GET <?php echo $resource->exampleURI; ?>?format=<?php echo $format; ?></code>
 
-                        <h3>Response</h3>
+                        <h3 class="dcf-mt-4">Response</h3>
                         <?php
                         //Get the output.
                         if (!$result = file_get_contents($resource->exampleURI."?format=$format")) {
@@ -89,6 +87,11 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
                     </div>
                 <?php endforeach; ?>
             </div>
+            <script>
+              window.addEventListener('inlineJSReady', function() {
+                WDN.initializePlugin('tabs');
+              }, false);
+            </script>
         </div>
     </div>
     <div class="dcf-col-100% dcf-col-25%-end@md">
