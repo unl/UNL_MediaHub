@@ -87,19 +87,6 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
                     </div>
                 <?php endforeach; ?>
             </div>
-            <script>
-              window.addEventListener('inlineJSReady', function() {
-                if (typeof WDN === 'undefined') {
-                  require(['dcf-utility', 'dcf-tabs'], function() {
-                    let tabs = document.querySelectorAll('.dcf-tabs')
-                    let unlTabs = new DCFTabs(tabs);
-                    unlTabs.initialize();
-                  });
-                } else {
-                  WDN.initializePlugin('tabs');
-                }
-              }, false);
-            </script>
         </div>
     </div>
     <div class="dcf-col-100% dcf-col-25%-end@md">
@@ -128,9 +115,20 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
 
 <?php
 $page->addScriptDeclaration("
+    if (typeof WDN === 'undefined') {
+        require(['dcf-utility', 'dcf-tabs'], function() {
+            var tabs = document.querySelectorAll('.dcf-tabs')
+            var unlTabs = new DCFTabs(tabs);
+            unlTabs.initialize();
+        });
+    } else {
+        WDN.initializePlugin('tabs');
+    }
+
     require(['jquery', 'https://cdn.jsdelivr.net/highlight.js/9.2.0/highlight.min.js'], function ($, hljs) {
         $('.resource pre.code code').each(function () {
             hljs.highlightBlock(this);
-        })
-    })");
+        });
+    });
+");
 ?>
