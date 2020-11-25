@@ -207,8 +207,8 @@
                             <ul>
                                 <?php foreach ($track->getFiles()->items as $file): ?>
                                     <li>
-                                        <a href="<?php echo $file->getURL() ?>&amp;download=1" target="_blank"><?php echo UNL_MediaHub::escape($file->language) ?>.<?php echo $file->format ?></a>,
-                                        <a href="<?php echo $file->getSrtURL() ?>&amp;download=1" target="_blank"><?php echo UNL_MediaHub::escape($file->language) ?>.srt</a>
+                                        <a href="<?php echo $file->getURL() ?>&amp;download=1" rel="noopener" target="_blank"><?php echo UNL_MediaHub::escape($file->language) ?>.<?php echo $file->format ?></a>,
+                                        <a href="<?php echo $file->getSrtURL() ?>&amp;download=1" rel="noopener" target="_blank"><?php echo UNL_MediaHub::escape($file->language) ?>.srt</a>
                                     </li>
                                 <?php endforeach; ?>
                             </ul>
