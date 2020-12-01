@@ -9,7 +9,7 @@ class UNL_MediaHub_Media_Embed
     /**
      * @var int
      */
-    public $version = 1;
+    public $version = 3;
 
     /**
      * @var array
@@ -19,9 +19,9 @@ class UNL_MediaHub_Media_Embed
     /**
      * @var array
      */
-    protected $allowed_versions = array(1, 2, 3);
+    protected $allowed_versions = array(3);
 
-    function __construct(UNL_MediaHub_Media $media = null, $version = 1, $options = array())
+    function __construct(UNL_MediaHub_Media $media = null, $version = 3, $options = array())
     {
         //Validate the version
         if (!$this->versionIsAllowed($version)) {
@@ -66,7 +66,7 @@ class UNL_MediaHub_Media_Embed
      * @param array $options
      * @return UNL_MediaHub_Media_Embed
      */
-    static function getById($id = null, $version = 1, $options = array())
+    static function getById($id = null, $version = 3, $options = array())
     {
         if (!$id) {
             return new self();

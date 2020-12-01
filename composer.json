@@ -12,10 +12,6 @@
     },
     "repositories": [
         {
-            "type": "pear",
-            "url": "https://pear.php.net"
-        },
-        {
             "type": "vcs",
             "url": "https://github.com/unlpear/UNL_Cache_Lite.git"
         },
@@ -37,7 +33,7 @@
       "unl/php-wdn-templates": "^5.2",
       "unl/unl_cache_lite": "0.1.*",
       "unl/reg-exp-router": "0.1.*",
-      "pear-pear.php.net/http_request2": "2.2.*",
+      "pear/http_request2": "2.2.*",
       "saltybeagle/savvy": "0.8.1",
       "saltybeagle/savvy_turbo": "0.1.*",
       "phpunit/phpunit": "~4.3",
