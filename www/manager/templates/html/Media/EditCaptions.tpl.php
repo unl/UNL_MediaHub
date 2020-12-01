@@ -134,39 +134,39 @@
     <div class="dcf-wrapper">
         <h2>Order history and status</h2>
         <p>View the current status of your orders</p>
-        <table class="wdn_responsive_table flush-left">
+        <table class="dcf-table-responsive">
             <thead>
                 <tr>
-                    <th>Order Number</th>
-                    <th>Date of order</th>
-                    <th>Requester</th>
-                    <th>Status of order</th>
-                    <th>Cost</th>
-                    <th>Actions</th>
+                    <th scope="col">Order Number</th>
+                    <th scope="col">Date of order</th>
+                    <th scope="col">Requester</th>
+                    <th scope="col">Status of order</th>
+                    <th scope="col">Cost</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
             <?php foreach ($revOrders as $order): ?>
                 <tr>
-                    <td data-header="Order Number">
+                    <td data-label="Order Number">
                         <?php echo (int)$order->id ?>
                     </td>
-                    <td data-header="Date of order">
+                    <td data-label="Date of order">
                         <?php echo UNL_MediaHub::escape($order->datecreated) ?>
                     </td>
-                    <td data-header="Requester">
+                    <td data-label="Requester">
                         <?php echo UNL_MediaHub::escape($order->uid) ?>
                     </td>
-                    <td data-header="Status of order">
+                    <td data-label="Status of order">
                         <?php echo $order->status ?>
                         <?php if (UNL_MediaHub_RevOrder::STATUS_ERROR == $order->status): ?>
                             -- <?php echo UNL_MediaHub::escape($order->error_text) ?>
                         <?php endif; ?>
                     </td>
-                    <td data-header="Cost">
+                    <td data-label="Cost">
                         $<?php echo UNL_MediaHub::escape($order->estimate) ?>
                     </td>
-                    <td data-header="Actions">
+                    <td data-label="Actions">
                         <a href="<?php echo $order->getDetailsURL() ?>">view details</a>
                     </td>
                 </tr>
@@ -176,44 +176,44 @@
 
         <h2 class="dcf-pt-4">Caption track history</h2>
         <p>You can manage old captions. You may copy any track, edit copied tracks and delete non-active copied tracks.</p>
-        <table class="wdn_responsive_table flush-left">
+        <table class="dcf-table-responsive">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>Date of caption track</th>
-                <th>Source</th>
-                <th>Comments</th>
-                <th>Files</th>
-                <th>Actions</th>
+                <th scope="col">ID</th>
+                <th scope="col">Date of caption track</th>
+                <th scope="col">Source</th>
+                <th scope="col">Comments</th>
+                <th scope="col">Files</th>
+                <th scope="col">Actions</th>
             </tr>
             </thead>
             <tbody>
             <?php $text_tracks = $context->getTrackHistory()->items; ?>
                 <?php foreach ($text_tracks as $track): ?>
                     <tr>
-                        <td data-header="ID of caption track">
+                        <td data-label="ID of caption track">
                             <?php echo UNL_MediaHub::escape($track->id) ?>
                         </td>
-                        <td data-header="Date of caption track">
+                        <td data-label="Date of caption track">
                             <?php echo UNL_MediaHub::escape($track->datecreated) ?>
                         </td>
-                        <td data-header="Source">
+                        <td data-label="Source">
                             <?php echo UNL_MediaHub::escape($track->source) ?>
                         </td>
-                        <td data-header="Comments">
+                        <td data-label="Comments">
                             <?php echo UNL_MediaHub::escape($track->revision_comment) ?>
                         </td>
-                        <td data-header="Files">
+                        <td data-label="Files">
                             <ul>
                                 <?php foreach ($track->getFiles()->items as $file): ?>
                                     <li>
-                                        <a href="<?php echo $file->getURL() ?>&amp;download=1" target="_blank"><?php echo UNL_MediaHub::escape($file->language) ?>.<?php echo $file->format ?></a>,
-                                        <a href="<?php echo $file->getSrtURL() ?>&amp;download=1" target="_blank"><?php echo UNL_MediaHub::escape($file->language) ?>.srt</a>
+                                        <a href="<?php echo $file->getURL() ?>&amp;download=1" rel="noopener" target="_blank"><?php echo UNL_MediaHub::escape($file->language) ?>.<?php echo $file->format ?></a>,
+                                        <a href="<?php echo $file->getSrtURL() ?>&amp;download=1" rel="noopener" target="_blank"><?php echo UNL_MediaHub::escape($file->language) ?>.srt</a>
                                     </li>
                                 <?php endforeach; ?>
                             </ul>
                         </td>
-                        <td data-header="Actions" class="dcf-txt-sm">
+                        <td data-label="Actions" class="dcf-txt-sm"><span>
                             <?php if (!empty($track->media_text_tracks_source_id)): ?>
                             <a href="<?php echo UNL_MediaHub_Manager::getURL() . '?view=editcaptiontrack&media_id=' . (int)$context->media->id . '&track_id=' . (int)$track->id; ?>" class="dcf-btn dcf-btn-secondary dcf-mt-1">Edit</a>
                                 <?php if ($context->media->media_text_tracks_id != $track->id): ?>
@@ -247,7 +247,7 @@
                                     <input class="dcf-btn dcf-btn-primary dcf-mt-1" type="submit" value="Set Active">
                                 </form>
                             <?php endif; ?>
-                        </td>
+                            </span></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

@@ -141,7 +141,9 @@ if ($type === 'audio') {
 
                 <div id="comments">
                     <?php
-                        $page->head .= '<link rel="stylesheet" type="text/css" href="../templates/html/css/comments.css?v=' . trim(UNL_MediaHub_Controller::getVersion()) .'" />';
+                        if (!empty($page)) {
+                            $page->head .= '<link rel="stylesheet" type="text/css" href="../templates/html/css/comments.css?v=' . trim(UNL_MediaHub_Controller::getVersion()) . '" />';
+                        }
                     ?>
                     <h2 class="unl-font-sans">Comments <?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_COMMENT, '{"size": 4}');?></h2>
                     <span class="subhead">
@@ -214,12 +216,6 @@ if ($type === 'audio') {
                 <p><strong>iframe embed code:</strong> Copy the following code into your page</p>
                 <textarea cols="25" rows="6" id="embed_code" onclick="this.select(); return false;"><?php echo htmlentities($embed, ENT_COMPAT | ENT_HTML401, "UTF-8"); ?></textarea>
             </label>
-            <?php if (3 == UNL_MediaHub_Controller::$current_embed_version): ?>
-                <!--
-                Old embed code for testing purposes
-                <?php echo $savvy->render(UNL_MediaHub_Media_Embed::getById($context->id, 2)); ?>
-                -->
-            <?php endif; ?>
         </div>
     </div>
 </div>
