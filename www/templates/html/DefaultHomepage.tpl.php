@@ -50,7 +50,7 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
     <div class="mh-featured">
       <a class="dcf-d-flex dcf-flex-col dcf-ai-center dcf-txt-decor-hover" href="<?php echo $baseUrl ?>channels/">
         <div class="mh-featured-icon mh-blue dcf-d-flex dcf-ai-center dcf-jc-center dcf-h-10 dcf-w-10 dcf-circle">
-          <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon.svg">
+          <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon.svg" title="Default Channel Icon">
             <img src="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon-white.png" alt="explore channels">
           </object>
         </div>
