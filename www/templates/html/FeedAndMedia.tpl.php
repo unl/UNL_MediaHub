@@ -25,7 +25,7 @@ $user = UNL_MediaHub_AuthService::getInstance()->getUser();
                     alt="<?php echo UNL_MediaHub::escape($context->feed->title); ?> Image">
               <?php else: ?>
                 <div>
-                  <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon.svg">
+                  <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon.svg" title="Default Channel Icon">
                     <img src="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon-white.png" alt="<?php echo htmlentities($context->feed->title, ENT_QUOTES); ?> Image">
                   </object>
                 </div>

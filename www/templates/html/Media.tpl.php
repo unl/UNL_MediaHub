@@ -212,10 +212,10 @@ if ($type === 'audio') {
         </header>
         <div class="dcf-modal-content dcf-wrapper dcf-pb-8">
             <?php $embed = $savvy->render(UNL_MediaHub_Media_Embed::getById($context->id, UNL_MediaHub_Controller::$current_embed_version)); ?>
-            <label for="embed_code">
-                <p><strong>iframe embed code:</strong> Copy the following code into your page</p>
+            <form class="dcf-form">
+                <label class="dcf-txt-md" for="embed_code"><strong>iframe embed code:</strong> Copy the following code into your page</label>
                 <textarea cols="25" rows="6" id="embed_code" onclick="this.select(); return false;"><?php echo htmlentities($embed, ENT_COMPAT | ENT_HTML401, "UTF-8"); ?></textarea>
-            </label>
+            </form>
         </div>
     </div>
 </div>
