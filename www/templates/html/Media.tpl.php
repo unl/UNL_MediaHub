@@ -174,11 +174,10 @@ if ($type === 'audio') {
                 </div>
 
                 <?php if ($user): ?>
-
                     <?php $form = new UNL_MediaHub_Media_Comment_Form(); ?>
                     <?php echo $savvy->render($form); ?>
                 <?php else: ?>
-                    <a href="https://login.unl.edu/cas/login?service=<?php echo urlencode(UNL_MediaHub_Controller::getURL($context)) ?>">Log in to post comments</a>
+                    <a href="https://shib.unl.edu/idp/profile/cas/login?service=<?php echo urlencode(UNL_MediaHub_Controller::getURL($context)) ?>">Log in to post comments</a>
                 <?php endif; ?>
 
             </div>
