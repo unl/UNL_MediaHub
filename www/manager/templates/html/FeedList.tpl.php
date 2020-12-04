@@ -17,7 +17,7 @@
                                     alt="<?php echo UNL_MediaHub::escape($feed->title); ?> Image">
                                 <?php else: ?>
                                     <div class="dcf-ratio-child dcf-d-flex dcf-ai-center dcf-jc-center">
-                                        <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon.svg">
+                                        <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon.svg" title="Default Channel Icon">
                                             <img src="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon-white.png" alt="<?php echo UNL_MediaHub::escape($feed->title); ?> Image">
                                         </object>
                                     </div>
