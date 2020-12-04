@@ -11,7 +11,7 @@ if (isset($context->output[0]) && $context->output[0] instanceof UNL_MediaHub_Me
 }
 ?>
 <!doctype html>
-<html class="no-js" lang="en">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,5 +49,23 @@ if (isset($context->output[0]) && $context->output[0] instanceof UNL_MediaHub_Me
 </head>
 <body>
     <?php echo $savvy->render($context->output); ?>
+    <script>
+        var video = document.getElementsByTagName("video")[0];
+        if (video) {
+          window.addEventListener('message', function (event) {
+            switch(event.data) {
+              case 'mh-play-video':
+                video.play();
+                break;
+              case 'mh-stop-video':
+                video.pause();
+                video.load();
+                break;
+              default:
+                // do nothing
+            }
+          });
+        }
+    </script>
 </body>
 </html>
