@@ -179,7 +179,7 @@ $page->jsbody .= $js;
                                 <?php endif; ?>
                                 <div id="mh_upload_media_container">
                                     <div id="mh_upload_media" class="mh-upload-box mh-upload-box-small dcf-txt-center">
-                                        <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/swap-arrows.svg">
+                                        <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/swap-arrows.svg"  title="Arrow Icon">
                                             <img src="<?php echo $baseUrl; ?>/templates/html/css/images/swap-arrows.png" alt="browse media">
                                         </object>
                                         <h2><span class="dcf-subhead">Swap Media</span></h2>
