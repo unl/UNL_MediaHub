@@ -40,7 +40,7 @@ if (count($topMedia) > 0):
         <div class="mh-featured">
             <a class="dcf-d-flex dcf-flex-col dcf-ai-center dcf-txt-decor-hover" href="<?php echo $baseUrl ?>search/">
                 <div class="mh-featured-icon mh-green dcf-d-flex dcf-ai-center dcf-jc-center dcf-h-10 dcf-w-10 dcf-circle">
-                    <object type="image/svg+xml" data="<?php echo $baseUrl; ?>templates/html/css/images/play-icon.svg">
+                    <object type="image/svg+xml" data="<?php echo $baseUrl; ?>templates/html/css/images/play-icon.svg"  title="Play Icon">
                         <img src="<?php echo $baseUrl; ?>templates/html/css/images/play-icon-white.png" alt="browse media">
                     </object>
                 </div>
@@ -62,7 +62,7 @@ if (count($topMedia) > 0):
         <div class="mh-featured">
             <a class="dcf-d-flex dcf-flex-col dcf-ai-center dcf-txt-decor-hover" href="<?php echo $baseUrl ?>manager/">
                 <div class="mh-featured-icon mh-red dcf-d-flex dcf-ai-center dcf-jc-center dcf-h-10 dcf-w-10 dcf-circle">
-                    <object type="image/svg+xml" data="<?php echo $baseUrl; ?>templates/html/css/images/gear-icon.svg">
+                    <object type="image/svg+xml" data="<?php echo $baseUrl; ?>templates/html/css/images/gear-icon.svg"  title="Manage Media Icon">
                         <img src="<?php echo $baseUrl; ?>templates/html/css/images/gear-icon-white.png" alt="manage media">
                     </object>
                 </div>
