@@ -82,7 +82,7 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
                         }
                         ?>
                         <pre class="code">
-                            <code class="<?php echo $code; ?>"><?php echo htmlentities($result); ?></code>
+                            <code class="<?php echo $code; ?>" tabindex="0"><?php echo htmlentities($result); ?></code>
                         </pre>
                     </div>
                 <?php endforeach; ?>
