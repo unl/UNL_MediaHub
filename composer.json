@@ -30,7 +30,7 @@
         }
     ],
     "require": {
-      "unl/php-wdn-templates": "^5.2",
+      "unl/php-wdn-templates": "^5.3",
       "unl/unl_cache_lite": "0.1.*",
       "unl/reg-exp-router": "0.1.*",
       "pear/http_request2": "2.2.*",

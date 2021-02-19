@@ -20,7 +20,7 @@ $user = UNL_MediaHub_AuthService::getInstance()->getUser();
     <p class="dcf-txt-md">
         <span class="dcf-subhead">
             <?php echo date('F j, Y, g:i a', strtotime($context->datecreated)) ?>
-        </span>
+        </span><br>
         <a class="dcf-txt-decor-none" href="<?php echo UNL_MediaHub_Controller::getURL($context) ?>"><?php echo UNL_MediaHub::escape($context->title); ?></a>
     </p>
 
