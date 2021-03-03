@@ -39,7 +39,7 @@
         <?php endif; ?>
 
         $(function() {
-            $('video, audio').each(function() {
+            $('video, audiox').each(function() {
                 var autoplay = false;
                 if (window.location.search.indexOf("autoplay=1") > -1) { // add ability to hide video titles. 
                     autoplay = true;
