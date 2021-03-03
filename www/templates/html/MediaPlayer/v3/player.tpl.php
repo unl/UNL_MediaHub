@@ -63,11 +63,12 @@
                     options.plugins.wavesurfer = {
                         src: $media.attr('src'),
                         msDisplayMax: 10,
-                        debug: true,
                         waveColor: '#D00000',
                         progressColor: '#FEFDFA',
                         cursorColor: '#FEFDFA',
-                        backend: 'MediaElement'
+                        backend: 'MediaElement',
+                        mediaType: 'audio',
+                        responsive: true
                     };
                     options.fluid = false;
                     options.fill = true;
