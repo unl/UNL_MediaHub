@@ -39,7 +39,17 @@
         <?php endif; ?>
 
         $(function() {
-            $('video, audiox').each(function() {
+            $('video, audio').each(function() {
+                var $media = $(this);
+                var videoElement = $media.get(0);
+                if (isMobile() && videoElement.tagName === 'AUDIO') {
+                    videoElement.setAttribute('controls', '');
+                    videoElement.style.width = '90%';
+                    videoElement.style.height = '100px';
+                    videoElement.style.margin = '0 auto';
+                    return;
+                }
+
                 var autoplay = false;
                 if (window.location.search.indexOf("autoplay=1") > -1) { // add ability to hide video titles. 
                     autoplay = true;
@@ -48,8 +58,6 @@
                 if (window.location.search.indexOf("captions=en") > -1) {
                   captions = true;
                 }
-                var $media = $(this);
-                var videoElement = $media.get(0);
                 var id = $media.attr("id");
                 var startLanguage = $media.attr('data-start-language');
                 var is360 = <?php echo json_encode($is360) ?>;
