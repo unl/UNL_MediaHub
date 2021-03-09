@@ -40,6 +40,16 @@
 
         $(function() {
             $('video, audio').each(function() {
+                var $media = $(this);
+                var videoElement = $media.get(0);
+                if (isMobile() && videoElement.tagName === 'AUDIO') {
+                    videoElement.setAttribute('controls', '');
+                    videoElement.style.width = '90%';
+                    videoElement.style.height = '100px';
+                    videoElement.style.margin = '0 auto';
+                    return;
+                }
+
                 var autoplay = false;
                 if (window.location.search.indexOf("autoplay=1") > -1) { // add ability to hide video titles. 
                     autoplay = true;
@@ -48,8 +58,6 @@
                 if (window.location.search.indexOf("captions=en") > -1) {
                   captions = true;
                 }
-                var $media = $(this);
-                var videoElement = $media.get(0);
                 var id = $media.attr("id");
                 var startLanguage = $media.attr('data-start-language');
                 var is360 = <?php echo json_encode($is360) ?>;
@@ -63,11 +71,12 @@
                     options.plugins.wavesurfer = {
                         src: $media.attr('src'),
                         msDisplayMax: 10,
-                        debug: true,
                         waveColor: '#D00000',
                         progressColor: '#FEFDFA',
                         cursorColor: '#FEFDFA',
-                        backend: 'MediaElement'
+                        backend: 'MediaElement',
+                        mediaType: 'audio',
+                        responsive: true
                     };
                     options.fluid = false;
                     options.fill = true;
