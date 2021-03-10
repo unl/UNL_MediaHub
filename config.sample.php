@@ -20,8 +20,7 @@ UNL_MediaHub::$dsn = 'mysql://mediahub:mediahub@localhost/mediahub';
 UNL_MediaHub_Controller::$url = 'http://localhost:8007/';
 UNL_MediaHub_Controller::$thumbnail_generator = 'https://itunes.unl.edu/thumbnails.php?url=';
 
-require_once 'Themes/Theme.php';
-UNL_MediaHub_Controller::$appName = 'UNL MediaHub';
+//UNL_MediaHub_Controller::$appName = 'UNL MediaHub';
 
 // default theme
 //UNL_MediaHub_Controller::$theme = 'default';
