@@ -19,18 +19,18 @@ UNL_MediaHub::$dsn = 'mysql://mediahub:mediahub@localhost/mediahub';
 
 UNL_MediaHub_Controller::$url = 'http://localhost:8007/';
 UNL_MediaHub_Controller::$thumbnail_generator = 'https://itunes.unl.edu/thumbnails.php?url=';
+//UNL_MediaHub_Controller::$appName = 'MediaHub';
 
-//UNL_MediaHub_Controller::$appName = 'UNL MediaHub';
+// default
+//UNL_MediaHub_Controller::$themePath = __DIR__ . '/src/Themes/default';
+//UNL_MediaHub_Controller::$template = UNL\Templates\Theme::TYPE_APP;
+//UNL_MediaHub_Controller::$customThemeTemplate = 'app.tpl.php';
+//UNL_MediaHub_Controller::$templateVersion = UNL\Templates\Theme::CUSTOM_VERSION;
 
-// default theme
-//UNL_MediaHub_Controller::$theme = 'default';
-//UNL_MediaHub_Controller::$template = \Themes\Theme::TYPE_APP;
-//UNL_MediaHub_Controller::$templateVersion = \Themes\Theme::CUSTOM_VERSION;
-
-// UNL theme
-UNL_MediaHub_Controller::$theme = 'UNL';
-UNL_MediaHub_Controller::$template = \Themes\Theme::TYPE_APP;
-UNL_MediaHub_Controller::$templateVersion = UNL\Templates\Templates::VERSION_5_1;
+// UNL
+UNL_MediaHub_Controller::$themePath = __DIR__ . '/src/Themes/unl';
+UNL_MediaHub_Controller::$template = UNL\Templates\Theme::TYPE_APP;
+UNL_MediaHub_Controller::$templateVersion = UNL\Templates\Templates::VERSION_5_3;
 
 UNL_MediaHub_AmaraAPI::$amara_username = false;
 UNL_MediaHub_AmaraAPI::$amara_api_key  = false;
