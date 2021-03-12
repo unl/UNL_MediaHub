@@ -2,23 +2,16 @@
 class UNL_MediaHub_AuthService_UNL extends UNL_MediaHub_AuthService_Interface
 {
     public static $cert_path = '/etc/pki/tls/cert.pem';
+    private $auth;
 
     public function __construct()
     {
-        if (!\phpCAS::isInitialized()) {
-            session_name('mediahub');
-            
-            \phpCAS::client(CAS_VERSION_2_0, 'shib.unl.edu', 443, 'idp/profile/cas');
-            
-            if (!file_exists(self::$cert_path)) {
-                self::$cert_path = GuzzleHttp\default_ca_bundle();
-            }
-            
-            \phpCAS::setCasServerCACert(self::$cert_path);
+        if (!file_exists(self::$cert_path)) {
+          self::$cert_path = GuzzleHttp\default_ca_bundle();
         }
-        
-        \phpCAS::handleLogoutRequests(false);
-        
+
+        $this->auth = new \UNL\Templates\Auth\AuthCAS('2.0', 'shib.unl.edu', 443, '/idp/profile/cas', self::$cert_path, 'mediahub');
+
         if (isset($_GET['logout'])) {
             $this->logout();
             exit();
@@ -46,8 +39,8 @@ class UNL_MediaHub_AuthService_UNL extends UNL_MediaHub_AuthService_Interface
         }
         
         //Everything looks good.  Log in!
-        if (\phpCAS::checkAuthentication()) {
-            $this->setUser(UNL_MediaHub_User::getByUid(\phpCAS::getUser()));
+        if ($this->auth->checkAuthentication()) {
+            $this->setUser(UNL_MediaHub_User::getByUid($this->auth->getUserId()));
         }
     }
 
@@ -56,7 +49,7 @@ class UNL_MediaHub_AuthService_UNL extends UNL_MediaHub_AuthService_Interface
      */
     public function isLoggedIn()
     {
-        if (\phpCAS::isAuthenticated()) {
+        if ($this->auth->isAuthenticated()) {
             return true;
         }
 
@@ -65,25 +58,29 @@ class UNL_MediaHub_AuthService_UNL extends UNL_MediaHub_AuthService_Interface
 
     public function login()
     {
-        \phpCAS::forceAuthentication();
+        $this->auth->login();
 
 
-        if (!\phpCAS::getUser()) {
+        if (!$this->auth->getUserId()) {
             throw new RuntimeException('Unable to authenticate', 403);
         }
 
-        $this->setUser(UNL_MediaHub_User::getByUid(\phpCAS::getUser()));
+        $this->setUser(UNL_MediaHub_User::getByUid($this->auth->getUserId()));
     }
 
     public function logout()
     {
-        \phpCAS::logoutWithRedirectService(UNL_MediaHub_Controller::$url);
+        if (!empty(UNL_MediaHub_Controller::$url)) {
+          $this->auth->logoutWithRedirect(UNL_MediaHub_Controller::$url);
+        } else {
+          $this->auth->logout();
+        }
     }
     
     public function getUser()
     {
         if (!$this->user && $this->isLoggedIn()) {
-            $this->setUser(UNL_MediaHub_User::getByUid(\phpCAS::getUser()));
+            $this->setUser(UNL_MediaHub_User::getByUid($this->auth->getUserId()));
         }
         
         return parent::getUser();
