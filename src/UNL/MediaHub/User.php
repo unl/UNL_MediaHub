@@ -31,7 +31,7 @@ class UNL_MediaHub_User extends UNL_MediaHub_Models_BaseUser
                       'datecreated' => date('Y-m-d H:i:s'));
         $user->fromArray($data);
         $user->save();
-        // Create the defaul feed for the user
+        // Create the default feed for the user
         UNL_MediaHub_Feed::addFeed(array('title'       => $user->uid.'\'s channel',
                                          'description' =>'This is ' .$user->uid . '\'s default channel'),
                                    $user);
