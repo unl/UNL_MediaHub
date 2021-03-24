@@ -1,13 +1,11 @@
 <?php
 class UNL_MediaHub_AuthService_Shib extends UNL_MediaHub_AuthService_Interface
 {
-    // likely not a thing for shib
-    //public static $cert_path = '/etc/pki/tls/cert.pem';
     private $auth;
 
-    public function __construct()
+    public function __construct($settingsInfo)
     {
-        $this->auth = new \SimpleSAML\Auth\Simple('sp-mediahub');
+        $this->auth =  new \UNL\Templates\Auth\AuthModShib($settingsInfo, 'mediahub');
 
         if (isset($_GET['logout'])) {
             $this->logout();
@@ -37,10 +35,9 @@ class UNL_MediaHub_AuthService_Shib extends UNL_MediaHub_AuthService_Interface
         }
 
         //Everything looks good.  Log in!
-        // TODO: verify shib authentication
-        //if (\phpCAS::checkAuthentication()) {
-        //    $this->setUser(UNL_MediaHub_User::getByUid(\phpCAS::getUser()));
-        //}
+        if ($this->auth->isAuthenticated()) {
+          $this->setUser(UNL_MediaHub_User::getByUid($this->auth->getUserId()));
+        }
     }
 
     /**
@@ -50,37 +47,36 @@ class UNL_MediaHub_AuthService_Shib extends UNL_MediaHub_AuthService_Interface
     {
         // check if logged in
         if ($this->auth->isAuthenticated()) {
-         return true;
+          return true;
         }
-
         return false;
     }
 
-    public function login()
+    public function login($redirect = NULL)
     {
-        $this->auth->login();
-        \SimpleSAML\Session::getSessionFromRequest()->cleanup();
+        $this->auth->login($redirect);
 
-        // Verify logged in, throw error if not
-        //if (???) {
-        //    throw new RuntimeException('Unable to authenticate', 403);
-        //}
+        if (!$this->auth->getUserId()) {
+          throw new RuntimeException('Unable to authenticate', 403);
+        }
 
-        //$this->setUser();
+        $this->setUser(UNL_MediaHub_User::getByUid($this->auth->getUserId()));
     }
 
     public function logout()
     {
-        //TODO logout of shib
-        //\phpCAS::logoutWithRedirectService(UNL_MediaHub_Controller::$url);
+      $this->auth->logout(UNL_MediaHub_Controller::$url);
     }
 
     public function getUser()
     {
-        if (!$this->user && $this->isLoggedIn()) {
-            //$this->setUser();
+      if (!$this->user && $this->isLoggedIn()) {
+        $userID = !(empty($this->auth->getUserId())) ? $this->auth->getUserId() : $_SESSION['samlNameId'];
+        if (!empty($userID)) {
+          $this->setUser(UNL_MediaHub_User::getByUid($userID));
         }
+      }
 
-        return parent::getUser();
+      return parent::getUser();
     }
 }

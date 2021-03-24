@@ -70,11 +70,7 @@ class UNL_MediaHub_AuthService_UNL extends UNL_MediaHub_AuthService_Interface
 
     public function logout()
     {
-        if (!empty(UNL_MediaHub_Controller::$url)) {
-          $this->auth->logoutWithRedirect(UNL_MediaHub_Controller::$url);
-        } else {
-          $this->auth->logout();
-        }
+       $this->auth->logout(UNL_MediaHub_Controller::$url);
     }
     
     public function getUser()

@@ -60,4 +60,12 @@ abstract class UNL_MediaHub_AuthService_Interface
     {
         return $this->user;
     }
+
+    /**
+     * @return NULL|String
+     */
+    public function getUserDisplayName()
+    {
+      return isset($this->user) && isset($this->user->uid) ? $this->user->uid : '';
+    }
 }

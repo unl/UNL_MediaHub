@@ -42,6 +42,10 @@ $routes['/^channels\/$/'] = 'UNL_MediaHub_FeedList';
 
 $routes['/^oembed\/?$/'] = 'media_oembed';
 
+$routes['/^login\/?$/'] = 'login';
+
+$routes['/^logout\/?$/'] = 'logout';
+
 // Now all the ?view= routes
 $routes += array(
     'search'  => 'UNL_MediaHub_MediaList',
