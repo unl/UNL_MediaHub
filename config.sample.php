@@ -18,7 +18,14 @@ UNL_MediaHub::registerAutoloaders();
 UNL_MediaHub::$dsn = 'mysql://mediahub:mediahub@localhost/mediahub';
 
 // Auth Provider (defaults to UNL_MediaHub_AuthService_Shib)
-UNL_MediaHub_AuthService::$provider = new UNL_MediaHub_AuthService_Shib();
+$shibSettings = array (
+  'shibLoginURL' => 'https://localhost/Shibboleth.sso/Login',
+  'shibLogoutURL' => 'https://localhost/Shibboleth.sso/Logout',
+  'appLoginURL' => UNL_MediaHub_Controller::$url . 'login',
+  'appLogoutURL' => UNL_MediaHub_Controller::$url . 'logout'
+);
+//UNL_MediaHub_AuthService::$provider = new UNL_MediaHub_AuthService_Shib($shibSettings);
+UNL_MediaHub_AuthService::$provider = new UNL_MediaHub_AuthService_UNL();
 
 // Controller Settings
 UNL_MediaHub_Controller::$url = 'http://localhost:8007/';
