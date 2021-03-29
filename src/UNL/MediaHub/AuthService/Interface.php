@@ -66,6 +66,7 @@ abstract class UNL_MediaHub_AuthService_Interface
      */
     public function getUserDisplayName()
     {
-      return isset($this->user) && isset($this->user->uid) ? $this->user->uid : '';
+        $user = $this->getUser();
+        return !empty($user) && !empty($user->uid) ? $user->uid : '';
     }
 }

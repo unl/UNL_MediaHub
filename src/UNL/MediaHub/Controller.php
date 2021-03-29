@@ -301,7 +301,9 @@ class UNL_MediaHub_Controller
                 break;
             case 'login':
                 $auth = UNL_MediaHub_AuthService::getInstance();
-                $auth->login(UNL_MediaHub_Controller::getURL() . 'manager');
+                $auth->login();
+                header('Location: ' . UNL_MediaHub_Controller::$url);
+                exit();
                 break;
             case 'logout':
                 $auth = UNL_MediaHub_AuthService::getInstance();

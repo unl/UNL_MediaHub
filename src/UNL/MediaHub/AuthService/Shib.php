@@ -52,9 +52,9 @@ class UNL_MediaHub_AuthService_Shib extends UNL_MediaHub_AuthService_Interface
         return false;
     }
 
-    public function login($redirect = NULL)
+    public function login()
     {
-        $this->auth->login($redirect);
+        $this->auth->login();
 
         if (!$this->auth->getUserId()) {
           throw new RuntimeException('Unable to authenticate', 403);
@@ -71,7 +71,7 @@ class UNL_MediaHub_AuthService_Shib extends UNL_MediaHub_AuthService_Interface
     public function getUser()
     {
       if (!$this->user && $this->isLoggedIn()) {
-        $userID = !(empty($this->auth->getUserId())) ? $this->auth->getUserId() : $_SESSION['samlNameId'];
+        $userID = $this->auth->getUserId();
         if (!empty($userID)) {
           $this->setUser(UNL_MediaHub_User::getByUid($userID));
         }

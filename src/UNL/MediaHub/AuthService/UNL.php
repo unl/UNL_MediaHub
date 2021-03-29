@@ -60,7 +60,6 @@ class UNL_MediaHub_AuthService_UNL extends UNL_MediaHub_AuthService_Interface
     {
         $this->auth->login();
 
-
         if (!$this->auth->getUserId()) {
             throw new RuntimeException('Unable to authenticate', 403);
         }
