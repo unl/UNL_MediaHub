@@ -21,8 +21,18 @@ UNL_MediaHub::$dsn = 'mysql://mediahub:mediahub@localhost/mediahub';
 $shibSettings = array (
   'shibLoginURL' => 'https://localhost/Shibboleth.sso/Login',
   'shibLogoutURL' => 'https://localhost/Shibboleth.sso/Logout',
-  'appLoginURL' => UNL_MediaHub_Controller::$url . 'login',
-  'appLogoutURL' => UNL_MediaHub_Controller::$url . 'logout'
+  'appBaseURL' => UNL_MediaHub_Controller::$url,
+  'userAttributes' => array(
+    'eduPersonAssurance',
+    'eduPersonScopedAffiliation',
+    'eduPersonAffiliation',
+    'sn',
+    'givenName',
+    'surname',
+    'email',
+    'displayName',
+    'eduPersonPrincipalName'
+  )
 );
 //UNL_MediaHub_AuthService::$provider = new UNL_MediaHub_AuthService_Shib($shibSettings);
 UNL_MediaHub_AuthService::$provider = new UNL_MediaHub_AuthService_UNL();

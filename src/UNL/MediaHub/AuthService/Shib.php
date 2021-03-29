@@ -46,10 +46,7 @@ class UNL_MediaHub_AuthService_Shib extends UNL_MediaHub_AuthService_Interface
     public function isLoggedIn()
     {
         // check if logged in
-        if ($this->auth->isAuthenticated()) {
-          return true;
-        }
-        return false;
+        return $this->auth->isAuthenticated();
     }
 
     public function login()
@@ -65,7 +62,7 @@ class UNL_MediaHub_AuthService_Shib extends UNL_MediaHub_AuthService_Interface
 
     public function logout()
     {
-      $this->auth->logout(UNL_MediaHub_Controller::$url);
+      $this->auth->logout();
     }
 
     public function getUser()
