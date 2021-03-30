@@ -17,7 +17,7 @@ addons:
 
 before_script:
   - mysql -e 'create database mediahub_test;'
-  - composer install
+  - composer update
   - mkdir www/uploads
   - mkdir tmp
 
