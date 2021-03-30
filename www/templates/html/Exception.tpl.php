@@ -1,5 +1,5 @@
 <?php
-if (false == headers_sent() && $code = $context->getCode()) {
+if (headers_sent() === FALSE && $code = $context->getCode()) {
     header('HTTP/1.1 '.$code);
     header('Status: '.$code);
 }
