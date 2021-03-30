@@ -17,24 +17,7 @@ UNL_MediaHub::registerAutoloaders();
 // DSN for the mediyak database
 UNL_MediaHub::$dsn = 'mysql://mediahub:mediahub@localhost/mediahub';
 
-// Auth Provider (defaults to UNL_MediaHub_AuthService_Shib)
-$shibSettings = array (
-  'shibLoginURL' => 'https://localhost/Shibboleth.sso/Login',
-  'shibLogoutURL' => 'https://localhost/Shibboleth.sso/Logout',
-  'appBaseURL' => UNL_MediaHub_Controller::$url,
-  'userAttributes' => array(
-    'eduPersonAssurance',
-    'eduPersonScopedAffiliation',
-    'eduPersonAffiliation',
-    'sn',
-    'givenName',
-    'surname',
-    'email',
-    'displayName',
-    'eduPersonPrincipalName'
-  )
-);
-//UNL_MediaHub_AuthService::$provider = new UNL_MediaHub_AuthService_Shib($shibSettings);
+// Auth Service
 UNL_MediaHub_AuthService::$provider = new UNL_MediaHub_AuthService_UNL();
 
 // Controller Settings

@@ -1,5 +1,5 @@
 <?php
-class UNL_MediaHub_AuthService_Shib extends UNL_MediaHub_AuthService_Interface
+class UNL_MediaHub_AuthService_ModShib extends UNL_MediaHub_AuthService_Interface
 {
     private $auth;
 
@@ -18,7 +18,6 @@ class UNL_MediaHub_AuthService_Shib extends UNL_MediaHub_AuthService_Interface
      */
     public function autoLogin($current_model = NULL)
     {
-        // TODO verify if want to check this for shib (likley do)
         if (!array_key_exists('unl_sso', $_COOKIE)) {
             //No unl_sso cookie was found, no need to auto-login.
             return;
