@@ -53,7 +53,7 @@ class UNL_MediaHub_AuthService_ModShib extends UNL_MediaHub_AuthService_Interfac
         $this->auth->login();
 
         if (!$this->auth->getUserId()) {
-          throw new RuntimeException('Unable to authenticate', 403);
+          throw new UNL_MediaHub_RuntimeException('Unable to authenticate', 403);
         }
 
         $this->setUser(UNL_MediaHub_User::getByUid($this->auth->getUserId()));
