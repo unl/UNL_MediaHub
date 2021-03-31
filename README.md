@@ -81,7 +81,7 @@ You may even want to have it triggered after post-merge (git pull)
 * jQuery from http://jquery.com/
 
 ## User Auth
-Media currently supports UNL PHP CAS or Apache mod_shib by setting `UNL_MediaHub_AuthService::$provider` in config.inc.php
+MediaHub currently supports UNL PHP CAS or Apache mod_shib by setting `UNL_MediaHub_AuthService::$provider` in config.inc.php
 
 ### UNL PHP CAS example
 ```
