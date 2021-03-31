@@ -79,3 +79,31 @@ You may even want to have it triggered after post-merge (git pull)
 
 * Audio and video player from http://mediaelementjs.com/
 * jQuery from http://jquery.com/
+
+## User Auth
+Media currently supports UNL PHP CAS or Apache mod_shib by setting `UNL_MediaHub_AuthService::$provider` in config.inc.php
+
+### UNL PHP CAS example
+```
+UNL_MediaHub_AuthService::$provider = new UNL_MediaHub_AuthService_UNL();
+```
+### Apache mod_shib example
+```
+$shibSettings = array (
+  'shibLoginURL' => 'https://localhost/Shibboleth.sso/Login',
+  'shibLogoutURL' => 'https://localhost/Shibboleth.sso/Logout',
+  'appBaseURL' => UNL_MediaHub_Controller::$url,
+  'userAttributes' => array(
+    'eduPersonAssurance',
+    'eduPersonScopedAffiliation',
+    'eduPersonAffiliation',
+    'sn',
+    'givenName',
+    'surname',
+    'email',
+    'displayName',
+    'eduPersonPrincipalName'
+  )
+);
+UNL_MediaHub_AuthService::$provider = new UNL_MediaHub_AuthService_ModShib($shibSettings);
+```
