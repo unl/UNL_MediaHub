@@ -26,7 +26,8 @@ cp www/sample.htaccess www/.htaccess
 
 ### 2. In `config.inc.php` be sure to:
 * Set `UNL_MediaHub_Controller::$url` to base absolute URL of the application, with a trailing slash
-* set `UNL_MediaHub::$dsn` to the proper DSN for the database. Format: mysql://username:password@localhost/database
+* Set `UNL_MediaHub::$dsn` to the proper DSN for the database. Format: mysql://username:password@localhost/database
+* Set `UNL_MediaHub_AuthService::$provider` to the desired auth service.  See User Auth section below.
 
 ### 3. In `.htaccess` be sure to:
 Change `RewriteBase /` to the correct path. If mediahub is accessed from example.com, the path would be `/`. If it is accessed from `example.com/mediahub/www/` the path would be `/mediahub/www/`.
