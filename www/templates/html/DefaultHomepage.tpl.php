@@ -39,8 +39,8 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
     <div class="mh-featured">
       <a class="dcf-d-flex dcf-flex-col dcf-ai-center dcf-txt-decor-hover" href="<?php echo $baseUrl ?>search/">
         <div class="mh-featured-icon mh-green dcf-d-flex dcf-ai-center dcf-jc-center dcf-h-10 dcf-w-10 dcf-circle">
-          <object type="image/svg+xml" data="<?php echo $baseUrl; ?>templates/html/css/images/play-icon.svg"  title="Play Icon">
-            <img src="<?php echo $baseUrl; ?>templates/html/css/images/play-icon-white.png" alt="browse media">
+          <object type="image/svg+xml" data="<?php echo $baseUrl; ?>templates/html/css/images/play-icon.svg?cb=20210423"  title="Play Icon">
+            <img src="<?php echo $baseUrl; ?>templates/html/css/images/play-icon-white.png?cb=20210423" alt="browse media">
           </object>
         </div>
         <h2 class="dcf-mt-2 dcf-txt-h4">Browse Media</h2>
@@ -50,8 +50,8 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
     <div class="mh-featured">
       <a class="dcf-d-flex dcf-flex-col dcf-ai-center dcf-txt-decor-hover" href="<?php echo $baseUrl ?>channels/">
         <div class="mh-featured-icon mh-blue dcf-d-flex dcf-ai-center dcf-jc-center dcf-h-10 dcf-w-10 dcf-circle">
-          <object type="image/svg+xml" data="<?php echo $baseUrl; ?>templates/html/css/images/channel-icon.svg" title="Default Channel Icon">
-            <img src="<?php echo $baseUrl; ?>templates/html/css/images/channel-icon-white.png" alt="explore channels">
+          <object type="image/svg+xml" data="<?php echo $baseUrl; ?>templates/html/css/images/channel-icon.svg?cb=20210423" title="Default Channel Icon">
+            <img src="<?php echo $baseUrl; ?>templates/html/css/images/channel-icon-white.png?cb=20210423" alt="explore channels">
           </object>
         </div>
         <h2 class="dcf-mt-2 dcf-txt-h4">Explore Channels</h2>
@@ -61,8 +61,8 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
     <div class="mh-featured">
       <a class="dcf-d-flex dcf-flex-col dcf-ai-center dcf-txt-decor-hover" href="<?php echo $baseUrl ?>manager/">
         <div class="mh-featured-icon dcf-d-flex dcf-ai-center dcf-jc-center dcf-h-10 dcf-w-10 dcf-circle unl-bg-scarlet">
-          <object type="image/svg+xml" data="<?php echo $baseUrl; ?>templates/html/css/images/gear-icon.svg"  title="Manage Media Icon">
-            <img src="<?php echo $baseUrl; ?>templates/html/css/images/gear-icon-white.png" alt="manage media">
+          <object type="image/svg+xml" data="<?php echo $baseUrl; ?>templates/html/css/images/gear-icon.svg?cb=20210423"  title="Manage Media Icon">
+            <img src="<?php echo $baseUrl; ?>templates/html/css/images/gear-icon-white.png?cb=20210423" alt="manage media">
           </object>
         </div>
         <h2 class="dcf-mt-2 dcf-txt-h4">Manage Media</h2>
