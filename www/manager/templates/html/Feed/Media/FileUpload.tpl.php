@@ -32,8 +32,10 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
             <div class="dcf-grid-halves@sm dcf-col-gap-vw">
                 <div id="mh_upload_media_container">
                     <div class="dcf-ratio dcf-ratio-16x9 mh-upload-box" id="mh_upload_media">
-                        <span class="dcf-ratio-child dcf-d-flex dcf-ai-center dcf-jc-center">Add Media</span>
-                        <p>.mp4 or .mp3<br>(Maximum file size: <?php echo UNL_MediaHub_Controller::$max_upload_mb; ?>mb)</p>
+                        <div class="dcf-ratio-child dcf-d-flex dcf-flex-col dcf-ai-center dcf-jc-center dcf-txt-center">
+                            <span>Add Media</span>
+                            <p class="dcf-mb-0">.mp4 or .mp3<br>(Maximum file size: <?php echo UNL_MediaHub_Controller::$max_upload_mb; ?>mb)</p>
+                        </div>
                     </div>
                     <div id="filelist" class="mh-upload-box dcf-txt-center">
                         Your browser doesn't have Flash, Silverlight or HTML5 support.
