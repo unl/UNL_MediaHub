@@ -1,4 +1,4 @@
-/* 
+/*
 -------------------------------------------------
 Supporting styles for the manager forms (add media, channel)
 -------------------------------------------------
@@ -94,15 +94,10 @@ iframe * {margin:0px}
 
 .mh-upload-box {
     width: 100%;
-    padding: 37% 0 63% 0;
     border: 2px dashed RGB(213,213,210);
     background-color: RGBA(255,255,255,.75);
     display: block;
     cursor: pointer;
-}
-
-.mh-upload-box.mh-upload-box-small {
-    padding: 20% 20px 80% 20px;
 }
 
 .mh-upload-box h2 {
@@ -156,10 +151,6 @@ iframe * {margin:0px}
 
 [class*=col-one-half] .mh-video-thumb.mh-featured-channel {
     padding: 0 0 70% 0;
-}
-
-.mh-your-channels .mh-upload-box {
-    padding: 14% 0 46% 0;
 }
 
 .mh-your-channels .mh-video-label h6{
@@ -255,8 +246,8 @@ form legend {
     background-color: white;
     content: "";
     display: block;
-    width: 15px; 
-    height: 15px; 
+    width: 15px;
+    height: 15px;
     position:absolute;
     bottom: -8px;
     left: 50%;
@@ -320,7 +311,6 @@ form legend {
 @media only screen and (max-width : 768px) {
 
     .mh-upload-band .mh-upload-box{
-        padding: 15% 0 35% 0;
         margin-bottom: 1em;
     }
 

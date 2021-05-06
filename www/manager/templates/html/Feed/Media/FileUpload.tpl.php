@@ -31,8 +31,8 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
             <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
             <div class="dcf-grid-halves@sm dcf-col-gap-vw">
                 <div id="mh_upload_media_container">
-                    <div id="mh_upload_media" class="mh-upload-box dcf-txt-center">
-                        <span class="dcf-subhead">+ Add Media</span>
+                    <div class="dcf-ratio dcf-ratio-16x9 mh-upload-box" id="mh_upload_media">
+                        <span class="dcf-ratio-child dcf-d-flex dcf-ai-center dcf-jc-center">Add Media</span>
                         <p>.mp4 or .mp3<br>(Maximum file size: <?php echo UNL_MediaHub_Controller::$max_upload_mb; ?>mb)</p>
                     </div>
                     <div id="filelist" class="mh-upload-box dcf-txt-center">
@@ -115,7 +115,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                             </fieldset>
                         </div>
                     <?php endif; ?>
-                    
+
                     <input type="submit" id="publish" name="publish" value="Next Step: Add Captions" class="dcf-btn dcf-btn-primary dcf-mt-3" disabled="disabled">
                     <?php if (UNL_MediaHub_Controller::$caption_requirement_date):?>
                         <p>
