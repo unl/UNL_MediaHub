@@ -60,7 +60,7 @@ $page->jsbody .= $js;
     <input type="hidden" id="id" name="id" value="<?php echo $context->media->id ?>" />
     <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
     <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
-    
+
     <div class="dcf-bleed unl-bg-lighter-gray dcf-pt-6 dcf-bp-6">
         <div class="dcf-wrapper">
             <div class="dcf-grid" id="headline_main">
@@ -134,7 +134,7 @@ $page->jsbody .= $js;
                         <img src="<?php echo $context->media->getThumbnailURL(); ?>" id="thumbnail" alt="Thumbnail preview" />
                         <!-- <div id="poster_picker">
                             <a class="action" id="setImage" href="#">Set Image</a>
-    
+
                         </div> -->
                         <div id="poster_picker_disabled">
                             <p>
@@ -156,7 +156,7 @@ $page->jsbody .= $js;
             <?php endif; ?>
         </div>
     </div>
-    
+
     <div class="dcf-bleed dcf-pt-6 mh-edit-media">
         <div class="dcf-wrapper">
             <?php
@@ -178,10 +178,11 @@ $page->jsbody .= $js;
                                     <p><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ALERT, '{"size": 4}');?><span class="dcf-sr-only">Notice:</span> You MUST use HandBrake to optimize the new video.</p>
                                 <?php endif; ?>
                                 <div id="mh_upload_media_container">
-                                    <div id="mh_upload_media" class="mh-upload-box mh-upload-box-small dcf-txt-center">
-                                        <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/swap-arrows.svg"  title="Arrow Icon">
-                                            <img src="<?php echo $baseUrl; ?>/templates/html/css/images/swap-arrows.png" alt="browse media">
-                                        </object>
+                                    <div class="dcf-ratio dcf-ratio-16x9 mh-upload-box dcf-txt-center" id="mh_upload_media">
+                                        <img
+                                            src="<?php echo $baseUrl; ?>/templates/html/css/images/swap-arrows.svg"
+                                            aria-hidden="true"
+                                            alt="">
                                         <h2><span class="dcf-subhead">Swap Media</span></h2>
                                         <p>Upload a new .mp4 or .mp3 file and replace your old one. <strong><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ALERT, '{"size": 4}');?>(Caution: This deletes your old file.)</strong></p>
                                     </div>
@@ -228,7 +229,7 @@ $page->jsbody .= $js;
                             <a class="dcf-btn dcf-btn-primary" href="<?php echo $edit_caption_url ?>">Order/Edit Captions</a>
                             <?php endif; ?>
                         </li>
-                    </ol>  
+                    </ol>
                 </div>
 
 
@@ -242,7 +243,7 @@ $page->jsbody .= $js;
                             </label>
                             <input id="title" name="title" type="text" class="required-entry" value="<?php echo UNL_MediaHub::escape(@$context->media->title); ?>" />
                         </div>
-                        
+
                         <div class="dcf-grid-halves@sm dcf-col-gap-vw">
                             <div>
                                 <div class="dcf-form-group">
@@ -260,7 +261,7 @@ $page->jsbody .= $js;
                                         <input id="mrss_copyright" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[10][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'copyright'); ?>"/>
                                     </div>
                                 </div>
-                            </div>           
+                            </div>
                             <div>
                                 <div class="dcf-form-group">
                                     <label for="mrss_credit">
@@ -651,7 +652,7 @@ $page->jsbody .= $js;
                         <button id="delete-media" class="dcf-btn dcf-btn-primary">Delete</button>
                     </div>
                 </div>
-                
+
                 <?php
                 function getFieldValue($savant, $xmlns, $element)
                 {

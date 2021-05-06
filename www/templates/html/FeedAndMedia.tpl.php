@@ -18,16 +18,23 @@ $user = UNL_MediaHub_AuthService::getInstance()->getUser();
 
       <div class="dcf-grid dcf-col-gap-vw dcf-pt-6">
         <div class="dcf-col-100% dcf-col-25%-start@sm">
-          <div class="mh-channel-thumb dcf-txt-center">
+          <div class="dcf-ratio dcf-ratio-16x9 mh-channel-thumb">
               <?php $url = htmlentities(UNL_MediaHub_Controller::getURL($context->feed), ENT_QUOTES) ?>
               <?php if($context->feed->hasImage()): ?>
-                <img src="<?php echo $url; ?>/image"
-                    alt="<?php echo UNL_MediaHub::escape($context->feed->title); ?> Image">
+                <img
+                    class="dcf-ratio-child dcf-obj-fit-cover"
+                    src="<?php echo $url; ?>/image"
+                    aria-hidden="true"
+                    alt="">
               <?php else: ?>
-                <div>
-                  <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon.svg" title="Default Channel Icon">
-                    <img src="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon-white.png" alt="<?php echo htmlentities($context->feed->title, ENT_QUOTES); ?> Image">
-                  </object>
+                <div class="dcf-ratio-child dcf-d-flex dcf-ai-center dcf-jc-center">
+                    <img
+                        class="dcf-h-8 dcf-w-8"
+                        src="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon.svg"
+                        height="51"
+                        width="51"
+                        aria-hidden="true"
+                        alt="">
                 </div>
               <?php endif; ?>
           </div>
