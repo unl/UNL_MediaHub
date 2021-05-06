@@ -17,6 +17,7 @@ if (count($context->items)) :
                 <?php else: ?>
                     <div class="dcf-ratio-child dcf-d-flex dcf-ai-center dcf-jc-center">
                         <img
+                            class="dcf-h-8 dcf-w-8"
                             src="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon.svg"
                             height="51"
                             width="51"
