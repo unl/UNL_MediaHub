@@ -13,7 +13,7 @@ if (isset($context->label) && !empty($context->label)) {
 ?>
 
 
-<?php 
+<?php
 
 if($context->options['orderby'] == 'datecreated'){
 
@@ -76,7 +76,7 @@ if($context->options['orderby'] == 'datecreated'){
     <div class="dcf-wrapper dcf-pt-8 dcf-pb-8">
         <div class="mh-feeds">
             <?php if (count($context->items)): ?>
-                <?php 
+                <?php
                 $pager_layout = new UNL_MediaHub_List_PagerLayout($context->pager,
                     new Doctrine_Pager_Range_Sliding(array('chunk'=>5)),
                     htmlentities(UNL_MediaHub_Controller::getURL($context, array_merge($context->options, array('page'=>'{%page_number}')))));
@@ -89,16 +89,21 @@ if($context->options['orderby'] == 'datecreated'){
                             <div class="dcf-grid dcf-col-gap-vw">
                                 <div class="dcf-col-100% dcf-col-25%-start@sm">
                                     <a href="<?php echo $url ?>">
-                                    <div class="mh-channel-thumb dcf-txt-center">
+                                    <div class="dcf-ratio dcf-ratio-16x9 mh-channel-thumb">
                                         <?php if($feed->hasImage()): ?>
                                             <img
-                                            src="<?php echo $url; ?>/image"
-                                            alt="<?php echo UNL_MediaHub::escape($feed->title); ?> Image">
+                                                class="dcf-ratio-child dcf-obj-fit-cover"
+                                                src="<?php echo $url; ?>/image"
+                                                aria-hidden="true"
+                                                alt="">
                                         <?php else: ?>
-                                            <div>
-                                                <object type="image/svg+xml" data="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon.svg" title="Default Channel Icon">
-                                                    <img src="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon-white.png" alt="<?php echo UNL_MediaHub::escape($feed->title); ?> Image">
-                                                </object>
+                                            <div class="dcf-ratio-child dcf-d-flex dcf-ai-center dcf-jc-center">
+                                                <img
+                                                    src="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon.svg"
+                                                    height="51"
+                                                    width="51"
+                                                    aria-hidden="true"
+                                                    alt="">
                                             </div>
                                         <?php endif; ?>
                                     </div>
