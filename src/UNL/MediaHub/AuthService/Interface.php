@@ -1,6 +1,14 @@
 <?php
 abstract class UNL_MediaHub_AuthService_Interface
 {
+    protected $auto_auth_models = array(
+        'UNL_MediaHub_MediaList',
+        'UNL_MediaHub_DefaultHomepage',
+        'UNL_MediaHub_FeedList',
+        'UNL_MediaHub_FeedAndMedia',
+        'media',
+    );
+
     /**
      * @var UNL_MediaHub_User|NULL
      */
@@ -51,5 +59,14 @@ abstract class UNL_MediaHub_AuthService_Interface
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * @return NULL|String
+     */
+    public function getUserDisplayName()
+    {
+        $displayUser = $this->getUser();
+        return !empty($displayUser) && !empty($displayUser->uid) ? $displayUser->uid : '';
     }
 }

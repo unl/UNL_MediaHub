@@ -1,16 +1,11 @@
 <?php
-class UNL_MediaHub_AuthService_UNL extends UNL_MediaHub_AuthService_Interface
+class UNL_MediaHub_AuthService_ModShib extends UNL_MediaHub_AuthService_Interface
 {
-    public static $cert_path = '/etc/pki/tls/cert.pem';
     private $auth;
 
-    public function __construct()
+    public function __construct($settingsInfo)
     {
-        if (!file_exists(self::$cert_path)) {
-          self::$cert_path = GuzzleHttp\default_ca_bundle();
-        }
-
-        $this->auth = new \UNL\Templates\Auth\AuthCAS('2.0', 'shib.unl.edu', 443, '/idp/profile/cas', self::$cert_path, 'mediahub');
+        $this->auth =  new \UNL\Templates\Auth\AuthModShib($settingsInfo, 'mediahub');
 
         if (isset($_GET['logout'])) {
             $this->logout();
@@ -27,20 +22,20 @@ class UNL_MediaHub_AuthService_UNL extends UNL_MediaHub_AuthService_Interface
             //No unl_sso cookie was found, no need to auto-login.
             return;
         }
-        
+
         if ($this->isLoggedIn()) {
             //We are already logged in, no need to auto-login
             return;
         }
-        
+
         if (!in_array($current_model, $this->auto_auth_models)) {
             //The current model doesn't support auto-login
             return;
         }
-        
+
         //Everything looks good.  Log in!
-        if ($this->auth->checkAuthentication()) {
-            $this->setUser(UNL_MediaHub_User::getByUid($this->auth->getUserId()));
+        if ($this->auth->isAuthenticated()) {
+          $this->setUser(UNL_MediaHub_User::getByUid($this->auth->getUserId()));
         }
     }
 
@@ -49,11 +44,8 @@ class UNL_MediaHub_AuthService_UNL extends UNL_MediaHub_AuthService_Interface
      */
     public function isLoggedIn()
     {
-        if ($this->auth->isAuthenticated()) {
-            return true;
-        }
-
-        return false;
+        // check if logged in
+        return $this->auth->isAuthenticated();
     }
 
     public function login()
@@ -61,7 +53,7 @@ class UNL_MediaHub_AuthService_UNL extends UNL_MediaHub_AuthService_Interface
         $this->auth->login();
 
         if (!$this->auth->getUserId()) {
-            throw new UNL_MediaHub_RuntimeException('Unable to authenticate', 403);
+          throw new UNL_MediaHub_RuntimeException('Unable to authenticate', 403);
         }
 
         $this->setUser(UNL_MediaHub_User::getByUid($this->auth->getUserId()));
@@ -69,15 +61,18 @@ class UNL_MediaHub_AuthService_UNL extends UNL_MediaHub_AuthService_Interface
 
     public function logout()
     {
-       $this->auth->logout(UNL_MediaHub_Controller::$url);
+      $this->auth->logout();
     }
-    
+
     public function getUser()
     {
-        if (!$this->user && $this->isLoggedIn()) {
-            $this->setUser(UNL_MediaHub_User::getByUid($this->auth->getUserId()));
+      if (!$this->user && $this->isLoggedIn()) {
+        $userID = $this->auth->getUserId();
+        if (!empty($userID)) {
+          $this->setUser(UNL_MediaHub_User::getByUid($userID));
         }
-        
-        return parent::getUser();
+      }
+
+      return parent::getUser();
     }
 }
