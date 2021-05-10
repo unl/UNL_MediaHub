@@ -1,6 +1,7 @@
 <?php
 class UNL_MediaHub_AuthService
 {
+    public static $provider;
     protected static $instance = false;
     
     protected function __construct() {}
@@ -14,9 +15,14 @@ class UNL_MediaHub_AuthService
         if (self::$instance) {
             return self::$instance;
         }
-        
-        if (!$provider) {
-            $provider = new UNL_MediaHub_AuthService_UNL();
+
+        if (empty($provider)) {
+            // use config auth service provider or default if not passed in
+            if (static::$provider instanceof UNL_MediaHub_AuthService_Interface) {
+                $provider = static::$provider;
+            } else {
+                $provider = new UNL_MediaHub_AuthService_Shib();
+            }
         }
 
         self::$instance = $provider;

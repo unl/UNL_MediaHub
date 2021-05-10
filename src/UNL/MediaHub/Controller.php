@@ -244,9 +244,9 @@ class UNL_MediaHub_Controller
     {
         try {
             if (!empty($_POST)) {
-                $this->handlePost($_POST);
+              $this->handlePost($_POST);
             }
-            
+
             if (!isset($this->options['model'])
                 || false === $this->options['model']) {
                 throw new Exception('Un-registered view', 404);
@@ -330,6 +330,16 @@ class UNL_MediaHub_Controller
                 } else {
                     http_response_code(404);
                 }
+                break;
+            case 'login':
+                $auth = UNL_MediaHub_AuthService::getInstance();
+                $auth->login();
+                header('Location: ' . UNL_MediaHub_Controller::$url);
+                exit();
+                break;
+            case 'logout':
+                $auth = UNL_MediaHub_AuthService::getInstance();
+                $auth->logout();
                 break;
             case 'media_file_download':
                 if (!$media = UNL_MediaHub_Media::getById($this->options['id'])) {
