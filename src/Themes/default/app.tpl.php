@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="http://dcf.dxg-jsturek.unl.edu/css/print.css" media="print">
     <meta name="description" content="The Digital Campus Framework is an open-source web framework for higher education institutions.">
 
-    <script src="http://dcf.dxg-jsturek.unl.edu/js/vendor/bodyScrollLock.min.js"></script>
+    <!-- <script src="http://dcf.dxg-jsturek.unl.edu/js/vendor/bodyScrollLock.min.js"></script>-->
     <!-- InstanceBeginEditable name="head" -->
     <!-- InstanceEndEditable -->
 </head>
