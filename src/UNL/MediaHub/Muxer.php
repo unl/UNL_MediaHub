@@ -126,8 +126,10 @@ class UNL_MediaHub_Muxer
             $error .= implode(PHP_EOL, $output);
             $log_file = UNL_MediaHub::getRootDir() . '/tmp/mux_error_log.log';
             file_put_contents($log_file, $error, FILE_APPEND);
-            
-            unlink($tmp_media_file);
+
+            if (file_exists($tmp_media_file)) {
+              unlink($tmp_media_file);
+            }
             
             throw new UNL_MediaHub_MuxerException('Unable to mux video');
         }
