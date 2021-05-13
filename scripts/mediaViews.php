@@ -15,7 +15,7 @@ $sql = "DELETE FROM media_views WHERE datecreated < (NOW() - INTERVAL 1 MONTH)";
 $q   = $db->prepare($sql);
 $q->execute();
 
-//Update popular counts (more of a weight than an acutal count)
+//Update popular counts (more of a weight than an actual count)
 $sql = "
 UPDATE media
 INNER JOIN (
