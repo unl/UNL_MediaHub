@@ -15,7 +15,12 @@ $sql = "DELETE FROM media_views WHERE datecreated < (NOW() - INTERVAL 1 MONTH)";
 $q   = $db->prepare($sql);
 $q->execute();
 
-//Update popular counts (more of a weight than an actual count)
+//Update all popular counts (more of a weight than an actual count)
+$sql = "UPDATE media SET popular_play_count = round(media.play_count*.15)";
+$q   = $db->prepare($sql);
+$q->execute();
+
+//Update popular counts (more of a weight than an actual count) with views in last month
 $sql = "
 UPDATE media
 INNER JOIN (
