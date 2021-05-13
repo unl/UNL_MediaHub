@@ -39,7 +39,7 @@ class UNL_MediaHub_DefaultHomepage implements UNL_MediaHub_CacheableInterface
         $top_media = new UNL_MediaHub_MediaList($options);
         $top_media->run();
 
-        $after_date = strtotime('2 weeks ago');
+        $after_date = strtotime('1 month ago');
 
         $limit = 6;
         $found_channels = array();
