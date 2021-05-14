@@ -10,15 +10,15 @@
     <title>Title</title>
     <!-- InstanceEndEditable -->
 
-    <link rel="stylesheet" href="http://dcf.dxg-jsturek.unl.edu/css/main.css">
-    <link rel="stylesheet" href="http://dcf.dxg-jsturek.unl.edu/css/print.css" media="print">
+    <link rel="stylesheet" href="/dcf/css/main.css">
+    <link rel="stylesheet" href="/dcf/css/print.css" media="print">
     <meta name="description" content="The Digital Campus Framework is an open-source web framework for higher education institutions.">
 
-    <!-- <script src="http://dcf.dxg-jsturek.unl.edu/js/vendor/bodyScrollLock.min.js"></script>-->
+    <script src="/dcf/js/vendor/bodyScrollLock.min.js"></script>
     <!-- InstanceBeginEditable name="head" -->
     <!-- InstanceEndEditable -->
 </head>
-<body class="theme" data-version="1.0">
+<body class="theme app" data-version="2.0">
 <nav class="dcf-absolute dcf-pin-top dcf-pin-left dcf-mt-1 dcf-ml-1 dcf-z-1" id="dcf-skip-nav" role="navigation">
     <a class="dcf-show-on-focus dcf-btn dcf-btn-primary" href="#dcf-main">Skip to main content</a>
 </nav>
@@ -26,29 +26,6 @@
 <header class="dcf-header" id="dcf-header" role="banner">
     <div class="dcf-header-global dcf-wrapper dcf-d-flex dcf-flex-row dcf-flex-nowrap dcf-ai-center dcf-jc-between dcf-relative">
         <a class="dcf-institution-title dcf-flex-shrink-0 dcf-pt-3 dcf-pb-3 dcf-txt-xs example-ls-1" href="#"><span class="dcf-uppercase">University of DCF</span></a>
-
-        <nav class="dcf-idm dcf-header-global-child dcf-flex-grow-1 dcf-jc-flex-end dcf-h-100% dcf-w-min-0 dcf-d-none@print" id="dcf-idm" role="navigation" aria-labelledby="dcf-idm-username">
-            <a class="dcf-idm-login dcf-mobile-nav-toggle dcf-idm-toggle" id="dcf-idm-username" href="#">
-                <span class="dcf-d-flex dcf-ai-center dcf-jc-center dcf-h-100%">
-                  <svg class="dcf-icon dcf-fill-current dcf-h-3 dcf-w-3" aria-hidden="true" focusable="false" height="16" width="16" viewBox="0 0 48 48"><path d="M24 48A24 24 0 1 0 0 24a24 24 0 0 0 24 24zm0-38a8 8 0 0 1 4.14 14.84l1.85 12A1 1 0 0 1 29 38H19a1 1 0 0 1-1-1.15l1.85-12A8 8 0 0 1 24 10z"/></svg>
-                    <span class="dcf-pl-2 dcf-txt-xs">Log In</span>
-                </span>
-            </a>
-            <div id="dcf-idm-notice-container" hidden>
-                <button class="dcf-p-0 dcf-b-0 dcf-bg-transparent dcf-mobile-nav-toggle dcf-idm-toggle" id="dcf-idm-toggle" aria-haspopup="true" aria-pressed="false" aria-controls="dcf-idm-options">
-                  <span class="dcf-d-flex dcf-flex-col dcf-ai-center dcf-jc-center dcf-h-100%">
-                    <img class="dcf-d-block dcf-circle dcf-h-6 dcf-w-6 example-bg-brand-alpha" src="#" alt="">
-                    <span class="dcf-sr-only">View your account, </span><span class="dcf-txt-xs">Ryan</span>
-                  </span>
-                </button>
-                <nav class="dcf-d-none dcf-overlay-dark dcf-idm-options" id="dcf-idm-options" aria-hidden="true">
-                    <ul class="dcf-list-bare">
-                        <li><a id="dcf-idm-profile" href="#">View Profile</a></li>
-                        <li><a id="dcf-idm-logout" href="#">Log Out</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </nav>
     </div>
 
     <div class="dcf-wrapper dcf-d-flex dcf-ai-center dcf-pt-4 dcf-logo dcf-overflow-hidden">
@@ -94,6 +71,7 @@
         <div class="dcf-nav-menu-child dcf-app-controls dcf-w-100%">
             <!-- InstanceBeginEditable name="appcontrols" -->
             <!-- InstanceEndEditable -->
+            <ul hidden></ul>
         </div>
     </nav>
 
@@ -126,9 +104,9 @@
 </noscript>
 
 <script src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=default"></script>
-<script src="http://dcf.dxg-jsturek.unl.edu/js/dcf.min.js"></script>
-<script src="http://dcf.dxg-jsturek.unl.edu/js/vendor/bodyScrollLock.min.js"></script>
-<script src="http://dcf.dxg-jsturek.unl.edu/js/vendor/ofi.min.js"></script>
+<script src="/dcf/js/dcf.min.js"></script>
+<script src="/dcf/js/vendor/bodyScrollLock.min.js"></script>
+<script src="/dcf/js/vendor/ofi.min.js"></script>
 <script>
     // WebP Support Example
     DCFUtility.flagSupportsWebP();
