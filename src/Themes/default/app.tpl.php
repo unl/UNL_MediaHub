@@ -10,11 +10,11 @@
     <title>Title</title>
     <!-- InstanceEndEditable -->
 
-    <link rel="stylesheet" href="/dcf/css/main.css">
-    <link rel="stylesheet" href="/dcf/css/print.css" media="print">
+    <link rel="stylesheet" href="/custom/dcf/css/main.css">
+    <link rel="stylesheet" href="/custom/dcf/css/print.css" media="print">
     <meta name="description" content="The Digital Campus Framework is an open-source web framework for higher education institutions.">
 
-    <script src="/dcf/js/vendor/bodyScrollLock.min.js"></script>
+    <script src="/custom/dcf/js/vendor/bodyScrollLock.min.js"></script>
     <!-- InstanceBeginEditable name="head" -->
     <!-- InstanceEndEditable -->
 </head>
@@ -76,10 +76,10 @@
     </nav>
 
     <div class="dcf-bleed"
-        <div class="dcf-absolute dcf-d-flex dcf-ai-center dcf-h-100% dcf-w-100% dcf-overflow-hidden">
-            <!-- InstanceBeginEditable name="appsearch" -->
-            <!-- InstanceEndEditable -->
-        </div>
+    <div class="dcf-absolute dcf-d-flex dcf-ai-center dcf-h-100% dcf-w-100% dcf-overflow-hidden">
+        <!-- InstanceBeginEditable name="appsearch" -->
+        <!-- InstanceEndEditable -->
+    </div>
     </div>
 
 </header>
@@ -104,20 +104,20 @@
 </noscript>
 
 <script src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=default"></script>
-<script src="/dcf/js/dcf.min.js"></script>
-<script src="/dcf/js/vendor/bodyScrollLock.min.js"></script>
-<script src="/dcf/js/vendor/ofi.min.js"></script>
+<script src="/custom/dcf/js/dcf.min.js"></script>
+<script src="/custom/dcf/js/vendor/bodyScrollLock.min.js"></script>
+<script src="/custom/dcf/js/vendor/ofi.min.js"></script>
 <script>
-    // WebP Support Example
-    DCFUtility.flagSupportsWebP();
+  // WebP Support Example
+  DCFUtility.flagSupportsWebP();
 
-    // JavaScript Support Example
-    DCFUtility.flagSupportsJavaScript();
+  // JavaScript Support Example
+  DCFUtility.flagSupportsJavaScript();
 
-    // Modals Example
-    var modals = document.querySelectorAll('.dcf-modal');
-    var modal = new DCFModal(modals, bodyScrollLock);
-    modal.initialize();
+  // Modals Example
+  var modals = document.querySelectorAll('.dcf-modal');
+  var modal = new DCFModal(modals, bodyScrollLock);
+  modal.initialize();
 </script>
 <script data-main="/templates/html/scripts/app.js" src="/templates/html/scripts/require.js"></script>
 
