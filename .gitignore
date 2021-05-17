@@ -5,7 +5,11 @@
 /.settings
 /.buildpath
 /.project
+/.idea
 *.espressostorage
+/www/custom/*
+!/www/custom/.gitkeep
+!/www/custom/dcf
 www/uploads
 /scripts/popular.sh
 /scripts/popular.txt
