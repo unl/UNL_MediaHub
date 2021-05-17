@@ -415,7 +415,6 @@ nav.mh-sort-filter {
 }
 
 ul.mh-btn-group {
-  background-color: #d00000;
   border-radius: 15px;
   display: inline-block;
   list-style: none;
@@ -426,7 +425,6 @@ ul.mh-btn-group {
 }
 
 ul.mh-btn-group a {
-  background-color: #d00000;
   padding: .75em;
 }
 
