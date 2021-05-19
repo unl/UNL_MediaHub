@@ -14,96 +14,120 @@
     <link rel="stylesheet" href="/custom/dcf/css/print.css" media="print">
     <meta name="description" content="The Digital Campus Framework is an open-source web framework for higher education institutions.">
 
-    <script src="/custom/dcf/js/vendor/bodyScrollLock.min.js"></script>
     <!-- InstanceBeginEditable name="head" -->
     <!-- InstanceEndEditable -->
 </head>
 <body class="theme app" data-version="2.0">
-<nav class="dcf-absolute dcf-pin-top dcf-pin-left dcf-mt-1 dcf-ml-1 dcf-z-1" id="dcf-skip-nav" role="navigation">
+<div class="dcf-absolute dcf-pin-top dcf-pin-left dcf-mt-1 dcf-ml-1 dcf-z-1" id="dcf-skip-nav">
     <a class="dcf-show-on-focus dcf-btn dcf-btn-primary" href="#dcf-main">Skip to main content</a>
-</nav>
+</div></nav>
 
 <header class="dcf-header" id="dcf-header" role="banner">
-    <div class="dcf-header-global dcf-wrapper dcf-d-flex dcf-flex-row dcf-flex-nowrap dcf-ai-center dcf-jc-between dcf-relative">
-        <a class="dcf-institution-title dcf-flex-shrink-0 dcf-pt-3 dcf-pb-3 dcf-txt-xs example-ls-1" href="#"><span class="dcf-uppercase">University of DCF</span></a>
+    <div class="dcf-header-global dcf-wrapper dcf-d-flex dcf-flex-row dcf-flex-nowrap dcf-ai-center dcf-jc-between dcf-relative dcf-bt-solid dcf-bt-3">
+        <a class="dcf-institution-title dcf-flex-shrink-0 dcf-pt-3 dcf-pb-3 dcf-txt-xs" id="dcf-institution-title" href="#">
+            <span class="dcf-uppercase">University</span> <span class="dcf-italic">of</span><span> </span><span class="dcf-uppercase ">Nebraska&ndash;Lincoln</span>
+        </a>
     </div>
-
-    <div class="dcf-wrapper dcf-d-flex dcf-ai-center dcf-pt-4 dcf-logo dcf-overflow-hidden">
-        <a id="dcf-header-logo" href="#" aria-label="Go to home page"><!-- Logo SVG goes here --></a>
-        <div class="dcf-d-flex dcf-flex-col dcf-jc-center">
-            <div id="dcf-site-title">
+    <div class="dcf-logo-lockup dcf-wrapper dcf-d-flex dcf-ai-flex-end dcf-relative dcf-overflow-hidden" id="dcf-logo-lockup">
+        <a class="dcf-header-logo dcf-mr-4 dcf-flex-shrink-0" id="dcf-header-logo" href="#" aria-label="Go to University of Nebraska–Lincoln home page">
+            <svg class="dcf-d-block dcf-h-8 dcf-w-8" focusable="false" height="76" width="76" viewBox="0 0 152 152">
+                <defs>
+                    <style>
+                        #n153,
+                        #n57 {
+                            display: none;
+                        }
+                        @media (min-width: 56px) {
+                            #n45 { display: none; }
+                            #n57 { display: block; }
+                        }
+                        @media (min-width: 152px) {
+                            #n57 { display: none; }
+                            #n153{ display: block; }
+                        }
+                    </style>
+                </defs>
+                <g id="n153">
+                    <path d="M147,1H90V42h10V75.673L53.532,2.393,52.648,1H2V42H12v66H2v41H62V108H52V74.336l46.467,73.271L99.351,149H150V108H140V42h10V1ZM59,111v35H5V111H15V39H5V4H51l52,82V39H93V4h54V39H137v72h10v35H101L49,64v47Z" fill="#fefdfa"></path>
+                    <path d="M147,0H88V45H98V69.8L55.2,2.3,53.8,0H0V45H10v62H0v45H64V107H54V82.2l42.8,67.5,1.5,2.3H152V107H142V45h10V0Zm3,5V43H140v66h10v41H99.4l-.9-1.4L52,75.3V109H62v41H2V109H12V43H2V2H52.6l.9,1.4L100,76.7V43H90V2h60ZM103,87,51,5H5V40H15v72H5v35H59V112H49V65l52,82h46V112H137V40h10V5H93V40h10Z" fill="#d00000"></path>
+                </g>
+                <g id="n57">
+                    <path d="M89.571,2.714V43.429h10.857V76L51.571,2.714H2.714V43.429H13.571v65.143H2.714v40.714H62.429V108.571H51.571V76l47.5,73.286h50.214V108.571H138.429V43.429h10.857V2.714ZM59.714,111.286v35.286H5.429V111.286H16.286V40.714H5.429V5.429H50.214l52.929,81.429V40.714H92.286V5.429h54.286V40.714H135.714v70.571h10.857v35.286H100.429L48.857,65.143v46.143Z" fill="#fefdfa"></path>
+                    <path d="M147.006,0H86.857V46.143H97.714V67.857L54.286,0H0V46.143H10.857v59.714H0V152H65.143V105.857H54.286V84.143L97.714,152H152V105.857H141.143V46.143H152V0Zm2.28,43.429H138.429v65.143h10.857v40.714H99.071L51.571,76v32.571H62.429v40.714H2.714V108.571H13.571V43.429H2.714V2.714H51.571L100.429,76V43.429H89.571V2.714h59.714ZM103.143,86.857,50.214,5.429H5.429V40.714H16.286v70.571H5.429v35.286H59.714V111.286H48.857V65.143l51.571,81.429h46.143V111.286H135.714V40.714h10.857V5.429H92.286V40.714h10.857Z" fill="#d00000"></path>
+                </g>
+                <g id="n45">
+                    <path d="M89.818,3.455v38h10.364V76L53.545,3.455H3.455v38H13.818v69.091H3.455v38H62.182v-38H51.818V76l46.636,72.545h50.091v-38H138.182V41.455h10.364v-38ZM58.727,114v31.091H6.909V114H17.273V38H6.909V6.909H51.818l51.818,79.455V38H93.273V6.909h51.818V38H134.727v76h10.364v31.091H100.182L48.364,65.636V114Z" fill="#fefdfa"></path>
+                    <path d="M147.008,0H86.364V44.909H96.727V65.636L55.273,0H0V44.909H10.364v62.182H0V152H65.636V107.091H55.273V86.364L96.727,152H152V107.091H141.636V44.909H152V0Zm1.537,41.455H138.182v69.091h10.364v38H98.455L51.818,76v34.545H62.182v38H3.455v-38H13.818V41.455H3.455v-38H53.545L100.182,76V41.455H89.818v-38h58.727ZM103.636,86.364,51.818,6.909H6.909V38H17.273v76H6.909v31.091H58.727V114H48.364V65.636l51.818,79.455h44.909V114H134.727V38h10.364V6.909H93.273V38h10.364Z" fill="#d00000"></path>
+                </g>
+            </svg>
+        </a>
+        <div class="dcf-site-group dcf-d-flex dcf-flex-col dcf-jc-center">
+            <div class="dcf-site-affiliation dcf-lh-3 dcf-txt-2xs" id="dcf-site-affiliation">
+                <!-- InstanceBeginEditable name="affiliation" -->
+                <!-- InstanceEndEditable -->
+            </div>
+            <div class="dcf-site-title dcf-bold dcf-lh-2 dcf-uppercase" id="dcf-site-title">
                 <!-- InstanceBeginEditable name="titlegraphic" -->
-                <!-- site title added by app here -->
+                <a class="dcf-txt-h5" href="#">
+                    Web Application
+                </a>
                 <!-- InstanceEndEditable -->
             </div>
         </div>
     </div>
-
-    <nav class="dcf-nav-toggle-group dcf-fixed dcf-pin-bottom dcf-h-9 dcf-w-100% dcf-bg-white dcf-d-none@print" role="navigation" aria-label="Navigate or log in">
-        <button class="dcf-nav-toggle-btn dcf-nav-toggle-btn-menu dcf-d-flex dcf-flex-col dcf-ai-center dcf-jc-center dcf-h-9 dcf-p-0 dcf-b-0 dcf-bg-transparent example-brand-alpha" id="dcf-mobile-toggle-menu" aria-expanded="false">
+    <div id="dcf-nav-toggle-group" class="dcf-nav-toggle-group dcf-pin-bottom dcf-fixed dcf-w-100% dcf-bt-solid dcf-bt-2 hrjs dcf-d-none@print">
+        <button class="dcf-nav-toggle-btn dcf-nav-toggle-btn-menu dcf-d-flex dcf-flex-col dcf-ai-center dcf-flex-grow-1 dcf-jc-center dcf-h-9 dcf-p-0 dcf-b-0 dcf-bg-transparent" id="dcf-mobile-toggle-menu" aria-haspopup="true" aria-expanded="false" aria-label="Open menu">
             <svg class="dcf-txt-sm dcf-h-6 dcf-w-6 dcf-fill-current" aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 24 24">
-                <path d="M23.5 12.5H.5c-.3 0-.5-.2-.5-.5s.2-.5.5-.5h23c.3 0 .5.2.5.5s-.2.5-.5.5zM23.5 4.5H.5C.2 4.5 0 4.3 0 4s.2-.5.5-.5h23c.3 0 .5.2.5.5s-.2.5-.5.5zM23.5 20.5H.5c-.3 0-.5-.2-.5-.5s.2-.5.5-.5h23c.3 0 .5.2.5.5s-.2.5-.5.5z"/>
+                <g id="dcf-nav-toggle-icon-open-menu" class="">
+                    <path d="M23.5 12.5H.5c-.3 0-.5-.2-.5-.5s.2-.5.5-.5h23c.3 0 .5.2.5.5s-.2.5-.5.5zM23.5 4.5H.5C.2 4.5 0 4.3 0 4s.2-.5.5-.5h23c.3 0 .5.2.5.5s-.2.5-.5.5zM23.5 20.5H.5c-.3 0-.5-.2-.5-.5s.2-.5.5-.5h23c.3 0 .5.2.5.5s-.2.5-.5.5z"></path>
+                </g>
+                <g id="dcf-nav-toggle-icon-close-menu" class="dcf-d-none">
+                    <path d="M20.5 4.2L4.2 20.5c-.2.2-.5.2-.7 0-.2-.2-.2-.5 0-.7L19.8 3.5c.2-.2.5-.2.7 0 .2.2.2.5 0 .7z"></path>
+                    <path d="M3.5 4.2l16.3 16.3c.2.2.5.2.7 0s.2-.5 0-.7L4.2 3.5c-.2-.2-.5-.2-.7 0-.2.2-.2.5 0 .7z"></path>
+                </g>
             </svg>
-            <svg class="dcf-txt-sm dcf-h-6 dcf-w-6 dcf-fill-current dcf-d-none" aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 24 24">
-                <path d="M20.5 4.2L4.2 20.5c-.2.2-.5.2-.7 0-.2-.2-.2-.5 0-.7L19.8 3.5c.2-.2.5-.2.7 0 .2.2.2.5 0 .7z"/>
-                <path d="M3.5 4.2l16.3 16.3c.2.2.5.2.7 0s.2-.5 0-.7L4.2 3.5c-.2-.2-.5-.2-.7 0-.2.2-.2.5 0 .7z"/>
-            </svg>
-            <span class="dcf-sr-only">Open </span><span class="dcf-mt-1 dcf-txt-2xs">Menu</span>
+            <span class="dcf-nav-toggle-label-menu dcf-mt-1 dcf-txt-2xs">Menu</span>
         </button>
-        <div class="dcf-nav-toggle-btn dcf-nav-toggle-btn-idm dcf-idm dcf-d-flex dcf-flex-col dcf-ai-center dcf-jc-center dcf-h-9">
-            <div class="dcf-idm-status-logged-out dcf-h-100% dcf-w-100%">
-                <a class="dcf-d-flex dcf-flex-col dcf-ai-center dcf-jc-center dcf-h-100% dcf-w-100% example-brand-alpha" href="">
-                    <svg class="dcf-txt-sm dcf-h-6 dcf-w-6 dcf-fill-current" aria-hidden="true" focusable="false" height="16" width="16" viewBox="0 0 24 24">
-                        <path d="M12 0C5.4 0 0 5.4 0 12c0 6.2 5 12 12 12 3.2 0 6.3-1.3 8.5-3.6S24 15.1 24 12c0-6.6-5.4-12-12-12zM4.7 20.2c1-.6 2.5-1.1 4-1.6l1.5-.6c.2-.1.3-.3.3-.5V15c0-.2-.1-.4-.3-.5 0 0-1.2-.5-1.2-2.5 0-.3-.2-.5-.5-.5 0 0-.1-.2-.1-.5s.1-.5.1-.5c.3 0 .5-.2.5-.5 0-.1 0-.3-.1-.5-.2-.5-.6-2-.2-2.4.1-.2.5-.2.7-.1.3 0 .5-.1.6-.4.2-.6 1.3-1.1 2.8-1.1s2.6.5 2.8 1.1c.2.9-.2 2.2-.4 2.8-.2.3-.2.5-.2.6 0 .3.2.5.5.5 0 0 .1.2.1.5s-.1.5-.1.5c-.3 0-.5.2-.5.5 0 2.1-1.1 2.5-1.2 2.5-.2.1-.3.3-.3.5v2.5c0 .2.1.4.3.5.5.2 1.1.4 1.6.6 1.5.5 2.9 1.1 3.9 1.6-2 1.8-4.5 2.8-7.3 2.8-2.7 0-5.3-1-7.3-2.8zm15.4-.8c-1-.6-2.6-1.2-4.3-1.8-.4-.2-.8-.3-1.3-.5v-1.8c.5-.3 1.4-1.1 1.5-2.9.4-.2.6-.7.6-1.4 0-.6-.2-1-.5-1.3.2-.8.7-2.1.4-3.3-.3-1.4-2.2-1.9-3.7-1.9-1.3 0-3 .4-3.6 1.5-.5-.1-.9.1-1.2.4-.8.8-.3 2.4-.1 3.3-.3.2-.5.7-.5 1.3 0 .6.2 1.1.6 1.4.1 1.8 1 2.6 1.5 2.9v1.8c-.4.1-.8.3-1.2.4-1.6.6-3.3 1.2-4.4 1.9C2 17.4 1 14.8 1 12 1 5.9 5.9 1 12 1s11 4.9 11 11c0 2.8-1 5.4-2.9 7.4z"/>
-                    </svg>
-                    <svg class="dcf-txt-sm dcf-h-6 dcf-w-6 dcf-fill-current dcf-d-none" aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 24 24">
-                        <path d="M20.5 4.2L4.2 20.5c-.2.2-.5.2-.7 0-.2-.2-.2-.5 0-.7L19.8 3.5c.2-.2.5-.2.7 0 .2.2.2.5 0 .7z"/>
-                        <path d="M3.5 4.2l16.3 16.3c.2.2.5.2.7 0s.2-.5 0-.7L4.2 3.5c-.2-.2-.5-.2-.7 0-.2.2-.2.5 0 .7z"/>
-                    </svg>
-                    <span class="dcf-mt-1 dcf-txt-2xs">Log In</span>
-                </a>
-            </div>
-            <div class="dcf-idm-status-logged-in dcf-relative dcf-h-100% dcf-w-100%" hidden></div>
-        </div>
-    </nav>
-
-    <nav class="dcf-nav-menu dcf-modal-parent dcf-d-none@print" id="dcf-navigation" role="navigation" aria-label="local navigation">
-        <div class="dcf-nav-menu-child dcf-app-controls dcf-w-100%">
+    </div>
+    <nav class="dcf-nav-menu dcf-modal-parent dcf-d-none@print" id="dcf-navigation" role="navigation" aria-label="Primary">
+        <div id="dcf-nav-menu-child" class="dcf-nav-menu-child dcf-nav-local dcf-w-100%">
             <!-- InstanceBeginEditable name="appcontrols" -->
             <!-- InstanceEndEditable -->
-            <ul hidden></ul>
         </div>
     </nav>
-
-    <div class="dcf-bleed"
-    <div class="dcf-absolute dcf-d-flex dcf-ai-center dcf-h-100% dcf-w-100% dcf-overflow-hidden">
-        <!-- InstanceBeginEditable name="appsearch" -->
-        <!-- InstanceEndEditable -->
+    <div class="dcf-bleed">
+        <div class="dcf-absolute dcf-d-flex dcf-ai-center dcf-h-100% dcf-w-100% dcf-overflow-hidden">
+            <!-- InstanceBeginEditable name="appsearch" -->
+            <!-- InstanceEndEditable -->
+        </div>
     </div>
-    </div>
-
 </header>
 <main class="dcf-wrapper" id="dcf-main" role="main" tabindex="-1">
     <!-- InstanceBeginEditable name="maincontentarea" -->
     <!-- InstanceEndEditable -->
 </main>
 <footer class="dcf-footer" id="dcf-footer" role="contentinfo">
-    <!-- InstanceBeginEditable name="optionalfooter" -->
-    <!-- InstanceEndEditable -->
-    <!-- InstanceBeginEditable name="contactinfo" -->
-    <!-- InstanceEndEditable -->
-    <div class="dcf-wrapper dcf-d-grid dcf-col-gap-4 dcf-footer-global dcf-pt-7" id="dcf-footer-global">
-        <small class="dcf-mt-6 dcf-txt-xs">&copy; 2019 University of DCF</small>
+    <div class="dcf-relative">
+        <div class="dcf-wrapper dcf-pb-7">
+            <div class="dcf-grid-halves@sm dcf-col-gap-vw dcf-ai-baseline dcf-pt-4 dcf-bt-1 dcf-bt-solid">
+                <div>
+                    <a class="dcf-institution-title dcf-d-inline-block dcf-txt-xs dcf-txt-decor-hover" href="#">
+                        <span class="dcf-uppercase">University</span> <span class="dcf-italic">of</span><span> </span><span class="dcf-uppercase">Nebraska–Lincoln</span>
+                    </a>
+                </div>
+                <small class="dcf-txt-2xs">Established 1869 &middot; Copyright 2021</small>
+            </div>
+        </div>
     </div>
-
+    <noscript>
+        <div id="dcf-noscript">
+            <p>Some parts of this site work best with JavaScript enabled.</p>
+        </div>
+    </noscript>
 </footer>
-<noscript>
-    <div class="" id="dcf-noscript">
-        <p>Some parts of this site work best with JavaScript enabled.</p>
-    </div>
-</noscript>
 
 <script src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=default"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.12.0/headroom.min.js"></script>
 <script src="/custom/dcf/js/dcf.min.js"></script>
 <script src="/custom/dcf/js/vendor/bodyScrollLock.min.js"></script>
 <script src="/custom/dcf/js/vendor/ofi.min.js"></script>
@@ -118,12 +142,12 @@
   var modals = document.querySelectorAll('.dcf-modal');
   var modal = new DCFModal(modals, bodyScrollLock);
   modal.initialize();
+
+  // Nav Menu Toggle (needed for mobile nav)
+  var navMenuToggle = new DCFNavMenuToggle(bodyScrollLock);
 </script>
 <script data-main="/templates/html/scripts/app.js" src="/templates/html/scripts/require.js"></script>
-
 <!-- InstanceBeginEditable name="jsbody" -->
-<!-- put your custom javascript here -->
 <!-- InstanceEndEditable -->
-
 </body>
-<!-- InstanceEnd --></html>
+</html>

@@ -26,12 +26,19 @@ if (!$theme->isCustomTheme()) {
 
     $page->addScriptDeclaration('WDN.setPluginParam("idm", "logout", "' . $baseUrl . '?logout");');
 
+	$page->addScriptDeclaration("WDN.initializePlugin('card-as-link');");
+
 } else {
     // Custom Theme
     $page->optionalfooter = '<div class="dcf-bleed dcf-wrapper">
     <h3 class="dcf-txt-md dcf-bold dcf-uppercase dcf-lh-3">About MediaHub</h3>
     <p>This application is a product of the <a href="https://dxg.unl.edu/">Digital Experience Group at Nebraska</a>. DXG is a partnership of <a href="https://ucomm.unl.edu/">University Communication</a> and <a href="https://its.unl.edu/">Information Technology Services</a> at the University of Nebraska.</p>
 </div>';
+	$page->addScriptDeclaration("
+	// Card as Links
+	var cards = document.querySelectorAll('.dcf-card-as-link');
+	var cardAsLink = new DCFCardAsLink(cards);
+	cardAsLink.initialize();");
 }
 
 // Shared Items
