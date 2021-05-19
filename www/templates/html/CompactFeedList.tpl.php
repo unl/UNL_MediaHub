@@ -28,7 +28,7 @@ if (count($context->items)) :
             </div>
         </div>
         <div class="mh-video-label dcf-txt-center">
-            <a class="dcf-card-link title" href="<?php echo $feed_url ?>" title="<?php echo UNL_MediaHub::escape($channel->description); ?>"><?php echo UNL_MediaHub::escape($channel->title); ?></a>
+            <a class="dcf-card-link title" href="<?php echo $feed_url ?>"><?php echo UNL_MediaHub::escape($channel->title); ?></a>
         </div>
     </div>
     <?php endforeach; ?>
