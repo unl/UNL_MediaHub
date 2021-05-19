@@ -7,7 +7,7 @@
             <?php foreach ($context->items as $index=>$feed): ?>
                 <?php $feed_url = htmlentities(UNL_MediaHub_Controller::getURL($feed), ENT_QUOTES); ?>
                 <div>
-                    <a href="<?php echo $feed_url ?>">
+                    <div class="dcf-card-as-link">
                         <div class="mh-video-thumb mh-channel-thumb mh-featured-channel">
                             <div class="dcf-ratio dcf-ratio-16x9 mh-thumbnail-clip">
                                 <?php if($feed->hasImage()): ?>
@@ -30,11 +30,9 @@
                             </div>
                         </div>
                         <div class="mh-video-label dcf-txt-center">
-                            <p>
-                                <?php echo UNL_MediaHub::escape($feed->title); ?>
-                            </p>
+                            <a class="dcf-card-link dcf-txt-decor-hover" href="<?php echo $feed_url ?>"><?php echo UNL_MediaHub::escape($feed->title); ?></a>
                         </div>
-                    </a>
+                    </div>
                 </div>
             <?php endforeach; ?>
             <div>
