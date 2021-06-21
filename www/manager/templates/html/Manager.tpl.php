@@ -16,7 +16,7 @@ if (!$theme->isCustomTheme()) {
         $page->setLocalIncludePath($theme->getWDNIncludePath());
     }
     // Add WDN Deprecated Styles
-    $page->head .= '<link rel="preload" href="https://unlcms.unl.edu/wdn/templates_5.3/css/deprecated.css" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"> <noscript><link rel="stylesheet" href="https://unlcms.unl.edu/wdn/templates_5.3/css/deprecated.css"></noscript>';
+    $page->head .= '<link rel="preload" href="../wdn/templates_5.3/css/deprecated.css" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"> <noscript><link rel="stylesheet" href="https://unlcms.unl.edu/wdn/templates_5.3/css/deprecated.css"></noscript>';
 
     $page->contactinfo = $theme->renderThemeTemplate(null, 'localfooter.tpl.php');
 
