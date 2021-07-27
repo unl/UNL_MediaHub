@@ -14,6 +14,10 @@
     <link rel="stylesheet" href="/custom/dcf/css/print.css" media="print">
     <meta name="description" content="The Digital Campus Framework is an open-source web framework for higher education institutions.">
 
+    <script src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=default"></script>
+    <script src="/custom/dcf/js/vendor/bodyScrollLock.min.js"></script>
+    <script src="/custom/dcf/js/vendor/ofi.min.js"></script>
+    <script src="/custom/dcf/js/vendor/require.js"></script>
     <!-- InstanceBeginEditable name="head" -->
     <!-- InstanceEndEditable -->
 </head>
@@ -125,28 +129,35 @@
         </div>
     </noscript>
 </footer>
-
-<script src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=default"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.12.0/headroom.min.js"></script>
-<script src="/custom/dcf/js/dcf.min.js"></script>
-<script src="/custom/dcf/js/vendor/bodyScrollLock.min.js"></script>
-<script src="/custom/dcf/js/vendor/ofi.min.js"></script>
 <script>
-  // WebP Support Example
-  DCFUtility.flagSupportsWebP();
+  require.config({
+    baseUrl: '/templates/html/scripts',
+    paths: {
+      'dcf': '../../../custom/dcf/js'
+    }
+  });
 
-  // JavaScript Support Example
-  DCFUtility.flagSupportsJavaScript();
+  // DCF Utility Examples
+  require(['dcf/dcf-utility'], function(DCFUtilityModule) {
+    // WebP Support Example
+    DCFUtilityModule.DCFUtility.flagSupportsWebP();
+
+    // JavaScript Support Example
+    DCFUtilityModule.DCFUtility.flagSupportsJavaScript();
+  });
 
   // Modals Example
-  var modals = document.querySelectorAll('.dcf-modal');
-  var modal = new DCFModal(modals, bodyScrollLock);
-  modal.initialize();
+  require(['dcf/dcf-modal'], function(DCFModalModule) {
+    var modals = document.querySelectorAll('.dcf-modal');
+    var modal = new DCFModalModule.DCFModal(modals, bodyScrollLock);
+    modal.initialize();
+  });
 
   // Nav Menu Toggle (needed for mobile nav)
-  var navMenuToggle = new DCFNavMenuToggle(bodyScrollLock);
+  require(['dcf/dcf-navMenuToggle', 'https://cdnjs.cloudflare.com/ajax/libs/headroom/0.12.0/headroom.min.js'], function(DCFNavMenuToggleModule, headroom) {
+    var navMenuToggle = new DCFNavMenuToggleModule.DCFNavMenuToggle(headroom, bodyScrollLock);
+  });
 </script>
-<script data-main="/templates/html/scripts/app.js" src="/templates/html/scripts/require.js"></script>
 <!-- InstanceBeginEditable name="jsbody" -->
 <!-- InstanceEndEditable -->
 </body>
