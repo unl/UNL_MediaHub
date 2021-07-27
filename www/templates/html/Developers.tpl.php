@@ -116,9 +116,9 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
 <?php
 $page->addScriptDeclaration("
     if (typeof WDN === 'undefined') {
-        require(['dcf-utility', 'dcf-tabs'], function() {
+        require(['dcf/dcf-tabs'], function(DCFTabsModule) {
             var tabs = document.querySelectorAll('.dcf-tabs')
-            var unlTabs = new DCFTabs(tabs);
+            var unlTabs = new DCFTabsModule.DCFTabs(tabs);
             unlTabs.initialize();
         });
     } else {

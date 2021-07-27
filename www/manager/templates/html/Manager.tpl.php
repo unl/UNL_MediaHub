@@ -29,9 +29,12 @@ if (!$theme->isCustomTheme()) {
 
 	$page->addScriptDeclaration("
 	// Card as Links
-	var cards = document.querySelectorAll('.dcf-card-as-link');
-	var cardAsLink = new DCFCardAsLink(cards);
-	cardAsLink.initialize();");
+	require(['dcf/dcf-cardAsLink'], function(DCFCardAsLinkModule) {
+		// Card as Links
+		var cards = document.querySelectorAll('.dcf-card-as-link');
+		var cardAsLink = new DCFCardAsLinkModule.DCFCardAsLink(cards);
+		cardAsLink.initialize();
+	});");
 }
 
 // Shared Items
