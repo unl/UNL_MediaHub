@@ -63,12 +63,12 @@ class UNL_MediaHub_TranscodeManager
     private function execCommand($command) {
         switch($command) {
             case self::COMMAND_RESTART:
-                $execCommand = 'sudo -s -H -u apache pm2 stop all && sudo -s -H -u apache pm2 start all';
+                //$execCommand = 'sudo -s -H -u apache pm2 stop all && sudo -s -H -u apache pm2 start all';
                 $execCommand = 'pwddd && whoami';
                 break;
 
             case self::COMMAND_LIST_WORKERS:
-                $execCommand = 'sudo -s -H -u apache pm2 stop all';
+                //$execCommand = 'sudo -s -H -u apache pm2 stop all';
                 $execCommand = 'which php && ls -l';
                 break;
 
