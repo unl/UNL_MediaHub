@@ -70,7 +70,7 @@ class UNL_MediaHub_TranscodeManager
                 break;
 
             case self::COMMAND_LIST_WORKERS:
-                //$execCommand = 'sudo -s -H -u apache pm2 stop all';
+                //$execCommand = 'sudo -s -H -u apache pm2 list';
                 $execCommand = 'which php && ls -l';
                 break;
 
