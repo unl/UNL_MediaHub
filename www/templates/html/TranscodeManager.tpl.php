@@ -22,7 +22,7 @@
             <?php $commandResults = $context->getCommandResults(); ?>
             <?php if (!empty($commandResults)) { ?>
                 <h3 class="dcf-txt-h6">Command Results (<?php echo $commandResults->code === 0 ? 'Success' : 'Error'; ?>)</h3>
-                <div class="dcf-b-1 dcf-b-dotted dcf-p-4 dcf-mb-6">
+                <div class="dcf-b-1 dcf-b-dotted dcf-p-4 dcf-mb-6 dcf-txt-3xs">
                     <?php echo !empty($commandResults->output) ? implode('<br>', $commandResults->output) : 'No command output to display.'; ?>
                 </div>
             <?php } ?>
