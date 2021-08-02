@@ -28,9 +28,9 @@
             <?php } ?>
             <?php $context->clearCommandResults(); ?>
 
-                <h3 class="dcf-txt-h6">Last 50 Transcoding Jobs <span class="dcf-subhead">Sorted by Date</span></h3>
+                <h3 class="dcf-txt-h6" id="table-description">Last 50 Transcoding Jobs <span class="dcf-subhead">Sorted by Date</span></h3>
             <?php if ($context->hasJobs()) { ?>
-                <table class="dcf-table dcf-table-bordered dcf-table-responsive">
+                <table class="dcf-table dcf-table-bordered dcf-table-responsive" aria-describedby="table-description">
                     <thead>
                         <th scope="col">ID</th>
                         <th scope="col">Type</th>
