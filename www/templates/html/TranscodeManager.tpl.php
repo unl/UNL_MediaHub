@@ -5,13 +5,13 @@
             <div class="dcf-col-100% dcf-col-25%-start@md">
                 <ul class="dcf-list-bare">
                     <li>
-                        <form class="dcf-form" id="reset" method="POST">
+                        <form class="dcf-form" id="reset" method="POST" action="<?php echo UNL_MediaHub_Controller::getURL() . 'transcode-manager/command'; ?>">
                             <input type="hidden" name="command" value="<?php echo UNL_MediaHub_TranscodeManager::COMMAND_RESTART; ?>">
                             <input type="submit" class="dcf-btn dcf-btn-primary" value="Restart Transcoder" onclick="return confirm('Are you sure you want to restart the transcoder?');">
                         </form>
                     </li>
                     <li>
-                        <form class="dcf-form" id="list" method="POST">
+                        <form class="dcf-form" id="list" method="POST" action="<?php echo UNL_MediaHub_Controller::getURL() . 'transcode-manager/command'; ?>">
                             <input type="hidden" name="command" value="<?php echo UNL_MediaHub_TranscodeManager::COMMAND_LIST_WORKERS; ?>">
                             <input type="submit" class="dcf-btn dcf-btn-primary" value="List Workers">
                         </form>
@@ -19,16 +19,46 @@
                 </ul>
             </div>
             <div class="dcf-col-100% dcf-col-75%-end@md">
-            <?php if ($context->commandAttempted()) { ?>
-                <h3 class="dcf-txt-h6">Command Results (<?php echo $context->getCommandResults()->code === 0 ? 'Success' : 'Error'; ?>)</h3>
+            <?php $commandResults = $context->getCommandResults(); ?>
+            <?php if (!empty($commandResults)) { ?>
+                <h3 class="dcf-txt-h6">Command Results (<?php echo $commandResults->code === 0 ? 'Success' : 'Error'; ?>)</h3>
                 <div class="dcf-b-1 dcf-b-dotted dcf-p-4 dcf-mb-6">
-                    <?php echo !empty($context->getCommandResults()->output) ? implode('<br>', $context->getCommandResults()->output) : 'No command output to display.'; ?>
+                    <?php echo !empty($commandResults->output) ? implode('<br>', $commandResults->output) : 'No command output to display.'; ?>
                 </div>
             <?php } ?>
+            <?php $context->clearCommandResults(); ?>
 
-            <h3 class="dcf-txt-h6">Current Transcoding Jobs</h3>
+                <h3 class="dcf-txt-h6">Last 50 Transcoding Jobs <span class="dcf-subhead">Sorted by Date</span></h3>
             <?php if ($context->hasJobs()) { ?>
-                <?php var_dump($context->getJobs()); ?>
+                <table class="dcf-table dcf-table-bordered dcf-table-responsive">
+                    <thead>
+                        <th scope="col">ID</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Media ID</th>
+                        <th scope="col">User</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Status</th>
+                    </thead>
+                    <tbody>
+                    <?php foreach($context->getJobs() as $job): ?>
+                        <tr>
+                            <td class="dcf-txt-right" data-label="ID"><?php echo $job->job_id; ?></td>
+                            <td class="dcf-txt-right" data-label="Type"><?php echo $job->job_type; ?></td>
+                            <td class="dcf-txt-right" data-label="Media ID"><?php echo $job->media_id; ?></td>
+                            <td data-label="User"><?php echo $job->uid; ?></td>
+                            <td class="dcf-txt-right" data-label="Date"><?php echo $job->dateupdated; ?></td>
+                            <td class="dcf-txt-right" data-label="Status"><?php
+                                $status = ucfirst(strtolower($job->status));
+                                if (!empty($job->error_text)) {
+                                    echo '<span title="' . $job->error_text . '">' . $status . '</span>';
+                                } else {
+	                                echo $status;
+                                }
+                            ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
             <?php } else { ?>
                 <p>There are not any jobs transcoding.</p>
             <?php } ?>

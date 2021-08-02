@@ -2,10 +2,8 @@
 class UNL_MediaHub_TranscodeManager
 {
     private $jobsList;
-    private $commandAttempted = false;
-    private $commandOutput;
-    private $commandResultCode;
 
+    const COMMAND_RESULT_SESSION = 'transcode-command-result';
     const COMMAND_RESTART = 'reset-pm2';
     const COMMAND_LIST_WORKERS = 'list-workers-pm2';
 
@@ -17,10 +15,9 @@ class UNL_MediaHub_TranscodeManager
         $this->handlePost();
 
         $this->jobsList = new UNL_MediaHub_TranscodingJobList(array(
-            'orderby' => 'id',
+            'orderby' => 'datecreated',
             'order' => 'desc',
-            'all_not_complete' => true,
-            'limit' => 200
+            'limit' => 50
         ));
     }
 
@@ -46,17 +43,22 @@ class UNL_MediaHub_TranscodeManager
     }
 
     public function getCommandResults() {
-        if ($this->commandAttempted) {
-            $results = new StdClass();
-            $results->code = $this->commandResultCode;
-            $results->output = $this->commandOutput;
-            return $results;
+        if (array_key_exists(COMMAND_RESULT_SESSION, $_SESSION) && !empty($_SESSION[COMMAND_RESULT_SESSION])) {
+            return $_SESSION[COMMAND_RESULT_SESSION];
+        }
+    }
+
+    public function clearCommandResults()
+    {
+        if (array_key_exists(COMMAND_RESULT_SESSION, $_SESSION)) {
+            unset($_SESSION[COMMAND_RESULT_SESSION]);
         }
     }
 
     private function handlePost() {
         if ($_POST && isset($_POST['command'])) {
             $this->execCommand($_POST['command']);
+	        UNL_MediaHub::redirect(UNL_MediaHub_Controller::getURL() . 'transcode-manager');
         }
     }
 
@@ -64,7 +66,7 @@ class UNL_MediaHub_TranscodeManager
         switch($command) {
             case self::COMMAND_RESTART:
                 //$execCommand = 'sudo -s -H -u apache pm2 stop all && sudo -s -H -u apache pm2 start all';
-                $execCommand = 'pwddd && whoami';
+                $execCommand = 'pwd && whoami';
                 break;
 
             case self::COMMAND_LIST_WORKERS:
@@ -76,10 +78,13 @@ class UNL_MediaHub_TranscodeManager
                 $execCommand = '';
         }
 
-        $this->commandAttempted = false;
         if (!empty($execCommand)) {
-            exec($execCommand, $this->commandOutput, $this->commandResultCode);
-            $this->commandAttempted = true;
+            $commandOutput = $commandResultCode = NULL;
+            exec($execCommand, $commandOutput, $commandResultCode);
+            $results = new StdClass();
+            $results->code = $commandResultCode;
+            $results->output = $commandOutput;
+            $_SESSION[COMMAND_RESULT_SESSION] = $results;
         }
     }
 }
