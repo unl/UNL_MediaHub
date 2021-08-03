@@ -5,15 +5,25 @@
             <div class="dcf-col-100% dcf-col-25%-start@md">
                 <ul class="dcf-list-bare">
                     <li>
-                        <form class="dcf-form" id="reset" method="POST" action="<?php echo UNL_MediaHub_Controller::getURL() . 'transcode-manager/command'; ?>">
-                            <input type="hidden" name="command" value="<?php echo UNL_MediaHub_TranscodeManager::COMMAND_RESTART; ?>">
-                            <input type="submit" class="dcf-btn dcf-btn-primary" value="Restart Transcoder" onclick="return confirm('Are you sure you want to restart the transcoder?');">
+                        <p class="dcf-txt-sm">
+                            The <strong>Show Status</strong> button will display the current status of the transcoder. A status of
+                            &lsquo;online&rsquo; means transcoder is up and working. The list of recent transcoding jobs may also
+                            help to determine if there is an issue with the transcoder.
+                        </p>
+                        <form class="dcf-form" id="list" method="POST" action="<?php echo UNL_MediaHub_Controller::getURL() . 'transcode-manager/command'; ?>">
+                            <input type="hidden" name="command" value="<?php echo UNL_MediaHub_TranscodeManager::COMMAND_LIST_WORKERS; ?>">
+                            <input type="submit" class="dcf-btn dcf-btn-primary" value="Show Status">
                         </form>
                     </li>
                     <li>
-                        <form class="dcf-form" id="list" method="POST" action="<?php echo UNL_MediaHub_Controller::getURL() . 'transcode-manager/command'; ?>">
-                            <input type="hidden" name="command" value="<?php echo UNL_MediaHub_TranscodeManager::COMMAND_LIST_WORKERS; ?>">
-                            <input type="submit" class="dcf-btn dcf-btn-primary" value="List Workers">
+                        <p class="dcf-txt-sm">
+                            The <strong>Restart Transcoder</strong> button will restart
+                            the transcoder process and should only be used if the status is not &lsquo;online&rsquo; or transcoder is not working
+                            correctly and a restart is needed.
+                        </p>
+                        <form class="dcf-form" id="reset" method="POST" action="<?php echo UNL_MediaHub_Controller::getURL() . 'transcode-manager/command'; ?>">
+                            <input type="hidden" name="command" value="<?php echo UNL_MediaHub_TranscodeManager::COMMAND_RESTART; ?>">
+                            <input type="submit" class="dcf-btn dcf-btn-primary" value="Restart Transcoder" onclick="return confirm('Are you sure you want to restart the transcoder?');">
                         </form>
                     </li>
                 </ul>
@@ -28,7 +38,7 @@
             <?php } ?>
             <?php $context->clearCommandResults(); ?>
 
-                <h3 class="dcf-txt-h6" id="table-description">Last 50 Transcoding Jobs <span class="dcf-subhead">Sorted by Date</span></h3>
+                <h3 class="dcf-txt-h6" id="table-description">Recent Transcoding Jobs <span class="dcf-subhead">Last 50 jobs sorted by Date</span></h3>
             <?php if ($context->hasJobs()) { ?>
                 <table class="dcf-table dcf-table-bordered dcf-table-responsive" aria-describedby="table-description">
                     <thead>
