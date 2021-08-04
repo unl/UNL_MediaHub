@@ -39,15 +39,15 @@ class UNL_MediaHub_TranscodeManager
     }
 
     public function getCommandResults() {
-        if (array_key_exists(COMMAND_RESULT_SESSION, $_SESSION) && !empty($_SESSION[COMMAND_RESULT_SESSION])) {
-            return $_SESSION[COMMAND_RESULT_SESSION];
+        if (array_key_exists(self::COMMAND_RESULT_SESSION, $_SESSION) && !empty($_SESSION[self::COMMAND_RESULT_SESSION])) {
+            return $_SESSION[self::COMMAND_RESULT_SESSION];
         }
     }
 
     public function clearCommandResults()
     {
-        if (array_key_exists(COMMAND_RESULT_SESSION, $_SESSION)) {
-            unset($_SESSION[COMMAND_RESULT_SESSION]);
+        if (array_key_exists(self::COMMAND_RESULT_SESSION, $_SESSION)) {
+            unset($_SESSION[self::COMMAND_RESULT_SESSION]);
         }
     }
 
