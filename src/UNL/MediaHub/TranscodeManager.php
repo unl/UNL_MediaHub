@@ -38,10 +38,6 @@ class UNL_MediaHub_TranscodeManager
         return $this->jobsList->items;
     }
 
-    public function commandAttempted() {
-        return $this->commandAttempted;
-    }
-
     public function getCommandResults() {
         if (array_key_exists(COMMAND_RESULT_SESSION, $_SESSION) && !empty($_SESSION[COMMAND_RESULT_SESSION])) {
             return $_SESSION[COMMAND_RESULT_SESSION];
@@ -82,7 +78,7 @@ class UNL_MediaHub_TranscodeManager
             $results = new StdClass();
             $results->code = $commandResultCode;
             $results->output = $commandOutput;
-            $_SESSION[COMMAND_RESULT_SESSION] = $results;
+            $_SESSION[self::COMMAND_RESULT_SESSION] = $results;
         }
     }
 }
