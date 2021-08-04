@@ -1,6 +1,8 @@
 <?php
 class UNL_MediaHub_TranscodeManager
 {
+	public $options = array();
+
     private $jobsList;
 
     const COMMAND_RESULT_SESSION = 'transcode-command-result';
@@ -9,8 +11,10 @@ class UNL_MediaHub_TranscodeManager
 
     public function __construct($options = array()) {
         if (!$this->hasAccess()) {
-            throw new Exception('You do not have permission to view this page.', 403);
+            throw new UNL_MediaHub_RuntimeException('You do not have permission to view this page.', 403);
         }
+
+	    $this->options = $options + $this->options;
 
         $this->handlePost();
 
