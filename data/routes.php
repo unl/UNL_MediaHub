@@ -11,6 +11,8 @@ $routes['/^$/'] = 'UNL_MediaHub_DefaultHomepage';
 $routes['/^developers\/?$/'] = 'UNL_MediaHub_Developers';
 
 $routes['/^help\/media-prep\/?$/'] = 'UNL_MediaHub_Help_MediaPrep';
+$routes['/^transcode-manager\/?$/'] = 'UNL_MediaHub_TranscodeManager';
+$routes['/^transcode-manager\/command\/?$/'] = 'UNL_MediaHub_TranscodeManager';
 
 $routes['/^search\/(?P<q>.*)$/'] = 'UNL_MediaHub_MediaList';
 
@@ -54,7 +56,7 @@ $routes += array(
     'feeds'   => 'UNL_MediaHub_FeedList',
     'feed'    => 'UNL_MediaHub_FeedAndMedia',
     'dev'     => 'UNL_MediaHub_Developers',
-    'live'    => 'UNL_MediaHub_Feed_LiveStream',
+    'live'    => 'UNL_MediaHub_Feed_LiveStream'
 );
 
 return $routes;
