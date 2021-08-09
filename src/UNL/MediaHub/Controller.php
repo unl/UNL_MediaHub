@@ -244,7 +244,7 @@ class UNL_MediaHub_Controller
     {
         try {
             if (!empty($_POST)) {
-              $this->handlePost($_POST);
+                $this->handlePost($_POST);
             }
 
             if (!isset($this->options['model'])
@@ -404,6 +404,11 @@ class UNL_MediaHub_Controller
      */
     protected function handlePost($post)
     {
+        // Skip posts for UNL_MediaHub_TranscodeManager
+        if ($this->options['model'] === 'UNL_MediaHub_TranscodeManager') {
+            return;
+        }
+
         $auth = UNL_MediaHub_AuthService::getInstance();
         
         if (!$media = $this->findRequestedMedia($this->options)) {
