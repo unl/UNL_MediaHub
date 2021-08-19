@@ -23,6 +23,7 @@
     "less": "^3.12.2",
     "less-plugin-clean-css": "^1.5.1",
     "lodash": "^4.17.21",
+    "path-parse": "^1.0.7",
     "websocket-extensions": ">=0.1.4"
   },
   "engines": {
