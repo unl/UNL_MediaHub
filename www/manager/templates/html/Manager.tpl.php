@@ -22,7 +22,7 @@ if (!$theme->isCustomTheme()) {
 
     $page->addScriptDeclaration('WDN.setPluginParam("idm", "logout", "' . UNL_MediaHub_Controller::getURL() . '?logout");');
 
-	$page->addScriptDeclaration("WDN.initializePlugin('card-as-link');");
+    $page->addScriptDeclaration("WDN.initializePlugin('card-as-link');");
 } else {
     $page->optionalfooter = '<div class="dcf-bleed dcf-wrapper">
     <h3 class="dcf-txt-md dcf-bold dcf-uppercase dcf-lh-3">About MediaHub</h3>
