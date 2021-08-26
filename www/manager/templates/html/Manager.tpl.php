@@ -20,6 +20,8 @@ if (!$theme->isCustomTheme()) {
 
     $page->contactinfo = $theme->renderThemeTemplate(null, 'localfooter.tpl.php');
 
+    $page->addScriptDeclaration('WDN.setPluginParam("idm", "logout", "' . UNL_MediaHub_Controller::getURL() . '?logout");');
+
 	$page->addScriptDeclaration("WDN.initializePlugin('card-as-link');");
 } else {
     $page->optionalfooter = '<div class="dcf-bleed dcf-wrapper">
