@@ -185,7 +185,7 @@ if ($type === 'audio') {
             <div class="dcf-col-100% dcf-col-25%-end@sm mh-sidebar">
 
               <div class="dcf-pt-4">
-                <div>
+                <div class="dcf-mb-4">
                   <button class="dcf-btn dcf-btn-secondary mh-hide-bp2 dcf-btn-toggle-modal" type="button" data-toggles-modal="embed-modal" aria-label="Show Media Embed Code"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_PLUS, '{"size": 5}');?>Embed</button>
                   <br><br>
                   <a href="<?php echo htmlentities($controller->getURL($context).'/download', ENT_QUOTES); ?>" target="_blank" class="dcf-btn dcf-btn-secondary mh-hide-bp2" aria-label="Download Media"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ARROW_DOWN, '{"size": 5}');?>Download</a>

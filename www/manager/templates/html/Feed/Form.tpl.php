@@ -177,7 +177,7 @@ $page->addScriptDeclaration("
                             </div>
                         </div>
                         <div class="dcf-form-group">
-                            <label for='itunes_block'>Block <span class="helper">Keep this channel from appearing in iTunes</span>
+                            <label for='itunes_block'>Block <span class="dcf-form-help">Keep this channel from appearing in iTunes</span>
                             </label>
                             <div>
                                 <input name='UNL_MediaHub_Feed_NamespacedElements_itunes[1][element]' type='hidden' value='block' />
@@ -185,7 +185,7 @@ $page->addScriptDeclaration("
                             </div>
                         </div>
                         <div class="dcf-form-group">
-                            <label for='itunes_category'>Category <span class="helper">Select an appropriate category listing.</span>
+                            <label for='itunes_category'>Category <span class="dcf-form-help">Select an appropriate category listing.</span>
                             </label>
                             <div>
                                 <input name='UNL_MediaHub_Feed_NamespacedElements_itunes[2][element]' type='hidden' value='category' />

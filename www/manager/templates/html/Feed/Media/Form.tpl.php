@@ -248,14 +248,14 @@ $page->jsbody .= $js;
                             <div>
                                 <div class="dcf-form-group">
                                     <label for="author">
-                                        Author<span class="required">*</span> <span class="helper">Name of media creator.</span>
+                                        Author<span class="required">*</span> <span class="dcf-form-help">Name of media creator.</span>
                                     </label>
                                     <div>
                                         <input id="author" name="author" class="required-entry" type="text" value="<?php echo UNL_MediaHub::escape(@$context->media->author); ?>" />
                                     </div>
                                 </div>
                                 <div class="dcf-form-group">
-                                    <label for="mrss_copyright">Copyright <span class="helper">&copy; info for media object.</span></label>
+                                    <label for="mrss_copyright">Copyright <span class="dcf-form-help">&copy; info for media object.</span></label>
                                     <div>
                                         <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[10][element]" type="hidden" value="copyright"/>
                                         <input id="mrss_copyright" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[10][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'copyright'); ?>"/>
@@ -402,7 +402,7 @@ $page->jsbody .= $js;
                             </li>
 
                             <li style="display:none;">
-                                <label for="mrss_player">Player <span class="helper">Allows the media object to be accessed through a web browser media player console.</span></label>
+                                <label for="mrss_player">Player <span class="dcf-form-help">Allows the media object to be accessed through a web browser media player console.</span></label>
                                 <div>
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[8][element]" type="hidden" value="player"/>
                                     <input id="mrss_player" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[8][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'player'); ?>"/>
@@ -410,7 +410,7 @@ $page->jsbody .= $js;
                             </li>
 
                             <li style="display:none;">
-                                <label for="mrss_restriction">Restriction <span class="helper">Allows restrictions to be placed on the aggregator rendering the media in the feed.</span></label>
+                                <label for="mrss_restriction">Restriction <span class="dcf-form-help">Allows restrictions to be placed on the aggregator rendering the media in the feed.</span></label>
                                 <div>
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[12][element]" type="hidden" value="restriction"/>
                                     <input id="mrss_restriction" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[12][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'restriction'); ?>"/>
@@ -423,7 +423,7 @@ $page->jsbody .= $js;
                         <legend class="dcf-legend">iTunes Information</legend>
                         <ol>
                             <li style="display:none;">
-                                <label for="itunes_author">Author <span class="helper">Name of media creator.</span></label>
+                                <label for="itunes_author">Author <span class="dcf-form-help">Name of media creator.</span></label>
                                 <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[0][element]" type="hidden" value="author"/>
                                 <input id="itunes_author" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[0][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'author'); ?>"/>
                             </li>
@@ -443,7 +443,7 @@ $page->jsbody .= $js;
                                 </div>
                             </li>
                             <li>
-                                <label for="itunes_category">Category <span class="helper">Choose a category for use within iTunes U</span></label>
+                                <label for="itunes_category">Category <span class="dcf-form-help">Choose a category for use within iTunes U</span></label>
                                 <div>
                                     <?php
                                     $category = '';
@@ -599,7 +599,7 @@ $page->jsbody .= $js;
                                 </div>
                             </li>
                             <li>
-                                <label for="itunes_block">Block from iTunes <span class="helper">Set to 'yes' if you would like to block this element from iTunes</span></label>
+                                <label for="itunes_block">Block from iTunes <span class="dcf-form-help">Set to 'yes' if you would like to block this element from iTunes</span></label>
                                 <div>
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[1][element]" type="hidden" value="block"/>
                                     <select class="dcf-input-select" id="itunes_block" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[1][value]">
@@ -632,14 +632,14 @@ $page->jsbody .= $js;
                             </li>
 
                             <li>
-                                <label for="itunes_subtitle">Subtitle <span class="helper">The contents of this tag are shown in the Description column in iTunes. The subtitle displays best if it is only a few words long.</span></label>
+                                <label for="itunes_subtitle">Subtitle <span class="dcf-form-help">The contents of this tag are shown in the Description column in iTunes. The subtitle displays best if it is only a few words long.</span></label>
                                 <div>
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[5][element]" type="hidden" value="subtitle"/>
                                     <input id="itunes_subtitle" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[5][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'subtitle'); ?>"/>
                                 </div>
                             </li>
                             <li>
-                                <label for="itunes_summary">Summary <span class="helper">The contents of this tag are shown in a separate window that appears when the "circled i" in the Description column is clicked.</span></label>
+                                <label for="itunes_summary">Summary <span class="dcf-form-help">The contents of this tag are shown in a separate window that appears when the "circled i" in the Description column is clicked.</span></label>
                                 <div>
                                     <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[6][element]" type="hidden" value="summary"/>
                                     <input id="itunes_summary" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[6][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'summary'); ?>"/>

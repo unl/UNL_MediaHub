@@ -148,18 +148,18 @@ a.action.delete:active {background-image:url('images/iconDelete.png');}
 #dcf-main #userList li:hover form {display:block;}
 
 #dcf-main #userList li form input[type='submit'] {
-    -webkit-box-shadow: -1px 1px 3px #1a1a1a;
-    -moz-box-shadow: -1px 1px 3px #1a1a1a;
-    box-shadow: -1px 1px 3px #1a1a1a; 
+    -webkit-box-shadow: -1px 1px 3px var(--b);
+    -moz-box-shadow: -1px 1px 3px var(--b);
+    box-shadow: -1px 1px 3px var(--b);
 }
 
 #dcf-main .addData {
     padding:10px;
-    border-top:2px solid #d5d5d5;
+    border-top:2px solid var(--b);
 
 }
 #dcf-main .addData input[type='text']{
-    border:1px solid #d5d5d5;
+    border:1px solid var(--b);
     padding:3px;
     width:50%;
     font-size:1.06em;
@@ -248,7 +248,7 @@ Google Maps override to display correctly in the framework
 
 .mh-caption-sidebar {
     padding: .75em 1em;
-    background-color: RGBA(255,255,255,.75);
+    background-color: var(--bg-light-gray);
 }
 
 dl {
@@ -263,7 +263,7 @@ dl dt {
 
 dl dd {
     font-family: "Mercury SSm A","Mercury SSm B",Georgia,Baskerville,"Baskerville Old Face","Hoefler Text",Garamond,"Times New Roman",serif;
-    background-color: #eceae3;
+    background-color: var(--bg-light-gray);
     margin-left: 0;
     padding: .75em;
     margin-bottom: 1em;
