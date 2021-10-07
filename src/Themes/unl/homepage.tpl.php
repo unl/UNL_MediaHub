@@ -12,9 +12,9 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
     </div>
     <div class="dcf-absolute dcf-h-100% dcf-w-100% dcf-pin-top dcf-pin-left dcf-d-flex dcf-ai-center dcf-jc-center dcf-wrapper mh-search">
         <form class="dcf-w-max-lg dcf-form dcf-form-controls-inline" method="get" action="<?php echo $baseUrl ?>search/">
-            <label class="dcf-inverse" for="q_app">Search MediaHub</label>
+            <label class="unl-cream" for="q_app">Search MediaHub</label>
             <div class="dcf-input-group">
-                <input class="dcf-bg-transparent dcf-inverse" id="q_app" name="q" type="text" required />
+                <input class="dcf-bg-transparent unl-cream" id="q_app" name="q" type="text" required />
                 <input class="dcf-btn dcf-btn-primary" type="submit" value="Go" />
             </div>
         </form>

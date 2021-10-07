@@ -10,7 +10,7 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
             Your browser does not support the video tag. I suggest you upgrade your browser.
         </video>
     </div>
-    <div class="dcf-absolute dcf-h-100% dcf-w-100% dcf-pin-top dcf-pin-left dcf-d-flex dcf-ai-center dcf-jc-center dcf-wrapper mh-search">
+    <div class="dcf-absolute dcf-h-100% dcf-w-100% dcf-pin-top dcf-pin-left dcf-d-flex dcf-ai-center dcf-jc-center dcf-wrapper dcf-bg-white mh-search">
         <form class="dcf-w-max-lg dcf-form dcf-form-controls-inline" method="get" action="<?php echo $baseUrl ?>search/">
             <label class="dcf-inverse" for="q_app">Search MediaHub</label>
             <div class="dcf-input-group">

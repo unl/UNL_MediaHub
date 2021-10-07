@@ -239,7 +239,7 @@ $page->jsbody .= $js;
 
                         <div class="dcf-form-group validation-container">
                             <label for="title">
-                                Title<span class="required">*</span>
+                                Title <small class="dcf-required">Required</small>
                             </label>
                             <input id="title" name="title" type="text" class="required-entry" value="<?php echo UNL_MediaHub::escape(@$context->media->title); ?>" />
                         </div>
@@ -248,7 +248,7 @@ $page->jsbody .= $js;
                             <div>
                                 <div class="dcf-form-group">
                                     <label for="author">
-                                        Author<span class="required">*</span> <span class="dcf-form-help">Name of media creator.</span>
+                                        Author <small class="dcf-required">Required</small> <span class="dcf-form-help">Name of media creator.</span>
                                     </label>
                                     <div>
                                         <input id="author" name="author" class="required-entry" type="text" value="<?php echo UNL_MediaHub::escape(@$context->media->author); ?>" />
@@ -299,7 +299,7 @@ $page->jsbody .= $js;
                         </div>
                         <div class="dcf-form-group">
                             <label for="description">
-                                Description<span class="required">*</span>
+                                Description <small class="dcf-required">Required</small>
                             </label>
                             <div class="mh-tooltip" id="description-details">
                                 <?php echo $savvy->render('description tooltip', 'InfoIcon.tpl.php'); ?>

@@ -59,7 +59,7 @@ $page->addScriptDeclaration("
                     <fieldset>
                         <legend class="dcf-legend">Basic Information</legend>
                         <div class="dcf-form-group">
-                            <label for="title">Title<span class="dcf-required">*</span></label>
+                            <label for="title">Title <small class="dcf-required">Required</small></label>
                             <div class="mh-tooltip" id="title-details">
                                 <?php echo $savvy->render('channel title tooltip', 'InfoIcon.tpl.php'); ?>
                                 <div>
@@ -71,7 +71,7 @@ $page->addScriptDeclaration("
                             <input id="title" name="title" type="text" aria-describedby="title-details" value="<?php echo (isset($context->feed))? UNL_MediaHub::escape($context->feed->title):''; ?>" size="55" />
                         </div>
                         <div class="dcf-form-group">
-                            <label for="description">Description<span class="dcf-required">*</span></label>
+                            <label for="description">Description <small class="dcf-required">Required</small></label>
                             <div class="mh-tooltip" id="description-details">
                                 <?php echo $savvy->render('channel description tooltip', 'InfoIcon.tpl.php'); ?>
                                 <div>
