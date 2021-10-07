@@ -45,11 +45,11 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                     <div class="dcf-grid-halves@sm dcf-col-gap-vw">
                         <div>
                             <div class="dcf-form-group">
-                                <label for="title">Title<span class="dcf-required">*</span></label>
+                                <label for="title">Title <small class="dcf-required">Required</small></label>
                                 <input type="text" id="title" name="title" class="required-entry">
                             </div>
                             <div class="dcf-form-group">
-                                <label for="author">Author<span class="dcf-required">*</span></label>
+                                <label for="author">Author <small class="dcf-required">Required</small></label>
                                 <div class="mh-tooltip hang-right" id="author-details">
                                     <?php echo $savvy->render('author tooltip', 'InfoIcon.tpl.php'); ?>
                                     <div>
@@ -59,7 +59,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                                 <input type="text" id="author" name="author" class="required-entry" aria-describedby="author-details">
                             </div>
                             <div class="dcf-form-group">
-                                <label for="description">Description<span class="dcf-required">*</span></label>
+                                <label for="description">Description <small class="dcf-required">Required</small></label>
                                 <div class="mh-tooltip" id="description-details">
                                     <?php echo $savvy->render('description tooltip', 'InfoIcon.tpl.php'); ?>
                                     <div>

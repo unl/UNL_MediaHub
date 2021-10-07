@@ -5,7 +5,7 @@
 ?>
 <fieldset>
     <legend class="dcf-legend">
-        Channels<span class="dcf-required">*</span>
+        Channels <small class="dcf-required">Required</small>
     </legend>
     <ul class="dcf-list-bare validation-container">
         <?php foreach ($context->getFeedSelectionData() as $feed_data): ?>

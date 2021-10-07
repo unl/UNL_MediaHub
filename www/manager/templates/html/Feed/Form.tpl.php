@@ -59,7 +59,7 @@ $page->addScriptDeclaration("
                     <fieldset>
                         <legend class="dcf-legend">Basic Information</legend>
                         <div class="dcf-form-group">
-                            <label for="title">Title<span class="dcf-required">*</span></label>
+                            <label for="title">Title <small class="dcf-required">Required</small></label>
                             <div class="mh-tooltip" id="title-details">
                                 <?php echo $savvy->render('channel title tooltip', 'InfoIcon.tpl.php'); ?>
                                 <div>
@@ -71,7 +71,7 @@ $page->addScriptDeclaration("
                             <input id="title" name="title" type="text" aria-describedby="title-details" value="<?php echo (isset($context->feed))? UNL_MediaHub::escape($context->feed->title):''; ?>" size="55" />
                         </div>
                         <div class="dcf-form-group">
-                            <label for="description">Description<span class="dcf-required">*</span></label>
+                            <label for="description">Description <small class="dcf-required">Required</small></label>
                             <div class="mh-tooltip" id="description-details">
                                 <?php echo $savvy->render('channel description tooltip', 'InfoIcon.tpl.php'); ?>
                                 <div>
@@ -177,7 +177,7 @@ $page->addScriptDeclaration("
                             </div>
                         </div>
                         <div class="dcf-form-group">
-                            <label for='itunes_block'>Block <span class="helper">Keep this channel from appearing in iTunes</span>
+                            <label for='itunes_block'>Block <span class="dcf-form-help">Keep this channel from appearing in iTunes</span>
                             </label>
                             <div>
                                 <input name='UNL_MediaHub_Feed_NamespacedElements_itunes[1][element]' type='hidden' value='block' />
@@ -185,7 +185,7 @@ $page->addScriptDeclaration("
                             </div>
                         </div>
                         <div class="dcf-form-group">
-                            <label for='itunes_category'>Category <span class="helper">Select an appropriate category listing.</span>
+                            <label for='itunes_category'>Category <span class="dcf-form-help">Select an appropriate category listing.</span>
                             </label>
                             <div>
                                 <input name='UNL_MediaHub_Feed_NamespacedElements_itunes[2][element]' type='hidden' value='category' />

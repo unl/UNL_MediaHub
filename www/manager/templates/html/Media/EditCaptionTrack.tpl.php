@@ -45,7 +45,7 @@
                         $cueLabel = 'Track ' . $cue->getStart() . ' - ' . $cue->getStop();
                     ?>
                     <div class="dcf-form-group">
-                        <label for="track-contents"><?php echo $cueLabel; ?></label>
+                        <label for="<?php echo $cueName; ?>"><?php echo $cueLabel; ?></label>
                         <textarea class="dcf-txt-sm" id="<?php echo $cueName; ?>" name="<?php echo $cueName; ?>" cols="60" rows="2"><?php echo trim($cue->getText());?></textarea>
                     </div>
                     <?php endforeach; ?>

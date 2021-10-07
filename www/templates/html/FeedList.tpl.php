@@ -108,6 +108,7 @@ if($context->options['orderby'] == 'datecreated'){
                                             </div>
                                         <?php endif; ?>
                                     </div>
+                                        <span class="dcf-sr-only">View Channel <?php echo htmlentities($feed->title) ?></span>
                                     </a>
                                 </div>
                                 <div class="dcf-col-100% dcf-col-75%-end@sm">

@@ -94,8 +94,8 @@ iframe * {margin:0px}
 
 .mh-upload-box {
     width: 100%;
-    border: 2px dashed RGB(213,213,210);
-    background-color: RGBA(255,255,255,.75);
+    border: 2px dashed var(--b);
+    background-color: var(--bg-body);
     display: block;
     cursor: pointer;
 }
