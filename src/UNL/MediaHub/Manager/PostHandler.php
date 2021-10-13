@@ -806,7 +806,7 @@ class UNL_MediaHub_Manager_PostHandler
             }
 
         } catch(Exception $e) {
-            throw new \Exception('Error saving track file.', 404);
+            throw new \Exception('Error saving track file: ' . $e->getMessage(), 404);
         }
 
         $notice = new UNL_MediaHub_Notice(
