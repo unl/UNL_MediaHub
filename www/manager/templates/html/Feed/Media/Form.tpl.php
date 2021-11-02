@@ -71,13 +71,11 @@ $page->jsbody .= $js;
             </div>
 
             <?php if ($transcoding_job && $transcoding_job->isError()): ?>
-                <div class="wdn_notice negate">
-                    <div class="message">
-                        <h2 class="title">Optimization Error</h2>
-                        <div id="transcoding-progress">
-                            <p>There was an error optimizing your media. Please delete this media record and try uploading it again.</p>
-                            <button form="retry_transcoding_job" class="dcf-btn">Retry</button>
-                        </div>
+                <div class="dcf-notice dcf-notice-danger" hidden>
+                    <h2>Optimization Error</h2>
+                    <div id="transcoding-progress">
+                        <p>There was an error optimizing your media. Please delete this media record and try uploading it again.</p>
+                        <button form="retry_transcoding_job" class="dcf-btn dcf-btn-inverse-secondary">Retry</button>
                     </div>
                 </div>
             <?php endif; ?>
@@ -87,33 +85,21 @@ $page->jsbody .= $js;
             <?php endif; ?>
 
             <?php if(empty($context->media->media_text_tracks_id)): ?>
-                <div class="wdn_notice alert mh-caption-alert">
-                    <div class="message">
-                        <h2 class="title">This Video is Missing Captions!</h2>
-                        <div class="mh-caption-band">
-                            <p>
-                                For accessibility reasons, captions are required for <strong>all</strong> videos.
-                            </p>
-                            <p>
-                                <a class="dcf-btn" href="<?php echo $edit_caption_url ?>">Caption Your Video</a>
-                            </p>
-                        </div>
+                <div class="dcf-notice dcf-notice-warning mh-caption-alert" hidden>
+                    <h2>This Video is Missing Captions!</h2>
+                    <div class="mh-caption-band">
+                        <p>For accessibility reasons, captions are required for <strong>all</strong> videos.</p>
+                        <p><a class="dcf-btn dcf-btn-inverse-secondary" href="<?php echo $edit_caption_url ?>">Caption Your Video</a></p>
                     </div>
                 </div>
             <?php endif; ?>
 
             <?php if (!$transcoding_job && !$context->media->isWebSafe()): ?>
-                <div class="wdn_notice alert mh-caption-alert">
-                    <div class="message">
-                        <h4>This video might not work on the web!</h4>
-                        <div class="mh-caption-band">
-                            <p>
-                                This video was encoded with '<?php echo UNL_MediaHub::escape($context->media->getCodec()) ?>', which is not safe for the web, and might not work on every device/browser. Please run the video through HandBrake and swap the video out.
-                            </p>
-                            <p>
-                                <a class="dcf-btn" href="http://wdn.unl.edu/documentation/unl-mediahub/using-handbrake">How to use HandBrake</a>
-                            </p>
-                        </div>
+                <div class="dcf-notice dcf-notice-warning mh-caption-alert" hidden>
+                    <h2>This video might not work on the web!</h2>
+                    <div class="mh-caption-band">
+                        <p>This video was encoded with '<?php echo UNL_MediaHub::escape($context->media->getCodec()) ?>', which is not safe for the web, and might not work on every device/browser. Please run the video through HandBrake and swap the video out.</p>
+                        <p><a class="dcf-btn dcf-btn-inverse-secondary" href="http://wdn.unl.edu/documentation/unl-mediahub/using-handbrake">How to use HandBrake</a></p>
                     </div>
                 </div>
             <?php endif; ?>
@@ -620,7 +606,7 @@ $page->jsbody .= $js;
                                     <input id="itunes_duration" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[2][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'duration'); ?>"/>
                                 </div>
                                 <div class="dcf-pt-2">
-                                  <button class="dcf-btn find-duration">Find The duration</button>
+                                  <button class="dcf-btn dcf-btn-primary find-duration">Find The duration</button>
                                 </div>
                             </li>
                             <li style="display:none;">

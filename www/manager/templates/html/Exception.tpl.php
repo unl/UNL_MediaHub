@@ -7,13 +7,7 @@ if (false == headers_sent()
 }
 ?>
 
-<div class="wdn_notice alert">
-    <div class="close">
-        <a href="#" title="Close this notice">Close this notice</a>
-    </div>
-    <div class="message">
-        <h4>Whoops! Sorry, there was an error:</h4>
-        <p><?php echo $context->getMessage(); ?></p>
-    </div>
-    <!-- <?php echo $context; ?> -->
+<div class="dcf-mt-8 dcf-mb-8 dcf-notice dcf-notice-warning" hidden data-no-close-button>
+   <h2>Whoops! Sorry, there was an error:</h2>
+   <div><?php echo $context->getMessage(); ?></div>
 </div>

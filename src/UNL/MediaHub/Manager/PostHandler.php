@@ -838,7 +838,7 @@ class UNL_MediaHub_Manager_PostHandler
             $notice = new UNL_MediaHub_Notice(
                 'Error',
                 'No amara captions could be found for this media',
-                UNL_MediaHub_Notice::TYPE_ERROR
+                UNL_MediaHub_Notice::TYPE_DANGER
             );
             UNL_MediaHub_Manager::addNotice($notice);
             UNL_MediaHub::redirect($media->getEditCaptionsURL());

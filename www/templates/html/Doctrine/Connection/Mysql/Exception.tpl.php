@@ -6,9 +6,9 @@ if (false == headers_sent()
 }
 ?>
 
-<div class="wdn_notice alert">
-    <div class="message">
-        <h4>Whoops! Sorry, there was a database error.</h4>
+<div class="dcf-mt-8 dcf-notice dcf-notice-warning" hidden data-no-close-button>
+    <h2>Whoops! Sorry, there was a database error.</h2>
+    <div>
         <p>Please try back later.</p>
         <?php if (UNL_MediaHub::$verbose_errors): ?>
             <p><?php echo UNL_MediaHub::escape($context->getMessage()); ?></p>

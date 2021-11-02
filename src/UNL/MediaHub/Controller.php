@@ -272,7 +272,7 @@ class UNL_MediaHub_Controller
                     $notice = new UNL_MediaHub_Notice(
                         'Notice',
                         'This media will not be published until captions are provided.',
-                        UNL_MediaHub_Notice::TYPE_NOTICE
+                        UNL_MediaHub_Notice::TYPE_INFO
                     );
                     $notice->addLink($media->getEditCaptionsURL(), 'Add Captions Now');
                     UNL_MediaHub_Manager::addNotice($notice);
