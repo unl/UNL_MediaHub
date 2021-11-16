@@ -5,10 +5,10 @@
  */
 class UNL_MediaHub_Notice
 {
-    const TYPE_NOTICE = '';
-    const TYPE_SUCCESS = 'affirm';
-    const TYPE_ERROR = 'negate';
-    const TYPE_ALERT = 'alert';
+    const TYPE_INFO = 'dcf-notice-info';
+    const TYPE_SUCCESS = 'dcf-notice-success';
+    const TYPE_WARNING = 'dcf-notice-warning';
+    const TYPE_DANGER = 'dcf-notice-danger';
     
     public $type;
     public $title;

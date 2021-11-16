@@ -1,6 +1,4 @@
-<div class="wdn_notice alert" id="media-errors" style="display:none">
-    <div class="message">
-        <h4 class="title"><?php echo $context->title; ?></h4>
-        <ul id="media-errors-list"></ul>
-    </div>
+<div class="dcf-notice dcf-notice-warning" hidden id="media-errors" data-no-close-button style="display:none!important;">
+    <h2><?php echo $context->title; ?></h2>
+    <div><ul id="media-errors-list"></ul></div>
 </div>

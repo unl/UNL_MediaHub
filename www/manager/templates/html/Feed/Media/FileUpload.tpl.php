@@ -189,11 +189,13 @@ $page->addScriptDeclaration("
         } else {
             var mediaErrorsContainer = document.getElementById('media-errors');
             var mediaErrorsList = document.getElementById('media-errors-list');
-            mediaErrorsList.innerHTML = '';
-            for (var i=0; i<errors.length; i++) {
-                var errorItem = document.createElement('li');
-                errorItem.innerHTML = errors[i];
-                mediaErrorsList.appendChild(errorItem);
+            if (mediaErrorsList) {
+                mediaErrorsList.innerHTML = '';
+                for (var i=0; i<errors.length; i++) {
+                    var errorItem = document.createElement('li');
+                    errorItem.innerHTML = errors[i];
+                    mediaErrorsList.appendChild(errorItem);
+                }
             }
             submitBtn.removeAttribute('disabled');
             mediaErrorsContainer.style.display = 'block';

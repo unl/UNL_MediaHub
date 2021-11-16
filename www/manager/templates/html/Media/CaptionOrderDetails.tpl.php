@@ -1,9 +1,9 @@
 <div class="dcf-bleed">
     <div class="dcf-wrapper dcf-pt-0">
         <h1>Caption Order Details for: <?php echo $context->media->title ?>, order number: <?php echo $context->order->id ?> </h1>
-        <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=addmedia&id=' . $context->media->id?>" class="dcf-btn">Edit Media</a>
-        <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=editcaptions&id='. $context->media->id?>" class="dcf-btn">Manage Captions</a>
-        <a href="<?php echo $context->media->getURL()?>" class="dcf-btn">View Media</a>
+        <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=addmedia&id=' . $context->media->id?>" class="dcf-btn dcf-btn-primary">Edit Media</a>
+        <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=editcaptions&id='. $context->media->id?>" class="dcf-btn dcf-btn-primary">Manage Captions</a>
+        <a href="<?php echo $context->media->getURL()?>" class="dcf-btn dcf-btn-primary">View Media</a>
     </div>
 </div>
 <div class="dcf-bleed">

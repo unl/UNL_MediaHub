@@ -296,14 +296,6 @@ form legend {
     display: none;
 }
 
-.mh-caption-alert {
-    margin-top: 1em;
-}
-
-.mh-caption-alert .message form input{
-    color: #5b5b5b;
-}
-
 .mh-unknown {
     color: #d00000;
 }
