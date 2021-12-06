@@ -81,6 +81,16 @@ if($context->options['orderby'] == 'datecreated'){
                     new Doctrine_Pager_Range_Sliding(array('chunk'=>5)),
                     htmlentities(UNL_MediaHub_Controller::getURL($context, array_merge($context->options, array('page'=>'{%page_number}')))));
                 $pager_links = $pager_layout->display(null, true);
+                if ($theme->isCustomTheme()) {
+	                $page->addScriptDeclaration("
+                        require(['dcf/dcf-pagination'], function(DCFPaginationModule) {
+                            const paginationNavs = document.querySelectorAll('.dcf-pagination');
+                            const pagination = new DCFPaginationModule.DCFPagination(paginationNavs);
+                            pagination.initialize();
+                        });");
+                } else {
+	                $page->addScriptDeclaration("WDN.initializePlugin('pagination');");
+                }
                 ?>
                 <ul class="mh-feed-list">
                     <?php foreach ($context->items as $feed): ?>
