@@ -9,30 +9,33 @@ class UNL_MediaHub_List_PagerLayout extends Doctrine_Pager_Layout
             return '';
         }
 
-        $this->setTemplate('<li><a href="{%url}" title="Go to page {%page}">{%page}</a></li>');
-        $this->setSelectedTemplate('<li class="selected">{%page}</li>');
+        $this->setTemplate('<li><a {%linkclass} href="{%url}">{%page}</a></li>');
+        $this->setSelectedTemplate('<li><span class="dcf-pagination-selected">{%page}</span></li>');
 
-        $str = '<ul class="mh_pagination">';
+        $str = '<nav class="dcf-pagination dcf-txt-center"><ol class="dcf-list-bare dcf-list-inline">';
 
         if ($pager->getPage() !== 1) {
             // Previous page
-            $this->addMaskReplacement('page', '&larr; prev', true);
+            $this->addMaskReplacement('linkclass', 'class="dcf-pagination-prev"', true);
+            $this->addMaskReplacement('page', 'Prev', true);
             $options['page_number'] = $pager->getPreviousPage();
             $str .= $this->processPage($options);
         }
 
         // Pages listing
+        $this->addMaskReplacement('linkclass', '', true);
         $this->removeMaskReplacement('page');
         $str .= parent::display($options, true);
 
         if ($pager->getPage() != $pager->getNextPage()) {
             // Next page
-            $this->addMaskReplacement('page', 'next &rarr;', true);
+            $this->addMaskReplacement('linkclass', 'class="dcf-pagination-next"', true);
+            $this->addMaskReplacement('page', 'Next', true);
             $options['page_number'] = $pager->getNextPage();
             $str .= $this->processPage($options);
         }
 
-        $str .= '</ul>';
+        $str .= '</ol></nav>';
 
         // Possible wish to return value instead of print it on screen
         if ($return) {

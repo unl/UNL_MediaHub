@@ -125,6 +125,17 @@ if(!empty($context->options['f'])){
     if ($context->options['filter']->getType() == 'browse') {
         $mediaListClass = ' mh-media-browse page-' . $context->pager->getPage();
     }
+
+	if ($theme->isCustomTheme()) {
+		$page->addScriptDeclaration("
+                        require(['dcf/dcf-pagination'], function(DCFPaginationModule) {
+                            const paginationNavs = document.querySelectorAll('.dcf-pagination');
+                            const pagination = new DCFPaginationModule.DCFPagination(paginationNavs);
+                            pagination.initialize();
+                        });");
+	} else {
+		$page->addScriptDeclaration("WDN.initializePlugin('pagination');");
+	}
     ?>
 
     <?php if ($feeds && count($feeds->items) && $context->pager->getPage() < 2): ?>

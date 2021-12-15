@@ -48,16 +48,6 @@ Supporting styles for listings of channels
   border: 0;
 }
 
-.mh-feeds .mh_pagination {
-  padding: 0;
-  text-align: center;
-}
-
-.mh-feeds .mh_pagination li {
-  display: inline-block;
-  float: none;
-}
-
 .mh-feed-stats {
   text-align: center;
 }

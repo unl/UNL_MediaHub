@@ -1,3 +1,0 @@
-[submodule "www/custom/dcf"]
-	path = www/custom/dcf
-	url = https://github.com/digitalcampusframework/dcf_starter.git
