@@ -16,7 +16,7 @@ if (!$theme->isCustomTheme()) {
         $page->setLocalIncludePath($theme->getWDNIncludePath());
     }
 
-	$page->contactinfo = $theme->renderThemeTemplate(null, 'localfooter.tpl.php');
+    $page->contactinfo = $theme->renderThemeTemplate(null, 'localfooter.tpl.php');
 
     $page->addScriptDeclaration('WDN.setPluginParam("idm", "logout", "' . UNL_MediaHub_Controller::getURL() . '?logout");');
 
