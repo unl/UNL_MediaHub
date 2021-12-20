@@ -4,7 +4,7 @@ Live Streaming
 -------------------------------------------------
 */
 
-.wdn_notice.live {
+.dcf-notice.live {
   background: #f1f1f1 url('images/onAir.png') no-repeat 15px center;
   border: 2px solid #c5c2c2;
   border-radius: 5px;
@@ -16,7 +16,7 @@ Live Streaming
   padding: 5px 5px 5px 135px;
 }
 
-#dcf-main.wdn_notice.live h2 {
+#dcf-main.dcf-notice.live h2 {
   font-weight: bold;
   margin-top: 10px;
 }
