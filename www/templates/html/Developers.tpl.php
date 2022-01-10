@@ -24,7 +24,7 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
             
             <h2>Resource Properties</h2>
       
-            <table class="zentable neutral">
+            <table class="dcf-table dcf-table-bordered zentable neutral">
                 <thead>
                     <tr>
                         <th>Property</th>

@@ -1,7 +1,7 @@
 <h2>My Subscriptions</h2>
 <?php
 if (count($context->items)) : ?>
-    <table>
+    <table class="dcf-table dcf-table-bordered">
     <thead>
         <tr>
             <th>Type</th>
