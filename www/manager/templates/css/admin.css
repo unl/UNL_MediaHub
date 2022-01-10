@@ -158,22 +158,14 @@ a.action.delete:active {background-image:url('images/iconDelete.png');}
     border-top:2px solid var(--b);
 
 }
-#dcf-main .addData input[type='text']{
-    border:1px solid var(--b);
-    padding:3px;
-    width:50%;
-    font-size:1.06em;
-    padding:5px 5px 5px 25px;
-}
+
 #dcf-main #emailList + form input[type='text']{
     display:block;
     width:84%;
     padding-left:25px;
     background: #fff url('images/iconEmail.png') no-repeat 5px 50%;
 }
-#dcf-main .addData input[type='submit']{
-    background: #616161;
-}
+
 #dcf-main #outpostExtension h3 {
 	background:url('images/iconVideo.png') no-repeat left top;
 	padding-left:30px;

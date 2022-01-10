@@ -78,8 +78,10 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                             </div>
                             <div class="dcf-form-group" style="display:none">
                                 <div class="mh-tooltip invisible" id="autodetect-360"></div>
-                                <input class="dcf-input-checkbox" type="checkbox" id="projection" name="projection" value="equirectangular">
-                                <label for="projection">360 Video (equirectangular)</label>
+                                <div class="dcf-input-checkbox">
+                                    <input type="checkbox" id="projection" name="projection" value="equirectangular">
+                                    <label for="projection">360 Video (equirectangular)</label>
+                                </div>
                             </div>
                         </div>
                     </div>

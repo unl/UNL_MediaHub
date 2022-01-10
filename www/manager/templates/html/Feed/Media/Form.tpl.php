@@ -185,12 +185,15 @@ $page->jsbody .= $js;
                             <?php echo $savvy->render($context->feed_selection); ?>
                         </li>
                         <li style="display:none">
+                            <div class="dcf-input-checkbox">
                             <?php if($context->media->getProjection() == "equirectangular") { ?>
-                            <input type="checkbox" id="projection" name="projection" checked="checked" value="equirectangular">
+                                <input type="checkbox" id="projection" name="projection" checked="checked" value="equirectangular">
                             <?php } else { ?>
-                            <input type="checkbox" id="projection" name="projection" value="equirectangular">
+                                <input type="checkbox" id="projection" name="projection" value="equirectangular">
                             <?php } ?>
-                            <label for="projection">360 Video (equirectangular)</label>
+                                <label for="projection">360 Video (equirectangular)</label>
+                            </div>
+                        </li>
                         </li>
                         <li>
                             <div class="mh-tooltip hang-right" id="poster-details">
