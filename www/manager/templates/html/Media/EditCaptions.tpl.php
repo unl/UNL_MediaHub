@@ -134,7 +134,7 @@
     <div class="dcf-wrapper">
         <h2>Order history and status</h2>
         <p>View the current status of your orders</p>
-        <table class="dcf-table-responsive">
+        <table class="dcf-table dcf-table-bordered dcf-table-responsive">
             <thead>
                 <tr>
                     <th scope="col">Order Number</th>
@@ -176,7 +176,7 @@
 
         <h2 class="dcf-pt-4">Caption track history</h2>
         <p>You can manage old captions. You may copy any track, edit copied tracks and delete non-active copied tracks.</p>
-        <table class="dcf-table-responsive">
+        <table class="dcf-table dcf-table-bordered dcf-table-responsive">
             <thead>
             <tr>
                 <th scope="col">ID</th>
