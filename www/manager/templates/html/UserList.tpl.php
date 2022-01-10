@@ -27,7 +27,7 @@
       <label for="uid">My.UNL Username</label>
       <div class="dcf-input-group">
         <input id="uid" name="uid" type="text" />
-        <input type="submit" value="Add User" />
+        <input class="dcf-btn dcf-btn-primary" type="submit" value="Add User" />
       </div>
   </form>
 </div>

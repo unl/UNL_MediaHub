@@ -125,13 +125,13 @@ if ($type === 'audio') {
                         <?php if ($user && $context->userCanEdit($user)): ?>
                             <li id="mediaTagsAdd">
                                 <a href="#" title="Add a tag"></a>
-                                <form id="addTags" method="post">
+                                <form class="dcf-form" id="addTags" method="post">
                                     <label for="new_tag">Please enter a tag name
                                        <input type="text" value="" name="tags" id="new_tag" >
                                     </label>
                                     <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
                                     <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
-                                    <input type="submit" value="Add" >
+                                    <input class="dcf-btn dcf-btn-primary" type="submit" value="Add" >
                                 </form>
                             </li>
                         <?php endif; ?>

@@ -1,5 +1,5 @@
 <h2>Add New Subscription</h2>
-<form action="<?php echo $context->action; ?>">
+<form class="dcf-form" action="<?php echo $context->action; ?>">
 <select name="filter_class">
 <?php
 foreach ($context->filters as $filter) {
@@ -9,5 +9,5 @@ foreach ($context->filters as $filter) {
 </select>
 Value: <input type="text" name="filter_option" />
 
-<input type="submit" value="Add Subscription" />
+<input class="dcf-btn dcf-btn-primary" type="submit" value="Add Subscription" />
 </form>

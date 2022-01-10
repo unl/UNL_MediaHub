@@ -117,7 +117,7 @@
                     <p>Please wait for your video to be optimized before captioning on Amara</p>
                 <?php else: ?>
                     <a class="dcf-btn dcf-btn-primary" href="<?php echo $context->getEditCaptionsURL(); ?>">Edit Captions on amara</a><br><br>
-                    <form method="post">
+                    <form class="dcf-form" method="post">
                         <input type="hidden" name="__unlmy_posttarget" value="pull_amara" />
                         <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
                         <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
