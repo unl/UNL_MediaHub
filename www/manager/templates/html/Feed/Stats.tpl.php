@@ -75,7 +75,7 @@ if (!$feed->userCanEdit($user)) {
         </div>
     </div>
 
-    <h2 class="dcf-txt-h3">Channel Media</h2>
+    <h2 id="channel-media-header" class="dcf-txt-h3">Channel Media</h2>
     <?php if (count($context->media_list->items)): ?>
 
     <?php
@@ -100,7 +100,7 @@ if (!$feed->userCanEdit($user)) {
         }
     ?>
 
-        <table class="dcf-table dcf-table-striped dcf-table-responsive">
+        <table class="dcf-table dcf-table-striped dcf-table-responsive" aria-labelledby="channel-media-header">
             <thead>
                 <tr>
                     <th scope="col">Title</th>
@@ -113,7 +113,7 @@ if (!$feed->userCanEdit($user)) {
             <tbody>
             <?php foreach ($context->media_list->items as $media): ?>
                 <tr>
-                    <td data-label="Title"><a href="<?php echo UNL_MediaHub_Controller::getURL($media) ?>" target="_blank"><?php echo $media->title; ?></a></td>
+                    <td data-label="Title"><a href="<?php echo UNL_MediaHub_Controller::getURL($media) ?>" target="_blank" rel="noopener"><?php echo $media->title; ?></a></td>
                     <td data-label="Privacy"><?php echo ucfirst(strtolower($media->privacy)); ?></td>
                     <td data-label="Author"><?php echo $media->author; ?></td>
                     <td class="dcf-txt-right" data-label="Plays"><?php echo $media->play_count; ?></td>

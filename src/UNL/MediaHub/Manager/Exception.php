@@ -16,7 +16,7 @@ class UNL_MediaHub_Manager_Exception implements UNL_MediaHub_CacheableInterface
 
     function preRun($cached)
     {
-
+        // empty since no pre-run logic
     }
 
     function getCacheKey()
@@ -26,7 +26,7 @@ class UNL_MediaHub_Manager_Exception implements UNL_MediaHub_CacheableInterface
 
     function run()
     {
-        $options = $this->options;
+        // empty since no run logic
     }
 
     public function getFeeds($options = array())
