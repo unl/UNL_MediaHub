@@ -5,6 +5,7 @@ use Themes\Theme;
 $theme = new \UNL\Templates\Theme($savvy, UNL_MediaHub_Controller::$themePath, UNL_MediaHub_Controller::$template, UNL_MediaHub_Controller::$templateVersion, UNL_MediaHub_Controller::$customThemeTemplate);
 
 $page = $theme->getPage();
+$savvy->addGlobal('theme', $theme);
 $savvy->addGlobal('page', $page);
 $theme->addGlobal('page', $page);
 

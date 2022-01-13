@@ -247,8 +247,7 @@ class UNL_MediaHub_Controller
                 $this->handlePost($_POST);
             }
 
-            if (!isset($this->options['model'])
-                || false === $this->options['model']) {
+            if (!isset($this->options['model']) || false === $this->options['model']) {
                 throw new Exception('Un-registered view', 404);
             }
 
