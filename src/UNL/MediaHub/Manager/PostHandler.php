@@ -354,7 +354,6 @@ class UNL_MediaHub_Manager_PostHandler
     function handleFeedMedia()
     {
         // Check for required fields
-        
         if (empty($this->post['title'])) {
             throw new Exception('Please provide a title for this media.', 400);
         }
@@ -406,7 +405,6 @@ class UNL_MediaHub_Manager_PostHandler
                     $media->transcode($transcoding_job->job_type);
                 }
             }
-            
         } else {
             // Insert a new piece of media
             // The url is required here
@@ -417,8 +415,7 @@ class UNL_MediaHub_Manager_PostHandler
             if (!filter_var($this->post['url'], FILTER_VALIDATE_URL)) {
                 throw new Exception('The provided value for field "url" is invalid.  It must be a valid absolute URL.', 400);
             }
-            
-            
+
             $details = array(
                 'url'        => $this->post['url'],
                 'title'      => $this->post['title'],
@@ -428,7 +425,6 @@ class UNL_MediaHub_Manager_PostHandler
             );
 
             $media = $this->mediahub->addMedia($details);
-            
             $is_new = true;
         }
 
@@ -439,7 +435,7 @@ class UNL_MediaHub_Manager_PostHandler
         if (isset($this->files['poster_image_file']) && is_uploaded_file($this->files['poster_image_file']['tmp_name'])) {
             $media->processPosterUpload($this->files['poster_image_file'], $errors);
             if (is_array($errors) && count($errors)) {
-                throw new Exception($errors[0], 400);
+                throw new UNL_MediaHub_RuntimeException($errors[0], 400);
             }
         } else {
             $this->post['poster'] = $this->post['poster_image_url'];
@@ -501,7 +497,6 @@ class UNL_MediaHub_Manager_PostHandler
                 if ($feed_selection_data[$feed_id]['readonly']) {
                     throw new Exception('Feed ' .$feed->title . ' can not be selected by you.', 403);
                 }
-                
                 $feed->addMedia($media);
             }
             
@@ -521,7 +516,6 @@ class UNL_MediaHub_Manager_PostHandler
                 if ($data['readonly']) {
                     throw new Exception('Feed ' .$data['feed']->title . ' can not be removed by you.', 403);
                 }
-                
                 $data['feed']->removeMedia($media);
             }
         }
@@ -576,7 +570,6 @@ class UNL_MediaHub_Manager_PostHandler
                 UNL_MediaHub::redirect(UNL_MediaHub_Controller::getURL($media));
             }
         }
-        
     }
 
     /**

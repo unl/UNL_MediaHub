@@ -574,7 +574,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         }
 
         $imageInfo = @getimagesize($upload['tmp_name']);
-        if (is_array($imageInfo)) {
+        if (!empty($imageInfo)) {
             $width = intval($imageInfo[0]);
             $height = intval($imageInfo[1]);
             if ($height > $width) {
