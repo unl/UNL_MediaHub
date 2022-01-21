@@ -1,6 +1,4 @@
 <?php
-
-
 use Ramsey\Uuid\Uuid;
 
 class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_MediaHub_MediaInterface
@@ -8,6 +6,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     const CODEC_REMOTE_VIDEO = 'remote-video-is-unknown';
     const ASPECT_16x9 = '16:9';
     const ASPECT_4x3 = '4:3';
+    const POSTER_PATH = 'uploads/posters/';
     
     /**
      * Get a piece of media by PK.
@@ -538,14 +537,89 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     }
 
     /**
-     * Get the URL to the thumbnail for this image
+     * Check if poster is a local custom upload
+     *
+     * @return boolean
+     */
+    function isLocalPosterURL() {
+        return !empty($this->poster) && strpos($this->poster, self::POSTER_PATH . $this->id);
+    }
+
+    /**
+     * Remove the local poster file if exists
+     *
+     * @return null
+     */
+    function removeLocalPosterFile() {
+        if ($this->isLocalPosterURL()) {
+            $pathParts = pathinfo(parse_url($this->poster, PHP_URL_PATH));
+            $file = UNL_MediaHub::getRootDir() . '/www/' . self::POSTER_PATH . $this->id . '.' . $pathParts['extension'];
+            if (file_exists($file)) {
+                $this->poster = '';
+                unlink($file);
+            }
+        }
+    }
+
+    /**
+     * Process the uploaded poster image file. Sets $errors with any errors generated.
+     *
+     * @return null
+     */
+    function processPosterUpload($upload, &$errors) {
+        $errors = array();
+        if (!in_array($upload['type'], array('image/gif', 'image/jpeg', 'image/jpg', 'image/png'))) {
+            $errors[] = 'Media poster image must be a gif, jpg, or png.';
+            return;
+        }
+
+        $imageInfo = @getimagesize($upload['tmp_name']);
+        if (is_array($imageInfo)) {
+            $width = intval($imageInfo[0]);
+            $height = intval($imageInfo[1]);
+            if ($height > $width) {
+                $errors[] = 'Media poster image height cannot be greater than width. Images with 16:9 ratio are recommended.';
+            } elseif ($width > 1920) {
+                $errors[] = 'Media poster image must not be wider than 1920 pixels.';
+            } elseif ($height > 1080) {
+                $errors[] = 'Media poster image must not be taller than 1080 pixels.';
+            }
+        }
+
+        if (count($errors) === 0) {
+            $this->removeLocalPosterFile();
+            $pathParts = pathinfo($upload['name']);
+            $posterFile = UNL_MediaHub::getRootDir() . '/www/' . self::POSTER_PATH . $this->id . '.' . $pathParts['extension'];
+            move_uploaded_file($upload['tmp_name'], $posterFile);
+            $this->poster = UNL_MediaHub_Controller::$url . self::POSTER_PATH . $this->id . '.' . $pathParts['extension'] . '?' . strtotime();
+        }
+    }
+
+    /**
+     * Get the URL of the poster thumbnail for this media
+     *
+     * @return string
+     */
+    function getPosterURL() {
+        if (!empty($this->poster)) {
+            $poster = $this->poster;
+            if ($this->isLocalPosterURL()) {
+                $poster .= '?'. strtotime($this->dateupdated);
+            }
+            return $poster;
+        }
+    }
+
+    /**
+     * Get the URL to the thumbnail for this media
      *
      * @return string
      */
     function getThumbnailURL()
     {
-        if (!empty($this->poster)) {
-            return $this->poster;
+        $posterURL = $this->getPosterURL();
+        if (!empty($posterURL)) {
+            return $posterURL;
         }
 
         if (!$this->isVideo()) {

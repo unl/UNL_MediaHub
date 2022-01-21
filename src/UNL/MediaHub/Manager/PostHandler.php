@@ -430,7 +430,20 @@ class UNL_MediaHub_Manager_PostHandler
             $media = $this->mediahub->addMedia($details);
             
             $is_new = true;
-        }  
+        }
+
+        if (isset($this->post['remove_poster_image'])) {
+            $media->removeLocalPosterFile();
+        }
+
+        if (isset($this->files['poster_image_file']) && is_uploaded_file($this->files['poster_image_file']['tmp_name'])) {
+            $media->processPosterUpload($this->files['poster_image_file'], $errors);
+            if (is_array($errors) && count($errors)) {
+                throw new Exception($errors[0], 400);
+            }
+        } else {
+            $this->post['poster'] = $this->post['poster_image_url'];
+        }
 
         //Update the dateupdated date for cache busting
         $media->dateupdated = date('Y-m-d H:i:s');

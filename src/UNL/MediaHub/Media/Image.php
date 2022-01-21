@@ -45,10 +45,11 @@ class UNL_MediaHub_Media_Image
         if (!$media = UNL_MediaHub_Media::getById($media_id)) {
             throw new \Exception('media not found', 404);
         }
-        
-        if (!empty($media->poster)) {
+
+        $posterURL = $media->getPosterURL();
+        if (!empty($posterURL)) {
             //handle custom posters
-            UNL_MediaHub::redirect($media->poster);
+            UNL_MediaHub::redirect($posterURL);
             exit();
         }
 
