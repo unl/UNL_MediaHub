@@ -346,13 +346,7 @@ class UNL_MediaHub_Manager_PostHandler
         UNL_MediaHub::redirect('?view=feedmetadata&id='.$feed->id);
     }
 
-    /**
-     * Handle adding media, and associating it to feeds
-     *
-     * @throws Exception
-     */
-    function handleFeedMedia()
-    {
+    private function validateFeedMediaRequired() {
         // Check for required fields
         if (empty($this->post['title'])) {
             throw new Exception('Please provide a title for this media.', 400);
@@ -365,11 +359,21 @@ class UNL_MediaHub_Manager_PostHandler
         if (empty($this->post['description'])) {
             throw new Exception('Please provide a description for this media.', 400);
         }
-        
+
         if (!isset($this->post['feed_id']) && empty($this->post['new_feed'])) {
             throw new Exception('You must select a feed for the media', 400);
         }
-        
+    }
+
+    /**
+     * Handle adding media, and associating it to feeds
+     *
+     * @throws Exception
+     */
+    function handleFeedMedia()
+    {
+        $this->validateFeedMediaRequired();
+
         $is_new = false;
 
         $user = UNL_MediaHub_AuthService::getInstance()->getUser();

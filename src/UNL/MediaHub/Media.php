@@ -586,7 +586,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
             }
         }
 
-        if (count($errors) === 0) {
+        if (empty($errors)) {
             $this->removeLocalPosterFile();
             $pathParts = pathinfo($upload['name']);
             $posterFile = UNL_MediaHub::getRootDir() . '/www/' . self::POSTER_PATH . $this->id . '.' . $pathParts['extension'];
