@@ -27,14 +27,14 @@ if (!$theme->isCustomTheme()) {
     <p>This application is a product of the <a href="https://dxg.unl.edu/">Digital Experience Group at Nebraska</a>. DXG is a partnership of <a href="https://ucomm.unl.edu/">University Communication</a> and <a href="https://its.unl.edu/">Information Technology Services</a> at the University of Nebraska.</p>
 </div>';
 
-	$page->addScriptDeclaration("
-	// Card as Links
-	require(['dcf/dcf-cardAsLink'], function(DCFCardAsLinkModule) {
-		// Card as Links
-		var cards = document.querySelectorAll('.dcf-card-as-link');
-		var cardAsLink = new DCFCardAsLinkModule.DCFCardAsLink(cards);
-		cardAsLink.initialize();
-	});");
+    $page->addScriptDeclaration("
+    // Card as Links
+    require(['dcf/dcf-cardAsLink'], function(DCFCardAsLinkModule) {
+        // Card as Links
+        var cards = document.querySelectorAll('.dcf-card-as-link');
+        var cardAsLink = new DCFCardAsLinkModule.DCFCardAsLink(cards);
+        cardAsLink.initialize();
+    });");
 }
 
 // Shared Items
@@ -67,5 +67,9 @@ if (!empty($_SESSION['notices']) && is_array($_SESSION['notices'])) {
 }
 
 $page->maincontentarea .= $savvy->render($context->output);
+
+if (isset($siteNotice) && $siteNotice->display) {
+    $page->displayDCFNoticeMessage($siteNotice->title, $siteNotice->message, $siteNotice->type, $siteNotice->noticePath, $siteNotice->containerID);
+}
 
 echo $page;
