@@ -54,6 +54,7 @@ $scriptBody = '
 $page->addScriptDeclaration($scriptBody);
 $page->addScript(UNL_MediaHub_Controller::getURL().'templates/html/scripts/manager.js?v='.UNL_MediaHub_Controller::getVersion());
 
-UNL_MediaHub_Controller::sharedTemplatePageActions($context, $page, $savvy);
+$siteNotice = isset($siteNotice) ? $siteNotice : NULL;
+UNL_MediaHub_Controller::sharedTemplatePageActions($siteNotice, $context, $page, $savvy);
 
 echo $page;
