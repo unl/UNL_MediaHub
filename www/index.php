@@ -51,4 +51,8 @@ switch($controller->options['format']) {
     default:
 }
 
+if (isset($siteNotice)) {
+    $outputcontroller->addGlobal('siteNotice', $siteNotice);
+}
+
 echo $outputcontroller->render($controller);

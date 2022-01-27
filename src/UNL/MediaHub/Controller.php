@@ -651,5 +651,33 @@ class UNL_MediaHub_Controller
 
         return $version;
     }
+
+    /**
+     * Set passed by reference page attributes for
+     * frontend and manager controller templates so
+     * shared actions are handle here to reduce code
+     * duplication.
+     *
+     * @return null
+     */
+    public static function sharedTemplatePageActions($siteNotice, $context, &$page, &$savvy) {
+        //Navigation
+        $page->appcontrols = $savvy->render(null, 'Navigation.tpl.php');
+
+        //Main content
+        $page->maincontentarea = '';
+        if (!empty($_SESSION['notices']) && is_array($_SESSION['notices'])) {
+            foreach ($_SESSION['notices'] as $key=>$notice) {
+                $page->maincontentarea .= $savvy->render($notice);
+                unset($_SESSION['notices'][$key]);
+            }
+        }
+
+        $page->maincontentarea .= $savvy->render($context->output);
+
+        if (isset($siteNotice) && $siteNotice->display) {
+            $page->displayDCFNoticeMessage($siteNotice->title, $siteNotice->message, $siteNotice->type, $siteNotice->noticePath, $siteNotice->containerID);
+        }
+    }
 }
 

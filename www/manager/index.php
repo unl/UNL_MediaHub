@@ -28,5 +28,9 @@ switch($manager->options['format']) {
     default:
 }
 
+if (isset($siteNotice)) {
+    $outputcontroller->addGlobal('siteNotice', $siteNotice);
+}
+
 echo $outputcontroller->render($manager);
 
