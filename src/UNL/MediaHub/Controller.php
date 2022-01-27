@@ -660,7 +660,7 @@ class UNL_MediaHub_Controller
      *
      * @return null
      */
-    public static function sharedTemplatePageActions($context, &$page, &$savvy) {
+    public static function sharedTemplatePageActions($siteNotice, $context, &$page, &$savvy) {
         //Navigation
         $page->appcontrols = $savvy->render(null, 'Navigation.tpl.php');
 

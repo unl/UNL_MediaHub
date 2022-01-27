@@ -58,6 +58,7 @@ if (is_array($context->output) && $context->output[0] instanceof UNL_MediaHub_Fe
 $xmlHref = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]?format=xml";
 $page->head .= '<link rel="alternate" type="application/rss+xml" title="'. $alternateLinkTitle .'" href="' . $xmlHref .'" />';
 
-UNL_MediaHub_Controller::sharedTemplatePageActions($context, $page, $savvy);
+$siteNotice = isset($siteNotice) ? $siteNotice : NULL;
+UNL_MediaHub_Controller::sharedTemplatePageActions($siteNotice, $context, $page, $savvy);
 
 echo $page;
