@@ -23,21 +23,21 @@ if (!$theme->isCustomTheme()) {
 
     $page->addScriptDeclaration('WDN.setPluginParam("idm", "logout", "' . $baseUrl . '?logout");');
 
-	$page->addScriptDeclaration("WDN.initializePlugin('card-as-link');");
+    $page->addScriptDeclaration("WDN.initializePlugin('card-as-link');");
 
 } else {
-	// Custom Theme
-	$page->optionalfooter = '<div class="dcf-bleed dcf-wrapper">
+    // Custom Theme
+    $page->optionalfooter = '<div class="dcf-bleed dcf-wrapper">
     <h3 class="dcf-txt-md dcf-bold dcf-uppercase dcf-lh-3">About MediaHub</h3>
     <p>This application is a product of the <a href="https://dxg.unl.edu/">Digital Experience Group at Nebraska</a>. DXG is a partnership of <a href="https://ucomm.unl.edu/">University Communication</a> and <a href="https://its.unl.edu/">Information Technology Services</a> at the University of Nebraska.</p>
 </div>';
-	$page->addScriptDeclaration("
-	require(['dcf/dcf-cardAsLink'], function(DCFCardAsLinkModule) {
-		// Card as Links
-		var cards = document.querySelectorAll('.dcf-card-as-link');
-		var cardAsLink = new DCFCardAsLinkModule.DCFCardAsLink(cards);
-		cardAsLink.initialize();
-	});");
+    $page->addScriptDeclaration("
+    require(['dcf/dcf-cardAsLink'], function(DCFCardAsLinkModule) {
+        // Card as Links
+        var cards = document.querySelectorAll('.dcf-card-as-link');
+        var cardAsLink = new DCFCardAsLinkModule.DCFCardAsLink(cards);
+        cardAsLink.initialize();
+    });");
 }
 
 // Shared Items
@@ -50,26 +50,15 @@ $page->addStyleSheet($baseUrl . 'templates/html/css/all.css?v=' . UNL_MediaHub_C
 $page->addScript($baseUrl . 'templates/html/scripts/frontend.js?v=' . UNL_MediaHub_Controller::getVersion());
 
 if (is_array($context->output) && $context->output[0] instanceof UNL_MediaHub_FeedAndMedia) {
-	$alternateLinkTitle = trim(htmlentities($context->output[0]->feed->title, ENT_QUOTES));
+    $alternateLinkTitle = trim(htmlentities($context->output[0]->feed->title, ENT_QUOTES));
 } else {
-	$alternateLinkTitle = UNL_MediaHub_Controller::$appName;
+    $alternateLinkTitle = UNL_MediaHub_Controller::$appName;
 }
 
 $xmlHref = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]?format=xml";
 $page->head .= '<link rel="alternate" type="application/rss+xml" title="'. $alternateLinkTitle .'" href="' . $xmlHref .'" />';
 
-//Navigation
-$page->appcontrols = $savvy->render(null, 'Navigation.tpl.php');
-
-//Main content
-$page->maincontentarea = '';
-if (!empty($_SESSION['notices']) && is_array($_SESSION['notices'])) {
-    foreach ($_SESSION['notices'] as $key=>$notice) {
-        $page->maincontentarea .= $savvy->render($notice);
-        unset($_SESSION['notices'][$key]);
-    }
-}
-
-$page->maincontentarea .= $savvy->render($context->output);
+$siteNotice = isset($siteNotice) ? $siteNotice : NULL;
+UNL_MediaHub_Controller::sharedTemplatePageActions($siteNotice, $context, $page, $savvy);
 
 echo $page;

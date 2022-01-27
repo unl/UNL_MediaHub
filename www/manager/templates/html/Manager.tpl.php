@@ -28,14 +28,14 @@ if (!$theme->isCustomTheme()) {
     <p>This application is a product of the <a href="https://dxg.unl.edu/">Digital Experience Group at Nebraska</a>. DXG is a partnership of <a href="https://ucomm.unl.edu/">University Communication</a> and <a href="https://its.unl.edu/">Information Technology Services</a> at the University of Nebraska.</p>
 </div>';
 
-	$page->addScriptDeclaration("
-	// Card as Links
-	require(['dcf/dcf-cardAsLink'], function(DCFCardAsLinkModule) {
-		// Card as Links
-		var cards = document.querySelectorAll('.dcf-card-as-link');
-		var cardAsLink = new DCFCardAsLinkModule.DCFCardAsLink(cards);
-		cardAsLink.initialize();
-	});");
+    $page->addScriptDeclaration("
+    // Card as Links
+    require(['dcf/dcf-cardAsLink'], function(DCFCardAsLinkModule) {
+        // Card as Links
+        var cards = document.querySelectorAll('.dcf-card-as-link');
+        var cardAsLink = new DCFCardAsLinkModule.DCFCardAsLink(cards);
+        cardAsLink.initialize();
+    });");
 }
 
 // Shared Items
@@ -55,18 +55,7 @@ $scriptBody = '
 $page->addScriptDeclaration($scriptBody);
 $page->addScript(UNL_MediaHub_Controller::getURL().'templates/html/scripts/manager.js?v='.UNL_MediaHub_Controller::getVersion());
 
-//Navigation
-$page->appcontrols = $savvy->render(null, 'Navigation.tpl.php');
-
-//Main content
-$page->maincontentarea = '';
-if (!empty($_SESSION['notices']) && is_array($_SESSION['notices'])) {
-    foreach ($_SESSION['notices'] as $key=>$notice) {
-        $page->maincontentarea .= $savvy->render($notice);
-        unset($_SESSION['notices'][$key]);
-    }
-}
-
-$page->maincontentarea .= $savvy->render($context->output);
+$siteNotice = isset($siteNotice) ? $siteNotice : NULL;
+UNL_MediaHub_Controller::sharedTemplatePageActions($siteNotice, $context, $page, $savvy);
 
 echo $page;

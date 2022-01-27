@@ -31,7 +31,12 @@ try {
         default:
     }
 
+	if (isset($siteNotice)) {
+		$outputcontroller->addGlobal('siteNotice', $siteNotice);
+	}
+
     echo $outputcontroller->render($manager);
+
 } catch(Exception $e) {
     $manager = new UNL_MediaHub_Manager(array('view' => 'exception', 'exception' => $e));
     $outputcontroller = new UNL_MediaHub_OutputController();
