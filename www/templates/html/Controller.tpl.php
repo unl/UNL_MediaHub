@@ -58,22 +58,6 @@ if (is_array($context->output) && $context->output[0] instanceof UNL_MediaHub_Fe
 $xmlHref = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]?format=xml";
 $page->head .= '<link rel="alternate" type="application/rss+xml" title="'. $alternateLinkTitle .'" href="' . $xmlHref .'" />';
 
-//Navigation
-$page->appcontrols = $savvy->render(null, 'Navigation.tpl.php');
-
-//Main content
-$page->maincontentarea = '';
-if (!empty($_SESSION['notices']) && is_array($_SESSION['notices'])) {
-    foreach ($_SESSION['notices'] as $key=>$notice) {
-        $page->maincontentarea .= $savvy->render($notice);
-        unset($_SESSION['notices'][$key]);
-    }
-}
-
-$page->maincontentarea .= $savvy->render($context->output);
-
-if (isset($siteNotice) && $siteNotice->display) {
-    $page->displayDCFNoticeMessage($siteNotice->title, $siteNotice->message, $siteNotice->type, $siteNotice->noticePath, $siteNotice->containerID);
-}
+UNL_MediaHub_Controller::sharedTemplatePageActions($context, $page, $savvy);
 
 echo $page;

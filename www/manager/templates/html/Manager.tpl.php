@@ -54,22 +54,6 @@ $scriptBody = '
 $page->addScriptDeclaration($scriptBody);
 $page->addScript(UNL_MediaHub_Controller::getURL().'templates/html/scripts/manager.js?v='.UNL_MediaHub_Controller::getVersion());
 
-//Navigation
-$page->appcontrols = $savvy->render(null, 'Navigation.tpl.php');
-
-//Main content
-$page->maincontentarea = '';
-if (!empty($_SESSION['notices']) && is_array($_SESSION['notices'])) {
-    foreach ($_SESSION['notices'] as $key=>$notice) {
-        $page->maincontentarea .= $savvy->render($notice);
-        unset($_SESSION['notices'][$key]);
-    }
-}
-
-$page->maincontentarea .= $savvy->render($context->output);
-
-if (isset($siteNotice) && $siteNotice->display) {
-    $page->displayDCFNoticeMessage($siteNotice->title, $siteNotice->message, $siteNotice->type, $siteNotice->noticePath, $siteNotice->containerID);
-}
+UNL_MediaHub_Controller::sharedTemplatePageActions($context, $page, $savvy);
 
 echo $page;
