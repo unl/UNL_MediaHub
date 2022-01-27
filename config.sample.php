@@ -58,3 +58,12 @@ $options = array(
 // Create a Cache_Lite object
 $cache = new \Savvy_Turbo_CacheInterface_UNLCacheLite($options);
 */
+
+// Site Notice
+$siteNotice = new stdClass();
+$siteNotice->display = false;
+$siteNotice->noticePath = 'dcf-notice';
+$siteNotice->containerID = 'dcf-main';
+$siteNotice->type = 'dcf-notice-info';
+$siteNotice->title = 'Maintenance Notice';
+$siteNotice->message = 'We will be performing site maintenance on February 3rd from 4:30 to 5:00 pm CST.  This site may not be available during this time.';
