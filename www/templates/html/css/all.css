@@ -56,7 +56,7 @@ Tags
 }
 
 #dcf-main ul#mediaTags li {
-  background-color: #fff;
+  background-color: var(--bg-btn-inverse-tertiary);
   box-shadow: 0 2px 4px rgba(0, 0, 0, .25);
   display: inline-block;
   font-size: .75em;
@@ -70,7 +70,7 @@ Tags
 }
 
 #dcf-main ul#mediaTags li#mediaTagsAdd {
-  border: dashed 2px #B8B8B8;
+  border: dashed 2px var(--b);
   border-radius: 3px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
