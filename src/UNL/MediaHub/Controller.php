@@ -247,8 +247,7 @@ class UNL_MediaHub_Controller
                 $this->handlePost($_POST);
             }
 
-            if (!isset($this->options['model'])
-                || false === $this->options['model']) {
+            if (!isset($this->options['model']) || false === $this->options['model']) {
                 throw new Exception('Un-registered view', 404);
             }
 
@@ -346,13 +345,15 @@ class UNL_MediaHub_Controller
                     throw new \Exception('media not found', 404);
                 }
                 $file = $media->getLocalFileName();
-                $path_info = pathinfo($file);
-                header('Content-Description: Media File Download');
-                header('Content-Type: application/octet-stream');
-                header('Content-Disposition: attachment; filename="'.$media->title.'.'.$path_info['extension'].'"');
-                header('Content-Length: ' . filesize($file));
-                ob_end_flush();
-                readfile($file);
+                if (!empty($file) && file_exists($file)) {
+                    $path_info = pathinfo($file);
+                    header('Content-Description: Media File Download');
+                    header('Content-Type: application/octet-stream');
+                    header('Content-Disposition: attachment; filename="' . $media->title . '.' . $path_info['extension'] . '"');
+                    header('Content-Length: ' . filesize($file));
+                    ob_end_flush();
+                    readfile($file);
+                }
                 exit;
             default:
                 $this->output[] = new $this->options['model']($this->options);

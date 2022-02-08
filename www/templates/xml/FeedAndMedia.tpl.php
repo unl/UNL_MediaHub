@@ -86,6 +86,9 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
                     $attribute_string = '';
                     if (!empty($namespaced_element['attributes'])) {
                         foreach ($namespaced_element['attributes'] as $attribute=>$value) {
+                            if (is_array($value)) {
+                                $value = implode(",", $value);
+                            }
                             $attribute_string .= " $attribute=\"$value\"";
                         }
                     }

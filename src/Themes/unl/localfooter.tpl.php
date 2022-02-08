@@ -19,5 +19,4 @@ $page->addScriptDeclaration("var _gaq = _gaq || [];
     _gaq.push(['_setDomainName', '.unl.edu']);
     _gaq.push(['_setAllowLinker', true]);
     _gaq.push(['_trackPageview']);");
-
 ?>

@@ -7,6 +7,7 @@ class UNL_MediaHub_Manager extends UNL_MediaHub_BaseController implements UNL_Me
 
     protected $view_map = array(
         'feedmetadata'    => 'UNL_MediaHub_Feed_Form',
+        'feedstats'       => 'UNL_MediaHub_Feed_Stats',
         'permissions'     => 'UNL_MediaHub_Feed_UserList',
         'feeds'           => 'UNL_MediaHub_User_FeedList',
         'subscriptions'   => 'UNL_MediaHub_User_Subscriptions',
@@ -18,6 +19,7 @@ class UNL_MediaHub_Manager extends UNL_MediaHub_BaseController implements UNL_Me
         'editcaptions'    => 'UNL_MediaHub_Media_EditCaptions',
         'editcaptiontrack' => 'UNL_MediaHub_Media_EditCaptionTrack',
         'captionorderdetails' => 'UNL_MediaHub_Media_CaptionOrderDetails',
+        'exception' => 'UNL_MediaHub_Manager_Exception',
         );
     
     protected static $replacements = array();
@@ -125,6 +127,8 @@ class UNL_MediaHub_Manager extends UNL_MediaHub_BaseController implements UNL_Me
                 $this->output[] = new $class($this->options);
                 return;
             }
+
+            throw new UNL_MediaHub_RuntimeException('This page does not exist', 404);
         } catch (Exception $e) {
             $this->output = $e;
         }
