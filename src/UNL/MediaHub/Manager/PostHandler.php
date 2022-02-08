@@ -384,7 +384,7 @@ class UNL_MediaHub_Manager_PostHandler
             $media = UNL_MediaHub_Media::getById($this->post['id']);
             
             if (!$media->userCanEdit($user)) {
-                throw new Exception('You do not have permission to edit this media', 400);
+                throw new Exception('You do not have permission to edit this media.', 403);
             }
             
             $media->uidupdated = $user->uid;

@@ -10,11 +10,20 @@ $user = UNL_MediaHub_AuthService::getInstance()->getUser();
     <div class="dcf-wrapper">
 
       <div class="dcf-float-right mh-rss"><a href="?format=xml" title="RSS feed for this channel"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_RSS_BOX, '{"size": 4}'); ?></a></div>
-      <h2><?php echo UNL_MediaHub::escape($context->feed->title) ?>
-        <?php if ($user && $context->feed->userCanEdit($user)): ?>
-          <span class="dcf-txt-base"><a href="<?php echo UNL_MediaHub_Manager::getURL()?>?view=feedmetadata&amp;id=<?php echo (int)$context->feed->id ?>" class="dcf-btn dcf-btn-primary mh-channel-edit-button">Edit</a></span>
-        <?php endif ?>
-      </h2>
+      <h2><?php echo UNL_MediaHub::escape($context->feed->title) ?></h2>
+      <?php if ($user && $context->feed->userCanEdit($user)): ?>
+        <ul class="dcf-p-1 dcf-list-bare dcf-list-inline dcf-txt-xs dcf-bg-overlay-dark">
+            <li class="dcf-m-0">
+                <a class="dcf-btn dcf-btn-inverse-tertiary" href="<?php echo UNL_MediaHub_Manager::getURL(); ?>?view=feedmetadata&amp;id=<?php echo (int)$context->feed->id ?>">Edit Channel</a>
+            </li>
+            <li class="dcf-m-0">
+                <a class="dcf-btn dcf-btn-inverse-tertiary" href="<?php echo UNL_MediaHub_Manager::getURL(); ?>?view=feedstats&amp;feed_id=<?php echo (int)$context->feed->id ?>">View Channel Stats</a>
+            </li>
+            <li class="dcf-m-0">
+                <a class="dcf-btn dcf-btn-inverse-tertiary" href="<?php echo UNL_MediaHub_Manager::getURL(); ?>?view=permissions&amp;feed_id=<?php echo (int)$context->feed->id ?>">Edit Channel Users</a>
+            </li>
+        </ul>
+      <?php endif ?>
 
       <div class="dcf-grid dcf-col-gap-vw dcf-pt-6">
         <div class="dcf-col-100% dcf-col-25%-start@sm">
@@ -53,13 +62,11 @@ $user = UNL_MediaHub_AuthService::getInstance()->getUser();
 
 <?php
 $maintainers = $context->feed->getUserList();
-
 $uids = array();
 foreach ($maintainers->items as $maintainer) {
     $uid = htmlentities($maintainer->uid, ENT_QUOTES);
     $uids[] = '<a href="http://directory.unl.edu/people/'.$uid.'">'.$uid.'</a>';
 }
-
 ?>
 
 <div class="dcf-bleed dcf-pt-6 unl-bg-lightest-gray mh-channel-maintainers-list">

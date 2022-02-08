@@ -60,7 +60,7 @@
                 <?php else: ?>
                     <?php
                         $errorNotice = new StdClass();
-                        $errorNotice->type = 'alert';
+                        $errorNotice->type = 'dcf-notice-alert';
                         $errorNotice->title = 'Invalid Caption Format';
                         $errorNotice->body = $invalidTrackMessage;
                         echo $savvy->render($errorNotice, 'Notice.tpl.php');
