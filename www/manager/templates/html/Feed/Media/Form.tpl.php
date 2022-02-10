@@ -693,7 +693,6 @@ $page->jsbody .= $js;
         if (removePosterCheckbox) {
             removePosterCheckbox.addEventListener('change', function() {
                 if (removePosterCheckbox.checked) {
-                    console.log('remove checked');
                     additionalPosterOptionsDiv.classList.remove('dcf-d-none');
                     additionalPosterOptionsDiv.classList.add('dcf-d-block');
                     postImageUrlInput.removeAttribute('disabled');
