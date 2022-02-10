@@ -422,6 +422,9 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         
         //Media can have its own upload directory associated with it. Delete it if it exists
         $this->deleteUploadDirectory();
+
+        // Remove local poster file if exists
+        $this->removeLocalPosterFile();
         
         return true;
     }
