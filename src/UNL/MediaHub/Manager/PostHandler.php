@@ -346,15 +346,8 @@ class UNL_MediaHub_Manager_PostHandler
         UNL_MediaHub::redirect('?view=feedmetadata&id='.$feed->id);
     }
 
-    /**
-     * Handle adding media, and associating it to feeds
-     *
-     * @throws Exception
-     */
-    function handleFeedMedia()
-    {
+    private function validateFeedMediaRequired() {
         // Check for required fields
-        
         if (empty($this->post['title'])) {
             throw new Exception('Please provide a title for this media.', 400);
         }
@@ -366,11 +359,21 @@ class UNL_MediaHub_Manager_PostHandler
         if (empty($this->post['description'])) {
             throw new Exception('Please provide a description for this media.', 400);
         }
-        
+
         if (!isset($this->post['feed_id']) && empty($this->post['new_feed'])) {
             throw new Exception('You must select a feed for the media', 400);
         }
-        
+    }
+
+    /**
+     * Handle adding media, and associating it to feeds
+     *
+     * @throws Exception
+     */
+    function handleFeedMedia()
+    {
+        $this->validateFeedMediaRequired();
+
         $is_new = false;
 
         $user = UNL_MediaHub_AuthService::getInstance()->getUser();
@@ -406,7 +409,6 @@ class UNL_MediaHub_Manager_PostHandler
                     $media->transcode($transcoding_job->job_type);
                 }
             }
-            
         } else {
             // Insert a new piece of media
             // The url is required here
@@ -417,8 +419,7 @@ class UNL_MediaHub_Manager_PostHandler
             if (!filter_var($this->post['url'], FILTER_VALIDATE_URL)) {
                 throw new Exception('The provided value for field "url" is invalid.  It must be a valid absolute URL.', 400);
             }
-            
-            
+
             $details = array(
                 'url'        => $this->post['url'],
                 'title'      => $this->post['title'],
@@ -428,9 +429,21 @@ class UNL_MediaHub_Manager_PostHandler
             );
 
             $media = $this->mediahub->addMedia($details);
-            
             $is_new = true;
-        }  
+        }
+
+        if (isset($this->post['remove_poster_image'])) {
+            $media->removeLocalPosterFile();
+        }
+
+        if (isset($this->files['poster_image_file']) && is_uploaded_file($this->files['poster_image_file']['tmp_name'])) {
+            $media->processPosterUpload($this->files['poster_image_file'], $errors);
+            if (is_array($errors) && count($errors)) {
+                throw new UNL_MediaHub_RuntimeException($errors[0], 400);
+            }
+        } else {
+            $this->post['poster'] = $this->post['poster_image_url'];
+        }
 
         //Update the dateupdated date for cache busting
         $media->dateupdated = date('Y-m-d H:i:s');
@@ -488,7 +501,6 @@ class UNL_MediaHub_Manager_PostHandler
                 if ($feed_selection_data[$feed_id]['readonly']) {
                     throw new Exception('Feed ' .$feed->title . ' can not be selected by you.', 403);
                 }
-                
                 $feed->addMedia($media);
             }
             
@@ -508,7 +520,6 @@ class UNL_MediaHub_Manager_PostHandler
                 if ($data['readonly']) {
                     throw new Exception('Feed ' .$data['feed']->title . ' can not be removed by you.', 403);
                 }
-                
                 $data['feed']->removeMedia($media);
             }
         }
@@ -563,7 +574,6 @@ class UNL_MediaHub_Manager_PostHandler
                 UNL_MediaHub::redirect(UNL_MediaHub_Controller::getURL($media));
             }
         }
-        
     }
 
     /**

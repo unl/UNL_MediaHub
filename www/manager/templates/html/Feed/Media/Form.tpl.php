@@ -106,8 +106,8 @@ $page->jsbody .= $js;
 
             <?php if (!$transcoding_job ||  $transcoding_job->isSuccess()): ?>
                 <div class="dcf-grid dcf-col-gap-vw">
-                    <div id="videoData" class="dcf-col-100% dcf-col-25%-start@sm">
-                        <h2 class="unl-font-sans">Set a Thumbnail</h2>
+                    <div id="videoData" class="dcf-col-100% dcf-col-25%-start@sm dcf-txt-xs">
+                        <h2 class="dcf-txt-h4">Set a Thumbnail</h2>
                         <ol>
                             <li>Pause the video to the left at the frame which you want as the image representation.</li>
                             <li>Click the "Set Image" button to save this as your image representation.</li>
@@ -143,17 +143,17 @@ $page->jsbody .= $js;
         </div>
     </div>
 
-    <div class="dcf-bleed dcf-pt-6 mh-edit-media">
+    <div class="dcf-bleed dcf-mt-6 dcf-pt-6 mh-edit-media">
         <div class="dcf-wrapper">
             <?php
                 $errorNotice = new StdClass();
                 $errorNotice->title = 'Media Errors';
                 echo $savvy->render($errorNotice, 'ErrorListNotice.tpl.php');
             ?>
-            <div class="dcf-grid dcf-col-gap-vw">
-                <div class="dcf-col-100% dcf-col-25%-start@sm dcf-pb-6">
+            <div class="dcf-grid dcf-col-gap-vw dcf-row-gap-2">
+                <div class="dcf-col-100% dcf-col-50%-start@md dcf-col-33%-start@lg dcf-pb-6">
                     <ol>
-                        <li>
+                        <li class="dcf-pl-2 dcf-mb-6">
                             <?php if ($transcoding_job && !$transcoding_job->isFinished()): ?>
                                 <p>Swapping media is disabled while a video is being optimized.</p>
                             <?php else: ?>
@@ -164,7 +164,7 @@ $page->jsbody .= $js;
                                     <p><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ALERT, '{"size": 4}');?><span class="dcf-sr-only">Notice:</span> You MUST use HandBrake to optimize the new video.</p>
                                 <?php endif; ?>
                                 <div id="mh_upload_media_container">
-                                    <div class="dcf-ratio dcf-ratio-16x9 mh-upload-box dcf-txt-center" id="mh_upload_media">
+                                    <div class="dcf-p-3 mh-upload-box dcf-txt-center" id="mh_upload_media">
                                         <img
                                             src="<?php echo $baseUrl; ?>/templates/html/css/images/swap-arrows.svg"
                                             aria-hidden="true"
@@ -178,13 +178,13 @@ $page->jsbody .= $js;
                                 </div>
                             <?php endif; ?>
                         </li>
-                        <li>
+                        <li class="dcf-pl-2 dcf-mb-6">
                             <?php echo $savvy->render($context, 'Feed/Media/fields/privacy.tpl.php'); ?>
                         </li>
-                        <li>
+                        <li class="dcf-pl-2 dcf-mb-6">
                             <?php echo $savvy->render($context->feed_selection); ?>
                         </li>
-                        <li style="display:none">
+                        <li class="dcf-pl-2 dcf-mb-6" style="display:none">
                             <div class="dcf-input-checkbox">
                             <?php if($context->media->getProjection() == "equirectangular") { ?>
                                 <input type="checkbox" id="projection" name="projection" checked="checked" value="equirectangular">
@@ -194,26 +194,62 @@ $page->jsbody .= $js;
                                 <label for="projection">360 Video (equirectangular)</label>
                             </div>
                         </li>
-                        </li>
-                        <li>
-                            <div class="mh-tooltip hang-right" id="poster-details">
-                                <?php echo $savvy->render('custom poster tooltip', 'InfoIcon.tpl.php'); ?>
-                              <div>
-                                <p>
-                                    <?php
-                                    $text = '';
-                                    if (isset($context->media) && $context->media->isVideo()) {
-                                        $text = 'This image will override the one chosen above.';
-                                    }
+                        <li class="dcf-pl-2 dcf-mb-6">
+                            <fieldset>
+                                <legend>Poster Image<span class="mh-tooltip dcf-d-inline dcf-p-0" id="poster-details">
+                                        <?php echo $savvy->render('custom poster tooltip', 'InfoIcon.tpl.php'); ?>
+                                        <div>
+                                            <p class="dcf-mb-3">
+                                                <?php
+                                                $text = '';
+                                                if (isset($context->media) && $context->media->isVideo()) {
+                                                    $text = 'This image will override the one chosen above.';
+                                                }
+                                                ?>
+                                                This image will be displayed as the thumbnail for the media.  <?php echo $text; ?>
+                                                Images should be in 16:9 ratio.
+                                            </p>
+                                        </div>
+                                    </span>
+                                </legend>
+                                <?php
+                                    $posterImageURLDisabled = '';
+                                    $additionalOptionsDisplayClass = 'dcf-d-block';
+                                ?>
+                                <?php if(isset($context->media->id) && $context->media->getPosterURL()): ?>
+                                    <div class="dcf-form-group">
+                                        <div class="mh-channel-thumb dcf-txt-center">
+                                            <img src="<?php echo $context->media->getPosterURL(); ?>" alt="<?php echo htmlentities($context->media->title, ENT_QUOTES); ?> Poster Image">
+                                        </div>
+                                    </div>
+
+                                    <?php if ($context->media->isLocalPosterURL()):
+                                            $additionalOptionsDisplayClass = 'dcf-d-none';
+                                            $posterImageURLDisabled = 'disabled';
                                     ?>
-                                  If filled in, this image will be displayed as the thumbnail for the media.  <?php echo $text; ?>
-                                </p>
-                              </div>
-                            </div>
-                            <label for="media_poster">URL of custom poster image</label>
-                            <input id="media_poster" name="poster" type="text" class="dcf-w-100% validate-url" value="<?php echo htmlentities(@$context->media->poster, ENT_QUOTES); ?>" aria-describedby="poster-details" />
+                                    <div class="dcf-input-checkbox dcf-mb-3">
+                                        <input type="checkbox" id="remove-poster-image" name="remove_poster_image" value="1">
+                                        <label for="remove-poster-image">Remove</label>
+                                    </div>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+
+                                <div class="dcf-form-group">
+                                    <label for="poster-image-file">Image Upload</label>
+                                    <input id="poster-image-file" name="poster_image_file" type="file" />
+                                    <input type="hidden" id="current-poster" name="current_poster" value="<?php echo htmlentities(@$context->media->poster, ENT_QUOTES); ?>">
+                                </div>
+
+                                <div class="<?php echo $additionalOptionsDisplayClass; ?>" id="additional-poster-options">
+                                    <p class="dcf-form-group dcf-form-help">or</p>
+                                    <div class="dcf-form-group">
+                                        <label for="poster-image-url">URL of Image</label>
+                                        <input id="poster-image-url" name="poster_image_url" <?php echo $posterImageURLDisabled; ?> type="text" class="dcf-w-100% validate-url" value="<?php echo htmlentities(@$context->media->poster, ENT_QUOTES); ?>" aria-describedby="poster-details" />
+                                    </div>
+                                </div>
+                            </fieldset>
                         </li>
-                        <li>
+                        <li class="dcf-pl-2 dcf-mb-6">
                             <?php if (isset($context->media)): ?>
                             <a class="dcf-btn dcf-btn-primary" href="<?php echo $edit_caption_url ?>">Order/Edit Captions</a>
                             <?php endif; ?>
@@ -221,70 +257,45 @@ $page->jsbody .= $js;
                     </ol>
                 </div>
 
-
-                <div class="dcf-col-100% dcf-col-75%-end@sm">
+                <div class="dcf-col-100% dcf-col-50%-end@md dcf-col-67%-end@lg">
                     <fieldset id="existing_media">
                         <legend class="dcf-legend">Basic Information</legend>
-
                         <div class="dcf-form-group validation-container">
-                            <label for="title">
-                                Title <small class="dcf-required">Required</small>
-                            </label>
-                            <input id="title" name="title" type="text" class="required-entry" value="<?php echo UNL_MediaHub::escape(@$context->media->title); ?>" />
+                            <label for="title">Title <small class="dcf-required">Required</small></label>
+                            <input id="title" name="title" type="text" class="required-entry dcf-w-100%" value="<?php echo UNL_MediaHub::escape(@$context->media->title); ?>" />
                         </div>
-
-                        <div class="dcf-grid-halves@sm dcf-col-gap-vw">
-                            <div>
-                                <div class="dcf-form-group">
-                                    <label for="author">
-                                        Author <small class="dcf-required">Required</small> <span class="dcf-form-help">Name of media creator.</span>
-                                    </label>
-                                    <div>
-                                        <input id="author" name="author" class="required-entry" type="text" value="<?php echo UNL_MediaHub::escape(@$context->media->author); ?>" />
-                                    </div>
-                                </div>
-                                <div class="dcf-form-group">
-                                    <label for="mrss_copyright">Copyright <span class="dcf-form-help">&copy; info for media object.</span></label>
-                                    <div>
-                                        <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[10][element]" type="hidden" value="copyright"/>
-                                        <input id="mrss_copyright" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[10][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'copyright'); ?>"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="dcf-form-group">
-                                    <label for="mrss_credit">
-                                        Credit
-                                    </label>
-                                    <div class="hang-right mh-tooltip" id="credit-details">
-                                        <?php echo $savvy->render('credit tooltip', 'InfoIcon.tpl.php'); ?>
-                                        <div>
-                                            <p>
-                                                Notable entity and the contribution to the creation of the media object.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[9][element]" type="hidden" value="credit"/>
-                                        <input id="mrss_credit" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[9][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'credit'); ?>" aria-describedby="credit-details" />
-                                    </div>
-                                </div>
-                                <div class="dcf-form-group">
-                                    <label for="mrss_category">Category</label>
-                                    <div class="hang-right mh-tooltip" id="category-details">
-                                        <?php echo $savvy->render('category tooltip', 'InfoIcon.tpl.php'); ?>
-                                        <div>
-                                            <p>
-                                                Allows a taxonomy to be set that gives an indication of the type of media content, and its particular contents.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[7][element]" type="hidden" value="category"/>
-                                        <input id="mrss_category" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[7][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'category'); ?>" aria-describedby="category-details"/>
-                                    </div>
+                        <div class="dcf-form-group">
+                            <label for="author">
+                                Author <small class="dcf-required">Required</small> <span class="dcf-form-help">Name of media creator.</span>
+                            </label>
+                            <input id="author" name="author" class="required-entry dcf-w-100%" type="text" value="<?php echo UNL_MediaHub::escape(@$context->media->author); ?>" />
+                        </div>
+                        <div class="dcf-form-group">
+                            <label for="mrss_copyright">Copyright <span class="dcf-form-help">&copy; info for media object.</span></label>
+                            <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[10][element]" type="hidden" value="copyright"/>
+                            <input class="dcf-w-100%" id="mrss_copyright" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[10][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'copyright'); ?>"/>
+                        </div>
+                        <div class="dcf-form-group">
+                            <label for="mrss_credit">Credit</label>
+                            <div class="hang-right mh-tooltip" id="credit-details">
+                                <?php echo $savvy->render('credit tooltip', 'InfoIcon.tpl.php'); ?>
+                                <div>
+                                    <p>Notable entity and the contribution to the creation of the media object.</p>
                                 </div>
                             </div>
+                            <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[9][element]" type="hidden" value="credit"/>
+                            <input class="dcf-w-100%" id="mrss_credit" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[9][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'credit'); ?>" aria-describedby="credit-details" />
+                        </div>
+                        <div class="dcf-form-group">
+                            <label for="mrss_category">Category</label>
+                            <div class="hang-right mh-tooltip" id="category-details">
+                                <?php echo $savvy->render('category tooltip', 'InfoIcon.tpl.php'); ?>
+                                <div>
+                                    <p>Allows a taxonomy to be set that gives an indication of the type of media content, and its particular contents.</p>
+                                </div>
+                            </div>
+                            <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[7][element]" type="hidden" value="category"/>
+                            <input class="dcf-w-100%" id="mrss_category" name="UNL_MediaHub_Feed_Media_NamespacedElements_media[7][value]" type="text" value="<?php echo getFieldValue($context, 'media', 'category'); ?>" aria-describedby="category-details"/>
                         </div>
                         <div class="dcf-form-group">
                             <label for="description">
@@ -308,7 +319,7 @@ $page->jsbody .= $js;
                             </div>
                             <div>
                                 <input name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[4][element]" type="hidden" value="keywords"/>
-                                <input id="itunes_keywords" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[4][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'keywords'); ?>" aria-describedby="tag-details"/>
+                                <input class="dcf-w-100%" id="itunes_keywords" name="UNL_MediaHub_Feed_Media_NamespacedElements_itunes[4][value]" type="text" value="<?php echo getFieldValue($context, 'itunes', 'keywords'); ?>" aria-describedby="tag-details"/>
                             </div>
                         </div>
                     </fieldset>
@@ -636,10 +647,6 @@ $page->jsbody .= $js;
                             </li>
                         </ol>
                     </fieldset>
-                    <div class="dcf-mt-4">
-                        <input type="submit" name="submit" id="continue3" value="Save" class="dcf-btn dcf-btn-primary dcf-float-left" />
-                        <button id="delete-media" class="dcf-btn dcf-btn-primary">Delete</button>
-                    </div>
                 </div>
 
                 <?php
@@ -665,8 +672,44 @@ $page->jsbody .= $js;
                 }
                 ?>
             </div>
+            <div class="dcf-mt-4 dcf-mb-6">
+                <input type="submit" name="submit" id="continue3" value="Save" class="dcf-btn dcf-btn-primary dcf-float-left" />
+                <button id="delete-media" class="dcf-btn dcf-btn-primary">Delete</button>
+            </div>
         </div>
     </div>
 </form>
 <?php echo $savvy->render($context->media, 'Media/DeleteForm.tpl.php'); ?>
 </div>
+
+<?php
+    $page->addScriptDeclaration("
+        var removePosterCheckbox = document.getElementById('remove-poster-image');
+        var mediaForm = document.getElementById('media_form');
+        var postImageUrlInput = document.getElementById('poster-image-url');
+        var currentPosterInput = document.getElementById('current-poster');
+        var additionalPosterOptionsDiv = document.getElementById('additional-poster-options');
+
+        if (removePosterCheckbox) {
+            removePosterCheckbox.addEventListener('change', function() {
+                if (removePosterCheckbox.checked) {
+                    additionalPosterOptionsDiv.classList.remove('dcf-d-none');
+                    additionalPosterOptionsDiv.classList.add('dcf-d-block');
+                    postImageUrlInput.removeAttribute('disabled');
+                    postImageUrlInput.value= '';
+                } else {
+                    additionalPosterOptionsDiv.classList.remove('dcf-d-block');
+                    additionalPosterOptionsDiv.classList.add('dcf-d-none');
+                    postImageUrlInput.setAttribute('disabled', '');
+                    postImageUrlInput.value = currentPosterInput.value;
+                }
+            });
+        }
+
+        if (mediaForm) {
+            mediaForm.addEventListener('submit', function() {
+                postImageUrlInput.removeAttribute('disabled');
+            });
+        }
+    ");
+?>
