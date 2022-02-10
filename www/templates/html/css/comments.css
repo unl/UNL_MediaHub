@@ -14,7 +14,7 @@ Supporting styles for  the display of the COMMENTS used on media pages.
 }
 
 #comments ul li em {
-  color: #666;
+  color: var(--body);
   font-size: .8em;
   margin-left: 5px;
 }
@@ -28,7 +28,7 @@ h3 a {
 }
 
 #comments blockquote {
-  background-color: #fff;
+  background-color: var(--bg-dialog);
   box-shadow: 0 2px 4px rgba(0, 0, 0, .25);
   clear: both;
   margin: 0;
@@ -37,7 +37,7 @@ h3 a {
 }
 
 #comments blockquote::before {
-  background-color: #fff;
+  background-color: var(--bg-dialog);
   bottom: -10px;
   box-shadow: 0 0 4px rgba(0, 0, 0, .25);
   content: '';
@@ -55,7 +55,7 @@ h3 a {
 }
 
 #comments blockquote::after {
-  background-color: #fff;
+  background-color: var(--bg-dialog);
   bottom: 0;
   content: '';
   display: block;
