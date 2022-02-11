@@ -11,6 +11,13 @@ if ($context->isVideo()) {
     }
 }
 
+// Set start time param (t) if valid in query string for media iframe URL
+$time = 0;
+if (!empty($_GET['t'])) {
+    $time = filter_input(INPUT_GET, 't', FILTER_VALIDATE_FLOAT);
+}
+$timeParam = !empty($time) ? '&t=' . $time : '';
+
 $user = UNL_MediaHub_AuthService::getInstance()->getUser();
 
 $context->loadReference('UNL_MediaHub_Media_Comment');
@@ -58,7 +65,7 @@ if ($type === 'audio') {
 <div class="dcf-bleed mh-video-band">
     <div class="dcf-wrapper dcf-pt-4 dcf-pb-4 dcf-d-flex dcf-jc-center">
         <div class="<?php echo $divClass; ?>">
-            <iframe class="<?php echo $iframeClass; ?>" height="667" src="<?php echo $controller->getURL($context)?>?format=iframe&autoplay=0&preload=auto" allowfullscreen title="play media"></iframe>
+            <iframe class="<?php echo $iframeClass; ?>" height="667" src="<?php echo $controller->getURL($context)?>?format=iframe&autoplay=0&preload=auto<?php echo $timeParam; ?>" allowfullscreen title="play media"></iframe>
         </div>
     </div>
 </div>
