@@ -94,6 +94,29 @@
                         });
                     });
 
+                    //Set starttime if valid
+                    player.on('loadedmetadata', function() {
+                        try {
+                            const queryString = $media.get(0).baseURI;
+                            const urlParams = new URLSearchParams(queryString);
+                            const startTime = parseFloat(urlParams.get('t'));
+                            if (startTime && !isNaN(startTime)) {
+                                if (videoElement.tagName === 'AUDIO') {
+                                    const audioPlayer = player.wavesurfer().surfer;
+                                    audioPlayer.on('ready', function(event) {
+                                        if (startTime < audioPlayer.getDuration()) {
+                                            audioPlayer.skipForward(startTime);
+                                        }
+                                    });
+                                } else if (startTime < player.duration()) {
+                                    player.currentTime(startTime);
+                                }
+                            }
+                       } catch(e) {
+                            // do nothing
+                       }
+                    });
+
                     if (videoElement.tagName === 'AUDIO') {
                         //Show loading indicator while loading the audio file
                         player.addClass('vjs-waiting');
