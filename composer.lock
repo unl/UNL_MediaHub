@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "22ab82ab6376d7f651b4aa37646388c2",
+    "content-hash": "f70331272a52134301e7807a3b300bc3",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -3654,26 +3654,26 @@
         },
         {
             "name": "unl/rev-api",
-            "version": "v0.1.2-beta",
+            "version": "v0.2.0-beta",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unl/rev_api.git",
-                "reference": "673ca7bb8aa9a925efcf45753085b964f36fe43d"
+                "reference": "fd8de4688d50318ca763555dd29e1f15e920e34e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unl/rev_api/zipball/673ca7bb8aa9a925efcf45753085b964f36fe43d",
-                "reference": "673ca7bb8aa9a925efcf45753085b964f36fe43d",
+                "url": "https://api.github.com/repos/unl/rev_api/zipball/fd8de4688d50318ca763555dd29e1f15e920e34e",
+                "reference": "fd8de4688d50318ca763555dd29e1f15e920e34e",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "guzzlehttp/guzzle": "^6.0",
-                "php": ">=5.3.0"
+                "php": ">=7.3.0"
             },
             "require-dev": {
                 "dshafik/guzzlehttp-vcr": "dev-master",
-                "phpunit/phpunit": "~4.3.0"
+                "phpunit/phpunit": "^9"
             },
             "type": "library",
             "autoload": {
@@ -3694,9 +3694,9 @@
             "description": "PHP library for the rev.com api",
             "support": {
                 "issues": "https://github.com/unl/rev_api/issues",
-                "source": "https://github.com/unl/rev_api/tree/develop"
+                "source": "https://github.com/unl/rev_api/tree/v0.2.0-beta"
             },
-            "time": "2015-09-15T19:49:37+00:00"
+            "time": "2022-02-17T21:14:57+00:00"
         },
         {
             "name": "unl/unl_cache_lite",
@@ -4039,7 +4039,7 @@
     },
     "platform-dev": [],
     "platform-overrides": {
-        "php": "5.6.1"
+        "php": "7.3.0"
     },
     "plugin-api-version": "2.1.0"
 }

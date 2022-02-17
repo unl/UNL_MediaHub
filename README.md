@@ -45,6 +45,7 @@ Assign proper permissions to allow the web server to write to those directories.
 
 ```bash
 chmod 777 www/uploads
+chmod 777 www/uploads/posters
 chmod 777 www/uploads/tmp
 ```
 
@@ -54,7 +55,7 @@ This can be done with a symlink like `ln -s /abolute-path-to-wdn-dir www/wdn`
 
 ### Requirements:
 
-* PHP 5, 7
+* PHP 7
 * PDO Mysql
 * mediainfo system package. This can be installed with `brew install mediainfo` or a similar command
 
