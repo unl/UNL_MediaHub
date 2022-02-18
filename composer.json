@@ -2,7 +2,7 @@
     "config": {
       "secure-http": false,
       "platform": {
-        "php": "5.6.1"
+        "php": "7.3.0"
       }
     },
     "autoload": {
@@ -39,7 +39,7 @@
       "phpunit/phpunit": "~4.3",
       "ezyang/htmlpurifier": "~4.6",
       "guzzlehttp/guzzle": "^6.0",
-      "unl/rev-api": "0.1.2-beta",
+      "unl/rev-api": "0.2.0-beta",
       "swiftmailer/swiftmailer": "@stable",
       "jasig/phpcas": "1.3.x-dev",
       "captioning/captioning": "2.*",
