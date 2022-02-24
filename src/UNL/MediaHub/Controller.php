@@ -265,6 +265,14 @@ class UNL_MediaHub_Controller
                     throw new Exception('There was an error optimizing this media.', 500);
                 }
 
+                // Auto login private and protected iframe media
+                if ($this->options['format'] === 'iframe' && !$media->canView()) {
+                    // attempt autologin but will likely fail in iframe;
+                    UNL_MediaHub_AuthService::getInstance()->autoLogin($this->options['model']);
+                    if (!$media->canView()) {
+                        $this->displayIframeAccessDeniedMessage($media);
+                    }
+                }
                 $this->canView($media);
                 
                 if (!$media->meetsCaptionRequirement()) {
@@ -361,6 +369,23 @@ class UNL_MediaHub_Controller
         } catch(Exception $e) {
             $this->output[] = $e;
         }
+    }
+
+    function displayIframeAccessDeniedMessage($media) {
+        $message = 'You do not have permission to view this.';
+        if ($media->privacy == 'PROTECTED') {
+            $message = 'This media is <strong>PROTECTED</strong> and may only be viewed by logged in users. If you have an account,';
+        } elseif ($media->privacy == 'PRIVATE') {
+            $message = 'This media is <strong>PRIVATE</strong> and may only be viewed by logged in users with proper channel access. If you have an account and access,';
+        } elseif (!$media->meetsCaptionRequirement()) {
+            $message = 'This media is not published and may only be viewed by logged in users with proper channel access. If you have an account and access,';
+        }
+        $message .= ' <a href="' . $media->getURL() . '" target="_blank">you may view on Mediahub</a>.';
+
+        echo '<div style="margin: 1em;"><div style="padding: 1em; color: #424240; background: #fff">';
+        echo '<h2>Access Denied</h2>';
+        echo '<p>' . $message . '</p>';
+        echo '</div></div>';
     }
 
     function canView($media) {
