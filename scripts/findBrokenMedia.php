@@ -1,8 +1,6 @@
 <?php
 require_once dirname(__FILE__).'/../config.inc.php';
 
-ini_set('display_errors', true);
-
 $mediahub = new UNL_MediaHub();
 
 $list = new UNL_MediaHub_MediaList(array('limit'=>99999));
