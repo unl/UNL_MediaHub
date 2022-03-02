@@ -18,6 +18,7 @@ class UNL_MediaHub_MediaView extends UNL_MediaHub_Models_BaseMediaView
 
         //Update the media play count
         $media->play_count++;
+        $media->last_played = date('Y-m-d H:i:s');
         $media->save();
         
         return $view;
