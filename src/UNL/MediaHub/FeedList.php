@@ -20,8 +20,8 @@ class UNL_MediaHub_FeedList extends UNL_MediaHub_List
      * @var array
      */
     public $options = array(
-        'orderby'            => 'plays',
-        'order'              => 'DESC',
+        'orderby'            => 'title',
+        'order'              => 'ASC',
         'page'               => 0,
         'limit'              => 10,
         'additional_filters' => array(),
@@ -39,11 +39,11 @@ class UNL_MediaHub_FeedList extends UNL_MediaHub_List
         }
         
         if (!in_array($this->options['order'], array('ASC', 'DESC'))) {
-            $this->options['order'] = 'desc';
+            $this->options['order'] = 'ASC';
         }
         
         if (!in_array($this->options['orderby'], array('title', 'datecreated', 'plays'))) {
-            $this->options['orderby'] = 'plays';
+            $this->options['orderby'] = 'title';
         }
     }
     /**
