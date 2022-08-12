@@ -705,5 +705,12 @@ class UNL_MediaHub_Controller
             $page->displayDCFNoticeMessage($siteNotice->title, $siteNotice->message, $siteNotice->type, $siteNotice->noticePath, $siteNotice->containerID);
         }
     }
+
+    /**
+     * @return string the model
+     */
+    public static function getModel() {
+        return $this->options['model'];
+    }
 }
 
