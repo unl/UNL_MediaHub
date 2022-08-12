@@ -29,10 +29,9 @@ class UNL_MediaHub_FeedList extends UNL_MediaHub_List
 
     public function __construct($options = array())
     {
-        $path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
-        $pathsToCheck = array("/channels/");
+        $modelsToAllow = array("UNL_MediaHub_FeedList");
 
-        if (in_array($path, $pathsToCheck)) {
+        if (in_array(UNL_MediaHub_Controller::getModel(), $pathsToCheck)) {
             if (empty($options['order']) || !in_array($options['order'], array('ASC', 'DESC'))) {
                 $this->options['order'] = 'DESC';
             }
@@ -41,7 +40,7 @@ class UNL_MediaHub_FeedList extends UNL_MediaHub_List
                 $this->options['orderby'] = 'plays';
             }
         }
-        
+
         parent::__construct($options);
     }
     
