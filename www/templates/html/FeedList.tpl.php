@@ -56,7 +56,7 @@ if($context->options['orderby'] == 'datecreated'){
         $buttons->buttons = [
             'title' => [
                 'label' => 'Alphabetical',
-                'url' => $baseUrl.'channels/'
+                'url' => '?orderby=title&order=ASC'
             ],
             'datecreated' => [
                 'label' => 'Recent',
@@ -64,7 +64,7 @@ if($context->options['orderby'] == 'datecreated'){
             ],
             'plays' => [
                 'label' => 'Popular',
-                'url' => '?orderby=plays&order=DESC'
+                'url' => $baseUrl.'channels/'
             ]
         ];
         echo $savvy->render($buttons, 'mh-sort-filter.tpl.php');
