@@ -709,7 +709,7 @@ class UNL_MediaHub_Controller
     /**
      * @return string the model
      */
-    public static function getModel() {
+    public function getModel() {
         return $this->options['model'];
     }
 }
