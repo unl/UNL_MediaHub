@@ -11,7 +11,7 @@ class UNL_MediaHub_Controller
      *
      * @var array
      */
-    public static $options = array(
+    public $options = array(
         'model'  => false,
         'format' => 'html',
     );
