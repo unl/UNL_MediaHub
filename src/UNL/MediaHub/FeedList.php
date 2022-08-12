@@ -42,8 +42,6 @@ class UNL_MediaHub_FeedList extends UNL_MediaHub_List
             }
         }
         
-        var_dump($path);
-        var_dump($options);
         parent::__construct($options);
     }
     
