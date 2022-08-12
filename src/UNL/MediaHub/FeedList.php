@@ -30,6 +30,18 @@ class UNL_MediaHub_FeedList extends UNL_MediaHub_List
     public function __construct($options = array())
     {
         $path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+        $pathsToCheck = array("/channels/");
+
+        if (in_array($path, $pathsToCheck)) {
+            if (!in_array($this->options['order'], array('ASC', 'DESC'))) {
+                $this->options['order'] = 'DESC';
+            }
+            
+            if (!in_array($this->options['orderby'], array('title', 'datecreated', 'plays'))) {
+                $this->options['orderby'] = 'plays';
+            }
+        }
+        
         var_dump($path);
         var_dump($options);
         parent::__construct($options);
