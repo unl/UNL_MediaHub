@@ -382,7 +382,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
 
     function getFeeds()
     {
-        return new UNL_MediaHub_FeedList(array('limit'=>null, 'filter'=>new UNL_MediaHub_FeedList_Filter_WithMediaId($this->id)));
+        return new UNL_MediaHub_FeedList(array('orderby'=>'title', 'limit'=>null, 'filter'=>new UNL_MediaHub_FeedList_Filter_WithMediaId($this->id)));
     }
 
     function delete(Doctrine_Connection $conn = null)
