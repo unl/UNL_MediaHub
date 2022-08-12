@@ -33,11 +33,11 @@ class UNL_MediaHub_FeedList extends UNL_MediaHub_List
         $pathsToCheck = array("/channels/");
 
         if (in_array($path, $pathsToCheck)) {
-            if (!in_array($this->options['order'], array('ASC', 'DESC'))) {
+            if (empty($options['order']) || !in_array($options['order'], array('ASC', 'DESC'))) {
                 $this->options['order'] = 'DESC';
             }
             
-            if (!in_array($this->options['orderby'], array('title', 'datecreated', 'plays'))) {
+            if (empty($options['orderby']) || !in_array($options['orderby'], array('title', 'datecreated', 'plays'))) {
                 $this->options['orderby'] = 'plays';
             }
         }
