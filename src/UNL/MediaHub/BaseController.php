@@ -1,7 +1,7 @@
 <?php
 class UNL_MediaHub_BaseController
 {
-    public $options = array();
+    public static $options = array();
     
     /**
      * Get a cacheable version of the media player (we need to inject the controller options for this)
