@@ -39,7 +39,7 @@ class UNL_MediaHub_FeedList extends UNL_MediaHub_List
         }
         
         if (!in_array($this->options['order'], array('ASC', 'DESC'))) {
-            $this->options['order'] = 'desc';
+            $this->options['order'] = 'DESC';
         }
         
         if (!in_array($this->options['orderby'], array('title', 'datecreated', 'plays'))) {
