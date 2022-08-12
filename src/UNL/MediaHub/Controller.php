@@ -11,7 +11,7 @@ class UNL_MediaHub_Controller
      *
      * @var array
      */
-    public $options = array(
+    public static $options = array(
         'model'  => false,
         'format' => 'html',
     );
@@ -704,13 +704,6 @@ class UNL_MediaHub_Controller
         if (isset($siteNotice) && $siteNotice->display) {
             $page->displayDCFNoticeMessage($siteNotice->title, $siteNotice->message, $siteNotice->type, $siteNotice->noticePath, $siteNotice->containerID);
         }
-    }
-
-    /**
-     * @return string the model
-     */
-    public static function getModel() {
-        return UNL_MediaHub_Controller::$options['model'];
     }
 }
 
