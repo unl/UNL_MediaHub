@@ -29,6 +29,9 @@ class UNL_MediaHub_FeedList extends UNL_MediaHub_List
 
     public function __construct($options = array())
     {
+        $path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+        var_dump($path);
+        var_dump($options);
         parent::__construct($options);
     }
     
