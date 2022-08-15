@@ -31,6 +31,8 @@ class UNL_MediaHub_FeedList extends UNL_MediaHub_List
     {
         $modelsToAllow = array("UNL_MediaHub_FeedList");
 
+        // if we are on the channels feed we want the default values to be plays desc
+        // we tried changing what was in $options but that broke everything
         if (in_array(UNL_MediaHub_Controller::getModel(), $modelsToAllow)) {
             if (empty($options['order']) || !in_array($options['order'], array('ASC', 'DESC'))) {
                 $this->options['order'] = 'DESC';

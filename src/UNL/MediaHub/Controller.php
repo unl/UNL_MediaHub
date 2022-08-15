@@ -16,6 +16,11 @@ class UNL_MediaHub_Controller
         'format' => 'html',
     );
 
+    /** 
+     * MediaHub copy of $options['model']
+     * 
+     * @var string
+    */
     public static $model;
 
     /**
@@ -138,6 +143,7 @@ class UNL_MediaHub_Controller
         // Initialize default options
         $this->options = $options + $this->options;
 
+        // set this for later use
         UNL_MediaHub_Controller::$model = $this->options['model'];
         
         if ($this->options['model'] == 'media_embed') {
@@ -711,6 +717,8 @@ class UNL_MediaHub_Controller
     }
 
     /**
+     * This is only used in the FeedList for checking if the channels feed's model is being used
+     * 
      * @return string the current model
      */
     public static function getModel()
