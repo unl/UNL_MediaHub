@@ -16,6 +16,8 @@ class UNL_MediaHub_Controller
         'format' => 'html',
     );
 
+    public static $model;
+
     /**
      * Mediahub app name to use.
      *
@@ -135,6 +137,8 @@ class UNL_MediaHub_Controller
 
         // Initialize default options
         $this->options = $options + $this->options;
+
+        UNL_MediaHub_Controller::$model = $this->options['model'];
         
         if ($this->options['model'] == 'media_embed') {
             $this->options['format'] = 'js';
@@ -711,7 +715,7 @@ class UNL_MediaHub_Controller
      */
     public static function getModel()
     {
-        return self::$options['model'];
+        return UNL_MediaHub_Controller::$model;
     }
 }
 
