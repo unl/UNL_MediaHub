@@ -31,7 +31,7 @@ class UNL_MediaHub_FeedList extends UNL_MediaHub_List
     {
         $modelsToAllow = array("UNL_MediaHub_FeedList");
 
-        if (in_array(UNL_MediaHub_Controller::getModel(), $pathsToCheck)) {
+        if (in_array(UNL_MediaHub_Controller::getModel(), $modelsToAllow)) {
             if (empty($options['order']) || !in_array($options['order'], array('ASC', 'DESC'))) {
                 $this->options['order'] = 'DESC';
             }
