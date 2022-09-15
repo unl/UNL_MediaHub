@@ -210,7 +210,7 @@ if ($type === 'audio') {
     </div>
 </div>
 
-<div class="dcf-modal dcf-bg-overlay-dark dcf-fixed dcf-pin-top dcf-pin-left dcf-h-100% dcf-w-100% dcf-d-flex dcf-ai-center dcf-jc-center dcf-opacity-100 dcf-pointer-events-auto" id="embed-modal" aria-labelledby="embed-modal" aria-hidden="false" role="dialog" tabindex="-1">
+<div class="dcf-modal dcf-bg-overlay-dark dcf-fixed dcf-pin-top dcf-pin-left dcf-h-100% dcf-w-100% dcf-d-flex dcf-ai-center dcf-jc-center dcf-opacity-100 dcf-pointer-events-auto" id="embed-modal" aria-labelledby="embed-modal" aria-hidden="false" role="dialog" tabindex="-1" hidden>
     <div class="dcf-modal-wrapper dcf-relative dcf-h-auto dcf-overflow-y-auto" role="document">
         <header class="dcf-modal-header dcf-wrapper dcf-pt-8 dcf-sticky dcf-pin-top">
             <h2 id="embed-modal-heading">Embed</h2>
