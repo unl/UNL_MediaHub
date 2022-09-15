@@ -211,10 +211,10 @@ if ($type === 'audio') {
 </div>
 
 <div class="dcf-modal" id="embed-modal" hidden>
-    <div class="dcf-modal-wrapper dcf-relative dcf-h-auto dcf-overflow-y-auto" role="document">
+    <div class="dcf-modal-wrapper">
         <header class="dcf-modal-header">
             <h2 id="embed-modal-heading">Embed</h2>
-            <button class="dcf-btn-close-modal dcf-btn dcf-btn-tertiary dcf-absolute dcf-pin-top dcf-pin-right dcf-z-1" type="button" aria-label="Close">Close</button>
+            <button class="dcf-btn-close-modal">Close</button>
         </header>
         <div class="dcf-modal-content">
             <?php $embed = $savvy->render(UNL_MediaHub_Media_Embed::getById($context->id, UNL_MediaHub_Controller::$current_embed_version)); ?>
