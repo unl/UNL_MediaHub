@@ -16,6 +16,13 @@ class UNL_MediaHub_Controller
         'format' => 'html',
     );
 
+    /** 
+     * MediaHub copy of $options['model']
+     * 
+     * @var string
+    */
+    public static $model;
+
     /**
      * Mediahub app name to use.
      *
@@ -135,6 +142,9 @@ class UNL_MediaHub_Controller
 
         // Initialize default options
         $this->options = $options + $this->options;
+
+        // set this for later use
+        UNL_MediaHub_Controller::$model = $this->options['model'];
         
         if ($this->options['model'] == 'media_embed') {
             $this->options['format'] = 'js';
@@ -704,6 +714,16 @@ class UNL_MediaHub_Controller
         if (isset($siteNotice) && $siteNotice->display) {
             $page->displayDCFNoticeMessage($siteNotice->title, $siteNotice->message, $siteNotice->type, $siteNotice->noticePath, $siteNotice->containerID);
         }
+    }
+
+    /**
+     * This is only used in the FeedList for checking if the channels feed's model is being used
+     * 
+     * @return string the current model
+     */
+    public static function getModel()
+    {
+        return UNL_MediaHub_Controller::$model;
     }
 }
 
