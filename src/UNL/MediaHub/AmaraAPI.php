@@ -1,10 +1,17 @@
 <?php
 class UNL_MediaHub_AmaraAPI
 {
-    const BASE_API_URI = 'https://amara.org/api2/partners/';
+    const BASE_API_URI = 'https://amara.org/api';
     
     public static $amara_username = false;
     public static $amara_api_key  = false;
+
+    /**
+     * Number of seconds until timeout for requests.
+     * 
+     * @var int
+     */
+    protected $api_future = "20190619";
 
     /**
      * Number of seconds until timeout for requests.
@@ -32,8 +39,9 @@ class UNL_MediaHub_AmaraAPI
         try {
             $response = $this->guzzle->get(self::BASE_API_URI . $request_path, array(
                 'headers' => array(
-                    'X-api-username' => self::$amara_username,
-                    'X-apikey' => self::$amara_api_key,
+                    // 'X-api-username' => self::$amara_username,
+                    'X-api-key'       => self::$amara_api_key,
+                    'X-API-FUTURE'   => $this->$api_future,
                 ),
                 'timeout' => $this->timeout
             ));
@@ -51,8 +59,9 @@ class UNL_MediaHub_AmaraAPI
         try {
             $response = $this->guzzle->post(self::BASE_API_URI.$request_path, array(
                 'headers' => array(
-                    'X-api-username' => self::$amara_username,
-                    'X-apikey'       => self::$amara_api_key,
+                    // 'X-api-username' => self::$amara_username,
+                    'X-api-key'       => self::$amara_api_key,
+                    'X-API-FUTURE'   => $this->$api_future,
                 ),
                 'body' => json_encode($content),
                 'timeout' => $this->timeout,
