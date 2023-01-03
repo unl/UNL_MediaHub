@@ -41,7 +41,7 @@ class UNL_MediaHub_AmaraAPI
                 'headers' => array(
                     // 'X-api-username' => self::$amara_username,
                     'X-api-key'       => self::$amara_api_key,
-                    'X-API-FUTURE'   => $this->$api_future,
+                    'X-API-FUTURE'   => $this->api_future,
                 ),
                 'timeout' => $this->timeout
             ));
@@ -61,7 +61,7 @@ class UNL_MediaHub_AmaraAPI
                 'headers' => array(
                     // 'X-api-username' => self::$amara_username,
                     'X-api-key'       => self::$amara_api_key,
-                    'X-API-FUTURE'   => $this->$api_future,
+                    'X-API-FUTURE'   => $this->api_future,
                 ),
                 'body' => json_encode($content),
                 'timeout' => $this->timeout,
