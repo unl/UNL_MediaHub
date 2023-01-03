@@ -83,7 +83,7 @@ class UNL_MediaHub_AmaraAPI
 
         return json_decode($infoJSON);
     }
-    
+
     public function createMedia($mediaUrl)
     {
         return $this->post('videos/?format=json', array(
@@ -101,11 +101,12 @@ class UNL_MediaHub_AmaraAPI
 
         if (!$mediaDetails || $mediaDetails->meta->total_count == 0) {
             //create the media
-            if (!$result = $this->createMedia($mediaUrl)) {
+            $result = $this->createMedia($mediaUrl);
+            if (!$result) {
                 //Media could not be created, can not continue.
                 return false;
             }
-            
+
             //update the details
             $mediaDetails = $this->getMediaDetails($mediaUrl);
         }
@@ -163,14 +164,14 @@ class UNL_MediaHub_AmaraAPI
         }
 
         foreach ($mediaDetails->objects[0]->languages as $track) {
-            $tracks[$track->code] = UNL_MediaHub_Controller::$url . 
-            'media/'.
-            $mediaID.
-            '/'.
-            $format.
-            '?amara_id='.
-            $mediaDetails->objects[0]->id.
-            '&lang_code='.
+            $tracks[$track->code] = UNL_MediaHub_Controller::$url .
+            'media/' .
+            $mediaID .
+            '/' .
+            $format .
+            '?amara_id=' .
+            $mediaDetails->objects[0]->id .
+            '&lang_code=' .
             $track->code;
         }
 
