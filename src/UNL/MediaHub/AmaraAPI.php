@@ -1,7 +1,7 @@
 <?php
 class UNL_MediaHub_AmaraAPI
 {
-    const BASE_API_URI = 'https://amara.org/api';
+    const BASE_API_URI = 'https://amara.org/api/';
     
     public static $amara_username = false;
     public static $amara_api_key  = false;
