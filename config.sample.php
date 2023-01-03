@@ -30,8 +30,7 @@ UNL_MediaHub_Controller::$themePath = __DIR__ . '/src/Themes/unl';
 UNL_MediaHub_Controller::$template = UNL\Templates\Theme::TYPE_APP;
 UNL_MediaHub_Controller::$templateVersion = UNL\Templates\Templates::VERSION_5_3;
 
-UNL_MediaHub_AmaraAPI::$amara_username = false;
-UNL_MediaHub_AmaraAPI::$amara_api_key  = false;
+UNL_MediaHub_AmaraAPI::$amaraAPIKey  = false;
 
 UNL_MediaHub_RevAPI::$host = \RevAPI\Rev::SANDBOX_HOST;
 UNL_MediaHub_RevAPI::$client_api_key = '';
