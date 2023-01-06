@@ -31,7 +31,7 @@
                     </p>
                     <ul>
                         <li>
-                            <strong>Important</strong>: captions cost $1.25 per video minute, rounded up.  Example: A 3:31 minute video would cost $4.40.
+                            <strong>Important</strong>: captions cost $1.50 per video minute, rounded up.  Example: A 3:31 minute video would cost $5.28.
                         </li>
                         <li>
                             Orders are usually completed within 24 hours.
@@ -53,7 +53,7 @@
                     <?php if (!$context->hasPendingOrder()): ?>
                     <form id="caption_order" method="post" class="dcf-form">
                         <?php if ($duration = $context->media->findDuration()): ?>
-                            <?php $estimate = sprintf("%01.2f", round($duration->getTotalSeconds()/60 * 1.25, 2)); ?>
+                            <?php $estimate = sprintf("%01.2f", round($duration->getTotalSeconds()/60 * 1.50, 2)); ?>
                             <input type="hidden" name="media_duration" value="<?php echo UNL_MediaHub::escape($duration->getString()); ?>" />
                             <input type="hidden" name="estimate" value="<?php echo UNL_MediaHub::escape($estimate) ?>" />
                             <h3 class="clear-top">Caption your video for <strong>$<?php echo UNL_MediaHub::escape($estimate) ?>.</strong></h3>  
