@@ -48,7 +48,7 @@ require(['jquery'], function($){
                             return;
                         }
 
-                        document.getElementById('filelist').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
+                        document.getElementById('filelist').innerHTML += '<div id="' + file.id + '" class="dcf-w-max-100% dcf-word-wrap" style="hyphens:none;">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
                     });
                     uploader.disableBrowse();
                     var $submit = $('input[type=submit]');
