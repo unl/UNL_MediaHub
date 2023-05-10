@@ -34,7 +34,17 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                     <div class="dcf-ratio dcf-ratio-16x9 mh-upload-box" id="mh_upload_media">
                         <div class="dcf-ratio-child dcf-d-flex dcf-flex-col dcf-ai-center dcf-jc-center dcf-txt-center">
                             <span>Add Media</span>
-                            <p class="dcf-mb-0">.mp4 or .mp3<br>(Maximum file size: <?php echo UNL_MediaHub_Controller::$max_upload_mb; ?>mb)</p>
+                            <p class="dcf-mb-0">
+                                <?php if ($user->canTranscode()): ?>
+                                    mp4, .mov, or .mp3
+                                    <br>
+                                    (Maximum file size: <?php echo UNL_MediaHub_Controller::$max_upload_mb * 10; ?>mb)
+                                <?php else: ?>
+                                    .mp4 or .mp3
+                                    <br>
+                                    (Maximum file size: <?php echo UNL_MediaHub_Controller::$max_upload_mb; ?>mb)
+                                <?php endif ?>
+                            </p>
                         </div>
                     </div>
                     <div id="filelist" class="mh-upload-box dcf-txt-center">
