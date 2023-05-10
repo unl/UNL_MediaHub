@@ -38,11 +38,23 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                                 <?php if ($user->canTranscode()): ?>
                                     mp4, .mov, or .mp3
                                     <br>
-                                    (Maximum file size: <?php echo UNL_MediaHub_Controller::$max_upload_mb * 10; ?>mb or ~10gb)
+                                    (Maximum file size: <?php echo UNL_MediaHub_Controller::$max_upload_mb * 10; ?>mb
+                                    or <?php echo number_format(
+                                        ((UNL_MediaHub_Controller::$max_upload_mb * 10) / 1000),
+                                        2,
+                                        '.',
+                                        ','
+                                    ); ?>gb)
                                 <?php else: ?>
                                     .mp4 or .mp3
                                     <br>
-                                    (Maximum file size: <?php echo UNL_MediaHub_Controller::$max_upload_mb; ?>mb or ~1gb)
+                                    (Maximum file size: <?php echo UNL_MediaHub_Controller::$max_upload_mb; ?>mb
+                                    or <?php echo number_format(
+                                        ((UNL_MediaHub_Controller::$max_upload_mb) / 1000),
+                                        2,
+                                        '.',
+                                        ','
+                                    ); ?>gb)
                                 <?php endif ?>
                             </p>
                         </div>
