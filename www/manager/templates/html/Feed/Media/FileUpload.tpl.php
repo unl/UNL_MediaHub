@@ -36,7 +36,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                             <span>Add Media</span>
                             <p class="dcf-mb-0">
                                 <?php if ($user->canTranscode()): ?>
-                                    mp4, .mov, or .mp3
+                                    .mp4, .mov, or .mp3
                                     <br>
                                     (Maximum file size: <?php echo UNL_MediaHub_Controller::$max_upload_mb * 10; ?>MB
                                     or <?php echo number_format(
