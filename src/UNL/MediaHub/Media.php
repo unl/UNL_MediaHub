@@ -6,6 +6,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     const CODEC_REMOTE_VIDEO = 'remote-video-is-unknown';
     const ASPECT_16x9 = '16:9';
     const ASPECT_4x3 = '4:3';
+    const ASPECT_9x16 = '9:16';
     const POSTER_PATH = 'uploads/posters/';
     
     /**
@@ -171,7 +172,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     }
 
     /**
-     * Get the aspect ratio of the video. Only supports 4x3 or 16x9
+     * Get the aspect ratio of the video. Only supports 4x3 or 16x9 or 9x16
      * 
      * @return bool|string
      */
@@ -200,6 +201,10 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         
         if ($ratio == '4:3') {
             return self::ASPECT_4x3;
+        }
+
+        if ($ratio == '9:16') {
+            return self::ASPECT_9x16;
         }
         
         //Otherwise assume 16x9

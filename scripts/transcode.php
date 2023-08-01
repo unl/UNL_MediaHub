@@ -249,6 +249,11 @@ function createMp4Job($endpoint, $role, $input, $output, $aspect_ratio)
         $job_settings = file_get_contents(__DIR__.'/../data/mediaconvert.mp4.4x3.template.json');
     }
 
+    //Use 9x16 if we need to
+    if (UNL_MediaHub_Media::ASPECT_9x16 == $aspect_ratio) {
+        $job_settings = file_get_contents(__DIR__.'/../data/mediaconvert.mp4.9x16.template.json');
+    }
+
     $job_settings = json_decode($job_settings, true);
 
     //We are not using a job template hosted in aws because we need to customize the destination
@@ -277,6 +282,11 @@ function createHlsJob($endpoint, $role, $input, $output, $aspect_ratio)
     //Use 4:3 if we need to
     if (UNL_MediaHub_Media::ASPECT_4x3 == $aspect_ratio) {
         $job_settings = file_get_contents(__DIR__.'/../data/mediaconvert.hls.4x3.template.json');
+    }
+
+    //Use 9x16 if we need to
+    if (UNL_MediaHub_Media::ASPECT_9x16 == $aspect_ratio) {
+        $job_settings = file_get_contents(__DIR__.'/../data/mediaconvert.hls.9x16.template.json');
     }
     
     $job_settings = json_decode($job_settings, true);
