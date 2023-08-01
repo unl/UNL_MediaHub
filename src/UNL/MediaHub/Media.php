@@ -580,9 +580,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         if (!empty($imageInfo)) {
             $width = intval($imageInfo[0]);
             $height = intval($imageInfo[1]);
-            if ($height > $width) {
-                $errors[] = 'Media poster image height cannot be greater than width. Images with 16:9 ratio are recommended.';
-            } elseif ($width > 1920) {
+            if ($width > 1920) {
                 $errors[] = 'Media poster image must not be wider than 1920 pixels.';
             } elseif ($height > 1080) {
                 $errors[] = 'Media poster image must not be taller than 1080 pixels.';
