@@ -117,7 +117,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                                         <input id="optimization-1" type="radio" name="optimization" value="none" /><label for="optimization-1">None (video is already optimized with HandBrake presets)</label>
                                     </div>
                                     <div class="dcf-input-radio">
-                                        <input id="optimization-2" type="radio" name="optimization" value="mp4" /><label for="optimization-2">Single file at quarter HD (540p, use this to reduce cost)</label>
+                                        <input id="optimization-2" type="radio" name="optimization" value="mp4" /><label for="optimization-2">Single file at quarter HD (720p, use this to reduce cost)</label>
                                     </div>
                                     <div class="dcf-input-radio">
                                         <input id="optimization-3" type="radio" name="optimization" value="hls" checked="checked" /><label for="optimization-3">Multiple files to optimize video quality (480p, 540p, 720p, and 1080p)</label>
