@@ -198,15 +198,15 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         } catch (\Exception $e) {
             return false;
         }
-        
+
         if ($ratio == '4:3') {
             return self::ASPECT_4x3;
         }
 
-        if ($ratio == '9:16') {
+        if ($ratio == '0.562') {
             return self::ASPECT_9x16;
         }
-        
+
         //Otherwise assume 16x9
         return self::ASPECT_16x9;
     }
