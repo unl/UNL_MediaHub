@@ -1,0 +1,41 @@
+{
+  "Settings": {
+    "OutputGroups": [
+      {
+        "Name": "File Group",
+        "Outputs": [
+          {
+            "Preset": "mp4 1x1 720p",
+            "Extension": "mp4"
+          }
+        ],
+        "OutputGroupSettings": {
+          "Type": "FILE_GROUP_SETTINGS",
+          "FileGroupSettings": {
+            "Destination": "--fill in--"
+          }
+        }
+      }
+    ],
+    "Inputs": [
+      {
+        "AudioSelectors": {
+          "Audio Selector 1": {
+            "Offset": 0,
+            "DefaultSelection": "DEFAULT",
+            "ProgramSelection": 1
+          }
+        },
+        "VideoSelector": {
+          "ColorSpace": "FOLLOW"
+        },
+        "FilterEnable": "AUTO",
+        "PsiControl": "USE_PSI",
+        "FilterStrength": 0,
+        "DeblockFilter": "DISABLED",
+        "DenoiseFilter": "DISABLED",
+        "TimecodeSource": "EMBEDDED"
+      }
+    ]
+  }
+}

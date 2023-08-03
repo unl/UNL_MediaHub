@@ -5,8 +5,10 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
 {
     const CODEC_REMOTE_VIDEO = 'remote-video-is-unknown';
     const ASPECT_16x9 = '16:9';
-    const ASPECT_4x3 = '4:3';
     const ASPECT_9x16 = '9:16';
+    const ASPECT_4x3 = '4:3';
+    const ASPECT_3x4 = '3:4';
+    const ASPECT_1x1 = '1:1';
     const POSTER_PATH = 'uploads/posters/';
     
     /**
@@ -199,8 +201,16 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
             return false;
         }
 
+        if ($ratio == '1.000') {
+            return self::ASPECT_1x1;
+        }
+
         if ($ratio == '4:3') {
             return self::ASPECT_4x3;
+        }
+
+        if ($ratio == '0.750') {
+            return self::ASPECT_3x4;
         }
 
         if ($ratio == '0.562') {
