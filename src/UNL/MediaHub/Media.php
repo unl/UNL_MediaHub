@@ -195,7 +195,10 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
                 return false;
             }
 
+            $rotation = $videos[0]->get('rotation')[0] ?? '0';
+
             $ratio = $videos[0]->get('display_aspect_ratio')->getTextvalue();
+            $ratioFlipped = $rotation === '90.000' || $rotation === '270.000';
 
         } catch (\Exception $e) {
             return false;
@@ -205,15 +208,15 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
             return self::ASPECT_1x1;
         }
 
-        if ($ratio == '4:3') {
+        if ($ratio == '4:3' || ($ratioFlipped && $ratio == '0.750')) {
             return self::ASPECT_4x3;
         }
 
-        if ($ratio == '0.750') {
+        if ($ratio == '0.750' || ($ratioFlipped && $ratio == '4:3')) {
             return self::ASPECT_3x4;
         }
 
-        if ($ratio == '0.562') {
+        if ($ratio == '0.562' || ($ratioFlipped && $ratio == '16:9')) {
             return self::ASPECT_9x16;
         }
 
