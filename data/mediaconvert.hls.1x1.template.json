@@ -25,6 +25,10 @@
             "NameModifier": "480p"
           },
           {
+            "Preset": "HLS 540p 1x1 single pass",
+            "NameModifier": "540p"
+          },
+          {
             "Preset": "HLS 720p 1x1 single pass",
             "NameModifier": "720p"
           },
