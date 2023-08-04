@@ -264,7 +264,14 @@ $page->jsbody .= $js;
                                 <?php if(isset($context->media->id) && $context->media->getPosterURL()): ?>
                                     <div class="dcf-form-group">
                                         <div class="mh-channel-thumb dcf-txt-center dcf-d-flex dcf-jc-center dcf-mb-3">
-                                            <img class="dcf-w-auto dcf-h-auto dcf-w-max-100%" style="max-height: 15rem;"  src="<?php echo $context->media->getPosterURL(); ?>" alt="<?php echo htmlentities($context->media->title, ENT_QUOTES); ?> Poster Image">
+                                            <img
+                                                class="dcf-w-auto dcf-h-auto dcf-w-max-100%"
+                                                style="max-height: 15rem;"
+                                                src="<?php echo $context->media->getPosterURL(); ?>"
+                                                alt="<?php
+                                                    echo htmlentities($context->media->title, ENT_QUOTES);
+                                                    ?> Poster Image"
+                                            >
                                         </div>
                                     </div>
 
@@ -501,7 +508,11 @@ $page->jsbody .= $js;
                             </div>
                         </div>
                     </fieldset>
-                    <fieldset id="geo_location" class="dcf-mt-3 dcf-collapsible-fieldset dcf-d-none" data-start-expanded="false">
+                    <fieldset
+                        id="geo_location"
+                        class="dcf-mt-3 dcf-collapsible-fieldset dcf-d-none"
+                        data-start-expanded="false"
+                    >
                         <legend class="dcf-legend">Geo Location</legend>
                         <ol>
                             <li>
@@ -525,7 +536,11 @@ $page->jsbody .= $js;
                     </fieldset>
 
                     <?php $customFields = UNL_MediaHub_Feed_Media_NamespacedElements_mediahub::getCustomElements(); ?>
-                    <fieldset class="dcf-mt-3 dcf-collapsible-fieldset dcf-d-none" id="other_header" data-start-expanded="false">
+                    <fieldset
+                        class="dcf-mt-3 dcf-collapsible-fieldset dcf-d-none"
+                        id="other_header"
+                        data-start-expanded="false"
+                    >
                         <legend class="dcf-legend">Other Information</legend>
                         <ol>
                             <?php foreach ($customFields as $customField=>$description): ?>
