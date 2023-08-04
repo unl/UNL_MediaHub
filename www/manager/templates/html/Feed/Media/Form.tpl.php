@@ -226,6 +226,8 @@ $page->jsbody .= $js;
                                                 unl-bg-blue
                                                 dcf-p-1
                                                 dcf-rounded
+                                                dcf-txt-md
+                                                dcf-lh-4
                                             "
                                             style="min-width: 25ch;"
                                         >
