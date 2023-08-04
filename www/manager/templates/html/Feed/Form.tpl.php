@@ -178,7 +178,9 @@ $page->addScriptDeclaration("
                         style="min-width: 25ch;"
                     >
                         <p class="dcf-m-0 dcf-regular">
-                            Images should follow the standard UNL image standards. <a href="https://github.com/unl/UNL_MediaHub/raw/master/designFiles/feedTemplate.psd">(get the sample template)</a>
+                            Images should follow the standard UNL image standards.
+                            <a href="https://github.com/unl/UNL_MediaHub/raw/master/designFiles/feedTemplate.psd">(get
+                                the sample template)</a>
                         </p>
                     </div>
                 </div>
@@ -580,7 +582,8 @@ $page->addScriptDeclaration("
                         style="min-width: 25ch;"
                     >
                         <p class="dcf-m-0 dcf-regular">
-                            This tag allows users to search on a maximum of 12 text keywords. Use commas to separate keywords.
+                            This tag allows users to search on a maximum of 12 text keywords.
+                            Use commas to separate keywords.
                         </p>
                     </div>
                 </div>
@@ -706,7 +709,8 @@ $page->addScriptDeclaration("
                         style="min-width: 25ch;"
                     >
                         <p class="dcf-m-0 dcf-regular">
-                            The contents of this tag are shown in the Description column in iTunes. The subtitle displays best if it is only a few words long.
+                            The contents of this tag are shown in the Description column in iTunes. The
+                            subtitle displays best if it is only a few words long.
                         </p>
                     </div>
                 </div>
@@ -745,7 +749,9 @@ $page->addScriptDeclaration("
                         style="min-width: 25ch;"
                     >
                         <p class="dcf-m-0 dcf-regular">
-                            The contents of this tag are shown in a separate window that appears when the "circled i" in the Description column is clicked. It also appears on the iTunes page for your podcast.
+                            The contents of this tag are shown in a separate window that appears when the
+                            "circled ?" in the Description column is clicked. It also appears on the
+                            iTunes page for your podcast.
                         </p>
                     </div>
                 </div>
@@ -922,7 +928,8 @@ $page->addScriptDeclaration("
                         style="min-width: 25ch;"
                     >
                         <p class="dcf-m-0 dcf-regular">
-                            Allows a taxonomy to be set that gives an indication of the type of media content, and its particular contents
+                            Allows a taxonomy to be set that gives an indication of the type of media content,
+                            and its particular contents
                         </p>
                     </div>
                 </div>
@@ -1086,7 +1093,8 @@ $page->addScriptDeclaration("
                         style="min-width: 25ch;"
                     >
                         <p class="dcf-m-0 dcf-regular">
-                            Allows the inclusion of a text transcript, closed captioning, or lyrics of the media content.
+                            Allows the inclusion of a text transcript, closed captioning, or lyrics
+                            of the media content.
                         </p>
                     </div>
                 </div>
