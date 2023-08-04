@@ -208,15 +208,15 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
             return self::ASPECT_1x1;
         }
 
-        if ($ratio == '4:3' || ($ratioFlipped && $ratio == '0.750')) {
+        if ((!$ratioFlipped && $ratio == '4:3') || ($ratioFlipped && $ratio == '0.750')) {
             return self::ASPECT_4x3;
         }
 
-        if ($ratio == '0.750' || ($ratioFlipped && $ratio == '4:3')) {
+        if ((!$ratioFlipped && $ratio == '0.750') || ($ratioFlipped && $ratio == '4:3')) {
             return self::ASPECT_3x4;
         }
 
-        if ($ratio == '0.562' || ($ratioFlipped && $ratio == '16:9')) {
+        if ((!$ratioFlipped && $ratio == '0.562') || ($ratioFlipped && $ratio == '16:9')) {
             return self::ASPECT_9x16;
         }
 
