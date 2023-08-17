@@ -75,7 +75,10 @@ if ($type === 'audio') {
     <div class="dcf-wrapper mh-media-page">
         <?php if ($user && $context->userCanEdit($user)): ?>
           <div class="dcf-pb-4">
-            <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=addmedia&id=' . $context->id ?>" class="dcf-btn dcf-btn-primary">
+            <a
+                href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=addmedia&id=' . $context->id ?>"
+                class="dcf-btn dcf-btn-primary"
+            >
                 <div class="dcf-d-flex dcf-jc-center dcf-ai-center dcf-col-gap-2">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
