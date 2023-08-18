@@ -1,5 +1,11 @@
 window.addEventListener('inlineJSReady', function() {
     WDN.initializePlugin('collapsible-fieldsets');
+
+    document.querySelectorAll('.dcf-collapsible-fieldset').forEach(function(fieldset){
+        fieldset.addEventListener('ready', function(){
+            fieldset.classList.remove('dcf-d-none');
+        });
+    });
 }, false);
 
 require(['jquery'], function($){
@@ -231,12 +237,6 @@ require(['jquery'], function($){
                         mediaErrorsContainer.style.display = 'block';
                         mediaErrorsContainer.scrollIntoView();
                     }
-                });
-
-                document.querySelectorAll('.dcf-collapsible-fieldset').forEach(function(fieldset){
-                    fieldset.addEventListener('ready', function(){
-                        fieldset.classList.remove('dcf-d-none');
-                    });
                 });
 
                 document.getElementById('geo_location').addEventListener('toggleElementOn', function(){
