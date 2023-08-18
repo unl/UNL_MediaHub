@@ -74,22 +74,8 @@ Supporting styles for the manager forms (add media, channel)
 }
 iframe * {margin:0px}
 
-#dcf-main .collapsible legend {
-    width: 99%;
-    cursor: pointer;
-}
-
-#dcf-main .collapsible ol {
-    border: none;
-}
-
 #dcf-main #media_form > fieldset > legend + ol > li:first-child {
     border-bottom: 1px solid #ffff;
-}
-
-#dcf-main .collapsible .toggle {
-    width: .75em;
-    display: inline-block;
 }
 
 .mh-upload-box {
@@ -108,44 +94,6 @@ iframe * {margin:0px}
 
 .mh-upload-box p {
     font-size: .75em;
-    font-style: italic;
-}
-
-.mh-tooltip span.heading{
-    font-weight: bold;
-}
-
-.mh-tooltip:hover > div, .mh-tooltip.open > div {
-    display: block;
-}
-
-.mh-tooltip.invisible {
-    background-color: transparent;
-    height: 0;
-    width: 0;
-    padding: 0;
-    display: inline-block;
-}
-.mh-tooltip#autodetect-360 > div {
-    top: 1.8em;
-    left: -.75em;
-    bottom: auto;
-}
-.mh-tooltip#autodetect-360 > div:before {
-    top: -8px;
-    left: 21px;
-}
-.mh-tooltip#autodetect-360 > div:after {
-    left: 0;
-    top: 0;
-    bottom: auto;
-    margin-left: 0;
-}
-.mh-tooltip p {
-    margin: 0;
-}
-
-.mh-tooltip.italic *{
     font-style: italic;
 }
 
@@ -203,93 +151,6 @@ form legend {
     line-height: 1em;
     border: none;
     font-weight: 400;
-}
-
-.mh-tooltip {
-    border-radius: 2em;
-    height: 1.5em;
-    width: 1.5em;
-    padding: 0 0.2em;
-    color: #4682B4;
-    display: inline-block;
-    text-align: center;
-    font-size: 0.66em;
-    line-height: 1.33;
-    position: relative;
-    font-family: 'Gotham SSm A', 'Gotham SSm B', Verdana, sans-serif;
-}
-
-.mh-tooltip > div {
-    position: absolute;
-    display: none;
-    background-color: #fff;
-    color: #000;
-    box-shadow: 0px 1px 4px RGBA(0,0,0,0.2);
-    padding: .75em;
-    bottom: 160%;
-    left: -91px;
-    width: 200px;
-    text-align: left;
-    z-index: 250;
-}
-
-
-.mh-tooltip.hang-right > div {
-    left: -27px;
-}
-
-.mh-tooltip.hang-left > div {
-    left: -157px;
-}
-
-.mh-tooltip > div:before {
-    background-color: white;
-    content: "";
-    display: block;
-    width: 15px;
-    height: 15px;
-    position:absolute;
-    bottom: -8px;
-    left: 50%;
-    margin-left: -7px;
-    transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-    box-shadow: 0px 0px 4px RGBA(0,0,0,0.25);
-}
-
-.mh-tooltip > div:after {
-    content:"";
-    height:12px;
-    width:40px;
-    background-color:#fff;
-    display:block;
-    position:absolute;
-    bottom: 0px;
-    left: 50%;
-    margin-left: -24px;
-}
-
-.mh-tooltip.hang-right > div:before {
-    left: 34px;
-    margin-left: -7px;
-}
-
-.mh-tooltip.hang-right > div:after {
-    left: 34px;
-    margin-left: -24px;
-}
-
-.mh-tooltip.hang-left > div:before {
-    left: 166px;
-    margin-left: -7px;
-}
-
-.mh-tooltip.hang-left > div:after {
-    left: 166px;
-    margin-left: -24px;
 }
 
 #headline_main .mh-share-this-page {

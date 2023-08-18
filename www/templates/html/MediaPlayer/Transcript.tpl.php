@@ -20,16 +20,6 @@
         <div class="title unl-font-sans">
             <?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_SEARCH, '{"size": 5}'); ?>
             <h2 class="unl-font-sans">Searchable Transcript</h2>
-            <div class="mh-tooltip">
-                <?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_INFO, '{"size": 5}'); ?>
-                <div>
-                    <ul>
-                        <li>Use the text input to search the transcript.</li>
-                        <li>Click any line to jump to that spot in the video.</li>
-                        <li>Use the icons to the right to toggle between list and paragraph view.</li>
-                    </ul>
-                </div>
-            </div>
             <button class="mh-caption-search-close caption-toggle" aria-label="Close Searchable Transcript">x</button>
             <select id="mh-language-select" aria-label="select language for searchable transcript">
                 <?php $languageTracks = array_keys($tracks); ?>

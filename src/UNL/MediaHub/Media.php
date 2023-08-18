@@ -5,7 +5,10 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
 {
     const CODEC_REMOTE_VIDEO = 'remote-video-is-unknown';
     const ASPECT_16x9 = '16:9';
+    const ASPECT_9x16 = '9:16';
     const ASPECT_4x3 = '4:3';
+    const ASPECT_3x4 = '3:4';
+    const ASPECT_1x1 = '1:1';
     const POSTER_PATH = 'uploads/posters/';
     
     /**
@@ -171,7 +174,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     }
 
     /**
-     * Get the aspect ratio of the video. Only supports 4x3 or 16x9
+     * Get the aspect ratio of the video. Only supports 4x3 or 16x9 or 9x16
      * 
      * @return bool|string
      */
@@ -192,16 +195,31 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
                 return false;
             }
 
+            $rotation = $videos[0]->get('rotation')[0] ?? '0';
+
             $ratio = $videos[0]->get('display_aspect_ratio')->getTextvalue();
+            $ratioFlipped = $rotation === '90.000' || $rotation === '270.000';
 
         } catch (\Exception $e) {
             return false;
         }
-        
-        if ($ratio == '4:3') {
+
+        if ($ratio == '1.000') {
+            return self::ASPECT_1x1;
+        }
+
+        if ((!$ratioFlipped && $ratio == '4:3') || ($ratioFlipped && $ratio == '0.750')) {
             return self::ASPECT_4x3;
         }
-        
+
+        if ((!$ratioFlipped && $ratio == '0.750') || ($ratioFlipped && $ratio == '4:3')) {
+            return self::ASPECT_3x4;
+        }
+
+        if ((!$ratioFlipped && $ratio == '0.562') || ($ratioFlipped && $ratio == '16:9')) {
+            return self::ASPECT_9x16;
+        }
+
         //Otherwise assume 16x9
         return self::ASPECT_16x9;
     }
@@ -580,12 +598,10 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         if (!empty($imageInfo)) {
             $width = intval($imageInfo[0]);
             $height = intval($imageInfo[1]);
-            if ($height > $width) {
-                $errors[] = 'Media poster image height cannot be greater than width. Images with 16:9 ratio are recommended.';
-            } elseif ($width > 1920) {
+            if ($width > 1920) {
                 $errors[] = 'Media poster image must not be wider than 1920 pixels.';
-            } elseif ($height > 1080) {
-                $errors[] = 'Media poster image must not be taller than 1080 pixels.';
+            } elseif ($height > 1920) {
+                $errors[] = 'Media poster image must not be taller than 1920 pixels.';
             }
         }
 

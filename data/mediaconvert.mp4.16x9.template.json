@@ -5,7 +5,7 @@
         "Name": "File Group",
         "Outputs": [
           {
-            "Preset": "mp4 16x9 540p",
+            "Preset": "mp4 16x9 720p",
             "Extension": "mp4"
           }
         ],
@@ -27,7 +27,8 @@
           }
         },
         "VideoSelector": {
-          "ColorSpace": "FOLLOW"
+          "ColorSpace": "FOLLOW",
+          "Rotate": "AUTO"
         },
         "FilterEnable": "AUTO",
         "PsiControl": "USE_PSI",
