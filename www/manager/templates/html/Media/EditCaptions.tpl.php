@@ -112,19 +112,33 @@
                 </ol>
             </div>
             <div class="dcf-col-100% dcf-col-33%-end@sm">
-                <?php $edit_captions_url = $context->getEditCaptionsURL(); ?>
-                <?php if (!$edit_captions_url): ?>
-                    <p>Please wait for your video to be optimized before captioning on Amara</p>
+                <?php if($context->isTranscodingFinished()): ?>
+                    <?php $edit_captions_url = $context->getEditCaptionsURL(); ?>
+                    <?php if (!$edit_captions_url): ?>
+                        <p>
+                            An error has occurred trying to add media to Amara.
+                            Please try again later or contact an administrator for help.
+                        </p>
+                        <p class="dcf-txt-xs">
+                            If your video was not optimized please note: Amara does not support
+                            .mov files so you will need to delete this upload and re-upload as an
+                            .mp4, or select one of our optimization setting on upload of your
+                            .mov to have it converted automatically.
+                        </p>
+                    <?php else: ?>
+                        <a class="dcf-btn dcf-btn-primary" href="<?php echo $context->getEditCaptionsURL(); ?>">Edit Captions on amara</a><br><br>
+                        <form class="dcf-form" method="post">
+                            <input type="hidden" name="__unlmy_posttarget" value="pull_amara" />
+                            <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
+                            <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
+                            <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
+                            <input class="dcf-btn dcf-btn-primary" type="submit" value="Pull Captions from amara.org">
+                        </form>
+                    <?php endif ?>
                 <?php else: ?>
-                    <a class="dcf-btn dcf-btn-primary" href="<?php echo $context->getEditCaptionsURL(); ?>">Edit Captions on amara</a><br><br>
-                    <form class="dcf-form" method="post">
-                        <input type="hidden" name="__unlmy_posttarget" value="pull_amara" />
-                        <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
-                        <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
-                        <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
-                        <input class="dcf-btn dcf-btn-primary" type="submit" value="Pull Captions from amara.org">
-                    </form>
-                <?php endif ?>
+                    <p>Please wait for your video to be optimized before captioning on Amara.</p>
+                <?php endif; ?>
+                
             </div>
         </div>
     </div>
