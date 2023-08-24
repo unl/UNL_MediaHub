@@ -27,7 +27,7 @@ class UNL_MediaHub_TranscodeManager
 
     public function hasAccess() {
         $auth = UNL_MediaHub_AuthService::getInstance();
-        return $auth->isLoggedIn() && $auth->getUser()->canTranscodePro();
+        return $auth->isLoggedIn() && $auth->getUser()->isAdmin();
     }
 
     public function hasJobs() {
