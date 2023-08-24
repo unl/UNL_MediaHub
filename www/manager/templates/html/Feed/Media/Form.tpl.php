@@ -158,10 +158,31 @@ $page->jsbody .= $js;
                                 <p>Swapping media is disabled while a video is being optimized.</p>
                             <?php else: ?>
                                 <?php if ($transcoding_job): ?>
-                                    <p><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ALERT, '{"size": 4}');?><span class="dcf-sr-only">Notice:</span> Swapping media will cause the media to be unavailable while the upload is optimized. This upload will be optimized with the same settings as the current version.</p>
+                                    <p>
+                                        <?php
+                                            echo \UNL\Templates\Icons::get(
+                                                    \UNL\Templates\Icons::ICON_ALERT,
+                                                    '{"size": 4}'
+                                                );
+                                        ?>
+                                        <span class="dcf-sr-only">Notice:</span>
+                                        Swapping media will cause the media to be unavailable
+                                        while the upload is optimized. This upload will be optimized
+                                        with the same settings as the current version.
+                                    </p>
                                 <?php endif; ?>
                                 <?php if (!$transcoding_job): ?>
-                                    <p><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ALERT, '{"size": 4}');?><span class="dcf-sr-only">Notice:</span> You MUST use HandBrake to optimize the new video.</p>
+                                    <p class="dcf-txt-xs">
+                                        <?php
+                                            echo \UNL\Templates\Icons::get(
+                                                    \UNL\Templates\Icons::ICON_ALERT,
+                                                    '{"size": 4}'
+                                                );
+                                        ?>
+                                        <span class="dcf-sr-only">Notice:</span>
+                                        You MUST use HandBrake to optimize the new video.
+                                        You must swap media with the same file type as you uploaded.
+                                    </p>
                                 <?php endif; ?>
                                 <div id="mh_upload_media_container">
                                     <div class="dcf-p-3 mh-upload-box dcf-txt-center" id="mh_upload_media">
@@ -170,7 +191,19 @@ $page->jsbody .= $js;
                                             aria-hidden="true"
                                             alt="">
                                         <h2><span class="dcf-subhead">Swap Media</span></h2>
-                                        <p>Upload a new .mp4 or .mp3 file and replace your old one. <strong><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ALERT, '{"size": 4}');?>(Caution: This deletes your old file.)</strong></p>
+                                        <p>
+                                            Upload a new .mp4 or .mp3 file and replace your old one.
+                                            <br>
+                                            <strong>
+                                                <?php
+                                                    echo \UNL\Templates\Icons::get(
+                                                            \UNL\Templates\Icons::ICON_ALERT,
+                                                            '{"size": 4}'
+                                                        );
+                                                    ?>
+                                                (Caution: This deletes your old file.)
+                                            </strong>
+                                        </p>
                                     </div>
                                     <div id="filelist" class="mh-upload-box dcf-txt-center">
                                         Your browser doesn't have Flash, Silverlight or HTML5 support.

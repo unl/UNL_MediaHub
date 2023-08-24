@@ -111,10 +111,16 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                         <div>
                             <fieldset>
                                 <legend class="dcf-legend">Optimization Settings</legend>
-                                <p class="dcf-txt-sm">Only videos will be optimized. If you are uploading an audio file, these settings will have no effect.</p>
+                                <p class="dcf-txt-xs">
+                                    Only videos will be optimized and converted to .mp4 files. If you are
+                                    uploading an audio file, these settings will have no effect.
+                                </p>
                                 <div>
                                     <div class="dcf-input-radio">
-                                        <input id="optimization-1" type="radio" name="optimization" value="none" /><label for="optimization-1">None (video is already optimized with HandBrake presets)</label>
+                                        <input id="optimization-1" type="radio" name="optimization" value="none" />
+                                        <label for="optimization-1">
+                                            None (video is already optimized with HandBrake presets, this should be an .mp4 for maximum compatibility)
+                                        </label>
                                     </div>
                                     <div class="dcf-input-radio">
                                         <input id="optimization-2" type="radio" name="optimization" value="mp4" /><label for="optimization-2">Single file at quarter HD (540p, use this to reduce cost)</label>
@@ -129,10 +135,24 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                         <div>
                             <fieldset>
                                 <legend class="dcf-legend">Optimization Settings</legend>
-                                <p class="dcf-txt-sm">Only videos will be optimized. If you are uploading an audio file, these settings will have no effect. <a href="https://wdn.unl.edu/mediahub-video-optimization-inquiry">If you need more options, please contact us</a>.</p>
+                                <p class="dcf-txt-xs">
+                                    Only videos will be optimized and converted to .mp4 files. If you are uploading an audio file,
+                                    these settings will have no effect.
+                                    <a href="https://wdn.unl.edu/mediahub-video-optimization-inquiry">If you need
+                                        more options, please contact us</a>.
+                                </p>
                                 <div>
                                     <div class="dcf-input-radio">
-                                        <input id="optimization-1" class="dcf-input-control" type="radio" name="optimization" value="none" /><label for="optimization-1">None (video is already optimized with HandBrake presets)</label>
+                                        <input
+                                            id="optimization-1"
+                                            class="dcf-input-control"
+                                            type="radio"
+                                            name="optimization"
+                                            value="none"
+                                        />
+                                        <label for="optimization-1">
+                                            None (video is already optimized with HandBrake presets, this should be an .mp4 for maximum compatibility)
+                                        </label>
                                     </div>
                                         <div class="dcf-input-radio">
                                         <input id="optimization-2" class="dcf-input-control" type="radio" name="optimization" value="mp4" checked="checked" /><label for="optimization-2">Single file at quarter HD</label>
