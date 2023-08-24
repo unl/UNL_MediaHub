@@ -117,7 +117,15 @@ $page->jsbody .= $js;
                         <div id="imageOverlay">
                             <p>We're updating your image, this may take a few minutes depending on video length. <strong>Now is a good time to make sure the information below is up to snuff!</strong></p>
                         </div>
-                        <img src="<?php echo $context->media->getThumbnailURL(); ?>" id="thumbnail" alt="Thumbnail preview" />
+                        <div class="dcf-d-flex dcf-jc-center dcf-mb-3">
+                            <img
+                                class="dcf-w-auto dcf-h-auto dcf-w-max-100%"
+                                style="max-height: 15rem;"
+                                src="<?php echo $context->media->getThumbnailURL(); ?>"
+                                id="thumbnail"
+                                alt="Thumbnail preview"
+                            />
+                        </div>
                         <!-- <div id="poster_picker">
                             <a class="action" id="setImage" href="#">Set Image</a>
 
@@ -229,21 +237,58 @@ $page->jsbody .= $js;
                         </li>
                         <li class="dcf-pl-2 dcf-mb-6">
                             <fieldset>
-                                <legend>Poster Image<span class="mh-tooltip dcf-d-inline dcf-p-0" id="poster-details">
-                                        <?php echo $savvy->render('custom poster tooltip', 'InfoIcon.tpl.php'); ?>
-                                        <div>
-                                            <p class="dcf-mb-3">
+                                <legend>
+                                    Poster Image
+                                    <div
+                                        class="dcf-popup dcf-d-inline"
+                                        id="poster-details"
+                                        data-hover="true"
+                                        data-point="true"
+                                    >
+                                        <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24
+                                                    S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23
+                                                    C5.71,23,1,18.29,1,12.5 C1,6.71,5.71,2,11.5,2S22,6.71,22,
+                                                    12.5C22,18.29,17.29,23,11.5,23z"></path>
+                                                <path d="M14.5,19H12v-8.5c0-0.276-0.224-0.5-0.5-0.5h-2
+                                                    C9.224,10,9,10.224,9,10.5S9.224,11,9.5,11H11v8H8.5
+                                                    C8.224,19,8,19.224,8,19.5 S8.224,20,8.5,20h6c0.276,
+                                                    0,0.5-0.224,0.5-0.5S14.776,19,14.5,19z"></path>
+                                                <circle cx="11" cy="6.5" r="1"></circle>
+                                                <g>
+                                                    <path fill="none" d="M0 0H24V24H0z"></path>
+                                                </g>
+                                            </svg>
+                                        </button>
+                                        <div
+                                            class="
+                                                dcf-popup-content
+                                                unl-cream
+                                                unl-bg-blue
+                                                dcf-p-1
+                                                dcf-rounded
+                                                dcf-txt-md
+                                                dcf-lh-4
+                                            "
+                                            style="min-width: 25ch;"
+                                        >
+                                            <p class="dcf-m-0 dcf-regular">
                                                 <?php
-                                                $text = '';
-                                                if (isset($context->media) && $context->media->isVideo()) {
-                                                    $text = 'This image will override the one chosen above.';
-                                                }
+                                                    $text = '';
+                                                    if (isset($context->media) && $context->media->isVideo()) {
+                                                        $text = 'This image will override the one chosen above.';
+                                                    }
                                                 ?>
-                                                This image will be displayed as the thumbnail for the media.  <?php echo $text; ?>
-                                                Images should be in 16:9 ratio.
+                                                This image will be displayed as the thumbnail for the media.
+                                                <?php echo $text; ?> Images should be in 16:9 ratio.
                                             </p>
                                         </div>
-                                    </span>
+                                    </div>
                                 </legend>
                                 <?php
                                     $posterImageURLDisabled = '';
@@ -251,8 +296,15 @@ $page->jsbody .= $js;
                                 ?>
                                 <?php if(isset($context->media->id) && $context->media->getPosterURL()): ?>
                                     <div class="dcf-form-group">
-                                        <div class="mh-channel-thumb dcf-txt-center">
-                                            <img src="<?php echo $context->media->getPosterURL(); ?>" alt="<?php echo htmlentities($context->media->title, ENT_QUOTES); ?> Poster Image">
+                                        <div class="mh-channel-thumb dcf-txt-center dcf-d-flex dcf-jc-center dcf-mb-3">
+                                            <img
+                                                class="dcf-w-auto dcf-h-auto dcf-w-max-100%"
+                                                style="max-height: 15rem;"
+                                                src="<?php echo $context->media->getPosterURL(); ?>"
+                                                alt="<?php
+                                                    echo htmlentities($context->media->title, ENT_QUOTES);
+                                                    ?> Poster Image"
+                                            >
                                         </div>
                                     </div>
 
@@ -310,10 +362,40 @@ $page->jsbody .= $js;
                         </div>
                         <div class="dcf-form-group">
                             <label for="mrss_credit">Credit</label>
-                            <div class="hang-right mh-tooltip" id="credit-details">
-                                <?php echo $savvy->render('credit tooltip', 'InfoIcon.tpl.php'); ?>
-                                <div>
-                                    <p>Notable entity and the contribution to the creation of the media object.</p>
+                            <div class="dcf-popup dcf-d-inline" id="credit-details" data-hover="true" data-point="true">
+                                <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24
+                                            S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23
+                                            C5.71,23,1,18.29,1,12.5 C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,
+                                            18.29,17.29,23,11.5,23z"></path>
+                                        <path d="M14.5,19H12v-8.5c0-0.276-0.224-0.5-0.5-0.5h-2
+                                            C9.224,10,9,10.224,9,10.5S9.224,11,9.5,11H11v8H8.5
+                                            C8.224,19,8,19.224,8,19.5 S8.224,20,8.5,20h6c0.276,
+                                            0,0.5-0.224,0.5-0.5S14.776,19,14.5,19z"></path>
+                                        <circle cx="11" cy="6.5" r="1"></circle>
+                                        <g>
+                                            <path fill="none" d="M0 0H24V24H0z"></path>
+                                        </g>
+                                    </svg>
+                                </button>
+                                <div
+                                    class="
+                                        dcf-popup-content
+                                        unl-cream
+                                        unl-bg-blue
+                                        dcf-p-1
+                                        dcf-rounded
+                                    "
+                                    style="min-width: 25ch;"
+                                >
+                                    <p class="dcf-m-0 dcf-regular">
+                                        Notable entity and the contribution to the creation of the media object.
+                                    </p>
                                 </div>
                             </div>
                             <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[9][element]" type="hidden" value="credit"/>
@@ -321,10 +403,46 @@ $page->jsbody .= $js;
                         </div>
                         <div class="dcf-form-group">
                             <label for="mrss_category">Category</label>
-                            <div class="hang-right mh-tooltip" id="category-details">
-                                <?php echo $savvy->render('category tooltip', 'InfoIcon.tpl.php'); ?>
-                                <div>
-                                    <p>Allows a taxonomy to be set that gives an indication of the type of media content, and its particular contents.</p>
+                            <div
+                                class="dcf-popup dcf-d-inline"
+                                id="category-details"
+                                data-hover="true"
+                                data-point="true"
+                            >
+                                <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24
+                                            S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23
+                                            C5.71,23,1,18.29,1,12.5 C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,
+                                            18.29,17.29,23,11.5,23z"></path>
+                                        <path d="M14.5,19H12v-8.5c0-0.276-0.224-0.5-0.5-0.5h-2
+                                            C9.224,10,9,10.224,9,10.5S9.224,11,9.5,11H11v8H8.5
+                                            C8.224,19,8,19.224,8,19.5 S8.224,20,8.5,20h6c0.276,
+                                            0,0.5-0.224,0.5-0.5S14.776,19,14.5,19z"></path>
+                                        <circle cx="11" cy="6.5" r="1"></circle>
+                                        <g>
+                                            <path fill="none" d="M0 0H24V24H0z"></path>
+                                        </g>
+                                    </svg>
+                                </button>
+                                <div
+                                    class="
+                                        dcf-popup-content
+                                        unl-cream
+                                        unl-bg-blue
+                                        dcf-p-1
+                                        dcf-rounded
+                                    "
+                                    style="min-width: 25ch;"
+                                >
+                                    <p class="dcf-m-0 dcf-regular">
+                                        Allows a taxonomy to be set that gives an indication of the type
+                                        of media content, and its particular contents.
+                                    </p>
                                 </div>
                             </div>
                             <input name="UNL_MediaHub_Feed_Media_NamespacedElements_media[7][element]" type="hidden" value="category"/>
@@ -334,20 +452,87 @@ $page->jsbody .= $js;
                             <label for="description">
                                 Description <small class="dcf-required">Required</small>
                             </label>
-                            <div class="mh-tooltip" id="description-details">
-                                <?php echo $savvy->render('description tooltip', 'InfoIcon.tpl.php'); ?>
-                                <div>
-                                    <p>Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.</p>
+                            <div
+                                class="dcf-popup dcf-d-inline"
+                                id="description-details"
+                                data-hover="true"
+                                data-point="true"
+                            >
+                                <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24
+                                            S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23
+                                            C5.71,23,1,18.29,1,12.5 C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,
+                                            18.29,17.29,23,11.5,23z"></path>
+                                        <path d="M14.5,19H12v-8.5c0-0.276-0.224-0.5-0.5-0.5h-2
+                                            C9.224,10,9,10.224,9,10.5S9.224,11,9.5,11H11v8H8.5
+                                            C8.224,19,8,19.224,8,19.5 S8.224,20,8.5,20h6c0.276,
+                                            0,0.5-0.224,0.5-0.5S14.776,19,14.5,19z"></path>
+                                        <circle cx="11" cy="6.5" r="1"></circle>
+                                        <g>
+                                            <path fill="none" d="M0 0H24V24H0z"></path>
+                                        </g>
+                                    </svg>
+                                </button>
+                                <div
+                                    class="
+                                        dcf-popup-content
+                                        unl-cream
+                                        unl-bg-blue
+                                        dcf-p-1
+                                        dcf-rounded
+                                    "
+                                    style="min-width: 25ch;"
+                                >
+                                    <p class="dcf-m-0 dcf-regular">
+                                        Explain what this media is all about. Use a few sentences,
+                                        but keep it to 1 paragraph.
+                                    </p>
                                 </div>
                             </div>
                             <div id="description_wrapper"><textarea id="description" name="description" class="required-entry" rows="5" aria-describedby="description-details"><?php echo UNL_MediaHub::escape(@$context->media->description); ?></textarea></div>
                         </div>
                         <div class="dcf-form-group">
                             <label for="itunes_keywords">Tags</label>
-                            <div class="mh-tooltip hang-right" id="tag-details">
-                                <?php echo $savvy->render('tag tooltip', 'InfoIcon.tpl.php'); ?>
-                                <div>
-                                    <p>A comma separated list of highly relevant keywords, MAX 10. Tags also serve as iTunes Keywords.</p>
+                            <div class="dcf-popup dcf-d-inline" id="tag-details" data-hover="true" data-point="true">
+                                <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24
+                                            S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23
+                                            C5.71,23,1,18.29,1,12.5 C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,
+                                            18.29,17.29,23,11.5,23z"></path>
+                                        <path d="M14.5,19H12v-8.5c0-0.276-0.224-0.5-0.5-0.5h-2
+                                            C9.224,10,9,10.224,9,10.5S9.224,11,9.5,11H11v8H8.5
+                                            C8.224,19,8,19.224,8,19.5 S8.224,20,8.5,20h6c0.276,
+                                            0,0.5-0.224,0.5-0.5S14.776,19,14.5,19z"></path>
+                                        <circle cx="11" cy="6.5" r="1"></circle>
+                                        <g>
+                                            <path fill="none" d="M0 0H24V24H0z"></path>
+                                        </g>
+                                    </svg>
+                                </button>
+                                <div
+                                    class="
+                                        dcf-popup-content
+                                        unl-cream
+                                        unl-bg-blue
+                                        dcf-p-1
+                                        dcf-rounded
+                                    "
+                                    style="min-width: 25ch;"
+                                >
+                                    <p class="dcf-m-0 dcf-regular">
+                                        A comma separated list of highly relevant keywords,
+                                        MAX 10. Tags also serve as iTunes Keywords.
+                                    </p>
                                 </div>
                             </div>
                             <div>
@@ -356,7 +541,11 @@ $page->jsbody .= $js;
                             </div>
                         </div>
                     </fieldset>
-                    <fieldset id="geo_location" class="dcf-mt-3 collapsible">
+                    <fieldset
+                        id="geo_location"
+                        class="dcf-mt-3 dcf-collapsible-fieldset dcf-d-none"
+                        data-start-expanded="false"
+                    >
                         <legend class="dcf-legend">Geo Location</legend>
                         <ol>
                             <li>
@@ -380,7 +569,11 @@ $page->jsbody .= $js;
                     </fieldset>
 
                     <?php $customFields = UNL_MediaHub_Feed_Media_NamespacedElements_mediahub::getCustomElements(); ?>
-                    <fieldset class="dcf-mt-3 collapsible" id="other_header">
+                    <fieldset
+                        class="dcf-mt-3 dcf-collapsible-fieldset dcf-d-none"
+                        id="other_header"
+                        data-start-expanded="false"
+                    >
                         <legend class="dcf-legend">Other Information</legend>
                         <ol>
                             <?php foreach ($customFields as $customField=>$description): ?>
@@ -452,7 +645,7 @@ $page->jsbody .= $js;
                         </ol>
                     </fieldset>
 
-                    <fieldset class='dcf-mt-3 collapsible'>
+                    <fieldset class='dcf-mt-3 dcf-collapsible-fieldset dcf-d-none' data-start-expanded="false">
                         <legend class="dcf-legend">iTunes Information</legend>
                         <ol>
                             <li style="display:none;">
@@ -464,10 +657,46 @@ $page->jsbody .= $js;
                                 <label for="mrss_text">
                                     Transcript/Captioning
                                 </label>
-                                <div class="mh-tooltip" id="captioning-details">
-                                    <?php echo $savvy->render('captioning tooltip', 'InfoIcon.tpl.php'); ?>
-                                    <div>
-                                        <p>Allows the inclusion of a text transcript, closed captioning, or lyrics of the media content.</p>
+                                <div
+                                    class="dcf-popup dcf-d-inline"
+                                    id="captioning-details"
+                                    data-hover="true"
+                                    data-point="true"
+                                >
+                                    <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24
+                                                S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23
+                                                C5.71,23,1,18.29,1,12.5 C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,
+                                                18.29,17.29,23,11.5,23z"></path>
+                                            <path d="M14.5,19H12v-8.5c0-0.276-0.224-0.5-0.5-0.5h-2
+                                                C9.224,10,9,10.224,9,10.5S9.224,11,9.5,11H11v8H8.5
+                                                C8.224,19,8,19.224,8,19.5 S8.224,20,8.5,20h6c0.276,
+                                                0,0.5-0.224,0.5-0.5S14.776,19,14.5,19z"></path>
+                                            <circle cx="11" cy="6.5" r="1"></circle>
+                                            <g>
+                                                <path fill="none" d="M0 0H24V24H0z"></path>
+                                            </g>
+                                        </svg>
+                                    </button>
+                                    <div
+                                        class="
+                                            dcf-popup-content
+                                            unl-cream
+                                            unl-bg-blue
+                                            dcf-p-1
+                                            dcf-rounded
+                                        "
+                                        style="min-width: 25ch;"
+                                    >
+                                        <p class="dcf-m-0 dcf-regular">
+                                            Allows the inclusion of a text transcript, closed captioning,
+                                            or lyrics of the media content.
+                                        </p>
                                     </div>
                                 </div>
                                 <div>

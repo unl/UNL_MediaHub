@@ -1,3 +1,12 @@
+window.addEventListener('inlineJSReady', function() {
+    WDN.initializePlugin('collapsible-fieldsets');
+
+    document.querySelectorAll('.dcf-collapsible-fieldset').forEach(function(fieldset){
+        fieldset.addEventListener('ready', function(){
+            fieldset.classList.remove('dcf-d-none');
+        });
+    });
+}, false);
 
 require(['jquery'], function($){
     var mediaDetails = function() {
@@ -230,20 +239,7 @@ require(['jquery'], function($){
                     }
                 });
 
-                //Collapisible forms.
-                $('.collapsible > legend').prepend("<span class='toggle'>+</span>");
-                $('.collapsible > ol').hide();
-                $('.collapsible > legend').click(function(){
-                    if ($(this).next('ol').is(":visible")) {
-                        $(this).next('ol').hide(200);
-                        $(this).find('.toggle').html('+');
-                    } else {
-                        $(this).next('ol').show(200);
-                        $(this).find('.toggle').html('-');
-                    }
-                });
-
-                $('#geo_location legend').click(function() {
+                document.getElementById('geo_location').addEventListener('toggleElementOn', function(){
                     var map;
                     var marker = false;
                     var lincoln = new google.maps.LatLng(41.5299085734404, -99.591595703125);
@@ -266,7 +262,11 @@ require(['jquery'], function($){
                         $('#geo_lat').attr('value', event.latLng.lat());
                         $('#geo_long').attr('value', event.latLng.lng());
                     });
-                });
+                }, true);
+
+                // $('#geo_location').on('toggleElementOn', 'div', function() {
+                    
+                // });
 
                 //Update duration
                 $('.find-duration').click(function() {

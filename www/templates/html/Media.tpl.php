@@ -75,7 +75,31 @@ if ($type === 'audio') {
     <div class="dcf-wrapper mh-media-page">
         <?php if ($user && $context->userCanEdit($user)): ?>
           <div class="dcf-pb-4">
-            <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=addmedia&id=' . $context->id ?>" class="dcf-btn dcf-btn-primary"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_WRENCH, '{size": 5}');?> Edit Media Details</a>
+            <a
+                href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=addmedia&id=' . $context->id ?>"
+                class="dcf-btn dcf-btn-primary"
+            >
+                <div class="dcf-d-flex dcf-jc-center dcf-ai-center dcf-col-gap-2">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="dcf-h-4 dcf-w-4 dcf-d-block dcf-fill-current"
+                        viewBox="0 0 24 24"
+                    >
+                        <path d="M23.077,3.96c-0.073-0.143-0.209-0.241-0.367-0.267c-0.158-0.026-0.318,
+                            0.027-0.431,0.14l-3.165,3.156h-1.958V4.884 l3.087-3.166c0.111-0.115,
+                            0.161-0.274,0.136-0.431c-0.026-0.156-0.125-0.29-0.266-0.364
+                            c-0.98-0.501-2.088-0.767-3.203-0.767 c-1.886,0-3.653,0.728-4.974,
+                            2.049c-2.075,2.075-2.64,5.169-1.46,7.804l-9.577,9.568c-0.976,
+                            0.977-0.98,2.556-0.003,3.533 c0.976,0.976,2.554,0.979,3.531,
+                            0.002l9.566-9.568c0.894,0.4,1.875,0.608,2.858,0.608h0c1.868,
+                            0,3.623-0.726,4.944-2.048 C23.952,9.949,24.466,6.675,23.077,3.96z"></path>
+                        <g>
+                            <path fill="none" d="M0 0H24V24H0z"></path>
+                        </g>
+                    </svg>
+                    Edit Media Details
+                </div>
+            </a>
           </div>
         <?php endif; ?>
         <div class="dcf-grid dcf-col-gap-vw dcf-row-gap-4">
@@ -193,9 +217,37 @@ if ($type === 'audio') {
 
               <div class="dcf-pt-4">
                 <div class="dcf-mb-4">
-                  <button class="dcf-btn dcf-btn-secondary mh-hide-bp2 dcf-btn-toggle-modal" type="button" data-toggles-modal="embed-modal" aria-label="Show Media Embed Code"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_PLUS, '{"size": 5}');?>Embed</button>
-                  <br><br>
-                  <a href="<?php echo htmlentities($controller->getURL($context).'/download', ENT_QUOTES); ?>" target="_blank" class="dcf-btn dcf-btn-secondary mh-hide-bp2" aria-label="Download Media"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ARROW_DOWN, '{"size": 5}');?>Download</a>
+                    <button
+                        class="
+                            dcf-btn
+                            dcf-btn-secondary
+                            mh-hide-bp2
+                            dcf-btn-toggle-modal
+                            dcf-d-flex
+                            dcf-jc-center
+                            dcf-ai-center
+                            dcf-col-gap-2
+                        "
+                        type="button"
+                        data-toggles-modal="embed-modal"
+                        aria-label="Show Media Embed Code"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="dcf-h-4 dcf-w-4 dcf-d-block dcf-fill-current"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M21.4,9.4h-6.7V2.6C14.6,1.2,13.5,0,12,0c-1.4,0-2.6,
+                                1.2-2.6,2.6l0,6.7H2.6C1.2,9.4,0,10.6,0,12c0,1.4,1.2,2.6,
+                                2.6,2.6h6.8l0,6.7c0,0.7,0.3,1.4,0.8,1.9c0.5,0.5,1.2,0.8,
+                                1.9,0.8c1.4,0,2.6-1.2,2.6-2.6v-6.7h6.7c1.4,0,2.6-1.2,
+                                2.6-2.6C24,10.6,22.8,9.4,21.4,9.4z"/>
+                            <g>
+                                <path fill="none" d="M0,0h24v24H0V0z"/>
+                            </g>
+                        </svg>
+                        Embed
+                    </button>
                 </div>
 
                   <?php

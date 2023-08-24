@@ -5,7 +5,7 @@
         "Name": "File Group",
         "Outputs": [
           {
-            "Preset": "mp4 4x3 720p",
+            "Preset": "mp4 3x4 720p",
             "Extension": "mp4"
           }
         ],

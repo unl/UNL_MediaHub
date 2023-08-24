@@ -244,9 +244,24 @@ function createMp4Job($endpoint, $role, $input, $output, $aspect_ratio)
     //Default to 16:9
     $job_settings = file_get_contents(__DIR__.'/../data/mediaconvert.mp4.16x9.template.json');
 
+    //Use 9x16 if we need to
+    if (UNL_MediaHub_Media::ASPECT_9x16 == $aspect_ratio) {
+        $job_settings = file_get_contents(__DIR__.'/../data/mediaconvert.mp4.9x16.template.json');
+    }
+
     //Use 4:3 if we need to
     if (UNL_MediaHub_Media::ASPECT_4x3 == $aspect_ratio) {
         $job_settings = file_get_contents(__DIR__.'/../data/mediaconvert.mp4.4x3.template.json');
+    }
+
+    //Use 3:4 if we need to
+    if (UNL_MediaHub_Media::ASPECT_3x4 == $aspect_ratio) {
+        $job_settings = file_get_contents(__DIR__.'/../data/mediaconvert.mp4.3x4.template.json');
+    }
+
+    //Use 1:1 if we need to
+    if (UNL_MediaHub_Media::ASPECT_1x1 == $aspect_ratio) {
+        $job_settings = file_get_contents(__DIR__.'/../data/mediaconvert.mp4.1x1.template.json');
     }
 
     $job_settings = json_decode($job_settings, true);
@@ -271,14 +286,29 @@ function createHlsJob($endpoint, $role, $input, $output, $aspect_ratio)
         'endpoint' => $endpoint,
     ]);
 
-    //Default to 16:9
+    ///Default to 16:9
     $job_settings = file_get_contents(__DIR__.'/../data/mediaconvert.hls.16x9.template.json');
-    
+
+    //Use 9x16 if we need to
+    if (UNL_MediaHub_Media::ASPECT_9x16 == $aspect_ratio) {
+        $job_settings = file_get_contents(__DIR__.'/../data/mediaconvert.hls.9x16.template.json');
+    }
+
     //Use 4:3 if we need to
     if (UNL_MediaHub_Media::ASPECT_4x3 == $aspect_ratio) {
         $job_settings = file_get_contents(__DIR__.'/../data/mediaconvert.hls.4x3.template.json');
     }
-    
+
+    //Use 3:4 if we need to
+    if (UNL_MediaHub_Media::ASPECT_3x4 == $aspect_ratio) {
+        $job_settings = file_get_contents(__DIR__.'/../data/mediaconvert.hls.3x4.template.json');
+    }
+
+    //Use 1:1 if we need to
+    if (UNL_MediaHub_Media::ASPECT_1x1 == $aspect_ratio) {
+        $job_settings = file_get_contents(__DIR__.'/../data/mediaconvert.hls.1x1.template.json');
+    }
+
     $job_settings = json_decode($job_settings, true);
 
     //We are not using a job template hosted in aws because we need to customize the destination

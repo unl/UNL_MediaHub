@@ -25,7 +25,11 @@ if (!$theme->isCustomTheme()) {
 } else {
     $page->optionalfooter = '<div class="dcf-bleed dcf-wrapper">
     <h3 class="dcf-txt-md dcf-bold dcf-uppercase dcf-lh-3">About MediaHub</h3>
-    <p>This application is a product of the <a href="https://dxg.unl.edu/">Digital Experience Group at Nebraska</a>. DXG is a partnership of <a href="https://ucomm.unl.edu/">University Communication</a> and <a href="https://its.unl.edu/">Information Technology Services</a> at the University of Nebraska.</p>
+    <p>
+        This application is a product of the <a href="https://dxg.unl.edu/">Digital
+        Experience Group</a> at <a href="https://www.unl.edu/">Nebraska</a>. DXG
+        is a part of <a href="https://ucomm.unl.edu/">University Communication &amp; Marketing</a>.
+    </p>
 </div>';
 
     $page->addScriptDeclaration("

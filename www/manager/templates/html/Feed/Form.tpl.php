@@ -62,10 +62,36 @@ $page->addScriptDeclaration("
             <legend class="dcf-legend">Basic Information</legend>
             <div class="dcf-form-group">
                 <label for="title">Title <small class="dcf-required">Required</small></label>
-                <div class="mh-tooltip" id="title-details">
-                    <?php echo $savvy->render('channel title tooltip', 'InfoIcon.tpl.php'); ?>
-                    <div>
-                        <p>
+                <div class="dcf-popup dcf-d-inline" id="title-details" data-hover="true" data-point="true">
+                    <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24
+                                S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23 C5.71,23,1,18.29,1,12.5
+                                C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,18.29,17.29,23,11.5,23z"></path>
+                            <path d="M14.5,19H12v-8.5c0-0.276-0.224-0.5-0.5-0.5h-2
+                                C9.224,10,9,10.224,9,10.5S9.224,11,9.5,11H11v8H8.5 C8.224,19,8,19.224,8,19.5
+                                S8.224,20,8.5,20h6c0.276,0,0.5-0.224,0.5-0.5S14.776,19,14.5,19z"></path>
+                            <circle cx="11" cy="6.5" r="1"></circle>
+                            <g>
+                                <path fill="none" d="M0 0H24V24H0z"></path>
+                            </g>
+                        </svg>
+                    </button>
+                    <div
+                        class="
+                            dcf-popup-content
+                            unl-cream
+                            unl-bg-blue
+                            dcf-p-1
+                            dcf-rounded
+                        "
+                        style="min-width: 25ch;"
+                    >
+                        <p class="dcf-m-0 dcf-regular">
                             Channel name displayed everywhere.
                         </p>
                     </div>
@@ -74,10 +100,36 @@ $page->addScriptDeclaration("
             </div>
             <div class="dcf-form-group">
                 <label for="description">Description <small class="dcf-required">Required</small></label>
-                <div class="mh-tooltip" id="description-details">
-                    <?php echo $savvy->render('channel description tooltip', 'InfoIcon.tpl.php'); ?>
-                    <div>
-                        <p>
+                <div class="dcf-popup dcf-d-inline" id="description-details" data-hover="true" data-point="true">
+                    <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24
+                                S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23 C5.71,23,1,18.29,1,12.5
+                                C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,18.29,17.29,23,11.5,23z"></path>
+                            <path d="M14.5,19H12v-8.5c0-0.276-0.224-0.5-0.5-0.5h-2
+                                C9.224,10,9,10.224,9,10.5S9.224,11,9.5,11H11v8H8.5 C8.224,19,8,19.224,8,19.5
+                                S8.224,20,8.5,20h6c0.276,0,0.5-0.224,0.5-0.5S14.776,19,14.5,19z"></path>
+                            <circle cx="11" cy="6.5" r="1"></circle>
+                            <g>
+                                <path fill="none" d="M0 0H24V24H0z"></path>
+                            </g>
+                        </svg>
+                    </button>
+                    <div
+                        class="
+                            dcf-popup-content
+                            unl-cream
+                            unl-bg-blue
+                            dcf-p-1
+                            dcf-rounded
+                        "
+                        style="min-width: 25ch;"
+                    >
+                        <p class="dcf-m-0 dcf-regular">
                             Explain what this channel is all about. Use a few sentences, but keep it to 1 paragraph.
                         </p>
                     </div>
@@ -96,30 +148,116 @@ $page->addScriptDeclaration("
             <?php endif; ?>
             <div class="dcf-form-group">
                 <label for="image_file">Image File</label>
-                <div class="mh-tooltip" id="image-file-details">
-                    <?php echo $savvy->render('channel image tooltip', 'InfoIcon.tpl.php'); ?>
-                    <div>
-                        <p>Images should follow the standard UNL image standards. <a href="https://github.com/unl/UNL_MediaHub/raw/master/designFiles/feedTemplate.psd">(get the sample template)</a></p>
+                <div class="dcf-popup dcf-d-inline" id="image-file-details" data-hover="true" data-point="true">
+                    <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24
+                                S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23 C5.71,23,1,18.29,1,12.5
+                                C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,18.29,17.29,23,11.5,23z"></path>
+                            <path d="M14.5,19H12v-8.5c0-0.276-0.224-0.5-0.5-0.5h-2
+                                C9.224,10,9,10.224,9,10.5S9.224,11,9.5,11H11v8H8.5 C8.224,19,8,19.224,8,19.5
+                                S8.224,20,8.5,20h6c0.276,0,0.5-0.224,0.5-0.5S14.776,19,14.5,19z"></path>
+                            <circle cx="11" cy="6.5" r="1"></circle>
+                            <g>
+                                <path fill="none" d="M0 0H24V24H0z"></path>
+                            </g>
+                        </svg>
+                    </button>
+                    <div
+                        class="
+                            dcf-popup-content
+                            unl-cream
+                            unl-bg-blue
+                            dcf-p-1
+                            dcf-rounded
+                        "
+                        style="min-width: 25ch;"
+                    >
+                        <p class="dcf-m-0 dcf-regular">
+                            Images should follow the standard UNL image standards.
+                            <a href="https://github.com/unl/UNL_MediaHub/raw/master/designFiles/feedTemplate.psd">(get
+                                the sample template)</a>
+                        </p>
                     </div>
                 </div>
                 <input id="image_file" name="image_file" type="file" aria-describedby="image-file-details" />
             </div>
             <div class="dcf-form-group">
                 <label for="image_title">Image Title</label>
-                <div class="mh-tooltip" id="image-title-details">
-                    <?php echo $savvy->render('channel image title tooltip', 'InfoIcon.tpl.php'); ?>
-                    <div>
-                        <p>Give the image a title, used in RSS feeds.</p>
+                <div class="dcf-popup dcf-d-inline" id="image-title-details" data-hover="true" data-point="true">
+                    <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24
+                                S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23 C5.71,23,1,18.29,1,12.5
+                                C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,18.29,17.29,23,11.5,23z"></path>
+                            <path d="M14.5,19H12v-8.5c0-0.276-0.224-0.5-0.5-0.5h-2
+                                C9.224,10,9,10.224,9,10.5S9.224,11,9.5,11H11v8H8.5 C8.224,19,8,19.224,8,19.5
+                                S8.224,20,8.5,20h6c0.276,0,0.5-0.224,0.5-0.5S14.776,19,14.5,19z"></path>
+                            <circle cx="11" cy="6.5" r="1"></circle>
+                            <g>
+                                <path fill="none" d="M0 0H24V24H0z"></path>
+                            </g>
+                        </svg>
+                    </button>
+                    <div
+                        class="
+                            dcf-popup-content
+                            unl-cream
+                            unl-bg-blue
+                            dcf-p-1
+                            dcf-rounded
+                        "
+                        style="min-width: 25ch;"
+                    >
+                        <p class="dcf-m-0 dcf-regular">
+                            Give the image a title, used in RSS feeds.
+                        </p>
                     </div>
                 </div>
                 <input id="image_title" name="image_title" type="text" aria-describedby="image-title-details" value="<?php echo (isset($context->feed))? htmlentities($context->feed->image_title, ENT_QUOTES):''; ?>" />
             </div>
             <div class="dcf-form-group">
                 <label for="image_description">Image Description</label>
-                <div class="mh-tooltip" id="image-description-details">
-                    <?php echo $savvy->render('channel image description tooltip', 'InfoIcon.tpl.php'); ?>
-                    <div>
-                        <p>Describe your image, used in RSS feeds.</p>
+                <div class="dcf-popup dcf-d-inline" id="image-description-details" data-hover="true" data-point="true">
+                    <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24
+                                S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23 C5.71,23,1,18.29,1,12.5
+                                C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,18.29,17.29,23,11.5,23z"></path>
+                            <path d="M14.5,19H12v-8.5c0-0.276-0.224-0.5-0.5-0.5h-2
+                                C9.224,10,9,10.224,9,10.5S9.224,11,9.5,11H11v8H8.5 C8.224,19,8,19.224,8,19.5
+                                S8.224,20,8.5,20h6c0.276,0,0.5-0.224,0.5-0.5S14.776,19,14.5,19z"></path>
+                            <circle cx="11" cy="6.5" r="1"></circle>
+                            <g>
+                                <path fill="none" d="M0 0H24V24H0z"></path>
+                            </g>
+                        </svg>
+                    </button>
+                    <div
+                        class="
+                            dcf-popup-content
+                            unl-cream
+                            unl-bg-blue
+                            dcf-p-1
+                            dcf-rounded
+                        "
+                        style="min-width: 25ch;"
+                    >
+                        <p class="dcf-m-0 dcf-regular">
+                            Describe your image, used in RSS feeds.
+                        </p>
                     </div>
                 </div>
                 <textarea id="image_description" name="image_description" aria-describedby="image-description-details"><?php echo (isset($context->feed))?htmlentities($context->feed->image_description):''; ?></textarea>
@@ -162,10 +300,38 @@ $page->addScriptDeclaration("
             <legend class="dcf-legend">iTunes U Options</legend>
             <div class="dcf-form-group">
                 <label for='itunes_author'>Author</label>
-                <div class="mh-tooltip" id="itunes-author-details">
-                    <?php echo $savvy->render('channel itunes author tooltip', 'InfoIcon.tpl.php'); ?>
-                    <div>
-                        <p>Used in the Artist column of iTunes</p>
+                <div class="dcf-popup dcf-d-inline" id="itunes-author-details" data-hover="true" data-point="true">
+                    <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24
+                                S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23 C5.71,23,1,18.29,1,12.5
+                                C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,18.29,17.29,23,11.5,23z"></path>
+                            <path d="M14.5,19H12v-8.5c0-0.276-0.224-0.5-0.5-0.5h-2
+                                C9.224,10,9,10.224,9,10.5S9.224,11,9.5,11H11v8H8.5 C8.224,19,8,19.224,8,19.5
+                                S8.224,20,8.5,20h6c0.276,0,0.5-0.224,0.5-0.5S14.776,19,14.5,19z"></path>
+                            <circle cx="11" cy="6.5" r="1"></circle>
+                            <g>
+                                <path fill="none" d="M0 0H24V24H0z"></path>
+                            </g>
+                        </svg>
+                    </button>
+                    <div
+                        class="
+                            dcf-popup-content
+                            unl-cream
+                            unl-bg-blue
+                            dcf-p-1
+                            dcf-rounded
+                        "
+                        style="min-width: 25ch;"
+                    >
+                        <p class="dcf-m-0 dcf-regular">
+                            Used in the Artist column of iTunes
+                        </p>
                     </div>
                 </div>
                 <div>
@@ -334,10 +500,38 @@ $page->addScriptDeclaration("
             </div>
             <div class="dcf-form-group">
                 <label for='itunes_explicit'>Explicit</label>
-                <div class="mh-tooltip" id="itune-explicit-details">
-                    <?php echo $savvy->render('channel itunes explicit tooltip', 'InfoIcon.tpl.php'); ?>
-                    <div>
-                        <p>Set to 'yes' if this feed contains explicit content</p>
+                <div class="dcf-popup dcf-d-inline" id="itune-explicit-details" data-hover="true" data-point="true">
+                    <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24
+                                S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23 C5.71,23,1,18.29,1,12.5
+                                C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,18.29,17.29,23,11.5,23z"></path>
+                            <path d="M14.5,19H12v-8.5c0-0.276-0.224-0.5-0.5-0.5h-2
+                                C9.224,10,9,10.224,9,10.5S9.224,11,9.5,11H11v8H8.5 C8.224,19,8,19.224,8,19.5
+                                S8.224,20,8.5,20h6c0.276,0,0.5-0.224,0.5-0.5S14.776,19,14.5,19z"></path>
+                            <circle cx="11" cy="6.5" r="1"></circle>
+                            <g>
+                                <path fill="none" d="M0 0H24V24H0z"></path>
+                            </g>
+                        </svg>
+                    </button>
+                    <div
+                        class="
+                            dcf-popup-content
+                            unl-cream
+                            unl-bg-blue
+                            dcf-p-1
+                            dcf-rounded
+                        "
+                        style="min-width: 25ch;"
+                    >
+                        <p class="dcf-m-0 dcf-regular">
+                            Set to 'yes' if this feed contains explicit content
+                        </p>
                     </div>
                 </div>
 
@@ -358,10 +552,39 @@ $page->addScriptDeclaration("
             </div>
             <div class="dcf-form-group">
                 <label for='itunes_keywords'>Keywords</label>
-                <div class="mh-tooltip" id="itune-keyword-details">
-                    <?php echo $savvy->render('channel itunes keywords tooltip', 'InfoIcon.tpl.php'); ?>
-                    <div>
-                        <p>This tag allows users to search on a maximum of 12 text keywords. Use commas to separate keywords.</p>
+                <div class="dcf-popup dcf-d-inline" id="itune-keyword-details" data-hover="true" data-point="true">
+                    <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24
+                                S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23 C5.71,23,1,18.29,1,12.5
+                                C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,18.29,17.29,23,11.5,23z"></path>
+                            <path d="M14.5,19H12v-8.5c0-0.276-0.224-0.5-0.5-0.5h-2
+                                C9.224,10,9,10.224,9,10.5S9.224,11,9.5,11H11v8H8.5 C8.224,19,8,19.224,8,19.5
+                                S8.224,20,8.5,20h6c0.276,0,0.5-0.224,0.5-0.5S14.776,19,14.5,19z"></path>
+                            <circle cx="11" cy="6.5" r="1"></circle>
+                            <g>
+                                <path fill="none" d="M0 0H24V24H0z"></path>
+                            </g>
+                        </svg>
+                    </button>
+                    <div
+                        class="
+                            dcf-popup-content
+                            unl-cream
+                            unl-bg-blue
+                            dcf-p-1
+                            dcf-rounded
+                        "
+                        style="min-width: 25ch;"
+                    >
+                        <p class="dcf-m-0 dcf-regular">
+                            This tag allows users to search on a maximum of 12 text keywords.
+                            Use commas to separate keywords.
+                        </p>
                     </div>
                 </div>
 
@@ -372,10 +595,38 @@ $page->addScriptDeclaration("
             </div>
             <div class="dcf-form-group">
                 <label for='itunes_new-feed-url'>New-feed-url</label>
-                <div class="mh-tooltip " id="itune-new-feed-url-details">
-                    <?php echo $savvy->render('channel itunes new feed url tooltip', 'InfoIcon.tpl.php'); ?>
-                    <div>
-                        <p>This tag allows you to change the URL where the podcast feed is located.</p>
+                <div class="dcf-popup dcf-d-inline" id="itune-new-feed-url-details" data-hover="true" data-point="true">
+                    <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24
+                                S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23 C5.71,23,1,18.29,1,12.5
+                                C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,18.29,17.29,23,11.5,23z"></path>
+                            <path d="M14.5,19H12v-8.5c0-0.276-0.224-0.5-0.5-0.5h-2
+                                C9.224,10,9,10.224,9,10.5S9.224,11,9.5,11H11v8H8.5 C8.224,19,8,19.224,8,19.5
+                                S8.224,20,8.5,20h6c0.276,0,0.5-0.224,0.5-0.5S14.776,19,14.5,19z"></path>
+                            <circle cx="11" cy="6.5" r="1"></circle>
+                            <g>
+                                <path fill="none" d="M0 0H24V24H0z"></path>
+                            </g>
+                        </svg>
+                    </button>
+                    <div
+                        class="
+                            dcf-popup-content
+                            unl-cream
+                            unl-bg-blue
+                            dcf-p-1
+                            dcf-rounded
+                        "
+                        style="min-width: 25ch;"
+                    >
+                        <p class="dcf-m-0 dcf-regular">
+                            This tag allows you to change the URL where the podcast feed is located.
+                        </p>
                     </div>
                 </div>
 
@@ -386,10 +637,38 @@ $page->addScriptDeclaration("
             </div>
             <div class="dcf-form-group">
                 <label for='itunes_owner'>Owner</label>
-                <div class="mh-tooltip" id="itunes-owner-details">
-                    <?php echo $savvy->render('channel itunes owner tooltip', 'InfoIcon.tpl.php'); ?>
-                    <div>
-                        <p>Information that will be used to contact the owner of the podcast. Not publicly displayed.</p>
+                <div class="dcf-popup dcf-d-inline" id="itunes-owner-details" data-hover="true" data-point="true">
+                    <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24
+                                S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23 C5.71,23,1,18.29,1,12.5
+                                C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,18.29,17.29,23,11.5,23z"></path>
+                            <path d="M14.5,19H12v-8.5c0-0.276-0.224-0.5-0.5-0.5h-2
+                                C9.224,10,9,10.224,9,10.5S9.224,11,9.5,11H11v8H8.5 C8.224,19,8,19.224,8,19.5
+                                S8.224,20,8.5,20h6c0.276,0,0.5-0.224,0.5-0.5S14.776,19,14.5,19z"></path>
+                            <circle cx="11" cy="6.5" r="1"></circle>
+                            <g>
+                                <path fill="none" d="M0 0H24V24H0z"></path>
+                            </g>
+                        </svg>
+                    </button>
+                    <div
+                        class="
+                            dcf-popup-content
+                            unl-cream
+                            unl-bg-blue
+                            dcf-p-1
+                            dcf-rounded
+                        "
+                        style="min-width: 25ch;"
+                    >
+                        <p class="dcf-m-0 dcf-regular">
+                            Information that will be used to contact the owner of the podcast. Not publicly displayed.
+                        </p>
                     </div>
                 </div>
 
@@ -400,10 +679,39 @@ $page->addScriptDeclaration("
             </div>
             <div class="dcf-form-group">
                 <label for='itunes_subtitle'>Subtitle</label>
-                <div class="mh-tooltip" id="itunes-subtitle-details">
-                    <?php echo $savvy->render('channel itunes subtitle tooltip', 'InfoIcon.tpl.php'); ?>
-                    <div>
-                        <p>The contents of this tag are shown in the Description column in iTunes. The subtitle displays best if it is only a few words long.</p>
+                <div class="dcf-popup dcf-d-inline" id="itunes-subtitle-details" data-hover="true" data-point="true">
+                    <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24
+                                S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23 C5.71,23,1,18.29,1,12.5
+                                C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,18.29,17.29,23,11.5,23z"></path>
+                            <path d="M14.5,19H12v-8.5c0-0.276-0.224-0.5-0.5-0.5h-2
+                                C9.224,10,9,10.224,9,10.5S9.224,11,9.5,11H11v8H8.5 C8.224,19,8,19.224,8,19.5
+                                S8.224,20,8.5,20h6c0.276,0,0.5-0.224,0.5-0.5S14.776,19,14.5,19z"></path>
+                            <circle cx="11" cy="6.5" r="1"></circle>
+                            <g>
+                                <path fill="none" d="M0 0H24V24H0z"></path>
+                            </g>
+                        </svg>
+                    </button>
+                    <div
+                        class="
+                            dcf-popup-content
+                            unl-cream
+                            unl-bg-blue
+                            dcf-p-1
+                            dcf-rounded
+                        "
+                        style="min-width: 25ch;"
+                    >
+                        <p class="dcf-m-0 dcf-regular">
+                            The contents of this tag are shown in the Description column in iTunes. The
+                            subtitle displays best if it is only a few words long.
+                        </p>
                     </div>
                 </div>
                 <input name='UNL_MediaHub_Feed_NamespacedElements_itunes[8][element]' type='hidden' value='subtitle' />
@@ -411,10 +719,40 @@ $page->addScriptDeclaration("
             </div>
             <div class="dcf-form-group">
                 <label for='itunes_summary'>Summary</label>
-                <div class="mh-tooltip" id="itunes-summary-details">
-                    <?php echo $savvy->render('channel itunes summary tooltip', 'InfoIcon.tpl.php'); ?>
-                    <div>
-                        <p>The contents of this tag are shown in a separate window that appears when the "circled i" in the Description column is clicked. It also appears on the iTunes page for your podcast.</p>
+                <div class="dcf-popup dcf-d-inline" id="itunes-summary-details" data-hover="true" data-point="true">
+                    <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24
+                                S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23 C5.71,23,1,18.29,1,12.5
+                                C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,18.29,17.29,23,11.5,23z"></path>
+                            <path d="M14.5,19H12v-8.5c0-0.276-0.224-0.5-0.5-0.5h-2
+                                C9.224,10,9,10.224,9,10.5S9.224,11,9.5,11H11v8H8.5 C8.224,19,8,19.224,8,19.5
+                                S8.224,20,8.5,20h6c0.276,0,0.5-0.224,0.5-0.5S14.776,19,14.5,19z"></path>
+                            <circle cx="11" cy="6.5" r="1"></circle>
+                            <g>
+                                <path fill="none" d="M0 0H24V24H0z"></path>
+                            </g>
+                        </svg>
+                    </button>
+                    <div
+                        class="
+                            dcf-popup-content
+                            unl-cream
+                            unl-bg-blue
+                            dcf-p-1
+                            dcf-rounded
+                        "
+                        style="min-width: 25ch;"
+                    >
+                        <p class="dcf-m-0 dcf-regular">
+                            The contents of this tag are shown in a separate window that appears when the
+                            "circled ?" in the Description column is clicked. It also appears on the
+                            iTunes page for your podcast.
+                        </p>
                     </div>
                 </div>
                 <input name='UNL_MediaHub_Feed_NamespacedElements_itunes[9][element]' type='hidden' value='summary' />
@@ -425,10 +763,38 @@ $page->addScriptDeclaration("
             <legend class="dcf-legend">Media RSS Options</legend>
             <div class="dcf-form-group">
                 <label for='media_rating'>Rating</label>
-                <div class="mh-tooltip" id="rating-details">
-                    <?php echo $savvy->render('channel rss rating tooltip', 'InfoIcon.tpl.php'); ?>
-                    <div>
-                        <p>Appropriate audience: adult or nonadult. Leave blank if no restrictions.</p>
+                <div class="dcf-popup dcf-d-inline" id="rating-details" data-hover="true" data-point="true">
+                    <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24
+                                S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23 C5.71,23,1,18.29,1,12.5
+                                C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,18.29,17.29,23,11.5,23z"></path>
+                            <path d="M14.5,19H12v-8.5c0-0.276-0.224-0.5-0.5-0.5h-2
+                                C9.224,10,9,10.224,9,10.5S9.224,11,9.5,11H11v8H8.5 C8.224,19,8,19.224,8,19.5
+                                S8.224,20,8.5,20h6c0.276,0,0.5-0.224,0.5-0.5S14.776,19,14.5,19z"></path>
+                            <circle cx="11" cy="6.5" r="1"></circle>
+                            <g>
+                                <path fill="none" d="M0 0H24V24H0z"></path>
+                            </g>
+                        </svg>
+                    </button>
+                    <div
+                        class="
+                            dcf-popup-content
+                            unl-cream
+                            unl-bg-blue
+                            dcf-p-1
+                            dcf-rounded
+                        "
+                        style="min-width: 25ch;"
+                    >
+                        <p class="dcf-m-0 dcf-regular">
+                            Appropriate audience: adult or nonadult. Leave blank if no restrictions.
+                        </p>
                     </div>
                 </div>
                 <div>
@@ -450,10 +816,38 @@ $page->addScriptDeclaration("
             </div>
             <div class="dcf-form-group">
                 <label for='media_keywords'>Keywords</label>
-                <div class="mh-tooltip" id="keyword-details">
-                    <?php echo $savvy->render('channel rss keyword tooltip', 'InfoIcon.tpl.php'); ?>
-                    <div>
-                        <p>Comma seperated list of highly relevant keywords/tags describing the channel.</p>
+                <div class="dcf-popup dcf-d-inline" id="keyword-details" data-hover="true" data-point="true">
+                    <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24
+                                S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23 C5.71,23,1,18.29,1,12.5
+                                C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,18.29,17.29,23,11.5,23z"></path>
+                            <path d="M14.5,19H12v-8.5c0-0.276-0.224-0.5-0.5-0.5h-2
+                                C9.224,10,9,10.224,9,10.5S9.224,11,9.5,11H11v8H8.5 C8.224,19,8,19.224,8,19.5
+                                S8.224,20,8.5,20h6c0.276,0,0.5-0.224,0.5-0.5S14.776,19,14.5,19z"></path>
+                            <circle cx="11" cy="6.5" r="1"></circle>
+                            <g>
+                                <path fill="none" d="M0 0H24V24H0z"></path>
+                            </g>
+                        </svg>
+                    </button>
+                    <div
+                        class="
+                            dcf-popup-content
+                            unl-cream
+                            unl-bg-blue
+                            dcf-p-1
+                            dcf-rounded
+                        "
+                        style="min-width: 25ch;"
+                    >
+                        <p class="dcf-m-0 dcf-regular">
+                            Comma seperated list of highly relevant keywords/tags describing the channel.
+                        </p>
                     </div>
                 </div>
                 <div>
@@ -463,10 +857,38 @@ $page->addScriptDeclaration("
             </div>
             <div class="dcf-form-group">
                 <label for='media_thumbnail'>Thumbnail</label>
-                <div class="mh-tooltip" id="thumbnail-details">
-                    <?php echo $savvy->render('channel rss thumbnail tooltip', 'InfoIcon.tpl.php'); ?>
-                    <div>
-                        <p>Allows particular images to be used as representative images for the media object.</p>
+                <div class="dcf-popup dcf-d-inline" id="thumbnail-details" data-hover="true" data-point="true">
+                    <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24
+                                S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23 C5.71,23,1,18.29,1,12.5
+                                C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,18.29,17.29,23,11.5,23z"></path>
+                            <path d="M14.5,19H12v-8.5c0-0.276-0.224-0.5-0.5-0.5h-2
+                                C9.224,10,9,10.224,9,10.5S9.224,11,9.5,11H11v8H8.5 C8.224,19,8,19.224,8,19.5
+                                S8.224,20,8.5,20h6c0.276,0,0.5-0.224,0.5-0.5S14.776,19,14.5,19z"></path>
+                            <circle cx="11" cy="6.5" r="1"></circle>
+                            <g>
+                                <path fill="none" d="M0 0H24V24H0z"></path>
+                            </g>
+                        </svg>
+                    </button>
+                    <div
+                        class="
+                            dcf-popup-content
+                            unl-cream
+                            unl-bg-blue
+                            dcf-p-1
+                            dcf-rounded
+                        "
+                        style="min-width: 25ch;"
+                    >
+                        <p class="dcf-m-0 dcf-regular">
+                            Allows particular images to be used as representative images for the media object.
+                        </p>
                     </div>
                 </div>
                 <div>
@@ -476,10 +898,39 @@ $page->addScriptDeclaration("
             </div>
             <div class="dcf-form-group">
                 <label for='media_category'>Category</label>
-                <div class="mh-tooltip" id="category-details">
-                    <?php echo $savvy->render('channel rss category tooltip', 'InfoIcon.tpl.php'); ?>
-                    <div>
-                        <p>Allows a taxonomy to be set that gives an indication of the type of media content, and its particular contents</p>
+                <div class="dcf-popup dcf-d-inline" id="category-details" data-hover="true" data-point="true">
+                    <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24
+                                S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23 C5.71,23,1,18.29,1,12.5
+                                C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,18.29,17.29,23,11.5,23z"></path>
+                            <path d="M14.5,19H12v-8.5c0-0.276-0.224-0.5-0.5-0.5h-2
+                                C9.224,10,9,10.224,9,10.5S9.224,11,9.5,11H11v8H8.5 C8.224,19,8,19.224,8,19.5
+                                S8.224,20,8.5,20h6c0.276,0,0.5-0.224,0.5-0.5S14.776,19,14.5,19z"></path>
+                            <circle cx="11" cy="6.5" r="1"></circle>
+                            <g>
+                                <path fill="none" d="M0 0H24V24H0z"></path>
+                            </g>
+                        </svg>
+                    </button>
+                    <div
+                        class="
+                            dcf-popup-content
+                            unl-cream
+                            unl-bg-blue
+                            dcf-p-1
+                            dcf-rounded
+                        "
+                        style="min-width: 25ch;"
+                    >
+                        <p class="dcf-m-0 dcf-regular">
+                            Allows a taxonomy to be set that gives an indication of the type of media content,
+                            and its particular contents
+                        </p>
                     </div>
                 </div>
                 <div>
@@ -489,10 +940,38 @@ $page->addScriptDeclaration("
             </div>
             <div class="dcf-form-group">
                 <label for='media_player'>Player</label>
-                <div class="mh-tooltip" id="player-details">
-                    <?php echo $savvy->render('channel rss player tooltip', 'InfoIcon.tpl.php'); ?>
-                    <div>
-                        <p>Allows the media object to be accessed through a web browser media player console.</p>
+                <div class="dcf-popup dcf-d-inline" id="player-details" data-hover="true" data-point="true">
+                    <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24
+                                S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23 C5.71,23,1,18.29,1,12.5
+                                C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,18.29,17.29,23,11.5,23z"></path>
+                            <path d="M14.5,19H12v-8.5c0-0.276-0.224-0.5-0.5-0.5h-2
+                                C9.224,10,9,10.224,9,10.5S9.224,11,9.5,11H11v8H8.5 C8.224,19,8,19.224,8,19.5
+                                S8.224,20,8.5,20h6c0.276,0,0.5-0.224,0.5-0.5S14.776,19,14.5,19z"></path>
+                            <circle cx="11" cy="6.5" r="1"></circle>
+                            <g>
+                                <path fill="none" d="M0 0H24V24H0z"></path>
+                            </g>
+                        </svg>
+                    </button>
+                    <div
+                        class="
+                            dcf-popup-content
+                            unl-cream
+                            unl-bg-blue
+                            dcf-p-1
+                            dcf-rounded
+                        "
+                        style="min-width: 25ch;"
+                    >
+                        <p class="dcf-m-0 dcf-regular">
+                            Allows the media object to be accessed through a web browser media player console.
+                        </p>
                     </div>
                 </div>
                 <div>
@@ -502,10 +981,38 @@ $page->addScriptDeclaration("
             </div>
             <div class="dcf-form-group">
                 <label for='media_credit'>Credit</label>
-                <div class="mh-tooltip" id="credit-details">
-                    <?php echo $savvy->render('channel rss rating tooltip', 'InfoIcon.tpl.php'); ?>
-                    <div>
-                        <p>Notable entity and the contribution to the creation of the media object.</p>
+                <div class="dcf-popup dcf-d-inline" id="credit-details" data-hover="true" data-point="true">
+                    <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24
+                                S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23 C5.71,23,1,18.29,1,12.5
+                                C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,18.29,17.29,23,11.5,23z"></path>
+                            <path d="M14.5,19H12v-8.5c0-0.276-0.224-0.5-0.5-0.5h-2
+                                C9.224,10,9,10.224,9,10.5S9.224,11,9.5,11H11v8H8.5 C8.224,19,8,19.224,8,19.5
+                                S8.224,20,8.5,20h6c0.276,0,0.5-0.224,0.5-0.5S14.776,19,14.5,19z"></path>
+                            <circle cx="11" cy="6.5" r="1"></circle>
+                            <g>
+                                <path fill="none" d="M0 0H24V24H0z"></path>
+                            </g>
+                        </svg>
+                    </button>
+                    <div
+                        class="
+                            dcf-popup-content
+                            unl-cream
+                            unl-bg-blue
+                            dcf-p-1
+                            dcf-rounded
+                        "
+                        style="min-width: 25ch;"
+                    >
+                        <p class="dcf-m-0 dcf-regular">
+                            Notable entity and the contribution to the creation of the media object.
+                        </p>
                     </div>
                 </div>
                 <div>
@@ -515,10 +1022,38 @@ $page->addScriptDeclaration("
             </div>
             <div class="dcf-form-group">
                 <label for='media_copyright'>Copyright</label>
-                <div class="mh-tooltip" id="copyright-details">
-                    <?php echo $savvy->render('channel rss copyright tooltip', 'InfoIcon.tpl.php'); ?>
-                    <div>
-                        <p>Copyright information for media object.</p>
+                <div class="dcf-popup dcf-d-inline" id="copyright-details" data-hover="true" data-point="true">
+                    <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24
+                                S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23 C5.71,23,1,18.29,1,12.5
+                                C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,18.29,17.29,23,11.5,23z"></path>
+                            <path d="M14.5,19H12v-8.5c0-0.276-0.224-0.5-0.5-0.5h-2
+                                C9.224,10,9,10.224,9,10.5S9.224,11,9.5,11H11v8H8.5 C8.224,19,8,19.224,8,19.5
+                                S8.224,20,8.5,20h6c0.276,0,0.5-0.224,0.5-0.5S14.776,19,14.5,19z"></path>
+                            <circle cx="11" cy="6.5" r="1"></circle>
+                            <g>
+                                <path fill="none" d="M0 0H24V24H0z"></path>
+                            </g>
+                        </svg>
+                    </button>
+                    <div
+                        class="
+                            dcf-popup-content
+                            unl-cream
+                            unl-bg-blue
+                            dcf-p-1
+                            dcf-rounded
+                        "
+                        style="min-width: 25ch;"
+                    >
+                        <p class="dcf-m-0 dcf-regular">
+                            Copyright information for media object.
+                        </p>
                     </div>
                 </div>
                 <div>
@@ -528,10 +1063,39 @@ $page->addScriptDeclaration("
             </div>
             <div class="dcf-form-group" style="display:none;">
                 <label for='media_text'>Text</label>
-                <div class="mh-tooltip" id="text-details">
-                    <?php echo $savvy->render('channel rss text tooltip', 'InfoIcon.tpl.php'); ?>
-                    <div>
-                        <p>Allows the inclusion of a text transcript, closed captioning, or lyrics of the media content.</p>
+                <div class="dcf-popup dcf-d-inline" id="text-details" data-hover="true" data-point="true">
+                    <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24
+                                S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23 C5.71,23,1,18.29,1,12.5
+                                C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,18.29,17.29,23,11.5,23z"></path>
+                            <path d="M14.5,19H12v-8.5c0-0.276-0.224-0.5-0.5-0.5h-2
+                                C9.224,10,9,10.224,9,10.5S9.224,11,9.5,11H11v8H8.5 C8.224,19,8,19.224,8,19.5
+                                S8.224,20,8.5,20h6c0.276,0,0.5-0.224,0.5-0.5S14.776,19,14.5,19z"></path>
+                            <circle cx="11" cy="6.5" r="1"></circle>
+                            <g>
+                                <path fill="none" d="M0 0H24V24H0z"></path>
+                            </g>
+                        </svg>
+                    </button>
+                    <div
+                        class="
+                            dcf-popup-content
+                            unl-cream
+                            unl-bg-blue
+                            dcf-p-1
+                            dcf-rounded
+                        "
+                        style="min-width: 25ch;"
+                    >
+                        <p class="dcf-m-0 dcf-regular">
+                            Allows the inclusion of a text transcript, closed captioning, or lyrics
+                            of the media content.
+                        </p>
                     </div>
                 </div>
                 <div>
@@ -541,10 +1105,38 @@ $page->addScriptDeclaration("
             </div>
             <div class="dcf-form-group">
                 <label for='media_restriction'>Restriction</label>
-                <div class="mh-tooltip " id="restriction-details">
-                    <?php echo $savvy->render('channel rss restrictions tooltip', 'InfoIcon.tpl.php'); ?>
-                    <div>
-                        <p>Allows restrictions to be placed on the aggregator rendering the media in the feed.</p>
+                <div class="dcf-popup dcf-d-inline" id="restriction-details" data-hover="true" data-point="true">
+                    <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24
+                                S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23 C5.71,23,1,18.29,1,12.5
+                                C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,18.29,17.29,23,11.5,23z"></path>
+                            <path d="M14.5,19H12v-8.5c0-0.276-0.224-0.5-0.5-0.5h-2
+                                C9.224,10,9,10.224,9,10.5S9.224,11,9.5,11H11v8H8.5 C8.224,19,8,19.224,8,19.5
+                                S8.224,20,8.5,20h6c0.276,0,0.5-0.224,0.5-0.5S14.776,19,14.5,19z"></path>
+                            <circle cx="11" cy="6.5" r="1"></circle>
+                            <g>
+                                <path fill="none" d="M0 0H24V24H0z"></path>
+                            </g>
+                        </svg>
+                    </button>
+                    <div
+                        class="
+                            dcf-popup-content
+                            unl-cream
+                            unl-bg-blue
+                            dcf-p-1
+                            dcf-rounded
+                        "
+                        style="min-width: 25ch;"
+                    >
+                        <p class="dcf-m-0 dcf-regular">
+                        Allows restrictions to be placed on the aggregator rendering the media in the feed.
+                        </p>
                     </div>
                 </div>
                 <div>

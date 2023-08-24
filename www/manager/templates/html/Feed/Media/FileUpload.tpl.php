@@ -72,20 +72,91 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                             </div>
                             <div class="dcf-form-group">
                                 <label for="author">Author <small class="dcf-required">Required</small></label>
-                                <div class="mh-tooltip hang-right" id="author-details">
-                                    <?php echo $savvy->render('author tooltip', 'InfoIcon.tpl.php'); ?>
-                                    <div>
+                                <div
+                                    class="dcf-popup dcf-d-inline"
+                                    id="author-details"
+                                    data-hover="true"
+                                    data-point="true"
+                                >
+                                    <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24
+                                                S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23
+                                                C5.71,23,1,18.29,1,12.5 C1,6.71,5.71,2,11.5,2S22,6.71,
+                                                22,12.5C22,18.29,17.29,23,11.5,23z"></path>
+                                            <path d="M14.5,19H12v-8.5c0-0.276-0.224-0.5-0.5-0.5h-2
+                                                C9.224,10,9,10.224,9,10.5S9.224,11,9.5,11H11v8H8.5
+                                                C8.224,19,8,19.224,8,19.5 S8.224,20,8.5,20h6c0.276,
+                                                0,0.5-0.224,0.5-0.5S14.776,19,14.5,19z"></path>
+                                            <circle cx="11" cy="6.5" r="1"></circle>
+                                            <g>
+                                                <path fill="none" d="M0 0H24V24H0z"></path>
+                                            </g>
+                                        </svg>
+                                    </button>
+                                    <div
+                                        class="
+                                            dcf-popup-content
+                                            unl-cream
+                                            unl-bg-blue
+                                            dcf-p-1
+                                            dcf-rounded
+                                        "
+                                        style="min-width: 25ch;"
+                                    >
+                                        <p class="dcf-m-0 dcf-regular">
                                         Name of media creator
+                                        </p>
                                     </div>
                                 </div>
                                 <input type="text" id="author" name="author" class="required-entry" aria-describedby="author-details">
                             </div>
                             <div class="dcf-form-group">
                                 <label for="description">Description <small class="dcf-required">Required</small></label>
-                                <div class="mh-tooltip" id="description-details">
-                                    <?php echo $savvy->render('description tooltip', 'InfoIcon.tpl.php'); ?>
-                                    <div>
-                                        Explain what this media is all about. Use a few sentences, but keep it to 1 paragraph.
+                                <div
+                                    class="dcf-popup dcf-d-inline"
+                                    id="description-details"
+                                    data-hover="true"
+                                    data-point="true"
+                                >
+                                    <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24
+                                                S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23
+                                                C5.71,23,1,18.29,1,12.5 C1,6.71,5.71,2,11.5,2S22,6.71,
+                                                22,12.5C22,18.29,17.29,23,11.5,23z"></path>
+                                            <path d="M14.5,19H12v-8.5c0-0.276-0.224-0.5-0.5-0.5h-2
+                                                C9.224,10,9,10.224,9,10.5S9.224,11,9.5,11H11v8H8.5
+                                                C8.224,19,8,19.224,8,19.5 S8.224,20,8.5,20h6c0.276,
+                                                0,0.5-0.224,0.5-0.5S14.776,19,14.5,19z"></path>
+                                            <circle cx="11" cy="6.5" r="1"></circle>
+                                            <g>
+                                                <path fill="none" d="M0 0H24V24H0z"></path>
+                                            </g>
+                                        </svg>
+                                    </button>
+                                    <div
+                                        class="
+                                            dcf-popup-content
+                                            unl-cream
+                                            unl-bg-blue
+                                            dcf-p-1
+                                            dcf-rounded
+                                        "
+                                        style="min-width: 25ch;"
+                                    >
+                                        <p class="dcf-m-0 dcf-regular">
+                                            Explain what this media is all about. Use a few sentences,
+                                            but keep it to 1 paragraph.
+                                        </p>
                                     </div>
                                 </div>
                                 <textarea rows="4" type="text" id="description" name="description" class="required-entry" aria-describedby="description-details"></textarea>
@@ -123,10 +194,22 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                                         </label>
                                     </div>
                                     <div class="dcf-input-radio">
-                                        <input id="optimization-2" type="radio" name="optimization" value="mp4" /><label for="optimization-2">Single file at quarter HD (540p, use this to reduce cost)</label>
+                                        <input id="optimization-2" type="radio" name="optimization" value="mp4" />
+                                        <label for="optimization-2">
+                                            Single file at quarter HD (720p, use this to reduce cost)
+                                        </label>
                                     </div>
                                     <div class="dcf-input-radio">
-                                        <input id="optimization-3" type="radio" name="optimization" value="hls" checked="checked" /><label for="optimization-3">Multiple files to optimize video quality (480p, 540p, 720p, and 1080p)</label>
+                                        <input
+                                            id="optimization-3"
+                                            type="radio"
+                                            name="optimization"
+                                            value="hls"
+                                            checked="checked"
+                                        />
+                                        <label for="optimization-3">
+                                            Multiple files to optimize video quality (480p, 540p, 720p, and 1080p)
+                                        </label>
                                     </div>
                                 </div>
                             </fieldset>
@@ -155,7 +238,15 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                                         </label>
                                     </div>
                                         <div class="dcf-input-radio">
-                                        <input id="optimization-2" class="dcf-input-control" type="radio" name="optimization" value="mp4" checked="checked" /><label for="optimization-2">Single file at quarter HD</label>
+                                        <input
+                                            id="optimization-2"
+                                            class="dcf-input-control"
+                                            type="radio"
+                                            name="optimization"
+                                            value="mp4"
+                                            checked="checked"
+                                        />
+                                        <label for="optimization-2">Single file at 720p</label>
                                     </div>
                                 </div>
                             </fieldset>
