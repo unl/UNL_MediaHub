@@ -4,13 +4,17 @@ class UNL_MediaHub_AuthService_UNL extends UNL_MediaHub_AuthService_Interface
     public static $cert_path = '/etc/pki/tls/cert.pem';
     private $auth;
 
-    public function __construct()
+    public function __construct($siteURL=null)
     {
-        if (!file_exists(self::$cert_path)) {
+        if (self::$cert_path !== false && !file_exists(self::$cert_path)) {
           self::$cert_path = GuzzleHttp\default_ca_bundle();
         }
 
-        $this->auth = new \UNL\Templates\Auth\AuthCAS('2.0', 'shib.unl.edu', 443, '/idp/profile/cas', self::$cert_path, 'mediahub');
+        if (isset($siteURL)) {
+            $this->auth = new \UNL\Templates\Auth\AuthCAS('2.0', 'shib.unl.edu', 443, '/idp/profile/cas', $siteURL, self::$cert_path, 'mediahub');
+        } else {
+            $this->auth = new \UNL\Templates\Auth\AuthCAS('2.0', 'shib.unl.edu', 443, '/idp/profile/cas', self::$cert_path, 'mediahub');
+        }
 
         if (isset($_GET['logout'])) {
             $this->logout();

@@ -19,6 +19,9 @@ UNL_MediaHub::$dsn = 'mysql://mediahub:mediahub@localhost/mediahub';
 
 // Auth Service
 UNL_MediaHub_AuthService::$provider = new UNL_MediaHub_AuthService_UNL();
+// For local development
+// UNL_MediaHub_AuthService_UNL::$cert_path = false;
+// UNL_MediaHub_AuthService::$provider = new UNL_MediaHub_AuthService_UNL(UNL_MediaHub_Controller::$url);
 
 // Controller Settings
 UNL_MediaHub_Controller::$url = 'http://localhost:8007/';
