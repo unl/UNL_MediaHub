@@ -119,12 +119,6 @@
                             An error has occurred trying to add media to Amara.
                             Please try again later or contact an administrator for help.
                         </p>
-                        <p class="dcf-txt-xs">
-                            If your video was not optimized please note: Amara does not support
-                            .mov files so you will need to delete this upload and re-upload as an
-                            .mp4, or select one of our optimization setting on upload of your
-                            .mov to have it converted automatically.
-                        </p>
                     <?php else: ?>
                         <a class="dcf-btn dcf-btn-primary" href="<?php echo $context->getEditCaptionsURL(); ?>">Edit Captions on amara</a><br><br>
                         <form class="dcf-form" method="post">
