@@ -357,6 +357,10 @@ function createHlsJob($endpoint, $role, $input, $output, $aspect_ratio, $max_dim
             "Preset" => "HLS 2160p " . $formatted_aspect_ratio . " single pass",
             "NameModifier" => "2160p"
         );
+        $HLS_adaptive_outputs[] = array(
+            "Preset" => "HLS 2160p " . $formatted_aspect_ratio . " 32mbps single pass",
+            "NameModifier" => "2160p32mbps"
+        );
     }
 
     $job_settings = json_decode($job_settings, true);
