@@ -178,6 +178,10 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                             </div>
                         </div>
                     </div>
+                    <p class="dcf-txt-sm">
+                        Note: All Video will be optimized for web in multiple resolutions.
+                        If you are uploading an audio file, this will have no effect.
+                    </p>
 
                     <input type="submit" id="publish" name="publish" value="Next Step: Add Captions" class="dcf-btn dcf-btn-primary dcf-mt-3" disabled="disabled">
                     <?php if (UNL_MediaHub_Controller::$caption_requirement_date):?>
