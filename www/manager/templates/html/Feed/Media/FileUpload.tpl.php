@@ -15,10 +15,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
 
 <div class="dcf-bleed unl-bg-lightest-gray mh-upload-band dcf-pb-6 dcf-pt-6">
     <div class="dcf-wrapper">
-        <h2>
-            Manage Media
-            <span class="dcf-subhead dcf-float-right"><a href="<?php echo UNL_MediaHub_Controller::getURL() ?>help/media-prep">Preparing Your Media</a></span>
-        </h2>
+        <h2>Manage Media</h2>
         <?php
             $errorNotice = new StdClass();
             $errorNotice->title = 'Media Errors';

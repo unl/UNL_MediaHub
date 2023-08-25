@@ -10,7 +10,6 @@
     <h3 class="dcf-txt-md dcf-bold dcf-uppercase dcf-lh-3 unl-ls-2 unl-cream" id="dcf-footer-group-2-heading">Related Links</h3>
     <ul class="dcf-list-bare dcf-mb-0">
         <li><a href="<?php echo UNL_MediaHub_Controller::getURL() ?>developers">Developer Documentation</a></li>
-        <li><a href="<?php echo UNL_MediaHub_Controller::getURL() ?>help/media-prep">Preparing Your Media</a></li>
         <li><a href="https://wdn.unl.edu/documentation/unl-mediahub">Documentation</a></li>
         <li><a href="https://wdn.unl.edu/documentation/unl-mediahub/changelog">Changelog</a></li>
         <li><a href="https://dxg.unl.edu/">Digital Experience Group</a></li>
