@@ -532,15 +532,8 @@ class UNL_MediaHub_Manager_PostHandler
         }
 
         if ($is_new) {
-            //if it is is and the user is set to auto-transcode... do it
-            if ($user && isset($this->post['optimization']) && $this->post['optimization'] !== 'none' && $user->canTranscode()) {
-                if (!$user->canTranscodePro() && $this->post['optimization'] !== 'mp4') {
-                    throw new Exception('Unauthorized transcoding level selected.', 403);
-                }
-                
-                $media->transcode($this->post['optimization']);
-            }
-
+            $media->transcode('hls');
+            
             //After upload, add captions
             $success_string = 'Your media has been uploaded and is now published. Please make sure that the media is captioned.';
             if ($media->getMostRecentTranscodingJob()) {

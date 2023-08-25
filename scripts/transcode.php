@@ -53,6 +53,14 @@ while (true) {
                 upload($source, $input_bucket, $input_key);
 
                 $aspect_ratio = $media->getAspectRatio();
+                $video_dimensions = $media->findVideoDimensions();
+
+                $max_dimension = '720';
+                if ($video_dimensions !== false && $video_dimensions['height'] >= $video_dimensions['width']) {
+                    $max_dimension = $video_dimensions['height'];
+                } elseif ($video_dimensions !== false && $video_dimensions['height'] < $video_dimensions['width']) {
+                    $max_dimension = $video_dimensions['width'];
+                }
 
                 //2. create job
                 if ('hls' === $media_hub_job->job_type) {
@@ -61,7 +69,8 @@ while (true) {
                         UNL_MediaHub::$transcode_mediaconvert_role,
                         $input_arn,
                         $output_arn,
-                        $aspect_ratio
+                        $aspect_ratio,
+                        $max_dimension
                     );
                 } else {
                     //default to an mp4 job
@@ -278,7 +287,7 @@ function createMp4Job($endpoint, $role, $input, $output, $aspect_ratio)
     return $jobData['Id'];
 }
 
-function createHlsJob($endpoint, $role, $input, $output, $aspect_ratio)
+function createHlsJob($endpoint, $role, $input, $output, $aspect_ratio, $max_dimension)
 {
     $mediaConvert = new \Aws\MediaConvert\MediaConvertClient([
         'version' => '2017-08-29',
@@ -288,25 +297,70 @@ function createHlsJob($endpoint, $role, $input, $output, $aspect_ratio)
 
     ///Default to 16:9
     $job_settings = file_get_contents(__DIR__.'/../data/mediaconvert.hls.16x9.template.json');
+    $formatted_aspect_ratio = '16x9';
 
     //Use 9x16 if we need to
     if (UNL_MediaHub_Media::ASPECT_9x16 == $aspect_ratio) {
         $job_settings = file_get_contents(__DIR__.'/../data/mediaconvert.hls.9x16.template.json');
+        $formatted_aspect_ratio = '9x16';
     }
 
     //Use 4:3 if we need to
     if (UNL_MediaHub_Media::ASPECT_4x3 == $aspect_ratio) {
         $job_settings = file_get_contents(__DIR__.'/../data/mediaconvert.hls.4x3.template.json');
+        $formatted_aspect_ratio = '4x3';
     }
 
     //Use 3:4 if we need to
     if (UNL_MediaHub_Media::ASPECT_3x4 == $aspect_ratio) {
         $job_settings = file_get_contents(__DIR__.'/../data/mediaconvert.hls.3x4.template.json');
+        $formatted_aspect_ratio = '3x4';
     }
 
     //Use 1:1 if we need to
     if (UNL_MediaHub_Media::ASPECT_1x1 == $aspect_ratio) {
         $job_settings = file_get_contents(__DIR__.'/../data/mediaconvert.hls.1x1.template.json');
+        $formatted_aspect_ratio = '1x1';
+    }
+
+    $HLS_adaptive_outputs = array();
+
+    // Some times these are like right under the actual value so I like to bump it up by a small bit
+    $small_bump = 50;
+
+    if ($max_dimension+$small_bump >= '480') {
+        $HLS_adaptive_outputs[] = array(
+            "Preset" => "HLS 480p " . $formatted_aspect_ratio . " single pass",
+            "NameModifier" => "480p"
+        );
+    }
+    if ($max_dimension+$small_bump >= '540') {
+        $HLS_adaptive_outputs[] = array(
+            "Preset" => "HLS 540p " . $formatted_aspect_ratio . " single pass",
+            "NameModifier" => "540p"
+        );
+    }
+    if ($max_dimension+$small_bump >= '720') {
+        $HLS_adaptive_outputs[] = array(
+            "Preset" => "HLS 720p " . $formatted_aspect_ratio . " single pass",
+            "NameModifier" => "720p"
+        );
+    }
+    if ($max_dimension+$small_bump >= '1080') {
+        $HLS_adaptive_outputs[] = array(
+            "Preset" => "HLS 1080p " . $formatted_aspect_ratio . " single pass",
+            "NameModifier" => "1080p"
+        );
+    }
+    if ($max_dimension+$small_bump >= '2160') {
+        $HLS_adaptive_outputs[] = array(
+            "Preset" => "HLS 2160p " . $formatted_aspect_ratio . " single pass",
+            "NameModifier" => "2160p"
+        );
+        $HLS_adaptive_outputs[] = array(
+            "Preset" => "HLS 2160p " . $formatted_aspect_ratio . " 32mbps single pass",
+            "NameModifier" => "2160p32mbps"
+        );
     }
 
     $job_settings = json_decode($job_settings, true);
@@ -314,6 +368,7 @@ function createHlsJob($endpoint, $role, $input, $output, $aspect_ratio)
     //We are not using a job template hosted in aws because we need to customize the destination
     $job_settings['Settings']['OutputGroups'][0]['OutputGroupSettings']['FileGroupSettings']['Destination'] = $output;
     $job_settings['Settings']['OutputGroups'][1]['OutputGroupSettings']['HlsGroupSettings']['Destination'] = $output;
+    $job_settings['Settings']['OutputGroups'][1]['Outputs'] = $HLS_adaptive_outputs;
     $job_settings['Settings']['Inputs'][0]['FileInput'] = $input;
     $job_settings['Role'] = $role;
 

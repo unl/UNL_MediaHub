@@ -40,6 +40,13 @@ UNL_MediaHub_RevAPI::$client_api_key = '';
 UNL_MediaHub_RevAPI::$user_api_key = '';
 UNL_MediaHub_RevAPI::$http_config = array();
 
+UNL_MediaHub::$admins = array();
+UNL_MediaHub::$auto_transcode_pro_all_users = true;
+// UNL_MediaHub::$transcode_input_bucket = '';
+// UNL_MediaHub::$transcode_output_bucket = '';
+// UNL_MediaHub::$transcode_mediaconvert_api_endpoint = '';
+// UNL_MediaHub::$transcode_mediaconvert_role = '';
+
 // Set custom mediahub namespaced item elements
 $itemElements = array(
     'water_af'  => 'Volume of water in acre-feet (af)',

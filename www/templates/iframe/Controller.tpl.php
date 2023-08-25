@@ -30,9 +30,6 @@ if (isset($context->output[0]) && $context->output[0] instanceof UNL_MediaHub_Me
         <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/videojs-panorama.v5.min.js?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>"></script>
         <link href="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/videojs-panorama.min.css?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>" rel="stylesheet">
     <?php endif; ?>
-    <?php if ($has_hls): ?>
-        <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/videojs-contrib-hls.min.js?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>"></script>
-    <?php endif; ?>
     
     <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/videojs-mediahub.js?v=<?php echo UNL_MediaHub_Controller::getVersion() ?>"></script>
     <script src="<?php echo UNL_MediaHub_Controller::getURL(); ?>templates/iframe/js/vendor/videojs-captions-toggle.js"></script>

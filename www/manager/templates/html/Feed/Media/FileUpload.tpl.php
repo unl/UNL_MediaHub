@@ -15,10 +15,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
 
 <div class="dcf-bleed unl-bg-lightest-gray mh-upload-band dcf-pb-6 dcf-pt-6">
     <div class="dcf-wrapper">
-        <h2>
-            Manage Media
-            <span class="dcf-subhead dcf-float-right"><a href="<?php echo UNL_MediaHub_Controller::getURL() ?>help/media-prep">Preparing Your Media</a></span>
-        </h2>
+        <h2>Manage Media</h2>
         <?php
             $errorNotice = new StdClass();
             $errorNotice->title = 'Media Errors';
@@ -178,80 +175,10 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                             </div>
                         </div>
                     </div>
-                    <?php if ($user->canTranscodePro()): ?>
-                        <div>
-                            <fieldset>
-                                <legend class="dcf-legend">Optimization Settings</legend>
-                                <p class="dcf-txt-xs">
-                                    Only videos will be optimized and converted to .mp4 files. If you are
-                                    uploading an audio file, these settings will have no effect.
-                                </p>
-                                <div>
-                                    <div class="dcf-input-radio">
-                                        <input id="optimization-1" type="radio" name="optimization" value="none" />
-                                        <label for="optimization-1">
-                                            None (video is already optimized with HandBrake presets, this should be an .mp4 for maximum compatibility)
-                                        </label>
-                                    </div>
-                                    <div class="dcf-input-radio">
-                                        <input id="optimization-2" type="radio" name="optimization" value="mp4" />
-                                        <label for="optimization-2">
-                                            Single file at quarter HD (720p, use this to reduce cost)
-                                        </label>
-                                    </div>
-                                    <div class="dcf-input-radio">
-                                        <input
-                                            id="optimization-3"
-                                            type="radio"
-                                            name="optimization"
-                                            value="hls"
-                                            checked="checked"
-                                        />
-                                        <label for="optimization-3">
-                                            Multiple files to optimize video quality (480p, 540p, 720p, and 1080p)
-                                        </label>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                    <?php elseif ($user->canTranscode()): ?>
-                        <div>
-                            <fieldset>
-                                <legend class="dcf-legend">Optimization Settings</legend>
-                                <p class="dcf-txt-xs">
-                                    Only videos will be optimized and converted to .mp4 files. If you are uploading an audio file,
-                                    these settings will have no effect.
-                                    <a href="https://wdn.unl.edu/mediahub-video-optimization-inquiry">If you need
-                                        more options, please contact us</a>.
-                                </p>
-                                <div>
-                                    <div class="dcf-input-radio">
-                                        <input
-                                            id="optimization-1"
-                                            class="dcf-input-control"
-                                            type="radio"
-                                            name="optimization"
-                                            value="none"
-                                        />
-                                        <label for="optimization-1">
-                                            None (video is already optimized with HandBrake presets, this should be an .mp4 for maximum compatibility)
-                                        </label>
-                                    </div>
-                                        <div class="dcf-input-radio">
-                                        <input
-                                            id="optimization-2"
-                                            class="dcf-input-control"
-                                            type="radio"
-                                            name="optimization"
-                                            value="mp4"
-                                            checked="checked"
-                                        />
-                                        <label for="optimization-2">Single file at 720p</label>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                    <?php endif; ?>
+                    <p class="dcf-txt-sm">
+                        Note: All videos will be optimized for web in multiple resolutions automatically.
+                        If you are uploading an audio file, this will have no effect.
+                    </p>
 
                     <input type="submit" id="publish" name="publish" value="Next Step: Add Captions" class="dcf-btn dcf-btn-primary dcf-mt-3" disabled="disabled">
                     <?php if (UNL_MediaHub_Controller::$caption_requirement_date):?>
@@ -310,12 +237,6 @@ $page->addScriptDeclaration("
         }
         if (!feedChecked && !newFeed) {
             errors.push('Media must have at least one Channel.');
-        }
-
-        // Validate Optimization
-        var optimization = document.getElementsByName('optimization');
-        if (!optimization) {
-            errors.push('Optimization is required.');
         }
 
         // Submit form or display errors

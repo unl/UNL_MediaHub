@@ -10,7 +10,6 @@ $routes['/^$/'] = 'UNL_MediaHub_DefaultHomepage';
 
 $routes['/^developers\/?$/'] = 'UNL_MediaHub_Developers';
 
-$routes['/^help\/media-prep\/?$/'] = 'UNL_MediaHub_Help_MediaPrep';
 $routes['/^transcode-manager\/?$/'] = 'UNL_MediaHub_TranscodeManager';
 $routes['/^transcode-manager\/command\/?$/'] = 'UNL_MediaHub_TranscodeManager';
 
