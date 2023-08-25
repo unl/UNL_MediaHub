@@ -179,7 +179,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                         </div>
                     </div>
                     <p class="dcf-txt-sm">
-                        Note: All Video will be optimized for web in multiple resolutions.
+                        Note: All videos will be optimized for web in multiple resolutions automatically.
                         If you are uploading an audio file, this will have no effect.
                     </p>
 
