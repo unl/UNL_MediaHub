@@ -46,10 +46,10 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         
         if ($exp >= 6) {
             $exp = 6;
-            $suffix = ' M';
+            $suffix = 'M';
         } elseif ($exp >= 4) {
             $exp = 3;
-            $suffix = ' k';
+            $suffix = 'k';
         } else {
             $exp = 0;
         }
