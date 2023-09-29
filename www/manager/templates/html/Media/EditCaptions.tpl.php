@@ -56,7 +56,7 @@
                             <?php $estimate = sprintf("%01.2f", round($duration->getTotalSeconds()/60 * 1.50, 2)); ?>
                             <input type="hidden" name="media_duration" value="<?php echo UNL_MediaHub::escape($duration->getString()); ?>" />
                             <input type="hidden" name="estimate" value="<?php echo UNL_MediaHub::escape($estimate) ?>" />
-                            <h3 class="clear-top">Caption your video for <strong>$<?php echo UNL_MediaHub::escape($estimate) ?>.</strong></h3>  
+                            <h3 class="clear-top">Caption your video for <strong>$<?php echo UNL_MediaHub::escape($estimate) ?>.</strong></h3>
                         <?php else: ?>
                             <p>
                                 We were unable to find the duration of the video, and can not estimate the cost.
@@ -90,7 +90,7 @@
                     <?php else: ?>
                     <p>Great news! There is an order already in the works.</p>
                     <?php endif; ?>
-                </div>  
+                </div>
 
             </div>
         </div>
@@ -132,7 +132,7 @@
                 <?php else: ?>
                     <p>Please wait for your video to be optimized before captioning on Amara.</p>
                 <?php endif; ?>
-                
+
             </div>
         </div>
     </div>
@@ -159,12 +159,22 @@
                 <form class="dcf-form dcf-d-inline" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="__unlmy_posttarget" value="upload_caption_file" />
                     <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
-                    <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
-                    <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
+                    <input
+                        type="hidden"
+                        name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>"
+                        value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>"
+                    >
+                    <input
+                        type="hidden"
+                        name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>"
+                        value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>"
+                    >
                     <fieldset>
                         <legend>Caption File Upload</legend>
                         <div class="dcf-form-group">
-                            <label for="captions-language-select"> Language <small class="dcf-required">Required</small></label>
+                            <label for="captions-language-select">
+                                Language <small class="dcf-required">Required</small>
+                            </label>
                             <select id="captions-language-select" name="language" required>
                                 <?php $languages = array("Abkhazian","Afar","Afrikaans","Akan","Albanian","Amharic","Arabic","Aragonese","Armenian","Assamese","Avaric","Avestan","Aymara","Azerbaijani","Bambara","Bashkir","Basque","Belarusian","Bengali","Bislama","Bosnian","Breton","Bulgarian","Burmese","Catalan, Valencian","Chamorro","Chechen","Chichewa, Chewa, Nyanja","Chinese","Church Slavonic, Old Slavonic, Old Church Slavonic","Chuvash","Cornish","Corsican","Cree","Croatian","Czech","Danish","Divehi, Dhivehi, Maldivian","Dutch, Flemish","Dzongkha","English","Esperanto","Estonian","Ewe","Faroese","Fijian","Finnish","French","Western Frisian","Fulah","Gaelic, Scottish Gaelic","Galician","Ganda","Georgian","German","Greek, Modern (1453–)","Kalaallisut, Greenlandic","Guarani","Gujarati","Haitian, Haitian Creole","Hausa","Hebrew","Herero","Hindi","Hiri Motu","Hungarian","Icelandic","Ido","Igbo","Indonesian","Interlingua (International Auxiliary Language Association)","Interlingue, Occidental","Inuktitut","Inupiaq","Irish","Italian","Japanese","Javanese","Kannada","Kanuri","Kashmiri","Kazakh","Central Khmer","Kikuyu, Gikuyu","Kinyarwanda","Kirghiz, Kyrgyz","Komi","Kongo","Korean","Kuanyama, Kwanyama","Kurdish","Lao","Latin","Latvian","Limburgan, Limburger, Limburgish","Lingala","Lithuanian","Luba-Katanga","Luxembourgish, Letzeburgesch","Macedonian","Malagasy","Malay","Malayalam","Maltese","Manx","Maori","Marathi","Marshallese","Mongolian","Nauru","Navajo, Navaho","North Ndebele","South Ndebele","Ndonga","Nepali","Norwegian","Norwegian Bokmål","Norwegian Nynorsk","Sichuan Yi, Nuosu","Occitan","Ojibwa","Oriya","Oromo","Ossetian, Ossetic","Pali","Pashto, Pushto","Persian","Polish","Portuguese","Punjabi, Panjabi","Quechua","Romanian, Moldavian, Moldovan","Romansh","Rundi","Russian","Northern Sami","Samoan","Sango","Sanskrit","Sardinian","Serbian","Shona","Sindhi","Sinhala, Sinhalese","Slovak","Slovenian","Somali","Southern Sotho","Spanish, Castilian","Sundanese","Swahili","Swati","Swedish","Tagalog","Tahitian","Tajik","Tamil","Tatar","Telugu","Thai","Tibetan","Tigrinya","Tonga (Tonga Islands)","Tsonga","Tswana","Turkish","Turkmen","Twi","Uighur, Uyghur","Ukrainian","Urdu","Uzbek","Venda","Vietnamese","Volapük","Walloon","Welsh","Wolof","Xhosa","Yiddish","Yoruba","Zhuang, Chuang","Zulu"); ?>
                                 <?php $languages_codes = array("ab","aa","af","ak","sq","am","ar","an","hy","as","av","ae","ay","az","bm","ba","eu","be","bn","bi","bs","br","bg","my","ca","ch","ce","ny","zh","cu","cv","kw","co","cr","hr","cs","da","dv","nl","dz","en","eo","et","ee","fo","fj","fi","fr","fy","ff","gd","gl","lg","ka","de","el","kl","gn","gu","ht","ha","he","hz","hi","ho","hu","is","io","ig","id","ia","ie","iu","ik","ga","it","ja","jv","kn","kr","ks","kk","km","ki","rw","ky","kv","kg","ko","kj","ku","lo","la","lv","li","ln","lt","lu","lb","mk","mg","ms","ml","mt","gv","mi","mr","mh","mn","na","nv","nd","nr","ng","ne","no","nb","nn","ii","oc","oj","or","om","os","pi","ps","fa","pl","pt","pa","qu","ro","rm","rn","ru","se","sm","sg","sa","sc","sr","sn","sd","si","sk","sl","so","st","es","su","sw","ss","sv","tl","ty","tg","ta","tt","te","th","bo","ti","to","ts","tn","tr","tk","tw","ug","uk","ur","uz","ve","vi","vo","wa","cy","wo","xh","yi","yo","za","zu"); ?>
@@ -191,7 +201,14 @@
                         </div>
                         <div class="dcf-form-group">
                             <label for="caption-file">Caption File <small class="dcf-required">Required</small></label>
-                            <input type="file" id="caption-file" name="caption_file" accept=".vtt,.srt" aria-describedby="caption-file-help" required>
+                            <input
+                                type="file"
+                                id="caption-file"
+                                name="caption_file"
+                                accept=".vtt,.srt"
+                                aria-describedby="caption-file-help"
+                                required
+                            >
                             <p class="dcf-form-help dcf-mb-0" id="caption-file-help">Must be of type .vtt or .srt</p>
                         </div>
                         <div class="dcf-form-group">
@@ -206,7 +223,7 @@
             </div>
         </div>
     </div>
-</div> 
+</div>
 
 <div class="dcf-bleed dcf-pt-6 dcf-pb-6">
     <div class="dcf-wrapper">
@@ -257,16 +274,22 @@
             You may copy any track, edit any copied track, and
             delete non-active copied/uploaded tracks. Editing tracks is limited
             to fixing typos, for more intensive edits you may need to download
-            the caption file and edit in your caption editor of choice. 
+            the caption file and edit in your caption editor of choice.
         </p>
         <!--  This form is for all the is active radio buttons in the table -->
         <form class="dcf-form dcf-d-inline" method="post" id="caption_active_form">
             <input type="hidden" name="__unlmy_posttarget" value="set_active_text_track" />
             <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
-            <!-- <input type="hidden" name="text_track_id" value="<?php //echo (int)$track->id ?>" /> -->
-            <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
-            <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
-            <!-- <input class="dcf-btn dcf-btn-primary dcf-mt-1" type="submit" value="Set Active"> -->
+            <input
+                type="hidden"
+                name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>"
+                value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>"
+            >
+            <input
+                type="hidden"
+                name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>"
+                value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>"
+            >
         </form>
         <table class="dcf-table dcf-table-bordered dcf-table-responsive">
             <thead>
@@ -317,29 +340,84 @@
                                 <div class="dcf-col-100% dcf-col-75%-start@md">
                                     <form class="dcf-form dcf-d-inline" method="post">
                                         <input type="hidden" name="__unlmy_posttarget" value="copy_text_track_file" />
-                                        <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
-                                        <input type="hidden" name="text_track_id" value="<?php echo (int)$track->id ?>" />
-                                        <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
-                                        <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
+                                        <input
+                                            type="hidden"
+                                            name="media_id"
+                                            value="<?php echo (int)$context->media->id ?>"
+                                        >
+                                        <input
+                                            type="hidden"
+                                            name="text_track_id"
+                                            value="<?php echo (int)$track->id ?>"
+                                        >
+                                        <input
+                                            type="hidden"
+                                            name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>"
+                                            value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>"
+                                        >
+                                        <input
+                                            type="hidden"
+                                            name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>"
+                                            value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>"
+                                        >
                                         <input class="dcf-btn dcf-btn-primary dcf-mt-1" type="submit" value="Copy">
                                     </form>
                                     <?php if ($is_copy): ?>
-                                        <a href="<?php echo UNL_MediaHub_Manager::getURL() . '?view=editcaptiontrack&media_id=' . (int)$context->media->id . '&track_id=' . (int)$track->id; ?>" class="dcf-btn dcf-btn-primary dcf-mt-1">Edit</a>
+                                        <a
+                                            href="<?php
+                                                echo UNL_MediaHub_Manager::getURL()
+                                                    . '?view=editcaptiontrack&media_id='
+                                                    . (int)$context->media->id
+                                                    . '&track_id='
+                                                    . (int)$track->id;
+                                                ?>" class="dcf-btn dcf-btn-primary dcf-mt-1">Edit</a>
                                     <?php endif; ?>
                                     <?php if (($is_copy || $is_upload) && !$is_active): ?>
                                         <form class="dcf-form dcf-d-inline" method="post">
-                                            <input type="hidden" name="__unlmy_posttarget" value="delete_text_track_file" />
-                                            <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
-                                            <input type="hidden" name="text_track_id" value="<?php echo (int)$track->id ?>" />
-                                            <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
-                                            <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
-                                            <input class="dcf-btn dcf-btn-secondary dcf-mt-1" type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this track?');">
+                                            <input
+                                                type="hidden"
+                                                name="__unlmy_posttarget"
+                                                value="delete_text_track_file"
+                                            >
+                                            <input
+                                                type="hidden"
+                                                name="media_id"
+                                                value="<?php echo (int)$context->media->id ?>"
+                                            >
+                                            <input
+                                                type="hidden"
+                                                name="text_track_id"
+                                                value="<?php echo (int)$track->id ?>"
+                                            >
+                                            <input
+                                                type="hidden"
+                                                name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>"
+                                                value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>"
+                                            >
+                                            <input
+                                                type="hidden"
+                                                name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>"
+                                                value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>"
+                                            >
+                                            <input
+                                                class="dcf-btn dcf-btn-secondary dcf-mt-1"
+                                                type="submit"
+                                                value="Delete"
+                                                onclick="return confirm('Are you sure you want to delete this track?');"
+                                            >
                                         </form>
                                     <?php endif; ?>
                                 </div>
                                 <div class="dcf-input-radio dcf-col-100% dcf-col-25%-end@md">
                                     <?php $active_check = $is_active ? 'checked="checked"' : ''; ?>
-                                    <input id="caption-active-radio-<?php echo (int)$track->id; ?>" form="caption_active_form" name="text_track_id" type="radio" value="<?php echo (int)$track->id; ?>" <?php echo $active_check; ?>>
+                                    <input
+                                        id="caption-active-radio-<?php echo (int)$track->id; ?>"
+                                        form="caption_active_form"
+                                        name="text_track_id"
+                                        type="radio"
+                                        value="<?php echo (int)$track->id; ?>"
+                                        <?php echo $active_check; ?>
+                                    >
                                     <label for="caption-active-radio-<?php echo (int)$track->id; ?>">Active</label>
                                 </div>
                             </div>

@@ -749,16 +749,19 @@ class UNL_MediaHub_Manager_PostHandler
 
         UNL_MediaHub::redirect($media->getEditCaptionsURL());
     }
-    
-    function uploadCaptionFile() {
-        // Validate media 
+
+    protected function uploadCaptionFile() {
+        // Validate media
         $mediaId = !empty($this->post['media_id']) ? $this->post['media_id'] : 0;
         if (!$media = UNL_MediaHub_Media::getById($mediaId)) {
             throw new Exception('Unable to find media', 404);
         }
 
         // Double check user auth
-        if (!$media->userHasPermission(UNL_MediaHub_AuthService::getInstance()->getUser(), UNL_MediaHub_Permission::USER_CAN_UPDATE)) {
+        if (!$media->userHasPermission(
+                UNL_MediaHub_AuthService::getInstance()->getUser(),
+                UNL_MediaHub_Permission::USER_CAN_UPDATE
+            )) {
             throw new Exception('You do not have permission to edit this media.', 403);
         }
 
