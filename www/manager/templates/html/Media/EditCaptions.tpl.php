@@ -336,7 +336,7 @@
                             </ul>
                         </td>
                         <td data-label="Actions" class="dcf-txt-sm">
-                            <div class="dcf-grid dcf-row-gap-3">
+                            <div class="dcf-grid dcf-row-gap-3 dcf-ai-center">
                                 <div class="dcf-col-100% dcf-col-75%-start@md">
                                     <form class="dcf-form dcf-d-inline" method="post">
                                         <input type="hidden" name="__unlmy_posttarget" value="copy_text_track_file" />
