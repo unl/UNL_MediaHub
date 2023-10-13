@@ -37,6 +37,7 @@ class UNL_MediaHub_Installer
         $messages[] = $this->exec_sql(file_get_contents(dirname(__FILE__).'/../../../data/media_text_tracks_dates.sql'), 'Fixing date fields', true);
         $messages[] = $this->exec_sql(file_get_contents(dirname(__FILE__).'/../../../data/add_media_duration.sql'), 'Add media duration column', true);
         $messages[] = $this->exec_sql(file_get_contents(dirname(__FILE__).'/../../../data/transcoding_jobs.sql'), 'Add transcoding job table', true);
+        $messages[] = $this->exec_sql(file_get_contents(dirname(__FILE__).'/../../../data/add_caption_upload.sql'), 'Add caption upload table', true);
         
         return $messages;
     }

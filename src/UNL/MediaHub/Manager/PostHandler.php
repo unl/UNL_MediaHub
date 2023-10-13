@@ -143,6 +143,9 @@ class UNL_MediaHub_Manager_PostHandler
         case 'retry_transcoding_job':
             $this->retryTranscodingJob();
             break;
+        case 'upload_caption_file':
+            $this->uploadCaptionFile();
+            break;
         }
     }
 
@@ -729,6 +732,107 @@ class UNL_MediaHub_Manager_PostHandler
             $newTrackFile->format = $trackFile->format;
             $newTrackFile->language = $trackFile->language;
             $newTrackFile->file_contents = $trackFile->file_contents;
+            $newTrackFile->save();
+        } catch(Exception $e) {
+            if (!empty($newTrack->id)) {
+                $newTrack->delete();
+            }
+            throw new \Exception('Error copying caption track', 404);
+        }
+
+        $notice = new UNL_MediaHub_Notice(
+            'Success',
+            'The caption track has been copied.',
+            UNL_MediaHub_Notice::TYPE_SUCCESS
+        );
+        UNL_MediaHub_Manager::addNotice($notice);
+
+        UNL_MediaHub::redirect($media->getEditCaptionsURL());
+    }
+
+    protected function uploadCaptionFile() {
+        // Validate media
+        $mediaId = !empty($this->post['media_id']) ? $this->post['media_id'] : 0;
+        if (!$media = UNL_MediaHub_Media::getById($mediaId)) {
+            throw new Exception('Unable to find media', 404);
+        }
+
+        // Double check user auth
+        if (!$media->userHasPermission(
+                UNL_MediaHub_AuthService::getInstance()->getUser(),
+                UNL_MediaHub_Permission::USER_CAN_UPDATE
+            )) {
+            throw new Exception('You do not have permission to edit this media.', 403);
+        }
+
+        // Double check we actually just uploaded this file
+        if (!is_uploaded_file($_FILES['caption_file']['tmp_name'])) {
+            throw new Exception('Invalid Caption File', 400);
+        }
+
+        // Validate file mime type
+        $mimeType = mime_content_type($_FILES['caption_file']['tmp_name']);
+        if ($mimeType !== 'text/plain') {
+            throw new Exception('Invalid Caption File', 400);
+        }
+
+        // Validate file extension
+        $fileExtension = explode(".", $_FILES['caption_file']['name']);
+        $fileExtension = strtolower(end($fileExtension));
+        $availableExtensions = array('vtt', 'srt');
+        if (!in_array($fileExtension, $availableExtensions)) {
+            throw new Exception('Invalid Caption File', 400);
+        }
+
+        // Try to read from file
+        $fileContent = file_get_contents($_FILES['caption_file']['tmp_name']);
+        if ($fileContent === false || empty($fileContent)) {
+            throw new Exception('Invalid Caption File', 400);
+        }
+
+        // Validate language and country codes
+        if (
+            !isset($this->post['language'])
+            || empty($this->post['language'])
+            || strlen($this->post['language']) !== 2
+        ) {
+            throw new Exception('Missing or Invalid Language Code', 400);
+        }
+        if (
+            isset($this->post['country'])
+            && !empty($this->post['country'])
+            && strlen($this->post['country']) !== 2
+        ) {
+            throw new Exception('Invalid Country Code', 400);
+        }
+
+        // Format language code
+        $language_code = strtolower($this->post['language']);
+        if (isset($this->post['country']) && !empty($this->post['country'])) {
+            $language_code .= '-' . strtolower($this->post['country']);
+        }
+
+        $comment = null;
+        if (isset($this->post['caption_comment']) && !empty($this->post['caption_comment'])) {
+            $comment = $this->post['caption_comment'];
+        }
+
+        // Attempt to copy track and track file
+        try {
+            // copy track
+            $newTrack = new UNL_MediaHub_MediaTextTrack();
+            $newTrack->media_id = $media->id;
+            $newTrack->source = 'upload';
+            $newTrack->revision_comment = $comment;
+            $newTrack->save();
+
+            // copy track file
+            $newTrackFile = new UNL_MediaHub_MediaTextTrackFile();
+            $newTrackFile->media_text_tracks_id = $newTrack->id;
+            $newTrackFile->kind = 'caption';
+            $newTrackFile->format = $fileExtension;
+            $newTrackFile->language = $language_code;
+            $newTrackFile->file_contents = $fileContent;
             $newTrackFile->save();
         } catch(Exception $e) {
             if (!empty($newTrack->id)) {
