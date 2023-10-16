@@ -20,7 +20,40 @@
     <?php echo $savvy->render($context, 'Feed/Media/transcoding_notice.tpl.php'); ?>
 <?php endif; ?>
 
+<?php if ($context->hasTranscriptionJob() && !$context->isTranscribingFinished()):?>
+    <?php echo $savvy->render($context, 'Feed/Media/transcription_notice.tpl.php'); ?>
+<?php endif; ?>
+
 <div class="dcf-bleed unl-bg-lightest-gray dcf-pt-6 dcf-pb-6">
+    <div class="dcf-wrapper">
+        <h2>AI Captioning</h2>
+        <div class="dcf-grid dcf-col-gap-vw">
+            <div class="dcf-col-100% dcf-col-67%-start@sm">
+                <p>
+                    AI Captioning is Free. Completion time may vary based on the
+                    length of the video and the number of video before you in the
+                    queue. You will be required to verify the captions before
+                    activating them.
+                </p>
+            </div>
+            <div class="dcf-col-100% dcf-col-33%-end@sm">
+            <?php if ($context->hasTranscriptionJob() && !$context->isTranscribingFinished()):?>
+                    <p> Your order is still being processed. </p>
+            <?php else: ?>
+                <form id="ai_captions" method="post" class="dcf-form">
+                    <input type="hidden" name="__unlmy_posttarget" value="ai_captions" />
+                    <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
+                    <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
+                    <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
+                    <input class="dcf-mb-4 dcf-btn dcf-btn-primary" type="submit" value="Order captions">
+                </form>
+            <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="dcf-bleed dcf-pt-6 dcf-pb-6">
     <div class="dcf-wrapper">
         <h2>Order Captions With Your Cost Object Number</h2>
         <div class="dcf-grid dcf-col-gap-vw">
@@ -94,7 +127,7 @@
     </div>
 </div>
 
-<div class="dcf-bleed dcf-pt-6 dcf-pb-6">
+<div class="dcf-bleed unl-bg-lightest-gray dcf-pt-6 dcf-pb-6">
     <div class="dcf-wrapper">
     <h2>Self-Manage Captions With Amara</h2>
         <div class="dcf-grid dcf-col-gap-vw">
@@ -135,7 +168,7 @@
     </div>
 </div>
 
-<div class="dcf-bleed unl-bg-lightest-gray dcf-pt-6 dcf-pb-6">
+<div class="dcf-bleed dcf-pt-6 dcf-pb-6">
     <div class="dcf-wrapper">
         <h2>Upload your own .vtt or .srt file</h2>
         <div class="dcf-grid dcf-col-gap-vw">
@@ -222,7 +255,7 @@
     </div>
 </div>
 
-<div class="dcf-bleed dcf-pt-6 dcf-pb-6">
+<div class="dcf-bleed unl-bg-lightest-gray dcf-pt-6 dcf-pb-6">
     <div class="dcf-wrapper">
         <h2>Order history and status</h2>
         <p>View the current status of your orders</p>
@@ -432,6 +465,7 @@
         </script>
     </div>
 </div>
+
 <div class="dcf-bleed dcf-pt-6 dcf-pb-6">
     <div class="dcf-wrapper">
         <div>

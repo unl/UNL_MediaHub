@@ -134,6 +134,9 @@ class UNL_MediaHub_Manager_PostHandler
         case 'order_rev':
             $this->handleRev();
             break;
+        case 'ai_captions':
+            $this->handleTranscriptions();
+            break;
         case 'download_rev':
             $this->downloadRev();
             break;
@@ -1033,6 +1036,44 @@ class UNL_MediaHub_Manager_PostHandler
         );
         UNL_MediaHub_Manager::addNotice($notice);
         
+        UNL_MediaHub::redirect($media->getEditCaptionsURL());
+    }
+
+    protected function handleTranscriptions()
+    {
+        // Try to contact AI captioning website
+        // Get response and parse
+        // Save Job Id to DB
+
+        $user = UNL_MediaHub_AuthService::getInstance()->getUser();
+        $media = UNL_MediaHub_Media::getById($this->post['media_id']);
+        if (!$media) {
+            throw new Exception('Unable to find media', 404);
+        }
+        if (!$media->userHasPermission($user, UNL_MediaHub_Permission::USER_CAN_UPDATE)) {
+            throw new Exception('You do not have permission to edit this media.', 403);
+        }
+
+        // Set up variables for transcriber
+        $media_type = explode('.', $media->url);
+        $media_type = end($media_type);
+        $media_url = $media->getURL() . '/file';
+
+        $ai_captioning = new UNL_MediaHub_TranscriptionAPI();
+        $job_id = $ai_captioning->create_job($media_url, $media_type);
+        if ($job_id === false) {
+            throw new Exception('Could Not Create New Job', 500);
+        }
+
+        $media->transcription($job_id, $user->uid);
+
+        $notice = new UNL_MediaHub_Notice(
+            'Success',
+            'Ai Captioning Job Has Been Created',
+            UNL_MediaHub_Notice::TYPE_SUCCESS
+        );
+        UNL_MediaHub_Manager::addNotice($notice);
+
         UNL_MediaHub::redirect($media->getEditCaptionsURL());
     }
 
