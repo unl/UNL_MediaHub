@@ -39,9 +39,15 @@ class UNL_MediaHub_Media_EditCaptions
         return !($job && !$job->isFinished());
     }
 
+    public function isTranscribingFinished()
+    {
+        $job = $this->media->getMostRecentTranscriptionJob();
+        return !($job && !$job->isFinished());
+    }
+
     public function getEditCaptionsURL()
     {
-        if ($this->isTranscodingFinished()) {
+        if ($this->isTranscribingFinished()) {
             $amara_api = new UNL_MediaHub_AmaraAPI();
             return $amara_api->getCaptionEditURL($this->media->url);
         }
@@ -62,5 +68,11 @@ class UNL_MediaHub_Media_EditCaptions
         }
         
         return false;
+    }
+
+    public function hasTranscriptionJob()
+    {
+        $job = $this->media->getMostRecentTranscriptionJob();
+        return $job !== false;
     }
 }
