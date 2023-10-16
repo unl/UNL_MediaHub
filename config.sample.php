@@ -40,6 +40,10 @@ UNL_MediaHub_RevAPI::$client_api_key = '';
 UNL_MediaHub_RevAPI::$user_api_key = '';
 UNL_MediaHub_RevAPI::$http_config = array();
 
+UNL_MediaHub_TranscriptionAPI::$captioning_url = 'https://local-captions.unl.edu/';
+UNL_MediaHub_TranscriptionAPI::$captioning_api_key = '';
+UNL_MediaHub_TranscriptionAPI::$verify = true; // Set this for false on local dev if you are running into errors
+
 UNL_MediaHub::$admins = array();
 UNL_MediaHub::$auto_transcode_pro_all_users = true;
 // UNL_MediaHub::$transcode_input_bucket = '';
