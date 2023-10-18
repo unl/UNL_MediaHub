@@ -175,6 +175,18 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                             </div>
                         </div>
                     </div>
+
+                    <fieldset>
+                        <legend>Auto Captions</legend>
+                        <div class="dcf-input-checkbox">
+                            <input id="opt-out-captions" name="opt-out-captions" type="checkbox" value="1">
+                            <label for="opt-out-captions">Opt Out of auto captions</label>
+                            <p class="dcf-form-help dcf-mb-0" id="opt-out-captions">
+                                You would only want to opt out if your video is not in english
+                                or you already have captions for your video. Disregard if your uploading audio.
+                            </p>
+                        </div>
+                    </fieldset>
                     <p class="dcf-txt-sm">
                         Note: All videos will be optimized for web in multiple resolutions automatically.
                         If you are uploading an audio file, this will have no effect.
