@@ -573,7 +573,7 @@ class UNL_MediaHub_Manager_PostHandler
             // Creates the success message string based on $transcribing_successful,
             //   $transcribing_successful, and UNL_MediaHub_Controller::$caption_requirement_date
             $success_string = "";
-            if ($transcribing_successful && $transcribing_successful) {
+            if ($transcribing_successful && $transcoding_successful) {
                 $success_string = 'Your media has been uploaded and is being optimized and captioned. ';
                 $success_string .= 'Once we get those finished it will be published. ';
             } elseif ($transcribing_successful) {
@@ -584,13 +584,15 @@ class UNL_MediaHub_Manager_PostHandler
                 if (UNL_MediaHub_Controller::$caption_requirement_date !== false) {
                     $success_string .= 'Your media will not be published until it is captioned. ';
                 } else {
-                    $success_string .= 'Once we get that finished it will be published. Please make sure that the media is captioned. ';
+                    $success_string .= 'Once we get that finished it will be published. ';
+                    $success_string .= 'Please make sure that the media is captioned. ';
                 }
             } else {
                 if (UNL_MediaHub_Controller::$caption_requirement_date !== false) {
                     $success_string = 'Your media will not be published until it is captioned. ';
                 } else {
-                    $success_string = 'Your media has been uploaded and is now published. Please make sure that the media is captioned. ';
+                    $success_string = 'Your media has been uploaded and is now published. ';
+                    $success_string .= 'Please make sure that the media is captioned. ';
                 }
             }
 

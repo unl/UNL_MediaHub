@@ -14,7 +14,7 @@ class UNL_MediaHub_TranscriptionJob extends UNL_MediaHub_Models_BaseTranscriptio
      *
      * @return UNL_MediaHub_TranscriptionJob
      */
-    static function getById($id)
+    public static function getById($id)
     {
         return Doctrine::getTable(__CLASS__)->find($id);
     }
