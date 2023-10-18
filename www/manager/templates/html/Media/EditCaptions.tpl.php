@@ -11,10 +11,10 @@
     <div class="dcf-wrapper">
         <h1>Manage Captions for: <?php echo UNL_MediaHub::escape($context->media->title) ?></h1>
         <a href="<?php
-            echo UNL_MediaHub_Controller::getURL() 
-                . 'manager/?view=addmedia&id=' 
+            echo UNL_MediaHub_Controller::getURL()
+                . 'manager/?view=addmedia&id='
                 . (int)$context->media->id
-            ?>" 
+            ?>"
             class="dcf-btn dcf-btn-primary"
         >Edit Media</a>
         <a href="<?php echo $context->media->getURL()?>" class="dcf-btn dcf-btn-primary">View Media</a>
@@ -385,18 +385,18 @@
                             <ul>
                                 <?php foreach ($track->getFiles()->items as $file): ?>
                                     <li>
-                                        <a 
-                                            href="<?php echo $file->getURL() ?>&amp;download=1" 
+                                        <a
+                                            href="<?php echo $file->getURL() ?>&amp;download=1"
                                             rel="noopener"
                                             target="_blank"
                                         >
                                             <?php
                                                 echo UNL_MediaHub::escape($file->language)
-                                            ?>.<?php 
+                                            ?>.<?php
                                                 echo $file->format
                                             ?>
                                         </a>,
-                                        <a 
+                                        <a
                                             href="<?php echo $file->getSrtURL() ?>&amp;download=1"
                                             rel="noopener"
                                             target="_blank"
