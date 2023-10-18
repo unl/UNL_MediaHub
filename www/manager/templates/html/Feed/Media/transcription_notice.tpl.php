@@ -1,7 +1,7 @@
 <div class="dcf-notice dcf-notice-info" hidden>
-    <h2>We are captioning your video</h2>
+    <h2>We are captioning your media</h2>
     <div id="ai-caption-progress" aria-live="polite">
-        <p>We are captioning your video. This may take some time, so please fill out the media details while you wait.</p>
+        <p>We are captioning your media. This may take some time, so please fill out the media details while you wait.</p>
         <progress>loading</progress>
     </div>
 </div>

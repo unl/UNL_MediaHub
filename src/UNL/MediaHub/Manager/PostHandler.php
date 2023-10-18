@@ -578,13 +578,13 @@ class UNL_MediaHub_Manager_PostHandler
             } elseif ($transcoding_successful) {
                 $success_string = 'Your media has been uploaded and is being optimized. ';
                 if (UNL_MediaHub_Controller::$caption_requirement_date !== false) {
-                    $success_string .= 'Your video will not be published until it is captioned. ';
+                    $success_string .= 'Your media will not be published until it is captioned. ';
                 } else {
                     $success_string .= 'Once we get that finished it will be published. Please make sure that the media is captioned. ';
                 }
             } else {
                 if (UNL_MediaHub_Controller::$caption_requirement_date !== false) {
-                    $success_string = 'Your video will not be published until it is captioned. ';
+                    $success_string = 'Your media will not be published until it is captioned. ';
                 } else {
                     $success_string = 'Your media has been uploaded and is now published. Please make sure that the media is captioned. ';
                 }
