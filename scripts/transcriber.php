@@ -11,7 +11,7 @@ $TranscriptionAPI = new UNL_MediaHub_TranscriptionAPI();
 $db = Doctrine_Manager::getInstance()->getCurrentConnection();
 
 $start_date = time();
-$total_time_running = 24;
+$total_time_running = 24 * 60 * 60;
 
 while (true) {
     if (!$db->isConnected()) {
