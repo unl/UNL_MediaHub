@@ -10,6 +10,9 @@ $media_hub = new UNL_MediaHub();
 $TranscriptionAPI = new UNL_MediaHub_TranscriptionAPI();
 $db = Doctrine_Manager::getInstance()->getCurrentConnection();
 
+$start_date = time();
+$total_time_running = 24;
+
 while (true) {
     if (!$db->isConnected()) {
         $db->connect();
@@ -27,7 +30,6 @@ while (true) {
         $captioning_job = $media_hub_job;
 
         $status = $TranscriptionAPI->get_status($captioning_job->job_id);
-
         if ($status === 'finished') {
             $captioning_job->status = 'FINISHED';
             $captioning_job->save();
@@ -57,6 +59,11 @@ while (true) {
 
         usleep(500 * 1000); // 500 Milliseconds
     }
-    
+
+    // Checks how long loop has been running and will shut it down if its been too long
+    if (time() - $start_date > $total_time_running) {
+        echo "Restarting due to age.";
+        break;
+    }
 }
 
