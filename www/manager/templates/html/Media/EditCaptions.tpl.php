@@ -10,7 +10,13 @@
 <div class="dcf-bleed dcf-pt-6 dcf-pb-6">
     <div class="dcf-wrapper">
         <h1>Manage Captions for: <?php echo UNL_MediaHub::escape($context->media->title) ?></h1>
-        <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=addmedia&id=' . (int)$context->media->id?>" class="dcf-btn dcf-btn-primary">Edit Media</a>
+        <a href="<?php
+            echo UNL_MediaHub_Controller::getURL() 
+                . 'manager/?view=addmedia&id=' 
+                . (int)$context->media->id
+            ?>" 
+            class="dcf-btn dcf-btn-primary"
+        >Edit Media</a>
         <a href="<?php echo $context->media->getURL()?>" class="dcf-btn dcf-btn-primary">View Media</a>
     </div>
 </div>
@@ -43,8 +49,16 @@
                 <form id="ai_captions" method="post" class="dcf-form">
                     <input type="hidden" name="__unlmy_posttarget" value="ai_captions" />
                     <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
-                    <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
-                    <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
+                    <input
+                        type="hidden"
+                        name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>"
+                        value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>"
+                    >
+                    <input
+                        type="hidden"
+                        name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>"
+                        value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>"
+                    >
                     <input class="dcf-mb-4 dcf-btn dcf-btn-primary" type="submit" value="Order captions">
                 </form>
             <?php endif; ?>
@@ -133,7 +147,8 @@
         <div class="dcf-grid dcf-col-gap-vw">
             <div class="dcf-col-100% dcf-col-67%-start@sm">
                 <p>
-                    <a href="http://amara.org">amara.org</a> is a free service which helps you caption videos. To caption your video you will need to do the following.
+                    <a href="http://amara.org">amara.org</a> is a free service which helps
+                    you caption videos. To caption your video you will need to do the following.
                 </p>
                 <ol>
                     <li>Go to amara.org and create/edit captions for the video.</li>
@@ -150,12 +165,23 @@
                             Please try again later or contact an administrator for help.
                         </p>
                     <?php else: ?>
-                        <a class="dcf-btn dcf-btn-primary" href="<?php echo $context->getEditCaptionsURL(); ?>">Edit Captions on amara</a><br><br>
+                        <a class="dcf-btn dcf-btn-primary" href="<?php echo $context->getEditCaptionsURL(); ?>">
+                            Edit Captions on amara
+                        </a>
+                        <br><br>
                         <form class="dcf-form" method="post">
                             <input type="hidden" name="__unlmy_posttarget" value="pull_amara" />
                             <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
-                            <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
-                            <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
+                            <input
+                                type="hidden"
+                                name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>"
+                                value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>"
+                            >
+                            <input
+                                type="hidden"
+                                name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>"
+                                value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>"
+                            >
                             <input class="dcf-btn dcf-btn-primary" type="submit" value="Pull Captions from amara.org">
                         </form>
                     <?php endif ?>
@@ -359,8 +385,24 @@
                             <ul>
                                 <?php foreach ($track->getFiles()->items as $file): ?>
                                     <li>
-                                        <a href="<?php echo $file->getURL() ?>&amp;download=1" rel="noopener" target="_blank"><?php echo UNL_MediaHub::escape($file->language) ?>.<?php echo $file->format ?></a>,
-                                        <a href="<?php echo $file->getSrtURL() ?>&amp;download=1" rel="noopener" target="_blank"><?php echo UNL_MediaHub::escape($file->language) ?>.srt</a>
+                                        <a 
+                                            href="<?php echo $file->getURL() ?>&amp;download=1" 
+                                            rel="noopener"
+                                            target="_blank"
+                                        >
+                                            <?php
+                                                echo UNL_MediaHub::escape($file->language)
+                                            ?>.<?php 
+                                                echo $file->format
+                                            ?>
+                                        </a>,
+                                        <a 
+                                            href="<?php echo $file->getSrtURL() ?>&amp;download=1"
+                                            rel="noopener"
+                                            target="_blank"
+                                        >
+                                            <?php echo UNL_MediaHub::escape($file->language) ?>.srt
+                                        </a>
                                     </li>
                                 <?php endforeach; ?>
                             </ul>
@@ -471,7 +513,8 @@
         <div>
             <h2>Get Help</h2>
             <p>
-                If you have questions or comments, please use the 'Email Us' tab on this page or email <a href="mailto:mysupport@unl.edu">MySupport</a>.
+                If you have questions or comments, please use the 'Email Us' tab on
+                this page or email <a href="mailto:mysupport@unl.edu">MySupport</a>.
             </p>
         </div>
     </div>
