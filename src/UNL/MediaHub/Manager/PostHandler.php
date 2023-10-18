@@ -539,31 +539,35 @@ class UNL_MediaHub_Manager_PostHandler
 
         if ($is_new) {
             // Tries to make transcoding job
-            $transcoding_successful = 'true';
-            $media->transcode('hls');
-            if (!$media->getMostRecentTranscodingJob()) {
-                $transcoding_successful = 'false';
+            $transcoding_successful = true;
+            $transcode_output = $media->transcode('hls');
+            if ($transcode_output === false || !$media->getMostRecentTranscodingJob()) {
+                $transcoding_successful = false;
             }
 
             // Tries to make a transcription job
-            $transcribing_successful = 'true';
-            try {
-                // Set up variables for transcriber
-                $media_type = explode('.', $media->url);
-                $media_type = end($media_type);
-                $media_url = $media->getURL() . '/file';
-
-                // Called API to make job
-                $ai_captioning = new UNL_MediaHub_TranscriptionAPI();
-                $job_id = $ai_captioning->create_job($media_url, $media_type);
-                if ($job_id === false) {
-                    throw new Exception('Could Not Create New Job', 500);
-                }
-
-                // If successful it will create a job in the database
-                $media->transcription($job_id, $user->uid);
-            } catch(Exception $e) {
+            $transcribing_successful = true;
+            if ($this->post['opt-out-captions'] === '1') {
                 $transcribing_successful = false;
+            } else {
+                try {
+                    // Set up variables for transcriber
+                    $media_type = explode('.', $media->url);
+                    $media_type = end($media_type);
+                    $media_url = $media->getURL() . '/file';
+    
+                    // Called API to make job
+                    $ai_captioning = new UNL_MediaHub_TranscriptionAPI();
+                    $job_id = $ai_captioning->create_job($media_url, $media_type);
+                    if ($job_id === false) {
+                        throw new Exception('Could Not Create New Job', 500);
+                    }
+    
+                    // If successful it will create a job in the database
+                    $media->transcription($job_id, $user->uid);
+                } catch(Exception $e) {
+                    $transcribing_successful = false;
+                }
             }
 
             // Creates the success message string based on $transcribing_successful,
