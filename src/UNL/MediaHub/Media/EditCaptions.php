@@ -45,6 +45,12 @@ class UNL_MediaHub_Media_EditCaptions
         return !($job && !$job->isFinished());
     }
 
+    public function isTranscribingError()
+    {
+        $job = $this->media->getMostRecentTranscriptionJob();
+        return !($job && !$job->status === UNL_MediaHub_TranscriptionJob::STATUS_ERROR);
+    }
+
     public function mediaHasCaptions()
     {
         return count($this->getTrackHistory()->items) > 0;

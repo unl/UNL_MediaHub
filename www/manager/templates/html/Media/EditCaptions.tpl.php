@@ -48,8 +48,11 @@
             <div class="dcf-col-100% dcf-col-33%-end@sm">
             <?php if ($context->hasTranscriptionJob() && !$context->isTranscribingFinished()):?>
                 <p> Your order is still being processed. </p>
-            <?php elseif ($context->hasTranscriptionJob() && $context->media->getMostRecentTranscriptionJob()->status === 'ERROR'): ?>
-                <p class="unl-bg-scarlet dcf-rounded dcf-p-2">There has been an error with your order, please reach out to an administrator to resolve the issue.</p>
+            <?php elseif ($context->hasTranscriptionJob() && $context->isTranscribingError()): ?>
+                <p class="unl-bg-scarlet dcf-rounded dcf-p-2">
+                    There has been an error with your order, please
+                    reach out to an administrator to resolve the issue.
+                </p>
             <?php else: ?>
                 <form id="ai_captions" method="post" class="dcf-form">
                     <input type="hidden" name="__unlmy_posttarget" value="ai_captions" />
