@@ -18,6 +18,9 @@
             class="dcf-btn dcf-btn-primary"
         >Edit Media</a>
         <a href="<?php echo $context->media->getURL()?>" class="dcf-btn dcf-btn-primary">View Media</a>
+        <?php if ($context->mediaHasCaptions()):?>
+            <a href="#activate-captions" class="dcf-btn dcf-btn-secondary">Activate your captions</a>
+        <?php endif; ?>
     </div>
 </div>
 
@@ -281,7 +284,7 @@
     </div>
 </div>
 
-<div class="dcf-bleed unl-bg-lightest-gray dcf-pt-6 dcf-pb-6">
+<div id="activate-captions" class="dcf-bleed unl-bg-lightest-gray dcf-pt-6 dcf-pb-6">
     <div class="dcf-wrapper">
         <h2>Order history and status</h2>
         <p>View the current status of your orders</p>

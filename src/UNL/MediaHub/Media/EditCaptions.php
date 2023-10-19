@@ -45,6 +45,11 @@ class UNL_MediaHub_Media_EditCaptions
         return !($job && !$job->isFinished());
     }
 
+    public function mediaHasCaptions()
+    {
+        return count($this->getTrackHistory()->items) > 0;
+    }   
+
     public function getEditCaptionsURL()
     {
         if ($this->isTranscribingFinished()) {
