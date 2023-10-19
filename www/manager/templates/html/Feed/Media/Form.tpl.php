@@ -944,7 +944,11 @@ $page->jsbody .= $js;
             <div class="dcf-mt-4 dcf-mb-6">
                 <input type="submit" name="submit" id="continue3" value="Save" class="dcf-btn dcf-btn-primary dcf-float-left" />
                 <button id="delete-media" class="dcf-btn dcf-btn-primary">Delete</button>
-                <a href="<?php echo htmlentities($context->media->getURL().'/download', ENT_QUOTES); ?>" target="_blank" class="dcf-btn dcf-btn-secondary">Download Media</a>
+                <a
+                    href="<?php echo htmlentities($context->media->getURL().'/download', ENT_QUOTES); ?>"
+                    target="_blank"
+                    class="dcf-btn dcf-btn-secondary"
+                >Download Media</a>
             </div>
         </div>
     </div>
