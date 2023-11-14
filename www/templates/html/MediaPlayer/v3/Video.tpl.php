@@ -44,7 +44,7 @@ if (isset($controller->options['captions'])) {
 
 // This was added after the fact, I did not want to break the functionality of what was already here
 $muted = '';
-if (isset($controller->options['muted'])) {
+if (isset($controller->options['muted']) && empty($autoplay)) {
     switch (strtolower($controller->options['muted'])) {
         case '1':
         case 'true':
