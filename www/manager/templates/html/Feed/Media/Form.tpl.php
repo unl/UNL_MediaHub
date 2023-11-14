@@ -543,8 +543,9 @@ $page->jsbody .= $js;
                     </fieldset>
                     <fieldset
                         id="geo_location"
-                        class="dcf-mt-3 dcf-collapsible-fieldset dcf-d-none"
+                        class="dcf-mt-3 dcf-collapsible-fieldset"
                         data-start-expanded="false"
+                        hidden
                     >
                         <legend class="dcf-legend">Geo Location</legend>
                         <ol>
@@ -570,9 +571,10 @@ $page->jsbody .= $js;
 
                     <?php $customFields = UNL_MediaHub_Feed_Media_NamespacedElements_mediahub::getCustomElements(); ?>
                     <fieldset
-                        class="dcf-mt-3 dcf-collapsible-fieldset dcf-d-none"
+                        class="dcf-mt-3 dcf-collapsible-fieldset"
                         id="other_header"
                         data-start-expanded="false"
+                        hidden
                     >
                         <legend class="dcf-legend">Other Information</legend>
                         <ol>
@@ -645,7 +647,7 @@ $page->jsbody .= $js;
                         </ol>
                     </fieldset>
 
-                    <fieldset class='dcf-mt-3 dcf-collapsible-fieldset dcf-d-none' data-start-expanded="false">
+                    <fieldset class='dcf-mt-3 dcf-collapsible-fieldset' data-start-expanded="false" hidden>
                         <legend class="dcf-legend">iTunes Information</legend>
                         <ol>
                             <li style="display:none;">

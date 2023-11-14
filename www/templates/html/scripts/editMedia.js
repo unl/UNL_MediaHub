@@ -1,11 +1,5 @@
 window.addEventListener('inlineJSReady', function() {
     WDN.initializePlugin('collapsible-fieldsets');
-
-    document.querySelectorAll('.dcf-collapsible-fieldset').forEach(function(fieldset){
-        fieldset.addEventListener('ready', function(){
-            fieldset.classList.remove('dcf-d-none');
-        });
-    });
 }, false);
 
 require(['jquery'], function($){
