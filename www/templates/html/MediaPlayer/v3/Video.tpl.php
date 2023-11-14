@@ -42,8 +42,18 @@ if (isset($controller->options['captions'])) {
     $start_language = 'data-start-language="'.UNL_MediaHub::escape($controller->options['captions']).'"';
 }
 
+// This was added after the fact, I did not want to break the functionality of what was already here
+$muted = '';
+if (isset($controller->options['muted'])) {
+    switch (strtolower($controller->options['muted'])) {
+        case '1':
+        case 'true':
+            $muted = 'muted';
+    }
+}
+
 ?>
-<video class="mh_player video-js" height="100" width="100" style="width:100%;height:100%" <?php echo $autoplay ?> <?php echo $preload ?> src="<?php echo UNL_MediaHub_Controller::toAgnosticURL($context->getMediaURL()); ?>" controls data-mediahub-id="<?php echo (int)$context->id ?>" data-url="<?php echo $controller->getURL($context); ?>" poster="<?php echo UNL_MediaHub_Controller::toAgnosticURL($context->getThumbnailURL()); ?>" title="<?php echo UNL_MediaHub::escape($context->title); ?>" <?php echo $start_language ?>>
+<video class="mh_player video-js" height="100" width="100" style="width:100%;height:100%" <?php echo $autoplay ?> <?php echo $muted; ?> <?php echo $preload ?> src="<?php echo UNL_MediaHub_Controller::toAgnosticURL($context->getMediaURL()); ?>" controls data-mediahub-id="<?php echo (int)$context->id ?>" data-url="<?php echo $controller->getURL($context); ?>" poster="<?php echo UNL_MediaHub_Controller::toAgnosticURL($context->getThumbnailURL()); ?>" title="<?php echo UNL_MediaHub::escape($context->title); ?>" <?php echo $start_language ?>
     <?php if ($context->hasHLS()): ?>
         <source src="<?php echo $context->getHLSPlaylistUrl() ?>" type="application/x-mpegURL">
     <?php endif; ?>
