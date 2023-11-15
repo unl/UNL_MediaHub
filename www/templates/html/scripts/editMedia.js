@@ -1,7 +1,3 @@
-window.addEventListener('inlineJSReady', function() {
-    WDN.initializePlugin('collapsible-fieldsets');
-}, false);
-
 require(['jquery'], function($){
     var mediaDetails = function() {
         var $posterPicker;

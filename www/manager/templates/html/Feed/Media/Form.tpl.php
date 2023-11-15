@@ -912,6 +912,11 @@ $page->jsbody .= $js;
                         </ol>
                     </fieldset>
                 </div>
+                <script>
+                    window.addEventListener('inlineJSReady', function() {
+                        WDN.initializePlugin('collapsible-fieldsets');
+                    }, false);
+                </script>
 
                 <?php
                 function getFieldValue($savant, $xmlns, $element)
