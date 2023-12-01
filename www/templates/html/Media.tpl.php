@@ -192,7 +192,7 @@ if ($type === 'audio') {
 
                                     <blockquote><?php echo UNL_MediaHub::escape(strip_tags($comment['comment'])); ?></blockquote>
                                     <div class="mh-user">
-                                        <img alt="Your Profile Pic" src="http://planetred.unl.edu/pg/icon/unl_<?php echo UNL_MediaHub::escape($comment['uid']); ?>/small/" class="profile_pic small">
+                                        <img alt="Your Profile Pic" src="https://directory.unl.edu/avatar/<?php echo UNL_MediaHub::escape($comment['uid']); ?>/?s=small" class="profile_pic small">
                                         <div class="commenter unl-font-sans sec_header clear-top"><?php echo $name; ?></div>
                                         <em><?php echo date('m/d/y g:i a', strtotime($comment['datecreated'])); ?></em>
                                     </div>
