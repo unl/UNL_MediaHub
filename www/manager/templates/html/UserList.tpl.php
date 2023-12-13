@@ -23,7 +23,7 @@
     <ul class="dcf-list-inline" id="userList">
         <?php foreach ($context->items as $user):?>
         <li>
-                  <img class="profile_pic medium" src="https://directory.unl.edu/avatar/<?php echo $user->uid; ?>/" />
+                  <img class="profile_pic medium dcf-w-10" src="https://directory.unl.edu/avatar/<?php echo $user->uid; ?>/" />
                   <div class="dcf-txt-xs dcf-txt-center">
                     <?php $fullName = @UNL_Services_Peoplefinder::getFullName($user->uid); ?>
                     <?php if($fullName): ?>
