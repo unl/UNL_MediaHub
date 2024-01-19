@@ -52,6 +52,7 @@ while (true) {
             $newTrackFile->save();
         }
 
+        // If there is an error save the status
         if ($status === 'error') {
             $captioning_job->status = 'ERROR';
             $captioning_job->save();
