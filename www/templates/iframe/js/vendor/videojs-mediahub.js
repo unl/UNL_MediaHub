@@ -206,9 +206,9 @@ function MediahubPlayer(options) {
             var textTracks = t.textTracks();
             var defaultCaptions;
             for (var i = 0; i < textTracks.length; i++) {
-                if (textTracks[i].language === "en" && textTracks[i].type !== 'metadata') {
+                if (textTracks[i].language = 'en' && textTracks[i].type !== 'metadata') {
                     defaultCaptions = textTracks[i];
-                    
+
                     if (defaultCaptions.mode === "disabled" && !defaultCaptions.cues) {
                         // Try to load the cues but don't force them to show.
                         // Some browsers (Safari) won't load the cues if the track is 'disabled'
@@ -216,6 +216,27 @@ function MediahubPlayer(options) {
                     }
                 }
             }
+
+            // When there are no textTracks that are language 'en' try to find one that starts with en
+            // If you still can't find any then just use the first one
+            if (defaultCaptions === undefined && textTracks.length > 0) {
+                for (var i = 0; i < textTracks.length; i++) {
+                    if (textTracks[i].language.startsWith('en') && textTracks[i].type !== 'metadata') {
+                        defaultCaptions = textTracks[i];
+
+                        if (defaultCaptions.mode === "disabled" && !defaultCaptions.cues) {
+                            // Try to load the cues but don't force them to show.
+                            // Some browsers (Safari) won't load the cues if the track is 'disabled'
+                            defaultCaptions.mode = "hidden";
+                        }
+                    }
+                }
+
+                if (defaultCaptions === undefined) {
+                    defaultCaptions = textTracks[1];
+                }
+            }
+
             if (textTracks.length > 0) {
                 textTracks.on("change", function(e) {
                     for (var i = 0; i < textTracks.length; i++) {
@@ -228,7 +249,7 @@ function MediahubPlayer(options) {
 
             // whether to display captions by default
             if (textTracks.length > 0 && captions) {
-              defaultCaptions.mode = "showing";
+                defaultCaptions.mode = "showing";
             }
             setTranscript(defaultCaptions);
 
