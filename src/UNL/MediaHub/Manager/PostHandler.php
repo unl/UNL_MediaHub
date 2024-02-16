@@ -817,6 +817,13 @@ class UNL_MediaHub_Manager_PostHandler
             $comment = $this->post['caption_comment'];
         }
 
+        // Convert SRT files to vtt since srt files will error on `www/templates/html/MediaPlayer/Transcript.tpl.php`
+        if ($fileExtension == 'srt') {
+            $vtt_converter = new UNL_MediaHub_Manager_PostHandler_VttHelper($fileContent);
+            $fileContent = $vtt_converter->get_vtt_file();
+            $fileExtension = 'vtt';
+        }
+
         // Attempt to copy track and track file
         try {
             // copy track
