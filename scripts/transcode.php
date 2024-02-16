@@ -328,12 +328,10 @@ function createHlsJob($endpoint, $role, $input, $output, $aspect_ratio, $max_dim
     // Some times these are like right under the actual value so I like to bump it up by a small bit
     $small_bump = 50;
 
-    if ($max_dimension+$small_bump >= '480') {
-        $HLS_adaptive_outputs[] = array(
-            "Preset" => "HLS 480p " . $formatted_aspect_ratio . " single pass",
-            "NameModifier" => "480p"
-        );
-    }
+    $HLS_adaptive_outputs[] = array(
+        "Preset" => "HLS 480p " . $formatted_aspect_ratio . " single pass",
+        "NameModifier" => "480p"
+    );
     if ($max_dimension+$small_bump >= '540') {
         $HLS_adaptive_outputs[] = array(
             "Preset" => "HLS 540p " . $formatted_aspect_ratio . " single pass",
