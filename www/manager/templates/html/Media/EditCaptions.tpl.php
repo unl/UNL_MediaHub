@@ -10,8 +10,17 @@
 <div class="dcf-bleed dcf-pt-6 dcf-pb-6">
     <div class="dcf-wrapper">
         <h1>Manage Captions for: <?php echo UNL_MediaHub::escape($context->media->title) ?></h1>
-        <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=addmedia&id=' . (int)$context->media->id?>" class="dcf-btn dcf-btn-primary">Edit Media</a>
+        <a href="<?php
+            echo UNL_MediaHub_Controller::getURL()
+                . 'manager/?view=addmedia&id='
+                . (int)$context->media->id
+            ?>"
+            class="dcf-btn dcf-btn-primary"
+        >Edit Media</a>
         <a href="<?php echo $context->media->getURL()?>" class="dcf-btn dcf-btn-primary">View Media</a>
+        <?php if ($context->mediaHasCaptions()):?>
+            <a href="#activate-captions" class="dcf-btn dcf-btn-secondary">Activate your captions</a>
+        <?php endif; ?>
     </div>
 </div>
 
@@ -20,7 +29,53 @@
     <?php echo $savvy->render($context, 'Feed/Media/transcoding_notice.tpl.php'); ?>
 <?php endif; ?>
 
+<?php if ($context->hasTranscriptionJob() && !$context->isTranscribingFinished()):?>
+    <?php echo $savvy->render($context, 'Feed/Media/transcription_notice.tpl.php'); ?>
+<?php endif; ?>
+
 <div class="dcf-bleed unl-bg-lightest-gray dcf-pt-6 dcf-pb-6">
+    <div class="dcf-wrapper">
+        <h2>AI Captioning</h2>
+        <div class="dcf-grid dcf-col-gap-vw">
+            <div class="dcf-col-100% dcf-col-67%-start@sm">
+                <p>
+                    AI Captioning is Free. Completion time may vary based on the
+                    length of the video and the number of video before you in the
+                    queue. You will be required to verify the captions before
+                    activating them.
+                </p>
+            </div>
+            <div class="dcf-col-100% dcf-col-33%-end@sm">
+            <?php if ($context->hasTranscriptionJob() && !$context->isTranscribingFinished()):?>
+                <p> Your order is still being processed. </p>
+            <?php elseif ($context->hasTranscriptionJob() && $context->isTranscribingError()): ?>
+                <p class="unl-bg-scarlet dcf-rounded dcf-p-2">
+                    There has been an error with your order, please
+                    reach out to an administrator to resolve the issue.
+                </p>
+            <?php else: ?>
+                <form id="ai_captions" method="post" class="dcf-form">
+                    <input type="hidden" name="__unlmy_posttarget" value="ai_captions" />
+                    <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
+                    <input
+                        type="hidden"
+                        name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>"
+                        value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>"
+                    >
+                    <input
+                        type="hidden"
+                        name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>"
+                        value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>"
+                    >
+                    <input class="dcf-mb-4 dcf-btn dcf-btn-primary" type="submit" value="Order captions">
+                </form>
+            <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="dcf-bleed dcf-pt-6 dcf-pb-6">
     <div class="dcf-wrapper">
         <h2>Order Captions With Your Cost Object Number</h2>
         <div class="dcf-grid dcf-col-gap-vw">
@@ -94,13 +149,14 @@
     </div>
 </div>
 
-<div class="dcf-bleed dcf-pt-6 dcf-pb-6">
+<div class="dcf-bleed unl-bg-lightest-gray dcf-pt-6 dcf-pb-6">
     <div class="dcf-wrapper">
     <h2>Self-Manage Captions With Amara</h2>
         <div class="dcf-grid dcf-col-gap-vw">
             <div class="dcf-col-100% dcf-col-67%-start@sm">
                 <p>
-                    <a href="http://amara.org">amara.org</a> is a free service which helps you caption videos. To caption your video you will need to do the following.
+                    <a href="http://amara.org">amara.org</a> is a free service which helps
+                    you caption videos. To caption your video you will need to do the following.
                 </p>
                 <ol>
                     <li>Go to amara.org and create/edit captions for the video.</li>
@@ -117,12 +173,23 @@
                             Please try again later or contact an administrator for help.
                         </p>
                     <?php else: ?>
-                        <a class="dcf-btn dcf-btn-primary" href="<?php echo $context->getEditCaptionsURL(); ?>">Edit Captions on amara</a><br><br>
+                        <a class="dcf-btn dcf-btn-primary" href="<?php echo $context->getEditCaptionsURL(); ?>">
+                            Edit Captions on amara
+                        </a>
+                        <br><br>
                         <form class="dcf-form" method="post">
                             <input type="hidden" name="__unlmy_posttarget" value="pull_amara" />
                             <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
-                            <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
-                            <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
+                            <input
+                                type="hidden"
+                                name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>"
+                                value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>"
+                            >
+                            <input
+                                type="hidden"
+                                name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>"
+                                value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>"
+                            >
                             <input class="dcf-btn dcf-btn-primary" type="submit" value="Pull Captions from amara.org">
                         </form>
                     <?php endif ?>
@@ -135,7 +202,7 @@
     </div>
 </div>
 
-<div class="dcf-bleed unl-bg-lightest-gray dcf-pt-6 dcf-pb-6">
+<div class="dcf-bleed dcf-pt-6 dcf-pb-6">
     <div class="dcf-wrapper">
         <h2>Upload your own .vtt or .srt file</h2>
         <div class="dcf-grid dcf-col-gap-vw">
@@ -222,7 +289,7 @@
     </div>
 </div>
 
-<div class="dcf-bleed dcf-pt-6 dcf-pb-6">
+<div id="activate-captions" class="dcf-bleed unl-bg-lightest-gray dcf-pt-6 dcf-pb-6">
     <div class="dcf-wrapper">
         <h2>Order history and status</h2>
         <p>View the current status of your orders</p>
@@ -326,8 +393,24 @@
                             <ul>
                                 <?php foreach ($track->getFiles()->items as $file): ?>
                                     <li>
-                                        <a href="<?php echo $file->getURL() ?>&amp;download=1" rel="noopener" target="_blank"><?php echo UNL_MediaHub::escape($file->language) ?>.<?php echo $file->format ?></a>,
-                                        <a href="<?php echo $file->getSrtURL() ?>&amp;download=1" rel="noopener" target="_blank"><?php echo UNL_MediaHub::escape($file->language) ?>.srt</a>
+                                        <a
+                                            href="<?php echo $file->getURL() ?>&amp;download=1"
+                                            rel="noopener"
+                                            target="_blank"
+                                        >
+                                            <?php
+                                                echo UNL_MediaHub::escape($file->language)
+                                            ?>.<?php
+                                                echo $file->format
+                                            ?>
+                                        </a>,
+                                        <a
+                                            href="<?php echo $file->getSrtURL() ?>&amp;download=1"
+                                            rel="noopener"
+                                            target="_blank"
+                                        >
+                                            <?php echo UNL_MediaHub::escape($file->language) ?>.srt
+                                        </a>
                                     </li>
                                 <?php endforeach; ?>
                             </ul>
@@ -432,12 +515,14 @@
         </script>
     </div>
 </div>
+
 <div class="dcf-bleed dcf-pt-6 dcf-pb-6">
     <div class="dcf-wrapper">
         <div>
             <h2>Get Help</h2>
             <p>
-                If you have questions or comments, please use the 'Email Us' tab on this page or email <a href="mailto:mysupport@unl.edu">MySupport</a>.
+                If you have questions or comments, please use the 'Email Us' tab on
+                this page or email <a href="mailto:mysupport@unl.edu">MySupport</a>.
             </p>
         </div>
     </div>

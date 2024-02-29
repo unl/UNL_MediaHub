@@ -134,6 +134,9 @@ class UNL_MediaHub_Manager_PostHandler
         case 'order_rev':
             $this->handleRev();
             break;
+        case 'ai_captions':
+            $this->handleTranscriptions();
+            break;
         case 'download_rev':
             $this->downloadRev();
             break;
@@ -535,17 +538,65 @@ class UNL_MediaHub_Manager_PostHandler
         }
 
         if ($is_new) {
-            $media->transcode('hls');
-            
-            //After upload, add captions
-            $success_string = 'Your media has been uploaded and is now published. Please make sure that the media is captioned.';
-            if ($media->getMostRecentTranscodingJob()) {
-                $success_string = 'Your media has been uploaded and is being optimized.';
-            }
-            if (UNL_MediaHub_Controller::$caption_requirement_date) {
-                $success_string = 'Your media has been uploaded but will not be published until it is captioned.';
+            // Tries to make transcoding job
+            $transcoding_successful = true;
+            $transcode_output = $media->transcode('hls');
+            if ($transcode_output === false || !$media->getMostRecentTranscodingJob()) {
+                $transcoding_successful = false;
             }
 
+            // Tries to make a transcription job
+            $transcribing_successful = true;
+            if ($this->post['opt-out-captions'] === '1') {
+                $transcribing_successful = false;
+            } else {
+                try {
+                    // Set up variables for transcriber
+                    $media_type = explode('.', $media->url);
+                    $media_type = end($media_type);
+                    $media_url = $media->getURL() . '/file';
+    
+                    // Called API to make job
+                    $ai_captioning = new UNL_MediaHub_TranscriptionAPI();
+                    $job_id = $ai_captioning->create_job($media_url, $media_type);
+                    if ($job_id === false) {
+                        throw new Exception('Could Not Create New Job', 500);
+                    }
+    
+                    // If successful it will create a job in the database
+                    $media->transcription($job_id, $user->uid);
+                } catch(Exception $e) {
+                    $transcribing_successful = false;
+                }
+            }
+
+            // Creates the success message string based on $transcribing_successful,
+            //   $transcribing_successful, and UNL_MediaHub_Controller::$caption_requirement_date
+            $success_string = "";
+            if ($transcribing_successful && $transcoding_successful) {
+                $success_string = 'Your media has been uploaded and is being optimized and captioned. ';
+                $success_string .= 'Once we get those finished it will be published. ';
+            } elseif ($transcribing_successful) {
+                $success_string = 'Your media has been uploaded and is being captioned. ';
+                $success_string .= 'Once we get that finished it will be published. ';
+            } elseif ($transcoding_successful) {
+                $success_string = 'Your media has been uploaded and is being optimized. ';
+                if (UNL_MediaHub_Controller::$caption_requirement_date !== false) {
+                    $success_string .= 'Your media will not be published until it is captioned. ';
+                } else {
+                    $success_string .= 'Once we get that finished it will be published. ';
+                    $success_string .= 'Please make sure that the media is captioned. ';
+                }
+            } else {
+                if (UNL_MediaHub_Controller::$caption_requirement_date !== false) {
+                    $success_string = 'Your media will not be published until it is captioned. ';
+                } else {
+                    $success_string = 'Your media has been uploaded and is now published. ';
+                    $success_string .= 'Please make sure that the media is captioned. ';
+                }
+            }
+
+            // Sends notice to page
             $notice = new UNL_MediaHub_Notice(
                 'Success',
                 $success_string,
@@ -1027,6 +1078,44 @@ class UNL_MediaHub_Manager_PostHandler
         );
         UNL_MediaHub_Manager::addNotice($notice);
         
+        UNL_MediaHub::redirect($media->getEditCaptionsURL());
+    }
+
+    protected function handleTranscriptions()
+    {
+        // Try to contact AI captioning website
+        // Get response and parse
+        // Save Job Id to DB
+
+        $user = UNL_MediaHub_AuthService::getInstance()->getUser();
+        $media = UNL_MediaHub_Media::getById($this->post['media_id']);
+        if (!$media) {
+            throw new Exception('Unable to find media', 404);
+        }
+        if (!$media->userHasPermission($user, UNL_MediaHub_Permission::USER_CAN_UPDATE)) {
+            throw new Exception('You do not have permission to edit this media.', 403);
+        }
+
+        // Set up variables for transcriber
+        $media_type = explode('.', $media->url);
+        $media_type = end($media_type);
+        $media_url = $media->getURL() . '/file';
+
+        $ai_captioning = new UNL_MediaHub_TranscriptionAPI();
+        $job_id = $ai_captioning->create_job($media_url, $media_type);
+        if ($job_id === false) {
+            throw new Exception('Could Not Create New Captioning Job. Please reach out to an administrator.', 500);
+        }
+
+        $media->transcription($job_id, $user->uid);
+
+        $notice = new UNL_MediaHub_Notice(
+            'Success',
+            'Ai Captioning Job Has Been Created',
+            UNL_MediaHub_Notice::TYPE_SUCCESS
+        );
+        UNL_MediaHub_Manager::addNotice($notice);
+
         UNL_MediaHub::redirect($media->getEditCaptionsURL());
     }
 
