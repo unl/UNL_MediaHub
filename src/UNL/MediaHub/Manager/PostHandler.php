@@ -579,13 +579,16 @@ class UNL_MediaHub_Manager_PostHandler
      */
     function handleFeedUsers()
     {
+        $user = UNL_MediaHub_AuthService::getInstance()->getUser();
         $feed = UNL_MediaHub_Feed::getById($this->post['feed_id']);
-        if (!$feed->userHasPermission(
-                UNL_MediaHub_AuthService::getInstance()->getUser(),
-                UNL_MediaHub_Permission::getByID(UNL_MediaHub_Permission::USER_CAN_ADD_USER)
-                )
-            ) {
-            throw new Exception('You do not have permission to add a user.', 403);
+        if (!$user->isAdmin()) {
+            if (!$feed->userHasPermission(
+                    $user,
+                    UNL_MediaHub_Permission::getByID(UNL_MediaHub_Permission::USER_CAN_ADD_USER)
+                    )
+                ) {
+                throw new Exception('You do not have permission to add a user.', 403);
+            }
         }
         if (!empty($this->post['uid'])) {
             if (!empty($this->post['delete'])) {
@@ -609,13 +612,16 @@ class UNL_MediaHub_Manager_PostHandler
             throw new Exception('Please provide a feed id to delete.', 400);
         }
         
+        $user = UNL_MediaHub_AuthService::getInstance()->getUser();
         $feed = UNL_MediaHub_Feed::getById($this->post['feed_id']);
         
-        if (!$feed->userHasPermission(
-                UNL_MediaHub_AuthService::getInstance()->getUser(), 
-                UNL_MediaHub_Permission::getByID(UNL_MediaHub_Permission::USER_CAN_DELETE
-            ))) {
-            throw new Exception('You do not have permission to delete this.', 403);
+        if (!$user->isAdmin()) {
+            if (!$feed->userHasPermission(
+                    UNL_MediaHub_AuthService::getInstance()->getUser(), 
+                    UNL_MediaHub_Permission::getByID(UNL_MediaHub_Permission::USER_CAN_DELETE
+                ))) {
+                throw new Exception('You do not have permission to delete this.', 403);
+            }
         }
 
         $feed->delete();
