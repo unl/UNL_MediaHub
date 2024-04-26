@@ -12,6 +12,10 @@ class UNL_MediaHub_Permission extends UNL_MediaHub_Models_BasePermission
     
     public static function userHasPermission(UNL_MediaHub_User $user, UNL_MediaHub_Permission $permission, UNL_MediaHub_Feed $feed)
     {
+        if ($user->isAdmin()) {
+            return true;
+        }
+
         $query = new Doctrine_Query();
         $query->from('UNL_MediaHub_User_Permission u')
               ->where('u.user_uid = ? AND u.permission_id = ? AND u.feed_id = ?',
