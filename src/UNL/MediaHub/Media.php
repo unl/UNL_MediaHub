@@ -774,7 +774,11 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         if (!$user) {
             return false;
         }
-        
+
+        if ($user->isAdmin()) {
+            return true;
+        }
+
         if (!$permission = UNL_MediaHub_Permission::getByID($permission_id)) {
             return false;
         }
