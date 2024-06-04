@@ -92,6 +92,11 @@
                                 canvas.el().style.transform = "matrix(1, 0, 0, 1, "+window.innerWidth*-.5+", 0)"; // chrome resize bug shim
                             }
                         });
+
+                        // This is needed for videojs-wavesurfer for some reason
+                        if (videoElement.tagName === 'AUDIO') {
+                            player.src($media.attr('src'));
+                        }
                     });
 
                     //Set starttime if valid
