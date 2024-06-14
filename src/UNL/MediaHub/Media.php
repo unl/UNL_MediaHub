@@ -1075,7 +1075,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         $job = new UNL_MediaHub_TranscriptionJob();
         $job->media_id = $this->id;
         $job->job_id = $job_id;
-        // $job->auto_activate = intval($auto_activate);
+        $job->auto_activate = intval($auto_activate);
         if ($uid) {
             $job->uid = $uid;
         } else {

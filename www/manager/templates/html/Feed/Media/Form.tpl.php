@@ -948,6 +948,7 @@ $page->jsbody .= $js;
                 <input type="submit" name="submit" id="continue3" value="Save" class="dcf-btn dcf-btn-primary dcf-float-left" />
                 <button id="delete-media" class="dcf-btn dcf-btn-primary">Delete</button>
                 <a
+                    rel="noopener"
                     href="<?php echo htmlentities($context->media->getURL().'/download', ENT_QUOTES); ?>"
                     target="_blank"
                     class="dcf-btn dcf-btn-secondary"

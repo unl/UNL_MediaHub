@@ -574,7 +574,7 @@ class UNL_MediaHub_Manager_PostHandler
                     }
 
                     // If successful it will create a job in the database
-                    $return = $media->transcription($job_id, $user->uid, $auto_activate);
+                    $media->transcription($job_id, $user->uid, $auto_activate);
                 } catch(Exception $e) {
                     $transcribing_successful = false;
                 }
@@ -753,7 +753,7 @@ class UNL_MediaHub_Manager_PostHandler
         UNL_MediaHub::redirect($media->getEditCaptionsURL());
     }
 
-    function subFuncCopyTextTrackFile() {
+    public function subFuncCopyTextTrackFile() {
         $mediaId = !empty($this->post['media_id']) ? $this->post['media_id'] : 0;
         if (!$media = UNL_MediaHub_Media::getById($mediaId)) {
             throw new Exception('Unable to find media', 404);
@@ -821,12 +821,12 @@ class UNL_MediaHub_Manager_PostHandler
         ];
     }
 
-    function handleCopyTextTrackFile() {
+    public function handleCopyTextTrackFile() {
         $returnData = $this->subFuncCopyTextTrackFile();
         UNL_MediaHub::redirect($returnData['editCaptionsURL']);
     }
 
-    function handleCopyAndEditTextTrackFile() {
+    public function handleCopyAndEditTextTrackFile() {
         $returnData = $this->subFuncCopyTextTrackFile();
 
         $redirectURL = UNL_MediaHub_Manager::getURL()

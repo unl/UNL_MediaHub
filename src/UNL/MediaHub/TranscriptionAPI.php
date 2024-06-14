@@ -23,6 +23,9 @@ class UNL_MediaHub_TranscriptionAPI
     public static $job_error_route = 'api/job/{job_id}/error';
     public static $job_output_route = 'api/job/{job_id}/output';
 
+    public static $no_response = 'No response';
+    public static $no_job_id = 'No Job ID';
+
     public static $caption_format = 'vtt';
 
     protected $guzzle;
@@ -47,7 +50,7 @@ class UNL_MediaHub_TranscriptionAPI
 
             $response = json_decode($response->getBody());
             if (!isset($response)) {
-                throw new Exception('No response');
+                throw new Exception(self::$no_response);
             }
 
             return $response;
@@ -84,12 +87,12 @@ class UNL_MediaHub_TranscriptionAPI
 
             $response = json_decode($response->getBody());
             if (!isset($response)) {
-                throw new Exception('No response');
+                throw new Exception(self::$no_response);
             }
 
             $job_id = $response->data->new_job_id ?? 0;
             if ($job_id === 0) {
-                throw new Exception('No Job ID');
+                throw new Exception(self::$no_job_id);
             }
             return $job_id;
 
@@ -122,12 +125,12 @@ class UNL_MediaHub_TranscriptionAPI
 
             $response = json_decode($response->getBody());
             if (!isset($response)) {
-                throw new Exception('No response');
+                throw new Exception(self::$no_response);
             }
 
             $job_status = $response->data->job_status ?? '0';
             if ($job_status === 0) {
-                throw new Exception('No Job Status');
+                throw new Exception(self::$no_job_id);
             }
             return $job_status;
 
@@ -160,12 +163,12 @@ class UNL_MediaHub_TranscriptionAPI
 
             $response = json_decode($response->getBody());
             if (!isset($response)) {
-                throw new Exception('No response');
+                throw new Exception(self::$no_response);
             }
 
             $job_status = $response->data->job_status ?? '0';
             if ($job_status === 0) {
-                throw new Exception('No Job Status');
+                throw new Exception(self::$no_job_id);
             }
             return $job_status;
 
@@ -198,7 +201,7 @@ class UNL_MediaHub_TranscriptionAPI
 
             $response = json_decode($response->getBody());
             if (!isset($response)) {
-                throw new Exception('No response');
+                throw new Exception(self::$no_response);
             }
 
             $output_file_contents = $response->data->output_file_contents ?? '0';
