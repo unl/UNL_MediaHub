@@ -49,7 +49,7 @@
             >
         </form>
         <?php if($context->mediaHasCaptions()): ?>
-            <table class="dcf-table dcf-table-bordered dcf-table-responsive">
+            <table class="dcf-table dcf-table-bordered dcf-table-responsive dcf-mb-3">
                 <thead>
                 <tr>
                     <th scope="col">ID</th>
@@ -263,6 +263,7 @@
                     the captions after they are completed to ensure their accuracy
                     with names and acronyms.
                 </p>
+                <?php echo $savvy->render($context, 'Feed/Media/transcriber_maintenance_notice.tpl.php'); ?>
             </div>
             <div class="dcf-col-100% dcf-col-33%-end@sm">
             <?php if ($context->hasTranscriptionJob() && !$context->isTranscribingFinished()):?>
@@ -293,7 +294,7 @@
                     </form>
                 <?php endif; ?>
             <?php else: ?>
-                <form id="ai_captions" method="post" class="dcf-form">
+                <form id="ai_captions" method="post" class="dcf-form dcf-d-flex dcf-jc-center">
                     <input type="hidden" name="__unlmy_posttarget" value="ai_captions" />
                     <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
                     <input
