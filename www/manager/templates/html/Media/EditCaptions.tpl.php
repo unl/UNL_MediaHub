@@ -257,7 +257,7 @@
         <div class="dcf-grid dcf-col-gap-vw">
             <div class="dcf-col-100% dcf-col-67%-start@sm">
                 <p>
-                    MediaHub has a free AI-powered auto-captioning system to
+                    MediaHub has a free AI-powered auto captioning system to
                     make your content accessible. Generation times can vary based
                     on media length and queue position. We recommend double-checking
                     the captions after they are completed to ensure their accuracy
