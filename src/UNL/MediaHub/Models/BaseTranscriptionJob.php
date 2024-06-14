@@ -5,13 +5,14 @@ abstract class UNL_MediaHub_Models_BaseTranscriptionJob extends Doctrine_Record
     public function setTableDefinition()
     {
         $this->setTableName('transcription_jobs');
-        $this->hasColumn('id',          'integer',   4,    array('unsigned' => 0, 'primary' => true, 'notnull' => true, 'autoincrement' => true));
-        $this->hasColumn('media_id',    'integer',   4,    array('unsigned' => 0, 'primary' => false, 'notnull' => true));
-        $this->hasColumn('datecreated', 'timestamp', null, array('primary' => false, 'notnull' => true, 'autoincrement' => false));
-        $this->hasColumn('dateupdated', 'timestamp', null, array('primary' => false, 'notnull' => false, 'autoincrement' => false));
-        $this->hasColumn('uid',         'string',    null, array('primary' => false,  'notnull' => false, 'autoincrement' => false));
-        $this->hasColumn('job_id',      'string',    null, array('primary' => false,  'notnull' => false, 'autoincrement' => false));
-        $this->hasColumn('status',      'enum',      null, array('primary' => false,  'notnull' => true, 'autoincrement' => false, 'values' => array('SUBMITTED', 'WORKING', 'ERROR', 'FINISHED'), 'default' => 'SUBMITTED'));
+        $this->hasColumn('id',           'integer',   4,    array('unsigned' => 0, 'primary' => true, 'notnull' => true, 'autoincrement' => true));
+        $this->hasColumn('media_id',     'integer',   4,    array('unsigned' => 0, 'primary' => false, 'notnull' => true));
+        $this->hasColumn('datecreated',  'timestamp', null, array('primary' => false, 'notnull' => true, 'autoincrement' => false));
+        $this->hasColumn('dateupdated',  'timestamp', null, array('primary' => false, 'notnull' => false, 'autoincrement' => false));
+        $this->hasColumn('uid',          'string',    null, array('primary' => false,  'notnull' => false, 'autoincrement' => false));
+        $this->hasColumn('job_id',       'string',    null, array('primary' => false,  'notnull' => false, 'autoincrement' => false));
+        $this->hasColumn('status',       'enum',      null, array('primary' => false,  'notnull' => true, 'autoincrement' => false, 'values' => array('SUBMITTED', 'WORKING', 'ERROR', 'FINISHED'), 'default' => 'SUBMITTED'));
+        $this->hasColumn('auto_activate','tinyint',   null, array('primary' => false,  'notnull' => true, 'autoincrement' => false, 'default' => 1));
     }
 
     public function setUp()

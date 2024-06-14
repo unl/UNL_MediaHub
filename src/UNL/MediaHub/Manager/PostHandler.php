@@ -120,8 +120,11 @@ class UNL_MediaHub_Manager_PostHandler
             $this->handleDeleteFeed();
             break;
         case 'copy_text_track_file':
-           $this->handleCopyTextTrackFile();
-           break;
+            $this->handleCopyTextTrackFile();
+            break;
+        case 'copy_and_edit_text_track_file':
+            $this->handleCopyAndEditTextTrackFile();
+            break;
         case 'update_text_track_file';
             $this->handleUpdateTextTrackFile();
             break;
@@ -136,6 +139,12 @@ class UNL_MediaHub_Manager_PostHandler
             break;
         case 'ai_captions':
             $this->handleTranscriptions();
+            break;
+        case 'ai_captions_retry':
+            $user = UNL_MediaHub_AuthService::getInstance()->getUser();
+            if ($user->isAdmin()) {
+                $this->handleTranscriptions();
+            }
             break;
         case 'download_rev':
             $this->downloadRev();
@@ -547,24 +556,25 @@ class UNL_MediaHub_Manager_PostHandler
 
             // Tries to make a transcription job
             $transcribing_successful = true;
-            if ($this->post['opt-out-captions'] === '1') {
+            $captions_opt_out = isset($this->post['opt-out-captions']) && $this->post['opt-out-captions'] === '1';
+            $auto_activate = isset($this->post['auto-activate-captions']) && $this->post['auto-activate-captions'] === '1';
+
+            if ($captions_opt_out) {
                 $transcribing_successful = false;
             } else {
                 try {
-                    // Set up variables for transcriber
-                    $media_type = explode('.', $media->url);
-                    $media_type = end($media_type);
+                    // Set up variable for transcriber
                     $media_url = $media->getURL() . '/file';
     
                     // Called API to make job
                     $ai_captioning = new UNL_MediaHub_TranscriptionAPI();
-                    $job_id = $ai_captioning->create_job($media_url, $media_type);
+                    $job_id = $ai_captioning->create_job($media_url);
                     if ($job_id === false) {
                         throw new Exception('Could Not Create New Job', 500);
                     }
-    
+
                     // If successful it will create a job in the database
-                    $media->transcription($job_id, $user->uid);
+                    $return = $media->transcription($job_id, $user->uid, $auto_activate);
                 } catch(Exception $e) {
                     $transcribing_successful = false;
                 }
@@ -743,7 +753,7 @@ class UNL_MediaHub_Manager_PostHandler
         UNL_MediaHub::redirect($media->getEditCaptionsURL());
     }
 
-    function handleCopyTextTrackFile() {
+    function subFuncCopyTextTrackFile() {
         $mediaId = !empty($this->post['media_id']) ? $this->post['media_id'] : 0;
         if (!$media = UNL_MediaHub_Media::getById($mediaId)) {
             throw new Exception('Unable to find media', 404);
@@ -804,7 +814,28 @@ class UNL_MediaHub_Manager_PostHandler
         );
         UNL_MediaHub_Manager::addNotice($notice);
 
-        UNL_MediaHub::redirect($media->getEditCaptionsURL());
+        return [
+            'editCaptionsURL' => $media->getEditCaptionsURL(),
+            'mediaID' => $media->id,
+            'trackID' => $newTrack->id
+        ];
+    }
+
+    function handleCopyTextTrackFile() {
+        $returnData = $this->subFuncCopyTextTrackFile();
+        UNL_MediaHub::redirect($returnData['editCaptionsURL']);
+    }
+
+    function handleCopyAndEditTextTrackFile() {
+        $returnData = $this->subFuncCopyTextTrackFile();
+
+        $redirectURL = UNL_MediaHub_Manager::getURL()
+        . '?view=editcaptiontrack&media_id='
+        . (int)$returnData['mediaID']
+        . '&track_id='
+        . (int)$returnData['trackID'];
+
+        UNL_MediaHub::redirect($redirectURL);
     }
 
     protected function uploadCaptionFile() {
@@ -1103,12 +1134,10 @@ class UNL_MediaHub_Manager_PostHandler
         }
 
         // Set up variables for transcriber
-        $media_type = explode('.', $media->url);
-        $media_type = end($media_type);
         $media_url = $media->getURL() . '/file';
 
         $ai_captioning = new UNL_MediaHub_TranscriptionAPI();
-        $job_id = $ai_captioning->create_job($media_url, $media_type);
+        $job_id = $ai_captioning->create_job($media_url);
         if ($job_id === false) {
             throw new Exception('Could Not Create New Captioning Job. Please reach out to an administrator.', 500);
         }

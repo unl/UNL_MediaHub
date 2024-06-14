@@ -71,4 +71,9 @@ class UNL_MediaHub_TranscriptionJob extends UNL_MediaHub_Models_BaseTranscriptio
 
         return in_array($this->status, $pending_statuses);
     }
+
+    public function isAutoActivating()
+    {
+        return $this->auto_activate === '1';
+    }
 }

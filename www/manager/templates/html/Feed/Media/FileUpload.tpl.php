@@ -176,15 +176,33 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                         </div>
                     </div>
 
+                    <div id="auto-captioning-maintenance" class="dcf-d-none">
+                        <div id="auto-captioning-maintenance-notice" class="dcf-notice dcf-notice-info" data-no-close-button="true" hidden>
+                            <h2>Auto Captions Maintenance Notice</h2>
+                            <div>
+                                We will be preforming maintenance on
+                                the auto captioning service on <span id="auto-captioning-maintenance-date-range"></span>. <br>
+                                Captions may not be generated at that
+                                time but they will be generated once
+                                the maintenance has finished.
+                            </div>
+                        </div>
+                    </div>
                     <fieldset>
                         <legend>Auto Captions</legend>
                         <div class="dcf-input-checkbox">
-                            <input id="opt-out-captions" name="opt-out-captions" type="checkbox" value="1">
+                            <input id="opt-out-captions" name="opt-out-captions" aria-describedby="opt-out-captions-help" type="checkbox" value="1">
                             <label for="opt-out-captions">Opt Out of auto captions</label>
-                            <p class="dcf-form-help dcf-mb-0" id="opt-out-captions">
-                                You would only want to opt out if your video is not in english
-                                or you already have captions for your video. Disregard if your uploading audio.
+                            <p class="dcf-form-help dcf-mb-0" id="opt-out-captions-help">
+                                Captions are free to generate and will automatically
+                                be translated into english. You would only want to
+                                check this if you have your own captions.
                             </p>
+                        </div>
+
+                        <div class="dcf-input-checkbox">
+                            <input id="auto-activate-captions" name="auto-activate-captions" type="checkbox" value="1" checked="checked">
+                            <label for="auto-activate-captions">Auto activate captions after generation</label>
                         </div>
                     </fieldset>
                     <p class="dcf-txt-sm">
@@ -269,5 +287,60 @@ $page->addScriptDeclaration("
             mediaErrorsContainer.style.display = 'block';
         }
     });
+
+    const opt_out_captions_input = document.getElementById('opt-out-captions');
+    const auto_activate_captions_input = document.getElementById('auto-activate-captions');
+
+    opt_out_captions_input.addEventListener('change', () => {
+        if (opt_out_captions_input.checked === true) {
+            auto_activate_captions_input.setAttribute('disabled', 'disabled');
+            auto_activate_captions_input.dataset.lastValue = auto_activate_captions_input.checked;
+            auto_activate_captions_input.checked = false;
+        } else {
+            auto_activate_captions_input.removeAttribute('disabled');
+            auto_activate_captions_input.checked = auto_activate_captions_input.dataset.lastValue === 'true';
+        }
+    });
+
+    const api_status_url = '" . UNL_MediaHub_TranscriptionManager::getURL() . "';
+    const auto_captioning_maintenance = document.getElementById('auto-captioning-maintenance');
+    const auto_captioning_maintenance_notice = document.getElementById('auto-captioning-maintenance-notice');
+
+    async function check_captioning_status() {
+        const auto_captioning_maintenance_date_range = document.getElementById('auto-captioning-maintenance-date-range');
+
+        try {
+            const api_status_response = await fetch(api_status_url);
+            if (!api_status_response.ok) {
+                console.error('Failed to get data from ' + api_status_url);
+                return;
+            }
+            const parsed_data = await api_status_response.json();
+
+            if ( !('status' in parsed_data) || parsed_data['status'] !== 'OK') {
+                console.error('Bad result from ' + api_status_url);
+                return;
+            }
+
+            if ( !('data' in parsed_data) || !('maintenance_date_range' in parsed_data['data']) ) {
+                console.error('Bad data from ' + api_status_url);
+                return;
+            }
+
+            auto_captioning_maintenance.classList.remove('dcf-d-none');
+            auto_captioning_maintenance_date_range.innerText = parsed_data['data']['maintenance_date_range'];
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    window.addEventListener('inlineJSReady', function() {
+        let timer = setInterval(() => {
+            if (auto_captioning_maintenance_notice.classList.contains('dcf-notice-initialized')) {
+                clearInterval(timer);
+                check_captioning_status();
+            }
+        }, 200);
+    }, false);
 ");
 ?>

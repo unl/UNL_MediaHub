@@ -4,6 +4,8 @@ class UNL_MediaHub_Media_EditCaptions
 {
     public $options = array();
 
+    public $media;
+
     public function __construct($options = array())
     {
         $this->options = $options;
@@ -42,13 +44,13 @@ class UNL_MediaHub_Media_EditCaptions
     public function isTranscribingFinished()
     {
         $job = $this->media->getMostRecentTranscriptionJob();
-        return !($job && !$job->isFinished());
+        return $job && $job->isFinished();
     }
 
     public function isTranscribingError()
     {
         $job = $this->media->getMostRecentTranscriptionJob();
-        return !($job && !$job->status === UNL_MediaHub_TranscriptionJob::STATUS_ERROR);
+        return $job && $job->isError();
     }
 
     public function mediaHasCaptions()

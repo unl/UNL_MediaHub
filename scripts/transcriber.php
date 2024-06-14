@@ -39,17 +39,25 @@ while (true) {
             // copy track
             $newTrack = new UNL_MediaHub_MediaTextTrack();
             $newTrack->media_id = $captioning_job->media_id;
-            $newTrack->source = 'ai transcriptionist';
+            $newTrack->source = UNL_MediaHub_MediaTextTrack::SOURCE_AI_TRANSCRIPTIONIST;
             $newTrack->save();
 
             // copy track file
             $newTrackFile = new UNL_MediaHub_MediaTextTrackFile();
             $newTrackFile->media_text_tracks_id = $newTrack->id;
             $newTrackFile->kind = 'caption';
-            $newTrackFile->format = 'vtt';
+            $newTrackFile->format = UNL_MediaHub_TranscriptionAPI::$caption_format;
             $newTrackFile->language = 'en';
             $newTrackFile->file_contents = $captions;
             $newTrackFile->save();
+
+            $allTracks = new UNL_MediaHub_MediaTextTrackList(array('media_id'=>$captioning_job->media_id));
+            // Check if auto activated was checked
+            if ($captioning_job->isAutoActivating()) {
+                $media = UNL_MediaHub_Media::getById($captioning_job->media_id);
+                $media->setTextTrack($newTrack);
+            }
+
         }
 
         // If there is an error save the status
