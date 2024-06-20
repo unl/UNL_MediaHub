@@ -33,6 +33,7 @@
                         <thead>
                             <th scope="col">ID</th>
                             <th scope="col">Job ID</th>
+                            <th scope="col">Media ID</th>
                             <th scope="col">User ID</th>
                             <th scope="col">Status</th>
                             <th scope="col">Auto Activate</th>
@@ -44,6 +45,11 @@
                             <tr>
                                 <td class="dcf-txt-right" data-label="ID"><?php echo $job->id; ?></td>
                                 <td class="dcf-txt-right" data-label="Job ID"><?php echo $job->job_id; ?></td>
+                                <td class="dcf-txt-right" data-label="Media ID">
+                                    <a href="<?php echo UNL_MediaHub_Manager::getURL() . '?view=editcaptions&id=' . $job->media_id; ?>">
+                                        <?php echo $job->media_id; ?>
+                                    </a>
+                                </td>
                                 <td data-label="User Id"><?php echo $job->uid; ?></td>
                                 <td data-label="Status"><?php echo ucwords(strtolower($job->status)); ?></td>
                                 <td data-label="Auto Activate"><?php echo $job->auto_activate === '1' ? 'Yes': 'No'; ?></td>

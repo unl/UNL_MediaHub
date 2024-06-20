@@ -190,10 +190,10 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                             </p>
                         </div>
 
-                        <div class="dcf-input-checkbox">
+                        <!-- <div class="dcf-input-checkbox">
                             <input id="auto-activate-captions" name="auto-activate-captions" type="checkbox" value="1" checked="checked">
                             <label for="auto-activate-captions">Auto activate captions after generation</label>
-                        </div>
+                        </div> -->
                     </fieldset>
                     <p class="dcf-txt-sm">
                         Note: All videos will be optimized for web in multiple resolutions automatically.

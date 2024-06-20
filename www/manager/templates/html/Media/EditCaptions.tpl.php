@@ -111,8 +111,18 @@
                                 </ul>
                             </td>
                             <td data-label="Actions" class="dcf-txt-sm">
-                                <div class="dcf-grid dcf-row-gap-3 dcf-ai-center">
+                                <div class="dcf-grid dcf-row-gap-3 dcf-col-gap-3 dcf-ai-center">
                                     <div class="dcf-col-100% dcf-col-75%-start@md">
+                                        <?php if ($is_ai_gen && !$is_copy): ?>
+                                            <a
+                                            href="<?php
+                                                echo UNL_MediaHub_Manager::getURL()
+                                                    . '?view=editcaptiontrack&media_id='
+                                                    . (int)$context->media->id
+                                                    . '&track_id='
+                                                    . (int)$track->id;
+                                                ?>" class="dcf-btn dcf-btn-primary dcf-mt-1">Review</a>
+                                        <?php else: ?>
                                         <form class="dcf-form dcf-d-inline" method="post">
                                             <input type="hidden" name="__unlmy_posttarget" value="copy_text_track_file" />
                                             <input
@@ -137,6 +147,7 @@
                                             >
                                             <input class="dcf-btn dcf-btn-primary dcf-mt-1" type="submit" value="Copy">
                                         </form>
+                                        <?php endif; ?>
                                         <?php if ($is_copy): ?>
                                             <a
                                                 href="<?php
@@ -182,45 +193,25 @@
                                                 >
                                             </form>
                                         <?php endif; ?>
-                                        <?php if ($is_ai_gen && !$is_copy): ?>
-                                            <form class="dcf-form dcf-d-inline" method="post">
-                                                <input type="hidden" name="__unlmy_posttarget" value="copy_and_edit_text_track_file" />
-                                                <input
-                                                    type="hidden"
-                                                    name="media_id"
-                                                    value="<?php echo (int)$context->media->id ?>"
-                                                >
-                                                <input
-                                                    type="hidden"
-                                                    name="text_track_id"
-                                                    value="<?php echo (int)$track->id ?>"
-                                                >
-                                                <input
-                                                    type="hidden"
-                                                    name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>"
-                                                    value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>"
-                                                >
-                                                <input
-                                                    type="hidden"
-                                                    name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>"
-                                                    value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>"
-                                                >
-                                                <input class="dcf-btn dcf-btn-primary dcf-mt-1" type="submit" value="Copy &amp; Edit">
-                                            </form>
-                                        <?php endif;?>
                                     </div>
-                                    <div class="dcf-input-radio dcf-col-100% dcf-col-25%-end@md">
-                                        <?php $active_check = $is_active ? 'checked="checked"' : ''; ?>
-                                        <input
-                                            id="caption-active-radio-<?php echo (int)$track->id; ?>"
-                                            form="caption_active_form"
-                                            name="text_track_id"
-                                            type="radio"
-                                            value="<?php echo (int)$track->id; ?>"
-                                            <?php echo $active_check; ?>
-                                        >
-                                        <label for="caption-active-radio-<?php echo (int)$track->id; ?>">Active</label>
-                                    </div>
+                                    <?php if($is_ai_gen && !$is_copy): ?>
+                                        <div class="dcf-col-100% dcf-col-25%-end@md">
+                                            <p class="dcf-m-0 dcf-p-0 dcf-txt-xs">Captions need to be reviewed before activation</p>
+                                        </div>
+                                    <?php else: ?>
+                                        <div class="dcf-input-radio dcf-col-100% dcf-col-25%-end@md">
+                                            <?php $active_check = $is_active ? 'checked="checked"' : ''; ?>
+                                            <input
+                                                id="caption-active-radio-<?php echo (int)$track->id; ?>"
+                                                form="caption_active_form"
+                                                name="text_track_id"
+                                                type="radio"
+                                                value="<?php echo (int)$track->id; ?>"
+                                                <?php echo $active_check; ?>
+                                            >
+                                            <label for="caption-active-radio-<?php echo (int)$track->id; ?>">Active</label>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             </td>
                         </tr>
@@ -259,9 +250,8 @@
                 <p>
                     MediaHub has a free AI-powered auto captioning system to
                     make your content accessible. Generation times can vary based
-                    on media length and queue position. We recommend double-checking
-                    the captions after they are completed to ensure their accuracy
-                    with names and acronyms.
+                    on media length and queue position. Your captions will need
+                    to be reviewed to ensure their accuracy with names and acronyms.
                 </p>
                 <?php echo $savvy->render($context, 'Feed/Media/transcriber_maintenance_notice.tpl.php'); ?>
             </div>

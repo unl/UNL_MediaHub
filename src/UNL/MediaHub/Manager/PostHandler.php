@@ -128,6 +128,9 @@ class UNL_MediaHub_Manager_PostHandler
         case 'update_text_track_file';
             $this->handleUpdateTextTrackFile();
             break;
+        case 'save_review_ai_captions';
+            $this->handleAICaptionReview();
+            break;
         case 'delete_text_track_file';
             $this->handleDeleteTextTrackFile();
             break;
@@ -817,7 +820,10 @@ class UNL_MediaHub_Manager_PostHandler
         return [
             'editCaptionsURL' => $media->getEditCaptionsURL(),
             'mediaID' => $media->id,
-            'trackID' => $newTrack->id
+            'media' => $media,
+            'trackID' => $newTrack->id,
+            'track' => $newTrack,
+            'trackFile' => $newTrackFile
         ];
     }
 
@@ -1019,6 +1025,49 @@ class UNL_MediaHub_Manager_PostHandler
         UNL_MediaHub_Manager::addNotice($notice);
 
         UNL_MediaHub::redirect($media->getEditCaptionsURL());
+    }
+
+    function handleAICaptionReview() {
+        $returnData = $this->subFuncCopyTextTrackFile();
+
+        try {
+            $vtt = new Captioning\Format\WebvttFile();
+            $vtt->loadFromString(trim($returnData['trackFile']->file_contents));
+            $cues = $vtt->getCues();
+            foreach ($cues as $index => $cue) {
+                $cueName = 'cue' . $index;
+                if (!isset($this->post[$cueName])) {
+                    throw new \Exception('Missing expected track cue at ' . $cue->getStart() . ' - ' . $cue->getStop(), 404);
+                }
+
+                // update cue with new text
+                $cue->setText(trim($this->post[$cueName]));
+
+                // remove old cue;
+                $vtt->removeCue($index);
+
+                // add updated cue;
+                $vtt->addCue($cue);
+            }
+            $vtt->build();
+            $returnData['trackFile']->file_contents = preg_replace("/(\r?\n){2,}/", "\n\n", trim($vtt->getFileContent()));
+            $returnData['trackFile']->save();
+
+            if (isset($this->post['activate_after_review']) && $this->post['activate_after_review'] === '1') {
+                $returnData['media']->setTextTrack($returnData['track']);
+            }
+
+            // Mux Media with updated track if active track
+            if ($returnData['media']->media_text_tracks_id == $returnData['trackID']) {
+                $muxer = new UNL_MediaHub_Muxer($returnData['media']);
+                $muxer->mux();
+            }
+
+        } catch(Exception $e) {
+            throw new \Exception('Error saving track file: ' . $e->getMessage(), 404);
+        }
+
+        UNL_MediaHub::redirect($returnData['media']->getEditCaptionsURL());
     }
     
     function handleAmara()

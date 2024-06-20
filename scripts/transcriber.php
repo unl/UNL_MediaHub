@@ -41,7 +41,6 @@ while (true) {
             $newTrack = new UNL_MediaHub_MediaTextTrack();
             $newTrack->media_id = $captioning_job->media_id;
             $newTrack->source = UNL_MediaHub_MediaTextTrack::SOURCE_AI_TRANSCRIPTIONIST;
-            $newTrack->approved = 0;
             $newTrack->save();
 
             // copy track file
