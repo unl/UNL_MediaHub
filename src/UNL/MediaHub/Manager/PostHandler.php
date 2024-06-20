@@ -1198,7 +1198,7 @@ class UNL_MediaHub_Manager_PostHandler
             throw new Exception('Could Not Create New Captioning Job. Please reach out to an administrator.', 500);
         }
 
-        $media->transcription($job_id, $user->uid);
+        $media->transcription($job_id, $user->uid, false);
 
         $notice = new UNL_MediaHub_Notice(
             'Success',
