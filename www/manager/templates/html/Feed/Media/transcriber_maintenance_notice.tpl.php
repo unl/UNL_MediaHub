@@ -21,7 +21,7 @@
 </div>
 
 <script>
-    const api_status_url = '<?php echo UNL_MediaHub_TranscriptionManager::getURL(); ?>';
+    const api_status_url = '<?php echo UNL_MediaHub_TranscriptionManager::getJSONURL(); ?>';
     const auto_captioning_maintenance = document.getElementById('auto-captioning-maintenance');
     const auto_captioning_error = document.getElementById('auto-captioning-error');
     const auto_captioning_maintenance_notice = document.getElementById('auto-captioning-maintenance-notice');

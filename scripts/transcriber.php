@@ -32,6 +32,7 @@ while (true) {
         $status = $TranscriptionAPI->get_status($captioning_job->job_id);
         if ($status === 'finished') {
             $captioning_job->status = 'FINISHED';
+            $captioning_job->dateupdated = date('Y-m-d H:i:s');
             $captioning_job->save();
 
             $captions = $TranscriptionAPI->get_captions($captioning_job->job_id);
@@ -40,6 +41,7 @@ while (true) {
             $newTrack = new UNL_MediaHub_MediaTextTrack();
             $newTrack->media_id = $captioning_job->media_id;
             $newTrack->source = UNL_MediaHub_MediaTextTrack::SOURCE_AI_TRANSCRIPTIONIST;
+            $newTrack->approved = 0;
             $newTrack->save();
 
             // copy track file
@@ -60,9 +62,16 @@ while (true) {
 
         }
 
+        if ($status === 'working') {
+            $captioning_job->status = 'WORKING';
+            $captioning_job->dateupdated = date('Y-m-d H:i:s');
+            $captioning_job->save();
+        }
+
         // If there is an error save the status
         if ($status === 'error') {
             $captioning_job->status = 'ERROR';
+            $captioning_job->dateupdated = date('Y-m-d H:i:s');
             $captioning_job->save();
         }
 
