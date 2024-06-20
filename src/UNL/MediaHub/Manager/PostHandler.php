@@ -756,7 +756,7 @@ class UNL_MediaHub_Manager_PostHandler
         UNL_MediaHub::redirect($media->getEditCaptionsURL());
     }
 
-    public function subFuncCopyTextTrackFile() {
+    public function subFuncCopyTextTrackFile($comment_text=null) {
         $mediaId = !empty($this->post['media_id']) ? $this->post['media_id'] : 0;
         if (!$media = UNL_MediaHub_Media::getById($mediaId)) {
             throw new Exception('Unable to find media', 404);
@@ -791,7 +791,12 @@ class UNL_MediaHub_Manager_PostHandler
             $newTrack = new UNL_MediaHub_MediaTextTrack();
             $newTrack->media_id = $track->media_id;
             $newTrack->source = $track->source;
-            $newTrack->revision_comment = 'Copied from track id ' . $track->id;
+
+            if ($comment_text === null) {
+                $newTrack->revision_comment = 'Copied from track id ' . $track->id;
+            } else {
+                $newTrack->revision_comment = $comment_text;
+            }
             $newTrack->media_text_tracks_source_id = $track->id;
             $newTrack->save();
 
@@ -1028,7 +1033,9 @@ class UNL_MediaHub_Manager_PostHandler
     }
 
     function handleAICaptionReview() {
-        $returnData = $this->subFuncCopyTextTrackFile();
+        $trackId = !empty($this->post['text_track_id']) ? $this->post['text_track_id'] : 0;
+        $comment_text = 'Reviewed copy from track id' . $trackId;
+        $returnData = $this->subFuncCopyTextTrackFile($comment_text);
 
         try {
             $vtt = new Captioning\Format\WebvttFile();
