@@ -1034,7 +1034,7 @@ class UNL_MediaHub_Manager_PostHandler
 
     function handleAICaptionReview() {
         $trackId = !empty($this->post['text_track_id']) ? $this->post['text_track_id'] : 0;
-        $comment_text = 'Reviewed copy from track id' . $trackId;
+        $comment_text = 'Reviewed copy from track id ' . $trackId;
         $returnData = $this->subFuncCopyTextTrackFile($comment_text);
 
         try {
