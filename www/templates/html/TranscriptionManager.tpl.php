@@ -44,11 +44,11 @@
                             <tr>
                                 <td class="dcf-txt-right" data-label="ID"><?php echo $job->id; ?></td>
                                 <td class="dcf-txt-right" data-label="Job ID"><?php echo $job->job_id; ?></td>
-                                <td data-label="user id"><?php echo $job->uid; ?></td>
-                                <td data-label="status"><?php echo ucwords(strtolower($job->status)); ?></td>
-                                <td data-label="auto activate"><?php echo $job->auto_activate === '1' ? 'Yes': 'No'; ?></td>
-                                <td data-label="date created"><?php echo $job->datecreated; ?></td>
-                                <td data-label="date updated"><?php echo $job->dateupdated; ?></td>
+                                <td data-label="User Id"><?php echo $job->uid; ?></td>
+                                <td data-label="Status"><?php echo ucwords(strtolower($job->status)); ?></td>
+                                <td data-label="Auto Activate"><?php echo $job->auto_activate === '1' ? 'Yes': 'No'; ?></td>
+                                <td data-label="Date Created"><?php echo $job->datecreated; ?></td>
+                                <td data-label="Date Updated"><?php echo $job->dateupdated; ?></td>
                             </tr>
                         <?php endforeach; ?>
                         </tbody>
