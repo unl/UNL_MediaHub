@@ -54,6 +54,8 @@
                 return;
             }
 
+            if (parsed_data['data']['maintenance_date_range'] === '') { return; }
+
             auto_captioning_maintenance.classList.remove('dcf-d-none');
             auto_captioning_maintenance_date_range.innerText = parsed_data['data']['maintenance_date_range'];
         } catch (err) {

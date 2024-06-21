@@ -1,8 +1,4 @@
 <?php
-// TODO: disable breadcrumbs since currently not supported in 5.0 App templates
-//$controller->setReplacementData('breadcrumbs', '<ol> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'manager/">Manage Media</a></li> <li><a href="' . $context->media->getURL() .'">'.UNL_MediaHub::escape($context->media->title).'</a></li> <li>Edit Captions</li></ol>');
-?>
-<?php
     $revOrders = $context->getRevOrderHistory()->items;
     $hasRevOrders = count($revOrders) > 0;
 ?>
@@ -30,7 +26,7 @@
     <?php echo $savvy->render($context, 'Feed/Media/transcription_notice.tpl.php'); ?>
 <?php endif; ?>
 
-<div id="activate-captions" class="dcf-bleed unl-bg-lightest-gray dcf-pt-6 dcf-pb-8">
+<div id="activate-captions" class="dcf-bleed dcf-pt-6 dcf-pb-8">
     <div class="dcf-wrapper">
         <h2>Your Captions</h2>
         <!--  This form is for all the is active radio buttons in the table -->
@@ -392,6 +388,59 @@
     </div>
 </div>
 
+<div class="dcf-bleed unl-bg-lightest-gray dcf-pt-6 dcf-pb-6">
+    <div class="dcf-wrapper">
+    <h2>Self-Manage Captions With Amara</h2>
+        <div class="dcf-grid dcf-col-gap-vw">
+            <div class="dcf-col-100% dcf-col-67%-start@sm">
+                <p>
+                    <a href="http://amara.org">amara.org</a> is a free service which helps
+                    you caption videos. To caption your video you will need to do the following.
+                </p>
+                <ol>
+                    <li>Go to amara.org and create/edit captions for the video.</li>
+                    <li>Follow the instructions on amara.org to publish the new captions</li>
+                    <li>Come back here, and click the button to 'pull captions from amara.org'</li>
+                </ol>
+            </div>
+            <div class="dcf-col-100% dcf-col-33%-end@sm">
+                <?php if($context->isTranscodingFinished()): ?>
+                    <?php $edit_captions_url = $context->getEditCaptionsURL(); ?>
+                    <?php if (!$edit_captions_url): ?>
+                        <p>
+                            An error has occurred trying to add media to Amara.
+                            Please try again later or contact an administrator for help.
+                        </p>
+                    <?php else: ?>
+                        <a class="dcf-btn dcf-btn-primary" href="<?php echo $context->getEditCaptionsURL(); ?>">
+                            Edit Captions on amara
+                        </a>
+                        <br><br>
+                        <form class="dcf-form" method="post">
+                            <input type="hidden" name="__unlmy_posttarget" value="pull_amara" />
+                            <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
+                            <input
+                                type="hidden"
+                                name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>"
+                                value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>"
+                            >
+                            <input
+                                type="hidden"
+                                name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>"
+                                value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>"
+                            >
+                            <input class="dcf-btn dcf-btn-primary" type="submit" value="Pull Captions from amara.org">
+                        </form>
+                    <?php endif ?>
+                <?php else: ?>
+                    <p>Please wait for your video to be optimized before captioning on Amara.</p>
+                <?php endif; ?>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="dcf-bleed dcf-pt-6 dcf-pb-6">
     <div class="dcf-wrapper">
         <h2>Order Captions With Your Cost Object Number</h2>
@@ -460,59 +509,6 @@
                     <p>Great news! There is an order already in the works.</p>
                     <?php endif; ?>
                 </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="dcf-bleed unl-bg-lightest-gray dcf-pt-6 dcf-pb-6">
-    <div class="dcf-wrapper">
-    <h2>Self-Manage Captions With Amara</h2>
-        <div class="dcf-grid dcf-col-gap-vw">
-            <div class="dcf-col-100% dcf-col-67%-start@sm">
-                <p>
-                    <a href="http://amara.org">amara.org</a> is a free service which helps
-                    you caption videos. To caption your video you will need to do the following.
-                </p>
-                <ol>
-                    <li>Go to amara.org and create/edit captions for the video.</li>
-                    <li>Follow the instructions on amara.org to publish the new captions</li>
-                    <li>Come back here, and click the button to 'pull captions from amara.org'</li>
-                </ol>
-            </div>
-            <div class="dcf-col-100% dcf-col-33%-end@sm">
-                <?php if($context->isTranscodingFinished()): ?>
-                    <?php $edit_captions_url = $context->getEditCaptionsURL(); ?>
-                    <?php if (!$edit_captions_url): ?>
-                        <p>
-                            An error has occurred trying to add media to Amara.
-                            Please try again later or contact an administrator for help.
-                        </p>
-                    <?php else: ?>
-                        <a class="dcf-btn dcf-btn-primary" href="<?php echo $context->getEditCaptionsURL(); ?>">
-                            Edit Captions on amara
-                        </a>
-                        <br><br>
-                        <form class="dcf-form" method="post">
-                            <input type="hidden" name="__unlmy_posttarget" value="pull_amara" />
-                            <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
-                            <input
-                                type="hidden"
-                                name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>"
-                                value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>"
-                            >
-                            <input
-                                type="hidden"
-                                name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>"
-                                value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>"
-                            >
-                            <input class="dcf-btn dcf-btn-primary" type="submit" value="Pull Captions from amara.org">
-                        </form>
-                    <?php endif ?>
-                <?php else: ?>
-                    <p>Please wait for your video to be optimized before captioning on Amara.</p>
-                <?php endif; ?>
 
             </div>
         </div>
