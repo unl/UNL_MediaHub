@@ -32,8 +32,10 @@
                     <dd><?php echo UNL_MediaHub::escape($context->track->datecreated); ?></dd>
                     <dt>Source</dt>
                     <dd><?php echo UNL_MediaHub::escape($context->track->source); ?></dd>
-                    <dt>Revision Comment</dt>
-                    <dd><?php echo UNL_MediaHub::escape($context->track->revision_comment) ?></dd>
+                    <?php if(!empty($context->track->revision_comment)): ?>
+                        <dt>Revision Comment</dt>
+                        <dd><?php echo UNL_MediaHub::escape($context->track->revision_comment) ?></dd>
+                    <?php endif; ?>
                 </dl>
                 <div>
                     <?php if($is_review): ?>
