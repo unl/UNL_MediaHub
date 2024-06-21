@@ -13,6 +13,8 @@ abstract class UNL_MediaHub_Models_BaseTranscriptionJob extends Doctrine_Record
         $this->hasColumn('job_id',       'string',    null, array('primary' => false,  'notnull' => false, 'autoincrement' => false));
         $this->hasColumn('status',       'enum',      null, array('primary' => false,  'notnull' => true, 'autoincrement' => false, 'values' => array('SUBMITTED', 'WORKING', 'ERROR', 'FINISHED'), 'default' => 'SUBMITTED'));
         $this->hasColumn('auto_activate','tinyint',   null, array('primary' => false,  'notnull' => true, 'autoincrement' => false, 'default' => 1));
+        $this->hasColumn('queue_length', 'integer', 4, array('unsigned' => 0, 'primary' => false, 'notnull' => false, 'autoincrement' => false));
+        $this->hasColumn('queue_position', 'integer', 4, array('unsigned' => 0, 'primary' => false, 'notnull' => false, 'autoincrement' => false));
     }
 
     public function setUp()

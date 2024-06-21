@@ -107,7 +107,7 @@ class UNL_MediaHub_TranscriptionAPI
 
     /**
      * @param string $job_id the job id to get the status of
-     * @return string|bool false on error, string of job status
+     * @return array|bool false on error, string of job status
      */
     public function get_status(string $job_id)
     {
@@ -132,7 +132,11 @@ class UNL_MediaHub_TranscriptionAPI
             if ($job_status === 0) {
                 throw new Exception(self::$no_job_id);
             }
-            return $job_status;
+            return [
+                'status' => $job_status,
+                'queue_length' => $response->data->queue_length ?? '-1',
+                'queue_position' => $response->data->queue_position ?? '-1',
+            ];
 
         } catch (GuzzleHttp\Exception\ClientException $e) {
             return false;

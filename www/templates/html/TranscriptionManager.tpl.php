@@ -25,6 +25,16 @@
                         <p>Can't get worker's statuses</p>
                     <?php endif; ?>
                 </table>
+                <h3 class="dcf-txt-h6 dcf-mt-8">Queue Length</h3>
+                    <?php if (
+                        $context->getAPIData()['status'] === 'OK' &&
+                        isset($context->getAPIData()['data']) &&
+                        isset($context->getAPIData()['data']->queue_length)
+                    ): ?>
+                        <p><code><?php echo $context->getAPIData()['data']->queue_length?></code></p>
+                    <?php else: ?>
+                        <p>Can't get queue length</p>
+                    <?php endif; ?>
             </div>
             <div class="dcf-col-100% dcf-col-75%-end@md">
                 <h3 class="dcf-txt-h6" id="table-description">Recent Transcription Jobs <span class="dcf-subhead">Last 50 jobs sorted by Date</span></h3>

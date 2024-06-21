@@ -29,8 +29,16 @@ while (true) {
          */
         $captioning_job = $media_hub_job;
 
-        $status = $TranscriptionAPI->get_status($captioning_job->job_id);
-        if ($status === 'finished') {
+        $status_data = $TranscriptionAPI->get_status($captioning_job->job_id);
+
+        if ($status_data === false) { continue; }
+
+        $captioning_job->queue_length = $status_data['queue_length'];
+        $captioning_job->queue_position = $status_data['queue_position'];
+        $captioning_job->save();
+
+
+        if ($status_data['status'] === 'finished') {
             $captioning_job->status = 'FINISHED';
             $captioning_job->dateupdated = date('Y-m-d H:i:s');
             $captioning_job->save();
@@ -58,17 +66,16 @@ while (true) {
                 $media = UNL_MediaHub_Media::getById($captioning_job->media_id);
                 $media->setTextTrack($newTrack);
             }
-
         }
 
-        if ($status === 'working') {
+        if ($status_data['status'] === 'working') {
             $captioning_job->status = 'WORKING';
             $captioning_job->dateupdated = date('Y-m-d H:i:s');
             $captioning_job->save();
         }
 
         // If there is an error save the status
-        if ($status === 'error') {
+        if ($status_data['status'] === 'error') {
             $captioning_job->status = 'ERROR';
             $captioning_job->dateupdated = date('Y-m-d H:i:s');
             $captioning_job->save();
