@@ -277,7 +277,8 @@ select#format {
     margin-bottom: 2em;
 }
 
-#transcoding-progress progress {
+#transcoding-progress progress,
+#ai-caption-progress progress {
     display: block;
     width: 100%;
 }

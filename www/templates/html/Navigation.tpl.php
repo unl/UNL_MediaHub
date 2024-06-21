@@ -9,7 +9,8 @@
     <li><a href="<?php echo $baseUrl ?>manager/">Manage Media</a></li>
     <?php if ($auth->isLoggedIn()) { ?>
         <?php if ($auth->getUser()->isAdmin()) { ?>
-            <li><a href="<?php echo UNL_MediaHub_Controller::getURL() ?>transcode-manager">Transcode Manager</a></li>
+            <li><a href="<?php echo UNL_MediaHub_Controller::getURL(); ?>transcode-manager">Transcode Manager</a></li>
+            <li><a href="<?php echo UNL_MediaHub_TranscriptionManager::getURL(); ?>">Transcription Manager</a></li>
         <?php } ?>
         <li><a href="<?php echo $baseUrl ?>logout/">Log out as <?php echo $auth->getUserDisplayName(); ?></a></li>
     <?php } else { ?>

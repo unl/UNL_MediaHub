@@ -5,6 +5,10 @@ class UNL_MediaHub_Media_EditCaptionTrack
     public $options = array();
     private $trackFiles = array();
 
+    public $media;
+    public $track;
+    public $trackFile;
+
     public function __construct($options = array())
     {
         $this->options = $options;
@@ -31,7 +35,7 @@ class UNL_MediaHub_Media_EditCaptionTrack
             throw new \Exception('Could not find that track', 404);
         }
 
-        if (empty($this->track->media_text_tracks_source_id)) {
+        if (empty($this->track->media_text_tracks_source_id) && !$this->track->is_ai_generated()) {
             throw new \Exception('Track must be a copy to edit', 404);
         }
 
