@@ -1,9 +1,9 @@
 <div id="auto-captioning-maintenance" class="dcf-d-none">
     <div id="auto-captioning-maintenance-notice" class="dcf-notice dcf-notice-info" data-no-close-button="true" hidden>
-        <h2>Auto Captions Maintenance Notice</h2>
+        <h2>AI Captions Maintenance Notice</h2>
         <div>
-            We will be preforming maintenance on
-            the auto captioning service on <span id="auto-captioning-maintenance-date-range"></span>.
+            We will be performing maintenance on
+            the AI captioning service on <span id="auto-captioning-maintenance-date-range"></span>.
             Captions may not be generated at that
             time but they will be generated once
             the maintenance has finished.
@@ -13,9 +13,9 @@
 
 <div id="auto-captioning-error" class="dcf-d-none">
     <div id="auto-captioning-error-notice" class="dcf-notice dcf-notice-danger" data-no-close-button="true" hidden>
-        <h2>Auto Captions Error</h2>
+        <h2>AI Captions Error</h2>
         <div>
-            There is an error trying to contact the auto captioning server. If this error persists please contact an administrator.
+            There is an error trying to contact the AI captioning server. If this error persists please contact an administrator.
         </div>
     </div>
 </div>

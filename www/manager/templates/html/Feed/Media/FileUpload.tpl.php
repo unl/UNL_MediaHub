@@ -179,13 +179,13 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                     <?php echo $savvy->render($context, 'Feed/Media/transcriber_maintenance_notice.tpl.php'); ?>
 
                     <fieldset>
-                        <legend>Auto Captions</legend>
+                        <legend>AI Captions</legend>
                         <div class="dcf-input-checkbox">
                             <input id="opt-out-captions" name="opt-out-captions" aria-describedby="opt-out-captions-help" type="checkbox" value="1">
-                            <label for="opt-out-captions">Opt Out of auto captions</label>
+                            <label for="opt-out-captions">Opt Out of AI captions</label>
                             <p class="dcf-form-help dcf-mb-0" id="opt-out-captions-help">
                                 Captions are free to generate and will automatically
-                                be translated into english. You would only want to
+                                be translated into English. You would only want to
                                 check this if you have your own captions.
                             </p>
                         </div>

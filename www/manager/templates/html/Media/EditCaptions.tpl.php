@@ -59,10 +59,14 @@
                 <tbody>
                 <?php $text_tracks = $context->getTrackHistory()->items; ?>
                     <?php foreach ($text_tracks as $track): ?>
-                        <?php $is_active = $context->media->media_text_tracks_id === $track->id; ?>
-                        <?php $is_copy = !empty($track->media_text_tracks_source_id); ?>
-                        <?php $is_ai_gen = $track->is_ai_generated(); ?>
-                        <?php $is_upload = $track->source === 'upload'; ?>
+                        <?php
+                            $is_active = $context->media->media_text_tracks_id === $track->id;
+                            $is_copy = !empty($track->media_text_tracks_source_id);
+                            $is_ai_gen = $track->is_ai_generated();
+                            $is_upload = $track->source === 'upload';
+
+                            $track_source_formatted = $track->source === self::SOURCE_AI_TRANSCRIPTIONIST ? 'AI Captions' : $track->source;
+                        ?>
                         <tr>
                             <td data-label="ID of caption track">
                                 <?php echo UNL_MediaHub::escape($track->id); ?>
@@ -72,9 +76,9 @@
                             </td>
                             <td data-label="Source">
                                 <?php if($is_copy): ?>
-                                    Copied from <?php echo ucwords(UNL_MediaHub::escape($track->source)); ?>
+                                    Copied from <?php echo ucwords($track_source_formatted); ?>
                                 <?php else: ?>
-                                    <?php echo ucwords(UNL_MediaHub::escape($track->source)); ?>
+                                    <?php echo ucwords($track_source_formatted); ?>
                                 <?php endif; ?>
                             </td>
                             <td data-label="Comments">
@@ -216,9 +220,10 @@
             </table>
             <p class="dcf-txt-xs">
                 You may copy any track, edit any copied track, and
-                delete non-active copied/uploaded tracks. Editing tracks is limited
-                to fixing typos, for more intensive edits you may need to download
-                the caption file and edit in your caption editor of choice.
+                delete non-active copied/uploaded tracks. Editing
+                tracks is limited to fixing typos. For more intensive
+                edits you may need to download the caption file and
+                edit in your caption editor of choice.
             </p>
             <script defer>
                 document.querySelectorAll('input[type="radio"][form="caption_active_form"]').forEach((radio_button) => {
@@ -240,23 +245,24 @@
 
 <div class="dcf-bleed dcf-pt-6 dcf-pb-6">
     <div class="dcf-wrapper">
-        <h2>Auto Captioning</h2>
+        <h2>AI Captioning</h2>
         <div class="dcf-grid dcf-col-gap-vw">
             <div class="dcf-col-100% dcf-col-67%-start@sm">
                 <p>
-                    MediaHub has a free AI-powered auto captioning system to
-                    make your content accessible. Generation times can vary based
-                    on media length and queue position. Your captions will need
-                    to be reviewed to ensure their accuracy with names and acronyms.
+                    MediaHub includes a free AI-powered captioning service to help
+                    make your content accessible. Generation times vary based on
+                    media length and queue position. Your captions will need to
+                    be reviewed to ensure the accuracy of names, acronyms and any
+                    words which may not have been pronounced clearly.
                 </p>
                 <?php echo $savvy->render($context, 'Feed/Media/transcriber_maintenance_notice.tpl.php'); ?>
             </div>
             <div class="dcf-col-100% dcf-col-33%-end@sm">
             <?php if ($context->hasTranscriptionJob() && !$context->isTranscribingFinished()):?>
-                <p>Your order is still being processed.</p>
+                <p>Your captions are being generated.</p>
             <?php elseif ($context->hasTranscriptionJob() && $context->isTranscribingError()): ?>
                 <p class="unl-bg-scarlet unl-cream dcf-rounded dcf-p-2">
-                    There has been an error with your order, please
+                    There has been an error with your captions, please
                     reach out to an administrator to resolve the issue.
                 </p>
                 <?php if ($user->isAdmin()): ?>
