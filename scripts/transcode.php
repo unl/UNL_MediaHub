@@ -171,7 +171,9 @@ function downloadOutput($output_bucket, $key, UNL_MediaHub_Media $media)
     // because it should have the same name (media.mp4)
     if ($url !== $media->url) {
         //Delete the original upload to save space
-        unlink($media->getLocalFileName());
+        if (file_exists($media->getLocalFileName())) {
+            unlink($media->getLocalFileName());
+        }
         //Update the URL of the media to the media.mp4 file
         $media->url = $url;
         $media->save();
