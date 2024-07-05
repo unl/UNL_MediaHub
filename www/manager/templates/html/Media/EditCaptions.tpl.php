@@ -65,7 +65,7 @@
                             $is_ai_gen = $track->is_ai_generated();
                             $is_upload = $track->source === 'upload';
 
-                            $track_source_formatted = $track->source === self::SOURCE_AI_TRANSCRIPTIONIST ? 'AI Captions' : $track->source;
+                            $track_source_formatted = $track->source === UNL_MediaHub_MediaTextTrack::SOURCE_AI_TRANSCRIPTIONIST ? 'AI Captions' : $track->source;
                         ?>
                         <tr>
                             <td data-label="ID of caption track">
