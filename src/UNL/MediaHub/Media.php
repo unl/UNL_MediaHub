@@ -965,10 +965,10 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     }
 
     /**
-     * @param UNL_MediaHub_MediaTextTrack $track
+     * @param UNL_MediaHub_MediaTextTrack|null $track
      * @return bool
      */
-    public function setTextTrack(UNL_MediaHub_MediaTextTrack $track)
+    public function setTextTrack($track)
     {
         $this->media_text_tracks_id = $track->id;
         $this->dateupdated = date('Y-m-d H:i:s');

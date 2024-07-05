@@ -29,23 +29,8 @@
 <div id="activate-captions" class="dcf-bleed dcf-pt-6 dcf-pb-8">
     <div class="dcf-wrapper">
         <h2>Your Captions</h2>
-        <!--  This form is for all the is active radio buttons in the table -->
-        <form class="dcf-form dcf-d-inline" method="post" id="caption_active_form">
-            <input type="hidden" name="__unlmy_posttarget" value="set_active_text_track" />
-            <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
-            <input
-                type="hidden"
-                name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>"
-                value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>"
-            >
-            <input
-                type="hidden"
-                name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>"
-                value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>"
-            >
-        </form>
         <?php if($context->mediaHasCaptions()): ?>
-            <table class="dcf-table dcf-table-bordered dcf-table-responsive dcf-mb-3">
+            <table class="dcf-table dcf-table-bordered dcf-table-responsive dcf-mb-3 dcf-w-100%">
                 <thead>
                 <tr>
                     <th scope="col">ID</th>
@@ -111,60 +96,27 @@
                                 </ul>
                             </td>
                             <td data-label="Actions" class="dcf-txt-sm">
-                                <div class="dcf-grid dcf-row-gap-3 dcf-col-gap-3 dcf-ai-center">
-                                    <div class="dcf-col-100% dcf-col-75%-start@md">
-                                        <?php if ($is_ai_gen && !$is_copy): ?>
-                                            <a
+                                <?php if($is_ai_gen && !$is_copy): ?>
+                                    <div class="dcf-d-flex dcf-flex-row dcf-flex-wrap dcf-jc-start dcf-ai-center dcf-gap-3">
+                                        <a
                                             href="<?php
                                                 echo UNL_MediaHub_Manager::getURL()
                                                     . '?view=editcaptiontrack&media_id='
                                                     . (int)$context->media->id
                                                     . '&track_id='
                                                     . (int)$track->id;
-                                                ?>" class="dcf-btn dcf-btn-primary dcf-mt-1">Review</a>
-                                        <?php else: ?>
-                                        <form class="dcf-form dcf-d-inline" method="post">
-                                            <input type="hidden" name="__unlmy_posttarget" value="copy_text_track_file" />
-                                            <input
-                                                type="hidden"
-                                                name="media_id"
-                                                value="<?php echo (int)$context->media->id ?>"
-                                            >
-                                            <input
-                                                type="hidden"
-                                                name="text_track_id"
-                                                value="<?php echo (int)$track->id ?>"
-                                            >
-                                            <input
-                                                type="hidden"
-                                                name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>"
-                                                value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>"
-                                            >
-                                            <input
-                                                type="hidden"
-                                                name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>"
-                                                value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>"
-                                            >
-                                            <input class="dcf-btn dcf-btn-primary dcf-mt-1" type="submit" value="Copy">
-                                        </form>
-                                        <?php endif; ?>
-                                        <?php if ($is_copy): ?>
-                                            <a
-                                                href="<?php
-                                                    echo UNL_MediaHub_Manager::getURL()
-                                                        . '?view=editcaptiontrack&media_id='
-                                                        . (int)$context->media->id
-                                                        . '&track_id='
-                                                        . (int)$track->id;
-                                                    ?>" class="dcf-btn dcf-btn-primary dcf-mt-1">Edit</a>
-                                        <?php endif; ?>
-                                        <?php if (($is_copy || $is_upload) && !$is_active): ?>
+                                                ?>"
+                                            class="dcf-btn dcf-btn-primary dcf-mt-1"
+                                        >
+                                            Review
+                                        </a>
+                                        <p class="dcf-m-0 dcf-p-0 dcf-txt-xs">Captions need to be reviewed before activation</p>
+                                    </div>
+                                <?php else: ?>
+                                    <div class="dcf-grid dcf-row-gap-3 dcf-col-gap-3 dcf-ai-center">
+                                        <div class="dcf-col-100% dcf-col-75%-start@md">
                                             <form class="dcf-form dcf-d-inline" method="post">
-                                                <input
-                                                    type="hidden"
-                                                    name="__unlmy_posttarget"
-                                                    value="delete_text_track_file"
-                                                >
+                                                <input type="hidden" name="__unlmy_posttarget" value="copy_text_track_file" />
                                                 <input
                                                     type="hidden"
                                                     name="media_id"
@@ -185,20 +137,54 @@
                                                     name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>"
                                                     value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>"
                                                 >
-                                                <input
-                                                    class="dcf-btn dcf-btn-secondary dcf-mt-1"
-                                                    type="submit"
-                                                    value="Delete"
-                                                    onclick="return confirm('Are you sure you want to delete this track?');"
-                                                >
+                                                <input class="dcf-btn dcf-btn-primary dcf-mt-1" type="submit" value="Copy">
                                             </form>
-                                        <?php endif; ?>
-                                    </div>
-                                    <?php if($is_ai_gen && !$is_copy): ?>
-                                        <div class="dcf-col-100% dcf-col-25%-end@md">
-                                            <p class="dcf-m-0 dcf-p-0 dcf-txt-xs">Captions need to be reviewed before activation</p>
+                                            <?php if ($is_copy): ?>
+                                                <a
+                                                    href="<?php
+                                                        echo UNL_MediaHub_Manager::getURL()
+                                                            . '?view=editcaptiontrack&media_id='
+                                                            . (int)$context->media->id
+                                                            . '&track_id='
+                                                            . (int)$track->id;
+                                                        ?>" class="dcf-btn dcf-btn-primary dcf-mt-1">Edit</a>
+                                            <?php endif; ?>
+                                            <?php if (($is_copy || $is_upload) && !$is_active): ?>
+                                                <form class="dcf-form dcf-d-inline" method="post">
+                                                    <input
+                                                        type="hidden"
+                                                        name="__unlmy_posttarget"
+                                                        value="delete_text_track_file"
+                                                    >
+                                                    <input
+                                                        type="hidden"
+                                                        name="media_id"
+                                                        value="<?php echo (int)$context->media->id ?>"
+                                                    >
+                                                    <input
+                                                        type="hidden"
+                                                        name="text_track_id"
+                                                        value="<?php echo (int)$track->id ?>"
+                                                    >
+                                                    <input
+                                                        type="hidden"
+                                                        name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>"
+                                                        value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>"
+                                                    >
+                                                    <input
+                                                        type="hidden"
+                                                        name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>"
+                                                        value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>"
+                                                    >
+                                                    <input
+                                                        class="dcf-btn dcf-btn-secondary dcf-mt-1"
+                                                        type="submit"
+                                                        value="Delete"
+                                                        onclick="return confirm('Are you sure you want to delete this track?');"
+                                                    >
+                                                </form>
+                                            <?php endif; ?>
                                         </div>
-                                    <?php else: ?>
                                         <div class="dcf-input-radio dcf-col-100% dcf-col-25%-end@md">
                                             <?php $active_check = $is_active ? 'checked="checked"' : ''; ?>
                                             <input
@@ -211,13 +197,62 @@
                                             >
                                             <label for="caption-active-radio-<?php echo (int)$track->id; ?>">Active</label>
                                         </div>
-                                    <?php endif; ?>
-                                </div>
+                                    </div>
+                                <?php endif; ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
+            <!--  This form is for all the is active radio buttons in the table -->
+            <form class="dcf-form dcf-d-inline" method="post" id="caption_active_form">
+                <input type="hidden" name="__unlmy_posttarget" value="set_active_text_track" />
+                <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
+                <input
+                    type="hidden"
+                    name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>"
+                    value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>"
+                >
+                <input
+                    type="hidden"
+                    name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>"
+                    value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>"
+                >
+                <fieldset id="more-options-fieldset" class="dcf-collapsible-fieldset dcf-mb-2" data-start-expanded="false" hidden>
+                    <legend>More Options</legend>
+                    <div class="dcf-input-radio">
+                        <?php $active_check = $context->media->media_text_tracks_id === null ? 'checked="checked"' : ''; ?>
+                        <input
+                            id="caption-active-radio-deactivate-all"
+                            form="caption_active_form"
+                            name="text_track_id"
+                            type="radio"
+                            value="-1"
+                            <?php echo $active_check; ?>
+                        >
+                        <label for="caption-active-radio-deactivate-all">Deactivate All Captions</label>
+                    </div>
+                </fieldset>
+            </form>
+            <script>
+                
+                const caption_active_form = document.getElementById('caption_active_form');
+                const more_options_fieldset = document.getElementById('more-options-fieldset');
+
+                window.addEventListener('inlineJSReady', function() {
+                    more_options_fieldset.addEventListener('ready', () => {
+                        const radio_buttons = document.querySelectorAll('input[type="radio"][form="caption_active_form"]');
+
+                        radio_buttons.forEach((radio_button) => {
+                            radio_button.addEventListener('input', () => {
+                                caption_active_form.submit();
+                            });
+                        });
+                    });
+
+                    WDN.initializePlugin('collapsible-fieldsets');
+                }, false);
+            </script>
             <p class="dcf-txt-xs">
                 You may copy any track, edit any copied track, and
                 delete non-active copied/uploaded tracks. Editing
@@ -225,13 +260,6 @@
                 edits you may need to download the caption file and
                 edit in your caption editor of choice.
             </p>
-            <script defer>
-                document.querySelectorAll('input[type="radio"][form="caption_active_form"]').forEach((radio_button) => {
-                    radio_button.addEventListener('input', () => {
-                        document.getElementById('caption_active_form')?.submit();
-                    });
-                });
-            </script>
         <?php elseif ($context->hasTranscriptionJob() && !$context->isTranscribingFinished()): ?>
             <p>We are working on your captions now! </p>
         <?php else: ?>

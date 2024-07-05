@@ -1285,6 +1285,15 @@ class UNL_MediaHub_Manager_PostHandler
             throw new Exception('Post data must include text_track_id.', 400);
         }
         
+        if (intval($this->post['text_track_id']) === -1) {
+            $media->setTextTrack(null);
+            $notice = new UNL_MediaHub_Notice('Success', 'Deactivated All Captions', UNL_MediaHub_Notice::TYPE_SUCCESS);
+            UNL_MediaHub_Manager::addNotice($notice);
+
+            UNL_MediaHub::redirect($media->getEditCaptionsURL());
+            return;
+        }
+
         $text_track = UNL_MediaHub_MediaTextTrack::getById($this->post['text_track_id']);
         
         if (!$text_track) {
