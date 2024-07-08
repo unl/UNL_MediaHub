@@ -4,6 +4,7 @@ class UNL_MediaHub_MediaTextTrack extends UNL_MediaHub_Models_BaseMediaTextTrack
 {
     const SOURCE_AMARA = 'amara';
     const SOURCE_REV = 'order';
+    const SOURCE_AI_TRANSCRIPTIONIST = 'ai transcriptionist';
 
     /**
      * Get a piece of media by PK.
@@ -40,5 +41,10 @@ class UNL_MediaHub_MediaTextTrack extends UNL_MediaHub_Models_BaseMediaTextTrack
     public function getMedia()
     {
         return UNL_MediaHub_Media::getById($this->media_id);
+    }
+
+    public function is_ai_generated()
+    {
+        return $this->source === self::SOURCE_AI_TRANSCRIPTIONIST;
     }
 }

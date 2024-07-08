@@ -362,6 +362,26 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         //Return the first item
         return $jobs->items[0];
     }
+
+    /**
+     * @return UNL_MediaHub_TranscriptionJob|false
+     */
+    public function getMostRecentTranscriptionJob()
+    {
+        $jobs = new UNL_MediaHub_TranscriptionJobList(array(
+            'media_id' => $this->id,
+            'orderby' => 'id',
+            'order' => 'desc',
+            'limit' => 1
+        ));
+
+        if (!isset($jobs->items[0])) {
+            return false;
+        }
+
+        //Return the first item
+        return $jobs->items[0];
+    }
     
     /**
      * Sets the content type for the media being added.
@@ -374,10 +394,18 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
             return false;
         }
 
-        $context = stream_context_create(array('http'=>array(
-                'method'     => 'GET',
-                'user_agent' => 'UNL MediaHub/mediahub.unl.edu'
-                )));
+        $context = stream_context_create(
+            array(
+                'http'=>array(
+                    'method'     => 'GET',
+                    'user_agent' => 'UNL MediaHub/mediahub.unl.edu'
+                ),
+                "ssl"=>array(
+                    "verify_peer"=>false,
+                    "verify_peer_name"=>false,
+                ),
+            )
+        );
 
         $result = @file_get_contents($this->url, null, $context, 0, 8);
         if (false === $result) {
@@ -937,10 +965,10 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     }
 
     /**
-     * @param UNL_MediaHub_MediaTextTrack $track
+     * @param UNL_MediaHub_MediaTextTrack|null $track
      * @return bool
      */
-    public function setTextTrack(UNL_MediaHub_MediaTextTrack $track)
+    public function setTextTrack($track)
     {
         $this->media_text_tracks_id = $track->id;
         $this->dateupdated = date('Y-m-d H:i:s');
@@ -1035,6 +1063,26 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         
         $job->save();
         
+        return $job;
+    }
+
+    public function transcription(string $job_id, $uid=null, $auto_activate=true)
+    {
+        if (empty($job_id)) {
+            return false;
+        }
+
+        $job = new UNL_MediaHub_TranscriptionJob();
+        $job->media_id = $this->id;
+        $job->job_id = $job_id;
+        $job->auto_activate = intval($auto_activate);
+        if ($uid) {
+            $job->uid = $uid;
+        } else {
+            $uid = $this->uidcreated;
+            $job->uid = $uid;
+        }
+        $job->save();
         return $job;
     }
 }

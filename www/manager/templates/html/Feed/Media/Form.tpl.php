@@ -42,6 +42,7 @@ $page->jsbody .= $js;
 ?>
 
 <?php $transcoding_job = $context->media->getMostRecentTranscodingJob(); ?>
+<?php $transcribing_job = $context->media->getMostRecentTranscriptionJob(); ?>
 
 <?php if ($transcoding_job && $transcoding_job->isError()): ?>
 <form id="retry_transcoding_job" method="post">
@@ -84,7 +85,9 @@ $page->jsbody .= $js;
                 <?php echo $savvy->render($context, 'Feed/Media/transcoding_notice.tpl.php'); ?>
             <?php endif; ?>
 
-            <?php if(empty($context->media->media_text_tracks_id)): ?>
+            <?php if ($transcribing_job && $transcribing_job->isPending()): ?>
+                <?php echo $savvy->render($context, 'Feed/Media/transcription_notice.tpl.php'); ?>
+            <?php elseif(empty($context->media->media_text_tracks_id)): ?>
                 <div class="dcf-notice dcf-notice-warning mh-caption-alert" hidden>
                     <h2>This Video is Missing Captions!</h2>
                     <div class="mh-caption-band">
@@ -944,6 +947,12 @@ $page->jsbody .= $js;
             <div class="dcf-mt-4 dcf-mb-6">
                 <input type="submit" name="submit" id="continue3" value="Save" class="dcf-btn dcf-btn-primary dcf-float-left" />
                 <button id="delete-media" class="dcf-btn dcf-btn-primary">Delete</button>
+                <a
+                    rel="noopener"
+                    href="<?php echo htmlentities($context->media->getURL().'/download', ENT_QUOTES); ?>"
+                    target="_blank"
+                    class="dcf-btn dcf-btn-secondary"
+                >Download Media</a>
             </div>
         </div>
     </div>

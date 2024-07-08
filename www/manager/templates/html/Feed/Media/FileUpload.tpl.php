@@ -175,6 +175,26 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                             </div>
                         </div>
                     </div>
+
+                    <?php echo $savvy->render($context, 'Feed/Media/transcriber_maintenance_notice.tpl.php'); ?>
+
+                    <fieldset>
+                        <legend>AI Captions</legend>
+                        <div class="dcf-input-checkbox">
+                            <input id="opt-out-captions" name="opt-out-captions" aria-describedby="opt-out-captions-help" type="checkbox" value="1">
+                            <label for="opt-out-captions">Opt Out of AI captions</label>
+                            <p class="dcf-form-help dcf-mb-0" id="opt-out-captions-help">
+                                Captions are free to generate and will automatically
+                                be translated into English. You would only want to
+                                check this if you have your own captions.
+                            </p>
+                        </div>
+
+                        <!-- <div class="dcf-input-checkbox">
+                            <input id="auto-activate-captions" name="auto-activate-captions" type="checkbox" value="1" checked="checked">
+                            <label for="auto-activate-captions">Auto activate captions after generation</label>
+                        </div> -->
+                    </fieldset>
                     <p class="dcf-txt-sm">
                         Note: All videos will be optimized for web in multiple resolutions automatically.
                         If you are uploading an audio file, this will have no effect.
@@ -255,6 +275,20 @@ $page->addScriptDeclaration("
             }
             submitBtn.removeAttribute('disabled');
             mediaErrorsContainer.style.display = 'block';
+        }
+    });
+
+    const opt_out_captions_input = document.getElementById('opt-out-captions');
+    const auto_activate_captions_input = document.getElementById('auto-activate-captions');
+
+    opt_out_captions_input.addEventListener('change', () => {
+        if (opt_out_captions_input.checked === true) {
+            auto_activate_captions_input.setAttribute('disabled', 'disabled');
+            auto_activate_captions_input.dataset.lastValue = auto_activate_captions_input.checked;
+            auto_activate_captions_input.checked = false;
+        } else {
+            auto_activate_captions_input.removeAttribute('disabled');
+            auto_activate_captions_input.checked = auto_activate_captions_input.dataset.lastValue === 'true';
         }
     });
 ");

@@ -13,6 +13,8 @@ $routes['/^developers\/?$/'] = 'UNL_MediaHub_Developers';
 $routes['/^transcode-manager\/?$/'] = 'UNL_MediaHub_TranscodeManager';
 $routes['/^transcode-manager\/command\/?$/'] = 'UNL_MediaHub_TranscodeManager';
 
+$routes['/^transcription-manager\/?$/'] = 'UNL_MediaHub_TranscriptionManager';
+
 $routes['/^search\/(?P<q>.*)$/'] = 'UNL_MediaHub_MediaList';
 
 $routes['/^tags\/(?P<t>.*)$/'] = 'UNL_MediaHub_MediaList';

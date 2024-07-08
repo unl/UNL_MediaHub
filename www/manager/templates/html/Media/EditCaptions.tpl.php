@@ -1,8 +1,4 @@
 <?php
-// TODO: disable breadcrumbs since currently not supported in 5.0 App templates
-//$controller->setReplacementData('breadcrumbs', '<ol> <li><a href="http://www.unl.edu/">UNL</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'">MediaHub</a></li> <li><a href="'.UNL_MediaHub_Controller::getURL().'manager/">Manage Media</a></li> <li><a href="' . $context->media->getURL() .'">'.UNL_MediaHub::escape($context->media->title).'</a></li> <li>Edit Captions</li></ol>');
-?>
-<?php
     $revOrders = $context->getRevOrderHistory()->items;
     $hasRevOrders = count($revOrders) > 0;
 ?>
@@ -10,7 +6,13 @@
 <div class="dcf-bleed dcf-pt-6 dcf-pb-6">
     <div class="dcf-wrapper">
         <h1>Manage Captions for: <?php echo UNL_MediaHub::escape($context->media->title) ?></h1>
-        <a href="<?php echo UNL_MediaHub_Controller::getURL() . 'manager/?view=addmedia&id=' . (int)$context->media->id?>" class="dcf-btn dcf-btn-primary">Edit Media</a>
+        <a href="<?php
+            echo UNL_MediaHub_Controller::getURL()
+                . 'manager/?view=addmedia&id='
+                . (int)$context->media->id
+            ?>"
+            class="dcf-btn dcf-btn-primary"
+        >Edit Media</a>
         <a href="<?php echo $context->media->getURL()?>" class="dcf-btn dcf-btn-primary">View Media</a>
     </div>
 </div>
@@ -20,116 +22,314 @@
     <?php echo $savvy->render($context, 'Feed/Media/transcoding_notice.tpl.php'); ?>
 <?php endif; ?>
 
-<div class="dcf-bleed unl-bg-lightest-gray dcf-pt-6 dcf-pb-6">
-    <div class="dcf-wrapper">
-        <h2>Order Captions With Your Cost Object Number</h2>
-        <div class="dcf-grid dcf-col-gap-vw">
-            <div class="dcf-col-100% dcf-col-67%-start@sm">
-                <div class="important-notice">
-                    <p>
-                        We will manually caption this media for you. Some things to keep in mind when ordering captions:
-                    </p>
-                    <ul>
-                        <li>
-                            <strong>Important</strong>: captions cost $1.50 per video minute, rounded up.  Example: A 3:31 minute video would cost $5.28.
-                        </li>
-                        <li>
-                            Orders are usually completed within 24 hours.
-                        </li>
-                        <li>
-                            Orders can not be canceled.
-                        </li>
-                        <li>
-                            If you need to edit captions that you ordered, please upload them to amara and customize them there. Once the customized captions are published on amara.org, use this page to pull them down to mediahub.
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="dcf-col-100% dcf-col-33%-end@sm">
-                <div class="mh-caption-sidebar">
-                    <?php if (!$context->hasPendingOrder()): ?>
-                    <form id="caption_order" method="post" class="dcf-form">
-                        <?php if ($duration = $context->media->findDuration()): ?>
-                            <?php $estimate = sprintf("%01.2f", round($duration->getTotalSeconds()/60 * 1.50, 2)); ?>
-                            <input type="hidden" name="media_duration" value="<?php echo UNL_MediaHub::escape($duration->getString()); ?>" />
-                            <input type="hidden" name="estimate" value="<?php echo UNL_MediaHub::escape($estimate) ?>" />
-                            <h3 class="clear-top">Caption your video for <strong>$<?php echo UNL_MediaHub::escape($estimate) ?>.</strong></h3>
-                        <?php else: ?>
-                            <p>
-                                We were unable to find the duration of the video, and can not estimate the cost.
-                            </p>
-                        <?php endif; ?>
-                        <ul class="dcf-list-bare">
-                            <li>
-                                <label>
-                                    Cost Object Number
-                                    <input type="text" name="cost_object" required />
-                                </label>
-                            </li>
-                        </ul>
-                        <input type="hidden" name="__unlmy_posttarget" value="order_rev" />
-                        <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
-                        <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
-                        <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
-                        <?php
-                            if ($hasRevOrders === TRUE) {
-                                $confirmMessage = 'Captions have already been ordered for this video. Are you sure you want to submit another caption order?';
-                            } else {
-                                $confirmMessage = 'Orders can not be canceled. Are you sure you want to order captions?';
-                            }
-                        ?>
-                        <input class="dcf-mb-4 dcf-btn dcf-btn-primary" type="submit" id="caption_submit_button" value="Order captions" onclick="return confirm('<?php echo $confirmMessage; ?>');">
-                        <?php if ($hasRevOrders === TRUE): ?>
-                        <p class="unl-font-sans"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ALERT, '{"size": 4}'); ?> Captions have already been ordered for this video.</p>
-                        <?php endif; ?>
-                        <p class="unl-font-sans"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ALERT, '{"size": 4}'); ?> Orders can not be canceled.</p>
-                    </form>
-                    <?php else: ?>
-                    <p>Great news! There is an order already in the works.</p>
-                    <?php endif; ?>
-                </div>
+<?php if ($context->hasTranscriptionJob() && !$context->isTranscribingFinished()):?>
+    <?php echo $savvy->render($context, 'Feed/Media/transcription_notice.tpl.php'); ?>
+<?php endif; ?>
 
-            </div>
-        </div>
+<div id="activate-captions" class="dcf-bleed dcf-pt-6 dcf-pb-8">
+    <div class="dcf-wrapper">
+        <h2>Your Captions</h2>
+        <?php if($context->mediaHasCaptions()): ?>
+            <table class="dcf-table dcf-table-bordered dcf-table-responsive dcf-mb-3 dcf-w-100%">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Date of caption track</th>
+                    <th scope="col">Source</th>
+                    <th scope="col">Comments</th>
+                    <th scope="col">Files</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php $text_tracks = $context->getTrackHistory()->items; ?>
+                    <?php foreach ($text_tracks as $track): ?>
+                        <?php
+                            $is_active = $context->media->media_text_tracks_id === $track->id;
+                            $is_copy = !empty($track->media_text_tracks_source_id);
+                            $is_ai_gen = $track->is_ai_generated();
+                            $is_upload = $track->source === 'upload';
+
+                            $track_source_formatted = $track->source === UNL_MediaHub_MediaTextTrack::SOURCE_AI_TRANSCRIPTIONIST ? 'AI Captions' : $track->source;
+                        ?>
+                        <tr>
+                            <td data-label="ID of caption track">
+                                <?php echo UNL_MediaHub::escape($track->id); ?>
+                            </td>
+                            <td data-label="Date of caption track">
+                                <?php echo UNL_MediaHub::escape($track->datecreated); ?>
+                            </td>
+                            <td data-label="Source">
+                                <?php if($is_copy): ?>
+                                    Copied from <?php echo ucwords($track_source_formatted); ?>
+                                <?php else: ?>
+                                    <?php echo ucwords($track_source_formatted); ?>
+                                <?php endif; ?>
+                            </td>
+                            <td data-label="Comments">
+                                <?php echo UNL_MediaHub::escape($track->revision_comment) ?>
+                            </td>
+                            <td data-label="Files">
+                                <ul>
+                                    <?php foreach ($track->getFiles()->items as $file): ?>
+                                        <li>
+                                            <a
+                                                href="<?php echo $file->getURL() ?>&amp;download=1"
+                                                rel="noopener"
+                                                target="_blank"
+                                            >
+                                                <?php
+                                                    echo UNL_MediaHub::escape($file->language)
+                                                ?>.<?php
+                                                    echo $file->format
+                                                ?>
+                                            </a>,
+                                            <a
+                                                href="<?php echo $file->getSrtURL() ?>&amp;download=1"
+                                                rel="noopener"
+                                                target="_blank"
+                                            >
+                                                <?php echo UNL_MediaHub::escape($file->language) ?>.srt
+                                            </a>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </td>
+                            <td data-label="Actions" class="dcf-txt-sm">
+                                <?php if($is_ai_gen && !$is_copy): ?>
+                                    <div class="dcf-d-flex dcf-flex-row dcf-flex-wrap dcf-jc-start dcf-ai-center dcf-gap-3">
+                                        <a
+                                            href="<?php
+                                                echo UNL_MediaHub_Manager::getURL()
+                                                    . '?view=editcaptiontrack&media_id='
+                                                    . (int)$context->media->id
+                                                    . '&track_id='
+                                                    . (int)$track->id;
+                                                ?>"
+                                            class="dcf-btn dcf-btn-primary dcf-mt-1"
+                                        >
+                                            Review
+                                        </a>
+                                        <p class="dcf-m-0 dcf-p-0 dcf-txt-xs">Captions need to be reviewed before activation</p>
+                                    </div>
+                                <?php else: ?>
+                                    <div class="dcf-grid dcf-row-gap-3 dcf-col-gap-3 dcf-ai-center">
+                                        <div class="dcf-col-100% dcf-col-75%-start@md">
+                                            <form class="dcf-form dcf-d-inline" method="post">
+                                                <input type="hidden" name="__unlmy_posttarget" value="copy_text_track_file" />
+                                                <input
+                                                    type="hidden"
+                                                    name="media_id"
+                                                    value="<?php echo (int)$context->media->id ?>"
+                                                >
+                                                <input
+                                                    type="hidden"
+                                                    name="text_track_id"
+                                                    value="<?php echo (int)$track->id ?>"
+                                                >
+                                                <input
+                                                    type="hidden"
+                                                    name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>"
+                                                    value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>"
+                                                >
+                                                <input
+                                                    type="hidden"
+                                                    name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>"
+                                                    value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>"
+                                                >
+                                                <input class="dcf-btn dcf-btn-primary dcf-mt-1" type="submit" value="Copy">
+                                            </form>
+                                            <?php if ($is_copy): ?>
+                                                <a
+                                                    href="<?php
+                                                        echo UNL_MediaHub_Manager::getURL()
+                                                            . '?view=editcaptiontrack&media_id='
+                                                            . (int)$context->media->id
+                                                            . '&track_id='
+                                                            . (int)$track->id;
+                                                        ?>" class="dcf-btn dcf-btn-primary dcf-mt-1">Edit</a>
+                                            <?php endif; ?>
+                                            <?php if (($is_copy || $is_upload) && !$is_active): ?>
+                                                <form class="dcf-form dcf-d-inline" method="post">
+                                                    <input
+                                                        type="hidden"
+                                                        name="__unlmy_posttarget"
+                                                        value="delete_text_track_file"
+                                                    >
+                                                    <input
+                                                        type="hidden"
+                                                        name="media_id"
+                                                        value="<?php echo (int)$context->media->id ?>"
+                                                    >
+                                                    <input
+                                                        type="hidden"
+                                                        name="text_track_id"
+                                                        value="<?php echo (int)$track->id ?>"
+                                                    >
+                                                    <input
+                                                        type="hidden"
+                                                        name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>"
+                                                        value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>"
+                                                    >
+                                                    <input
+                                                        type="hidden"
+                                                        name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>"
+                                                        value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>"
+                                                    >
+                                                    <input
+                                                        class="dcf-btn dcf-btn-secondary dcf-mt-1"
+                                                        type="submit"
+                                                        value="Delete"
+                                                        onclick="return confirm('Are you sure you want to delete this track?');"
+                                                    >
+                                                </form>
+                                            <?php endif; ?>
+                                        </div>
+                                        <div class="dcf-input-radio dcf-col-100% dcf-col-25%-end@md">
+                                            <?php $active_check = $is_active ? 'checked="checked"' : ''; ?>
+                                            <input
+                                                id="caption-active-radio-<?php echo (int)$track->id; ?>"
+                                                form="caption_active_form"
+                                                name="text_track_id"
+                                                type="radio"
+                                                value="<?php echo (int)$track->id; ?>"
+                                                <?php echo $active_check; ?>
+                                            >
+                                            <label for="caption-active-radio-<?php echo (int)$track->id; ?>">Active</label>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            <!--  This form is for all the is active radio buttons in the table -->
+            <form class="dcf-form dcf-d-inline" method="post" id="caption_active_form">
+                <input type="hidden" name="__unlmy_posttarget" value="set_active_text_track" />
+                <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
+                <input
+                    type="hidden"
+                    name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>"
+                    value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>"
+                >
+                <input
+                    type="hidden"
+                    name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>"
+                    value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>"
+                >
+                <fieldset id="more-options-fieldset" class="dcf-collapsible-fieldset dcf-mb-2" data-start-expanded="false" hidden>
+                    <legend>More Options</legend>
+                    <div class="dcf-input-radio">
+                        <?php $active_check = $context->media->media_text_tracks_id === null ? 'checked="checked"' : ''; ?>
+                        <input
+                            id="caption-active-radio-deactivate-all"
+                            form="caption_active_form"
+                            name="text_track_id"
+                            type="radio"
+                            value="-1"
+                            <?php echo $active_check; ?>
+                        >
+                        <label for="caption-active-radio-deactivate-all">Deactivate All Captions</label>
+                    </div>
+                </fieldset>
+            </form>
+            <script>
+                
+                const caption_active_form = document.getElementById('caption_active_form');
+                const more_options_fieldset = document.getElementById('more-options-fieldset');
+
+                window.addEventListener('inlineJSReady', function() {
+                    more_options_fieldset.addEventListener('ready', () => {
+                        const radio_buttons = document.querySelectorAll('input[type="radio"][form="caption_active_form"]');
+
+                        radio_buttons.forEach((radio_button) => {
+                            radio_button.addEventListener('input', () => {
+                                caption_active_form.submit();
+                            });
+                        });
+                    });
+
+                    WDN.initializePlugin('collapsible-fieldsets');
+                }, false);
+            </script>
+            <p class="dcf-txt-xs">
+                You may copy any track, edit any copied track, and
+                delete non-active copied/uploaded tracks. Editing
+                tracks is limited to fixing typos. For more intensive
+                edits you may need to download the caption file and
+                edit in your caption editor of choice.
+            </p>
+        <?php elseif ($context->hasTranscriptionJob() && !$context->isTranscribingFinished()): ?>
+            <p>We are working on your captions now! </p>
+        <?php else: ?>
+            <p>You currently do not have any captions on this media. Please generate, upload, or order some below. </p>
+        <?php endif; ?>
     </div>
+</div>
+
+<div class="dcf-bleed unl-bg-scarlet dcf-pb-6">
 </div>
 
 <div class="dcf-bleed dcf-pt-6 dcf-pb-6">
     <div class="dcf-wrapper">
-    <h2>Self-Manage Captions With Amara</h2>
+        <h2>AI Captioning</h2>
         <div class="dcf-grid dcf-col-gap-vw">
             <div class="dcf-col-100% dcf-col-67%-start@sm">
                 <p>
-                    <a href="http://amara.org">amara.org</a> is a free service which helps you caption videos. To caption your video you will need to do the following.
+                    MediaHub includes a free AI-powered captioning service to help
+                    make your content accessible. Generation times vary based on
+                    media length and queue position. Your captions will need to
+                    be reviewed to ensure the accuracy of names, acronyms and any
+                    words which may not have been pronounced clearly.
                 </p>
-                <ol>
-                    <li>Go to amara.org and create/edit captions for the video.</li>
-                    <li>Follow the instructions on amara.org to publish the new captions</li>
-                    <li>Come back here, and click the button to 'pull captions from amara.org'</li>
-                </ol>
+                <?php echo $savvy->render($context, 'Feed/Media/transcriber_maintenance_notice.tpl.php'); ?>
             </div>
             <div class="dcf-col-100% dcf-col-33%-end@sm">
-                <?php if($context->isTranscodingFinished()): ?>
-                    <?php $edit_captions_url = $context->getEditCaptionsURL(); ?>
-                    <?php if (!$edit_captions_url): ?>
-                        <p>
-                            An error has occurred trying to add media to Amara.
-                            Please try again later or contact an administrator for help.
-                        </p>
-                    <?php else: ?>
-                        <a class="dcf-btn dcf-btn-primary" href="<?php echo $context->getEditCaptionsURL(); ?>">Edit Captions on amara</a><br><br>
-                        <form class="dcf-form" method="post">
-                            <input type="hidden" name="__unlmy_posttarget" value="pull_amara" />
+            <?php if ($context->hasTranscriptionJob() && !$context->isTranscribingFinished()):?>
+                <p>Your captions are being generated.</p>
+            <?php elseif ($context->hasTranscriptionJob() && $context->isTranscribingError()): ?>
+                <p class="unl-bg-scarlet unl-cream dcf-rounded dcf-p-2">
+                    There has been an error with your captions, please
+                    reach out to an administrator to resolve the issue.
+                </p>
+                <?php if ($user->isAdmin()): ?>
+                    <form  id="ai_captions_retry" class="dcf-form" method="post">
+                        <div class="unl-bg-orange dcf-form-group dcf-p-3 dcf-rounded" style="width: fit-content;">
+                            <input type="hidden" name="__unlmy_posttarget" value="ai_captions_retry" />
                             <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
-                            <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
-                            <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
-                            <input class="dcf-btn dcf-btn-primary" type="submit" value="Pull Captions from amara.org">
-                        </form>
-                    <?php endif ?>
-                <?php else: ?>
-                    <p>Please wait for your video to be optimized before captioning on Amara.</p>
+                            <input
+                                type="hidden"
+                                name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>"
+                                value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>"
+                            >
+                            <input
+                                type="hidden"
+                                name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>"
+                                value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>"
+                            >
+                            <label for="admin_retry_captions" class="unl-darkest-gray@dark">Retry Captions</label>
+                            <input id="admin_retry_captions" class="dcf-btn dcf-btn-primary" value="retry" type="submit">
+                        </div>
+                    </form>
                 <?php endif; ?>
-
+            <?php else: ?>
+                <form id="ai_captions" method="post" class="dcf-form dcf-d-flex dcf-jc-center">
+                    <input type="hidden" name="__unlmy_posttarget" value="ai_captions" />
+                    <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
+                    <input
+                        type="hidden"
+                        name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>"
+                        value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>"
+                    >
+                    <input
+                        type="hidden"
+                        name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>"
+                        value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>"
+                    >
+                    <input class="dcf-mb-4 dcf-btn dcf-btn-primary" type="submit" value="Generate Captions">
+                </form>
+            <?php endif; ?>
             </div>
         </div>
     </div>
@@ -222,6 +422,133 @@
     </div>
 </div>
 
+<div class="dcf-bleed unl-bg-lightest-gray dcf-pt-6 dcf-pb-6">
+    <div class="dcf-wrapper">
+    <h2>Self-Manage Captions With Amara</h2>
+        <div class="dcf-grid dcf-col-gap-vw">
+            <div class="dcf-col-100% dcf-col-67%-start@sm">
+                <p>
+                    <a href="http://amara.org">amara.org</a> is a free service which helps
+                    you caption videos. To caption your video you will need to do the following.
+                </p>
+                <ol>
+                    <li>Go to amara.org and create/edit captions for the video.</li>
+                    <li>Follow the instructions on amara.org to publish the new captions</li>
+                    <li>Come back here, and click the button to 'pull captions from amara.org'</li>
+                </ol>
+            </div>
+            <div class="dcf-col-100% dcf-col-33%-end@sm">
+                <?php if($context->isTranscodingFinished()): ?>
+                    <?php $edit_captions_url = $context->getEditCaptionsURL(); ?>
+                    <?php if (!$edit_captions_url): ?>
+                        <p>
+                            An error has occurred trying to add media to Amara.
+                            Please try again later or contact an administrator for help.
+                        </p>
+                    <?php else: ?>
+                        <a class="dcf-btn dcf-btn-primary" href="<?php echo $context->getEditCaptionsURL(); ?>">
+                            Edit Captions on amara
+                        </a>
+                        <br><br>
+                        <form class="dcf-form" method="post">
+                            <input type="hidden" name="__unlmy_posttarget" value="pull_amara" />
+                            <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
+                            <input
+                                type="hidden"
+                                name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>"
+                                value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>"
+                            >
+                            <input
+                                type="hidden"
+                                name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>"
+                                value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>"
+                            >
+                            <input class="dcf-btn dcf-btn-primary" type="submit" value="Pull Captions from amara.org">
+                        </form>
+                    <?php endif ?>
+                <?php else: ?>
+                    <p>Please wait for your video to be optimized before captioning on Amara.</p>
+                <?php endif; ?>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="dcf-bleed dcf-pt-6 dcf-pb-6">
+    <div class="dcf-wrapper">
+        <h2>Order Captions With Your Cost Object Number</h2>
+        <div class="dcf-grid dcf-col-gap-vw">
+            <div class="dcf-col-100% dcf-col-67%-start@sm">
+                <div class="important-notice">
+                    <p>
+                        We will manually caption this media for you. Some things to keep in mind when ordering captions:
+                    </p>
+                    <ul>
+                        <li>
+                            <strong>Important</strong>: captions cost $1.50 per video minute, rounded up.  Example: A 3:31 minute video would cost $5.28.
+                        </li>
+                        <li>
+                            Orders are usually completed within 24 hours.
+                        </li>
+                        <li>
+                            Orders can not be canceled.
+                        </li>
+                        <li>
+                            If you need to edit captions that you ordered, please upload them to amara and customize them there. Once the customized captions are published on amara.org, use this page to pull them down to mediahub.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dcf-col-100% dcf-col-33%-end@sm">
+                <div class="mh-caption-sidebar">
+                    <?php if (!$context->hasPendingOrder()): ?>
+                    <form id="caption_order" method="post" class="dcf-form">
+                        <?php if ($duration = $context->media->findDuration()): ?>
+                            <?php $estimate = sprintf("%01.2f", round($duration->getTotalSeconds()/60 * 1.50, 2)); ?>
+                            <input type="hidden" name="media_duration" value="<?php echo UNL_MediaHub::escape($duration->getString()); ?>" />
+                            <input type="hidden" name="estimate" value="<?php echo UNL_MediaHub::escape($estimate) ?>" />
+                            <h3 class="clear-top">Caption your video for <strong>$<?php echo UNL_MediaHub::escape($estimate) ?>.</strong></h3>
+                        <?php else: ?>
+                            <p>
+                                We were unable to find the duration of the video, and can not estimate the cost.
+                            </p>
+                        <?php endif; ?>
+                        <ul class="dcf-list-bare">
+                            <li>
+                                <label>
+                                    Cost Object Number
+                                    <input type="text" name="cost_object" required />
+                                </label>
+                            </li>
+                        </ul>
+                        <input type="hidden" name="__unlmy_posttarget" value="order_rev" />
+                        <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
+                        <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
+                        <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
+                        <?php
+                            if ($hasRevOrders === TRUE) {
+                                $confirmMessage = 'Captions have already been ordered for this video. Are you sure you want to submit another caption order?';
+                            } else {
+                                $confirmMessage = 'Orders can not be canceled. Are you sure you want to order captions?';
+                            }
+                        ?>
+                        <input class="dcf-mb-4 dcf-btn dcf-btn-primary" type="submit" id="caption_submit_button" value="Order captions" onclick="return confirm('<?php echo $confirmMessage; ?>');">
+                        <?php if ($hasRevOrders === TRUE): ?>
+                        <p class="unl-font-sans"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ALERT, '{"size": 4}'); ?> Captions have already been ordered for this video.</p>
+                        <?php endif; ?>
+                        <p class="unl-font-sans"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ALERT, '{"size": 4}'); ?> Orders can not be canceled.</p>
+                    </form>
+                    <?php else: ?>
+                    <p>Great news! There is an order already in the works.</p>
+                    <?php endif; ?>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="dcf-bleed dcf-pt-6 dcf-pb-6">
     <div class="dcf-wrapper">
         <h2>Order history and status</h2>
@@ -265,179 +592,16 @@
             <?php endforeach; ?>
             </tbody>
         </table>
-
-        <h2 class="dcf-pt-4">Caption track history</h2>
-        <p>
-            You may copy any track, edit any copied track, and
-            delete non-active copied/uploaded tracks. Editing tracks is limited
-            to fixing typos, for more intensive edits you may need to download
-            the caption file and edit in your caption editor of choice.
-        </p>
-        <!--  This form is for all the is active radio buttons in the table -->
-        <form class="dcf-form dcf-d-inline" method="post" id="caption_active_form">
-            <input type="hidden" name="__unlmy_posttarget" value="set_active_text_track" />
-            <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
-            <input
-                type="hidden"
-                name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>"
-                value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>"
-            >
-            <input
-                type="hidden"
-                name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>"
-                value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>"
-            >
-        </form>
-        <table class="dcf-table dcf-table-bordered dcf-table-responsive">
-            <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Date of caption track</th>
-                <th scope="col">Source</th>
-                <th scope="col">Comments</th>
-                <th scope="col">Files</th>
-                <th scope="col">Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php $text_tracks = $context->getTrackHistory()->items; ?>
-                <?php foreach ($text_tracks as $track): ?>
-                    <?php $is_active = $context->media->media_text_tracks_id === $track->id; ?>
-                    <?php $is_copy = !empty($track->media_text_tracks_source_id); ?>
-                    <?php $is_upload = $track->source === 'upload'; ?>
-                    <tr>
-                        <td data-label="ID of caption track">
-                            <?php echo UNL_MediaHub::escape($track->id); ?>
-                        </td>
-                        <td data-label="Date of caption track">
-                            <?php echo UNL_MediaHub::escape($track->datecreated); ?>
-                        </td>
-                        <td data-label="Source">
-                            <?php if($is_copy): ?>
-                                Copied from <?php echo ucwords(UNL_MediaHub::escape($track->source)); ?>
-                            <?php else: ?>
-                                <?php echo ucwords(UNL_MediaHub::escape($track->source)); ?>
-                            <?php endif; ?>
-                        </td>
-                        <td data-label="Comments">
-                            <?php echo UNL_MediaHub::escape($track->revision_comment) ?>
-                        </td>
-                        <td data-label="Files">
-                            <ul>
-                                <?php foreach ($track->getFiles()->items as $file): ?>
-                                    <li>
-                                        <a href="<?php echo $file->getURL() ?>&amp;download=1" rel="noopener" target="_blank"><?php echo UNL_MediaHub::escape($file->language) ?>.<?php echo $file->format ?></a>,
-                                        <a href="<?php echo $file->getSrtURL() ?>&amp;download=1" rel="noopener" target="_blank"><?php echo UNL_MediaHub::escape($file->language) ?>.srt</a>
-                                    </li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </td>
-                        <td data-label="Actions" class="dcf-txt-sm">
-                            <div class="dcf-grid dcf-row-gap-3 dcf-ai-center">
-                                <div class="dcf-col-100% dcf-col-75%-start@md">
-                                    <form class="dcf-form dcf-d-inline" method="post">
-                                        <input type="hidden" name="__unlmy_posttarget" value="copy_text_track_file" />
-                                        <input
-                                            type="hidden"
-                                            name="media_id"
-                                            value="<?php echo (int)$context->media->id ?>"
-                                        >
-                                        <input
-                                            type="hidden"
-                                            name="text_track_id"
-                                            value="<?php echo (int)$track->id ?>"
-                                        >
-                                        <input
-                                            type="hidden"
-                                            name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>"
-                                            value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>"
-                                        >
-                                        <input
-                                            type="hidden"
-                                            name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>"
-                                            value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>"
-                                        >
-                                        <input class="dcf-btn dcf-btn-primary dcf-mt-1" type="submit" value="Copy">
-                                    </form>
-                                    <?php if ($is_copy): ?>
-                                        <a
-                                            href="<?php
-                                                echo UNL_MediaHub_Manager::getURL()
-                                                    . '?view=editcaptiontrack&media_id='
-                                                    . (int)$context->media->id
-                                                    . '&track_id='
-                                                    . (int)$track->id;
-                                                ?>" class="dcf-btn dcf-btn-primary dcf-mt-1">Edit</a>
-                                    <?php endif; ?>
-                                    <?php if (($is_copy || $is_upload) && !$is_active): ?>
-                                        <form class="dcf-form dcf-d-inline" method="post">
-                                            <input
-                                                type="hidden"
-                                                name="__unlmy_posttarget"
-                                                value="delete_text_track_file"
-                                            >
-                                            <input
-                                                type="hidden"
-                                                name="media_id"
-                                                value="<?php echo (int)$context->media->id ?>"
-                                            >
-                                            <input
-                                                type="hidden"
-                                                name="text_track_id"
-                                                value="<?php echo (int)$track->id ?>"
-                                            >
-                                            <input
-                                                type="hidden"
-                                                name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>"
-                                                value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>"
-                                            >
-                                            <input
-                                                type="hidden"
-                                                name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>"
-                                                value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>"
-                                            >
-                                            <input
-                                                class="dcf-btn dcf-btn-secondary dcf-mt-1"
-                                                type="submit"
-                                                value="Delete"
-                                                onclick="return confirm('Are you sure you want to delete this track?');"
-                                            >
-                                        </form>
-                                    <?php endif; ?>
-                                </div>
-                                <div class="dcf-input-radio dcf-col-100% dcf-col-25%-end@md">
-                                    <?php $active_check = $is_active ? 'checked="checked"' : ''; ?>
-                                    <input
-                                        id="caption-active-radio-<?php echo (int)$track->id; ?>"
-                                        form="caption_active_form"
-                                        name="text_track_id"
-                                        type="radio"
-                                        value="<?php echo (int)$track->id; ?>"
-                                        <?php echo $active_check; ?>
-                                    >
-                                    <label for="caption-active-radio-<?php echo (int)$track->id; ?>">Active</label>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-        <script defer>
-            document.querySelectorAll('input[type="radio"][form="caption_active_form"]').forEach((radio_button) => {
-                radio_button.addEventListener('input', () => {
-                    document.getElementById('caption_active_form')?.submit();
-                });
-            });
-        </script>
     </div>
 </div>
-<div class="dcf-bleed dcf-pt-6 dcf-pb-6">
+
+<div class="dcf-bleed unl-bg-lightest-gray dcf-pt-6 dcf-pb-6">
     <div class="dcf-wrapper">
         <div>
             <h2>Get Help</h2>
             <p>
-                If you have questions or comments, please use the 'Email Us' tab on this page or email <a href="mailto:mysupport@unl.edu">MySupport</a>.
+                If you have questions or comments, please use the 'Email Us' tab on
+                this page or email <a href="mailto:mysupport@unl.edu">MySupport</a>.
             </p>
         </div>
     </div>

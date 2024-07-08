@@ -120,10 +120,16 @@ class UNL_MediaHub_Manager_PostHandler
             $this->handleDeleteFeed();
             break;
         case 'copy_text_track_file':
-           $this->handleCopyTextTrackFile();
-           break;
+            $this->handleCopyTextTrackFile();
+            break;
+        case 'copy_and_edit_text_track_file':
+            $this->handleCopyAndEditTextTrackFile();
+            break;
         case 'update_text_track_file';
             $this->handleUpdateTextTrackFile();
+            break;
+        case 'save_review_ai_captions';
+            $this->handleAICaptionReview();
             break;
         case 'delete_text_track_file';
             $this->handleDeleteTextTrackFile();
@@ -133,6 +139,15 @@ class UNL_MediaHub_Manager_PostHandler
             break;
         case 'order_rev':
             $this->handleRev();
+            break;
+        case 'ai_captions':
+            $this->handleTranscriptions();
+            break;
+        case 'ai_captions_retry':
+            $user = UNL_MediaHub_AuthService::getInstance()->getUser();
+            if ($user->isAdmin()) {
+                $this->handleTranscriptions();
+            }
             break;
         case 'download_rev':
             $this->downloadRev();
@@ -535,17 +550,66 @@ class UNL_MediaHub_Manager_PostHandler
         }
 
         if ($is_new) {
-            $media->transcode('hls');
-            
-            //After upload, add captions
-            $success_string = 'Your media has been uploaded and is now published. Please make sure that the media is captioned.';
-            if ($media->getMostRecentTranscodingJob()) {
-                $success_string = 'Your media has been uploaded and is being optimized.';
-            }
-            if (UNL_MediaHub_Controller::$caption_requirement_date) {
-                $success_string = 'Your media has been uploaded but will not be published until it is captioned.';
+            // Tries to make transcoding job
+            $transcoding_successful = true;
+            $transcode_output = $media->transcode('hls');
+            if ($transcode_output === false || !$media->getMostRecentTranscodingJob()) {
+                $transcoding_successful = false;
             }
 
+            // Tries to make a transcription job
+            $transcribing_successful = true;
+            $captions_opt_out = isset($this->post['opt-out-captions']) && $this->post['opt-out-captions'] === '1';
+            $auto_activate = isset($this->post['auto-activate-captions']) && $this->post['auto-activate-captions'] === '1';
+
+            if ($captions_opt_out) {
+                $transcribing_successful = false;
+            } else {
+                try {
+                    // Set up variable for transcriber
+                    $media_url = $media->getURL() . '/file';
+    
+                    // Called API to make job
+                    $ai_captioning = new UNL_MediaHub_TranscriptionAPI();
+                    $job_id = $ai_captioning->create_job($media_url);
+                    if ($job_id === false) {
+                        throw new Exception('Could Not Create New Job', 500);
+                    }
+
+                    // If successful it will create a job in the database
+                    $media->transcription($job_id, $user->uid, $auto_activate);
+                } catch(Exception $e) {
+                    $transcribing_successful = false;
+                }
+            }
+
+            // Creates the success message string based on $transcribing_successful,
+            //   $transcribing_successful, and UNL_MediaHub_Controller::$caption_requirement_date
+            $success_string = "";
+            if ($transcribing_successful && $transcoding_successful) {
+                $success_string = 'Your media has been uploaded and is being optimized and captioned. ';
+                $success_string .= 'Once we get those finished it will be published. ';
+            } elseif ($transcribing_successful) {
+                $success_string = 'Your media has been uploaded and is being captioned. ';
+                $success_string .= 'Once we get that finished it will be published. ';
+            } elseif ($transcoding_successful) {
+                $success_string = 'Your media has been uploaded and is being optimized. ';
+                if (UNL_MediaHub_Controller::$caption_requirement_date !== false) {
+                    $success_string .= 'Your media will not be published until it is captioned. ';
+                } else {
+                    $success_string .= 'Once we get that finished it will be published. ';
+                    $success_string .= 'Please make sure that the media is captioned. ';
+                }
+            } else {
+                if (UNL_MediaHub_Controller::$caption_requirement_date !== false) {
+                    $success_string = 'Your media will not be published until it is captioned. ';
+                } else {
+                    $success_string = 'Your media has been uploaded and is now published. ';
+                    $success_string .= 'Please make sure that the media is captioned. ';
+                }
+            }
+
+            // Sends notice to page
             $notice = new UNL_MediaHub_Notice(
                 'Success',
                 $success_string,
@@ -692,7 +756,7 @@ class UNL_MediaHub_Manager_PostHandler
         UNL_MediaHub::redirect($media->getEditCaptionsURL());
     }
 
-    function handleCopyTextTrackFile() {
+    public function subFuncCopyTextTrackFile($comment_text=null) {
         $mediaId = !empty($this->post['media_id']) ? $this->post['media_id'] : 0;
         if (!$media = UNL_MediaHub_Media::getById($mediaId)) {
             throw new Exception('Unable to find media', 404);
@@ -727,7 +791,12 @@ class UNL_MediaHub_Manager_PostHandler
             $newTrack = new UNL_MediaHub_MediaTextTrack();
             $newTrack->media_id = $track->media_id;
             $newTrack->source = $track->source;
-            $newTrack->revision_comment = 'Copied from track id ' . $track->id;
+
+            if ($comment_text === null) {
+                $newTrack->revision_comment = 'Copied from track id ' . $track->id;
+            } else {
+                $newTrack->revision_comment = $comment_text;
+            }
             $newTrack->media_text_tracks_source_id = $track->id;
             $newTrack->save();
 
@@ -753,7 +822,31 @@ class UNL_MediaHub_Manager_PostHandler
         );
         UNL_MediaHub_Manager::addNotice($notice);
 
-        UNL_MediaHub::redirect($media->getEditCaptionsURL());
+        return [
+            'editCaptionsURL' => $media->getEditCaptionsURL(),
+            'mediaID' => $media->id,
+            'media' => $media,
+            'trackID' => $newTrack->id,
+            'track' => $newTrack,
+            'trackFile' => $newTrackFile
+        ];
+    }
+
+    public function handleCopyTextTrackFile() {
+        $returnData = $this->subFuncCopyTextTrackFile();
+        UNL_MediaHub::redirect($returnData['editCaptionsURL']);
+    }
+
+    public function handleCopyAndEditTextTrackFile() {
+        $returnData = $this->subFuncCopyTextTrackFile();
+
+        $redirectURL = UNL_MediaHub_Manager::getURL()
+        . '?view=editcaptiontrack&media_id='
+        . (int)$returnData['mediaID']
+        . '&track_id='
+        . (int)$returnData['trackID'];
+
+        UNL_MediaHub::redirect($redirectURL);
     }
 
     protected function uploadCaptionFile() {
@@ -938,6 +1031,51 @@ class UNL_MediaHub_Manager_PostHandler
 
         UNL_MediaHub::redirect($media->getEditCaptionsURL());
     }
+
+    function handleAICaptionReview() {
+        $trackId = !empty($this->post['text_track_id']) ? $this->post['text_track_id'] : 0;
+        $comment_text = 'Reviewed copy from track id ' . $trackId;
+        $returnData = $this->subFuncCopyTextTrackFile($comment_text);
+
+        try {
+            $vtt = new Captioning\Format\WebvttFile();
+            $vtt->loadFromString(trim($returnData['trackFile']->file_contents));
+            $cues = $vtt->getCues();
+            foreach ($cues as $index => $cue) {
+                $cueName = 'cue' . $index;
+                if (!isset($this->post[$cueName])) {
+                    throw new \Exception('Missing expected track cue at ' . $cue->getStart() . ' - ' . $cue->getStop(), 404);
+                }
+
+                // update cue with new text
+                $cue->setText(trim($this->post[$cueName]));
+
+                // remove old cue;
+                $vtt->removeCue($index);
+
+                // add updated cue;
+                $vtt->addCue($cue);
+            }
+            $vtt->build();
+            $returnData['trackFile']->file_contents = preg_replace("/(\r?\n){2,}/", "\n\n", trim($vtt->getFileContent()));
+            $returnData['trackFile']->save();
+
+            if (isset($this->post['activate_after_review']) && $this->post['activate_after_review'] === '1') {
+                $returnData['media']->setTextTrack($returnData['track']);
+            }
+
+            // Mux Media with updated track if active track
+            if ($returnData['media']->media_text_tracks_id == $returnData['trackID']) {
+                $muxer = new UNL_MediaHub_Muxer($returnData['media']);
+                $muxer->mux();
+            }
+
+        } catch(Exception $e) {
+            throw new \Exception('Error saving track file: ' . $e->getMessage(), 404);
+        }
+
+        UNL_MediaHub::redirect($returnData['media']->getEditCaptionsURL());
+    }
     
     function handleAmara()
     {
@@ -1036,6 +1174,42 @@ class UNL_MediaHub_Manager_PostHandler
         UNL_MediaHub::redirect($media->getEditCaptionsURL());
     }
 
+    protected function handleTranscriptions()
+    {
+        // Try to contact AI captioning website
+        // Get response and parse
+        // Save Job Id to DB
+
+        $user = UNL_MediaHub_AuthService::getInstance()->getUser();
+        $media = UNL_MediaHub_Media::getById($this->post['media_id']);
+        if (!$media) {
+            throw new Exception('Unable to find media', 404);
+        }
+        if (!$media->userHasPermission($user, UNL_MediaHub_Permission::USER_CAN_UPDATE)) {
+            throw new Exception('You do not have permission to edit this media.', 403);
+        }
+
+        // Set up variables for transcriber
+        $media_url = $media->getURL() . '/file';
+
+        $ai_captioning = new UNL_MediaHub_TranscriptionAPI();
+        $job_id = $ai_captioning->create_job($media_url);
+        if ($job_id === false) {
+            throw new Exception('Could Not Create New Captioning Job. Please reach out to an administrator.', 500);
+        }
+
+        $media->transcription($job_id, $user->uid, false);
+
+        $notice = new UNL_MediaHub_Notice(
+            'Success',
+            'Ai Captioning Job Has Been Created',
+            UNL_MediaHub_Notice::TYPE_SUCCESS
+        );
+        UNL_MediaHub_Manager::addNotice($notice);
+
+        UNL_MediaHub::redirect($media->getEditCaptionsURL());
+    }
+
     protected function downloadRev()
     {
         $order = UNL_MediaHub_RevOrder::getById($this->post['order_id']);
@@ -1111,6 +1285,15 @@ class UNL_MediaHub_Manager_PostHandler
             throw new Exception('Post data must include text_track_id.', 400);
         }
         
+        if (intval($this->post['text_track_id']) === -1) {
+            $media->setTextTrack(null);
+            $notice = new UNL_MediaHub_Notice('Success', 'Deactivated All Captions', UNL_MediaHub_Notice::TYPE_SUCCESS);
+            UNL_MediaHub_Manager::addNotice($notice);
+
+            UNL_MediaHub::redirect($media->getEditCaptionsURL());
+            return;
+        }
+
         $text_track = UNL_MediaHub_MediaTextTrack::getById($this->post['text_track_id']);
         
         if (!$text_track) {
