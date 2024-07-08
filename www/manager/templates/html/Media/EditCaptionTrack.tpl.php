@@ -31,7 +31,17 @@
                     <dt>Created</dt>
                     <dd><?php echo UNL_MediaHub::escape($context->track->datecreated); ?></dd>
                     <dt>Source</dt>
-                    <dd><?php echo UNL_MediaHub::escape($context->track->source); ?></dd>
+                    <?php
+                        $is_copy = !empty($context->track->media_text_tracks_source_id);
+                        $track_source_formatted = $context->track->source === UNL_MediaHub_MediaTextTrack::SOURCE_AI_TRANSCRIPTIONIST ? 'AI Captions' : $context->track->source;
+                    ?>
+                    <dd>
+                        <?php if($is_copy): ?>
+                            Copied from <?php echo ucwords($track_source_formatted); ?>
+                        <?php else: ?>
+                            <?php echo ucwords($track_source_formatted); ?>
+                        <?php endif; ?>
+                    </dd>
                     <?php if(!empty($context->track->revision_comment)): ?>
                         <dt>Revision Comment</dt>
                         <dd><?php echo UNL_MediaHub::escape($context->track->revision_comment) ?></dd>
