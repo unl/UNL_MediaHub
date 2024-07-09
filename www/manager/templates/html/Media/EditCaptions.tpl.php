@@ -501,6 +501,9 @@
                 </div>
             </div>
             <div class="dcf-col-100% dcf-col-33%-end@sm">
+                <div class="dcf-rounded unl-bg-scarlet unl-cream dcf-txt-center dcf-p-2 dcf-mb-3">
+                    <p class="dcf-m-0 dcf-p-0">Free AI Captions are available above.</p>
+                </div>
                 <div class="mh-caption-sidebar">
                     <?php if (!$context->hasPendingOrder()): ?>
                     <form id="caption_order" method="post" class="dcf-form">
@@ -514,6 +517,7 @@
                                 We were unable to find the duration of the video, and can not estimate the cost.
                             </p>
                         <?php endif; ?>
+                        
                         <ul class="dcf-list-bare">
                             <li>
                                 <label>
@@ -528,9 +532,9 @@
                         <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
                         <?php
                             if ($hasRevOrders === TRUE) {
-                                $confirmMessage = 'Captions have already been ordered for this video. Are you sure you want to submit another caption order?';
+                                $confirmMessage = 'Free AI Captions are available and captions have already been ordered for this video. Are you sure you want to submit another caption order?';
                             } else {
-                                $confirmMessage = 'Orders can not be canceled. Are you sure you want to order captions?';
+                                $confirmMessage = 'Free AI Captions are available and orders can not be canceled. Are you sure you want to order captions?';
                             }
                         ?>
                         <input class="dcf-mb-4 dcf-btn dcf-btn-primary" type="submit" id="caption_submit_button" value="Order captions" onclick="return confirm('<?php echo $confirmMessage; ?>');">

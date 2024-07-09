@@ -81,7 +81,7 @@ while (true) {
             $captioning_job->save();
         }
 
-        usleep(500 * 1000); // 500 Milliseconds
+        usleep(1000 * 1000); // 1 Second
     }
 
     // Checks how long loop has been running and will shut it down if its been too long
