@@ -60,7 +60,11 @@
                                         <?php echo $job->media_id; ?>
                                     </a>
                                 </td>
-                                <td data-label="User Id"><?php echo $job->uid; ?></td>
+                                <td data-label="User Id">
+                                    <a href="https://directory.unl.edu/people/<?php echo $job->uid; ?>" target="_blank">
+                                        <?php echo $job->uid; ?>
+                                    </a>
+                                </td>
                                 <td data-label="Status"><?php echo ucwords(strtolower($job->status)); ?></td>
                                 <td data-label="Auto Activate"><?php echo $job->auto_activate === '1' ? 'Yes': 'No'; ?></td>
                                 <td data-label="Date Created"><?php echo $job->datecreated; ?></td>
