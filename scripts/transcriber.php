@@ -21,6 +21,10 @@ while (true) {
     //Get all orders that have not been completed.
     $media_hub_jobs = new UNL_MediaHub_TranscriptionJobList(array('all_not_complete' => true));
 
+    if (count($media_hub_jobs) === 0) {
+        sleep(10);
+    }
+
     //Loop through them and check with Rev.com to see their status.
     foreach ($media_hub_jobs->items as $media_hub_job) {
         /**
