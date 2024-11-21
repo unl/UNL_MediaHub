@@ -79,10 +79,10 @@ class UNL_MediaHub_Media_Oembed extends UNL_MediaHub_Media
     }
 
     function append_thumbnail_details(&$details, $context) {
-        $imagePath = UNL_MediaHub_Controller::getURL($context).'/image';
+        $imagePath = $this->media->getThumbnailURL();
         $imageSizes = @getimagesize($imagePath);
         if (is_array($imageSizes)) {
-            $details['thumbnail_url'] = $imagePath . $this->getImageExtension($imagePath);
+            $details['thumbnail_url'] = $imagePath;
             $details['thumbnail_width'] =  $imageSizes[0];
             $details['thumbnail_height'] =  $imageSizes[1];
         }
