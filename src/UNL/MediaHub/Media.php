@@ -407,7 +407,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
             )
         );
 
-        $result = @file_get_contents($this->url, null, $context, 0, 8);
+        $result = @file_get_contents($this->url, false, $context, 0, 8);
         if (false === $result) {
             // Could not retrieve the info about this piece of media
             return false;
@@ -638,7 +638,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
             $pathParts = pathinfo($upload['name']);
             $posterFile = UNL_MediaHub::getRootDir() . '/www/' . self::POSTER_PATH . $this->id . '.' . $pathParts['extension'];
             move_uploaded_file($upload['tmp_name'], $posterFile);
-            $this->poster = UNL_MediaHub_Controller::$url . self::POSTER_PATH . $this->id . '.' . $pathParts['extension'] . '?' . strtotime();
+            $this->poster = UNL_MediaHub_Controller::$url . self::POSTER_PATH . $this->id . '.' . $pathParts['extension'] . '?' . strtotime('now');
         }
     }
 
@@ -651,7 +651,18 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         if (!empty($this->poster)) {
             $poster = $this->poster;
             if ($this->isLocalPosterURL()) {
-                $poster .= '?'. strtotime($this->dateupdated);
+
+                // This is a placeholder until str_ends_with becomes a thing
+                $needle = '?';
+                $haystack = $poster;
+                $needle_len = strlen($needle);
+                $string_ends_with_question_mark = ($needle_len === 0 || 0 === substr_compare($haystack, $needle, - $needle_len));
+
+                if ($string_ends_with_question_mark) {
+                    $poster .= strtotime($this->dateupdated);
+                } else if (strpos($poster, '?') === false) {
+                    $poster .= '?' . strtotime($this->dateupdated);
+                }
             }
             return $poster;
         }
