@@ -660,7 +660,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
 
                 if ($string_ends_with_question_mark) {
                     $poster .= strtotime($this->dateupdated);
-                } else if (strpos($poster, '?') === false) {
+                } elseif (strpos($poster, '?') === false) {
                     $poster .= '?' . strtotime($this->dateupdated);
                 }
             }
