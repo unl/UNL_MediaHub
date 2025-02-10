@@ -369,16 +369,24 @@ function MediahubPlayer(options) {
             
             // share urls
             var sharelinks = {
-                "mh-icon-mail": { title: 'Email', url: 'mailto:?body=Checkout this ' + media_type + ': ' + share_url + '&subject=' + media_type + ': ' + $title },
-                "mh-icon-facebook": { title: 'Facebook', url: 'https://www.facebook.com/sharer/sharer.php?u=' + share_url }, // facebook
-                "mh-icon-twitter": { title: 'Twitter', url: 'https://twitter.com/share?text=' + media_type + ': ' + $title + '&url=' + share_url }, // twitter
-                "mh-icon-linkedin-squared": { title: 'LinkedIn', url: 'https://www.linkedin.com/shareArticle?mini=true&url=' + share_url + '&title=' + $title + '&summary=Checkout this ' + media_type + '%20&source=University%20of%20Nebraska%20-%20Lincoln%20MediaHub' } //google plus
+                "mail-share-link-data": { title: 'Email', url: 'mailto:?body=Checkout this ' + media_type + ': ' + share_url + '&subject=' + media_type + ': ' + $title },
+                "facebook-share-link-data": { title: 'Facebook', url: 'https://www.facebook.com/sharer/sharer.php?u=' + share_url }, // facebook
+                "x-share-link-data": { title: 'X', url: 'https://x.com/share?text=' + media_type + ': ' + $title + '&url=' + share_url }, // X, formerly known as twitter
+                "linkedin-share-link-data": { title: 'LinkedIn', url: 'https://www.linkedin.com/shareArticle?mini=true&url=' + share_url + '&title=' + $title + '&summary=Checkout this ' + media_type + '%20&source=University%20of%20Nebraska%20-%20Lincoln%20MediaHub' } //linkedin
             };
 
             //create share links
-            var links = '<li><a href="https://go.unl.edu/?url=referer"  target="_parent" rel="nofollow"><span class="mh-icon-link" aria-hidden="true"></span>Get a Go URL</a></li>';
+            var links = '<li><svg style="fill: currentColor;"  focusable="false" height="16" width="16" viewbox="0 0 24 24" aria-hidden="true"><path d="m14.474 10.232-.706-.706a4.004 4.004 0 0 0-5.658-.001l-4.597 4.597a4.004 4.004 0 0 0 0 5.657l.707.706a3.97 3.97 0 0 0 2.829 1.173 3.973 3.973 0 0 0 2.827-1.172l2.173-2.171a.999.999 0 1 0-1.414-1.414l-2.173 2.17c-.755.756-2.071.757-2.828 0l-.707-.706a2.004 2.004 0 0 1 0-2.829l4.597-4.596c.756-.756 2.073-.756 2.828 0l.707.707a1.001 1.001 0 0 0 1.415-1.415z"/><path d="m20.486 4.221-.707-.706a3.97 3.97 0 0 0-2.829-1.173 3.977 3.977 0 0 0-2.827 1.172L12.135 5.5a.999.999 0 1 0 1.414 1.414l1.988-1.984c.755-.756 2.071-.757 2.828 0l.707.706c.779.78.779 2.049 0 2.829l-4.597 4.596c-.756.756-2.073.756-2.828 0a.999.999 0 0 0-1.414 0 .999.999 0 0 0-.001 1.414 4.001 4.001 0 0 0 5.657.001l4.597-4.597a4.005 4.005 0 0 0 0-5.658z"/><path fill="none" d="M0 0h24v24H0z"/></svg> <a href="https://go.unl.edu/?url=referer"  target="_parent" rel="nofollow">Get a Go URL</a></li>'
             for (var key in sharelinks) {
-                links += '<li class="outpost"><a href="' + sharelinks[key].url + '" rel="nofollow" target="_blank"><span class="' + key + '" aria-hidden="true"></span> Share on ' + sharelinks[key].title + '</a></li>';
+                if (key == 'x-share-link-data') {
+                links += '<li class="outpost"><svg style="fill: currentColor; vertical-align: middle;" focusable="false" height="16" width="16" viewBox="0 0 48 48"><title>X</title><path d="M28.5 20.3 46 0h-4.1L26.6 17.6 14.5 0H.5l18.3 26.7L.5 48h4.1l16-18.6L33.5 48h14l-19-27.7zm-5.7 6.6-1.9-2.7L6.2 3.1h6.4l11.9 17.1 1.9 2.7L41.8 45h-6.4L22.8 26.9z"></path></svg><a href="' + sharelinks[key].url + '" rel="nofollow" target="_blank"> Share on ' + sharelinks[key].title + '</a></li>'
+                } else if (key == 'facebook-share-link-data') {
+                links += '<li class="outpost"><svg style="fill: currentColor; vertical-align: middle;" focusable="false" height="16" width="16" viewbox="0 0 48 48"><path d="M48 24.1c0-13.3-10.7-24-24-24S0 10.9 0 24.1c0 12 8.8 21.9 20.2 23.7V31.1h-6.1v-6.9h6.1v-5.3c0-6 3.6-9.3 9.1-9.3 2.6 0 5.4.5 5.4.5V16h-3c-3 0-3.9 1.9-3.9 3.7v4.5h6.7l-1.1 6.9h-5.6v16.8C39.2 46.1 48 36.1 48 24.1z"></path></svg><a href="' + sharelinks[key].url + '" rel="nofollow" target="_blank"> Share on ' + sharelinks[key].title + '</a></li>'} 
+                else if (key == 'linkedin-share-link-data') {
+                links += '<li class="outpost"><svg style="fill: currentColor; vertical-align: middle;" focusable="false" height="16" width="16" viewbox="0 0 48 48"><path d="M44.45 0H3.54A3.5 3.5 0 0 0 0 3.46v41.08A3.5 3.5 0 0 0 3.54 48h40.91A3.51 3.51 0 0 0 48 44.54V3.46A3.51 3.51 0 0 0 44.45 0zM14.24 40.9H7.11V18h7.13zm-3.56-26a4.13 4.13 0 1 1 4.13-4.13 4.13 4.13 0 0 1-4.13 4.1zm30.23 26h-7.12V29.76c0-2.66 0-6.07-3.7-6.07s-4.27 2.9-4.27 5.88V40.9h-7.11V18h6.82v3.13h.1a7.48 7.48 0 0 1 6.74-3.7c7.21 0 8.54 4.74 8.54 10.91z"></path></svg><a href="' + sharelinks[key].url + '" rel="nofollow" target="_blank"> Share on ' + sharelinks[key].title + '</a></li>'
+                } else if (key == 'mail-share-link-data') {
+                links += '<li class="outpost"><svg style="fill: currentColor; vertical-align: middle;" focusable="false" height="16" width="16" viewbox="0 0 24 24" aria-hidden="true"><path d="m12.002 12.36 10.095-8.03A1.99 1.99 0 0 0 21.001 4h-18c-.387 0-.746.115-1.053.307l10.054 8.053z"/><path d="m22.764 5.076-10.468 8.315a.488.488 0 0 1-.594-.001L1.26 5.036c-.16.287-.259.612-.26.964v11c.001 1.103.898 2 2.001 2h17.998c1.103 0 2-.897 2.001-2V6c0-.335-.09-.647-.236-.924z"/><path fill="none" d="M0 0h24v24H0z"/></svg><a href="' + sharelinks[key].url + '" rel="nofollow" target="_blank"> Share on ' + sharelinks[key].title + '</a></li>'
+                }
             }
 
             var html = '<div class="media-content-head mejs-control">';
