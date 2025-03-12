@@ -60,7 +60,7 @@ class UNL_MediaHub_Media_EditCaptions
 
     public function getEditCaptionsURL()
     {
-        if ($this->isTranscribingFinished()) {
+        if ($this->isTranscodingFinished()) {
             $amara_api = new UNL_MediaHub_AmaraAPI();
             return $amara_api->getCaptionEditURL($this->media->url);
         }
