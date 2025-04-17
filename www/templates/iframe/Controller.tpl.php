@@ -56,7 +56,7 @@ if (isset($context->output[0]) && $context->output[0] instanceof UNL_MediaHub_Me
                 break;
               case 'mh-reset-video':
                 video.pause();
-                video.load();
+                video.currentTime = 0;
                 break;
               case 'mh-pause-video':
                 video.pause();
