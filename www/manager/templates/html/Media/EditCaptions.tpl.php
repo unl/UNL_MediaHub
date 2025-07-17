@@ -97,21 +97,33 @@
                             </td>
                             <td data-label="Actions" class="dcf-txt-sm">
                                 <?php if($is_ai_gen && !$is_copy): ?>
-                                    <div class="dcf-d-flex dcf-flex-row dcf-flex-wrap dcf-jc-start dcf-ai-center dcf-gap-3">
-                                        <a
-                                            href="<?php
-                                                echo UNL_MediaHub_Manager::getURL()
-                                                    . '?view=editcaptiontrack&media_id='
-                                                    . (int)$context->media->id
-                                                    . '&track_id='
-                                                    . (int)$track->id;
-                                                ?>"
-                                            class="dcf-btn dcf-btn-primary dcf-mt-1"
-                                        >
-                                            Review
-                                        </a>
-                                        <p class="dcf-m-0 dcf-p-0 dcf-txt-xs">Captions need to be reviewed before activation</p>
+                                    <div class="dcf-grid dcf-row-gap-2 dcf-col-gap-3 dcf-ai-center">
+                                        <div class="dcf-col-100% dcf-col-75%-start@md">
+                                            <a
+                                                href="<?php
+                                                    echo UNL_MediaHub_Manager::getURL()
+                                                        . '?view=editcaptiontrack&media_id='
+                                                        . (int)$context->media->id
+                                                        . '&track_id='
+                                                        . (int)$track->id;
+                                                    ?>"
+                                                class="dcf-btn dcf-btn-primary dcf-mt-1"
+                                                >
+                                                Review
+                                            </a>
+                                        </div>
+                                        <?php $active_check = $is_active ? 'checked="checked"' : ''; ?>
+                                        <div  class="dcf-input-radio dcf-col-100% dcf-col-25%-end@md">
+                                            <input disabled id="caption-active-radio-<?php echo (int) $track->id; ?>" form="caption_active_form"
+                                                name="text_track_id" type="radio" value="<?php echo (int) $track->id; ?>" <?php echo $active_check; ?>>
+                                            <label for="caption-active-radio-<?php echo (int) $track->id; ?>">Active</label>
+                                        </div>
                                     </div>
+                                    <?php if($is_active): ?> 
+                                    <p class="dcf-m-0 dcf-pt-4 dcf-txt-xs">Captions need to be reviewed</p>
+                                    <?php else: ?>
+                                        <p class="dcf-m-0 dcf-pt-4 dcf-txt-xs">Captions need to be reviewed before activation</p>
+                                    <?php endif; ?>
                                 <?php else: ?>
                                     <div class="dcf-grid dcf-row-gap-3 dcf-col-gap-3 dcf-ai-center">
                                         <div class="dcf-col-100% dcf-col-75%-start@md">
