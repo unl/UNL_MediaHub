@@ -14,6 +14,8 @@ require(['jquery'], function($){
             silverlight_xap_url : baseurl+'templates/html/scripts/plupload/Moxie.xap',
             drop_element: "mh_upload_media",
             chunk_size: '5mb',
+            max_retries: 10,
+            multi_selection:false,
             multi_selection:false,
             multipart_params: {
                 __unlmy_posttarget: 'upload_media',
@@ -88,6 +90,38 @@ require(['jquery'], function($){
                     $('input[type=submit]').removeAttr("disabled");
                     $('input[type=submit]').attr("value", submit_text);
 
+                },
+
+                BeforeChunkUpload: function (up, file, info) {
+                    // Pause the upload until we set the hash
+                    up.stop();
+
+                    var blobSlice = file.getSource().slice(info.offset, info.offset + info.chunk_size);
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        crypto.subtle.digest('SHA-256', e.target.result).then(function (hashBuffer) {
+                            var hashArray = Array.from(new Uint8Array(hashBuffer));
+                            var hashHex = hashArray.map(function (b) {
+                                return b.toString(16).padStart(2, '0');
+                            }).join('');
+
+                            info.multipart_params = info.multipart_params || {};
+                            info.multipart_params.chunk_hash = hashHex;
+
+                            // Resume upload after hash is ready
+                            up.start();
+                        });
+                    };
+
+                    reader.readAsArrayBuffer(blobSlice);
+                },
+
+                ChunkUploaded: function(up, file, info) {
+                    console.log('chunk info', JSON.stringify(info));
+                    console.log('Chunk index:', info.chunk, 'of', info.chunks);
+                    console.log('HTTP status:', info.status);
+                    console.log('Server response:', info.response);
                 },
 
                 Error: function(up, err) {
