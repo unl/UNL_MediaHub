@@ -206,28 +206,29 @@ class UNL_MediaHub_Manager_PostHandler
 
     /**
      * Handles new media file uploads
-     *
+     * 
      * Copies any files posted to the uploads directory, with a unique filename.
+     * 
      * After the file has been saved, the URL to the media is returned.
-     *
+     * 
      * @see UNL_MediaHub_Manager::getUploadDirectory()
-     *
-     * @return string|false URL to media or false if still uploading chunks
-     * @throws UNL_MediaHub_Manager_PostHandler_UploadException
+     * 
+     * @return string URL to media
      */
     protected function _handleMediaFileUpload()
     {
         // Settings
         $targetDir = UNL_MediaHub_Manager::getTmpUploadDirectory();
+        //$targetDir = 'uploads';
         $cleanupTargetDir = true; // Remove old files
         $maxFileAge = 5 * 3600; // Temp file age in seconds (5 hours)
 
-        // Create target dir if not exists
+        // Create target dir
         if (!file_exists($targetDir)) {
             @mkdir($targetDir);
         }
 
-        // Determine file name
+        // Get a file name
         if (isset($this->post['name'])) {
             $fileName = $this->post['name'];
         } elseif (!empty($this->files)) {
@@ -235,17 +236,14 @@ class UNL_MediaHub_Manager_PostHandler
         } else {
             $fileName = uniqid('file_');
         }
-
+        
         $filePath = $targetDir . DIRECTORY_SEPARATOR . $fileName;
 
-        // Chunking
-        $chunk  = isset($this->post['chunk']) ? intval($this->post['chunk']) : 0;
-        $chunks = isset($this->post['chunks']) ? intval($this->post['chunks']) : 0;
-
-        // Optional client-sent chunk hash
-        $chunkHash = isset($this->post['chunk_hash']) ? $this->post['chunk_hash'] : '';
-
-        // Cleanup old temp files
+        // Chunking might be enabled
+        $chunk = isset($this->post["chunk"]) ? intval($this->post["chunk"]) : 0;
+        $chunks = isset($this->post["chunks"]) ? intval($this->post["chunks"]) : 0;
+        
+        // Remove old temp files
         if ($cleanupTargetDir) {
             if (!is_dir($targetDir) || !$dir = opendir($targetDir)) {
                 throw new UNL_MediaHub_Manager_PostHandler_UploadException('Failed to open temp directory.', 500);
@@ -254,12 +252,12 @@ class UNL_MediaHub_Manager_PostHandler
             while (($file = readdir($dir)) !== false) {
                 $tmpfilePath = $targetDir . DIRECTORY_SEPARATOR . $file;
 
-                // Skip current file
+                // If temp file is current file proceed to the next
                 if ($tmpfilePath == "{$filePath}.part") {
                     continue;
                 }
 
-                // Remove old temp files
+                // Remove temp file if it is older than the max age and is not the current file
                 if (preg_match('/\.part$/', $file) && (filemtime($tmpfilePath) < time() - $maxFileAge)) {
                     @unlink($tmpfilePath);
                 }
@@ -267,59 +265,62 @@ class UNL_MediaHub_Manager_PostHandler
             closedir($dir);
         }
 
-        // Read uploaded chunk into memory
+
+        // Open temp file
+        if (!$out = @fopen("{$filePath}.part", $chunks ? "ab" : "wb")) {
+            throw new UNL_MediaHub_Manager_PostHandler_UploadException('Failed to open output stream.', 500);
+        }
+
         if (!empty($this->files)) {
             if ($this->files["file"]["error"] || !is_uploaded_file($this->files["file"]["tmp_name"])) {
                 throw new UNL_MediaHub_Manager_PostHandler_UploadException('Failed to move uploaded file. Max upload or post size is likely too small.', 500);
             }
-            $data = file_get_contents($this->files["file"]["tmp_name"]);
-        } else {
-            $data = file_get_contents("php://input");
-        }
 
-        // Verify chunk hash if provided
-        if ($chunkHash) {
-            $serverHash = hash('sha256', $data);
-            if (!hash_equals($serverHash, $chunkHash)) {
-                // 500 status will make plupload automatically retry the chunk
-                throw new UNL_MediaHub_Manager_PostHandler_UploadException('Chunk hash mismatch', 500);
+            // Read binary input stream and append it to temp file
+            if (!$in = @fopen($this->files["file"]["tmp_name"], "rb")) {
+                throw new UNL_MediaHub_Manager_PostHandler_UploadException('Failed to open input stream.', 500);
+            }
+        } else {
+            if (!$in = @fopen("php://input", "rb")) {
+                throw new UNL_MediaHub_Manager_PostHandler_UploadException('Failed to open input stream.', 500);
             }
         }
 
-        // Append or write the chunk to the .part file
-        if (!$out = @fopen("{$filePath}.part", $chunks ? "ab" : "wb")) {
-            throw new UNL_MediaHub_Manager_PostHandler_UploadException('Failed to open output stream.', 500);
+        while ($buff = fread($in, 4096)) {
+            fwrite($out, $buff);
         }
-        fwrite($out, $data);
-        fclose($out);
 
-        // If last chunk, finalize the file
+        @fclose($out);
+        @fclose($in);
+
+        // Check if file has been uploaded
         if (!$chunks || $chunk == $chunks - 1) {
             $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
-            // Convert 3gp to mp4 extension
-            if ($extension === '3gp') {
+            //3gp doesnt work with mediaelement. Right now call it an mp4 (won't always work because 3gps are not always h264.)
+            //TODO: Handle this better.  perhaps check the file encoding or convert it instead of just renaming it.
+            if ($extension == '3gp') {
                 $extension = 'mp4';
             }
-
-            // Validate extension
+            
+            //Make sure that the media has a valid extension
             $allowed_extensions = array('mp4', 'mp3', 'mov');
             if (!in_array($extension, $allowed_extensions)) {
-                @unlink("{$filePath}.part");
+                //Remove the file
+                unlink("{$filePath}.part");
+                
+                //throw the error
                 throw new UNL_MediaHub_Manager_PostHandler_UploadException('Invalid extension', 400);
             }
 
-            // Generate unique final name
-            $finalName = md5(uniqid()) . '.' . $extension;
+            $finalName = md5(uniqid()) . '.'. $extension;
             $finalPath = UNL_MediaHub_Manager::getUploadDirectory() . DIRECTORY_SEPARATOR . $finalName;
-
-            // Move from .part to final
+            
+            // Strip the temp .part suffix off 
             rename("{$filePath}.part", $finalPath);
-
-            return UNL_MediaHub_Controller::$url . 'uploads/' . $finalName;
+            return UNL_MediaHub_Controller::$url.'uploads/'.$finalName;
         }
 
-        // Still more chunks to come
         return false;
     }
 
