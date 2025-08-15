@@ -89,6 +89,11 @@ async function uploadInChunks(file) {
     const randomID = window.crypto.randomUUID();
     const extension = file.name.split('.').pop();
 
+    const wholeFileArrayBuffer = await file.arrayBuffer();
+    const wholeFileBuffer = await crypto.subtle.digest('SHA-1', wholeFileArrayBuffer);
+    const wholeFileHashArray = Array.from(new Uint8Array(wholeFileBuffer));
+    const wholeFileHash = wholeFileHashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
     let chunks = [];
 
     // Split the file into chunks and generate a hash checksum of each chunk
@@ -153,6 +158,7 @@ async function uploadInChunks(file) {
     formData.append('randomID', randomID);
     formData.append('extension', extension);
     formData.append('isFinal', true);
+    formData.append('wholeFileHash', wholeFileHash);
     formData.append('__unlmy_posttarget', 'upload_media');
     formData.append('csrf_name', csrf_name);
     formData.append('csrf_value', csrf_value);

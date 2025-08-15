@@ -269,7 +269,7 @@ class UNL_MediaHub_Manager_PostHandler
 
             $paddedIndex = str_pad($fileIndex, 5, '0', STR_PAD_LEFT); // e.g., 00001
 
-            $serverHash = sha1(file_get_contents($chunk));
+            $serverHash = sha1_file($chunk);
             if ($serverHash !== $hash) {
                 //throw the error
                 throw new UNL_MediaHub_Manager_PostHandler_UploadException('Mismatched Checksum', 400);
@@ -279,6 +279,8 @@ class UNL_MediaHub_Manager_PostHandler
             move_uploaded_file($_FILES['file']['tmp_name'], $tmpDir . '/' . $fileName . '.part.' . $paddedIndex);
             return false;
         }
+
+        $wholeFileHash = $_POST['wholeFileHash'];
 
         //Make sure that the media has a valid extension
         $allowed_extensions = array('mp4', 'mp3', 'mov');
@@ -303,6 +305,14 @@ class UNL_MediaHub_Manager_PostHandler
         }
         fclose($finalFile);
         rmdir($tmpDir);
+
+        $serverWholeFileHash = sha1_file($finalPath);
+        if ($serverWholeFileHash !== $wholeFileHash) {
+            //throw the error
+            header('MH-SERVER: '. $serverWholeFileHash);
+            header('MH-CLIENT: '. $wholeFileHash);
+            throw new UNL_MediaHub_Manager_PostHandler_UploadException('Mismatched Checksum', 400);
+        }
 
         return UNL_MediaHub_Controller::$url.'uploads/'.$finalName;
     }
