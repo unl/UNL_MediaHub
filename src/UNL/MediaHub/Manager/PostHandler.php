@@ -253,7 +253,7 @@ class UNL_MediaHub_Manager_PostHandler
         }
 
         $isFinal = $_POST['isFinal'] ?? 'false';
-        $randomID = $_POST['randomID'];
+        $randomID = sha1($_POST['randomID']);
         $extension = $_POST['extension'];
 
         $tmpDir = $targetDir . '/' . $randomID;
@@ -300,10 +300,10 @@ class UNL_MediaHub_Manager_PostHandler
             $chunkFile = fopen($filePart, 'rb'); // binary mode
             stream_copy_to_stream($chunkFile, $finalFile);
             fclose($chunkFile);
-            unlink($filePart);
+            // unlink($filePart);
         }
         fclose($finalFile);
-        rmdir($tmpDir);
+        // rmdir($tmpDir);
 
         $serverWholeFileHash = sha1_file($finalPath);
         if ($serverWholeFileHash !== $wholeFileHash) {
