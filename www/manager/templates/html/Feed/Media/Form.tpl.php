@@ -246,6 +246,7 @@ $page->jsbody .= $js;
                                         data-point="true"
                                     >
                                         <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                                            <span class="dcf-sr-only">More Info</span>
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
@@ -364,6 +365,7 @@ $page->jsbody .= $js;
                             <label for="mrss_credit">Credit</label>
                             <div class="dcf-popup dcf-d-inline" id="credit-details" data-hover="true" data-point="true">
                                 <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                                    <span class="dcf-sr-only">More Info</span>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
@@ -410,6 +412,7 @@ $page->jsbody .= $js;
                                 data-point="true"
                             >
                                 <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                                    <span class="dcf-sr-only">More Info</span>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
@@ -459,6 +462,7 @@ $page->jsbody .= $js;
                                 data-point="true"
                             >
                                 <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                                    <span class="dcf-sr-only">More Info</span>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
@@ -500,6 +504,7 @@ $page->jsbody .= $js;
                             <label for="itunes_keywords">Tags</label>
                             <div class="dcf-popup dcf-d-inline" id="tag-details" data-hover="true" data-point="true">
                                 <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                                    <span class="dcf-sr-only">More Info</span>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
@@ -666,6 +671,7 @@ $page->jsbody .= $js;
                                     data-point="true"
                                 >
                                     <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                                        <span class="dcf-sr-only">More Info</span>
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"

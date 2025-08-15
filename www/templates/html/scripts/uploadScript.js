@@ -8,7 +8,6 @@ mh_upload_media_container.classList.add('dcf-relative', 'dcf-h-fit-content');
 // Set up input element
 const input_element = document.createElement('input');
 input_element.setAttribute('id', 'file_' + window.crypto.randomUUID());
-input_element.setAttribute('required', 'required');
 input_element.setAttribute('type', 'file');
 input_element.setAttribute('accept', '.mp4,.mov,.mp3');
 input_element.classList.add('dcf-absolute', 'dcf-top-0', 'dcf-left-0', 'dcf-right-0', 'dcf-bottom-0');

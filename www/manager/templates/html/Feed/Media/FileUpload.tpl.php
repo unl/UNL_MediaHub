@@ -14,7 +14,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
 
 <div class="dcf-bleed unl-bg-lightest-gray mh-upload-band dcf-pb-6 dcf-pt-6">
     <div class="dcf-wrapper">
-        <h2>Manage Media</h2>
+        <h1>Manage Media</h1>
         <?php
             $errorNotice = new StdClass();
             $errorNotice->title = 'Media Errors';
@@ -73,6 +73,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                                     data-point="true"
                                 >
                                     <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                                        <span class="dcf-sr-only">More Info</span>
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
@@ -118,6 +119,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                                     data-point="true"
                                 >
                                     <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                                        <span class="dcf-sr-only">More Info</span>
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"

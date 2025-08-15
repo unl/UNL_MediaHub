@@ -64,6 +64,7 @@ $page->addScriptDeclaration("
                 <label for="title">Title <small class="dcf-required">Required</small></label>
                 <div class="dcf-popup dcf-d-inline" id="title-details" data-hover="true" data-point="true">
                     <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <span class="dcf-sr-only">More Info</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
@@ -102,6 +103,7 @@ $page->addScriptDeclaration("
                 <label for="description">Description <small class="dcf-required">Required</small></label>
                 <div class="dcf-popup dcf-d-inline" id="description-details" data-hover="true" data-point="true">
                     <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <span class="dcf-sr-only">More Info</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
@@ -150,6 +152,7 @@ $page->addScriptDeclaration("
                 <label for="image_file">Image File</label>
                 <div class="dcf-popup dcf-d-inline" id="image-file-details" data-hover="true" data-point="true">
                     <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <span class="dcf-sr-only">More Info</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
@@ -190,6 +193,7 @@ $page->addScriptDeclaration("
                 <label for="image_title">Image Title</label>
                 <div class="dcf-popup dcf-d-inline" id="image-title-details" data-hover="true" data-point="true">
                     <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <span class="dcf-sr-only">More Info</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
@@ -228,6 +232,7 @@ $page->addScriptDeclaration("
                 <label for="image_description">Image Description</label>
                 <div class="dcf-popup dcf-d-inline" id="image-description-details" data-hover="true" data-point="true">
                     <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <span class="dcf-sr-only">More Info</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
@@ -302,6 +307,7 @@ $page->addScriptDeclaration("
                 <label for='itunes_author'>Author</label>
                 <div class="dcf-popup dcf-d-inline" id="itunes-author-details" data-hover="true" data-point="true">
                     <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <span class="dcf-sr-only">More Info</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
@@ -502,6 +508,7 @@ $page->addScriptDeclaration("
                 <label for='itunes_explicit'>Explicit</label>
                 <div class="dcf-popup dcf-d-inline" id="itune-explicit-details" data-hover="true" data-point="true">
                     <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <span class="dcf-sr-only">More Info</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
@@ -554,6 +561,7 @@ $page->addScriptDeclaration("
                 <label for='itunes_keywords'>Keywords</label>
                 <div class="dcf-popup dcf-d-inline" id="itune-keyword-details" data-hover="true" data-point="true">
                     <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <span class="dcf-sr-only">More Info</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
@@ -597,6 +605,7 @@ $page->addScriptDeclaration("
                 <label for='itunes_new-feed-url'>New-feed-url</label>
                 <div class="dcf-popup dcf-d-inline" id="itune-new-feed-url-details" data-hover="true" data-point="true">
                     <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <span class="dcf-sr-only">More Info</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
@@ -639,6 +648,7 @@ $page->addScriptDeclaration("
                 <label for='itunes_owner'>Owner</label>
                 <div class="dcf-popup dcf-d-inline" id="itunes-owner-details" data-hover="true" data-point="true">
                     <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <span class="dcf-sr-only">More Info</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
@@ -681,6 +691,7 @@ $page->addScriptDeclaration("
                 <label for='itunes_subtitle'>Subtitle</label>
                 <div class="dcf-popup dcf-d-inline" id="itunes-subtitle-details" data-hover="true" data-point="true">
                     <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <span class="dcf-sr-only">More Info</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
@@ -721,6 +732,7 @@ $page->addScriptDeclaration("
                 <label for='itunes_summary'>Summary</label>
                 <div class="dcf-popup dcf-d-inline" id="itunes-summary-details" data-hover="true" data-point="true">
                     <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <span class="dcf-sr-only">More Info</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
@@ -765,6 +777,7 @@ $page->addScriptDeclaration("
                 <label for='media_rating'>Rating</label>
                 <div class="dcf-popup dcf-d-inline" id="rating-details" data-hover="true" data-point="true">
                     <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <span class="dcf-sr-only">More Info</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
@@ -818,6 +831,7 @@ $page->addScriptDeclaration("
                 <label for='media_keywords'>Keywords</label>
                 <div class="dcf-popup dcf-d-inline" id="keyword-details" data-hover="true" data-point="true">
                     <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <span class="dcf-sr-only">More Info</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
@@ -859,6 +873,7 @@ $page->addScriptDeclaration("
                 <label for='media_thumbnail'>Thumbnail</label>
                 <div class="dcf-popup dcf-d-inline" id="thumbnail-details" data-hover="true" data-point="true">
                     <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <span class="dcf-sr-only">More Info</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
@@ -900,6 +915,7 @@ $page->addScriptDeclaration("
                 <label for='media_category'>Category</label>
                 <div class="dcf-popup dcf-d-inline" id="category-details" data-hover="true" data-point="true">
                     <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <span class="dcf-sr-only">More Info</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
@@ -942,6 +958,7 @@ $page->addScriptDeclaration("
                 <label for='media_player'>Player</label>
                 <div class="dcf-popup dcf-d-inline" id="player-details" data-hover="true" data-point="true">
                     <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <span class="dcf-sr-only">More Info</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
@@ -983,6 +1000,7 @@ $page->addScriptDeclaration("
                 <label for='media_credit'>Credit</label>
                 <div class="dcf-popup dcf-d-inline" id="credit-details" data-hover="true" data-point="true">
                     <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <span class="dcf-sr-only">More Info</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
@@ -1024,6 +1042,7 @@ $page->addScriptDeclaration("
                 <label for='media_copyright'>Copyright</label>
                 <div class="dcf-popup dcf-d-inline" id="copyright-details" data-hover="true" data-point="true">
                     <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <span class="dcf-sr-only">More Info</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
@@ -1065,6 +1084,7 @@ $page->addScriptDeclaration("
                 <label for='media_text'>Text</label>
                 <div class="dcf-popup dcf-d-inline" id="text-details" data-hover="true" data-point="true">
                     <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <span class="dcf-sr-only">More Info</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
@@ -1107,6 +1127,7 @@ $page->addScriptDeclaration("
                 <label for='media_restriction'>Restriction</label>
                 <div class="dcf-popup dcf-d-inline" id="restriction-details" data-hover="true" data-point="true">
                     <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                        <span class="dcf-sr-only">More Info</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
