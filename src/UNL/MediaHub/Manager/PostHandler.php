@@ -239,7 +239,7 @@ class UNL_MediaHub_Manager_PostHandler
                 foreach ($files as $singleFile) {
                     $tmpfilePath = $targetDir . DIRECTORY_SEPARATOR . $singleFile;
 
-                    if (is_dir($tmpfilePath)) {;
+                    if (is_dir($tmpfilePath)) {
                         if (filemtime($tmpfilePath . DIRECTORY_SEPARATOR . '.') < time() - $maxFileAge) {
                             @rmdir($tmpfilePath);
                         }
