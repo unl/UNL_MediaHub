@@ -300,10 +300,10 @@ class UNL_MediaHub_Manager_PostHandler
             $chunkFile = fopen($filePart, 'rb'); // binary mode
             stream_copy_to_stream($chunkFile, $finalFile);
             fclose($chunkFile);
-            // unlink($filePart);
+            unlink($filePart);
         }
         fclose($finalFile);
-        // rmdir($tmpDir);
+        rmdir($tmpDir);
 
         $serverWholeFileHash = sha1_file($finalPath);
         if ($serverWholeFileHash !== $wholeFileHash) {
