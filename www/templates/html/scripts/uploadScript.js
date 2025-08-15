@@ -94,6 +94,7 @@ async function uploadInChunks(file) {
     // Split the file into chunks and generate a hash checksum of each chunk
     let start = 0;
     let end = CHUNK_SIZE;
+    let chunk_count = 0;
     while (start < file.size) {
         let chunkData = file.slice(start, end);
 
@@ -103,10 +104,12 @@ async function uploadInChunks(file) {
         const chunkHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
         chunks.push({
+            index: chunk_count,
             chunkData: chunkData,
             chunkHash: chunkHash,
         });
 
+        chunk_count++;
         start = end;
         end = start + CHUNK_SIZE;
     }
@@ -127,7 +130,7 @@ async function uploadInChunks(file) {
                 let formData = new FormData();
                 formData.append('file', single_chunk.chunkData);
                 formData.append('name', file.name);
-                formData.append('index', index);
+                formData.append('index', single_chunk.index);
                 formData.append('randomID', randomID);
                 formData.append('extension', extension);
                 formData.append('hash', single_chunk.chunkHash);
