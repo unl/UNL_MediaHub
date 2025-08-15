@@ -109,3 +109,13 @@
        background-position: 50px 50px;
     }
 }
+
+.mh-focus-outline {
+   border-radius: 3px;
+   -webkit-box-shadow: 0 0 0 3px var(--bg-body), 0 0 0 5px var(--b-input-focus);
+   box-shadow: 0 0 0 3px var(--bg-body), 0 0 0 5px var(--b-input-focus);
+   -webkit-transition: -webkit-box-shadow .2s ease-out;
+   transition: -webkit-box-shadow .2s ease-out;
+   transition: box-shadow .2s ease-out;
+   transition: box-shadow .2s ease-out, -webkit-box-shadow .2s ease-out;
+}

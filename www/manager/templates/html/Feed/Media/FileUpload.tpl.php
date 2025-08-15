@@ -9,13 +9,12 @@
 </script>
 
 <?php
-$page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plupload/plupload.full.min.js?v='.UNL_MediaHub_Controller::getVersion());
 $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/uploadScript.js?v='.UNL_MediaHub_Controller::getVersion());
 ?>
 
 <div class="dcf-bleed unl-bg-lightest-gray mh-upload-band dcf-pb-6 dcf-pt-6">
     <div class="dcf-wrapper">
-        <h2>Manage Media</h2>
+        <h1>Manage Media</h1>
         <?php
             $errorNotice = new StdClass();
             $errorNotice->title = 'Media Errors';
@@ -56,9 +55,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                             </p>
                         </div>
                     </div>
-                    <div id="filelist" class="mh-upload-box dcf-txt-center">
-                        Your browser doesn't have Flash, Silverlight or HTML5 support.
-                    </div>
+                    <div id="filelist" class="mh-upload-box dcf-txt-center dcf-d-none"></div>
                 </div>
                 <div>
                     <div class="dcf-grid-halves@sm dcf-col-gap-vw">
@@ -76,6 +73,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                                     data-point="true"
                                 >
                                     <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                                        <span class="dcf-sr-only">More Info</span>
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
@@ -121,6 +119,7 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                                     data-point="true"
                                 >
                                     <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+                                        <span class="dcf-sr-only">More Info</span>
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"

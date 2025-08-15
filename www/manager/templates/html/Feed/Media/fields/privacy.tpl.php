@@ -1,6 +1,7 @@
 <label for="privacy">Privacy</label>
 <div class="dcf-popup dcf-d-inline" id="privacy-details" data-hover="true" data-point="true">
   <button class="dcf-btn dcf-btn-tertiary dcf-btn-popup dcf-p-0" type="button">
+    <span class="dcf-sr-only">More Info</span>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       class="dcf-d-block dcf-h-3 dcf-w-3 dcf-fill-current"
