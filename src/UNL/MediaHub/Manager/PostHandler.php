@@ -270,6 +270,8 @@ class UNL_MediaHub_Manager_PostHandler
             $paddedIndex = str_pad($fileIndex, 5, '0', STR_PAD_LEFT); // e.g., 00001
 
             $serverHash = sha1_file($chunk);
+            header('MH-SERVER: '. $serverHash);
+            header('MH-CLIENT: '. $hash);
             if ($serverHash !== $hash) {
                 //throw the error
                 throw new UNL_MediaHub_Manager_PostHandler_UploadException('Mismatched Checksum', 400);
@@ -307,10 +309,10 @@ class UNL_MediaHub_Manager_PostHandler
         rmdir($tmpDir);
 
         $serverWholeFileHash = sha1_file($finalPath);
+        header('MH-SERVER: '. $serverWholeFileHash);
+        header('MH-CLIENT: '. $wholeFileHash);
         if ($serverWholeFileHash !== $wholeFileHash) {
             //throw the error
-            header('MH-SERVER: '. $serverWholeFileHash);
-            header('MH-CLIENT: '. $wholeFileHash);
             throw new UNL_MediaHub_Manager_PostHandler_UploadException('Mismatched Checksum', 400);
         }
 
