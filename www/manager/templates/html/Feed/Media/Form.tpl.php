@@ -9,7 +9,6 @@
 </script>
 
 <?php
-$page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/plupload/plupload.full.min.js?v='.UNL_MediaHub_Controller::getVersion());
 $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/uploadScript.js?v='.UNL_MediaHub_Controller::getVersion());
 $baseUrl = UNL_MediaHub_Controller::getURL();
 $formView  = '';
@@ -216,9 +215,7 @@ $page->jsbody .= $js;
                                             </strong>
                                         </p>
                                     </div>
-                                    <div id="filelist" class="mh-upload-box dcf-txt-center">
-                                        Your browser doesn't have Flash, Silverlight or HTML5 support.
-                                    </div>
+                                    <div id="filelist" class="mh-upload-box dcf-txt-center dcf-d-none"></div>
                                 </div>
                             <?php endif; ?>
                         </li>
