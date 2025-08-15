@@ -263,9 +263,11 @@ class UNL_MediaHub_Manager_PostHandler
         }
 
         if ($isFinal !== 'true') {
-            $fileIndex = $_POST['index'];
+            $fileIndex = intval($_POST['index']);
             $chunk = $_FILES['file']['tmp_name'];
             $hash = $_POST['hash'];
+
+            $paddedIndex = str_pad($fileIndex, 5, '0', STR_PAD_LEFT); // e.g., 00001
 
             $serverHash = sha1(file_get_contents($chunk));
             if ($serverHash !== $hash) {
@@ -274,7 +276,7 @@ class UNL_MediaHub_Manager_PostHandler
             }
 
             // Save chunk
-            move_uploaded_file($_FILES['file']['tmp_name'], $tmpDir . '/' . $fileName . '.part.' . $fileIndex);
+            move_uploaded_file($_FILES['file']['tmp_name'], $tmpDir . '/' . $fileName . '.part.' . $paddedIndex);
             return false;
         }
 
@@ -292,13 +294,13 @@ class UNL_MediaHub_Manager_PostHandler
         $fileParts = glob($filePath);
         sort($fileParts, SORT_NATURAL);
 
-        $finalFile = fopen($finalPath, 'w');
+        $finalFile = fopen($finalPath, 'wb'); // binary mode
         foreach ($fileParts as $filePart) {
-            $chunk = file_get_contents($filePart);
-            fwrite($finalFile, $chunk);
-            unlink($filePart);  // Optionally delete the chunk
+            $chunkFile = fopen($filePart, 'rb'); // binary mode
+            stream_copy_to_stream($chunkFile, $finalFile);
+            fclose($chunkFile);
+            unlink($filePart);
         }
-
         fclose($finalFile);
         rmdir($tmpDir);
 
