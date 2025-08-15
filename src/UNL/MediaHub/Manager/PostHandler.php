@@ -253,7 +253,6 @@ class UNL_MediaHub_Manager_PostHandler
         }
 
         $isFinal = $_POST['isFinal'] ?? 'false';
-        $fileName = $_POST['name'];
         $randomID = $_POST['randomID'];
         $extension = $_POST['extension'];
 
@@ -276,7 +275,7 @@ class UNL_MediaHub_Manager_PostHandler
             }
 
             // Save chunk
-            move_uploaded_file($_FILES['file']['tmp_name'], $tmpDir . '/' . $fileName . '.part.' . $paddedIndex);
+            move_uploaded_file($_FILES['file']['tmp_name'], $tmpDir . '/' . $randomID . '.part.' . $paddedIndex);
             return false;
         }
 
@@ -292,7 +291,7 @@ class UNL_MediaHub_Manager_PostHandler
         $finalName = md5(uniqid()) . '.'. $extension;
         $finalPath = UNL_MediaHub_Manager::getUploadDirectory() . DIRECTORY_SEPARATOR . $finalName;
 
-        $filePath = $tmpDir. '/' . $fileName . '.part.*';
+        $filePath = $tmpDir. '/' . $randomID . '.part.*';
         $fileParts = glob($filePath);
         sort($fileParts, SORT_NATURAL);
 
