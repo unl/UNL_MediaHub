@@ -113,22 +113,32 @@ async function uploadInChunks(file) {
 
     setProgressTotal(chunks.length);
     try {
+        // If we ever fail to upload a chunk after the retries this will allow us to abort
+        // all the rest of the requests
         const abortSignal = new AbortController();
-        // Send all the chunks in parallel
-        await Promise.all(chunks.map((single_chunk, index) => {
-            let formData = new FormData();
-            formData.append('file', single_chunk.chunkData);
-            formData.append('name', file.name);
-            formData.append('index', index);
-            formData.append('randomID', randomID);
-            formData.append('extension', extension);
-            formData.append('hash', single_chunk.chunkHash);
-            formData.append('__unlmy_posttarget', 'upload_media');
-            formData.append('csrf_name', csrf_name);
-            formData.append('csrf_value', csrf_value);
 
-            return uploadSingleChunk(formData, abortSignal);
-        }));
+        // Probably not a good idea to send all the requests at the same time
+        const batchSize = 50;
+        for (let batch = 0; batch < chunks.length; batch += batchSize) {
+            const currentBatch = chunks.slice(batch, batch + batchSize);
+
+            // Send all the chunks in parallel
+            await Promise.all(currentBatch.map((single_chunk, index) => {
+                let formData = new FormData();
+                formData.append('file', single_chunk.chunkData);
+                formData.append('name', file.name);
+                formData.append('index', index);
+                formData.append('randomID', randomID);
+                formData.append('extension', extension);
+                formData.append('hash', single_chunk.chunkHash);
+                formData.append('__unlmy_posttarget', 'upload_media');
+                formData.append('csrf_name', csrf_name);
+                formData.append('csrf_value', csrf_value);
+    
+                return uploadSingleChunk(formData, abortSignal);
+            }));
+
+        }
     } catch (err) {
         console.error(err);
         statusFailed();
