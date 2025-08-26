@@ -261,12 +261,13 @@ class UNL_MediaHub_Manager_PostHandler
             @mkdir($tmpDir);
         }
 
+        $tmpFilePath = $tmpDir . '/' . $randomID . '.part';
+
         if ($isFinal !== 'true') {
             $fileIndex = intval($_POST['index']);
             $chunk = $_FILES['file']['tmp_name'];
+            $chunkSize = intval($_POST['chunkSize']);
             $hash = $_POST['hash'];
-
-            $paddedIndex = str_pad($fileIndex, 5, '0', STR_PAD_LEFT); // e.g., 00001
 
             $serverHash = sha1_file($chunk);
             if ($serverHash !== $hash) {
@@ -274,12 +275,25 @@ class UNL_MediaHub_Manager_PostHandler
                 throw new UNL_MediaHub_Manager_PostHandler_UploadException('Mismatched Checksum', 400);
             }
 
+            // open file for read/write, create if missing
+            $fp = fopen($tmpFilePath, 'c+b');
+            if (!$fp) {
+                throw new Exception("Unable to open file", 500);
+            }
+
+            // calculate byte offset
+            $offset = $fileIndex * $chunkSize;
+            fseek($fp, $offset);
+
+            // write chunk bytes directly
+            $in = fopen($chunk, 'rb');
+            stream_copy_to_stream($in, $fp);
+            fclose($in);
+            fclose($fp);
+
             // Save chunk
-            move_uploaded_file($_FILES['file']['tmp_name'], $tmpDir . '/' . $randomID . '.part.' . $paddedIndex);
             return false;
         }
-
-        $wholeFileHash = $_POST['wholeFileHash'];
 
         //Make sure that the media has a valid extension
         $allowed_extensions = array('mp4', 'mp3', 'mov');
@@ -291,25 +305,8 @@ class UNL_MediaHub_Manager_PostHandler
         $finalName = md5(uniqid()) . '.'. $extension;
         $finalPath = UNL_MediaHub_Manager::getUploadDirectory() . DIRECTORY_SEPARATOR . $finalName;
 
-        $filePath = $tmpDir. '/' . $randomID . '.part.*';
-        $fileParts = glob($filePath);
-        sort($fileParts, SORT_NATURAL);
-
-        $finalFile = fopen($finalPath, 'wb'); // binary mode
-        foreach ($fileParts as $filePart) {
-            $chunkFile = fopen($filePart, 'rb'); // binary mode
-            stream_copy_to_stream($chunkFile, $finalFile);
-            fclose($chunkFile);
-            unlink($filePart);
-        }
-        fclose($finalFile);
+        rename($tmpFilePath, $finalPath);
         rmdir($tmpDir);
-
-        $serverWholeFileHash = sha1_file($finalPath);
-        if ($serverWholeFileHash !== $wholeFileHash) {
-            //throw the error
-            throw new UNL_MediaHub_Manager_PostHandler_UploadException('Mismatched Checksum', 400);
-        }
 
         return UNL_MediaHub_Controller::$url.'uploads/'.$finalName;
     }

@@ -89,12 +89,11 @@ async function uploadInChunks(file) {
     const randomID = window.crypto.randomUUID();
     const extension = file.name.split('.').pop();
 
-    const wholeFileArrayBuffer = await file.arrayBuffer();
-    const wholeFileBuffer = await crypto.subtle.digest('SHA-1', wholeFileArrayBuffer);
-    const wholeFileHashArray = Array.from(new Uint8Array(wholeFileBuffer));
-    const wholeFileHash = wholeFileHashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-
     let chunks = [];
+    const tmp_chunks_length = Math.ceil(file.size / CHUNK_SIZE);
+
+    setProgressText('Processing');
+    setProgressTotal(tmp_chunks_length);
 
     // Split the file into chunks and generate a hash checksum of each chunk
     let start = 0;
@@ -117,8 +116,10 @@ async function uploadInChunks(file) {
         chunk_count++;
         start = end;
         end = start + CHUNK_SIZE;
+        incrementProgress();
     }
 
+    setProgressText('Uploading');
     setProgressTotal(chunks.length);
     try {
         // If we ever fail to upload a chunk after the retries this will allow us to abort
@@ -139,6 +140,7 @@ async function uploadInChunks(file) {
                 formData.append('randomID', randomID);
                 formData.append('extension', extension);
                 formData.append('hash', single_chunk.chunkHash);
+                formData.append('chunkSize', CHUNK_SIZE);
                 formData.append('__unlmy_posttarget', 'upload_media');
                 formData.append('csrf_name', csrf_name);
                 formData.append('csrf_value', csrf_value);
@@ -153,12 +155,13 @@ async function uploadInChunks(file) {
         return;
     }
 
+    status_finalizing();
+
     let formData = new FormData();
     formData.append('name', file.name);
     formData.append('randomID', randomID);
     formData.append('extension', extension);
     formData.append('isFinal', true);
-    formData.append('wholeFileHash', wholeFileHash);
     formData.append('__unlmy_posttarget', 'upload_media');
     formData.append('csrf_name', csrf_name);
     formData.append('csrf_value', csrf_value);
@@ -273,7 +276,7 @@ function statusUploading(fileName, fileSize) {
     submit_button.setAttribute('value', 'Upload in Progress...');
 
     fileList.innerHTML = '<div class="dcf-w-max-100% dcf-word-wrap" style="hyphens:none;">' + fileName + '<br> (' + fileSize + ') <b></b></div>';
-    fileList.getElementsByTagName('b')[0].innerHTML = '<span>0%</span>';
+    fileList.getElementsByTagName('b')[0].innerHTML = '<span>Loading video...</span>';
 
     mh_upload_media.classList.add('dcf-d-none');
     fileList.classList.remove('dcf-d-none');
@@ -287,6 +290,10 @@ function statusUploading(fileName, fileSize) {
  */
 function statusFailed() {
     error_element.classList.remove('dcf-d-none');
+}
+
+function status_finalizing() {
+    fileList.getElementsByTagName('b')[0].innerHTML = '<span>Finalizing Upload...</span><br><span>This may take some time.</span>';
 }
 
 /**
@@ -305,11 +312,18 @@ function statusComplete(response_url) {
     if (publish !== null) {
         publish.removeAttribute('disabled');
     }
+
+    fileList.getElementsByTagName('b')[0].innerHTML = '<span>Complete!</span>';
 }
 
 // Set up progress bar variables
+let progressText = '';
 let progressTotal = 0;
 let progressAmount = 0;
+
+function setProgressText(newProgressText) {
+    progressText = newProgressText;
+}
 
 /**
  * Sets the total amount of progress that can be made
@@ -317,6 +331,7 @@ let progressAmount = 0;
  */
 function setProgressTotal(newProgressTotal) {
     progressTotal = newProgressTotal;
+    progressAmount = 0;
 }
 
 /**
@@ -326,5 +341,5 @@ function incrementProgress() {
     progressAmount++;
 
     const progressPercent = ((progressAmount / progressTotal) * 100).toFixed();
-    fileList.getElementsByTagName('b')[0].innerHTML = '<span>' + progressPercent + "%</span>";
+    fileList.getElementsByTagName('b')[0].innerHTML = '<span>' + progressText + ': ' + progressPercent + "%</span>";
 }
