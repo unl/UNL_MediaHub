@@ -293,7 +293,7 @@ function statusFailed() {
 }
 
 function status_finalizing() {
-    fileList.getElementsByTagName('b')[0].innerHTML = '<span>Finalizing Upload...</span><br><span>This may take some time.</span>';
+    fileList.getElementsByTagName('b')[0].innerHTML = '<span>Finalizing Upload...</span>';
 }
 
 /**
