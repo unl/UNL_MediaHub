@@ -254,7 +254,7 @@ class UNL_MediaHub_Manager_PostHandler
 
         $isFinal = $_POST['isFinal'] ?? 'false';
         $randomID = sha1($_POST['randomID']);
-        $extension = $_POST['extension'];
+        $extension = strtolower($_POST['extension']);
 
         $tmpDir = $targetDir . '/' . $randomID;
         if (!file_exists($tmpDir)) {
