@@ -339,6 +339,38 @@ class UNL_MediaHub_Controller
             case 'media_oembed':
                 $oembed = null;
                 if (isset($this->options['url'])) {
+
+                    // Make sure 'url' is a URL
+                    if(!filter_var($this->options['url'], FILTER_VALIDATE_URL)){ 
+                        http_response_code(400);
+                        exit();
+                    }
+
+                    // Make sure 'url' can be parsed like a url and there is no query string
+                    $parse_controller_url = parse_url(UNL_MediaHub_Controller::$url);
+                    $parsed_input_url = parse_url($this->options['url']);
+                    if (
+                        !array_key_exists('host', $parse_controller_url) ||
+                        !array_key_exists('host', $parsed_input_url) ||
+                        !array_key_exists('path', $parsed_input_url) ||
+                        array_key_exists('query', $parsed_input_url)
+                    ) {
+                        http_response_code(400);
+                        exit();
+                    }
+
+                    // Make sure the hosts match
+                    if ($parsed_input_url['host'] !== $parse_controller_url['host']) {
+                        http_response_code(400);
+                        exit();
+                    }
+
+                    // Make sure path matches a media endpoint
+                    if (!preg_match('/^\/media\/[0-9]+$/', $parsed_input_url['path'])) {
+                        http_response_code(400);
+                        exit();
+                    }
+
                     $oembed = UNL_MediaHub_Media_Oembed::getByURL($this->options['url'], $this->options);
                 }
 
