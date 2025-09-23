@@ -38,6 +38,8 @@ function MediahubPlayer(options) {
             if (track.id.lastIndexOf('mediahub', 0) !== 0) {
                 //Prevent non-mediahub tracks from showing up
                 t.textTracks().removeTrack(t.textTracks()[i]);
+            } else if (Safari) {
+                track.mode = 'hidden';
             }
         }
     });
@@ -155,8 +157,8 @@ function MediahubPlayer(options) {
 
                 $transcript.on('click', 'a', function() {
                     var time;
-                    time = $(this).data('timeOffset')
-                    if (!time) {
+                    time = parseFloat($(this).data('timeOffset'))
+                    if (Number.isNaN(time)) {
                         return;
                     }
                     if (!isEmbed) {
@@ -206,7 +208,7 @@ function MediahubPlayer(options) {
             var textTracks = t.textTracks();
             var defaultCaptions;
             for (var i = 0; i < textTracks.length; i++) {
-                if (textTracks[i].language = 'en' && textTracks[i].type !== 'metadata') {
+                if (textTracks[i].language === 'en' && textTracks[i].kind !== 'metadata') {
                     defaultCaptions = textTracks[i];
 
                     if (defaultCaptions.mode === "disabled" && !defaultCaptions.cues) {
@@ -221,7 +223,7 @@ function MediahubPlayer(options) {
             // If you still can't find any then just use the first one
             if (defaultCaptions === undefined && textTracks.length > 0) {
                 for (var i = 0; i < textTracks.length; i++) {
-                    if (textTracks[i].language.startsWith('en') && textTracks[i].type !== 'metadata') {
+                    if (textTracks[i].language.startsWith('en') && textTracks[i].kind !== 'metadata') {
                         defaultCaptions = textTracks[i];
 
                         if (defaultCaptions.mode === "disabled" && !defaultCaptions.cues) {
