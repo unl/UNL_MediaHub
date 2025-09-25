@@ -65,7 +65,7 @@ if ($type === 'audio') {
 <div class="dcf-bleed mh-video-band">
     <div class="dcf-wrapper dcf-pt-4 dcf-pb-4 dcf-d-flex dcf-jc-center">
         <div class="<?php echo $divClass; ?>">
-            <iframe class="<?php echo $iframeClass; ?>" height="667" src="<?php echo $controller->getURL($context)?>?format=iframe&autoplay=0&preload=auto<?php echo $timeParam; ?>" allowfullscreen title="play media"></iframe>
+            <iframe style="background-image:url(<?php echo UNL_MediaHub_Controller::toAgnosticURL($context->getThumbnailURL()); ?>)" class="<?php echo $iframeClass; ?>" height="667" src="<?php echo $controller->getURL($context)?>?format=iframe&autoplay=0&preload=auto<?php echo $timeParam; ?>" allowfullscreen title="play media"></iframe>
         </div>
     </div>
 </div>
