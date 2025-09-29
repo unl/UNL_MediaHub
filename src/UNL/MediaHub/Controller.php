@@ -746,6 +746,16 @@ class UNL_MediaHub_Controller
         if (isset($siteNotice) && $siteNotice->display) {
             $page->displayDCFNoticeMessage($siteNotice->title, $siteNotice->message, $siteNotice->type, $siteNotice->noticePath, $siteNotice->containerID);
         }
+        // Add a notice for logged users with:
+        // Active AI captions that have not been reviewed OR
+        // Videos that currently have no active captions but contain AI-generated captions that could be activated after review.
+        $auth = UNL_MediaHub_AuthService::getInstance();
+        if($auth->isLoggedIn()) {
+            if(count(UNL_MediaHub_User::getMediaWithUnreviewedCaptions($auth->getUser())->items) > 0) {
+            $page->displayDCFNoticeMessage('You have unreviewed media captions', "Please review auto generated AI captions for your media for any missed context or inaccuracies. <a href=\"" . htmlspecialchars(UNL_MediaHub_CaptionReviewListManager::getURL()) . "\">View Unreviewed Media Captions.</a>", 'dcf-notice-warning', $siteNotice->noticePath, $siteNotice->containerID);
+            }
+        }
+        
     }
 
     /**

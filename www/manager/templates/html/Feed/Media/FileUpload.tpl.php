@@ -179,20 +179,23 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
 
                     <fieldset>
                         <legend>AI Captions</legend>
-                        <div class="dcf-input-checkbox">
+                        <div class="dcf-input-checkbox dcf-pb-3">
                             <input id="opt-out-captions" name="opt-out-captions" aria-describedby="opt-out-captions-help" type="checkbox" value="1">
                             <label for="opt-out-captions">Opt Out of AI captions</label>
                             <p class="dcf-form-help dcf-mb-0" id="opt-out-captions-help">
-                                Captions are free to generate and will automatically
-                                be translated into English. You would only want to
-                                check this if you have your own captions.
+                                Captions are required for all media uploads.
+                                Only select this option if you are providing your own captions.
                             </p>
                         </div>
 
-                        <!-- <div class="dcf-input-checkbox">
+                             <div class="dcf-input-checkbox">
                             <input id="auto-activate-captions" name="auto-activate-captions" type="checkbox" value="1" checked="checked">
                             <label for="auto-activate-captions">Auto activate captions after generation</label>
-                        </div> -->
+                            <p class="dcf-form-help dcf-mb-0" id="opt-out-captions-help">
+                                Captions are free to generate and will automatically
+                                be translated into English.
+                            </p>
+                        </div> 
                     </fieldset>
                     <p class="dcf-txt-sm">
                         Note: All videos will be optimized for web in multiple resolutions automatically.

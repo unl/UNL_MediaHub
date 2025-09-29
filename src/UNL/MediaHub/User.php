@@ -50,6 +50,17 @@ class UNL_MediaHub_User extends UNL_MediaHub_Models_BaseUser
     }
 
     /**
+     * Returns a list of media with unreviewed AI-generated captions.
+     * 
+     * @return UNL_MediaHub_MediaList
+     */
+    public static function getMediaWithUnreviewedCaptions($uid)
+    {
+       $options['filter'] = new UNL_MediaHub_MediaList_Filter_UnreviewedCaptions($uid);
+       return new UNL_MediaHub_MediaList($options);
+    }
+
+    /**
      * Get an array of feed IDs
      * 
      * @return mixed
@@ -66,7 +77,7 @@ class UNL_MediaHub_User extends UNL_MediaHub_Models_BaseUser
         $result = $q->fetchAll(PDO::FETCH_COLUMN);
         return $result;
     }
-    
+
     public function canTranscode()
     {
         return UNL_MediaHub::$auto_transcode_hls_all_users;
