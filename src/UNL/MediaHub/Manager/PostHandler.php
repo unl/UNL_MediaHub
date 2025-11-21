@@ -208,6 +208,7 @@ class UNL_MediaHub_Manager_PostHandler
      * Handles new media file uploads
      * 
      * Copies any files posted to the uploads directory, with a unique filename.
+     * Chunks are written to individual files and assembled in order during finalization.
      * 
      * After the file has been saved, the URL to the media is returned.
      * 
@@ -219,13 +220,12 @@ class UNL_MediaHub_Manager_PostHandler
     {
         // Settings
         $targetDir = UNL_MediaHub_Manager::getTmpUploadDirectory();
-        //$targetDir = 'uploads';
         $cleanupTargetDir = true; // Remove old files
         $maxFileAge = 5 * 3600; // Temp file age in seconds (5 hours)
 
         // Create target dir
         if (!file_exists($targetDir)) {
-            @mkdir($targetDir);
+            @mkdir($targetDir, 0755, true);
         }
 
         // Remove old temp files
@@ -237,14 +237,20 @@ class UNL_MediaHub_Manager_PostHandler
             $files = scandir($targetDir);
             if ($files !== false) {
                 foreach ($files as $singleFile) {
+                    if ($singleFile === '.' || $singleFile === '..') {
+                        continue;
+                    }
+
                     $tmpfilePath = $targetDir . DIRECTORY_SEPARATOR . $singleFile;
 
                     if (is_dir($tmpfilePath)) {
-                        if (filemtime($tmpfilePath . DIRECTORY_SEPARATOR . '.') < time() - $maxFileAge) {
-                            @rmdir($tmpfilePath);
+                        $dirTime = filemtime($tmpfilePath . DIRECTORY_SEPARATOR . '.');
+                        if ($dirTime !== false && $dirTime < time() - $maxFileAge) {
+                            $this->_rmdirRecursive($tmpfilePath);
                         }
                     } else {
-                        if (filemtime($tmpfilePath) < time() - $maxFileAge) {
+                        $fileTime = filemtime($tmpfilePath);
+                        if ($fileTime !== false && $fileTime < time() - $maxFileAge) {
                             @unlink($tmpfilePath);
                         }
                     }
@@ -256,60 +262,177 @@ class UNL_MediaHub_Manager_PostHandler
         $randomID = sha1($_POST['randomID']);
         $extension = strtolower($_POST['extension']);
 
-        $tmpDir = $targetDir . '/' . $randomID;
-        if (!file_exists($tmpDir)) {
-            @mkdir($tmpDir);
-        }
-
-        $tmpFilePath = $tmpDir . '/' . $randomID . '.part';
-
-        if ($isFinal !== 'true') {
-            $fileIndex = intval($_POST['index']);
-            $chunk = $_FILES['file']['tmp_name'];
-            $chunkSize = intval($_POST['chunkSize']);
-            $hash = $_POST['hash'];
-
-            $serverHash = sha1_file($chunk);
-            if ($serverHash !== $hash) {
-                //throw the error
-                throw new UNL_MediaHub_Manager_PostHandler_UploadException('Mismatched Checksum', 400);
-            }
-
-            // open file for read/write, create if missing
-            $fp = fopen($tmpFilePath, 'c+b');
-            if (!$fp) {
-                throw new Exception("Unable to open file", 500);
-            }
-
-            // calculate byte offset
-            $offset = $fileIndex * $chunkSize;
-            fseek($fp, $offset);
-
-            // write chunk bytes directly
-            $in = fopen($chunk, 'rb');
-            stream_copy_to_stream($in, $fp);
-            fclose($in);
-            fclose($fp);
-
-            // Save chunk
-            return false;
-        }
-
-        //Make sure that the media has a valid extension
+        // Validate extension early
         $allowed_extensions = array('mp4', 'mp3', 'mov');
         if (!in_array($extension, $allowed_extensions)) {
-            //throw the error
             throw new UNL_MediaHub_Manager_PostHandler_UploadException('Invalid extension', 400);
         }
 
-        $finalName = md5(uniqid()) . '.'. $extension;
+        $tmpDir = $targetDir . DIRECTORY_SEPARATOR . $randomID;
+        if (!file_exists($tmpDir)) {
+            @mkdir($tmpDir, 0755, true);
+        }
+
+        // CHUNK UPLOAD PHASE
+        if ($isFinal !== 'true') {
+            $fileIndex = intval($_POST['index']);
+            $hash = $_POST['hash'];
+            $chunk = $_FILES['file']['tmp_name'];
+
+            // Validate chunk hash
+            $serverHash = sha1_file($chunk);
+            if ($serverHash !== $hash) {
+                @unlink($chunk);
+                throw new UNL_MediaHub_Manager_PostHandler_UploadException('Mismatched Checksum', 400);
+            }
+
+            // Write chunk to individual file with padded index for proper sorting
+            $chunkFilename = str_pad($fileIndex, 10, '0', STR_PAD_LEFT) . '.chunk';
+            $chunkPath = $tmpDir . DIRECTORY_SEPARATOR . $chunkFilename;
+
+            if (!move_uploaded_file($chunk, $chunkPath)) {
+                throw new UNL_MediaHub_Manager_PostHandler_UploadException('Failed to save chunk', 500);
+            }
+
+            // Verify chunk was written
+            if (!file_exists($chunkPath)) {
+                throw new UNL_MediaHub_Manager_PostHandler_UploadException('Chunk file verification failed', 500);
+            }
+
+            return false;
+        }
+
+        // FINALIZATION PHASE
+        // Collect all chunk files
+        $chunkPattern = $tmpDir . DIRECTORY_SEPARATOR . '*.chunk';
+        $chunks = glob($chunkPattern);
+
+        if ($chunks === false || empty($chunks)) {
+            throw new UNL_MediaHub_Manager_PostHandler_UploadException('No chunks found for upload', 400);
+        }
+
+        // Sort chunks by filename (padded index ensures correct order)
+        sort($chunks);
+
+        // Verify we have a complete sequence (0.chunk through N.chunk)
+        $expectedChunkCount = count($chunks);
+        for ($i = 0; $i < $expectedChunkCount; $i++) {
+            $expectedFilename = str_pad($i, 10, '0', STR_PAD_LEFT) . '.chunk';
+            $expectedPath = $tmpDir . DIRECTORY_SEPARATOR . $expectedFilename;
+            if (!file_exists($expectedPath)) {
+                $this->_cleanupChunks($chunks);
+                throw new UNL_MediaHub_Manager_PostHandler_UploadException('Missing chunk at index ' . $i, 400);
+            }
+        }
+
+        // Generate final filename
+        $finalName = md5(uniqid()) . '.' . $extension;
         $finalPath = UNL_MediaHub_Manager::getUploadDirectory() . DIRECTORY_SEPARATOR . $finalName;
 
-        rename($tmpFilePath, $finalPath);
-        rmdir($tmpDir);
+        // Create final directory if needed
+        $finalDir = UNL_MediaHub_Manager::getUploadDirectory();
+        if (!is_dir($finalDir)) {
+            @mkdir($finalDir, 0755, true);
+        }
 
-        return UNL_MediaHub_Controller::$url.'uploads/'.$finalName;
+        // Assemble chunks into final file
+        $finalFp = fopen($finalPath, 'wb');
+        if (!$finalFp) {
+            $this->_cleanupChunks($chunks);
+            throw new UNL_MediaHub_Manager_PostHandler_UploadException('Unable to open final file for writing', 500);
+        }
+
+        try {
+            foreach ($chunks as $chunkFile) {
+                $chunkFp = fopen($chunkFile, 'rb');
+                if (!$chunkFp) {
+                    throw new Exception('Unable to open chunk file: ' . $chunkFile);
+                }
+
+                // Copy chunk to final file
+                $bytesWritten = stream_copy_to_stream($chunkFp, $finalFp);
+                fclose($chunkFp);
+
+                if ($bytesWritten === false) {
+                    throw new Exception('Failed to copy chunk data');
+                }
+            }
+
+            // Ensure all data is written to disk
+            fflush($finalFp);
+            if (function_exists('fsync') && function_exists('fileno')) {
+                fsync(fileno($finalFp));
+            }
+            fclose($finalFp);
+
+        } catch (Exception $e) {
+            fclose($finalFp);
+            @unlink($finalPath);
+            $this->_cleanupChunks($chunks);
+            throw new UNL_MediaHub_Manager_PostHandler_UploadException('Failed during chunk assembly: ' . $e->getMessage(), 500);
+        }
+
+        // Cleanup chunk files
+        $this->_cleanupChunks($chunks);
+
+        // Remove temp directory
+        @rmdir($tmpDir);
+
+        // Verify final file exists and has content
+        if (!file_exists($finalPath) || filesize($finalPath) === 0) {
+            @unlink($finalPath);
+            throw new UNL_MediaHub_Manager_PostHandler_UploadException('Final file verification failed', 500);
+        }
+
+        return UNL_MediaHub_Controller::$url . 'uploads/' . $finalName;
     }
+
+    /**
+     * Cleanup chunk files
+     * 
+     * @param array $chunks Array of chunk file paths
+     * @return void
+     */
+    private function _cleanupChunks($chunks)
+    {
+        if (is_array($chunks)) {
+            foreach ($chunks as $chunkFile) {
+                @unlink($chunkFile);
+            }
+        }
+    }
+
+    /**
+     * Recursively remove directory and contents
+     * 
+     * @param string $dir Directory path
+     * @return bool
+     */
+    private function _rmdirRecursive($dir)
+    {
+        if (!is_dir($dir)) {
+            return false;
+        }
+
+        $files = scandir($dir);
+        if ($files === false) {
+            return false;
+        }
+
+        foreach ($files as $file) {
+            if ($file !== '.' && $file !== '..') {
+                $path = $dir . DIRECTORY_SEPARATOR . $file;
+                if (is_dir($path)) {
+                    $this->_rmdirRecursive($path);
+                } else {
+                    @unlink($path);
+                }
+            }
+        }
+
+        return @rmdir($dir);
+    }
+
 
     /**
      * Checks if the filename is supported.
