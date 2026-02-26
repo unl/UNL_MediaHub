@@ -526,8 +526,7 @@
         <div>
             <h2>Get Help</h2>
             <p>
-                If you have questions or comments, please use the 'Email Us' tab on
-                this page or email <a href="mailto:mysupport@unl.edu">MySupport</a>.
+                If you have questions or comments please email <a href="mailto:nusupport@nebraska.edu">ITS Support</a>.
             </p>
         </div>
     </div>
