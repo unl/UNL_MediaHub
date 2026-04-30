@@ -6,7 +6,7 @@
         <div class="dcf-grid dcf-col-gap-vw dcf-row-gap-4">
             <div class="dcf-col-100%">
                 <?php if ($context->hasUnreviewedCaptionMedia()) { ?>
-                    <h3 class="dcf-txt-h6" id="table-description">List of all media that either have an active AI caption that has not been reviewed or have a generated AI caption that is not yet activated and is pending review. </h3>
+                    <h3 class="dcf-txt-h6" id="table-description">List of the first 100 media uploads that either have an active AI caption that has not been reviewed or have a generated AI caption that is not yet activated and is pending review. </h3>
                     <table class="dcf-table dcf-table-bordered dcf-table-responsive" aria-describedby="table-description">
                         <thead>
                             <th scope="col">Media</th>
