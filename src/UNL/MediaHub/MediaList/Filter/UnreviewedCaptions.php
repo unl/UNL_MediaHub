@@ -14,7 +14,11 @@ class UNL_MediaHub_MediaList_Filter_UnreviewedCaptions implements UNL_MediaHub_F
       $query->addFrom('LEFT JOIN mediahub.media_text_tracks mtt ON (mtt.media_id = m.id)');
       $query->addFrom('JOIN mediahub.feed_has_media fhm ON (fhm.media_id = m.id)');
       $query->addFrom('JOIN mediahub.user_has_permission uhm ON (uhm.feed_id = fhm.feed_id)');
-      $query->where('(m.media_text_tracks_id IS NULL and mtt.source = "ai transcriptionist" and permission_id = 2) OR (mtt.source = "ai transcriptionist" and uhm.user_uid = ? and uhm.feed_id = fhm.feed_id and m.media_text_tracks_id IS NOT NULL and media_text_tracks_source_id is null and m.media_text_tracks_id = mtt.id and permission_id = 2)', $this->user->uid);
+      $query->where('
+        (m.media_text_tracks_id IS NULL and mtt.source = "ai transcriptionist" and permission_id = 2 and uhm.user_uid = ?)
+        OR
+        (mtt.source = "ai transcriptionist" and uhm.user_uid = ? and uhm.feed_id = fhm.feed_id and m.media_text_tracks_id IS NOT NULL and media_text_tracks_source_id is null and m.media_text_tracks_id = mtt.id and permission_id = 2)'
+    , [$this->user->uid, $this->user->uid]);
       $query->groupBy('m.id');
     }
     
