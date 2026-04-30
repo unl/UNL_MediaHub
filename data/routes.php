@@ -15,6 +15,8 @@ $routes['/^transcode-manager\/command\/?$/'] = 'UNL_MediaHub_TranscodeManager';
 
 $routes['/^transcription-manager\/?$/'] = 'UNL_MediaHub_TranscriptionManager';
 
+$routes['/^caption-review-list-manager\/?$/'] = 'UNL_MediaHub_CaptionReviewListManager';
+
 $routes['/^search\/(?P<q>.*)$/'] = 'UNL_MediaHub_MediaList';
 
 $routes['/^tags\/(?P<t>.*)$/'] = 'UNL_MediaHub_MediaList';
