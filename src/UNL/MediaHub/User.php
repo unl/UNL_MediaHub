@@ -57,6 +57,7 @@ class UNL_MediaHub_User extends UNL_MediaHub_Models_BaseUser
     public static function getMediaWithUnreviewedCaptions($uid)
     {
        $options['filter'] = new UNL_MediaHub_MediaList_Filter_UnreviewedCaptions($uid);
+       $options['limit'] = 100;
        return new UNL_MediaHub_MediaList($options);
     }
 

@@ -59,6 +59,6 @@ class UNL_MediaHub_MediaList_Filter_UnreviewedCaptions implements UNL_MediaHub_F
 
     public static function getDescription()
     {
-        return 'List of all media that either have an active AI caption that has not been reviewed or have a generated AI caption that is not yet activated and is pending review.';
+        return 'List of the first 100 media uploads that either have an active AI caption that has not been reviewed or have a generated AI caption that is not yet activated and is pending review.';
     }
 }
