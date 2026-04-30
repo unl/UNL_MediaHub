@@ -11,15 +11,30 @@ class UNL_MediaHub_MediaList_Filter_UnreviewedCaptions implements UNL_MediaHub_F
     
     public function apply(Doctrine_Query_Abstract $query)
     {
-      $query->addFrom('LEFT JOIN mediahub.media_text_tracks mtt ON (mtt.media_id = m.id)');
-      $query->addFrom('JOIN mediahub.feed_has_media fhm ON (fhm.media_id = m.id)');
-      $query->addFrom('JOIN mediahub.user_has_permission uhm ON (uhm.feed_id = fhm.feed_id)');
-      $query->where('
-        (m.media_text_tracks_id IS NULL and mtt.source = "ai transcriptionist" and permission_id = 2 and uhm.user_uid = ?)
-        OR
-        (mtt.source = "ai transcriptionist" and uhm.user_uid = ? and uhm.feed_id = fhm.feed_id and m.media_text_tracks_id IS NOT NULL and media_text_tracks_source_id is null and m.media_text_tracks_id = mtt.id and permission_id = 2)'
-    , [$this->user->uid, $this->user->uid]);
-      $query->groupBy('m.id');
+        $query->addFrom('LEFT JOIN mediahub.media_text_tracks mtt ON (mtt.media_id = m.id)');
+        $query->addFrom('JOIN mediahub.feed_has_media fhm ON (fhm.media_id = m.id)');
+        $query->addFrom('JOIN mediahub.user_has_permission uhp ON (uhp.feed_id = fhm.feed_id)');
+
+        // Where either:
+        // 1. There is no caption track active on the media but there is an "ai transcriptionist" track available
+        // 2. The active caption track is the original "ai transcriptionist" and not the reviewed version
+        $query->where('
+            (
+                m.media_text_tracks_id IS NULL
+                and mtt.source = "ai transcriptionist"
+                and uhp.permission_id = 2
+                and uhp.user_uid = ?
+            )
+            OR
+            (
+                m.media_text_tracks_id = mtt.id
+                and mtt.source = "ai transcriptionist"
+                and mtt.media_text_tracks_source_id is null
+                and uhp.permission_id = 2
+                and uhp.user_uid = ?
+            )'
+        , [$this->user->uid, $this->user->uid]);
+        $query->groupBy('m.id');
     }
     
     public function getLabel()
