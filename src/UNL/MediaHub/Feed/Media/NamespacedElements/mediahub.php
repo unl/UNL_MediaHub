@@ -47,4 +47,14 @@ class UNL_MediaHub_Feed_Media_NamespacedElements_mediahub extends UNL_MediaHub_F
     {
         return parent::mediaHasElementNS($media_id, $element, self::$xmlns);
     }
+
+    public function __serialize(): array
+    {
+        return parent::__serialize();
+    }
+
+    public function __unserialize(array $data): void
+    {
+        parent::__unserialize($data);
+    }
 }

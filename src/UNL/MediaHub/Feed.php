@@ -61,7 +61,7 @@ class UNL_MediaHub_Feed extends UNL_MediaHub_Models_BaseFeed
      * @param Doctrine_Connection $conn
      * @return bool|void
      */
-    public function delete(Doctrine_Connection $conn = null)
+    public function delete(?Doctrine_Connection $conn = null)
     {
         //Delete feed_has_media records
         $media_list = $this->getMediaList();

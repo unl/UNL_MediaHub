@@ -16,7 +16,7 @@ class UNL_MediaHub_Media_Oembed extends UNL_MediaHub_Media
      */
     public $options = array();
 
-    function __construct(UNL_MediaHub_Media $media = null, $options = array())
+    function __construct(?UNL_MediaHub_Media $media = null, $options = array())
     {
 
         $this->media = $media;

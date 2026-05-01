@@ -84,7 +84,7 @@ class Doctrine_Tree_NestedSet extends Doctrine_Tree implements Doctrine_Tree_Int
      *
      * @param object $record        instance of Doctrine_Record
      */
-    public function createRoot(Doctrine_Record $record = null)
+    public function createRoot(?Doctrine_Record $record = null)
     {
         if ($this->getAttribute('hasManyRoots')) {
             if ( ! $record || ( ! $record->exists() && ! $record->getNode()->getRootValue())
