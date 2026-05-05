@@ -38,19 +38,18 @@
       "saltybeagle/savvy_turbo": "0.1.*",
       "phpunit/phpunit": "~4.3",
       "ezyang/htmlpurifier": "~4.6",
-      "guzzlehttp/guzzle": "^6.0",
-      "unl/rev-api": "0.2.0-beta",
       "jasig/phpcas": "1.3.x-dev",
       "captioning/captioning": "2.*",
       "php": ">=5.5.0",
       "phpseclib/phpseclib": "3.0.7",
       "leodido/langcode-conv": "^0.2.0",
-      "mhor/php-mediainfo": "^4.1",
       "ramsey/uuid": "^3.7",
-      "aws/aws-sdk-php": "^3.52",
       "moontoast/math": "^1.1",
       "slim/csrf": "^0.8.2",
-        "unl/php-dwt-parser": "^1.0"
+      "unl/php-dwt-parser": "^1.0",
+        "aws/aws-sdk-php": "^3.365",
+        "guzzlehttp/guzzle": "^7.10",
+        "mhor/php-mediainfo": "^5.8"
     },
     "scripts": {
       "post-install-cmd": [

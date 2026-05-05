@@ -1122,7 +1122,7 @@ class Doctrine_Table extends Doctrine_Configurable implements Countable
         }
 
         if ( ! is_array($orderBy)) {
-            $e1 = explode(',', $orderBy);
+            $e1 = explode(',', $orderBy ?? '');
         } else {
             $e1 = $orderBy;
         }

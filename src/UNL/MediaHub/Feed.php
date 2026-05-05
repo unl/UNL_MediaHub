@@ -36,11 +36,10 @@ class UNL_MediaHub_Feed extends UNL_MediaHub_Models_BaseFeed
      * Add Media to the feed
      *
      * @param UNL_MediaHub_Media          $media    The media to add
-     * @param UNL_MediaHub_Media_MetaData $metadata unused
      *
      * @return unknown
      */
-    function addMedia(UNL_MediaHub_Media $media, UNL_MediaHub_Media_MetaData $metadata = null)
+    function addMedia(UNL_MediaHub_Media $media)
     {
         $this->UNL_MediaHub_Media[] = $media;
         $this->save();
@@ -267,5 +266,14 @@ class UNL_MediaHub_Feed extends UNL_MediaHub_Models_BaseFeed
 
         return false;
     }
-    
+
+    public function __serialize(): array
+    {
+        return parent::__serialize();
+    }
+
+    public function __unserialize(array $data): void
+    {
+        parent::__unserialize($data);
+    }
 }

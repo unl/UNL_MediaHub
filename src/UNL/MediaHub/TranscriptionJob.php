@@ -76,4 +76,14 @@ class UNL_MediaHub_TranscriptionJob extends UNL_MediaHub_Models_BaseTranscriptio
     {
         return $this->auto_activate === '1';
     }
+
+    public function __serialize(): array
+    {
+        return parent::__serialize();
+    }
+
+    public function __unserialize(array $data): void
+    {
+        parent::__unserialize($data);
+    }
 }

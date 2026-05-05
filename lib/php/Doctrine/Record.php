@@ -342,6 +342,10 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
      */
     public function invokeSaveHooks($when, $type, $event = null)
     {
+        if (!is_array($this->_invokedSaveHooks)) {
+            $this->_invokedSaveHooks = [];
+        }
+
         $func = $when . ucfirst($type);
 
         if (is_null($event)) {
@@ -1544,7 +1548,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
         } else if (in_array($type, array('integer', 'int')) && is_numeric($old) && is_numeric($new)) {
             return $old != $new;
         } else if ($type == 'timestamp' || $type == 'date') {
-            $oldStrToTime = strtotime($old);
+            $oldStrToTime = strtotime($old ?? '');
             $newStrToTime = strtotime($new);
             if ($oldStrToTime && $newStrToTime) {
                 return $oldStrToTime !== $newStrToTime;

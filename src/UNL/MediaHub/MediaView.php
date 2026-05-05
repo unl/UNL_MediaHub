@@ -23,5 +23,14 @@ class UNL_MediaHub_MediaView extends UNL_MediaHub_Models_BaseMediaView
         
         return $view;
     }
-    
+
+    public function __serialize(): array
+    {
+        return parent::__serialize();
+    }
+
+    public function __unserialize(array $data): void
+    {
+        parent::__unserialize($data);
+    }
 }

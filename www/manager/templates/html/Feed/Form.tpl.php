@@ -38,13 +38,13 @@ $page->addScriptDeclaration("
 </h1>
 <ul class="dcf-p-1 dcf-list-bare dcf-list-inline dcf-txt-xs dcf-bg-overlay-dark">
     <li class="dcf-m-0">
-        <a class="dcf-btn dcf-btn-inverse-tertiary" href="<?php echo UNL_MediaHub_Controller::getURL(); ?>channels/<?php echo $context->feed->id; ?>">View Channel</a>
+        <a class="dcf-btn dcf-btn-inverse-tertiary" href="<?php echo UNL_MediaHub_Controller::getURL(); ?>channels/<?php echo $context->feed->id ?? ''; ?>">View Channel</a>
     </li>
     <li class="dcf-m-0">
-        <a class="dcf-btn dcf-btn-inverse-tertiary" href="<?php echo UNL_MediaHub_Manager::getURL(); ?>?view=feedstats&amp;feed_id=<?php echo $context->feed->id; ?>">View Channel Stats</a>
+        <a class="dcf-btn dcf-btn-inverse-tertiary" href="<?php echo UNL_MediaHub_Manager::getURL(); ?>?view=feedstats&amp;feed_id=<?php echo $context->feed->id ?? ''; ?>">View Channel Stats</a>
     </li>
     <li class="dcf-m-0">
-        <a class="dcf-btn dcf-btn-inverse-tertiary" href="<?php echo UNL_MediaHub_Manager::getURL(); ?>?view=permissions&amp;feed_id=<?php echo $context->feed->id; ?>">Edit Channel Users</a>
+        <a class="dcf-btn dcf-btn-inverse-tertiary" href="<?php echo UNL_MediaHub_Manager::getURL(); ?>?view=permissions&amp;feed_id=<?php echo $context->feed->id ?? ''; ?>">Edit Channel Users</a>
     </li>
 </ul>
 <div class="dcf-mt-6 dcf-mb-6 ">
@@ -136,7 +136,7 @@ $page->addScriptDeclaration("
                         </p>
                     </div>
                 </div>
-                <textarea id="description" name="description" aria-describedby="description-details"><?php echo (isset($context->feed))?htmlentities($context->feed->description):''; ?></textarea>
+                <textarea id="description" name="description" aria-describedby="description-details"><?php echo (isset($context->feed))?htmlentities($context->feed->description ?? ''):''; ?></textarea>
             </div>
         </fieldset>
         <fieldset id="feed_header">
@@ -144,7 +144,7 @@ $page->addScriptDeclaration("
             <?php if(isset($context->feed->id) && $context->feed->hasImage()): ?>
                 <div class="dcf-form-group">
                     <div class="mh-channel-thumb">
-                        <img src="<?php echo $url; ?>/image" alt="<?php echo htmlentities($context->feed->title, ENT_QUOTES); ?> Image">
+                        <img src="<?php echo $url; ?>/image" alt="<?php echo htmlentities($context->feed->title ?? '', ENT_QUOTES); ?> Image">
                     </div>
                 </div>
             <?php endif; ?>
@@ -226,7 +226,7 @@ $page->addScriptDeclaration("
                         </p>
                     </div>
                 </div>
-                <input id="image_title" name="image_title" type="text" aria-describedby="image-title-details" value="<?php echo (isset($context->feed))? htmlentities($context->feed->image_title, ENT_QUOTES):''; ?>" />
+                <input id="image_title" name="image_title" type="text" aria-describedby="image-title-details" value="<?php echo (isset($context->feed))? htmlentities($context->feed->image_title ?? '', ENT_QUOTES):''; ?>" />
             </div>
             <div class="dcf-form-group">
                 <label for="image_description">Image Description</label>
@@ -265,7 +265,7 @@ $page->addScriptDeclaration("
                         </p>
                     </div>
                 </div>
-                <textarea id="image_description" name="image_description" aria-describedby="image-description-details"><?php echo (isset($context->feed))?htmlentities($context->feed->image_description):''; ?></textarea>
+                <textarea id="image_description" name="image_description" aria-describedby="image-description-details"><?php echo (isset($context->feed))?htmlentities($context->feed->image_description ?? ''):''; ?></textarea>
             </div>
         </fieldset>
 
