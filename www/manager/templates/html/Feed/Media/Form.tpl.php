@@ -303,7 +303,7 @@ $page->jsbody .= $js;
                                                 style="max-height: 15rem;"
                                                 src="<?php echo $context->media->getPosterURL(); ?>"
                                                 alt="<?php
-                                                    echo htmlentities($context->media->title, ENT_QUOTES);
+                                                    echo htmlentities($context->media->title ?? '', ENT_QUOTES);
                                                     ?> Poster Image"
                                             >
                                         </div>
@@ -323,14 +323,14 @@ $page->jsbody .= $js;
                                 <div class="dcf-form-group">
                                     <label for="poster-image-file">Image Upload</label>
                                     <input id="poster-image-file" name="poster_image_file" type="file" />
-                                    <input type="hidden" id="current-poster" name="current_poster" value="<?php echo htmlentities(@$context->media->poster, ENT_QUOTES); ?>">
+                                    <input type="hidden" id="current-poster" name="current_poster" value="<?php echo htmlentities(@$context->media->poster ?? '', ENT_QUOTES); ?>">
                                 </div>
 
                                 <div class="<?php echo $additionalOptionsDisplayClass; ?>" id="additional-poster-options">
                                     <p class="dcf-form-group dcf-form-help">or</p>
                                     <div class="dcf-form-group">
                                         <label for="poster-image-url">URL of Image</label>
-                                        <input id="poster-image-url" name="poster_image_url" <?php echo $posterImageURLDisabled; ?> type="text" class="dcf-w-100% validate-url" value="<?php echo htmlentities(@$context->media->poster, ENT_QUOTES); ?>" aria-describedby="poster-details" />
+                                        <input id="poster-image-url" name="poster_image_url" <?php echo $posterImageURLDisabled; ?> type="text" class="dcf-w-100% validate-url" value="<?php echo htmlentities(@$context->media->poster ?? '', ENT_QUOTES); ?>" aria-describedby="poster-details" />
                                     </div>
                                 </div>
                             </fieldset>
