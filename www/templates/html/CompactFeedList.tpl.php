@@ -7,15 +7,15 @@ if (count($context->items)) :
     <?php $feed_url = UNL_MediaHub_Controller::getURL($channel); ?>
     <div class="dcf-card-as-link">
         <div class="mh-channel-thumb mh-featured-channel">
-            <div class="dcf-ratio dcf-ratio-16x9 mh-thumbnail-clip">
+            <div class="mh-thumbnail-clip">
                 <?php if($channel->hasImage()): ?>
                     <img
-                        class="dcf-ratio-child dcf-obj-fit-cover"
+                        class="dcf-16x9 dcf-obj-fit-cover"
                         src="<?php echo $feed_url; ?>/image"
                         aria-hidden="true"
                         alt="">
                 <?php else: ?>
-                    <div class="dcf-ratio-child dcf-d-flex dcf-ai-center dcf-jc-center">
+                    <div class="dcf-16x9 dcf-d-flex dcf-ai-center dcf-jc-center">
                         <img
                             class="dcf-h-8 dcf-w-8"
                             src="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon.svg"

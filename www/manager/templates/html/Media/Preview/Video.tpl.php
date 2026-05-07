@@ -1,5 +1,5 @@
-<div class="dcf-grid dcf-col-gap-vw">
-  <div id="videoData" class="dcf-col-100% dcf-col-25%-start@sm mh-hide-bp2">
+<div class="dcf-d-grid dcf-grid-cols-12 dcf-col-gap-vw">
+  <div id="videoData" class="dcf-col-span-12 dcf-col-span-3@sm mh-hide-bp2">
       <h5 class="unl-font-sans">Set a Thumbnail</h5>
       <ol>
           <li>Pause the video to the left at the frame which you want as the image representation.</li>
@@ -22,7 +22,7 @@
       </div>
   </div>
 
-  <div id="videoDisplay" class="dcf-col-100% dcf-col-75%-end@sm">
+  <div id="videoDisplay" class="dcf-col-span-12 dcf-col-span-9@sm">
       <?php echo $savvy->render($controller->getMediaPlayer($context), 'MediaPlayer.tpl.php'); ?>
       <a class="dcf-btn dcf-btn-primary mh-hide-bp2" id="setImage" href="#">Set Image</a>
   </div>

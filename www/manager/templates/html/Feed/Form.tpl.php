@@ -36,7 +36,7 @@ $page->addScriptDeclaration("
 <h1 class="dcf-mt-4 dcf-txt-h2">
     <?php echo (isset($context->feed))?'Edit':'Create'; ?> Channel<?php echo (isset($context->feed))? ': ' . UNL_MediaHub::escape($context->feed->title):''; ?>
 </h1>
-<ul class="dcf-p-1 dcf-list-bare dcf-list-inline dcf-txt-xs dcf-bg-overlay-dark">
+<ul class="dcf-p-1 dcf-list-inline dcf-txt-xs dcf-bg-overlay-dark" role="list">
     <li class="dcf-m-0">
         <a class="dcf-btn dcf-btn-inverse-tertiary" href="<?php echo UNL_MediaHub_Controller::getURL(); ?>channels/<?php echo $context->feed->id ?? ''; ?>">View Channel</a>
     </li>

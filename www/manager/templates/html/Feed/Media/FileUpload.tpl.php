@@ -25,10 +25,10 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
             <input type="hidden" id="media_url" name="url" value="">
             <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
             <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
-            <div class="dcf-grid-halves@sm dcf-col-gap-vw">
+            <div class="dcf-d-grid dcf-grid-cols-1 dcf-grid-cols-2@sm dcf-col-gap-vw">
                 <div id="mh_upload_media_container">
-                    <div class="dcf-ratio dcf-ratio-16x9 mh-upload-box" id="mh_upload_media">
-                        <div class="dcf-ratio-child dcf-d-flex dcf-flex-col dcf-ai-center dcf-jc-center dcf-txt-center">
+                    <div class="mh-upload-box" id="mh_upload_media">
+                        <div class="dcf-16x9 dcf-d-flex dcf-flex-col dcf-ai-center dcf-jc-center dcf-txt-center">
                             <span>Add Media</span>
                             <p class="dcf-mb-0">
                                 <?php if ($user->canTranscode()): ?>
@@ -55,10 +55,10 @@ $page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/upl
                             </p>
                         </div>
                     </div>
-                    <div id="filelist" class="mh-upload-box dcf-txt-center dcf-d-none"></div>
+                    <div id="filelist" class="mh-upload-box dcf-txt-center dcf-d-none!"></div>
                 </div>
                 <div>
-                    <div class="dcf-grid-halves@sm dcf-col-gap-vw">
+                    <div class="dcf-d-grid dcf-grid-cols-1 dcf-grid-cols-2@sm dcf-col-gap-vw">
                         <div>
                             <div class="dcf-form-group">
                                 <label for="title">Title <small class="dcf-required">Required</small></label>

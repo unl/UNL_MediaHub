@@ -63,8 +63,8 @@ $page->jsbody .= $js;
 
     <div class="dcf-bleed unl-bg-lighter-gray dcf-pt-6 dcf-bp-6">
         <div class="dcf-wrapper">
-            <div class="dcf-grid" id="headline_main">
-                <div class="dcf-col-100%">
+            <div class="dcf-d-grid dcf-grid-cols-12" id="headline_main">
+                <div class="dcf-col-span-12">
                     <input type="submit" name="submit" value="Save" class="dcf-btn dcf-btn-primary dcf-float-right" />
                     <h2><div class="dcf-subhead">Edit Media Details for</div> <?php echo $context->media->title ?></h2>
                 </div>
@@ -107,8 +107,8 @@ $page->jsbody .= $js;
             <?php endif; ?>
 
             <?php if (!$transcoding_job ||  $transcoding_job->isSuccess()): ?>
-                <div class="dcf-grid dcf-col-gap-vw">
-                    <div id="videoData" class="dcf-col-100% dcf-col-25%-start@sm dcf-txt-xs">
+                <div class="dcf-d-grid dcf-grid-cols-12 dcf-col-gap-vw">
+                    <div id="videoData" class="dcf-col-span-12 dcf-col-span-3@sm dcf-txt-xs">
                         <h2 class="dcf-txt-h4">Set a Thumbnail</h2>
                         <ol>
                             <li>Pause the video to the left at the frame which you want as the image representation.</li>
@@ -121,7 +121,7 @@ $page->jsbody .= $js;
                         </div>
                         <div class="dcf-d-flex dcf-jc-center dcf-mb-3">
                             <img
-                                class="dcf-w-auto dcf-h-auto dcf-w-max-100%"
+                                class="dcf-w-auto dcf-h-auto dcf-max-w-100%"
                                 style="max-height: 15rem;"
                                 src="<?php echo $context->media->getThumbnailURL(); ?>"
                                 id="thumbnail"
@@ -138,7 +138,7 @@ $page->jsbody .= $js;
                             </p>
                         </div>
                     </div>
-                    <div id="videoDisplay" class="dcf-col-100% dcf-col-75%-end@sm">
+                    <div id="videoDisplay" class="dcf-col-span-12 dcf-col-span-9@sm">
                         <div class="mh-iframe-wrapper">
                             <?php
                             if (isset($context->media)) {
@@ -160,8 +160,8 @@ $page->jsbody .= $js;
                 $errorNotice->title = 'Media Errors';
                 echo $savvy->render($errorNotice, 'ErrorListNotice.tpl.php');
             ?>
-            <div class="dcf-grid dcf-col-gap-vw dcf-row-gap-2">
-                <div class="dcf-col-100% dcf-col-50%-start@md dcf-col-33%-start@lg dcf-pb-6">
+            <div class="dcf-d-grid dcf-grid-cols-12 dcf-col-gap-vw dcf-row-gap-2">
+                <div class="dcf-col-span-12 dcf-col-span-6@md dcf-col-span-4@lg dcf-pb-6">
                     <ol>
                         <li class="dcf-pl-2 dcf-mb-6">
                             <?php if ($transcoding_job && !$transcoding_job->isFinished()): ?>
@@ -215,7 +215,7 @@ $page->jsbody .= $js;
                                             </strong>
                                         </p>
                                     </div>
-                                    <div id="filelist" class="mh-upload-box dcf-txt-center dcf-d-none"></div>
+                                    <div id="filelist" class="mh-upload-box dcf-txt-center dcf-d-none!"></div>
                                 </div>
                             <?php endif; ?>
                         </li>
@@ -299,7 +299,7 @@ $page->jsbody .= $js;
                                     <div class="dcf-form-group">
                                         <div class="mh-channel-thumb dcf-txt-center dcf-d-flex dcf-jc-center dcf-mb-3">
                                             <img
-                                                class="dcf-w-auto dcf-h-auto dcf-w-max-100%"
+                                                class="dcf-w-auto dcf-h-auto dcf-max-w-100%"
                                                 style="max-height: 15rem;"
                                                 src="<?php echo $context->media->getPosterURL(); ?>"
                                                 alt="<?php
@@ -310,7 +310,7 @@ $page->jsbody .= $js;
                                     </div>
 
                                     <?php if ($context->media->isLocalPosterURL()):
-                                            $additionalOptionsDisplayClass = 'dcf-d-none';
+                                            $additionalOptionsDisplayClass = 'dcf-d-none!';
                                             $posterImageURLDisabled = 'disabled';
                                     ?>
                                     <div class="dcf-input-checkbox dcf-mb-3">
@@ -343,7 +343,7 @@ $page->jsbody .= $js;
                     </ol>
                 </div>
 
-                <div class="dcf-col-100% dcf-col-50%-end@md dcf-col-67%-end@lg">
+                <div class="dcf-col-span-12 dcf-col-span-6@md dcf-col-span-8@lg">
                     <fieldset id="existing_media">
                         <legend class="dcf-legend">Basic Information</legend>
                         <div class="dcf-form-group validation-container">
@@ -974,13 +974,13 @@ $page->jsbody .= $js;
         if (removePosterCheckbox) {
             removePosterCheckbox.addEventListener('change', function() {
                 if (removePosterCheckbox.checked) {
-                    additionalPosterOptionsDiv.classList.remove('dcf-d-none');
+                    additionalPosterOptionsDiv.classList.remove('dcf-d-none!');
                     additionalPosterOptionsDiv.classList.add('dcf-d-block');
                     postImageUrlInput.removeAttribute('disabled');
                     postImageUrlInput.value= '';
                 } else {
                     additionalPosterOptionsDiv.classList.remove('dcf-d-block');
-                    additionalPosterOptionsDiv.classList.add('dcf-d-none');
+                    additionalPosterOptionsDiv.classList.add('dcf-d-none!');
                     postImageUrlInput.setAttribute('disabled', '');
                     postImageUrlInput.value = currentPosterInput.value;
                 }

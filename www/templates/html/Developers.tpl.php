@@ -3,8 +3,8 @@
 $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized-dark.min.css', 'stylesheet');
 ?>
 
-<div class="developer-docs dcf-grid dcf-col-gap-vw dcf-row-gap-6 dcf-pt-8 dcf-pb-8">
-    <div class="dcf-col-100% dcf-col-75%-start@md">
+<div class="developer-docs dcf-d-grid dcf-grid-cols-12 dcf-col-gap-vw dcf-row-gap-6 dcf-pt-8 dcf-pb-8">
+    <div class="dcf-col-span-12 dcf-col-span-9@md">
         <?php
         $resource = "UNL_MediaHub_Developers_" . $context->resource;
         $resource = new $resource;
@@ -89,7 +89,7 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
             </div>
         </div>
     </div>
-    <div class="dcf-col-100% dcf-col-25%-end@md">
+    <div class="dcf-col-span-12 dcf-col-span-3@md">
         <nav id='resources'>
             <h2>MediaHub API</h2>
             <p>The following is a list of resources for MediaHub.</p>

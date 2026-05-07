@@ -5,7 +5,7 @@
             We are captioning your media. This may take some time,
             so please fill out the media details while you wait.
         </p>
-        <p class="transcription_queue_data dcf-d-none dcf-mb-3">Queue Position: <span class="transcription_queue_position">-1</span> of <span class="transcription_queue_length">-1</span></p>
+        <p class="transcription_queue_data dcf-d-none! dcf-mb-3">Queue Position: <span class="transcription_queue_position">-1</span> of <span class="transcription_queue_length">-1</span></p>
         <progress>loading</progress>
     </div>
 </div>
@@ -26,10 +26,10 @@ $page->addScriptDeclaration("
                     queue_length_element.innerText = data.transcription_queue_length;
 
                     const queue_data_element = document.querySelector('.transcription_queue_data');
-                    queue_data_element.classList.remove('dcf-d-none');
+                    queue_data_element.classList.remove('dcf-d-none!');
                 } else {
                     const queue_data_element = document.querySelector('.transcription_queue_data');
-                    queue_data_element.classList.add('dcf-d-none');
+                    queue_data_element.classList.add('dcf-d-none!');
                 }
 
                 if (data.transcription_is_complete && data.transcription_is_error) {

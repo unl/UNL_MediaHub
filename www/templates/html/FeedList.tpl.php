@@ -30,14 +30,14 @@ if($context->options['orderby'] == 'datecreated'){
 <div class="dcf-bleed dcf-pt-6">
     <div class="dcf-wrapper dcf-pb-0">
         <div class="mh-list-header">
-            <div class="dcf-grid">
-                <div class="dcf-col-100% dcf-col-75%-start@sm">
+            <div class="dcf-d-grid dcf-grid-cols-12">
+                <div class="dcf-col-span-12 dcf-col-span-9@sm">
                     <h2><?php echo UNL_MediaHub::escape($label); ?></h2>
                     <?php if (count($context->items) && $context->pager->getLastPage() > 1): ?>
                         <p>Page <?php echo $context->pager->getPage() ?> of <?php echo $context->pager->getLastPage() ?></p>
                     <?php endif; ?>
                 </div>
-                <div class="dcf-col-100% dcf-col-25%-end@sm">
+                <div class="dcf-col-span-12 dcf-col-span-3@sm">
                     <?php echo $savvy->render($context->options['filter'], 'SearchBox.tpl.php'); ?>
                 </div>
             </div>
@@ -96,18 +96,18 @@ if($context->options['orderby'] == 'datecreated'){
                     <?php foreach ($context->items as $feed): ?>
                         <?php $url = UNL_MediaHub::escape(UNL_MediaHub_Controller::getURL($feed)) ?>
                         <li class="dcf-mb-8">
-                            <div class="dcf-grid dcf-col-gap-vw">
-                                <div class="dcf-col-100% dcf-col-25%-start@sm">
+                            <div class="dcf-d-grid dcf-grid-cols-12 dcf-col-gap-vw">
+                                <div class="dcf-col-span-12 dcf-col-span-3@sm">
                                     <a href="<?php echo $url ?>">
-                                    <div class="dcf-ratio dcf-ratio-16x9 mh-channel-thumb">
+                                    <div class="mh-channel-thumb">
                                         <?php if($feed->hasImage()): ?>
                                             <img
-                                                class="dcf-ratio-child dcf-obj-fit-cover"
+                                                class="dcf-16x9 dcf-obj-fit-cover"
                                                 src="<?php echo $url; ?>/image"
                                                 aria-hidden="true"
                                                 alt="">
                                         <?php else: ?>
-                                            <div class="dcf-ratio-child dcf-d-flex dcf-ai-center dcf-jc-center">
+                                            <div class="dcf-16x9 dcf-d-flex dcf-ai-center dcf-jc-center">
                                                 <img
                                                     class="dcf-h-8 dcf-w-8"
                                                     src="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon.svg"
@@ -121,14 +121,14 @@ if($context->options['orderby'] == 'datecreated'){
                                         <span class="dcf-sr-only">View Channel <?php echo htmlentities($feed->title) ?></span>
                                     </a>
                                 </div>
-                                <div class="dcf-col-100% dcf-col-75%-end@sm">
+                                <div class="dcf-col-span-12 dcf-col-span-9@sm">
                                     <h2><a href="<?php echo $url ?>"><?php echo htmlentities($feed->title) ?></a></h2>
                                     <p><?php echo UNL_MediaHub::escape($feed->description) ?></p>
-                                    <div class="dcf-grid dcf-col-gap-vw">
-                                        <div class="dcf-col-100% dcf-col-75%-start@sm mh-media-samples">
+                                    <div class="dcf-d-grid dcf-grid-cols-12 dcf-col-gap-vw">
+                                        <div class="dcf-col-span-12 dcf-col-span-9@sm mh-media-samples">
                                             <?php echo $savvy->render($feed->getMediaList(), 'CompactMediaList.tpl.php') ?>
                                         </div>
-                                        <div class="dcf-col-100% dcf-col-25%-end@sm mh-feed-stats">
+                                        <div class="dcf-col-span-12 dcf-col-span-3@sm mh-feed-stats">
                                             <?php echo $savvy->render($feed, 'Feed/Stats.tpl.php') ?>
                                         </div>
                                     </div>
