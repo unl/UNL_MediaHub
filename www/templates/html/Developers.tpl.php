@@ -113,22 +113,9 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
     </div>
 </div>
 
-<?php
-$page->addScriptDeclaration("
-    if (typeof WDN === 'undefined') {
-        require(['dcf/dcf-tabs'], function(DCFTabsModule) {
-            var tabs = document.querySelectorAll('.dcf-tabs')
-            var unlTabs = new DCFTabsModule.DCFTabs(tabs);
-            unlTabs.initialize();
-        });
-    } else {
-        WDN.initializePlugin('tabs');
-    }
-
-    require(['jquery', 'https://cdn.jsdelivr.net/highlight.js/9.2.0/highlight.min.js'], function ($, hljs) {
-        $('.resource pre.code code').each(function () {
-            hljs.highlightBlock(this);
-        });
+<script type="module" defer>
+    import 'https://cdn.jsdelivr.net/highlight.js/9.2.0/highlight.min.js';
+    document.querySelectorAll('.resource pre.code code').forEach((single_element) => {
+        hljs.highlightBlock(single_element);
     });
-");
-?>
+</script>

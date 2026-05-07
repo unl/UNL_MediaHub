@@ -6,30 +6,26 @@ if (isset($context->feed) && !$context->feed->userCanEdit($user)) {
     throw new UNL_MediaHub_RuntimeException('You do not have permission to manage this channel.', 403);
 }
 $page->addScriptDeclaration("
-    require(['jquery'], function($) {
-        $(document).ready(function() {
-            $('#extensions input').change(function() {
-                if(this.checked){
-                    $('#'+this.value+'_header').slideDown(400);
-                } else {
-                    $('#'+this.value+'_header').slideUp(400);
-                }
-                return true;
-            });
-            $('#description').change(function(){
-                if ($('#itunes_summary').val() == '') {
-                    $('#itunes_summary').val($(this).val());
-                }
-                if ($('#media_description').val() == '') {
-                    $('#media_description').val($(this).val());
-                }
-            });
-            $('#title').change(function(){
-                if ($('#media_title').val() == '') {
-                    $('#media_title').val($(this).val());
-                }
-            });
-        });
+    const description_input = document.getElementById('description');
+    const itunes_summary_input = document.getElementById('itunes_summary');
+    const media_description_input = document.getElementById('media_description');
+
+    description_input.addEventListener('change', () => {
+        if (itunes_summary_input.value === '') {
+            itunes_summary_input.value = description_input.value;
+        }
+        if (media_description_input.value === '') {
+            media_description_input.value = description_input.value;
+        }
+    });
+
+    const title_input = document.getElementById('title');
+    const media_title_input = document.getElementById('media_title');
+
+    title_input.addEventListener('change', () => {
+        if (media_title_input.value === '') {
+            media_title_input.value = title_input.value;
+        }
     });
 ");
 ?>
