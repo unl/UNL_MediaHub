@@ -97,8 +97,8 @@
                             </td>
                             <td data-label="Actions" class="dcf-txt-sm">
                                 <?php if($is_ai_gen && !$is_copy): ?>
-                                    <div class="dcf-grid dcf-row-gap-2 dcf-col-gap-3 dcf-ai-center">
-                                        <div class="dcf-col-100% dcf-col-75%-start@md">
+                                    <div class="dcf-d-grid dcf-grid-cols-12 dcf-row-gap-2 dcf-col-gap-3 dcf-ai-center">
+                                        <div class="dcf-col-span-12 dcf-col-span-8@md">
                                             <a
                                                 href="<?php
                                                     echo UNL_MediaHub_Manager::getURL()
@@ -113,7 +113,7 @@
                                             </a>
                                         </div>
                                         <?php $active_check = $is_active ? 'checked="checked"' : ''; ?>
-                                        <div  class="dcf-input-radio dcf-col-100% dcf-col-25%-end@md">
+                                        <div  class="dcf-input-radio dcf-col-span-12 dcf-col-span-4@md">
                                             <input disabled id="caption-active-radio-<?php echo (int) $track->id; ?>" form="caption_active_form"
                                                 name="text_track_id" type="radio" value="<?php echo (int) $track->id; ?>" <?php echo $active_check; ?>>
                                             <label for="caption-active-radio-<?php echo (int) $track->id; ?>">Active</label>
@@ -125,8 +125,8 @@
                                         <p class="dcf-m-0 dcf-pt-4 dcf-txt-xs">Captions need to be reviewed before activation</p>
                                     <?php endif; ?>
                                 <?php else: ?>
-                                    <div class="dcf-grid dcf-row-gap-3 dcf-col-gap-3 dcf-ai-center">
-                                        <div class="dcf-col-100% dcf-col-75%-start@md">
+                                    <div class="dcf-d-grid dcf-grid-cols-12 dcf-row-gap-3 dcf-col-gap-3 dcf-ai-center">
+                                        <div class="dcf-col-span-12 dcf-col-span-8@md">
                                             <form class="dcf-form dcf-d-inline" method="post">
                                                 <input type="hidden" name="__unlmy_posttarget" value="copy_text_track_file" />
                                                 <input
@@ -197,7 +197,7 @@
                                                 </form>
                                             <?php endif; ?>
                                         </div>
-                                        <div class="dcf-input-radio dcf-col-100% dcf-col-25%-end@md">
+                                        <div class="dcf-input-radio dcf-col-span-12 dcf-col-span-4@md">
                                             <?php $active_check = $is_active ? 'checked="checked"' : ''; ?>
                                             <input
                                                 id="caption-active-radio-<?php echo (int)$track->id; ?>"
@@ -286,8 +286,8 @@
 <div class="dcf-bleed dcf-pt-6 dcf-pb-6">
     <div class="dcf-wrapper">
         <h2>AI Captioning</h2>
-        <div class="dcf-grid dcf-col-gap-vw">
-            <div class="dcf-col-100% dcf-col-67%-start@sm">
+        <div class="dcf-d-grid dcf-grid-cols-12 dcf-col-gap-vw">
+            <div class="dcf-col-span-12 dcf-col-span-9@sm">
                 <p>
                     MediaHub includes a free AI-powered captioning service to help
                     make your content accessible. Generation times vary based on
@@ -297,7 +297,7 @@
                 </p>
                 <?php echo $savvy->render($context, 'Feed/Media/transcriber_maintenance_notice.tpl.php'); ?>
             </div>
-            <div class="dcf-col-100% dcf-col-33%-end@sm">
+            <div class="dcf-col-span-12 dcf-col-span-3@sm">
             <?php if ($context->hasTranscriptionJob() && !$context->isTranscribingFinished()):?>
                 <p>Your captions are being generated.</p>
             <?php elseif ($context->hasTranscriptionJob() && $context->isTranscribingError()): ?>
@@ -350,8 +350,8 @@
 <div class="dcf-bleed unl-bg-lightest-gray dcf-pt-6 dcf-pb-6">
     <div class="dcf-wrapper">
         <h2>Upload your own .vtt or .srt file</h2>
-        <div class="dcf-grid dcf-col-gap-vw">
-            <div class="dcf-col-100% dcf-col-50%-start@sm">
+        <div class="dcf-d-grid dcf-grid-cols-12 dcf-col-gap-vw">
+            <div class="dcf-col-span-12 dcf-col-span-8@sm">
                 <p>
                     When crafting captions for your video, it's crucial to ensure clarity,
                     accuracy, and accessibility. Begin by transcribing spoken content
@@ -364,7 +364,7 @@
                     and insufficient proofreading.
                 </p>
             </div>
-            <div class="dcf-col-100% dcf-col-50%-end@sm">
+            <div class="dcf-col-span-12 dcf-col-span-4@sm">
                 <form class="dcf-form dcf-d-inline" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="__unlmy_posttarget" value="upload_caption_file" />
                     <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />
@@ -437,8 +437,8 @@
 <div class="dcf-bleed unl-bg-lightest-gray dcf-pt-6 dcf-pb-6">
     <div class="dcf-wrapper">
     <h2>Self-Manage Captions With Amara</h2>
-        <div class="dcf-grid dcf-col-gap-vw">
-            <div class="dcf-col-100% dcf-col-67%-start@sm">
+        <div class="dcf-d-grid dcf-grid-cols-12 dcf-col-gap-vw">
+            <div class="dcf-col-span-12 dcf-col-span-8@sm">
                 <p>
                     <a href="http://amara.org">amara.org</a> is a free service which helps
                     you caption videos. To caption your video you will need to do the following.
@@ -449,7 +449,7 @@
                     <li>Come back here, and click the button to 'pull captions from amara.org'</li>
                 </ol>
             </div>
-            <div class="dcf-col-100% dcf-col-33%-end@sm">
+            <div class="dcf-col-span-12 dcf-col-span-4@sm">
                 <?php if($context->isTranscodingFinished()): ?>
                     <?php $edit_captions_url = $context->getEditCaptionsURL(); ?>
                     <?php if (!$edit_captions_url): ?>

@@ -53,10 +53,10 @@ if ($type == 'video') {
 $controller->setReplacementData('head', $meta);
 $getTracks = $context->getTextTrackURLs();
 
-$divClass = 'dcf-ratio dcf-ratio-16x9 dcf-flex-grow-1';
-$iframeClass = 'dcf-ratio-child dcf-obj-fit-contain dcf-obj-top dcf-b-0';
+$divClass = 'dcf-flex-grow-1';
+$iframeClass = 'dcf-16x9 dcf-obj-fit-contain dcf-obj-top dcf-b-0';
 if ($type === 'audio') {
-    $divClass = 'dcf-w-max-xl dcf-flex-grow-1 dcf-overflow-hidden dcf-relative';
+    $divClass = 'dcf-max-w-xl dcf-flex-grow-1 dcf-overflow-hidden dcf-relative';
     $iframeClass = 'dcf-w-100% dcf-h-auto dcf-b-0';
 }
 
@@ -102,8 +102,8 @@ if ($type === 'audio') {
             </a>
           </div>
         <?php endif; ?>
-        <div class="dcf-grid dcf-col-gap-vw dcf-row-gap-4">
-            <div class="dcf-col-100% dcf-col-75%-start@sm">
+        <div class="dcf-d-grid dcf-grid-cols-12 dcf-col-gap-vw dcf-row-gap-4">
+            <div class="dcf-col-span-12 dcf-col-span-9@sm">
                 <h1><?php echo UNL_MediaHub::escape($context->title); ?></h1>
                 <?php if ($element = UNL_MediaHub_Feed_Media_NamespacedElements_itunes::mediaHasElement($context->id, 'subtitle')): ?>
                     <p class="unl-font-sans itunes_subtitle"><?php echo UNL_MediaHub::escape($element->value) ?></p>
@@ -118,7 +118,7 @@ if ($type === 'audio') {
                 }
                 ?>
 
-                <div class="mh-authoring dcf-grid-thirds@sm dcf-col-gap-vw dcf-txt-center">
+                <div class="mh-authoring dcf-d-grid dcf-grid-cols-1 dcf-grid-cols-3@sm dcf-col-gap-vw dcf-txt-center">
                     <?php if (!empty($context->author)): // @TODO present author with more info (standardize people records) ?>
                         <div class="mh-stat">
                             <span class="mh-count"><?php echo UNL_MediaHub::escape($context->author); ?></span>
@@ -213,7 +213,7 @@ if ($type === 'audio') {
 
             </div>
 
-            <div class="dcf-col-100% dcf-col-25%-end@sm mh-sidebar">
+            <div class="dcf-col-span-12 dcf-col-span-3@sm mh-sidebar">
 
               <div class="dcf-pt-4">
                 <div class="dcf-mb-4">
@@ -222,14 +222,14 @@ if ($type === 'audio') {
                             dcf-btn
                             dcf-btn-secondary
                             mh-hide-bp2
-                            dcf-btn-toggle-modal
+                            dcf-btn-toggle-dialog
                             dcf-d-flex
                             dcf-jc-center
                             dcf-ai-center
                             dcf-col-gap-2
                         "
                         type="button"
-                        data-toggles-modal="embed-modal"
+                        data-controls="embed-modal"
                         aria-label="Show Media Embed Code"
                     >
                         <svg
@@ -262,55 +262,53 @@ if ($type === 'audio') {
     </div>
 </div>
 
-<div class="dcf-modal" id="embed-modal" hidden>
-    <div class="dcf-modal-wrapper">
-        <header class="dcf-modal-header">
-            <h2 id="embed-modal-heading">Embed</h2>
-            <button class="dcf-btn-close-modal">Close</button>
-        </header>
-        <div class="dcf-modal-content">
-            <?php $embed = $savvy->render(UNL_MediaHub_Media_Embed::getById($context->id, UNL_MediaHub_Controller::$current_embed_version)); ?>
+<dialog class="dcf-dialog" id="embed-modal">
+    <header class="dcf-dialog-header">
+        <h2 id="embed-dialog-heading">Embed</h2>
+        <button class="dcf-btn-close-dialog">Close</button>
+    </header>
+    <div class="dcf-dialog-content">
+        <?php $embed = $savvy->render(UNL_MediaHub_Media_Embed::getById($context->id, UNL_MediaHub_Controller::$current_embed_version)); ?>
 
-            <p>Copy the following code into your page</p>
-            <div class="dcf-grid-full dcf-rounded dcf-overflow-hidden dcf-mb-5">
-                <div class="dcf-ai-center unl-bg-scarlet unl-cream" style="display: grid; grid-template-columns: 1fr auto;">
-                    <p class="dcf-m-0 dcf-p-0 dcf-pl-3">
-                        <span class="dcf-bold">HTML</span>
-                    </p>
-                    <button class="dcf-btn dcf-btn-primary dcf-m-1 dcf-d-flex dcf-ai-center copyCodeSnippet" type="button">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="dcf-h-5 dcf-w-5 dcf-fill-current"
-                            focusable="false"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            aria-labelledby="filled-copy-1-basic-title"
-                        >
-                            <title id="filled-copy-1-basic-title">Copy Code Snippet</title>
-                            <path
-                                d="M5.5,22C5.224,22,5,21.776,5,21.5V3H3.5C3.224,3,3,3.224,3,3.5v20C3,23.776,
-                                3.224,24,3.5,24h14c0.276,0,0.5-0.224,0.5-0.5 V22H5.5z"
-                            ></path>
-                            <path
-                                d="M21,6.5c0-0.133-0.053-0.26-0.146-0.353l-6-6C14.76,0.053,14.632,0,14.5,
-                                0h-8C6.224,0,6,0.224,6,0.5v20 C6,20.776,6.224,21,6.5,21h14c0.276,0,
-                                0.5-0.224,0.5-0.5V6.5z M14,7V1l6,6H14z"
-                            ></path>
-                            <g>
-                                <path fill="none" d="M0 0H24V24H0z"></path>
-                            </g>
-                        </svg>
-                    </button>
-                </div>
-                <pre
-                    class="dcf-m-0 dcf-sharp dcf-p-3 dcf-overflow-x-auto dcf-lh-1"
-                    style="background-color: var(--bg-code);"
-                ><?php echo htmlentities($embed, ENT_COMPAT | ENT_HTML401, "UTF-8"); ?></pre>
+        <p>Copy the following code into your page</p>
+        <div class="dcf-d-grid dcf-grid-cols-1 dcf-rounded dcf-overflow-hidden dcf-mb-5">
+            <div class="dcf-ai-center unl-bg-scarlet unl-cream" style="display: grid; grid-template-columns: 1fr auto;">
+                <p class="dcf-m-0 dcf-p-0 dcf-pl-3">
+                    <span class="dcf-bold">HTML</span>
+                </p>
+                <button class="dcf-btn dcf-btn-primary dcf-m-1 dcf-d-flex dcf-ai-center copyCodeSnippet" type="button">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="dcf-h-5 dcf-w-5 dcf-fill-current"
+                        focusable="false"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        aria-labelledby="filled-copy-1-basic-title"
+                    >
+                        <title id="filled-copy-1-basic-title">Copy Code Snippet</title>
+                        <path
+                            d="M5.5,22C5.224,22,5,21.776,5,21.5V3H3.5C3.224,3,3,3.224,3,3.5v20C3,23.776,
+                            3.224,24,3.5,24h14c0.276,0,0.5-0.224,0.5-0.5 V22H5.5z"
+                        ></path>
+                        <path
+                            d="M21,6.5c0-0.133-0.053-0.26-0.146-0.353l-6-6C14.76,0.053,14.632,0,14.5,
+                            0h-8C6.224,0,6,0.224,6,0.5v20 C6,20.776,6.224,21,6.5,21h14c0.276,0,
+                            0.5-0.224,0.5-0.5V6.5z M14,7V1l6,6H14z"
+                        ></path>
+                        <g>
+                            <path fill="none" d="M0 0H24V24H0z"></path>
+                        </g>
+                    </svg>
+                </button>
             </div>
+            <pre
+                class="dcf-m-0 dcf-sharp dcf-p-3 dcf-overflow-x-auto dcf-lh-1"
+                style="background-color: var(--bg-code);"
+            ><?php echo htmlentities($embed, ENT_COMPAT | ENT_HTML401, "UTF-8"); ?></pre>
         </div>
     </div>
-</div>
+</dialog>
 
 <script>
     document.querySelectorAll('.copyCodeSnippet').forEach((copyButton) => {

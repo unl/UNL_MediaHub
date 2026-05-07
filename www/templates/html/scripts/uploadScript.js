@@ -22,7 +22,7 @@ label_element.innerText = 'Browse for media';
 
 // Set up error element
 const error_element = document.createElement('p');
-error_element.classList.add('unl-bg-scarlet', 'unl-cream', 'dcf-rounded', 'dcf-p-4', 'dcf-mt-4', 'dcf-txt-sm', 'dcf-bold', 'dcf-d-none');
+error_element.classList.add('unl-bg-scarlet', 'unl-cream', 'dcf-rounded', 'dcf-p-4', 'dcf-mt-4', 'dcf-txt-sm', 'dcf-bold', 'dcf-d-none!');
 error_element.innerText = 'There was an error uploading your media. Please try refreshing the page and trying again or reach out to an administrator if the issue persists.';
 
 // Add new elements to media container
@@ -278,18 +278,18 @@ function statusUploading(fileName, fileSize) {
     fileList.innerHTML = '<div class="dcf-w-max-100% dcf-word-wrap" style="hyphens:none;">' + fileName + '<br> (' + fileSize + ') <b></b></div>';
     fileList.getElementsByTagName('b')[0].innerHTML = '<span>Loading video...</span>';
 
-    mh_upload_media.classList.add('dcf-d-none');
-    fileList.classList.remove('dcf-d-none');
+    mh_upload_media.classList.add('dcf-d-none!');
+    fileList.classList.remove('dcf-d-none!');
 
-    input_element.classList.add('dcf-d-none');
-    label_element.classList.add('dcf-d-none');
+    input_element.classList.add('dcf-d-none!');
+    label_element.classList.add('dcf-d-none!');
 }
 
 /**
  * Sets up the form to display the failed to upload state
  */
 function statusFailed() {
-    error_element.classList.remove('dcf-d-none');
+    error_element.classList.remove('dcf-d-none!');
 }
 
 function status_finalizing() {

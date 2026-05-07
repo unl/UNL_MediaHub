@@ -72,4 +72,14 @@ class UNL_MediaHub_Permission extends UNL_MediaHub_Models_BasePermission
         $user_permission->fromArray($data);
         return $user_permission->save();
     }
+
+    public function __serialize(): array
+    {
+        return parent::__serialize();
+    }
+
+    public function __unserialize(array $data): void
+    {
+        parent::__unserialize($data);
+    }
 }

@@ -15,7 +15,7 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
 if (!$theme->isCustomTheme()) {
     // UNL Theme
     $theme->setWDNIncludePath(__DIR__ . '/../..');
-    if (file_exists($theme->getWDNIncludePath() . '/wdn/templates_5.3')) {
+    if (file_exists($theme->getWDNIncludePath() . '/wdn/templates_6.0')) {
         $page->setLocalIncludePath($theme->getWDNIncludePath());
     }
 

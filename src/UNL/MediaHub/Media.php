@@ -431,7 +431,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         return new UNL_MediaHub_FeedList(array('limit'=>null, 'filter'=>new UNL_MediaHub_FeedList_Filter_WithMediaId($this->id)));
     }
 
-    function delete(Doctrine_Connection $conn = null)
+    function delete(?Doctrine_Connection $conn = null)
     {
         $feeds = $this->getFeeds();
         $feeds->run();
@@ -737,7 +737,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     /**
      * @return bool
      */
-    public function canView(UNL_MediaHub_User $user = NULL)
+    public function canView(?UNL_MediaHub_User $user = NULL)
     {
         $requires_membership = false;
         
@@ -1095,5 +1095,15 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         }
         $job->save();
         return $job;
+    }
+
+    public function __serialize(): array
+    {
+        return parent::__serialize();
+    }
+
+    public function __unserialize(array $data): void
+    {
+        parent::__unserialize($data);
     }
 }

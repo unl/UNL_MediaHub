@@ -6,7 +6,7 @@ class UNL_MediaHub_AuthService_UNL extends UNL_MediaHub_AuthService_Interface
 
     public function __construct($siteURL=null)
     {
-        if (self::$cert_path !== false && !file_exists(self::$cert_path)) {
+        if (self::$cert_path !== false && self::$cert_path !== null && !file_exists(self::$cert_path)) {
           self::$cert_path = GuzzleHttp\default_ca_bundle();
         }
 

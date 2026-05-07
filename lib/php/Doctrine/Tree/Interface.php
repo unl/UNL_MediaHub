@@ -37,7 +37,7 @@ interface Doctrine_Tree_Interface {
      *
      * @param Doctrine_Record $record                    instance of Doctrine_Record
      */
-    public function createRoot(Doctrine_Record $record = null);
+    public function createRoot(?Doctrine_Record $record = null);
 
     /**
      * returns root node

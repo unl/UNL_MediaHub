@@ -21,7 +21,7 @@ class UNL_MediaHub_Media_Embed
      */
     protected $allowed_versions = array(3);
 
-    function __construct(UNL_MediaHub_Media $media = null, $version = 3, $options = array())
+    function __construct(?UNL_MediaHub_Media $media = null, $version = 3, $options = array())
     {
         //Validate the version
         if (!$this->versionIsAllowed($version)) {
@@ -52,7 +52,7 @@ class UNL_MediaHub_Media_Embed
         return $this->media->meetsCaptionRequirement();
     }
 
-    public function canView(UNL_MediaHub_User $user = NULL)
+    public function canView(?UNL_MediaHub_User $user = NULL)
     {
         return $this->media->canView($user);
     }

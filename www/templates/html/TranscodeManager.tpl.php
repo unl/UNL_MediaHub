@@ -1,9 +1,9 @@
 <div class="dcf-bleed dcf-pt-6 dcf-mb-6">
     <div class="dcf-wrapper">
         <h2 class="dcf-txt-h2">Transcode Manager</h2>
-        <div class="dcf-grid dcf-col-gap-vw dcf-row-gap-4">
-            <div class="dcf-col-100% dcf-col-25%-start@md">
-                <ul class="dcf-list-bare">
+        <div class="dcf-d-grid dcf-grid-cols-12 dcf-col-gap-vw dcf-row-gap-4">
+            <div class="dcf-col-span-12 dcf-col-span-3@md">
+                <ul role="list">
                     <li>
                         <p class="dcf-txt-sm">
                             The <strong>Show Status</strong> button will display the current status of the transcoder. A status of
@@ -28,7 +28,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="dcf-col-100% dcf-col-75%-end@md">
+            <div class="dcf-col-span-12 dcf-col-span-9@md">
             <?php $commandResults = $context->getCommandResults(); ?>
             <?php if (!empty($commandResults)) { ?>
                 <h3 class="dcf-txt-h6">Command Results (<?php echo $commandResults->code === 0 ? 'Success' : 'Error'; ?>)</h3>
