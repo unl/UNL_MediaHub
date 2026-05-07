@@ -258,15 +258,6 @@ class UNL_MediaHub_Feed extends UNL_MediaHub_Models_BaseFeed
         return false;
     }
 
-    public function hasLiveStream()
-    {
-        if ($this->id == 89) {
-            return true;
-        }
-
-        return false;
-    }
-
     public function __serialize(): array
     {
         return parent::__serialize();

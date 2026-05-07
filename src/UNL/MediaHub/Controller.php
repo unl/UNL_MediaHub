@@ -102,8 +102,7 @@ class UNL_MediaHub_Controller
         'default' => 'UNL_MediaHub_DefaultHomepage',
         'feeds'   => 'UNL_MediaHub_FeedList',
         'feed'    => 'UNL_MediaHub_FeedAndMedia',
-        'dev'     => 'UNL_MediaHub_Developers',
-        'live'    => 'UNL_MediaHub_Feed_LiveStream',
+        'dev'     => 'UNL_MediaHub_Developers'
         );
 
     /**
