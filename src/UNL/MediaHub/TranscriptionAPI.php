@@ -68,13 +68,14 @@ class UNL_MediaHub_TranscriptionAPI
      * @param string $media_url url of the media to be captioned
      * @return string|bool false on error, string of job id
      */
-    public function create_job(string $media_url)
+    public function create_job(string $media_url, int $priority_level = 1)
     {
         try {
             $response = $this->guzzle->post(
                 self::$captioning_url . self::$create_job_route,
                 [
                     'form_params' => [
+                        'priority' => $priority_level,
                         'media_url' => $media_url,
                         'output_format' => self::$caption_format,
                     ],
