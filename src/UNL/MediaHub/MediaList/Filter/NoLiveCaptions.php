@@ -5,7 +5,7 @@ class UNL_MediaHub_MediaList_Filter_NoLiveCaptions implements UNL_MediaHub_Filte
 
     public function apply(Doctrine_Query_Abstract $query)
     {
-        $query->where('(m.media_text_tracks_id IS NULL and m.id not in (SELECT tj.media_id FROM mediahub.transcription_jobs tj WHERE tj.status = "ERROR" AND tj.uid = "AUTO CAPTION"))');
+        $query->where('(m.media_text_tracks_id IS NULL and m.id not in (SELECT tj.media_id FROM mediahub.transcription_jobs tj WHERE tj.status = "ERROR" AND tj.uid is NULL))');
     }
 
     public function getLabel()

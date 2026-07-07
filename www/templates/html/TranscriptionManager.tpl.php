@@ -61,7 +61,7 @@
                                     </a>
                                 </td>
                                 <td data-label="User Id">
-                                    <?php if ($job->uid === 'AUTO CAPTION'): ?>
+                                    <?php if ($job->uid === null): ?>
                                         AUTO CAPTION
                                     <?php else: ?>
                                         <a href="https://directory.unl.edu/people/<?php echo $job->uid; ?>" target="_blank">

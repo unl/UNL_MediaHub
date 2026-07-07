@@ -35,22 +35,18 @@ while (true) {
         // Loop through those 5 videos and order low priority captions for them
         // Low priority since we don't want to prevent new videos from
         foreach ($media_with_no_captions->items as $single_media) {
-            try {
-                // Set up variable for transcriber
-                $media_url = $single_media->getURL() . '/file';
+            // Set up variable for transcriber
+            $media_url = $single_media->getURL() . '/file';
 
-                // Called API to make job
-                $ai_captioning = new UNL_MediaHub_TranscriptionAPI();
-                $job_id = $ai_captioning->create_job($media_url, 0);
-                if ($job_id === false) {
-                    continue;
-                }
-
-                // If successful it will create a job in the database
-                $single_media->transcription($job_id, 'AUTO CAPTION', true);
-            } catch(Exception $e) {
-                $transcribing_successful = false;
+            // Called API to make job
+            $ai_captioning = new UNL_MediaHub_TranscriptionAPI();
+            $job_id = $ai_captioning->create_job($media_url, 0);
+            if ($job_id === false) {
+                continue;
             }
+
+            // If successful it will create a job in the database
+            $single_media->transcription($job_id, null, true);
         }
 
         // Sleep in case we have no more media to caption
