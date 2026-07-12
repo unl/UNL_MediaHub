@@ -33,8 +33,8 @@ if(!empty($context->options['f'])){
 <div class="dcf-bleed dcf-pt-6">
     <div class="dcf-wrapper dcf-pb-0">
         <div class="mh-list-header">
-            <div class="dcf-grid">
-                <div class="dcf-col-100% dcf-col-75%-start@sm">
+            <div class="dcf-d-grid dcf-grid-cols-12">
+                <div class="dcf-col-span-12 dcf-col-span-9@sm">
                     <?php if ($context->options['filter']->getType() == 'search'): ?>
                         <h2>
                             <span class="dcf-subhead">Search results for</span>
@@ -49,7 +49,7 @@ if(!empty($context->options['f'])){
                         <p>Page <?php echo $context->pager->getPage() ?> of <?php echo $context->pager->getLastPage() ?></p>
                     <?php endif; ?>
                 </div>
-                <div class="dcf-col-100% dcf-col-25%-end@sm">
+                <div class="dcf-col-span-12 dcf-col-span-3@sm">
                     <?php if (in_array($context->options['filter']->getType(), array('search', 'browse'))): ?>
                         <?php echo $savvy->render($context->options['filter'], 'SearchBox.tpl.php'); ?>
                     <?php endif; ?>
@@ -145,7 +145,7 @@ if(!empty($context->options['f'])){
                 <h2>
                     <span class="dcf-subhead">Channel Search</span>
                 </h2>
-                <ul class="mh-channel-buttons dcf-grid-full dcf-grid-halves@sm dcf-grid-thirds@md dcf-col-gap-vw dcf-row-gap-7">
+                <ul class="mh-channel-buttons dcf-d-grid dcf-grid-cols-1 dcf-grid-cols-2@sm dcf-grid-cols-3@md dcf-col-gap-vw dcf-row-gap-7">
                     <?php foreach ($feeds->items as $feed): ?>
                         <li><a class="dcf-btn dcf-btn-secondary dcf-w-100% dcf-h-100%" href="<?php echo UNL_MediaHub_Controller::getURL($feed); ?>"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_ROCKET, '{"size": 4}'); ?> <?php echo UNL_MediaHub::escape($feed->title) ?></a></li>
                     <?php endforeach; ?>
@@ -157,7 +157,7 @@ if(!empty($context->options['f'])){
 
     <div class="dcf-bleed mh-media">
         <div class="dcf-wrapper dcf-pt-8 dcf-pb-8">
-            <ul class="dcf-list-bare dcf-grid-halves@sm dcf-grid-thirds@md dcf-grid-fourths@xl dcf-col-gap-vw dcf-row-gap-7 mh-media-list<?php echo $mediaListClass ?>">
+            <ul class="dcf-d-grid dcf-grid-cols-1 dcf-grid-cols-2@sm dcf-grid-cols-3@md dcf-grid-cols-4@xl dcf-col-gap-vw dcf-row-gap-7 mh-media-list<?php echo $mediaListClass ?>" role="list">
                 <?php foreach ($context->items as $media): ?>
                     <li>
                         <?php echo $savvy->render($media, 'Media/teaser.tpl.php'); ?>

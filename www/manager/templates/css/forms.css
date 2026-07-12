@@ -145,14 +145,6 @@ input[value="Save"] {
     margin-right: 1em;
 }
 
-form legend {
-    margin: 0;
-    font-size: 1.899em;
-    line-height: 1em;
-    border: none;
-    font-weight: 400;
-}
-
 #headline_main .mh-share-this-page {
     display: none;
 }

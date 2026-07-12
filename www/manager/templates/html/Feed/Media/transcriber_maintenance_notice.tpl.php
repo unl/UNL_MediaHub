@@ -1,4 +1,4 @@
-<div id="auto-captioning-maintenance" class="dcf-d-none">
+<div id="auto-captioning-maintenance" class="dcf-d-none!">
     <div id="auto-captioning-maintenance-notice" class="dcf-notice dcf-notice-info" data-no-close-button="true" hidden>
         <h2>AI Captions Maintenance Notice</h2>
         <div>
@@ -11,7 +11,7 @@
     </div>
 </div>
 
-<div id="auto-captioning-error" class="dcf-d-none">
+<div id="auto-captioning-error" class="dcf-d-none!">
     <div id="auto-captioning-error-notice" class="dcf-notice dcf-notice-danger" data-no-close-button="true" hidden>
         <h2>AI Captions Error</h2>
         <div>
@@ -45,7 +45,7 @@
 
             if (parsed_data['status'] !== 'OK') {
                 // Show the error message
-                auto_captioning_error.classList.remove('dcf-d-none');
+                auto_captioning_error.classList.remove('dcf-d-none!');
                 return;
             }
 
@@ -56,7 +56,7 @@
 
             if (parsed_data['data']['maintenance_date_range'] === '') { return; }
 
-            auto_captioning_maintenance.classList.remove('dcf-d-none');
+            auto_captioning_maintenance.classList.remove('dcf-d-none!');
             auto_captioning_maintenance_date_range.innerText = parsed_data['data']['maintenance_date_range'];
         } catch (err) {
             console.error(err);

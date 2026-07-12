@@ -86,4 +86,14 @@ class UNL_MediaHub_RevOrder extends UNL_MediaHub_Models_BaseRevOrder
     {
         return !$this->isFinished();
     }
+
+    public function __serialize(): array
+    {
+        return parent::__serialize();
+    }
+
+    public function __unserialize(array $data): void
+    {
+        parent::__unserialize($data);
+    }
 }

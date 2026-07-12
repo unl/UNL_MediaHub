@@ -44,7 +44,7 @@ class Doctrine_Export_Reporter implements IteratorAggregate
         return array_pop($this->messages);
     }
 
-    public function getIterator()
+    public function getIterator():Traversable
     {
         return new ArrayIterator($this->messages);
     }

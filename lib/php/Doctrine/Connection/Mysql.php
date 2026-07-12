@@ -210,4 +210,14 @@ class Doctrine_Connection_Mysql extends Doctrine_Connection_Common
 
         return $this->exec($query, $params);
     }
+
+    public function __serialize(): array
+    {
+        return parent::__serialize();
+    }
+
+    public function __unserialize(array $data): void
+    {
+        parent::__unserialize($data);
+    }
 }

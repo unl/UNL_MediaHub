@@ -311,7 +311,7 @@ class Doctrine_Connection_Statement implements Doctrine_Adapter_Statement_Interf
         $data = $this->_conn->getListener()->preFetch($event);
 
         if ( ! $event->skipOperation) {
-            $data = $this->_stmt->fetch($fetchMode, $cursorOrientation, $cursorOffset);
+            $data = $this->_stmt->fetch($fetchMode, $cursorOrientation, $cursorOffset || 0);
         }
 
         $this->_conn->getListener()->postFetch($event);

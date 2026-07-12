@@ -22,8 +22,8 @@
         <p class="dcf-mb-6">
             This form allows simple edits of copied caption tracks.
         </p>
-        <div class="dcf-grid dcf-col-gap-vw dcf-row-gap-6">
-            <div class="dcf-sticky dcf-pt-4 dcf-top-0 dcf-col-100% dcf-col-25%-start@sm" style="height: fit-content;">
+        <div class="dcf-d-grid dcf-grid-cols-12 dcf-col-gap-vw dcf-row-gap-6">
+            <div class="dcf-sticky dcf-pt-4 dcf-top-0 dcf-col-span-12 dcf-col-span-3@sm" style="height: fit-content;">
                 <a class="dcf-btn dcf-btn-secondary dcf-mb-3" href="<?php echo UNL_MediaHub_Manager::getURL() . '?view=editcaptions&id=' . $context->media->id; ?>">
                     Back To Captions
                 </a>
@@ -131,7 +131,7 @@
                 $invalidTrackMessage = 'Unable to edit caption track due to invalid format. ' . $e->getMessage();
             }
             ?>
-            <div class="dcf-col-100% dcf-col-75%-end@sm">
+            <div class="dcf-col-span-12 dcf-col-span-9@sm">
                 <?php if ($validTrack === TRUE) : ?>
                 <form class="dcf-form" id="captions_edit" method="POST">
                     <input type="hidden" name="media_id" value="<?php echo (int)$context->media->id ?>" />

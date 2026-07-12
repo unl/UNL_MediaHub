@@ -8,7 +8,7 @@
 <div class="dcf-pt-6 dcf-pb-6">
     <h1 class="dcf-txt-h2"><?php if (isset($context->options['feed'])) { echo UNL_MediaHub::escape($context->options['feed']->title); } ?> Channel - User Manager</h1>
 
-    <ul class="dcf-p-1 dcf-list-bare dcf-list-inline dcf-txt-xs dcf-bg-overlay-dark">
+    <ul class="dcf-p-1 dcf-list-inline dcf-txt-xs dcf-bg-overlay-dark" role="list">
         <li class="dcf-m-0">
             <a class="dcf-btn dcf-btn-inverse-tertiary" href="<?php echo UNL_MediaHub_Controller::getURL(); ?>channels/<?php echo $feedID; ?>">View Channel</a>
         </li>

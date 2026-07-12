@@ -38,4 +38,14 @@ class UNL_MediaHub_Feed_Media_NamespacedElements_itunesu extends UNL_MediaHub_Fe
             unset($this->value);
         }
     }
+
+    public function __serialize(): array
+    {
+        return parent::__serialize();
+    }
+
+    public function __unserialize(array $data): void
+    {
+        parent::__unserialize($data);
+    }
 }

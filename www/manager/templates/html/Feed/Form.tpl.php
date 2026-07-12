@@ -6,45 +6,41 @@ if (isset($context->feed) && !$context->feed->userCanEdit($user)) {
     throw new UNL_MediaHub_RuntimeException('You do not have permission to manage this channel.', 403);
 }
 $page->addScriptDeclaration("
-    require(['jquery'], function($) {
-        $(document).ready(function() {
-            $('#extensions input').change(function() {
-                if(this.checked){
-                    $('#'+this.value+'_header').slideDown(400);
-                } else {
-                    $('#'+this.value+'_header').slideUp(400);
-                }
-                return true;
-            });
-            $('#description').change(function(){
-                if ($('#itunes_summary').val() == '') {
-                    $('#itunes_summary').val($(this).val());
-                }
-                if ($('#media_description').val() == '') {
-                    $('#media_description').val($(this).val());
-                }
-            });
-            $('#title').change(function(){
-                if ($('#media_title').val() == '') {
-                    $('#media_title').val($(this).val());
-                }
-            });
-        });
+    const description_input = document.getElementById('description');
+    const itunes_summary_input = document.getElementById('itunes_summary');
+    const media_description_input = document.getElementById('media_description');
+
+    description_input.addEventListener('change', () => {
+        if (itunes_summary_input.value === '') {
+            itunes_summary_input.value = description_input.value;
+        }
+        if (media_description_input.value === '') {
+            media_description_input.value = description_input.value;
+        }
+    });
+
+    const title_input = document.getElementById('title');
+    const media_title_input = document.getElementById('media_title');
+
+    title_input.addEventListener('change', () => {
+        if (media_title_input.value === '') {
+            media_title_input.value = title_input.value;
+        }
     });
 ");
 ?>
 <h1 class="dcf-mt-4 dcf-txt-h2">
     <?php echo (isset($context->feed))?'Edit':'Create'; ?> Channel<?php echo (isset($context->feed))? ': ' . UNL_MediaHub::escape($context->feed->title):''; ?>
 </h1>
-<ul class="dcf-p-1 dcf-list-bare dcf-list-inline dcf-txt-xs dcf-bg-overlay-dark">
+<ul class="dcf-p-1 dcf-list-inline dcf-txt-xs dcf-bg-overlay-dark" role="list">
     <li class="dcf-m-0">
-        <a class="dcf-btn dcf-btn-inverse-tertiary" href="<?php echo UNL_MediaHub_Controller::getURL(); ?>channels/<?php echo $context->feed->id; ?>">View Channel</a>
+        <a class="dcf-btn dcf-btn-inverse-tertiary" href="<?php echo UNL_MediaHub_Controller::getURL(); ?>channels/<?php echo $context->feed->id ?? ''; ?>">View Channel</a>
     </li>
     <li class="dcf-m-0">
-        <a class="dcf-btn dcf-btn-inverse-tertiary" href="<?php echo UNL_MediaHub_Manager::getURL(); ?>?view=feedstats&amp;feed_id=<?php echo $context->feed->id; ?>">View Channel Stats</a>
+        <a class="dcf-btn dcf-btn-inverse-tertiary" href="<?php echo UNL_MediaHub_Manager::getURL(); ?>?view=feedstats&amp;feed_id=<?php echo $context->feed->id ?? ''; ?>">View Channel Stats</a>
     </li>
     <li class="dcf-m-0">
-        <a class="dcf-btn dcf-btn-inverse-tertiary" href="<?php echo UNL_MediaHub_Manager::getURL(); ?>?view=permissions&amp;feed_id=<?php echo $context->feed->id; ?>">Edit Channel Users</a>
+        <a class="dcf-btn dcf-btn-inverse-tertiary" href="<?php echo UNL_MediaHub_Manager::getURL(); ?>?view=permissions&amp;feed_id=<?php echo $context->feed->id ?? ''; ?>">Edit Channel Users</a>
     </li>
 </ul>
 <div class="dcf-mt-6 dcf-mb-6 ">
@@ -136,7 +132,7 @@ $page->addScriptDeclaration("
                         </p>
                     </div>
                 </div>
-                <textarea id="description" name="description" aria-describedby="description-details"><?php echo (isset($context->feed))?htmlentities($context->feed->description):''; ?></textarea>
+                <textarea id="description" name="description" aria-describedby="description-details"><?php echo (isset($context->feed))?htmlentities($context->feed->description ?? ''):''; ?></textarea>
             </div>
         </fieldset>
         <fieldset id="feed_header">
@@ -144,7 +140,7 @@ $page->addScriptDeclaration("
             <?php if(isset($context->feed->id) && $context->feed->hasImage()): ?>
                 <div class="dcf-form-group">
                     <div class="mh-channel-thumb">
-                        <img src="<?php echo $url; ?>/image" alt="<?php echo htmlentities($context->feed->title, ENT_QUOTES); ?> Image">
+                        <img src="<?php echo $url; ?>/image" alt="<?php echo htmlentities($context->feed->title ?? '', ENT_QUOTES); ?> Image">
                     </div>
                 </div>
             <?php endif; ?>
@@ -226,7 +222,7 @@ $page->addScriptDeclaration("
                         </p>
                     </div>
                 </div>
-                <input id="image_title" name="image_title" type="text" aria-describedby="image-title-details" value="<?php echo (isset($context->feed))? htmlentities($context->feed->image_title, ENT_QUOTES):''; ?>" />
+                <input id="image_title" name="image_title" type="text" aria-describedby="image-title-details" value="<?php echo (isset($context->feed))? htmlentities($context->feed->image_title ?? '', ENT_QUOTES):''; ?>" />
             </div>
             <div class="dcf-form-group">
                 <label for="image_description">Image Description</label>
@@ -265,7 +261,7 @@ $page->addScriptDeclaration("
                         </p>
                     </div>
                 </div>
-                <textarea id="image_description" name="image_description" aria-describedby="image-description-details"><?php echo (isset($context->feed))?htmlentities($context->feed->image_description):''; ?></textarea>
+                <textarea id="image_description" name="image_description" aria-describedby="image-description-details"><?php echo (isset($context->feed))?htmlentities($context->feed->image_description ?? ''):''; ?></textarea>
             </div>
         </fieldset>
 

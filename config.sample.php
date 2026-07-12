@@ -35,11 +35,6 @@ UNL_MediaHub_Controller::$templateVersion = UNL\Templates\Templates::VERSION_5_3
 
 UNL_MediaHub_AmaraAPI::$amaraAPIKey  = false;
 
-UNL_MediaHub_RevAPI::$host = \RevAPI\Rev::SANDBOX_HOST;
-UNL_MediaHub_RevAPI::$client_api_key = '';
-UNL_MediaHub_RevAPI::$user_api_key = '';
-UNL_MediaHub_RevAPI::$http_config = array();
-
 UNL_MediaHub_TranscriptionAPI::$captioning_url = 'https://local-captions.unl.edu/';
 UNL_MediaHub_TranscriptionAPI::$captioning_api_key = '';
 UNL_MediaHub_TranscriptionAPI::$verify = true; // Set this for false on local dev if you are running into errors
