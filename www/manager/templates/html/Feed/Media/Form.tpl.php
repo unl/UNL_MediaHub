@@ -33,7 +33,7 @@ $js = '<script type="text/javascript">
 var formView = "'.$formView.'";
 var mediaType = "'.$mediaType.'";
 </script>
-<script type="text/javascript" src="'.UNL_MediaHub_Controller::getURL().'templates/html/scripts/editMedia.js?v='.UNL_MediaHub_Controller::getVersion().'"></script>
+<script type="module" src="'.UNL_MediaHub_Controller::getURL().'templates/html/scripts/editMedia.js?v='.UNL_MediaHub_Controller::getVersion().'"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 ';
 
