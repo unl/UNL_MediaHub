@@ -413,8 +413,11 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
             return false;
         }
 
-        if (false !== $http_response_header && count($http_response_header)) {
-            foreach($http_response_header as $header) {
+        $headers = function_exists('http_get_last_response_headers')
+            ? http_get_last_response_headers()
+            : ($http_response_header ?? null);
+        if (!empty($headers)) {
+            foreach ($headers as $header) {
                 if (strpos($header, 'Content-Type: ') !== false) {
                     $this->type = substr($header, 14);
                 }
