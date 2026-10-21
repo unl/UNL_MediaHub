@@ -19,20 +19,20 @@ class UNL_MediaHub_DurationHelper
         $duration = [];
         //Duration in totals
         $duration['total_milliseconds'] = $total_milliseconds;
-        $duration['total_seconds'] = floor($total_milliseconds / 1000);
-        
+        $duration['total_seconds'] = (int) floor($total_milliseconds / 1000);
+
         //duration in units
-        $duration['milliseconds'] = $duration['total_milliseconds'] % 1000;
-        $duration['hours'] =  floor($duration['total_seconds'] / (60 * 60));
-        $duration['minutes'] = floor(($duration['total_seconds'] / 60) % 60);
-        $duration['seconds'] = floor((($duration['total_seconds'] % 60) * 100) / 100);
-        
+        $duration['milliseconds'] = (int) $duration['total_milliseconds'] % 1000;
+        $duration['hours'] = intdiv($duration['total_seconds'], 3600);
+        $duration['minutes'] = intdiv($duration['total_seconds'], 60) % 60;
+        $duration['seconds'] = $duration['total_seconds'] % 60;
+
         //string
         $duration['string'] = str_pad($duration['hours'], 2, '0', STR_PAD_LEFT);
         $duration['string'] .= ':' . str_pad($duration['minutes'], 2, '0', STR_PAD_LEFT);
         $duration['string'] .= ':' . str_pad($duration['seconds'], 2, '0', STR_PAD_LEFT);
-        
-        $this->details = $duration;
+
+    $this->details = $duration;
     }
     
     public function getTotalMilliseconds()
