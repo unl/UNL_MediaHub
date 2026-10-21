@@ -2,9 +2,17 @@
 $html = $savvy->render($context, 'Exception.tpl.php');
 ?>
 <script type="text/javascript">
-  require(['jquery'], function($) {
-    $('#dcf-main').prepend(<?php echo json_encode($html); ?>);
-    $('.meter').hide();
-    $('#fileUpload').show();
+  const main = document.getElementById('dcf-main');
+  if (main) {
+    main.insertAdjacentHTML('afterbegin', <?php echo json_encode($html); ?>);
+  }
+
+  document.querySelectorAll('.meter').forEach(function (meter) {
+    meter.style.display = 'none';
   });
+
+  const fileUpload = document.getElementById('fileUpload');
+  if (fileUpload) {
+    fileUpload.style.display = '';
+  }
 </script>
