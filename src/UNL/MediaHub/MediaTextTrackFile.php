@@ -55,4 +55,14 @@ class UNL_MediaHub_MediaTextTrackFile extends UNL_MediaHub_Models_BaseMediaTextT
     {
         return UNL_MediaHub_MediaTextTrack::getById($this->media_text_tracks_id);
     }
+
+    public function __serialize(): array
+    {
+        return parent::__serialize();
+    }
+
+    public function __unserialize(array $data): void
+    {
+        parent::__unserialize($data);
+    }
 }
