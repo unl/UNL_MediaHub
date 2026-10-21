@@ -169,12 +169,14 @@ $page->jsbody .= $js;
                             <?php else: ?>
                                 <?php if ($transcoding_job): ?>
                                     <p>
-                                        <?php
-                                            echo \UNL\Templates\Icons::get(
-                                                    \UNL\Templates\Icons::ICON_ALERT,
-                                                    '{"size": 4}'
-                                                );
-                                        ?>
+                                        <span class="dcf-d-inline-block">
+                                            <?php
+                                                echo \UNL\Templates\Icons::get(
+                                                        \UNL\Templates\Icons::ICON_ALERT,
+                                                        '{"size": 4}'
+                                                    );
+                                            ?>
+                                        </span>
                                         <span class="dcf-sr-only">Notice:</span>
                                         Swapping media will cause the media to be unavailable
                                         while the upload is optimized. This upload will be optimized
@@ -183,12 +185,14 @@ $page->jsbody .= $js;
                                 <?php endif; ?>
                                 <?php if (!$transcoding_job): ?>
                                     <p class="dcf-txt-xs">
-                                        <?php
-                                            echo \UNL\Templates\Icons::get(
-                                                    \UNL\Templates\Icons::ICON_ALERT,
-                                                    '{"size": 4}'
-                                                );
-                                        ?>
+                                        <span class="dcf-d-inline-block">
+                                            <?php
+                                                echo \UNL\Templates\Icons::get(
+                                                        \UNL\Templates\Icons::ICON_ALERT,
+                                                        '{"size": 4}'
+                                                    );
+                                            ?>
+                                        </span>
                                         <span class="dcf-sr-only">Notice:</span>
                                         You MUST use HandBrake to optimize the new video.
                                         You must swap media with the same file type as you uploaded.
@@ -196,21 +200,25 @@ $page->jsbody .= $js;
                                 <?php endif; ?>
                                 <div id="mh_upload_media_container">
                                     <div class="dcf-p-3 mh-upload-box dcf-txt-center" id="mh_upload_media">
-                                        <img
-                                            src="<?php echo $baseUrl; ?>/templates/html/css/images/swap-arrows.svg"
-                                            aria-hidden="true"
-                                            alt="">
+                                        <div class="dcf-d-flex dcf-ai-center dcf-jc-center">
+                                            <img
+                                                src="<?php echo $baseUrl; ?>/templates/html/css/images/swap-arrows.svg"
+                                                aria-hidden="true"
+                                                alt="">
+                                        </div>
                                         <h2><span class="dcf-subhead">Swap Media</span></h2>
                                         <p>
                                             Upload a new .mp4 or .mp3 file and replace your old one.
                                             <br>
                                             <strong>
-                                                <?php
-                                                    echo \UNL\Templates\Icons::get(
+                                                <span class="dcf-d-inline-block">
+                                                    <?php
+                                                        echo \UNL\Templates\Icons::get(
                                                             \UNL\Templates\Icons::ICON_ALERT,
                                                             '{"size": 4}'
                                                         );
                                                     ?>
+                                                </span>
                                                 (Caution: This deletes your old file.)
                                             </strong>
                                         </p>
@@ -276,6 +284,7 @@ $page->jsbody .= $js;
                                                 dcf-txt-md
                                                 dcf-lh-4
                                             "
+                                            hidden
                                             style="min-width: 25ch;"
                                         >
                                             <p class="dcf-m-0 dcf-regular">
@@ -393,6 +402,7 @@ $page->jsbody .= $js;
                                         dcf-p-1
                                         dcf-rounded
                                     "
+                                    hidden
                                     style="min-width: 25ch;"
                                 >
                                     <p class="dcf-m-0 dcf-regular">
@@ -440,6 +450,7 @@ $page->jsbody .= $js;
                                         dcf-p-1
                                         dcf-rounded
                                     "
+                                    hidden
                                     style="min-width: 25ch;"
                                 >
                                     <p class="dcf-m-0 dcf-regular">
@@ -490,6 +501,7 @@ $page->jsbody .= $js;
                                         dcf-p-1
                                         dcf-rounded
                                     "
+                                    hidden
                                     style="min-width: 25ch;"
                                 >
                                     <p class="dcf-m-0 dcf-regular">
@@ -532,6 +544,7 @@ $page->jsbody .= $js;
                                         dcf-p-1
                                         dcf-rounded
                                     "
+                                    hidden
                                     style="min-width: 25ch;"
                                 >
                                     <p class="dcf-m-0 dcf-regular">
@@ -699,6 +712,7 @@ $page->jsbody .= $js;
                                             dcf-p-1
                                             dcf-rounded
                                         "
+                                        hidden
                                         style="min-width: 25ch;"
                                     >
                                         <p class="dcf-m-0 dcf-regular">
