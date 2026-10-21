@@ -262,7 +262,6 @@
                         });
                     });
 
-                    WDN.initializePlugin('collapsible-fieldsets');
                 }, false);
             </script>
             <p class="dcf-txt-xs">

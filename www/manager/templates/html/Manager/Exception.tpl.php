@@ -21,13 +21,6 @@ switch ($code) {
 
 ?>
 
-<script>
-  window.addEventListener('inlineJSReady', function(e) {
-    require(['wdn'], function(wdn) {
-      wdn.initializePlugin('notice');
-    });
-  });
-</script>
 <div class="dcf-mt-8 dcf-notice dcf-notice-warning" hidden data-no-close-button>
     <h2><?php echo $title; ?></h2>
     <div><?php echo UNL_MediaHub::escape($context->exception->getMessage()); ?></div>

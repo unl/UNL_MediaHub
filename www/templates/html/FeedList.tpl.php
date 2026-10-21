@@ -88,8 +88,6 @@ if($context->options['orderby'] == 'datecreated'){
                             const pagination = new DCFPaginationModule.DCFPagination(paginationNavs);
                             pagination.initialize();
                         });");
-                } else {
-	                $page->addScriptDeclaration("WDN.initializePlugin('pagination');");
                 }
                 ?>
                 <ul class="mh-feed-list">

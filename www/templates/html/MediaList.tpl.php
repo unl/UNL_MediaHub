@@ -133,8 +133,6 @@ if(!empty($context->options['f'])){
                             const pagination = new DCFPaginationModule.DCFPagination(paginationNavs);
                             pagination.initialize();
                         });");
-	} else {
-		$page->addScriptDeclaration("WDN.initializePlugin('pagination');");
 	}
     ?>
 
