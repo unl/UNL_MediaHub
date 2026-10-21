@@ -61,12 +61,16 @@
                                     </a>
                                 </td>
                                 <td data-label="User Id">
-                                    <a href="https://directory.unl.edu/people/<?php echo $job->uid; ?>" target="_blank">
-                                        <?php echo $job->uid; ?>
-                                    </a>
+                                    <?php if ($job->uid === null): ?>
+                                        AUTO CAPTION
+                                    <?php else: ?>
+                                        <a href="https://directory.unl.edu/people/<?php echo $job->uid; ?>" target="_blank">
+                                            <?php echo $job->uid; ?>
+                                        </a>
+                                    <?php endif; ?>
                                 </td>
                                 <td data-label="Status"><?php echo ucwords(strtolower($job->status)); ?></td>
-                                <td data-label="Auto Activate"><?php echo $job->auto_activate === '1' ? 'Yes': 'No'; ?></td>
+                                <td data-label="Auto Activate"><?php echo intval($job->auto_activate) === 1 ? 'Yes': 'No'; ?></td>
                                 <td data-label="Date Created"><?php echo $job->datecreated; ?></td>
                                 <td data-label="Date Updated"><?php echo $job->dateupdated; ?></td>
                             </tr>

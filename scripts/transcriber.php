@@ -17,11 +17,40 @@ while (true) {
     if (!$db->isConnected()) {
         $db->connect();
     }
-    
+
     //Get all orders that have not been completed.
     $media_hub_jobs = new UNL_MediaHub_TranscriptionJobList(array('all_not_complete' => true));
 
     if (count($media_hub_jobs) === 0) {
+        // If we are here then we have nothing to caption
+        // so we should try captioning any videos with no captions
+
+        // Get the 5 newest videos with no captions
+        // This filters out videos we already tried captioning and errored out on
+        $media_with_no_captions = new UNL_MediaHub_MediaList(array(
+            'filter'=>new UNL_MediaHub_MediaList_Filter_NoLiveCaptions(),
+            'limit'=>5,
+            'order'=>'datecreated'));
+
+        // Loop through those 5 videos and order low priority captions for them
+        // Low priority since we don't want to prevent new videos from
+        foreach ($media_with_no_captions->items as $single_media) {
+            // Set up variable for transcriber
+            $media_url = $single_media->getURL() . '/file';
+
+            // Called API to make job
+            $ai_captioning = new UNL_MediaHub_TranscriptionAPI();
+            $job_id = $ai_captioning->create_job($media_url, 0);
+            if ($job_id === false) {
+                continue;
+            }
+
+            // If successful it will create a job in the database
+            $single_media->transcription($job_id, null, true);
+        }
+
+        // Sleep in case we have no more media to caption
+        // If no sleep then CPU 100% on server
         sleep(10);
     }
 
