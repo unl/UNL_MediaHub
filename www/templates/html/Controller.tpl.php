@@ -21,9 +21,13 @@ if (!$theme->isCustomTheme()) {
 
     $page->contactinfo = $theme->renderThemeTemplate(null, 'localfooter.tpl.php');
 
-    $page->addScriptDeclaration('WDN.setPluginParam("idm", "logout", "' . $baseUrl . '?logout");');
+    $page->addScriptDeclaration('window.UNL.idm.pushConfig("logoutRoute", "' . $baseUrl . '?logout");', '', true);
 
-    $page->addScriptDeclaration("WDN.initializePlugin('card-as-link');");
+    $auth = UNL_MediaHub_AuthService::getInstance();
+    if ($auth->isLoggedIn()) {
+        $user = $auth->getUser();
+        $page->addScriptDeclaration('window.UNL.idm.pushConfig("serverUser", "' . $user->uid . '");', '', true);
+    }
 
 } else {
     // Custom Theme
