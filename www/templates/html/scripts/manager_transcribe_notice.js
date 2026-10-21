@@ -30,14 +30,14 @@ async function check_status_transcribe() {
     const message = document.getElementById('ai-caption-progress');
     const notice = message.closest('.dcf-notice');
 
-    if (data.transcoding_is_complete && data.transcoding_is_error) {
-        message.innerHTML = `<p>There was an error preparing your video. <a href="${window.location}">Reload this page</a></p>`;
+    if (data.transcription_is_complete && data.transcription_is_error) {
+        message.innerHTML = `<p>There was an error generating your video's captions. <a href="${window.location}">Reload this page</a></p>`;
         notice.classList.remove('dcf-notice-info');
-        notice.classList.remove('dcf-notice-warning');
-    } else if (data.transcoding_is_complete) {
-        message.innerHTML = `<p>We have finished preparing your video. <a href="${window.location}">Reload this page</a></p>`;
+        notice.classList.add('dcf-notice-warning');
+    } else if (data.transcription_is_complete) {
+        message.innerHTML = `<p>We have finished generating your video's captions. <a href="${window.location}">Reload this page</a></p>`;
         notice.classList.remove('dcf-notice-info');
-        notice.classList.remove('dcf-notice-success');
+        notice.classList.add('dcf-notice-success');
     } else {
         setTimeout(check_status_transcribe, 10000);
     }
