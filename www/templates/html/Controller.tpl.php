@@ -15,7 +15,7 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
 if (!$theme->isCustomTheme()) {
     // UNL Theme
     $theme->setWDNIncludePath(__DIR__ . '/../..');
-    if (file_exists($theme->getWDNIncludePath() . '/wdn/templates_6.0')) {
+    if (file_exists($theme->getWDNIncludePath() . '/wdn/templates_6.1')) {
         $page->setLocalIncludePath($theme->getWDNIncludePath());
     }
 
@@ -54,6 +54,7 @@ $page->titlegraphic = $theme->renderThemeTemplate(null, 'titlegraphic.tpl.php');
 
 //Header
 $page->addStyleSheet($baseUrl . 'templates/html/css/all.css?v=' . UNL_MediaHub_Controller::getVersion());
+$page->addStyleSheet($baseUrl . 'templates/html/css/viewTransitions.css?v=' . UNL_MediaHub_Controller::getVersion());
 
 $page->addScript($baseUrl . 'templates/html/scripts/frontend.js?v=' . UNL_MediaHub_Controller::getVersion());
 

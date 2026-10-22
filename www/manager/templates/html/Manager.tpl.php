@@ -13,7 +13,7 @@ $theme->addGlobal('page', $page);
 if (!$theme->isCustomTheme()) {
     // UNL Theme
     $theme->setWDNIncludePath(__DIR__ . '/../../..');
-    if (file_exists($theme->getWDNIncludePath() . '/wdn/templates_6.0')) {
+    if (file_exists($theme->getWDNIncludePath() . '/wdn/templates_6.1')) {
         $page->setLocalIncludePath($theme->getWDNIncludePath());
     }
 
@@ -53,6 +53,7 @@ $page->titlegraphic = $theme->renderThemeTemplate(null, 'titlegraphic.tpl.php');
 
 //header
 $page->addStyleSheet(UNL_MediaHub_Controller::getURL().'templates/html/css/all.css?v='.UNL_MediaHub_Controller::getVersion());
+$page->addStyleSheet(UNL_MediaHub_Controller::getURL().'templates/html/css/viewTransitions.css?v='.UNL_MediaHub_Controller::getVersion());
 $page->addStyleSheet(UNL_MediaHub_Manager::getURL().'templates/css/all_manager.css?v='.UNL_MediaHub_Controller::getVersion());
 
 // no menu items, so hide mobile menu
