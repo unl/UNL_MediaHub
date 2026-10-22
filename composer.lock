@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c48b46dd2a53c9799e553826572800c2",
+    "content-hash": "f908154c8a283b8f348c5c4ef97e4f26",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -3307,16 +3307,16 @@
         },
         {
             "name": "unl/html-minifier",
-            "version": "0.5.1",
+            "version": "0.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unl/html-minifier.git",
-                "reference": "d533b6b73db3c85168dd722894169f839ca7a1fa"
+                "reference": "bd087f1fae360997c713dffc48911eebdfb11f41"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unl/html-minifier/zipball/d533b6b73db3c85168dd722894169f839ca7a1fa",
-                "reference": "d533b6b73db3c85168dd722894169f839ca7a1fa",
+                "url": "https://api.github.com/repos/unl/html-minifier/zipball/bd087f1fae360997c713dffc48911eebdfb11f41",
+                "reference": "bd087f1fae360997c713dffc48911eebdfb11f41",
                 "shasum": ""
             },
             "require": {
@@ -3355,27 +3355,27 @@
                 "php"
             ],
             "support": {
-                "source": "https://github.com/unl/html-minifier/tree/0.5.1"
+                "source": "https://github.com/unl/html-minifier/tree/0.5.2"
             },
-            "time": "2020-07-16T18:08:39+00:00"
+            "time": "2026-05-01T15:48:42+00:00"
         },
         {
             "name": "unl/php-dwt-parser",
-            "version": "v1.0.3",
+            "version": "v1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unl/phpdwtparser.git",
-                "reference": "88d089538d7b529514f3f19cab4afc09bd13082e"
+                "reference": "3c89bd24df1e66eb4209b6e1308c564a9cb79c4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unl/phpdwtparser/zipball/88d089538d7b529514f3f19cab4afc09bd13082e",
-                "reference": "88d089538d7b529514f3f19cab4afc09bd13082e",
+                "url": "https://api.github.com/repos/unl/phpdwtparser/zipball/3c89bd24df1e66eb4209b6e1308c564a9cb79c4c",
+                "reference": "3c89bd24df1e66eb4209b6e1308c564a9cb79c4c",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1",
-                "unl/html-minifier": "*",
+                "unl/html-minifier": "0.5.2",
                 "zendframework/zend-code": "^2.5"
             },
             "require-dev": {
@@ -3410,27 +3410,27 @@
             "homepage": "http://wdn.unl.edu/",
             "support": {
                 "issues": "https://github.com/unl/phpdwtparser/issues",
-                "source": "https://github.com/unl/phpdwtparser/tree/v1.0.3"
+                "source": "https://github.com/unl/phpdwtparser/tree/v1.0.4"
             },
-            "time": "2024-07-11T18:45:27+00:00"
+            "time": "2026-10-22T15:34:01+00:00"
         },
         {
             "name": "unl/php-wdn-templates",
-            "version": "v6.0.0",
+            "version": "v6.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unl/phpunltemplates.git",
-                "reference": "ff6cdf9f543f1e9e307bf9b379c65c5fa7f9ac2b"
+                "reference": "095bc27d70fa15791eb44ed3d092c7c7deb0c67f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unl/phpunltemplates/zipball/ff6cdf9f543f1e9e307bf9b379c65c5fa7f9ac2b",
-                "reference": "ff6cdf9f543f1e9e307bf9b379c65c5fa7f9ac2b",
+                "url": "https://api.github.com/repos/unl/phpunltemplates/zipball/095bc27d70fa15791eb44ed3d092c7c7deb0c67f",
+                "reference": "095bc27d70fa15791eb44ed3d092c7c7deb0c67f",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1",
-                "unl/php-dwt-parser": "1.0.3"
+                "unl/php-dwt-parser": "1.0.4"
             },
             "require-dev": {
                 "phpunit/phpunit": "^10.5.27"
@@ -3476,9 +3476,9 @@
             "homepage": "http://wdn.unl.edu/",
             "support": {
                 "issues": "https://github.com/unl/phpunltemplates/issues",
-                "source": "https://github.com/unl/phpunltemplates/tree/v6.0.0"
+                "source": "https://github.com/unl/phpunltemplates/tree/v6.1.1"
             },
-            "time": "2025-07-22T19:46:24+00:00"
+            "time": "2026-10-22T17:18:18+00:00"
         },
         {
             "name": "unl/reg-exp-router",
@@ -3508,16 +3508,16 @@
         },
         {
             "name": "unl/savvy",
-            "version": "v1.0.0",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unl/Savvy.git",
-                "reference": "853e5b553166c0d6cded5e80a39fff00654ec8c9"
+                "reference": "9d65e45012ce1c3eb1c8ca517f9b6f361fa952b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unl/Savvy/zipball/853e5b553166c0d6cded5e80a39fff00654ec8c9",
-                "reference": "853e5b553166c0d6cded5e80a39fff00654ec8c9",
+                "url": "https://api.github.com/repos/unl/Savvy/zipball/9d65e45012ce1c3eb1c8ca517f9b6f361fa952b3",
+                "reference": "9d65e45012ce1c3eb1c8ca517f9b6f361fa952b3",
                 "shasum": ""
             },
             "require": {
@@ -3550,9 +3550,9 @@
             "description": "Savvy is a powerful but lightweight object-oriented template system for PHP.",
             "homepage": "http://wdn.unl.edu/",
             "support": {
-                "source": "https://github.com/unl/Savvy/tree/v1.0.0"
+                "source": "https://github.com/unl/Savvy/tree/v1.0.2"
             },
-            "time": "2024-07-11T18:21:33+00:00"
+            "time": "2026-10-22T15:24:16+00:00"
         },
         {
             "name": "unl/unl_cache_lite",
@@ -3892,5 +3892,5 @@
     "platform-overrides": {
         "php": "8.4"
     },
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.9.0"
 }

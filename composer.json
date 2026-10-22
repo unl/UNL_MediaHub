@@ -30,10 +30,10 @@
         }
     ],
     "require": {
-      "unl/php-wdn-templates": "6.0",
+      "unl/php-wdn-templates": "6.1.*",
       "unl/unl_cache_lite": "0.1.*",
       "unl/reg-exp-router": "0.1.*",
-      "unl/savvy": "1.0.0",
+      "unl/savvy": "1.0.2",
       "pear/http_request2": "2.2.*",
       "saltybeagle/savvy_turbo": "0.1.*",
       "phpunit/phpunit": "~4.3",
@@ -46,10 +46,10 @@
       "ramsey/uuid": "^3.7",
       "moontoast/math": "^1.1",
       "slim/csrf": "^0.8.2",
-      "unl/php-dwt-parser": "^1.0",
-        "aws/aws-sdk-php": "^3.365",
-        "guzzlehttp/guzzle": "^7.10",
-        "mhor/php-mediainfo": "^5.8"
+      "unl/php-dwt-parser": "^1.0.4",
+      "aws/aws-sdk-php": "^3.365",
+      "guzzlehttp/guzzle": "^7.10",
+      "mhor/php-mediainfo": "^5.8"
     },
     "scripts": {
       "post-install-cmd": [
