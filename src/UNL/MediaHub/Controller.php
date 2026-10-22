@@ -102,8 +102,7 @@ class UNL_MediaHub_Controller
         'default' => 'UNL_MediaHub_DefaultHomepage',
         'feeds'   => 'UNL_MediaHub_FeedList',
         'feed'    => 'UNL_MediaHub_FeedAndMedia',
-        'dev'     => 'UNL_MediaHub_Developers',
-        'live'    => 'UNL_MediaHub_Feed_LiveStream',
+        'dev'     => 'UNL_MediaHub_Developers'
         );
 
     /**
@@ -752,7 +751,7 @@ class UNL_MediaHub_Controller
         $auth = UNL_MediaHub_AuthService::getInstance();
         if($auth->isLoggedIn()) {
             if(count(UNL_MediaHub_User::getMediaWithUnreviewedCaptions($auth->getUser())->items) > 0) {
-            $page->displayDCFNoticeMessage('You have unreviewed media captions', "Please review auto generated AI captions for your media for any missed context or inaccuracies. <a href=\"" . htmlspecialchars(UNL_MediaHub_CaptionReviewListManager::getURL()) . "\">View Unreviewed Media Captions.</a>", 'dcf-notice-warning', $siteNotice->noticePath, $siteNotice->containerID);
+            $page->displayDCFNoticeMessage('You have unreviewed media captions', "Please review auto generated AI captions for your media for any missed context or inaccuracies. <a class=\"dcf-d-block unl-cream\" href=\"" . htmlspecialchars(UNL_MediaHub_CaptionReviewListManager::getURL()) . "\">View Unreviewed Media Captions</a>", 'dcf-notice-warning', $siteNotice->noticePath, $siteNotice->containerID);
             }
         }
         

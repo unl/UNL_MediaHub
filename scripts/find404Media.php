@@ -21,11 +21,15 @@ if (count($list->items)) {
                 continue;
             }
 
-            if (false === $http_response_header) {
+            $headers = function_exists('http_get_last_response_headers')
+                ? http_get_last_response_headers()
+                : ($http_response_header ?? null);
+
+            if (false === $headers) {
                 echo 'DNS failure, did the server move?'.PHP_EOL;
             }
 
-            foreach ($http_response_header as $header) {
+            foreach ($headers as $header) {
                 if (strpos($header, 'HTTP/1.1 404 Not Found') !== false) {
                     // This file is GONE! Better remove it
                     echo 'REMOVING -'.PHP_EOL.'ID:    '.$media->id.PHP_EOL.'Title: '.$media->title.PHP_EOL.'URL:   '.$media->url.PHP_EOL.PHP_EOL;

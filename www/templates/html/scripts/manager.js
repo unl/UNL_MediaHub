@@ -1,34 +1,37 @@
-require(['jquery'], function($){
-    $(document).ready(function() {
-        $('.confirm-delete').submit(function () {
-            if (confirm('Are you sure? This will delete this media, and remove it from any associated channels.')) {
-                return true;
-            }
+document.addEventListener('DOMContentLoaded', function () {
 
-            return false;
-        });
-        
-        $('#delete-media').click(function(){
-            $('#deleteForm').submit();
-            return false; //prevent default action
-        });
-        
-        var caption_order_submit = 0;
-        $('#caption_order').submit(function() {
-            if (caption_order_submit > 0) {
-                //prevent double submission
-                return false;
+    // Confirm before deleting
+    document.querySelectorAll('.confirm-delete').forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (!confirm('Are you sure? This will delete this media, and remove it from any associated channels.')) {
+                event.preventDefault();
             }
-            
-            caption_order_submit++;
-            var $button = $('#caption_submit_button');
-            $button.attr("disabled", true);
-            $button.val("Please wait...");
         });
     });
-});
 
-// Load WDN notice javascript when available
-window.addEventListener('inlineJSReady', function() {
-    require(['notice']);
-}, false);
+    // Delete link submits the delete form
+    var deleteMedia = document.getElementById('delete-media');
+    if (deleteMedia) {
+        deleteMedia.addEventListener('click', function (event) {
+            event.preventDefault(); // prevent default action
+            document.getElementById('deleteForm').requestSubmit();
+        });
+    }
+
+    // Prevent double submission of the caption order form
+    var captionOrderSubmit = 0;
+    var captionOrder = document.getElementById('caption_order');
+    if (captionOrder) {
+        captionOrder.addEventListener('submit', function (event) {
+            if (captionOrderSubmit > 0) {
+                event.preventDefault(); // prevent double submission
+                return;
+            }
+
+            captionOrderSubmit++;
+            var button = document.getElementById('caption_submit_button');
+            button.disabled = true;
+            button.value = 'Please wait...';
+        });
+    }
+});

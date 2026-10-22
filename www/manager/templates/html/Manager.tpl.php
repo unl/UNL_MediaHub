@@ -13,15 +13,20 @@ $theme->addGlobal('page', $page);
 if (!$theme->isCustomTheme()) {
     // UNL Theme
     $theme->setWDNIncludePath(__DIR__ . '/../../..');
-    if (file_exists($theme->getWDNIncludePath() . '/wdn/templates_5.3')) {
+    if (file_exists($theme->getWDNIncludePath() . '/wdn/templates_6.1')) {
         $page->setLocalIncludePath($theme->getWDNIncludePath());
     }
 
     $page->contactinfo = $theme->renderThemeTemplate(null, 'localfooter.tpl.php');
 
-    $page->addScriptDeclaration('WDN.setPluginParam("idm", "logout", "' . UNL_MediaHub_Controller::getURL() . '?logout");');
+    $page->addScriptDeclaration('window.UNL.idm.pushConfig("logoutRoute", "' . UNL_MediaHub_Controller::getURL() . '?logout");', '', true);
 
-    $page->addScriptDeclaration("WDN.initializePlugin('card-as-link');");
+    $auth = UNL_MediaHub_AuthService::getInstance();
+    if ($auth->isLoggedIn()) {
+        $user = $auth->getUser();
+        $page->addScriptDeclaration('window.UNL.idm.pushConfig("serverUser", "' . $user->uid . '");', '', true);
+    }
+
 } else {
     $page->optionalfooter = '<div class="dcf-bleed dcf-wrapper">
     <h3 class="dcf-txt-md dcf-bold dcf-uppercase dcf-lh-3">About MediaHub</h3>
@@ -48,6 +53,7 @@ $page->titlegraphic = $theme->renderThemeTemplate(null, 'titlegraphic.tpl.php');
 
 //header
 $page->addStyleSheet(UNL_MediaHub_Controller::getURL().'templates/html/css/all.css?v='.UNL_MediaHub_Controller::getVersion());
+$page->addStyleSheet(UNL_MediaHub_Controller::getURL().'templates/html/css/viewTransitions.css?v='.UNL_MediaHub_Controller::getVersion());
 $page->addStyleSheet(UNL_MediaHub_Manager::getURL().'templates/css/all_manager.css?v='.UNL_MediaHub_Controller::getVersion());
 
 // no menu items, so hide mobile menu

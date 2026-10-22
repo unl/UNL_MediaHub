@@ -6,7 +6,7 @@ class UNL_MediaHub_MediaList_Filter_Privacy implements UNL_MediaHub_Filter
      */
     protected $user = NULL;
     
-    public function __construct(UNL_MediaHub_User $user = NULL)
+    public function __construct(?UNL_MediaHub_User $user = NULL)
     {
         $this->user = $user;
     }

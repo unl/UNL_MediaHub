@@ -11,37 +11,42 @@ if (!$water_media->hasMedia($context->media)) {
 <?php
 $page->addScriptDeclaration("
     //<![CDATA[ 
-    require(['jquery'], function($) {
-        $(document).ready(function() {
-            //water info.
-            if ($('#water_cfs').val() == '') {
-              $('#water_cfs_form').hide();
-            }
+    document.addEventListener('DOMContentLoaded', function () {
+        const waterCfs = document.getElementById('water_cfs');
+        const waterMaf = document.getElementById('water_maf');
+        const cfsForm = document.getElementById('water_cfs_form');
+        const mafForm = document.getElementById('water_maf_form');
+        const showCfs = document.getElementById('show_cfs');
+        const showMaf = document.getElementById('show_maf');
 
-            if ($('#water_maf').val() == '') {
-                $('#water_maf_form').hide();
-            }
+        //water info.
+        if (waterCfs.value === '') {
+            cfsForm.style.display = 'none';
+        }
 
-            $('#show_cfs').click(function() {
-              $('#water_cfs_form').show();
-              $('#water_maf_form').hide();
-              return false;
-            });
+        if (waterMaf.value === '') {
+            mafForm.style.display = 'none';
+        }
 
-            $('#show_maf').click(function() {
-              $('#water_maf_form').show();
-              $('#water_cfs_form').hide();
-              return false;
-            });
+        showCfs.addEventListener('click', function (event) {
+            event.preventDefault();
+            cfsForm.style.display = '';
+            mafForm.style.display = 'none';
+        });
 
-            //Only one of water_maf or water_cfs should be filled out at once.
-            $('#water_maf').change(function() {
-                $('#water_cfs').val('');
-            });
+        showMaf.addEventListener('click', function (event) {
+            event.preventDefault();
+            mafForm.style.display = '';
+            cfsForm.style.display = 'none';
+        });
 
-            $('#water_cfs').change(function() {
-                $('#water_maf').val('');
-            });
+        //Only one of water_maf or water_cfs should be filled out at once.
+        waterMaf.addEventListener('change', function () {
+            waterCfs.value = '';
+        });
+
+        waterCfs.addEventListener('change', function () {
+            waterMaf.value = '';
         });
     });
     //]]>");

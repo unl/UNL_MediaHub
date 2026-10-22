@@ -8,7 +8,7 @@
 <div class="dcf-pt-6 dcf-pb-6">
     <h1 class="dcf-txt-h2"><?php if (isset($context->options['feed'])) { echo UNL_MediaHub::escape($context->options['feed']->title); } ?> Channel - User Manager</h1>
 
-    <ul class="dcf-p-1 dcf-list-bare dcf-list-inline dcf-txt-xs dcf-bg-overlay-dark">
+    <ul class="dcf-p-1 dcf-list-inline dcf-txt-xs dcf-bg-overlay-dark" role="list">
         <li class="dcf-m-0">
             <a class="dcf-btn dcf-btn-inverse-tertiary" href="<?php echo UNL_MediaHub_Controller::getURL(); ?>channels/<?php echo $feedID; ?>">View Channel</a>
         </li>
@@ -23,7 +23,7 @@
     <ul class="dcf-list-inline" id="userList">
         <?php foreach ($context->items as $user):?>
         <li>
-                  <img class="profile_pic medium dcf-w-10" src="https://directory.unl.edu/avatar/<?php echo $user->uid; ?>/" />
+                  <img class="profile_pic medium dcf-w-10 dcf-1x1" src="https://directory.unl.edu/avatar/<?php echo $user->uid; ?>/" />
                   <div class="dcf-txt-xs dcf-txt-center">
                     <?php $fullName = @UNL_Services_Peoplefinder::getFullName($user->uid); ?>
                     <?php if($fullName): ?>

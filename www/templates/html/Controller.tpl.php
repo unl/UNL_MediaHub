@@ -15,15 +15,19 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
 if (!$theme->isCustomTheme()) {
     // UNL Theme
     $theme->setWDNIncludePath(__DIR__ . '/../..');
-    if (file_exists($theme->getWDNIncludePath() . '/wdn/templates_5.3')) {
+    if (file_exists($theme->getWDNIncludePath() . '/wdn/templates_6.1')) {
         $page->setLocalIncludePath($theme->getWDNIncludePath());
     }
 
     $page->contactinfo = $theme->renderThemeTemplate(null, 'localfooter.tpl.php');
 
-    $page->addScriptDeclaration('WDN.setPluginParam("idm", "logout", "' . $baseUrl . '?logout");');
+    $page->addScriptDeclaration('window.UNL.idm.pushConfig("logoutRoute", "' . $baseUrl . '?logout");', '', true);
 
-    $page->addScriptDeclaration("WDN.initializePlugin('card-as-link');");
+    $auth = UNL_MediaHub_AuthService::getInstance();
+    if ($auth->isLoggedIn()) {
+        $user = $auth->getUser();
+        $page->addScriptDeclaration('window.UNL.idm.pushConfig("serverUser", "' . $user->uid . '");', '', true);
+    }
 
 } else {
     // Custom Theme
@@ -50,6 +54,7 @@ $page->titlegraphic = $theme->renderThemeTemplate(null, 'titlegraphic.tpl.php');
 
 //Header
 $page->addStyleSheet($baseUrl . 'templates/html/css/all.css?v=' . UNL_MediaHub_Controller::getVersion());
+$page->addStyleSheet($baseUrl . 'templates/html/css/viewTransitions.css?v=' . UNL_MediaHub_Controller::getVersion());
 
 $page->addScript($baseUrl . 'templates/html/scripts/frontend.js?v=' . UNL_MediaHub_Controller::getVersion());
 

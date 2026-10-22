@@ -12,7 +12,7 @@ class UNL_MediaHub_Feed_Media_FeedSelection
      */
     public $media;
 
-    function __construct(UNL_MediaHub_User $user, UNL_MediaHub_Media $media = null)
+    function __construct(UNL_MediaHub_User $user, ?UNL_MediaHub_Media $media = null)
     {
         $this->user  = $user;
         $this->media = $media;

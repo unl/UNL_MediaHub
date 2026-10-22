@@ -29,13 +29,17 @@ if (count($list->items)) {
                 continue;
             }
 
-            if (!isset($http_response_header) || 
-                false === $http_response_header) {
+            $headers = function_exists('http_get_last_response_headers')
+                ? http_get_last_response_headers()
+                : ($http_response_header ?? null);
+
+            if (!isset($headers) || 
+                false === $headers) {
                 echo 'DNS failure, did the server move?'.PHP_EOL;
             }
 
-            if (!isset($http_response_header[0])
-                || strpos($http_response_header[0], '200') === false) {
+            if (!isset($headers[0])
+                || strpos($headers[0], '200') === false) {
                 // This file is GONE! Better remove it
                 echo 'REMOVING POSTER-'.PHP_EOL.'ID:    '.$media->id.PHP_EOL.'Title: '.$media->title.PHP_EOL.'POSTER URL:   '.$media->poster.PHP_EOL.PHP_EOL;
                 $media->poster = '';

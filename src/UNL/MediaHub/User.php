@@ -105,4 +105,14 @@ class UNL_MediaHub_User extends UNL_MediaHub_Models_BaseUser
 
         return false;
     }
+
+    public function __serialize(): array
+    {
+        return parent::__serialize();
+    }
+
+    public function __unserialize(array $data): void
+    {
+        parent::__unserialize($data);
+    }
 }

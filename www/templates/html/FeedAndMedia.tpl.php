@@ -12,7 +12,7 @@ $user = UNL_MediaHub_AuthService::getInstance()->getUser();
       <div class="dcf-float-right mh-rss"><a href="?format=xml" title="RSS feed for this channel"><?php echo \UNL\Templates\Icons::get(\UNL\Templates\Icons::ICON_RSS_BOX, '{"size": 4}'); ?></a></div>
       <h2><?php echo UNL_MediaHub::escape($context->feed->title) ?></h2>
       <?php if ($user && $context->feed->userCanEdit($user)): ?>
-        <ul class="dcf-p-1 dcf-list-bare dcf-list-inline dcf-txt-xs dcf-bg-overlay-dark">
+        <ul class="dcf-p-1 dcf-list-inline dcf-txt-xs dcf-bg-overlay-dark" role="list">
             <li class="dcf-m-0">
                 <a class="dcf-btn dcf-btn-inverse-tertiary" href="<?php echo UNL_MediaHub_Manager::getURL(); ?>?view=feedmetadata&amp;id=<?php echo (int)$context->feed->id ?>">Edit Channel</a>
             </li>
@@ -25,18 +25,18 @@ $user = UNL_MediaHub_AuthService::getInstance()->getUser();
         </ul>
       <?php endif ?>
 
-      <div class="dcf-grid dcf-col-gap-vw dcf-pt-6">
-        <div class="dcf-col-100% dcf-col-25%-start@sm">
-          <div class="dcf-ratio dcf-ratio-16x9 mh-channel-thumb">
+      <div class="dcf-d-grid dcf-grid-cols-12 dcf-col-gap-vw dcf-pt-6">
+        <div class="dcf-col-span-12 dcf-col-span-3@sm">
+          <div class="mh-channel-thumb">
               <?php $url = htmlentities(UNL_MediaHub_Controller::getURL($context->feed), ENT_QUOTES) ?>
               <?php if($context->feed->hasImage()): ?>
                 <img
-                    class="dcf-ratio-child dcf-obj-fit-cover"
+                    class="dcf-16x9 dcf-obj-fit-cover"
                     src="<?php echo $url; ?>/image"
                     aria-hidden="true"
                     alt="">
               <?php else: ?>
-                <div class="dcf-ratio-child dcf-d-flex dcf-ai-center dcf-jc-center">
+                <div class="dcf-16x9 dcf-d-flex dcf-ai-center dcf-jc-center">
                     <img
                         class="dcf-h-8 dcf-w-8"
                         src="<?php echo $baseUrl; ?>/templates/html/css/images/channel-icon.svg"
@@ -51,7 +51,7 @@ $user = UNL_MediaHub_AuthService::getInstance()->getUser();
               <?php echo $savvy->render($context->feed, 'Feed/Stats.tpl.php') ?>
           </div>
         </div>
-        <div class="dcf-col-100% dcf-col-75%-end@sm">
+        <div class="dcf-col-span-12 dcf-col-span-9@sm">
           <p><?php echo UNL_MediaHub::escape($context->feed->description) ?></p>
         </div>
       </div>

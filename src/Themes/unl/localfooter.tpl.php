@@ -8,7 +8,7 @@
 </nav>
 <nav id="dcf-footer-group-2" role="navigation" aria-labelledby="dcf-footer-group-2-heading">
     <h3 class="dcf-txt-md dcf-bold dcf-uppercase dcf-lh-3 unl-ls-2 unl-cream" id="dcf-footer-group-2-heading">Related Links</h3>
-    <ul class="dcf-list-bare dcf-mb-0">
+    <ul class="dcf-mb-0" role="list">
         <li><a href="<?php echo UNL_MediaHub_Controller::getURL() ?>developers">Developer Documentation</a></li>
         <li><a href="https://wdn.unl.edu/documentation/unl-mediahub">Documentation</a></li>
         <li><a href="https://wdn.unl.edu/documentation/unl-mediahub/changelog">Changelog</a></li>
