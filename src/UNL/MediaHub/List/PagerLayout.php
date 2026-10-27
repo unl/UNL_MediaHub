@@ -12,7 +12,7 @@ class UNL_MediaHub_List_PagerLayout extends Doctrine_Pager_Layout
         $this->setTemplate('<li><a {%linkclass} href="{%url}">{%page}</a></li>');
         $this->setSelectedTemplate('<li><span class="dcf-pagination-selected">{%page}</span></li>');
 
-        $str = '<nav class="dcf-pagination dcf-txt-center"><ol class="dcf-list-bare dcf-list-inline">';
+        $str = '<nav class="dcf-pagination dcf-txt-center"><ol class="dcf-list-inline" role="list">';
 
         if ($pager->getPage() !== 1) {
             // Previous page

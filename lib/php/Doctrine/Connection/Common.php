@@ -54,4 +54,14 @@ class Doctrine_Connection_Common extends Doctrine_Connection
 
         return $query;
     }
+
+    public function __serialize(): array
+    {
+        return parent::__serialize();
+    }
+
+    public function __unserialize(array $data): void
+    {
+        parent::__unserialize($data);
+    }
 }

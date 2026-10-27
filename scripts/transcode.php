@@ -32,9 +32,8 @@ while (true) {
     //Loop through them and check with Rev.com to see their status.
     foreach ($media_hub_jobs->items as $media_hub_job) {
         /**
-         * @var $media_hub_job UNL_MediaHub_TranscodingJob
+         * @var UNL_MediaHub_TranscodingJob $media_hub_job
          */
-
         $media = $media_hub_job->getMedia();
 
         $input_bucket = UNL_MediaHub::$transcode_input_bucket;

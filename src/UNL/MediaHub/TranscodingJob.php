@@ -89,4 +89,14 @@ class UNL_MediaHub_TranscodingJob extends UNL_MediaHub_Models_BaseTranscodingJob
 
         return in_array($this->status, $pending_statuses);
     }
+
+    public function __serialize(): array
+    {
+        return parent::__serialize();
+    }
+
+    public function __unserialize(array $data): void
+    {
+        parent::__unserialize($data);
+    }
 }

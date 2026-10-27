@@ -11,7 +11,7 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
         </video>
     </div>
     <div class="dcf-absolute dcf-h-100% dcf-w-100% dcf-pin-top dcf-pin-left dcf-d-flex dcf-ai-center dcf-jc-center dcf-wrapper dcf-bg-white mh-search">
-        <form class="dcf-w-max-lg dcf-form dcf-form-controls-inline" method="get" action="<?php echo $baseUrl ?>search/">
+        <form class="dcf-max-w-lg dcf-form dcf-form-controls-inline" method="get" action="<?php echo $baseUrl ?>search/">
             <label class="dcf-inverse" for="q_app">Search MediaHub</label>
             <div class="dcf-input-group">
                 <input class="dcf-bg-transparent dcf-inverse" id="q_app" name="q" type="text" required />
@@ -26,7 +26,7 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
 ?>
 <div class="dcf-bleed dcf-wrapper dcf-pt-7 dcf-pb-8 unl-bg-lightest-gray">
     <h2 class="dcf-txt-center dcf-subhead dcf-mb-6">Recent Popular Media</span></h2>
-    <div class="dcf-grid-halves@sm dcf-grid-thirds@md dcf-col-gap-vw dcf-row-gap-7">
+    <div class="dcf-d-grid dcf-grid-cols-1 dcf-grid-cols-2@sm dcf-grid-cols-3@md dcf-col-gap-vw dcf-row-gap-7">
     <?php foreach ($context->getTopMedia() as $media): ?>
         <div>
             <?php echo $savvy->render($media, 'Media/teaser.tpl.php'); ?>
@@ -36,7 +36,7 @@ $baseUrl = UNL_MediaHub_Controller::getURL();
 </div>
 <?php endif; ?>
 <div class="dcf-bleed dcf-wrapper dcf-pt-8 dcf-pb-8">
-    <div class="dcf-grid-thirds@sm dcf-col-gap-vw dcf-row-gap-7 dcf-txt-center">
+    <div class="dcf-d-grid dcf-grid-cols-1 dcf-grid-cols-3@sm dcf-col-gap-vw dcf-row-gap-7 dcf-txt-center">
         <div class="mh-featured">
             <a class="dcf-d-flex dcf-flex-col dcf-ai-center dcf-txt-decor-hover" href="<?php echo $baseUrl ?>search/">
                 <div class="mh-featured-icon mh-green dcf-d-flex dcf-ai-center dcf-jc-center dcf-h-10 dcf-w-10 dcf-circle">

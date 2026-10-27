@@ -7,25 +7,13 @@
 </div>
 
 <?php
-$page->addScriptDeclaration("
-    require(['jquery'], function($) {
-        var checkStatus = function() {
-            \$.get('" . UNL_MediaHub_Manager::getURL() . "?view=addmedia&id=" . $context->media->id . "&format=json', function(data) {
-                if (data.transcoding_is_complete && data.transcoding_is_error) {
-                    var \$message = $('#transcoding-progress');
-                    \$message.html('<p>There was an error preparing your video. <a href=\"" . UNL_MediaHub_Manager::getURL() . "?view=addmedia&id=" . $context->media->id . "\">Click here for details</a></p>');
-                    \$message.closest('.dcf-notice').removeClass('dcf-notice-info').addClass('dcf-notice-warning');
-                } else if (data.transcoding_is_complete) {
-                    var \$message = $('#transcoding-progress');
-                    \$message.html('<p>We have finished preparing your video. <a href=\"'+window.location+'\">Reload this page</a></p>');
-                    \$message.closest('.dcf-notice').removeClass('dcf-notice-info').addClass('dcf-notice-success');
-                } else {
-                    //Try again in 10 seconds
-                    setTimeout(checkStatus, 10000);
-                }
-            });
-        };
+$transcoding_status_api = UNL_MediaHub_Manager::getURL() . "?view=addmedia&id=" . $context->media->id . "&format=json";
+$add_media_url = UNL_MediaHub_Manager::getURL() . "?view=addmedia&id=" . $context->media->id;
 
-        checkStatus();
-    });");
+$page->addScriptDeclaration("
+    window.mediahub = window.mediahub ?? {};
+    window.mediahub.transcoding_status_api = '" . $transcoding_status_api . "';
+    window.mediahub.add_media_url = '" . $add_media_url . "';
+");
+$page->addScript(UNL_MediaHub_Controller::getURL() . 'templates/html/scripts/manager_transcode_notice.js?v='.UNL_MediaHub_Controller::getVersion());
 ?>

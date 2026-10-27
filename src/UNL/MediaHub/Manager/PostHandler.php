@@ -137,9 +137,6 @@ class UNL_MediaHub_Manager_PostHandler
         case 'pull_amara':
             $this->handleAmara();
             break;
-        case 'order_rev':
-            $this->handleRev();
-            break;
         case 'ai_captions':
             $this->handleTranscriptions();
             break;
@@ -148,9 +145,6 @@ class UNL_MediaHub_Manager_PostHandler
             if ($user->isAdmin()) {
                 $this->handleTranscriptions();
             }
-            break;
-        case 'download_rev':
-            $this->downloadRev();
             break;
         case 'set_active_text_track':
             $this->setActiveTextTrack();
@@ -570,7 +564,7 @@ class UNL_MediaHub_Manager_PostHandler
                 throw new UNL_MediaHub_RuntimeException($errors[0], 400);
             }
         } else {
-            $this->post['poster'] = $this->post['poster_image_url'];
+            $this->post['poster'] = $this->post['poster_image_url'] ?? null;
         }
 
         //Update the dateupdated date for cache busting
@@ -1223,66 +1217,7 @@ class UNL_MediaHub_Manager_PostHandler
 
         UNL_MediaHub::redirect($media->getEditCaptionsURL());
     }
-    
-    function handleRev()
-    {
-        $media = UNL_MediaHub_Media::getById($this->post['media_id']);
 
-        if (!$media) {
-            throw new Exception('Unable to find media', 404);
-        }
-
-        $user = UNL_MediaHub_AuthService::getInstance()->getUser();
-        
-        if (!$media->userHasPermission($user, UNL_MediaHub_Permission::USER_CAN_UPDATE)) {
-            throw new Exception('You do not have permission to edit this media.', 403);
-        }
-        
-        if (!isset($this->post['cost_object']) || empty($this->post['cost_object'])) {
-            throw new Exception('A cost object number must be provided', 400);
-        }
-        
-        $sanitized_co = preg_replace('/[^\d]/', '', $this->post['cost_object']);
-        
-        if (!is_numeric($sanitized_co)) {
-            throw new Exception('The cost object number must be a number. It can not contain any other characters.', 400);
-        }
-        
-        $length = strlen($sanitized_co);
-        if ($length < 10 || $length > 13) {
-            throw new Exception('The cost object number must be between 10 and 13 digits', 400);
-        }
-        
-        $existing_orders = new UNL_MediaHub_RevOrderList(array(
-            'media_id_not_complete' => $media->id
-        ));
-        
-        if ($existing_orders->count()) {
-            throw new Exception('A pending order already exists for this media. Please wait for the existing order to finish.', 400);
-        }
-        
-        $order_record = new UNL_MediaHub_RevOrder();
-        $order_record->media_id = $media->id;
-        $order_record->costobjectnumber = $sanitized_co;
-        $order_record->uid = $user->uid;
-        $order_record->status = UNL_MediaHub_RevOrder::STATUS_MEDIAHUB_CREATED;
-        
-        if (isset($this->post['media_duration'])) {
-            $order_record->estimate = $this->post['estimate'];
-            $order_record->media_duration = $this->post['media_duration'];
-        }
-        
-        $order_record->save();
-
-        $notice = new UNL_MediaHub_Notice(
-            'Success',
-            'A caption order has been placed, it should be completed within 24 hours.',
-            UNL_MediaHub_Notice::TYPE_SUCCESS
-        );
-        UNL_MediaHub_Manager::addNotice($notice);
-        
-        UNL_MediaHub::redirect($media->getEditCaptionsURL());
-    }
 
     protected function handleTranscriptions()
     {
@@ -1320,62 +1255,6 @@ class UNL_MediaHub_Manager_PostHandler
         UNL_MediaHub::redirect($media->getEditCaptionsURL());
     }
 
-    protected function downloadRev()
-    {
-        $order = UNL_MediaHub_RevOrder::getById($this->post['order_id']);
-
-        if (!$order) {
-            throw new Exception('Unable to find order', 404);
-        }
-
-        $media = UNL_MediaHub_Media::getById($order->media_id);
-
-        $user = UNL_MediaHub_AuthService::getInstance()->getUser();
-
-        if (!$media->userHasPermission($user, UNL_MediaHub_Permission::USER_CAN_UPDATE)) {
-            throw new Exception('You do not have permission to edit this media.', 403);
-        }
-
-        if (!isset($this->post['format']) || empty($this->post['format'])) {
-            throw new Exception('A format must be provided', 400);
-        }
-
-        $rev = UNL_MediaHub_RevAPI::getRevClient();
-
-        if (!$rev) {
-            throw new Exception('Unable to get the Rev client', 503);
-        }
-        
-        $content = '';
-        
-        try {
-            $rev_order = $rev->getOrder($order->rev_order_number);
-
-            $attachments = $rev_order->getAttachments();
-
-            $newest_attachment = false;
-            foreach ($attachments as $attachment) {
-                if ($attachment->isMedia()) {
-                    //Only save non-media attachments
-                    continue;
-                }
-                
-                //Get the last caption attachment (newest)
-                $newest_attachment = $attachment;
-            }
-
-            if ($newest_attachment) {
-                $content = $newest_attachment->getContent('.' . $this->post['format']);
-            }
-        } catch(\RevAPI\Exception\RequestException $e) {
-            throw new Exception('There was an error requesting captions');
-        }
-        
-        header('Content-Disposition: attachment; filename=' . $media->title . '.' . $this->post['format']);
-
-        echo $content;
-        exit();
-    }
     
     function setActiveTextTrack()
     {

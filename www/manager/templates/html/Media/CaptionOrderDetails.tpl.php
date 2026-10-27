@@ -8,9 +8,9 @@
 </div>
 <div class="dcf-bleed">
     <div class="dcf-wrapper dcf-pt-0">
-        <div class="dcf-grid dcf-col-gap-vw">
+        <div class="dcf-d-grid dcf-grid-cols-12 dcf-col-gap-vw">
 <?php if ($context->order->isSuccess()): ?>
-            <div class="dcf-col-100% dcf-col-67%-start@sm">
+            <div class="dcf-col-span-12 dcf-col-span-8@sm">
                 <form method="post" id="download_format" class="dcf-form">
                     <h2 class="clear-top">Download captions</h2>
                     <label for="format">Select caption format</label>
@@ -34,7 +34,7 @@
                 </form>
             </div>
 <?php endif; ?>
-            <div class="dcf-col-100% dcf-col-33%-start@sm">
+            <div class="dcf-col-span-12 dcf-col-span-4@sm">
                 <dl>
                     <dt>Order Number</dt>
                     <dd><?php echo (int)$context->order->id ?></dd>

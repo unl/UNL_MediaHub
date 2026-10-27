@@ -11,7 +11,7 @@
         class="dcf-overflow-y-auto dcf-pr-5 dcf-pb-4"
         style="max-height: 20rem; margin-right: calc(-3.16vw + 1px)!important;"
     >
-        <ul class="dcf-list-bare validation-container">
+        <ul class="validation-container" role="list">
             <?php foreach ($context->getFeedSelectionData() as $feed_data): ?>
                 <li>
                 <?php if ($feed_data['readonly']): ?>

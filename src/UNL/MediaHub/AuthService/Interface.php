@@ -48,7 +48,7 @@ abstract class UNL_MediaHub_AuthService_Interface
     /**
      * @param UNL_MediaHub_User $user
      */
-    public function setUser(UNL_MediaHub_User $user = NULL)
+    public function setUser(?UNL_MediaHub_User $user = NULL)
     {
         $this->user = $user;
     }

@@ -288,6 +288,6 @@ class UNL_MediaHub
      */
     public static function escape($html)
     {
-        return htmlspecialchars($html, ENT_QUOTES, 'UTF-8', false);
+        return htmlspecialchars($html ?? '', ENT_QUOTES, 'UTF-8', false);
     }
 }

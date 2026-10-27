@@ -112,7 +112,7 @@
 <footer class="dcf-footer" id="dcf-footer" role="contentinfo">
     <div class="dcf-relative">
         <div class="dcf-wrapper dcf-pb-7">
-            <div class="dcf-grid-halves@sm dcf-col-gap-vw dcf-ai-baseline dcf-pt-4 dcf-bt-1 dcf-bt-solid">
+            <div class="dcf-d-grid dcf-grid-cols-2@sm dcf-col-gap-vw dcf-ai-baseline dcf-pt-4 dcf-bt-1 dcf-bt-solid">
                 <div>
                     <a class="dcf-institution-title dcf-d-inline-block dcf-txt-xs dcf-txt-decor-hover" href="#">
                         <span class="dcf-uppercase">University</span> <span class="dcf-italic">of</span><span> </span><span class="dcf-uppercase">Nebraska–Lincoln</span>

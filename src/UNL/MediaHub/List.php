@@ -48,6 +48,8 @@ abstract class UNL_MediaHub_List implements Countable
     protected $select = null;
     
     public $ran = false;
+
+    public $items = null;
     
     /**
      * Construct a list of items.
@@ -120,7 +122,7 @@ abstract class UNL_MediaHub_List implements Countable
      * 
      * @return int
      */
-    function count()
+    function count():int
     {
         return $this->total;
     }

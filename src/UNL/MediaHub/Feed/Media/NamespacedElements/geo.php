@@ -19,4 +19,14 @@ class UNL_MediaHub_Feed_Media_NamespacedElements_geo extends UNL_MediaHub_Feed_M
     {
         return UNL_MediaHub_Feed_Media_NamespacedElements::mediaHasElementNS($media_id, $element, 'geo');
     }
+
+    public function __serialize(): array
+    {
+        return parent::__serialize();
+    }
+
+    public function __unserialize(array $data): void
+    {
+        parent::__unserialize($data);
+    }
 }

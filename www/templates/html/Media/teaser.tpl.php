@@ -7,8 +7,8 @@ $user = UNL_MediaHub_AuthService::getInstance()->getUser();
 ?>
 <div class="dcf-card-as-link">
     <div class="dcf-relative mh-video-thumb">
-        <div class="dcf-ratio dcf-ratio-16x9 mh-thumbnail-clip">
-            <img class="dcf-ratio-child dcf-obj-fit-cover" src="<?php echo $context->getThumbnailURL() ?>" alt="<?php echo UNL_MediaHub::escape($context->title) ?>">
+        <div class="dcf-16x9 mh-thumbnail-clip">
+            <img class="dcf-16x9 dcf-obj-fit-cover" src="<?php echo $context->getThumbnailURL() ?>" alt="<?php echo UNL_MediaHub::escape($context->title) ?>">
         </div>
         <div class="mh-play-button"></div>
         <?php if ($user && $context->userCanEdit($user)): ?>

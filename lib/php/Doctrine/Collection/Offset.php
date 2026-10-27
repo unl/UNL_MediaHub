@@ -58,7 +58,7 @@ class Doctrine_Collection_Offset extends Doctrine_Collection
     /**
      * @return Doctrine_Collection_Iterator_Expandable
      */
-    public function getIterator()
+    public function getIterator():Traversable
     {
         return new Doctrine_Collection_Iterator_Expandable($this);
     }

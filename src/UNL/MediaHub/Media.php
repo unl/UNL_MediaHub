@@ -208,15 +208,30 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
             return self::ASPECT_1x1;
         }
 
-        if ((!$ratioFlipped && $ratio == '4:3') || ($ratioFlipped && $ratio == '0.750')) {
+        if (
+            (!$ratioFlipped && $ratio == '4:3') ||
+            (!$ratioFlipped && $ratio == '1.333') ||
+            ($ratioFlipped && $ratio == '0.750') ||
+            ($ratioFlipped && $ratio == '3:4')
+        ) {
             return self::ASPECT_4x3;
         }
 
-        if ((!$ratioFlipped && $ratio == '0.750') || ($ratioFlipped && $ratio == '4:3')) {
+        if (
+            (!$ratioFlipped && $ratio == '0.750') ||
+            (!$ratioFlipped && $ratio == '3:4') ||
+            ($ratioFlipped && $ratio == '4:3') ||
+            ($ratioFlipped && $ratio == '1.333')
+        ) {
             return self::ASPECT_3x4;
         }
 
-        if ((!$ratioFlipped && $ratio == '0.562') || ($ratioFlipped && $ratio == '16:9')) {
+        if (
+            (!$ratioFlipped && $ratio == '0.562') ||
+            (!$ratioFlipped && $ratio == '9:16') ||
+            ($ratioFlipped && $ratio == '16:9') ||
+            ($ratioFlipped && $ratio == '1.777')
+        ) {
             return self::ASPECT_9x16;
         }
 
@@ -413,8 +428,11 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
             return false;
         }
 
-        if (false !== $http_response_header && count($http_response_header)) {
-            foreach($http_response_header as $header) {
+        $headers = function_exists('http_get_last_response_headers')
+            ? http_get_last_response_headers()
+            : ($http_response_header ?? null);
+        if (!empty($headers)) {
+            foreach ($headers as $header) {
                 if (strpos($header, 'Content-Type: ') !== false) {
                     $this->type = substr($header, 14);
                 }
@@ -431,7 +449,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         return new UNL_MediaHub_FeedList(array('limit'=>null, 'filter'=>new UNL_MediaHub_FeedList_Filter_WithMediaId($this->id)));
     }
 
-    function delete(Doctrine_Connection $conn = null)
+    function delete(?Doctrine_Connection $conn = null)
     {
         $feeds = $this->getFeeds();
         $feeds->run();
@@ -737,7 +755,7 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
     /**
      * @return bool
      */
-    public function canView(UNL_MediaHub_User $user = NULL)
+    public function canView(?UNL_MediaHub_User $user = NULL)
     {
         $requires_membership = false;
         
@@ -1090,5 +1108,15 @@ class UNL_MediaHub_Media extends UNL_MediaHub_Models_BaseMedia implements UNL_Me
         $job->uid = $uid;
         $job->save();
         return $job;
+    }
+
+    public function __serialize(): array
+    {
+        return parent::__serialize();
+    }
+
+    public function __unserialize(array $data): void
+    {
+        parent::__unserialize($data);
     }
 }

@@ -1,6 +1,6 @@
 <nav class="mh-sort-filter" aria-labelledby="mh-sort-filter-<?php echo UNL_MediaHub::escape($context->group_id); ?>">
     <span id="mh-sort-filter-<?php echo UNL_MediaHub::escape($context->group_id); ?>" class="sort-filter-title"><?php echo UNL_MediaHub::escape($context->label); ?></span>
-    <ul class="dcf-list-bare mh-btn-group">
+    <ul class="mh-btn-group" role="list">
 
         <?php foreach ($context->buttons as $key=>$details):?>
             <?php

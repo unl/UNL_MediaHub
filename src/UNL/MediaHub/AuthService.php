@@ -10,7 +10,7 @@ class UNL_MediaHub_AuthService
      * @param UNL_MediaHub_AuthService_Interface $provider
      * @return bool|UNL_MediaHub_AuthService_Interface
      */
-    public static function getInstance(UNL_MediaHub_AuthService_Interface $provider = NULL)
+    public static function getInstance(?UNL_MediaHub_AuthService_Interface $provider = NULL)
     {
         if (self::$instance) {
             return self::$instance;

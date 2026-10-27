@@ -3,8 +3,8 @@
         <h2 class="dcf-txt-h2">Unreviewed Media Captions List</h2>
         <p> Captions for audio content are required for ADA compliance. Please review the list of media items that either have active AI-generated captions that have not been reviewed, or have generated captions pending activation and review. Ensure all AI-generated captions are reviewed for accuracy and context. You can also upload your own captions. </p>
 
-        <div class="dcf-grid dcf-col-gap-vw dcf-row-gap-4">
-            <div class="dcf-col-100%">
+        <div class="dcf-d-grid dcf-grid-cols-12 dcf-col-gap-vw dcf-row-gap-4">
+            <div class="dcf-col-span-12">
                 <?php if ($context->hasUnreviewedCaptionMedia()) { ?>
                     <p class="dcf-txt-h6 dcf-bold" id="table-description">List of the first 100 media uploads that either have an active AI caption that has not been reviewed or have a generated AI caption that is not yet activated and is pending review. </p>
                     <table class="dcf-table dcf-table-bordered dcf-table-responsive" aria-describedby="table-description">
