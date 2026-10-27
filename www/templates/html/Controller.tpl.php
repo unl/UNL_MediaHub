@@ -55,6 +55,7 @@ $page->titlegraphic = $theme->renderThemeTemplate(null, 'titlegraphic.tpl.php');
 //Header
 $page->addStyleSheet($baseUrl . 'templates/html/css/all.css?v=' . UNL_MediaHub_Controller::getVersion());
 $page->addStyleSheet($baseUrl . 'templates/html/css/viewTransitions.css?v=' . UNL_MediaHub_Controller::getVersion());
+$page->addStyleDeclaration(file_get_contents( dirname(__FILE__) . '/css/critical.css'));
 
 $page->addScript($baseUrl . 'templates/html/scripts/frontend.js?v=' . UNL_MediaHub_Controller::getVersion());
 

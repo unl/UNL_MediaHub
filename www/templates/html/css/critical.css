@@ -1,0 +1,183 @@
+@layer critical {
+    :root {
+        --b-input: #c7c8ca;
+        --bg-input: #fff;
+    }
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --b-input: #6b6b68;
+            --bg-input: #1f1f1e;
+        }
+    }
+
+    .dcf-pin-top,
+    .dcf-top-0 {
+        top: 0
+    }
+
+    .dcf-pin-left,
+    .dcf-left-0 {
+        left: 0
+    }
+
+    .dcf-pin-bottom,
+    .dcf-bottom-0 {
+        bottom: 0
+    }
+
+    .dcf-pin-right,
+    .dcf-right-0 {
+        right: 0
+    }
+
+    .dcf-w-10 {
+        width: 5.62em;
+    }
+
+    .dcf-h-10 {
+        height: 5.62em;
+    }
+
+    .dcf-d-grid {
+        display: grid;
+    }
+
+    .dcf-grid-cols-1 {
+        grid-template-columns: repeat(1, minmax(0, 1fr))
+    }
+
+    .dcf-row-gap-7 {
+        row-gap: 2.37em
+    }
+
+    .dcf-bg-transparent {
+        background-color: #0000
+    }
+
+    .dcf-label,
+    .dcf-form label {
+        font-size: .84em
+    }
+
+    .dcf-input-text,
+    .dcf-form input:not([type=file]):not([type=submit]),
+    .dcf-form textarea {
+        border: 1px solid var(--b-input);
+        border-radius: 3px;
+        font-size: 1em;
+        line-height: 1.5
+    }
+
+    .dcf-input-text,
+    .dcf-form input:not([type=checkbox]):not([type=file]):not([type=radio]):not([type=range]):not([type=submit]),
+    .dcf-form textarea {
+        padding: .56em .75em
+    }
+
+    .dcf-input-text:focus-visible,
+    .dcf-form input:not([type=submit]):focus-visible,
+    .dcf-form textarea:focus-visible {
+        border-color: var(--b-input-focus);
+        outline: none
+    }
+
+    .dcf-input-text:enabled:hover,
+    .dcf-form input:not([type=submit]):enabled:hover,
+    .dcf-form textarea:enabled:hover {
+        border-color: var(--b-input-hover)
+    }
+
+    .dcf-input-text,
+    .dcf-input-file,
+    .dcf-form textarea,
+    .dcf-form input:not([type=button]):not([type=color]):not([type=range]):not([type=reset]):not([type=submit]) {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        color: inherit
+    }
+
+    .dcf-input-text,
+    .dcf-input-file,
+    .dcf-form textarea,
+    .dcf-form input:not([type=button]):not([type=color]):not([type=reset]):not([type=submit]) {
+        display: block
+    }
+
+    .dcf-form .dcf-input-group input:not(:first-child),
+    .dcf-form .dcf-input-group select:not(:first-child) {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0
+    }
+
+    .dcf-form .dcf-input-group input:not(:last-child),
+    .dcf-form .dcf-input-group select:not(:last-child) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0
+    }
+
+    .dcf-input-group {
+        flex: 50%;
+        display: flex
+    }
+
+    .dcf-input-group input:not(.dcf-btn) {
+        flex: auto
+    }
+
+    .dcf-input-group :focus,
+    .dcf-input-group :focus-visible {
+        z-index: 1
+    }
+
+    .dcf-input-group,
+    .dcf-input-group input:not(.dcf-btn) {
+        min-width: 0
+    }
+
+    .dcf-input-group .dcf-btn {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        align-items: center;
+        display: flex
+    }
+
+    .unl .dcf-form-controls-inline label {
+        margin-bottom: 0
+    }
+
+    @media only screen and (width>=42.09em) {
+        .dcf-grid-cols-2\@sm {
+            grid-template-columns: repeat(2, minmax(0, 1fr))
+        }
+
+
+        .dcf-input-group-form,
+        .dcf-form-controls-inline {
+            flex-wrap: wrap;
+            align-items: baseline;
+            display: flex
+        }
+
+        .dcf-form-controls-inline label {
+            flex-shrink: 0;
+            margin-right: 1em
+        }
+
+        .dcf-form-controls-inline input,
+        .dcf-form-controls-inline select,
+        .dcf-form-controls-inline label+span {
+            flex: 1px
+        }
+
+        .dcf-form-controls-inline .dcf-form-help {
+            flex-basis: 100%
+        }
+    }
+
+    @media only screen and (width>=56.12em) {
+        .dcf-grid-cols-3\@md {
+            grid-template-columns: repeat(3, minmax(0, 1fr))
+        }
+    }
+}
