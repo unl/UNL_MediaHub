@@ -48,6 +48,11 @@ class UNL_MediaHub_MediaList extends UNL_MediaHub_List
 
         $this->options['additional_filters'][] = new UNL_MediaHub_MediaList_Filter_Privacy(UNL_MediaHub_AuthService::getInstance()->getUser());
 
+        // Transcriber script uses this to avoid filtering private media
+        if (isset($this->options['avoid_privacy_filter'])) {
+            $this->options['additional_filters'] = array();
+        }
+
         if (isset($this->options['f'])) {
             switch ($this->options['f']) {
                 case 'video':

@@ -30,7 +30,8 @@ while (true) {
         $media_with_no_captions = new UNL_MediaHub_MediaList(array(
             'filter'=>new UNL_MediaHub_MediaList_Filter_NoLiveCaptions(),
             'limit'=>5,
-            'order'=>'datecreated'));
+            'avoid_privacy_filter' => true,
+        ));
 
         // Loop through those 5 videos and order low priority captions for them
         // Low priority since we don't want to prevent new videos from
